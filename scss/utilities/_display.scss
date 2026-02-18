@@ -1,0 +1,204 @@
+// UTILITIES: DISPLAY & FLEX
+// ===============================================
+// @layer syx.utilities ensures these always win over components
+// without !important and regardless of import order.
+
+@layer syx.utilities {
+
+// Display
+.syx-d-flex {
+  display: flex;
+}
+.syx-d-inline-flex {
+  display: inline-flex;
+}
+.syx-d-block {
+  display: block;
+}
+.syx-d-inline-block {
+  display: inline-block;
+}
+.syx-d-inline {
+  display: inline;
+}
+.syx-d-none {
+  display: none;
+}
+.syx-d-grid {
+  display: grid;
+}
+
+// Width
+.syx-w-full {
+  width: 100%;
+}
+.syx-w-auto {
+  width: auto;
+}
+
+// Border
+.syx-border {
+  border: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+}
+.syx-border-none {
+  border: none;
+}
+
+// Flex Direction
+.syx-flex-row {
+  flex-direction: row;
+}
+.syx-flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.syx-flex-col {
+  flex-direction: column;
+}
+.syx-flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+// Flex Wrap
+.syx-flex-wrap {
+  flex-wrap: wrap;
+}
+.syx-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+// Flex Grow / Shrink
+.syx-flex-1 {
+  flex: 1 1 0%;
+}
+.syx-flex-auto {
+  flex: 1 1 auto;
+}
+.syx-flex-none {
+  flex: none;
+}
+
+// Justify Content
+.syx-justify-start {
+  justify-content: flex-start;
+}
+.syx-justify-end {
+  justify-content: flex-end;
+}
+.syx-justify-center {
+  justify-content: center;
+}
+.syx-justify-between {
+  justify-content: space-between;
+}
+.syx-justify-around {
+  justify-content: space-around;
+}
+.syx-justify-evenly {
+  justify-content: space-evenly;
+}
+
+// Align Items
+.syx-items-start {
+  align-items: flex-start;
+}
+.syx-items-end {
+  align-items: flex-end;
+}
+.syx-items-center {
+  align-items: center;
+}
+.syx-items-baseline {
+  align-items: baseline;
+}
+.syx-items-stretch {
+  align-items: stretch;
+}
+
+// Align Self
+.syx-self-start {
+  align-self: flex-start;
+}
+.syx-self-end {
+  align-self: flex-end;
+}
+.syx-self-center {
+  align-self: center;
+}
+.syx-self-auto {
+  align-self: auto;
+}
+
+// Gap
+.syx-gap-0 {
+  gap: 0;
+}
+.syx-gap-1 {
+  gap: var(--semantic-space-inline-xs);
+}
+.syx-gap-2 {
+  gap: var(--semantic-space-inline-sm);
+}
+.syx-gap-3 {
+  gap: var(--semantic-space-inline-md);
+}
+.syx-gap-4 {
+  gap: var(--semantic-space-inline-lg);
+}
+.syx-gap-5 {
+  gap: var(--semantic-space-layout-xl);
+}
+
+// Column Gap
+.syx-col-gap-1 {
+  column-gap: var(--semantic-space-inline-xs);
+}
+.syx-col-gap-2 {
+  column-gap: var(--semantic-space-inline-sm);
+}
+.syx-col-gap-3 {
+  column-gap: var(--semantic-space-inline-md);
+}
+.syx-col-gap-4 {
+  column-gap: var(--semantic-space-inline-lg);
+}
+
+// Row Gap
+.syx-row-gap-1 {
+  row-gap: var(--semantic-space-inline-xs);
+}
+.syx-row-gap-2 {
+  row-gap: var(--semantic-space-inline-sm);
+}
+.syx-row-gap-3 {
+  row-gap: var(--semantic-space-inline-md);
+}
+.syx-row-gap-4 {
+  row-gap: var(--semantic-space-inline-lg);
+}
+
+// Overflow
+.syx-overflow-hidden {
+  overflow: hidden;
+}
+.syx-overflow-auto {
+  overflow: auto;
+}
+.syx-overflow-scroll {
+  overflow: scroll;
+}
+
+// Position
+.syx-relative {
+  position: relative;
+}
+.syx-absolute {
+  position: absolute;
+}
+.syx-sticky {
+  position: sticky;
+}
+.syx-fixed {
+  position: fixed;
+}
+
+} // end @layer syx.utilities

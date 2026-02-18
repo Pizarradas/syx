@@ -1,0 +1,35 @@
+// SYX BUNDLE: BLOG
+// ================================================
+// For editorial content: articles, blogs, documentation
+// pages, and long-form reading experiences.
+// Optimized for typography, readability, and content flow.
+// ================================================
+// Usage: @use '../_bundles/bundle-blog' as *;
+//        @include syx-bundle-blog($theme);
+// ================================================
+
+@mixin syx-bundle-blog($theme: null) {
+
+  // ATOMS
+  // ================================================
+  @include atom-breadcrumb($theme); // Article navigation
+  @include atom-card($theme);       // Related posts, teasers
+  @include atom-code($theme);       // Code snippets
+  @include atom-icon($theme);       // Inline icons
+  @include atom-link($theme);       // In-text links
+  @include atom-list($theme);       // Ordered/unordered lists
+  @include atom-pill($theme);       // Tags, categories
+  @include atom-title($theme);      // Article headings
+  @include atom-txt($theme);        // Body text
+
+  // MOLECULES
+  // ================================================
+  // (none specific to blog — add as needed)
+  // @include mol-article-header($theme);
+
+  // ORGANISMS
+  // ================================================
+  @include org-content-columns($theme); // Multi-column layout
+  // @include org-article($theme);
+  // @include org-related-posts($theme);
+}

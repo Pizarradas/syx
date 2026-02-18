@@ -1,0 +1,112 @@
+// ================================================
+// TEMPLATE THEME - COMPLETE THEME DEFINITION
+// ================================================
+// Part of SYX Design System
+// Copy this folder and customize for new themes
+// Replace all instances of "template" with your theme name
+// ================================================
+
+@use '../../abstracts/index' as *;
+
+@mixin theme-template {
+  :root {
+    // ================================================
+    // SECCIÓN 1: PRIMITIVOS
+    // ================================================
+    // Sobrescriben valores base de abstracts/tokens/primitives/
+    
+    // Spacing
+    --primitive-space-base: 0.5rem;  // Base unit for spacing
+    
+    // Colors - Brand (customize these)
+    --primitive-color-primary-500: hsl(200, 100%, 50%);
+    --primitive-color-secondary-500: hsl(350, 100%, 60%);
+    --primitive-color-accent-500: hsl(45, 100%, 50%);
+    
+    // Colors - State
+    --primitive-color-success-500: hsl(128, 100%, 27%);
+    --primitive-color-error-500: hsl(0, 57%, 37%);
+    --primitive-color-warning-500: hsl(57, 86%, 44%);
+    --primitive-color-disabled: hsl(0, 0%, 80%);
+    
+    // Typography (customize font families)
+    --primitive-font-family-primary: "Your-Font-Regular", Arial, sans-serif;
+    --primitive-font-family-bold: "Your-Font-Bold", Arial, sans-serif;
+    
+    // Icons - Theme Specific (add your theme icons)
+    --primitive-icon-arrow-default: url('#{$icon-path},...');
+    --primitive-icon-logo: url('#{$icon-path},...');
+    
+    // Filters - Color (generate with https://codepen.io/sosuke/pen/Pjoqqp)
+    --primitive-filter-primary: invert(50%) sepia(100%) saturate(500%);
+    --primitive-filter-success: invert(20%) sepia(69%) saturate(1571%);
+    --primitive-filter-error: invert(26%) sepia(84%) saturate(6466%);
+    --primitive-filter-warning: invert(35%) sepia(55%) saturate(1731%);
+    --primitive-filter-disabled: grayscale(1);
+
+    // ================================================
+    // SECCIÓN 2: VARIABLES DEL TEMA
+    // ================================================
+    // Variables específicas que usan primitivos
+    
+    // Base measure
+    --base-measure: var(--primitive-space-base);
+    
+    // Icons
+    --icon-arrow-default: var(--primitive-icon-arrow-default);
+    --icon-logo: var(--primitive-icon-logo);
+    
+    // Fonts
+    --font-weight-1: var(--primitive-font-family-primary);
+    --font-weight-2: var(--primitive-font-family-bold);
+    --font-bold: var(--font-weight-2);
+    
+    // Colors - Semantic
+    --color-primary: var(--primitive-color-primary-500);
+    --color-secondary: var(--primitive-color-secondary-500);
+    --color-accent: var(--primitive-color-accent-500);
+    
+    // Colors - State
+    --color-state-ok: var(--primitive-color-success-500);
+    --color-state-ko: var(--primitive-color-error-500);
+    --color-state-warning: var(--primitive-color-warning-500);
+    --color-state-disabled: var(--primitive-color-disabled);
+    --color-state-focus: var(--color-primary);
+    --color-state-hover-primary: var(--color-secondary);
+    
+    // Filters
+    --filter-primary: var(--primitive-filter-primary);
+    --filter-state-ok: var(--primitive-filter-success);
+    --filter-state-ko: var(--primitive-filter-error);
+    --filter-state-warning: var(--primitive-filter-warning);
+    --filter-state-disabled: var(--primitive-filter-disabled);
+    
+    // Typography - Reset
+    --reset-html-font: normal normal 500 16px/18px var(--font-weight-1);
+    --reset-body-color: var(--color-primary);
+    --reset-body-background-color: var(--color-white);
+    --reset-body-font-size: calc(2 * var(--base-measure));
+    --reset-body-line-height: calc(3 * var(--base-measure));
+    
+    // Layout
+    --layout-max-width: calc(360 * var(--base-measure));
+    --layout-pad-1: calc(2 * var(--base-measure));
+    --layout-gap-1: calc(1 * var(--base-measure));
+    
+    // Theme
+    --theme-focus: 0 0 0.313rem 0 var(--color-state-focus);
+    --theme-radius: calc(var(--base-measure));
+    --theme-w-border: calc(0.4 * var(--base-measure));
+    
+    // Buttons
+    --btn-primary-font-color: var(--color-primary);
+    --btn-primary-filled-font-color: var(--color-white);
+    
+    // Forms
+    --form-font-family: var(--font-weight-2);
+    --form-font-size: calc(2 * var(--base-measure));
+    --form-height-size: calc(6 * var(--base-measure));
+    
+    // Add more component-specific variables as needed...
+  }
+}

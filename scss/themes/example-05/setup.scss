@@ -1,0 +1,127 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use 'theme' as *;
+// ===============================================
+
+// :ROOT
+// ===============================================
+@include universal-values();    // Universal values (RRSS icons, external brands, etc.)
+@include theme-example-05();    // Complete Midnight theme (primitives + variables)
+// ===============================================
+
+// FONT SETUP
+// ===============================================
+// Bebas Neue — condensed display for headings
+@include font-family("Google-Bebas-Neue--regular",
+  "#{$fonts-path}/google-bebas-neue/BebasNeue-Regular",
+  400,
+  normal,
+  eot woff2 woff ttf svg);
+
+// Inter — clean sans-serif for body text
+@include font-family("Google-Inter--regular",
+  "#{$fonts-path}/google-inter/Inter-Regular",
+  400,
+  normal,
+  eot woff2 woff ttf svg);
+
+@include font-family("Google-Inter--medium",
+  "#{$fonts-path}/google-inter/Inter-Medium",
+  500,
+  normal,
+  eot woff2 woff ttf svg);
+
+// Space Grotesk — fallback for UI elements
+@include font-family("Google-Space-Grotesk--regular",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
+  400,
+  normal,
+  eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--bold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
+  700,
+  normal,
+  eot woff2 woff ttf svg);
+// ===============================================
+
+// RESET: global
+// ===============================================
+@include resets-global(example-05);
+// ===============================================
+
+// HELPER: all
+// ===============================================
+@include helper-animations();
+@include helper-positioning();
+@include helper-hides();
+@include helper-displays();
+@include helper-alignments();
+@include helper-images();
+@include helper-embedded();
+@include helper-maps();
+@include helper-objects();
+@include helper-texts();
+@include helper-links();
+@include helper-icons();
+// ===============================================
+
+// LAYOUT: grid
+// ===============================================
+@include layout-grid(example-05);
+// ===============================================
+
+// HELPER: theme
+// ===============================================
+@include helper-font-sizes(example-05);
+@include helper-dimensions(example-05);
+@include helper-scopes(example-05); // @deprecated
+@include helper-spacer(example-05);
+@include helper-gap(example-05);
+@include helper-fonts(example-05);
+@include helper-backgrounds(example-05);
+// ===============================================
+
+// SYX ATOMS
+// ===============================================
+@include atom-breadcrumb(example-05);
+@include atom-btn(example-05);
+@include atom-code(example-05);
+@include atom-pill(example-05);
+@include atom-check(example-05);
+@include atom-form(example-05);
+@include atom-icon(example-05);
+@include atom-label(example-05);
+@include atom-link(example-05);
+@include atom-list(example-05);
+@include atom-pagination(example-05);
+@include atom-radio(example-05);
+@include atom-specimen(example-05);
+@include atom-switch(example-05);
+@include atom-swatch(example-05);
+@include atom-table(example-05);
+@include atom-title(example-05);
+@include atom-txt(example-05);
+// ===============================================
+
+// SYX MOLECULES
+// ===============================================
+@include mol-card(example-05);
+@include mol-form-field(example-05);
+@include mol-btn-group(example-05);
+@include mol-label-group(example-05);
+@include mol-form-field-set(example-05);
+// ===============================================
+
+// SYX ORGANISMS
+// ===============================================
+@include org-documentation-layout(example-05);
+@include org-content-columns(example-05);
+// ===============================================
