@@ -1,0 +1,411 @@
+// PAGE: DOCS LAYOUT (shared across all documentation pages)
+// ===============================================
+@use "../abstracts/index" as *;
+
+// -----------------------------------------------
+// SKIP LINK (Accessibility — shared with landing)
+// -----------------------------------------------
+.docs-skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--semantic-space-component-sm);
+  background: var(--semantic-color-primary);
+  color: var(--semantic-color-text-inverse);
+  padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
+  border-radius: var(--semantic-border-radius-default);
+  font-weight: var(--semantic-font-weight-bold);
+  text-decoration: none;
+  z-index: 9999;
+  @include transition(top 0.2s ease);
+
+  &:focus { top: var(--semantic-space-component-sm); }
+}
+
+// -----------------------------------------------
+// DOCS TOPBAR
+// -----------------------------------------------
+.docs-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--semantic-color-bg-primary) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+  height: 56px;
+  display: flex;
+  align-items: center;
+
+  // Dark mode: frosted glass on dark surface
+  [data-theme="dark"] & {
+    background: rgba(17, 17, 27, 0.92);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not([data-theme="light"] &) {
+      background: rgba(17, 17, 27, 0.92);
+    }
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 var(--layout-pad-3);
+  }
+
+  &__logo {
+    font-size: var(--primitive-fluid-font-h5);
+    font-family: var(--primitive-font-family-syne-bold);
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    @include transition(opacity 0.2s ease);
+
+    @media (hover: hover) {
+      &:hover { opacity: 0.75; }
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+      border-radius: var(--semantic-border-radius-sm);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-space-inline-md);
+  }
+
+  // ← Home link
+  &__home-link {
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+    text-decoration: none;
+    @include transition(color 0.2s ease);
+
+    @media (hover: hover) {
+      &:hover { color: var(--color-primary); }
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+      border-radius: var(--semantic-border-radius-sm);
+    }
+  }
+
+  // DARK MODE TOGGLE BUTTON
+  &__theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-border-radius-full, 9999px);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    @include transition(background 0.2s ease, border-color 0.2s ease);
+
+    @media (hover: hover) {
+      &:hover {
+        background: var(--semantic-color-bg-tertiary);
+        border-color: var(--semantic-color-border-default);
+      }
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  &__theme-toggle-icon {
+    font-size: 0.875rem;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+// -----------------------------------------------
+// DOCS LAYOUT (sidebar + content) — MOBILE FIRST
+// -----------------------------------------------
+.docs-layout {
+  display: grid;
+  grid-template-columns: 1fr;           // mobile: single column
+  min-height: calc(100vh - 56px);
+
+  @include breakpoint(tablet) {
+    grid-template-columns: 260px 1fr;   // tablet+: sidebar + content
+  }
+}
+
+// -----------------------------------------------
+// SIDEBAR — MOBILE FIRST
+// -----------------------------------------------
+.docs-sidebar {
+  // Mobile: full-width, no sticky
+  background: var(--semantic-color-bg-primary);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+  border-right: none;
+  padding: var(--layout-pad-3);
+
+  @include breakpoint(tablet) {
+    // Tablet+: sticky sidebar with independent scroll
+    border-bottom: none;
+    border-right: 1px solid var(--semantic-color-border-subtle);
+    padding: var(--layout-pad-4) var(--layout-pad-3);
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+
+  &__logo {
+    display: block;
+    font-size: var(--primitive-fluid-font-h4);
+    font-family: var(--primitive-font-family-syne-bold);
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    margin-bottom: var(--layout-gap-4);
+    @include transition(opacity 0.2s ease);
+
+    @media (hover: hover) {
+      &:hover { opacity: 0.75; }
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+      border-radius: var(--semantic-border-radius-sm);
+    }
+  }
+
+  // Section divider
+  &__divider {
+    height: 1px;
+    background: var(--semantic-color-border-subtle);
+    margin: var(--layout-gap-3) 0;
+  }
+
+  // Version badge
+  &__version {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primitive-color-purple-500);
+    background: var(--primitive-color-purple-50);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--semantic-border-radius-full);
+    margin-bottom: var(--layout-gap-3);
+  }
+}
+
+// -----------------------------------------------
+// SIDENAV (inside sidebar) — MOBILE FIRST
+// -----------------------------------------------
+.syx-sidenav {
+  &__group {
+    margin-bottom: var(--layout-gap-4);
+  }
+
+  &__title {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--semantic-color-text-tertiary);
+    margin-bottom: var(--layout-gap-2);
+    padding-left: var(--layout-pad-2);
+  }
+
+  &__link {
+    display: block;
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+    text-decoration: none;
+    padding: 0.35rem var(--layout-pad-2);
+    border-radius: var(--semantic-border-radius-default);
+    border-left: 2px solid transparent;
+    @include transition(color 0.15s ease, background 0.15s ease, border-color 0.15s ease);
+
+    // Hover only on pointer devices (not touch)
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-primary);
+        background: var(--semantic-color-bg-tertiary);
+        border-left-color: var(--semantic-color-border-default);
+      }
+    }
+
+    // Active / current page state
+    &--active,
+    &[aria-current="page"] {
+      color: var(--color-primary);
+      background: var(--semantic-color-bg-tertiary);
+      border-left-color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+    }
+  }
+}
+
+// -----------------------------------------------
+// DOCS CONTENT AREA — MOBILE FIRST
+// -----------------------------------------------
+.docs-content {
+  // Mobile: compact padding
+  padding: var(--layout-pad-3) var(--layout-pad-3);
+  max-width: 860px;
+
+  @include breakpoint(tablet) {
+    // Tablet+: more breathing room
+    padding: var(--layout-pad-5) var(--layout-pad-4);
+  }
+
+  // Section cards
+  .mol-card {
+    margin-bottom: var(--layout-gap-5);
+    scroll-margin-top: 72px; // offset for sticky topbar
+  }
+}
+
+// -----------------------------------------------
+// DOCS PAGE HEADER — MOBILE FIRST
+// -----------------------------------------------
+.docs-page-header {
+  @include relative();
+  overflow: hidden;
+  background: var(--semantic-color-bg-primary);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+
+  // Mobile: compact
+  padding: var(--layout-pad-4) var(--layout-pad-3) var(--layout-pad-3);
+  margin-bottom: var(--layout-gap-4);
+
+  @include breakpoint(tablet) {
+    // Tablet+: more space
+    padding: var(--layout-pad-5) var(--layout-pad-4) var(--layout-pad-4);
+    margin-bottom: var(--layout-gap-5);
+  }
+
+  // Subtle gradient orb (decorative, hidden on mobile for perf)
+  &::before {
+    content: '';
+    @include absolute($top: -60%, $right: -5%);
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--primitive-color-purple-50) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+
+    @include breakpoint(tablet) {
+      display: block;
+    }
+  }
+
+  > * { @include relative(); z-index: 1; }
+
+  &__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-space-inline-sm);
+    margin-bottom: var(--layout-gap-2);
+  }
+
+  &__breadcrumb {
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-tertiary);
+    text-decoration: none;
+    @include transition(color 0.2s ease);
+
+    @media (hover: hover) {
+      &:hover { color: var(--color-primary); }
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--semantic-color-state-focus);
+      border-radius: var(--semantic-border-radius-sm);
+    }
+  }
+
+  &__sep {
+    color: var(--semantic-color-border-default);
+    font-size: var(--semantic-font-size-body-small);
+  }
+}
+
+// -----------------------------------------------
+// DOCS FOOTER — MOBILE FIRST
+// -----------------------------------------------
+.docs-footer {
+  border-top: 1px solid var(--semantic-color-border-subtle);
+  background: var(--semantic-color-bg-primary);
+
+  // Mobile: stacked, centered
+  padding: var(--layout-pad-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--semantic-space-inline-sm);
+  text-align: center;
+
+  @include breakpoint(tablet) {
+    // Tablet+: horizontal row
+    flex-direction: row;
+    justify-content: space-between;
+    padding: var(--layout-pad-3) var(--layout-pad-4);
+    text-align: left;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--semantic-space-inline-sm);
+
+    @include breakpoint(tablet) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__copy {
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-tertiary);
+  }
+}
+
+// -----------------------------------------------
+// DOCS SECTION HEADER (legacy — kept for compat)
+// -----------------------------------------------
+.docs-section-header {
+  padding-bottom: var(--layout-pad-4);
+  border-bottom: 1px solid var(--semantic-color-border-subtle);
+  margin-bottom: var(--layout-gap-4);
+}
+
+// -----------------------------------------------
+// DOCS ICON PREVIEW (galería de iconos en docs)
+// Encapsula los estilos de presentación para evitar
+// inline styles en el HTML de documentación.
+// -----------------------------------------------
+.docs-icon-preview {
+  display: block;
+  margin: 0 auto var(--semantic-space-stack-sm);
+}
+
