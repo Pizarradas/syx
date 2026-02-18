@@ -1,0 +1,18 @@
+// SYX — Entry point: example-03 (coral)
+// ================================================
+// Compiles to: css/styles-theme-example-03.css
+// ================================================
+
+// THEME SETUP (tokens + reset + helpers + atoms + molecules + organisms)
+@use 'themes/example-03/setup';
+
+// LAYOUT
+@use 'layout/index' as *;
+
+// UTILITIES (text, display, spacing utility classes)
+@use 'utilities/index' as *;
+
+// PAGES (landing page styles + docs styles)
+@use 'pages/landing';
+@use 'pages/docs';
+@use 'pages/docs-layout';

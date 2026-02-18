@@ -1,0 +1,23 @@
+// SYX — Entry point: example-01
+// ================================================
+// Compiles to: css/styles-theme-example-01.css
+// Prepros entry point for theme example-01 (full docs bundle).
+// For context-specific bundles, use:
+//   themes/example-01/bundle-app.scss
+//   themes/example-01/bundle-marketing.scss
+//   themes/example-01/bundle-blog.scss
+// ================================================
+
+// THEME SETUP (tokens + reset + helpers + atoms + molecules + organisms)
+@use 'themes/example-01/setup';
+
+// LAYOUT
+@use 'layout/index' as *;
+
+// UTILITIES (text, display, spacing utility classes)
+@use 'utilities/index' as *;
+
+// PAGES (landing page styles + docs styles)
+@use 'pages/landing';
+@use 'pages/docs';
+@use 'pages/docs-layout';
