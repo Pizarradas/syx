@@ -1,0 +1,145 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: specimen
+// ===============================================
+// Documentation specimen rows for showing typography
+// scales, spacing scales, and other design token demos.
+// ===============================================
+@mixin atom-specimen($theme: null) {
+
+  // -----------------------------------------------
+  // TYPOGRAPHY SPECIMEN
+  // Shows a type scale entry with meta + live preview
+  // -----------------------------------------------
+  .syx-specimen {
+    display: flex;
+    align-items: baseline;
+    gap: var(--semantic-space-layout-md);
+    padding: var(--semantic-space-layout-sm) 0;
+    border-bottom: 1px solid var(--primitive-color-gray-100);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &__meta {
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    &__label {
+      font-size: var(--semantic-font-size-caption);
+      color: var(--primitive-color-gray-400);
+      font-family: var(--primitive-font-family-mono);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    &__size {
+      font-size: var(--semantic-font-size-caption);
+      color: var(--primitive-color-gray-300);
+      display: block;
+    }
+  }
+
+  // -----------------------------------------------
+  // SPACING SPECIMEN
+  // Shows a spacing token as a visual bar + label
+  // -----------------------------------------------
+  .syx-spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-space-layout-sm);
+    padding: var(--semantic-space-component-sm) 0;
+    border-bottom: 1px solid var(--primitive-color-gray-100);
+
+    &:last-child { border-bottom: none; }
+
+    &__bar {
+      background: linear-gradient(
+        90deg,
+        var(--primitive-color-blue-200),
+        var(--primitive-color-blue-100)
+      );
+      border-radius: var(--semantic-border-radius-sm);
+      height: 20px;
+      flex-shrink: 0;
+
+      // Width modifiers — one per spacing token
+      // Replaces inline style="width: Xpx"
+      &--1  { width: var(--primitive-space-1); }   // 8px
+      &--2  { width: var(--primitive-space-2); }   // 16px
+      &--3  { width: var(--primitive-space-3); }   // 24px
+      &--4  { width: var(--primitive-space-4); }   // 32px
+      &--6  { width: var(--primitive-space-6); }   // 48px
+    }
+
+    &__label {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--primitive-color-gray-500);
+      font-family: var(--primitive-font-family-mono);
+      min-width: 130px;
+    }
+
+    &__value {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--primitive-color-gray-400);
+    }
+  }
+
+  // -----------------------------------------------
+  // PREVIEW AREA
+  // Sandbox container for live component demos
+  // -----------------------------------------------
+  .syx-preview {
+    background: var(--primitive-color-gray-50);
+    border: 1px solid var(--primitive-color-gray-200);
+    border-radius: var(--semantic-border-radius-md);
+    @include padding(var(--semantic-space-layout-md));
+    margin-bottom: var(--semantic-space-layout-sm);
+    overflow-x: auto;
+  }
+
+  // -----------------------------------------------
+  // GRID DEMO CELL
+  // Used in the grid documentation to show columns
+  // -----------------------------------------------
+  .syx-grid-cell {
+    background: var(--primitive-color-blue-100);
+    text-align: center;
+    padding: var(--semantic-space-component-sm);
+    font-size: var(--semantic-font-size-caption);
+    border-radius: var(--semantic-border-radius-sm);
+    color: var(--primitive-color-blue-700);
+    font-family: var(--primitive-font-family-mono);
+
+    &--alt {
+      background: var(--primitive-color-blue-200);
+      color: var(--primitive-color-blue-900);
+    }
+  }
+
+  // -----------------------------------------------
+  // GRID DEMO WRAPPER
+  // -----------------------------------------------
+  .syx-grid-demo {
+    background: var(--primitive-color-gray-100);
+    padding: var(--semantic-space-component-sm);
+    border-radius: var(--semantic-border-radius-md);
+    margin-bottom: var(--semantic-space-layout-sm);
+  }
+
+  // -----------------------------------------------
+  // DOCS LABEL (fixed-width label for gap demos)
+  // -----------------------------------------------
+  .syx-demo-label {
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--primitive-color-gray-500);
+    font-family: var(--primitive-font-family-mono);
+    min-width: 60px;
+    display: inline-block;
+  }
+}

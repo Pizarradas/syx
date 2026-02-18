@@ -1,0 +1,100 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: radio
+// ===============================================
+@mixin atom-radio($theme: null) {
+  .syx-radio {
+    @include relative();
+    display: inline-flex;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+
+    // &__input — hidden native radio
+    &__input {
+      @include absolute();
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    // &__label — the visible label with custom radio circle
+    &__label {
+      @include relative();
+      display: inline-flex;
+      align-items: center;
+      gap: var(--component-radio-gap);
+      font-size: var(--component-form-field-font-size);
+      color: var(--component-form-field-color);
+      line-height: var(--component-form-field-line-height);
+      cursor: pointer;
+
+      // Custom radio outer circle
+      &::before {
+        content: "";
+        flex-shrink: 0;
+        width: var(--component-radio-size);
+        height: var(--component-radio-size);
+        border: var(--component-radio-border-width) solid var(--component-radio-border-color);
+        border-radius: 50%;
+        background-color: var(--primitive-color-white);
+        @include transition(
+          border-color 0.15s ease,
+          background-color 0.15s ease,
+          box-shadow 0.15s ease
+        );
+      }
+
+      // Inner dot (hidden by default)
+      &::after {
+        content: "";
+        @include absolute($top: 50%, $left: calc(var(--component-radio-size) / 4));
+        transform: translateY(-50%) scale(0);
+        width: var(--component-radio-checked-size);
+        height: var(--component-radio-checked-size);
+        border-radius: 50%;
+        background-color: var(--primitive-color-white);
+        @include transition(transform 0.15s cubic-bezier(0.16, 1, 0.3, 1));
+      }
+
+      // Hover
+      &:hover::before {
+        border-color: var(--component-radio-border-color-hover);
+        box-shadow: var(--component-form-field-shadow-focus);
+      }
+    }
+
+    // Checked state
+    &__input:checked + &__label {
+      &::before {
+        background-color: var(--component-radio-bg-checked);
+        border-color: var(--component-radio-bg-checked);
+      }
+
+      &::after {
+        transform: translateY(-50%) scale(1);
+      }
+    }
+
+    // Focus visible
+    &__input:focus-visible + &__label::before {
+      outline: 0.2rem solid var(--component-form-field-border-focus);
+      outline-offset: 2px;
+    }
+
+    // Disabled
+    &__input:disabled + &__label {
+      opacity: 0.5;
+      cursor: not-allowed;
+
+      &::before {
+        background-color: var(--primitive-color-gray-100);
+        border-color: var(--primitive-color-gray-200);
+      }
+    }
+  }
+}

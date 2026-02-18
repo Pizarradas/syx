@@ -1,0 +1,59 @@
+// SEMANTIC TOKENS: TYPOGRAPHY
+// ================================================
+// Contextual typography tokens for consistent text styling.
+// All sizes reference the Major Third primitive scale.
+// ================================================
+
+:root {
+  // FONT FAMILIES
+  // ================================================
+  --semantic-font-family-primary:       var(--primitive-font-family-space-grotesk-regular);
+  --semantic-font-family-primary-bold:  var(--primitive-font-family-space-grotesk-bold);
+  --semantic-font-family-heading:       var(--primitive-font-family-syne-bold);
+  --semantic-font-family-heading-md:    var(--primitive-font-family-syne-medium);
+  --semantic-font-family-mono:          "Courier New", Courier, monospace;
+
+  // FONT SIZES — UI TEXT
+  // ================================================
+  // Maps to the Major Third scale steps
+  --semantic-font-size-overline:    var(--primitive-font-size-xs);   // ~11px  — labels, tags
+  --semantic-font-size-caption:     var(--primitive-font-size-xs);   // ~11px  — helper text
+  --semantic-font-size-body-small:  var(--primitive-font-size-sm);   // ~14px  — secondary text
+  --semantic-font-size-body:        var(--primitive-font-size-base); // ~16px  — default body
+  --semantic-font-size-body-large:  var(--primitive-font-size-md);   // ~20px  — lead text
+
+  // Backward-compatible alias (was 12px fixed — now fluid 14px)
+  --semantic-font-size-body-sm:     var(--primitive-font-size-sm);   // ~14px
+
+  // FONT SIZES — HEADINGS (fluid, Major Third scale)
+  // ================================================
+  --semantic-font-size-h6: var(--primitive-font-size-md);   // ~20px
+  --semantic-font-size-h5: var(--primitive-font-size-lg);   // ~25px
+  --semantic-font-size-h4: var(--primitive-font-size-xl);   // ~31px
+  --semantic-font-size-h3: var(--primitive-font-size-2xl);  // ~39px
+  --semantic-font-size-h2: var(--primitive-font-size-3xl);  // ~49px
+  --semantic-font-size-h1: var(--primitive-font-size-4xl);  // ~61px
+
+  // LINE HEIGHTS
+  // ================================================
+  --semantic-line-height-tight:   var(--primitive-line-height-tight);
+  --semantic-line-height-snug:    var(--primitive-line-height-snug);
+  --semantic-line-height-normal:  var(--primitive-line-height-normal);
+  --semantic-line-height-relaxed: var(--primitive-line-height-relaxed);
+  --semantic-line-height-body:    var(--primitive-line-height-relaxed);
+  --semantic-line-height-heading: var(--primitive-line-height-snug);
+  --semantic-line-height-caption: var(--primitive-line-height-normal);
+
+  // FONT WEIGHTS
+  // ================================================
+  --semantic-font-weight-regular: var(--primitive-font-weight-regular);
+  --semantic-font-weight-medium:  var(--primitive-font-weight-medium);
+  --semantic-font-weight-bold:    var(--primitive-font-weight-bold);
+
+  // LETTER SPACING
+  // ================================================
+  --semantic-letter-spacing-tight:  var(--primitive-letter-spacing-tight);
+  --semantic-letter-spacing-normal: var(--primitive-letter-spacing-normal);
+  --semantic-letter-spacing-wide:   var(--primitive-letter-spacing-wide);
+  --semantic-letter-spacing-wider:  var(--primitive-letter-spacing-wider);
+}

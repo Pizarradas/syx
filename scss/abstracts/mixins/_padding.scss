@@ -1,0 +1,21 @@
+// SYX MIXINS — PADDING
+// ================================================
+// Null-skipping shorthand for padding.
+// Philosophy: pass `null` to skip any side (Bourbon-compatible API).
+//
+// @example
+//   @include padding(null auto);
+//   // → padding-left: auto; padding-right: auto;
+//
+//   @include padding(1rem null 2rem null);
+//   // → padding-top: 1rem; padding-bottom: 2rem;
+//
+//   @include padding(1rem);
+//   // → padding: 1rem;
+// ================================================
+@use 'sass:list';
+@use 'directional' as *;
+
+@mixin padding($values) {
+  @include syx-directional(padding, null, $values);
+}

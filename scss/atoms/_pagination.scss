@@ -1,0 +1,79 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: pagination
+// ===============================================
+@mixin atom-pagination($theme: null) {
+  .syx-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--component-pagination-gap);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    // &__item — each page item wrapper
+    &__item {
+      @include relative();
+      display: flex;
+
+      // Active state
+      &--is-active {
+        .syx-pagination__trigger {
+          background-color: var(--component-pagination-bg-active);
+          border-color: var(--component-pagination-bg-active);
+          color: var(--component-pagination-color-active);
+          font-weight: var(--primitive-font-weight-bold);
+        }
+      }
+
+      // Disabled state
+      &--is-disabled {
+        .syx-pagination__trigger {
+          color: var(--component-pagination-color-disabled);
+          background-color: transparent;
+          border-color: transparent;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
+    }
+
+    // &__trigger — the clickable button/link
+    &__trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--component-pagination-item-size);
+      height: var(--component-pagination-item-size);
+      border-radius: var(--component-pagination-border-radius);
+      border: var(--component-pagination-border-width) solid transparent;
+      background-color: transparent;
+      color: var(--component-pagination-color);
+      font-size: var(--semantic-font-size-body-small);
+      font-family: var(--component-pagination-font-family);
+      font-weight: var(--primitive-font-weight-medium);
+      cursor: pointer;
+      @include transition(background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease);
+      text-decoration: none;
+
+      &:hover:not(:disabled) {
+        border-color: var(--component-pagination-border-color-hover);
+        color: var(--component-pagination-color-hover);
+      }
+
+      &:focus-visible {
+        outline: 0.2rem solid var(--component-pagination-shadow-focus);
+        outline-offset: 2px;
+      }
+
+      &:disabled {
+        color: var(--component-pagination-color-disabled);
+        cursor: not-allowed;
+      }
+    }
+  }
+}

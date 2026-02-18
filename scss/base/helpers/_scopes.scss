@@ -1,0 +1,27 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+// ===============================================
+
+// MIXIN HELPER: scopes
+// ===============================================
+// @deprecated Use helper-dimensions() instead
+// This mixin is maintained for backward compatibility
+@mixin helper-scopes($theme: null) {
+  .helper-scope {
+    // &-1
+    &-1 {
+      @include size(var(--scope-1));
+    }
+
+    // &-2
+    &-2 {
+      @include size(var(--scope-2));
+    }
+
+    // &-3
+    &-3 {
+      @include size(var(--scope-3));
+    }
+  }
+}

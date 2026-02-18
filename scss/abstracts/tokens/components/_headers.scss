@@ -1,0 +1,45 @@
+// COMPONENT TOKENS: HEADERS
+// ================================================
+// Header-specific tokens
+// ================================================
+
+:root {
+  // HEADER: LAYOUT & SIZING
+  // ================================================
+  --component-header-height: calc(3.5 * var(--primitive-space-base)); // 56px (3.5rem)
+  --component-header-padding-y: var(--semantic-space-component-md);
+  --component-header-z-index: 5;
+  
+  // HEADER: COLORS
+  // ================================================
+  --component-header-bg: transparent; // Default
+  --component-header-bg-scrolled: var(--semantic-color-bg-primary); // For sticky state if needed
+  
+  // SIDENAV (Part of Header Organism)
+  // ================================================
+  --component-sidenav-width: calc(15 * var(--primitive-space-base)); // 240px (15rem)
+  --component-sidenav-z-index: 500;
+  --component-sidenav-bg: var(--semantic-color-bg-primary); // Assuming white/primary bg
+  --component-sidenav-shadow: 0.625rem 0 0.313rem -0.188rem var(--semantic-color-primary); // specific shadow
+  
+  // LOGO
+  // ================================================
+  --component-header-logo-color: var(--semantic-color-primary);
+  --component-header-logo-color-hover: var(--semantic-color-secondary); // pink-500
+  --component-header-logo-padding-left: calc(3.2 * var(--primitive-space-base));   // ~25.6px
+  --component-header-logo-padding-left-md: calc(4 * var(--primitive-space-base));  // 32px
+  --component-header-logo-icon-size: calc(2.5 * var(--primitive-space-base));      // 20px
+  --component-header-logo-icon-size-md: calc(3.25 * var(--primitive-space-base));  // 26px
+  
+  // NAVIGATION LINKS (Sidenav)
+  // ================================================
+  --component-sidenav-link-padding-y: calc(1.4 * var(--primitive-space-base));    // ~11.2px
+  --component-sidenav-link-padding-x: var(--semantic-space-component-md);          // 16-24px fluid
+  --component-sidenav-link-font-weight: var(--semantic-font-weight-bold);
+  --component-sidenav-link-arrow-size: calc(2.6 * var(--primitive-space-base));   // ~20.8px
+  
+  // SOCIAL ICONS
+  // ================================================
+  --component-header-social-gap: var(--semantic-space-inline-xs);                 // 8px
+  --component-header-social-icon-size: var(--primitive-size-5);                   // 48px
+}

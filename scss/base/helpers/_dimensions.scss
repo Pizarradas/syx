@@ -1,0 +1,35 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+// ===============================================
+
+// MIXIN HELPER: dimensions
+// ===============================================
+@mixin helper-dimensions($theme: null) {
+  .helper-dimension {
+    // &-1
+    &-1 {
+      @include size(var(--dimension-1));
+    }
+
+    // &-2
+    &-2 {
+      @include size(var(--dimension-2));
+    }
+
+    // &-3
+    &-3 {
+      @include size(var(--dimension-3));
+    }
+
+    // &-4
+    &-4 {
+      @include size(var(--dimension-4));
+    }
+
+    // &-5
+    &-5 {
+      @include size(var(--dimension-5));
+    }
+  }
+}

@@ -1,0 +1,91 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: switch
+// ===============================================
+@mixin atom-switch($theme: null) {
+  .syx-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--semantic-space-component-sm);
+    cursor: pointer;
+    user-select: none;
+
+    // &__input — hidden native checkbox
+    &__input {
+      @include absolute();
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    // &__slider — the visual track + knob
+    &__slider {
+      @include relative();
+      display: inline-block;
+      width: var(--component-switch-width);
+      height: var(--component-switch-height);
+      background-color: var(--component-switch-bg-off);
+      border-radius: 100px;
+      border: var(--component-form-field-border-width) solid var(--component-switch-border-color);
+      @include transition(
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease
+      );
+      flex-shrink: 0;
+
+      // Knob
+      &::before {
+        content: "";
+        @include absolute($top: 50%, $left: calc(var(--component-form-field-border-width) * 2));
+        transform: translateY(-50%);
+        width: var(--component-switch-slider-size);
+        height: var(--component-switch-slider-size);
+        background-color: var(--component-switch-slider-bg);
+        border-radius: var(--component-switch-slider-radius);
+        box-shadow: var(--semantic-shadow-sm);
+        @include transition(transform 0.25s cubic-bezier(0.16, 1, 0.3, 1));
+      }
+    }
+
+    // &__label — visible text label
+    &__label {
+      font-size: var(--component-form-field-font-size);
+      color: var(--component-form-field-color);
+      line-height: var(--component-form-field-line-height);
+    }
+
+    // Checked state — move knob right, turn track on
+    &__input:checked + &__slider {
+      background-color: var(--component-switch-bg-on);
+      border-color: var(--component-switch-bg-on);
+
+      &::before {
+        // Move knob: track-width - knob-size - 2*border-offset
+        transform: translateY(-50%) translateX(calc(var(--component-switch-width) - var(--component-switch-slider-size) - (var(--component-form-field-border-width) * 4)));
+      }
+    }
+
+    // Hover
+    &:hover &__slider {
+      box-shadow: var(--component-form-field-shadow-focus);
+    }
+
+    // Focus visible
+    &__input:focus-visible + &__slider {
+      outline: 0.2rem solid var(--component-form-field-border-focus);
+      outline-offset: 2px;
+    }
+
+    // Disabled
+    &:has(&__input:disabled) {
+      opacity: var(--component-switch-status-disabled-opacity);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+// SYX MIXINS — INDEX
+// ================================================
+@forward 'directional';    // Private shared helpers (used by margin + padding)
+@forward 'margin';         // @include margin(null auto)
+@forward 'padding';        // @include padding(1rem null)
+@forward 'positioning';    // @include position / absolute / fixed / relative / sticky
+@forward 'border';         // @include border / border-radius
+@forward 'size';           // @include size($w, $h)
+@forward 'font';           // @include font-family(...)
+@forward 'hide';           // @include hide-visually / unhide-visually
+@forward 'triangle';       // @include triangle($size, $color, $direction)
+@forward 'background';     // @include background-setup(...)
+@forward 'behavior';       // @include behavior-in-ancestor(...)
+@forward 'media-queries';  // @include breakpoint / mq / darkmode / reduced-motion
+@forward 'helpers';        // @include transition / truncate / sr-only / focus-ring / flex-center / aspect-ratio
+@forward 'generate-utilities'; // @include generate-utility / generate-utility-directional
+// ================================================
