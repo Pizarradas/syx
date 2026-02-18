@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilities — Syx Design System</title>
+    <meta name="description"
+        content="Syx Utilities: Atomic CSS classes for layout, spacing, display, flexbox, text and backgrounds. No !important needed.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="José Luis Pizarro Feo">
+    <link rel="canonical" href="https://syntaxys.design/docs-utilities.html">
+    <meta property="og:title" content="Utilities — Syx Design System">
+    <meta property="og:description"
+        content="Atomic utility classes for layout, spacing, and typography. Format: .syx-{property}-{value}.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/styles-theme-example-01.css">
+</head>
+
+<body class="syx syx--theme-example-01">
+
+    <a href="#main-content" class="docs-skip-link">Skip to main content</a>
+
+    <!-- TOPBAR -->
+    <header role="banner">
+        <div class="docs-topbar">
+            <div class="docs-topbar__inner">
+                <a href="index.html" class="docs-topbar__logo" aria-label="Syx Design System — Home">Syx.</a>
+                <nav class="docs-topbar__nav" aria-label="Top navigation">
+                    <a href="index.html" class="docs-topbar__home-link">← Home</a>
+                    <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+                    <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+                    <a href="docs-developer-guide.html"
+                        class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Dev Guide</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="docs-sidebar" aria-label="Documentation navigation">
+            <span class="docs-sidebar__version">v2.0 Beta</span>
+
+            <nav aria-label="Utility sections">
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">Core</span>
+                    <a href="docs-foundation.html" class="syx-sidenav__link">Foundation</a>
+                    <a href="docs-components.html" class="syx-sidenav__link">Components</a>
+                    <a href="docs-elements.html" class="syx-sidenav__link">Elements</a>
+                </div>
+
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">Utilities</span>
+                    <a href="#layer-info" class="syx-sidenav__link">Why No !important?</a>
+                    <a href="#spacing" class="syx-sidenav__link">Spacing</a>
+                    <a href="#display" class="syx-sidenav__link">Display &amp; Flex</a>
+                    <a href="#text" class="syx-sidenav__link">Text &amp; Color</a>
+                    <a href="#backgrounds" class="syx-sidenav__link">Backgrounds</a>
+                </div>
+
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">More</span>
+                    <a href="docs-developer-guide.html" class="syx-sidenav__link">Developer Guide</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main id="main-content" role="main" class="docs-content">
+
+            <!-- Page Header -->
+            <div class="docs-page-header">
+                <div class="docs-page-header__eyebrow">
+                    <a href="index.html" class="docs-page-header__breadcrumb">Home</a>
+                    <span class="docs-page-header__sep" aria-hidden="true">›</span>
+                    <span class="syx-pill" aria-current="page">Utilities</span>
+                </div>
+                <h1 class="syx-title syx-title--h1 syx-mb-2">Utilities</h1>
+                <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
+                    Atomic utility classes for handling layout, spacing, and typography directly in HTML. Format:
+                    <code>.syx-{property}-{value}</code>.
+                </p>
+            </div>
+
+            <!-- WHY NO !IMPORTANT -->
+            <section id="layer-info" class="mol-card" aria-labelledby="layer-info-heading">
+                <h2 id="layer-info-heading" class="syx-title syx-title--h2 syx-mb-1">Why No <code>!important</code>?
+                </h2>
+                <p class="syx-type-body syx-text-gray syx-mb-4">
+                    SYX utilities live in the <code>syx.utilities</code> CSS layer — the highest in the stack.
+                    This means they always override component styles without needing <code>!important</code>.
+                </p>
+
+                <div class="syx-code syx-mb-4">/* SYX @layer stack */
+                    @layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.utilities;
+
+                    /* Utilities win by position, not by specificity */
+                    @layer syx.utilities {
+                    .syx-d-none { display: none; } /* always wins over .syx-btn */
+                    }</div>
+
+                <p class="syx-type-body syx-text-gray">
+                    <strong>Rule:</strong> If a utility isn't overriding a component, check that both are compiled
+                    in the correct layer. Never add <code>!important</code> — it's a bug.
+                </p>
+            </section>
+
+            <!-- SPACING -->
+            <section id="spacing" class="mol-card" aria-labelledby="spacing-heading">
+                <h2 id="spacing-heading" class="syx-title syx-title--h2 syx-mb-1">Spacing</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Format: <code>.syx-{m|p}{t|b|l|r|x|y}-{0-5}</code>. Auto margin: <code>.syx-mx-auto</code>.
+                </p>
+
+                <div class="syx-preview" role="img" aria-label="Gap spacing demo">
+                    <div class="syx-d-flex syx-flex-col syx-gap-2">
+                        <div class="syx-d-flex syx-items-center syx-gap-3">
+                            <span class="syx-type-body-small syx-text-gray" style="min-width:40px">gap-1</span>
+                            <div class="syx-d-flex syx-gap-1 syx-items-center">
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">A</div>
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">B</div>
+                            </div>
+                        </div>
+                        <div class="syx-d-flex syx-items-center syx-gap-3">
+                            <span class="syx-type-body-small syx-text-gray" style="min-width:40px">gap-2</span>
+                            <div class="syx-d-flex syx-gap-2 syx-items-center">
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">A</div>
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">B</div>
+                            </div>
+                        </div>
+                        <div class="syx-d-flex syx-items-center syx-gap-3">
+                            <span class="syx-type-body-small syx-text-gray" style="min-width:40px">gap-3</span>
+                            <div class="syx-d-flex syx-gap-3 syx-items-center">
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">A</div>
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">B</div>
+                            </div>
+                        </div>
+                        <div class="syx-d-flex syx-items-center syx-gap-3">
+                            <span class="syx-type-body-small syx-text-gray" style="min-width:40px">gap-4</span>
+                            <div class="syx-d-flex syx-gap-4 syx-items-center">
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">A</div>
+                                <div class="syx-p-2 syx-bg-primary-light syx-type-body-small">B</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syx-code syx-mt-3">// Margin
+                    .syx-m-{0-5} .syx-mt-{n} .syx-mb-{n}
+                    .syx-ml-{n} .syx-mr-{n} .syx-mx-{n} .syx-my-{n}
+                    .syx-mx-auto .syx-ml-auto .syx-mr-auto
+
+                    // Padding
+                    .syx-p-{0-5} .syx-pt-{n} .syx-pb-{n}
+                    .syx-pl-{n} .syx-pr-{n} .syx-px-{n} .syx-py-{n}</div>
+            </section>
+
+            <!-- DISPLAY & FLEX -->
+            <section id="display" class="mol-card" aria-labelledby="display-heading">
+                <h2 id="display-heading" class="syx-title syx-title--h2 syx-mb-1">Display &amp; Flex</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Display, flex direction, justify-content, align-items, gap, overflow, and position utilities.
+                </p>
+
+                <div class="syx-preview">
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Justify Content</h3>
+                    <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-3">
+                        <div class="syx-d-flex syx-justify-start syx-p-2 syx-bg-gray-100">
+                            <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">.syx-justify-start</span>
+                        </div>
+                        <div class="syx-d-flex syx-justify-center syx-p-2 syx-bg-gray-100">
+                            <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">.syx-justify-center</span>
+                        </div>
+                        <div class="syx-d-flex syx-justify-end syx-p-2 syx-bg-gray-100">
+                            <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">.syx-justify-end</span>
+                        </div>
+                        <div class="syx-d-flex syx-justify-between syx-p-2 syx-bg-gray-100">
+                            <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">Between</span>
+                            <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">Between</span>
+                        </div>
+                    </div>
+
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Flex Direction</h3>
+                    <div class="syx-d-flex syx-gap-2 syx-mb-3">
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-row</code>
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-col</code>
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-wrap</code>
+                    </div>
+
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Align Items</h3>
+                    <div class="syx-d-flex syx-gap-2">
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-items-start</code>
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-items-center</code>
+                        <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-items-end</code>
+                    </div>
+                </div>
+
+                <div class="syx-code syx-mt-3">// Display
+                    .syx-d-flex .syx-d-inline-flex .syx-d-block .syx-d-none .syx-d-grid
+
+                    // Flex
+                    .syx-flex-row .syx-flex-col .syx-flex-wrap .syx-flex-1 .syx-flex-none
+
+                    // Justify
+                    .syx-justify-start .syx-justify-center .syx-justify-end
+                    .syx-justify-between .syx-justify-around .syx-justify-evenly
+
+                    // Align
+                    .syx-items-start .syx-items-center .syx-items-end .syx-items-baseline
+
+                    // Gap
+                    .syx-gap-{0-5} .syx-col-gap-{1-4} .syx-row-gap-{1-4}
+
+                    // Position
+                    .syx-relative .syx-absolute .syx-sticky .syx-fixed</div>
+            </section>
+
+            <!-- TEXT & COLOR -->
+            <section id="text" class="mol-card" aria-labelledby="text-heading">
+                <h2 id="text-heading" class="syx-title syx-title--h2 syx-mb-1">Text &amp; Color</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Text color, alignment, font weight, and typography scale utilities.
+                </p>
+
+                <div class="syx-preview">
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Text Colors</h3>
+                    <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-4">
+                        <p class="syx-text-primary syx-mb-0">.syx-text-primary</p>
+                        <p class="syx-text-secondary syx-mb-0">.syx-text-secondary</p>
+                        <p class="syx-text-gray syx-mb-0">.syx-text-gray</p>
+                        <p class="syx-text-muted syx-mb-0">.syx-text-muted</p>
+                        <div class="syx-p-2 syx-bg-dark">
+                            <p class="syx-text-white syx-mb-0">.syx-text-white</p>
+                        </div>
+                    </div>
+
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Alignment</h3>
+                    <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-4">
+                        <p class="syx-text-left syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-left</p>
+                        <p class="syx-text-center syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-center</p>
+                        <p class="syx-text-right syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-right</p>
+                    </div>
+
+                    <h3 class="syx-title syx-title--h4 syx-mb-2">Font Weight</h3>
+                    <div class="syx-d-flex syx-gap-3">
+                        <span class="syx-font-regular">.syx-font-regular</span>
+                        <span class="syx-font-medium">.syx-font-medium</span>
+                        <span class="syx-font-bold">.syx-font-bold</span>
+                    </div>
+                </div>
+
+                <div class="syx-code syx-mt-3">// Text Colors
+                    .syx-text-primary .syx-text-secondary .syx-text-gray
+                    .syx-text-muted .syx-text-white .syx-text-black
+
+                    // Alignment
+                    .syx-text-left .syx-text-center .syx-text-right .syx-text-justify
+
+                    // Font Weight
+                    .syx-font-regular .syx-font-medium .syx-font-bold
+                    .syx-type-bold .syx-type-medium</div>
+            </section>
+
+            <!-- BACKGROUNDS -->
+            <section id="backgrounds" class="mol-card" aria-labelledby="backgrounds-heading">
+                <h2 id="backgrounds-heading" class="syx-title syx-title--h2 syx-mb-1">Backgrounds</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Background color utilities. All values reference primitive tokens.
+                </p>
+
+                <div class="syx-preview">
+                    <div class="layout-grid">
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-white syx-p-3 syx-type-body-small syx-border">.syx-bg-white</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-gray-50 syx-p-3 syx-type-body-small">.syx-bg-gray-50</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-gray-100 syx-p-3 syx-type-body-small">.syx-bg-gray-100</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-gray-200 syx-p-3 syx-type-body-small">.syx-bg-gray-200</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-primary-light syx-p-3 syx-type-body-small syx-text-primary">
+                                .syx-bg-primary-light</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-primary syx-p-3 syx-type-body-small syx-text-white">.syx-bg-primary</div>
+                        </div>
+                        <div class="layout-grid__col-xs-6 layout-grid__col-md-3 syx-mb-3">
+                            <div class="syx-bg-dark syx-p-3 syx-type-body-small syx-text-white">.syx-bg-dark</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syx-code syx-mt-3">.syx-bg-white → var(--primitive-color-white)
+                    .syx-bg-gray-50 → var(--primitive-color-gray-50)
+                    .syx-bg-gray-100 → var(--primitive-color-gray-100)
+                    .syx-bg-gray-200 → var(--primitive-color-gray-200)
+                    .syx-bg-primary-light → var(--primitive-color-purple-50)
+                    .syx-bg-primary → var(--color-primary)
+                    .syx-bg-dark → var(--primitive-color-gray-900)</div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="docs-footer" role="contentinfo">
+        <nav class="docs-footer__links" aria-label="Documentation links">
+            <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+            <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+            <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small"
+                aria-current="page">Utilities</a>
+            <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
+            <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+        </nav>
+        <small class="docs-footer__copy">© 2026 Syx Design System · v2.0 Beta</small>
+    </footer>
+
+</body>
+
+</html>

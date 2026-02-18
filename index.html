@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary Meta -->
+  <title>Syx — Hybrid Fluid Design System</title>
+  <meta name="description"
+    content="Syx is a high-performance, fluid design system built on Atomic Design, Semantic Tokens, and Fluid Typography. Build consistent, scalable UIs with zero redundancy.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="José Luis Pizarro Feo">
+  <link rel="canonical" href="https://syntaxys.design/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://syntaxys.design/">
+  <meta property="og:title" content="Syx — Hybrid Fluid Design System">
+  <meta property="og:description"
+    content="A high-performance, fluid design system built on Atomic Design, Semantic Tokens, and Fluid Typography.">
+  <meta property="og:image" content="https://syntaxys.design/assets/og-image.png">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syx — Hybrid Fluid Design System">
+  <meta name="twitter:description"
+    content="A high-performance, fluid design system built on Atomic Design, Semantic Tokens, and Fluid Typography.">
+  <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Syx Design System",
+    "description": "A hybrid, token-based design system built for scalability. Engineered with SASS, Fluid Typography, and Semantic Tokens.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "url": "https://syntaxys.design/",
+    "author": { "@type": "Person", "name": "José Luis Pizarro Feo" }
+  }
+  </script>
+
+  <!-- Syx Core -->
+  <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
+
+  <!-- THEME SWITCHER — standalone styles, not part of SYX architecture -->
+  <style>
+    .syx-theme-switcher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 999px;
+    }
+
+    .syx-theme-switcher__btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      outline: none;
+    }
+
+    .syx-theme-switcher__btn[data-theme="example-01"] {
+      background: #7c3aed;
+    }
+
+    .syx-theme-switcher__btn[data-theme="example-02"] {
+      background: #2563eb;
+    }
+
+    .syx-theme-switcher__btn[data-theme="example-03"] {
+      background: #e11d48;
+    }
+
+    .syx-theme-switcher__btn[data-theme="example-04"] {
+      background: #16a34a;
+    }
+
+    .syx-theme-switcher__btn[data-theme="example-05"] {
+      background: #0f172a;
+    }
+
+    @media (hover: hover) {
+      .syx-theme-switcher__btn:hover {
+        transform: scale(1.25);
+      }
+    }
+
+    .syx-theme-switcher__btn:focus-visible {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .syx-theme-switcher__btn--active {
+      border-color: rgba(0, 0, 0, 0.3);
+      transform: scale(1.2);
+      box-shadow: 0 0 0 2px #fff, 0 0 0 3px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body class="syx syx--theme-example-01">
+
+  <!-- Skip to main content (Accessibility) -->
+  <a href="#main-content" class="landing-skip-link">Skip to main content</a>
+
+  <!-- ============================================
+       NAVBAR
+  ============================================= -->
+  <header role="banner">
+    <nav class="landing-nav" aria-label="Main navigation">
+      <div class="layout-grid">
+        <div class="layout-grid__col-xs-12 syx-d-flex syx-justify-between syx-items-center syx-py-2">
+
+          <!-- Logo -->
+          <a href="index.html" class="landing-nav__logo" aria-label="Syx Design System — Home"
+            aria-current="page">Syx.</a>
+
+          <!-- Nav Links -->
+          <div class="syx-d-flex syx-items-center syx-gap-3" role="list">
+            <a href="docs-foundation.html" class="syx-link syx-link--primary" role="listitem">Foundation</a>
+            <a href="docs-components.html" class="syx-link syx-link--primary" role="listitem">Components</a>
+            <a href="docs-utilities.html" class="syx-link syx-link--primary" role="listitem">Utilities</a>
+            <a href="docs-developer-guide.html" class="syx-link syx-link--primary" role="listitem">Dev Guide</a>
+            <a href="docs-foundation.html" class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm"
+              role="listitem">Get Started</a>
+
+            <!-- THEME SWITCHER -->
+            <div class="syx-theme-switcher" role="group" aria-label="Switch theme" id="syx-theme-switcher">
+              <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
+                aria-label="Theme Default" title="Default" type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer" title="Codymer"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral" title="Coral"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest" title="Forest"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight"
+                title="Midnight" type="button"></button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ============================================
+       MAIN CONTENT
+  ============================================= -->
+  <main id="main-content" role="main">
+
+    <!-- ==========================================
+         HERO
+    =========================================== -->
+    <section class="landing-hero syx-d-flex syx-flex-col syx-justify-center syx-items-center syx-text-center syx-py-5"
+      aria-labelledby="hero-heading">
+      <span class="syx-pill syx-pill--primary syx-mb-3" aria-label="Version 2.0 Beta — Now with Fluid Typography">
+        v2.0 Beta — Now with Fluid Typography
+      </span>
+
+      <h1 id="hero-heading" class="landing-hero__title syx-mb-3">
+        Design <span class="landing-hero__accent" aria-label="Fluidity">Fluidity</span><br>into every pixel.
+      </h1>
+
+      <p class="syx-type-body-large syx-mb-4 syx-text-gray syx-max-w-50ch">
+        Syx is a hybrid, token-based design system built for scalability.
+        Engineered with SASS, Fluid Typography, and Semantic Tokens.
+      </p>
+
+      <div class="syx-d-flex syx-gap-2 syx-items-center syx-flex-wrap syx-justify-center syx-mb-5">
+        <a href="docs-foundation.html" class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">
+          Get Started
+        </a>
+        <a href="docs-components.html" class="syx-btn syx-btn--secondary syx-btn--size-md">
+          Explore Components
+        </a>
+      </div>
+
+      <!-- Code snippet preview -->
+      <div class="landing-hero__code" role="img" aria-label="Example of a Syx semantic token definition in CSS">
+        <div class="landing-hero__code-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <code>
+          <span class="landing-hero__code-line">
+            <span class="t-comment">/* Semantic token — one source of truth */</span>
+          </span>
+          <span class="landing-hero__code-line">
+            <span class="t-prop">--semantic-color-primary</span>
+            <span class="t-punc">: </span>
+            <span class="t-token">var(--primitive-color-purple-500)</span>
+            <span class="t-punc">;</span>
+          </span>
+          <span class="landing-hero__code-line">
+            <span class="t-prop">--component-button-bg</span>
+            <span class="t-punc">: </span>
+            <span class="t-token">var(--semantic-color-primary)</span>
+            <span class="t-punc">;</span>
+          </span>
+          <span class="landing-hero__code-line">
+            <span class="t-prop">--component-button-font-size</span>
+            <span class="t-punc">: </span>
+            <span class="t-val">clamp(0.875rem, 0.8rem + 0.25vw, 1rem)</span>
+            <span class="t-punc">;</span>
+          </span>
+        </code>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         STATS BAR
+    =========================================== -->
+    <section class="landing-stats" aria-label="System statistics">
+      <div class="layout-grid">
+        <div class="layout-grid__col-xs-12 syx-d-flex">
+
+          <div class="landing-stats__item syx-w-full">
+            <span class="landing-stats__number" aria-label="More than 120 design tokens">120+</span>
+            <span class="landing-stats__label">Design Tokens</span>
+          </div>
+
+          <div class="landing-stats__item syx-w-full">
+            <span class="landing-stats__number" aria-label="More than 30 components">30+</span>
+            <span class="landing-stats__label">Components</span>
+          </div>
+
+          <div class="landing-stats__item syx-w-full">
+            <span class="landing-stats__number" aria-label="3 token layers">3</span>
+            <span class="landing-stats__label">Token Layers</span>
+          </div>
+
+          <div class="landing-stats__item syx-w-full">
+            <span class="landing-stats__number" aria-label="Infinite scalability">∞</span>
+            <span class="landing-stats__label">Scalability</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         HOW IT WORKS
+    =========================================== -->
+    <section class="landing-how syx-py-5" aria-labelledby="how-heading">
+      <div class="layout-grid">
+
+        <div class="layout-grid__col-xs-12 syx-text-center syx-mb-5">
+          <span class="syx-pill syx-pill--primary syx-mb-3">Architecture</span>
+          <h2 id="how-heading" class="syx-title syx-title--h2 syx-mb-2">How Syx works</h2>
+          <p class="syx-type-body-large syx-text-gray" style="max-width:50ch; margin:0 auto;">
+            A three-layer token system that separates raw values from meaning, and meaning from usage.
+          </p>
+        </div>
+
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+          <div class="landing-how__step">
+            <div class="landing-how__number" aria-hidden="true">1</div>
+            <h3 class="landing-how__label">Primitive Tokens</h3>
+            <p class="landing-how__desc">Raw values — colors, spacing, type scales. The single source of truth.</p>
+          </div>
+        </div>
+
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+          <div class="landing-how__step">
+            <div class="landing-how__number" aria-hidden="true">2</div>
+            <h3 class="landing-how__label">Semantic Tokens</h3>
+            <p class="landing-how__desc">Contextual aliases — <code>--semantic-color-primary</code> maps to the right
+              primitive per theme.</p>
+          </div>
+        </div>
+
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+          <div class="landing-how__step">
+            <div class="landing-how__number" aria-hidden="true">3</div>
+            <h3 class="landing-how__label">Component Tokens</h3>
+            <p class="landing-how__desc">Scoped decisions — each component consumes semantic tokens, never primitives.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         FEATURES
+    =========================================== -->
+    <section class="landing-features syx-py-5" aria-labelledby="features-heading">
+      <div class="layout-grid">
+
+        <div class="layout-grid__col-xs-12 syx-text-center syx-mb-5">
+          <span class="syx-pill syx-pill--secondary syx-mb-3">Core Principles</span>
+          <h2 id="features-heading" class="syx-title syx-title--h2 syx-mb-2">Built for the modern web</h2>
+          <p class="syx-type-body-large syx-text-gray landing-features__intro">
+            Three pillars that make Syx different from any other design system.
+          </p>
+        </div>
+
+        <!-- Feature 1 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--purple" role="img" aria-label="Atomic architecture icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Atomic Architecture</h3>
+            <p class="syx-type-body syx-text-gray">
+              Built on the Atomic Design methodology. Atoms, molecules, and organisms work together
+              to build complex UIs with zero redundancy.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--cyan" role="img" aria-label="Semantic tokens icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Semantic Tokens</h3>
+            <p class="syx-type-body syx-text-gray">
+              Theming made easy. Switch between brands or modes (Dark/Light) purely by changing
+              token mappings — no component changes needed.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--orange" role="img" aria-label="Fluid typography icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Fluid Typography</h3>
+            <p class="syx-type-body syx-text-gray">
+              Typography that scales organically with the viewport using CSS <code>clamp()</code>.
+              No more jerky breakpoints — just smooth, continuous scaling.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--green" role="img" aria-label="Accessibility icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Accessibility First</h3>
+            <p class="syx-type-body syx-text-gray">
+              WCAG 2.1 AA compliant focus states, ARIA patterns, and reduced-motion support
+              baked into every component.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--blue" role="img" aria-label="Theming icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Multi-Theme Ready</h3>
+            <p class="syx-type-body syx-text-gray">
+              Ship multiple brand themes from a single codebase. Each theme is a CSS class
+              override — zero duplication.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--pink" role="img" aria-label="Developer experience icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <polyline points="16 18 22 12 16 6" />
+                <polyline points="8 6 2 12 8 18" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Developer Experience</h3>
+            <p class="syx-type-body syx-text-gray">
+              SCSS mixins, utility classes, and a clear naming convention make Syx fast to learn
+              and a joy to use every day.
+            </p>
+          </article>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="layout-grid__col-xs-12 layout-grid__col-md-4 syx-pb-5 syx-d-flex syx-flex-col">
+          <article class="landing-feature-card">
+            <div class="landing-icon-box landing-icon-box--teal" role="img" aria-label="Mobile-first icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+                <line x1="12" y1="18" x2="12.01" y2="18" />
+              </svg>
+            </div>
+            <h3 class="syx-title syx-title--h4 syx-mb-2">Mobile-First</h3>
+            <p class="syx-type-body syx-text-gray">
+              Every component is designed mobile-first. Named breakpoints (<code>phablet</code>,
+              <code>tablet</code>, <code>desktop</code>) and <code>@include breakpoint()</code>
+              make responsive design systematic, not an afterthought.
+            </p>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         LIVE PREVIEW
+    =========================================== -->
+    <section class="landing-preview syx-py-5" aria-labelledby="preview-heading">
+      <div class="layout-grid">
+
+        <div class="layout-grid__col-xs-12 syx-text-center syx-mb-5">
+          <span class="syx-pill syx-pill--primary syx-mb-3">Live Preview</span>
+          <h2 id="preview-heading" class="syx-title syx-title--h2 syx-mb-2">See it in action</h2>
+          <p class="syx-type-body-large syx-text-gray" style="max-width:50ch; margin:0 auto;">
+            Every element on this page is built with Syx components. Here's a sample of what's available.
+          </p>
+        </div>
+
+        <div class="layout-grid__col-xs-12">
+
+          <!-- Buttons -->
+          <span class="landing-preview__group-label">Buttons</span>
+          <div class="landing-preview__row syx-mb-4" role="group" aria-label="Button variants">
+            <a href="#" class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Primary</a>
+            <a href="#" class="syx-btn syx-btn--secondary syx-btn--filled syx-btn--size-md">Secondary</a>
+            <a href="#" class="syx-btn syx-btn--tertiary syx-btn--filled syx-btn--size-md">Tertiary</a>
+            <a href="#" class="syx-btn syx-btn--primary syx-btn--size-md">Outlined</a>
+            <a href="#" class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Small</a>
+            <a href="#" class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-lg">Large</a>
+          </div>
+
+          <!-- Labels / Pills -->
+          <span class="landing-preview__group-label">Labels &amp; Pills</span>
+          <div class="landing-preview__row syx-mb-4" role="group" aria-label="Label and pill variants">
+            <span class="syx-pill syx-pill--primary">Primary</span>
+            <span class="syx-pill syx-pill--secondary">Secondary</span>
+            <span class="syx-label syx-label--success">Success</span>
+            <span class="syx-label syx-label--error">Error</span>
+            <span class="syx-label syx-label--warning">Warning</span>
+            <span class="syx-label syx-label--info">Info</span>
+          </div>
+
+          <!-- Typography -->
+          <span class="landing-preview__group-label">Typography</span>
+          <div class="landing-preview__row syx-mb-4" role="group" aria-label="Typography scale">
+            <span class="syx-title syx-title--h1" style="line-height:1.1">H1 Display</span>
+            <span class="syx-title syx-title--h3">H3 Heading</span>
+            <span class="syx-type-body-large">Body Large</span>
+            <span class="syx-type-body">Body</span>
+            <span class="syx-type-body-small">Body Small</span>
+          </div>
+
+          <!-- Form elements -->
+          <span class="landing-preview__group-label">Form Elements</span>
+          <div class="landing-preview__row" role="group" aria-label="Form element examples">
+            <label class="syx-label" for="preview-input">Label</label>
+            <input id="preview-input" type="text" class="syx-input syx-input--primary" placeholder="Type something…"
+              aria-label="Example input field" style="max-width:220px">
+            <label class="syx-label syx-d-flex syx-items-center syx-gap-1" for="preview-check">
+              <input id="preview-check" type="checkbox" class="syx-check" aria-label="Example checkbox">
+              Checkbox
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         CTA
+    =========================================== -->
+    <section class="landing-cta" aria-labelledby="cta-heading">
+      <div class="layout-grid">
+        <div class="layout-grid__col-xs-12 syx-text-center syx-py-5">
+
+          <h2 id="cta-heading" class="syx-title syx-title--h2 syx-mb-3 syx-text-white">
+            Ready to build something beautiful?
+          </h2>
+          <p class="syx-type-body-large syx-mb-4 syx-max-w-50ch syx-mx-auto landing-cta__lead">
+            Start with the Foundation docs to understand the token system,
+            then explore the full component library.
+          </p>
+          <div class="syx-d-flex syx-gap-2 syx-justify-center syx-flex-wrap">
+            <a href="docs-foundation.html"
+              class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md landing-cta__btn-light">
+              Read the Docs
+            </a>
+            <a href="docs-components.html" class="syx-btn syx-btn--secondary syx-btn--size-md landing-cta__btn-ghost">
+              View Components
+            </a>
+            <a href="docs-developer-guide.html"
+              class="syx-btn syx-btn--secondary syx-btn--size-md landing-cta__btn-ghost">
+              Developer Guide
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================
+       FOOTER
+  ============================================= -->
+  <footer class="landing-footer" role="contentinfo">
+    <div class="layout-grid">
+      <div
+        class="layout-grid__col-xs-12 syx-d-flex syx-justify-between syx-items-center syx-flex-wrap syx-py-3 syx-gap-3">
+
+        <div>
+          <span class="landing-nav__logo" aria-hidden="true">Syx.</span>
+          <small class="landing-footer__version syx-d-block syx-mt-1">v2.0 Beta — Hybrid Fluid Design System</small>
+        </div>
+
+        <nav class="landing-footer__links" aria-label="Documentation links">
+          <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+          <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+          <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
+          <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
+          <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+        </nav>
+
+        <small class="syx-type-body-small syx-text-gray">© 2026 Syx Design System · Built by <a
+            href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis Pizarro
+            Feo</a></small>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- THEME SWITCHER SCRIPT -->
+  <script>
+    (function () {
+      var STORAGE_KEY = 'syx-active-theme';
+      var themes = {
+        'example-01': { css: 'css/styles-theme-example-01.css', bodyClass: 'syx--theme-example-01', label: 'Default' },
+        'example-02': { css: 'css/styles-theme-example-02.css', bodyClass: 'syx--theme-example-02', label: 'Codymer' },
+        'example-03': { css: 'css/styles-theme-example-03.css', bodyClass: 'syx--theme-example-03', label: 'Coral' },
+        'example-04': { css: 'css/styles-theme-example-04.css', bodyClass: 'syx--theme-example-04', label: 'Forest' },
+        'example-05': { css: 'css/styles-theme-example-05.css', bodyClass: 'syx--theme-example-05', label: 'Midnight' }
+      };
+
+      var stylesheet = document.getElementById('syx-theme-stylesheet');
+      var switcher = document.getElementById('syx-theme-switcher');
+      var body = document.body;
+
+      function applyTheme(themeKey) {
+        var t = themes[themeKey];
+        if (!t) return;
+
+        // Swap stylesheet
+        stylesheet.href = t.css;
+
+        // Swap body class
+        Object.values(themes).forEach(function (th) { body.classList.remove(th.bodyClass); });
+        body.classList.add(t.bodyClass);
+
+        // Update active button
+        if (switcher) {
+          switcher.querySelectorAll('.syx-theme-switcher__btn').forEach(function (btn) {
+            btn.classList.toggle('syx-theme-switcher__btn--active', btn.dataset.theme === themeKey);
+          });
+        }
+
+        localStorage.setItem(STORAGE_KEY, themeKey);
+      }
+
+      // Apply persisted or default theme on load
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && themes[saved]) applyTheme(saved);
+
+      // Wire up buttons
+      if (switcher) {
+        switcher.addEventListener('click', function (e) {
+          var btn = e.target.closest('.syx-theme-switcher__btn');
+          if (btn && btn.dataset.theme) applyTheme(btn.dataset.theme);
+        });
+      }
+    })();
+  </script>
+
+</body>
+
+</html>

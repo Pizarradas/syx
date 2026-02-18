@@ -1,0 +1,44 @@
+{
+  "name": "syx-design-system",
+  "version": "2.0.0-beta",
+  "description": "A modern, token-driven SCSS design system built on Atomic Design principles. Zero external CSS dependencies. Dart Sass native.",
+  "keywords": [
+    "design-system",
+    "scss",
+    "sass",
+    "css-tokens",
+    "atomic-design",
+    "dark-mode",
+    "multi-theming",
+    "white-labeling",
+    "framework-agnostic",
+    "css-layers",
+    "fluid-typography"
+  ],
+  "homepage": "https://syntaxys.design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syntaxys/syx-design-system"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "José Luis Pizarro Feo",
+    "url": "https://github.com/jlpizarro"
+  },
+  "scripts": {
+    "build": "npm run build:01 && npm run build:02 && npm run build:03 && npm run build:04 && npm run build:05",
+    "build:01": "sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=compressed --no-source-map",
+    "build:02": "sass scss/styles-theme-example-02.scss css/styles-theme-example-02.css --style=compressed --no-source-map",
+    "build:03": "sass scss/styles-theme-example-03.scss css/styles-theme-example-03.css --style=compressed --no-source-map",
+    "build:04": "sass scss/styles-theme-example-04.scss css/styles-theme-example-04.css --style=compressed --no-source-map",
+    "build:05": "sass scss/styles-theme-example-05.scss css/styles-theme-example-05.css --style=compressed --no-source-map",
+    "watch": "sass --watch scss/styles-theme-example-01.scss:css/styles-theme-example-01.css --no-source-map",
+    "watch:all": "sass --watch scss/:css/ --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.80.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

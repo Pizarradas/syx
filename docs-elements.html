@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Elements — Syx Design System</title>
+    <meta name="description"
+        content="Syx HTML Elements: Standard element styling provided by the Syx reset and base layer. Lists, tables, and more.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="José Luis Pizarro Feo">
+    <link rel="canonical" href="https://syntaxys.design/docs-elements.html">
+    <meta property="og:title" content="HTML Elements — Syx Design System">
+    <meta property="og:description" content="Standard HTML element styling provided by the Syx reset and base layer.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="css/styles-theme-example-01.css">
+</head>
+
+<body class="syx syx--theme-example-01">
+
+    <a href="#main-content" class="docs-skip-link">Skip to main content</a>
+
+    <!-- TOPBAR -->
+    <header role="banner">
+        <div class="docs-topbar">
+            <div class="docs-topbar__inner">
+                <a href="index.html" class="docs-topbar__logo" aria-label="Syx Design System — Home">Syx.</a>
+                <nav class="docs-topbar__nav" aria-label="Top navigation">
+                    <a href="index.html" class="docs-topbar__home-link">← Home</a>
+                    <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+                    <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+                    <a href="docs-developer-guide.html"
+                        class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Dev Guide</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="docs-sidebar" aria-label="Documentation navigation">
+            <span class="docs-sidebar__version">v2.0 Beta</span>
+
+            <nav aria-label="Element sections">
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">Core</span>
+                    <a href="docs-foundation.html" class="syx-sidenav__link">Foundation</a>
+                    <a href="docs-components.html" class="syx-sidenav__link">Components</a>
+                    <a href="docs-utilities.html" class="syx-sidenav__link">Utilities</a>
+                </div>
+
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">Elements</span>
+                    <a href="#lists" class="syx-sidenav__link">Lists</a>
+                    <a href="#tables" class="syx-sidenav__link">Tables</a>
+                </div>
+
+                <div class="syx-sidenav__group">
+                    <span class="syx-sidenav__title">More</span>
+                    <a href="docs-developer-guide.html" class="syx-sidenav__link">Developer Guide</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main id="main-content" role="main" class="docs-content">
+
+            <!-- Page Header -->
+            <div class="docs-page-header">
+                <div class="docs-page-header__eyebrow">
+                    <a href="index.html" class="docs-page-header__breadcrumb">Home</a>
+                    <span class="docs-page-header__sep" aria-hidden="true">›</span>
+                    <span class="syx-pill" aria-current="page">Elements</span>
+                </div>
+                <h1 class="syx-title syx-title--h1 syx-mb-2">HTML Elements</h1>
+                <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
+                    Standard HTML element styling provided by the Syx reset and base layer.
+                </p>
+            </div>
+
+            <!-- LISTS -->
+            <section id="lists" class="mol-card" aria-labelledby="lists-heading">
+                <h2 id="lists-heading" class="syx-title syx-title--h2 syx-mb-3">Lists</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Atom: <code>atom-list</code>. Class: <code>.syx-list</code>. Add <code>.syx-list--ordered</code> for
+                    numbered lists.
+                </p>
+
+                <div class="syx-preview layout-grid">
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+                        <h3 class="syx-title syx-title--h4 syx-mb-2">Unordered List</h3>
+                        <ul class="syx-list">
+                            <li class="syx-list__item">List item one</li>
+                            <li class="syx-list__item">List item two
+                                <ul class="syx-list syx-mt-1">
+                                    <li class="syx-list__item">Nested item A</li>
+                                    <li class="syx-list__item">Nested item B</li>
+                                </ul>
+                            </li>
+                            <li class="syx-list__item">List item three</li>
+                        </ul>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+                        <h3 class="syx-title syx-title--h4 syx-mb-2">Ordered List</h3>
+                        <ol class="syx-list syx-list--ordered">
+                            <li class="syx-list__item">First step</li>
+                            <li class="syx-list__item">Second step</li>
+                            <li class="syx-list__item">Third step</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="syx-code syx-mt-3">&lt;ul class="syx-list"&gt;
+                    &lt;li class="syx-list__item"&gt;Item one&lt;/li&gt;
+                    &lt;li class="syx-list__item"&gt;Item two&lt;/li&gt;
+                    &lt;/ul&gt;
+
+                    &lt;ol class="syx-list syx-list--ordered"&gt;
+                    &lt;li class="syx-list__item"&gt;First step&lt;/li&gt;
+                    &lt;/ol&gt;</div>
+            </section>
+
+            <!-- TABLES -->
+            <section id="tables" class="mol-card" aria-labelledby="tables-heading">
+                <h2 id="tables-heading" class="syx-title syx-title--h2 syx-mb-3">Tables</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Atom: <code>atom-table</code>. Class: <code>.syx-table</code>. Full-width, striped rows, and
+                    responsive overflow.
+                </p>
+
+                <div class="syx-preview">
+                    <table class="syx-table">
+                        <caption class="syx-sr-only">Team members and their status</caption>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alex Johnson</td>
+                                <td>Designer</td>
+                                <td>alex@example.com</td>
+                                <td><span class="syx-pill syx-pill--success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sam Smith</td>
+                                <td>Developer</td>
+                                <td>sam@example.com</td>
+                                <td><span class="syx-pill syx-pill--success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>Maria García</td>
+                                <td>Product Manager</td>
+                                <td>maria@example.com</td>
+                                <td><span class="syx-pill syx-pill--warning">Away</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="syx-code syx-mt-3">&lt;table class="syx-table"&gt;
+                    &lt;thead&gt;
+                    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                    &lt;tr&gt;&lt;td&gt;Alex Johnson&lt;/td&gt;&lt;td&gt;Designer&lt;/td&gt;&lt;/tr&gt;
+                    &lt;/tbody&gt;
+                    &lt;/table&gt;</div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="docs-footer" role="contentinfo">
+        <nav class="docs-footer__links" aria-label="Documentation links">
+            <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+            <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+            <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
+            <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small"
+                aria-current="page">Elements</a>
+            <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+        </nav>
+        <small class="docs-footer__copy">© 2026 Syx Design System · v2.0 Beta · Built by <a
+                href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis Pizarro
+                Feo</a></small>
+    </footer>
+
+</body>
+
+</html>
