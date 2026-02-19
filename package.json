@@ -1,6 +1,6 @@
 {
   "name": "syx-design-system",
-  "version": "2.0.0-beta",
+  "version": "2.0.1",
   "description": "A modern, token-driven SCSS design system built on Atomic Design principles. Zero external CSS dependencies. Dart Sass native.",
   "keywords": [
     "design-system",
@@ -32,10 +32,24 @@
     "build:03": "sass scss/styles-theme-example-03.scss css/styles-theme-example-03.css --style=compressed --no-source-map",
     "build:04": "sass scss/styles-theme-example-04.scss css/styles-theme-example-04.css --style=compressed --no-source-map",
     "build:05": "sass scss/styles-theme-example-05.scss css/styles-theme-example-05.css --style=compressed --no-source-map",
+
+    "build:prod": "npm run build && npm run purge:01 && npm run purge:02 && npm run purge:03 && npm run purge:04 && npm run purge:05",
+    "purge:01": "npx postcss css/styles-theme-example-01.css --output css/prod/styles-theme-example-01.css",
+    "purge:02": "npx postcss css/styles-theme-example-02.css --output css/prod/styles-theme-example-02.css",
+    "purge:03": "npx postcss css/styles-theme-example-03.css --output css/prod/styles-theme-example-03.css",
+    "purge:04": "npx postcss css/styles-theme-example-04.css --output css/prod/styles-theme-example-04.css",
+    "purge:05": "npx postcss css/styles-theme-example-05.css --output css/prod/styles-theme-example-05.css",
+
+    "build:core": "sass scss/styles-core.scss css/styles-core.css --style=compressed --no-source-map",
+    "purge:core": "npx postcss css/styles-core.css --output css/prod/styles-core.css",
+
     "watch": "sass --watch scss/styles-theme-example-01.scss:css/styles-theme-example-01.css --no-source-map",
     "watch:all": "sass --watch scss/:css/ --no-source-map"
   },
   "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^8.0.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
     "sass": "^1.80.0"
   },
   "engines": {

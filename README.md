@@ -50,6 +50,8 @@ Open `index.html` in your browser to see the full live demo.
 ```bash
 npm install
 npm run build        # compiles all 5 themes
+npm run build:core   # compiles minimal production bundle (styles-core.css)
+npm run build:prod   # compiles + runs PurgeCSS on all themes
 npm run watch        # watches theme-01 for changes
 npm run watch:all    # watches all themes
 ```
@@ -65,7 +67,7 @@ sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=c
 ## Project Structure
 
 ```
-syntaxys/
+syx/
 │
 ├── scss/                        ← All source SCSS
 │   ├── abstracts/               ← Tokens, mixins, functions, maps
@@ -85,6 +87,7 @@ syntaxys/
 │   ├── utilities/               ← Display, spacing, text utilities
 │   ├── pages/                   ← Page-specific styles
 │   │
+│   ├── styles-core.scss         ← Minimal production bundle entry point
 │   └── themes/                  ← Theme definitions
 │       ├── _shared/             ← Shared core + 4 bundle definitions
 │       ├── _template/           ← Template for new themes
@@ -94,15 +97,20 @@ syntaxys/
 │       ├── example-04/          ← Theme 04 (Green)
 │       └── example-05/          ← Theme 05 (Yellow)
 │
-├── css/                         ← Compiled output (gitignore this)
-├── html/                        ← HTML showrooms per theme
-│   ├── example-01/
-│   └── …
+├── css/                         ← Compiled output (committed for zero-install use)
+│   └── prod/                    ← PurgeCSS-optimized output
 │
+├── fonts/                       ← Self-hosted webfonts
+├── img/                         ← Images and icons
+│
+├── index.html                   ← Live demo / landing page
+├── demo-bundle-weight.html      ← Core bundle weight reference page
 ├── docs-foundation.html         ← Colors, typography, spacing reference
 ├── docs-components.html         ← All atoms and molecules
 ├── docs-elements.html           ← Base HTML elements
-└── docs-utilities.html          ← Utility classes reference
+├── docs-utilities.html          ← Utility classes reference
+├── docs-developer-guide.html    ← Mixin and token practical reference
+└── docs-why-syx.html            ← Competitive analysis (7 sector committees)
 ```
 
 ---
@@ -155,13 +163,14 @@ Utilities always win over components. No `!important` needed.
 
 ## Themes
 
-| Theme      | Primary Color  | Bundles                    |
-| ---------- | -------------- | -------------------------- |
-| example-01 | Purple / Blue  | app, docs, marketing, blog |
-| example-02 | Codymer (Dark) | app, docs, marketing, blog |
-| example-03 | Blue           | app, docs, marketing, blog |
-| example-04 | Green          | app, docs, marketing, blog |
-| example-05 | Yellow         | app, docs, marketing, blog |
+| Theme       | Primary Color  | Bundles                              |
+| ----------- | -------------- | ------------------------------------ |
+| example-01  | Purple / Blue  | app, docs, marketing, blog           |
+| example-02  | Codymer (Dark) | app, docs, marketing, blog           |
+| example-03  | Blue           | app, docs, marketing, blog           |
+| example-04  | Green          | app, docs, marketing, blog           |
+| example-05  | Yellow         | app, docs, marketing, blog           |
+| `_template` | Neutral (core) | `styles-core.css` — production-ready |
 
 ---
 

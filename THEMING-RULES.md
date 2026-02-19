@@ -36,7 +36,7 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 
 ## Tokens de superficie disponibles
 
-Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de referencia. Cada `_theme.scss` los sobreescribe para crear la identidad del tema. El archivo `_token-aliases.scss` provee fallbacks de compatibilidad (deprecated, se eliminará en v2.0).
+Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de referencia. Cada `_theme.scss` los sobreescribe para crear la identidad del tema. El archivo `_token-aliases.scss` provee fallbacks de compatibilidad (deprecated, se eliminará en v2.1).
 
 ```css
 /* Backgrounds */
@@ -111,6 +111,8 @@ Los primitivos **sí se pueden usar** en:
 - `scss/themes/*/\_theme.scss` — para definir los semánticos
 - `scss/base/\_reset.scss` — para el reset global
 - Colores de marca específicos de un componente que **no deben cambiar con el tema** (ej: badges de categoría con colores fijos)
+
+Los **semánticos** se pueden sobreescribir directamente en `_theme.scss` **únicamente** en la Sección 3 (Neutral Brand), que define la identidad visual base para el bundle core (`_template`). En temas con marca propia, sobreescribir siempre desde primitivos.
 
 ---
 

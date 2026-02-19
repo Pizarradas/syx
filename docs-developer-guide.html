@@ -4,21 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Guide — Syx Design System</title>
+    <title>Developer Guide - Syx Design System</title>
     <meta name="description"
         content="SYX Developer Guide: how to style with SYX, mixin usage, token patterns, and component recipes. Practical reference for every mixin and token.">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="José Luis Pizarro Feo">
+    <meta name="author" content="Jos&eacute; Luis Pizarro Feo">
     <link rel="canonical" href="https://syntaxys.design/docs-developer-guide.html">
-    <meta property="og:title" content="Developer Guide — Syx Design System">
+    <meta property="og:title" content="Developer Guide Â— Syx Design System">
     <meta property="og:description"
         content="Practical reference for every mixin, token pattern, and component recipe. Each section shows the SCSS you write and the CSS it generates.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="css/styles-theme-example-01.css">
+    <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
 
     <style>
-        /* ── Inline demo helpers (not part of SYX) ── */
-        .demo-box {
+        /* -- Inline demo helpers (mol-demo-* Â— removable in production) -- */
+        .mol-demo-box {
             background: var(--semantic-color-surface-secondary);
             border: 1px solid var(--semantic-color-border);
             border-radius: var(--semantic-border-radius-md);
@@ -26,7 +26,7 @@
             margin-bottom: 1rem;
         }
 
-        .demo-flex-center {
+        .mol-demo-flex-center {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -37,7 +37,7 @@
             font-weight: 600;
         }
 
-        .demo-flex-between {
+        .mol-demo-flex-between {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -49,7 +49,7 @@
             font-weight: 500;
         }
 
-        .demo-truncate {
+        .mol-demo-truncate {
             max-width: 200px;
             overflow: hidden;
             white-space: nowrap;
@@ -59,7 +59,7 @@
             border-radius: var(--semantic-border-radius-sm);
         }
 
-        .demo-ellipsis {
+        .mol-demo-ellipsis {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             line-clamp: 2;
@@ -70,7 +70,7 @@
             border-radius: var(--semantic-border-radius-sm);
         }
 
-        .demo-aspect {
+        .mol-demo-aspect {
             aspect-ratio: 16 / 9;
             background: linear-gradient(135deg, var(--primitive-color-purple-50), var(--primitive-color-cyan-100, #cffafe));
             border-radius: var(--semantic-border-radius-md);
@@ -81,7 +81,7 @@
             font-weight: 600;
         }
 
-        .demo-token-row {
+        .mol-demo-token-row {
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -89,11 +89,11 @@
             border-bottom: 1px solid var(--semantic-color-border);
         }
 
-        .demo-token-row:last-child {
+        .mol-demo-token-row:last-child {
             border-bottom: none;
         }
 
-        .demo-swatch {
+        .mol-demo-swatch {
             width: 32px;
             height: 32px;
             border-radius: var(--semantic-border-radius-sm);
@@ -101,7 +101,7 @@
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
-        .guide-callout {
+        .mol-demo-callout {
             background: var(--primitive-color-purple-50);
             border-left: 3px solid var(--color-primary);
             padding: 0.75rem 1rem;
@@ -111,19 +111,19 @@
             color: var(--primitive-color-gray-800);
         }
 
-        .guide-callout--warn {
+        .mol-demo-callout--warn {
             background: var(--primitive-color-orange-50);
             border-left-color: var(--primitive-color-orange-400);
             color: var(--primitive-color-orange-800);
         }
 
-        .guide-callout--good {
+        .mol-demo-callout--good {
             background: #f0fdf4;
             border-left-color: #22c55e;
             color: #166534;
         }
 
-        .syx-code-label {
+        .docs-code-label {
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -132,68 +132,153 @@
             margin-bottom: 0.25rem;
         }
     </style>
-</head>
 
-<body class="syx syx--theme-example-01">
+    <!-- ============================================
+       NAVBAR (org-navbar organism)
+  ============================================= -->
+    <!-- ============================================
+       NAVBAR (org-navbar organism)
+  ============================================= -->
+    <header class="org-navbar org-navbar--docs" role="banner" id="site-header">
+        <div class="layout-grid">
+            <div class="org-navbar__bar layout-grid__col-xs-12">
+                <!-- Sidebar toggle (docs â€” mobile only) -->
+                <button class="org-navbar__sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar"
+                    aria-expanded="false" aria-controls="org-docs-sidebar" type="button">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
 
-    <a href="#main-content" class="docs-skip-link">Skip to main content</a>
 
-    <!-- TOPBAR -->
-    <header role="banner">
-        <div class="docs-topbar">
-            <div class="docs-topbar__inner">
-                <a href="index.html" class="docs-topbar__logo" aria-label="Syx Design System — Home">Syx.</a>
-                <nav class="docs-topbar__nav" aria-label="Top navigation">
-                    <a href="index.html" class="docs-topbar__home-link">← Home</a>
-                    <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-                    <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
-                    <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
+                <!-- Logo -->
+                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System â€” Home">Syx.</a>
+
+                <!-- Desktop navigation -->
+                <nav class="org-navbar__links" aria-label="Main navigation">
+                    <a href="docs-foundation.html" class="syx-link syx-link--primary">Foundation</a>
+                    <a href="docs-components.html" class="syx-link syx-link--primary">Components</a>
+                    <a href="docs-utilities.html" class="syx-link syx-link--primary">Utilities</a>
+                    <a href="docs-developer-guide.html" class="syx-link syx-link--primary" aria-current="page">Dev
+                        Guide</a>
+                    <a href="docs-elements.html" class="syx-link syx-link--primary">Elements</a>
+                    <a href="docs-why-syx.html" class="syx-link syx-link--primary">Why SYX?</a>
+
+                    <!-- Theme switcher â€” desktop -->
+                    <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group"
+                        aria-label="Switch theme" id="syx-theme-switcher">
+                        <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
+                            aria-label="Theme Default" title="Default" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer"
+                            title="Codymer" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral"
+                            title="Coral" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest"
+                            title="Forest" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight"
+                            title="Midnight" type="button"></button>
+                    </div>
+
+                    <!-- Dark mode toggle -->
+                    <button id="syx-dark-mode-toggle" class="org-navbar__dark-toggle" aria-label="Toggle dark mode"
+                        type="button">&#9790;</button>
                 </nav>
+
+                <!-- Hamburger toggle (mobile only) -->
+                <button class="org-navbar__toggle" aria-label="Toggle navigation" aria-expanded="false"
+                    aria-controls="org-navbar-menu" id="org-navbar-toggle" type="button">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="org-navbar__mobile-menu" id="org-navbar-menu" aria-hidden="true">
+            <div class="layout-grid">
+                <div class="layout-grid__col-xs-12">
+                    <nav class="org-navbar__mobile-nav" aria-label="Mobile navigation">
+                        <a href="docs-foundation.html" class="org-navbar__mobile-link">Foundation</a>
+                        <a href="docs-components.html" class="org-navbar__mobile-link">Components</a>
+                        <a href="docs-utilities.html" class="org-navbar__mobile-link">Utilities</a>
+                        <a href="docs-developer-guide.html" class="org-navbar__mobile-link" aria-current="page">Dev
+                            Guide</a>
+                        <a href="docs-elements.html" class="org-navbar__mobile-link">Elements</a>
+                    </nav>
+                    <!-- Theme switcher â€” mobile drawer -->
+                    <div class="org-navbar__mobile-footer">
+                        <span class="org-navbar__mobile-footer__label">Theme:</span>
+                        <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
+                            <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active"
+                                data-theme="example-01" aria-label="Theme Default" title="Default"
+                                type="button"></button>
+                            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer"
+                                title="Codymer" type="button"></button>
+                            <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral"
+                                title="Coral" type="button"></button>
+                            <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest"
+                                title="Forest" type="button"></button>
+                            <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight"
+                                title="Midnight" type="button"></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="docs-layout">
+
+    <div class="docs-progress" role="progressbar" aria-hidden="true" aria-label="Reading progress" aria-valuenow="0"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="tpl-docs">
 
         <!-- SIDEBAR -->
-        <aside class="docs-sidebar" aria-label="Documentation navigation">
-            <span class="docs-sidebar__version">v2.0 Beta</span>
+        <aside class="org-docs-sidebar" id="org-docs-sidebar" aria-label="Documentation navigation">
+            <div class="org-docs-sidebar__search">
+                <span class="org-docs-sidebar__search-icon" aria-hidden="true">&#9906;</span>
+                <input type="search" placeholder="Search documentation..." aria-label="Search documentation"
+                    tabindex="0">
+            </div>
+            <div class="org-docs-sidebar__divider" aria-hidden="true"></div>
 
             <nav aria-label="Developer guide sections">
-                <div class="syx-sidenav__group">
-                    <span class="syx-sidenav__title">Developer Guide</span>
-                    <a href="#tokens" class="syx-sidenav__link">Token System</a>
-                    <a href="#mixins-positioning" class="syx-sidenav__link">Positioning</a>
-                    <a href="#mixins-spacing" class="syx-sidenav__link">Spacing</a>
-                    <a href="#mixins-sizing" class="syx-sidenav__link">Sizing</a>
-                    <a href="#mixins-flex" class="syx-sidenav__link">Flexbox</a>
-                    <a href="#mixins-text" class="syx-sidenav__link">Text</a>
-                    <a href="#mixins-animation" class="syx-sidenav__link">Animation</a>
-                    <a href="#mixins-mq" class="syx-sidenav__link">Media Queries</a>
-                    <a href="#mixins-a11y" class="syx-sidenav__link">Accessibility</a>
-                    <a href="#mixins-layout" class="syx-sidenav__link">Layout</a>
-                    <a href="#recipes" class="syx-sidenav__link">Recipes</a>
-                    <a href="#antipatterns" class="syx-sidenav__link">Anti-patterns</a>
+                <div class="mol-docs-sidenav__group">
+                    <span class="mol-docs-sidenav__title">Developer Guide</span>
+                    <a href="#tokens" class="mol-docs-sidenav__link">Token System</a>
+                    <a href="#mixins-positioning" class="mol-docs-sidenav__link">Positioning</a>
+                    <a href="#mixins-spacing" class="mol-docs-sidenav__link">Spacing</a>
+                    <a href="#mixins-sizing" class="mol-docs-sidenav__link">Sizing</a>
+                    <a href="#mixins-flex" class="mol-docs-sidenav__link">Flexbox</a>
+                    <a href="#mixins-text" class="mol-docs-sidenav__link">Text</a>
+                    <a href="#mixins-animation" class="mol-docs-sidenav__link">Animation</a>
+                    <a href="#mixins-mq" class="mol-docs-sidenav__link">Media Queries</a>
+                    <a href="#mixins-a11y" class="mol-docs-sidenav__link">Accessibility</a>
+                    <a href="#mixins-layout" class="mol-docs-sidenav__link">Layout</a>
+                    <a href="#recipes" class="mol-docs-sidenav__link">Recipes</a>
+                    <a href="#antipatterns" class="mol-docs-sidenav__link">Anti-patterns</a>
+                    <a href="#single-partial-pattern" class="mol-docs-sidenav__link">Single-Partial Pattern</a>
                 </div>
 
-                <div class="syx-sidenav__group">
-                    <span class="syx-sidenav__title">Reference</span>
-                    <a href="docs-foundation.html" class="syx-sidenav__link">Foundation</a>
-                    <a href="docs-components.html" class="syx-sidenav__link">Components</a>
-                    <a href="docs-utilities.html" class="syx-sidenav__link">Utilities</a>
-                    <a href="docs-elements.html" class="syx-sidenav__link">Elements</a>
+                <div class="mol-docs-sidenav__group">
+                    <span class="mol-docs-sidenav__title">Reference</span>
+                    <a href="docs-foundation.html" class="mol-docs-sidenav__link">Foundation</a>
+                    <a href="docs-components.html" class="mol-docs-sidenav__link">Components</a>
+                    <a href="docs-utilities.html" class="mol-docs-sidenav__link">Utilities</a>
+                    <a href="docs-elements.html" class="mol-docs-sidenav__link">Elements</a>
                 </div>
             </nav>
         </aside>
 
         <!-- MAIN CONTENT -->
-        <main id="main-content" role="main" class="docs-content">
+        <main id="main-content" role="main">
 
             <!-- Page Header -->
-            <div class="docs-page-header">
-                <div class="docs-page-header__eyebrow">
-                    <a href="index.html" class="docs-page-header__breadcrumb">Home</a>
-                    <span class="docs-page-header__sep" aria-hidden="true">›</span>
+            <div class="org-docs-page-header">
+                <div class="org-docs-page-header__eyebrow">
+                    <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
+                    <span class="org-docs-page-header__sep" aria-hidden="true">Â›</span>
                     <span class="syx-pill syx-pill--primary" aria-current="page">Developer Guide</span>
                 </div>
                 <h1 class="syx-title syx-title--h1 syx-mb-2">How to Style with SYX</h1>
@@ -210,50 +295,51 @@
                     SYX uses 3 token layers. Always consume the most specific layer available.
                 </p>
 
-                <div class="guide-callout syx-mb-3">
+                <div class="mol-demo-callout syx-mb-3">
                     <strong>Rule:</strong> Components use <code>--component-*</code> tokens.
                     Themes use <code>--semantic-*</code>. Never use <code>--primitive-*</code> directly in components.
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 1 — Primitive (raw values)</h3>
-                <div class="syx-code syx-mb-3">// ❌ Don't use in components
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 1 Â— Primitive (raw values)</h3>
+                <div class="syx-code syx-mb-3">// ? Don't use in components
                     color: var(--primitive-color-purple-500);
                     font-size: var(--primitive-font-size-16);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 2 — Semantic (contextual aliases)</h3>
-                <div class="syx-code syx-mb-3">// ✅ Use in theme-level overrides and layout
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 2 Â— Semantic (contextual aliases)</h3>
+                <div class="syx-code syx-mb-3">// ? Use in theme-level overrides and layout
                     color: var(--semantic-color-primary);
                     background: var(--semantic-color-surface-secondary);
                     border-radius: var(--semantic-border-radius-md);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 3 — Component (per-component)</h3>
-                <div class="syx-code syx-mb-3">// ✅ Use inside component mixins
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 3 Â— Component (per-component)</h3>
+                <div class="syx-code syx-mb-3">// ? Use inside component mixins
                     color: var(--component-btn-primary-color);
                     background: var(--component-btn-primary-bg);
                     border-radius: var(--component-btn-border-radius);</div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2">Semantic color tokens</h3>
-                <div class="demo-box">
-                    <div class="demo-token-row">
-                        <div class="demo-swatch" style="background: var(--semantic-color-primary)" aria-hidden="true">
+                <div class="mol-demo-box">
+                    <div class="mol-demo-token-row">
+                        <div class="mol-demo-swatch" style="background: var(--semantic-color-primary)"
+                            aria-hidden="true">
                         </div>
                         <code>--semantic-color-primary</code>
                         <span class="syx-text-gray syx-type-body-small">Main brand color</span>
                     </div>
-                    <div class="demo-token-row">
-                        <div class="demo-swatch" style="background: var(--semantic-color-surface-secondary)"
+                    <div class="mol-demo-token-row">
+                        <div class="mol-demo-swatch" style="background: var(--semantic-color-surface-secondary)"
                             aria-hidden="true"></div>
                         <code>--semantic-color-surface-secondary</code>
                         <span class="syx-text-gray syx-type-body-small">Page background alt</span>
                     </div>
-                    <div class="demo-token-row">
-                        <div class="demo-swatch" style="background: var(--semantic-color-border); border: none"
+                    <div class="mol-demo-token-row">
+                        <div class="mol-demo-swatch" style="background: var(--semantic-color-border); border: none"
                             aria-hidden="true"></div>
                         <code>--semantic-color-border</code>
                         <span class="syx-text-gray syx-type-body-small">Default border</span>
                     </div>
-                    <div class="demo-token-row">
-                        <div class="demo-swatch" style="background: var(--semantic-color-text-primary)"
+                    <div class="mol-demo-token-row">
+                        <div class="mol-demo-swatch" style="background: var(--semantic-color-text-primary)"
                             aria-hidden="true"></div>
                         <code>--semantic-color-text-primary</code>
                         <span class="syx-text-gray syx-type-body-small">Body text</span>
@@ -265,12 +351,12 @@
             <section id="mixins-positioning" class="mol-card" aria-labelledby="positioning-heading">
                 <h2 id="positioning-heading" class="syx-title syx-title--h2 syx-mb-1">Positioning Mixins</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Null-safe shorthands. Pass <code>null</code> to skip any side — no empty CSS emitted.
+                    Null-safe shorthands. Pass <code>null</code> to skip any side Â— no empty CSS emitted.
                 </p>
 
-                <div class="guide-callout syx-mb-3">
+                <div class="mol-demo-callout syx-mb-3">
                     <strong>Null-safety:</strong> <code>@include absolute($top: 0)</code> emits only
-                    <code>position: absolute; top: 0;</code> — not <code>right: null</code>.
+                    <code>position: absolute; top: 0;</code> Â— not <code>right: null</code>.
                 </div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include absolute()</code></h3>
@@ -324,33 +410,33 @@
                 </p>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include margin()</code></h3>
-                <div class="syx-code-label">SCSS → CSS</div>
+                <div class="syx-code-label">SCSS ? CSS</div>
                 <div class="syx-code syx-mb-4">@include margin(null auto);
-                    // → margin-left: auto; margin-right: auto;
+                    // ? margin-left: auto; margin-right: auto;
 
                     @include margin(2rem null 1rem null);
-                    // → margin-top: 2rem; margin-bottom: 1rem;
+                    // ? margin-top: 2rem; margin-bottom: 1rem;
 
                     @include margin(1rem);
-                    // → margin: 1rem;
+                    // ? margin: 1rem;
 
                     // With tokens
                     @include margin(var(--layout-gap-4) null);
-                    // → margin-top: var(--layout-gap-4); margin-bottom: var(--layout-gap-4);</div>
+                    // ? margin-top: var(--layout-gap-4); margin-bottom: var(--layout-gap-4);</div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include padding()</code></h3>
                 <div class="syx-code syx-mb-4">@include padding(1rem null);
-                    // → padding-top: 1rem; padding-bottom: 1rem;
+                    // ? padding-top: 1rem; padding-bottom: 1rem;
 
                     @include padding(var(--component-card-padding-y) var(--component-card-padding-x));
-                    // → padding-top: ...; padding-bottom: ...; padding-left: ...; padding-right: ...;
+                    // ? padding-top: ...; padding-bottom: ...; padding-left: ...; padding-right: ...;
 
                     // Skip left/right (vertical only)
                     @include padding(var(--layout-pad-3) null);
-                    // → padding-top: var(--layout-pad-3); padding-bottom: var(--layout-pad-3);</div>
+                    // ? padding-top: var(--layout-pad-3); padding-bottom: var(--layout-pad-3);</div>
 
-                <div class="guide-callout guide-callout--warn">
-                    <strong>Tip:</strong> For symmetric padding use <code>@include padding(Y X)</code> — 2 values.
+                <div class="mol-demo-callout mol-demo-callout--warn">
+                    <strong>Tip:</strong> For symmetric padding use <code>@include padding(Y X)</code> Â— 2 values.
                     For asymmetric use all 4: <code>@include padding(top right bottom left)</code>.
                 </div>
             </section>
@@ -362,18 +448,18 @@
                     <code>@include size()</code> sets width and height. One argument = square.
                 </p>
 
-                <div class="syx-code-label">SCSS → CSS</div>
+                <div class="syx-code-label">SCSS ? CSS</div>
                 <div class="syx-code syx-mb-4">// Square (one arg)
                     @include size(48px);
-                    // → width: 48px; height: 48px;
+                    // ? width: 48px; height: 48px;
 
                     // Rectangle (two args)
                     @include size(100%, 56px);
-                    // → width: 100%; height: 56px;
+                    // ? width: 100%; height: 56px;
 
                     // With tokens
                     @include size(var(--component-avatar-size));
-                    // → width: var(--component-avatar-size); height: var(--component-avatar-size);</div>
+                    // ? width: var(--component-avatar-size); height: var(--component-avatar-size);</div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include aspect-ratio()</code></h3>
                 <div class="syx-code syx-mb-3">// 16:9 video embed
@@ -384,8 +470,9 @@
 
                     // Portrait card
                     .portrait { @include aspect-ratio(3, 4); }</div>
-                <div class="demo-box">
-                    <div class="demo-aspect" role="img" aria-label="16/9 aspect ratio demo">16 / 9 aspect ratio</div>
+                <div class="mol-demo-box">
+                    <div class="mol-demo-aspect" role="img" aria-label="16/9 aspect ratio demo">16 / 9 aspect ratio
+                    </div>
                 </div>
             </section>
 
@@ -404,18 +491,18 @@
                     border-radius: 50%;
                     background: var(--semantic-color-primary);
                     }</div>
-                <div class="demo-box syx-mb-4">
-                    <div class="demo-flex-center">Centered content</div>
+                <div class="mol-demo-box syx-mb-4">
+                    <div class="mol-demo-flex-center">Centered content</div>
                 </div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include flex-between()</code></h3>
-                <div class="syx-code syx-mb-3">// Space-between row — navbars, card headers
+                <div class="syx-code syx-mb-3">// Space-between row Â— navbars, card headers
                     .card__header {
                     @include flex-between();
                     @include padding(1rem);
                     }</div>
-                <div class="demo-box">
-                    <div class="demo-flex-between">
+                <div class="mol-demo-box">
+                    <div class="mol-demo-flex-between">
                         <span>Card Title</span>
                         <button class="syx-btn syx-btn--primary syx-btn--size-sm">Action</button>
                     </div>
@@ -426,7 +513,7 @@
             <section id="mixins-text" class="mol-card" aria-labelledby="text-heading">
                 <h2 id="text-heading" class="syx-title syx-title--h2 syx-mb-1">Text Mixins</h2>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include truncate()</code> — single line</h3>
+                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include truncate()</code> Â— single line</h3>
                 <div class="syx-code syx-mb-3">// Truncate to max-width (default: 100%)
                     .card__title {
                     @include truncate(240px);
@@ -436,12 +523,13 @@
                     .list-item__label {
                     @include truncate();
                     }</div>
-                <div class="demo-box syx-mb-4">
+                <div class="mol-demo-box syx-mb-4">
                     <p class="syx-type-body-small syx-text-gray syx-mb-2">Result (max-width: 200px):</p>
-                    <div class="demo-truncate">This is a very long title that will be truncated with an ellipsis</div>
+                    <div class="mol-demo-truncate">This is a very long title that will be truncated with an ellipsis
+                    </div>
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include ellipsis($lines)</code> — multi-line</h3>
+                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include ellipsis($lines)</code> Â— multi-line</h3>
                 <div class="syx-code syx-mb-3">// Clamp to N lines
                     .card__excerpt {
                     @include ellipsis(2);
@@ -450,9 +538,9 @@
                     .article__summary {
                     @include ellipsis(3);
                     }</div>
-                <div class="demo-box">
+                <div class="mol-demo-box">
                     <p class="syx-type-body-small syx-text-gray syx-mb-2">Result (2 lines):</p>
-                    <div class="demo-ellipsis">
+                    <div class="mol-demo-ellipsis">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
                         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                         laboris.
@@ -465,7 +553,7 @@
                 <h2 id="animation-heading" class="syx-title syx-title--h2 syx-mb-1">Animation Mixin</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     <code>@include transition()</code> automatically adds a
-                    <code>prefers-reduced-motion</code> guard — no extra code needed.
+                    <code>prefers-reduced-motion</code> guard Â— no extra code needed.
                 </p>
 
                 <div class="syx-code-label">SCSS</div>
@@ -491,8 +579,8 @@
                     .syx-btn { transition: none; }
                     }</div>
 
-                <div class="guide-callout guide-callout--good">
-                    <strong>✅ Best practice:</strong> Always use <code>@include transition()</code> instead of
+                <div class="mol-demo-callout mol-demo-callout--good">
+                    <strong>? Best practice:</strong> Always use <code>@include transition()</code> instead of
                     bare <code>transition:</code>. The reduced-motion guard is free.
                 </div>
             </section>
@@ -520,37 +608,37 @@
                             <td><code>mobile-only</code></td>
                             <td>max-width</td>
                             <td>37.5em</td>
-                            <td>≤ 600px</td>
+                            <td>= 600px</td>
                         </tr>
                         <tr>
                             <td><code>phablet</code></td>
                             <td>min-width</td>
                             <td>37.5em</td>
-                            <td>≥ 600px</td>
+                            <td>= 600px</td>
                         </tr>
                         <tr>
                             <td><code>tablet</code></td>
                             <td>min-width</td>
                             <td>50em</td>
-                            <td>≥ 800px</td>
+                            <td>= 800px</td>
                         </tr>
                         <tr>
                             <td><code>laptop</code></td>
                             <td>min-width</td>
                             <td>64em</td>
-                            <td>≥ 1024px</td>
+                            <td>= 1024px</td>
                         </tr>
                         <tr>
                             <td><code>desktop</code></td>
                             <td>min-width</td>
                             <td>70em</td>
-                            <td>≥ 1120px</td>
+                            <td>= 1120px</td>
                         </tr>
                         <tr>
                             <td><code>wide</code></td>
                             <td>min-width</td>
                             <td>90em</td>
-                            <td>≥ 1440px</td>
+                            <td>= 1440px</td>
                         </tr>
                     </tbody>
                 </table>
@@ -562,11 +650,11 @@
                     font-size: 2rem; // mobile default
 
                     @include breakpoint(tablet) {
-                    font-size: 3rem; // ≥ 800px
+                    font-size: 3rem; // = 800px
                     }
 
                     @include breakpoint(desktop) {
-                    font-size: 4rem; // ≥ 1120px
+                    font-size: 4rem; // = 1120px
                     }
                     }
 
@@ -594,7 +682,7 @@
                     }</div>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include reduced-motion</code></h3>
-                <div class="syx-code syx-mb-3">// Manual override (usually not needed — @include transition() handles
+                <div class="syx-code syx-mb-3">// Manual override (usually not needed Â— @include transition() handles
                     this)
                     .animated-element {
                     animation: slide-in 0.4s ease;
@@ -643,7 +731,7 @@
                     .custom-input:focus {
                     @include focus-ring($color: var(--semantic-color-primary), $offset: 4px);
                     }</div>
-                <div class="demo-box">
+                <div class="mol-demo-box">
                     <p class="syx-type-body-small syx-text-gray syx-mb-2">Tab to see focus ring:</p>
                     <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Focus me</button>
                 </div>
@@ -667,7 +755,7 @@
                     Real-world patterns combining multiple mixins and tokens.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 1 — Overlay badge</h3>
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 1 Â— Overlay badge</h3>
                 <div class="syx-code syx-mb-4">// A badge positioned top-right of a card
                     .card {
                     @include relative(); // positioning context
@@ -684,8 +772,8 @@
                     font-weight: 700;
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 2 — Responsive card grid</h3>
-                <div class="syx-code syx-mb-4">// 1 col mobile → 2 col tablet → 3 col desktop
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 2 Â— Responsive card grid</h3>
+                <div class="syx-code syx-mb-4">// 1 col mobile ? 2 col tablet ? 3 col desktop
                     .card-grid {
                     display: grid;
                     grid-template-columns: 1fr;
@@ -709,7 +797,7 @@
                     }
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 3 — New atom from scratch</h3>
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 3 Â— New atom from scratch</h3>
                 <div class="syx-code syx-mb-4">// scss/atoms/_tag.scss
                     @use "../abstracts/index" as *;
 
@@ -741,68 +829,295 @@
                     Common mistakes and how to fix them.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">❌ Inline position instead of mixin</h3>
-                <div class="syx-code syx-mb-2">// ❌ Wrong
+                <h3 class="syx-title syx-title--h4 syx-mb-2">? Inline position instead of mixin</h3>
+                <div class="syx-code syx-mb-2">// ? Wrong
                     .card { position: relative; }
                     .badge { position: absolute; top: 0; right: 0; }</div>
-                <div class="syx-code syx-mb-4">// ✅ Correct
+                <div class="syx-code syx-mb-4">// ? Correct
                     .card { @include relative(); }
                     .badge { @include absolute($top: 0, $right: 0); }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">❌ Inline transition instead of mixin</h3>
-                <div class="syx-code syx-mb-2">// ❌ Wrong — no reduced-motion guard
+                <h3 class="syx-title syx-title--h4 syx-mb-2">? Inline transition instead of mixin</h3>
+                <div class="syx-code syx-mb-2">// ? Wrong Â— no reduced-motion guard
                     .btn { transition: background-color 0.2s ease; }</div>
-                <div class="syx-code syx-mb-4">// ✅ Correct — guard included automatically
+                <div class="syx-code syx-mb-4">// ? Correct Â— guard included automatically
                     .btn { @include transition(background-color 0.2s ease); }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">❌ Hardcoded values instead of tokens</h3>
-                <div class="syx-code syx-mb-2">// ❌ Wrong
+                <h3 class="syx-title syx-title--h4 syx-mb-2">? Hardcoded values instead of tokens</h3>
+                <div class="syx-code syx-mb-2">// ? Wrong
                     .card { border-radius: 8px; color: #1a1a2e; }</div>
-                <div class="syx-code syx-mb-4">// ✅ Correct
+                <div class="syx-code syx-mb-4">// ? Correct
                     .card {
                     border-radius: var(--semantic-border-radius-md);
                     color: var(--semantic-color-text-primary);
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">❌ Using !important</h3>
-                <div class="syx-code syx-mb-2">// ❌ Wrong — @layer makes this unnecessary
+                <h3 class="syx-title syx-title--h4 syx-mb-2">? Using !important</h3>
+                <div class="syx-code syx-mb-2">// ? Wrong Â— @layer makes this unnecessary
                     .syx-d-none { display: none !important; }</div>
-                <div class="syx-code syx-mb-4">// ✅ Correct — @layer syx.utilities wins by position
+                <div class="syx-code syx-mb-4">// ? Correct Â— @layer syx.utilities wins by position
                     @layer syx.utilities {
                     .syx-d-none { display: none; }
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">❌ Using primitive tokens in components</h3>
-                <div class="syx-code syx-mb-2">// ❌ Wrong — breaks theming
+                <h3 class="syx-title syx-title--h4 syx-mb-2">? Using primitive tokens in components</h3>
+                <div class="syx-code syx-mb-2">// ? Wrong Â— breaks theming
                     .syx-btn { background: var(--primitive-color-purple-500); }</div>
-                <div class="syx-code syx-mb-4">// ✅ Correct — theme-swappable
+                <div class="syx-code syx-mb-4">// ? Correct Â— theme-swappable
                     .syx-btn { background: var(--component-btn-primary-bg); }</div>
 
-                <div class="guide-callout guide-callout--warn">
+                <div class="mol-demo-callout mol-demo-callout--warn">
                     <strong>Rule of thumb:</strong> If you find yourself writing <code>position:</code>,
-                    <code>transition:</code>, <code>!important</code>, or a hex color directly in a component —
+                    <code>transition:</code>, <code>!important</code>, or a hex color directly in a component Â—
                     stop and use the mixin or token equivalent.
+                </div>
+            </section>
+
+            <!-- SINGLE-PARTIAL MULTI-THEME PATTERN -->
+            <section id="single-partial-pattern" class="mol-card" aria-labelledby="single-partial-heading">
+                <h2 id="single-partial-heading" class="syx-title syx-title--h2 syx-mb-1">Single-Partial Multi-Theme
+                    Pattern</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-4">
+                    One SCSS file per component handles <strong>all themes</strong> via three distinct mechanisms.
+                    No per-theme copies, no duplication.
+                </p>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 1 &mdash; CSS Custom Property <code>var()</code>
+                </h3>
+                <p class="syx-type-body syx-text-gray syx-mb-2">
+                    For values that <strong>all themes have</strong> but differ in value (colors, spacing, icons).
+                    Use a generic token in the partial; each <code>_theme.scss</code> overrides it.
+                </p>
+                <div class="syx-code syx-mb-4">// organisms/_header.scss
+                    background-color: var(--component-header-bg); // generic â€” every theme has this
+                    background-image: var(--component-header-logo-icon); // generic â€” every theme overrides it
+
+                    // themes/example-02/_theme.scss (Codymer)
+                    --component-header-logo-icon: var(--icon-logo-codymer);
+
+                    // themes/example-03/_theme.scss (Coral)
+                    --component-header-logo-icon: var(--icon-logo-coral);</div>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 2 &mdash; Sass Map <code>theme-cfg()</code></h3>
+                <p class="syx-type-body syx-text-gray syx-mb-2">
+                    For <strong>structural differences</strong> resolved at compile time (layout, position, Sass-only
+                    sizes).
+                    Values live in <code>abstracts/_theme-config.scss</code> and are read with <code>theme-cfg()</code>.
+                </p>
+                <div class="syx-code syx-mb-4">// abstracts/_theme-config.scss
+                    $theme-config: (
+                    'codymer': (header-sidenav-side: right, header-logo-size: 2.4rem),
+                    'coral': (header-sidenav-side: left, header-logo-size: 2rem),
+                    );
+
+                    // organisms/_header.scss â€” reads the map at compile time
+                    @if theme-cfg($theme, 'header-sidenav-side', left) == right {
+                    right: 0;
+                    transform: translateX(100%); // Codymer: slides in from right
+                    } @else {
+                    left: 0;
+                    transform: translateX(-100%); // all others: slides in from left
+                    }</div>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 3 &mdash; <code>@if $theme</code></h3>
+                <p class="syx-type-body syx-text-gray syx-mb-2">
+                    For <strong>one-off rules</strong> that only 1&ndash;2 themes need.
+                    No token or map entry required &mdash; inline override in the partial.
+                </p>
+                <div class="syx-code syx-mb-4">// organisms/_header.scss
+                    @if $theme == 'codymer' {
+                    border-bottom: 1px solid var(--semantic-color-border-subtle); // Codymer only
+                    }
+                    @if $theme == 'midnight' {
+                    backdrop-filter: blur(8px); // Midnight glass effect only
+                    }</div>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Decision table</h3>
+                <table class="syx-table syx-mb-4">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Do <strong>all themes</strong> need this, but with different values?</td>
+                            <td><strong>Method 1</strong> &mdash; CSS token</td>
+                        </tr>
+                        <tr>
+                            <td>Is it structural and reused in <strong>multiple spots</strong> of the mixin?</td>
+                            <td><strong>Method 2</strong> &mdash; Sass Map</td>
+                        </tr>
+                        <tr>
+                            <td>Is it specific to <strong>only 1&ndash;2 themes</strong> and not worth tokenizing?</td>
+                            <td><strong>Method 3</strong> &mdash; <code>@if $theme</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mol-demo-callout mol-demo-callout--info">
+                    <strong>Adding a new theme variant:</strong> add an entry to <code>$theme-config</code>,
+                    define token overrides in <code>_theme.scss</code>, pass the name to the mixin.
+                    No new SCSS partials ever needed.
                 </div>
             </section>
 
         </main>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="docs-footer" role="contentinfo">
-        <nav class="docs-footer__links" aria-label="Documentation links">
-            <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-            <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
-            <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
-            <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
-            <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small"
-                aria-current="page">Dev Guide</a>
-        </nav>
-        <small class="docs-footer__copy">© 2026 Syx Design System · v2.0 Beta · Built by <a
-                href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis Pizarro
-                Feo</a></small>
-    </footer>
 
-</body>
+    <!-- ============================================
+       FOOTER (org-site-footer â€” universal)
+  ============================================= -->
+    <footer class="org-site-footer" role="contentinfo">
+        <div class="org-site-footer__inner">
+
+            <div class="org-site-footer__brand">
+                <a href="index.html" class="org-site-footer__logo">Syx.</a>
+                <small class="org-site-footer__tagline">v2.0 Beta &mdash; Hybrid Fluid Design System</small>
+            </div>
+
+            <nav class="org-site-footer__links" aria-label="Footer navigation">
+                <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+                <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+                <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
+                <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
+                <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+            </nav>
+
+            <small class="org-site-footer__copy">
+                &copy; 2026 Syx Design System &mdash; Built by
+                <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">Jos&eacute; Luis
+                    Pizarro Feo</a>
+            </small>
+
+        </div>
+    </footer>
+    <!-- SIDEBAR TOGGLE SCRIPT -->
+    <!-- NAVBAR TOGGLE -->
+    <script>
+        (function () {
+            var toggle = document.getElementById('org-navbar-toggle');
+            var menu = document.getElementById('org-navbar-menu');
+            if (!toggle || !menu) return;
+            toggle.addEventListener('click', function () {
+                var open = menu.classList.toggle('is-open');
+                toggle.setAttribute('aria-expanded', open);
+                menu.setAttribute('aria-hidden', !open);
+            });
+            menu.querySelectorAll('a').forEach(function (l) {
+                l.addEventListener('click', function () {
+                    menu.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    menu.setAttribute('aria-hidden', 'true');
+                });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+                    menu.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    menu.setAttribute('aria-hidden', 'true');
+                    toggle.focus();
+                }
+            });
+        })();
+    </script>
+
+    <!-- THEME SWITCHER -->
+    <script>
+        (function () {
+            var KEY = 'syx-active-theme';
+            var themes = {
+                'example-01': { css: 'css/styles-theme-example-01.css', cls: 'syx--theme-example-01' },
+                'example-02': { css: 'css/styles-theme-example-02.css', cls: 'syx--theme-example-02' },
+                'example-03': { css: 'css/styles-theme-example-03.css', cls: 'syx--theme-example-03' },
+                'example-04': { css: 'css/styles-theme-example-04.css', cls: 'syx--theme-example-04' },
+                'example-05': { css: 'css/styles-theme-example-05.css', cls: 'syx--theme-example-05' }
+            };
+            var sheet = document.getElementById('syx-theme-stylesheet');
+            var body = document.body;
+            function allBtns() { return document.querySelectorAll('.syx-theme-switcher__btn'); }
+            function apply(key) {
+                var t = themes[key]; if (!t) return;
+                if (sheet) sheet.href = t.css;
+                Object.values(themes).forEach(function (x) { body.classList.remove(x.cls); });
+                body.classList.add(t.cls);
+                allBtns().forEach(function (b) {
+                    b.classList.toggle('syx-theme-switcher__btn--active', b.dataset.theme === key);
+                });
+                localStorage.setItem(KEY, key);
+            }
+            var saved = localStorage.getItem(KEY);
+            if (saved && themes[saved]) apply(saved);
+            document.addEventListener('click', function (e) {
+                var b = e.target.closest('.syx-theme-switcher__btn');
+                if (b && b.dataset.theme) apply(b.dataset.theme);
+            });
+        })();
+    </script>
+
+    <!-- DARK MODE TOGGLE -->
+    <script>
+        (function () {
+            var btn = document.getElementById('syx-dark-mode-toggle');
+            var root = document.documentElement;
+            if (localStorage.getItem('syx-dark-mode') === 'dark') root.setAttribute('data-theme', 'dark');
+            if (btn) btn.addEventListener('click', function () {
+                var isDark = root.getAttribute('data-theme') === 'dark';
+                isDark ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+                localStorage.setItem('syx-dark-mode', isDark ? 'light' : 'dark');
+            });
+        })();
+    </script>
+    <!-- DOCS SCRIPTS -->
+    <script>
+        (function () {
+            // Reading progress
+            var bar = document.querySelector('.docs-progress');
+            if (bar) window.addEventListener('scroll', function () {
+                var d = document.documentElement;
+                var p = d.scrollHeight - d.clientHeight;
+                bar.style.width = (p > 0 ? (window.scrollY / p) * 100 : 0) + '%';
+                bar.setAttribute('aria-valuenow', Math.round(p > 0 ? (window.scrollY / p) * 100 : 0));
+            }, { passive: true });
+
+            // Active sidenav
+            var links = document.querySelectorAll('.mol-docs-sidenav__link[href^="#"]');
+            if (links.length) {
+                var obs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            links.forEach(function (l) { l.classList.remove('mol-docs-sidenav__link--active'); });
+                            var a = document.querySelector('.mol-docs-sidenav__link[href="#' + e.target.id + '"]');
+                            if (a) a.classList.add('mol-docs-sidenav__link--active');
+                        }
+                    });
+                }, { rootMargin: '-20% 0px -75% 0px', threshold: 0 });
+                links.forEach(function (l) {
+                    var s = document.querySelector(l.getAttribute('href'));
+                    if (s) obs.observe(s);
+                });
+            }
+
+            // Sidebar toggle
+            var st = document.getElementById('docs-sidebar-toggle');
+            var sb = document.getElementById('org-docs-sidebar');
+            if (st && sb) {
+                st.addEventListener('click', function () {
+                    var open = sb.classList.toggle('is-open');
+                    st.setAttribute('aria-expanded', open);
+                });
+                sb.querySelectorAll('a').forEach(function (l) {
+                    l.addEventListener('click', function () {
+                        sb.classList.remove('is-open');
+                        st.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        })();
+    </script>
+
+    </body>
 
 </html>

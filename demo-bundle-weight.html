@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SYX · Bundle Mínimo — Referencia de Peso</title>
+    <meta name="description"
+        content="Página de referencia del bundle mínimo de SYX. Muestra el peso real del sistema sin el overhead de la documentación." />
+    <meta name="robots" content="noindex" />
+
+    <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  BUNDLE CORE — SYX mínimo de producción                 ║
+    ║                                                          ║
+    ║  Este archivo usa css/styles-core.css, NO el bundle      ║
+    ║  completo de los docs (styles-theme-example-01.css).     ║
+    ║                                                          ║
+    ║  Pesos reales (tema example-01 como referencia):         ║
+    ║    styles-theme-example-01.css  →  208 KB  (docs full)   ║
+    ║    styles-core.css              →  164 KB  (solo prod)   ║
+    ║    css/prod/styles-core.css     →  130 KB  (+ PurgeCSS)  ║
+    ║                                                          ║
+    ║  ¿Cómo compilar?                                         ║
+    ║    npm run build:core           →  css/styles-core.css   ║
+    ║    npm run purge:core           →  css/prod/styles-core  ║
+    ║                                                          ║
+    ║  ¿Qué está excluido del docs bundle?                     ║
+    ║    ❌ atom-specimen / atom-swatch / atom-code             ║
+    ║    ❌ mol-demo                                            ║
+    ║    ❌ org-documentation-layout / org-content-columns     ║
+    ║    ❌ pages/docs · pages/docs-layout · pages/landing      ║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
+    <link rel="stylesheet" href="css/styles-core.css" />
+
+    <style>
+        /* ── Estilos propios de esta página demo (NO forman parte del bundle) ── */
+        .demo-page {
+            max-width: 72rem;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 6rem;
+        }
+
+        .demo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: #f0f9f0;
+            color: #1a6b1a;
+            border: 1px solid #a8d5a8;
+            border-radius: 2rem;
+            padding: .25rem .75rem;
+            font-size: .75rem;
+            font-weight: 600;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .demo-badge--warn {
+            background: #fff8e1;
+            color: #7a5400;
+            border-color: #f0c040;
+        }
+
+        .demo-weight-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-block: 1.5rem;
+        }
+
+        .demo-weight-table th,
+        .demo-weight-table td {
+            padding: .6rem 1rem;
+            text-align: left;
+            font-size: .875rem;
+            border-bottom: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+        }
+
+        .demo-weight-table th {
+            background: var(--semantic-color-bg-subtle, #f5f5f5);
+            font-weight: 600;
+        }
+
+        .demo-weight-table tr.is-current td {
+            font-weight: 700;
+            background: #f0fdf4;
+        }
+
+        .demo-weight-table .demo-cell--red {
+            color: #dc2626;
+        }
+
+        .demo-weight-table .demo-cell--green {
+            color: #16a34a;
+        }
+
+        .demo-weight-table .demo-cell--best {
+            color: #0d9488;
+            font-weight: 700;
+        }
+
+        .demo-separator {
+            border: none;
+            border-top: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+            margin-block: 2.5rem;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+            gap: 1.5rem;
+            margin-block: 1.5rem;
+        }
+
+        .demo-section-title {
+            font-size: .6875rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--semantic-color-text-weak, #6b7280);
+            padding-block: .5rem;
+            margin-top: 2rem;
+            margin-bottom: .75rem;
+            border-bottom: 1px solid var(--semantic-color-border-subtle, #e5e7eb);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo-page">
+
+        <!-- ── CABECERA ───────────────────────────────────────── -->
+        <header style="margin-bottom: 2.5rem;">
+            <span class="demo-badge">📦 Bundle Core — Referencia de peso</span>
+            <h1 class="syx-type-h1" style="margin-top: 1rem; margin-bottom: .5rem;">SYX Design System</h1>
+            <p class="syx-type-body syx-text-gray" style="max-width: 60ch;">
+                Esta página usa <strong>únicamente el bundle mínimo de producción</strong>
+                (<code>css/styles-core.css</code>). No está cargado ningún estilo de documentación.
+            </p>
+        </header>
+
+        <!-- ── TABLA DE PESOS ────────────────────────────────── -->
+        <h2 class="syx-type-h2" style="margin-bottom: 1rem;">📊 Tabla de pesos reales</h2>
+        <p class="syx-type-body syx-text-gray" style="max-width: 65ch; margin-bottom: 1rem;">
+            Comparativa CSS sin comprimir entre los distintos bundles disponibles.
+            Los pesos con PurgeCSS son los que correspondería servir en producción.
+        </p>
+
+        <table class="demo-weight-table">
+            <thead>
+                <tr>
+                    <th>Bundle</th>
+                    <th>Descripción</th>
+                    <th>Sin purgar</th>
+                    <th>+ PurgeCSS</th>
+                    <th>Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>styles-theme-example-01.css</code></td>
+                    <td>Bundle docs completo (con specimen, demos, layouts)</td>
+                    <td class="demo-cell--red">208 KB</td>
+                    <td>175 KB</td>
+                    <td>Showroom / Documentación</td>
+                </tr>
+                <tr class="is-current">
+                    <td><code>styles-core.css</code> ← <strong>esta página</strong></td>
+                    <td>Bundle mínimo de producción (sin docs-only)</td>
+                    <td class="demo-cell--green">164 KB</td>
+                    <td class="demo-cell--best">130 KB</td>
+                    <td>Producción · Proyectos reales</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="syx-type-body-small syx-text-gray">
+            💡 El ahorro directo entre bundle docs y bundle core es <strong>-44 KB</strong> sin purgar,
+            <strong>-45 KB</strong> después de PurgeCSS.
+            En gzip el ratio es mayor: estimado ~30–40 KB para el bundle core (vs ~55–60 KB para el docs).
+        </p>
+
+        <hr class="demo-separator" />
+
+        <!-- ── QUÉ INCLUYE / QUÉ EXCLUYE ────────────────────── -->
+        <h2 class="syx-type-h2" style="margin-bottom: 1rem;">🧩 Contenido del bundle core</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+            <div>
+                <p class="demo-section-title">✅ Incluido</p>
+                <ul class="syx-type-body-small" style="line-height: 1.8; padding-left: 1.2rem;">
+                    <li>Sistema de tokens completo (primitivo → semántico → componente)</li>
+                    <li>Reset + estilos base de elementos HTML</li>
+                    <li>Tipografía fluida + escala de espaciado</li>
+                    <li>Grid (sistema de columnas)</li>
+                    <li>Helpers: posicionamiento, display, textos, iconos, imágenes, animaciones</li>
+                    <li>Atoms: btn, form, check, radio, switch, link, breadcrumb, icon, label, pill, list, table, title,
+                        txt, pagination</li>
+                    <li>Molecules: card, form-field, btn-group, label-group, form-field-set</li>
+                    <li>Organisms: navbar, header</li>
+                    <li>Utilities: display/flex, spacing, texto/color</li>
+                    <li>Dark mode (media query + <code>data-theme</code>)</li>
+                </ul>
+            </div>
+            <div>
+                <p class="demo-section-title">❌ Excluido (solo docs/showroom)</p>
+                <ul class="syx-type-body-small" style="line-height: 1.8; padding-left: 1.2rem;">
+                    <li><code>atom-specimen</code> — bloques de muestra de color/tipo</li>
+                    <li><code>atom-swatch</code> — paletas de color interactivas</li>
+                    <li><code>atom-code</code> — bloque de sintaxis del showroom</li>
+                    <li><code>mol-demo</code> — wrappers del showroom</li>
+                    <li><code>org-documentation-layout</code> — layout de 2 columnas de docs</li>
+                    <li><code>org-content-columns</code> — layout de contenido de docs</li>
+                    <li><code>pages/docs</code> + <code>pages/docs-layout</code> — estilos de página de docs</li>
+                    <li><code>pages/landing</code> — estilos de landing del showroom</li>
+                    <li><code>helper-scopes</code> — deprecated, pendiente de eliminar</li>
+                </ul>
+            </div>
+        </div>
+
+        <hr class="demo-separator" />
+
+        <!-- ── COMPONENTES EN VIVO ───────────────────────────── -->
+        <h2 class="syx-type-h2" style="margin-bottom: .5rem;">🎨 Componentes disponibles</h2>
+        <p class="syx-type-body syx-text-gray" style="margin-bottom: 1.5rem;">
+            Todos estos componentes funcionan con el bundle mínimo.
+        </p>
+
+        <!-- BOTONES -->
+        <p class="demo-section-title">Atom · Botones</p>
+        <div style="display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: .75rem;">
+            <button class="syx-btn syx-btn--primary syx-btn--filled">Primary</button>
+            <button class="syx-btn syx-btn--primary">Outline</button>
+            <button class="syx-btn syx-btn--secondary">Secondary</button>
+            <button class="syx-btn syx-btn--secondary syx-btn--filled">Secondary filled</button>
+            <button class="syx-btn syx-btn--primary syx-btn--filled" disabled>Disabled</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1.5rem;">
+            <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Small</button>
+            <button class="syx-btn syx-btn--primary syx-btn--filled">Medium</button>
+            <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-lg">Large</button>
+        </div>
+
+        <!-- PILLS + LABELS -->
+        <p class="demo-section-title">Atom · Pills &amp; Labels</p>
+        <div style="display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem;">
+            <span class="syx-pill">Default</span>
+            <span class="syx-pill syx-pill--primary">Primary</span>
+            <span class="syx-pill syx-pill--success">Success</span>
+            <span class="syx-pill syx-pill--warning">Warning</span>
+            <span class="syx-pill syx-pill--error">Error</span>
+            <span class="syx-label">Label</span>
+            <span class="syx-label syx-label--primary">Primary</span>
+        </div>
+
+        <!-- TIPOGRAFÍA -->
+        <p class="demo-section-title">Utilities · Tipografía fluida</p>
+        <div style="margin-bottom: 1.5rem;">
+            <p class="syx-type-display-1">Display — Major Third Scale</p>
+            <p class="syx-type-h1">Heading 1 — Fluid clamp()</p>
+            <p class="syx-type-h2">Heading 2 — Sin breakpoints</p>
+            <p class="syx-type-h3">Heading 3 — system-ui</p>
+            <p class="syx-type-body-large">Body Large — system-ui (sin Google Fonts)</p>
+            <p class="syx-type-body">Body Regular — font-size: clamp(0.875rem, …, 1rem)</p>
+            <p class="syx-type-caption">Caption — overline pattern</p>
+        </div>
+
+        <!-- CARDS -->
+        <p class="demo-section-title">Molecule · Cards</p>
+        <div class="demo-grid" style="margin-bottom: 1.5rem;">
+            <div class="syx-card">
+                <div class="syx-card__body">
+                    <p class="syx-title syx-title--h4">Card Standard</p>
+                    <p class="syx-txt">Contenido de ejemplo con el bundle mínimo activo.</p>
+                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm"
+                        style="margin-top: .75rem;">Acción</button>
+                </div>
+            </div>
+            <div class="syx-card">
+                <div class="syx-card__body">
+                    <p class="syx-title syx-title--h4">Card con Pills</p>
+                    <div style="display: flex; gap: .4rem; margin-bottom: .75rem;">
+                        <span class="syx-pill syx-pill--primary">Tag 1</span>
+                        <span class="syx-pill">Tag 2</span>
+                    </div>
+                    <p class="syx-txt">Segundo ejemplo de card compuesta.</p>
+                </div>
+            </div>
+            <div class="syx-card">
+                <div class="syx-card__body">
+                    <p class="syx-title syx-title--h4">Card de Formulario</p>
+                    <p class="syx-txt syx-text-gray" style="margin-bottom: .75rem;">Con un campo dentro.</p>
+                    <div class="syx-form-field">
+                        <label class="syx-label" for="demo-input-card">Email</label>
+                        <input class="syx-form syx-form--text" id="demo-input-card" type="email"
+                            placeholder="tu@email.com" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULARIOS -->
+        <p class="demo-section-title">Atom · Formularios</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+            <div class="syx-form-field">
+                <label class="syx-label" for="demo-text">Campo texto</label>
+                <input class="syx-form syx-form--text" id="demo-text" type="text" placeholder="Escribe aquí…" />
+            </div>
+            <div class="syx-form-field">
+                <label class="syx-label" for="demo-select">Select</label>
+                <select class="syx-form syx-form--select" id="demo-select">
+                    <option>Opción 1</option>
+                    <option>Opción 2</option>
+                </select>
+            </div>
+            <div class="syx-form-field">
+                <label class="syx-check">
+                    <input type="checkbox" class="syx-check__input" /> Checkbox habilitado
+                </label>
+                <label class="syx-check">
+                    <input type="checkbox" class="syx-check__input" checked /> Checkbox marcado
+                </label>
+            </div>
+            <div class="syx-form-field">
+                <label class="syx-radio">
+                    <input type="radio" class="syx-radio__input" name="demo-radio" /> Radio 1
+                </label>
+                <label class="syx-radio">
+                    <input type="radio" class="syx-radio__input" name="demo-radio" checked /> Radio 2
+                </label>
+            </div>
+        </div>
+
+        <!-- DARK MODE -->
+        <hr class="demo-separator" />
+        <h2 class="syx-type-h2" style="margin-bottom: 1rem;">🌗 Dark mode</h2>
+        <p class="syx-type-body syx-text-gray" style="margin-bottom: 1rem;">
+            El dark mode es activable sin JS runtime (solo CSS). El botón de abajo añade
+            <code>data-theme="dark"</code> al <code>&lt;html&gt;</code> para demostración.
+        </p>
+        <div class="syx-btn-group" style="margin-bottom: 2rem;">
+            <button class="syx-btn syx-btn--secondary"
+                onclick="document.documentElement.setAttribute('data-theme','')">☀️ Light</button>
+            <button class="syx-btn syx-btn--secondary"
+                onclick="document.documentElement.setAttribute('data-theme','dark')">🌑 Dark</button>
+        </div>
+
+        <!-- TABLA -->
+        <p class="demo-section-title">Atom · Tabla</p>
+        <div style="overflow-x: auto; margin-bottom: 2rem;">
+            <table class="syx-table">
+                <thead>
+                    <tr>
+                        <th>Bundle</th>
+                        <th>CSS sin comprimir</th>
+                        <th>Gzip estimado</th>
+                        <th>¿Incluye docs?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>styles-theme-example-01.css</code></td>
+                        <td>208 KB</td>
+                        <td>~56 KB</td>
+                        <td>✅ Sí</td>
+                    </tr>
+                    <tr>
+                        <td><strong>styles-core.css</strong></td>
+                        <td><strong>138 KB</strong></td>
+                        <td><strong>~37 KB</strong></td>
+                        <td>❌ No</td>
+                    </tr>
+                    <tr>
+                        <td><code>css/prod/styles-core.css</code></td>
+                        <td>~110 KB</td>
+                        <td>~30 KB</td>
+                        <td>❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- FOOTER INFO -->
+        <footer
+            style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--semantic-color-border-subtle, #e5e7eb);">
+            <p class="syx-type-caption syx-text-gray">
+                SYX Design System · v2.0.0-beta · Bundle Core Reference ·
+                Compilado con <code>npm run build:core</code> desde
+                <code>scss/styles-core.scss</code>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

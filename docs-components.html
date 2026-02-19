@@ -2,367 +2,580 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Components — Syx Design System</title>
-    <meta name="description"
-        content="Syx Component Library: Buttons, Forms, Navigation, Pills, Tables and more. All atoms and molecules built with semantic tokens.">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="José Luis Pizarro Feo">
-    <link rel="canonical" href="https://syntaxys.design/docs-components.html">
-    <meta property="og:title" content="Components — Syx Design System">
-    <meta property="og:description"
-        content="All SYX atoms and molecules. Each component is a @mixin called per-theme, using semantic tokens.">
-    <meta property="og:type" content="website">
-    <link rel="stylesheet" href="css/styles-theme-example-01.css">
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components - Syx Design System</title>
+  <meta name="description"
+    content="Syx Component Library: Buttons, Forms, Navigation, Pills, Tables and more. All atoms and molecules built with semantic tokens.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Jos&eacute; Luis Pizarro Feo">
+  <link rel="canonical" href="https://syntaxys.design/docs-components.html">
+  <meta property="og:title" content="Components Â— Syx Design System">
+  <meta property="og:description"
+    content="All SYX atoms and molecules. Each component is a @mixin called per-theme, using semantic tokens.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
 
-<body class="syx syx--theme-example-01">
+  <!-- ============================================
+       NAVBAR (org-navbar organism)
+  ============================================= -->
+  <!-- ============================================
+       NAVBAR (org-navbar organism)
+  ============================================= -->
+  <header class="org-navbar org-navbar--docs" role="banner" id="site-header">
+    <div class="layout-grid">
+      <div class="org-navbar__bar layout-grid__col-xs-12">
 
-    <a href="#main-content" class="docs-skip-link">Skip to main content</a>
+        <!-- Sidebar toggle (docs â€” mobile only) -->
+        <button class="org-navbar__sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar"
+          aria-expanded="false" aria-controls="org-docs-sidebar" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
 
-    <!-- TOPBAR -->
-    <header role="banner">
-        <div class="docs-topbar">
-            <div class="docs-topbar__inner">
-                <a href="index.html" class="docs-topbar__logo" aria-label="Syx Design System — Home">Syx.</a>
-                <nav class="docs-topbar__nav" aria-label="Top navigation">
-                    <a href="index.html" class="docs-topbar__home-link">← Home</a>
-                    <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-                    <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
-                    <a href="docs-developer-guide.html"
-                        class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Dev Guide</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+        <!-- Logo -->
+        <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System â€” Home">Syx.</a>
 
-    <div class="docs-layout">
+        <!-- Desktop navigation -->
+        <nav class="org-navbar__links" aria-label="Main navigation">
+          <a href="docs-foundation.html" class="syx-link syx-link--primary">Foundation</a>
+          <a href="docs-components.html" class="syx-link syx-link--primary" aria-current="page">Components</a>
+          <a href="docs-utilities.html" class="syx-link syx-link--primary">Utilities</a>
+          <a href="docs-developer-guide.html" class="syx-link syx-link--primary">Dev Guide</a>
+          <a href="docs-elements.html" class="syx-link syx-link--primary">Elements</a>
+          <a href="docs-why-syx.html" class="syx-link syx-link--primary">Why SYX?</a>
 
-        <!-- SIDEBAR -->
-        <aside class="docs-sidebar" aria-label="Documentation navigation">
-            <span class="docs-sidebar__version">v2.0 Beta</span>
+          <!-- Theme switcher â€” desktop -->
+          <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group" aria-label="Switch theme"
+            id="syx-theme-switcher">
+            <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
+              aria-label="Theme Default" title="Default" type="button"></button>
+            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer" title="Codymer"
+              type="button"></button>
+            <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral" title="Coral"
+              type="button"></button>
+            <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest" title="Forest"
+              type="button"></button>
+            <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight" title="Midnight"
+              type="button"></button>
+          </div>
 
-            <nav aria-label="Component sections">
-                <div class="syx-sidenav__group">
-                    <span class="syx-sidenav__title">Foundation</span>
-                    <a href="docs-foundation.html#colors" class="syx-sidenav__link">Colors</a>
-                    <a href="docs-foundation.html#typography" class="syx-sidenav__link">Typography</a>
-                    <a href="docs-foundation.html#spacing" class="syx-sidenav__link">Spacing</a>
-                    <a href="docs-foundation.html#grid" class="syx-sidenav__link">Grid</a>
-                </div>
+          <!-- Dark mode toggle -->
+          <button id="syx-dark-mode-toggle" class="org-navbar__dark-toggle" aria-label="Toggle dark mode"
+            type="button">&#9790;</button>
+        </nav>
 
-                <div class="syx-sidenav__group">
-                    <span class="syx-sidenav__title">Components</span>
-                    <a href="#how-to-use" class="syx-sidenav__link">How to Use</a>
-                    <a href="#buttons" class="syx-sidenav__link">Buttons</a>
-                    <a href="#pills" class="syx-sidenav__link">Pills / Badges</a>
-                    <a href="#forms" class="syx-sidenav__link">Forms</a>
-                    <a href="#navigation" class="syx-sidenav__link">Navigation</a>
-                    <a href="#lists" class="syx-sidenav__link">Lists</a>
-                    <a href="#tables" class="syx-sidenav__link">Tables</a>
-                </div>
+        <!-- Hamburger toggle (mobile only) -->
+        <button class="org-navbar__toggle" aria-label="Toggle navigation" aria-expanded="false"
+          aria-controls="org-navbar-menu" id="org-navbar-toggle" type="button">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
 
-                <div class="syx-sidenav__group">
-                    <span class="syx-sidenav__title">More</span>
-                    <a href="docs-utilities.html" class="syx-sidenav__link">Utilities</a>
-                    <a href="docs-elements.html" class="syx-sidenav__link">Elements</a>
-                    <a href="docs-developer-guide.html" class="syx-sidenav__link">Developer Guide</a>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main id="main-content" role="main" class="docs-content">
-
-            <!-- Page Header -->
-            <div class="docs-page-header">
-                <div class="docs-page-header__eyebrow">
-                    <a href="index.html" class="docs-page-header__breadcrumb">Home</a>
-                    <span class="docs-page-header__sep" aria-hidden="true">›</span>
-                    <span class="syx-pill syx-pill--secondary" aria-current="page">Components</span>
-                </div>
-                <h1 class="syx-title syx-title--h1 syx-mb-2">Component Library</h1>
-                <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
-                    All SYX atoms and molecules. Each component is a <code>@mixin</code> called per-theme, using
-                    semantic tokens.
-                </p>
-            </div>
-
-            <!-- HOW TO USE -->
-            <section id="how-to-use" class="mol-card" aria-labelledby="how-to-use-heading">
-                <h2 id="how-to-use-heading" class="syx-title syx-title--h2 syx-mb-1">How to Use Components</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-4">
-                    Every SYX component is a SCSS <code>@mixin</code> called per-theme. Components use
-                    <strong>component tokens</strong> for all values — never hardcoded colors or sizes.
-                </p>
-
-                <h3 class="syx-title syx-title--h4 syx-mb-2">1. Link the compiled CSS</h3>
-                <div class="syx-code syx-mb-4">&lt;link rel="stylesheet" href="css/styles-theme-example-01.css"&gt;
-                </div>
-
-                <h3 class="syx-title syx-title--h4 syx-mb-2">2. Add the theme class to body</h3>
-                <div class="syx-code syx-mb-4">&lt;body class="syx syx--theme-example-01"&gt;</div>
-
-                <h3 class="syx-title syx-title--h4 syx-mb-2">3. Use component classes</h3>
-                <div class="syx-code syx-mb-4">&lt;!-- Pattern: .syx-{component} .syx-{component}--{modifier} --&gt;
-                    &lt;button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md"&gt;Click&lt;/button&gt;
-                    &lt;input class="syx-input" type="text" placeholder="Enter text…"&gt;
-                    &lt;nav class="syx-breadcrumb"&gt;…&lt;/nav&gt;</div>
-
-                <h3 class="syx-title syx-title--h4 syx-mb-2">SCSS Mixin Pattern</h3>
-                <div class="syx-code">// scss/atoms/_btn.scss
-                    @mixin atom-btn($theme: null) {
-                    .syx-btn {
-                    @include transition(color 0.2s ease, background-color 0.2s ease);
-                    color: var(--component-btn-primary-color);
-                    background: var(--component-btn-primary-bg);
-                    @include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
-                    }
-                    }</div>
-            </section>
-
-            <!-- BUTTONS -->
-            <section id="buttons" class="mol-card" aria-labelledby="buttons-heading">
-                <h2 id="buttons-heading" class="syx-title syx-title--h2 syx-mb-1">Buttons</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atom: <code>atom-btn</code>. Variants: <code>--primary</code>, <code>--secondary</code>,
-                    <code>--tertiary</code>, <code>--quaternary</code>. Add <code>--filled</code> for solid background.
-                </p>
-
-                <p class="syx-type-body-small syx-type-bold syx-mb-2">Filled</p>
-                <div class="syx-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
-                    aria-label="Filled button variants">
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Primary</button>
-                    <button class="syx-btn syx-btn--secondary syx-btn--filled syx-btn--size-md">Secondary</button>
-                    <button class="syx-btn syx-btn--tertiary syx-btn--filled syx-btn--size-md">Tertiary</button>
-                    <button class="syx-btn syx-btn--quaternary syx-btn--filled syx-btn--size-md">Quaternary</button>
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md" disabled
-                        aria-disabled="true">Disabled</button>
-                </div>
-
-                <p class="syx-type-body-small syx-type-bold syx-mb-2 syx-mt-3">Outline</p>
-                <div class="syx-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
-                    aria-label="Outline button variants">
-                    <button class="syx-btn syx-btn--primary syx-btn--size-md">Primary</button>
-                    <button class="syx-btn syx-btn--secondary syx-btn--size-md">Secondary</button>
-                    <button class="syx-btn syx-btn--tertiary syx-btn--size-md">Tertiary</button>
-                    <button class="syx-btn syx-btn--quaternary syx-btn--size-md">Quaternary</button>
-                </div>
-
-                <p class="syx-type-body-small syx-type-bold syx-mb-2 syx-mt-3">Sizes</p>
-                <div class="syx-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
-                    aria-label="Button size variants">
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Small</button>
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Medium</button>
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-lg">Large</button>
-                </div>
-
-                <div class="syx-code syx-mt-3">&lt;button class="syx-btn syx-btn--primary syx-btn--filled
-                    syx-btn--size-md"&gt;Primary&lt;/button&gt;
-                    &lt;button class="syx-btn syx-btn--secondary syx-btn--size-md"&gt;Outline&lt;/button&gt;</div>
-            </section>
-
-            <!-- PILLS -->
-            <section id="pills" class="mol-card" aria-labelledby="pills-heading">
-                <h2 id="pills-heading" class="syx-title syx-title--h2 syx-mb-1">Pills / Badges</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atom: <code>atom-pill</code>. Variants: <code>--primary</code>, <code>--secondary</code>,
-                    <code>--success</code>, <code>--warning</code>, <code>--danger</code>, <code>--dark</code>.
-                </p>
-
-                <div class="syx-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
-                    aria-label="Pill and badge variants">
-                    <span class="syx-pill">Default</span>
-                    <span class="syx-pill syx-pill--primary">Primary</span>
-                    <span class="syx-pill syx-pill--secondary">Secondary</span>
-                    <span class="syx-pill syx-pill--success">Success</span>
-                    <span class="syx-pill syx-pill--warning">Warning</span>
-                    <span class="syx-pill syx-pill--danger">Danger</span>
-                    <span class="syx-pill syx-pill--dark">Dark</span>
-                </div>
-
-                <div class="syx-code syx-mt-3">&lt;span class="syx-pill syx-pill--primary"&gt;Primary&lt;/span&gt;
-                    &lt;span class="syx-pill syx-pill--success"&gt;Success&lt;/span&gt;</div>
-            </section>
-
-            <!-- FORMS -->
-            <section id="forms" class="mol-card" aria-labelledby="forms-heading">
-                <h2 id="forms-heading" class="syx-title syx-title--h2 syx-mb-1">Forms</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atoms: <code>atom-form</code>, <code>atom-check</code>, <code>atom-radio</code>,
-                    <code>atom-switch</code>. Molecule: <code>mol-form-field</code>.
-                </p>
-
-                <div class="syx-preview">
-                    <div class="mol-form-field syx-mb-3">
-                        <label class="syx-label" for="email1">Email Address</label>
-                        <div class="syx-input-wrapper">
-                            <input type="email" id="email1" class="syx-input" placeholder="name@example.com"
-                                autocomplete="email">
-                        </div>
-                    </div>
-
-                    <div class="syx-check syx-mb-2">
-                        <input type="checkbox" id="check1" class="syx-check__input">
-                        <label for="check1" class="syx-check__label">Subscribe to newsletter</label>
-                    </div>
-
-                    <div class="syx-radio syx-mb-2">
-                        <input type="radio" id="radio1" name="plan" class="syx-radio__input" checked>
-                        <label for="radio1" class="syx-radio__label">Monthly Plan</label>
-                    </div>
-                    <div class="syx-radio syx-mb-3">
-                        <input type="radio" id="radio2" name="plan" class="syx-radio__input">
-                        <label for="radio2" class="syx-radio__label">Annual Plan</label>
-                    </div>
-
-                    <label class="syx-switch" for="switch1">
-                        <input type="checkbox" id="switch1" class="syx-switch__input">
-                        <span class="syx-switch__slider" aria-hidden="true"></span>
-                        <span class="syx-switch__label">Dark Mode</span>
-                    </label>
-                </div>
-
-                <div class="syx-code syx-mt-3">&lt;div class="mol-form-field"&gt;
-                    &lt;label class="syx-label" for="email"&gt;Email&lt;/label&gt;
-                    &lt;input type="email" id="email" class="syx-input" placeholder="name@example.com"&gt;
-                    &lt;/div&gt;
-                    &lt;div class="syx-check"&gt;
-                    &lt;input type="checkbox" id="c1" class="syx-check__input"&gt;
-                    &lt;label for="c1" class="syx-check__label"&gt;Label&lt;/label&gt;
-                    &lt;/div&gt;</div>
-            </section>
-
-            <!-- NAVIGATION -->
-            <section id="navigation" class="mol-card" aria-labelledby="navigation-heading">
-                <h2 id="navigation-heading" class="syx-title syx-title--h2 syx-mb-1">Navigation</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atoms: <code>atom-breadcrumb</code>, <code>atom-pagination</code>.
-                </p>
-
-                <p class="syx-type-body-small syx-type-bold syx-mb-2">Breadcrumb</p>
-                <div class="syx-preview syx-mb-3">
-                    <nav aria-label="Breadcrumb example">
-                        <ol class="syx-breadcrumb">
-                            <li class="syx-breadcrumb__item"><a href="#" class="syx-breadcrumb__link">Home</a></li>
-                            <li class="syx-breadcrumb__item"><a href="#" class="syx-breadcrumb__link">Foundation</a>
-                            </li>
-                            <li class="syx-breadcrumb__item"><span class="syx-breadcrumb__link"
-                                    aria-current="page">Colors</span></li>
-                        </ol>
-                    </nav>
-                </div>
-
-                <p class="syx-type-body-small syx-type-bold syx-mb-2">Pagination</p>
-                <div class="syx-preview">
-                    <nav class="syx-pagination" aria-label="Pagination example">
-                        <li class="syx-pagination__item"><button class="syx-pagination__trigger"
-                                aria-label="Previous page">‹</button></li>
-                        <li class="syx-pagination__item"><button class="syx-pagination__trigger">1</button></li>
-                        <li class="syx-pagination__item syx-pagination__item--is-active"><button
-                                class="syx-pagination__trigger" aria-current="page">2</button></li>
-                        <li class="syx-pagination__item"><button class="syx-pagination__trigger">3</button></li>
-                        <li class="syx-pagination__item"><button class="syx-pagination__trigger"
-                                aria-label="Next page">›</button></li>
-                    </nav>
-                </div>
-
-                <div class="syx-code syx-mt-3">&lt;ol class="syx-breadcrumb"&gt;
-                    &lt;li class="syx-breadcrumb__item"&gt;&lt;a href="#"
-                    class="syx-breadcrumb__link"&gt;Home&lt;/a&gt;&lt;/li&gt;
-                    &lt;li class="syx-breadcrumb__item"&gt;&lt;span aria-current="page"&gt;Page&lt;/span&gt;&lt;/li&gt;
-                    &lt;/ol&gt;</div>
-            </section>
-
-            <!-- LISTS -->
-            <section id="lists" class="mol-card" aria-labelledby="lists-heading">
-                <h2 id="lists-heading" class="syx-title syx-title--h2 syx-mb-1">Lists</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atom: <code>atom-list</code>. Variants: unordered, ordered, and definition lists.
-                </p>
-
-                <div class="syx-preview layout-grid">
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
-                        <p class="syx-type-body-small syx-type-bold syx-mb-2">Unordered</p>
-                        <ul class="syx-list">
-                            <li class="syx-list__item">Atomic Design</li>
-                            <li class="syx-list__item">Semantic Tokens</li>
-                            <li class="syx-list__item">Fluid Typography</li>
-                        </ul>
-                    </div>
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
-                        <p class="syx-type-body-small syx-type-bold syx-mb-2">Ordered</p>
-                        <ol class="syx-list syx-list--ordered">
-                            <li class="syx-list__item">Primitives</li>
-                            <li class="syx-list__item">Semantic Tokens</li>
-                            <li class="syx-list__item">Component Tokens</li>
-                        </ol>
-                    </div>
-                </div>
-            </section>
-
-            <!-- TABLES -->
-            <section id="tables" class="mol-card" aria-labelledby="tables-heading">
-                <h2 id="tables-heading" class="syx-title syx-title--h2 syx-mb-1">Tables</h2>
-                <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Atom: <code>atom-table</code>. Class: <code>.syx-table</code>.
-                </p>
-
-                <div class="syx-preview">
-                    <table class="syx-table">
-                        <caption class="syx-sr-only">Token layer examples</caption>
-                        <thead>
-                            <tr>
-                                <th>Token</th>
-                                <th>Layer</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>--primitive-color-purple-500</code></td>
-                                <td><span class="syx-pill syx-pill--primary">Primitive</span></td>
-                                <td>hsl(262, 83%, 58%)</td>
-                            </tr>
-                            <tr>
-                                <td><code>--color-primary</code></td>
-                                <td><span class="syx-pill syx-pill--secondary">Semantic</span></td>
-                                <td>→ purple-500</td>
-                            </tr>
-                            <tr>
-                                <td><code>--component-button-primary-color</code></td>
-                                <td><span class="syx-pill">Component</span></td>
-                                <td>→ color-primary</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="syx-code syx-mt-3">&lt;table class="syx-table"&gt;
-                    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Token&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-                    &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
-                    &lt;/table&gt;</div>
-            </section>
-
-        </main>
+      </div>
     </div>
 
-    <!-- FOOTER -->
-    <footer class="docs-footer" role="contentinfo">
-        <nav class="docs-footer__links" aria-label="Documentation links">
-            <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-            <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small"
-                aria-current="page">Components</a>
-            <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
-            <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
-            <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
-        </nav>
-        <small class="docs-footer__copy">© 2026 Syx Design System · v2.0 Beta · Built by <a
-                href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis Pizarro
-                Feo</a></small>
-    </footer>
+    <!-- Mobile drawer -->
+    <div class="org-navbar__mobile-menu" id="org-navbar-menu" aria-hidden="true">
+      <div class="layout-grid">
+        <div class="layout-grid__col-xs-12">
+          <nav class="org-navbar__mobile-nav" aria-label="Mobile navigation">
+            <a href="docs-foundation.html" class="org-navbar__mobile-link">Foundation</a>
+            <a href="docs-components.html" class="org-navbar__mobile-link" aria-current="page">Components</a>
+            <a href="docs-utilities.html" class="org-navbar__mobile-link">Utilities</a>
+            <a href="docs-developer-guide.html" class="org-navbar__mobile-link">Dev Guide</a>
+            <a href="docs-elements.html" class="org-navbar__mobile-link">Elements</a>
+          </nav>
+          <!-- Theme switcher â€” mobile drawer -->
+          <div class="org-navbar__mobile-footer">
+            <span class="org-navbar__mobile-footer__label">Theme:</span>
+            <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
+              <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
+                aria-label="Theme Default" title="Default" type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer" title="Codymer"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral" title="Coral"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest" title="Forest"
+                type="button"></button>
+              <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight"
+                title="Midnight" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-</body>
+  <div class="docs-progress" role="progressbar" aria-hidden="true" aria-label="Reading progress" aria-valuenow="0"
+    aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="tpl-docs">
+
+    <!-- SIDEBAR -->
+    <aside class="org-docs-sidebar" id="org-docs-sidebar" aria-label="Documentation navigation">
+      <div class="org-docs-sidebar__search">
+        <span class="org-docs-sidebar__search-icon" aria-hidden="true">&#9906;</span>
+        <input type="search" placeholder="Search documentation..." aria-label="Search documentation" tabindex="0">
+      </div>
+      <div class="org-docs-sidebar__divider" aria-hidden="true"></div>
+
+      <nav aria-label="Component sections">
+        <div class="mol-docs-sidenav__group">
+          <span class="mol-docs-sidenav__title">Foundation</span>
+          <a href="docs-foundation.html#colors" class="mol-docs-sidenav__link">Colors</a>
+          <a href="docs-foundation.html#typography" class="mol-docs-sidenav__link">Typography</a>
+          <a href="docs-foundation.html#spacing" class="mol-docs-sidenav__link">Spacing</a>
+          <a href="docs-foundation.html#grid" class="mol-docs-sidenav__link">Grid</a>
+        </div>
+
+        <div class="mol-docs-sidenav__group">
+          <span class="mol-docs-sidenav__title">Components</span>
+          <a href="#how-to-use" class="mol-docs-sidenav__link">How to Use</a>
+          <a href="#buttons" class="mol-docs-sidenav__link">Buttons</a>
+          <a href="#pills" class="mol-docs-sidenav__link">Pills / Badges</a>
+          <a href="#forms" class="mol-docs-sidenav__link">Forms</a>
+          <a href="#navigation" class="mol-docs-sidenav__link">Navigation</a>
+          <a href="#lists" class="mol-docs-sidenav__link">Lists</a>
+          <a href="#tables" class="mol-docs-sidenav__link">Tables</a>
+        </div>
+
+        <div class="mol-docs-sidenav__group">
+          <span class="mol-docs-sidenav__title">More</span>
+          <a href="docs-utilities.html" class="mol-docs-sidenav__link">Utilities</a>
+          <a href="docs-elements.html" class="mol-docs-sidenav__link">Elements</a>
+          <a href="docs-developer-guide.html" class="mol-docs-sidenav__link">Developer Guide</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" role="main">
+
+      <!-- Page Header -->
+      <div class="org-docs-page-header">
+        <div class="org-docs-page-header__eyebrow">
+          <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
+          <span class="org-docs-page-header__sep" aria-hidden="true">Â›</span>
+          <span class="syx-pill syx-pill--secondary" aria-current="page">Components</span>
+        </div>
+        <h1 class="syx-title syx-title--h1 syx-mb-2">Component Library</h1>
+        <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
+          All SYX atoms and molecules. Each component is a <code>@mixin</code> called per-theme, using
+          semantic tokens.
+        </p>
+      </div>
+
+      <!-- HOW TO USE -->
+      <section id="how-to-use" class="mol-card" aria-labelledby="how-to-use-heading">
+        <h2 id="how-to-use-heading" class="syx-title syx-title--h2 syx-mb-1">How to Use Components</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-4">
+          Every SYX component is a SCSS <code>@mixin</code> called per-theme. Components use
+          <strong>component tokens</strong> for all values Â— never hardcoded colors or sizes.
+        </p>
+
+        <h3 class="syx-title syx-title--h4 syx-mb-2">1. Link the compiled CSS</h3>
+        <div class="syx-code syx-mb-4">&lt;link rel="stylesheet" href="css/styles-theme-example-01.css"&gt;
+        </div>
+
+        <h3 class="syx-title syx-title--h4 syx-mb-2">2. Add the theme class to body</h3>
+        <div class="syx-code syx-mb-4">&lt;body class="syx syx--theme-example-01"&gt;</div>
+
+        <h3 class="syx-title syx-title--h4 syx-mb-2">3. Use component classes</h3>
+        <div class="syx-code syx-mb-4">&lt;!-- Pattern: .syx-{component} .syx-{component}--{modifier} --&gt;
+          &lt;button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md"&gt;Click&lt;/button&gt;
+          &lt;input class="syx-input" type="text" placeholder="Enter textÂ…"&gt;
+          &lt;nav class="syx-breadcrumb"&gt;Â…&lt;/nav&gt;</div>
+
+        <h3 class="syx-title syx-title--h4 syx-mb-2">SCSS Mixin Pattern</h3>
+        <div class="syx-code">// scss/atoms/_btn.scss
+          @mixin atom-btn($theme: null) {
+          .syx-btn {
+          @include transition(color 0.2s ease, background-color 0.2s ease);
+          color: var(--component-btn-primary-color);
+          background: var(--component-btn-primary-bg);
+          @include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
+          }
+          }</div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section id="buttons" class="mol-card" aria-labelledby="buttons-heading">
+        <h2 id="buttons-heading" class="syx-title syx-title--h2 syx-mb-1">Buttons</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atom: <code>atom-btn</code>. Variants: <code>--primary</code>, <code>--secondary</code>,
+          <code>--tertiary</code>, <code>--quaternary</code>. Add <code>--filled</code> for solid background.
+        </p>
+
+        <p class="syx-type-body-small syx-type-bold syx-mb-2">Filled</p>
+        <div class="mol-demo-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
+          aria-label="Filled button variants">
+          <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Primary</button>
+          <button class="syx-btn syx-btn--secondary syx-btn--filled syx-btn--size-md">Secondary</button>
+          <button class="syx-btn syx-btn--tertiary syx-btn--filled syx-btn--size-md">Tertiary</button>
+          <button class="syx-btn syx-btn--quaternary syx-btn--filled syx-btn--size-md">Quaternary</button>
+          <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md" disabled
+            aria-disabled="true">Disabled</button>
+        </div>
+
+        <p class="syx-type-body-small syx-type-bold syx-mb-2 syx-mt-3">Outline</p>
+        <div class="mol-demo-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
+          aria-label="Outline button variants">
+          <button class="syx-btn syx-btn--primary syx-btn--size-md">Primary</button>
+          <button class="syx-btn syx-btn--secondary syx-btn--size-md">Secondary</button>
+          <button class="syx-btn syx-btn--tertiary syx-btn--size-md">Tertiary</button>
+          <button class="syx-btn syx-btn--quaternary syx-btn--size-md">Quaternary</button>
+        </div>
+
+        <p class="syx-type-body-small syx-type-bold syx-mb-2 syx-mt-3">Sizes</p>
+        <div class="mol-demo-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
+          aria-label="Button size variants">
+          <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-sm">Small</button>
+          <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Medium</button>
+          <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-lg">Large</button>
+        </div>
+
+        <div class="syx-code syx-mt-3">&lt;button class="syx-btn syx-btn--primary syx-btn--filled
+          syx-btn--size-md"&gt;Primary&lt;/button&gt;
+          &lt;button class="syx-btn syx-btn--secondary syx-btn--size-md"&gt;Outline&lt;/button&gt;</div>
+      </section>
+
+      <!-- PILLS -->
+      <section id="pills" class="mol-card" aria-labelledby="pills-heading">
+        <h2 id="pills-heading" class="syx-title syx-title--h2 syx-mb-1">Pills / Badges</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atom: <code>atom-pill</code>. Variants: <code>--primary</code>, <code>--secondary</code>,
+          <code>--success</code>, <code>--warning</code>, <code>--danger</code>, <code>--dark</code>.
+        </p>
+
+        <div class="mol-demo-preview syx-d-flex syx-gap-2 syx-flex-wrap syx-items-center" role="group"
+          aria-label="Pill and badge variants">
+          <span class="syx-pill">Default</span>
+          <span class="syx-pill syx-pill--primary">Primary</span>
+          <span class="syx-pill syx-pill--secondary">Secondary</span>
+          <span class="syx-pill syx-pill--success">Success</span>
+          <span class="syx-pill syx-pill--warning">Warning</span>
+          <span class="syx-pill syx-pill--danger">Danger</span>
+          <span class="syx-pill syx-pill--dark">Dark</span>
+        </div>
+
+        <div class="syx-code syx-mt-3">&lt;span class="syx-pill syx-pill--primary"&gt;Primary&lt;/span&gt;
+          &lt;span class="syx-pill syx-pill--success"&gt;Success&lt;/span&gt;</div>
+      </section>
+
+      <!-- FORMS -->
+      <section id="forms" class="mol-card" aria-labelledby="forms-heading">
+        <h2 id="forms-heading" class="syx-title syx-title--h2 syx-mb-1">Forms</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atoms: <code>atom-form</code>, <code>atom-check</code>, <code>atom-radio</code>,
+          <code>atom-switch</code>. Molecule: <code>mol-form-field</code>.
+        </p>
+
+        <div class="mol-demo-preview">
+          <div class="mol-form-field syx-mb-3">
+            <label class="syx-label" for="email1">Email Address</label>
+            <div class="syx-input-wrapper">
+              <input type="email" id="email1" class="syx-input" placeholder="name@example.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="syx-check syx-mb-2">
+            <input type="checkbox" id="check1" class="syx-check__input">
+            <label for="check1" class="syx-check__label">Subscribe to newsletter</label>
+          </div>
+
+          <div class="syx-radio syx-mb-2">
+            <input type="radio" id="radio1" name="plan" class="syx-radio__input" checked>
+            <label for="radio1" class="syx-radio__label">Monthly Plan</label>
+          </div>
+          <div class="syx-radio syx-mb-3">
+            <input type="radio" id="radio2" name="plan" class="syx-radio__input">
+            <label for="radio2" class="syx-radio__label">Annual Plan</label>
+          </div>
+
+          <label class="syx-switch" for="switch1">
+            <input type="checkbox" id="switch1" class="syx-switch__input">
+            <span class="syx-switch__slider" aria-hidden="true"></span>
+            <span class="syx-switch__label">Dark Mode</span>
+          </label>
+        </div>
+
+        <div class="syx-code syx-mt-3">&lt;div class="mol-form-field"&gt;
+          &lt;label class="syx-label" for="email"&gt;Email&lt;/label&gt;
+          &lt;input type="email" id="email" class="syx-input" placeholder="name@example.com"&gt;
+          &lt;/div&gt;
+          &lt;div class="syx-check"&gt;
+          &lt;input type="checkbox" id="c1" class="syx-check__input"&gt;
+          &lt;label for="c1" class="syx-check__label"&gt;Label&lt;/label&gt;
+          &lt;/div&gt;</div>
+      </section>
+
+      <!-- NAVIGATION -->
+      <section id="navigation" class="mol-card" aria-labelledby="navigation-heading">
+        <h2 id="navigation-heading" class="syx-title syx-title--h2 syx-mb-1">Navigation</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atoms: <code>atom-breadcrumb</code>, <code>atom-pagination</code>.
+        </p>
+
+        <p class="syx-type-body-small syx-type-bold syx-mb-2">Breadcrumb</p>
+        <div class="mol-demo-preview syx-mb-3">
+          <nav aria-label="Breadcrumb example">
+            <ol class="syx-breadcrumb">
+              <li class="syx-breadcrumb__item"><a href="#" class="syx-breadcrumb__link">Home</a></li>
+              <li class="syx-breadcrumb__item"><a href="#" class="syx-breadcrumb__link">Foundation</a>
+              </li>
+              <li class="syx-breadcrumb__item"><span class="syx-breadcrumb__link" aria-current="page">Colors</span></li>
+            </ol>
+          </nav>
+        </div>
+
+        <p class="syx-type-body-small syx-type-bold syx-mb-2">Pagination</p>
+        <div class="mol-demo-preview">
+          <nav class="syx-pagination" aria-label="Pagination example">
+            <li class="syx-pagination__item"><button class="syx-pagination__trigger"
+                aria-label="Previous page">‹</button></li>
+            <li class="syx-pagination__item"><button class="syx-pagination__trigger">1</button></li>
+            <li class="syx-pagination__item syx-pagination__item--is-active"><button class="syx-pagination__trigger"
+                aria-current="page">2</button></li>
+            <li class="syx-pagination__item"><button class="syx-pagination__trigger">3</button></li>
+            <li class="syx-pagination__item"><button class="syx-pagination__trigger" aria-label="Next page">›</button>
+            </li>
+          </nav>
+        </div>
+
+        <div class="syx-code syx-mt-3">&lt;ol class="syx-breadcrumb"&gt;
+          &lt;li class="syx-breadcrumb__item"&gt;&lt;a href="#"
+          class="syx-breadcrumb__link"&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li class="syx-breadcrumb__item"&gt;&lt;span aria-current="page"&gt;Page&lt;/span&gt;&lt;/li&gt;
+          &lt;/ol&gt;</div>
+      </section>
+
+      <!-- LISTS -->
+      <section id="lists" class="mol-card" aria-labelledby="lists-heading">
+        <h2 id="lists-heading" class="syx-title syx-title--h2 syx-mb-1">Lists</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atom: <code>atom-list</code>. Variants: unordered, ordered, and definition lists.
+        </p>
+
+        <div class="mol-demo-preview layout-grid">
+          <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+            <p class="syx-type-body-small syx-type-bold syx-mb-2">Unordered</p>
+            <ul class="syx-list">
+              <li class="syx-list__item">Atomic Design</li>
+              <li class="syx-list__item">Semantic Tokens</li>
+              <li class="syx-list__item">Fluid Typography</li>
+            </ul>
+          </div>
+          <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+            <p class="syx-type-body-small syx-type-bold syx-mb-2">Ordered</p>
+            <ol class="syx-list syx-list--ordered">
+              <li class="syx-list__item">Primitives</li>
+              <li class="syx-list__item">Semantic Tokens</li>
+              <li class="syx-list__item">Component Tokens</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- TABLES -->
+      <section id="tables" class="mol-card" aria-labelledby="tables-heading">
+        <h2 id="tables-heading" class="syx-title syx-title--h2 syx-mb-1">Tables</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Atom: <code>atom-table</code>. Class: <code>.syx-table</code>.
+        </p>
+
+        <div class="mol-demo-preview">
+          <table class="syx-table">
+            <caption class="syx-sr-only">Token layer examples</caption>
+            <thead>
+              <tr>
+                <th>Token</th>
+                <th>Layer</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--primitive-color-purple-500</code></td>
+                <td><span class="syx-pill syx-pill--primary">Primitive</span></td>
+                <td>hsl(262, 83%, 58%)</td>
+              </tr>
+              <tr>
+                <td><code>--color-primary</code></td>
+                <td><span class="syx-pill syx-pill--secondary">Semantic</span></td>
+                <td>? purple-500</td>
+              </tr>
+              <tr>
+                <td><code>--component-button-primary-color</code></td>
+                <td><span class="syx-pill">Component</span></td>
+                <td>? color-primary</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="syx-code syx-mt-3">&lt;table class="syx-table"&gt;
+          &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Token&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+          &lt;tbody&gt;&lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+          &lt;/table&gt;</div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- ============================================
+       FOOTER (org-site-footer â€” universal)
+  ============================================= -->
+  <footer class="org-site-footer" role="contentinfo">
+    <div class="org-site-footer__inner">
+
+      <div class="org-site-footer__brand">
+        <a href="index.html" class="org-site-footer__logo">Syx.</a>
+        <small class="org-site-footer__tagline">v2.0 Beta &mdash; Hybrid Fluid Design System</small>
+      </div>
+
+      <nav class="org-site-footer__links" aria-label="Footer navigation">
+        <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
+        <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
+        <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
+        <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
+        <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+      </nav>
+
+      <small class="org-site-footer__copy">
+        &copy; 2026 Syx Design System &mdash; Built by
+        <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">Jos&eacute; Luis Pizarro
+          Feo</a>
+      </small>
+
+    </div>
+  </footer>
+  <!-- SIDEBAR TOGGLE SCRIPT -->
+  <!-- NAVBAR TOGGLE -->
+  <script>
+    (function () {
+      var toggle = document.getElementById('org-navbar-toggle');
+      var menu = document.getElementById('org-navbar-menu');
+      if (!toggle || !menu) return;
+      toggle.addEventListener('click', function () {
+        var open = menu.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open);
+        menu.setAttribute('aria-hidden', !open);
+      });
+      menu.querySelectorAll('a').forEach(function (l) {
+        l.addEventListener('click', function () {
+          menu.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+        });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+          menu.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+          toggle.focus();
+        }
+      });
+    })();
+  </script>
+
+  <!-- THEME SWITCHER -->
+  <script>
+    (function () {
+      var KEY = 'syx-active-theme';
+      var themes = {
+        'example-01': { css: 'css/styles-theme-example-01.css', cls: 'syx--theme-example-01' },
+        'example-02': { css: 'css/styles-theme-example-02.css', cls: 'syx--theme-example-02' },
+        'example-03': { css: 'css/styles-theme-example-03.css', cls: 'syx--theme-example-03' },
+        'example-04': { css: 'css/styles-theme-example-04.css', cls: 'syx--theme-example-04' },
+        'example-05': { css: 'css/styles-theme-example-05.css', cls: 'syx--theme-example-05' }
+      };
+      var sheet = document.getElementById('syx-theme-stylesheet');
+      var body = document.body;
+      function allBtns() { return document.querySelectorAll('.syx-theme-switcher__btn'); }
+      function apply(key) {
+        var t = themes[key]; if (!t) return;
+        if (sheet) sheet.href = t.css;
+        Object.values(themes).forEach(function (x) { body.classList.remove(x.cls); });
+        body.classList.add(t.cls);
+        allBtns().forEach(function (b) {
+          b.classList.toggle('syx-theme-switcher__btn--active', b.dataset.theme === key);
+        });
+        localStorage.setItem(KEY, key);
+      }
+      var saved = localStorage.getItem(KEY);
+      if (saved && themes[saved]) apply(saved);
+      document.addEventListener('click', function (e) {
+        var b = e.target.closest('.syx-theme-switcher__btn');
+        if (b && b.dataset.theme) apply(b.dataset.theme);
+      });
+    })();
+  </script>
+
+  <!-- DARK MODE TOGGLE -->
+  <script>
+    (function () {
+      var btn = document.getElementById('syx-dark-mode-toggle');
+      var root = document.documentElement;
+      if (localStorage.getItem('syx-dark-mode') === 'dark') root.setAttribute('data-theme', 'dark');
+      if (btn) btn.addEventListener('click', function () {
+        var isDark = root.getAttribute('data-theme') === 'dark';
+        isDark ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+        localStorage.setItem('syx-dark-mode', isDark ? 'light' : 'dark');
+      });
+    })();
+  </script>
+  <!-- DOCS SCRIPTS -->
+  <script>
+    (function () {
+      // Reading progress
+      var bar = document.querySelector('.docs-progress');
+      if (bar) window.addEventListener('scroll', function () {
+        var d = document.documentElement;
+        var p = d.scrollHeight - d.clientHeight;
+        bar.style.width = (p > 0 ? (window.scrollY / p) * 100 : 0) + '%';
+        bar.setAttribute('aria-valuenow', Math.round(p > 0 ? (window.scrollY / p) * 100 : 0));
+      }, { passive: true });
+
+      // Active sidenav
+      var links = document.querySelectorAll('.mol-docs-sidenav__link[href^="#"]');
+      if (links.length) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              links.forEach(function (l) { l.classList.remove('mol-docs-sidenav__link--active'); });
+              var a = document.querySelector('.mol-docs-sidenav__link[href="#' + e.target.id + '"]');
+              if (a) a.classList.add('mol-docs-sidenav__link--active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -75% 0px', threshold: 0 });
+        links.forEach(function (l) {
+          var s = document.querySelector(l.getAttribute('href'));
+          if (s) obs.observe(s);
+        });
+      }
+
+      // Sidebar toggle
+      var st = document.getElementById('docs-sidebar-toggle');
+      var sb = document.getElementById('org-docs-sidebar');
+      if (st && sb) {
+        st.addEventListener('click', function () {
+          var open = sb.classList.toggle('is-open');
+          st.setAttribute('aria-expanded', open);
+        });
+        sb.querySelectorAll('a').forEach(function (l) {
+          l.addEventListener('click', function () {
+            sb.classList.remove('is-open');
+            st.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+    })();
+  </script>
+
+  </body>
 
 </html>

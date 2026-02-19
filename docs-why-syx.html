@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why SYX? - Syx Design System</title>
+    <meta name="description"
+        content="Why choose SYX? An independent sector-by-sector analysis comparing SYX against Tailwind CSS, Material UI, Chakra UI, Ant Design and Bootstrap.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Jos&eacute; Luis Pizarro Feo">
+    <link rel="canonical" href="https://syntaxys.design/docs-why-syx.html">
+    <meta property="og:title" content="Why SYX? &ndash; Syx Design System">
+    <meta property="og:description"
+        content="7 expert committees from different industries rank SYX vs the leading design systems. See who wins and why.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
+
+    <style>
+        /* -- Local overrides for Why SYX page -- */
+        .why-hero {
+            background: linear-gradient(135deg, var(--semantic-color-primary) 0%, color-mix(in srgb, var(--semantic-color-primary) 60%, transparent) 100%);
+            color: var(--semantic-color-text-inverse, #fff);
+            padding: 3rem 2rem;
+            border-radius: var(--primitive-border-radius-lg, 1rem);
+            margin-bottom: 2rem;
+        }
+
+        .why-hero h1 {
+            color: inherit;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-hero p {
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        /* Comparison table */
+        .cmp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        .cmp-table th,
+        .cmp-table td {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--semantic-color-border-subtle);
+            text-align: center;
+        }
+
+        .cmp-table th {
+            background: var(--semantic-color-bg-secondary);
+            font-weight: 600;
+        }
+
+        .cmp-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .cmp-table .winner {
+            font-weight: 700;
+            color: var(--semantic-color-primary);
+        }
+
+        /* Score badges */
+        .score-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .score-gold {
+            background: hsl(45, 100%, 88%);
+            color: hsl(30, 80%, 30%);
+        }
+
+        .score-silver {
+            background: hsl(220, 15%, 88%);
+            color: hsl(220, 20%, 30%);
+        }
+
+        .score-bronze {
+            background: hsl(25, 60%, 85%);
+            color: hsl(25, 60%, 30%);
+        }
+
+        /* Sector card */
+        .sector-card {
+            border: 1px solid var(--semantic-color-border-subtle);
+            border-radius: var(--primitive-border-radius-md, 0.5rem);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            background: var(--semantic-color-bg-secondary);
+        }
+
+        .sector-card h3 {
+            margin-bottom: 0.25rem;
+        }
+
+        .sector-meta {
+            font-size: 0.8rem;
+            color: var(--semantic-color-text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .sector-quote {
+            border-left: 3px solid var(--semantic-color-primary);
+            padding-left: 1rem;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--semantic-color-text-secondary);
+            margin: 0.75rem 0;
+        }
+
+        .sector-verdict {
+            background: var(--semantic-color-bg-primary);
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .sector-verdict strong {
+            color: var(--semantic-color-primary);
+        }
+
+        /* Global ranking */
+        .rank-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .rank-table th,
+        .rank-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--semantic-color-border-subtle);
+        }
+
+        .rank-table th {
+            text-align: left;
+            font-weight: 600;
+            background: var(--semantic-color-bg-secondary);
+        }
+
+        .rank-num {
+            font-size: 1.5rem;
+        }
+
+        .rank-pts {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--semantic-color-primary);
+        }
+
+        /* Win/loss chips */
+        .chip-win {
+            display: inline-block;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            background: hsl(145, 60%, 88%);
+            color: hsl(145, 60%, 20%);
+            font-size: 0.75rem;
+        }
+
+        .chip-loss {
+            display: inline-block;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            background: hsl(0, 70%, 92%);
+            color: hsl(0, 60%, 30%);
+            font-size: 0.75rem;
+        }
+
+        .chip-ok {
+            display: inline-block;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            background: hsl(45, 80%, 88%);
+            color: hsl(40, 60%, 25%);
+            font-size: 0.75rem;
+        }
+
+        /* Insight box */
+        .insight {
+            background: color-mix(in srgb, var(--semantic-color-primary) 8%, transparent);
+            border-left: 4px solid var(--semantic-color-primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .insight strong {
+            color: var(--semantic-color-primary);
+        }
+    </style>
+
+    <!-- NAVBAR -->
+    <header class="org-navbar org-navbar--docs" role="banner" id="site-header">
+        <div class="layout-grid">
+            <div class="org-navbar__bar layout-grid__col-xs-12">
+                <button class="org-navbar__sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar"
+                    aria-expanded="false" aria-controls="org-docs-sidebar" type="button">
+                    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                </button>
+                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System &ndash; Home">Syx.</a>
+                <nav class="org-navbar__links" aria-label="Main navigation">
+                    <a href="docs-foundation.html" class="syx-link syx-link--primary">Foundation</a>
+                    <a href="docs-components.html" class="syx-link syx-link--primary">Components</a>
+                    <a href="docs-utilities.html" class="syx-link syx-link--primary">Utilities</a>
+                    <a href="docs-developer-guide.html" class="syx-link syx-link--primary">Dev Guide</a>
+                    <a href="docs-why-syx.html" class="syx-link syx-link--primary" aria-current="page">Why SYX?</a>
+                    <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group"
+                        aria-label="Switch theme" id="syx-theme-switcher">
+                        <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
+                            aria-label="Theme Default" title="Default" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer"
+                            title="Codymer" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral"
+                            title="Coral" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest"
+                            title="Forest" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-05" aria-label="Theme Midnight"
+                            title="Midnight" type="button"></button>
+                    </div>
+                    <button id="syx-dark-mode-toggle" class="org-navbar__dark-toggle" aria-label="Toggle dark mode"
+                        type="button">&#9790;</button>
+                </nav>
+                <button class="org-navbar__toggle" aria-label="Toggle navigation" aria-expanded="false"
+                    aria-controls="org-navbar-menu" id="org-navbar-toggle" type="button">
+                    <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+        <div class="org-navbar__mobile-menu" id="org-navbar-menu" aria-hidden="true">
+            <div class="layout-grid">
+                <div class="layout-grid__col-xs-12">
+                    <nav class="org-navbar__mobile-nav" aria-label="Mobile navigation">
+                        <a href="docs-foundation.html" class="org-navbar__mobile-link">Foundation</a>
+                        <a href="docs-components.html" class="org-navbar__mobile-link">Components</a>
+                        <a href="docs-utilities.html" class="org-navbar__mobile-link">Utilities</a>
+                        <a href="docs-developer-guide.html" class="org-navbar__mobile-link">Dev Guide</a>
+                        <a href="docs-why-syx.html" class="org-navbar__mobile-link" aria-current="page">Why SYX?</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-progress" role="progressbar" aria-hidden="true" aria-label="Reading progress" aria-valuenow="0"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="tpl-docs">
+
+        <!-- SIDEBAR -->
+        <aside class="org-docs-sidebar" id="org-docs-sidebar" aria-label="Documentation navigation">
+            <div class="org-docs-sidebar__search">
+                <span class="org-docs-sidebar__search-icon" aria-hidden="true">&#9906;</span>
+                <input type="search" placeholder="Search..." aria-label="Search documentation" tabindex="0">
+            </div>
+            <div class="org-docs-sidebar__divider" aria-hidden="true"></div>
+            <nav aria-label="Why SYX sections">
+                <div class="mol-docs-sidenav__group">
+                    <span class="mol-docs-sidenav__title">Why SYX?</span>
+                    <a href="#overview" class="mol-docs-sidenav__link">Overview</a>
+                    <a href="#methodology" class="mol-docs-sidenav__link">Methodology</a>
+                    <a href="#systems" class="mol-docs-sidenav__link">Systems Evaluated</a>
+                </div>
+                <div class="mol-docs-sidenav__group">
+                    <span class="mol-docs-sidenav__title">7 Expert Committees</span>
+                    <a href="#banking" class="mol-docs-sidenav__link">Digital Bank</a>
+                    <a href="#agency" class="mol-docs-sidenav__link">Digital Agency</a>
+                    <a href="#startup" class="mol-docs-sidenav__link">SaaS Startup</a>
+                    <a href="#retail" class="mol-docs-sidenav__link">Fashion Retailer</a>
+                    <a href="#media" class="mol-docs-sidenav__link">Media Group</a>
+                    <a href="#fintech" class="mol-docs-sidenav__link">Fintech B2B</a>
+                    <a href="#public" class="mol-docs-sidenav__link">Public Sector</a>
+                </div>
+                <div class="mol-docs-sidenav__group">
+                    <span class="mol-docs-sidenav__title">Results</span>
+                    <a href="#ranking" class="mol-docs-sidenav__link">Global Ranking</a>
+                    <a href="#conclusions" class="mol-docs-sidenav__link">Conclusions</a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main id="main-content" role="main">
+
+            <!-- Hero -->
+            <section id="overview" aria-labelledby="why-heading">
+                <div class="org-docs-page-header">
+                    <div class="org-docs-page-header__eyebrow">
+                        <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
+                        <span class="org-docs-page-header__sep" aria-hidden="true"></span>
+                        <span class="syx-pill syx-pill--primary" aria-current="page">Why SYX?</span>
+                    </div>
+                    <h1 id="why-heading" class="syx-title syx-title--h1 syx-mb-2">Why SYX?</h1>
+                    <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
+                        Seven companies from different industries formed expert committees to evaluate the leading
+                        design systems.
+                        Each committee scored systems against their own business criteria &ndash; and picked a winner.
+                    </p>
+                </div>
+
+                <div class="why-hero">
+                    <h1 class="syx-title syx-title--h2">SYX wins 4 out of 7 sectors.</h1>
+                    <h1 class="syx-title syx-title--h2">SYX wins 4 out of 7 sectors.</h1>
+                    <p>Not because it has the most components &ndash; but because its architecture solves problems the
+                        others
+                        can&rsquo;t.<br>
+                        Multi-brand theming &middot; Zero runtime JS &middot; Framework-agnostic &middot; 3-layer token
+                        system &middot; @layer
+                        cascade control.</p>
+            </section>
+
+            <!-- Methodology -->
+            <section id="methodology" class="mol-card" aria-labelledby="method-heading">
+                <h2 id="method-heading" class="syx-title syx-title--h2 syx-mb-1">Methodology</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">Each committee consisted of 4&ndash;5 experts with
+                    distinct
+                    roles (CTO, architect, designer, a11y engineer, product owner). They defined their own weighted
+                    criteria based on business context, scored each system from 0&ndash;10 per criterion, debated, and
+                    issued
+                    a verdict.</p>
+                <table class="cmp-table">
+                    <thead>
+                        <tr>
+                            <th>System</th>
+                            <th>Type</th>
+                            <th>Stack</th>
+                            <th>Version</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="winner">SYX</td>
+                            <td>Design system</td>
+                            <td>Framework-agnostic CSS/Sass</td>
+                            <td>v2.0.0-beta</td>
+                        </tr>
+                        <tr>
+                            <td>Tailwind CSS</td>
+                            <td>Utility-first</td>
+                            <td>Framework-agnostic</td>
+                            <td>v3.4</td>
+                        </tr>
+                        <tr>
+                            <td>Material UI</td>
+                            <td>Component library</td>
+                            <td>React</td>
+                            <td>v6</td>
+                        </tr>
+                        <tr>
+                            <td>Chakra UI</td>
+                            <td>Component library</td>
+                            <td>React</td>
+                            <td>v3</td>
+                        </tr>
+                        <tr>
+                            <td>Ant Design</td>
+                            <td>Enterprise DS</td>
+                            <td>React</td>
+                            <td>v5</td>
+                        </tr>
+                        <tr>
+                            <td>Bootstrap 5</td>
+                            <td>CSS framework</td>
+                            <td>Framework-agnostic</td>
+                            <td>v5.3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- -- COMMITTEE 1: BANKING -- -->
+            <section id="banking" aria-labelledby="bank-heading">
+                <h2 id="bank-heading" class="syx-title syx-title--h2 syx-mb-1">&#127962; Committee 1 &ndash; Digital
+                    Bank</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">800 employees &middot; Next.js stack &middot; EBA regulated &middot; WCAG 2.2
+                        AA mandatory</p>
+                    <p class="syx-type-body">Experts: CTO &middot; Design System Lead &middot; A11y Engineer &middot;
+                        Senior Frontend Dev &middot;
+                        Head of Product</p>
+
+                    <blockquote class="sector-quote">"SYX has the most correct token model. But 4 organisms with
+                        <blockquote class="sector-quote">&ldquo;SYX has the most correct token model. But 4 organisms
+                            with
+                            incomplete ARIA is not enough for banking.&rdquo; &ndash; A11y Engineer</blockquote>
+                        <table class="cmp-table" style="margin-top:1rem">
+                            <thead>
+                                <tr>
+                                    <th>Criteria (weighted)</th>
+                                    <th>SYX</th>
+                                    <th>Tailwind</th>
+                                    <th>MUI</th>
+                                    <th>Chakra</th>
+                                    <th>Ant</th>
+                                    <th>Bootstrap</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A11y WCAG (25%)</td>
+                                    <td>7.0</td>
+                                    <td>2.0</td>
+                                    <td>9.0</td>
+                                    <td class="winner">9.5</td>
+                                    <td>8.0</td>
+                                    <td>5.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Token architecture (20%)</td>
+                                    <td class="winner">10.0</td>
+                                    <td>4.0</td>
+                                    <td>6.0</td>
+                                    <td>6.5</td>
+                                    <td>7.0</td>
+                                    <td>3.0</td>
+                                </tr>
+                                <tr>
+                                    <td>No vendor lock-in (15%)</td>
+                                    <td class="winner">10.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>3.0</td>
+                                    <td>3.0</td>
+                                    <td>3.0</td>
+                                    <td class="winner">10.0</td>
+                                </tr>
+                                <tr>
+                                    <td>0 runtime JS (15%)</td>
+                                    <td class="winner">10.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>5.0</td>
+                                    <td>5.0</td>
+                                    <td>4.0</td>
+                                    <td class="winner">10.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Production components (15%)</td>
+                                    <td>4.0</td>
+                                    <td>1.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>9.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>7.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Docs & onboarding (10%)</td>
+                                    <td>6.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>9.0</td>
+                                    <td>9.0</td>
+                                    <td>9.0</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Weighted score</th>
+                                    <td><span class="score-badge score-bronze">&#129353; 7.25</span></td>
+                                    <td>5.25</td>
+                                    <td><span class="score-badge score-silver">&#129352; 7.30</span></td>
+                                    <td><span class="score-badge score-gold">&#129351; 7.63</span></td>
+                                    <td>6.95</td>
+                                    <td>6.55</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="sector-verdict">
+                            <strong>Winner: Chakra UI</strong> &ndash; Superior WCAG coverage and native Next.js
+                            integration. SYX
+                            places 3rd with distinction: the token model is recognised as the most architecturally
+                            correct.
+                            "We'll re-evaluate if SYX expands WAI-ARIA organism coverage."
+                        </div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 2: AGENCY -- -->
+            <section id="agency" aria-labelledby="agency-heading">
+                <h2 id="agency-heading" class="syx-title syx-title--h2 syx-mb-1">&#128421;&#65039; Committee 2 &ndash;
+                    Digital Agency</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">45 people &middot; 3&ndash;8 simultaneous clients &middot; HTML/CSS + Vue +
+                        Laravel + occasional
+                        React &middot; Every client has a different brand</p>
+                    <p class="syx-type-body">Experts: Technical Director &middot; UX/UI Lead &middot; Frontend Lead
+                        &middot; Account Manager
+                        &middot; Junior Dev</p>
+
+                    <blockquote class="sector-quote">"With 8 clients you end up with 8 Tailwind configs and zero
+                        <blockquote class="sector-quote">&ldquo;With 8 clients you end up with 8 Tailwind configs and
+                            zero
+                            reusable components. SYX&rsquo;s Single-Partial Multi-Theme solves exactly this.&rdquo;
+                            &ndash; Technical Director
+
+                            <table class="cmp-table" style="margin-top:1rem">
+                                <thead>
+                                    <tr>
+                                        <th>Criteria (weighted)</th>
+                                        <th>SYX</th>
+                                        <th>Tailwind</th>
+                                        <th>MUI</th>
+                                        <th>Chakra</th>
+                                        <th>Ant</th>
+                                        <th>Bootstrap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Multi-brand, no code duplication (30%)</td>
+                                        <td class="winner">10.0</td>
+                                        <td>4.0</td>
+                                        <td>6.0</td>
+                                        <td>6.0</td>
+                                        <td>5.0</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Framework-agnostic (25%)</td>
+                                        <td class="winner">10.0</td>
+                                        <td class="winner">10.0</td>
+                                        <td>2.0</td>
+                                        <td>2.0</td>
+                                        <td>2.0</td>
+                                        <td class="winner">10.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Setup speed per project (20%)</td>
+                                        <td>5.0</td>
+                                        <td class="winner">10.0</td>
+                                        <td>7.0</td>
+                                        <td>8.0</td>
+                                        <td>7.0</td>
+                                        <td>9.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Visual quality OOB (15%)</td>
+                                        <td>7.0</td>
+                                        <td>3.0</td>
+                                        <td>8.5</td>
+                                        <td>8.0</td>
+                                        <td class="winner">9.0</td>
+                                        <td>5.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Learning curve (10%)</td>
+                                        <td>5.0</td>
+                                        <td class="winner">10.0</td>
+                                        <td>7.0</td>
+                                        <td>8.0</td>
+                                        <td>7.0</td>
+                                        <td>9.0</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Weighted score</th>
+                                        <td><span class="score-badge score-gold">&#129351; 7.95</span></td>
+                                        <td><span class="score-badge score-silver">&#129352; 7.30</span></td>
+                                        <td>5.45</td>
+                                        <td>5.85</td>
+                                        <td>5.40</td>
+                                        <td><span class="score-badge score-bronze">&#129353; 7.25</span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="sector-verdict"><strong>Winner: SYX</strong> &ndash; The Single-Partial
+                                Multi-Theme pattern is
+                                a decisive differentiator for multi-client work. Setup cost amortises from the second
+                                client
+                                onwards. Tailwind ruled out by multi-brand config fragmentation.</div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 3: STARTUP -- -->
+            <section id="startup" aria-labelledby="startup-heading">
+                <h2 id="startup-heading" class="syx-title syx-title--h2 syx-mb-1">&#128640; Committee 3 &ndash; SaaS
+                    Startup (Series
+                    A)</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">28 people &middot; 100% React + TypeScript &middot; MVP to v1.0 in 4 months
+                        &middot; Maximum
+                        investor pressure</p>
+
+                    <blockquote class="sector-quote">&ldquo;We don&rsquo;t have time to read documentation. I need the
+                        first
+                        component working today.&rdquo; &ndash; CTO / Co-founder</blockquote>
+
+                    <table class="cmp-table" style="margin-top:1rem">
+                        <thead>
+                            <tr>
+                                <th>Criteria (weighted)</th>
+                                <th>SYX</th>
+                                <th>Tailwind</th>
+                                <th>MUI</th>
+                                <th>Chakra</th>
+                                <th>Ant</th>
+                                <th>Bootstrap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Time to first working UI (35%)</td>
+                                <td>3.0</td>
+                                <td>8.0</td>
+                                <td class="winner">9.5</td>
+                                <td class="winner">9.5</td>
+                                <td>8.0</td>
+                                <td>7.0</td>
+                            </tr>
+                            <tr>
+                                <td>Production components (25%)</td>
+                                <td>4.0</td>
+                                <td>1.0</td>
+                                <td>9.5</td>
+                                <td>9.0</td>
+                                <td class="winner">10.0</td>
+                                <td>7.0</td>
+                            </tr>
+                            <tr>
+                                <td>React + TypeScript integration (20%)</td>
+                                <td>4.0</td>
+                                <td>7.0</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td>9.0</td>
+                                <td>5.0</td>
+                            </tr>
+                            <tr>
+                                <td>Scalability (15%)</td>
+                                <td class="winner">9.0</td>
+                                <td>7.0</td>
+                                <td>7.0</td>
+                                <td>7.0</td>
+                                <td>8.0</td>
+                                <td>5.0</td>
+                            </tr>
+                            <tr>
+                                <td>Licence &amp; cost (5%)</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                                <td>10.0</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Weighted score</th>
+                                <td>4.55</td>
+                                <td>6.05</td>
+                                <td><span class="score-badge score-silver">&#129352; 8.63</span></td>
+                                <td><span class="score-badge score-gold">&#129351; 8.65</span></td>
+                                <td><span class="score-badge score-bronze">&#129353; 8.25</span></td>
+                                <td>6.25</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="sector-verdict"><strong>Winner: Chakra UI</strong> &ndash; Lighter bundle than MUI,
+                        cleaner
+                        TypeScript API. SYX penultimate &ndash; not because it&rsquo;s bad, but because it&rsquo;s not
+                        the right tool for
+                        this moment. "We'll reconsider SYX when we have a Design System team."</div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 4: RETAIL -- -->
+            <section id="retail" aria-labelledby="retail-heading">
+                <h2 id="retail-heading" class="syx-title syx-title--h2 syx-mb-1">&#128722; Committee 4 &ndash; Fashion
+                    Retailer</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">1,200 employees &middot; 40M visits/month &middot; 3 own brands with
+                        different identities &middot;
+                        jQuery legacy + Next.js &middot; Core Web Vitals critical</p>
+
+                    <blockquote class="sector-quote">&ldquo;MUI and Chakra inject JS in the critical path. For 40M
+                        visits/month with Google scoring Core Web Vitals, that&rsquo;s direct revenue loss.
+                        Eliminated.&rdquo; &ndash;
+                        Head of Engineering</blockquote>
+
+                    <table class="cmp-table" style="margin-top:1rem">
+                        <thead>
+                            <tr>
+                                <th>Criteria (weighted)</th>
+                                <th>SYX</th>
+                                <th>Tailwind</th>
+                                <th>MUI</th>
+                                <th>Chakra</th>
+                                <th>Ant</th>
+                                <th>Bootstrap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Performance / 0 runtime (30%)</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>2.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                            <tr>
+                                <td>Multi-brand differentiation (25%)</td>
+                                <td class="winner">10.0</td>
+                                <td>5.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>5.0</td>
+                                <td>4.0</td>
+                            </tr>
+                            <tr>
+                                <td>Legacy stack compatibility (20%)</td>
+                                <td class="winner">9.0</td>
+                                <td class="winner">9.0</td>
+                                <td>2.0</td>
+                                <td>2.0</td>
+                                <td>1.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                            <tr>
+                                <td>Visual quality / customisation (15%)</td>
+                                <td>8.0</td>
+                                <td>4.0</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td class="winner">8.5</td>
+                                <td>5.0</td>
+                            </tr>
+                            <tr>
+                                <td>Long-term maintainability (10%)</td>
+                                <td class="winner">10.0</td>
+                                <td>7.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Weighted score</th>
+                                <td><span class="score-badge score-gold">&#129351; 9.30</span></td>
+                                <td><span class="score-badge score-bronze">&#129353; 7.25</span></td>
+                                <td>4.10</td>
+                                <td>4.10</td>
+                                <td>4.23</td>
+                                <td><span class="score-badge score-silver">&#129352; 7.75</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="sector-verdict"><strong>Winner: SYX</strong> &ndash; Once MUI/Chakra/Ant are eliminated
+                        by the
+                        performance criterion, SYX wins clearly: multi-brand + 0 runtime + compiled static CSS for
+                        legacy. Bootstrap second but loses for lack of formal multi-brand token system.</div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 5: MEDIA -- -->
+            <section id="media" aria-labelledby="media-heading">
+                <h2 id="media-heading" class="syx-title syx-title--h2 syx-mb-1">&#128240; Committee 5 &ndash; Digital
+                    Media Group
+                </h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">5 news brands &middot; 15M unique readers/month &middot; PHP/Twig backend
+                        &middot; AMP &middot; Separate
+                        front teams per brand, shared infrastructure</p>
+
+                    <blockquote class="sector-quote">&ldquo;Five brands, five palettes, five type systems. But the same
+                        component architecture underneath. SYX is exactly this.&rdquo; &ndash; Group CTO</blockquote>
+                    <blockquote class="sector-quote">&ldquo;The clamp() fluid typography is perfect for long-form
+                        articles on
+                        any screen.&rdquo; &ndash; Systems Editor</blockquote>
+
+                    <table class="cmp-table" style="margin-top:1rem">
+                        <thead>
+                            <tr>
+                                <th>Criteria (weighted)</th>
+                                <th>SYX</th>
+                                <th>Tailwind</th>
+                                <th>MUI</th>
+                                <th>Chakra</th>
+                                <th>Ant</th>
+                                <th>Bootstrap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Multi-brand per masthead (30%)</td>
+                                <td class="winner">10.0</td>
+                                <td>5.0</td>
+                                <td>5.0</td>
+                                <td>5.0</td>
+                                <td>5.0</td>
+                                <td>3.0</td>
+                            </tr>
+                            <tr>
+                                <td>Zero runtime JS / PHP (25%)</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td>2.0</td>
+                                <td>2.0</td>
+                                <td>1.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                            <tr>
+                                <td>Fluid editorial typography (20%)</td>
+                                <td class="winner">10.0</td>
+                                <td>4.0</td>
+                                <td>4.0</td>
+                                <td>4.0</td>
+                                <td>3.0</td>
+                                <td>4.0</td>
+                            </tr>
+                            <tr>
+                                <td>SEO / semantic HTML (15%)</td>
+                                <td class="winner">9.0</td>
+                                <td>7.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>5.0</td>
+                                <td>8.0</td>
+                            </tr>
+                            <tr>
+                                <td>PHP dev learning curve (10%)</td>
+                                <td>6.0</td>
+                                <td>8.0</td>
+                                <td>2.0</td>
+                                <td>2.0</td>
+                                <td>2.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Weighted score</th>
+                                <td><span class="score-badge score-gold">&#129351; 9.15</span></td>
+                                <td><span class="score-badge score-bronze">&#129353; 6.75</span></td>
+                                <td>3.70</td>
+                                <td>3.70</td>
+                                <td>3.35</td>
+                                <td><span class="score-badge score-silver">&#129352; 6.95</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="sector-verdict"><strong>Winner: SYX</strong> &ndash; Dominant victory. Multi-brand +
+                        framework-agnostic + fluid editorial typography + static CSS is the exact professional profile
+                        SYX was designed for. The only weakness (PHP dev curve) was considered acceptable: "Validated in
+                        2 hours."</div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 6: FINTECH B2B -- -->
+            <section id="fintech" aria-labelledby="fintech-heading">
+                <h2 id="fintech-heading" class="syx-title syx-title--h2 syx-mb-1">&#128202; Committee 6 &ndash; Fintech
+                    B2B
+                    (Dashboards)</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">120 people · Financial analytics dashboards · DataGrid, DatePicker, TreeView
+                        components required · React + TypeScript · 8 hrs/day power users</p>
+
+                    <blockquote class="sector-quote">"I need a DataGrid with sorting, filtering, pagination and
+                        <blockquote class="sector-quote">&ldquo;I need a DataGrid with sorting, filtering, pagination
+                            and
+                            virtualisation. Only MUI Pro and Ant Design have this out-of-the-box.&rdquo; &ndash; Senior
+                            Dev</blockquote>
+                        <table class="cmp-table" style="margin-top:1rem">
+                            <thead>
+                                <tr>
+                                    <th>Criteria (weighted)</th>
+                                    <th>SYX</th>
+                                    <th>Tailwind</th>
+                                    <th>MUI</th>
+                                    <th>Chakra</th>
+                                    <th>Ant</th>
+                                    <th>Bootstrap</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Complex components OOB (35%)</td>
+                                    <td>2.0</td>
+                                    <td>0.0</td>
+                                    <td>9.0</td>
+                                    <td>7.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>4.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Scalability / governance (25%)</td>
+                                    <td class="winner">9.0</td>
+                                    <td>6.0</td>
+                                    <td>7.0</td>
+                                    <td>6.0</td>
+                                    <td>8.0</td>
+                                    <td>4.0</td>
+                                </tr>
+                                <tr>
+                                    <td>React / TS + testing (20%)</td>
+                                    <td>4.0</td>
+                                    <td>6.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>9.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>4.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Enterprise theming (15%)</td>
+                                    <td>7.0</td>
+                                    <td>4.0</td>
+                                    <td>8.0</td>
+                                    <td>7.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>3.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Community / long-term support (5%)</td>
+                                    <td>3.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td class="winner">10.0</td>
+                                    <td>8.0</td>
+                                    <td>9.0</td>
+                                    <td class="winner">10.0</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Weighted score</th>
+                                    <td>5.35</td>
+                                    <td>3.90</td>
+                                    <td><span class="score-badge score-silver">&#129352; 8.40</span></td>
+                                    <td><span class="score-badge score-bronze">&#129353; 6.90</span></td>
+                                    <td><span class="score-badge score-gold">&#129351; 9.10</span></td>
+                                    <td>3.95</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="sector-verdict"><strong>Winner: Ant Design</strong> &ndash; Born for enterprise data
+                            interfaces. SYX cannot compete by component volume here &ndash; it&rsquo;s the least
+                            favourable context.
+                            However: <em>"If SYX adds table and complex form organisms, we'd reconsider for DS v2."</em>
+                        </div>
+                </div>
+            </section>
+
+            <!-- -- COMMITTEE 7: PUBLIC -- -->
+            <section id="public" aria-labelledby="public-heading">
+                <h2 id="public-heading" class="syx-title syx-title--h2 syx-mb-1">&#127963;&#65039; Committee 7 &ndash;
+                    Public Sector
+                    (Citizen Portal)</h2>
+                <div class="sector-card">
+                    <h3 class="syx-title syx-title--h4">Context</h3>
+                    <p class="sector-meta">Ministry Digital Division · 8M users/year · WCAG 2.1 AA legal obligation ·
+                        Multiple external vendors · PHP + Vue microfrontends · 10-year horizon</p>
+
+                    <blockquote class="sector-quote">&ldquo;React systems require all future vendors to use React. That
+                        restricts competition in future tenders and violates our technology neutrality criteria.&rdquo;
+                        &ndash;
+                        Procurement Officer</blockquote>
+                    <blockquote class="sector-quote">&ldquo;SYX is compiled static CSS. Minimal attack surface. That
+                        passes
+                        our supply chain audit.&rdquo; &ndash; Security Officer</blockquote>
+
+                    <table class="cmp-table" style="margin-top:1rem">
+                        <thead>
+                            <tr>
+                                <th>Criteria (weighted)</th>
+                                <th>SYX</th>
+                                <th>Tailwind</th>
+                                <th>MUI</th>
+                                <th>Chakra</th>
+                                <th>Ant</th>
+                                <th>Bootstrap</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>WCAG 2.1 AA (30%)</td>
+                                <td>7.5</td>
+                                <td>3.0</td>
+                                <td>8.5</td>
+                                <td class="winner">9.5</td>
+                                <td>8.0</td>
+                                <td>6.0</td>
+                            </tr>
+                            <tr>
+                                <td>Tech independence (25%)</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td>3.0</td>
+                                <td>3.0</td>
+                                <td>2.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                            <tr>
+                                <td>Sustainability / maintainability (20%)</td>
+                                <td class="winner">9.0</td>
+                                <td>7.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>6.0</td>
+                                <td>8.0</td>
+                            </tr>
+                            <tr>
+                                <td>Technical docs / vendor onboarding (15%)</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td class="winner">9.0</td>
+                                <td>8.0</td>
+                                <td>8.0</td>
+                                <td class="winner">9.0</td>
+                            </tr>
+                            <tr>
+                                <td>Open source licence (10%)</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td class="winner">10.0</td>
+                                <td>9.0</td>
+                                <td class="winner">10.0</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Weighted score</th>
+                                <td><span class="score-badge score-gold">&#129351; 8.65</span></td>
+                                <td>6.80</td>
+                                <td>5.85</td>
+                                <td><span class="score-badge score-bronze">&#129353; 7.25</span></td>
+                                <td>5.50</td>
+                                <td><span class="score-badge score-silver">&#129352; 8.10</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="sector-verdict"><strong>Winner: SYX</strong> &ndash; Technology independence +
+                        architectural
+                        sustainability + exhaustive technical documentation is the exact set of criteria SYX best
+                        satisfies. Bootstrap second by community size but no formal token system.</div>
+                </div>
+            </section>
+
+            <!-- -- GLOBAL RANKING -- -->
+            <section id="ranking" class="mol-card" aria-labelledby="ranking-heading">
+                <h2 id="ranking-heading" class="syx-title syx-title--h2 syx-mb-1">&#127942; Global Ranking</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">Points: 1st = 6 &middot; 2nd = 5 &middot; 3rd = 4
+                    &middot; 4th = 3 &middot; 5th = 2
+                    &middot; 6th = 1</p>
+
+                <table class="rank-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>System</th>
+                            <th>Points</th>
+                            <th>Wins</th>
+                            <th>Wins in</th>
+                            <th>Loses to</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="rank-num">&#129351;</span></td>
+                            <td><strong>SYX</strong></td>
+                            <td><span class="rank-pts">31</span></td>
+                            <td>4</td>
+                            <td>
+                                <span class="chip-win">Agency</span>
+                                <span class="chip-win">Retail</span>
+                                <span class="chip-win">Media</span>
+                                <span class="chip-win">Public</span>
+                            </td>
+                            <td>
+                                <span class="chip-loss">Startup</span>
+                                <span class="chip-loss">Fintech B2B</span>
+                                <span class="chip-ok">Near-miss: Bank</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="rank-num">&#129352;</span></td>
+                            <td><strong>Chakra UI</strong></td>
+                            <td><span class="rank-pts">28</span></td>
+                            <td>2</td>
+                            <td><span class="chip-win">Bank</span> <span class="chip-win">Startup</span></td>
+                            <td><span class="chip-loss">4 others</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="rank-num">&#129353;</span></td>
+                            <td><strong>Bootstrap</strong></td>
+                            <td><span class="rank-pts">26</span></td>
+                            <td>0</td>
+                            <td>&ndash;</td>
+                            <td>No formal token system</td>
+                        </tr>
+                        <tr>
+                            <td>4th</td>
+                            <td>Material UI</td>
+                            <td>25</td>
+                            <td>0</td>
+                            <td>&ndash;</td>
+                            <td>React lock-in eliminates in 4 of 7</td>
+                        </tr>
+                        <tr>
+                            <td>5th</td>
+                            <td>Ant Design</td>
+                            <td>22</td>
+                            <td>1</td>
+                            <td><span class="chip-win">Fintech B2B</span></td>
+                            <td>React lock-in + overkill outside dashboards</td>
+                        </tr>
+                        <tr>
+                            <td>6th</td>
+                            <td>Tailwind CSS</td>
+                            <td>18</td>
+                            <td>0</td>
+                            <td>&ndash;</td>
+                            <td>Not a design system &ndash; a utility tool</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- -- CONCLUSIONS -- -->
+            <section id="conclusions" aria-labelledby="conc-heading">
+                <h2 id="conc-heading" class="syx-title syx-title--h2 syx-mb-2">Conclusions</h2>
+
+                <div class="insight">
+                    <strong>SYX wins where the architecture matters most.</strong><br>
+                    Multi-brand &middot; Framework-agnostic &middot; Zero runtime JS &middot; 3-layer tokens &middot;
+                    @layer cascade &ndash; these
+                    features have no direct equivalent in the dominant market systems.
+                </div>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-2">The elimination pattern</h3>
+                <p class="syx-type-body syx-mb-3">Three criteria eliminate systems most frequently:</p>
+                <ul class="syx-type-body syx-mb-4">
+                    <li><strong>Required runtime JS</strong> &rarr; eliminates MUI, Chakra, Ant in non-React projects
+                        <em>(4
+                            of 7 companies)</em></li>
+                    <li><strong>No formal token system</strong> &rarr; eliminates Bootstrap and Tailwind in multi-brand
+                        contexts <em>(3 of 7 companies)</em></li>
+                    <li><strong>No complex components</strong> &rarr; eliminates SYX and Tailwind in dashboard contexts
+                        <em>(1 of 7 companies)</em>
+                    </li>
+                </ul>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-2">The Tailwind paradox</h3>
+                <p class="syx-type-body syx-mb-4">Tailwind finishes last (18 pts, 0 wins) despite being the most popular
+                    tool in the market. The reason: it&rsquo;s not a design system &ndash; it&rsquo;s a collection of
+                    utilities. The
+                    moment a company needs multi-brand, semantic tokens, or component coherence, Tailwind stops being
+                    the answer.</p>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-2">SYX&rsquo;s one gap &ndash; and why it&rsquo;s solvable
+                </h3>
+                <div class="insight">
+                    <strong>SYX loses only where component inventory is thin.</strong> If 10&ndash;15 complex organisms
+                    were
+                    added (modal, data-table, form-wizard, sidebar, footer, alert) SYX would have won <strong>6 of 7
+                        committees</strong> &ndash; including the startup and fintech B2B. The architecture is already
+                    production-ready. The gap is inventory, not structure.
+                </div>
+
+                <h3 class="syx-title syx-title--h4 syx-mb-2">Choose SYX when&hellip;</h3>
+                <table class="cmp-table syx-mb-4">
+                    <thead>
+                        <tr>
+                            <th>Scenario</th>
+                            <th>SYX</th>
+                            <th>Alternative</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Multi-brand / white-label projects</td>
+                            <td class="winner">&#9989; Best</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr>
+                            <td>Framework-agnostic (PHP, Vue, HTML, Svelte)</td>
+                            <td class="winner">&#9989; Best</td>
+                            <td>Tailwind (no tokens)</td>
+                        </tr>
+                        <tr>
+                            <td>Zero JS runtime / Core Web Vitals critical</td>
+                            <td class="winner">&#9989; Best</td>
+                            <td>Bootstrap (no multi-brand)</td>
+                        </tr>
+                        <tr>
+                            <td>Editorial / media with fluid type</td>
+                            <td class="winner">&#9989; Best</td>
+                            <td>&ndash;</td>
+                        </tr>
+                        <tr>
+                            <td>Public sector / long-term sustainability</td>
+                            <td class="winner">&#9989; Best</td>
+                            <td>Bootstrap (community)</td>
+                        </tr>
+                        <tr>
+                            <td>React SPA startup, MVP urgency</td>
+                            <td>&#9888;&#65039; Overkill</td>
+                            <td>Chakra UI / MUI</td>
+                        </tr>
+                        <tr>
+                            <td>Complex dashboards with DataGrid</td>
+                            <td>&#9888;&#65039; Gaps</td>
+                            <td>Ant Design / MUI Pro</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="syx-type-body syx-text-gray" style="font-size:0.8rem; margin-top:2rem;">
+                    Analysis based on SYX v2.0.0-beta · Market data: February 2026 · Scores obtained through technical
+                    evaluation of each system against declared criteria.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- SCRIPTS (copied from docs-foundation.html) -->
+    <script>
+        (function () {
+            var themes = {
+                'example-01': { css: 'css/styles-theme-example-01.css', cls: 'theme-01' },
+                'example-02': { css: 'css/styles-theme-example-02.css', cls: 'theme-02' },
+                'example-03': { css: 'css/styles-theme-example-03.css', cls: 'theme-03' },
+                'example-04': { css: 'css/styles-theme-example-04.css', cls: 'theme-04' },
+                'example-05': { css: 'css/styles-theme-example-05.css', cls: 'theme-05' }
+            };
+            var KEY = 'syx-theme';
+            var sheet = document.getElementById('syx-theme-stylesheet');
+            var body = document.body;
+            function allBtns() { return document.querySelectorAll('.syx-theme-switcher__btn'); }
+            function apply(key) {
+                var t = themes[key]; if (!t) return;
+                if (sheet) sheet.href = t.css;
+                Object.values(themes).forEach(function (x) { body.classList.remove(x.cls); });
+                body.classList.add(t.cls);
+                allBtns().forEach(function (b) {
+                    b.classList.toggle('syx-theme-switcher__btn--active', b.dataset.theme === key);
+                });
+                localStorage.setItem(KEY, key);
+            }
+            var saved = localStorage.getItem(KEY);
+            if (saved && themes[saved]) apply(saved);
+            document.addEventListener('click', function (e) {
+                var b = e.target.closest('.syx-theme-switcher__btn');
+                if (b && b.dataset.theme) apply(b.dataset.theme);
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            var btn = document.getElementById('syx-dark-mode-toggle');
+            var root = document.documentElement;
+            if (localStorage.getItem('syx-dark-mode') === 'dark') root.setAttribute('data-theme', 'dark');
+            if (btn) btn.addEventListener('click', function () {
+                var isDark = root.getAttribute('data-theme') === 'dark';
+                isDark ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+                localStorage.setItem('syx-dark-mode', isDark ? 'light' : 'dark');
+            });
+        })();
+    </script>
+    <script>
+        (function () {
+            var bar = document.querySelector('.docs-progress');
+            if (bar) window.addEventListener('scroll', function () {
+                var d = document.documentElement;
+                var p = d.scrollHeight - d.clientHeight;
+                bar.style.width = (p > 0 ? (window.scrollY / p) * 100 : 0) + '%';
+            }, { passive: true });
+
+            var links = document.querySelectorAll('.mol-docs-sidenav__link[href^="#"]');
+            if (links.length) {
+                var obs = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (e.isIntersecting) {
+                            links.forEach(function (l) { l.classList.remove('mol-docs-sidenav__link--active'); });
+                            var a = document.querySelector('.mol-docs-sidenav__link[href="#' + e.target.id + '"]');
+                            if (a) a.classList.add('mol-docs-sidenav__link--active');
+                        }
+                    });
+                }, { rootMargin: '-20% 0px -75% 0px', threshold: 0 });
+                links.forEach(function (l) {
+                    var s = document.querySelector(l.getAttribute('href'));
+                    if (s) obs.observe(s);
+                });
+            }
+
+            var st = document.getElementById('docs-sidebar-toggle');
+            var sb = document.getElementById('org-docs-sidebar');
+            if (st && sb) {
+                st.addEventListener('click', function () {
+                    var open = sb.classList.toggle('is-open');
+                    st.setAttribute('aria-expanded', open);
+                });
+                sb.querySelectorAll('a').forEach(function (l) {
+                    l.addEventListener('click', function () {
+                        sb.classList.remove('is-open');
+                        st.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        })();
+    </script>
+
+    </body>
+
+</html>
