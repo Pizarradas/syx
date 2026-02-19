@@ -1,4 +1,5 @@
-// PAGE: DOCS
+// PAGE: DOCS — Global body background
+// All layout, sidebar, topbar, and sidenav styles live in _docs-layout.scss
 // ===============================================
 @use "../abstracts/index" as *;
 
@@ -10,110 +11,10 @@ body {
 }
 
 // -----------------------------------------------
-// 1. SIDEBAR
+// INLINE BADGE (for class/atom references in docs)
+// NOTE: demo-only — safe to remove in production builds
 // -----------------------------------------------
-.docs-sidebar {
-  background: var(--semantic-color-bg-primary);
-  border-right: 1px solid var(--semantic-color-border-subtle);
-  min-height: 100vh;
-  position: sticky;
-  top: 0;
-  overflow-y: auto;
-  @include padding(var(--layout-pad-4));
-
-  &__logo {
-    display: block;
-    text-decoration: none;
-    margin-bottom: var(--layout-gap-5);
-    padding-bottom: var(--layout-gap-3);
-    border-bottom: 1px solid var(--semantic-color-border-subtle);
-    font-size: var(--primitive-fluid-font-h5);
-    font-family: var(--primitive-font-family-syne-bold);
-    color: var(--color-primary);
-    letter-spacing: -0.02em;
-  }
-}
-
-.syx-sidenav__group {
-  margin-bottom: var(--layout-gap-4);
-}
-
-.syx-sidenav__title {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: var(--primitive-font-weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--semantic-color-text-tertiary);
-  margin-bottom: var(--layout-gap-2);
-  padding-left: var(--layout-gap-2);
-}
-
-.syx-sidenav__link {
-  display: block;
-  padding: 0.4rem var(--layout-gap-2);
-  color: var(--semantic-color-text-secondary);
-  text-decoration: none;
-  font-size: 0.875rem;
-  border-radius: 6px;
-  @include transition(
-    color 0.15s ease,
-    background-color 0.15s ease
-  );
-  margin-bottom: 2px;
-
-  &:hover {
-    color: var(--color-primary);
-    background-color: var(--semantic-color-bg-tertiary);
-  }
-
-  &.active,
-  &[aria-current="page"] {
-    color: var(--color-primary);
-    background-color: var(--semantic-color-bg-tertiary);
-    font-weight: var(--primitive-font-weight-medium);
-    border-left: 2px solid var(--color-primary);
-    padding-left: calc(var(--layout-gap-2) - 2px);
-  }
-}
-
-// -----------------------------------------------
-// 2. CONTENT AREA
-// -----------------------------------------------
-.docs-content {
-  @include padding(var(--layout-pad-5));
-  max-width: 100%;
-}
-
-// -----------------------------------------------
-// 3. SECTION HEADER
-// -----------------------------------------------
-.docs-section-header {
-  margin-bottom: var(--layout-gap-5);
-  padding-bottom: var(--layout-gap-4);
-  border-bottom: 1px solid var(--semantic-color-border-subtle);
-
-  // Pill label above title
-  .syx-pill {
-    margin-bottom: var(--layout-gap-2);
-  }
-
-  // Page title uses syx-title atom
-  .syx-title--h1,
-  h1 {
-    margin-top: 0;
-    margin-bottom: var(--layout-gap-2);
-  }
-}
-
-// -----------------------------------------------
-// 4. INLINE BADGE (for class/atom references)
-// -----------------------------------------------
-// NOTE: docs-badge is page-scoped to docs pages only.
-// It is NOT a SYX atom because it has no semantic
-// meaning outside of documentation context.
-// -----------------------------------------------
-.docs-badge {
+.mol-demo-badge {
   display: inline-block;
   font-size: 0.7rem;
   font-family: 'Courier New', Courier, monospace;
@@ -122,8 +23,8 @@ body {
   margin-right: 0.25rem;
   margin-bottom: 0.25rem;
 
-  &--atom     { background: var(--primitive-color-blue-50);   color: var(--primitive-color-blue-600); }
-  &--molecule { background: var(--primitive-color-cyan-50);   color: var(--primitive-color-cyan-700); }
-  &--organism { background: var(--primitive-color-orange-50); color: var(--primitive-color-orange-700); }
+  &--atom     { background: var(--primitive-color-blue-50);    color: var(--primitive-color-blue-600); }
+  &--molecule { background: var(--primitive-color-cyan-50);    color: var(--primitive-color-cyan-700); }
+  &--organism { background: var(--primitive-color-orange-50);  color: var(--primitive-color-orange-700); }
   &--utility  { background: var(--semantic-color-bg-tertiary); color: var(--semantic-color-text-secondary); }
 }

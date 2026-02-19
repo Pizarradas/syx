@@ -19,15 +19,17 @@
     --primitive-space-base: 0.25rem;
     
     // Colors - Brand
-    // Primary Blue
-    --primitive-color-blue-500: #1C3CF7;
-    --primitive-color-blue-50:  #EEF1FF;
-    
-    // Secondary Cyan
-    --primitive-color-cyan-500: #00C2FF;
-    
-    // Accent Orange
-    --primitive-color-orange-500: #FF7A00;
+    // Primary Indigo — the blueprint color
+    --primitive-color-blue-500: #4F46E5;   // rebind: was blue, now indigo
+    --primitive-color-blue-400: #6366F1;   // indigo lighter — hover surfaces
+    --primitive-color-blue-50:  #EEF2FF;   // indigo tint — light backgrounds
+
+    // Secondary Amber — the hot point of the system
+    --primitive-color-cyan-500: #F59E0B;   // rebind: was cyan, now amber
+    --primitive-color-cyan-200: #FDE68A;   // amber soft
+
+    // Accent Deep Indigo — darkened for strong CTA
+    --primitive-color-orange-500: #3730A3; // rebind: was orange, now deep indigo
 
     // Colors - State
     --primitive-color-success-500: #16C784;
@@ -35,9 +37,13 @@
     --primitive-color-warning-500: #F5B800;
     --primitive-color-disabled: #CBD2D9;
     
-    // Typography
+    // Typography — system fonts hierarchy
     --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
     --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
+    // Inter — body text (loaded via Google Fonts)
+    --primitive-font-family-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    // JetBrains Mono — code blocks
+    --primitive-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
     
     // Icons - Theme Specific
     --primitive-icon-arrow-default: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8299 11.2897L10.5899 7.0497C10.497 6.95598 10.3864 6.88158 10.2645 6.83081C10.1427 6.78004 10.012 6.75391 9.87994 6.75391C9.74793 6.75391 9.61723 6.78004 9.49537 6.83081C9.37351 6.88158 9.26291 6.95598 9.16994 7.0497C8.98369 7.23707 8.87915 7.49052 8.87915 7.7547C8.87915 8.01889 8.98369 8.27234 9.16994 8.4597L12.7099 11.9997L9.16994 15.5397C8.98369 15.7271 8.87915 15.9805 8.87915 16.2447C8.87915 16.5089 8.98369 16.7623 9.16994 16.9497C9.26338 17.0424 9.3742 17.1157 9.49604 17.1655C9.61787 17.2152 9.74834 17.2405 9.87994 17.2397C10.0115 17.2405 10.142 17.2152 10.2638 17.1655C10.3857 17.1157 10.4965 17.0424 10.5899 16.9497L14.8299 12.7097C14.9237 12.6167 14.9981 12.5061 15.0488 12.3843C15.0996 12.2624 15.1257 12.1317 15.1257 11.9997C15.1257 11.8677 15.0996 11.737 15.0488 11.6151C14.9981 11.4933 14.9237 11.3827 14.8299 11.2897Z" fill="black"/></svg>');
@@ -94,28 +100,28 @@
     --color-red: var(--primitive-color-error-500);
     
     // Colors (semantic)
-    // Colors (semantic)
     --color-primary: var(--color-primary-base);
     --color-secondary: var(--color-secondary-base);
     --color-secondary-lt-1: var(--color-primary-light);
     --color-tertiary: var(--color-accent-base);
-    --color-quaternary: var(--color-primary-base);
+    --color-quaternary: var(--color-primary);
     --color-quinary: var(--primitive-color-error-500);
     --color-senary: initial;
     --color-septenary: initial;
     --color-selector-placeholder: var(--color-primary);
-    --color-action-link: var(--color-blue);
+    --color-action-link: var(--color-primary);
     --color-state-disabled: var(--primitive-color-disabled);
-    --color-state-focus: var(--color-blue);
-    --color-state-hover-primary:    #1530C8; // blue-500 darkened ~20%
-    --color-state-hover-secondary:  #009FD4; // cyan-500 darkened ~20%
-    --color-state-hover-tertiary:   #D96600; // orange-500 darkened ~20%
-    --color-state-hover-quaternary: #1530C8; // same as primary
+    --color-state-focus: var(--color-primary);
+    // Hover states — darkened variants of the new palette
+    --color-state-hover-primary:    #3730A3; // indigo-800 — darker than primary
+    --color-state-hover-secondary:  #D97706; // amber-600 — darker than secondary
+    --color-state-hover-tertiary:   #22208C; // very deep indigo
+    --color-state-hover-quaternary: #3730A3; // same as primary hover
     --color-state-ok: var(--primitive-color-success-500);
     --color-state-ko: var(--primitive-color-error-500);
     --color-state-warning: var(--primitive-color-warning-500);
-    --color-action-selection: var(--color-blue);
-    --background-action-selection: var(--color-blue);
+    --color-action-selection: var(--color-primary);
+    --background-action-selection: var(--color-primary);
 
     // ================================================
     // MAPPING: LEGACY TO SEMANTIC (NEW STANDARD)
@@ -126,32 +132,47 @@
     --semantic-color-primary: var(--color-primary);
     --semantic-color-secondary: var(--color-secondary);
     --semantic-color-tertiary: var(--color-tertiary);
-    --semantic-color-quaternary: var(--color-quaternary);
+    --semantic-color-quaternary: var(--color-primary);
     --semantic-color-quinary: var(--color-quinary);
-    
-    --semantic-color-text-primary: #1F2933; // Dark Slate
-    --semantic-color-text-inverse: #FFFFFF;
-    
-    --semantic-color-bg-primary: #FFFFFF;
-    --semantic-color-bg-secondary: #F5F7FA;
-    
+
+    // Text — cool-tinted dark gray for precision feel
+    --semantic-color-text-primary:   #111827; // gray-900 cool
+    --semantic-color-text-secondary: #4B5563; // gray-600 cool
+    --semantic-color-text-tertiary:  #9CA3AF; // gray-400 cool
+    --semantic-color-text-inverse:   #FFFFFF;
+    --semantic-color-text-disabled:  #D1D5DB;
+
+    // Backgrounds — pure white + soft blue-tinted gray
+    --semantic-color-bg-primary:   #FFFFFF;
+    --semantic-color-bg-secondary: #F8FAFF; // very faint indigo tint
+    --semantic-color-bg-tertiary:  #F0F4FF; // soft indigo wash
+    --semantic-color-bg-inverse:   #0F0E2C; // deep indigo-black
+
+    // Borders — cool grays
+    --semantic-color-border-subtle:  #E5E7EB;
+    --semantic-color-border-default: #D1D5DB;
+    --semantic-color-border-strong:  #9CA3AF;
+
+    // State
+    --semantic-color-state-focus:    var(--color-primary);
+
     // Fonts
-    --semantic-font-family-primary: var(--font-weight-1);
+    --semantic-font-family-primary:      var(--primitive-font-family-inter);
     --semantic-font-family-primary-bold: var(--font-weight-2);
-    --semantic-font-family-heading: var(--font-weight-2);
-    
-    // Filters
-    // Note: Filters need to be recalculated for Blue/Cyan but leaving defaults for now or disabling to avoid broken SVG colors
-    --filter-color-brown: initial; 
-    --filter-color-blue: initial;
-    --filter-primary: brightness(0) saturate(100%) invert(18%) sepia(85%) saturate(3620%) hue-rotate(229deg) brightness(88%) contrast(106%); // Approx Blue
-    --filter-secondary: brightness(0) saturate(100%) invert(56%) sepia(68%) saturate(2335%) hue-rotate(163deg) brightness(101%) contrast(101%); // Approx Cyan
-    --filter-state-ok: var(--primitive-filter-success);
+    --semantic-font-family-heading:      var(--font-weight-2);
+    --semantic-font-family-mono:         var(--primitive-font-family-mono);
+
+    // Filters (recalculated for indigo palette)
+    --filter-primary:   brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1800%) hue-rotate(230deg) brightness(95%) contrast(95%);
+    --filter-secondary: brightness(0) saturate(100%) invert(72%) sepia(60%) saturate(1200%) hue-rotate(5deg) brightness(100%) contrast(95%);
+    --filter-state-ok:      var(--primitive-filter-success);
     --filter-state-warning: var(--primitive-filter-warning);
     --filter-state-disabled: var(--primitive-filter-disabled);
+    --filter-color-brown: initial;
+    --filter-color-blue:  initial;
     
-    // Reset
-    --reset-html-font: normal normal 500 16px/18px var(--font-weight-1);
+    // Reset — body now uses Inter
+    --reset-html-font: normal normal 400 16px/24px var(--primitive-font-family-inter);
     --reset-body-color: var(--color-black);
     --reset-body-background-color: var(--color-brown-lt-1);
     --reset-body-font-size: calc(4 * var(--base-measure));

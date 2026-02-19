@@ -1,4 +1,4 @@
-// CORE
+﻿// CORE
 // ===============================================
 @use '../../abstracts/index' as *;
 @use '../../base/index' as *;
@@ -118,10 +118,12 @@
 @include mol-btn-group(example-05);
 @include mol-label-group(example-05);
 @include mol-form-field-set(example-05);
+@include mol-demo(example-05);   // mol-demo-*
 // ===============================================
 
 // SYX ORGANISMS
 // ===============================================
+@include org-navbar(example-05);
 @include org-documentation-layout(example-05);
 @include org-content-columns(example-05);
 // ===============================================

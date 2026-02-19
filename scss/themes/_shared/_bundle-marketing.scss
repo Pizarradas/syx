@@ -27,9 +27,9 @@
 
   // ORGANISMS
   // ================================================
-  // Add as they are created:
-  // @include org-header($theme);
-  // @include org-hero($theme);
-  // @include org-cta($theme);
-  // @include org-footer($theme);
+  @include org-navbar($theme);            // Sticky navbar with mobile hamburger
+  @include org-header($theme);            // Unified header + sidenav pattern
+  // Future: @include org-hero($theme);
+  // Future: @include org-cta($theme);
+  // Future: @include org-footer($theme);
 }

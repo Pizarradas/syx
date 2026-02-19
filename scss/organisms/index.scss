@@ -1,8 +1,7 @@
 // SYX ORGANISMS
 // ===============================================
-@forward 'documentation-layout';
-@forward 'content-columns';
-@forward 'header-example-02';
-@forward 'header-example-03';
-@forward 'header-example-04';
-@forward 'header-example-05';
+@forward 'documentation-layout'; // @mixin org-documentation-layout($theme)
+@forward 'content-columns';      // @mixin org-content-columns($theme)
+@forward 'navbar';               // @mixin org-navbar($theme)
+@forward 'header';               // @mixin org-header($theme) — unified, replaces header-example-02..05
+

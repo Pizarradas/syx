@@ -1,4 +1,4 @@
-// CORE
+﻿// CORE
 // ===============================================
 @use '../../abstracts/index' as *;
 @use '../../base/index' as *;
@@ -100,9 +100,11 @@
 @include mol-btn-group(codymer);
 @include mol-label-group(codymer);
 @include mol-form-field-set(codymer);
+@include mol-demo(example-02);   // mol-demo-*
 
 // SYX ORGANISMS
 // ===============================================
+@include org-navbar(codymer);
 @include org-documentation-layout(codymer);
 @include org-content-columns(codymer);
 // ===============================================

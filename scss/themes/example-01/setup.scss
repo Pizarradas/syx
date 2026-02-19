@@ -124,10 +124,12 @@
 @include mol-btn-group(example-01);
 @include mol-label-group(example-01);
 @include mol-form-field-set(example-01);
+@include mol-demo(example-01);   // mol-demo-* — removable in production builds
 // ===============================================
 
 // SYX ORGANISMS
 // ===============================================
+@include org-navbar(example-01);
 @include org-documentation-layout(example-01);
 @include org-content-columns(example-01);
 // ===============================================

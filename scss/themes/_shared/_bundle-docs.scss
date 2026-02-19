@@ -25,7 +25,7 @@
   @include atom-pagination($theme);
   @include atom-pill($theme);
   @include atom-radio($theme);
-  @include atom-specimen($theme);
+  @include atom-specimen($theme);   // @deprecated — stub kept for compat, use mol-demo instead
   @include atom-switch($theme);
   @include atom-swatch($theme);
   @include atom-table($theme);
@@ -34,13 +34,17 @@
 
   // MOLECULES — all
   // ================================================
+  @include mol-card($theme);
   @include mol-form-field($theme);
   @include mol-btn-group($theme);
   @include mol-label-group($theme);
   @include mol-form-field-set($theme);
+  @include mol-demo($theme);         // mol-demo-* — removable in production builds
 
   // ORGANISMS — all
   // ================================================
+  @include org-navbar($theme);
   @include org-documentation-layout($theme);
   @include org-content-columns($theme);
+  @include org-header($theme);  // unified header — replaces org-header-example-02..05
 }
