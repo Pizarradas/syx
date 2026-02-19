@@ -6,11 +6,11 @@
 
 ## Prerequisites
 
-| Tool                                       | Version | Purpose                 |
-| ------------------------------------------ | ------- | ----------------------- |
-| [Dart Sass](https://sass-lang.com/install) | ≥ 1.57  | Compilation             |
-| [Prepros](https://prepros.io/)             | Any     | GUI compiler (optional) |
-| A code editor                              | —       | VS Code recommended     |
+| Tool                                       | Version  | Purpose               |
+| ------------------------------------------ | -------- | --------------------- |
+| [Dart Sass](https://sass-lang.com/install) | ≥ 1.57   | Compilation           |
+| [Node.js](https://nodejs.org/)             | ≥ 18.0.0 | npm scripts, PurgeCSS |
+| A code editor                              | —        | VS Code recommended   |
 
 > **Note:** SYX uses `@use` / `@forward` (Dart Sass module system). Legacy `@import` is not supported.
 
@@ -18,11 +18,15 @@
 
 ## 1. Compile Your First Theme
 
-### With Prepros
+### With npm (recommended)
 
-1. Open `prepros.config` in Prepros
-2. All entry points are pre-configured
-3. Click **Compile All**
+```bash
+npm install                # install dependencies (Sass + PurgeCSS)
+npm run build              # compile all 5 themes
+npm run build:core         # compile minimal production bundle
+npm run build:prod         # compile all themes + run PurgeCSS
+npm run watch              # watch theme-01 for changes
+```
 
 ### With Dart Sass CLI
 
@@ -145,6 +149,23 @@ touch scss/atoms/_tooltip.scss
 ```bash
 sass scss/styles-theme-example-01.scss css/test.css
 ```
+
+---
+
+### Option B — Minimal production bundle
+
+```bash
+npm run build:core         # compiles styles-core.css (138 KB, no docs overhead)
+npm run purge:core         # + PurgeCSS for production (~110 KB)
+```
+
+Link in HTML:
+
+```html
+<link rel="stylesheet" href="css/styles-core.css" />
+```
+
+See `demo-bundle-weight.html` for a live reference.
 
 ---
 
