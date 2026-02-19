@@ -263,8 +263,8 @@ Incluyen: display, text-align, spacing básico.
 | Ambos                                   | Ambos — son complementarios |
 
 > **Nota**: `base/helpers/helpers.scss` incluye internamente un `@forward 'utilities'`
-> que expone algunas utilidades adicionales dentro del namespace de helpers.
-> Esto es legacy y se consolidará en SYX v2.0.
+> que exposa algunas utilidades adicionales dentro del namespace de helpers.
+> Esto es legacy y se eliminará en v2.1.
 
 ---
 
@@ -277,13 +277,17 @@ Incluyen: display, text-align, spacing básico.
 3. ✅ Accesibilidad: `.syx-sr-only`, `.syx-skip-link`, `.syx-motion-safe` añadidos
 4. ✅ `color-mix()` para hover tints de botones
 5. ✅ Dark-mode: card, borders y utilities respetan el tema
+6. ✅ **Bundle core** (`styles-core.scss`): producción-ready, sin overhead de documentación. **138 KB** sin PurgeCSS, **~110 KB** con PurgeCSS.
+7. ✅ **`_template` neutral (Sección 3)**: botones y forms tienen identidad visual mínima sin marca SYX. Base ideal para nuevos proyectos.
+8. ✅ **Deprecation warnings** de Sass corregidos en `_directional.scss`, `_font.scss`, `_triangle.scss`, `_theme-config.scss`.
 
-### 🔵 Pendiente (v2.0)
+### 🔵 Pendiente (v2.1+)
 
-1. Eliminar `_token-aliases.scss` cuando no haya referencias activas (milestone v2.0)
+1. Eliminar `_token-aliases.scss` cuando no haya referencias activas (milestone v2.1)
 2. Añadir tokens de switch faltantes (`--component-switch-slider-*`, `--component-switch-status-*`)
-3. Expansión de organisms
-4. Site de documentación pública
+3. Consolidar helpers legacy con utilities
+4. Expansión de organisms
+5. Site de documentación pública
 
 ---
 

@@ -10,9 +10,19 @@
 // @example _syx-compact(10px 20px 10px 20px) → 10px 20px
 @function _syx-compact($values) {
   $a: list.nth($values, 1);
-  $b: if(list.length($values) < 2, $a, list.nth($values, 2));
-  $c: if(list.length($values) < 3, $a, list.nth($values, 3));
-  $d: if(list.length($values) < 2, $a, list.nth($values, if(list.length($values) < 4, 2, 4)));
+
+  $b: $a;
+  @if list.length($values) >= 2 { $b: list.nth($values, 2); }
+
+  $c: $a;
+  @if list.length($values) >= 3 { $c: list.nth($values, 3); }
+
+  $d: $a;
+  @if list.length($values) >= 4 {
+    $d: list.nth($values, 4);
+  } @else if list.length($values) >= 2 {
+    $d: list.nth($values, 2);
+  }
 
   @if $a == $b and $a == $c and $a == $d { @return $a; }
   @else if $a == $c and $b == $d         { @return $a $b; }
@@ -33,11 +43,14 @@
 // @param {string} $suffix    — e.g. null, 'width'
 // @param {list}   $values    — shorthand list, nulls skip that side
 @mixin syx-directional($property, $suffix, $values) {
-  $top:    $property + '-top'    + if($suffix, '-#{$suffix}', '');
-  $bottom: $property + '-bottom' + if($suffix, '-#{$suffix}', '');
-  $left:   $property + '-left'   + if($suffix, '-#{$suffix}', '');
-  $right:  $property + '-right'  + if($suffix, '-#{$suffix}', '');
-  $all:    $property             + if($suffix, '-#{$suffix}', '');
+  $suffix-str: '';
+  @if $suffix { $suffix-str: '-#{$suffix}'; }
+
+  $top:    $property + '-top'    + $suffix-str;
+  $bottom: $property + '-bottom' + $suffix-str;
+  $left:   $property + '-left'   + $suffix-str;
+  $right:  $property + '-right'  + $suffix-str;
+  $all:    $property             + $suffix-str;
 
   $values: _syx-compact($values);
 

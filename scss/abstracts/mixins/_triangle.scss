@@ -16,7 +16,8 @@
   $triangle--height: list.nth($triangle--size, list.length($triangle--size));
 
   $triangle--width: list.nth($triangle--size, 1);
-  $triangle--height: if(list.length($triangle--size) > 1, $triangle--height, $triangle--height/2);
+  $triangle--height: $triangle--height;
+  @if list.length($triangle--size) <= 1 { $triangle--height: $triangle--height / 2; }
 
   @if $triangle--direction == up {
       border-bottom: $triangle--height solid $triangle--color;
