@@ -11,7 +11,7 @@
 @mixin theme-example-01 {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
     // Sobrescriben valores base de abstracts/tokens/primitives/
     
@@ -19,16 +19,16 @@
     --primitive-space-base: 0.25rem;
     
     // Colors - Brand
-    // Primary Indigo — the blueprint color
+    // Primary Indigo â the blueprint color
     --primitive-color-blue-500: #4F46E5;   // rebind: was blue, now indigo
-    --primitive-color-blue-400: #6366F1;   // indigo lighter — hover surfaces
-    --primitive-color-blue-50:  #EEF2FF;   // indigo tint — light backgrounds
+    --primitive-color-blue-400: #6366F1;   // indigo lighter â hover surfaces
+    --primitive-color-blue-50:  #EEF2FF;   // indigo tint â light backgrounds
 
-    // Secondary Amber — the hot point of the system
+    // Secondary Amber â the hot point of the system
     --primitive-color-cyan-500: #F59E0B;   // rebind: was cyan, now amber
     --primitive-color-cyan-200: #FDE68A;   // amber soft
 
-    // Accent Deep Indigo — darkened for strong CTA
+    // Accent Deep Indigo â darkened for strong CTA
     --primitive-color-orange-500: #3730A3; // rebind: was orange, now deep indigo
 
     // Colors - State
@@ -37,12 +37,12 @@
     --primitive-color-warning-500: #F5B800;
     --primitive-color-disabled: #CBD2D9;
     
-    // Typography — system fonts hierarchy
+    // Typography â system fonts hierarchy
     --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
     --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
-    // Inter — body text (loaded locally)
+    // Inter â body text (loaded locally)
     --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    // JetBrains Mono — code blocks
+    // JetBrains Mono â code blocks
     --primitive-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
     
     // Icons - Theme Specific
@@ -64,9 +64,9 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
-    // Variables específicas que usan primitivos
+    // Variables especÃ­ficas que usan primitivos
     
     // Base measure
     --base-measure: var(--primitive-space-base);
@@ -112,9 +112,9 @@
     --color-action-link: var(--color-primary);
     --color-state-disabled: var(--primitive-color-disabled);
     --color-state-focus: var(--color-primary);
-    // Hover states — darkened variants of the new palette
-    --color-state-hover-primary:    #3730A3; // indigo-800 — darker than primary
-    --color-state-hover-secondary:  #D97706; // amber-600 — darker than secondary
+    // Hover states â darkened variants of the new palette
+    --color-state-hover-primary:    #3730A3; // indigo-800 â darker than primary
+    --color-state-hover-secondary:  #D97706; // amber-600 â darker than secondary
     --color-state-hover-tertiary:   #22208C; // very deep indigo
     --color-state-hover-quaternary: #3730A3; // same as primary hover
     --color-state-ok: var(--primitive-color-success-500);
@@ -135,20 +135,20 @@
     --semantic-color-quaternary: var(--color-primary);
     --semantic-color-quinary: var(--color-quinary);
 
-    // Text — cool-tinted dark gray for precision feel
+    // Text â cool-tinted dark gray for precision feel
     --semantic-color-text-primary:   #111827; // gray-900 cool
     --semantic-color-text-secondary: #4B5563; // gray-600 cool
     --semantic-color-text-tertiary:  #9CA3AF; // gray-400 cool
     --semantic-color-text-inverse:   #FFFFFF;
     --semantic-color-text-disabled:  #D1D5DB;
 
-    // Backgrounds — pure white + soft blue-tinted gray
+    // Backgrounds â pure white + soft blue-tinted gray
     --semantic-color-bg-primary:   #FFFFFF;
     --semantic-color-bg-secondary: #F8FAFF; // very faint indigo tint
     --semantic-color-bg-tertiary:  #F0F4FF; // soft indigo wash
     --semantic-color-bg-inverse:   #0F0E2C; // deep indigo-black
 
-    // Borders — cool grays
+    // Borders â cool grays
     --semantic-color-border-subtle:  #E5E7EB;
     --semantic-color-border-default: #D1D5DB;
     --semantic-color-border-strong:  #9CA3AF;
@@ -171,7 +171,7 @@
     --filter-color-brown: initial;
     --filter-color-blue:  initial;
     
-    // Reset — body now uses Inter
+    // Reset â body now uses Inter
     --reset-html-font: normal normal 400 16px/24px var(--primitive-font-family-inter);
     --reset-body-color: var(--color-black);
     --reset-body-background-color: var(--color-brown-lt-1);
@@ -323,17 +323,17 @@
   // DARK MODE
   // ================================================
   // Dual activation:
-  //   1. Automatic — respects OS preference
-  //   2. Manual    — [data-theme="dark"] on <html>
+  //   1. Automatic â respects OS preference
+  //   2. Manual    â [data-theme="dark"] on <html>
   // ================================================
   @media (prefers-color-scheme: dark) {
     :root { @include dark-mode-tokens(); }
   }
 
-  // Manual override — wins over @media
+  // Manual override â wins over @media
   :root[data-theme="dark"] { @include dark-mode-tokens(); }
 
-  // Light mode forced — wins over @media when user explicitly chose light
+  // Light mode forced â wins over @media when user explicitly chose light
   :root[data-theme="light"] {
     --semantic-color-bg-primary:   var(--primitive-color-white);
     --semantic-color-bg-secondary: var(--primitive-color-pink-50);

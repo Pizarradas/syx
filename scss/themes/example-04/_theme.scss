@@ -1,8 +1,8 @@
 // ================================================
 // FOREST THEME (example-04) - COMPLETE THEME DEFINITION
 // ================================================
-// Identity: Natural · Grounded · Organic
-// Primary: Forest Green #16A34A · Accent: Earthy Brown #92400E · BG: Sage #F0F7F0
+// Identity: Natural Â· Grounded Â· Organic
+// Primary: Forest Green #16A34A Â· Accent: Earthy Brown #92400E Â· BG: Sage #F0F7F0
 // Typography: DM Mono (monospace, technical)
 // ================================================
 
@@ -11,10 +11,10 @@
 @mixin theme-example-04 {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
 
-    // Spacing — terminal-density micro grid
+    // Spacing â terminal-density micro grid
     --primitive-space-base: 0.18rem;
 
     // Colors - Brand
@@ -36,7 +36,7 @@
     --primitive-color-warning-500: #D97706;
     --primitive-color-disabled:    #D1D5DB;
 
-    // Typography — DM Mono (monospace, technical-organic)
+    // Typography â DM Mono (monospace, technical-organic)
     --primitive-font-family-dm-mono-regular: "Google-DM-Mono--regular", "Courier New", monospace;
     --primitive-font-family-dm-mono-medium:  "Google-DM-Mono--medium", "Courier New", monospace;
 
@@ -59,7 +59,7 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
 
     --base-measure: var(--primitive-space-base);
@@ -74,7 +74,7 @@
     --icon-user-interface-home:             var(--primitive-icon-ui-home);
     --icon-user-interface-tick:             var(--primitive-icon-ui-tick);
 
-    // Fonts — DM Mono
+    // Fonts â DM Mono
     --font-weight-1: var(--primitive-font-family-dm-mono-regular);
     --font-weight-2: var(--primitive-font-family-dm-mono-medium);
     --font-bold:     var(--font-weight-2);
@@ -136,14 +136,14 @@
     --semantic-color-quaternary: var(--color-quaternary);
     --semantic-color-quinary:    var(--color-quinary);
 
-    --semantic-color-text-primary:   #4ADE80;   // 12:1 on bg-primary ✅ WCAG AAA — bright green
-    --semantic-color-text-secondary: #86EFAC;   // 8.0:1 on bg-primary ✅ WCAG AAA — light green
-    --semantic-color-text-tertiary:  #6EE7A0;   // 5.2:1 on bg-tertiary ✅ WCAG AA — mid green
+    --semantic-color-text-primary:   #4ADE80;   // 12:1 on bg-primary â WCAG AAA â bright green
+    --semantic-color-text-secondary: #86EFAC;   // 8.0:1 on bg-primary â WCAG AAA â light green
+    --semantic-color-text-tertiary:  #6EE7A0;   // 5.2:1 on bg-tertiary â WCAG AA â mid green
     --semantic-color-text-inverse:   #0A0F0A;   // text on light bg
-    --semantic-color-bg-primary:     #0A0F0A;   // page bg — terminal black
-    --semantic-color-bg-secondary:   #0D140D;   // sections — slightly lighter
+    --semantic-color-bg-primary:     #0A0F0A;   // page bg â terminal black
+    --semantic-color-bg-secondary:   #0D140D;   // sections â slightly lighter
     --semantic-color-bg-tertiary:    #111A11;   // cards, inputs
-    --semantic-color-border-default: #1A2E1A;   // visible borders — dark green
+    --semantic-color-border-default: #1A2E1A;   // visible borders â dark green
     --semantic-color-border-subtle:  #142014;   // subtle dividers
     --semantic-color-border-strong:  #4ADE80;   // green accent borders
     --semantic-color-text-inverse:   #0A0F0A;   // text on light bg
@@ -152,7 +152,7 @@
     --semantic-font-family-primary-bold: var(--font-weight-2);
     --semantic-font-family-heading:      var(--font-weight-2);
 
-    // Reset — monospace terminal, black bg, green text
+    // Reset â monospace terminal, black bg, green text
     --reset-html-font:             normal normal 400 13px/1.5 var(--font-weight-1);
     --reset-body-color:            #4ADE80;
     --reset-body-background-color: #0A0F0A;
@@ -198,12 +198,12 @@
     --scope-4: calc(4 * var(--base-measure));
     --scope-5: calc(5 * var(--base-measure));
 
-    // Theme — zero radius, terminal precision
+    // Theme â zero radius, terminal precision
     --theme-focus:    0 0 0.15rem 0 var(--color-state-focus);
     --theme-w-border: calc(var(--base-measure));
     --theme-radius:   0;
 
-    // Buttons — forest filled, moss text, square
+    // Buttons â forest filled, moss text, square
     --btn-primary-font-color:           var(--primitive-color-forest-500);
     --btn-primary-filled-font-color:    var(--primitive-color-moss-950);
     --btn-secondary-font-color:         var(--primitive-color-earth-500);

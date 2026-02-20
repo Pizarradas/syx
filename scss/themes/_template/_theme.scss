@@ -11,7 +11,7 @@
 @mixin theme-template {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
     // Sobrescriben valores base de abstracts/tokens/primitives/
     
@@ -45,9 +45,9 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
-    // Variables específicas que usan primitivos
+    // Variables especÃ­ficas que usan primitivos
     
     // Base measure
     --base-measure: var(--primitive-space-base);
@@ -108,52 +108,52 @@
     --form-height-size: calc(6 * var(--base-measure));
 
     // ================================================
-    // SECCIÓN 3: NEUTRAL BRAND — Botones y formularios
+    // SECCIÃN 3: NEUTRAL BRAND â Botones y formularios
     // ================================================
     // Sobreescribe los semantic tokens del sistema base
     // para que el bundle core tenga un aspecto presentable
     // sin identidad de marca SYX (sin morado ni pink).
-    // ──────────────────────────────────────────────────
+    // ââââââââââââââââââââââââââââââââââââââââââââââââââ
     // Reemplaza estas variables con las de tu propio tema.
     // ================================================
 
-    // COLORES DE MARCA — neutros por defecto
-    // Primary: slate-700 — oscuro, legible, sin color de marca
+    // COLORES DE MARCA â neutros por defecto
+    // Primary: slate-700 â oscuro, legible, sin color de marca
     --semantic-color-primary:    hsl(215, 20%, 30%);
-    // Secondary: slate-500 — gris medio para variantes
+    // Secondary: slate-500 â gris medio para variantes
     --semantic-color-secondary:  hsl(215, 15%, 50%);
     // Tertiary / Quaternary: conservan sus valores del sistema
-    //   (azul, verde — estados de feedback)
+    //   (azul, verde â estados de feedback)
 
     // TEXTO
-    --semantic-color-text-primary:   hsl(215, 20%, 15%);   // casi negro cálido — cuerpo de texto
-    --semantic-color-text-secondary:  hsl(215, 15%, 40%);   // gris oscuro — subtítulos, labels
-    --semantic-color-text-tertiary:   hsl(215, 12%, 60%);   // gris medio — captions, placeholders
+    --semantic-color-text-primary:   hsl(215, 20%, 15%);   // casi negro cÃ¡lido â cuerpo de texto
+    --semantic-color-text-secondary:  hsl(215, 15%, 40%);   // gris oscuro â subtÃ­tulos, labels
+    --semantic-color-text-tertiary:   hsl(215, 12%, 60%);   // gris medio â captions, placeholders
 
-    // HOVER STATES — tono oscurecido del primario
+    // HOVER STATES â tono oscurecido del primario
     --semantic-color-state-hover-primary:    hsl(215, 20%, 20%);
     --semantic-color-state-hover-secondary:  hsl(215, 15%, 35%);
 
-    // BORDER FOCUS — azul sutil, accesible
+    // BORDER FOCUS â azul sutil, accesible
     --semantic-color-border-focus:  hsl(210, 70%, 50%);
 
-    // LINK COLORS — azul estándar, familiar, sin marca
+    // LINK COLORS â azul estÃ¡ndar, familiar, sin marca
     --semantic-color-link-default:  hsl(210, 70%, 42%);
     --semantic-color-link-hover:    hsl(210, 70%, 30%);
     --semantic-color-link-visited:  hsl(270, 40%, 40%);
     --semantic-color-link-active:   hsl(210, 70%, 30%);
 
-    // SOMBRA FOCUS — discreta, sin color de marca
+    // SOMBRA FOCUS â discreta, sin color de marca
     --semantic-shadow-focus: 0 0 0 3px hsl(210 70% 50% / 0.25);
 
-    // TIPOGRAFÍA — system-ui, sin Google Fonts
+    // TIPOGRAFÃA â system-ui, sin Google Fonts
     --semantic-font-family-primary:       system-ui, -apple-system, Arial, sans-serif;
     --semantic-font-family-primary-bold:  system-ui, -apple-system, Arial, sans-serif;
 
-    // BORDER RADIUS — sutil y funcional
-    --semantic-border-radius-default: 0.375rem;   // 6px — botones, inputs
-    --semantic-border-radius-sm:      0.25rem;    // 4px — checkboxes
-    --semantic-border-radius-lg:      0.625rem;   // 10px — cards
+    // BORDER RADIUS â sutil y funcional
+    --semantic-border-radius-default: 0.375rem;   // 6px â botones, inputs
+    --semantic-border-radius-sm:      0.25rem;    // 4px â checkboxes
+    --semantic-border-radius-lg:      0.625rem;   // 10px â cards
     --semantic-border-radius-circle:  9999px;     // pills, switches
 
     // PLACEHOLDER

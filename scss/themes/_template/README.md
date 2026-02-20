@@ -30,18 +30,18 @@
 4. **Customize `_theme.scss`**:
 
    The file is organized in 3 sections:
-   - **Sección 1 — Primitivos**: Raw values (colors, spacing, fonts). Override these to set your brand's palette and scale.
-   - **Sección 2 — Variables del tema**: Semantic aliases that reference primitives. Override to map your primitives to roles.
-   - **Sección 3 — Neutral Brand**: Overrides for `--semantic-color-*`, `--semantic-font-family-*`, `--semantic-border-radius-*`, and `--semantic-shadow-focus`. This section is what makes buttons and forms look presentable out of the box with the `_template` theme. Replace these with your brand's values.
+   - **SecciÃ³n 1 â Primitivos**: Raw values (colors, spacing, fonts). Override these to set your brand's palette and scale.
+   - **SecciÃ³n 2 â Variables del tema**: Semantic aliases that reference primitives. Override to map your primitives to roles.
+   - **SecciÃ³n 3 â Neutral Brand**: Overrides for `--semantic-color-*`, `--semantic-font-family-*`, `--semantic-border-radius-*`, and `--semantic-shadow-focus`. This section is what makes buttons and forms look presentable out of the box with the `_template` theme. Replace these with your brand's values.
 
    Minimum customization per section:
 
    ```scss
-   // Sección 1 — your brand colors
+   // SecciÃ³n 1 â your brand colors
    --primitive-color-primary-500: hsl(220, 90%, 50%);
    --primitive-font-family-primary: "Your-Font", Arial, sans-serif;
 
-   // Sección 3 — wire up semantic tokens to your brand
+   // SecciÃ³n 3 â wire up semantic tokens to your brand
    --semantic-color-primary: var(--primitive-color-primary-500);
    --semantic-font-family-primary: "Your-Font", Arial, sans-serif;
    --semantic-border-radius-default: 0.5rem;
@@ -84,8 +84,8 @@
 The `_template` theme is already configured as a **neutral, brand-agnostic baseline** in `styles-core.scss`. Use it directly for projects where you want SYX components without any brand identity:
 
 ```bash
-npm run build:core   # → css/styles-core.css  (138 KB)
-npm run purge:core   # → css/prod/styles-core.css (~110 KB, with PurgeCSS)
+npm run build:core   # â css/styles-core.css  (138 KB)
+npm run purge:core   # â css/prod/styles-core.css (~110 KB, with PurgeCSS)
 ```
 
 See `demo-bundle-weight.html` for a live reference.
@@ -95,20 +95,20 @@ See `demo-bundle-weight.html` for a live reference.
 ```
 themes/
   your-theme-name/
-    _theme.scss    ← All theme values (primitives + variables + dark-mode)
-    setup.scss     ← Theme setup, @layer declaration, and component includes
-    bundle-app.scss       ← (optional) App context bundle
-    bundle-docs.scss      ← (optional) Documentation context bundle
-    bundle-marketing.scss ← (optional) Marketing/landing context bundle
-    bundle-blog.scss      ← (optional) Blog/editorial context bundle
+    _theme.scss    â All theme values (primitives + variables + dark-mode)
+    setup.scss     â Theme setup, @layer declaration, and component includes
+    bundle-app.scss       â (optional) App context bundle
+    bundle-docs.scss      â (optional) Documentation context bundle
+    bundle-marketing.scss â (optional) Marketing/landing context bundle
+    bundle-blog.scss      â (optional) Blog/editorial context bundle
 ```
 
 ## Tips
 
-- **Sección 1 (Primitivos)**: Foundation values — colors, spacing, fonts. Override these first.
-- **Sección 2 (Variables)**: Semantic layer — maps primitives to roles (`--color-primary`, `--font-weight-1`…).
-- **Sección 3 (Neutral Brand)**: Buttons and forms baseline — override `--semantic-*` tokens here.
-- **Keep it simple**: Start with Sección 3 overrides, expand to Secciones 1 & 2 as needed.
+- **SecciÃ³n 1 (Primitivos)**: Foundation values â colors, spacing, fonts. Override these first.
+- **SecciÃ³n 2 (Variables)**: Semantic layer â maps primitives to roles (`--color-primary`, `--font-weight-1`â¦).
+- **SecciÃ³n 3 (Neutral Brand)**: Buttons and forms baseline â override `--semantic-*` tokens here.
+- **Keep it simple**: Start with SecciÃ³n 3 overrides, expand to Secciones 1 & 2 as needed.
 - **Use existing themes**: Reference `example-01` for a complete branded example.
 - **Dark mode**: Use `@include dark-mode-tokens()` from `semantic/_dark-mode.scss`.
 

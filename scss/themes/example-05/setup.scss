@@ -1,4 +1,4 @@
-﻿// CORE
+// CORE
 // ===============================================
 @use '../../abstracts/index' as *;
 @use '../../base/index' as *;
@@ -18,14 +18,14 @@
 
 // FONT SETUP
 // ===============================================
-// Bebas Neue — condensed display for headings
+// Bebas Neue â condensed display for headings
 @include font-family("Google-Bebas-Neue--regular",
   "#{$fonts-path}/google-bebas-neue/BebasNeue-Regular",
   400,
   normal,
   eot woff2 woff ttf svg);
 
-// Inter — clean sans-serif for body text
+// Inter â clean sans-serif for body text
 @include font-family("Google-Inter--regular",
   "#{$fonts-path}/google-inter/Inter-Regular",
   400,
@@ -38,7 +38,7 @@
   normal,
   eot woff2 woff ttf svg);
 
-// Space Grotesk — fallback for UI elements
+// Space Grotesk â fallback for UI elements
 @include font-family("Google-Space-Grotesk--regular",
   "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
   400,

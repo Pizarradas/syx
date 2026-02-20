@@ -11,11 +11,11 @@
 @mixin theme-codymer {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
     // Sobrescriben valores base de abstracts/tokens/primitives/
     
-    // Spacing — ultra-compact startup grid
+    // Spacing â ultra-compact startup grid
     --primitive-space-base: 0.4rem;
     
     // Colors - Brand
@@ -56,9 +56,9 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
-    // Variables específicas que usan primitivos
+    // Variables especÃ­ficas que usan primitivos
     
     // Base measure
     --base-measure: var(--primitive-space-base);
@@ -124,21 +124,21 @@
     --filter-state-disabled: var(--primitive-filter-disabled);
 
     // ================================================
-    // SURFACE TOKENS — Dark-first startup identity
+    // SURFACE TOKENS â Dark-first startup identity
     // ================================================
-    // Deep purple palette: #1A0A2E → #2D1B4E → #3D2560
-    --semantic-color-bg-primary:     #1A0A2E;   // page bg — deep purple
-    --semantic-color-bg-secondary:   #220D3B;   // sections — slightly lighter
+    // Deep purple palette: #1A0A2E â #2D1B4E â #3D2560
+    --semantic-color-bg-primary:     #1A0A2E;   // page bg â deep purple
+    --semantic-color-bg-secondary:   #220D3B;   // sections â slightly lighter
     --semantic-color-bg-tertiary:    #2D1B4E;   // cards, inputs
     --semantic-color-border-default: #4A2D7A;   // visible borders
     --semantic-color-border-subtle:  #3D2560;   // subtle dividers
     --semantic-color-border-strong:  #FF2D78;   // accent borders
-    --semantic-color-text-primary:   #FFFFFF;   // 15:1 on bg-primary ✅ WCAG AAA
-    --semantic-color-text-secondary: #D4BBFF;   // 8.5:1 on bg-primary ✅ WCAG AAA
-    --semantic-color-text-tertiary:  #B89FD8;   // 5.5:1 on bg-tertiary ✅ WCAG AA
+    --semantic-color-text-primary:   #FFFFFF;   // 15:1 on bg-primary â WCAG AAA
+    --semantic-color-text-secondary: #D4BBFF;   // 8.5:1 on bg-primary â WCAG AAA
+    --semantic-color-text-tertiary:  #B89FD8;   // 5.5:1 on bg-tertiary â WCAG AA
     --semantic-color-text-inverse:   #1A0A2E;   // text on light bg
 
-    // Reset — compact, bold, startup dark
+    // Reset â compact, bold, startup dark
     --reset-html-font:             normal normal 400 14px/1.45 var(--font-weight-1);
     --reset-body-color:            #FFFFFF;
     --reset-body-background-color: #1A0A2E;
@@ -200,12 +200,12 @@
     --scope-4: var(--font-size-4);
     --scope-5: var(--font-size-5);
     
-    // Theme — sharp, minimal, startup
+    // Theme â sharp, minimal, startup
     --theme-focus: 0 0 0.25rem 0 var(--color-state-focus);
     --theme-radius: calc(0.5 * var(--base-measure));
     --theme-w-border: calc(.25 * var(--base-measure));
 
-    // Buttons — compact, tight
+    // Buttons â compact, tight
     --btn-primary-font-color: var(--color-primary);
     --btn-primary-filled-font-color: var(--color-white);
     --btn-secondary-font-color: var(--color-secondary);
@@ -215,7 +215,7 @@
     --btn-quaternary-font-color: var(--color-quaternary);
     --btn-quaternary-filled-font-color: var(--color-white);
 
-    // Form — ultra-compact
+    // Form â ultra-compact
     --form-font-family: var(--font-weight-1);
     --form-font-size: calc(3 * var(--base-measure));
     --form-line-height: calc(4 * var(--base-measure));

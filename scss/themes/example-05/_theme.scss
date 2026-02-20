@@ -1,8 +1,8 @@
 // ================================================
 // MIDNIGHT THEME (example-05) - COMPLETE THEME DEFINITION
 // ================================================
-// Identity: Bold · Dark · Luxury
-// Primary: Midnight Blue #1E3A5F · Accent: Gold #D4AF37 · BG: Dark #0D1117
+// Identity: Bold Â· Dark Â· Luxury
+// Primary: Midnight Blue #1E3A5F Â· Accent: Gold #D4AF37 Â· BG: Dark #0D1117
 // Typography: Bebas Neue (condensed display)
 // ================================================
 
@@ -11,10 +11,10 @@
 @mixin theme-example-05 {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
 
-    // Spacing — bold, dramatic scale
+    // Spacing â bold, dramatic scale
     --primitive-space-base: 0.35rem;
 
     // Colors - Brand (dark-first palette)
@@ -46,7 +46,7 @@
     --primitive-color-warning-500: #D29922;
     --primitive-color-disabled:    #3A4048;
 
-    // Typography — Bebas Neue (condensed, bold display)
+    // Typography â Bebas Neue (condensed, bold display)
     --primitive-font-family-bebas-regular: "Google-Bebas-Neue--regular", Impact, "Arial Narrow", sans-serif;
     // Body uses Inter for readability on dark bg
     --primitive-font-family-inter-regular: "Google-Inter--regular", Arial, sans-serif;
@@ -72,7 +72,7 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
 
     --base-measure: var(--primitive-space-base);
@@ -87,7 +87,7 @@
     --icon-user-interface-home:             var(--primitive-icon-ui-home);
     --icon-user-interface-tick:             var(--primitive-icon-ui-tick);
 
-    // Fonts — Bebas Neue for headings, Inter for body
+    // Fonts â Bebas Neue for headings, Inter for body
     --font-weight-1: var(--primitive-font-family-inter-regular);
     --font-weight-2: var(--primitive-font-family-bebas-regular);
     --font-bold:     var(--font-weight-2);
@@ -149,7 +149,7 @@
     --semantic-color-quaternary: var(--color-quaternary);
     --semantic-color-quinary:    var(--color-quinary);
 
-    // Dark-first semantic tokens — toda la UI construida sobre oscuro
+    // Dark-first semantic tokens â toda la UI construida sobre oscuro
     --semantic-color-text-primary:   var(--primitive-color-gold-500);
     --semantic-color-text-secondary: var(--primitive-color-silver-100);
     --semantic-color-text-tertiary:  var(--primitive-color-dark-300);
@@ -166,7 +166,7 @@
     --semantic-font-family-primary-bold: var(--font-weight-2);
     --semantic-font-family-heading:      var(--font-weight-2);
 
-    // Reset — Bebas Neue COLOSSAL, deep night bg, gold text
+    // Reset â Bebas Neue COLOSSAL, deep night bg, gold text
     --reset-html-font:             normal normal 400 15px/1.65 var(--font-weight-1);
     --reset-body-color:            #D4AF37;
     --reset-body-background-color: #070B14;
@@ -212,12 +212,12 @@
     --scope-4: calc(4 * var(--base-measure));
     --scope-5: calc(5 * var(--base-measure));
 
-    // Theme — zero radius, noir poster sharpness
+    // Theme â zero radius, noir poster sharpness
     --theme-focus:    0 0 0.4rem 0.1rem var(--color-state-focus);
     --theme-w-border: calc(var(--base-measure));
     --theme-radius:   0;
 
-    // Buttons — gold filled, dark text, dramatic
+    // Buttons â gold filled, dark text, dramatic
     --btn-primary-font-color:           var(--primitive-color-gold-500);
     --btn-primary-filled-font-color:    var(--primitive-color-dark-900);
     --btn-secondary-font-color:         var(--primitive-color-midnight-500);
@@ -227,7 +227,7 @@
     --btn-quaternary-font-color:        var(--primitive-color-gold-600);
     --btn-quaternary-filled-font-color: var(--primitive-color-dark-900);
 
-    // Form — dramatic, dark, gold accents
+    // Form â dramatic, dark, gold accents
     --form-font-family: var(--font-weight-1);
     --form-font-size:   calc(3.5 * var(--base-measure));
     --form-line-height: calc(5 * var(--base-measure));
@@ -319,7 +319,7 @@
   }
 
   // ================================================
-  // DARK MODE — this theme IS dark by default
+  // DARK MODE â this theme IS dark by default
   // ================================================
   @media (prefers-color-scheme: dark) {
     :root { @include dark-mode-tokens(); }

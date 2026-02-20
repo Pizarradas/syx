@@ -2,7 +2,7 @@
 // ================================================
 // Complete bundle for internal design system documentation.
 // Includes ALL atoms, molecules, and organisms.
-// NOT recommended for production — use context bundles instead.
+// NOT recommended for production â use context bundles instead.
 // ================================================
 // Usage: @use '../_bundles/bundle-docs' as *;
 //        @include syx-bundle-docs($theme);
@@ -10,7 +10,7 @@
 
 @mixin syx-bundle-docs($theme: null) {
 
-  // ATOMS — all
+  // ATOMS â all
   // ================================================
   @include atom-breadcrumb($theme);
   @include atom-btn($theme);
@@ -25,26 +25,26 @@
   @include atom-pagination($theme);
   @include atom-pill($theme);
   @include atom-radio($theme);
-  @include atom-specimen($theme);   // @deprecated — stub kept for compat, use mol-demo instead
+  @include atom-specimen($theme);   // @deprecated â stub kept for compat, use mol-demo instead
   @include atom-switch($theme);
   @include atom-swatch($theme);
   @include atom-table($theme);
   @include atom-title($theme);
   @include atom-txt($theme);
 
-  // MOLECULES — all
+  // MOLECULES â all
   // ================================================
   @include mol-card($theme);
   @include mol-form-field($theme);
   @include mol-btn-group($theme);
   @include mol-label-group($theme);
   @include mol-form-field-set($theme);
-  @include mol-demo($theme);         // mol-demo-* — removable in production builds
+  @include mol-demo($theme);         // mol-demo-* â removable in production builds
 
-  // ORGANISMS — all
+  // ORGANISMS â all
   // ================================================
   @include org-navbar($theme);
   @include org-documentation-layout($theme);
   @include org-content-columns($theme);
-  @include org-header($theme);  // unified header — replaces org-header-example-02..05
+  @include org-header($theme);  // unified header â replaces org-header-example-02..05
 }

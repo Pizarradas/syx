@@ -1,8 +1,8 @@
 // ================================================
 // CORAL THEME (example-03) - COMPLETE THEME DEFINITION
 // ================================================
-// Identity: Editorial · Warm · Premium
-// Primary: Coral Red #E11D48 · Accent: Orange #F97316 · BG: Cream #FFF8F5
+// Identity: Editorial Â· Warm Â· Premium
+// Primary: Coral Red #E11D48 Â· Accent: Orange #F97316 Â· BG: Cream #FFF8F5
 // Typography: Playfair Display (serif)
 // ================================================
 
@@ -11,10 +11,10 @@
 @mixin theme-example-03 {
   :root {
     // ================================================
-    // SECCIÓN 1: PRIMITIVOS
+    // SECCIÃN 1: PRIMITIVOS
     // ================================================
 
-    // Spacing — generous base for editorial feel
+    // Spacing â generous base for editorial feel
     --primitive-space-base: 0.3rem;
 
     // Colors - Brand
@@ -35,7 +35,7 @@
     --primitive-color-warning-500: #D97706;
     --primitive-color-disabled:    #D1D5DB;
 
-    // Typography — Playfair Display (serif, editorial)
+    // Typography â Playfair Display (serif, editorial)
     --primitive-font-family-playfair-regular: "Google-Playfair-Display--regular", Georgia, serif;
     --primitive-font-family-playfair-bold:    "Google-Playfair-Display--bold", Georgia, serif;
 
@@ -58,7 +58,7 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIÓN 2: VARIABLES DEL TEMA
+    // SECCIÃN 2: VARIABLES DEL TEMA
     // ================================================
 
     --base-measure: var(--primitive-space-base);
@@ -135,12 +135,12 @@
     --semantic-color-quaternary: var(--color-quaternary);
     --semantic-color-quinary:   var(--color-quinary);
 
-    --semantic-color-text-primary:   #FFD3B6;   // 10:1 on bg-primary ✅ WCAG AAA
-    --semantic-color-text-secondary: #FFB89A;   // 7.2:1 on bg-primary ✅ WCAG AAA
-    --semantic-color-text-tertiary:  #D4907A;   // 5.8:1 on bg-tertiary ✅ WCAG AA
+    --semantic-color-text-primary:   #FFD3B6;   // 10:1 on bg-primary â WCAG AAA
+    --semantic-color-text-secondary: #FFB89A;   // 7.2:1 on bg-primary â WCAG AAA
+    --semantic-color-text-tertiary:  #D4907A;   // 5.8:1 on bg-tertiary â WCAG AA
     --semantic-color-text-inverse:   #1A0808;   // text on light bg
-    --semantic-color-bg-primary:     #1A0808;   // page bg — deep red
-    --semantic-color-bg-secondary:   #220A0A;   // sections — slightly lighter
+    --semantic-color-bg-primary:     #1A0808;   // page bg â deep red
+    --semantic-color-bg-secondary:   #220A0A;   // sections â slightly lighter
     --semantic-color-bg-tertiary:    #2E1010;   // cards, inputs
     --semantic-color-border-default: #5C2020;   // visible borders
     --semantic-color-border-subtle:  #3D1515;   // subtle dividers
@@ -150,7 +150,7 @@
     --semantic-font-family-primary-bold: var(--font-weight-2);
     --semantic-font-family-heading:      var(--font-weight-2);
 
-    // Reset — editorial serif, dark red bg, coral text
+    // Reset â editorial serif, dark red bg, coral text
     --reset-html-font:             normal normal 400 18px/1.8 var(--font-weight-1);
     --reset-body-color:            #FFD3B6;
     --reset-body-background-color: #1A0808;
@@ -196,12 +196,12 @@
     --scope-4: calc(4 * var(--base-measure));
     --scope-5: calc(5 * var(--base-measure));
 
-    // Theme — pill radius everywhere (luxury magazine)
+    // Theme â pill radius everywhere (luxury magazine)
     --theme-focus:    0 0 0.6rem 0 var(--color-state-focus);
     --theme-w-border: calc(var(--base-measure));
     --theme-radius:   9999px;
 
-    // Buttons — coral filled, cream text, pill shaped
+    // Buttons â coral filled, cream text, pill shaped
     --btn-primary-font-color:           var(--primitive-color-cream-50);
     --btn-primary-filled-font-color:    var(--primitive-color-cream-50);
     --btn-secondary-font-color:         var(--primitive-color-orange-500);
@@ -218,7 +218,7 @@
     --breadcrumb-item-icon-size:       calc(4 * var(--base-measure));
     --breadcrumb-item-icon-pic:        var(--icon-arrow-default);
 
-    // Form — large, airy, elegant
+    // Form â large, airy, elegant
     --form-font-family: var(--font-weight-1);
     --form-font-size:   calc(4.5 * var(--base-measure));
     --form-line-height: calc(5 * var(--base-measure));

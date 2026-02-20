@@ -1,4 +1,4 @@
-// SYX — THEME: [THEME-NAME] | BUNDLE: [BUNDLE-TYPE]
+// SYX â THEME: [THEME-NAME] | BUNDLE: [BUNDLE-TYPE]
 // ================================================
 // HOW TO USE:
 // 1. Copy this file to: scss/themes/[theme-name]/bundle-[type].scss
@@ -17,13 +17,13 @@
 @use '../../organisms/index' as *;
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
-@use '../_shared/bundle-docs' as *;  // ← swap for bundle-app / bundle-marketing / bundle-blog
+@use '../_shared/bundle-docs' as *;  // â swap for bundle-app / bundle-marketing / bundle-blog
 @use 'theme' as *;
 
 // THEME TOKENS
 // ================================================
 @include universal-values();
-// @include theme-THEME_NAME();  // ← uncomment and replace THEME_NAME
+// @include theme-THEME_NAME();  // â uncomment and replace THEME_NAME
 
 // FONTS
 // ================================================
@@ -31,8 +31,8 @@
 
 // CORE (reset + helpers + grid)
 // ================================================
-// @include syx-core(THEME_NAME);  // ← uncomment and replace THEME_NAME
+// @include syx-core(THEME_NAME);  // â uncomment and replace THEME_NAME
 
 // BUNDLE
 // ================================================
-// @include syx-bundle-docs(THEME_NAME);  // ← uncomment and replace THEME_NAME + bundle type
+// @include syx-bundle-docs(THEME_NAME);  // â uncomment and replace THEME_NAME + bundle type

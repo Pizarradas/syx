@@ -10,7 +10,7 @@
 @use 'theme' as *;
 // ===============================================
 
-// LAYER ORDER — establishes cascade specificity for the entire system.
+// LAYER ORDER â establishes cascade specificity for the entire system.
 // Layers declared later win over layers declared earlier.
 // utilities always win over components, components over base, etc.
 @layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.utilities;
@@ -129,7 +129,7 @@
 @include mol-btn-group(example-01);
 @include mol-label-group(example-01);
 @include mol-form-field-set(example-01);
-@include mol-demo(example-01);   // mol-demo-* — removable in production builds
+@include mol-demo(example-01);   // mol-demo-* â removable in production builds
 // ===============================================
 
 // SYX ORGANISMS

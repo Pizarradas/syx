@@ -1,9 +1,9 @@
-﻿// PAGE: LANDING
+// PAGE: LANDING
 // ===============================================
 @use "../abstracts/index" as *;
 
 // -----------------------------------------------
-// LANDING PAGE MAIN — Reset docs-layout constraints
+// LANDING PAGE MAIN â Reset docs-layout constraints
 // _docs-layout sets #main-content { max-width: 860px }
 // Selector ID+class specificity (1-1-0) beats ID alone (1-0-0)
 // -----------------------------------------------
@@ -34,7 +34,7 @@
 }
 
 // -----------------------------------------------
-// HERO — Mobile-first
+// HERO â Mobile-first
 // Mobile:  copy stacked, code hidden
 // Tablet+: copy left + code right (split)
 // -----------------------------------------------
@@ -43,7 +43,7 @@
   @include relative();
   overflow: hidden;
 
-  // Blueprint grid — subtle geometric texture
+  // Blueprint grid â subtle geometric texture
   &::before {
     content: "";
     @include absolute($top: 0, $left: 0);
@@ -57,7 +57,7 @@
     pointer-events: none;
   }
 
-  // Amber glow — top-right accent, visible desktop+
+  // Amber glow â top-right accent, visible desktop+
   &::after {
     content: "";
     @include absolute($top: -20%, $right: -10%);
@@ -179,7 +179,7 @@
     }
   }
 
-  // Code panel — HIDDEN on mobile, shown tablet+
+  // Code panel â HIDDEN on mobile, shown tablet+
   &__code-wrap {
     display: none;
 
@@ -365,8 +365,8 @@
   background: var(--semantic-color-bg-primary);
   padding: var(--semantic-space-layout-xl) 0;
 
-  // Flow grid: 1-col mobile → 3-col tablet+
-  // No arrow elements in DOM — connector done via CSS on step::after
+  // Flow grid: 1-col mobile â 3-col tablet+
+  // No arrow elements in DOM â connector done via CSS on step::after
   &__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -591,7 +591,7 @@
 }
 
 // -----------------------------------------------
-// CTA SECTION — Dark, dot-grid
+// CTA SECTION â Dark, dot-grid
 // -----------------------------------------------
 .org-landing-cta {
   background: #0a0914;

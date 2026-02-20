@@ -1,4 +1,4 @@
-﻿// PAGE: DOCS LAYOUT (shared across all documentation pages)
+// PAGE: DOCS LAYOUT (shared across all documentation pages)
 // ===============================================
 @use "../abstracts/index" as *;
 
@@ -39,7 +39,7 @@
 }
 
 // -----------------------------------------------
-// DOCS LAYOUT (sidebar + content) — MOBILE FIRST
+// DOCS LAYOUT (sidebar + content)  MOBILE FIRST
 // -----------------------------------------------
 .tpl-docs {
   display: grid;
@@ -59,10 +59,10 @@
 }
 
 // -----------------------------------------------
-// SIDEBAR — MOBILE FIRST (collapsible → sticky)
+// SIDEBAR  MOBILE FIRST (collapsible ? sticky)
 // -----------------------------------------------
 .org-docs-sidebar {
-  // Mobile: overlay — slides down above content
+  // Mobile: overlay  slides down above content
   position: absolute;
   top: 0; left: 0; right: 0;
   z-index: 50;
@@ -110,7 +110,7 @@
     }
   }
 
-  // Logo — back to home (tablet+ only)
+  // Logo  back to home (tablet+ only)
   &__logo {
     display: none;
 
@@ -149,7 +149,7 @@
     margin-bottom: var(--semantic-space-component-md);
   }
 
-  // Search input (visual — non-functional placeholder)
+  // Search input (visual  non-functional placeholder)
   &__search {
     position: relative;
     margin-bottom: var(--semantic-space-component-md);
@@ -194,7 +194,7 @@
 }
 
 // -----------------------------------------------
-// SIDENAV (inside sidebar) — MOBILE FIRST
+// SIDENAV (inside sidebar)  MOBILE FIRST
 // -----------------------------------------------
 .mol-docs-sidenav {
 
@@ -258,7 +258,7 @@
 }
 
 // -----------------------------------------------
-// DOCS CONTENT AREA — MOBILE FIRST
+// DOCS CONTENT AREA  MOBILE FIRST
 // Scoped to .tpl-docs to avoid leaking to landing.
 // -----------------------------------------------
 .tpl-docs #main-content {
@@ -269,7 +269,7 @@
     padding: var(--layout-pad-5) var(--layout-pad-4);
   }
 
-  // Section cards — generous space + visual separator
+  // Section cards  generous space + visual separator
   .mol-card {
     margin-bottom: var(--layout-gap-6);
     scroll-margin-top: 80px; // accounts for sticky navbar
@@ -281,7 +281,7 @@
     }
   }
 
-  // Section h2 — anchor icon on hover
+  // Section h2  anchor icon on hover
   h2 {
     @include relative();
     
@@ -337,7 +337,7 @@
 }
 
 // -----------------------------------------------
-// DOCS PAGE HEADER — redesigned
+// DOCS PAGE HEADER  redesigned
 // -----------------------------------------------
 .org-docs-page-header {
   @include relative();
@@ -367,7 +367,7 @@
     z-index: 0;
   }
 
-  // Second orb — bottom-left
+  // Second orb  bottom-left
   &::after {
     content: '';
     @include absolute($bottom: -30%, $left: 5%);
@@ -432,7 +432,7 @@
 }
 
 // -----------------------------------------------
-// DOCS SECTION HEADER (legacy — kept for compat)
+// DOCS SECTION HEADER (legacy  kept for compat)
 // -----------------------------------------------
 .mol-docs-section-header {
   padding-bottom: var(--layout-pad-4);
@@ -514,32 +514,32 @@
 // at ALL breakpoints, giving docs pages a more
 // editorial, readable rhythm on any screen size.
 //
-// Global chain: syx-title--h2 → --component-title-h2
-//               → --semantic-font-size-h2 → primitive-3xl (~49px)
-// Docs override → primitive-2xl (~39px) — 1 step ↓
+// Global chain: atom-title--h2 ? --component-title-h2
+//               ? --semantic-font-size-h2 ? primitive-3xl (~49px)
+// Docs override ? primitive-2xl (~39px)  1 step ?
 // -----------------------------------------------
 .tpl-docs {
 
-  // ── Page H1 (section title in page-header):
-  //    4xl (~61px) → 3xl (~49px)
+  // -- Page H1 (section title in page-header):
+  //    4xl (~61px) ? 3xl (~49px)
   --component-title-h1: var(--primitive-font-size-3xl);
 
-  // ── Section H2 (main section title):
-  //    3xl (~49px) → 2xl (~39px)
+  // -- Section H2 (main section title):
+  //    3xl (~49px) ? 2xl (~39px)
   --component-title-h2: var(--primitive-font-size-2xl);
 
-  // ── Sub-section H3:
-  //    2xl (~39px) → xl (~31px)
+  // -- Sub-section H3:
+  //    2xl (~39px) ? xl (~31px)
   --component-title-h3: var(--primitive-font-size-xl);
 
-  // ── Sub-sub-section H4 (most used in docs):
-  //    xl (~31px) → lg (~25px)
+  // -- Sub-sub-section H4 (most used in docs):
+  //    xl (~31px) ? lg (~25px)
   --component-title-h4: var(--primitive-font-size-lg);
 
-  // ── H5:
-  //    lg (~25px) → md (~20px)
+  // -- H5:
+  //    lg (~25px) ? md (~20px)
   --component-title-h5: var(--primitive-font-size-md);
 
-  // ── H6 keeps its base size
+  // -- H6 keeps its base size
   --component-title-h6: var(--primitive-font-size-sm);
 }

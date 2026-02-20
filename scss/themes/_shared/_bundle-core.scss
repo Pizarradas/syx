@@ -1,36 +1,36 @@
 // SYX BUNDLE: CORE
 // ================================================
-// The leanest functional bundle — production-ready minimum.
+// The leanest functional bundle â production-ready minimum.
 // Excludes ALL showroom/documentation-specific components.
 //
 // What's IN:
-//   ✅ Full token system (CSS custom properties via theme setup)
-//   ✅ Reset + base element styles
-//   ✅ Fluid typography + spacing scale
-//   ✅ Essential atoms: btn, form, check, radio, switch,
+//   â Full token system (CSS custom properties via theme setup)
+//   â Reset + base element styles
+//   â Fluid typography + spacing scale
+//   â Essential atoms: btn, form, check, radio, switch,
 //      link, breadcrumb, icon, label, pill, list, table,
 //      title, txt, pagination
-//   ✅ Essential molecules: card, form-field, btn-group,
+//   â Essential molecules: card, form-field, btn-group,
 //      label-group, form-field-set
-//   ✅ Core organism: navbar + header
-//   ✅ Display/flex/spacing utilities
-//   ✅ Dark mode
+//   â Core organism: navbar + header
+//   â Display/flex/spacing utilities
+//   â Dark mode
 //
 // What's OUT (documentation/showroom only):
-//   ❌ atom-specimen  — color/type specimen blocks
-//   ❌ atom-swatch    — color palette swatches
-//   ❌ atom-code      — code syntax block (doc component)
-//   ❌ mol-demo       — showroom demo wrappers
-//   ❌ org-documentation-layout — docs 2-col layout
-//   ❌ org-content-columns — docs-only layout
-//   ❌ pages/docs, pages/docs-layout, pages/landing
+//   â atom-specimen  â color/type specimen blocks
+//   â atom-swatch    â color palette swatches
+//   â atom-code      â code syntax block (doc component)
+//   â mol-demo       â showroom demo wrappers
+//   â org-documentation-layout â docs 2-col layout
+//   â org-content-columns â docs-only layout
+//   â pages/docs, pages/docs-layout, pages/landing
 //
 // Bundle size goal: < 120KB uncompressed, < 50KB gzip.
 // ================================================
 
 @mixin syx-bundle-core($theme: null) {
 
-  // ATOMS — production essentials only
+  // ATOMS â production essentials only
   // ================================================
   @include atom-breadcrumb($theme);
   @include atom-btn($theme);
@@ -49,7 +49,7 @@
   @include atom-txt($theme);
   // NOT included: atom-specimen, atom-swatch, atom-code
 
-  // MOLECULES — all are production-relevant
+  // MOLECULES â all are production-relevant
   // ================================================
   @include mol-card($theme);
   @include mol-form-field($theme);
@@ -58,7 +58,7 @@
   @include mol-form-field-set($theme);
   // NOT included: mol-demo
 
-  // ORGANISMS — navigation only
+  // ORGANISMS â navigation only
   // ================================================
   @include org-navbar($theme);
   @include org-header($theme);
