@@ -1,0 +1,45 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: title
+// ===============================================
+@mixin atom-title($theme: null) {
+  .syx-title {
+    font-family: var(--component-title-font-family);
+    line-height: var(--component-title-line-height);
+    color: var(--component-title-color);
+    margin-bottom: var(--component-title-margin-bottom);
+
+    // &--h1
+    &--h1 {
+      font-size: var(--component-title-h1);
+    }
+
+    // &--h2
+    &--h2 {
+      font-size: var(--component-title-h2);
+    }
+
+    // &--h3
+    &--h3 {
+      font-size: var(--component-title-h3);
+    }
+
+    // &--h4
+    &--h4 {
+      font-size: var(--component-title-h4);
+    }
+
+    // &--h5
+    &--h5 {
+      font-size: var(--component-title-h5);
+    }
+
+    // &--h6
+    &--h6 {
+      font-size: var(--component-title-h6);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+// DEPRECATED — atom: specimen
+// ===============================================
+// All styles have been migrated to:
+//   scss/molecules/_demo.scss  (mol-demo-* classes)
+//
+// This stub is kept so any @include atom-specimen()
+// calls in setup.scss files continue to compile
+// without errors. Will be removed in a future version.
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-specimen($theme: null) {
+  // intentionally empty — see molecules/_demo.scss
+}

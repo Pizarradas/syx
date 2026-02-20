@@ -1,0 +1,120 @@
+// SYX MIXINS — MEDIA QUERIES
+// ================================================
+// Responsive breakpoint helpers.
+// Named breakpoints use a mobile-first (min-width) approach.
+//
+// Breakpoint scale (em-based for zoom-safety):
+//   mobile-only  → max-width: 37.5em  (600px)
+//   phablet      → min-width: 37.5em  (600px)
+//   tablet       → min-width: 50em    (800px)
+//   laptop       → min-width: 64em    (1024px)
+//   desktop      → min-width: 70em    (1120px)
+//   wide         → min-width: 90em    (1440px)
+// ================================================
+@use 'sass:map';
+@use 'sass:meta';
+
+
+// BREAKPOINT MAP — single source of truth
+$syx-breakpoints: (
+  'mobile-only': (max-width: 37.5em),
+  'phablet':     (min-width: 37.5em),
+  'tablet':      (min-width: 50em),
+  'laptop':      (min-width: 64em),
+  'desktop':     (min-width: 70em),
+  'wide':        (min-width: 90em),
+) !default;
+
+// MIXIN: breakpoint($name)
+// Named breakpoint shorthand.
+// @example
+//   @include breakpoint(tablet) { ... }
+@mixin breakpoint($name) {
+  @if map.has-key($syx-breakpoints, $name) {
+    $bp: map.get($syx-breakpoints, $name);
+    @each $feature, $value in $bp {
+      @media (#{$feature}: #{$value}) {
+        @content;
+      }
+    }
+  } @else {
+    @warn 'SYX: Unknown breakpoint `#{$name}`. Available: #{map.keys($syx-breakpoints)}';
+  }
+}
+
+// MIXIN: mq($args...)
+// Generic keyword-argument media query builder.
+// @example
+//   @include mq($min-width: 60em, $max-width: 80em) { ... }
+@mixin mq($args...) {
+  $media-type: 'only screen';
+  $media-type-key: 'media-type';
+  $args: meta.keywords($args);
+  $expr: '';
+
+  @if map.has-key($args, $media-type-key) {
+    $media-type: map.get($args, $media-type-key);
+    $args: map.remove($args, $media-type-key);
+  }
+
+  @each $key, $value in $args {
+    @if $value {
+      $expr: '#{$expr} and (#{$key}: #{$value})';
+    }
+  }
+
+  @media #{$media-type} #{$expr} {
+    @content;
+  }
+}
+
+// MIXIN: min-screen($min) / max-screen($max) / screen($min, $max)
+// Range helpers.
+@mixin min-screen($min) {
+  @media (min-width: $min) { @content; }
+}
+
+@mixin max-screen($max) {
+  @media (max-width: $max) { @content; }
+}
+
+@mixin screen($min, $max) {
+  @media (min-width: $min) and (max-width: $max) { @content; }
+}
+
+// MIXIN: darkmode
+// Outputs content for both OS-level dark mode preference
+// and explicit data-theme="dark" attribute.
+// Respects data-theme="light" override.
+// @example
+//   .card { @include darkmode { background: #111; } }
+@mixin darkmode {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) & {
+      @content;
+    }
+  }
+
+  :root[data-theme='dark'] & {
+    @content;
+  }
+}
+
+// MIXIN: reduced-motion
+// Wraps content in a prefers-reduced-motion: reduce guard.
+// @example
+//   .btn { transition: opacity 0.3s; @include reduced-motion { transition: none; } }
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// MIXIN: landscape / portrait
+@mixin landscape {
+  @media (orientation: landscape) { @content; }
+}
+
+@mixin portrait {
+  @media (orientation: portrait) { @content; }
+}

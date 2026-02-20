@@ -1,0 +1,33 @@
+// ================================================
+// SCSS VARIABLE ALIASES (DEPRECATED)
+// ================================================
+// This file provides SCSS variable aliases for backward compatibility.
+// These map legacy SCSS variables to the new token system.
+//
+// DEPRECATED: These will be removed in a future version.
+// Please migrate to using token variables directly.
+// ================================================
+
+// Import tokens to create aliases
+@use 'tokens' as *;
+
+// ================================================
+// BREAKPOINTS (SCSS VARIABLES - DEPRECATED)
+// ================================================
+// Use: $token-breakpoint-* from tokens/primitives/breakpoints
+
+$breakpoint-xs: $token-breakpoint-xs;
+$breakpoint-sm: $token-breakpoint-sm;
+$breakpoint-md: $token-breakpoint-md;
+$breakpoint-lg: $token-breakpoint-lg;
+$breakpoint-xl: $token-breakpoint-xl;
+$breakpoint-xxl: $token-breakpoint-xxl;
+
+// Legacy device name aliases
+$breakpoint-phablet: $token-breakpoint-sm;
+$breakpoint-tablet: $token-breakpoint-md;
+$breakpoint-laptop: $token-breakpoint-lg;
+$breakpoint-desktop: $token-breakpoint-xl;
+
+// Breakpoint map
+$breakpoints: $token-breakpoints;

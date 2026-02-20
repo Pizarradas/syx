@@ -1,0 +1,128 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: list
+// ===============================================
+@mixin atom-list($theme: null) {
+  .syx-list {
+    // &--primary
+    &--primary {
+      @include padding(null null null 0);
+
+      // [class*="__item"]
+      [class*="__item"] {
+        @include position(relative);
+        @include padding(null null null var(--list-lvl1-gap));
+
+        // &:before
+        &:before {
+          content: "";
+          @include position(absolute, null, null, null, 0);
+          @include size(var(--list-icon-size));
+          filter: var(--semantic-filter-primary);
+        }
+
+        // &:not()
+        &:not(:first-child) { 
+          @include margin(var(--list-item-m-t) null null null);
+        }
+        &:not([class*="__lvl2"]) {
+          // &:before
+          &:before {
+            @include background-setup(
+              // img path
+              var(--list-lvl1-icon-pic),
+              // position and size
+              "0 0 / contain",
+              // repeat
+              no-repeat,
+              // attachment
+              null,
+              // origin
+              null,
+              // clip
+              null,
+              // color
+              transparent
+            );
+          }
+        }
+      }
+
+      // [class*="__lvl2"]
+      [class*="__lvl2"] {
+        @include margin(var(--list-lvl2-m-l) null null null);
+        @include padding(null null null var(--list-lvl2-gap));
+
+        // [class*="__item"]
+        [class*="__item"] {
+          // &:before
+          &:before {
+            @include background-setup(
+              // img path
+              var(--list-lvl2-icon-pic),
+              // position and size
+              "0 0 / contain",
+              // repeat
+              no-repeat,
+              // attachment
+              null,
+              // origin
+              null,
+              // clip
+              null,
+              // color
+              transparent
+            );
+          }
+        }
+      }
+
+      // [class*="__lvl3"]
+      [class*="__lvl3"] {
+        @include margin(var(--list-lvl3-m-l) null null null);
+        @include padding(null null null var(--list-lvl3-gap));
+      }
+    }
+
+    // &--ordered
+    &--ordered {
+      @include margin(
+        var(--list-ordered-m-t) null var(--list-ordered-m-b) null
+      );
+      @include padding(null null null 0);
+      list-style: none;
+      counter-reset: list-number;
+
+      // [class*="__item"]
+      [class*="__item"] {
+        @include position(relative);
+        @include padding(null null null var(--list-ordered-gap));
+
+        // &:not()
+        &:not(:first-child) {
+          @include margin(var(--list-ordered-item-m-t) null null null);
+        }
+      }
+
+      // [class*=__item]
+      > [class*=__item] {
+        // ::before
+        &:before {
+          content: counter(list-number);
+          @include position(absolute, -0.25rem, null, null, 0);
+          @include size(var(--list-ordered-counter-size));
+          @include border-radius(50%);
+          counter-increment: list-number;
+          font-size: var(--list-ordered-counter-font-size);
+          line-height: var(--list-ordered-counter-line-height);
+          color: var(--primitive-color-white);
+          text-align: center;
+          background-color: var(--semantic-color-primary);
+        }
+      }
+    }
+  }
+}

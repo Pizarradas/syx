@@ -1,0 +1,136 @@
+// COMPONENT TOKENS: FORMS
+// ================================================
+// Form-specific tokens that reference semantic tokens
+// ================================================
+
+:root {
+  // FORM FIELD: COLORS
+  // ================================================
+  --component-form-field-color: var(--semantic-color-text-primary);
+  --component-form-field-bg: var(--semantic-color-bg-primary);
+  --component-form-field-border: var(--semantic-color-border-default);
+  --component-form-field-border-focus: var(--semantic-color-border-focus);
+  --component-form-field-placeholder: var(--semantic-color-placeholder);
+
+  // FORM FIELD: SPACING
+  // ================================================
+  --component-form-field-padding-x: var(--semantic-space-component-sm);
+  --component-form-field-padding-y: var(--semantic-space-component-sm);
+  --component-form-field-height: calc(6 * var(--primitive-space-base));
+  --component-form-field-gap: var(--semantic-space-component-sm);
+  --component-form-field-margin-bottom: var(--semantic-space-stack-md);
+
+  // FORM FIELD: ICONS
+  // ================================================
+  --component-form-field-icon-size: var(--primitive-size-3); // 24px
+  --component-form-field-icon-position-right: var(--semantic-space-inline-md);
+  
+  // FORM FIELD: MESSAGES
+  // ================================================
+  --component-form-field-msg-margin-top: var(--semantic-space-stack-xs);
+  --component-form-field-msg-font-size: var(--semantic-font-size-caption);
+  --component-form-field-msg-line-height: var(--semantic-line-height-caption);
+  
+  // FORM FIELD: LABEL
+  // ================================================
+  --component-form-field-label-margin-bottom: var(--semantic-space-stack-xs);
+
+  // FORM FIELD: TYPOGRAPHY
+  // ================================================
+  --component-form-field-font-family: var(--semantic-font-family-primary-bold);
+  --component-form-field-font-size: var(--semantic-font-size-body);          // ~16px
+  --component-form-field-font-size-sm: var(--semantic-font-size-body-small);  // ~14px — helper text, hints
+  --component-form-field-line-height: var(--semantic-line-height-normal);
+
+  // FORM FIELD: BORDER
+  // ================================================
+  --component-form-field-border-width: var(--semantic-border-width-default);
+  --component-form-field-border-radius: var(--semantic-border-radius-default);
+
+  // FORM FIELD: STATES
+  // ================================================
+  --component-form-field-shadow-focus: var(--semantic-shadow-focus);
+  --component-form-field-color-disabled: var(--semantic-color-state-disabled);
+  --component-form-field-bg-disabled: var(--semantic-color-bg-tertiary);
+
+  // FORM FIELD: SUCCESS STATE
+  // ================================================
+  --component-form-field-success-color: var(--semantic-color-state-success);
+  --component-form-field-success-border: var(--semantic-color-state-success);
+
+  // FORM FIELD: ERROR STATE
+  // ================================================
+  --component-form-field-error-color: var(--semantic-color-state-error);
+  --component-form-field-error-border: var(--semantic-color-state-error);
+
+  // FORM FIELD: WARNING STATE
+  // ================================================
+  --component-form-field-warning-color: var(--semantic-color-state-warning);
+  --component-form-field-warning-border: var(--semantic-color-state-warning);
+
+  // FORM GROUP: SPACING
+  // ================================================
+  --component-form-group-gap: var(--semantic-space-component-sm);
+  --component-form-group-margin-bottom: var(--semantic-space-component-sm);
+
+  // CHECKBOX: SIZING & SPACING
+  // ================================================
+  --component-check-size: var(--primitive-size-3); // 24px
+  --component-check-gap: var(--semantic-space-inline-sm);
+  --component-check-line-height: var(--semantic-line-height-normal);
+  --component-check-icon-size: var(--primitive-size-2); // 24px (inner check icon)
+
+  
+  // CHECKBOX: VISUALS
+  // ================================================
+  --component-check-border-width: var(--semantic-border-width-default);
+  --component-check-border-radius: var(--semantic-border-radius-sm);
+  --component-check-border-color: var(--semantic-color-border-default);
+  --component-check-border-color-hover: var(--semantic-color-primary);
+  --component-check-color-checked: var(--semantic-color-primary);
+  --component-check-bg-checked: var(--semantic-color-primary);
+  --component-check-shadow-focus: var(--semantic-shadow-focus);
+  
+  // CHECKBOX: ICONS
+  // ================================================
+  // Assuming these are defined globally or need to be passed in
+  --component-check-icon-image: var(--icon-check); 
+
+  // RADIO: SIZING & SPACING
+  // ================================================
+  --component-radio-size: var(--primitive-size-3); // 24px
+  --component-radio-gap: var(--semantic-space-inline-sm);
+  --component-radio-line-height: var(--semantic-line-height-normal);
+  --component-radio-checked-size: var(--primitive-size-1); // 8px (inner dot) or 12px depending on design
+
+  // RADIO: VISUALS
+  // ================================================
+  --component-radio-border-width: var(--semantic-border-width-default);
+  --component-radio-border-color: var(--semantic-color-border-default);
+  --component-radio-border-color-hover: var(--semantic-color-primary);
+  --component-radio-color-checked: var(--semantic-color-primary);
+  --component-radio-bg-checked: var(--semantic-color-primary);
+  
+  // SWITCH: SIZING
+  // ================================================
+  --component-switch-width: calc(6 * var(--primitive-space-base)); // 48px
+  --component-switch-height: calc(3.5 * var(--primitive-space-base)); // 28px
+  --component-switch-slider-size: calc(2.5 * var(--primitive-space-base)); // 20px
+  --component-switch-slider-bg: var(--semantic-color-bg-primary);
+  --component-switch-slider-radius: var(--semantic-border-radius-circle);
+
+  // SWITCH: COLORS
+  // ================================================
+  --component-switch-bg-off: var(--semantic-color-bg-tertiary);
+  --component-switch-bg-on: var(--semantic-color-state-success);
+  --component-switch-border-color: var(--semantic-color-border-default);
+  --component-switch-status-disabled-opacity: 0.5;
+  
+  // SWITCH: STATUS INDICATORS
+  // ================================================
+  --component-switch-status-color-on: var(--semantic-color-state-success);
+  --component-switch-status-color-off: var(--semantic-color-state-error);
+  --component-switch-icon-on: var(--icon-check); // Ensure these exist or use semantic icons
+  --component-switch-icon-off: var(--icon-close);
+  --component-switch-status-icon-filter: brightness(0) invert(1); // For white icons
+}

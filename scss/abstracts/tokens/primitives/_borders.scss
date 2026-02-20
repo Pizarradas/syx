@@ -1,0 +1,25 @@
+// PRIMITIVE TOKENS: BORDERS
+// ================================================
+// Foundation border values including widths and radii
+// ================================================
+
+:root {
+  // BORDER WIDTHS
+  // ================================================
+  --primitive-border-width-0: 0;
+  --primitive-border-width-1: 1px;
+  --primitive-border-width-2: 2px;
+  --primitive-border-width-4: 4px;
+  --primitive-border-width-8: 8px;
+
+  // BORDER RADIUS
+  // ================================================
+  --primitive-border-radius-none: 0;
+  --primitive-border-radius-sm: calc(0.5 * var(--primitive-space-base)); // 4px
+  --primitive-border-radius-md: calc(1 * var(--primitive-space-base)); // 8px
+  --primitive-border-radius-lg: calc(1.5 * var(--primitive-space-base)); // 12px
+  --primitive-border-radius-xl: calc(2 * var(--primitive-space-base)); // 16px
+  --primitive-border-radius-2xl: calc(3 * var(--primitive-space-base)); // 24px
+  --primitive-border-radius-full: 9999px;
+  --primitive-border-radius-circle: 50%;
+}

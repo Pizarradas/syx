@@ -1,0 +1,140 @@
+// PRIMITIVE TOKENS: COLORS
+// ================================================
+// Foundation color values without semantic meaning
+// These are the base palette that semantic tokens reference
+// ================================================
+
+:root {
+  // SYSTEM COLORS
+  // ================================================
+  --primitive-color-black: hsl(0, 0%, 0%);
+  --primitive-color-white: hsl(0, 0%, 100%);
+
+  // GRAY SCALE
+  // ================================================
+  --primitive-color-gray-50: hsl(0, 0%, 98%);
+  --primitive-color-gray-100: hsl(0, 0%, 95%);
+  --primitive-color-gray-200: hsl(0, 0%, 90%);
+  --primitive-color-gray-300: hsl(0, 0%, 80%);
+  --primitive-color-gray-400: hsl(0, 0%, 60%);
+  --primitive-color-gray-500: hsl(0, 0%, 40%);
+  --primitive-color-gray-600: hsl(0, 0%, 30%);
+  --primitive-color-gray-700: hsl(0, 0%, 20%);
+  --primitive-color-gray-800: hsl(0, 0%, 10%);
+  --primitive-color-gray-900: hsl(0, 0%, 5%);
+
+  // BRAND COLORS - PURPLE
+  // ================================================
+  --primitive-color-purple-50: hsl(248, 62%, 96%);
+  --primitive-color-purple-100: hsl(248, 62%, 90%);
+  --primitive-color-purple-200: hsl(248, 62%, 80%);
+  --primitive-color-purple-300: hsl(248, 62%, 60%);
+  --primitive-color-purple-400: hsl(248, 62%, 40%);
+  --primitive-color-purple-500: hsl(248, 62%, 22%); // Original Base
+  --primitive-color-purple-600: hsl(248, 62%, 18%);
+  --primitive-color-purple-700: hsl(248, 62%, 14%);
+  --primitive-color-purple-800: hsl(248, 62%, 10%);
+  --primitive-color-purple-900: hsl(248, 62%, 6%);
+
+  // BRAND COLORS - PINK
+  // ================================================
+  --primitive-color-pink-50: hsl(339, 100%, 96%); // Original
+  --primitive-color-pink-100: hsl(341, 100%, 90%);
+  --primitive-color-pink-200: hsl(341, 100%, 80%);
+  --primitive-color-pink-300: hsl(341, 100%, 70%);
+  --primitive-color-pink-400: hsl(341, 100%, 64%);
+  --primitive-color-pink-500: hsl(341, 100%, 59%); // Original Base
+  --primitive-color-pink-600: hsl(341, 100%, 50%);
+  --primitive-color-pink-700: hsl(341, 100%, 40%);
+  --primitive-color-pink-800: hsl(341, 100%, 30%);
+  --primitive-color-pink-900: hsl(341, 100%, 20%);
+
+  // BRAND COLORS - BLUE
+  // ================================================
+  --primitive-color-blue-50: hsl(239, 100%, 96%);
+  --primitive-color-blue-100: hsl(239, 100%, 90%);
+  --primitive-color-blue-200: hsl(239, 100%, 80%);
+  --primitive-color-blue-300: hsl(239, 100%, 70%);
+  --primitive-color-blue-400: hsl(239, 100%, 65%);
+  --primitive-color-blue-500: hsl(239, 100%, 61%); // Original Base
+  --primitive-color-blue-600: hsl(239, 100%, 50%);
+  --primitive-color-blue-700: hsl(239, 100%, 40%);
+  --primitive-color-blue-800: hsl(239, 100%, 30%);
+  --primitive-color-blue-900: hsl(239, 100%, 20%);
+
+  // BRAND COLORS - GREEN
+  // ================================================
+  --primitive-color-green-50: hsl(142, 77%, 96%);
+  --primitive-color-green-100: hsl(142, 77%, 90%);
+  --primitive-color-green-200: hsl(142, 77%, 80%);
+  --primitive-color-green-300: hsl(142, 77%, 60%);
+  --primitive-color-green-400: hsl(142, 77%, 45%);
+  --primitive-color-green-500: hsl(142, 77%, 28%); // Original Base
+  --primitive-color-green-600: hsl(142, 77%, 22%);
+  --primitive-color-green-700: hsl(142, 77%, 16%);
+  --primitive-color-green-800: hsl(142, 77%, 10%);
+  --primitive-color-green-900: hsl(142, 77%, 6%);
+
+  // BRAND COLORS - YELLOW
+  // ================================================
+  --primitive-color-yellow-50: hsl(44.9, 89.2%, 96%);
+  --primitive-color-yellow-100: hsl(44.9, 89.2%, 90%);
+  --primitive-color-yellow-200: hsl(44.9, 89.2%, 80%);
+  --primitive-color-yellow-300: hsl(44.9, 89.2%, 70%);
+  --primitive-color-yellow-400: hsl(44.9, 89.2%, 60%);
+  --primitive-color-yellow-500: hsl(44.9, 89.2%, 52.7%); // Original Base
+  --primitive-color-yellow-600: hsl(44.9, 89.2%, 45%);
+  --primitive-color-yellow-700: hsl(44.9, 89.2%, 35%);
+  --primitive-color-yellow-800: hsl(44.9, 89.2%, 25%);
+  --primitive-color-yellow-900: hsl(44.9, 89.2%, 15%);
+
+  // BRAND COLORS - BROWN
+  // ================================================
+  --primitive-color-brown-50: hsl(16, 84%, 96%);
+  --primitive-color-brown-100: hsl(16, 84%, 85%);
+  --primitive-color-brown-200: hsl(16, 84%, 70%);
+  --primitive-color-brown-300: hsl(16, 84%, 55%);
+  --primitive-color-brown-400: hsl(16, 84%, 40%);
+  --primitive-color-brown-500: hsl(16, 84%, 25%); // Original Base
+  --primitive-color-brown-600: hsl(16, 84%, 20%);
+  --primitive-color-brown-700: hsl(16, 84%, 15%);
+  --primitive-color-brown-800: hsl(16, 84%, 10%);
+  --primitive-color-brown-900: hsl(16, 84%, 5%);
+
+  // BRAND COLORS - RED
+  // ================================================
+  --primitive-color-red-50: hsl(349, 91%, 96%);
+  --primitive-color-red-100: hsl(349, 91%, 90%);
+  --primitive-color-red-200: hsl(349, 91%, 80%);
+  --primitive-color-red-300: hsl(349, 91%, 70%);
+  --primitive-color-red-400: hsl(349, 91%, 60%);
+  --primitive-color-red-500: hsl(349, 91%, 50%); // Original Base
+  --primitive-color-red-600: hsl(349, 91%, 40%);
+  --primitive-color-red-700: hsl(349, 91%, 30%);
+  --primitive-color-red-800: hsl(349, 91%, 20%);
+  --primitive-color-red-900: hsl(349, 91%, 10%);
+
+  // STATE COLORS
+  // ================================================
+  --primitive-color-success-500: hsl(128, 100%, 27%);
+  --primitive-color-error-500: hsl(0, 57%, 37%);
+  --primitive-color-warning-500: hsl(57, 86%, 44%);
+
+  // SOCIAL MEDIA BRAND COLORS
+  // ================================================
+  // NOTE (M-08): Estos colores están definidos en hex de forma intencional.
+  // Son brand colors oficiales de terceros (Facebook, Instagram, etc.) que
+  // no deben derivarse de la paleta del sistema. Son valores fijos por contrato
+  // de marca, no tokens temáticos. No modificar.
+  --primitive-color-facebook: #3b5998;
+  --primitive-color-instagram-blue: #3f729b;
+  --primitive-color-instagram-purple: #8a3ab9;
+  --primitive-color-linkedin: #0077b5;
+  --primitive-color-paypal-blue: #009cde;
+  --primitive-color-paypal-blue-dark: #003087;
+  --primitive-color-pinterest: #e60023;
+  --primitive-color-twitter: #5ea9dd;
+  --primitive-color-whatsapp-green: #41c75d;
+  --primitive-color-whatsapp-green-dark: #40a73b;
+  --primitive-color-youtube: #cc181e;
+}

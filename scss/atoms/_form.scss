@@ -1,0 +1,69 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: form
+// ===============================================
+// API: .syx-label · .syx-input-wrapper · .syx-input
+// ===============================================
+@mixin atom-form($theme: null) {
+  // -----------------------------------------------
+  // LABEL — @canonical
+  // -----------------------------------------------
+  .syx-label {
+    display: block;
+    font-family: var(--component-form-field-font-family);
+    font-size: var(--component-form-field-font-size);
+    font-weight: var(--primitive-font-weight-medium);
+    line-height: var(--component-form-field-line-height);
+    color: var(--component-form-field-color);
+    margin-bottom: var(--component-form-field-label-margin-bottom);
+  }
+
+  // -----------------------------------------------
+  // INPUT WRAPPER — @canonical
+  // -----------------------------------------------
+  .syx-input-wrapper {
+    @include relative();
+    @include flex-center();
+  }
+
+  // -----------------------------------------------
+  // INPUT — @canonical
+  // -----------------------------------------------
+  .syx-input {
+    display: block;
+    width: 100%;
+    height: var(--component-form-field-height);
+    @include padding(var(--component-form-field-padding-y) var(--component-form-field-padding-x));
+    @include border(all, var(--component-form-field-border-width), solid, var(--component-form-field-border));
+    @include border-radius(var(--component-form-field-border-radius));
+    background-color: var(--component-form-field-bg);
+    font-family: var(--component-form-field-font-family);
+    font-size: var(--component-form-field-font-size);
+    line-height: var(--component-form-field-line-height);
+    color: var(--component-form-field-color);
+    @include transition(border-color 0.15s ease, box-shadow 0.15s ease);
+
+    &::placeholder {
+      color: var(--component-form-field-placeholder);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--semantic-color-primary);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--component-form-field-border-focus);
+      box-shadow: var(--component-form-field-shadow-focus);
+    }
+
+    &:disabled {
+      background-color: var(--component-form-field-bg-disabled);
+      border-color: var(--component-form-field-color-disabled);
+      cursor: not-allowed;
+    }
+  }
+}

@@ -1,0 +1,56 @@
+// COMPONENT TOKENS: NAVIGATION
+// ================================================
+// Navigation-specific tokens that reference semantic tokens
+// ================================================
+
+:root {
+  // BREADCRUMB
+  // ================================================
+  --component-breadcrumb-gap: calc(3 * var(--primitive-space-base));
+  --component-breadcrumb-item-padding-x: var(--semantic-space-component-xs);
+  --component-breadcrumb-icon-margin-right: calc(-2.5 * var(--primitive-space-base)); // -20px — use as margin-right (negative margin for icon overlap)
+
+  --component-breadcrumb-icon-size: var(--primitive-size-1);
+
+  // BREADCRUMB: COLORS & STATES
+  // ================================================
+  --component-breadcrumb-font-size: var(--semantic-font-size-body-small);  // ~14px
+  --component-breadcrumb-color: var(--semantic-color-primary);
+  --component-breadcrumb-color-hover: var(--semantic-color-link-hover);
+  --component-breadcrumb-color-active: var(--semantic-color-text-inverse);
+  --component-breadcrumb-bg-active: var(--semantic-color-primary);
+  --component-breadcrumb-icon-filter: var(--semantic-filter-primary);
+  
+  // PAGINATION
+  // ================================================
+  --component-pagination-gap: var(--semantic-space-inline-sm);
+  --component-pagination-item-size: calc(5 * var(--primitive-space-base)); // 40px
+  --component-pagination-icon-size: calc(3 * var(--primitive-space-base)); // 24px
+  
+  // PAGINATION: VISUALS
+  // ================================================
+  --component-pagination-font-family: var(--semantic-font-family-primary);
+  --component-pagination-font-size: var(--semantic-font-size-body-small);  // ~14px
+
+  --component-pagination-border-width: var(--semantic-border-width-default);
+  --component-pagination-border-radius: var(--semantic-border-radius-default);
+  --component-pagination-border-color: transparent;
+  --component-pagination-border-color-hover: var(--semantic-color-primary);
+  
+  // PAGINATION: COLORS & STATES
+  // ================================================
+  --component-pagination-color: var(--semantic-color-primary);
+  --component-pagination-color-hover: var(--semantic-color-primary);
+  --component-pagination-color-active: var(--semantic-color-text-inverse);
+  --component-pagination-bg-active: var(--semantic-color-primary);
+  --component-pagination-color-disabled: var(--semantic-color-state-disabled);
+  --component-pagination-bg-disabled: var(--semantic-color-state-disabled);
+  --component-pagination-shadow-focus: var(--semantic-shadow-focus);
+  
+  // PAGINATION: ICONS
+  // ================================================
+  --component-pagination-icon-prev: var(--icon-chevron-left); 
+  --component-pagination-icon-next: var(--icon-chevron-right);
+  --component-pagination-icon-first: var(--icon-chevron-double-left);
+  --component-pagination-icon-last: var(--icon-chevron-double-right);
+}
