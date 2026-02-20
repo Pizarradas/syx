@@ -1,7 +1,7 @@
 # SYX Mixin Reference
 
 > Complete reference for the SYX native mixin library.
-> All mixins are **null-safe** â passing `null` for any parameter skips that property entirely.
+> All mixins are **null-safe** — passing `null` for any parameter skips that property entirely.
 
 ---
 
@@ -26,63 +26,63 @@ Null-safe shorthand for `position` + offsets.
 
 ```scss
 @include position(absolute, $top: 0, $right: 0);
-// â position: absolute; top: 0; right: 0;
+// → position: absolute; top: 0; right: 0;
 
 @include position(fixed, $bottom: 1rem, $left: 50%);
-// â position: fixed; bottom: 1rem; left: 50%;
+// → position: fixed; bottom: 1rem; left: 50%;
 
 @include position(relative);
-// â position: relative;
+// → position: relative;
 ```
 
 ---
 
 ### `absolute($top, $right, $bottom, $left)`
 
-Shorthand for `position(absolute, â¦)`.
+Shorthand for `position(absolute, …)`.
 
 ```scss
 @include absolute($top: 0, $left: 0);
-// â position: absolute; top: 0; left: 0;
+// → position: absolute; top: 0; left: 0;
 
 @include absolute($top: 50%, $left: 5px);
-// â position: absolute; top: 50%; left: 5px;
+// → position: absolute; top: 50%; left: 5px;
 
 @include absolute();
-// â position: absolute;
+// → position: absolute;
 ```
 
 ---
 
 ### `fixed($top, $right, $bottom, $left)`
 
-Shorthand for `position(fixed, â¦)`.
+Shorthand for `position(fixed, …)`.
 
 ```scss
 @include fixed($bottom: 0, $left: 0, $right: 0);
-// â position: fixed; bottom: 0; left: 0; right: 0;
+// → position: fixed; bottom: 0; left: 0; right: 0;
 ```
 
 ---
 
 ### `relative($top, $right, $bottom, $left)`
 
-Shorthand for `position(relative, â¦)`.
+Shorthand for `position(relative, …)`.
 
 ```scss
 @include relative();
-// â position: relative;
+// → position: relative;
 ```
 
 ---
 
 ### `sticky($top, $right, $bottom, $left)`
 
-Shorthand for `position(sticky, â¦)`.
+Shorthand for `position(sticky, …)`.
 
 ```scss
 @include sticky($top: 0);
-// â position: sticky; top: 0;
+// → position: sticky; top: 0;
 ```
 
 ---
@@ -95,16 +95,16 @@ Null-skipping shorthand for `margin`. Pass a space-separated list; `null` skips 
 
 ```scss
 @include margin(1rem);
-// â margin: 1rem;
+// → margin: 1rem;
 
 @include margin(null auto);
-// â margin-left: auto; margin-right: auto;
+// → margin-left: auto; margin-right: auto;
 
 @include margin(1rem null 2rem null);
-// â margin-top: 1rem; margin-bottom: 2rem;
+// → margin-top: 1rem; margin-bottom: 2rem;
 
 @include margin(1rem 2rem 3rem 4rem);
-// â margin-top: 1rem; margin-right: 2rem; margin-bottom: 3rem; margin-left: 4rem;
+// → margin-top: 1rem; margin-right: 2rem; margin-bottom: 3rem; margin-left: 4rem;
 ```
 
 ---
@@ -115,10 +115,10 @@ Null-skipping shorthand for `padding`. Same API as `margin`.
 
 ```scss
 @include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
-// â padding-top: â¦; padding-right: â¦; padding-bottom: â¦; padding-left: â¦;
+// → padding-top: …; padding-right: …; padding-bottom: …; padding-left: …;
 
 @include padding(null var(--layout-pad-4));
-// â padding-left: â¦; padding-right: â¦;
+// → padding-left: …; padding-right: …;
 ```
 
 ---
@@ -131,13 +131,13 @@ Sets `width` and `height`. If only `$width` is given, applies to both.
 
 ```scss
 @include size(48px);
-// â width: 48px; height: 48px;
+// → width: 48px; height: 48px;
 
 @include size(100%, 48px);
-// â width: 100%; height: 48px;
+// → width: 100%; height: 48px;
 
 @include size(null, 48px);
-// â height: 48px;
+// → height: 48px;
 ```
 
 ---
@@ -150,10 +150,10 @@ Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `
 
 ```scss
 @include border(all, 1px, solid, var(--component-form-field-border));
-// â border: 1px solid â¦;
+// → border: 1px solid …;
 
 @include border(bottom, 2px, solid, var(--semantic-color-primary));
-// â border-bottom: 2px solid â¦;
+// → border-bottom: 2px solid …;
 ```
 
 ---
@@ -162,10 +162,10 @@ Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `
 
 ```scss
 @include border-radius(var(--theme-radius));
-// â border-radius: â¦;
+// → border-radius: …;
 
 @include border-radius(4px 8px);
-// â border-radius: 4px 8px;
+// → border-radius: 4px 8px;
 ```
 
 ---
@@ -178,11 +178,11 @@ Outputs `transition` with an automatic `prefers-reduced-motion: reduce` guard th
 
 ```scss
 @include transition(color 0.2s ease);
-// â transition: color 0.2s ease;
+// → transition: color 0.2s ease;
 //   @media (prefers-reduced-motion: reduce) { transition: none; }
 
 @include transition(opacity 0.3s ease, transform 0.3s ease);
-// â transition: opacity 0.3s ease, transform 0.3s ease;
+// → transition: opacity 0.3s ease, transform 0.3s ease;
 //   @media (prefers-reduced-motion: reduce) { transition: none; }
 ```
 
@@ -209,7 +209,7 @@ Named breakpoint shorthand. Mobile-first (min-width).
 @include breakpoint(tablet) {
   font-size: 1.25rem;
 }
-// â @media (min-width: 50em) { font-size: 1.25rem; }
+// → @media (min-width: 50em) { font-size: 1.25rem; }
 ```
 
 ---
@@ -219,14 +219,14 @@ Named breakpoint shorthand. Mobile-first (min-width).
 Raw value range helpers.
 
 ```scss
-@include min-screen(768px) { â¦ }
-// â @media (min-width: 768px) { â¦ }
+@include min-screen(768px) { … }
+// → @media (min-width: 768px) { … }
 
-@include max-screen(600px) { â¦ }
-// â @media (max-width: 600px) { â¦ }
+@include max-screen(600px) { … }
+// → @media (max-width: 600px) { … }
 
-@include screen(600px, 1024px) { â¦ }
-// â @media (min-width: 600px) and (max-width: 1024px) { â¦ }
+@include screen(600px, 1024px) { … }
+// → @media (min-width: 600px) and (max-width: 1024px) { … }
 ```
 
 ---
@@ -236,8 +236,8 @@ Raw value range helpers.
 Generic keyword-argument media query builder.
 
 ```scss
-@include mq($min-width: 60em, $max-width: 80em) { â¦ }
-// â @media only screen and (min-width: 60em) and (max-width: 80em) { â¦ }
+@include mq($min-width: 60em, $max-width: 80em) { … }
+// → @media only screen and (min-width: 60em) and (max-width: 80em) { … }
 ```
 
 ---
@@ -255,7 +255,7 @@ Respects `data-theme="light"` override.
     background: #111;
   }
 }
-// â @media (prefers-color-scheme: dark) {
+// → @media (prefers-color-scheme: dark) {
 //     :root:not([data-theme='light']) .card { background: #111; }
 //   }
 //   :root[data-theme='dark'] .card { background: #111; }
@@ -282,11 +282,11 @@ Wraps content in `prefers-reduced-motion: reduce`.
 ### `landscape` / `portrait`
 
 ```scss
-@include landscape { â¦ }
-// â @media (orientation: landscape) { â¦ }
+@include landscape { … }
+// → @media (orientation: landscape) { … }
 
-@include portrait { â¦ }
-// â @media (orientation: portrait) { â¦ }
+@include portrait { … }
+// → @media (orientation: portrait) { … }
 ```
 
 ---
@@ -301,7 +301,7 @@ Wraps content in `prefers-reduced-motion: reduce`.
 .icon-wrapper {
   @include flex-center();
 }
-// â display: flex; align-items: center; justify-content: center;
+// → display: flex; align-items: center; justify-content: center;
 ```
 
 ---
@@ -314,7 +314,7 @@ Wraps content in `prefers-reduced-motion: reduce`.
 .toolbar {
   @include flex-between();
 }
-// â display: flex; align-items: center; justify-content: space-between;
+// → display: flex; align-items: center; justify-content: space-between;
 ```
 
 ---
@@ -329,7 +329,7 @@ WCAG-compliant visually hidden (screen-reader accessible).
 .skip-link {
   @include sr-only();
 }
-// â position: absolute; width: 1px; height: 1px;
+// → position: absolute; width: 1px; height: 1px;
 //   padding: 0; margin: -1px; overflow: hidden;
 //   clip-path: inset(50%); white-space: nowrap; border: 0;
 ```
@@ -338,7 +338,7 @@ WCAG-compliant visually hidden (screen-reader accessible).
 
 ### `sr-only-reset()`
 
-Reverts `sr-only()` â makes the element visible again.
+Reverts `sr-only()` — makes the element visible again.
 
 ```scss
 .skip-link:focus {
@@ -356,7 +356,7 @@ Accessible focus outline.
 .btn:focus-visible {
   @include focus-ring();
 }
-// â outline: 0.2rem solid var(--semantic-color-state-focus);
+// → outline: 0.2rem solid var(--semantic-color-state-focus);
 //   outline-offset: 0.2rem;
 ```
 
@@ -372,7 +372,7 @@ Single-line text truncation with ellipsis.
 .card__title {
   @include truncate(200px);
 }
-// â max-width: 200px; overflow: hidden;
+// → max-width: 200px; overflow: hidden;
 //   white-space: nowrap; text-overflow: ellipsis;
 ```
 
@@ -386,7 +386,7 @@ Multi-line text clamp with ellipsis.
 .card__excerpt {
   @include ellipsis(3);
 }
-// â display: -webkit-box; -webkit-line-clamp: 3;
+// → display: -webkit-box; -webkit-line-clamp: 3;
 //   -webkit-box-orient: vertical; overflow: hidden;
 ```
 
@@ -402,7 +402,7 @@ Native `aspect-ratio` with `@supports` fallback.
 .video-wrapper {
   @include aspect-ratio(16, 9);
 }
-// â @supports (aspect-ratio: 1) { aspect-ratio: 16 / 9; }
+// → @supports (aspect-ratio: 1) { aspect-ratio: 16 / 9; }
 //   @supports not (aspect-ratio: 1) { /* padding-top fallback */ }
 ```
 
@@ -416,7 +416,7 @@ Modern clearfix using `display: flow-root`.
 .container {
   @include clearfix();
 }
-// â display: flow-root;
+// → display: flow-root;
 ```
 
 ---
@@ -429,7 +429,7 @@ Multi-property background shorthand.
 
 ```scss
 @include background-setup(var(--icon-logo), "center / contain", no-repeat);
-// â background: var(--icon-logo) center / contain no-repeat;
+// → background: var(--icon-logo) center / contain no-repeat;
 ```
 
 ---
@@ -466,7 +466,7 @@ $spacing-map: (
 );
 
 @include generate-utility($spacing-map, "u-p", padding);
-// â .u-p-sm { padding: 0.5rem; }
+// → .u-p-sm { padding: 0.5rem; }
 //   .u-p-md { padding: 1rem; }
 //   .u-p-lg { padding: 2rem; }
 ```
@@ -479,9 +479,9 @@ Generates directional utility classes (top/right/bottom/left/x/y).
 
 ```scss
 @include generate-utility-directional($spacing-map, "u-m", margin);
-// â .u-mt-sm { margin-top: 0.5rem; }
+// → .u-mt-sm { margin-top: 0.5rem; }
 //   .u-mx-md { margin-left: 1rem; margin-right: 1rem; }
-//   â¦ etc
+//   … etc
 ```
 
 ---
