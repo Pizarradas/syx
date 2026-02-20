@@ -1,0 +1,357 @@
+// ================================================
+// EXAMPLE-01 THEME - COMPLETE THEME DEFINITION
+// ================================================
+// Part of SYX Design System
+// This file contains ALL theme-specific values for Example-01
+// Primitives + Variables in one place for easy maintenance
+// ================================================
+
+@use '../../abstracts/index' as *;
+
+@mixin theme-example-01 {
+  :root {
+    // ================================================
+    // SECCIÓN 1: PRIMITIVOS
+    // ================================================
+    // Sobrescriben valores base de abstracts/tokens/primitives/
+    
+    // Spacing
+    --primitive-space-base: 0.25rem;
+    
+    // Colors - Brand
+    // Primary Indigo — the blueprint color
+    --primitive-color-blue-500: #4F46E5;   // rebind: was blue, now indigo
+    --primitive-color-blue-400: #6366F1;   // indigo lighter — hover surfaces
+    --primitive-color-blue-50:  #EEF2FF;   // indigo tint — light backgrounds
+
+    // Secondary Amber — the hot point of the system
+    --primitive-color-cyan-500: #F59E0B;   // rebind: was cyan, now amber
+    --primitive-color-cyan-200: #FDE68A;   // amber soft
+
+    // Accent Deep Indigo — darkened for strong CTA
+    --primitive-color-orange-500: #3730A3; // rebind: was orange, now deep indigo
+
+    // Colors - State
+    --primitive-color-success-500: #16C784;
+    --primitive-color-error-500: #E5484D;
+    --primitive-color-warning-500: #F5B800;
+    --primitive-color-disabled: #CBD2D9;
+    
+    // Typography — system fonts hierarchy
+    --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
+    --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
+    // Inter — body text (loaded locally)
+    --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    // JetBrains Mono — code blocks
+    --primitive-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    
+    // Icons - Theme Specific
+    --primitive-icon-arrow-default: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8299 11.2897L10.5899 7.0497C10.497 6.95598 10.3864 6.88158 10.2645 6.83081C10.1427 6.78004 10.012 6.75391 9.87994 6.75391C9.74793 6.75391 9.61723 6.78004 9.49537 6.83081C9.37351 6.88158 9.26291 6.95598 9.16994 7.0497C8.98369 7.23707 8.87915 7.49052 8.87915 7.7547C8.87915 8.01889 8.98369 8.27234 9.16994 8.4597L12.7099 11.9997L9.16994 15.5397C8.98369 15.7271 8.87915 15.9805 8.87915 16.2447C8.87915 16.5089 8.98369 16.7623 9.16994 16.9497C9.26338 17.0424 9.3742 17.1157 9.49604 17.1655C9.61787 17.2152 9.74834 17.2405 9.87994 17.2397C10.0115 17.2405 10.142 17.2152 10.2638 17.1655C10.3857 17.1157 10.4965 17.0424 10.5899 16.9497L14.8299 12.7097C14.9237 12.6167 14.9981 12.5061 15.0488 12.3843C15.0996 12.2624 15.1257 12.1317 15.1257 11.9997C15.1257 11.8677 15.0996 11.737 15.0488 11.6151C14.9981 11.4933 14.9237 11.3827 14.8299 11.2897Z" fill="black"/></svg>');
+    --primitive-icon-arrow-double: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.46002 8.28978C8.27172 8.09617 8.01422 7.98529 7.74416 7.98154C7.47411 7.97779 7.21363 8.08147 7.02002 8.26978C6.82641 8.45808 6.71554 8.71558 6.71179 8.98564C6.70804 9.25569 6.81172 9.51617 7.00002 9.70978L9.34002 11.9998L7.00002 14.2898C6.90629 14.3827 6.8319 14.4933 6.78113 14.6152C6.73036 14.7371 6.70422 14.8678 6.70422 14.9998C6.70422 15.1318 6.73036 15.2625 6.78113 15.3844C6.8319 15.5062 6.90629 15.6168 7.00002 15.7098C7.09298 15.8035 7.20359 15.8779 7.32545 15.9287C7.4473 15.9794 7.57801 16.0056 7.71002 16.0056C7.84203 16.0056 7.97274 15.9794 8.0946 15.9287C8.21646 15.8779 8.32706 15.8035 8.42002 15.7098L11.42 12.7098C11.5138 12.6168 11.5881 12.5062 11.6389 12.3844C11.6897 12.2625 11.7158 12.1318 11.7158 11.9998C11.7158 11.8678 11.6897 11.7371 11.6389 11.6152C11.5881 11.4933 11.5138 11.3827 11.42 11.2898L8.46002 8.28978ZM16.96 11.2898L13.96 8.28978C13.7717 8.10147 13.5163 7.99569 13.25 7.99569C12.9837 7.99569 12.7283 8.10147 12.54 8.28978C12.3517 8.47808 12.2459 8.73348 12.2459 8.99978C12.2459 9.26608 12.3517 9.52147 12.54 9.70978L14.84 11.9998L12.54 14.2898C12.4463 14.3827 12.3719 14.4933 12.3211 14.6152C12.2704 14.7371 12.2442 14.8678 12.2442 14.9998C12.2442 15.1318 12.2704 15.2625 12.3211 15.3844C12.3719 15.5062 12.4463 15.6168 12.54 15.7098C12.633 15.8035 12.7436 15.8779 12.8654 15.9287C12.9873 15.9794 13.118 16.0056 13.25 16.0056C13.382 16.0056 13.5127 15.9794 13.6346 15.9287C13.7565 15.8779 13.8671 15.8035 13.96 15.7098L16.96 12.7098C17.0564 12.6195 17.134 12.511 17.1882 12.3906C17.2424 12.2701 17.2723 12.1401 17.276 12.0081C17.2797 11.8761 17.2572 11.7446 17.2099 11.6213C17.1625 11.498 17.0912 11.3854 17 11.2898H16.96Z" fill="black"/></svg>');
+    --primitive-icon-content-bars: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8H21C21.2652 8 21.5196 7.89464 21.7071 7.70711C21.8946 7.51957 22 7.26522 22 7C22 6.73478 21.8946 6.48043 21.7071 6.29289C21.5196 6.10536 21.2652 6 21 6H3C2.73478 6 2.48043 6.10536 2.29289 6.29289C2.10536 6.48043 2 6.73478 2 7C2 7.26522 2.10536 7.51957 2.29289 7.70711C2.48043 7.89464 2.73478 8 3 8ZM21 16H3C2.73478 16 2.48043 16.1054 2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM21 11H3C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 12.2652 2.10536 12.5196 2.29289 12.7071C2.48043 12.8946 2.73478 13 3 13H21C21.2652 13 21.5196 12.8946 21.7071 12.7071C21.8946 12.5196 22 12.2652 22 12C22 11.7348 21.8946 11.4804 21.7071 11.2929C21.5196 11.1054 21.2652 11 21 11Z" fill="black"/></svg>');
+    --primitive-icon-rrss-email: url('#{$icon-path},<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.125 4.69112L12.219 10.375H12.214C11.6352 10.95 10.8505 11.2487 9.98582 11.2487C9.12152 11.2487 8.33677 10.95 7.75685 10.375H7.74135L1.875 4.6949V2.53153C4.2241 4.85363 8.49967 9 8.49967 9H8.50103C8.88358 9.4 9.40435 9.56993 9.979 9.56993C10.5877 9.56993 11.1355 9.325 11.523 8.9H11.5257L18.125 2.50128V4.69112ZM17.7874 0H0V13.425C0 14.6452 0.989025 15.625 2.20922 15.625H20C20 15.625 20 2.18857 20 2.15745C20 0.93745 19.0081 0 17.7874 0Z" fill="black"/></svg>');
+    --primitive-icon-ui-cancel: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.4099 12.0002L17.7099 7.71019C17.8982 7.52188 18.004 7.26649 18.004 7.00019C18.004 6.73388 17.8982 6.47849 17.7099 6.29019C17.5216 6.10188 17.2662 5.99609 16.9999 5.99609C16.7336 5.99609 16.4782 6.10188 16.2899 6.29019L11.9999 10.5902L7.70994 6.29019C7.52164 6.10188 7.26624 5.99609 6.99994 5.99609C6.73364 5.99609 6.47824 6.10188 6.28994 6.29019C6.10164 6.47849 5.99585 6.73388 5.99585 7.00019C5.99585 7.26649 6.10164 7.52188 6.28994 7.71019L10.5899 12.0002L6.28994 16.2902C6.19621 16.3831 6.12182 16.4937 6.07105 16.6156C6.02028 16.7375 5.99414 16.8682 5.99414 17.0002C5.99414 17.1322 6.02028 17.2629 6.07105 17.3848C6.12182 17.5066 6.19621 17.6172 6.28994 17.7102C6.3829 17.8039 6.4935 17.8783 6.61536 17.9291C6.73722 17.9798 6.86793 18.006 6.99994 18.006C7.13195 18.006 7.26266 17.9798 7.38452 17.9291C7.50638 17.8783 7.61698 17.8039 7.70994 17.7102L11.9999 13.4102L16.2899 17.7102C16.3829 17.8039 16.4935 17.8783 16.6154 17.9291C16.7372 17.9798 16.8679 18.006 16.9999 18.006C17.132 18.006 17.2627 17.9798 17.3845 17.9291C17.5064 17.8783 17.617 17.8039 17.7099 17.7102C17.8037 17.6172 17.8781 17.5066 17.9288 17.3848C17.9796 17.2629 18.0057 17.1322 18.0057 17.0002C18.0057 16.8682 17.9796 16.7375 17.9288 16.6156C17.8781 16.4937 17.8037 16.3831 17.7099 16.2902L13.4099 12.0002Z" fill="black"/></svg>');
+    --primitive-icon-ui-exclamation: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16C11.8022 16 11.6089 16.0587 11.4444 16.1686C11.28 16.2784 11.1518 16.4346 11.0761 16.6173C11.0004 16.8001 10.9806 17.0011 11.0192 17.1951C11.0578 17.3891 11.153 17.5673 11.2929 17.7071C11.4327 17.847 11.6109 17.9422 11.8049 17.9808C11.9989 18.0194 12.2 17.9996 12.3827 17.9239C12.5654 17.8482 12.7216 17.72 12.8315 17.5556C12.9414 17.3911 13 17.1978 13 17C13 16.7348 12.8946 16.4805 12.7071 16.2929C12.5196 16.1054 12.2652 16 12 16ZM22.67 17.47L14.62 3.47003C14.3598 3.00354 13.9798 2.61498 13.5192 2.3445C13.0586 2.07401 12.5341 1.9314 12 1.9314C11.4659 1.9314 10.9414 2.07401 10.4808 2.3445C10.0202 2.61498 9.64019 3.00354 9.38 3.47003L1.38 17.47C1.1108 17.924 0.966143 18.441 0.960644 18.9688C0.955146 19.4966 1.089 20.0166 1.34869 20.4761C1.60837 20.9356 1.9847 21.3185 2.43968 21.5861C2.89466 21.8536 3.41219 21.9964 3.94 22H20.06C20.5921 22.0053 21.1159 21.8689 21.5779 21.6049C22.0399 21.341 22.4234 20.9589 22.689 20.4978C22.9546 20.0368 23.0928 19.5134 23.0895 18.9814C23.0862 18.4493 22.9414 17.9277 22.67 17.47ZM20.94 19.47C20.8523 19.626 20.7245 19.7556 20.5697 19.8453C20.4149 19.935 20.2389 19.9815 20.06 19.98H3.94C3.76111 19.9815 3.5851 19.935 3.43032 19.8453C3.27554 19.7556 3.14765 19.626 3.06 19.47C2.97223 19.318 2.92603 19.1456 2.92603 18.97C2.92603 18.7945 2.97223 18.622 3.06 18.47L11.06 4.47003C11.1439 4.30623 11.2714 4.16876 11.4284 4.07277C11.5855 3.97678 11.766 3.92599 11.95 3.92599C12.134 3.92599 12.3145 3.97678 12.4716 4.07277C12.6286 4.16876 12.7561 4.30623 12.84 4.47003L20.89 18.47C20.9892 18.6199 21.0462 18.7937 21.055 18.9732C21.0638 19.1527 21.0241 19.3312 20.94 19.49V19.47ZM12 8.00003C11.7348 8.00003 11.4804 8.10538 11.2929 8.29292C11.1054 8.48046 11 8.73481 11 9.00003V13C11 13.2652 11.1054 13.5196 11.2929 13.7071C11.4804 13.8947 11.7348 14 12 14C12.2652 14 12.5196 13.8947 12.7071 13.7071C12.8946 13.5196 13 13.2652 13 13V9.00003C13 8.73481 12.8946 8.48046 12.7071 8.29292C12.5196 8.10538 12.2652 8.00003 12 8.00003Z" fill="black"/></svg>');
+    --primitive-icon-ui-home: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.0001 7.99952L14.0001 2.73952C13.4501 2.24756 12.738 1.97559 12.0001 1.97559C11.2622 1.97559 10.5501 2.24756 10.0001 2.73952L4.00009 7.99952C3.68246 8.28359 3.42899 8.63207 3.25657 9.02176C3.08414 9.41145 2.99671 9.8334 3.00009 10.2595V18.9995C3.00009 19.7952 3.31617 20.5582 3.87877 21.1208C4.44138 21.6834 5.20445 21.9995 6.00009 21.9995H18.0001C18.7957 21.9995 19.5588 21.6834 20.1214 21.1208C20.684 20.5582 21.0001 19.7952 21.0001 18.9995V10.2495C21.0021 9.82508 20.9139 9.40506 20.7416 9.0172C20.5692 8.62934 20.3165 8.28247 20.0001 7.99952ZM14.0001 19.9995H10.0001V14.9995C10.0001 14.7343 10.1055 14.4799 10.293 14.2924C10.4805 14.1049 10.7349 13.9995 11.0001 13.9995H13.0001C13.2653 13.9995 13.5197 14.1049 13.7072 14.2924C13.8947 14.4799 14.0001 14.7343 14.0001 14.9995V19.9995ZM19.0001 18.9995C19.0001 19.2647 18.8947 19.5191 18.7072 19.7066C18.5197 19.8942 18.2653 19.9995 18.0001 19.9995H16.0001V14.9995C16.0001 14.2039 15.684 13.4408 15.1214 12.8782C14.5588 12.3156 13.7957 11.9995 13.0001 11.9995H11.0001C10.2044 11.9995 9.44138 12.3156 8.87877 12.8782C8.31616 13.4408 8.00009 14.2039 8.00009 14.9995V19.9995H6.00009C5.73488 19.9995 5.48052 19.8942 5.29299 19.7066C5.10545 19.5191 5.00009 19.2647 5.00009 18.9995V10.2495C5.00027 10.1075 5.03069 9.96721 5.08931 9.8379C5.14794 9.70858 5.23343 9.59323 5.3401 9.49952L11.3401 4.24952C11.5226 4.0892 11.7572 4.00078 12.0001 4.00078C12.243 4.00078 12.4776 4.0892 12.6601 4.24952L18.6601 9.49952C18.7668 9.59323 18.8523 9.70858 18.9109 9.8379C18.9695 9.96721 18.9999 10.1075 19.0001 10.2495V18.9995Z" fill="black"/></svg>');
+    --primitive-icon-ui-tick: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.7099 7.20986C18.617 7.11613 18.5064 7.04174 18.3845 6.99097C18.2627 6.9402 18.132 6.91406 17.9999 6.91406C17.8679 6.91406 17.7372 6.9402 17.6154 6.99097C17.4935 7.04174 17.3829 7.11613 17.29 7.20986L9.83995 14.6699L6.70995 11.5299C6.61343 11.4366 6.49949 11.3633 6.37463 11.3141C6.24978 11.2649 6.11645 11.2408 5.98227 11.2431C5.84809 11.2454 5.71568 11.2741 5.5926 11.3276C5.46953 11.3811 5.35819 11.4583 5.26495 11.5549C5.17171 11.6514 5.0984 11.7653 5.04919 11.8902C4.99999 12.015 4.97586 12.1484 4.97818 12.2825C4.9805 12.4167 5.00923 12.5491 5.06272 12.6722C5.11622 12.7953 5.19343 12.9066 5.28995 12.9999L9.12995 16.8399C9.22291 16.9336 9.33351 17.008 9.45537 17.0588C9.57723 17.1095 9.70794 17.1357 9.83995 17.1357C9.97196 17.1357 10.1027 17.1095 10.2245 17.0588C10.3464 17.008 10.457 16.9336 10.55 16.8399L18.7099 8.67986C18.8115 8.58622 18.8925 8.47257 18.9479 8.34607C19.0033 8.21957 19.0319 8.08296 19.0319 7.94486C19.0319 7.80676 19.0033 7.67015 18.9479 7.54365C18.8925 7.41715 18.8115 7.3035 18.7099 7.20986Z" fill="black"/></svg>');
+    
+    // Filters - Color
+    --primitive-filter-brown: invert(18%) sepia(39%) saturate(2629%) hue-rotate(357deg) brightness(95%) contrast(92%);
+    --primitive-filter-blue: invert(60%) sepia(97%) saturate(1953%) hue-rotate(179deg) brightness(99%) contrast(91%);
+    --primitive-filter-success: invert(20%) sepia(69%) saturate(1571%) hue-rotate(151deg) brightness(107%) contrast(102%);
+    --primitive-filter-error: invert(26%) sepia(84%) saturate(6466%) hue-rotate(356deg) brightness(76%) contrast(131%);
+    --primitive-filter-warning: invert(35%) sepia(55%) saturate(1731%) hue-rotate(33deg) brightness(92%);
+    --primitive-filter-disabled: grayscale(1);
+
+    // ================================================
+    // SECCIÓN 2: VARIABLES DEL TEMA
+    // ================================================
+    // Variables específicas que usan primitivos
+    
+    // Base measure
+    --base-measure: var(--primitive-space-base);
+    
+    // Icons (theme-specific)
+    --icon-arrow-default: var(--primitive-icon-arrow-default);
+    --icon-arrow-double: var(--primitive-icon-arrow-double);
+    --icon-content-bars: var(--primitive-icon-content-bars);
+    --icon-rrss-email: var(--primitive-icon-rrss-email);
+    --icon-user-interface-cancel: var(--primitive-icon-ui-cancel);
+    --icon-user-interface-exclamation-mark: var(--primitive-icon-ui-exclamation);
+    --icon-user-interface-home: var(--primitive-icon-ui-home);
+    --icon-user-interface-tick: var(--primitive-icon-ui-tick);
+    
+    // Fonts
+    --font-weight-1: var(--primitive-font-family-syne-medium);
+    --font-weight-2: var(--primitive-font-family-syne-bold);
+    --font-bold: var(--font-weight-2);
+    
+    // Colors (brand)
+    --color-primary-base: var(--primitive-color-blue-500);
+    --color-primary-light: var(--primitive-color-blue-50);
+    --color-secondary-base: var(--primitive-color-cyan-500);
+    --color-accent-base: var(--primitive-color-orange-500);
+    
+    // Deprecated mappings (mapping to new system for safety)
+    --color-brown: var(--color-primary-base);
+    --color-brown-lt-1: var(--color-primary-light);
+    --color-yellow: var(--color-secondary-base);
+    --color-blue: var(--color-primary-base);
+    --color-red: var(--primitive-color-error-500);
+    
+    // Colors (semantic)
+    --color-primary: var(--color-primary-base);
+    --color-secondary: var(--color-secondary-base);
+    --color-secondary-lt-1: var(--color-primary-light);
+    --color-tertiary: var(--color-accent-base);
+    --color-quaternary: var(--color-primary);
+    --color-quinary: var(--primitive-color-error-500);
+    --color-senary: initial;
+    --color-septenary: initial;
+    --color-selector-placeholder: var(--color-primary);
+    --color-action-link: var(--color-primary);
+    --color-state-disabled: var(--primitive-color-disabled);
+    --color-state-focus: var(--color-primary);
+    // Hover states — darkened variants of the new palette
+    --color-state-hover-primary:    #3730A3; // indigo-800 — darker than primary
+    --color-state-hover-secondary:  #D97706; // amber-600 — darker than secondary
+    --color-state-hover-tertiary:   #22208C; // very deep indigo
+    --color-state-hover-quaternary: #3730A3; // same as primary hover
+    --color-state-ok: var(--primitive-color-success-500);
+    --color-state-ko: var(--primitive-color-error-500);
+    --color-state-warning: var(--primitive-color-warning-500);
+    --color-action-selection: var(--color-primary);
+    --background-action-selection: var(--color-primary);
+
+    // ================================================
+    // MAPPING: LEGACY TO SEMANTIC (NEW STANDARD)
+    // ================================================
+    // Bridging local theme variables to global semantic tokens
+    
+    // Colors
+    --semantic-color-primary: var(--color-primary);
+    --semantic-color-secondary: var(--color-secondary);
+    --semantic-color-tertiary: var(--color-tertiary);
+    --semantic-color-quaternary: var(--color-primary);
+    --semantic-color-quinary: var(--color-quinary);
+
+    // Text — cool-tinted dark gray for precision feel
+    --semantic-color-text-primary:   #111827; // gray-900 cool
+    --semantic-color-text-secondary: #4B5563; // gray-600 cool
+    --semantic-color-text-tertiary:  #9CA3AF; // gray-400 cool
+    --semantic-color-text-inverse:   #FFFFFF;
+    --semantic-color-text-disabled:  #D1D5DB;
+
+    // Backgrounds — pure white + soft blue-tinted gray
+    --semantic-color-bg-primary:   #FFFFFF;
+    --semantic-color-bg-secondary: #F8FAFF; // very faint indigo tint
+    --semantic-color-bg-tertiary:  #F0F4FF; // soft indigo wash
+    --semantic-color-bg-inverse:   #0F0E2C; // deep indigo-black
+
+    // Borders — cool grays
+    --semantic-color-border-subtle:  #E5E7EB;
+    --semantic-color-border-default: #D1D5DB;
+    --semantic-color-border-strong:  #9CA3AF;
+
+    // State
+    --semantic-color-state-focus:    var(--color-primary);
+
+    // Fonts
+    --semantic-font-family-primary:      var(--primitive-font-family-inter);
+    --semantic-font-family-primary-bold: var(--font-weight-2);
+    --semantic-font-family-heading:      var(--font-weight-2);
+    --semantic-font-family-mono:         var(--primitive-font-family-mono);
+
+    // Filters (recalculated for indigo palette)
+    --filter-primary:   brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1800%) hue-rotate(230deg) brightness(95%) contrast(95%);
+    --filter-secondary: brightness(0) saturate(100%) invert(72%) sepia(60%) saturate(1200%) hue-rotate(5deg) brightness(100%) contrast(95%);
+    --filter-state-ok:      var(--primitive-filter-success);
+    --filter-state-warning: var(--primitive-filter-warning);
+    --filter-state-disabled: var(--primitive-filter-disabled);
+    --filter-color-brown: initial;
+    --filter-color-blue:  initial;
+    
+    // Reset — body now uses Inter
+    --reset-html-font: normal normal 400 16px/24px var(--primitive-font-family-inter);
+    --reset-body-color: var(--color-black);
+    --reset-body-background-color: var(--color-brown-lt-1);
+    --reset-body-font-size: calc(4 * var(--base-measure));
+    --reset-body-line-height: calc(5 * var(--base-measure));
+    --reset-h-font-family: var(--font-weight-2);
+    --reset-h1-size: calc(7 * var(--base-measure));
+    --reset-h1-line-height: calc(7 * var(--base-measure));
+    --reset-h1-letter-spacing: -0.2rem;
+    --reset-h2-size: calc(6 * var(--base-measure));
+    --reset-h2-line-height: calc(6 * var(--base-measure));
+    --reset-h2-letter-spacing: initial;
+    --reset-h3-size: calc(5 * var(--base-measure));
+    --reset-h3-line-height: calc(5 * var(--base-measure));
+    --reset-h3-letter-spacing: initial;
+    --reset-h4-size: calc(4 * var(--base-measure));
+    --reset-h4-line-height: calc(4 * var(--base-measure));
+    --reset-h4-letter-spacing: initial;
+    --reset-h5-size: calc(3 * var(--base-measure));
+    --reset-h5-line-height: calc(3 * var(--base-measure));
+    --reset-h5-letter-spacing: initial;
+    --reset-h6-size: calc(2 * var(--base-measure));
+    --reset-h6-line-height: calc(2 * var(--base-measure));
+    --reset-h6-letter-spacing: initial;
+    
+    // Layout
+    --layout-max-width: calc(360 * var(--base-measure));
+    --layout-pad-1: calc(2 * var(--base-measure));
+    --layout-gap-1: calc(var(--base-measure));
+    --layout-pad-2: calc(3 * var(--base-measure));
+    --layout-gap-2: calc(3 * var(--base-measure));
+    --layout-pad-3: calc(4 * var(--base-measure));
+    --layout-gap-3: calc(4 * var(--base-measure));
+    --layout-pad-4: calc(5 * var(--base-measure));
+    --layout-gap-4: calc(5 * var(--base-measure));
+    --layout-pad-5: calc(6 * var(--base-measure));
+    --layout-gap-5: calc(6 * var(--base-measure));
+    --gap-1: calc(2 * var(--base-measure));
+    --inner-1: calc(var(--base-measure));
+    --scope-1: calc(2 * var(--base-measure));
+    --scope-2: calc(2.5 * var(--base-measure));
+    --scope-3: calc(3 * var(--base-measure));
+    --scope-4: calc(4 * var(--base-measure));
+    --scope-5: calc(5 * var(--base-measure));
+    --scope-6: calc(5.4 * var(--base-measure));
+    
+    // Theme
+    --theme-focus: 0 0 0.313rem 0 var(--color-state-focus);
+    --theme-w-border: calc(var(--base-measure) / 2);
+    --theme-radius: calc(3 * var(--base-measure));
+    
+    // Buttons
+    --btn-primary-font-color: var(--color-primary);
+    --btn-primary-filled-font-color: var(--color-white);
+    --btn-secondary-font-color: var(--color-secondary);
+    --btn-secondary-filled-font-color: var(--color-white);
+    --btn-tertiary-font-color: var(--color-tertiary);
+    --btn-tertiary-filled-font-color: var(--color-white);
+    --btn-quaternary-font-color: var(--color-quaternary);
+    --btn-quaternary-filled-font-color: var(--color-white);
+    
+    // Breadcrumb
+    --breadcrumb-gap: calc(4 * var(--base-measure));
+    --breadcrumb-item-highlighted-p-x: calc(4 * var(--base-measure));
+    --breadcrumb-item-icon-p-r: calc(-4 * var(--base-measure));
+    --breadcrumb-item-icon-size: calc(4 * var(--base-measure));
+    --breadcrumb-item-icon-pic: var(--icon-arrow-default);
+    
+    // Check
+    --check-gap: calc(10 * var(--base-measure));
+    --check-line-height: calc(8 * var(--base-measure));
+    --check-uncheck-size: calc(8 * var(--base-measure));
+    --check-checked-icon-size: calc(8 * var(--base-measure));
+    --check-checked-icon-pic: var(--icon-user-interface-tick);
+    
+    // Form
+    --form-font-family: var(--font-weight-2);
+    --form-font-size: calc(4 * var(--base-measure));
+    --form-line-height: calc(3 * var(--base-measure));
+    --form-inner-field: calc(4 * var(--base-measure));
+    --form-height-size: calc(14 * var(--base-measure));
+    
+    // List ordered
+    --list-ordered-m-t: calc(0 * var(--base-measure));
+    --list-ordered-m-b: calc(0 * var(--base-measure));
+    --list-ordered-gap: calc(8 * var(--base-measure));
+    --list-ordered-item-m-t: calc(2 * var(--base-measure));
+    --list-ordered-counter-size: calc(6 * var(--base-measure));
+    --list-ordered-counter-font-size: calc(2 * var(--base-measure));
+    --list-ordered-counter-line-height: calc(6 * var(--base-measure));
+    
+    // List
+    --list-lvl1-gap: calc(6 * var(--base-measure));
+    --list-item-m-t: calc(4 * var(--base-measure));
+    --list-icon-size: calc(4 * var(--base-measure));
+    --list-lvl1-icon-pic: var(--icon-arrow-default);
+    --list-lvl2-m-l: calc(6 * var(--base-measure));
+    --list-lvl2-gap: calc(6 * var(--base-measure));
+    --list-lvl2-icon-pic: var(--icon-arrow-double);
+    --list-lvl3-m-l: calc(6 * var(--base-measure));
+    --list-lvl3-gap: calc(6 * var(--base-measure));
+    
+    // Pagination
+    --pagination-gap: calc(4 * var(--base-measure));
+    --pagination-item-size: calc(12 * var(--base-measure));
+    --pagination-icon-size: calc(8 * var(--base-measure));
+    --pagination-back-icon-pic: var(--icon-arrow-double);
+    --pagination-prev-icon-pic: var(--icon-arrow-default);
+    --pagination-next-icon-pic: var(--icon-arrow-default);
+    --pagination-forward-icon-pic: var(--icon-arrow-double);
+    
+    // Radio
+    --radio-gap: calc(10 * var(--base-measure));
+    --radio-line-height: calc(9 * var(--base-measure));
+    --radio-uncheck-size: calc(8 * var(--base-measure));
+    --radio-checked-size: calc(2 * var(--base-measure));
+    
+    // Switch
+    --switch-w-size: calc(16 * var(--base-measure));
+    --switch-h-size: calc(8 * var(--base-measure));
+    --switch-slider-w-size: calc(8 * var(--base-measure));
+    --switch-slider-h-size: calc(8 * var(--base-measure));
+    --switch-slider-background-color: var(--color-primary);
+    --switch-slider-radius: 50%;
+    --switch-status-w-size: calc(9 * var(--base-measure));
+    --switch-status-h-size: calc(0 * var(--base-measure));
+    --switch-status-icon-size: calc(7 * var(--base-measure));
+    --switch-status-icon-ok-pic: var(--icon-user-interface-tick);
+    --switch-status-icon-ko-pic: var(--icon-user-interface-cancel);
+    --switch-status-icon-filter: var(--filter-primary);
+    --switch-status-disabled: 0.5;
+    
+    // Table
+    --table-th-font-size: calc(4 * var(--base-measure));
+    --table-th-line-height: calc(5 * var(--base-measure));
+    
+    // Text
+    --txt-m-b: calc(2 * var(--base-measure));
+    
+    // Container: group: form-field
+    --cont-group-form-field-m-b: calc(4 * var(--base-measure));
+    --cont-group-form-field-icon-p-r: calc(2 * var(--base-measure));
+    --cont-group-form-field-icon-size: calc(6 * var(--base-measure));
+    --cont-group-form-field-success-icon-pic: var(--icon-user-interface-tick);
+    --cont-group-form-field-warning-icon-pic: var(--icon-user-interface-exclamation-mark);
+  }
+
+  // ================================================
+  // DARK MODE
+  // ================================================
+  // Dual activation:
+  //   1. Automatic — respects OS preference
+  //   2. Manual    — [data-theme="dark"] on <html>
+  // ================================================
+  @media (prefers-color-scheme: dark) {
+    :root { @include dark-mode-tokens(); }
+  }
+
+  // Manual override — wins over @media
+  :root[data-theme="dark"] { @include dark-mode-tokens(); }
+
+  // Light mode forced — wins over @media when user explicitly chose light
+  :root[data-theme="light"] {
+    --semantic-color-bg-primary:   var(--primitive-color-white);
+    --semantic-color-bg-secondary: var(--primitive-color-pink-50);
+    --semantic-color-bg-tertiary:  var(--primitive-color-gray-50);
+    --semantic-color-bg-inverse:   var(--primitive-color-black);
+    --semantic-color-text-primary:   var(--primitive-color-purple-500);
+    --semantic-color-text-secondary: var(--primitive-color-gray-700);
+    --semantic-color-text-tertiary:  var(--primitive-color-gray-500);
+    --semantic-color-text-inverse:   var(--primitive-color-white);
+    --semantic-color-text-disabled:  var(--primitive-color-gray-300);
+    --semantic-color-border-default: var(--primitive-color-gray-300);
+    --semantic-color-border-subtle:  var(--primitive-color-gray-200);
+    --semantic-color-border-strong:  var(--primitive-color-gray-400);
+    --semantic-shadow-xs:   var(--primitive-shadow-xs);
+    --semantic-shadow-sm:   var(--primitive-shadow-sm);
+    --semantic-shadow-md:   var(--primitive-shadow-md);
+    --semantic-shadow-lg:   var(--primitive-shadow-lg);
+    --semantic-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+}
+

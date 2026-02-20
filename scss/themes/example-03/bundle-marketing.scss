@@ -1,0 +1,26 @@
+// SYX — THEME: example-03 | BUNDLE: marketing
+// ================================================
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-marketing' as *;
+@use 'theme' as *;
+
+@include universal-values();
+@include theme-example-03();
+
+@include font-family("Google-Space-Grotesk--regular",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
+  400, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--bold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
+  700, normal, eot woff2 woff ttf svg);
+
+@include syx-core(example-03);
+@include syx-bundle-marketing(example-03);

@@ -1,0 +1,44 @@
+// SYX BUNDLE: CORE
+// ================================================
+// Shared foundation included in EVERY bundle.
+// Contains: fonts, reset, helpers, grid, theme tokens.
+// Never includes atoms, molecules or organisms.
+// ================================================
+// Usage: @use '../_bundles/core' as *; @include syx-core($theme);
+// ================================================
+
+@mixin syx-core($theme: null) {
+
+  // RESET: global
+  // ================================================
+  @include resets-global($theme);
+
+  // HELPERS: base
+  // ================================================
+  @include helper-animations();
+  @include helper-positioning();
+  @include helper-hides();
+  @include helper-displays();
+  @include helper-alignments();
+  @include helper-images();
+  @include helper-embedded();
+  @include helper-maps();
+  @include helper-objects();
+  @include helper-texts();
+  @include helper-links();
+  @include helper-icons();
+
+  // LAYOUT: grid
+  // ================================================
+  @include layout-grid($theme);
+
+  // HELPERS: theme-aware
+  // ================================================
+  @include helper-font-sizes($theme);
+  @include helper-dimensions($theme);
+  @include helper-scopes($theme); // @deprecated — kept for compatibility
+  @include helper-spacer($theme);
+  @include helper-gap($theme);
+  @include helper-fonts($theme);
+  @include helper-backgrounds($theme);
+}

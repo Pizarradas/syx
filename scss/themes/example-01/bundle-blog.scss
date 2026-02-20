@@ -1,0 +1,52 @@
+// SYX — THEME: example-01 | BUNDLE: blog
+// ================================================
+// Optimized for editorial content, articles, blogs.
+// Includes: typography, lists, code, breadcrumb, cards.
+// ================================================
+
+// CORE
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-blog' as *;
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-example-01();
+
+// FONTS
+// ================================================
+@include font-family("Google-Syne--regular",
+  "#{$fonts-path}/google-syne/Syne-Regular",
+  500, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Syne--bold",
+  "#{$fonts-path}/google-syne/Syne-Bold",
+  800, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--regular",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
+  400, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--medium",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Medium",
+  500, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--bold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
+  700, normal, eot woff2 woff ttf svg);
+
+// CORE (reset + helpers + grid)
+// ================================================
+@include syx-core(example-01);
+
+// BUNDLE: blog components
+// ================================================
+@include syx-bundle-blog(example-01);

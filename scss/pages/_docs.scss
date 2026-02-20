@@ -1,0 +1,30 @@
+// PAGE: DOCS — Global body background
+// All layout, sidebar, topbar, and sidenav styles live in _docs-layout.scss
+// ===============================================
+@use "../abstracts/index" as *;
+
+// -----------------------------------------------
+// GLOBAL DOCS BODY
+// -----------------------------------------------
+body {
+  background-color: var(--semantic-color-bg-secondary);
+}
+
+// -----------------------------------------------
+// INLINE BADGE (for class/atom references in docs)
+// NOTE: demo-only — safe to remove in production builds
+// -----------------------------------------------
+.mol-demo-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
+
+  &--atom     { background: var(--primitive-color-blue-50);    color: var(--primitive-color-blue-600); }
+  &--molecule { background: var(--primitive-color-cyan-50);    color: var(--primitive-color-cyan-700); }
+  &--organism { background: var(--primitive-color-orange-50);  color: var(--primitive-color-orange-700); }
+  &--utility  { background: var(--semantic-color-bg-tertiary); color: var(--semantic-color-text-secondary); }
+}
