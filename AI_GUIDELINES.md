@@ -6,19 +6,19 @@
 
 ---
 
-## ð The "Thou Shalt Not" Rules (Strict Mode)
+## 🚫 The "Thou Shalt Not" Rules (Strict Mode)
 
 1.  **NEVER use raw values.**
-    - â `padding: 1rem;`
-    - â `@include padding(var(--semantic-space-inset-md));`
+    - ❌ `padding: 1rem;`
+    - ✅ `@include padding(var(--semantic-space-inset-md));`
 2.  **NEVER use raw CSS properties where a mixin exists.**
-    - â `position: absolute;` -> â `@include absolute();`
-    - â `display: flex; align-items: center;` -> â `@include flex-center();`
+    - ❌ `position: absolute;` → ✅ `@include absolute();`
+    - ❌ `display: flex; align-items: center;` → ✅ `@include flex-center();`
 3.  **NEVER use `!important`.**
     - SYX uses CSS `@layer` to manage specificity. Utilities always win.
 4.  **NEVER skip the token layer.**
     - Do not use Primitives (`--primitive-*`) in components.
-    - **Always** map: Primitive â Semantic â Component.
+    - **Always** map: Primitive → Semantic → Component.
 5.  **NEVER mix naming prefixes.**
     - Atoms MUST start with `.syx-`
     - Molecules MUST start with `.mol-`
@@ -26,26 +26,26 @@
 
 ---
 
-## ð§  The SYX Philosophy & Naming Convention
+## 🧠 The SYX Philosophy & Naming Convention
 
 ### 1. Atomic Hierarchy
 
 | Level               | Prefix    | Path              | Example                        |
 | :------------------ | :-------- | :---------------- | :----------------------------- |
-| **Atoms**           | `.syx-`   | `scss/atoms/`     | `.atom-btn`, `.atom-icon`        |
+| **Atoms**           | `.syx-`   | `scss/atoms/`     | `.atom-btn`, `.atom-icon`      |
 | **Molecules**       | `.mol-`   | `scss/molecules/` | `.mol-card`, `.mol-search`     |
 | **Organisms**       | `.org-`   | `scss/organisms/` | `.org-navbar`, `.org-footer`   |
 | **Templates/Pages** | (Context) | `scss/pages/`     | `.page-home`, `.tpl-dashboard` |
 
 ### 2. Token Architecture
 
-- **Primitives**: "We have blue." -> `scss/abstracts/tokens/primitives/`
-- **Semantic**: "Primary action is blue." -> `scss/abstracts/tokens/semantic/`
-- **Component**: "Button background is Primary Action." -> `scss/abstracts/tokens/components/`
+- **Primitives**: "We have blue." → `scss/abstracts/tokens/primitives/`
+- **Semantic**: "Primary action is blue." → `scss/abstracts/tokens/semantic/`
+- **Component**: "Button background is Primary Action." → `scss/abstracts/tokens/components/`
 
 ---
 
-## ð The Grid System (Strict Usage)
+## 📐 The Grid System (Strict Usage)
 
 SYX uses a 12-column CSS Grid system. **Do not create custom flex grids for main layouts.**
 
@@ -77,7 +77,7 @@ Reference `.layout-grid__nested` if you need a grid inside a column.
 
 ---
 
-## â¡ The Quick-Recipe for Components
+## ⚡ The Quick-Recipe for Components
 
 When asked to "create a new component X":
 
@@ -121,7 +121,7 @@ When asked to "create a new component X":
 
 ---
 
-## ð Mixin Cheatsheet (Most Used)
+## 📋 Mixin Cheatsheet (Most Used)
 
 | Intent       | Mixin                                                  |
 | :----------- | :----------------------------------------------------- |
@@ -135,7 +135,7 @@ When asked to "create a new component X":
 
 ---
 
-## ð Implementation Check
+## ✅ Implementation Check
 
 Before outputting code, ask yourself:
 
