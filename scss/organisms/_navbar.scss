@@ -46,10 +46,9 @@
     // &__links — desktop navigation (hidden on mobile)
     &__links {
       display: none;
-      @include flex(null, null, center, null, var(--semantic-space-inline-md, 1.25rem));
 
       @include breakpoint(tablet) {
-        display: flex;
+        @include flex(null, null, center, null, var(--semantic-space-inline-md, 1.25rem));
       }
     }
 
