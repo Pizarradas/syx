@@ -7,7 +7,7 @@
 // DEPRECATED: These aliases will be removed in a future version.
 // Please migrate to using the new token system directly.
 //
-// ⚠️  MILESTONE: Target removal in SYX v2.0
+// â ï¸  MILESTONE: Target removal in SYX v2.0
 //     Before removing, run a grep for each alias across all project HTML/SCSS
 //     to confirm zero usages. Then delete this file and remove from base/index.scss.
 //
@@ -18,7 +18,7 @@
 
 :root {
   // ================================================
-  // SURFACE TOKENS — FALLBACK UNIVERSAL
+  // SURFACE TOKENS â FALLBACK UNIVERSAL
   // ================================================
   // These are the ONLY tokens allowed in page-level and component SCSS.
   // Never use --primitive-color-* directly in pages or components.
@@ -92,10 +92,10 @@
   // ================================================
   // Use semantic typography tokens instead
   
-  // ⚠️ RENAMED: --font-weight-1/2 → --font-family-1/2 (were pointing to font-family, not font-weight)
+  // â ï¸ RENAMED: --font-weight-1/2 â --font-family-1/2 (were pointing to font-family, not font-weight)
   --font-family-1: var(--semantic-font-family-primary);
   --font-family-2: var(--semantic-font-family-primary-bold);
-  // Backward-compat aliases (deprecated — use --font-family-1/2)
+  // Backward-compat aliases (deprecated â use --font-family-1/2)
   --font-weight-1: var(--font-family-1);
   --font-weight-2: var(--font-family-2);
   --font-bold: var(--semantic-font-family-primary-bold);

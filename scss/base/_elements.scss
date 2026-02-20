@@ -10,7 +10,7 @@
 // ===============================================
 ul, ol {
   // Restore basic spacing if not explicitly reset
-  &:not([class*="syx-list--reset"]) {
+  &:not([class*="atom-list--reset"]) {
     @include padding(null null null var(--layout-pad-4));
     margin-bottom: var(--layout-gap-3);
   }
@@ -72,7 +72,7 @@ p {
   color: var(--semantic-color-text-primary);
 }
 
-a:not([class*="syx-btn"]) {
+a:not([class*="atom-btn"]) {
   color: var(--color-primary);
   text-decoration: none;
   font-weight: var(--primitive-font-weight-medium);

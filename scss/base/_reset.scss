@@ -3,7 +3,7 @@
 @use "../abstracts/index" as *;
 // ===============================================
 
-// CSS @layer declaration — establishes specificity order
+// CSS @layer declaration â establishes specificity order
 // Lower layers lose to higher layers regardless of selector specificity.
 // Order: reset < base < components < utilities
 @layer syx.reset, syx.base, syx.components, syx.utilities;
@@ -14,7 +14,7 @@
   @layer syx.reset {
 
   // -----------------------------------------------
-  // BOX MODEL — universal box-sizing
+  // BOX MODEL â universal box-sizing
   // -----------------------------------------------
   *, *::before, *::after {
     box-sizing: border-box;
@@ -24,7 +24,7 @@
   // -----------------------------------------------
   // SELECTION
   // Hardcoded: custom properties are unreliable in ::selection
-  // White (#fff) on purple-500 (#7c3aed) — matches brand primary
+  // White (#fff) on purple-500 (#7c3aed) â matches brand primary
   // -----------------------------------------------
   ::selection {
     color: #ffffff;
@@ -142,7 +142,7 @@
   }
 
   // -----------------------------------------------
-  // MONOSPACE — grouped: code, kbd, samp, pre
+  // MONOSPACE â grouped: code, kbd, samp, pre
   // -----------------------------------------------
   code, kbd, samp, pre {
     font-family: monospace, monospace;
@@ -299,7 +299,7 @@
       display: none;
     }
 
-    // Chrome autofill — prevent bg flash
+    // Chrome autofill â prevent bg flash
     &:-webkit-autofill {
       transition: background-color 600000s 0s, color 600000s 0s;
     }

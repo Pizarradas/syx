@@ -304,20 +304,19 @@
       grid-template-columns: repeat(12, minmax(0, 1fr));
       grid-template-rows: 1fr;
       gap: var(--layout-gap-1);
+      // No horizontal padding by default for nested grids to prevent double gutter
+      @include padding(null 0); 
+      
       @include min-screen(768px) {
-        @include padding(null var(--layout-pad-2) null var(--layout-pad-2));
         gap: var(--layout-gap-2);
       }
       @include min-screen(1024px) {
-        @include padding(null var(--layout-pad-3) null var(--layout-pad-3));
         gap: var(--layout-gap-3);
       }
       @include min-screen(1280px) {
-        @include padding(null var(--layout-pad-4) null var(--layout-pad-4));
         gap: var(--layout-gap-4);
       }
       @include min-screen(1440px) {
-        @include padding(null var(--layout-pad-5) null var(--layout-pad-5));
         gap: var(--layout-gap-5);
       }
     }
@@ -326,8 +325,33 @@
     &--is {
       // &-fs
       &-fs {
-        @include padding(null calc(var(--base-measure) * 0) null calc(var(--base-measure) * 0));
+        @include padding(null 0);
       }
+    }
+
+    // MODIFIERS
+    // ===============================================
+    
+    // &--no-padding / &--edge2edge
+    &--no-padding,
+    &--is-edge2edge {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
+    // &--no-gap
+    &--no-gap {
+      gap: 0 !important;
+    }
+
+    // &--align-center (Vertical)
+    &--align-center {
+      align-items: center;
+    }
+
+    // &--justify-center (Horizontal)
+    &--justify-center {
+      justify-items: center;
     }
   }
 }
