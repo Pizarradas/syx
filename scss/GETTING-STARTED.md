@@ -8,9 +8,9 @@
 
 | Tool                                       | Version  | Purpose               |
 | ------------------------------------------ | -------- | --------------------- |
-| [Dart Sass](https://sass-lang.com/install) | ≥ 1.57   | Compilation           |
-| [Node.js](https://nodejs.org/)             | ≥ 18.0.0 | npm scripts, PurgeCSS |
-| A code editor                              | —        | VS Code recommended   |
+| [Dart Sass](https://sass-lang.com/install) | â¥ 1.57   | Compilation           |
+| [Node.js](https://nodejs.org/)             | â¥ 18.0.0 | npm scripts, PurgeCSS |
+| A code editor                              | â        | VS Code recommended   |
 
 > **Note:** SYX uses `@use` / `@forward` (Dart Sass module system). Legacy `@import` is not supported.
 
@@ -59,8 +59,8 @@ sass --watch scss/styles-theme-example-01.scss:css/styles-theme-example-01.css
   </head>
   <body>
     <!-- SYX components use the .syx- prefix -->
-    <button class="syx-btn syx-btn--primary">Primary Button</button>
-    <button class="syx-btn syx-btn--secondary">Secondary Button</button>
+    <button class="atom-btn atom-btn--primary">Primary Button</button>
+    <button class="atom-btn atom-btn--secondary">Secondary Button</button>
 
     <!-- Utility classes use .syx- prefix too -->
     <div class="syx-d-flex syx-gap-2">
@@ -76,14 +76,14 @@ sass --watch scss/styles-theme-example-01.scss:css/styles-theme-example-01.css
 
 Follow this checklist when adding a new atomic component.
 
-### Step 1 — Create the file
+### Step 1 â Create the file
 
 ```bash
 # Create the atom file
 touch scss/atoms/_tooltip.scss
 ```
 
-### Step 2 — Write the mixin
+### Step 2 â Write the mixin
 
 ```scss
 // scss/atoms/_tooltip.scss
@@ -117,7 +117,7 @@ touch scss/atoms/_tooltip.scss
 > - Use SYX mixins (`@include transition()`, `@include absolute()`, etc.)
 > - Use component tokens, never hardcoded values
 
-### Step 3 — Add component tokens
+### Step 3 â Add component tokens
 
 ```scss
 // scss/abstracts/tokens/components/_tooltip.scss
@@ -130,21 +130,21 @@ touch scss/atoms/_tooltip.scss
 }
 ```
 
-### Step 4 — Register in the index
+### Step 4 â Register in the index
 
 ```scss
 // scss/atoms/index.scss
 @forward "tooltip" show atom-tooltip; // add this line
 ```
 
-### Step 5 — Register the token file
+### Step 5 â Register the token file
 
 ```scss
 // scss/abstracts/tokens/index.scss
 @forward "components/tooltip"; // add this line
 ```
 
-### Step 6 — Compile and verify
+### Step 6 â Compile and verify
 
 ```bash
 sass scss/styles-theme-example-01.scss css/test.css
@@ -152,7 +152,7 @@ sass scss/styles-theme-example-01.scss css/test.css
 
 ---
 
-### Option B — Minimal production bundle
+### Option B â Minimal production bundle
 
 ```bash
 npm run build:core         # compiles styles-core.css (138 KB, no docs overhead)
@@ -253,7 +253,7 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 @include relative();
 @include sticky($top: 0);
 
-// SPACING (null-safe — null values are skipped)
+// SPACING (null-safe â null values are skipped)
 @include margin(1rem null);                  // only top + bottom
 @include padding(null var(--space-md));      // only left + right
 
@@ -266,11 +266,11 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 @include flex-between();                     // display:flex + space-between
 
 // MEDIA QUERIES
-@include breakpoint(tablet) { … }           // min-width: 50em
-@include breakpoint(desktop) { … }          // min-width: 70em
-@include min-screen(768px) { … }
-@include darkmode { … }
-@include reduced-motion { … }
+@include breakpoint(tablet) { â¦ }           // min-width: 50em
+@include breakpoint(desktop) { â¦ }          // min-width: 70em
+@include min-screen(768px) { â¦ }
+@include darkmode { â¦ }
+@include reduced-motion { â¦ }
 
 // ACCESSIBILITY
 @include sr-only();                          // WCAG visually hidden
@@ -285,7 +285,7 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 @include aspect-ratio(16, 9);
 ```
 
-→ Full reference: [abstracts/mixins/README.md](abstracts/mixins/README.md)
+â Full reference: [abstracts/mixins/README.md](abstracts/mixins/README.md)
 
 ---
 
@@ -297,5 +297,5 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 | `position: absolute; top: 0;`             | `@include absolute($top: 0);`                |
 | `color: #3B82F6;`                         | `color: var(--semantic-color-primary);`      |
 | `color: var(--primitive-color-blue-500);` | `color: var(--component-btn-primary-color);` |
-| `!important` anywhere                     | Use `@layer` — utilities always win          |
-| Skipping token layers                     | Always Primitive → Semantic → Component      |
+| `!important` anywhere                     | Use `@layer` â utilities always win          |
+| Skipping token layers                     | Always Primitive â Semantic â Component      |

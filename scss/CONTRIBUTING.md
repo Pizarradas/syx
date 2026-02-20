@@ -6,12 +6,12 @@
 
 ## Core Principles
 
-1. **Token-first** — Never hardcode values. Always use tokens.
-2. **Mixin-first** — Always use SYX mixins instead of raw CSS properties.
-3. **Null-safe** — Mixins skip null values. Use this to write concise shorthand.
-4. **No `!important`** — CSS `@layer` manages specificity. Never use `!important`.
-5. **BEM naming** — All component classes follow BEM with the `syx-` prefix.
-6. **Atomic Design** — Know where your component lives in the hierarchy.
+1. **Token-first** â Never hardcode values. Always use tokens.
+2. **Mixin-first** â Always use SYX mixins instead of raw CSS properties.
+3. **Null-safe** â Mixins skip null values. Use this to write concise shorthand.
+4. **No `!important`** â CSS `@layer` manages specificity. Never use `!important`.
+5. **BEM naming** â All component classes follow BEM with the `syx-` prefix.
+6. **Atomic Design** â Know where your component lives in the hierarchy.
 
 ---
 
@@ -20,8 +20,8 @@
 ### SCSS Authoring
 
 ```scss
-// ✅ Correct
-.syx-btn--primary {
+// â Correct
+.atom-btn--primary {
   color: var(--component-btn-primary-color);
   @include padding(
     var(--component-btn-padding-y) var(--component-btn-padding-x)
@@ -30,8 +30,8 @@
   @include border-radius(var(--component-btn-border-radius));
 }
 
-// ❌ Wrong — raw CSS instead of mixins
-.syx-btn--primary {
+// â Wrong â raw CSS instead of mixins
+.atom-btn--primary {
   color: #3b82f6; // hardcoded value
   padding: 0.5rem 1rem; // not using token
   transition: color 0.2s ease; // not using @include transition()
@@ -75,10 +75,10 @@ Follow this order for consistency:
   @include transition(color 0.2s ease);
 
   // 8. States (&:hover, &:focus, &:disabled, &--modifier)
-  &:hover { … }
-  &:focus-visible { … }
-  &:disabled { … }
-  &--modifier { … }
+  &:hover { â¦ }
+  &:focus-visible { â¦ }
+  &:disabled { â¦ }
+  &--modifier { â¦ }
 }
 ```
 
@@ -125,9 +125,9 @@ Follow this order for consistency:
     }
 
     // States
-    &:hover { … }
-    &:focus-visible { … }
-    &:disabled { … }
+    &:hover { â¦ }
+    &:focus-visible { â¦ }
+    &:disabled { â¦ }
   }
 }
 ```
@@ -197,12 +197,12 @@ Examples:
 Always use explicit class selectors for BEM modifiers. Never use `[class*=]` to detect variants:
 
 ```scss
-// ✅ Correct
-&.syx-btn--primary { ... }
-&.syx-btn--filled { ... }
-&:not(.syx-btn--circle) { ... }
+// â Correct
+&.atom-btn--primary { ... }
+&.atom-btn--filled { ... }
+&:not(.atom-btn--circle) { ... }
 
-// ❌ Wrong — fragile, unpredictable specificity
+// â Wrong â fragile, unpredictable specificity
 &[class*="--primary"] { ... }
 &:is([class*="--filled"]) { ... }
 ```
@@ -214,15 +214,15 @@ Always use explicit class selectors for BEM modifiers. Never use `[class*=]` to 
 Always use named breakpoints from `$syx-breakpoints`:
 
 ```scss
-// ✅ Correct
-@include breakpoint(tablet) { … }
-@include breakpoint(desktop) { … }
+// â Correct
+@include breakpoint(tablet) { â¦ }
+@include breakpoint(desktop) { â¦ }
 
-// ✅ Also OK for one-off values
-@include min-screen(768px) { … }
+// â Also OK for one-off values
+@include min-screen(768px) { â¦ }
 
-// ❌ Wrong — raw @media
-@media (min-width: 768px) { … }
+// â Wrong â raw @media
+@media (min-width: 768px) { â¦ }
 ```
 
 ---
@@ -230,7 +230,7 @@ Always use named breakpoints from `$syx-breakpoints`:
 ## CSS @layer Rules
 
 - **Never** add `!important` to override specificity
-- **Utilities** always win over components — that's by design
+- **Utilities** always win over components â that's by design
 - If a utility isn't overriding a component, check that both are in the correct layer
 
 ---
