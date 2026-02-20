@@ -152,7 +152,7 @@
     // If an icon is present (state or select), add padding to the field input
     &:where([class*="--has-select"], [class*="--is-"]) {
       .syx-input {
-        padding-right: calc(var(--component-form-field-icon-position-right) + var(--component-form-field-icon-size));
+        padding-right: calc(0 + (var(--component-form-field-icon-position-right)) + (var(--component-form-field-icon-size)));
       }
     }
 
