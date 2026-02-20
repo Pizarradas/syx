@@ -248,7 +248,7 @@ Before submitting any change:
 - [ ] No `[class*=]` attribute selectors for BEM variants (use explicit classes)
 - [ ] Token naming follows the convention
 - [ ] BEM naming follows the `syx-` prefix convention
-- [ ] New tokens are documented in `GUIA_DE_USO.md` if significant
+- [ ] New tokens are documented in `TOKEN-GUIDE.md` if significant
 
 ---
 
