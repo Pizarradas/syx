@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +10,7 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="José Luis Pizarro Feo">
   <link rel="canonical" href="https://syntaxys.design/docs-utilities.html">
-  <meta property="og:title" content="Utilities — Syx Design System">
+  <meta property="og:title" content="Utilities  Syx Design System">
   <meta property="og:description"
     content="Atomic utility classes for layout, spacing, and typography. Format: .syx-{property}-{value}.">
   <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Utilities — Syx Design System">
+  <meta name="twitter:title" content="Utilities  Syx Design System">
   <meta name="twitter:description"
     content="Atomic utility classes for layout, spacing, and typography. Format: .syx-{property}-{value}.">
   <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
@@ -35,7 +35,7 @@
   <header class="org-navbar org-navbar--docs" role="banner" id="site-header">
     <div class="layout-grid">
       <div class="org-navbar__bar layout-grid__col-xs-12">
-        <!-- Sidebar toggle (docs — mobile only) -->
+        <!-- Sidebar toggle (docs  mobile only) -->
         <button class="org-navbar__sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar"
           aria-expanded="false" aria-controls="org-docs-sidebar" type="button">
           <span aria-hidden="true"></span>
@@ -45,18 +45,18 @@
 
 
         <!-- Logo -->
-        <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System — Home">Syx.</a>
+        <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System  Home">Syx.</a>
 
         <!-- Desktop navigation -->
         <nav class="org-navbar__links" aria-label="Main navigation">
-          <a href="docs-foundation.html" class="syx-link syx-link--primary">Foundation</a>
-          <a href="docs-components.html" class="syx-link syx-link--primary">Components</a>
-          <a href="docs-utilities.html" class="syx-link syx-link--primary" aria-current="page">Utilities</a>
-          <a href="docs-developer-guide.html" class="syx-link syx-link--primary">Dev Guide</a>
-          <a href="docs-elements.html" class="syx-link syx-link--primary">Elements</a>
-          <a href="docs-why-syx.html" class="syx-link syx-link--primary">Why SYX?</a>
+          <a href="docs-foundation.html" class="atom-link atom-link--primary">Foundation</a>
+          <a href="docs-components.html" class="atom-link atom-link--primary">Components</a>
+          <a href="docs-utilities.html" class="atom-link atom-link--primary" aria-current="page">Utilities</a>
+          <a href="docs-developer-guide.html" class="atom-link atom-link--primary">Dev Guide</a>
+          <a href="docs-elements.html" class="atom-link atom-link--primary">Elements</a>
+          <a href="docs-why-syx.html" class="atom-link atom-link--primary">Why SYX?</a>
 
-          <!-- Theme switcher — desktop -->
+          <!-- Theme switcher  desktop -->
           <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group" aria-label="Switch theme"
             id="syx-theme-switcher">
             <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
@@ -98,7 +98,7 @@
             <a href="docs-developer-guide.html" class="org-navbar__mobile-link">Dev Guide</a>
             <a href="docs-elements.html" class="org-navbar__mobile-link">Elements</a>
           </nav>
-          <!-- Theme switcher — mobile drawer -->
+          <!-- Theme switcher  mobile drawer -->
           <div class="org-navbar__mobile-footer">
             <span class="org-navbar__mobile-footer__label">Theme:</span>
             <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
@@ -164,9 +164,9 @@
         <div class="org-docs-page-header__eyebrow">
           <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
           <span class="org-docs-page-header__sep" aria-hidden="true">&rsaquo;</span>
-          <span class="syx-pill" aria-current="page">Utilities</span>
+          <span class="atom-pill" aria-current="page">Utilities</span>
         </div>
-        <h1 class="syx-title syx-title--h1 syx-mb-2">Utilities</h1>
+        <h1 class="atom-title atom-title--h1 syx-mb-2">Utilities</h1>
         <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
           Atomic utility classes for handling layout, spacing, and typography directly in HTML. Format:
           <code>.syx-{property}-{value}</code>.
@@ -175,30 +175,30 @@
 
       <!-- WHY NO !IMPORTANT -->
       <section id="layer-info" class="mol-card" aria-labelledby="layer-info-heading">
-        <h2 id="layer-info-heading" class="syx-title syx-title--h2 syx-mb-1">Why No <code>!important</code>?
+        <h2 id="layer-info-heading" class="atom-title atom-title--h2 syx-mb-1">Why No <code>!important</code>?
         </h2>
         <p class="syx-type-body syx-text-gray syx-mb-4">
-          SYX utilities live in the <code>syx.utilities</code> CSS layer Â— the highest in the stack.
+          SYX utilities live in the <code>syx.utilities</code> CSS layer Â the highest in the stack.
           This means they always override component styles without needing <code>!important</code>.
         </p>
 
-        <div class="syx-code syx-mb-4">/* SYX @layer stack */
+        <div class="atom-code syx-mb-4">/* SYX @layer stack */
           @layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.utilities;
 
           /* Utilities win by position, not by specificity */
           @layer syx.utilities {
-          .syx-d-none { display: none; } /* always wins over .syx-btn */
+          .syx-d-none { display: none; } /* always wins over .atom-btn */
           }</div>
 
         <p class="syx-type-body syx-text-gray">
           <strong>Rule:</strong> If a utility isn't overriding a component, check that both are compiled
-          in the correct layer. Never add <code>!important</code> Â— it's a bug.
+          in the correct layer. Never add <code>!important</code> Â it's a bug.
         </p>
       </section>
 
       <!-- SPACING -->
       <section id="spacing" class="mol-card" aria-labelledby="spacing-heading">
-        <h2 id="spacing-heading" class="syx-title syx-title--h2 syx-mb-1">Spacing</h2>
+        <h2 id="spacing-heading" class="atom-title atom-title--h2 syx-mb-1">Spacing</h2>
         <p class="syx-type-body syx-text-gray syx-mb-3">
           Format: <code>.syx-{m|p}{t|b|l|r|x|y}-{0-5}</code>. Auto margin: <code>.syx-mx-auto</code>.
         </p>
@@ -236,7 +236,7 @@
           </div>
         </div>
 
-        <div class="syx-code syx-mt-3">// Margin
+        <div class="atom-code syx-mt-3">// Margin
           .syx-m-{0-5} .syx-mt-{n} .syx-mb-{n}
           .syx-ml-{n} .syx-mr-{n} .syx-mx-{n} .syx-my-{n}
           .syx-mx-auto .syx-ml-auto .syx-mr-auto
@@ -248,13 +248,13 @@
 
       <!-- DISPLAY & FLEX -->
       <section id="display" class="mol-card" aria-labelledby="display-heading">
-        <h2 id="display-heading" class="syx-title syx-title--h2 syx-mb-1">Display &amp; Flex</h2>
+        <h2 id="display-heading" class="atom-title atom-title--h2 syx-mb-1">Display &amp; Flex</h2>
         <p class="syx-type-body syx-text-gray syx-mb-3">
           Display, flex direction, justify-content, align-items, gap, overflow, and position utilities.
         </p>
 
         <div class="mol-demo-preview">
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Justify Content</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Justify Content</h3>
           <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-3">
             <div class="syx-d-flex syx-justify-start syx-p-2 syx-bg-gray-100">
               <span class="syx-p-1 syx-bg-primary-light syx-type-body-small">.syx-justify-start</span>
@@ -271,14 +271,14 @@
             </div>
           </div>
 
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Flex Direction</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Flex Direction</h3>
           <div class="syx-d-flex syx-gap-2 syx-mb-3">
             <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-row</code>
             <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-col</code>
             <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-flex-wrap</code>
           </div>
 
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Align Items</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Align Items</h3>
           <div class="syx-d-flex syx-gap-2">
             <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-items-start</code>
             <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-items-center</code>
@@ -286,7 +286,7 @@
           </div>
         </div>
 
-        <div class="syx-code syx-mt-3">// Display
+        <div class="atom-code syx-mt-3">// Display
           .syx-d-flex .syx-d-inline-flex .syx-d-block .syx-d-none .syx-d-grid
 
           // Flex
@@ -308,13 +308,13 @@
 
       <!-- TEXT & COLOR -->
       <section id="text" class="mol-card" aria-labelledby="text-heading">
-        <h2 id="text-heading" class="syx-title syx-title--h2 syx-mb-1">Text &amp; Color</h2>
+        <h2 id="text-heading" class="atom-title atom-title--h2 syx-mb-1">Text &amp; Color</h2>
         <p class="syx-type-body syx-text-gray syx-mb-3">
           Text color, alignment, font weight, and typography scale utilities.
         </p>
 
         <div class="mol-demo-preview">
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Text Colors</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Text Colors</h3>
           <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-4">
             <p class="syx-text-primary syx-mb-0">.syx-text-primary</p>
             <p class="syx-text-secondary syx-mb-0">.syx-text-secondary</p>
@@ -325,14 +325,14 @@
             </div>
           </div>
 
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Alignment</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Alignment</h3>
           <div class="syx-d-flex syx-flex-col syx-gap-2 syx-mb-4">
             <p class="syx-text-left syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-left</p>
             <p class="syx-text-center syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-center</p>
             <p class="syx-text-right syx-p-2 syx-bg-gray-100 syx-mb-0">.syx-text-right</p>
           </div>
 
-          <h3 class="syx-title syx-title--h4 syx-mb-2">Font Weight</h3>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Font Weight</h3>
           <div class="syx-d-flex syx-gap-3">
             <span class="syx-font-regular">.syx-font-regular</span>
             <span class="syx-font-medium">.syx-font-medium</span>
@@ -340,7 +340,7 @@
           </div>
         </div>
 
-        <div class="syx-code syx-mt-3">// Text Colors
+        <div class="atom-code syx-mt-3">// Text Colors
           .syx-text-primary .syx-text-secondary .syx-text-gray
           .syx-text-muted .syx-text-white .syx-text-black
 
@@ -354,7 +354,7 @@
 
       <!-- BACKGROUNDS -->
       <section id="backgrounds" class="mol-card" aria-labelledby="backgrounds-heading">
-        <h2 id="backgrounds-heading" class="syx-title syx-title--h2 syx-mb-1">Backgrounds</h2>
+        <h2 id="backgrounds-heading" class="atom-title atom-title--h2 syx-mb-1">Backgrounds</h2>
         <p class="syx-type-body syx-text-gray syx-mb-3">
           Background color utilities. All values reference primitive tokens.
         </p>
@@ -386,7 +386,7 @@
           </div>
         </div>
 
-        <div class="syx-code syx-mt-3">.syx-bg-white ? var(--primitive-color-white)
+        <div class="atom-code syx-mt-3">.syx-bg-white ? var(--primitive-color-white)
           .syx-bg-gray-50 ? var(--primitive-color-gray-50)
           .syx-bg-gray-100 ? var(--primitive-color-gray-100)
           .syx-bg-gray-200 ? var(--primitive-color-gray-200)
@@ -400,7 +400,7 @@
 
 
   <!-- ============================================
-       FOOTER (org-site-footer — universal)
+       FOOTER (org-site-footer  universal)
   ============================================= -->
   <footer class="org-site-footer" role="contentinfo">
     <div class="org-site-footer__inner">
@@ -411,16 +411,16 @@
       </div>
 
       <nav class="org-site-footer__links" aria-label="Footer navigation">
-        <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-        <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
-        <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
-        <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
-        <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+        <a href="docs-foundation.html" class="atom-link atom-link--primary syx-type-body-small">Foundation</a>
+        <a href="docs-components.html" class="atom-link atom-link--primary syx-type-body-small">Components</a>
+        <a href="docs-utilities.html" class="atom-link atom-link--primary syx-type-body-small">Utilities</a>
+        <a href="docs-elements.html" class="atom-link atom-link--primary syx-type-body-small">Elements</a>
+        <a href="docs-developer-guide.html" class="atom-link atom-link--primary syx-type-body-small">Dev Guide</a>
       </nav>
 
       <small class="org-site-footer__copy">
         &copy; 2026 Syx Design System &mdash; Built by
-        <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis Pizarro
+        <a href="https://github.com/jlpizarro" class="atom-link atom-link--primary" rel="author">José Luis Pizarro
           Feo</a>
       </small>
 

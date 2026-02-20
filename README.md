@@ -7,7 +7,7 @@
 
 > A modern, token-driven SCSS design system built on Atomic Design principles.  
 > Zero external CSS dependencies. Dart Sass native.  
-> Built by **José Luis Pizarro Feo**
+> Built by **JosÃ© Luis Pizarro Feo**
 
 ---
 
@@ -15,9 +15,9 @@
 
 SYX is a **component-first design system** that provides:
 
-- A **3-layer token architecture** (Primitive → Semantic → Component)
+- A **3-layer token architecture** (Primitive â Semantic â Component)
 - A **native SCSS mixin library** (15 files, Bourbon-philosophy, null-safe)
-- An **Atomic Design component hierarchy** (Atoms → Molecules → Organisms)
+- An **Atomic Design component hierarchy** (Atoms â Molecules â Organisms)
 - A **multi-context bundle system** (docs / app / marketing / blog per theme)
 - **CSS `@layer`** for specificity management without `!important`
 - **Fluid typography** with `clamp()` on every scale step
@@ -26,7 +26,7 @@ SYX is a **component-first design system** that provides:
 
 ## Quick Start
 
-### Option A — Zero install (use the compiled CSS)
+### Option A â Zero install (use the compiled CSS)
 
 Download or clone the repo, then link the CSS directly in your HTML:
 
@@ -35,17 +35,17 @@ Download or clone the repo, then link the CSS directly in your HTML:
 <link rel="stylesheet" href="css/styles-theme-example-01.css" />
 
 <!-- Use SYX components -->
-<button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">
+<button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">
   Click me
 </button>
-<span class="syx-pill syx-pill--primary">New</span>
+<span class="atom-pill atom-pill--primary">New</span>
 ```
 
 Open `index.html` in your browser to see the full live demo.
 
 ---
 
-### Option B — Build from SCSS with npm
+### Option B â Build from SCSS with npm
 
 ```bash
 npm install
@@ -56,7 +56,7 @@ npm run watch        # watches theme-01 for changes
 npm run watch:all    # watches all themes
 ```
 
-### Option C — Dart Sass CLI directly
+### Option C â Dart Sass CLI directly
 
 ```bash
 sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=compressed --no-source-map
@@ -68,49 +68,49 @@ sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=c
 
 ```
 syx/
-│
-├── scss/                        ← All source SCSS
-│   ├── abstracts/               ← Tokens, mixins, functions, maps
-│   │   ├── tokens/
-│   │   │   ├── primitives/      ← Raw values (colors, spacing, fonts)
-│   │   │   ├── semantic/        ← Contextual aliases (color-primary, etc.)
-│   │   │   └── components/      ← Per-component tokens (btn, form, header…)
-│   │   ├── mixins/              ← 15 SYX native mixins
-│   │   ├── functions/
-│   │   └── maps/
-│   │
-│   ├── base/                    ← Reset, elements, helpers
-│   ├── atoms/                   ← 19 atomic components
-│   ├── molecules/               ← 4 composite components
-│   ├── organisms/               ← 6 complex components
-│   ├── layout/                  ← Grid system
-│   ├── utilities/               ← Display, spacing, text utilities
-│   ├── pages/                   ← Page-specific styles
-│   │
-│   ├── styles-core.scss         ← Minimal production bundle entry point
-│   └── themes/                  ← Theme definitions
-│       ├── _shared/             ← Shared core + 4 bundle definitions
-│       ├── _template/           ← Template for new themes
-│       ├── example-01/          ← Theme 01 (Purple/Blue)
-│       ├── example-02/          ← Theme 02 (Codymer)
-│       ├── example-03/          ← Theme 03 (Blue)
-│       ├── example-04/          ← Theme 04 (Green)
-│       └── example-05/          ← Theme 05 (Yellow)
-│
-├── css/                         ← Compiled output (committed for zero-install use)
-│   └── prod/                    ← PurgeCSS-optimized output
-│
-├── fonts/                       ← Self-hosted webfonts
-├── img/                         ← Images and icons
-│
-├── index.html                   ← Live demo / landing page
-├── demo-bundle-weight.html      ← Core bundle weight reference page
-├── docs-foundation.html         ← Colors, typography, spacing reference
-├── docs-components.html         ← All atoms and molecules
-├── docs-elements.html           ← Base HTML elements
-├── docs-utilities.html          ← Utility classes reference
-├── docs-developer-guide.html    ← Mixin and token practical reference
-└── docs-why-syx.html            ← Competitive analysis (7 sector committees)
+â
+âââ scss/                        â All source SCSS
+â   âââ abstracts/               â Tokens, mixins, functions, maps
+â   â   âââ tokens/
+â   â   â   âââ primitives/      â Raw values (colors, spacing, fonts)
+â   â   â   âââ semantic/        â Contextual aliases (color-primary, etc.)
+â   â   â   âââ components/      â Per-component tokens (btn, form, headerâ¦)
+â   â   âââ mixins/              â 15 SYX native mixins
+â   â   âââ functions/
+â   â   âââ maps/
+â   â
+â   âââ base/                    â Reset, elements, helpers
+â   âââ atoms/                   â 19 atomic components
+â   âââ molecules/               â 4 composite components
+â   âââ organisms/               â 6 complex components
+â   âââ layout/                  â Grid system
+â   âââ utilities/               â Display, spacing, text utilities
+â   âââ pages/                   â Page-specific styles
+â   â
+â   âââ styles-core.scss         â Minimal production bundle entry point
+â   âââ themes/                  â Theme definitions
+â       âââ _shared/             â Shared core + 4 bundle definitions
+â       âââ _template/           â Template for new themes
+â       âââ example-01/          â Theme 01 (Purple/Blue)
+â       âââ example-02/          â Theme 02 (Codymer)
+â       âââ example-03/          â Theme 03 (Blue)
+â       âââ example-04/          â Theme 04 (Green)
+â       âââ example-05/          â Theme 05 (Yellow)
+â
+âââ css/                         â Compiled output (committed for zero-install use)
+â   âââ prod/                    â PurgeCSS-optimized output
+â
+âââ fonts/                       â Self-hosted webfonts
+âââ img/                         â Images and icons
+â
+âââ index.html                   â Live demo / landing page
+âââ demo-bundle-weight.html      â Core bundle weight reference page
+âââ docs-foundation.html         â Colors, typography, spacing reference
+âââ docs-components.html         â All atoms and molecules
+âââ docs-elements.html           â Base HTML elements
+âââ docs-utilities.html          â Utility classes reference
+âââ docs-developer-guide.html    â Mixin and token practical reference
+âââ docs-why-syx.html            â Competitive analysis (7 sector committees)
 ```
 
 ---
@@ -133,11 +133,11 @@ syx/
 ### Token Layers
 
 ```
-Primitive  →  Semantic  →  Component
+Primitive  â  Semantic  â  Component
 #3B82F6       color-primary  btn-primary-bg
 ```
 
-Never use primitive tokens directly in components. Always go through semantic → component.
+Never use primitive tokens directly in components. Always go through semantic â component.
 
 ### Mixin Usage
 
@@ -154,7 +154,7 @@ Never use primitive tokens directly in components. Always go through semantic �
 ### CSS @layer Stack
 
 ```
-syx.reset → syx.base → syx.tokens → syx.atoms → syx.molecules → syx.organisms → syx.utilities
+syx.reset â syx.base â syx.tokens â syx.atoms â syx.molecules â syx.organisms â syx.utilities
 ```
 
 Utilities always win over components. No `!important` needed.
@@ -170,11 +170,11 @@ Utilities always win over components. No `!important` needed.
 | example-03  | Blue           | app, docs, marketing, blog           |
 | example-04  | Green          | app, docs, marketing, blog           |
 | example-05  | Yellow         | app, docs, marketing, blog           |
-| `_template` | Neutral (core) | `styles-core.css` — production-ready |
+| `_template` | Neutral (core) | `styles-core.css` â production-ready |
 
 ---
 
 ## Score (Feb 2026)
 
-**93/100** — Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility utilities, and `@layer` specificity management all production-ready.
+**93/100** â Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility utilities, and `@layer` specificity management all production-ready.
 Roadmap to 100: Organisms expansion + Public documentation site.

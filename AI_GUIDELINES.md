@@ -6,19 +6,19 @@
 
 ---
 
-## 🛑 The "Thou Shalt Not" Rules (Strict Mode)
+## ð The "Thou Shalt Not" Rules (Strict Mode)
 
 1.  **NEVER use raw values.**
-    - ❌ `padding: 1rem;`
-    - ✅ `@include padding(var(--semantic-space-inset-md));`
+    - â `padding: 1rem;`
+    - â `@include padding(var(--semantic-space-inset-md));`
 2.  **NEVER use raw CSS properties where a mixin exists.**
-    - ❌ `position: absolute;` -> ✅ `@include absolute();`
-    - ❌ `display: flex; align-items: center;` -> ✅ `@include flex-center();`
+    - â `position: absolute;` -> â `@include absolute();`
+    - â `display: flex; align-items: center;` -> â `@include flex-center();`
 3.  **NEVER use `!important`.**
     - SYX uses CSS `@layer` to manage specificity. Utilities always win.
 4.  **NEVER skip the token layer.**
     - Do not use Primitives (`--primitive-*`) in components.
-    - **Always** map: Primitive → Semantic → Component.
+    - **Always** map: Primitive â Semantic â Component.
 5.  **NEVER mix naming prefixes.**
     - Atoms MUST start with `.syx-`
     - Molecules MUST start with `.mol-`
@@ -26,13 +26,13 @@
 
 ---
 
-## 🧠 The SYX Philosophy & Naming Convention
+## ð§  The SYX Philosophy & Naming Convention
 
 ### 1. Atomic Hierarchy
 
 | Level               | Prefix    | Path              | Example                        |
 | :------------------ | :-------- | :---------------- | :----------------------------- |
-| **Atoms**           | `.syx-`   | `scss/atoms/`     | `.syx-btn`, `.syx-icon`        |
+| **Atoms**           | `.syx-`   | `scss/atoms/`     | `.atom-btn`, `.atom-icon`        |
 | **Molecules**       | `.mol-`   | `scss/molecules/` | `.mol-card`, `.mol-search`     |
 | **Organisms**       | `.org-`   | `scss/organisms/` | `.org-navbar`, `.org-footer`   |
 | **Templates/Pages** | (Context) | `scss/pages/`     | `.page-home`, `.tpl-dashboard` |
@@ -45,7 +45,7 @@
 
 ---
 
-## 📐 The Grid System (Strict Usage)
+## ð The Grid System (Strict Usage)
 
 SYX uses a 12-column CSS Grid system. **Do not create custom flex grids for main layouts.**
 
@@ -77,7 +77,7 @@ Reference `.layout-grid__nested` if you need a grid inside a column.
 
 ---
 
-## ⚡ The Quick-Recipe for Components
+## â¡ The Quick-Recipe for Components
 
 When asked to "create a new component X":
 
@@ -121,7 +121,7 @@ When asked to "create a new component X":
 
 ---
 
-## 📚 Mixin Cheatsheet (Most Used)
+## ð Mixin Cheatsheet (Most Used)
 
 | Intent       | Mixin                                                  |
 | :----------- | :----------------------------------------------------- |
@@ -135,7 +135,7 @@ When asked to "create a new component X":
 
 ---
 
-## 🌍 Implementation Check
+## ð Implementation Check
 
 Before outputting code, ask yourself:
 

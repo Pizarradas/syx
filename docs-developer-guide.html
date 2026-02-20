@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,7 +10,7 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="José Luis Pizarro Feo">
     <link rel="canonical" href="https://syntaxys.design/docs-developer-guide.html">
-    <meta property="og:title" content="Developer Guide — Syx Design System">
+    <meta property="og:title" content="Developer Guide  Syx Design System">
     <meta property="og:description"
         content="Practical reference for every mixin, token pattern, and component recipe. Each section shows the SCSS you write and the CSS it generates.">
     <meta property="og:type" content="website">
@@ -20,14 +20,14 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Developer Guide — Syx Design System">
+    <meta name="twitter:title" content="Developer Guide  Syx Design System">
     <meta name="twitter:description"
         content="Practical reference for every mixin, token pattern, and component recipe. Each section shows the SCSS you write and the CSS it generates.">
     <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
     <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
 
     <style>
-        /* -- Inline demo helpers (mol-demo-* — removable in production) -- */
+        /* -- Inline demo helpers (mol-demo-*  removable in production) -- */
         .mol-demo-box {
             background: var(--semantic-color-surface-secondary);
             border: 1px solid var(--semantic-color-border);
@@ -152,7 +152,7 @@
     <header class="org-navbar org-navbar--docs" role="banner" id="site-header">
         <div class="layout-grid">
             <div class="org-navbar__bar layout-grid__col-xs-12">
-                <!-- Sidebar toggle (docs — mobile only) -->
+                <!-- Sidebar toggle (docs  mobile only) -->
                 <button class="org-navbar__sidebar-toggle" id="docs-sidebar-toggle" aria-label="Toggle sidebar"
                     aria-expanded="false" aria-controls="org-docs-sidebar" type="button">
                     <span aria-hidden="true"></span>
@@ -162,19 +162,19 @@
 
 
                 <!-- Logo -->
-                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System — Home">Syx.</a>
+                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System  Home">Syx.</a>
 
                 <!-- Desktop navigation -->
                 <nav class="org-navbar__links" aria-label="Main navigation">
-                    <a href="docs-foundation.html" class="syx-link syx-link--primary">Foundation</a>
-                    <a href="docs-components.html" class="syx-link syx-link--primary">Components</a>
-                    <a href="docs-utilities.html" class="syx-link syx-link--primary">Utilities</a>
-                    <a href="docs-developer-guide.html" class="syx-link syx-link--primary" aria-current="page">Dev
+                    <a href="docs-foundation.html" class="atom-link atom-link--primary">Foundation</a>
+                    <a href="docs-components.html" class="atom-link atom-link--primary">Components</a>
+                    <a href="docs-utilities.html" class="atom-link atom-link--primary">Utilities</a>
+                    <a href="docs-developer-guide.html" class="atom-link atom-link--primary" aria-current="page">Dev
                         Guide</a>
-                    <a href="docs-elements.html" class="syx-link syx-link--primary">Elements</a>
-                    <a href="docs-why-syx.html" class="syx-link syx-link--primary">Why SYX?</a>
+                    <a href="docs-elements.html" class="atom-link atom-link--primary">Elements</a>
+                    <a href="docs-why-syx.html" class="atom-link atom-link--primary">Why SYX?</a>
 
-                    <!-- Theme switcher — desktop -->
+                    <!-- Theme switcher  desktop -->
                     <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group"
                         aria-label="Switch theme" id="syx-theme-switcher">
                         <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
@@ -217,7 +217,7 @@
                             Guide</a>
                         <a href="docs-elements.html" class="org-navbar__mobile-link">Elements</a>
                     </nav>
-                    <!-- Theme switcher — mobile drawer -->
+                    <!-- Theme switcher  mobile drawer -->
                     <div class="org-navbar__mobile-footer">
                         <span class="org-navbar__mobile-footer__label">Theme:</span>
                         <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
@@ -289,9 +289,9 @@
                 <div class="org-docs-page-header__eyebrow">
                     <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
                     <span class="org-docs-page-header__sep" aria-hidden="true">&rsaquo;</span>
-                    <span class="syx-pill syx-pill--primary" aria-current="page">Developer Guide</span>
+                    <span class="atom-pill atom-pill--primary" aria-current="page">Developer Guide</span>
                 </div>
-                <h1 class="syx-title syx-title--h1 syx-mb-2">How to Style with SYX</h1>
+                <h1 class="atom-title atom-title--h1 syx-mb-2">How to Style with SYX</h1>
                 <p class="syx-type-body-large syx-text-gray syx-max-w-65ch">
                     Practical reference for every mixin, token pattern, and component recipe.
                     Each section shows the SCSS you write and the CSS it generates.
@@ -300,7 +300,7 @@
 
             <!-- TOKEN SYSTEM -->
             <section id="tokens" class="mol-card" aria-labelledby="tokens-heading">
-                <h2 id="tokens-heading" class="syx-title syx-title--h2 syx-mb-1">Token System</h2>
+                <h2 id="tokens-heading" class="atom-title atom-title--h2 syx-mb-1">Token System</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     SYX uses 3 token layers. Always consume the most specific layer available.
                 </p>
@@ -310,24 +310,24 @@
                     Themes use <code>--semantic-*</code>. Never use <code>--primitive-*</code> directly in components.
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 1 — Primitive (raw values)</h3>
-                <div class="syx-code syx-mb-3">// ? Don't use in components
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Layer 1  Primitive (raw values)</h3>
+                <div class="atom-code syx-mb-3">// ? Don't use in components
                     color: var(--primitive-color-purple-500);
                     font-size: var(--primitive-font-size-16);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 2 — Semantic (contextual aliases)</h3>
-                <div class="syx-code syx-mb-3">// ? Use in theme-level overrides and layout
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Layer 2  Semantic (contextual aliases)</h3>
+                <div class="atom-code syx-mb-3">// ? Use in theme-level overrides and layout
                     color: var(--semantic-color-primary);
                     background: var(--semantic-color-surface-secondary);
                     border-radius: var(--semantic-border-radius-md);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Layer 3 — Component (per-component)</h3>
-                <div class="syx-code syx-mb-3">// ? Use inside component mixins
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Layer 3  Component (per-component)</h3>
+                <div class="atom-code syx-mb-3">// ? Use inside component mixins
                     color: var(--component-btn-primary-color);
                     background: var(--component-btn-primary-bg);
                     border-radius: var(--component-btn-border-radius);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Semantic color tokens</h3>
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Semantic color tokens</h3>
                 <div class="mol-demo-box">
                     <div class="mol-demo-token-row">
                         <div class="mol-demo-swatch" style="background: var(--semantic-color-primary)"
@@ -359,19 +359,19 @@
 
             <!-- POSITIONING MIXINS -->
             <section id="mixins-positioning" class="mol-card" aria-labelledby="positioning-heading">
-                <h2 id="positioning-heading" class="syx-title syx-title--h2 syx-mb-1">Positioning Mixins</h2>
+                <h2 id="positioning-heading" class="atom-title atom-title--h2 syx-mb-1">Positioning Mixins</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
-                    Null-safe shorthands. Pass <code>null</code> to skip any side — no empty CSS emitted.
+                    Null-safe shorthands. Pass <code>null</code> to skip any side  no empty CSS emitted.
                 </p>
 
                 <div class="mol-demo-callout syx-mb-3">
                     <strong>Null-safety:</strong> <code>@include absolute($top: 0)</code> emits only
-                    <code>position: absolute; top: 0;</code> — not <code>right: null</code>.
+                    <code>position: absolute; top: 0;</code>  not <code>right: null</code>.
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include absolute()</code></h3>
-                <div class="syx-code-label">SCSS</div>
-                <div class="syx-code syx-mb-2">// Full overlay
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include absolute()</code></h3>
+                <div class="atom-code-label">SCSS</div>
+                <div class="atom-code syx-mb-2">// Full overlay
                     @include absolute($top: 0, $right: 0, $bottom: 0, $left: 0);
 
                     // Top-right corner
@@ -379,8 +379,8 @@
 
                     // Centered horizontally at bottom
                     @include absolute($bottom: 0, $left: 50%);</div>
-                <div class="syx-code-label">Generated CSS</div>
-                <div class="syx-code syx-mb-4">position: absolute;
+                <div class="atom-code-label">Generated CSS</div>
+                <div class="atom-code syx-mb-4">position: absolute;
                     top: 0; right: 0; bottom: 0; left: 0;
 
                     position: absolute;
@@ -389,22 +389,22 @@
                     position: absolute;
                     bottom: 0; left: 50%;</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include sticky()</code></h3>
-                <div class="syx-code-label">SCSS</div>
-                <div class="syx-code syx-mb-2">// Sticky header
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include sticky()</code></h3>
+                <div class="atom-code-label">SCSS</div>
+                <div class="atom-code syx-mb-2">// Sticky header
                     .site-header {
                     @include sticky($top: 0);
                     z-index: 100;
                     }</div>
-                <div class="syx-code-label">Generated CSS</div>
-                <div class="syx-code syx-mb-4">position: sticky;
+                <div class="atom-code-label">Generated CSS</div>
+                <div class="atom-code syx-mb-4">position: sticky;
                     top: 0;
                     z-index: 100;</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include relative()</code> /
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include relative()</code> /
                     <code>@include fixed()</code>
                 </h3>
-                <div class="syx-code syx-mb-4">// Positioning context for children
+                <div class="atom-code syx-mb-4">// Positioning context for children
                     .card { @include relative(); }
 
                     // Fixed bottom bar
@@ -413,15 +413,15 @@
 
             <!-- SPACING MIXINS -->
             <section id="mixins-spacing" class="mol-card" aria-labelledby="spacing-heading">
-                <h2 id="spacing-heading" class="syx-title syx-title--h2 syx-mb-1">Spacing Mixins</h2>
+                <h2 id="spacing-heading" class="atom-title atom-title--h2 syx-mb-1">Spacing Mixins</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     <code>@include margin()</code> and <code>@include padding()</code> follow the CSS shorthand order
                     (top right bottom left). Pass <code>null</code> to skip a side.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include margin()</code></h3>
-                <div class="syx-code-label">SCSS ? CSS</div>
-                <div class="syx-code syx-mb-4">@include margin(null auto);
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include margin()</code></h3>
+                <div class="atom-code-label">SCSS ? CSS</div>
+                <div class="atom-code syx-mb-4">@include margin(null auto);
                     // ? margin-left: auto; margin-right: auto;
 
                     @include margin(2rem null 1rem null);
@@ -434,8 +434,8 @@
                     @include margin(var(--layout-gap-4) null);
                     // ? margin-top: var(--layout-gap-4); margin-bottom: var(--layout-gap-4);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include padding()</code></h3>
-                <div class="syx-code syx-mb-4">@include padding(1rem null);
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include padding()</code></h3>
+                <div class="atom-code syx-mb-4">@include padding(1rem null);
                     // ? padding-top: 1rem; padding-bottom: 1rem;
 
                     @include padding(var(--component-card-padding-y) var(--component-card-padding-x));
@@ -446,20 +446,20 @@
                     // ? padding-top: var(--layout-pad-3); padding-bottom: var(--layout-pad-3);</div>
 
                 <div class="mol-demo-callout mol-demo-callout--warn">
-                    <strong>Tip:</strong> For symmetric padding use <code>@include padding(Y X)</code> — 2 values.
+                    <strong>Tip:</strong> For symmetric padding use <code>@include padding(Y X)</code>  2 values.
                     For asymmetric use all 4: <code>@include padding(top right bottom left)</code>.
                 </div>
             </section>
 
             <!-- SIZING MIXIN -->
             <section id="mixins-sizing" class="mol-card" aria-labelledby="sizing-heading">
-                <h2 id="sizing-heading" class="syx-title syx-title--h2 syx-mb-1">Sizing Mixin</h2>
+                <h2 id="sizing-heading" class="atom-title atom-title--h2 syx-mb-1">Sizing Mixin</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     <code>@include size()</code> sets width and height. One argument = square.
                 </p>
 
-                <div class="syx-code-label">SCSS ? CSS</div>
-                <div class="syx-code syx-mb-4">// Square (one arg)
+                <div class="atom-code-label">SCSS ? CSS</div>
+                <div class="atom-code syx-mb-4">// Square (one arg)
                     @include size(48px);
                     // ? width: 48px; height: 48px;
 
@@ -471,8 +471,8 @@
                     @include size(var(--component-avatar-size));
                     // ? width: var(--component-avatar-size); height: var(--component-avatar-size);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include aspect-ratio()</code></h3>
-                <div class="syx-code syx-mb-3">// 16:9 video embed
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include aspect-ratio()</code></h3>
+                <div class="atom-code syx-mb-3">// 16:9 video embed
                     .video-wrapper { @include aspect-ratio(16, 9); }
 
                     // Square thumbnail
@@ -488,13 +488,13 @@
 
             <!-- FLEXBOX MIXINS -->
             <section id="mixins-flex" class="mol-card" aria-labelledby="flex-heading">
-                <h2 id="flex-heading" class="syx-title syx-title--h2 syx-mb-1">Flexbox Mixins</h2>
+                <h2 id="flex-heading" class="atom-title atom-title--h2 syx-mb-1">Flexbox Mixins</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     The two most common flex patterns, as single-line mixins.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include flex-center()</code></h3>
-                <div class="syx-code syx-mb-3">// Centers children both axes
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include flex-center()</code></h3>
+                <div class="atom-code syx-mb-3">// Centers children both axes
                     .icon-wrapper {
                     @include flex-center();
                     @include size(48px);
@@ -505,8 +505,8 @@
                     <div class="mol-demo-flex-center">Centered content</div>
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include flex-between()</code></h3>
-                <div class="syx-code syx-mb-3">// Space-between row — navbars, card headers
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include flex-between()</code></h3>
+                <div class="atom-code syx-mb-3">// Space-between row  navbars, card headers
                     .card__header {
                     @include flex-between();
                     @include padding(1rem);
@@ -514,17 +514,17 @@
                 <div class="mol-demo-box">
                     <div class="mol-demo-flex-between">
                         <span>Card Title</span>
-                        <button class="syx-btn syx-btn--primary syx-btn--size-sm">Action</button>
+                        <button class="atom-btn atom-btn--primary atom-btn--size-sm">Action</button>
                     </div>
                 </div>
             </section>
 
             <!-- TEXT MIXINS -->
             <section id="mixins-text" class="mol-card" aria-labelledby="text-heading">
-                <h2 id="text-heading" class="syx-title syx-title--h2 syx-mb-1">Text Mixins</h2>
+                <h2 id="text-heading" class="atom-title atom-title--h2 syx-mb-1">Text Mixins</h2>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include truncate()</code> — single line</h3>
-                <div class="syx-code syx-mb-3">// Truncate to max-width (default: 100%)
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include truncate()</code>  single line</h3>
+                <div class="atom-code syx-mb-3">// Truncate to max-width (default: 100%)
                     .card__title {
                     @include truncate(240px);
                     }
@@ -539,8 +539,8 @@
                     </div>
                 </div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include ellipsis($lines)</code> — multi-line</h3>
-                <div class="syx-code syx-mb-3">// Clamp to N lines
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include ellipsis($lines)</code>  multi-line</h3>
+                <div class="atom-code syx-mb-3">// Clamp to N lines
                     .card__excerpt {
                     @include ellipsis(2);
                     }
@@ -560,15 +560,15 @@
 
             <!-- ANIMATION MIXIN -->
             <section id="mixins-animation" class="mol-card" aria-labelledby="animation-heading">
-                <h2 id="animation-heading" class="syx-title syx-title--h2 syx-mb-1">Animation Mixin</h2>
+                <h2 id="animation-heading" class="atom-title atom-title--h2 syx-mb-1">Animation Mixin</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     <code>@include transition()</code> automatically adds a
-                    <code>prefers-reduced-motion</code> guard Â— no extra code needed.
+                    <code>prefers-reduced-motion</code> guard Â no extra code needed.
                 </p>
 
-                <div class="syx-code-label">SCSS</div>
-                <div class="syx-code syx-mb-3">// Single property
-                    .syx-btn {
+                <div class="atom-code-label">SCSS</div>
+                <div class="atom-code syx-mb-3">// Single property
+                    .atom-btn {
                     @include transition(background-color 0.2s ease);
                     }
 
@@ -580,13 +580,13 @@
                     );
                     }</div>
 
-                <div class="syx-code-label">Generated CSS</div>
-                <div class="syx-code syx-mb-3">/* Always emits the reduced-motion guard automatically */
-                    .syx-btn {
+                <div class="atom-code-label">Generated CSS</div>
+                <div class="atom-code syx-mb-3">/* Always emits the reduced-motion guard automatically */
+                    .atom-btn {
                     transition: background-color 0.2s ease;
                     }
                     @media (prefers-reduced-motion: reduce) {
-                    .syx-btn { transition: none; }
+                    .atom-btn { transition: none; }
                     }</div>
 
                 <div class="mol-demo-callout mol-demo-callout--good">
@@ -597,13 +597,13 @@
 
             <!-- MEDIA QUERIES -->
             <section id="mixins-mq" class="mol-card" aria-labelledby="mq-heading">
-                <h2 id="mq-heading" class="syx-title syx-title--h2 syx-mb-1">Media Query Mixins</h2>
+                <h2 id="mq-heading" class="atom-title atom-title--h2 syx-mb-1">Media Query Mixins</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-3">
                     Mobile-first (min-width) named breakpoints. Em-based for zoom safety.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Breakpoint scale</h3>
-                <table class="syx-table syx-mb-4">
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Breakpoint scale</h3>
+                <table class="atom-table syx-mb-4">
                     <caption class="syx-sr-only">SYX breakpoint scale</caption>
                     <thead>
                         <tr>
@@ -653,9 +653,9 @@
                     </tbody>
                 </table>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include breakpoint()</code></h3>
-                <div class="syx-code-label">SCSS</div>
-                <div class="syx-code syx-mb-3">// Mobile-first: style mobile, override upward
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include breakpoint()</code></h3>
+                <div class="atom-code-label">SCSS</div>
+                <div class="atom-code syx-mb-3">// Mobile-first: style mobile, override upward
                     .hero__title {
                     font-size: 2rem; // mobile default
 
@@ -677,13 +677,13 @@
                     }
                     }</div>
 
-                <div class="syx-code-label">Generated CSS</div>
-                <div class="syx-code syx-mb-4">.hero__title { font-size: 2rem; }
+                <div class="atom-code-label">Generated CSS</div>
+                <div class="atom-code syx-mb-4">.hero__title { font-size: 2rem; }
                     @media (min-width: 50em) { .hero__title { font-size: 3rem; } }
                     @media (min-width: 70em) { .hero__title { font-size: 4rem; } }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include darkmode</code></h3>
-                <div class="syx-code syx-mb-3">.card {
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include darkmode</code></h3>
+                <div class="atom-code syx-mb-3">.card {
                     background: var(--semantic-color-surface);
 
                     @include darkmode {
@@ -691,8 +691,8 @@
                     }
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include reduced-motion</code></h3>
-                <div class="syx-code syx-mb-3">// Manual override (usually not needed — @include transition() handles
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include reduced-motion</code></h3>
+                <div class="atom-code syx-mb-3">// Manual override (usually not needed  @include transition() handles
                     this)
                     .animated-element {
                     animation: slide-in 0.4s ease;
@@ -705,13 +705,13 @@
 
             <!-- ACCESSIBILITY MIXINS -->
             <section id="mixins-a11y" class="mol-card" aria-labelledby="a11y-heading">
-                <h2 id="a11y-heading" class="syx-title syx-title--h2 syx-mb-1">Accessibility Mixins</h2>
+                <h2 id="a11y-heading" class="atom-title atom-title--h2 syx-mb-1">Accessibility Mixins</h2>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include sr-only()</code></h3>
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include sr-only()</code></h3>
                 <p class="syx-type-body syx-text-gray syx-mb-2">
                     Visually hides an element while keeping it accessible to screen readers.
                 </p>
-                <div class="syx-code syx-mb-4">// Skip navigation link
+                <div class="atom-code syx-mb-4">// Skip navigation link
                     .skip-link {
                     @include sr-only();
 
@@ -727,12 +727,12 @@
                     @include sr-only();
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include focus-ring()</code></h3>
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include focus-ring()</code></h3>
                 <p class="syx-type-body syx-text-gray syx-mb-2">
                     WCAG-compliant focus outline. Uses <code>outline</code> (not <code>box-shadow</code>)
                     so it's not clipped by <code>overflow: hidden</code>.
                 </p>
-                <div class="syx-code syx-mb-3">// Default (uses --color-primary)
+                <div class="atom-code syx-mb-3">// Default (uses --color-primary)
                     a:focus-visible {
                     @include focus-ring();
                     }
@@ -743,16 +743,16 @@
                     }</div>
                 <div class="mol-demo-box">
                     <p class="syx-type-body-small syx-text-gray syx-mb-2">Tab to see focus ring:</p>
-                    <button class="syx-btn syx-btn--primary syx-btn--filled syx-btn--size-md">Focus me</button>
+                    <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">Focus me</button>
                 </div>
             </section>
 
             <!-- LAYOUT MIXINS -->
             <section id="mixins-layout" class="mol-card" aria-labelledby="layout-heading">
-                <h2 id="layout-heading" class="syx-title syx-title--h2 syx-mb-1">Layout Mixins</h2>
+                <h2 id="layout-heading" class="atom-title atom-title--h2 syx-mb-1">Layout Mixins</h2>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2"><code>@include clearfix()</code></h3>
-                <div class="syx-code syx-mb-4">// Modern clearfix (display: flow-root)
+                <h3 class="atom-title atom-title--h4 syx-mb-2"><code>@include clearfix()</code></h3>
+                <div class="atom-code syx-mb-4">// Modern clearfix (display: flow-root)
                     .legacy-float-container {
                     @include clearfix();
                     }</div>
@@ -760,13 +760,13 @@
 
             <!-- RECIPES -->
             <section id="recipes" class="mol-card" aria-labelledby="recipes-heading">
-                <h2 id="recipes-heading" class="syx-title syx-title--h2 syx-mb-1">Component Recipes</h2>
+                <h2 id="recipes-heading" class="atom-title atom-title--h2 syx-mb-1">Component Recipes</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
                     Real-world patterns combining multiple mixins and tokens.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 1 — Overlay badge</h3>
-                <div class="syx-code syx-mb-4">// A badge positioned top-right of a card
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Recipe 1  Overlay badge</h3>
+                <div class="atom-code syx-mb-4">// A badge positioned top-right of a card
                     .card {
                     @include relative(); // positioning context
                     }
@@ -782,8 +782,8 @@
                     font-weight: 700;
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 2 — Responsive card grid</h3>
-                <div class="syx-code syx-mb-4">// 1 col mobile ? 2 col tablet ? 3 col desktop
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Recipe 2  Responsive card grid</h3>
+                <div class="atom-code syx-mb-4">// 1 col mobile ? 2 col tablet ? 3 col desktop
                     .card-grid {
                     display: grid;
                     grid-template-columns: 1fr;
@@ -807,8 +807,8 @@
                     }
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Recipe 3 — New atom from scratch</h3>
-                <div class="syx-code syx-mb-4">// scss/atoms/_tag.scss
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Recipe 3  New atom from scratch</h3>
+                <div class="atom-code syx-mb-4">// scss/atoms/_tag.scss
                     @use "../abstracts/index" as *;
 
                     @mixin atom-tag($theme: null) {
@@ -834,73 +834,73 @@
 
             <!-- ANTI-PATTERNS -->
             <section id="antipatterns" class="mol-card" aria-labelledby="antipatterns-heading">
-                <h2 id="antipatterns-heading" class="syx-title syx-title--h2 syx-mb-1">Anti-patterns</h2>
+                <h2 id="antipatterns-heading" class="atom-title atom-title--h2 syx-mb-1">Anti-patterns</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
                     Common mistakes and how to fix them.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">? Inline position instead of mixin</h3>
-                <div class="syx-code syx-mb-2">// ? Wrong
+                <h3 class="atom-title atom-title--h4 syx-mb-2">? Inline position instead of mixin</h3>
+                <div class="atom-code syx-mb-2">// ? Wrong
                     .card { position: relative; }
                     .badge { position: absolute; top: 0; right: 0; }</div>
-                <div class="syx-code syx-mb-4">// ? Correct
+                <div class="atom-code syx-mb-4">// ? Correct
                     .card { @include relative(); }
                     .badge { @include absolute($top: 0, $right: 0); }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">? Inline transition instead of mixin</h3>
-                <div class="syx-code syx-mb-2">// ? Wrong Â— no reduced-motion guard
+                <h3 class="atom-title atom-title--h4 syx-mb-2">? Inline transition instead of mixin</h3>
+                <div class="atom-code syx-mb-2">// ? Wrong Â no reduced-motion guard
                     .btn { transition: background-color 0.2s ease; }</div>
-                <div class="syx-code syx-mb-4">// ? Correct Â— guard included automatically
+                <div class="atom-code syx-mb-4">// ? Correct Â guard included automatically
                     .btn { @include transition(background-color 0.2s ease); }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">? Hardcoded values instead of tokens</h3>
-                <div class="syx-code syx-mb-2">// ? Wrong
+                <h3 class="atom-title atom-title--h4 syx-mb-2">? Hardcoded values instead of tokens</h3>
+                <div class="atom-code syx-mb-2">// ? Wrong
                     .card { border-radius: 8px; color: #1a1a2e; }</div>
-                <div class="syx-code syx-mb-4">// ? Correct
+                <div class="atom-code syx-mb-4">// ? Correct
                     .card {
                     border-radius: var(--semantic-border-radius-md);
                     color: var(--semantic-color-text-primary);
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">? Using !important</h3>
-                <div class="syx-code syx-mb-2">// ? Wrong Â— @layer makes this unnecessary
+                <h3 class="atom-title atom-title--h4 syx-mb-2">? Using !important</h3>
+                <div class="atom-code syx-mb-2">// ? Wrong Â @layer makes this unnecessary
                     .syx-d-none { display: none !important; }</div>
-                <div class="syx-code syx-mb-4">// ? Correct Â— @layer syx.utilities wins by position
+                <div class="atom-code syx-mb-4">// ? Correct Â @layer syx.utilities wins by position
                     @layer syx.utilities {
                     .syx-d-none { display: none; }
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">? Using primitive tokens in components</h3>
-                <div class="syx-code syx-mb-2">// ? Wrong Â— breaks theming
-                    .syx-btn { background: var(--primitive-color-purple-500); }</div>
-                <div class="syx-code syx-mb-4">// ? Correct Â— theme-swappable
-                    .syx-btn { background: var(--component-btn-primary-bg); }</div>
+                <h3 class="atom-title atom-title--h4 syx-mb-2">? Using primitive tokens in components</h3>
+                <div class="atom-code syx-mb-2">// ? Wrong Â breaks theming
+                    .atom-btn { background: var(--primitive-color-purple-500); }</div>
+                <div class="atom-code syx-mb-4">// ? Correct Â theme-swappable
+                    .atom-btn { background: var(--component-btn-primary-bg); }</div>
 
                 <div class="mol-demo-callout mol-demo-callout--warn">
                     <strong>Rule of thumb:</strong> If you find yourself writing <code>position:</code>,
-                    <code>transition:</code>, <code>!important</code>, or a hex color directly in a component Â—
+                    <code>transition:</code>, <code>!important</code>, or a hex color directly in a component Â
                     stop and use the mixin or token equivalent.
                 </div>
             </section>
 
             <!-- SINGLE-PARTIAL MULTI-THEME PATTERN -->
             <section id="single-partial-pattern" class="mol-card" aria-labelledby="single-partial-heading">
-                <h2 id="single-partial-heading" class="syx-title syx-title--h2 syx-mb-1">Single-Partial Multi-Theme
+                <h2 id="single-partial-heading" class="atom-title atom-title--h2 syx-mb-1">Single-Partial Multi-Theme
                     Pattern</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
                     One SCSS file per component handles <strong>all themes</strong> via three distinct mechanisms.
                     No per-theme copies, no duplication.
                 </p>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 1 &mdash; CSS Custom Property <code>var()</code>
+                <h3 class="atom-title atom-title--h4 syx-mb-1">Method 1 &mdash; CSS Custom Property <code>var()</code>
                 </h3>
                 <p class="syx-type-body syx-text-gray syx-mb-2">
                     For values that <strong>all themes have</strong> but differ in value (colors, spacing, icons).
                     Use a generic token in the partial; each <code>_theme.scss</code> overrides it.
                 </p>
-                <div class="syx-code syx-mb-4">// organisms/_header.scss
-                    background-color: var(--component-header-bg); // generic â€” every theme has this
-                    background-image: var(--component-header-logo-icon); // generic â€” every theme overrides it
+                <div class="atom-code syx-mb-4">// organisms/_header.scss
+                    background-color: var(--component-header-bg); // generic â every theme has this
+                    background-image: var(--component-header-logo-icon); // generic â every theme overrides it
 
                     // themes/example-02/_theme.scss (Codymer)
                     --component-header-logo-icon: var(--icon-logo-codymer);
@@ -908,19 +908,19 @@
                     // themes/example-03/_theme.scss (Coral)
                     --component-header-logo-icon: var(--icon-logo-coral);</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 2 &mdash; Sass Map <code>theme-cfg()</code></h3>
+                <h3 class="atom-title atom-title--h4 syx-mb-1">Method 2 &mdash; Sass Map <code>theme-cfg()</code></h3>
                 <p class="syx-type-body syx-text-gray syx-mb-2">
                     For <strong>structural differences</strong> resolved at compile time (layout, position, Sass-only
                     sizes).
                     Values live in <code>abstracts/_theme-config.scss</code> and are read with <code>theme-cfg()</code>.
                 </p>
-                <div class="syx-code syx-mb-4">// abstracts/_theme-config.scss
+                <div class="atom-code syx-mb-4">// abstracts/_theme-config.scss
                     $theme-config: (
                     'codymer': (header-sidenav-side: right, header-logo-size: 2.4rem),
                     'coral': (header-sidenav-side: left, header-logo-size: 2rem),
                     );
 
-                    // organisms/_header.scss â€” reads the map at compile time
+                    // organisms/_header.scss â reads the map at compile time
                     @if theme-cfg($theme, 'header-sidenav-side', left) == right {
                     right: 0;
                     transform: translateX(100%); // Codymer: slides in from right
@@ -929,12 +929,12 @@
                     transform: translateX(-100%); // all others: slides in from left
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-1">Method 3 &mdash; <code>@if $theme</code></h3>
+                <h3 class="atom-title atom-title--h4 syx-mb-1">Method 3 &mdash; <code>@if $theme</code></h3>
                 <p class="syx-type-body syx-text-gray syx-mb-2">
                     For <strong>one-off rules</strong> that only 1-2 themes need.
                     No token or map entry required &mdash; inline override in the partial.
                 </p>
-                <div class="syx-code syx-mb-4">// organisms/_header.scss
+                <div class="atom-code syx-mb-4">// organisms/_header.scss
                     @if $theme == 'codymer' {
                     border-bottom: 1px solid var(--semantic-color-border-subtle); // Codymer only
                     }
@@ -942,8 +942,8 @@
                     backdrop-filter: blur(8px); // Midnight glass effect only
                     }</div>
 
-                <h3 class="syx-title syx-title--h4 syx-mb-2">Decision table</h3>
-                <table class="syx-table syx-mb-4">
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Decision table</h3>
+                <table class="atom-table syx-mb-4">
                     <thead>
                         <tr>
                             <th>Question</th>
@@ -978,7 +978,7 @@
 
 
     <!-- ============================================
-       FOOTER (org-site-footer â€” universal)
+       FOOTER (org-site-footer â universal)
   ============================================= -->
     <footer class="org-site-footer" role="contentinfo">
         <div class="org-site-footer__inner">
@@ -989,16 +989,16 @@
             </div>
 
             <nav class="org-site-footer__links" aria-label="Footer navigation">
-                <a href="docs-foundation.html" class="syx-link syx-link--primary syx-type-body-small">Foundation</a>
-                <a href="docs-components.html" class="syx-link syx-link--primary syx-type-body-small">Components</a>
-                <a href="docs-utilities.html" class="syx-link syx-link--primary syx-type-body-small">Utilities</a>
-                <a href="docs-elements.html" class="syx-link syx-link--primary syx-type-body-small">Elements</a>
-                <a href="docs-developer-guide.html" class="syx-link syx-link--primary syx-type-body-small">Dev Guide</a>
+                <a href="docs-foundation.html" class="atom-link atom-link--primary syx-type-body-small">Foundation</a>
+                <a href="docs-components.html" class="atom-link atom-link--primary syx-type-body-small">Components</a>
+                <a href="docs-utilities.html" class="atom-link atom-link--primary syx-type-body-small">Utilities</a>
+                <a href="docs-elements.html" class="atom-link atom-link--primary syx-type-body-small">Elements</a>
+                <a href="docs-developer-guide.html" class="atom-link atom-link--primary syx-type-body-small">Dev Guide</a>
             </nav>
 
             <small class="org-site-footer__copy">
                 &copy; 2026 Syx Design System &mdash; Built by
-                <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis
+                <a href="https://github.com/jlpizarro" class="atom-link atom-link--primary" rel="author">José Luis
                     Pizarro Feo</a>
             </small>
 
