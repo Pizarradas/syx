@@ -1,0 +1,168 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOL: form-field
+// ===============================================
+@mixin mol-form-field($theme: null) {
+  .mol-form-field {
+    @include position(relative);
+    // Legacy support alias if needed, otherwise just standard margin
+    margin-bottom: var(--component-form-field-margin-bottom);
+
+    // ICONS (State or Custom)
+    // ===============================================
+    &:before {
+      content: "";
+      @include position(
+        absolute,
+        0,
+        var(--component-form-field-icon-position-right),
+        0,
+        null
+      );
+      margin: auto 0;
+      @include size(var(--component-form-field-icon-size));
+      filter: var(--semantic-filter-primary);
+      pointer-events: none;
+      opacity: 0;
+      @include transition(opacity 0.2s ease);
+    }
+
+    // LABEL
+    // ===============================================
+    .syx-label {
+      margin-bottom: var(--component-form-field-label-margin-bottom);
+      display: block;
+      color: var(--component-form-field-color);
+      font-weight: var(--semantic-font-weight-bold);
+    }
+
+    // HELPER MESSAGE
+    // ===============================================
+    &__msg {
+      margin-top: var(--component-form-field-msg-margin-top);
+      display: block;
+      font-size: var(--component-form-field-msg-font-size);
+      line-height: var(--component-form-field-msg-line-height);
+      color: var(--component-form-field-color); // Default color
+    }
+
+    // STATE: HAS SELECT (Arrow Icon)
+    // ===============================================
+    &--has-select {
+      &:not([class*="--is-"]) {
+        &:before {
+          opacity: 1;
+           @include background-setup(
+            var(--icon-arrow-default),
+            "center / contain",
+            no-repeat
+          );
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    // STATE: ERROR
+    // ===============================================
+    &--is-error {
+      &:before {
+        opacity: 1;
+        @include background-setup(
+          var(--icon-user-interface-cancel),
+          "center / contain",
+          no-repeat
+        );
+        filter: var(--semantic-filter-state-ko);
+      }
+
+      .syx-label {
+        color: var(--component-form-field-error-color);
+      }
+      
+      .syx-input {
+        border-color: var(--component-form-field-error-border);
+        &:focus {
+           border-color: var(--component-form-field-error-border);
+           box-shadow: 0 0 0 1px var(--component-form-field-error-border);
+        }
+      }
+
+      .mol-form-field__msg {
+        color: var(--component-form-field-error-color);
+      }
+    }
+
+    // STATE: SUCCESS
+    // ===============================================
+    &--is-success {
+      &:before {
+        opacity: 1;
+        @include background-setup(
+           var(--icon-check), // Standardize icon
+          "center / contain",
+          no-repeat
+        );
+        filter: var(--semantic-filter-state-ok);
+      }
+
+      .syx-label {
+        color: var(--component-form-field-success-color);
+      }
+
+      .syx-input {
+         border-color: var(--component-form-field-success-border);
+      }
+
+      .mol-form-field__msg {
+        color: var(--component-form-field-success-color);
+      }
+    }
+
+    // STATE: WARNING
+    // ===============================================
+    &--is-warning {
+      &:before {
+        opacity: 1;
+        @include background-setup(
+           var(--icon-alert), // Standardize icon
+          "center / contain",
+          no-repeat
+        );
+        filter: var(--semantic-filter-state-warning);
+      }
+
+      .syx-label {
+        color: var(--component-form-field-warning-color);
+      }
+
+      .syx-input {
+        border-color: var(--component-form-field-warning-border);
+      }
+
+      .mol-form-field__msg {
+        color: var(--component-form-field-warning-color);
+      }
+    }
+
+    // LAYOUT ADJUSTMENT FOR ICONS
+    // ===============================================
+    // If an icon is present (state or select), add padding to the field input
+    &:where([class*="--has-select"], [class*="--is-"]) {
+      .syx-input {
+        padding-right: calc(var(--component-form-field-icon-position-right) + var(--component-form-field-icon-size));
+      }
+    }
+
+    // HIDE HELPER MESSAGE BY DEFAULT IF NOT IN STATE
+    // ===============================================
+    // (Optional: Depends on UX requirements. legacy code hid it)
+    &:not([class*="--is-"]) {
+       .mol-form-field__msg {
+         display: none; // Simpler than hide-visually if purely for state messages
+       }
+    }
+  }
+}

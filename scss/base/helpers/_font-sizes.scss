@@ -1,0 +1,56 @@
+// CORE
+// ===============================================
+@use "../../abstracts/index" as *;
+// ===============================================
+
+// MIXIN HELPER: font-sizes
+// ===============================================
+@mixin helper-font-sizes($theme: null) {
+  .helper-font-size {
+    // &-1
+    &-1 {
+      font-size: var(--font-size-1);
+      line-height: var(--font-size-1);
+    }
+
+    // &-2
+    &-2 {
+      font-size: var(--font-size-2);
+      line-height: var(--font-size-2);
+      @include min-screen($breakpoint-md) {
+        font-size: calc(10% + var(--font-size-2));
+        line-height: calc(10% + var(--font-size-2)); 
+      }
+    }
+
+    // &-3
+    &-3 {
+      font-size: var(--font-size-3);
+      line-height: var(--font-size-3);
+      @include min-screen($breakpoint-md) {
+        font-size: calc(20% + var(--font-size-3));
+        line-height: calc(20% + var(--font-size-3));
+      }
+    }
+
+    // &-4
+    &-4 {
+      font-size: var(--font-size-4);
+      line-height: var(--font-size-4);
+      @include min-screen($breakpoint-md) {
+        font-size: calc(30% + var(--font-size-4));
+        line-height: calc(30% + var(--font-size-4));
+      }
+    }
+
+    // &-5
+    &-5 {
+      font-size: var(--font-size-5);
+      line-height: var(--font-size-5);
+      @include min-screen($breakpoint-md) {
+        font-size: calc(50% + var(--font-size-5));
+        line-height: calc(50% + var(--font-size-5)); 
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOL: form-field-set
+// ===============================================
+@mixin mol-form-field-set($theme: null) {
+  .mol-form-field-set {
+    display: flex;
+    flex-direction: column;
+    gap: var(--component-form-group-gap); 
+    // Uses standardized gap from _forms.scss tokens
+
+    // &--inline
+    &--inline {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      // .mol-form-field child items
+      .mol-form-field {
+        flex: 1 1 auto;
+        // Consider tokenizing this min-width if critical, or leave as sensible default
+        min-width: 12.5rem; // 200px equivalent, but using rem
+      }
+    }
+  }
+}

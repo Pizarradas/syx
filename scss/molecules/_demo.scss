@@ -1,0 +1,273 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOLECULE: demo
+// ===============================================
+// Demo/documentation-only molecules.
+// These classes are ONLY needed for the SYX demo
+// site (index.html + docs/*.html). Any team that
+// adopts SYX for production can safely remove this
+// entire module without affecting the design system.
+// ===============================================
+
+@mixin mol-demo($theme: null) {
+
+  // -----------------------------------------------
+  // TYPOGRAPHY SPECIMEN
+  // Shows a type scale entry with meta + live preview
+  // -----------------------------------------------
+  .mol-demo-specimen {
+    display: flex;
+    align-items: baseline;
+    gap: var(--semantic-space-layout-md);
+    padding: var(--semantic-space-layout-sm) 0;
+    border-bottom: 1px solid var(--semantic-color-border-subtle);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &__meta {
+      min-width: 160px;
+      flex-shrink: 0;
+    }
+
+    &__label {
+      font-size: var(--semantic-font-size-caption);
+      color: var(--semantic-color-text-tertiary);
+      font-family: var(--primitive-font-family-mono);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    &__size {
+      font-size: var(--semantic-font-size-caption);
+      color: var(--semantic-color-text-tertiary);
+      display: block;
+    }
+  }
+
+  // -----------------------------------------------
+  // SPACING SPECIMEN
+  // Shows a spacing token as a visual bar + label
+  // -----------------------------------------------
+  .mol-demo-spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-space-layout-sm);
+    padding: var(--semantic-space-component-sm) 0;
+    border-bottom: 1px solid var(--semantic-color-border-subtle);
+
+    &:last-child { border-bottom: none; }
+
+    &__bar {
+      background: linear-gradient(
+        90deg,
+        var(--primitive-color-blue-200),
+        var(--primitive-color-blue-100)
+      );
+      border-radius: var(--semantic-border-radius-sm);
+      height: 20px;
+      flex-shrink: 0;
+
+      // Width modifiers — one per spacing token
+      &--1  { width: var(--primitive-space-1); }   // 8px
+      &--2  { width: var(--primitive-space-2); }   // 16px
+      &--3  { width: var(--primitive-space-3); }   // 24px
+      &--4  { width: var(--primitive-space-4); }   // 32px
+      &--6  { width: var(--primitive-space-6); }   // 48px
+    }
+
+    &__label {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--semantic-color-text-secondary);
+      font-family: var(--primitive-font-family-mono);
+      min-width: 130px;
+    }
+
+    &__value {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--semantic-color-text-tertiary);
+    }
+  }
+
+  // -----------------------------------------------
+  // PREVIEW AREA
+  // Sandbox container for live component demos
+  // -----------------------------------------------
+  .mol-demo-preview {
+    background: var(--semantic-color-bg-secondary);
+    border: 1px solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-border-radius-md);
+    @include padding(var(--semantic-space-layout-md));
+    margin-bottom: var(--semantic-space-layout-sm);
+    overflow-x: auto;
+  }
+
+  // -----------------------------------------------
+  // GRID DEMO CELL
+  // Colored column cell used in grid documentation
+  // -----------------------------------------------
+  .mol-demo-grid-cell {
+    background: var(--primitive-color-blue-100);
+    text-align: center;
+    padding: var(--semantic-space-component-sm);
+    font-size: var(--semantic-font-size-caption);
+    border-radius: var(--semantic-border-radius-sm);
+    color: var(--primitive-color-blue-700);
+    font-family: var(--primitive-font-family-mono);
+
+    &--alt {
+      background: var(--primitive-color-blue-200);
+      color: var(--primitive-color-blue-900);
+    }
+  }
+
+  // -----------------------------------------------
+  // GRID DEMO WRAPPER
+  // Container background for grid column examples
+  // -----------------------------------------------
+  .mol-demo-grid-wrapper {
+    background: var(--semantic-color-bg-tertiary);
+    padding: var(--semantic-space-component-sm);
+    border-radius: var(--semantic-border-radius-md);
+    margin-bottom: var(--semantic-space-layout-sm);
+  }
+
+  // -----------------------------------------------
+  // DEMO BOX
+  // Generic bordered container for isolated examples
+  // -----------------------------------------------
+  .mol-demo-box {
+    background: var(--semantic-color-bg-secondary);
+    border: 1px solid var(--semantic-color-border-subtle);
+    border-radius: var(--semantic-border-radius-md);
+    @include padding(var(--semantic-space-layout-md));
+    margin-bottom: var(--semantic-space-layout-sm);
+  }
+
+  // -----------------------------------------------
+  // TOKEN ROW
+  // Horizontal row pairing a swatch + token name/value
+  // -----------------------------------------------
+  .mol-demo-token-row {
+    display: flex;
+    align-items: center;
+    gap: var(--semantic-space-inline-md);
+    padding: var(--semantic-space-component-xs) 0;
+  }
+
+  // -----------------------------------------------
+  // COLOR SWATCH (inside token rows)
+  // -----------------------------------------------
+  .mol-demo-swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--semantic-border-radius-sm);
+    border: 1px solid var(--semantic-color-border-subtle);
+    flex-shrink: 0;
+  }
+
+  // -----------------------------------------------
+  // ASPECT RATIO BOX
+  // Used to showcase aspect-ratio mixin
+  // -----------------------------------------------
+  .mol-demo-aspect {
+    aspect-ratio: 16 / 9;
+    background: var(--semantic-color-bg-tertiary);
+    border-radius: var(--semantic-border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-tertiary);
+    font-family: var(--primitive-font-family-mono);
+  }
+
+  // -----------------------------------------------
+  // FLEX CENTER / BETWEEN demos
+  // Used to showcase flexbox alignment utilities
+  // -----------------------------------------------
+  .mol-demo-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--semantic-space-component-md);
+    background: var(--semantic-color-bg-tertiary);
+    border-radius: var(--semantic-border-radius-sm);
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+  }
+
+  .mol-demo-flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--semantic-space-component-md);
+    background: var(--semantic-color-bg-tertiary);
+    border-radius: var(--semantic-border-radius-sm);
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+  }
+
+  // -----------------------------------------------
+  // TRUNCATION / ELLIPSIS demos
+  // -----------------------------------------------
+  .mol-demo-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 260px;
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+  }
+
+  .mol-demo-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+  }
+
+  // -----------------------------------------------
+  // INLINE LABEL (fixed-width label for gap demos)
+  // -----------------------------------------------
+  .mol-demo-label {
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-tertiary);
+    font-family: var(--primitive-font-family-mono);
+    min-width: 60px;
+    display: inline-block;
+  }
+
+  // -----------------------------------------------
+  // CALLOUT — guides and best practices blocks
+  // Used in developer-guide to highlight good/warn
+  // -----------------------------------------------
+  .mol-demo-callout {
+    padding: var(--semantic-space-component-md) var(--semantic-space-component-lg);
+    border-left: 4px solid var(--semantic-color-border-default);
+    background: var(--semantic-color-bg-secondary);
+    border-radius: 0 var(--semantic-border-radius-sm) var(--semantic-border-radius-sm) 0;
+    margin-bottom: var(--semantic-space-layout-sm);
+    font-size: var(--semantic-font-size-body-small);
+    color: var(--semantic-color-text-secondary);
+
+    &--good {
+      border-left-color: var(--semantic-color-state-ok);
+      background: color-mix(in srgb, var(--semantic-color-state-ok) 8%, var(--semantic-color-bg-primary));
+      color: var(--semantic-color-text-primary);
+    }
+
+    &--warn {
+      border-left-color: var(--semantic-color-state-warning);
+      background: color-mix(in srgb, var(--semantic-color-state-warning) 8%, var(--semantic-color-bg-primary));
+      color: var(--semantic-color-text-primary);
+    }
+  }
+}

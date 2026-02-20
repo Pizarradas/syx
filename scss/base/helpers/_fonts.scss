@@ -1,0 +1,155 @@
+// CORE
+// ===============================================
+@use "../../abstracts/index" as *;
+// ===============================================
+
+// MIXIN HELPER: fonts
+// ===============================================
+@mixin helper-fonts($theme: null) {
+  .helper-font {
+    // &-color
+    &-color {
+      // &-black
+      &-black {
+        color: var(--color-black);
+      }
+
+      // &-white
+      &-white {
+        color: var(--color-white);
+      }
+
+      // &-blue
+      &-blue {
+        
+        // &-facebook
+        &-facebook {
+          color: var(--color-brand-fb-blue);
+        }
+
+        // &-instagram
+        &-instagram {
+          color: var(--color-brand-instagram-blue);
+        }
+
+        // &-twitter
+        &-twitter {
+          color: var(--color-brand-twitter-blue);
+        }
+      }
+
+      // &-green
+      &-green {
+        // &-whatsapp
+        &-whatsapp {
+          color: var(--color-brand-whatsapp-green);
+        }
+      }
+
+      // &-purple
+      &-purple {
+        // &-instagram
+        &-instagram {
+          color: var(--color-brand-instagram-purple);
+        }
+      }
+
+      // &-primary
+      &-primary {
+        color: var(--color-primary);
+      }
+
+      // &-secondary
+      &-secondary {
+        color: var(--color-secondary);
+      }
+
+      // &-tertiary
+      &-tertiary {
+        color: var(--color-tertiary);
+      }
+
+      // &-quaternary
+      &-quaternary {
+        color: var(--color-quaternary);
+      }
+
+      // &-quinary
+      &-quinary {
+        color: var(--color-quinary);
+      }
+
+      // &-septenary
+      &-septenary {
+        color: var(--color-septenary);
+      }
+    }
+
+    // &-weight
+    &-weight {
+      // &-1
+      &-1 {
+        font-family: var(--font-weight-1);
+      }
+
+      // &-2
+      &-2 {
+        font-family: var(--font-weight-2);
+      }
+
+      // &-3
+      &-3 {
+        font-family: var(--font-weight-3);
+      }
+    }
+
+    // &-scope
+    &-scope {
+      // &-1
+      &-1 {
+        font-size: var(--scope-1);
+        line-height: var(--scope-1);
+      }
+
+      // &-2
+      &-2 {
+        font-size: var(--scope-2);
+        line-height: var(--scope-2);
+        @include min-screen($breakpoint-md) {
+          font-size: calc(10% + var(--scope-2));
+          line-height: calc(10% + var(--scope-2)); 
+        }
+      }
+
+      // &-3
+      &-3 {
+        font-size: var(--scope-3);
+        line-height: var(--scope-3);
+        @include min-screen($breakpoint-md) {
+          font-size: calc(20% + var(--scope-3));
+          line-height: calc(20% + var(--scope-3));
+        }
+      }
+
+      // &-4
+      &-4 {
+        font-size: var(--scope-4);
+        line-height: var(--scope-4);
+        @include min-screen($breakpoint-md) {
+          font-size: calc(30% + var(--scope-4));
+          line-height: calc(30% + var(--scope-4));
+        }
+      }
+
+      // &-5
+      &-5 {
+        font-size: var(--scope-5);
+        line-height: var(--scope-5);
+        @include min-screen($breakpoint-md) {
+          font-size: calc(50% + var(--scope-5));
+          line-height: calc(50% + var(--scope-5)); 
+        }
+      }
+    }
+  }
+}

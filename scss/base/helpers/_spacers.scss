@@ -1,0 +1,38 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+// ===============================================
+
+// MIXIN HELPER: spacer
+// ===============================================
+@mixin helper-spacer($theme: null) {
+  .helper-spacer {
+    // &-gap
+    &-gap {
+      // &-t
+      &-t {
+        // &-1
+        &-1 {
+          @include margin(var(--gap-1) null null null);
+          @include min-screen(768px) {
+            @include margin(calc(2* var(--gap-1)) null null null);
+          }
+        }
+      }
+    }
+
+    // &-inner
+    &-inner {
+      // &-t
+      &-t {
+        // &-1
+        &-1 {
+          @include padding(var(--inner-1) null null null);
+          @include min-screen(768px) {
+            @include padding(calc(2 * var(--inner-1)) null null null);
+          }
+        }
+      }
+    }
+  }
+}
