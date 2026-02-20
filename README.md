@@ -122,7 +122,7 @@ syx/
 | [ARCHITECTURE.md](scss/ARCHITECTURE.md)                                 | Technical architecture deep-dive      |
 | [GETTING-STARTED.md](scss/GETTING-STARTED.md)                           | Step-by-step guide for new developers |
 | [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference              |
-| [abstracts/tokens/GUIA_DE_USO.md](scss/abstracts/tokens/GUIA_DE_USO.md) | Token system guide                    |
+| [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                    |
 | [CONTRIBUTING.md](scss/CONTRIBUTING.md)                                 | Contribution guidelines               |
 | [themes/\_template/README.md](scss/themes/_template/README.md)          | How to create a new theme             |
 
