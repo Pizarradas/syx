@@ -1,4 +1,4 @@
-# ð SYX: El Gran Premio (AnÃ¡lisis 2026)
+# 🏎️ SYX: El Gran Premio (Análisis 2026)
 
 **Objetivo:** SYX Design System v2.0-beta
 **Clasificatorios:** Tailwind CSS v4, Bootstrap 6, Material UI (MUI), Shadcn/UI
@@ -6,92 +6,92 @@
 
 ---
 
-## ðï¸ Panel Ejecutivo
+## 🏁 Panel Ejecutivo
 
-| Sistema       | Mejor Para...                 | PuntuaciÃ³n Arquitectura | PuntuaciÃ³n Rendimiento | PuntuaciÃ³n DX | PersonalizaciÃ³n |
+| Sistema       | Mejor Para...                 | Puntuación Arquitectura | Puntuación Rendimiento | Puntuación DX | Personalización |
 | :------------ | :---------------------------- | :---------------------: | :--------------------: | :-----------: | :-------------: |
-| **SYX**       | **Estabilidad a Largo Plazo** |       â­â­â­â­â­        |        â­â­â­â­        |    â­â­â­     |   â­â­â­â­â­    |
-| **Tailwind**  | Prototipado RÃ¡pido            |          â­â­           |       â­â­â­â­â­       |  â­â­â­â­â­   |     â­â­â­      |
-| **Shadcn**    | Apps React                    |         â­â­â­          |         â­â­â­         |  â­â­â­â­â­   |    â­â­â­â­     |
-| **MUI**       | Dashboards Empresariales      |         â­â­â­          |          â­â­          |    â­â­â­     |     â­â­â­      |
-| **Bootstrap** | Legacy / MVP RÃ¡pido           |          â­â­           |          â­â­          |    â­â­â­     |      â­â­       |
+| **SYX**       | **Estabilidad a Largo Plazo** |       ⭐⭐⭐⭐⭐        |        ⭐⭐⭐⭐        |    ⭐⭐⭐     |   ⭐⭐⭐⭐⭐    |
+| **Tailwind**  | Prototipado Rápido            |          ⭐⭐           |       ⭐⭐⭐⭐⭐       |  ⭐⭐⭐⭐⭐   |     ⭐⭐⭐      |
+| **Shadcn**    | Apps React                    |         ⭐⭐⭐          |         ⭐⭐⭐         |  ⭐⭐⭐⭐⭐   |    ⭐⭐⭐⭐     |
+| **MUI**       | Dashboards Empresariales      |         ⭐⭐⭐          |          ⭐⭐          |    ⭐⭐⭐     |     ⭐⭐⭐      |
+| **Bootstrap** | Legacy / MVP Rápido           |          ⭐⭐           |          ⭐⭐          |    ⭐⭐⭐     |      ⭐⭐       |
 
 ---
 
-## ð CategorÃ­a A: Arquitectura y Especificidad
+## 🏗️ Categoría A: Arquitectura y Especificidad
 
-_Â¿QuÃ© tan bien gestiona la cascada CSS?_
+_¿Qué tan bien gestiona la cascada CSS?_
 
-| Rango | Sistema       |  Puntos   | Â¿Por quÃ©?                                                                                             | Leyenda |
+| Rango | Sistema       |  Puntos   | ¿Por qué?                                                                                             | Leyenda |
 | :---: | :------------ | :-------: | :---------------------------------------------------------------------------------------------------- | :------ |
-|  ð¥   | **SYX**       | **10/10** | **Uso nativo de `@layer`.** Resuelve guerras de especificidad a nivel de navegador. Sin `!important`. | ð¡ï¸      |
-|  ð¥   | **MUI**       | **8/10**  | Fuerte aislamiento de componentes vÃ­a CSS-in-JS, pero aÃ±ade carga en tiempo de ejecuciÃ³n.             | ð¦      |
-|  ð¥   | **Shadcn**    | **7/10**  | Buen aislamiento vÃ­a archivos, pero depende de la estructura plana de utilidades de Tailwind.         | ð      |
-|   4   | **Tailwind**  | **4/10**  | La "Arquitectura" se deja al desarrollador. Las clases son globales y sin scope por defecto.          | ð      |
-|   5   | **Bootstrap** | **3/10**  | Depende de cadenas de alta especificidad y `!important`. Doloroso personalizar lÃ³gica profunda.       | âï¸      |
+|  🥇   | **SYX**       | **10/10** | **Uso nativo de `@layer`.** Resuelve guerras de especificidad a nivel de navegador. Sin `!important`. | 🛡️      |
+|  🥈   | **MUI**       | **8/10**  | Fuerte aislamiento de componentes vía CSS-in-JS, pero añade carga en tiempo de ejecución.             | 🦾      |
+|  🥉   | **Shadcn**    | **7/10**  | Buen aislamiento vía archivos, pero depende de la estructura plana de utilidades de Tailwind.         | 💪      |
+|   4   | **Tailwind**  | **4/10**  | La "Arquitectura" se deja al desarrollador. Las clases son globales y sin scope por defecto.          | 💡      |
+|   5   | **Bootstrap** | **3/10**  | Depende de cadenas de alta especificidad y `!important`. Doloroso personalizar lógica profunda.       | ⚙️      |
 
 ---
 
-## â¡ CategorÃ­a B: Rendimiento (Runtime y Bundle)
+## ⚡ Categoría B: Rendimiento (Runtime y Bundle)
 
-_Â¿QuÃ© tan pesado es para el navegador del usuario?_
+_¿Qué tan pesado es para el navegador del usuario?_
 
-| Rango | Sistema       |  Puntos   | TamaÃ±o Bundle  |       Coste Runtime (JS)       |
+| Rango | Sistema       |  Puntos   | Tamaño Bundle  |       Coste Runtime (JS)       |
 | :---: | :------------ | :-------: | :------------: | :----------------------------: |
-|  ð¥   | **Tailwind**  | **10/10** | ~10KB (Purged) |         **0ms** (Nada)         |
-|  ð¥   | **SYX**       | **9/10**  | ~130KB (Core)  |         **0ms** (Nada)         |
-|  ð¥   | **Shadcn**    | **7/10**  |    Variable    |    Bajo (Primitivas Radix)     |
+|  🥇   | **Tailwind**  | **10/10** | ~10KB (Purged) |         **0ms** (Nada)         |
+|  🥈   | **SYX**       | **9/10**  | ~130KB (Core)  |         **0ms** (Nada)         |
+|  🥉   | **Shadcn**    | **7/10**  |    Variable    |    Bajo (Primitivas Radix)     |
 |   4   | **Bootstrap** | **5/10**  |    ~200KB+     |     Medio (jQuery/Vanilla)     |
-|   5   | **MUI**       | **3/10**  |     Pesado     | **Alto** (InyecciÃ³n CSS-in-JS) |
+|   5   | **MUI**       | **3/10**  |     Pesado     | **Alto** (Inyección CSS-in-JS) |
 
-> **Nota del Analista:** SYX cambia un archivo CSS ligeramente mÃ¡s grande por **cero dependencia de JavaScript**. Tailwind gana en tamaÃ±o de archivo puro, pero SYX gana en "Peso Total del Sistema" (CSS + JS) comparado con MUI o frameworks React pesados.
+> **Nota del Analista:** SYX cambia un archivo CSS ligeramente más grande por **cero dependencia de JavaScript**. Tailwind gana en tamaño de archivo puro, pero SYX gana en "Peso Total del Sistema" (CSS + JS) comparado con MUI o frameworks React pesados.
 
 ---
 
-## ð ï¸ CategorÃ­a C: Experiencia de Desarrollador (DX)
+## 🛠️ Categoría C: Experiencia de Desarrollador (DX)
 
-_Â¿QuÃ© tan rÃ¡pido puedo construir una feature?_
+_¿Qué tan rápido puedo construir una feature?_
 
-| Sistema       | Curva de Aprendizaje | IntelliSense | Â¿Copy-Paste Friendly? | Factor DiversiÃ³n |
+| Sistema       | Curva de Aprendizaje | IntelliSense | ¿Copy-Paste Friendly? | Factor Diversión |
 | :------------ | :------------------- | :----------: | :-------------------: | :--------------: |
-| **Shadcn**    | ð¢ FÃ¡cil             |  Excelente   |    â **El Mejor**    |     ð¥ Alto      |
-| **Tailwind**  | ð¡ Medio             | **Perfecto** |         â SÃ­         |     ð¥ Alto      |
-| **SYX**       | ð¡ Medio             |    Bueno     |   â (Estricto BEM)   |  ð§  Intelectual  |
-| **Bootstrap** | ð¢ FÃ¡cil             |    Bueno     |         â SÃ­         |   ð Aburrido    |
-| **MUI**       | ð´ Escarpada         |   GenÃ©rico   |  â (Props pesadas)   |    ð« Fatiga     |
+| **Shadcn**    | 🟢 Fácil             |  Excelente   |    ✅ **El Mejor**    |     🔥 Alto      |
+| **Tailwind**  | 🟡 Medio             | **Perfecto** |         ✅ Sí         |     🔥 Alto      |
+| **SYX**       | 🟡 Medio             |    Bueno     |   ✅ (Estricto BEM)   |  🧠 Intelectual  |
+| **Bootstrap** | 🟢 Fácil             |    Bueno     |         ✅ Sí         |   😐 Aburrido    |
+| **MUI**       | 🔴 Escarpada         |   Genérico   |  ❌ (Props pesadas)   |    😫 Fatiga     |
 
 **Ganador:** **Shadcn/UI**. El modelo de "propiedad por copy-paste" es el favorito de la industria para DX actualmente.
-**DesafÃ­o SYX:** el BEM estricto requiere teclear mÃ¡s y cambiar de modelo mental mÃ¡s que las clases de utilidad.
+**Desafío SYX:** el BEM estricto requiere teclear más y cambiar de modelo mental más que las clases de utilidad.
 
 ---
 
-## ð¨ CategorÃ­a D: Theming y PersonalizaciÃ³n
+## 🎨 Categoría D: Theming y Personalización
 
-_Â¿Puedo hacer que parezca MI marca?_
+_¿Puedo hacer que parezca MI marca?_
 
-| Rango | Sistema       | Motor de Theming                                  | Estrategia Dark Mode         | Â¿Cambio en Runtime? |
+| Rango | Sistema       | Motor de Theming                                  | Estrategia Dark Mode         | ¿Cambio en Runtime? |
 | :---: | :------------ | :------------------------------------------------ | :--------------------------- | :-----------------: |
-|  ð¥   | **SYX**       | **Variables CSS Nativas** (Sistema Token 3-Capas) | **Nativo** (CSS Media/Class) | â **InstantÃ¡neo**  |
-|  ð¥   | **Shadcn**    | Variables CSS (Basado en Tailwind)                | Basado en Clase              |        â SÃ­        |
-|  ð¥   | **MUI**       | Objetos JS (ThemeProvider)                        | Contexto JS                  |    â ï¸ Re-render     |
-|   4   | **Tailwind**  | Archivo Config (estÃ¡tico)                         | Clase (`dark:`)              |  â Re-compilar\*   |
-|   5   | **Bootstrap** | Variables SASS                                    | Variables SASS               |   â Re-compilar    |
+|  🥇   | **SYX**       | **Variables CSS Nativas** (Sistema Token 3-Capas) | **Nativo** (CSS Media/Class) | ✅ **Instantáneo**  |
+|  🥈   | **Shadcn**    | Variables CSS (Basado en Tailwind)                | Basado en Clase              |        ✅ Sí        |
+|  🥉   | **MUI**       | Objetos JS (ThemeProvider)                        | Contexto JS                  |    ⚠️ Re-render     |
+|   4   | **Tailwind**  | Archivo Config (estático)                         | Clase (`dark:`)              |  ❌ Re-compilar\*   |
+|   5   | **Bootstrap** | Variables SASS                                    | Variables SASS               |   ❌ Re-compilar    |
 
-> \*Tailwind v4 estÃ¡ mejorando los valores dinÃ¡micos, pero histÃ³ricamente requiere rebuild para cambiar valores core del tema extensivamente.
+> \*Tailwind v4 está mejorando los valores dinámicos, pero históricamente requiere rebuild para cambiar valores core del tema extensivamente.
 
 ---
 
-## ð Veredicto Final: La Zona "Ricitos de Oro"
+## 🏆 Veredicto Final: La Zona "Ricitos de Oro"
 
-**SYX es el "Adulto en la HabitaciÃ³n".**
+**SYX es el "Adulto en la Habitación".**
 
-Mientras otros persiguen velocidad inigualable (Tailwind) o librerÃ­as de componentes masivas (MUI), **SYX se centra en la correcciÃ³n arquitectÃ³nica.**
+Mientras otros persiguen velocidad inigualable (Tailwind) o librerías de componentes masivas (MUI), **SYX se centra en la corrección arquitectónica.**
 
 - No requiere un paso de build (a diferencia de Tailwind).
 - No requiere JavaScript (a diferencia de MUI/Shadcn).
 - No pelea contra el navegador (a diferencia de Bootstrap).
 
-### ð¥ Ganador General por CategorÃ­a
+### 🥇 Ganador General por Categoría
 
 - **Arquitectura:** SYX
 - **Rendimiento:** Tailwind CSS
@@ -99,4 +99,4 @@ Mientras otros persiguen velocidad inigualable (Tailwind) o librerÃ­as de comp
 - **Theming:** SYX
 - **Mantenibilidad a Largo Plazo:** SYX
 
-**ConclusiÃ³n:** SYX es la **mejor opciÃ³n para un Sistema Fundacional** destinado a durar 5+ aÃ±os a travÃ©s de mÃºltiples frameworks y equipos.
+**Conclusión:** SYX es la **mejor opción para un Sistema Fundacional** destinado a durar 5+ años a través de múltiples frameworks y equipos.
