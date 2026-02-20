@@ -1,0 +1,36 @@
+{
+  "name": "syx-design-system",
+  "version": "2.0.0-beta",
+  "description": "A modern, token-driven SCSS design system built on Atomic Design principles.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npm run watch",
+    "build": "npm run build:css && npm run build:core",
+    "build:css": "sass scss:css --style=expanded --no-source-map && npm run postcss",
+    "build:core": "sass scss/styles-core.scss css/styles-core.css --style=expanded --no-source-map && npm run postcss:core",
+    "watch": "sass --watch scss:css --style=expanded --no-source-map",
+    "postcss": "postcss css/*.css --replace --no-map",
+    "postcss:core": "postcss css/styles-core.css --replace --no-map",
+    "lint": "echo \"TODO: Add stylelint\" && exit 0"
+  },
+  "keywords": [
+    "design-system",
+    "scss",
+    "atomic-design",
+    "tokens",
+    "css-layers"
+  ],
+  "author": "José Luis Pizarro Feo",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.0",
+    "sass": "^1.77.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 0.2%",
+    "not dead"
+  ]
+}
