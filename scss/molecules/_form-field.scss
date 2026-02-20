@@ -32,7 +32,7 @@
 
     // LABEL
     // ===============================================
-    .syx-label {
+    .atom-label {
       margin-bottom: var(--component-form-field-label-margin-bottom);
       display: block;
       color: var(--component-form-field-color);
@@ -78,11 +78,11 @@
         filter: var(--semantic-filter-state-ko);
       }
 
-      .syx-label {
+      .atom-label {
         color: var(--component-form-field-error-color);
       }
       
-      .syx-input {
+      .atom-input {
         border-color: var(--component-form-field-error-border);
         &:focus {
            border-color: var(--component-form-field-error-border);
@@ -108,11 +108,11 @@
         filter: var(--semantic-filter-state-ok);
       }
 
-      .syx-label {
+      .atom-label {
         color: var(--component-form-field-success-color);
       }
 
-      .syx-input {
+      .atom-input {
          border-color: var(--component-form-field-success-border);
       }
 
@@ -134,11 +134,11 @@
         filter: var(--semantic-filter-state-warning);
       }
 
-      .syx-label {
+      .atom-label {
         color: var(--component-form-field-warning-color);
       }
 
-      .syx-input {
+      .atom-input {
         border-color: var(--component-form-field-warning-border);
       }
 
@@ -151,7 +151,7 @@
     // ===============================================
     // If an icon is present (state or select), add padding to the field input
     &:where([class*="--has-select"], [class*="--is-"]) {
-      .syx-input {
+      .atom-input {
         padding-right: calc(0 + (var(--component-form-field-icon-position-right)) + (var(--component-form-field-icon-size)));
       }
     }

@@ -17,7 +17,7 @@
     -webkit-backdrop-filter: blur(12px);
     @include border(bottom, 1px, solid, var(--semantic-color-border-subtle));
 
-    // &__bar — the always-visible top row
+    // &__bar â the always-visible top row
     &__bar {
       @include flex-between;
       @include padding(var(--semantic-space-component-sm) 0);
@@ -43,7 +43,7 @@
       }
     }
 
-    // &__links — desktop navigation (hidden on mobile)
+    // &__links â desktop navigation (hidden on mobile)
     &__links {
       display: none;
 
@@ -52,7 +52,7 @@
       }
     }
 
-    // &__toggle — hamburger button (visible only on mobile)
+    // &__toggle â hamburger button (visible only on mobile)
     &__toggle {
       @include flex(column, center, center, null, 5px);
       @include size(2.5rem);
@@ -85,7 +85,7 @@
         outline: 0.2rem solid var(--semantic-color-state-focus);
       }
 
-      // Open state — animates to × (X)
+      // Open state â animates to Ã (X)
       &[aria-expanded="true"] {
         span:nth-child(1) {
           transform: translateY(7px) rotate(45deg);
@@ -100,7 +100,7 @@
       }
     }
 
-    // &__mobile-menu — full-width drawer shown when toggle is open
+    // &__mobile-menu â full-width drawer shown when toggle is open
     &__mobile-menu {
       max-height: 0;
       overflow: hidden;
@@ -119,13 +119,13 @@
       }
     }
 
-    // &__mobile-nav — list of links inside the drawer
+    // &__mobile-nav â list of links inside the drawer
     &__mobile-nav {
       @include flex(column, null, null, null, 0);
       @include padding(var(--semantic-space-component-md) 0);
     }
 
-    // &__mobile-link — individual link in the drawer
+    // &__mobile-link â individual link in the drawer
     &__mobile-link {
       @include flex(null, null, center);
       @include padding(var(--semantic-space-component-sm) var(--semantic-space-component-md));
@@ -153,7 +153,7 @@
       }
     }
 
-    // &__mobile-footer — theme switcher row in mobile drawer
+    // &__mobile-footer â theme switcher row in mobile drawer
     &__mobile-footer {
       @include flex(null, null, center, null, var(--semantic-space-inline-sm));
       @include padding(var(--semantic-space-component-sm) var(--semantic-space-component-md) var(--semantic-space-component-md));
@@ -168,7 +168,7 @@
       }
     }
 
-    // .syx-theme-switcher — container visibility controlled here
+    // .syx-theme-switcher â container visibility controlled here
     // Standalone styles are below (outside mixin, compiled globally)
     &__theme-switcher--desktop {
       display: none;
@@ -178,7 +178,7 @@
       }
     }
 
-    // &__dark-toggle — light/dark mode button
+    // &__dark-toggle â light/dark mode button
     &__dark-toggle {
       display: none;
       @include flex(null, center, center);
@@ -217,7 +217,7 @@
     // where the sidebar is always visible in the sticky grid layout).
     // -----------------------------------------------
     &--docs {
-      // Hide the main hamburger — sidebar toggle replaces it on mobile
+      // Hide the main hamburger â sidebar toggle replaces it on mobile
       .org-navbar__toggle {
         display: none;
       }
@@ -251,13 +251,13 @@
         }
 
         @include breakpoint(tablet) {
-          display: none; // Hidden on desktop — sidebar is always visible
+          display: none; // Hidden on desktop â sidebar is always visible
         }
       }
     }
   }
 
-  // Mobile drawer footer — theme switcher row inside mobile nav
+  // Mobile drawer footer â theme switcher row inside mobile nav
   .org-navbar__mobile-footer {
     @include flex(null, null, center, null, var(--semantic-space-inline-sm));
     @include padding(var(--semantic-space-component-sm) var(--semantic-space-component-md) var(--semantic-space-component-md));
@@ -275,7 +275,7 @@
 } // end @mixin org-navbar
 
 // -----------------------------------------------
-// SYX THEME SWITCHER — standalone component
+// SYX THEME SWITCHER â standalone component
 // Compiled globally so all pages (index + docs) have
 // the dot-pills strip without needing inline styles.
 // -----------------------------------------------

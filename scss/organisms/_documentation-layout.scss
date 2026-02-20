@@ -13,7 +13,7 @@
       // &-title
       &-title {
         // &:not()
-        &:not(.syx-list *, .syx-list-ordered *) {
+        &:not(.atom-list *, .atom-list-ordered *) {
           @include position(sticky, var(--semantic-space-layout-lg), null, null, null);
           @include margin(0 null var(--semantic-space-inline-xs) null);
           @include padding(var(--semantic-space-component-sm) null var(--semantic-space-component-sm) null);
