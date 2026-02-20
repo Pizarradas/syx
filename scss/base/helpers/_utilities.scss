@@ -4,12 +4,14 @@
 // NOTE: !important removed — @layer syx.utilities provides highest specificity.
 // ===============================================
 
+@use 'sass:map';
 @use '../../abstracts/index' as *;
 
 // SPACING UTILITIES
 // ===============================================
 // Usage: .u-p-sm, .u-mt-lg, .u-mx-auto
-@include generate-utility-directional('p', padding, $tokens-spacing);
+// We remove 'auto' from padding because padding: auto is invalid CSS.
+@include generate-utility-directional('p', padding, map.remove($tokens-spacing, 'auto'));
 @include generate-utility-directional('m', margin, $tokens-spacing);
 
 // SIZING UTILITIES (Width/Height)
