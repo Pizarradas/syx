@@ -1,0 +1,50 @@
+// UTILITIES: SPACING
+// ===============================================
+// @layer syx.utilities ensures these always win over components
+// without !important and regardless of import order.
+@use "../abstracts/index" as *;
+
+@layer syx.utilities {
+
+// Spacing Map
+$spacers: (
+  0: 0,
+  1: var(--semantic-space-inline-xs),
+  2: var(--semantic-space-inline-sm),
+  3: var(--semantic-space-inline-md),
+  4: var(--semantic-space-inline-lg),
+  5: var(--semantic-space-layout-xl)
+);
+
+// Generate Margin and Padding Utilities
+@each $name, $value in $spacers {
+  .syx-m-#{$name}  { margin: $value; }
+  .syx-mt-#{$name} { margin-top: $value; }
+  .syx-mb-#{$name} { margin-bottom: $value; }
+  .syx-ml-#{$name} { margin-left: $value; }
+  .syx-mr-#{$name} { margin-right: $value; }
+  .syx-mx-#{$name} { margin-left: $value; margin-right: $value; }
+  .syx-my-#{$name} { margin-top: $value; margin-bottom: $value; }
+
+  .syx-p-#{$name}  { padding: $value; }
+  .syx-pt-#{$name} { padding-top: $value; }
+  .syx-pb-#{$name} { padding-bottom: $value; }
+  .syx-pl-#{$name} { padding-left: $value; }
+  .syx-pr-#{$name} { padding-right: $value; }
+  .syx-px-#{$name} { padding-left: $value; padding-right: $value; }
+  .syx-py-#{$name} { padding-top: $value; padding-bottom: $value; }
+
+  // Logical Properties (for RTL support)
+  .syx-pis-#{$name} { padding-inline-start: $value; }
+  .syx-pie-#{$name} { padding-inline-end: $value; }
+}
+
+// Section padding shorthand
+.syx-pad-section { padding: var(--semantic-space-layout-xxl) 0; }
+
+// Auto margin (centering)
+.syx-mx-auto { margin-left: auto; margin-right: auto; }
+.syx-ml-auto { margin-left: auto; }
+.syx-mr-auto { margin-right: auto; }
+
+} // end @layer syx.utilities

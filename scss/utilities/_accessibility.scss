@@ -1,0 +1,82 @@
+// UTILITIES: ACCESSIBILITY
+// ===============================================
+// @layer syx.utilities ensures these always win over components
+// without !important and regardless of import order.
+@use "../abstracts/index" as *;
+
+@layer syx.utilities {
+
+// ================================================
+// SCREEN READER ONLY
+// ================================================
+// Visually hides content while keeping it accessible to screen readers.
+// Use for: skip links, icon labels, off-screen text.
+// ------------------------------------------------
+
+.syx-sr-only {
+  @include sr-only();
+}
+
+// Focusable variant: becomes visible when focused (e.g. skip links)
+.syx-sr-only-focusable {
+  @include sr-only();
+
+  &:focus,
+  &:focus-within {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+// ================================================
+// SKIP LINK
+// ================================================
+// Place at the very top of <body> to allow keyboard users to skip navigation.
+// @example
+//   <a href="#main-content" class="syx-skip-link">Skip to main content</a>
+// ------------------------------------------------
+
+.syx-skip-link {
+  @include sr-only();
+
+  &:focus {
+    position: fixed;
+    top: var(--semantic-space-layout-sm);
+    left: var(--semantic-space-layout-sm);
+    z-index: 9999;
+    padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
+    background: var(--semantic-color-primary);
+    color: var(--semantic-color-text-inverse);
+    border-radius: var(--semantic-border-radius-default);
+    font-size: var(--primitive-font-size-sm);
+    font-weight: var(--primitive-font-weight-semibold);
+    text-decoration: none;
+    box-shadow: var(--semantic-shadow-md);
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+// ================================================
+// REDUCED MOTION
+// ================================================
+// Force-disable animations for users who prefer reduced motion.
+// Complements the @include reduced-motion() mixin for utility-level control.
+
+.syx-motion-safe {
+  @include reduced-motion() {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+} // end @layer syx.utilities
