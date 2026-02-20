@@ -6,14 +6,14 @@
 // atom: radio
 // ===============================================
 @mixin atom-radio($theme: null) {
-  .syx-radio {
+  .atom-radio {
     @include relative();
     display: inline-flex;
     align-items: flex-start;
     cursor: pointer;
     user-select: none;
 
-    // &__input — hidden native radio
+    // &__input â hidden native radio
     &__input {
       @include absolute();
       opacity: 0;
@@ -22,7 +22,7 @@
       pointer-events: none;
     }
 
-    // &__label — the visible label with custom radio circle
+    // &__label â the visible label with custom radio circle
     &__label {
       @include relative();
       display: inline-flex;

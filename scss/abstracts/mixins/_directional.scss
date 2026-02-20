@@ -1,13 +1,13 @@
-// SYX MIXINS — DIRECTIONAL (shared)
+// SYX MIXINS â DIRECTIONAL (shared)
 // ================================================
 // Private helpers for null-skipping shorthand properties.
 // Used by: _margin.scss, _padding.scss
-// Philosophy: Bourbon-compatible API — pass `null` to skip a side.
+// Philosophy: Bourbon-compatible API â pass `null` to skip a side.
 // ================================================
 @use 'sass:list';
 
 // PRIVATE: Transforms shorthand to its shortest possible form.
-// @example _syx-compact(10px 20px 10px 20px) → 10px 20px
+// @example _syx-compact(10px 20px 10px 20px) â 10px 20px
 @function _syx-compact($values) {
   $a: list.nth($values, 1);
 
@@ -39,9 +39,9 @@
 }
 
 // PRIVATE: Builds directional properties from CSS shorthand, skipping null sides.
-// @param {string} $property  — e.g. 'margin', 'padding'
-// @param {string} $suffix    — e.g. null, 'width'
-// @param {list}   $values    — shorthand list, nulls skip that side
+// @param {string} $property  â e.g. 'margin', 'padding'
+// @param {string} $suffix    â e.g. null, 'width'
+// @param {list}   $values    â shorthand list, nulls skip that side
 @mixin syx-directional($property, $suffix, $values) {
   $suffix-str: '';
   @if $suffix { $suffix-str: '-#{$suffix}'; }
@@ -55,7 +55,7 @@
   $values: _syx-compact($values);
 
   @if _syx-has-null($values) {
-    // Null-skipping mode — emit only non-null sides
+    // Null-skipping mode â emit only non-null sides
     @if list.nth($values, 1) { #{$top}: list.nth($values, 1); }
 
     @if list.length($values) == 1 {
@@ -75,7 +75,7 @@
       @if list.nth($values, 4) { #{$left}: list.nth($values, 4); }
     }
   } @else {
-    // No nulls — emit compact shorthand
+    // No nulls â emit compact shorthand
     #{$all}: $values;
   }
 }

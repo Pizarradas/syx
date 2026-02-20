@@ -1,17 +1,17 @@
-// SYX — THEME CONFIG MAP
+// SYX â THEME CONFIG MAP
 // ===============================================
 // Dart Sass compile-time config per theme.
 // Use for structural differences that tokens cannot
 // express without unnecessary complexity:
-//   • Sidenav side (left/right)
-//   • Logo size overrides
-//   • Border-radius exceptions
-//   • Breakpoint-specific deviations
+//   â¢ Sidenav side (left/right)
+//   â¢ Logo size overrides
+//   â¢ Border-radius exceptions
+//   â¢ Breakpoint-specific deviations
 //
-// ✅ Use this map for: layout structure, positions,
+// â Use this map for: layout structure, positions,
 //    Sass-only values resolved at compile-time.
-// ❌ Do NOT use this for: colors, spacing, typography
-//    → those belong to CSS Custom Properties tokens.
+// â Do NOT use this for: colors, spacing, typography
+//    â those belong to CSS Custom Properties tokens.
 // ===============================================
 @use 'sass:map';
 
@@ -19,12 +19,12 @@
 // THEME CONFIG
 // -----------------------------------------------
 // Keys map to the $theme argument passed to mixins:
-//   @include org-header('syx');       → map key: 'syx'
-//   @include org-header('codymer');   → map key: 'codymer'
+//   @include org-header('syx');       â map key: 'syx'
+//   @include org-header('codymer');   â map key: 'codymer'
 // -----------------------------------------------
 $theme-config: (
 
-  // example-01 — Syx (default)
+  // example-01 â Syx (default)
   'syx': (
     header-sidenav-side:   left,
     header-logo-size:      2rem,
@@ -32,7 +32,7 @@ $theme-config: (
     header-border-bottom:  false,
   ),
 
-  // example-02 — Codymer
+  // example-02 â Codymer
   'codymer': (
     header-sidenav-side:   right,       // sidenav opens from the right
     header-logo-size:      2.4rem,
@@ -40,7 +40,7 @@ $theme-config: (
     header-border-bottom:  true,        // bottom border on header bar
   ),
 
-  // example-03 — Coral
+  // example-03 â Coral
   'coral': (
     header-sidenav-side:   left,
     header-logo-size:      2rem,
@@ -48,7 +48,7 @@ $theme-config: (
     header-border-bottom:  false,
   ),
 
-  // example-04 — Forest
+  // example-04 â Forest
   'forest': (
     header-sidenav-side:   left,
     header-logo-size:      2rem,
@@ -56,7 +56,7 @@ $theme-config: (
     header-border-bottom:  false,
   ),
 
-  // example-05 — Midnight
+  // example-05 â Midnight
   'midnight': (
     header-sidenav-side:   left,
     header-logo-size:      2rem,

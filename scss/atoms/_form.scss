@@ -5,13 +5,13 @@
 
 // atom: form
 // ===============================================
-// API: .syx-label · .syx-input-wrapper · .syx-input
+// API: .atom-label Â· .atom-input-wrapper Â· .atom-input
 // ===============================================
 @mixin atom-form($theme: null) {
   // -----------------------------------------------
-  // LABEL — @canonical
+  // LABEL â @canonical
   // -----------------------------------------------
-  .syx-label {
+  .atom-label {
     display: block;
     font-family: var(--component-form-field-font-family);
     font-size: var(--component-form-field-font-size);
@@ -22,22 +22,30 @@
   }
 
   // -----------------------------------------------
-  // INPUT WRAPPER — @canonical
+  // INPUT WRAPPER â @canonical
   // -----------------------------------------------
-  .syx-input-wrapper {
+  .atom-input-wrapper {
     @include relative();
     @include flex-center();
   }
 
   // -----------------------------------------------
-  // INPUT — @canonical
+  // INPUT â @canonical
   // -----------------------------------------------
-  .syx-input {
+  .atom-input {
     display: block;
     width: 100%;
     height: var(--component-form-field-height);
-    @include padding(var(--component-form-field-padding-y) var(--component-form-field-padding-x));
-    @include border(all, var(--component-form-field-border-width), solid, var(--component-form-field-border));
+    @include padding(
+      var(--component-form-field-padding-y)
+        var(--component-form-field-padding-x)
+    );
+    @include border(
+      all,
+      var(--component-form-field-border-width),
+      solid,
+      var(--component-form-field-border)
+    );
     @include border-radius(var(--component-form-field-border-radius));
     background-color: var(--component-form-field-bg);
     font-family: var(--component-form-field-font-family);

@@ -6,13 +6,13 @@
 // atom: btn
 // ===============================================
 @mixin atom-btn($theme: null) {
-  .syx-btn {
+  .atom-btn {
     @include border(all, var(--component-button-border-width), solid, null);
     overflow-wrap: break-word;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    // Reset <a> text-decoration for all interactive states — single source of truth
+    // Reset <a> text-decoration for all interactive states â single source of truth
     &, &:hover, &:focus, &:visited, &:active { text-decoration: none; }
     user-select: none;
     text-align: center;
@@ -37,13 +37,13 @@
       border-color: var(--component-button-primary-color);
 
       // Filled variant
-      &.syx-btn--filled {
+      &.atom-btn--filled {
         background-color: var(--component-button-primary-filled-bg);
         color: var(--component-button-primary-filled-color, white);
       }
 
       // Outline variant (no --filled class)
-      &:not(.syx-btn--filled) {
+      &:not(.atom-btn--filled) {
         background-color: transparent;
         color: var(--component-button-primary-color);
       }
@@ -54,13 +54,13 @@
       border-color: var(--component-button-secondary-color);
 
       // Filled variant
-      &.syx-btn--filled {
+      &.atom-btn--filled {
         background-color: var(--component-button-secondary-filled-bg);
         color: var(--component-button-secondary-filled-color, white);
       }
 
       // Outline variant (no --filled class)
-      &:not(.syx-btn--filled) {
+      &:not(.atom-btn--filled) {
         background-color: transparent;
         color: var(--component-button-secondary-color);
       }
@@ -71,13 +71,13 @@
       border-color: var(--component-button-tertiary-color);
 
       // Filled variant
-      &.syx-btn--filled {
+      &.atom-btn--filled {
         background-color: var(--component-button-tertiary-filled-bg);
         color: var(--component-button-tertiary-filled-color, white);
       }
 
       // Outline variant (no --filled class)
-      &:not(.syx-btn--filled) {
+      &:not(.atom-btn--filled) {
         background-color: transparent;
         color: var(--component-button-tertiary-color);
       }
@@ -88,13 +88,13 @@
       border-color: var(--component-button-quaternary-color);
 
       // Filled variant
-      &.syx-btn--filled {
+      &.atom-btn--filled {
         background-color: var(--component-button-quaternary-filled-bg);
         color: var(--component-button-quaternary-filled-color, white);
       }
 
       // Outline variant (no --filled class)
-      &:not(.syx-btn--filled) {
+      &:not(.atom-btn--filled) {
         background-color: transparent;
         color: var(--component-button-quaternary-color);
       }
@@ -131,13 +131,13 @@
         cursor: pointer;
 
         // Primary variant hover
-        &.syx-btn--primary {
+        &.atom-btn--primary {
           border-color: var(--component-button-primary-border-hover);
           background-color: var(--component-button-primary-bg-hover);
           color: var(--component-button-primary-color-hover);
 
           // Filled: bg darkens, text stays white
-          &.syx-btn--filled {
+          &.atom-btn--filled {
             background-color: var(--component-button-primary-filled-bg-hover);
             border-color: var(--component-button-primary-filled-border-hover);
             color: var(--component-button-primary-filled-color-hover);
@@ -145,12 +145,12 @@
         }
 
         // Secondary variant hover
-        &.syx-btn--secondary {
+        &.atom-btn--secondary {
           border-color: var(--component-button-secondary-border-hover);
           background-color: var(--component-button-secondary-bg-hover);
           color: var(--component-button-secondary-color-hover);
 
-          &.syx-btn--filled {
+          &.atom-btn--filled {
             background-color: var(--component-button-secondary-filled-bg-hover);
             border-color: var(--component-button-secondary-filled-border-hover);
             color: var(--component-button-secondary-filled-color-hover);
@@ -158,12 +158,12 @@
         }
 
         // Tertiary variant hover
-        &.syx-btn--tertiary {
+        &.atom-btn--tertiary {
           border-color: var(--component-button-tertiary-border-hover);
           background-color: var(--component-button-tertiary-bg-hover);
           color: var(--component-button-tertiary-color-hover);
 
-          &.syx-btn--filled {
+          &.atom-btn--filled {
             background-color: var(--component-button-tertiary-filled-bg-hover);
             border-color: var(--component-button-tertiary-filled-border-hover);
             color: var(--component-button-tertiary-filled-color-hover);
@@ -171,12 +171,12 @@
         }
 
         // Quaternary variant hover
-        &.syx-btn--quaternary {
+        &.atom-btn--quaternary {
           border-color: var(--component-button-quaternary-border-hover);
           background-color: var(--component-button-quaternary-bg-hover);
           color: var(--component-button-quaternary-color-hover);
 
-          &.syx-btn--filled {
+          &.atom-btn--filled {
             background-color: var(--component-button-quaternary-filled-bg-hover);
             border-color: var(--component-button-quaternary-filled-border-hover);
             color: var(--component-button-quaternary-filled-color-hover);
@@ -208,24 +208,24 @@
     }
 
     // Circle variant
-    &.syx-btn--circle {
+    &.atom-btn--circle {
       @include border-radius(50%);
     }
 
     // Filled disabled state
-    &.syx-btn--filled {
+    &.atom-btn--filled {
       &:disabled {
         background-color: var(--semantic-color-state-disabled);
       }
     }
 
     // Default border-radius for non-circle buttons
-    &:not(.syx-btn--circle) {
+    &:not(.atom-btn--circle) {
       @include border-radius(var(--component-button-border-radius));
     }
     &:not(:has(.helper-hide)) {
-      // .syx 
-      .syx {
+      // .atom 
+      .atom {
         // &-icon
         &-icon {
           @include size(null, 50%);
@@ -234,11 +234,11 @@
     }
 
     // &:has()
-    &:has(.syx-icon) {
+    &:has(.atom-icon) {
       @include position(relative);
 
-      // .syx
-      .syx {
+      // .atom
+      .atom {
         // &-icon
         &-icon {
           @include position(absolute, 0, 0, 0, 0);
@@ -248,13 +248,13 @@
     }
 
     // &:where()
-    &:where([class*="--scope-1"]):has(.syx-icon:first-child:last-child) {
+    &:where([class*="--scope-1"]):has(.atom-icon:first-child:last-child) {
       @include padding(null null null calc(var(--component-button-size-sm) * 2));
     }
-    &:where([class*="--scope-2"]):has(.syx-icon:first-child:last-child) {
+    &:where([class*="--scope-2"]):has(.atom-icon:first-child:last-child) {
       @include padding(null null null calc(var(--component-button-size-md) * 2.5));
     }
-    &:where([class*="--scope-3"]):has(.syx-icon:first-child:last-child) {
+    &:where([class*="--scope-3"]):has(.atom-icon:first-child:last-child) {
       @include padding(null null null calc(var(--component-button-size-lg) * 3.5));
     }
 
@@ -264,8 +264,8 @@
       &-icon {
         @include position(relative);
 
-        // .syx
-        .syx {
+        // .atom
+        .atom {
           // &-icon
           &-icon {
             @include position(absolute, 0, null, 0, 0);
@@ -279,8 +279,8 @@
           &-1 {
             @include padding(null null null calc(2 * var(--component-button-size-sm)));
 
-            // .syx
-            .syx {
+            // .atom
+            .atom {
               // &-icon
               &-icon {
                 @include margin(null null null calc(var(--component-button-size-sm) / 2));
@@ -293,8 +293,8 @@
           &-2 {
             @include padding(null null null calc(2 * var(--component-button-size-md)));
 
-            // .syx
-            .syx {
+            // .atom
+            .atom {
               // &-icon
               &-icon {
                 @include margin(null null null calc(var(--component-button-size-md) / 2));
@@ -307,8 +307,8 @@
           &-3 {
             @include padding(null null null calc(2 * var(--component-button-size-lg)));
 
-            // .syx
-            .syx {
+            // .atom
+            .atom {
               // &-icon
               &-icon {
                 @include margin(null null null calc(var(--component-button-size-lg) / 2));

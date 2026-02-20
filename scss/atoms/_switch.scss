@@ -6,14 +6,14 @@
 // atom: switch
 // ===============================================
 @mixin atom-switch($theme: null) {
-  .syx-switch {
+  .atom-switch {
     display: inline-flex;
     align-items: center;
     gap: var(--semantic-space-component-sm);
     cursor: pointer;
     user-select: none;
 
-    // &__input — hidden native checkbox
+    // &__input â hidden native checkbox
     &__input {
       @include absolute();
       opacity: 0;
@@ -22,7 +22,7 @@
       pointer-events: none;
     }
 
-    // &__slider — the visual track + knob
+    // &__slider â the visual track + knob
     &__slider {
       @include relative();
       display: inline-block;
@@ -52,14 +52,14 @@
       }
     }
 
-    // &__label — visible text label
+    // &__label â visible text label
     &__label {
       font-size: var(--component-form-field-font-size);
       color: var(--component-form-field-color);
       line-height: var(--component-form-field-line-height);
     }
 
-    // Checked state — move knob right, turn track on
+    // Checked state â move knob right, turn track on
     &__input:checked + &__slider {
       background-color: var(--component-switch-bg-on);
       border-color: var(--component-switch-bg-on);

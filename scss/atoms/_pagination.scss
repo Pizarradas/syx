@@ -6,7 +6,7 @@
 // atom: pagination
 // ===============================================
 @mixin atom-pagination($theme: null) {
-  .syx-pagination {
+  .atom-pagination {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -15,14 +15,14 @@
     padding: 0;
     margin: 0;
 
-    // &__item — each page item wrapper
+    // &__item â each page item wrapper
     &__item {
       @include relative();
       display: flex;
 
       // Active state
       &--is-active {
-        .syx-pagination__trigger {
+        .atom-pagination__trigger {
           background-color: var(--component-pagination-bg-active);
           border-color: var(--component-pagination-bg-active);
           color: var(--component-pagination-color-active);
@@ -32,7 +32,7 @@
 
       // Disabled state
       &--is-disabled {
-        .syx-pagination__trigger {
+        .atom-pagination__trigger {
           color: var(--component-pagination-color-disabled);
           background-color: transparent;
           border-color: transparent;
@@ -42,7 +42,7 @@
       }
     }
 
-    // &__trigger — the clickable button/link
+    // &__trigger â the clickable button/link
     &__trigger {
       display: inline-flex;
       align-items: center;

@@ -1,4 +1,4 @@
-// SYX MIXINS — HELPERS
+// SYX MIXINS â HELPERS
 // ================================================
 // Modern utility mixins that complement the SYX mixin library.
 // These cover common patterns that previously required Bourbon
@@ -9,7 +9,7 @@
 // Shorthand for transition with automatic prefers-reduced-motion guard.
 // @example
 //   @include transition(opacity 0.2s ease, transform 0.3s ease);
-//   // → transition: opacity 0.2s ease, transform 0.3s ease;
+//   // â transition: opacity 0.2s ease, transform 0.3s ease;
 //   //   @media (prefers-reduced-motion: reduce) { transition: none; }
 @mixin transition($props...) {
   transition: $props;
@@ -23,7 +23,7 @@
 // Single-line text truncation with ellipsis.
 // @example
 //   @include truncate(200px);
-//   // → max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+//   // â max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
 @mixin truncate($max-width: 100%) {
   max-width: $max-width;
   overflow: hidden;
@@ -49,7 +49,7 @@
 }
 
 // MIXIN: sr-only-reset()
-// Reverses sr-only() — makes a previously hidden element visible again.
+// Reverses sr-only() â makes a previously hidden element visible again.
 @mixin sr-only-reset {
   position: static;
   width: auto;
@@ -81,7 +81,7 @@
 }
 
 // MIXIN: flex-between()
-// Space-between row layout — common for navbars, card headers, etc.
+// Space-between row layout â common for navbars, card headers, etc.
 @mixin flex-between {
   display: flex;
   align-items: center;

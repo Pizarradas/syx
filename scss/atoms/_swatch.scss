@@ -9,13 +9,13 @@
 // documentation to show color palette tokens.
 // ===============================================
 @mixin atom-swatch($theme: null) {
-  .syx-swatch {
+  .atom-swatch {
     border-radius: var(--semantic-border-radius-md);
     overflow: hidden;
     margin-bottom: var(--semantic-space-layout-sm);
     box-shadow: var(--semantic-shadow-sm);
 
-    // Color block — background set via modifier class
+    // Color block â background set via modifier class
     &__block {
       height: 80px;
       display: flex;

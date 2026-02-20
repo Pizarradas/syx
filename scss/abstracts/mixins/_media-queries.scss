@@ -1,21 +1,21 @@
-// SYX MIXINS — MEDIA QUERIES
+// SYX MIXINS â MEDIA QUERIES
 // ================================================
 // Responsive breakpoint helpers.
 // Named breakpoints use a mobile-first (min-width) approach.
 //
 // Breakpoint scale (em-based for zoom-safety):
-//   mobile-only  → max-width: 37.5em  (600px)
-//   phablet      → min-width: 37.5em  (600px)
-//   tablet       → min-width: 50em    (800px)
-//   laptop       → min-width: 64em    (1024px)
-//   desktop      → min-width: 70em    (1120px)
-//   wide         → min-width: 90em    (1440px)
+//   mobile-only  â max-width: 37.5em  (600px)
+//   phablet      â min-width: 37.5em  (600px)
+//   tablet       â min-width: 50em    (800px)
+//   laptop       â min-width: 64em    (1024px)
+//   desktop      â min-width: 70em    (1120px)
+//   wide         â min-width: 90em    (1440px)
 // ================================================
 @use 'sass:map';
 @use 'sass:meta';
 
 
-// BREAKPOINT MAP — single source of truth
+// BREAKPOINT MAP â single source of truth
 $syx-breakpoints: (
   'mobile-only': (max-width: 37.5em),
   'phablet':     (min-width: 37.5em),

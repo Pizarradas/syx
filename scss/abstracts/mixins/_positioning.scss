@@ -1,14 +1,14 @@
-// SYX MIXINS — POSITIONING
+// SYX MIXINS â POSITIONING
 // ================================================
 // Null-safe shorthand for position + offsets.
-// Null values are skipped — no empty CSS properties emitted.
+// Null values are skipped â no empty CSS properties emitted.
 //
 // @example
 //   @include position(absolute, $top: 0, $right: 0);
-//   // → position: absolute; top: 0; right: 0;
+//   // â position: absolute; top: 0; right: 0;
 //
 //   @include position(fixed, $bottom: 1rem, $left: 50%);
-//   // → position: fixed; bottom: 1rem; left: 50%;
+//   // â position: fixed; bottom: 1rem; left: 50%;
 //
 // Convenience aliases:
 //   @include absolute($top: 0, $left: 0);

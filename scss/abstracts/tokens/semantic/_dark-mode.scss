@@ -1,11 +1,11 @@
 // SEMANTIC TOKENS: DARK MODE
 // ================================================
-// Reasignación de tokens semánticos para modo oscuro.
+// ReasignaciÃ³n de tokens semÃ¡nticos para modo oscuro.
 // Solo se reasignan tokens de superficie, texto y borde.
 // Los brand colors y estados (success/error/warning) NO cambian.
 //
-// Activación dual:
-//   1. Automática: @media (prefers-color-scheme: dark)
+// ActivaciÃ³n dual:
+//   1. AutomÃ¡tica: @media (prefers-color-scheme: dark)
 //   2. Manual:     [data-theme="dark"] en <html>
 //
 // Uso en _theme.scss de cada tema:
@@ -65,7 +65,7 @@
 
   // SELECTION
   // ================================================
-  // Dark bg: white text on primary brand color — always readable
+  // Dark bg: white text on primary brand color â always readable
   --semantic-color-selection-text: var(--primitive-color-white);
   --semantic-color-selection-bg:   var(--primitive-color-purple-500);
 

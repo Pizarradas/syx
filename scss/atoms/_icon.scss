@@ -5,7 +5,7 @@
 
 // atom: icon
 // ===============================================
-// Usage: <span class="syx-icon syx-icon--arrow-default" aria-hidden="true"></span>
+// Usage: <span class="atom-icon atom-icon--arrow-default" aria-hidden="true"></span>
 //
 // Modifiers:
 //   --arrow-default
@@ -19,7 +19,7 @@
 //
 // Size modifiers:
 //   --sm  (16px)
-//   --md  (24px) ← default
+//   --md  (24px) â default
 //   --lg  (32px)
 //   --xl  (40px)
 //
@@ -34,7 +34,7 @@
 // ===============================================
 
 @mixin atom-icon($theme: null) {
-  .syx-icon {
+  .atom-icon {
     // BASE
     // ===============================================
     display: inline-block;
@@ -42,7 +42,7 @@
     @include size(var(--component-icon-size-md));
     flex-shrink: 0;
 
-    // &:before — the icon itself
+    // &:before â the icon itself
     &:before {
       content: "";
       @include position(absolute, 0, 0, 0, 0);

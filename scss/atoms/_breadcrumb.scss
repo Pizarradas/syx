@@ -6,7 +6,7 @@
 // atom: breadcrumb
 // ===============================================
 @mixin atom-breadcrumb($theme: null) {
-  .syx-breadcrumb {
+  .atom-breadcrumb {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -15,7 +15,7 @@
     padding: 0;
     margin: 0;
 
-    // &__item — each list item
+    // &__item â each list item
     &__item {
       display: flex;
       align-items: center;
@@ -31,7 +31,7 @@
 
       // Last item (current page)
       &:last-child {
-        .syx-breadcrumb__link,
+        .atom-breadcrumb__link,
         span {
           color: var(--primitive-color-gray-500);
           font-weight: var(--primitive-font-weight-medium);
@@ -40,7 +40,7 @@
       }
     }
 
-    // &__link — anchor/span inside each item
+    // &__link â anchor/span inside each item
     &__link {
       color: var(--semantic-color-primary);
       text-decoration: none;

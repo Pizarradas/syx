@@ -6,13 +6,13 @@
 // atom: check
 // ===============================================
 @mixin atom-check($theme: null) {
-  .syx-check {
+  .atom-check {
     display: inline-flex;
     align-items: flex-start;
     cursor: pointer;
     user-select: none;
 
-    // &__input — hidden native checkbox
+    // &__input â hidden native checkbox
     &__input {
       @include absolute();
       opacity: 0;
@@ -21,7 +21,7 @@
       pointer-events: none;
     }
 
-    // &__label — flex row: [box] [text]
+    // &__label â flex row: [box] [text]
     &__label {
       @include relative();
       display: inline-flex;
@@ -49,7 +49,7 @@
         );
       }
 
-      // Checkmark — centered inside the box using inset + margin: auto
+      // Checkmark â centered inside the box using inset + margin: auto
       &::after {
         content: "";
         @include absolute($top: 0, $right: calc(100% - var(--component-check-size)), $bottom: 0, $left: 0);

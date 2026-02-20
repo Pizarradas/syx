@@ -6,10 +6,10 @@
 // atom: code
 // ===============================================
 // Styled code block for displaying HTML/CSS/SCSS snippets.
-// Use .syx-code for preformatted code display.
+// Use .atom-code for preformatted code display.
 // ===============================================
 @mixin atom-code($theme: null) {
-  .syx-code {
+  .atom-code {
     background: hsl(230, 20%, 12%);
     color: hsl(220, 14%, 80%);
     font-family: var(--primitive-font-family-mono);
@@ -24,12 +24,12 @@
     display: block;
 
     // Syntax highlight tokens
-    // Usage: <span class="syx-code__tag">div</span>
-    &__tag  { color: hsl(207, 82%, 66%); }   // blue  — HTML tags / selectors
-    &__attr { color: hsl(187, 47%, 55%); }   // cyan  — attributes / properties
-    &__val  { color: hsl(28,  80%, 65%); }   // orange — values / strings
-    &__cmt  { color: hsl(220, 10%, 50%); font-style: italic; } // gray — comments
-    &__cls  { color: hsl(280, 60%, 75%); }   // purple — class names / keywords
+    // Usage: <span class="atom-code__tag">div</span>
+    &__tag  { color: hsl(207, 82%, 66%); }   // blue  â HTML tags / selectors
+    &__attr { color: hsl(187, 47%, 55%); }   // cyan  â attributes / properties
+    &__val  { color: hsl(28,  80%, 65%); }   // orange â values / strings
+    &__cmt  { color: hsl(220, 10%, 50%); font-style: italic; } // gray â comments
+    &__cls  { color: hsl(280, 60%, 75%); }   // purple â class names / keywords
 
     // &--inline: for short inline snippets
     &--inline {
