@@ -8,12 +8,22 @@
     <meta name="description"
         content="Syx Foundation: Colors, Typography, Spacing, Grid, Architecture and Mixins. The core building blocks of the Syx Design System.">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Jos&eacute; Luis Pizarro Feo">
+    <meta name="author" content="José Luis Pizarro Feo">
     <link rel="canonical" href="https://syntaxys.design/docs-foundation.html">
-    <meta property="og:title" content="Foundation Â— Syx Design System">
+    <meta property="og:title" content="Foundation — Syx Design System">
     <meta property="og:description"
         content="Colors, Typography, Spacing, Grid, Architecture and Mixins. The core building blocks of the Syx Design System.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://syntaxys.design/docs-foundation.html">
+    <meta property="og:image" content="https://syntaxys.design/assets/og-image.png">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Foundation — Syx Design System">
+    <meta name="twitter:description"
+        content="Colors, Typography, Spacing, Grid, Architecture and Mixins. The core building blocks of the Syx Design System.">
+    <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
     <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
 
     <!-- ============================================
@@ -35,7 +45,7 @@
 
 
                 <!-- Logo -->
-                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System â€” Home">Syx.</a>
+                <a href="index.html" class="org-navbar__logo" aria-label="Syx Design System — Home">Syx.</a>
 
                 <!-- Desktop navigation -->
                 <nav class="org-navbar__links" aria-label="Main navigation">
@@ -46,7 +56,7 @@
                     <a href="docs-elements.html" class="syx-link syx-link--primary">Elements</a>
                     <a href="docs-why-syx.html" class="syx-link syx-link--primary">Why SYX?</a>
 
-                    <!-- Theme switcher â€” desktop -->
+                    <!-- Theme switcher — desktop -->
                     <div class="syx-theme-switcher org-navbar__theme-switcher--desktop" role="group"
                         aria-label="Switch theme" id="syx-theme-switcher">
                         <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
@@ -89,7 +99,7 @@
                         <a href="docs-developer-guide.html" class="org-navbar__mobile-link">Dev Guide</a>
                         <a href="docs-elements.html" class="org-navbar__mobile-link">Elements</a>
                     </nav>
-                    <!-- Theme switcher â€” mobile drawer -->
+                    <!-- Theme switcher — mobile drawer -->
                     <div class="org-navbar__mobile-footer">
                         <span class="org-navbar__mobile-footer__label">Theme:</span>
                         <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
@@ -161,7 +171,7 @@
             <div class="org-docs-page-header">
                 <div class="org-docs-page-header__eyebrow">
                     <a href="index.html" class="org-docs-page-header__breadcrumb">Home</a>
-                    <span class="org-docs-page-header__sep" aria-hidden="true">Â›</span>
+                    <span class="org-docs-page-header__sep" aria-hidden="true">&rsaquo;</span>
                     <span class="syx-pill syx-pill--primary" aria-current="page">Foundation</span>
                 </div>
                 <h1 class="syx-title syx-title--h1 syx-mb-2">Design Foundation</h1>
@@ -204,7 +214,7 @@
                     <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 layout-grid__col-md-2">
                         <div class="syx-swatch">
                             <div class="syx-swatch__block syx-swatch__block--blue-500"><span
-                                    class="syx-swatch__name">500 ?</span></div>
+                                    class="syx-swatch__name">500</span></div>
                             <span class="syx-swatch__token">purple-500</span>
                         </div>
                     </div>
@@ -270,16 +280,16 @@
                     </div>
                 </div>
 
-                <pre class="syx-code">--color-primary   ? var(--primitive-color-purple-500)
---color-secondary ? var(--primitive-color-cyan-500)
---color-accent    ? var(--primitive-color-orange-500)</pre>
+                <pre class="syx-code">--color-primary   &rarr; var(--primitive-color-purple-500)
+--color-secondary &rarr; var(--primitive-color-cyan-500)
+--color-accent    &rarr; var(--primitive-color-orange-500)</pre>
             </section>
 
             <!-- TYPOGRAPHY -->
             <section id="typography" class="mol-card" aria-labelledby="typography-heading">
                 <h2 id="typography-heading" class="syx-title syx-title--h2 syx-mb-1">Typography</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
-                    Fluid type scale using <code>clamp()</code>. Classes: <code>.syx-type-display-1</code> ?
+                    Fluid type scale using <code>clamp()</code>. Classes: <code>.syx-type-display-1</code> &rarr;
                     <code>.syx-type-caption</code>.
                 </p>
 
@@ -316,28 +326,28 @@
                         <span class="mol-demo-specimen__label">.syx-type-body-large</span>
                         <span class="mol-demo-specimen__size">Space Grotesk &middot; fluid</span>
                     </div>
-                    <span class="syx-type-body-large">Body Large Â— Lead paragraph text</span>
+                    <span class="syx-type-body-large">Body Large — Lead paragraph text</span>
                 </div>
                 <div class="mol-demo-specimen">
                     <div class="mol-demo-specimen__meta">
                         <span class="mol-demo-specimen__label">.syx-type-body</span>
                         <span class="mol-demo-specimen__size">Space Grotesk &middot; fluid</span>
                     </div>
-                    <span class="syx-type-body">Body Â— Standard paragraph text for reading</span>
+                    <span class="syx-type-body">Body — Standard paragraph text for reading</span>
                 </div>
                 <div class="mol-demo-specimen">
                     <div class="mol-demo-specimen__meta">
                         <span class="mol-demo-specimen__label">.syx-type-body-small</span>
                         <span class="mol-demo-specimen__size">Space Grotesk &middot; fluid</span>
                     </div>
-                    <span class="syx-type-body-small">Body Small Â— Secondary and supporting text</span>
+                    <span class="syx-type-body-small">Body Small — Secondary and supporting text</span>
                 </div>
                 <div class="mol-demo-specimen">
                     <div class="mol-demo-specimen__meta">
                         <span class="mol-demo-specimen__label">.syx-type-caption</span>
                         <span class="mol-demo-specimen__size">Space Grotesk &middot; fluid</span>
                     </div>
-                    <span class="syx-type-caption">CAPTION Â— LABELS AND TAGS</span>
+                    <span class="syx-type-caption">CAPTION — LABELS AND TAGS</span>
                 </div>
             </section>
 
@@ -350,27 +360,27 @@
                 <div class="mol-demo-spacing-row">
                     <div class="mol-demo-spacing-row__bar mol-demo-spacing-row__bar--1"></div>
                     <span class="mol-demo-spacing-row__label">syx-m-1 / gap-1</span>
-                    <span class="mol-demo-spacing-row__value">8px Â— var(--layout-gap-1)</span>
+                    <span class="mol-demo-spacing-row__value">8px — var(--layout-gap-1)</span>
                 </div>
                 <div class="mol-demo-spacing-row">
                     <div class="mol-demo-spacing-row__bar mol-demo-spacing-row__bar--2"></div>
                     <span class="mol-demo-spacing-row__label">syx-m-2 / gap-2</span>
-                    <span class="mol-demo-spacing-row__value">16px Â— var(--layout-gap-2)</span>
+                    <span class="mol-demo-spacing-row__value">16px — var(--layout-gap-2)</span>
                 </div>
                 <div class="mol-demo-spacing-row">
                     <div class="mol-demo-spacing-row__bar mol-demo-spacing-row__bar--3"></div>
                     <span class="mol-demo-spacing-row__label">syx-m-3 / gap-3</span>
-                    <span class="mol-demo-spacing-row__value">24px Â— var(--layout-gap-3)</span>
+                    <span class="mol-demo-spacing-row__value">24px — var(--layout-gap-3)</span>
                 </div>
                 <div class="mol-demo-spacing-row">
                     <div class="mol-demo-spacing-row__bar mol-demo-spacing-row__bar--4"></div>
                     <span class="mol-demo-spacing-row__label">syx-m-4 / gap-4</span>
-                    <span class="mol-demo-spacing-row__value">32px Â— var(--layout-gap-4)</span>
+                    <span class="mol-demo-spacing-row__value">32px — var(--layout-gap-4)</span>
                 </div>
                 <div class="mol-demo-spacing-row">
                     <div class="mol-demo-spacing-row__bar mol-demo-spacing-row__bar--6"></div>
                     <span class="mol-demo-spacing-row__label">syx-m-5 / gap-5</span>
-                    <span class="mol-demo-spacing-row__value">48px Â— var(--layout-gap-5)</span>
+                    <span class="mol-demo-spacing-row__value">48px — var(--layout-gap-5)</span>
                 </div>
             </section>
 
@@ -407,7 +417,7 @@
                     </div>
                 </div>
 
-                <p class="syx-type-body-small syx-text-gray syx-mb-2">4 Ã— col-md-3</p>
+                <p class="syx-type-body-small syx-text-gray syx-mb-2">4 × col-md-3</p>
                 <div class="mol-demo-grid-wrapper layout-grid">
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-3 mol-demo-grid-cell">col-3</div>
                     <div
@@ -427,7 +437,7 @@
                 <h2 id="architecture-heading" class="syx-title syx-title--h2 syx-mb-1">Architecture</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
                     SYX uses CSS <code>@layer</code> to manage specificity without <code>!important</code>.
-                    Utilities always win over components Â— by design.
+                    Utilities always win over components — by design.
                 </p>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2">CSS @layer Stack</h3>
@@ -435,7 +445,7 @@
                     syx.organisms, syx.utilities;</div>
 
                 <table class="syx-table syx-mb-4">
-                    <caption class="syx-sr-only">CSS layer stack Â— order and precedence</caption>
+                    <caption class="syx-sr-only">CSS layer stack — order and precedence</caption>
                     <thead>
                         <tr>
                             <th>Layer</th>
@@ -447,7 +457,7 @@
                         <tr>
                             <td><code>syx.reset</code></td>
                             <td>Browser reset</td>
-                            <td>Â—</td>
+                            <td>—</td>
                         </tr>
                         <tr>
                             <td><code>syx.base</code></td>
@@ -483,9 +493,9 @@
                 </table>
 
                 <h3 class="syx-title syx-title--h4 syx-mb-2">Token Architecture</h3>
-                <div class="syx-code syx-mb-2">Primitive ? Semantic ? Component</div>
+                <div class="syx-code syx-mb-2">Primitive &rarr; Semantic &rarr; Component</div>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
-                    Never use primitive tokens directly in components. Always go through semantic ? component.
+                    Never use primitive tokens directly in components. Always go through semantic &rarr; component.
                 </p>
 
                 <table class="syx-table">
@@ -521,7 +531,7 @@
             <section id="mixins" class="mol-card" aria-labelledby="mixins-heading">
                 <h2 id="mixins-heading" class="syx-title syx-title--h2 syx-mb-1">Mixin Quick Reference</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
-                    All SYX mixins are null-safe Â— passing <code>null</code> skips that property.
+                    All SYX mixins are null-safe — passing <code>null</code> skips that property.
                     Full reference: <code>scss/abstracts/mixins/README.md</code>
                 </p>
 
@@ -582,12 +592,12 @@
                         </tr>
                         <tr>
                             <td><code>@include darkmode</code></td>
-                            <td><code>@include darkmode { Â… }</code></td>
+                            <td><code>@include darkmode { … }</code></td>
                             <td>Media Queries</td>
                         </tr>
                         <tr>
                             <td><code>@include reduced-motion</code></td>
-                            <td><code>@include reduced-motion { Â… }</code></td>
+                            <td><code>@include reduced-motion { … }</code></td>
                             <td>Media Queries</td>
                         </tr>
                         <tr>
@@ -634,23 +644,25 @@
                 <h2 id="iconography-heading" class="syx-title syx-title--h2 syx-mb-1">Iconography</h2>
                 <p class="syx-type-body syx-text-gray syx-mb-4">
                     Icons are inline SVGs stored as CSS custom properties (data URIs). Use the
-                    <code>.syx-icon</code> atom with BEM modifiers Â— no inline styles needed.
+                    <code>.syx-icon</code> atom with BEM modifiers — no inline styles needed.
                 </p>
 
                 <!-- Architecture -->
                 <h3 class="syx-title syx-title--h4 syx-mb-2">Token Architecture</h3>
                 <div class="mol-card mol-card--flat syx-mb-4" style="background:var(--primitive-color-gray-50);">
                     <p class="syx-type-body-small syx-text-gray" style="margin:0;">
-                        <strong>Layer 1 Â— Primitive:</strong> <code>--primitive-icon-*</code> ? stores the raw SVG data
+                        <strong>Layer 1 — Primitive:</strong> <code>--primitive-icon-*</code> &rarr; stores the raw SVG
+                        data
                         URI<br>
-                        <strong>Layer 2 Â— Semantic:</strong> <code>--icon-*</code> ? alias consumed by components<br>
-                        <strong>Colorization:</strong> <code>filter: var(--semantic-filter-*)</code> ? recolors the
+                        <strong>Layer 2 — Semantic:</strong> <code>--icon-*</code> &rarr; alias consumed by
+                        components<br>
+                        <strong>Colorization:</strong> <code>filter: var(--semantic-filter-*)</code> &rarr; recolors the
                         black SVG to any brand color
                     </p>
                 </div>
 
                 <!-- Icon Gallery -->
-                <h3 class="syx-title syx-title--h4 syx-mb-3">Icon Gallery Â— Theme Example 01</h3>
+                <h3 class="syx-title syx-title--h4 syx-mb-3">Icon Gallery — Theme Example 01</h3>
                 <div class="layout-grid syx-mb-4">
 
                     <!-- arrow-default -->
@@ -829,7 +841,7 @@
 
 
     <!-- ============================================
-       FOOTER (org-site-footer â€” universal)
+       FOOTER (org-site-footer — universal)
   ============================================= -->
     <footer class="org-site-footer" role="contentinfo">
         <div class="org-site-footer__inner">
@@ -849,7 +861,7 @@
 
             <small class="org-site-footer__copy">
                 &copy; 2026 Syx Design System &mdash; Built by
-                <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">Jos&eacute; Luis
+                <a href="https://github.com/jlpizarro" class="syx-link syx-link--primary" rel="author">José Luis
                     Pizarro Feo</a>
             </small>
 
