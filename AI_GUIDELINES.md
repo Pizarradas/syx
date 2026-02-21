@@ -30,12 +30,13 @@
 
 ### 1. Atomic Hierarchy
 
-| Level               | Prefix    | Path              | Example                        |
-| :------------------ | :-------- | :---------------- | :----------------------------- |
-| **Atoms**           | `.syx-`   | `scss/atoms/`     | `.atom-btn`, `.atom-icon`      |
-| **Molecules**       | `.mol-`   | `scss/molecules/` | `.mol-card`, `.mol-search`     |
-| **Organisms**       | `.org-`   | `scss/organisms/` | `.org-navbar`, `.org-footer`   |
-| **Templates/Pages** | (Context) | `scss/pages/`     | `.page-home`, `.tpl-dashboard` |
+| Level               | Prefix     | Path              | Example                                    |
+| :------------------ | :--------- | :---------------- | :----------------------------------------- |
+| **Atoms**           | `atom-`    | `scss/atoms/`     | `.atom-btn`, `.atom-icon`, `.atom-form`    |
+| **Molecules**       | `mol-`     | `scss/molecules/` | `.mol-card`, `.mol-form-field`             |
+| **Organisms**       | `org-`     | `scss/organisms/` | `.org-navbar`, `.org-landing-hero`         |
+| **Utilities**       | `syx-`     | `scss/utilities/` | `.syx-d-flex`, `.syx-sr-only`              |
+| **Templates/Pages** | (Context)  | `scss/pages/`     | `.page-home`, `.org-landing-section-title` |
 
 ### 2. Token Architecture
 
