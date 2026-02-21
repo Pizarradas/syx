@@ -80,19 +80,32 @@ Component-specific tokens that reference semantic tokens.
 
 ### In Themes
 
-Themes should only override **primitive tokens**. Semantic and component tokens will cascade automatically.
+Themes are organized in 3 sections inside `_theme.scss`:
+
+- **Section 1 — Primitives**: Override raw values (colors, spacing, fonts). The primary customization point.
+- **Section 2 — Legacy bindings**: Map primitives to legacy token names. Needed for backwards compatibility.
+- **Section 3 — Semantic overrides**: Override `--semantic-color-*`, `--semantic-font-family-*`, and `--semantic-border-radius-*` directly. This is how buttons and forms get their presentable baseline.
 
 ```scss
-@mixin theme-codymer {
-  // ✅ Correct: override primitives only
-  --primitive-space-base: 0.5rem;
-  --primitive-color-purple-500: hsl(248, 62%, 22%);
+@mixin theme-my-brand {
+  :root {
+    // ── Section 1: Primitives (always override these) ──
+    --primitive-space-base: 0.25rem;                    // 4px grid
+    --primitive-color-cyan-500: #6EE7F7;                // brand primary
+    --primitive-font-family-heading: "Space Grotesk", sans-serif;
 
-  // ❌ Wrong: do not override semantic or component tokens
-  // --semantic-color-primary: ...
-  // --component-button-primary-color: ...
+    // ── Section 3: Semantic overrides (wire up the system) ──
+    --semantic-color-primary: var(--primitive-color-cyan-500);
+    --semantic-font-family-heading: var(--primitive-font-family-heading);
+    --semantic-border-radius-default: calc(1 * var(--base-measure));
+
+    // ❌ Component tokens: do NOT override in themes unless truly brand-specific
+    // --component-button-primary-color: ...  ← only if primitive→semantic cascade is insufficient
+  }
 }
 ```
+
+> See `THEMING-RULES.md` for the full reference on which token layer to override and when.
 
 ---
 
