@@ -98,7 +98,7 @@ Follow this order for consistency:
 - [ ] Component tokens defined in `abstracts/tokens/components/_{name}.scss`
 - [ ] Token file registered in `abstracts/tokens/index.scss`
 - [ ] Component mixin registered in `{layer}/index.scss`
-- [ ] Compiles without errors in all 5 themes
+- [ ] Compiles without errors in both themes (velox and terra)
 
 ### File Template
 
@@ -239,8 +239,8 @@ Always use named breakpoints from `$syx-breakpoints`:
 
 Before submitting any change:
 
-- [ ] `sass scss/styles-theme-example-01.scss /dev/null` compiles without errors
-- [ ] All 5 themes compile without errors
+- [ ] `sass scss/styles-theme-velox.scss /dev/null` compiles without errors
+- [ ] Both themes (velox, terra) compile without errors
 - [ ] No hardcoded values (colors, spacing, font sizes)
 - [ ] No `!important`
 - [ ] No raw `transition:` (use `@include transition()`)
