@@ -1,0 +1,162 @@
+// CORE
+// ===============================================
+@use "../../abstracts/index" as *;
+// ===============================================
+
+// THEME-AWARE MIXIN HELPER: icons
+// Generates .syx-icon--* classes for social media icons.
+// Classes live in @layer syx.utilities so they always win over components.
+// Token values (--icon-rrss-*) are resolved at runtime per active theme.
+// ===============================================
+@mixin helper-icons() {
+  @layer syx.utilities {
+    // .syx-icon
+    .syx-icon {
+      display: inline-block;
+
+      // &:before
+      &:before {
+        content: "";
+        @include position(absolute, 0, 0, 0, 0);
+        @include margin(auto);
+      }
+
+      // &--facebook
+      &--facebook {
+        // &-primary
+        &-primary {
+          // &:before
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-facebook),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--github
+      &--github {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-github),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--instagram
+      &--instagram {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-instagram),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--linkedin
+      &--linkedin {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-linkedin),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--pinterest
+      &--pinterest {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-pinterest),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--snapchat
+      &--snapchat {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-snapchat),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--twitter
+      &--twitter {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-twitter),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--whatsapp
+      &--whatsapp {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-whatsapp),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+
+      // &--youtube
+      &--youtube {
+        &-primary {
+          &:before {
+            @include background-setup(
+              var(--icon-rrss-youtube),
+              "center center / contain",
+              no-repeat,
+              null, null, null,
+              transparent,
+            );
+          }
+        }
+      }
+    }
+  }
+}
