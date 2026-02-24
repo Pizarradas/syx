@@ -18,7 +18,7 @@ Unlike many "bootstrap-clone" systems, SYX is built with a deep understanding of
 
 ### 1. Advanced Architecture
 
-- **CSS Layers (`@layer`)**: You are correctly using the strict layer stack (`reset` < `base` < `tokens` < `atoms` ... < `utilities`). This is the "Holy Grail" of strict CSS organization in 2026.
+- **CSS Layers (`@layer`)**: The granular 7-layer stack (`reset` < `base` < `tokens` < `atoms` ... < `utilities`) is declared correctly. **Note:** As of v3.0.1, a full audit fixed two inconsistencies — a rogue `syx.components` declaration in `_reset.scss` and all component mixins (atoms, molecules, organisms, grid, elements) that were producing unlayered CSS. All CSS is now correctly layerized.
 - **Token 3-Tier Model**: The strict separation of `Primitive` -> `Semantic` -> `Component` tokens is industry best practice (matching standards from heavyweights like Salesforce Lightning and Adobe Spectrum).
 
 ### 2. Modern Implementation
