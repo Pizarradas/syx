@@ -1,0 +1,23 @@
+// ABSTRACTS
+// ================================================
+@use 'sass:list';
+@use '../variables/variables' as *;
+@use '../maps/maps' as *;
+@use '../functions/functions' as *;
+// ================================================
+
+// MIXIN: SIZE
+// ===============================================
+@mixin size(
+  $size--width,
+  $size--height...) {
+
+  @if list.length($size--height) == 1 {
+    height: $size--height;
+    width: $size--width;
+  } @else {
+    height: $size--width;
+    width: $size--width;
+  }
+
+}
