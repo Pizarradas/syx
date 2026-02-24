@@ -1,0 +1,38 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+// ===============================================
+
+// THEME-AWARE MIXIN HELPER: dimensions
+// Generates .syx-size-* classes using theme-specific --dimension-* tokens.
+// ===============================================
+@mixin helper-dimensions($theme: null) {
+  @layer syx.utilities {
+    .syx-size {
+      // &-1
+      &-1 {
+        @include size(var(--dimension-1));
+      }
+
+      // &-2
+      &-2 {
+        @include size(var(--dimension-2));
+      }
+
+      // &-3
+      &-3 {
+        @include size(var(--dimension-3));
+      }
+
+      // &-4
+      &-4 {
+        @include size(var(--dimension-4));
+      }
+
+      // &-5
+      &-5 {
+        @include size(var(--dimension-5));
+      }
+    }
+  }
+}

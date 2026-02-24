@@ -1,0 +1,36 @@
+// PRIMITIVE TOKENS: SIZING
+// ================================================
+// Foundation sizing values for dimensions, widths, and heights
+// ================================================
+
+:root {
+  // DIMENSION SCALE
+  // ================================================
+  // Based on spacing scale for consistency
+  --primitive-size-1: calc(2 * var(--primitive-space-base)); // 16px
+  --primitive-size-2: calc(3 * var(--primitive-space-base)); // 24px
+  --primitive-size-3: calc(4 * var(--primitive-space-base)); // 32px
+  --primitive-size-4: calc(5 * var(--primitive-space-base)); // 40px
+  --primitive-size-5: calc(6 * var(--primitive-space-base)); // 48px
+  --primitive-size-6: calc(8 * var(--primitive-space-base)); // 64px
+  --primitive-size-7: calc(10 * var(--primitive-space-base)); // 80px
+  --primitive-size-8: calc(12 * var(--primitive-space-base)); // 96px
+  --primitive-size-9: calc(14 * var(--primitive-space-base)); // 112px
+  --primitive-size-10: calc(16 * var(--primitive-space-base)); // 128px
+
+  // LAYOUT WIDTHS
+  // ================================================
+  --primitive-width-full: 100%;
+  --primitive-width-screen: 100vw;
+  --primitive-width-min: min-content;
+  --primitive-width-max: max-content;
+  --primitive-width-fit: fit-content;
+
+  // LAYOUT HEIGHTS
+  // ================================================
+  --primitive-height-full: 100%;
+  --primitive-height-screen: 100vh;
+  --primitive-height-min: min-content;
+  --primitive-height-max: max-content;
+  --primitive-height-fit: fit-content;
+}
