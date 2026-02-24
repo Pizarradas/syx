@@ -1,0 +1,39 @@
+// PRIMITIVE TOKENS: SHADOWS
+// ================================================
+// Foundation shadow values for elevation and depth
+// ================================================
+
+:root {
+  // BOX SHADOWS
+  // ================================================
+  --primitive-shadow-none: none;
+  --primitive-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --primitive-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --primitive-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --primitive-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --primitive-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --primitive-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  // INNER SHADOWS
+  // ================================================
+  --primitive-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  // OPACITY VALUES
+  // ================================================
+  // For creating custom shadows
+  --primitive-opacity-0: 0;
+  --primitive-opacity-5: 0.05;
+  --primitive-opacity-10: 0.1;
+  --primitive-opacity-20: 0.2;
+  --primitive-opacity-25: 0.25;
+  --primitive-opacity-30: 0.3;
+  --primitive-opacity-40: 0.4;
+  --primitive-opacity-50: 0.5;
+  --primitive-opacity-60: 0.6;
+  --primitive-opacity-70: 0.7;
+  --primitive-opacity-75: 0.75;
+  --primitive-opacity-80: 0.8;
+  --primitive-opacity-90: 0.9;
+  --primitive-opacity-95: 0.95;
+  --primitive-opacity-100: 1;
+}
