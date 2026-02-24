@@ -1,6 +1,6 @@
 {
   "name": "syx-design-system",
-  "version": "2.0.0-beta",
+  "version": "3.0.0",
   "description": "A modern, token-driven SCSS design system built on Atomic Design principles.",
   "main": "index.html",
   "scripts": {
@@ -11,7 +11,8 @@
     "watch": "sass --watch scss:css --style=expanded --no-source-map",
     "postcss": "postcss css/*.css --replace --no-map",
     "postcss:core": "postcss css/styles-core.css --replace --no-map",
-    "lint": "echo \"TODO: Add stylelint\" && exit 0"
+    "lint": "echo \"TODO: Add stylelint\" && exit 0",
+    "export:tokens": "node scripts/export-tokens.js"
   },
   "keywords": [
     "design-system",

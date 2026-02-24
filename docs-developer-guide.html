@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -25,6 +25,9 @@
         content="Practical reference for every mixin, token pattern, and component recipe. Each section shows the SCSS you write and the CSS it generates.">
     <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
     <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
+</head>
+
+<body class="syx syx--theme-example-01">
 
     <style>
         /* -- Inline demo helpers (mol-demo-*  removable in production) -- */
@@ -179,8 +182,8 @@
                         aria-label="Switch theme" id="syx-theme-switcher">
                         <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
                             aria-label="Theme Default" title="Default" type="button"></button>
-                        <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer"
-                            title="Codymer" type="button"></button>
+                        <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme 2"
+                            title="Theme 2" type="button"></button>
                         <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral"
                             title="Coral" type="button"></button>
                         <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest"
@@ -224,8 +227,8 @@
                             <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active"
                                 data-theme="example-01" aria-label="Theme Default" title="Default"
                                 type="button"></button>
-                            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer"
-                                title="Codymer" type="button"></button>
+                            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme 2"
+                                title="Theme 2" type="button"></button>
                             <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral"
                                 title="Coral" type="button"></button>
                             <button class="syx-theme-switcher__btn" data-theme="example-04" aria-label="Theme Forest"
@@ -256,6 +259,7 @@
             <nav aria-label="Developer guide sections">
                 <div class="mol-docs-sidenav__group">
                     <span class="mol-docs-sidenav__title">Developer Guide</span>
+                    <a href="#html-setup" class="mol-docs-sidenav__link">HTML Setup</a>
                     <a href="#tokens" class="mol-docs-sidenav__link">Token System</a>
                     <a href="#mixins-positioning" class="mol-docs-sidenav__link">Positioning</a>
                     <a href="#mixins-spacing" class="mol-docs-sidenav__link">Spacing</a>
@@ -297,6 +301,87 @@
                     Each section shows the SCSS you write and the CSS it generates.
                 </p>
             </div>
+
+            <!-- HTML SETUP -->
+            <section id="html-setup" class="mol-card" aria-labelledby="html-setup-heading">
+                <h2 id="html-setup-heading" class="atom-title atom-title--h2 syx-mb-1">HTML Setup — Body Classes</h2>
+                <p class="syx-type-body syx-text-gray syx-mb-3">
+                    Every SYX page requires <strong>two classes on the <code>&lt;body&gt;</code> element</strong>:
+                    <code>.syx</code> (root scope) and <code>.syx--theme-example-*</code> (theme context).
+                    All tokens, components, and theme overrides are scoped to this selector pair.
+                </p>
+
+                <div class="mol-demo-callout syx-mb-3">
+                    <strong>Required:</strong> Without <code>.syx</code>, no SYX CSS custom properties resolve.
+                    Without <code>.syx--theme-example-*</code>, no theme tokens apply.
+                </div>
+
+                <h3 class="atom-title atom-title--h4 syx-mb-2">The pattern</h3>
+                <div class="atom-code syx-mb-4">&lt;!DOCTYPE html&gt;
+                    &lt;html lang="en"&gt;
+                    &lt;head&gt;
+                    &lt;link rel="stylesheet" href="css/styles-theme-example-01.css" /&gt;
+                    &lt;/head&gt;
+
+                    &lt;!-- REQUIRED: .syx (root) + .syx--theme-example-N (theme) --&gt;
+                    &lt;body class="syx syx--theme-example-01"&gt;
+                    ...
+                    &lt;/body&gt;
+                    &lt;/html&gt;</div>
+
+                <h3 class="atom-title atom-title--h4 syx-mb-2">All 5 themes</h3>
+                <table class="atom-table syx-mb-4">
+                    <caption class="syx-sr-only">SYX theme class names</caption>
+                    <thead>
+                        <tr>
+                            <th>CSS File</th>
+                            <th>Body class</th>
+                            <th>Style</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>styles-theme-example-01.css</code></td>
+                            <td><code>syx syx--theme-example-01</code></td>
+                            <td>Purple / Blue (default)</td>
+                        </tr>
+                        <tr>
+                            <td><code>styles-theme-example-02.css</code></td>
+                            <td><code>syx syx--theme-example-02</code></td>
+                            <td>Dark</td>
+                        </tr>
+                        <tr>
+                            <td><code>styles-theme-example-03.css</code></td>
+                            <td><code>syx syx--theme-example-03</code></td>
+                            <td>Blue / Coral</td>
+                        </tr>
+                        <tr>
+                            <td><code>styles-theme-example-04.css</code></td>
+                            <td><code>syx syx--theme-example-04</code></td>
+                            <td>Green / Forest</td>
+                        </tr>
+                        <tr>
+                            <td><code>styles-theme-example-05.css</code></td>
+                            <td><code>syx syx--theme-example-05</code></td>
+                            <td>Yellow / Midnight</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="atom-title atom-title--h4 syx-mb-2">Optional page modifiers</h3>
+                <p class="syx-type-body syx-text-gray syx-mb-2">
+                    Page-type modifiers can be added as additional classes on <code>&lt;body&gt;</code>
+                    using the <code>syx--page-*</code> prefix:
+                </p>
+                <div class="atom-code syx-mb-3">&lt;body class="syx syx--theme-example-01 syx--page-editorial"&gt;
+                    &lt;body class="syx syx--theme-example-01 syx--page-agency"&gt;
+                    &lt;body class="syx syx--theme-example-01 syx--page-mag"&gt;</div>
+
+                <div class="mol-demo-callout mol-demo-callout--good">
+                    <strong>&#10003; Convention:</strong> All body modifiers use the <code>syx--</code> prefix.
+                    Never use unprefixed classes like <code>page-editorial</code> directly on <code>&lt;body&gt;</code>.
+                </div>
+            </section>
 
             <!-- TOKEN SYSTEM -->
             <section id="tokens" class="mol-card" aria-labelledby="tokens-heading">
@@ -902,8 +987,8 @@
                     background-color: var(--component-header-bg); // generic â every theme has this
                     background-image: var(--component-header-logo-icon); // generic â every theme overrides it
 
-                    // themes/example-02/_theme.scss (Codymer)
-                    --component-header-logo-icon: var(--icon-logo-codymer);
+                    // themes/example-02/_theme.scss
+                    --component-header-logo-icon: var(--icon-logo-example-02);
 
                     // themes/example-03/_theme.scss (Coral)
                     --component-header-logo-icon: var(--icon-logo-coral);</div>
@@ -916,14 +1001,14 @@
                 </p>
                 <div class="atom-code syx-mb-4">// abstracts/_theme-config.scss
                     $theme-config: (
-                    'codymer': (header-sidenav-side: right, header-logo-size: 2.4rem),
+                    'example-02': (header-sidenav-side: right, header-logo-size: 2.4rem),
                     'coral': (header-sidenav-side: left, header-logo-size: 2rem),
                     );
 
                     // organisms/_header.scss â reads the map at compile time
                     @if theme-cfg($theme, 'header-sidenav-side', left) == right {
                     right: 0;
-                    transform: translateX(100%); // Codymer: slides in from right
+                    transform: translateX(100%); // example-02: slides in from right
                     } @else {
                     left: 0;
                     transform: translateX(-100%); // all others: slides in from left
@@ -935,8 +1020,8 @@
                     No token or map entry required &mdash; inline override in the partial.
                 </p>
                 <div class="atom-code syx-mb-4">// organisms/_header.scss
-                    @if $theme == 'codymer' {
-                    border-bottom: 1px solid var(--semantic-color-border-subtle); // Codymer only
+                    @if $theme == 'example-02' {
+                    border-bottom: 1px solid var(--semantic-color-border-subtle); // example-02 only
                     }
                     @if $theme == 'midnight' {
                     backdrop-filter: blur(8px); // Midnight glass effect only
@@ -993,7 +1078,8 @@
                 <a href="docs-components.html" class="atom-link atom-link--primary syx-type-body-small">Components</a>
                 <a href="docs-utilities.html" class="atom-link atom-link--primary syx-type-body-small">Utilities</a>
                 <a href="docs-elements.html" class="atom-link atom-link--primary syx-type-body-small">Elements</a>
-                <a href="docs-developer-guide.html" class="atom-link atom-link--primary syx-type-body-small">Dev Guide</a>
+                <a href="docs-developer-guide.html" class="atom-link atom-link--primary syx-type-body-small">Dev
+                    Guide</a>
             </nav>
 
             <small class="org-site-footer__copy">
@@ -1128,6 +1214,6 @@
         })();
     </script>
 
-    </body>
+</body>
 
 </html>

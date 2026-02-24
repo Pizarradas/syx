@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -25,6 +25,8 @@
     content="Atomic utility classes for layout, spacing, and typography. Format: .syx-{property}-{value}.">
   <meta name="twitter:image" content="https://syntaxys.design/assets/og-image.png">
   <link rel="stylesheet" id="syx-theme-stylesheet" href="css/styles-theme-example-01.css">
+</head>
+<body class="syx syx--theme-example-01">
 
   <!-- ============================================
        NAVBAR (org-navbar organism)
@@ -61,7 +63,7 @@
             id="syx-theme-switcher">
             <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
               aria-label="Theme Default" title="Default" type="button"></button>
-            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer" title="Codymer"
+            <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme 2" title="Theme 2"
               type="button"></button>
             <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral" title="Coral"
               type="button"></button>
@@ -104,7 +106,7 @@
             <div class="syx-theme-switcher" role="group" aria-label="Switch theme">
               <button class="syx-theme-switcher__btn syx-theme-switcher__btn--active" data-theme="example-01"
                 aria-label="Theme Default" title="Default" type="button"></button>
-              <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme Codymer" title="Codymer"
+              <button class="syx-theme-switcher__btn" data-theme="example-02" aria-label="Theme 2" title="Theme 2"
                 type="button"></button>
               <button class="syx-theme-switcher__btn" data-theme="example-03" aria-label="Theme Coral" title="Coral"
                 type="button"></button>
@@ -145,13 +147,18 @@
           <a href="#layer-info" class="mol-docs-sidenav__link">Why No !important?</a>
           <a href="#spacing" class="mol-docs-sidenav__link">Spacing</a>
           <a href="#display" class="mol-docs-sidenav__link">Display &amp; Flex</a>
+          <a href="#position" class="mol-docs-sidenav__link">Position &amp; Visibility</a>
           <a href="#text" class="mol-docs-sidenav__link">Text &amp; Color</a>
           <a href="#backgrounds" class="mol-docs-sidenav__link">Backgrounds</a>
+          <a href="#media" class="mol-docs-sidenav__link">Media &amp; Embed</a>
+          <a href="#accessibility" class="mol-docs-sidenav__link">Accessibility</a>
         </div>
 
         <div class="mol-docs-sidenav__group">
           <span class="mol-docs-sidenav__title">More</span>
-          <a href="docs-developer-guide.html" class="mol-docs-sidenav__link">Developer Guide</a>
+          <a href="docs-developer-g
+          
+          uide.html" class="mol-docs-sidenav__link">Developer Guide</a>
         </div>
       </nav>
     </aside>
@@ -288,22 +295,97 @@
 
         <div class="atom-code syx-mt-3">// Display
           .syx-d-flex .syx-d-inline-flex .syx-d-block .syx-d-none .syx-d-grid
+          .syx-d-inline .syx-d-inline-block .syx-d-contents
 
           // Flex
           .syx-flex-row .syx-flex-col .syx-flex-wrap .syx-flex-1 .syx-flex-none
+          .syx-flex-auto .syx-flex-row-reverse .syx-flex-col-reverse
 
           // Justify
           .syx-justify-start .syx-justify-center .syx-justify-end
           .syx-justify-between .syx-justify-around .syx-justify-evenly
 
-          // Align
+          // Align Items
           .syx-items-start .syx-items-center .syx-items-end .syx-items-baseline
 
-          // Gap
-          .syx-gap-{0-5} .syx-col-gap-{1-4} .syx-row-gap-{1-4}
+          // Align Self
+          .syx-self-start .syx-self-center .syx-self-end .syx-self-auto
 
-          // Position
-          .syx-relative .syx-absolute .syx-sticky .syx-fixed</div>
+          // Align Content
+          .syx-content-start .syx-content-center .syx-content-between
+
+          // Gap
+          .syx-gap-{0-5} .syx-col-gap-{1-5} .syx-row-gap-{1-5}
+
+          // Width / Height
+          .syx-w-full .syx-w-auto .syx-h-full .syx-h-screen .syx-w-screen
+
+          // Border
+          .syx-border .syx-border-none
+
+          // Overflow
+          .syx-overflow-hidden .syx-overflow-auto .syx-overflow-scroll</div>
+      </section>
+
+      <!-- POSITION & VISIBILITY -->
+      <section id="position" class="mol-card" aria-labelledby="position-heading">
+        <h2 id="position-heading" class="atom-title atom-title--h2 syx-mb-1">Position &amp; Visibility</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Position utilities, inset helpers, vertical alignment, and responsive show/hide. Migrated from the former
+          <code>helper-pos-*</code> and <code>helper-dsp-sm/md/lg</code> patterns.
+        </p>
+
+        <div class="mol-demo-preview">
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Position</h3>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap syx-mb-4">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-relative</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-absolute</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-sticky</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-fixed</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-static</code>
+          </div>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Inset &amp; Coordinates</h3>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap syx-mb-4">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-inset-0</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-top-0</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-right-0</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-bottom-0</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-left-0</code>
+          </div>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Vertical Align</h3>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap syx-mb-4">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-valign-top</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-valign-middle</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-valign-bottom</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-valign-baseline</code>
+          </div>
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Responsive Visibility</h3>
+          <p class="syx-type-body-small syx-text-gray syx-mb-2">Replaces the former <code>helper-dsp-sm</code>,
+            <code>helper-dsp-md</code>, <code>helper-dsp-lg</code> pattern.
+          </p>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-d-sm-only → visible only &lt;768px</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-d-sm-up → show from 768px</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-d-md-up → show from 1024px</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-d-lg-up → show from 1280px</code>
+          </div>
+        </div>
+
+        <div class="atom-code syx-mt-3">// Position
+          .syx-relative .syx-absolute .syx-sticky .syx-fixed .syx-static
+
+          // Inset
+          .syx-inset-0 .syx-top-0 .syx-right-0 .syx-bottom-0 .syx-left-0
+
+          // Vertical Align
+          .syx-valign-top .syx-valign-middle .syx-valign-bottom
+          .syx-valign-baseline .syx-valign-sub .syx-valign-super
+
+          // Responsive Show/Hide
+          .syx-d-sm-only .syx-d-sm-up .syx-d-md-up .syx-d-lg-up .syx-d-xlg-up
+
+          // Animation
+          .syx-fade-in</div>
       </section>
 
       <!-- TEXT & COLOR -->
@@ -343,13 +425,29 @@
         <div class="atom-code syx-mt-3">// Text Colors
           .syx-text-primary .syx-text-secondary .syx-text-gray
           .syx-text-muted .syx-text-white .syx-text-black
+          .syx-text-inverse .syx-text-error .syx-text-success .syx-text-warning .syx-text-info
 
           // Alignment
-          .syx-text-left .syx-text-center .syx-text-right .syx-text-justify
+          .syx-text-left .syx-text-center .syx-text-right
+          .syx-text-justify .syx-text-start .syx-text-end
+
+          // Text Decoration
+          .syx-text-underline .syx-text-overline .syx-text-strikethrough .syx-text-no-underline
+
+          // Text Transform
+          .syx-text-uppercase .syx-text-lowercase .syx-text-capitalize
 
           // Font Weight
           .syx-font-regular .syx-font-medium .syx-font-bold
-          .syx-type-bold .syx-type-medium</div>
+          .syx-type-bold .syx-type-medium
+
+          // Typography Scale
+          .syx-type-display-1 .syx-type-h1 .syx-type-h2 .syx-type-h3 .syx-type-h4
+          .syx-type-body-large .syx-type-body .syx-type-body-small
+          .syx-type-caption .syx-type-label .syx-type-overline
+
+          // Max Width (reading measure)
+          .syx-max-w-15ch .syx-max-w-50ch .syx-max-w-65ch</div>
       </section>
 
       <!-- BACKGROUNDS -->
@@ -386,13 +484,109 @@
           </div>
         </div>
 
-        <div class="atom-code syx-mt-3">.syx-bg-white ? var(--primitive-color-white)
-          .syx-bg-gray-50 ? var(--primitive-color-gray-50)
-          .syx-bg-gray-100 ? var(--primitive-color-gray-100)
-          .syx-bg-gray-200 ? var(--primitive-color-gray-200)
-          .syx-bg-primary-light ? var(--primitive-color-purple-50)
-          .syx-bg-primary ? var(--color-primary)
-          .syx-bg-dark ? var(--primitive-color-gray-900)</div>
+        <div class="atom-code syx-mt-3">.syx-bg-white → var(--primitive-color-white)
+          .syx-bg-gray-50 → var(--primitive-color-gray-50)
+          .syx-bg-gray-100 → var(--primitive-color-gray-100)
+          .syx-bg-gray-200 → var(--primitive-color-gray-200)
+          .syx-bg-primary-light → var(--primitive-color-purple-50)
+          .syx-bg-primary → var(--semantic-color-primary)
+          .syx-bg-dark → var(--primitive-color-gray-900)
+          .syx-bg-transparent → transparent
+          .syx-bg-transparent-sm → transparent from 768px
+          .syx-bg-transparent-md → transparent from 1024px
+          .syx-bg-error → var(--semantic-color-error)
+          .syx-bg-success → var(--semantic-color-success)
+          .syx-bg-warning → var(--semantic-color-warning)
+          .syx-bg-info → var(--semantic-color-info)</div>
+      </section>
+
+      <!-- MEDIA & EMBED -->
+      <section id="media" class="mol-card" aria-labelledby="media-heading">
+        <h2 id="media-heading" class="atom-title atom-title--h2 syx-mb-1">Media &amp; Embed</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Responsive image, aspect-ratio embeds, object-fit, and background-size utilities. Unified from the former
+          <code>helper-img-resp</code>, <code>helper-embed-resp</code>, and <code>helper-obj-fit-*</code>.
+        </p>
+
+        <div class="mol-demo-preview">
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Responsive Image</h3>
+          <div class="syx-mb-4">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-img-fluid</code>
+            <p class="syx-type-body-small syx-text-gray syx-mt-2">
+              <code>display: block; max-width: 100%; height: auto;</code> — prevents images from overflowing their
+              container.
+            </p>
+          </div>
+
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Aspect-Ratio Embed</h3>
+          <p class="syx-type-body-small syx-text-gray syx-mb-2">Use for iframes, videos, or any embedded content that
+            needs a fixed aspect ratio.</p>
+          <div class="atom-code syx-mb-3">&lt;div class="syx-embed syx-embed--16by9"&gt;
+            &lt;iframe class="syx-embed__item" src="..."&gt;&lt;/iframe&gt;
+            &lt;/div&gt;</div>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap syx-mb-4">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-embed--16by9 (56.25%)</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-embed--4by3 (75%)</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-embed--3by2 (66.66%)</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-embed--1by1 (100%)</code>
+          </div>
+
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Map Embed</h3>
+          <p class="syx-type-body-small syx-text-gray syx-mb-2">Same pattern as embed, optimised for maps with
+            <code>iframe</code>.
+          </p>
+          <div class="atom-code syx-mb-4">&lt;div class="syx-map syx-map--16by9"&gt;
+            &lt;iframe class="syx-map__iframe" src="..."&gt;&lt;/iframe&gt;
+            &lt;/div&gt;</div>
+
+          <h3 class="atom-title atom-title--h4 syx-mb-2">Object Fit</h3>
+          <div class="syx-d-flex syx-gap-2 syx-flex-wrap">
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-obj-cover</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-obj-contain</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-obj-fill</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-obj-none</code>
+            <code class="syx-p-1 syx-bg-gray-100 syx-type-body-small">.syx-obj-scale-down</code>
+          </div>
+        </div>
+
+        <div class="atom-code syx-mt-3">// Responsive Image
+          .syx-img-fluid
+
+          // Aspect Ratio Embed
+          .syx-embed .syx-embed__item
+          .syx-embed--16by9 .syx-embed--8by5 .syx-embed--4by3 .syx-embed--3by2 .syx-embed--1by1
+
+          // Map Embed
+          .syx-map .syx-map__iframe
+          .syx-map--16by9 .syx-map--4by3 .syx-map--3by2 .syx-map--h100
+
+          // Object Fit
+          .syx-obj-cover .syx-obj-contain .syx-obj-fill .syx-obj-none .syx-obj-scale-down
+
+          // Object Position
+          .syx-obj-center .syx-obj-top .syx-obj-bottom
+
+          // Background Size
+          .syx-bg-cover .syx-bg-contain .syx-bg-auto</div>
+      </section>
+
+      <!-- ACCESSIBILITY -->
+      <section id="accessibility" class="mol-card" aria-labelledby="accessibility-heading">
+        <h2 id="accessibility-heading" class="atom-title atom-title--h2 syx-mb-1">Accessibility</h2>
+        <p class="syx-type-body syx-text-gray syx-mb-3">
+          Utilities for screen-reader-only content, skip links, and reduced-motion preferences.
+        </p>
+        <div class="atom-code syx-mt-3">// Screen reader only (hides visually, keeps accessible)
+          .syx-sr-only
+
+          // Becomes visible on focus (e.g. skip links)
+          .syx-sr-only-focusable
+
+          // Skip link (place at top of &lt;body&gt;)
+          .syx-skip-link
+
+          // Disable animations for prefers-reduced-motion
+          .syx-motion-safe</div>
       </section>
 
     </main>

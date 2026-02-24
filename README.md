@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-2.0.0--beta-blue)
+![Version](https://img.shields.io/badge/version-3.0.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -34,11 +34,14 @@ Download or clone the repo, then link the CSS directly in your HTML:
 <!-- Pick the theme that fits your project -->
 <link rel="stylesheet" href="css/styles-theme-example-01.css" />
 
-<!-- Use SYX components -->
-<button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">
-  Click me
-</button>
-<span class="atom-pill atom-pill--primary">New</span>
+<!-- REQUIRED: two classes on <body> -->
+<body class="syx syx--theme-example-01">
+  <!-- Use SYX components -->
+  <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">
+    Click me
+  </button>
+  <span class="atom-pill atom-pill--primary">New</span>
+</body>
 ```
 
 Open `index.html` in your browser to see the full live demo.
@@ -92,7 +95,7 @@ syx/
 │       ├── _shared/             # Shared core + 4 bundle definitions
 │       ├── _template/           # Template for new themes
 │       ├── example-01/          # Theme 01 (Purple/Blue)
-│       ├── example-02/          # Theme 02 (Codymer)
+│       ├── example-02/          # Theme 02 (Dark)
 │       ├── example-03/          # Theme 03 (Blue)
 │       ├── example-04/          # Theme 04 (Green)
 │       └── example-05/          # Theme 05 (Yellow)
@@ -166,7 +169,7 @@ Utilities always win over components. No `!important` needed.
 | Theme       | Primary Color  | Bundles                              |
 | ----------- | -------------- | ------------------------------------ |
 | example-01  | Purple / Blue  | app, docs, marketing, blog           |
-| example-02  | Codymer (Dark) | app, docs, marketing, blog           |
+| example-02  | Dark           | app, docs, marketing, blog           |
 | example-03  | Blue           | app, docs, marketing, blog           |
 | example-04  | Green          | app, docs, marketing, blog           |
 | example-05  | Yellow         | app, docs, marketing, blog           |
