@@ -36,7 +36,7 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 
 ## Tokens de superficie disponibles
 
-Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de referencia. Cada `_theme.scss` los sobreescribe para crear la identidad del tema. El archivo `_token-aliases.scss` provee fallbacks de compatibilidad (deprecated, se eliminará en v2.1).
+Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de referencia. Cada `_theme.scss` los sobreescribe para crear la identidad del tema. El archivo `_token-aliases.scss` provee fallbacks de compatibilidad para código legado (deprecated, pendiente de eliminación en una versión futura).
 
 ```css
 /* Backgrounds */

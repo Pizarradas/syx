@@ -7,14 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.0.2] — 2026-02-25
+
+### Fixed
+
+- **`@layer` order declaration hoisted to `universal-values()`** — The canonical `@layer syx.reset, syx.base, …` declaration was previously placed directly inside entry-point files (`styles-core.scss`, `styles-theme-*.scss`). It is now emitted as the **first CSS rule inside `universal-values()`** in `themes/_base/_universal.scss`. This guarantees it appears at the top of the compiled output before any `@include` call emits component CSS, regardless of which entry point is compiled.
+- **`base/_elements.scss` wrapped in `elements-base()` mixin** — Previously the `@layer syx.base { … }` block was at module top-level, causing it to be emitted during the `@use` phase. Now correctly wrapped in `@mixin elements-base($theme: null)` and called explicitly from each entry point via `@include elements-base($theme)`.
+- **`.syx-theme-switcher` moved inside `org-navbar()` mixin** — The `.syx-theme-switcher` block was a standalone top-level block outside the mixin in `organisms/_navbar.scss`. Moved to the correct position inside `org-navbar()`.
+- **Duplicate `@layer` declarations removed** — Entry points (`styles-core.scss` and all `themes/example-0X/setup.scss`) had a redundant `@layer` order declaration that is now exclusively owned by `universal-values()`.
+- **Documentation updated** — `themes/README.md`, `themes/_template/README.md`, and `CHANGELOG.md` corrected to reflect the new `@layer` declaration location and `elements-base()` mixin pattern.
+
+---
+
 ## [3.0.1] — 2026-02-24
 
 ### Fixed
 
 - **`@layer` audit — complete layerization** — Two critical cascade inconsistencies resolved:
-  1. **Rogue layer declaration removed** — `scss/base/_reset.scss` declared a conflicting `@layer syx.reset, syx.base, syx.components, syx.utilities` stack with a non-existent `syx.components` layer. Removed. The canonical stack is now declared exclusively in entrypoints (`styles-core.scss`, `styles-theme-*.scss`).
+  1. **Rogue layer declaration removed** — `scss/base/_reset.scss` declared a conflicting `@layer syx.reset, syx.base, syx.components, syx.utilities` stack with a non-existent `syx.components` layer. Removed. The canonical `@layer` order declaration is now hoisted as the **first CSS rule inside `universal-values()`** in `themes/_base/_universal.scss`, so it always precedes any component CSS emitted by `@include` calls.
   2. **All components now wrapped in `@layer`** — Every atom (×15), molecule (×5), organism (×4), and the layout grid were producing unlayered CSS, floating above the layer system. All now emit CSS inside their respective `@layer` block (`syx.atoms`, `syx.molecules`, `syx.organisms`, `syx.base`).
-- **`base/_elements.scss` now in `@layer syx.base`** — Element defaults (`ul`, `table`, `p`, `a`, `blockquote`, `hr`, `code`, `pre`) were the last remaining unlayered block. Now wrapped in `@layer syx.base { }`.
+- **`base/_elements.scss` now wrapped in `elements-base()` mixin** — Element defaults (`ul`, `table`, `p`, `a`, `blockquote`, `hr`, `code`, `pre`) were the last remaining unlayered block. Now wrapped in `@mixin elements-base($theme: null) { @layer syx.base { … } }` and explicitly called from every entry point with `@include elements-base($theme)`. This prevents premature CSS emission during the `@use` phase.
 - **All 6 helper mixins confirmed in `@layer syx.utilities`** — `_backgrounds`, `_dimensions`, `_font-sizes`, `_fonts`, `_icons`, `_spacers` all already had the correct wrapper (no change needed, documented for clarity).
 
 ### Changed
