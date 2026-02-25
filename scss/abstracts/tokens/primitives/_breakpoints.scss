@@ -1,0 +1,23 @@
+// PRIMITIVE TOKENS: BREAKPOINTS
+// ===============================================
+// Mobile-first breakpoint system
+// These are the foundation breakpoint values used across the design system
+// ===============================================
+
+// Breakpoint primitive tokens
+$token-breakpoint-xs: 0;
+$token-breakpoint-sm: 600px;      // 37.5em - Small devices (phones)
+$token-breakpoint-md: 768px;      // 48em - Medium devices (tablets)
+$token-breakpoint-lg: 1024px;     // 64em - Large devices (laptops)
+$token-breakpoint-xl: 1280px;     // 80em - Extra large devices (desktops)
+$token-breakpoint-xxl: 1440px;    // 90em - Extra extra large devices (wide screens)
+
+// Breakpoint map for iteration
+$token-breakpoints: (
+  'xs': $token-breakpoint-xs,
+  'sm': $token-breakpoint-sm,
+  'md': $token-breakpoint-md,
+  'lg': $token-breakpoint-lg,
+  'xl': $token-breakpoint-xl,
+  'xxl': $token-breakpoint-xxl
+);
