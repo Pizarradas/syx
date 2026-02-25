@@ -1,0 +1,370 @@
+// UTILITIES: DISPLAY, FLEX, GRID, POSITION & VISIBILITY
+// ===============================================
+// @layer syx.utilities ensures these always win over components
+// without !important and regardless of import order.
+
+@use "../abstracts/index" as *;
+
+@layer syx.utilities {
+  // ================================================
+  // DISPLAY
+  // ================================================
+  .syx-d-flex {
+    display: flex;
+  }
+  .syx-d-inline-flex {
+    display: inline-flex;
+  }
+  .syx-d-block {
+    display: block;
+  }
+  .syx-d-inline-block {
+    display: inline-block;
+  }
+  .syx-d-inline {
+    display: inline;
+  }
+  .syx-d-none {
+    display: none;
+  }
+  .syx-d-grid {
+    display: grid;
+  }
+  .syx-d-inline-grid {
+    display: inline-grid;
+  }
+  .syx-d-contents {
+    display: contents;
+  }
+  .syx-d-table {
+    display: table;
+  }
+  .syx-d-table-cell {
+    display: table-cell;
+  }
+  .syx-d-table-row {
+    display: table-row;
+  }
+  .syx-d-list-item {
+    display: list-item;
+  }
+
+  // ================================================
+  // RESPONSIVE VISIBILITY
+  // ================================================
+  // .syx-d-sm-only  → solo visible en mobile (< 768px)
+  // .syx-d-sm-up    → visible desde 768px en adelante
+  // .syx-d-md-up    → visible desde 1024px en adelante
+  // .syx-d-lg-up    → visible desde 1280px en adelante
+  // .syx-d-xlg-up   → visible desde 1440px en adelante
+
+  .syx-d-sm-only {
+    @include min-screen(768px) {
+      @include hide-visually;
+    }
+  }
+
+  .syx-d-sm-up {
+    @include hide-visually;
+    @include min-screen(768px) {
+      @include unhide-visually;
+    }
+  }
+
+  .syx-d-md-up {
+    @include hide-visually;
+    @include min-screen(1024px) {
+      @include unhide-visually;
+    }
+  }
+
+  .syx-d-lg-up {
+    @include hide-visually;
+    @include min-screen(1280px) {
+      @include unhide-visually;
+    }
+  }
+
+  .syx-d-xlg-up {
+    @include hide-visually;
+    @include min-screen(1440px) {
+      @include unhide-visually;
+    }
+  }
+
+  // ================================================
+  // WIDTH & HEIGHT
+  // ================================================
+  .syx-w-full {
+    width: 100%;
+  }
+  .syx-w-auto {
+    width: auto;
+  }
+  .syx-h-full {
+    height: 100%;
+  }
+  .syx-h-auto {
+    height: auto;
+  }
+  .syx-w-screen {
+    width: 100vw;
+  }
+  .syx-h-screen {
+    height: 100vh;
+  }
+
+  // ================================================
+  // BORDER
+  // ================================================
+  .syx-border {
+    border: var(--semantic-border-width-thin) solid
+      var(--semantic-color-border-subtle);
+  }
+  .syx-border-none {
+    border: none;
+  }
+
+  // ================================================
+  // FLEX DIRECTION
+  // ================================================
+  .syx-flex-row {
+    flex-direction: row;
+  }
+  .syx-flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+  .syx-flex-col {
+    flex-direction: column;
+  }
+  .syx-flex-col-reverse {
+    flex-direction: column-reverse;
+  }
+
+  // ================================================
+  // FLEX WRAP
+  // ================================================
+  .syx-flex-wrap {
+    flex-wrap: wrap;
+  }
+  .syx-flex-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  // ================================================
+  // FLEX GROW / SHRINK
+  // ================================================
+  .syx-flex-1 {
+    flex: 1 1 0%;
+  }
+  .syx-flex-auto {
+    flex: 1 1 auto;
+  }
+  .syx-flex-none {
+    flex: none;
+  }
+
+  // ================================================
+  // JUSTIFY CONTENT
+  // ================================================
+  .syx-justify-start {
+    justify-content: flex-start;
+  }
+  .syx-justify-end {
+    justify-content: flex-end;
+  }
+  .syx-justify-center {
+    justify-content: center;
+  }
+  .syx-justify-between {
+    justify-content: space-between;
+  }
+  .syx-justify-around {
+    justify-content: space-around;
+  }
+  .syx-justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  // ================================================
+  // ALIGN ITEMS
+  // ================================================
+  .syx-items-start {
+    align-items: flex-start;
+  }
+  .syx-items-end {
+    align-items: flex-end;
+  }
+  .syx-items-center {
+    align-items: center;
+  }
+  .syx-items-baseline {
+    align-items: baseline;
+  }
+  .syx-items-stretch {
+    align-items: stretch;
+  }
+
+  // ================================================
+  // ALIGN CONTENT
+  // ================================================
+  .syx-content-start {
+    align-content: flex-start;
+  }
+  .syx-content-end {
+    align-content: flex-end;
+  }
+  .syx-content-center {
+    align-content: center;
+  }
+  .syx-content-between {
+    align-content: space-between;
+  }
+  .syx-content-around {
+    align-content: space-around;
+  }
+
+  // ================================================
+  // ALIGN SELF
+  // ================================================
+  .syx-self-start {
+    align-self: flex-start;
+  }
+  .syx-self-end {
+    align-self: flex-end;
+  }
+  .syx-self-center {
+    align-self: center;
+  }
+  .syx-self-auto {
+    align-self: auto;
+  }
+
+  // ================================================
+  // GAP
+  // ================================================
+  .syx-gap-0 {
+    gap: 0;
+  }
+  .syx-gap-1 {
+    gap: var(--semantic-space-inline-xs);
+  }
+  .syx-gap-2 {
+    gap: var(--semantic-space-inline-sm);
+  }
+  .syx-gap-3 {
+    gap: var(--semantic-space-inline-md);
+  }
+  .syx-gap-4 {
+    gap: var(--semantic-space-inline-lg);
+  }
+  .syx-gap-5 {
+    gap: var(--semantic-space-layout-xl);
+  }
+
+  .syx-col-gap-1 { column-gap: var(--semantic-space-inline-xs); }
+  .syx-col-gap-2 { column-gap: var(--semantic-space-inline-sm); }
+  .syx-col-gap-3 { column-gap: var(--semantic-space-inline-md); }
+  .syx-col-gap-4 { column-gap: var(--semantic-space-inline-lg); }
+  .syx-col-gap-5 { column-gap: var(--semantic-space-layout-xl); }  // matches .syx-gap-5
+
+  .syx-row-gap-1 { row-gap: var(--semantic-space-inline-xs); }
+  .syx-row-gap-2 { row-gap: var(--semantic-space-inline-sm); }
+  .syx-row-gap-3 { row-gap: var(--semantic-space-inline-md); }
+  .syx-row-gap-4 { row-gap: var(--semantic-space-inline-lg); }
+  .syx-row-gap-5 { row-gap: var(--semantic-space-layout-xl); }   // matches .syx-gap-5
+
+  // ================================================
+  // OVERFLOW
+  // ================================================
+  .syx-overflow-hidden {
+    overflow: hidden;
+  }
+  .syx-overflow-auto {
+    overflow: auto;
+  }
+  .syx-overflow-scroll {
+    overflow: scroll;
+  }
+  .syx-overflow-x-hidden {
+    overflow-x: hidden;
+  }
+  .syx-overflow-y-auto {
+    overflow-y: auto;
+  }
+
+  // ================================================
+  // POSITION
+  // ================================================
+  .syx-relative {
+    position: relative;
+  }
+  .syx-absolute {
+    position: absolute;
+  }
+  .syx-sticky {
+    position: sticky;
+  }
+  .syx-fixed {
+    position: fixed;
+  }
+  .syx-static {
+    position: static;
+  }
+
+  // Inset helpers (útiles con .syx-absolute / .syx-relative)
+  .syx-inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .syx-top-0 {
+    top: 0;
+  }
+  .syx-right-0 {
+    right: 0;
+  }
+  .syx-bottom-0 {
+    bottom: 0;
+  }
+  .syx-left-0 {
+    left: 0;
+  }
+
+  // ================================================
+  // VERTICAL ALIGN
+  // ================================================
+  .syx-valign-top {
+    vertical-align: top;
+  }
+  .syx-valign-middle {
+    vertical-align: middle;
+  }
+  .syx-valign-bottom {
+    vertical-align: bottom;
+  }
+  .syx-valign-baseline {
+    vertical-align: baseline;
+  }
+  .syx-valign-sub {
+    vertical-align: sub;
+  }
+  .syx-valign-super {
+    vertical-align: super;
+  }
+
+  // ================================================
+  // ANIMATIONS
+  // ================================================
+  .syx-fade-in {
+    @include animate(
+      fadeIn,
+      1.2s,
+      cubic-bezier(0.39, 0.575, 0.565, 1),
+      null,
+      null,
+      both
+    );
+  }
+} // end @layer syx.utilities

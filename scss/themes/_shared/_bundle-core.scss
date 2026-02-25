@@ -1,0 +1,66 @@
+// SYX BUNDLE: CORE
+// ================================================
+// The leanest functional bundle â production-ready minimum.
+// Excludes ALL showroom/documentation-specific components.
+//
+// What's IN:
+//   â Full token system (CSS custom properties via theme setup)
+//   â Reset + base element styles
+//   â Fluid typography + spacing scale
+//   â Essential atoms: btn, form, check, radio, switch,
+//      link, breadcrumb, icon, label, pill, list, table,
+//      title, txt, pagination
+//   â Essential molecules: card, form-field, btn-group,
+//      label-group, form-field-set
+//   â Core organism: navbar + header
+//   â Display/flex/spacing utilities
+//   â Dark mode
+//
+// What's OUT (documentation/showroom only):
+//   â atom-specimen  â color/type specimen blocks
+//   â atom-swatch    â color palette swatches
+//   â atom-code      â code syntax block (doc component)
+//   â mol-demo       â showroom demo wrappers
+//   â org-documentation-layout â docs 2-col layout
+//   â org-content-columns â docs-only layout
+//   â pages/docs, pages/docs-layout, pages/landing
+//
+// Bundle size goal: < 120KB uncompressed, < 50KB gzip.
+// ================================================
+
+@mixin syx-bundle-core($theme: null) {
+
+  // ATOMS â production essentials only
+  // ================================================
+  @include atom-breadcrumb($theme);
+  @include atom-btn($theme);
+  @include atom-check($theme);
+  @include atom-form($theme);
+  @include atom-icon($theme);
+  @include atom-label($theme);
+  @include atom-link($theme);
+  @include atom-list($theme);
+  @include atom-pagination($theme);
+  @include atom-pill($theme);
+  @include atom-radio($theme);
+  @include atom-switch($theme);
+  @include atom-table($theme);
+  @include atom-title($theme);
+  @include atom-txt($theme);
+  // NOT included: atom-specimen, atom-swatch, atom-code
+
+  // MOLECULES â all are production-relevant
+  // ================================================
+  @include mol-card($theme);
+  @include mol-form-field($theme);
+  @include mol-btn-group($theme);
+  @include mol-label-group($theme);
+  @include mol-form-field-set($theme);
+  // NOT included: mol-demo
+
+  // ORGANISMS â navigation only
+  // ================================================
+  @include org-navbar($theme);
+  @include org-header($theme);
+  // NOT included: org-documentation-layout, org-content-columns
+}
