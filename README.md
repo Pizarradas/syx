@@ -107,7 +107,6 @@ syx/
 ├── img/                         # Images and icons
 │
 ├── index.html                   # Live demo / landing page
-├── demo-bundle-weight.html      # Core bundle weight reference page
 ├── docs-foundation.html         # Colors, typography, spacing reference
 ├── docs-components.html         # All atoms and molecules
 ├── docs-elements.html           # Base HTML elements
