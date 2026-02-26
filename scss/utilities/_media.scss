@@ -1,0 +1,89 @@
+// UTILITIES: MEDIA — IMAGES, EMBED & OBJECT-FIT
+// ===============================================
+// @layer syx.utilities ensures these always win over components
+// without !important and regardless of import order.
+
+@use "../abstracts/index" as *;
+
+@layer syx.utilities {
+
+// ================================================
+// RESPONSIVE IMAGE
+// ================================================
+// Usage: <img class="syx-img-fluid" ...>
+.syx-img-fluid {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// ================================================
+// RESPONSIVE EMBED (aspect-ratio wrapper)
+// ================================================
+// Usage:
+//   <div class="syx-embed syx-embed--16by9">
+//     <iframe class="syx-embed__item" ...></iframe>
+//   </div>
+
+.syx-embed {
+  @include position(relative);
+  @include size(null, 0);
+  display: block;
+  overflow: hidden;
+
+  &__item {
+    @include position(absolute, 0, null, 0, 0);
+    @include size(100%);
+    @include border(all, 0, null, null);
+  }
+
+  &--16by9  { padding-bottom: 56.25%; }
+  &--8by5   { padding-bottom: 62.5%; }
+  &--3by2   { padding-bottom: 66.66%; }
+  &--4by3   { padding-bottom: 75%; }
+  &--1by1   { padding-bottom: 100%; }
+}
+
+// ================================================
+// MAP EMBED (iframe de Google Maps, etc.)
+// ================================================
+.syx-map {
+  @include position(relative);
+  @include size(null, 0);
+  overflow: hidden;
+
+  &__iframe {
+    @include position(absolute, 0, null, null, 0);
+    @include size(100%);
+    @include border(all, 0, null, null);
+  }
+
+  &--16by9 { padding-bottom: 56.25%; }
+  &--8by5  { padding-bottom: 62.5%; }
+  &--4by3  { padding-bottom: 75%; }
+  &--3by2  { padding-bottom: 66.66%; }
+  &--h100  { padding-bottom: 100vh; }
+}
+
+// ================================================
+// OBJECT FIT
+// ================================================
+.syx-obj-cover      { object-fit: cover; }
+.syx-obj-contain    { object-fit: contain; }
+.syx-obj-fill       { object-fit: fill; }
+.syx-obj-none       { object-fit: none; }
+.syx-obj-scale-down { object-fit: scale-down; }
+
+// Object position
+.syx-obj-center { object-position: center; }
+.syx-obj-top    { object-position: top; }
+.syx-obj-bottom { object-position: bottom; }
+
+// ================================================
+// BACKGROUND SIZE
+// ================================================
+.syx-bg-cover   { background-size: cover; }
+.syx-bg-contain { background-size: contain; }
+.syx-bg-auto    { background-size: auto; }
+
+} // end @layer syx.utilities
