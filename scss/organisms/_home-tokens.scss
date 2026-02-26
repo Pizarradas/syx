@@ -1,0 +1,180 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// ORG: home-tokens
+// ===============================================
+// Token architecture visualization: 3-layer diagram.
+// Composes: atom-code, mol-code-snippet, atom-pill, atom-title
+// ===============================================
+@mixin org-home-tokens($theme: null) {
+  @layer syx.organisms {
+
+  .org-home-tokens {
+    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
+    background-color: var(--semantic-color-bg-secondary);
+
+    // &__header
+    &__header {
+      text-align: center;
+      margin-bottom: var(--semantic-space-layout-lg);
+
+      .org-home-tokens__title {
+        font-family: var(--semantic-font-family-heading);
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        font-weight: var(--primitive-font-weight-black, 900);
+        color: var(--semantic-color-text-primary);
+        letter-spacing: -0.025em;
+        margin: 0 auto var(--semantic-space-component-sm);
+      }
+
+      .org-home-tokens__sub {
+        font-size: var(--primitive-font-size-base);
+        color: var(--semantic-color-text-secondary);
+        max-width: 55ch;
+        margin: 0 auto;
+        line-height: var(--semantic-line-height-body);
+      }
+    }
+
+    // &__diagram — horizontal 3-column flow
+    &__diagram {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      max-width: 64rem;
+      margin: 0 auto var(--semantic-space-layout-lg);
+
+      @include breakpoint(phablet) {
+        flex-wrap: nowrap;
+      }
+    }
+
+    // &__layer — one column of the diagram
+    &__layer {
+      flex: 1;
+      min-width: min(100%, 16rem);
+      padding: var(--semantic-space-layout-sm);
+      border: 1px solid var(--semantic-color-border-subtle);
+      border-radius: var(--semantic-border-radius-lg, 1rem);
+      background-color: var(--semantic-color-bg-primary);
+      display: flex;
+      flex-direction: column;
+      gap: var(--semantic-space-component-md);
+
+      &:not(:last-child) {
+        @include breakpoint(phablet) {
+          border-right: none;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      &:not(:first-child) {
+        @include breakpoint(phablet) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+      }
+
+      // --primitive
+      &--primitive {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-blue-50, #eff6ff);
+          color: var(--primitive-color-blue-700, #1d4ed8);
+          border-color: var(--primitive-color-blue-200, #bfdbfe);
+        }
+      }
+
+      // --semantic
+      &--semantic {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-purple-50, #f5f3ff);
+          color: var(--primitive-color-purple-700, #6d28d9);
+          border-color: var(--primitive-color-purple-200, #ddd6fe);
+        }
+      }
+
+      // --component
+      &--component {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-green-50, #f0fdf4);
+          color: var(--primitive-color-green-700, #15803d);
+          border-color: var(--primitive-color-green-200, #bbf7d0);
+        }
+      }
+    }
+
+    // &__layer-badge
+    &__layer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: var(--primitive-font-size-xs);
+      font-weight: var(--primitive-font-weight-bold);
+      letter-spacing: var(--primitive-letter-spacing-wide);
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    // &__layer-title
+    &__layer-title {
+      font-family: var(--semantic-font-family-heading);
+      font-size: var(--semantic-font-size-h5);
+      font-weight: var(--primitive-font-weight-bold);
+      color: var(--semantic-color-text-primary);
+      margin: 0;
+    }
+
+    // &__layer-desc
+    &__layer-desc {
+      font-size: var(--primitive-font-size-sm);
+      color: var(--semantic-color-text-secondary);
+      line-height: var(--semantic-line-height-body);
+      margin: 0;
+    }
+
+    // &__arrow — connector between layers
+    &__arrow {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--semantic-color-text-secondary);
+      padding: 0 0.5rem;
+      font-size: 1.5rem;
+
+      @include breakpoint(phablet) {
+        display: flex;
+      }
+    }
+
+    // &__rule — bottom rule with key message
+    &__rule {
+      text-align: center;
+      padding: var(--semantic-space-layout-sm);
+      border: 1px solid var(--semantic-color-border-subtle);
+      border-radius: var(--semantic-border-radius-lg, 1rem);
+      background-color: var(--semantic-color-bg-primary);
+      max-width: 64rem;
+      margin: 0 auto;
+
+      p {
+        margin: 0;
+        font-size: var(--primitive-font-size-sm);
+        color: var(--semantic-color-text-secondary);
+      }
+
+      strong {
+        color: var(--semantic-color-text-primary);
+      }
+    }
+  }
+
+  } // end @layer syx.organisms
+}
