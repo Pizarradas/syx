@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" data-syx-theme="example-01">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary meta -->
+  <title>SYX Design System — CSS Tokens, @layer &amp; Atomic Design</title>
+  <meta name="description"
+    content="SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens, Atomic Design and native CSS @layer. 5 themes. WCAG AA compliant.">
+  <meta name="author" content="José Luis Pizarro Feo">
+  <meta name="keywords"
+    content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://github.com/Pizarradas/syx">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SYX Design System">
+  <meta property="og:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
+  <meta property="og:description"
+    content="Modular CSS design system with zero external dependencies. Three-layer Design Tokens, Atomic Design, native @layer. 5 themes. WCAG AA.">
+  <meta property="og:url" content="https://github.com/Pizarradas/syx">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
+  <meta name="twitter:description"
+    content="Modular CSS design system — zero dependencies, three-layer tokens, Atomic Design, native @layer. 5 themes. WCAG AA.">
+  <meta name="twitter:creator" content="@Pizarradas">
+
+  <!-- Theme color (mobile browser chrome) -->
+  <meta name="theme-color" content="#6d28d9">
+
+  <!-- Theme stylesheet — swapped by JS on theme change -->
+  <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+</head>
+
+<body class="syx syx--theme-example-01">
+
+  <!-- =============================================
+       MOBILE NAV OVERLAY + DRAWER
+       ============================================= -->
+  <div class="org-site-nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+  <nav class="org-site-nav-drawer" id="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="#features" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-zap" aria-hidden="true"></span>
+      Features
+    </a>
+    <a href="#tokens" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-coins" aria-hidden="true"></span>
+      Tokens
+    </a>
+    <a href="#layers" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-layers" aria-hidden="true"></span>
+      @layer
+    </a>
+    <a href="#themes" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-palette" aria-hidden="true"></span>
+      Themes
+    </a>
+    <a href="docs.html" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+      Docs
+    </a>
+    <a href="why-syx.html" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-pie-chart" aria-hidden="true"></span>
+      Why SYX
+    </a>
+
+    <div class="org-site-nav-drawer__theme">
+      <label for="theme-switcher-mobile">Theme</label>
+      <select id="theme-switcher-mobile" class="atom-select" aria-label="Switch theme">
+        <option value="example-01">01 — Violet</option>
+        <option value="example-02">02 — Slate</option>
+        <option value="example-03">03 — Blue</option>
+        <option value="example-04">04 — Forest</option>
+        <option value="example-05">05 — Gold</option>
+      </select>
+    </div>
+  </nav>
+
+
+  <!-- =============================================
+       HEADER
+       ============================================= -->
+  <header class="org-site-header" id="site-header" role="banner">
+
+    <a href="home.html" class="org-site-header__brand" aria-label="SYX Home">
+      <span class="atom-icon atom-icon--lc-layers" aria-hidden="true"></span>
+      SYX
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="org-site-header__nav" aria-label="Main navigation">
+      <a href="#features">Features</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#layers">@layer</a>
+      <a href="#themes">Themes</a>
+      <a href="docs.html">Docs</a>
+      <a href="why-syx.html">Why SYX</a>
+    </nav>
+
+    <div class="org-site-header__actions">
+      <!-- Theme select — desktop only -->
+      <div class="org-site-header__theme-select">
+        <select id="theme-switcher" class="atom-select" aria-label="Switch theme">
+          <option value="example-01">01 &mdash; Violet</option>
+          <option value="example-02">02 &mdash; Slate</option>
+          <option value="example-03">03 &mdash; Blue</option>
+          <option value="example-04">04 &mdash; Forest</option>
+          <option value="example-05">05 &mdash; Gold</option>
+        </select>
+      </div>
+
+      <!-- Dark mode toggle -->
+      <button class="org-site-header__darkmode" id="darkmode-toggle" aria-label="Toggle dark mode"
+        title="Toggle dark mode">
+        <span class="atom-icon atom-icon--lc-moon" aria-hidden="true" id="icon-moon"></span>
+        <span class="atom-icon atom-icon--lc-sun" aria-hidden="true" id="icon-sun"></span>
+      </button>
+
+      <a href="https://github.com/Pizarradas/syx"
+        class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-sm"
+        aria-label="View on GitHub" target="_blank" rel="noopener">
+        <span class="atom-icon atom-icon--lc-github" aria-hidden="true"></span>
+        GitHub
+      </a>
+
+      <!-- Hamburger — mobile only -->
+      <button class="org-site-header__burger" id="nav-burger" aria-controls="nav-drawer" aria-expanded="false"
+        aria-label="Open navigation">
+        <span class="org-site-header__burger-line" aria-hidden="true"></span>
+        <span class="org-site-header__burger-line" aria-hidden="true"></span>
+        <span class="org-site-header__burger-line" aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </header>
+
+
+  <!-- =============================================
+       HERO
+       ============================================= -->
+  <section class="org-home-hero" id="hero" aria-labelledby="hero-headline">
+
+    <span class="org-home-hero__overline">
+      <span class="atom-pill atom-pill--primary">SYX v3 · CSS Design System</span>
+    </span>
+
+    <h1 class="org-home-hero__headline" id="hero-headline">
+      Design with
+      <span class="org-home-hero__headline-accent">tokens.</span>
+      Scale with
+      <span class="org-home-hero__headline-accent">@layer.</span>
+    </h1>
+
+    <p class="org-home-hero__sub">
+      SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens,
+      Atomic Design and native <code>@layer</code>. Compatible with any front-end stack.
+    </p>
+
+    <div class="org-home-hero__badge-row" aria-label="Key capabilities">
+      <span class="atom-pill atom-pill--neutral">Zero dependencies</span>
+      <span class="atom-pill atom-pill--neutral">5 themes</span>
+      <span class="atom-pill atom-pill--neutral">@layer native</span>
+      <span class="atom-pill atom-pill--neutral">WCAG AA</span>
+      <span class="atom-pill atom-pill--neutral">Dart Sass</span>
+    </div>
+
+    <div class="org-home-hero__actions">
+      <a href="#cta" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-lg">
+        <span class="atom-icon atom-icon--lc-rocket" aria-hidden="true"></span>
+        Get started
+      </a>
+      <a href="docs.html" class="atom-btn atom-btn--secondary atom-btn--has-icon atom-btn--size-lg">
+        <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+        Read the docs
+      </a>
+    </div>
+
+    <div class="org-home-hero__stats" aria-label="System statistics">
+      <div class="atom-stat">
+        <span class="atom-stat__number">v3</span>
+        <span class="atom-stat__label">Current&nbsp;version</span>
+      </div>
+      <div class="atom-stat">
+        <span class="atom-stat__number">19</span>
+        <span class="atom-stat__label">Atoms</span>
+      </div>
+      <div class="atom-stat">
+        <span class="atom-stat__number">8</span>
+        <span class="atom-stat__label">Molecules</span>
+      </div>
+      <div class="atom-stat">
+        <span class="atom-stat__number">5</span>
+        <span class="atom-stat__label">Themes</span>
+      </div>
+      <div class="atom-stat">
+        <span class="atom-stat__number">AA</span>
+        <span class="atom-stat__label">WCAG&nbsp;compliant</span>
+      </div>
+    </div>
+
+    <p class="org-home-hero__scroll-hint" aria-hidden="true">
+      <span class="atom-icon atom-icon--lc-chevrons-down"></span>
+      Explore
+    </p>
+
+  </section>
+
+
+  <!-- =============================================
+       FEATURES
+       ============================================= -->
+  <section class="org-home-features" id="features" aria-labelledby="features-title">
+
+    <div class="org-home-features__header">
+      <span class="org-home-features__overline">
+        <span class="atom-pill atom-pill--subtle">Why SYX?</span>
+      </span>
+      <h2 class="org-home-features__title" id="features-title">
+        A design system built to scale
+      </h2>
+      <p class="org-home-features__sub">
+        Every architectural decision in SYX is driven by keeping CSS predictable, performant,
+        and easy to extend — for teams of any size.
+      </p>
+    </div>
+
+    <div class="org-home-features__grid">
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--token" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-coins"></span>
+        </span>
+        <h3 class="mol-feature-card__title">3-Layer Design Tokens</h3>
+        <p class="mol-feature-card__body">
+          Primitive → Semantic → Component. A CSS variable hierarchy that separates raw values from
+          semantic meaning and per-component implementation.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--layer" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-layers"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Native @layer</h3>
+        <p class="mol-feature-card__body">
+          All specificity in SYX is managed via native CSS <code>@layer</code>.
+          No hacks, no <code>!important</code>. The cascade finally working for you.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--primary" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-atom"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Atomic Design</h3>
+        <p class="mol-feature-card__body">
+          Clearly bounded atoms, molecules and organisms. Each component is a self-contained SCSS mixin
+          with its own <code>@layer</code> and class namespace.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--molecule" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-palette"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Multi-theme, Zero Duplication</h3>
+        <p class="mol-feature-card__body">
+          5 production-ready themes. Each redefines only its semantic tokens — components never change.
+          Switching theme is a single HTML attribute change.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--mixin" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-package"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Reusable Abstract Mixins</h3>
+        <p class="mol-feature-card__body">
+          Bourbon-compatible: <code>size()</code>, <code>absolute()</code>, <code>transition()</code>,
+          <code>breakpoint()</code>… Unified patterns that dramatically improve code readability.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--organism" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-shield-check"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Zero External Dependencies</h3>
+        <p class="mol-feature-card__body">
+          Dart Sass only. No Bootstrap, no Tailwind, no JS frameworks. SYX compiles to standard CSS
+          that works in any project: static HTML, React, Vue, Next.js…
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       TOKEN ARCHITECTURE
+       ============================================= -->
+  <section class="org-home-tokens" id="tokens" aria-labelledby="tokens-title">
+
+    <div class="org-home-tokens__header">
+      <h2 class="org-home-tokens__title" id="tokens-title">3-Layer Token Architecture</h2>
+      <p class="org-home-tokens__sub">
+        A CSS variable system with a clear direction of flow: from the most abstract to the most concrete.
+      </p>
+    </div>
+
+    <div class="org-home-tokens__diagram" aria-label="Token layer diagram">
+
+      <!-- Primitive Layer -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--primitive">
+        <span class="org-home-tokens__layer-badge">
+          <span class="atom-icon atom-icon--lc-database" aria-hidden="true"></span>
+          Primitive
+        </span>
+        <h3 class="org-home-tokens__layer-title">Raw values</h3>
+        <p class="org-home-tokens__layer-desc">Numbers, colors and scales without context. Never used directly in
+          components.</p>
+        <code class="atom-code">--primitive-color-purple-600</code>
+        <code class="atom-code">--primitive-font-size-lg</code>
+        <code class="atom-code">--primitive-space-base</code>
+      </div>
+
+      <!-- Arrow -->
+      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+
+      <!-- Semantic Layer -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--semantic">
+        <span class="org-home-tokens__layer-badge">
+          <span class="atom-icon atom-icon--lc-link" aria-hidden="true"></span>
+          Semantic
+        </span>
+        <h3 class="org-home-tokens__layer-title">Contextual meaning</h3>
+        <p class="org-home-tokens__layer-desc">Functional aliases. The only layer that changes between themes.</p>
+        <code class="atom-code">--semantic-color-primary</code>
+        <code class="atom-code">--semantic-font-family-heading</code>
+        <code class="atom-code">--semantic-space-layout-md</code>
+      </div>
+
+      <!-- Arrow -->
+      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+
+      <!-- Component Layer -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--component">
+        <span class="org-home-tokens__layer-badge">
+          <span class="atom-icon atom-icon--lc-component" aria-hidden="true"></span>
+          Component
+        </span>
+        <h3 class="org-home-tokens__layer-title">Component tokens</h3>
+        <p class="org-home-tokens__layer-desc">Scoped local variables. Enable surgical overrides per component.</p>
+        <code class="atom-code">--component-btn-bg</code>
+        <code class="atom-code">--component-btn-radius</code>
+        <code class="atom-code">--component-card-padding</code>
+      </div>
+
+    </div>
+
+    <div class="org-home-tokens__rule">
+      <p>
+        <strong>Golden rule:</strong> Components only consume <strong>semantic</strong> or
+        <strong>component</strong> tokens. They never reach directly into primitives. This guarantees
+        that switching themes requires changing zero component code.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- =============================================
+       @LAYER STACK
+       ============================================= -->
+  <section class="org-home-layers" id="layers" aria-labelledby="layers-title">
+    <div class="org-home-layers__inner">
+
+      <div class="org-home-layers__content">
+        <span class="org-home-layers__overline">
+          <span class="atom-pill atom-pill--subtle">No specificity hacks</span>
+        </span>
+        <h2 class="org-home-layers__title" id="layers-title">
+          The cascade, finally under control
+        </h2>
+        <p class="org-home-layers__body">
+          SYX uses native CSS <code>@layer</code> to explicitly order style precedence. The stack covers
+          everything from the global reset to the highest-priority utilities —
+          without a single <code>!important</code> or inflated selector.
+        </p>
+        <pre class="atom-code">@layer
+  syx.reset, syx.base, syx.tokens,
+  syx.atoms, syx.molecules, syx.organisms,
+  syx.utilities;</pre>
+      </div>
+
+      <div class="org-home-layers__visual" aria-label="SYX CSS layer stack">
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--utilities">
+          <span class="org-home-layers__stack-item-name">syx.utilities</span>
+          <span class="org-home-layers__stack-item-desc">Highest priority · Display, spacing, color helpers</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--organisms">
+          <span class="org-home-layers__stack-item-name">syx.organisms</span>
+          <span class="org-home-layers__stack-item-desc">Complex layouts · Page sections</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--molecules">
+          <span class="org-home-layers__stack-item-name">syx.molecules</span>
+          <span class="org-home-layers__stack-item-desc">Atom combinations · Cards, Form fields</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--atoms">
+          <span class="org-home-layers__stack-item-name">syx.atoms</span>
+          <span class="org-home-layers__stack-item-desc">Minimal UI · Buttons, Icons, Pills, Inputs</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--tokens">
+          <span class="org-home-layers__stack-item-name">syx.tokens</span>
+          <span class="org-home-layers__stack-item-desc">CSS Variables · Primitive, Semantic, Component</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--base">
+          <span class="org-home-layers__stack-item-name">syx.base</span>
+          <span class="org-home-layers__stack-item-desc">Typography · Base HTML element styles</span>
+        </div>
+
+        <div class="org-home-layers__stack-item org-home-layers__stack-item--reset">
+          <span class="org-home-layers__stack-item-name">syx.reset</span>
+          <span class="org-home-layers__stack-item-desc">Lowest priority · Global CSS reset</span>
+        </div>
+
+        <p class="org-home-layers__caption">↑ Higher precedence towards the top</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+       THEMES
+       ============================================= -->
+  <section class="org-home-themes" id="themes" aria-labelledby="themes-title">
+
+    <div class="org-home-themes__header">
+      <span class="org-home-themes__overline">
+        <span class="atom-pill atom-pill--subtle">Production-ready multi-theming</span>
+      </span>
+      <h2 class="org-home-themes__title" id="themes-title">5 themes, zero component changes</h2>
+      <p class="org-home-themes__sub">
+        Each theme redefines only the semantic tokens. Components stay intact.
+        Activate a theme by selecting it in the header — or set <code>data-syx-theme="example-XX"</code>
+        and link the corresponding CSS file.
+      </p>
+    </div>
+
+    <div class="org-home-themes__grid" role="list" aria-label="Available SYX themes">
+
+      <div class="mol-theme-card is-active" role="listitem" data-theme="example-01" tabindex="0"
+        aria-label="Theme 01 — Violet / Blue (active)">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--01" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Violet / Blue</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--01-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--01-b"></span>
+          </div>
+        </div>
+        <span class="mol-theme-card__label">example-01</span>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-02" tabindex="0" aria-label="Theme 02 — Slate">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--02" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Slate / Sky</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--02-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--02-b"></span>
+          </div>
+        </div>
+        <span class="mol-theme-card__label">example-02</span>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-03" tabindex="0" aria-label="Theme 03 — Blue">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--03" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Blue / Cyan</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--03-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--03-b"></span>
+          </div>
+        </div>
+        <span class="mol-theme-card__label">example-03</span>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-04" tabindex="0" aria-label="Theme 04 — Forest">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--04" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Forest / Lime</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--04-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--04-b"></span>
+          </div>
+        </div>
+        <span class="mol-theme-card__label">example-04</span>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-05" tabindex="0" aria-label="Theme 05 — Gold">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--05" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Gold / Amber</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--05-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--05-b"></span>
+          </div>
+        </div>
+        <span class="mol-theme-card__label">example-05</span>
+      </div>
+
+    </div>
+
+    <p class="org-home-themes__note">
+      Theme switching is instant, no page reload required. Try the selector in the header.
+      Combine any theme with dark mode using the ☾ toggle.
+    </p>
+
+  </section>
+
+
+  <!-- =============================================
+       CTA
+       ============================================= -->
+  <section class="org-home-cta" id="cta" aria-labelledby="cta-headline">
+
+    <span class="org-home-cta__overline">Quick start</span>
+
+    <h2 class="org-home-cta__headline" id="cta-headline">
+      Ready to integrate SYX into your project?
+    </h2>
+
+    <p class="org-home-cta__sub">
+      Clone the repository, compile with Dart Sass and link the appropriate bundle to your page.
+      A complete design system running in under 5 minutes.
+    </p>
+
+    <div class="org-home-cta__actions">
+      <a href="docs.html" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-lg">
+        <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+        Read the docs
+      </a>
+      <a href="https://github.com/Pizarradas/syx"
+        class="atom-btn atom-btn--secondary atom-btn--has-icon atom-btn--size-lg" target="_blank" rel="noopener">
+        <span class="atom-icon atom-icon--lc-github" aria-hidden="true"></span>
+        View on GitHub
+      </a>
+    </div>
+
+    <code class="org-home-cta__code" aria-label="Compilation command">
+      <span class="atom-icon atom-icon--lc-terminal" aria-hidden="true"></span>
+      sass scss/themes/example-01/bundle-home.scss css/theme-01-bundle-home.css
+    </code>
+
+  </section>
+
+
+  <!-- =============================================
+       FOOTER
+       ============================================= -->
+  <footer class="org-home-footer" role="contentinfo">
+    <div class="org-home-footer__inner">
+
+      <a href="home.html" class="org-home-footer__brand" aria-label="SYX Home">
+        <span class="atom-icon atom-icon--lc-layers" aria-hidden="true"></span>
+        SYX
+      </a>
+
+      <div class="org-home-footer__meta">
+        <strong>SYX Design System</strong> · v3.0.0<br>
+        Modular CSS design system · Zero external dependencies
+      </div>
+
+      <nav class="org-home-footer__nav" aria-label="Footer navigation">
+        <a href="docs.html" class="org-home-footer__link">Documentation</a>
+        <a href="docs.html#atoms" class="org-home-footer__link">Atoms</a>
+        <a href="docs.html#molecules" class="org-home-footer__link">Molecules</a>
+        <a href="docs.html#organisms" class="org-home-footer__link">Organisms</a>
+        <a href="https://github.com/Pizarradas/syx" class="org-home-footer__link" target="_blank"
+          rel="noopener">GitHub</a>
+      </nav>
+
+    </div>
+
+    <div class="org-home-footer__divider" aria-hidden="true"></div>
+
+    <p class="org-home-footer__credit">
+      SYX Design System · Built with Dart Sass, native @layer and Atomic Design · MIT License<br>
+      <strong>© 2024–2026 José Luis Pizarro Feo</strong> — All rights reserved
+    </p>
+  </footer>
+
+
+  <!-- =============================================
+       SCRIPTS
+       ============================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ── Constants ────────────────────────────────
+      // Map each theme key to its compiled CSS filename
+      var THEME_CSS = {
+        'example-01': 'css/styles-theme-example-01.css',
+        'example-02': 'css/styles-theme-example-02.css',
+        'example-03': 'css/styles-theme-example-03.css',
+        'example-04': 'css/styles-theme-example-04.css',
+        'example-05': 'css/styles-theme-example-05.css'
+      };
+
+      // ── Elements ──────────────────────────────────
+      var root = document.documentElement;
+      var body = document.body;
+      var cssLink = document.getElementById('syx-theme-css');
+      var header = document.getElementById('site-header');
+      var burger = document.getElementById('nav-burger');
+      var drawer = document.getElementById('nav-drawer');
+      var overlay = document.getElementById('nav-overlay');
+      var selDesk = document.getElementById('theme-switcher');
+      var selMob = document.getElementById('theme-switcher-mobile');
+      var dmToggle = document.getElementById('darkmode-toggle');
+      var iconMoon = document.getElementById('icon-moon');
+      var iconSun = document.getElementById('icon-sun');
+      var themeCards = document.querySelectorAll('.mol-theme-card[data-theme]');
+
+      // ── Theme switching ───────────────────────────
+      // SYX themes are separate CSS files — we swap the <link> href.
+      function applyTheme(theme) {
+        if (!THEME_CSS[theme]) return;
+
+        // 1. Swap the CSS file
+        if (cssLink) cssLink.setAttribute('href', THEME_CSS[theme]);
+
+        // 2. Keep data attribute for reference
+        root.setAttribute('data-syx-theme', theme);
+
+        // 3. Sync selects
+        if (selDesk) selDesk.value = theme;
+        if (selMob) selMob.value = theme;
+
+        // 4. Sync theme cards
+        themeCards.forEach(function (c) {
+          c.classList.toggle('is-active', c.dataset.theme === theme);
+        });
+
+        // 5. Persist
+        try { sessionStorage.setItem('syx-theme', theme); } catch (e) { }
+      }
+
+      // Restore persisted theme on load
+      // Normalise: docs.html saves '01'; home.html saves 'example-01'
+      try {
+        var savedTheme = sessionStorage.getItem('syx-theme');
+        // Convert short format '01' → 'example-01' if needed
+        if (savedTheme && /^\d+$/.test(savedTheme)) {
+          savedTheme = 'example-' + savedTheme.padStart(2, '0');
+        }
+        if (savedTheme && THEME_CSS[savedTheme]) applyTheme(savedTheme);
+      } catch (e) { }
+
+      if (selDesk) selDesk.addEventListener('change', function () { applyTheme(selDesk.value); });
+      if (selMob) selMob.addEventListener('change', function () { applyTheme(selMob.value); });
+
+      themeCards.forEach(function (card) {
+        card.addEventListener('click', function () { applyTheme(card.dataset.theme); });
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); applyTheme(card.dataset.theme); }
+        });
+      });
+
+      // ── Dark mode ────────────────────────────────
+      // SYX uses [data-theme="dark"] on :root for manual dark mode.
+      // Also respects prefers-color-scheme automatically (via CSS).
+      // States: 'auto' | 'dark' | 'light'
+
+      function isDark() {
+        return root.getAttribute('data-theme') === 'dark';
+      }
+
+      function updateDarkIcons(dark) {
+        if (iconMoon) iconMoon.style.display = dark ? 'none' : '';
+        if (iconSun) iconSun.style.display = dark ? '' : 'none';
+        if (dmToggle) {
+          dmToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+          dmToggle.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+      }
+
+      function applyDark(dark) {
+        if (dark) {
+          root.setAttribute('data-theme', 'dark');
+        } else {
+          root.setAttribute('data-theme', 'light');
+        }
+        updateDarkIcons(dark);
+        try { sessionStorage.setItem('syx-dark', dark ? '1' : '0'); } catch (e) { }
+      }
+
+      function toggleDark() {
+        applyDark(!isDark());
+      }
+
+      // Initialise dark mode
+      (function () {
+        var savedDark = null;
+        try { savedDark = sessionStorage.getItem('syx-dark'); } catch (e) { }
+
+        if (savedDark === '1') {
+          applyDark(true);
+        } else if (savedDark === '0') {
+          applyDark(false);
+        } else {
+          // No persisted pref — respect OS setting, just update icons
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          updateDarkIcons(prefersDark);
+          // Don't set data-theme so CSS @media takes effect naturally
+        }
+      })();
+
+      if (dmToggle) dmToggle.addEventListener('click', toggleDark);
+
+      // Update icons if OS preference changes (when no explicit pref saved)
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+          var saved = null;
+          try { saved = sessionStorage.getItem('syx-dark'); } catch (ex) { }
+          if (saved === null) updateDarkIcons(e.matches);
+        });
+      }
+
+      // ── Mobile nav toggle ─────────────────────────
+      function openNav() {
+        body.setAttribute('data-nav-open', '');
+        drawer.setAttribute('aria-hidden', 'false');
+        overlay.setAttribute('aria-hidden', 'false');
+        burger.setAttribute('aria-expanded', 'true');
+        burger.setAttribute('aria-label', 'Close navigation');
+      }
+
+      function closeNav() {
+        body.removeAttribute('data-nav-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('aria-hidden', 'true');
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open navigation');
+      }
+
+      if (burger) burger.addEventListener('click', function () { body.hasAttribute('data-nav-open') ? closeNav() : openNav(); });
+      if (overlay) overlay.addEventListener('click', closeNav);
+
+      drawer && drawer.querySelectorAll('.org-site-nav-drawer__link').forEach(function (l) {
+        l.addEventListener('click', closeNav);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && body.hasAttribute('data-nav-open')) closeNav();
+      });
+
+      // ── Header scroll shadow ──────────────────────
+      if (header && 'IntersectionObserver' in window) {
+        var sentinel = document.createElement('div');
+        sentinel.setAttribute('aria-hidden', 'true');
+        sentinel.style.cssText = 'position:absolute;top:0;left:0;height:1px;width:1px;pointer-events:none;';
+        document.body.prepend(sentinel);
+        new IntersectionObserver(function (entries) {
+          header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+        }, { rootMargin: '-1px 0px 0px 0px', threshold: 1 }).observe(sentinel);
+      }
+
+    })();
+  </script>
+
+</body>
+
+</html>

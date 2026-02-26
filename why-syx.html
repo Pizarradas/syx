@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" data-syx-theme="example-01">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary meta -->
+    <title>SYX Design System — Why SYX: Competitive Analysis</title>
+    <meta name="description"
+        content="An honest, expert-driven competitive analysis of SYX vs Tailwind CSS, Material UI, Chakra UI, and Ant Design across 7 key disciplines and enterprise sectors.">
+    <meta name="author" content="José Luis Pizarro Feo">
+    <meta name="keywords"
+        content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, Tailwind CSS, Material UI, Chakra UI, Ant Design">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://github.com/Pizarradas/syx">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SYX Design System">
+    <meta property="og:title" content="SYX Design System — Why SYX: Competitive Analysis">
+    <meta property="og:description" content="Honest expert committee analysis of SYX versus the top competitors.">
+    <meta property="og:url" content="https://github.com/Pizarradas/syx">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SYX Design System — Why SYX: Competitive Analysis">
+    <meta name="twitter:description" content="Honest expert committee analysis of SYX versus the top competitors.">
+    <meta name="twitter:creator" content="@Pizarradas">
+
+    <!-- Theme color (mobile browser chrome) -->
+    <meta name="theme-color" content="#6d28d9">
+
+    <!-- Theme stylesheet — swapped by JS on theme change -->
+    <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+
+    <style>
+        /* Custom utility for score highlights */
+        .score-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-5 {
+            background-color: var(--primitive-color-green-600);
+        }
+
+        .score-4 {
+            background-color: var(--primitive-color-green-400);
+        }
+
+        .score-3 {
+            background-color: var(--primitive-color-yellow-500);
+        }
+
+        .score-2 {
+            background-color: var(--primitive-color-orange-500);
+        }
+
+        .score-1 {
+            background-color: var(--primitive-color-red-500);
+        }
+
+        .score-winner {
+            border: 2px solid var(--primitive-color-yellow-400);
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+        }
+    </style>
+</head>
+
+<body class="syx syx--theme-example-01">
+
+    <a href="#main-content" class="syx-skip-link">Skip to main content</a>
+
+    <!-- =============================================
+       MOBILE NAV OVERLAY + DRAWER
+       ============================================= -->
+    <div class="org-site-nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+    <nav class="org-site-nav-drawer" id="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+        <a href="home.html" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-home" aria-hidden="true"></span>
+            Home
+        </a>
+        <a href="docs.html" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+            Docs
+        </a>
+        <a href="#committee" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-users" aria-hidden="true"></span>
+            Committee Evaluation
+        </a>
+        <a href="#global" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-award" aria-hidden="true"></span>
+            Global Ranking
+        </a>
+        <a href="#pros-cons" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-git-compare" aria-hidden="true"></span>
+            Pros & Cons
+        </a>
+        <a href="#sectors" class="org-site-nav-drawer__link">
+            <span class="atom-icon atom-icon--lc-briefcase" aria-hidden="true"></span>
+            Sector Fit
+        </a>
+
+        <div class="org-site-nav-drawer__theme">
+            <label for="theme-switcher-mobile">Theme</label>
+            <select id="theme-switcher-mobile" class="atom-select" aria-label="Switch theme">
+                <option value="example-01">01 &mdash; Violet</option>
+                <option value="example-02">02 &mdash; Slate</option>
+                <option value="example-03">03 &mdash; Blue</option>
+                <option value="example-04">04 &mdash; Forest</option>
+                <option value="example-05">05 &mdash; Gold</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- =============================================
+       HEADER
+       ============================================= -->
+    <header class="org-site-header" id="site-header" role="banner">
+
+        <a href="home.html" class="org-site-header__brand" aria-label="SYX Home">
+            <span class="atom-icon atom-icon--lc-layers" aria-hidden="true"></span>
+            SYX
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="org-site-header__nav" aria-label="Main navigation">
+            <a href="home.html">Home</a>
+            <a href="docs.html">Docs</a>
+            <a href="#committee">Evaluation</a>
+            <a href="#global">Ranking</a>
+            <a href="#pros-cons">Pros/Cons</a>
+            <a href="#sectors">Sector Fit</a>
+        </nav>
+
+        <div class="org-site-header__actions">
+            <!-- Theme select — desktop only -->
+            <div class="org-site-header__theme-select">
+                <select id="theme-switcher" class="atom-select" aria-label="Switch theme">
+                    <option value="example-01">01 &mdash; Violet</option>
+                    <option value="example-02">02 &mdash; Slate</option>
+                    <option value="example-03">03 &mdash; Blue</option>
+                    <option value="example-04">04 &mdash; Forest</option>
+                    <option value="example-05">05 &mdash; Gold</option>
+                </select>
+            </div>
+
+            <!-- Dark mode toggle -->
+            <button class="org-site-header__darkmode" id="darkmode-toggle" aria-label="Toggle dark mode"
+                title="Toggle dark mode">
+                <span class="atom-icon atom-icon--lc-moon" aria-hidden="true" id="icon-moon"></span>
+                <span class="atom-icon atom-icon--lc-sun" aria-hidden="true" id="icon-sun"></span>
+            </button>
+
+            <a href="https://github.com/Pizarradas/syx"
+                class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-sm"
+                aria-label="View on GitHub" target="_blank" rel="noopener">
+                <span class="atom-icon atom-icon--lc-github" aria-hidden="true"></span>
+                GitHub
+            </a>
+
+            <!-- Hamburger — mobile only -->
+            <button class="org-site-header__burger" id="nav-burger" aria-controls="nav-drawer" aria-expanded="false"
+                aria-label="Open navigation">
+                <span class="org-site-header__burger-line" aria-hidden="true"></span>
+                <span class="org-site-header__burger-line" aria-hidden="true"></span>
+                <span class="org-site-header__burger-line" aria-hidden="true"></span>
+            </button>
+        </div>
+
+    </header>
+
+    <main class="layout-grid" id="main-content" aria-label="Main content">
+        <div class="layout-grid__col-xs-12 syx-py-5">
+
+            <!-- ─── HERO ─── -->
+            <section class="syx-mb-5">
+                <h1 class="atom-title atom-title--h1 syx-mb-2">Why SYX: A Critical Analysis</h1>
+                <p class="atom-txt atom-txt--primary">
+                    An honest, direct comparative analysis between <strong>SYX, Tailwind CSS, Material UI, Chakra UI,
+                        and Ant Design</strong>. Valued by a committee of experts across 7 disciplines to reveal true
+                    strengths and weaknesses.
+                </p>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           COMMITTEE EVALUATION
+      ══════════════════════════════════════════ -->
+            <section id="committee" aria-labelledby="committee-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="committee-heading">Expert Committee Evaluation</h2>
+                <p class="atom-txt syx-mb-4">
+                    Each system was evaluated on a scale from <strong>1 (Poor) to 5 (Excellent)</strong> across seven
+                    critical disciplines in software development and marketing.
+                </p>
+
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-4" style="overflow-x:auto">
+                    <table class="atom-table" style="min-width: 900px; text-align: center;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Discipline</th>
+                                <th>Criteria Evaluated</th>
+                                <th>SYX</th>
+                                <th>Tailwind</th>
+                                <th>MUI</th>
+                                <th>Chakra UI</th>
+                                <th>Ant Design</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left;"><strong>1. Frontend Engineering</strong></td>
+                                <td>DX, Cascade control, Build size, Boilerplate</td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>2. Backend / Integration</strong></td>
+                                <td>Agnosticism, Legacy support (PHP/JSP/.NET)</td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>3. Visual Design</strong></td>
+                                <td>Tokens architecture, Theming capability</td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>4. Product Design (UX)</strong></td>
+                                <td>Out-of-the-box components, UX maturity</td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>5. Art Direction</strong></td>
+                                <td>Uniqueness, Flexibility, Typography fluidity</td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>6. Management / Tech Debt</strong></td>
+                                <td>Long-term maintainability, Fast onboarding</td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><strong>7. Marketing & SEO</strong></td>
+                                <td>Page load speed, Zero runtime CSS overhead</td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           COMMITTEE INSIGHTS
+      ══════════════════════════════════════════ -->
+            <section id="insights" aria-labelledby="insights-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="insights-heading">What the Experts Said</h2>
+
+                <div class="layout-grid__nested">
+
+                    <!-- 1. Frontend -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Frontend
+                                Engineering</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Tailwind is fast for quick
+                                prototypes, but maintaining massive class strings across hundreds of views becomes a
+                                nightmare. SYX brings sanity back with native @layer and predictable BEM component
+                                structures."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Lead Frontend Engineer</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 2. Backend -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Backend /
+                                Integration</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"We simply can't afford to rewrite
+                                our legacy PHP and JSP apps in React just to use a modern UI like MUI. SYX is completely
+                                agnostic and drops right in without disrupting our existing HTML generated by the
+                                server."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Systems Architect</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 3. Visual Design -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Visual
+                                Design</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Chakra UI handles design tokens
+                                beautifully, but it locks our visual identity entirely to React. SYX delivers the exact
+                                same 3-tier token architecture explicitly through native CSS variables, freeing us to
+                                design once for any platform."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Visual Design Lead</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 4. Product Design -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Product Design
+                                (UX)</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"While Ant Design wins on
+                                ready-to-use complex widgets like DataTables, SYX provides a much cleaner slate for
+                                building bespoke product identities without fighting rigid library overrides just to
+                                change a border radius."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Head of Product</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 5. Art Direction -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Art
+                                Direction</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Tailwind gives me total freedom to
+                                ruin a design if I'm not careful. SYX enforces systemic consistency—like its fluid
+                                typography primitives—without locking me into a 'Google' aesthetic like Material UI
+                                inherently does."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Art Director</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 6. Management -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Management /
+                                Tech Debt</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Technical debt is my biggest fear.
+                                With SYX's zero dependencies, we don't have to worry about the JavaScript framework
+                                treadmill breaking our UI layer every two years or chasing NPM vulnerabilities."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— VP of Engineering</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 7. Marketing -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Marketing &
+                                SEO</span>
+                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"CSS-in-JS solutions kill our
+                                initial page load times and hurt our SEO. SYX delivers lightning-fast, static CSS that
+                                keeps our Core Web Vitals in the green across all our marketing funnels."</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Director of Marketing</strong></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           GLOBAL SCORE
+      ══════════════════════════════════════════ -->
+            <section id="global" aria-labelledby="global-score-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="global-score-heading">Global Ranking Winner</h2>
+
+                <div class="layout-grid__nested">
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+                        <div class="mol-card syx-text-center syx-border-primary" style="border-width: 2px;">
+                            <span class="atom-icon atom-icon--lc-award syx-text-primary" style="font-size: 3rem;"
+                                aria-hidden="true"></span>
+                            <h3 class="atom-title atom-title--h3 syx-mt-2 syx-mb-1">1. SYX</h3>
+                            <p class="atom-title atom-title--h1 syx-text-primary syx-mb-2">30 <span
+                                    class="syx-text-gray" style="font-size: 1rem;">/ 35 pts</span></p>
+                            <p class="atom-txt syx-mb-0">The ultimate balance of performance, maintainability, and
+                                agnosticism.</p>
+                        </div>
+                    </div>
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-8">
+                        <div class="mol-card">
+                            <ul class="atom-list syx-mb-0" style="list-style: none; padding: 0;">
+                                <li class="syx-mb-2 syx-d-flex syx-items-center syx-gap-3">
+                                    <span class="atom-title atom-title--h4 syx-mb-0" style="width: 20px;">2.</span>
+                                    <span class="atom-title atom-title--h5 syx-mb-0" style="width: 120px;">Tailwind
+                                        CSS</span>
+                                    <div
+                                        style="flex-grow: 1; background: var(--primitive-color-gray-200); height: 12px; border-radius: 6px;">
+                                        <div
+                                            style="width: 74%; background: var(--primitive-color-green-400); height: 100%; border-radius: 6px;">
+                                        </div>
+                                    </div>
+                                    <span class="atom-txt"><strong>26 pts</strong></span>
+                                </li>
+                                <li class="syx-mb-2 syx-d-flex syx-items-center syx-gap-3">
+                                    <span class="atom-title atom-title--h4 syx-mb-0" style="width: 20px;">3.</span>
+                                    <span class="atom-title atom-title--h5 syx-mb-0" style="width: 120px;">Chakra
+                                        UI</span>
+                                    <div
+                                        style="flex-grow: 1; background: var(--primitive-color-gray-200); height: 12px; border-radius: 6px;">
+                                        <div
+                                            style="width: 60%; background: var(--primitive-color-yellow-500); height: 100%; border-radius: 6px;">
+                                        </div>
+                                    </div>
+                                    <span class="atom-txt"><strong>21 pts</strong></span>
+                                </li>
+                                <li class="syx-mb-2 syx-d-flex syx-items-center syx-gap-3">
+                                    <span class="atom-title atom-title--h4 syx-mb-0" style="width: 20px;">4.</span>
+                                    <span class="atom-title atom-title--h5 syx-mb-0" style="width: 120px;">Material
+                                        UI</span>
+                                    <div
+                                        style="flex-grow: 1; background: var(--primitive-color-gray-200); height: 12px; border-radius: 6px;">
+                                        <div
+                                            style="width: 45%; background: var(--primitive-color-orange-500); height: 100%; border-radius: 6px;">
+                                        </div>
+                                    </div>
+                                    <span class="atom-txt"><strong>16 pts</strong></span>
+                                </li>
+                                <li class="syx-mb-0 syx-d-flex syx-items-center syx-gap-3">
+                                    <span class="atom-title atom-title--h4 syx-mb-0" style="width: 20px;">5.</span>
+                                    <span class="atom-title atom-title--h5 syx-mb-0" style="width: 120px;">Ant
+                                        Design</span>
+                                    <div
+                                        style="flex-grow: 1; background: var(--primitive-color-gray-200); height: 12px; border-radius: 6px;">
+                                        <div
+                                            style="width: 34%; background: var(--primitive-color-red-500); height: 100%; border-radius: 6px;">
+                                        </div>
+                                    </div>
+                                    <span class="atom-txt"><strong>12 pts</strong></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           PROS & CONS
+      ══════════════════════════════════════════ -->
+            <section id="pros-cons" aria-labelledby="pros-cons-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="pros-cons-heading">Detailed Pros & Cons</h2>
+
+                <div class="layout-grid__nested">
+                    <!-- SYX -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <h3 class="atom-title atom-title--h4">SYX Design System</h3>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-success syx-mb-1"><span
+                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
+                                <strong>Pros:</strong> Zero dependencies, semantic BEM classes, extreme performance
+                                (~110kb CSS), no JS lock-in, solves specificity with <code>@layer</code>.
+                            </p>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-error syx-mb-0"><span
+                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"></span>
+                                <strong>Cons:</strong> Smaller out-of-the-box complex component library compared to Ant
+                                or MUI.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Tailwind -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <h3 class="atom-title atom-title--h4">Tailwind CSS</h3>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-success syx-mb-1"><span
+                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
+                                <strong>Pros:</strong> Unmatched development speed, ultimate design freedom, tiny
+                                production sizes.
+                            </p>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-error syx-mb-0"><span
+                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"></span>
+                                <strong>Cons:</strong> "Class soup" HTML, painful to refactor components without JS
+                                abstraction wrappers, difficult design governance.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Chakra -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <h3 class="atom-title atom-title--h4">Chakra UI</h3>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-success syx-mb-1"><span
+                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
+                                <strong>Pros:</strong> Excellent token implementation, extremely developer-friendly
+                                React props, great accessiblity.
+                            </p>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-error syx-mb-0"><span
+                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"></span>
+                                <strong>Cons:</strong> Tied exclusively to React, CSS-in-JS runtime overhead affects
+                                initial page load, heavy dependencies.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Material UI -->
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="mol-card syx-h-full">
+                            <h3 class="atom-title atom-title--h4">Material UI</h3>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-success syx-mb-1"><span
+                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
+                                <strong>Pros:</strong> Massive ecosystem, covers almost every possible component need,
+                                very battle-tested.
+                            </p>
+                            <p class="atom-txt syx-d-flex syx-items-center syx-gap-2 syx-text-error syx-mb-0"><span
+                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"></span>
+                                <strong>Cons:</strong> High customization friction (everything looks like Google), heavy
+                                bundle sizes, tied to React.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           SECTOR FIT MAP
+      ══════════════════════════════════════════ -->
+            <section id="sectors" aria-labelledby="sectors-fit-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="sectors-fit-heading">Sector Fit Recommendation</h2>
+
+                <div class="syx-border syx-bg-gray-50 syx-p-3">
+                    <ul class="atom-list syx-mb-0" style="list-style: none; padding: 0;">
+                        <li class="syx-mb-4 syx-pb-4 syx-border-b"
+                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
+                            <h4 class="atom-title atom-title--h4 syx-mb-1">1. E-Commerce & Retail: <span
+                                    class="syx-text-primary">SYX / Tailwind</span></h4>
+                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> SEO and fast time-to-first-byte are
+                                critical. SYX provides extreme performance (0 JS overhead) and makes multi-brand or
+                                seasonal theming effortless through tokens, while Tailwind excels for highly custom
+                                marketing campaigns.</p>
+                        </li>
+                        <li class="syx-mb-4 syx-pb-4 syx-border-b"
+                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
+                            <h4 class="atom-title atom-title--h4 syx-mb-1">2. Government & Public Sector: <span
+                                    class="syx-text-primary">SYX</span></h4>
+                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Decades of maintenance on legacy stacks
+                                (JSP, PHP, .NET) make React tools impossible. SYX explicitly shields its cascade using
+                                <code>@layer</code>, slotting seamlessly into old HTML structures without conflicts.
+                            </p>
+                        </li>
+                        <li class="syx-mb-4 syx-pb-4 syx-border-b"
+                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
+                            <h4 class="atom-title atom-title--h4 syx-mb-1">3. B2B SaaS Dashboards: <span
+                                    class="syx-text-primary">Chakra UI / SYX</span></h4>
+                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Chakra provides excellent out-of-the-box
+                                React components for complex dashboards. SYX wins for "White-label" capabilities,
+                                letting businesses brand dashboards per-client instantly just by changing a
+                                data-attribute.</p>
+                        </li>
+                        <li class="syx-mb-4 syx-pb-4 syx-border-b"
+                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
+                            <h4 class="atom-title atom-title--h4 syx-mb-1">4. Finance & Banking: <span
+                                    class="syx-text-primary">Ant Design / SYX</span></h4>
+                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Ant Design has incredibly powerful data
+                                grids. SYX is preferred when the sheer mass of financial data tables causes React's
+                                virtual DOM to lag, relying simply on lightweight SCSS-rendered semantic tables.</p>
+                        </li>
+                        <li class="syx-mb-0">
+                            <h4 class="atom-title atom-title--h4 syx-mb-1">5. Educational Tech & Logistics: <span
+                                    class="syx-text-primary">MUI / SYX</span></h4>
+                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Logistics terminals require huge
+                                hit-areas and robust interactions where MUI shines. SYX's fluid typography ensures it
+                                degrades beautifully on ancient, slow hardware typical in schools or warehouses without
+                                heavy JS payloads.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- =============================================
+       FOOTER
+       ============================================= -->
+    <footer class="org-home-footer" role="contentinfo">
+        <div class="org-home-footer__inner">
+
+            <a href="home.html" class="org-home-footer__brand" aria-label="SYX Home">
+                <span class="atom-icon atom-icon--lc-layers" aria-hidden="true"></span>
+                SYX
+            </a>
+
+            <div class="org-home-footer__meta">
+                <strong>SYX Design System</strong> · v3.0.0<br>
+                Modular CSS design system · Zero external dependencies
+            </div>
+
+            <nav class="org-home-footer__nav" aria-label="Footer navigation">
+                <a href="docs.html" class="org-home-footer__link">Documentation</a>
+                <a href="why-syx.html" class="org-home-footer__link">Why SYX</a>
+                <a href="https://github.com/Pizarradas/syx" class="org-home-footer__link" target="_blank"
+                    rel="noopener">GitHub</a>
+            </nav>
+
+        </div>
+
+        <div class="org-home-footer__divider" aria-hidden="true"></div>
+
+        <p class="org-home-footer__credit">
+            SYX Design System · Built with Dart Sass, native @layer and Atomic Design · MIT License<br>
+            <strong>© 2024–2026 José Luis Pizarro Feo</strong> — All rights reserved
+        </p>
+    </footer>
+
+    <!-- =============================================
+       SCRIPTS
+       ============================================= -->
+    <script>
+        (function () {
+            'use strict';
+
+            // ── Constants ────────────────────────────────
+            var THEME_CSS = {
+                'example-01': 'css/styles-theme-example-01.css',
+                'example-02': 'css/styles-theme-example-02.css',
+                'example-03': 'css/styles-theme-example-03.css',
+                'example-04': 'css/styles-theme-example-04.css',
+                'example-05': 'css/styles-theme-example-05.css'
+            };
+
+            // ── Elements ──────────────────────────────────
+            var root = document.documentElement;
+            var body = document.body;
+            var cssLink = document.getElementById('syx-theme-css');
+            var header = document.getElementById('site-header');
+            var burger = document.getElementById('nav-burger');
+            var drawer = document.getElementById('nav-drawer');
+            var overlay = document.getElementById('nav-overlay');
+            var selDesk = document.getElementById('theme-switcher');
+            var selMob = document.getElementById('theme-switcher-mobile');
+            var dmToggle = document.getElementById('darkmode-toggle');
+            var iconMoon = document.getElementById('icon-moon');
+            var iconSun = document.getElementById('icon-sun');
+
+            // ── Theme switching ───────────────────────────
+            function applyTheme(theme) {
+                if (!THEME_CSS[theme]) return;
+                if (cssLink) cssLink.setAttribute('href', THEME_CSS[theme]);
+                root.setAttribute('data-syx-theme', theme);
+                if (selDesk) selDesk.value = theme;
+                if (selMob) selMob.value = theme;
+                try { sessionStorage.setItem('syx-theme', theme); } catch (e) { }
+            }
+
+            try {
+                var savedTheme = sessionStorage.getItem('syx-theme');
+                if (savedTheme && /^\d+$/.test(savedTheme)) {
+                    savedTheme = 'example-' + savedTheme.padStart(2, '0');
+                }
+                if (savedTheme && THEME_CSS[savedTheme]) applyTheme(savedTheme);
+            } catch (e) { }
+
+            if (selDesk) selDesk.addEventListener('change', function () { applyTheme(selDesk.value); });
+            if (selMob) selMob.addEventListener('change', function () { applyTheme(selMob.value); });
+
+
+            // ── Dark mode ────────────────────────────────
+            function isDark() {
+                return root.getAttribute('data-theme') === 'dark';
+            }
+
+            function updateDarkIcons(dark) {
+                if (iconMoon) iconMoon.style.display = dark ? 'none' : '';
+                if (iconSun) iconSun.style.display = dark ? '' : 'none';
+                if (dmToggle) {
+                    dmToggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+                    dmToggle.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+                }
+            }
+
+            function applyDark(dark) {
+                if (dark) {
+                    root.setAttribute('data-theme', 'dark');
+                } else {
+                    root.setAttribute('data-theme', 'light');
+                }
+                updateDarkIcons(dark);
+                try { sessionStorage.setItem('syx-dark', dark ? '1' : '0'); } catch (e) { }
+            }
+
+            function toggleDark() {
+                applyDark(!isDark());
+            }
+
+            (function () {
+                var savedDark = null;
+                try { savedDark = sessionStorage.getItem('syx-dark'); } catch (e) { }
+
+                if (savedDark === '1') {
+                    applyDark(true);
+                } else if (savedDark === '0') {
+                    applyDark(false);
+                } else {
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    updateDarkIcons(prefersDark);
+                }
+            })();
+
+            if (dmToggle) dmToggle.addEventListener('click', toggleDark);
+
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+                    var saved = null;
+                    try { saved = sessionStorage.getItem('syx-dark'); } catch (ex) { }
+                    if (saved === null) updateDarkIcons(e.matches);
+                });
+            }
+
+            // ── Mobile nav toggle ─────────────────────────
+            function openNav() {
+                body.setAttribute('data-nav-open', '');
+                drawer.setAttribute('aria-hidden', 'false');
+                overlay.setAttribute('aria-hidden', 'false');
+                burger.setAttribute('aria-expanded', 'true');
+                burger.setAttribute('aria-label', 'Close navigation');
+            }
+
+            function closeNav() {
+                body.removeAttribute('data-nav-open');
+                drawer.setAttribute('aria-hidden', 'true');
+                overlay.setAttribute('aria-hidden', 'true');
+                burger.setAttribute('aria-expanded', 'false');
+                burger.setAttribute('aria-label', 'Open navigation');
+            }
+
+            if (burger) burger.addEventListener('click', function () { body.hasAttribute('data-nav-open') ? closeNav() : openNav(); });
+            if (overlay) overlay.addEventListener('click', closeNav);
+
+            drawer && drawer.querySelectorAll('.org-site-nav-drawer__link').forEach(function (l) {
+                l.addEventListener('click', closeNav);
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && body.hasAttribute('data-nav-open')) closeNav();
+            });
+
+            // ── Header scroll shadow ──────────────────────
+            if (header && 'IntersectionObserver' in window) {
+                var sentinel = document.createElement('div');
+                sentinel.setAttribute('aria-hidden', 'true');
+                sentinel.style.cssText = 'position:absolute;top:0;left:0;height:1px;width:1px;pointer-events:none;';
+                document.body.prepend(sentinel);
+                new IntersectionObserver(function (entries) {
+                    header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+                }, { rootMargin: '-1px 0px 0px 0px', threshold: 1 }).observe(sentinel);
+            }
+
+        })();
+    </script>
+
+</body>
+
+</html>
