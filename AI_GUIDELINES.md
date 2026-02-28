@@ -123,8 +123,6 @@ When asked to "create a new component X":
 
 ## 📋 Mixin Cheatsheet (Most Used)
 
-→ Full mixin deep-dive: [scss/AUTHORING-GUIDE.md — Section 4](scss/AUTHORING-GUIDE.md)
-
 | Intent       | Mixin                                                  |
 | :----------- | :----------------------------------------------------- |
 | **Position** | `@include absolute($top: 0, $left: 0);`                |
@@ -142,8 +140,6 @@ When asked to "create a new component X":
 Before outputting code, ask yourself:
 
 1.  Am I using a **mixin** instead of raw CSS?
-2.  Am I using a **token** variable instead of a hex/px value?
+2.  Am I using a **token** variable instead of a oklch/px value?
 3.  Is this class named with the correct **BEM prefix** (`syx-`, `mol-`, `org-`)?
 4.  Am I using the **Grid System** correctly?
-
-→ Full authoring guide (when to use each layer, HTML rules, SCSS tips): [scss/AUTHORING-GUIDE.md](scss/AUTHORING-GUIDE.md)

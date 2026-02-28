@@ -21,7 +21,7 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 
 | ❌ Nunca en páginas/componentes                              | ✅ Usar en su lugar               |
 | ------------------------------------------------------------ | --------------------------------- |
-| `--primitive-color-white` / `#fff` / `rgba(255,255,255,...)` | `--semantic-color-bg-primary`     |
+| `--primitive-color-white` / `oklch(1 0 0)` / `oklch(1 0 0 / ...)` | `--semantic-color-bg-primary`     |
 | `--primitive-color-gray-50`                                  | `--semantic-color-bg-secondary`   |
 | `--primitive-color-gray-100` (fondos)                        | `--semantic-color-bg-tertiary`    |
 | `--primitive-color-gray-100` (bordes)                        | `--semantic-color-border-subtle`  |
@@ -30,7 +30,7 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 | `--primitive-color-gray-900` (texto)                         | `--semantic-color-text-primary`   |
 | `--primitive-color-gray-500/600` (texto)                     | `--semantic-color-text-secondary` |
 | `--primitive-color-gray-300/400` (texto)                     | `--semantic-color-text-tertiary`  |
-| `#fff` sobre fondos oscuros                                  | `--semantic-color-text-inverse`   |
+| `oklch(1 0 0)` sobre fondos oscuros                                  | `--semantic-color-text-inverse`   |
 
 ---
 
@@ -97,7 +97,7 @@ Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de refer
 ```scss
 .my-section {
   background: var(--primitive-color-gray-50); // ❌ rompe la personalización
-  border-bottom: 1px solid #e5e7eb; // ❌ hardcoded, nunca cambia
+  border-bottom: 1px solid oklch(0.928 0.006 264.531); // ❌ hardcoded, nunca cambia
   color: var(--primitive-color-gray-900); // ❌ no respeta el tema
 }
 ```

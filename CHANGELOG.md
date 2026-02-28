@@ -127,7 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Card molecule** — `.syx-card` migrated from atoms to molecules layer with full dark-mode support.
 - **Fluid display token** — `--primitive-fluid-font-display` and `--primitive-letter-spacing-display` added.
 - **Container Queries** — Cards and column layouts use `@container` for truly responsive components.
-- **`package.json`** — Build scripts for all 5 themes with Dart Sass.
+- **`package.json`** — Build scripts for all 6 themes with Dart Sass.
 - **`CHANGELOG.md`** — This file.
 - **`LICENSE`** — MIT license.
 

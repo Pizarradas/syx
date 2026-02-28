@@ -8,7 +8,7 @@
   <!-- Primary meta -->
   <title>SYX Design System — CSS Tokens, @layer &amp; Atomic Design</title>
   <meta name="description"
-    content="SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens, Atomic Design and native CSS @layer. 5 themes. WCAG AA compliant.">
+    content="SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens, Atomic Design and native CSS @layer. 6 themes. WCAG AA compliant.">
   <meta name="author" content="José Luis Pizarro Feo">
   <meta name="keywords"
     content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX">
@@ -20,14 +20,14 @@
   <meta property="og:site_name" content="SYX Design System">
   <meta property="og:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta property="og:description"
-    content="Modular CSS design system with zero external dependencies. Three-layer Design Tokens, Atomic Design, native @layer. 5 themes. WCAG AA.">
+    content="Modular CSS design system with zero external dependencies. Three-layer Design Tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
   <meta property="og:url" content="https://github.com/Pizarradas/syx">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta name="twitter:description"
-    content="Modular CSS design system — zero dependencies, three-layer tokens, Atomic Design, native @layer. 5 themes. WCAG AA.">
+    content="Modular CSS design system — zero dependencies, three-layer tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
   <meta name="twitter:creator" content="@Pizarradas">
 
   <!-- Theme color (mobile browser chrome) -->
@@ -73,11 +73,12 @@
     <div class="org-site-nav-drawer__theme">
       <label for="theme-switcher-mobile">Theme</label>
       <select id="theme-switcher-mobile" class="atom-select" aria-label="Switch theme">
-        <option value="example-01">01 — Violet</option>
-        <option value="example-02">02 — Slate</option>
-        <option value="example-03">03 — Blue</option>
+        <option value="example-01">01 — Indigo</option>
+        <option value="example-02">02 — Purple</option>
+        <option value="example-03">03 — Coral</option>
         <option value="example-04">04 — Forest</option>
-        <option value="example-05">05 — Gold</option>
+        <option value="example-05">05 — Midnight</option>
+        <option value="example-06">06 — Cyber</option>
       </select>
     </div>
   </nav>
@@ -107,11 +108,12 @@
       <!-- Theme select — desktop only -->
       <div class="org-site-header__theme-select">
         <select id="theme-switcher" class="atom-select" aria-label="Switch theme">
-          <option value="example-01">01 &mdash; Violet</option>
-          <option value="example-02">02 &mdash; Slate</option>
-          <option value="example-03">03 &mdash; Blue</option>
+          <option value="example-01">01 &mdash; Indigo</option>
+          <option value="example-02">02 &mdash; Purple</option>
+          <option value="example-03">03 &mdash; Coral</option>
           <option value="example-04">04 &mdash; Forest</option>
-          <option value="example-05">05 &mdash; Gold</option>
+          <option value="example-05">05 &mdash; Midnight</option>
+          <option value="example-06">06 &mdash; Cyber</option>
         </select>
       </div>
 
@@ -164,7 +166,7 @@
 
     <div class="org-home-hero__badge-row" aria-label="Key capabilities">
       <span class="atom-pill atom-pill--neutral">Zero dependencies</span>
-      <span class="atom-pill atom-pill--neutral">5 themes</span>
+      <span class="atom-pill atom-pill--neutral">6 themes</span>
       <span class="atom-pill atom-pill--neutral">@layer native</span>
       <span class="atom-pill atom-pill--neutral">WCAG AA</span>
       <span class="atom-pill atom-pill--neutral">Dart Sass</span>
@@ -195,7 +197,7 @@
         <span class="atom-stat__label">Molecules</span>
       </div>
       <div class="atom-stat">
-        <span class="atom-stat__number">5</span>
+        <span class="atom-stat__number">6</span>
         <span class="atom-stat__label">Themes</span>
       </div>
       <div class="atom-stat">
@@ -271,7 +273,7 @@
         </span>
         <h3 class="mol-feature-card__title">Multi-theme, Zero Duplication</h3>
         <p class="mol-feature-card__body">
-          5 production-ready themes. Each redefines only its semantic tokens — components never change.
+          6 production-ready themes. Each redefines only its semantic tokens — components never change.
           Switching theme is a single HTML attribute change.
         </p>
       </article>
@@ -452,7 +454,7 @@
       <span class="org-home-themes__overline">
         <span class="atom-pill atom-pill--subtle">Production-ready multi-theming</span>
       </span>
-      <h2 class="org-home-themes__title" id="themes-title">5 themes, zero component changes</h2>
+      <h2 class="org-home-themes__title" id="themes-title">6 themes, zero component changes</h2>
       <p class="org-home-themes__sub">
         Each theme redefines only the semantic tokens. Components stay intact.
         Activate a theme by selecting it in the header — or set <code>data-syx-theme="example-XX"</code>
@@ -463,64 +465,74 @@
     <div class="org-home-themes__grid" role="list" aria-label="Available SYX themes">
 
       <div class="mol-theme-card is-active" role="listitem" data-theme="example-01" tabindex="0"
-        aria-label="Theme 01 — Violet / Blue (active)">
+        aria-label="Theme 01 — Indigo / Amber (active)">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--01" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
-          <span class="mol-theme-card__name">Violet / Blue</span>
+          <span class="mol-theme-card__name">Indigo / Amber</span>
           <div class="mol-theme-card__colors" aria-hidden="true">
             <span class="mol-theme-card__dot mol-theme-card__dot--01-a"></span>
             <span class="mol-theme-card__dot mol-theme-card__dot--01-b"></span>
           </div>
         </div>
-        <span class="mol-theme-card__label">example-01</span>
       </div>
 
-      <div class="mol-theme-card" role="listitem" data-theme="example-02" tabindex="0" aria-label="Theme 02 — Slate">
+      <div class="mol-theme-card" role="listitem" data-theme="example-02" tabindex="0"
+        aria-label="Theme 02 — Purple / Pink">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--02" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
-          <span class="mol-theme-card__name">Slate / Sky</span>
+          <span class="mol-theme-card__name">Purple / Pink</span>
           <div class="mol-theme-card__colors" aria-hidden="true">
             <span class="mol-theme-card__dot mol-theme-card__dot--02-a"></span>
             <span class="mol-theme-card__dot mol-theme-card__dot--02-b"></span>
           </div>
         </div>
-        <span class="mol-theme-card__label">example-02</span>
       </div>
 
-      <div class="mol-theme-card" role="listitem" data-theme="example-03" tabindex="0" aria-label="Theme 03 — Blue">
+      <div class="mol-theme-card" role="listitem" data-theme="example-03" tabindex="0"
+        aria-label="Theme 03 — Coral / Orange">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--03" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
-          <span class="mol-theme-card__name">Blue / Cyan</span>
+          <span class="mol-theme-card__name">Coral / Orange</span>
           <div class="mol-theme-card__colors" aria-hidden="true">
             <span class="mol-theme-card__dot mol-theme-card__dot--03-a"></span>
             <span class="mol-theme-card__dot mol-theme-card__dot--03-b"></span>
           </div>
         </div>
-        <span class="mol-theme-card__label">example-03</span>
       </div>
 
-      <div class="mol-theme-card" role="listitem" data-theme="example-04" tabindex="0" aria-label="Theme 04 — Forest">
+      <div class="mol-theme-card" role="listitem" data-theme="example-04" tabindex="0"
+        aria-label="Theme 04 — Forest / Earth">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--04" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
-          <span class="mol-theme-card__name">Forest / Lime</span>
+          <span class="mol-theme-card__name">Forest / Earth</span>
           <div class="mol-theme-card__colors" aria-hidden="true">
             <span class="mol-theme-card__dot mol-theme-card__dot--04-a"></span>
             <span class="mol-theme-card__dot mol-theme-card__dot--04-b"></span>
           </div>
         </div>
-        <span class="mol-theme-card__label">example-04</span>
       </div>
 
-      <div class="mol-theme-card" role="listitem" data-theme="example-05" tabindex="0" aria-label="Theme 05 — Gold">
+      <div class="mol-theme-card" role="listitem" data-theme="example-05" tabindex="0"
+        aria-label="Theme 05 — Midnight / Gold">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--05" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
-          <span class="mol-theme-card__name">Gold / Amber</span>
+          <span class="mol-theme-card__name">Midnight / Gold</span>
           <div class="mol-theme-card__colors" aria-hidden="true">
             <span class="mol-theme-card__dot mol-theme-card__dot--05-a"></span>
             <span class="mol-theme-card__dot mol-theme-card__dot--05-b"></span>
           </div>
         </div>
-        <span class="mol-theme-card__label">example-05</span>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-06" tabindex="0" aria-label="Theme 06 — Cyber">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--06" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Cyber</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--06-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--06-b"></span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -619,7 +631,8 @@
         'example-02': 'css/styles-theme-example-02.css',
         'example-03': 'css/styles-theme-example-03.css',
         'example-04': 'css/styles-theme-example-04.css',
-        'example-05': 'css/styles-theme-example-05.css'
+        'example-05': 'css/styles-theme-example-05.css',
+        'example-06': 'css/styles-theme-example-06.css'
       };
 
       // ── Elements ──────────────────────────────────
