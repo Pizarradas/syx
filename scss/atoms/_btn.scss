@@ -1,0 +1,262 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: btn
+// ===============================================
+@mixin atom-btn($theme: null) {
+  @layer syx.atoms {
+  .atom-btn {
+    @include border(all, var(--component-button-border-width), solid, null);
+    overflow-wrap: break-word;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    // Reset <a> text-decoration for all interactive states â single source of truth
+    &, &:hover, &:focus, &:visited, &:active { text-decoration: none; }
+    user-select: none;
+    text-align: center;
+    box-shadow: none;
+    cursor: pointer;
+    font-family: var(--component-button-font-family);
+    font-size: var(--component-button-font-size);
+    line-height: var(--component-button-line-height);
+    @include transition(
+      border-color 0.25s ease-out,
+      color 0.25s ease-out,
+      background-color 0.25s ease-out,
+      transform 0.1s ease
+    );
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    // &--primary
+    &--primary {
+      border-color: var(--component-button-primary-color);
+
+      // Filled variant
+      &.atom-btn--filled {
+        background-color: var(--component-button-primary-filled-bg);
+        color: var(--component-button-primary-filled-color, white);
+      }
+
+      // Outline variant (no --filled class)
+      &:not(.atom-btn--filled) {
+        background-color: transparent;
+        color: var(--component-button-primary-color);
+      }
+    }
+
+    // &--secondary
+    &--secondary {
+      border-color: var(--component-button-secondary-color);
+
+      // Filled variant
+      &.atom-btn--filled {
+        background-color: var(--component-button-secondary-filled-bg);
+        color: var(--component-button-secondary-filled-color, white);
+      }
+
+      // Outline variant (no --filled class)
+      &:not(.atom-btn--filled) {
+        background-color: transparent;
+        color: var(--component-button-secondary-color);
+      }
+    }
+
+    // &--tertiary
+    &--tertiary {
+      border-color: var(--component-button-tertiary-color);
+
+      // Filled variant
+      &.atom-btn--filled {
+        background-color: var(--component-button-tertiary-filled-bg);
+        color: var(--component-button-tertiary-filled-color, white);
+      }
+
+      // Outline variant (no --filled class)
+      &:not(.atom-btn--filled) {
+        background-color: transparent;
+        color: var(--component-button-tertiary-color);
+      }
+    }
+
+    // &--quaternary
+    &--quaternary {
+      border-color: var(--component-button-quaternary-color);
+
+      // Filled variant
+      &.atom-btn--filled {
+        background-color: var(--component-button-quaternary-filled-bg);
+        color: var(--component-button-quaternary-filled-color, white);
+      }
+
+      // Outline variant (no --filled class)
+      &:not(.atom-btn--filled) {
+        background-color: transparent;
+        color: var(--component-button-quaternary-color);
+      }
+    }
+
+    // &--size
+    &--size {
+      // &-sm
+      &-sm {
+        @include padding(var(--component-button-size-sm));
+        font-size: var(--component-button-font-size-sm);
+        line-height: var(--component-button-size-sm);
+      }
+
+      // &-md
+      &-md {
+        @include padding(var(--component-button-size-md));
+        font-size: var(--component-button-font-size-md);
+        line-height: var(--component-button-size-md);
+      }
+
+      // &-lg
+      &-lg {
+        @include padding(var(--component-button-size-lg));
+        font-size: var(--component-button-font-size-lg);
+        line-height: var(--component-button-size-lg);
+      }
+    }
+
+    // &:hover
+    &:hover {
+      // &:not(:disabled)
+      &:not(:disabled) {
+        cursor: pointer;
+
+        // Primary variant hover
+        &.atom-btn--primary {
+          border-color: var(--component-button-primary-border-hover);
+          background-color: var(--component-button-primary-bg-hover);
+          color: var(--component-button-primary-color-hover);
+
+          // Filled: bg darkens, text stays white
+          &.atom-btn--filled {
+            background-color: var(--component-button-primary-filled-bg-hover);
+            border-color: var(--component-button-primary-filled-border-hover);
+            color: var(--component-button-primary-filled-color-hover);
+          }
+        }
+
+        // Secondary variant hover
+        &.atom-btn--secondary {
+          border-color: var(--component-button-secondary-border-hover);
+          background-color: var(--component-button-secondary-bg-hover);
+          color: var(--component-button-secondary-color-hover);
+
+          &.atom-btn--filled {
+            background-color: var(--component-button-secondary-filled-bg-hover);
+            border-color: var(--component-button-secondary-filled-border-hover);
+            color: var(--component-button-secondary-filled-color-hover);
+          }
+        }
+
+        // Tertiary variant hover
+        &.atom-btn--tertiary {
+          border-color: var(--component-button-tertiary-border-hover);
+          background-color: var(--component-button-tertiary-bg-hover);
+          color: var(--component-button-tertiary-color-hover);
+
+          &.atom-btn--filled {
+            background-color: var(--component-button-tertiary-filled-bg-hover);
+            border-color: var(--component-button-tertiary-filled-border-hover);
+            color: var(--component-button-tertiary-filled-color-hover);
+          }
+        }
+
+        // Quaternary variant hover
+        &.atom-btn--quaternary {
+          border-color: var(--component-button-quaternary-border-hover);
+          background-color: var(--component-button-quaternary-bg-hover);
+          color: var(--component-button-quaternary-color-hover);
+
+          &.atom-btn--filled {
+            background-color: var(--component-button-quaternary-filled-bg-hover);
+            border-color: var(--component-button-quaternary-filled-border-hover);
+            color: var(--component-button-quaternary-filled-color-hover);
+          }
+        }
+      }
+    }
+
+    // &:focus
+    &:focus {
+      // &:not(:disabled)
+      &:not(:disabled) {
+        outline: 0;
+      }
+    }
+
+    // &:focus-visible
+    &:focus-visible {
+      // &:not(:disabled)
+      &:not(:disabled) {
+        outline: 0.2rem solid var(--semantic-color-state-focus);
+      }
+    }
+
+    // &:disabled
+    &:disabled {
+      cursor: not-allowed;
+      border-color: var(--semantic-color-state-disabled);
+    }
+
+    // Circle variant
+    &.atom-btn--circle {
+      @include border-radius(50%);
+    }
+
+    // Filled disabled state
+    &.atom-btn--filled {
+      &:disabled {
+        background-color: var(--semantic-color-state-disabled);
+      }
+    }
+
+    // Default border-radius for non-circle buttons
+    &:not(.atom-btn--circle) {
+      @include border-radius(var(--component-button-border-radius));
+    }
+    // --has-icon: self-contained icon+text variant
+    // Controls layout, gap and icon size based on the active --size-* modifier.
+    // Usage: add atom-btn--has-icon alongside any atom-btn--size-*
+    // The .atom-icon span needs no size modifier — --has-icon controls it.
+    // ─────────────────────────────────────────────────────────────
+    &--has-icon {
+      justify-content: flex-start;
+      gap: var(--component-button-size-md); // default gap (md)
+
+      .atom-icon {
+        flex-shrink: 0;
+        // Default icon size (md)
+        @include size(var(--component-icon-size-md));
+      }
+
+      // sm button → sm gap + sm icon
+      &.atom-btn--size-sm {
+        gap: var(--component-button-size-sm);
+        .atom-icon { @include size(var(--component-icon-size-sm)); }
+      }
+
+      // md button → md gap + md icon
+      &.atom-btn--size-md {
+        gap: var(--component-button-size-md);
+        .atom-icon { @include size(var(--component-icon-size-md)); }
+      }
+
+      // lg button → lg gap + lg icon
+      &.atom-btn--size-lg {
+        gap: var(--component-button-size-lg);
+        .atom-icon { @include size(var(--component-icon-size-lg)); }
+      }
+    }
+  }
+  } // end @layer syx.atoms
+}
