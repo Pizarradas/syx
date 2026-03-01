@@ -1,0 +1,18 @@
+// COMPONENT TOKENS: LABELS (TAGS)
+// ================================================
+// Label-specific tokens that reference semantic tokens
+// ================================================
+
+:root {
+  // LABEL: SIZES (Legacy Scope Mapping)
+  // ================================================
+  --component-label-padding-sm: var(--semantic-space-component-xs); // Scope 1
+  --component-label-padding-md: var(--semantic-space-component-sm); // Scope 2
+  --component-label-padding-lg: var(--semantic-space-component-md); // Scope 3
+  
+  // LABEL: VISUALS
+  // ================================================
+  --component-label-border-radius: var(--semantic-border-radius-default);
+  --component-label-font-size: var(--semantic-font-size-body-small);
+  --component-label-line-height: var(--semantic-line-height-normal);
+}

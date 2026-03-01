@@ -1,0 +1,175 @@
+// CORE
+// ===============================================
+@use "../../abstracts/index" as *;
+// ===============================================
+
+// THEME-AWARE MIXIN HELPER: backgrounds
+// Generates .syx-bg-* classes. Some blocks use @if $theme for compile-time
+// theme branching — this cannot be replaced by CSS custom properties alone.
+// Note: color is set on the container directly; children inherit via CSS
+// cascade. Components with their own color tokens are unaffected.
+// ===============================================
+@mixin helper-backgrounds($theme: null) {
+  @layer syx.utilities {
+    // .syx-bg
+    .syx-bg {
+      // &-auto
+      &-auto {
+        background-size: auto;
+      }
+
+      // &-cover
+      &-cover {
+        background-size: cover;
+      }
+
+      // &-contain
+      &-contain {
+        background-size: contain;
+      }
+
+      // color
+      &-color {
+        // &-black
+        &-black {
+          background-color: var(--color-black);
+
+          @if $theme == 'example-02' {
+            color: var(--color-white);
+          }
+
+          @if $theme == example-01 {
+            color: var(--color-primary);
+          }
+        }
+
+        // &-white
+        &-white {
+          background-color: var(--color-white);
+        }
+
+        // &-blue
+        &-blue {
+          // &-facebook
+          &-facebook {
+            background-color: var(--color-brand-fb-blue);
+          }
+
+          // &-instagram
+          &-instagram {
+            background-color: var(--color-brand-instagram-blue);
+          }
+
+          // &-twitter
+          &-twitter {
+            background-color: var(--color-brand-twitter-blue);
+          }
+        }
+
+        // &-green
+        &-green {
+          // &-whatsapp
+          &-whatsapp {
+            background-color: var(--color-brand-whatsapp-green);
+
+            // &-drk
+            &-drk {
+              // &-1
+              &-1 {
+                background-color: var(--color-brand-whatsapp-green-drk-1);
+              }
+            }
+          }
+        }
+
+        // &-purple
+        &-purple {
+          // &-instagram
+          &-instagram {
+            background-color: var(--color-brand-instagram-purple);
+          }
+        }
+
+        // &-transparent
+        &-transparent {
+          // &-mo
+          &-mo {
+            @include breakpoint(mobile-only) {
+              background-color: transparent;
+            }
+          }
+
+          // &-sm — 768px → 48em
+          &-sm {
+            @include min-screen(48em) {
+              background-color: transparent;
+            }
+          }
+
+          // &-md — 1024px → 64em
+          &-md {
+            @include min-screen(64em) {
+              background-color: transparent;
+            }
+          }
+
+          // &-lg — 1280px → 80em
+          &-lg {
+            @include min-screen(80em) {
+              background-color: transparent;
+            }
+          }
+        }
+
+        // &-primary
+        &-primary {
+          background-color: var(--color-primary);
+
+          @if $theme == 'example-02' {
+            color: var(--color-white);
+          }
+
+          @if $theme == example-01 {
+            color: var(--color-white);
+          }
+
+          // &-lt
+          &-lt {
+            // &-1
+            &-1 {
+              background-color: var(--color-primary-lt-1);
+            }
+          }
+        }
+
+        // &-secondary
+        &-secondary {
+          background-color: var(--color-secondary);
+
+          // &-lt
+          &-lt {
+            // &-1
+            &-1 {
+              background-color: var(--color-secondary-lt-1);
+            }
+          }
+        }
+
+        // &-tertiary
+        &-tertiary {
+          background-color: var(--color-tertiary);
+        }
+
+        // &-quaternary
+        &-quaternary {
+          background-color: var(--color-quaternary);
+        }
+
+        // &-quinary
+        &-quinary {
+          background-color: var(--color-quinary);
+        }
+      }
+    }
+  }
+}
