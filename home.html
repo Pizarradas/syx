@@ -61,6 +61,10 @@
       <span class="atom-icon atom-icon--lc-palette" aria-hidden="true"></span>
       Themes
     </a>
+    <a href="theme-builder.html" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-settings" aria-hidden="true"></span>
+      Theme Builder
+    </a>
     <a href="docs.html" class="org-site-nav-drawer__link">
       <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
       Docs
@@ -100,6 +104,7 @@
       <a href="#tokens">Tokens</a>
       <a href="#layers">@layer</a>
       <a href="#themes">Themes</a>
+      <a href="theme-builder.html">Theme Builder</a>
       <a href="docs.html">Docs</a>
       <a href="why-syx.html">Why SYX</a>
     </nav>
@@ -149,7 +154,7 @@
   <section class="org-home-hero" id="hero" aria-labelledby="hero-headline">
 
     <span class="org-home-hero__overline">
-      <span class="atom-pill atom-pill--primary">SYX v3 · CSS Design System</span>
+      <span class="atom-pill atom-pill--primary">SYX v4 · CSS Design System</span>
     </span>
 
     <h1 class="org-home-hero__headline" id="hero-headline">
@@ -173,19 +178,17 @@
     </div>
 
     <div class="org-home-hero__actions">
-      <a href="#cta" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-lg">
-        <span class="atom-icon atom-icon--lc-rocket" aria-hidden="true"></span>
-        Get started
+      <a href="theme-builder.html" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-lg">
+        Theme Builder
       </a>
-      <a href="docs.html" class="atom-btn atom-btn--secondary atom-btn--has-icon atom-btn--size-lg">
-        <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+      <a href="docs.html" class="atom-btn atom-btn--secondary atom-btn--size-lg">
         Read the docs
       </a>
     </div>
 
     <div class="org-home-hero__stats" aria-label="System statistics">
       <div class="atom-stat">
-        <span class="atom-stat__number">v3</span>
+        <span class="atom-stat__number">v4</span>
         <span class="atom-stat__label">Current&nbsp;version</span>
       </div>
       <div class="atom-stat">
@@ -238,10 +241,10 @@
         <span class="atom-feature-icon atom-feature-icon--token" aria-hidden="true">
           <span class="atom-icon atom-icon--lc-coins"></span>
         </span>
-        <h3 class="mol-feature-card__title">3-Layer Design Tokens</h3>
+        <h3 class="mol-feature-card__title">4-Layer Design Tokens</h3>
         <p class="mol-feature-card__body">
-          Primitive → Semantic → Component. A CSS variable hierarchy that separates raw values from
-          semantic meaning and per-component implementation.
+          Primitive → Theme/Architecture → Semantic Tones → Component Aliases. A strict CSS variable hierarchy that
+          separates raw values from structural logic, semantic meaning, and per-component implementation.
         </p>
       </article>
 
@@ -310,9 +313,9 @@
   <section class="org-home-tokens" id="tokens" aria-labelledby="tokens-title">
 
     <div class="org-home-tokens__header">
-      <h2 class="org-home-tokens__title" id="tokens-title">3-Layer Token Architecture</h2>
+      <h2 class="org-home-tokens__title" id="tokens-title">4-Layer Token Architecture</h2>
       <p class="org-home-tokens__sub">
-        A CSS variable system with a clear direction of flow: from the most abstract to the most concrete.
+        A CSS variable system with a strict cascade direction: from the most abstract to the most concrete.
       </p>
     </div>
 
@@ -328,8 +331,22 @@
         <p class="org-home-tokens__layer-desc">Numbers, colors and scales without context. Never used directly in
           components.</p>
         <code class="atom-code">--primitive-color-purple-600</code>
-        <code class="atom-code">--primitive-font-size-lg</code>
         <code class="atom-code">--primitive-space-base</code>
+      </div>
+
+      <!-- Arrow -->
+      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+
+      <!-- Theme / Architecture Layer -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--theme">
+        <span class="org-home-tokens__layer-badge">
+          <span class="atom-icon atom-icon--lc-settings" aria-hidden="true"></span>
+          Theme / Architecture
+        </span>
+        <h3 class="org-home-tokens__layer-title">Structural Config</h3>
+        <p class="org-home-tokens__layer-desc">Universal layout choices, radiuses, and dynamic theme focus styles.</p>
+        <code class="atom-code">--theme-radius</code>
+        <code class="atom-code">--theme-focus-ring-width</code>
       </div>
 
       <!-- Arrow -->
@@ -339,13 +356,13 @@
       <div class="org-home-tokens__layer org-home-tokens__layer--semantic">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-link" aria-hidden="true"></span>
-          Semantic
+          Semantic Tones
         </span>
-        <h3 class="org-home-tokens__layer-title">Contextual meaning</h3>
-        <p class="org-home-tokens__layer-desc">Functional aliases. The only layer that changes between themes.</p>
+        <h3 class="org-home-tokens__layer-title">Contextual feedback</h3>
+        <p class="org-home-tokens__layer-desc">Functional aliases determining success, warning, error, and primary
+          states.</p>
         <code class="atom-code">--semantic-color-primary</code>
-        <code class="atom-code">--semantic-font-family-heading</code>
-        <code class="atom-code">--semantic-space-layout-md</code>
+        <code class="atom-code">--semantic-tone-success-bg</code>
       </div>
 
       <!-- Arrow -->
@@ -355,12 +372,11 @@
       <div class="org-home-tokens__layer org-home-tokens__layer--component">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-component" aria-hidden="true"></span>
-          Component
+          Component Aliases
         </span>
-        <h3 class="org-home-tokens__layer-title">Component tokens</h3>
-        <p class="org-home-tokens__layer-desc">Scoped local variables. Enable surgical overrides per component.</p>
-        <code class="atom-code">--component-btn-bg</code>
-        <code class="atom-code">--component-btn-radius</code>
+        <h3 class="org-home-tokens__layer-title">Dedicated properties</h3>
+        <p class="org-home-tokens__layer-desc">Component-specific boundaries. Allows robust dark-mode overrides.</p>
+        <code class="atom-code">--btn-primary-text</code>
         <code class="atom-code">--component-card-padding</code>
       </div>
 
@@ -368,9 +384,9 @@
 
     <div class="org-home-tokens__rule">
       <p>
-        <strong>Golden rule:</strong> Components only consume <strong>semantic</strong> or
-        <strong>component</strong> tokens. They never reach directly into primitives. This guarantees
-        that switching themes requires changing zero component code.
+        <strong>Golden rule:</strong> Components only consume <strong>component aliases</strong> or <strong>semantic
+          tones</strong>. They never reach directly into primitives. This guarantees that switching themes requires
+        changing zero component code.
       </p>
     </div>
 
@@ -593,7 +609,7 @@
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v3.0.0<br>
+        <strong>SYX Design System</strong> · v4.0.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 

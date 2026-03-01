@@ -85,7 +85,7 @@ When asked to "create a new component X":
 
 ```scss
 :root {
-  --component-x-bg: var(--semantic-color-surface-primary);
+  --component-x-bg: var(--semantic-color-bg-primary);
   --component-x-padding: var(--semantic-space-inset-md);
 }
 ```

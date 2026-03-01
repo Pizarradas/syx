@@ -15,7 +15,7 @@
 
 SYX is a **component-first design system** that provides:
 
-- A **3-layer token architecture** (Primitive → Semantic → Component)
+- A **4-layer token architecture** (Primitive → Theme / Architecture → Semantic Tones → Component Aliases)
 - A **native SCSS mixin library** (15 files, Bourbon-philosophy, null-safe)
 - An **Atomic Design component hierarchy** (Atoms → Molecules → Organisms)
 - A **multi-context bundle system** (docs / app / marketing / blog per theme)

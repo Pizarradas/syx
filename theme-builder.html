@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYX — Theme Builder</title>
+    <link rel="stylesheet" id="syx-theme-link" href="css/setup-builder.css">
+    <style>
+        /* =========================================
+           SYX Theme Builder - Premium UI Polish
+           ========================================= */
+
+        /* --- Workspace Canvas (Right Preview) --- */
+        .theme-builder__preview {
+            background-color: var(--semantic-color-bg-primary) !important;
+            background-image: radial-gradient(var(--semantic-color-border-subtle) 1px, transparent 1px);
+            background-size: 20px 20px;
+            /* Dot grid pattern */
+        }
+
+        /* Elevate the preview cards slightly in the canvas */
+        .theme-builder__preview .atom-surface {
+            box-shadow: 0 4px 24px -4px oklch(0 0 0 / 0.08), 0 0 0 1px var(--semantic-color-border-subtle) !important;
+        }
+
+        /* --- Sidebar Aesthetics (Deep Dark Mode) --- */
+        .theme-builder__sidebar {
+            background: oklch(0.18 0.01 250) !important;
+            /* Deep technical gray */
+            border-right: 1px solid oklch(0.25 0.01 250) !important;
+            color: oklch(0.87 0.01 250);
+            /* p-gray-100 equivalent */
+        }
+
+        .theme-builder__sidebar .atom-title {
+            color: oklch(0.95 0.01 250) !important;
+            /* Brighter white for main title */
+        }
+
+        .theme-builder__group {
+            border-bottom-color: oklch(0.23 0.01 250) !important;
+        }
+
+        /* Refined Group Titles (Overline Style) */
+        .theme-builder__group-title {
+            font-size: 0.65rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: oklch(0.63 0.02 250) !important;
+            /* p-gray-400 */
+            margin-bottom: 1.25rem !important;
+        }
+
+        /* --- Value Pills (.val) --- */
+        .theme-builder__label-group label,
+        .theme-builder__control>label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 0.8rem;
+            color: oklch(0.87 0.01 250);
+            font-weight: 500;
+        }
+
+        span.val {
+            background: oklch(0.13 0.01 250);
+            /* Very dark pill background */
+            color: oklch(0.90 0.25 1);
+            /* p-cyan-500 (Secondary) for a technical pop */
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            box-shadow: inset 0 0 0 1px oklch(1 1 1 / 0.1);
+            letter-spacing: -0.02em;
+        }
+
+        /* --- Custom Inputs (Tactile & Sleek) --- */
+
+        /* Select Dropdowns */
+        .theme-builder__control select {
+            appearance: none;
+            background-color: oklch(0.23 0.01 250);
+            border: 1px solid oklch(0.31 0.01 250);
+            color: oklch(0.95 0.01 250);
+            border-radius: 6px;
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            /* Custom sleek arrow SVG */
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23A1A1AA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+
+        .theme-builder__control select:hover {
+            border-color: oklch(0.47 0.02 250);
+        }
+
+        .theme-builder__control select:focus {
+            outline: none;
+            border-color: var(--semantic-color-primary, oklch(0.53 0.37 118));
+            box-shadow: 0 0 0 2px oklch(0.53 0.37 118 / 0.25);
+        }
+
+        /* Range Sliders */
+        .theme-builder__control input[type="range"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            margin: 0.5rem 0;
+        }
+
+        .theme-builder__control input[type="range"]:focus {
+            outline: none;
+        }
+
+        /* WebKit Track */
+        .theme-builder__control input[type="range"]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: oklch(0.23 0.01 250);
+            border-radius: 2px;
+            transition: background 0.2s;
+        }
+
+        /* WebKit Hover Track */
+        .theme-builder__control input[type="range"]:hover::-webkit-slider-runnable-track {
+            background: oklch(0.31 0.01 250);
+        }
+
+        /* WebKit Thumb */
+        .theme-builder__control input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: oklch(0.95 0.01 250);
+            /* Bright white thumb */
+            cursor: pointer;
+            margin-top: -5px;
+            /* (Track height / 2) - (Thumb height / 2) */
+            box-shadow: 0 1px 3px oklch(0 0 0 / 0.4), 0 0 0 1px oklch(0 0 0 / 0.1);
+            transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s;
+        }
+
+        /* WebKit Thumb Active/Hover */
+        .theme-builder__control input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 2px 5px oklch(0 0 0 / 0.5), 0 0 0 1px oklch(0 0 0 / 0.1);
+        }
+
+        .theme-builder__control input[type="range"]:active::-webkit-slider-thumb {
+            transform: scale(1.05);
+            background: var(--semantic-color-primary, oklch(0.53 0.37 118));
+        }
+
+        /* Firefox Track */
+        .theme-builder__control input[type="range"]::-moz-range-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: oklch(0.23 0.01 250);
+            border-radius: 2px;
+        }
+
+        /* Firefox Thumb */
+        .theme-builder__control input[type="range"]::-moz-range-thumb {
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: oklch(0.95 0.01 250);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 1px 3px oklch(0 0 0 / 0.4), 0 0 0 1px oklch(0 0 0 / 0.1);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .theme-builder__control input[type="range"]::-moz-range-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .theme-builder__control input[type="range"]:active::-moz-range-thumb {
+            background: var(--semantic-color-primary, oklch(0.53 0.37 118));
+        }
+
+
+        /* --- Token Badges (Pills) --- */
+        .tb-token-badge {
+            display: inline-block;
+            background: oklch(0.19 0.01 250);
+            border: 1px solid oklch(0.23 0.01 250);
+            color: oklch(0.55 0.02 250);
+            border-radius: 4px;
+            padding: 0.15rem 0.3rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.65rem;
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* Minor inline helper for color boxes (Anatomy) */
+        .color-box {
+            width: 100%;
+            height: 60px;
+            border-radius: var(--theme-radius, 0.5rem);
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.1);
+        }
+
+        .color-box-sm {
+            width: 100%;
+            height: 40px;
+            border-radius: var(--theme-radius, 0.5rem);
+            box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.05);
+        }
+
+        /* Advanced Mode */
+        .tb-advanced-only {
+            display: none;
+        }
+
+        body.is-advanced .tb-advanced-only {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="syx syx--theme-builder">
+    <div class="theme-builder">
+
+        <!-- Sidebar / Configurator -->
+        <aside class="theme-builder__sidebar">
+            <div>
+                <h1 class="atom-title atom-title--h4 syx-mb-1" style="color: var(--primitive-color-white);">SYX Builder
+                </h1>
+                <p class="atom-txt syx-type-body-small" style="color: var(--primitive-color-gray-400);">Real-time theme
+                    configurator</p>
+            </div>
+
+            <!-- Advanced Mode Toggle -->
+            <div class="theme-builder__group tb-mb-4 tb-mt-4" style="border: none; padding-bottom: 0;">
+                <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-3"
+                    style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: oklch(0.23 0.01 250); border: 1px solid oklch(0.31 0.01 250);">
+                    <div>
+                        <span class="syx-type-body-small tb-d-block tb-text-black"
+                            style="color: oklch(0.95 0.01 250); font-weight: 600;">Advanced Mode</span>
+                        <span class="syx-type-caption" style="color: oklch(0.63 0.02 250);">Unlock deeper
+                            tokens</span>
+                    </div>
+                    <label class="atom-switch">
+                        <input type="checkbox" class="atom-switch__input" id="advanced-mode-toggle">
+                        <span class="atom-switch__slider"></span>
+                    </label>
+                </div>
+
+                <!-- Scalability Modules (Only visible in Advanced Mode) -->
+                <div class="tb-advanced-only">
+                    <h3 class="theme-builder__group-title tb-mt-4 tb-mb-3"
+                        style="border-bottom: 1px solid var(--primitive-color-gray-800); padding-bottom: 0.5rem; color: var(--primitive-color-white);">
+                        System Architecture
+                        Modules</h3>
+                    <p class="syx-type-caption tb-mb-4"
+                        style="color: var(--primitive-color-gray-400); font-size: 0.75rem;">
+                        SYX is a massive UI framework. Toggle these modular architectures to inject advanced semantic
+                        CSS into your export only when needed.
+                    </p>
+
+                    <!-- Fluid Typography & Spacing -->
+                    <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
+                        <div style="flex: 1; padding-right: 1rem;">
+                            <span class="syx-type-body-small tb-d-block"
+                                style="color: var(--primitive-color-white); font-weight: 600;">Fluid Typography &
+                                Spacing</span>
+                            <p class="syx-type-caption tb-mt-1"
+                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                Injects <code>clamp()</code> mathematical functions
+                                (<code>--primitive-fluid-space-*</code>, <code>font-*</code>). Perfect for responsive
+                                layouts that automatically scale across mobile and desktop without media queries.
+                            </p>
+                        </div>
+                        <label class="atom-switch atom-switch--sm tb-mt-1">
+                            <input type="checkbox" class="atom-switch__input" id="module-fluid-toggle">
+                            <span class="atom-switch__slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Extended Color Palette -->
+                    <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
+                        <div style="flex: 1; padding-right: 1rem;">
+                            <span class="syx-type-body-small tb-d-block"
+                                style="color: var(--primitive-color-white); font-weight: 600;">Extended Color
+                                Palette</span>
+                            <p class="syx-type-caption tb-mt-1"
+                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                Generates and injects 5 complete 11-step color scales (Yellow, Red, Blue, Green, Purple)
+                                calculated from OKLCH math. Crucial for complex UIs, charts, or multiple semantic
+                                states.
+                            </p>
+                        </div>
+                        <label class="atom-switch atom-switch--sm tb-mt-1">
+                            <input type="checkbox" class="atom-switch__input" id="module-palette-toggle">
+                            <span class="atom-switch__slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Advanced Components: Forms -->
+                    <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
+                        <div style="flex: 1; padding-right: 1rem;">
+                            <span class="syx-type-body-small tb-d-block"
+                                style="color: var(--primitive-color-white); font-weight: 600;">Forms, Switches &
+                                Radios</span>
+                            <p class="syx-type-caption tb-mt-1"
+                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                Outputs hundreds of specific component variables (<code>--component-form-*</code>,
+                                <code>--component-switch-*</code>) required to perfectly render and align forms inside
+                                the SYX ecosystem.
+                            </p>
+                        </div>
+                        <label class="atom-switch atom-switch--sm tb-mt-1">
+                            <input type="checkbox" class="atom-switch__input" id="module-forms-toggle">
+                            <span class="atom-switch__slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Advanced Components: Tables & Layout -->
+                    <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
+                        <div style="flex: 1; padding-right: 1rem;">
+                            <span class="syx-type-body-small tb-d-block"
+                                style="color: var(--primitive-color-white); font-weight: 600;">Tables, Lists &
+                                Pagination</span>
+                            <p class="syx-type-caption tb-mt-1"
+                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                Injects structural tokens for complex data-grids, interactive components, active table
+                                states, and deep breadcrumb/pagination component UI alignments.
+                            </p>
+                        </div>
+                        <label class="atom-switch atom-switch--sm tb-mt-1">
+                            <input type="checkbox" class="atom-switch__input" id="module-tables-toggle">
+                            <span class="atom-switch__slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Disable Legacy Bridge -->
+                    <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
+                        <div style="flex: 1; padding-right: 1rem;">
+                            <span class="syx-type-body-small tb-d-block"
+                                style="color: var(--primitive-color-warning-500); font-weight: 600;">Disable Legacy
+                                Bridge</span>
+                            <p class="syx-type-caption tb-mt-1"
+                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                Opt-out of generating the backward compatibility layer for old SYX variables. Exports a
+                                strict, zero-bloat modern OKLCH token tree.
+                            </p>
+                        </div>
+                        <label class="atom-switch atom-switch--sm tb-mt-1">
+                            <input type="checkbox" class="atom-switch__input" id="module-disable-legacy-toggle">
+                            <span class="atom-switch__slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing, Radius, Border -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Architecture</h2>
+                <div class="theme-builder__control">
+                    <label for="radius-base">Base Radius <span class="val" id="val-radius-base">0.75rem</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-radius</span>
+                    <input type="range" id="radius-base" min="0" max="2" value="0.75" step="0.05">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="spacing-base">Base Spacing <span class="val"
+                            id="val-spacing-base">0.25rem</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-spacing-base</span>
+                    <input type="range" id="spacing-base" min="0.1" max="0.5" value="0.25" step="0.05">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="border-width">Base Border <span class="val" id="val-border-width">1px</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-border-width</span>
+                    <input type="range" id="border-width" min="0" max="5" value="1" step="1">
+                </div>
+                <div class="theme-builder__control tb-advanced-only">
+                    <label for="container-max-width">Container Max Width <span class="val"
+                            id="val-container-max-width">1200px</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-container-max-width</span>
+                    <input type="range" id="container-max-width" min="800" max="1600" value="1200" step="50">
+                </div>
+                <div class="theme-builder__control tb-advanced-only">
+                    <label for="focus-ring-width">Focus Ring Width <span class="val"
+                            id="val-focus-ring-width">3px</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-focus-ring-width</span>
+                    <input type="range" id="focus-ring-width" min="1" max="4" value="3" step="1">
+                </div>
+            </div>
+
+            <!-- Typography -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Typography</h2>
+                <div class="theme-builder__control">
+                    <label for="font-family">Primary Font</label>
+                    <select id="font-family">
+                        <!-- System Fonts -->
+                        <optgroup label="System Fonts">
+                            <option
+                                value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+                                System UI</option>
+                            <option
+                                value="ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'">
+                                Tailwind Sans</option>
+                            <option value="ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif">System Serif
+                            </option>
+                            <option
+                                value="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+                                System Mono</option>
+                        </optgroup>
+                        <!-- Top Google Fonts -->
+                        <optgroup label="Google Fonts">
+                            <option value="'Inter', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+                                Inter</option>
+                            <option value="'Roboto', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap">
+                                Roboto</option>
+                            <option value="'Open Sans', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap">
+                                Open Sans</option>
+                            <option value="'Montserrat', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+                                Montserrat</option>
+                            <option value="'Poppins', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+                                Poppins</option>
+                            <option value="'Lato', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap">
+                                Lato</option>
+                            <option value="'Oswald', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap">
+                                Oswald</option>
+                            <option value="'Raleway', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap">
+                                Raleway</option>
+                            <option value="'Ubuntu', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap">
+                                Ubuntu</option>
+                            <option value="'Space Grotesk', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap">
+                                Space Grotesk</option>
+                            <option value="'Plus Jakarta Sans', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+                                Plus Jakarta Sans</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="theme-builder__control tb-advanced-only">
+                    <label for="font-family-heading">Heading Font</label>
+                    <select id="font-family-heading">
+                        <!-- System Fonts -->
+                        <optgroup label="System Fonts">
+                            <option
+                                value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+                                System UI</option>
+                            <option
+                                value="ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'">
+                                Tailwind Sans</option>
+                            <option value="ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif">System Serif
+                            </option>
+                            <option
+                                value="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace">
+                                System Mono</option>
+                        </optgroup>
+                        <!-- Top Google Fonts -->
+                        <optgroup label="Google Fonts">
+                            <option value="'Inter', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+                                Inter</option>
+                            <option value="'Roboto', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap">
+                                Roboto</option>
+                            <option value="'Montserrat', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap">
+                                Montserrat</option>
+                            <option value="'Poppins', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap">
+                                Poppins</option>
+                            <option value="'Oswald', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap">
+                                Oswald</option>
+                            <option value="'Playfair Display', serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap">
+                                Playfair Display</option>
+                            <option value="'Lora', serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap">
+                                Lora</option>
+                            <option value="'Merriweather', serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap">
+                                Merriweather</option>
+                            <option value="'Space Grotesk', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap">
+                                Space Grotesk</option>
+                            <option value="'Plus Jakarta Sans', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+                                Plus Jakarta Sans</option>
+                            <option value="'Syne', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap">
+                                Syne</option>
+                            <option value="'Archivo Black', sans-serif"
+                                data-font-url="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap">
+                                Archivo Black</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="theme-builder__control tb-advanced-only">
+                    <label for="font-weight-base">Base Font Weight <span class="val"
+                            id="val-font-weight-base">400</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-font-weight-base</span>
+                    <input type="range" id="font-weight-base" min="300" max="600" value="400" step="100">
+                </div>
+                <div class="theme-builder__control tb-advanced-only">
+                    <label for="font-weight-heading">Heading Font Weight <span class="val"
+                            id="val-font-weight-heading">700</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-font-weight-heading</span>
+                    <input type="range" id="font-weight-heading" min="500" max="900" value="700" step="100">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="font-size-base">Base Size <span class="val" id="val-font-size-base">16px</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-font-size-base</span>
+                    <input type="range" id="font-size-base" min="12" max="24" value="16" step="1">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="line-height-base">Base Line Height <span class="val"
+                            id="val-line-height-base">1.5</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-line-height-base</span>
+                    <input type="range" id="line-height-base" min="1" max="2" value="1.5" step="0.05">
+                </div>
+            </div>
+
+            <!-- Colors: Primary Palette -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Primary Color (OKLCH)</h2>
+                <div class="theme-builder__control">
+                    <label for="primary-h">Hue <span class="val" id="val-primary-h">250</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-primary-h</span>
+                    <input type="range" id="primary-h" min="0" max="360" value="250" step="1">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="primary-c">Chroma <span class="val" id="val-primary-c">0.2</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-primary-c</span>
+                    <input type="range" id="primary-c" min="0" max="0.37" value="0.2" step="0.01">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="primary-l">Base Lightness (500) <span class="val" id="val-primary-l">0.55</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-primary-l</span>
+                    <input type="range" id="primary-l" min="0.2" max="0.9" value="0.55" step="0.01">
+                </div>
+            </div>
+
+            <!-- Colors: Secondary Palette -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Secondary Color (OKLCH)</h2>
+                <div class="theme-builder__control">
+                    <label for="secondary-h">Hue <span class="val" id="val-secondary-h">70</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-secondary-h</span>
+                    <input type="range" id="secondary-h" min="0" max="360" value="70" step="1">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="secondary-c">Chroma <span class="val" id="val-secondary-c">0.16</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-secondary-c</span>
+                    <input type="range" id="secondary-c" min="0" max="0.37" value="0.16" step="0.01">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="secondary-l">Base Lightness (500) <span class="val"
+                            id="val-secondary-l">0.60</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-secondary-l</span>
+                    <input type="range" id="secondary-l" min="0.2" max="0.9" value="0.60" step="0.01">
+                </div>
+            </div>
+
+            <!-- Colors: Accent Palette -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Accent Color (OKLCH)</h2>
+                <div class="theme-builder__control">
+                    <label for="accent-h">Hue <span class="val" id="val-accent-h">277</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-accent-h</span>
+                    <input type="range" id="accent-h" min="0" max="360" value="277" step="1">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="accent-c">Chroma <span class="val" id="val-accent-c">0.17</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-accent-c</span>
+                    <input type="range" id="accent-c" min="0" max="0.37" value="0.17" step="0.01">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="accent-l">Base Lightness (500) <span class="val" id="val-accent-l">0.60</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-accent-l</span>
+                    <input type="range" id="accent-l" min="0.2" max="0.9" value="0.60" step="0.01">
+                </div>
+            </div>
+
+
+            <!-- Colors: Neutral Palette -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">Neutral Color (OKLCH)</h2>
+                <div class="theme-builder__control">
+                    <label for="neutral-h">Hue <span class="val" id="val-neutral-h">250</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-neutral-h</span>
+                    <input type="range" id="neutral-h" min="0" max="360" value="250" step="1">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="neutral-c">Chroma (Tint) <span class="val" id="val-neutral-c">0.02</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-neutral-c</span>
+                    <input type="range" id="neutral-c" min="0" max="0.1" value="0.02" step="0.005">
+                </div>
+            </div>
+
+            <!-- Colors: State Hues -->
+            <div class="theme-builder__group">
+                <h2 class="theme-builder__group-title">State Colors (Hue)</h2>
+                <div class="theme-builder__control" style="border-left: 2px solid oklch(0.60 0.163 150);">
+                    <div class="theme-builder__label-group">
+                        <label for="success-h">Success Hue <span class="val" id="val-success-h">150</span></label>
+                    </div>
+                    <input type="range" id="success-h" min="0" max="360" value="150" step="1">
+                </div>
+
+                <div class="theme-builder__control" style="border-left: 2px solid oklch(0.60 0.167 90);">
+                    <div class="theme-builder__label-group">
+                        <label for="warning-h">Warning Hue <span class="val" id="val-warning-h">90</span></label>
+                    </div>
+                    <input type="range" id="warning-h" min="0" max="360" value="90" step="1">
+                </div>
+
+                <div class="theme-builder__control" style="border-left: 2px solid oklch(0.60 0.193 30);">
+                    <div class="theme-builder__label-group">
+                        <label for="error-h">Error Hue <span class="val" id="val-error-h">30</span></label>
+                    </div>
+                    <input type="range" id="error-h" min="0" max="360" value="30" step="1">
+                </div>
+            </div>
+
+
+
+            <!-- Animation -->
+            <div class="theme-builder__group tb-advanced-only">
+                <h2 class="theme-builder__group-title">Animation</h2>
+                <div class="theme-builder__control">
+                    <label for="transition-duration">Base Transition <span class="val"
+                            id="val-transition-duration">0.2s</span></label>
+                    <span class="tb-token-badge syx-mt-1">--theme-transition-duration</span>
+                    <input type="range" id="transition-duration" min="0.1" max="1.0" value="0.2" step="0.05">
+                </div>
+                <div class="theme-builder__control">
+                    <label for="transition-easing">Base Easing</label>
+                    <select id="transition-easing">
+                        <option value="ease">Ease</option>
+                        <option value="ease-in-out">Ease In Out</option>
+                        <option value="linear">Linear</option>
+                        <option value="cubic-bezier(0.4, 0, 0.2, 1)">Material (Fast Out, Slow In)</option>
+                        <option value="cubic-bezier(0.175, 0.885, 0.32, 1.275)">Bouncy</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="theme-builder__group tb-mt-4"
+                style="border: none; position: sticky; bottom: 0; background: oklch(0.18 0.01 250); z-index: 10; padding-top: 1rem; padding-bottom: 2rem; margin-bottom: -2rem;">
+                <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-4"
+                    style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); box-shadow: var(--semantic-shadow-md); background: var(--semantic-color-bg-secondary);">
+                    <span class="syx-type-body-small tb-text-black"
+                        style="color: var(--primitive-color-text-primary);">Dark
+                        Mode
+                        Preview</span>
+                    <label class="atom-switch">
+                        <input type="checkbox" class="atom-switch__input" id="dark-mode-toggle">
+                        <span class="atom-switch__slider"></span>
+                    </label>
+                </div>
+                <button id="btn-export" class="atom-btn atom-btn--primary atom-btn--filled tb-w-full"
+                    style="box-shadow: 0 4px 12px -2px oklch(0.53 0.37 118 / 0.5);">
+                    <span class="atom-icon atom-icon--lc-download" aria-hidden="true"></span>
+                    Export Theme CSS
+                </button>
+            </div>
+        </aside>
+
+        <!-- Canvas / Live Preview Area -->
+        <main class="theme-builder__preview">
+            <div class="layout-grid">
+                <div class="layout-grid__col-xs-12 layout-grid__col-md-10 tb-mx-auto tb-py-5">
+
+                    <header class="tb-mb-5">
+                        <span class="syx-type-overline tb-d-block tb-mb-3"
+                            style="color: var(--semantic-color-text-tertiary);">Foundations</span>
+                        <h2 class="atom-title atom-title--h1 tb-mb-3">Theme Architecture</h2>
+                        <p class="atom-txt atom-txt--primary"
+                            style="color: var(--semantic-color-text-secondary); max-width: 60ch;">
+                            Explore how your token decisions cascade through the entire system. Adjust the sliders to
+                            see the underlying geometry of SYX adapt in real-time.
+                        </p>
+                    </header>
+
+                    <div class="layout-grid__nested tb-gap-3">
+
+                        <!-- 1. Color Anatomy -->
+                        <div class="layout-grid__col-xs-12">
+                            <h3 class="atom-title atom-title--h4 tb-mb-3 tb-py-3"
+                                style="border-bottom: 1px solid var(--semantic-color-border-subtle);">Color Anatomy</h3>
+                            <p class="syx-type-body tb-mb-4" style="color: var(--semantic-color-text-secondary);">The
+                                core color scales generated via OKLCH
+                                interpolation. These primitives power the semantic roles.</p>
+
+                            <div class="layout-grid__nested tb-gap-3">
+                                <!-- Primary Scale -->
+                                <div class="layout-grid__col-xs-12 layout-grid__col-md-12">
+                                    <h4 class="syx-type-overline tb-mb-3"
+                                        style="color: var(--semantic-color-text-tertiary);">Primary Scale</h4>
+                                    <div class="tb-d-flex tb-gap-3" id="primary-scale-container"
+                                        style="min-height: 120px;">
+                                        <!-- JS will inject .color-box divs here -->
+                                    </div>
+                                    <div class="tb-d-flex tb-justify-between syx-type-caption tb-mt-4"
+                                        style="color: var(--semantic-color-text-tertiary);">
+                                        <span>50</span><span>500 (Base)</span><span>950</span>
+                                    </div>
+                                </div>
+                                <!-- Secondary Scale -->
+                                <div class="layout-grid__col-xs-12 layout-grid__col-md-12 tb-mt-4">
+                                    <h4 class="syx-type-overline tb-mb-3"
+                                        style="color: var(--semantic-color-text-tertiary);">Secondary Scale</h4>
+                                    <div class="tb-d-flex tb-gap-3" id="secondary-scale-container"
+                                        style="min-height: 120px;">
+                                        <!-- JS will inject .color-box divs here -->
+                                    </div>
+                                    <div class="tb-d-flex tb-justify-between syx-type-caption tb-mt-4"
+                                        style="color: var(--semantic-color-text-tertiary);">
+                                        <span>50</span><span>500 (Base)</span><span>950</span>
+                                    </div>
+                                </div>
+                                <!-- Accent Scale -->
+                                <div class="layout-grid__col-xs-12 layout-grid__col-md-12 tb-mt-4">
+                                    <h4 class="syx-type-overline tb-mb-3"
+                                        style="color: var(--semantic-color-text-tertiary);">Accent Scale</h4>
+                                    <div class="tb-d-flex tb-gap-3" id="accent-scale-container"
+                                        style="min-height: 120px;">
+                                        <!-- JS will inject .color-box divs here -->
+                                    </div>
+                                    <div class="tb-d-flex tb-justify-between syx-type-caption tb-mt-4"
+                                        style="color: var(--semantic-color-text-tertiary);">
+                                        <span>50</span><span>500 (Base)</span><span>950</span>
+                                    </div>
+                                </div>
+                                <!-- Neutral Scale -->
+                                <div class="layout-grid__col-xs-12 layout-grid__col-md-12 tb-mt-4">
+                                    <h4 class="syx-type-overline tb-mb-3"
+                                        style="color: var(--semantic-color-text-tertiary);">Neutral Scale</h4>
+                                    <div class="tb-d-flex tb-gap-3" id="neutral-scale-container"
+                                        style="min-height: 120px;">
+                                        <!-- JS will inject .color-box divs here -->
+                                    </div>
+                                    <div class="tb-d-flex tb-justify-between syx-type-caption tb-mt-4"
+                                        style="color: var(--semantic-color-text-tertiary);">
+                                        <span>50</span><span>500</span><span>950</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Semantic Roles Mapping -->
+                        <div class="layout-grid__col-xs-12 tb-mt-4">
+                            <h3 class="atom-title atom-title--h5 tb-mb-3">Semantic Tokens in Action</h3>
+                            <div class="tb-p-4"
+                                style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
+                                <div class="tb-d-flex tb-justify-between tb-mb-4">
+                                    <span class="tb-token-badge">--semantic-color-bg-primary</span>
+                                    <span class="tb-token-badge">--semantic-color-border-subtle</span>
+                                </div>
+                                <div class="layout-grid__nested tb-align-center">
+                                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+                                        <div class="tb-mb-3"
+                                            style="padding: calc(4 * var(--primitive-space-base)); background: var(--semantic-color-bg-secondary); border-radius: var(--theme-radius); border: 1px solid var(--semantic-color-border-default);">
+                                            <h4 class="atom-title atom-title--h6"
+                                                style="color: var(--semantic-color-text-primary);">Bg Secondary & Text
+                                                Primary</h4>
+                                            <p class="syx-type-body-small tb-mb-3"
+                                                style="color: var(--semantic-color-text-secondary);">This card uses
+                                                secondary background and default borders.</p>
+                                            <div class="tb-d-flex tb-gap-3" style="flex-wrap: wrap;">
+                                                <span class="tb-token-badge">--semantic-color-bg-secondary</span>
+                                                <span class="tb-token-badge">--semantic-color-border-default</span>
+                                                <span class="tb-token-badge">--semantic-color-text-secondary</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
+                                        <button
+                                            class="atom-btn atom-btn--primary atom-btn--filled tb-mb-3 tb-w-full">Primary
+                                            Action (--semantic-color-primary)</button>
+                                        <div class="mol-form-field tb-mb-3">
+                                            <div class="atom-input-wrapper">
+                                                <input class="atom-input" type="text"
+                                                    placeholder="--semantic-color-text-tertiary">
+                                            </div>
+                                        </div>
+                                        <div class="tb-d-flex tb-gap-3" style="flex-wrap: wrap;">
+                                            <span class="tb-token-badge">--semantic-color-primary</span>
+                                            <span class="tb-token-badge">--semantic-color-text-tertiary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Typography Scale & Elevation -->
+                        <div class="layout-grid__col-xs-12 layout-grid__col-md-6 tb-mt-4">
+                            <h3 class="atom-title atom-title--h4 tb-mb-3 tb-py-3"
+                                style="border-bottom: 1px solid var(--semantic-color-border-subtle);">Typography Scale
+                            </h3>
+                            <div
+                                style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
+                                <div class="tb-d-flex"
+                                    style="flex-direction: column; gap: calc(3 * var(--primitive-space-base));">
+                                    <div class="tb-d-flex tb-align-center tb-justify-between">
+                                        <div><code class="syx-type-caption tb-mb-3"
+                                                style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-h1</code><span
+                                                class="syx-type-h1"
+                                                style="font-size: var(--semantic-font-size-h1); font-family: var(--semantic-font-family-heading); font-weight: var(--semantic-font-weight-bold); line-height: var(--semantic-line-height-heading);">Heading
+                                                One</span></div>
+                                        <span class="tb-token-badge">--semantic-font-size-h1</span>
+                                    </div>
+                                    <div class="tb-d-flex tb-align-center tb-justify-between">
+                                        <div><code class="syx-type-caption tb-mb-3"
+                                                style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-h3</code><span
+                                                class="syx-type-h3"
+                                                style="font-size: var(--semantic-font-size-h3); font-family: var(--semantic-font-family-heading); font-weight: var(--semantic-font-weight-bold); line-height: var(--semantic-line-height-heading);">Heading
+                                                Three</span></div>
+                                        <span class="tb-token-badge">--semantic-font-size-h3</span>
+                                    </div>
+                                    <div class="tb-d-flex tb-align-center tb-justify-between">
+                                        <div><code class="syx-type-caption tb-mb-3"
+                                                style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-body-large</code><span
+                                                class="syx-type-body-large"
+                                                style="font-size: var(--semantic-font-size-body-large);">Body large
+                                                text.</span></div>
+                                        <span class="tb-token-badge">--semantic-font-size-body-large</span>
+                                    </div>
+                                    <div class="tb-d-flex tb-align-center tb-justify-between">
+                                        <div><code class="syx-type-caption tb-mb-3"
+                                                style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-body</code><span
+                                                class="syx-type-body"
+                                                style="font-size: var(--semantic-font-size-body);">Body standard
+                                                text.</span></div>
+                                        <span class="tb-token-badge">--semantic-font-size-body</span>
+                                    </div>
+                                    <div class="tb-d-flex tb-align-center tb-justify-between">
+                                        <div><code class="syx-type-caption tb-mb-3"
+                                                style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-caption</code><span
+                                                class="syx-type-caption"
+                                                style="font-size: var(--semantic-font-size-caption);">Caption —
+                                                metadata.</span></div>
+                                        <span class="tb-token-badge">--semantic-font-size-caption</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Elevation & Radius -->
+                        <div class="layout-grid__col-xs-12 layout-grid__col-md-6 tb-mt-4">
+                            <h3 class="atom-title atom-title--h4 tb-mb-3 tb-py-3"
+                                style="border-bottom: 1px solid var(--semantic-color-border-subtle);">Elevation & Radius
+                            </h3>
+                            <div class="tb-d-flex tb-h-full"
+                                style="flex-direction: column; gap: calc(4 * var(--primitive-space-base));">
+                                <div class="tb-d-flex tb-align-center tb-justify-between"
+                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-sm); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    <span class="syx-type-body-small">Shadow SM + Theme Radius</span>
+                                    <span class="tb-token-badge">--semantic-shadow-sm</span>
+                                </div>
+                                <div class="tb-d-flex tb-align-center tb-justify-between"
+                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-md); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    <span class="syx-type-body-small">Shadow MD + Theme Radius</span>
+                                    <span class="tb-token-badge">--semantic-shadow-md</span>
+                                </div>
+                                <div class="tb-d-flex tb-align-center tb-justify-between"
+                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-lg); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    <span class="syx-type-body-small">Shadow LG + Theme Radius</span>
+                                    <span class="tb-token-badge">--semantic-shadow-lg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="js/theme-builder.js"></script>
+</body>
+
+</html>

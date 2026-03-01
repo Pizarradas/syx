@@ -18,19 +18,19 @@ Unlike many "bootstrap-clone" systems, SYX is built with a deep understanding of
 
 ### 1. Advanced Architecture
 
-- **CSS Layers (`@layer`)**: The granular 7-layer stack (`reset` < `base` < `tokens` < `atoms` ... < `utilities`) is declared correctly and all components are layerized. As of v3.0.1, a full audit fixed two inconsistencies — a rogue `syx.components` declaration in `_reset.scss` and all component mixins (atoms, molecules, organisms, grid, elements) that were producing unlayered CSS.
-- **Token 3-Tier Model**: The strict separation of `Primitive` → `Semantic` → `Component` tokens is industry best practice (matching standards from heavyweights like Salesforce Lightning and Adobe Spectrum).
+- **CSS Layers (`@layer`)**: The granular 7-layer stack (`reset` < `base` < `tokens` < `atoms` ... < `utilities`) is declared correctly and all components are layerized. As of v4.0.0, a full audit fixed two inconsistencies — a rogue `syx.components` declaration in `_reset.scss` and all component mixins (atoms, molecules, organisms, grid, elements) that were producing unlayered CSS.
+- **Token 4-Tier Model**: The strict separation of `Primitive` → `Theme / Architecture` → `Semantic Tones` → `Component Aliases` tokens is industry best practice (matching standards from heavyweights like Salesforce Lightning and Adobe Spectrum).
 
 ### 2. Modern Implementation
 
 - **Fluid Typography**: Using `clamp()` for generic scaling is far superior to breakpoint-based font resizing.
 - **Native SCSS**: The decision to build a mixin library from scratch (null-safe, bourbon-like) instead of relying on bloated libraries keeps the bundle size minimal.
-- **Breakpoint consistency**: As of v3.0.3, all breakpoints use `em` units throughout (768px→48em, 1024px→64em, 1280px→80em, 1440px→90em) — robust under browser zoom.
+- **Breakpoint consistency**: As of v4.0.0, all breakpoints use `em` units throughout (768px→48em, 1024px→64em, 1280px→80em, 1440px→90em) — robust under browser zoom.
 
 ### 3. Documentation & Accessibility
 
 - **In-Repo Docs**: The `docs-*.html` files are not just text; they are live, interactive playgrounds. This is excellent for developer experience.
-- **A11y First**: `index.html` was audited to WCAG AA standard (v3.0.3): `<main>` landmark, `<fieldset>`/`<legend>` for form groups, `scope="col"` on table headers, descriptive IDs, `type="button"` on all buttons, and correct `aria-hidden`/`role="img"` on icons.
+- **A11y First**: `index.html` was audited to WCAG AA standard (v4.0.0): `<main>` landmark, `<fieldset>`/`<legend>` for form groups, `scope="col"` on table headers, descriptive IDs, `type="button"` on all buttons, and correct `aria-hidden`/`role="img"` on icons.
 
 ### 4. Build System
 
