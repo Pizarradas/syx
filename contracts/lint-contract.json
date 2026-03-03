@@ -1,0 +1,2309 @@
+{
+  "_meta": {
+    "generatedAt": "2026-03-03T17:01:05.196Z"
+  },
+  "stats": {
+    "sourceTokens": 573,
+    "runtimeTokens": 943,
+    "officialRuntime": 664,
+    "legacyRuntime": 279,
+    "phantomTokens": 1,
+    "undocumentedTokens": 0
+  },
+  "phantomTokens": [
+    "--component-form-field-height"
+  ],
+  "undocumentedComponentTokens": [],
+  "legacyVars": {
+    "--base-measure": {
+      "value": "var(--primitive-space-base)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-space-base",
+      "replacedBy": "--primitive-space-base",
+      "replaceWith": "var(--primitive-space-base)"
+    },
+    "--color-blue": {
+      "value": "var(--primitive-color-blue-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-blue-500",
+      "replacedBy": "--primitive-color-blue-500",
+      "replaceWith": "var(--primitive-color-blue-500)"
+    },
+    "--color-green": {
+      "value": "var(--primitive-color-green-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-green-500",
+      "replacedBy": "--primitive-color-green-500",
+      "replaceWith": "var(--primitive-color-green-500)"
+    },
+    "--color-pink": {
+      "value": "var(--primitive-color-pink-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-pink-500",
+      "replacedBy": "--primitive-color-pink-500",
+      "replaceWith": "var(--primitive-color-pink-500)"
+    },
+    "--color-pink-lt-1": {
+      "value": "var(--primitive-color-pink-50)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-pink-100",
+      "replacedBy": "--primitive-color-pink-100",
+      "replaceWith": "var(--primitive-color-pink-100)"
+    },
+    "--color-purple": {
+      "value": "var(--primitive-color-purple-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-purple-500",
+      "replacedBy": "--primitive-color-purple-500",
+      "replaceWith": "var(--primitive-color-purple-500)"
+    },
+    "--color-yellow": {
+      "value": "var(--primitive-color-yellow-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-yellow-500",
+      "replacedBy": "--primitive-color-yellow-500",
+      "replaceWith": "var(--primitive-color-yellow-500)"
+    },
+    "--color-primary": {
+      "value": "var(--semantic-color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-primary",
+      "replacedBy": "--semantic-color-primary",
+      "replaceWith": "var(--semantic-color-primary)"
+    },
+    "--color-secondary": {
+      "value": "var(--semantic-color-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-secondary",
+      "replacedBy": "--semantic-color-secondary",
+      "replaceWith": "var(--semantic-color-secondary)"
+    },
+    "--color-secondary-lt-1": {
+      "value": "var(--semantic-color-bg-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-color-pink-100",
+      "replacedBy": "--primitive-color-pink-100",
+      "replaceWith": "var(--primitive-color-pink-100)"
+    },
+    "--color-tertiary": {
+      "value": "var(--semantic-color-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-tertiary",
+      "replacedBy": "--semantic-color-tertiary",
+      "replaceWith": "var(--semantic-color-tertiary)"
+    },
+    "--color-quaternary": {
+      "value": "var(--semantic-color-quaternary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-quaternary",
+      "replacedBy": "--semantic-color-quaternary",
+      "replaceWith": "var(--semantic-color-quaternary)"
+    },
+    "--color-quinary": {
+      "value": "var(--semantic-color-quinary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-quinary",
+      "replacedBy": "--semantic-color-quinary",
+      "replaceWith": "var(--semantic-color-quinary)"
+    },
+    "--color-selector-placeholder": {
+      "value": "var(--semantic-color-placeholder)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-action-link": {
+      "value": "var(--semantic-color-link-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-link-default",
+      "replacedBy": "--semantic-color-link-default",
+      "replaceWith": "var(--semantic-color-link-default)"
+    },
+    "--color-action-selection": {
+      "value": "var(--semantic-color-selection-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-selection-bg",
+      "replacedBy": "--semantic-color-selection-bg",
+      "replaceWith": "var(--semantic-color-selection-bg)"
+    },
+    "--background-action-selection": {
+      "value": "var(--semantic-color-selection-bg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-selection-bg",
+      "replacedBy": "--semantic-color-selection-bg",
+      "replaceWith": "var(--semantic-color-selection-bg)"
+    },
+    "--color-state-disabled": {
+      "value": "var(--semantic-color-disabled-bg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-disabled",
+      "replacedBy": "--semantic-color-state-disabled",
+      "replaceWith": "var(--semantic-color-state-disabled)"
+    },
+    "--color-state-focus": {
+      "value": "var(--semantic-focus-ring-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-focus",
+      "replacedBy": "--semantic-color-state-focus",
+      "replaceWith": "var(--semantic-color-state-focus)"
+    },
+    "--color-state-hover-primary": {
+      "value": "var(--semantic-color-state-hover-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-hover-primary",
+      "replacedBy": "--semantic-color-state-hover-primary",
+      "replaceWith": "var(--semantic-color-state-hover-primary)"
+    },
+    "--color-state-hover-secondary": {
+      "value": "var(--semantic-color-state-hover-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-state-hover-tertiary": {
+      "value": "var(--semantic-color-state-hover-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-state-hover-quaternary": {
+      "value": "var(--semantic-color-state-hover-quaternary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-state-ok": {
+      "value": "var(--semantic-color-state-success)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-success",
+      "replacedBy": "--semantic-color-state-success",
+      "replaceWith": "var(--semantic-color-state-success)"
+    },
+    "--color-state-ko": {
+      "value": "var(--semantic-color-state-error)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-error",
+      "replacedBy": "--semantic-color-state-error",
+      "replaceWith": "var(--semantic-color-state-error)"
+    },
+    "--color-state-warning": {
+      "value": "var(--semantic-color-state-warning)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-warning",
+      "replacedBy": "--semantic-color-state-warning",
+      "replaceWith": "var(--semantic-color-state-warning)"
+    },
+    "--font-family-1": {
+      "value": "var(--semantic-font-family-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-font-family-body",
+      "replacedBy": "--semantic-font-family-body",
+      "replaceWith": "var(--semantic-font-family-body)"
+    },
+    "--font-family-2": {
+      "value": "var(--semantic-font-family-primary-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-font-family-heading",
+      "replacedBy": "--semantic-font-family-heading",
+      "replaceWith": "var(--semantic-font-family-heading)"
+    },
+    "--font-weight-1": {
+      "value": "var(--font-family-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-font-weight-regular",
+      "replacedBy": "--primitive-font-weight-regular",
+      "replaceWith": "var(--primitive-font-weight-regular)"
+    },
+    "--font-weight-2": {
+      "value": "var(--font-family-2)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --primitive-font-weight-bold",
+      "replacedBy": "--primitive-font-weight-bold",
+      "replaceWith": "var(--primitive-font-weight-bold)"
+    },
+    "--font-bold": {
+      "value": "var(--semantic-font-family-primary-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--gap-1": {
+      "value": "var(--primitive-space-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--inner-1": {
+      "value": "var(--primitive-space-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--font-size-1": {
+      "value": "var(--semantic-font-size-body)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--font-size-2": {
+      "value": "var(--semantic-font-size-h5)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--font-size-3": {
+      "value": "var(--semantic-font-size-h4)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--font-size-4": {
+      "value": "var(--semantic-font-size-h3)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--font-size-5": {
+      "value": "var(--semantic-font-size-h2)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--dimension-1": {
+      "value": "var(--primitive-size-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--dimension-2": {
+      "value": "var(--primitive-size-2)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--dimension-3": {
+      "value": "var(--primitive-size-3)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--dimension-4": {
+      "value": "var(--primitive-size-4)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--dimension-5": {
+      "value": "var(--primitive-size-5)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--scope-1": {
+      "value": "var(--font-size-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--scope-2": {
+      "value": "var(--font-size-2)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--scope-3": {
+      "value": "var(--font-size-3)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--scope-4": {
+      "value": "var(--font-size-4)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--scope-5": {
+      "value": "var(--font-size-5)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-primary-font-color": {
+      "value": "var(--btn-primary-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-primary-filled-font-color": {
+      "value": "var(--component-button-primary-filled-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-secondary-font-color": {
+      "value": "var(--btn-secondary-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-secondary-filled-font-color": {
+      "value": "var(--component-button-secondary-filled-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-tertiary-font-color": {
+      "value": "var(--btn-tertiary-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-tertiary-filled-font-color": {
+      "value": "var(--component-button-tertiary-filled-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-quaternary-font-color": {
+      "value": "var(--btn-quaternary-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-quaternary-filled-font-color": {
+      "value": "var(--component-button-quaternary-filled-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-gap": {
+      "value": "var(--component-breadcrumb-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-item-highlighted-p-x": {
+      "value": "var(--component-breadcrumb-item-padding-x)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-item-icon-margin-r": {
+      "value": "var(--component-breadcrumb-icon-margin-right)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-item-icon-size": {
+      "value": "var(--component-breadcrumb-icon-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-gap": {
+      "value": "var(--component-pagination-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-item-size": {
+      "value": "var(--component-pagination-item-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-icon-size": {
+      "value": "var(--component-pagination-icon-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--check-gap": {
+      "value": "var(--component-check-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--check-line-height": {
+      "value": "var(--component-check-line-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--check-uncheck-size": {
+      "value": "var(--component-check-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--check-checked-icon-size": {
+      "value": "var(--component-check-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--form-font-family": {
+      "value": "var(--component-form-field-font-family)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--form-font-size": {
+      "value": "var(--component-form-field-font-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--form-line-height": {
+      "value": "var(--component-form-field-line-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--form-inner-field": {
+      "value": "var(--component-form-field-padding-x)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--form-height-size": {
+      "value": "var(--component-form-field-min-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--radio-gap": {
+      "value": "var(--component-radio-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--radio-line-height": {
+      "value": "var(--component-radio-line-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--radio-uncheck-size": {
+      "value": "var(--component-radio-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--radio-checked-size": {
+      "value": "var(--component-radio-checked-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-w-size": {
+      "value": "var(--component-switch-width)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-h-size": {
+      "value": "var(--component-switch-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-slider-w-size": {
+      "value": "var(--component-switch-slider-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-slider-h-size": {
+      "value": "var(--component-switch-slider-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-slider-background-color": {
+      "value": "var(--component-switch-slider-bg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-slider-radius": {
+      "value": "var(--component-switch-slider-radius)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-disabled": {
+      "value": "var(--component-switch-status-disabled-opacity)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--cont-group-form-field-m-b": {
+      "value": "var(--component-form-group-margin-bottom)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--cont-group-form-field-icon-p-r": {
+      "value": "var(--semantic-space-component-xs)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--cont-group-form-field-icon-size": {
+      "value": "var(--primitive-size-1)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-m-t": {
+      "value": "var(--component-list-ordered-margin-top)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-m-b": {
+      "value": "var(--component-list-ordered-margin-bottom)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-gap": {
+      "value": "var(--component-list-ordered-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-item-m-t": {
+      "value": "var(--component-list-ordered-item-margin-top)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-counter-size": {
+      "value": "var(--component-list-ordered-counter-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-counter-font-size": {
+      "value": "var(--component-list-ordered-counter-font-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-ordered-counter-line-height": {
+      "value": "var(--component-list-ordered-counter-line-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl1-gap": {
+      "value": "var(--component-list-lvl1-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-item-m-t": {
+      "value": "var(--component-list-item-margin-top)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-icon-size": {
+      "value": "var(--component-list-icon-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl2-m-l": {
+      "value": "var(--component-list-lvl2-margin-left)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl2-gap": {
+      "value": "var(--component-list-lvl2-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl3-m-l": {
+      "value": "var(--component-list-lvl3-margin-left)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl3-gap": {
+      "value": "var(--component-list-lvl3-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--table-th-font-size": {
+      "value": "var(--component-table-th-font-size)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--table-th-line-height": {
+      "value": "var(--component-table-th-line-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--txt-m-b": {
+      "value": "var(--semantic-space-stack-sm)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--color-black": {
+      "value": "black",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-white": {
+      "value": "white",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-grey-80pct": {
+      "value": "hsl(0,0%,80%)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-fb-blue": {
+      "value": "#3b5998",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-instagram-blue": {
+      "value": "#3f729b",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-instagram-purple": {
+      "value": "#8a3ab9",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-linkedin-blue": {
+      "value": "#0077b5",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-paypal-blue": {
+      "value": "#009cde",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-paypal-blue-drk-1": {
+      "value": "#003087",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-pinterest-red": {
+      "value": "#e60023",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-twitter-blue": {
+      "value": "#5ea9dd",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-whatsapp-green": {
+      "value": "#41c75d",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-whatsapp-green-drk-1": {
+      "value": "#40a73b",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brand-youtube-red": {
+      "value": "#cc181e",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--filter-color-black": {
+      "value": "invert(0%) sepia(40%) saturate(20%) hue-rotate(356deg) brightness(90%) contrast(104%)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-color-white": {
+      "value": "invert(99%) sepia(1%) saturate(4%) hue-rotate(355deg) brightness(103%) contrast(104%)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--color-primary-base": {
+      "value": "var(--primitive-color-blue-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-primary-light": {
+      "value": "var(--primitive-color-blue-50)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-secondary-base": {
+      "value": "var(--primitive-color-cyan-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-accent-base": {
+      "value": "var(--primitive-color-orange-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brown": {
+      "value": "var(--color-primary-base)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-brown-lt-1": {
+      "value": "var(--color-primary-light)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-red": {
+      "value": "var(--primitive-color-error-500)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-senary": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-septenary": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--filter-primary": {
+      "value": "brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1800%) hue-rotate(230deg) brightness(95%) contrast(95%)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-secondary": {
+      "value": "brightness(0) saturate(100%) invert(72%) sepia(60%) saturate(1200%) hue-rotate(5deg) brightness(100%) contrast(95%)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-state-ok": {
+      "value": "var(--primitive-filter-success)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-state-warning": {
+      "value": "var(--primitive-filter-warning)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-state-disabled": {
+      "value": "var(--primitive-filter-disabled)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-color-brown": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filter-color-blue": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--scope-6": {
+      "value": "calc(5.4 * var(--base-measure))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-primary-text": {
+      "value": "var(--color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-primary-filled-text": {
+      "value": "oklch(0.22 0.032 264.665)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-secondary-text": {
+      "value": "var(--color-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-secondary-filled-text": {
+      "value": "oklch(0.21 0.032 264.665)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-tertiary-text": {
+      "value": "var(--color-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-tertiary-filled-text": {
+      "value": "oklch(0.22 0.032 264.665)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-quaternary-text": {
+      "value": "var(--color-quaternary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-quaternary-filled-text": {
+      "value": "oklch(0.22 0.032 264.665)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-item-icon-p-r": {
+      "value": "calc(-4 * var(--base-measure))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--breadcrumb-item-icon-pic": {
+      "value": "var(--icon-arrow-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--check-checked-icon-pic": {
+      "value": "var(--icon-user-interface-tick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl1-icon-pic": {
+      "value": "var(--lc-icon-chevron-right)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--list-lvl2-icon-pic": {
+      "value": "var(--lc-icon-chevrons-right)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-back-icon-pic": {
+      "value": "var(--icon-arrow-double)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-prev-icon-pic": {
+      "value": "var(--icon-arrow-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-next-icon-pic": {
+      "value": "var(--icon-arrow-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pagination-forward-icon-pic": {
+      "value": "var(--icon-arrow-double)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-w-size": {
+      "value": "calc(9 * var(--base-measure))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-h-size": {
+      "value": "calc(0 * var(--base-measure))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-icon-size": {
+      "value": "calc(7 * var(--base-measure))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-icon-ok-pic": {
+      "value": "var(--icon-user-interface-tick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-icon-ko-pic": {
+      "value": "var(--icon-user-interface-cancel)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--switch-status-icon-filter": {
+      "value": "var(--filter-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--cont-group-form-field-success-icon-pic": {
+      "value": "var(--icon-user-interface-tick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--cont-group-form-field-warning-icon-pic": {
+      "value": "var(--icon-user-interface-exclamation-mark)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-primary-bg-hover": {
+      "value": "oklch(0.70 0.204 277.117)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--btn-secondary-bg-hover": {
+      "value": "oklch(0.88 0.115 95.746)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--facebook-primary": {
+      "value": "before{background:var(--icon-rrss-facebook) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--github-primary": {
+      "value": "before{background:var(--icon-rrss-github) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--instagram-primary": {
+      "value": "before{background:var(--icon-rrss-instagram) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--linkedin-primary": {
+      "value": "before{background:var(--icon-rrss-linkedin) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--pinterest-primary": {
+      "value": "before{background:var(--icon-rrss-pinterest) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--snapchat-primary": {
+      "value": "before{background:var(--icon-rrss-snapchat) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--twitter-primary": {
+      "value": "before{background:var(--icon-rrss-twitter) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--whatsapp-primary": {
+      "value": "before{background:var(--icon-rrss-whatsapp) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--youtube-primary": {
+      "value": "before{background:var(--icon-rrss-youtube) center center /contain no-repeat transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--primary": {
+      "value": "not(.atom-btn--filled){background-color:transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--secondary": {
+      "value": "not(.atom-btn--filled){background-color:transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--tertiary": {
+      "value": "not(.atom-btn--filled){background-color:transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--quaternary": {
+      "value": "not(.atom-btn--filled){background-color:transparent",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--filled": {
+      "value": "disabled{background-color:var(--semantic-color-disabled-bg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--arrow-default": {
+      "value": "before{background-image:var(--icon-arrow-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--arrow-double": {
+      "value": "before{background-image:var(--icon-arrow-double)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--content-bars": {
+      "value": "before{background-image:var(--icon-content-bars)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--rrss-email": {
+      "value": "before{background-image:var(--icon-rrss-email)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--ui-cancel": {
+      "value": "before{background-image:var(--icon-user-interface-cancel)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--ui-exclamation": {
+      "value": "before{background-image:var(--icon-user-interface-exclamation-mark)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--ui-home": {
+      "value": "before{background-image:var(--icon-user-interface-home)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--ui-tick": {
+      "value": "before{background-image:var(--icon-user-interface-tick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--lc-icon-home": {
+      "value": "url(\"../img/icons/lucide/home.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-menu": {
+      "value": "url(\"../img/icons/lucide/menu.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-x": {
+      "value": "url(\"../img/icons/lucide/x.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-layers": {
+      "value": "url(\"../img/icons/lucide/layers.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevron-right": {
+      "value": "url(\"../img/icons/lucide/chevron-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevron-left": {
+      "value": "url(\"../img/icons/lucide/chevron-left.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevron-down": {
+      "value": "url(\"../img/icons/lucide/chevron-down.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevron-up": {
+      "value": "url(\"../img/icons/lucide/chevron-up.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevrons-right": {
+      "value": "url(\"../img/icons/lucide/chevrons-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-chevrons-down": {
+      "value": "url(\"../img/icons/lucide/chevrons-down.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-arrow-right": {
+      "value": "url(\"../img/icons/lucide/arrow-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-arrow-left": {
+      "value": "url(\"../img/icons/lucide/arrow-left.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-search": {
+      "value": "url(\"../img/icons/lucide/search.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-plus": {
+      "value": "url(\"../img/icons/lucide/plus.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-minus": {
+      "value": "url(\"../img/icons/lucide/minus.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-check": {
+      "value": "url(\"../img/icons/lucide/check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-trash": {
+      "value": "url(\"../img/icons/lucide/trash-2.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-pencil": {
+      "value": "url(\"../img/icons/lucide/pencil.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-download": {
+      "value": "url(\"../img/icons/lucide/download.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-copy": {
+      "value": "url(\"../img/icons/lucide/copy.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-external-link": {
+      "value": "url(\"../img/icons/lucide/external-link.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-filter": {
+      "value": "url(\"../img/icons/lucide/filter.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-rocket": {
+      "value": "url(\"../img/icons/lucide/rocket.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-terminal": {
+      "value": "url(\"../img/icons/lucide/terminal.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-book-open": {
+      "value": "url(\"../img/icons/lucide/book-open.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-github": {
+      "value": "url(\"../img/icons/lucide/github.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-zap": {
+      "value": "url(\"../img/icons/lucide/zap.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-info": {
+      "value": "url(\"../img/icons/lucide/info.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-warning": {
+      "value": "url(\"../img/icons/lucide/alert-triangle.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-success": {
+      "value": "url(\"../img/icons/lucide/circle-check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-error": {
+      "value": "url(\"../img/icons/lucide/circle-x.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-shield-check": {
+      "value": "url(\"../img/icons/lucide/shield-check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-moon": {
+      "value": "url(\"../img/icons/lucide/moon.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-sun": {
+      "value": "url(\"../img/icons/lucide/sun.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-palette": {
+      "value": "url(\"../img/icons/lucide/palette.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-user": {
+      "value": "url(\"../img/icons/lucide/user.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-settings": {
+      "value": "url(\"../img/icons/lucide/settings.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-mail": {
+      "value": "url(\"../img/icons/lucide/mail.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-database": {
+      "value": "url(\"../img/icons/lucide/database.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-link": {
+      "value": "url(\"../img/icons/lucide/link.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-component": {
+      "value": "url(\"../img/icons/lucide/box.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-box": {
+      "value": "url(\"../img/icons/lucide/box.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-coins": {
+      "value": "url(\"../img/icons/lucide/coins.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-atom": {
+      "value": "url(\"../img/icons/lucide/atom.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-icon-package": {
+      "value": "url(\"../img/icons/lucide/package.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-home": {
+      "value": "before{background-image:url(\"../img/icons/lucide/home.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-menu": {
+      "value": "before{background-image:url(\"../img/icons/lucide/menu.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-x": {
+      "value": "before{background-image:url(\"../img/icons/lucide/x.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-layers": {
+      "value": "before{background-image:url(\"../img/icons/lucide/layers.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevron-right": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevron-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevron-left": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevron-left.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevron-down": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevron-down.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevron-up": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevron-up.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevrons-right": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevrons-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-chevrons-down": {
+      "value": "before{background-image:url(\"../img/icons/lucide/chevrons-down.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-arrow-right": {
+      "value": "before{background-image:url(\"../img/icons/lucide/arrow-right.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-arrow-left": {
+      "value": "before{background-image:url(\"../img/icons/lucide/arrow-left.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-search": {
+      "value": "before{background-image:url(\"../img/icons/lucide/search.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-plus": {
+      "value": "before{background-image:url(\"../img/icons/lucide/plus.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-minus": {
+      "value": "before{background-image:url(\"../img/icons/lucide/minus.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-check": {
+      "value": "before{background-image:url(\"../img/icons/lucide/check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-trash": {
+      "value": "before{background-image:url(\"../img/icons/lucide/trash-2.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-pencil": {
+      "value": "before{background-image:url(\"../img/icons/lucide/pencil.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-download": {
+      "value": "before{background-image:url(\"../img/icons/lucide/download.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-copy": {
+      "value": "before{background-image:url(\"../img/icons/lucide/copy.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-external-link": {
+      "value": "before{background-image:url(\"../img/icons/lucide/external-link.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-filter": {
+      "value": "before{background-image:url(\"../img/icons/lucide/filter.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-rocket": {
+      "value": "before{background-image:url(\"../img/icons/lucide/rocket.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-terminal": {
+      "value": "before{background-image:url(\"../img/icons/lucide/terminal.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-book-open": {
+      "value": "before{background-image:url(\"../img/icons/lucide/book-open.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-github": {
+      "value": "before{background-image:url(\"../img/icons/lucide/github.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-zap": {
+      "value": "before{background-image:url(\"../img/icons/lucide/zap.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-info": {
+      "value": "before{background-image:url(\"../img/icons/lucide/info.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-warning": {
+      "value": "before{background-image:url(\"../img/icons/lucide/alert-triangle.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-success": {
+      "value": "before{background-image:url(\"../img/icons/lucide/circle-check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-error": {
+      "value": "before{background-image:url(\"../img/icons/lucide/circle-x.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-shield-check": {
+      "value": "before{background-image:url(\"../img/icons/lucide/shield-check.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-moon": {
+      "value": "before{background-image:url(\"../img/icons/lucide/moon.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-sun": {
+      "value": "before{background-image:url(\"../img/icons/lucide/sun.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-palette": {
+      "value": "before{background-image:url(\"../img/icons/lucide/palette.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-user": {
+      "value": "before{background-image:url(\"../img/icons/lucide/user.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-settings": {
+      "value": "before{background-image:url(\"../img/icons/lucide/settings.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-mail": {
+      "value": "before{background-image:url(\"../img/icons/lucide/mail.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-database": {
+      "value": "before{background-image:url(\"../img/icons/lucide/database.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-link": {
+      "value": "before{background-image:url(\"../img/icons/lucide/link.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-component": {
+      "value": "before{background-image:url(\"../img/icons/lucide/box.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-box": {
+      "value": "before{background-image:url(\"../img/icons/lucide/box.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-coins": {
+      "value": "before{background-image:url(\"../img/icons/lucide/coins.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-atom": {
+      "value": "before{background-image:url(\"../img/icons/lucide/atom.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--lc-package": {
+      "value": "before{background-image:url(\"../img/icons/lucide/package.svg\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "keep",
+      "recommendation": "Keep — external dependency or intentional local contract."
+    },
+    "--has-select": {
+      "value": "not([class*=\"--is-\"]):before{opacity:1",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--is-error": {
+      "value": "before{opacity:1",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--is-success": {
+      "value": "before{opacity:1",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--is-warning": {
+      "value": "before{opacity:1",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    }
+  },
+  "scssViolations": {
+    "R01_primitiveInComponents": 0,
+    "R02_importantUsage": 0,
+    "R03_rawTransition": 0,
+    "R04_rawPosition": 0
+  }
+}

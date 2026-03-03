@@ -1,0 +1,104 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "description": "SYX Design System — Executable rule contract. Used by scripts/syx-validate.js to run automated checks.",
+    "severities": {
+      "error": "Must be fixed before release. Breaks token contract or introduces technical debt.",
+      "warning": "Should be fixed. Indicates misalignment between source and runtime.",
+      "info": "Informational. Catalogued but no blocking action required."
+    }
+  },
+  "rules": [
+    {
+      "id": "R01",
+      "severity": "error",
+      "category": "token-layer",
+      "description": "No --primitive-* tokens in atoms/, molecules/, organisms/ or pages/ SCSS files",
+      "rationale": "Primitive tokens are raw values. Components must always go through --semantic-* or --component-* to enable theming.",
+      "allowedIn": [
+        "scss/abstracts/",
+        "scss/themes/",
+        "scss/base/",
+        "scss/setup-builder.scss",
+        "scss/setup.scss",
+        "scss/utilities/"
+      ],
+      "autofix": false
+    },
+    {
+      "id": "R02",
+      "severity": "error",
+      "category": "cascade",
+      "description": "No !important declarations",
+      "rationale": "SYX uses @layer for cascade management. !important is never needed and indicates a layer assignment error.",
+      "allowedIn": [],
+      "autofix": false
+    },
+    {
+      "id": "R03",
+      "severity": "error",
+      "category": "mixin-compliance",
+      "description": "No raw `transition:` property — use @include transition()",
+      "rationale": "The @include transition() mixin automatically adds prefers-reduced-motion guard. Raw transition: skips this.",
+      "allowedIn": ["scss/abstracts/mixins/"],
+      "autofix": false
+    },
+    {
+      "id": "R04",
+      "severity": "error",
+      "category": "mixin-compliance",
+      "description": "No raw `position: absolute`, `position: fixed`, or `position: sticky` — use SYX positioning mixins",
+      "rationale": "Positioning mixins are null-safe and consistent. Raw position declarations bypass the null-safe pattern.",
+      "allowedIn": ["scss/abstracts/mixins/", "scss/base/_reset.scss"],
+      "autofix": false
+    },
+    {
+      "id": "R05",
+      "severity": "warning",
+      "category": "token-registry",
+      "description": "Component tokens defined in SCSS should be registered in tokens.json",
+      "rationale": "tokens.json is the source-of-truth documentation. Undocumented tokens are invisible to AI tooling.",
+      "allowedIn": [],
+      "autofix": false
+    },
+    {
+      "id": "R06",
+      "severity": "warning",
+      "category": "runtime-alignment",
+      "description": "Tokens documented in tokens.json should appear in the compiled CSS runtime",
+      "rationale": "A token that exists in documentation but not in CSS output is a phantom token. AI suggestions using it will fail at runtime.",
+      "allowedIn": [],
+      "autofix": false
+    },
+    {
+      "id": "R07",
+      "severity": "info",
+      "category": "legacy-governance",
+      "description": "CSS custom properties without an official SYX prefix (--primitive-*, --semantic-*, --component-*, --theme-*, --icon-*, --layout-*, --reset-*) must be catalogued",
+      "rationale": "Unprefixed variables are invisible to the AI contract layer and may be legacy, local, or from an external source.",
+      "allowedIn": [],
+      "autofix": false
+    },
+    {
+      "id": "R08",
+      "severity": "warning",
+      "category": "token-usage",
+      "description": "Tokens in the registry should have at least one usage in SCSS files",
+      "rationale": "Tokens that are defined but never used are candidates for removal. Dead tokens add noise to AI context.",
+      "allowedIn": [],
+      "autofix": false
+    }
+  ],
+  "officialPrefixes": [
+    "--primitive-",
+    "--semantic-",
+    "--component-",
+    "--theme-",
+    "--icon-",
+    "--layout-",
+    "--reset-"
+  ],
+  "knownLegacyOrigins": {
+    "note": "If a legacy var is identified, investigate its origin before migrating. Possible sources: historical SYX files, external CSS resets, or theme builder artifacts."
+  }
+}
