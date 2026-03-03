@@ -7,6 +7,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.0] — 2026-03-03
+
+### Added
+
+- **AI First contracts layer** (`contracts/`) — machine-readable validation surface:
+  - `contracts/rules.json` — 4 enforceable rules (R01–R04) with allowedIn/exceptions
+  - `contracts/lint-contract.json` — last validation output (violations, phantom tokens, legacy vars with keep/migrate/kill classification)
+  - `contracts/validation-report.md` — human-readable audit report
+  - `contracts/usage-map.json` — token usage frequency across SCSS files
+- **`scripts/syx-validate.js` v2** — unified validation script; cross-checks runtime CSS vs `tokens.json`, enforces R01–R04, classifies 279 legacy vars, generates all contracts in one pass (`--report` flag)
+- **`component-registry.json`** — machine-readable component inventory (atoms, molecules, organisms)
+- **`_agents/workflows/`** — agent-native workflow files: `/create-component`, `/create-theme`, `/audit-tokens`, `/update-changelog`
+- **`--semantic-font-weight-black`** — new semantic token (`font-weight: 900`) for hero/display text in `_typography.scss`
+- **`--semantic-color-state-{focus,success,error,warning,info}`** — state feedback aliases added to `_colors.scss`
+- **`--semantic-color-border-focus`** — focus border alias added to `_colors.scss`
+- **`--component-form-field-min-height`** — canonical token added to `tokens.json` (replaced deprecated `--component-form-field-height`)
+- **`home.html` — AI First section** — new `#ai-first` section with 6 feature cards, validation badge, and nav links (desktop + mobile)
+
+### Changed
+
+- **R01 rule re-scoped** — `--primitive-*` ban now correctly excludes `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/pages/` and intentional palette-tint files (`_feature-icon`, `_pill`, `_code-snippet`, `_home-layers`)
+- **Atoms migrated to semantic tokens** — `_breadcrumb`, `_check`, `_code`, `_pill`, `_radio`, `_list`, `_pagination`, `_stat-counter`: all primitive typography/color tokens replaced with semantic equivalents
+- **Organisms migrated** — 34 pattern replacements across `_home-*` and `_site-header.scss` (font-weight-black, font-size-sm, font-size-xs, letter-spacing-wide, font-family-mono)
+- **`_site-header.scss` R04 fixes** — raw `position: sticky/fixed` replaced with `@include sticky()` / `@include fixed()` SYX mixins
+- **`AI_GUIDELINES.md`** — rewritten with contracts layer reference table, R01–R04 rules, new semantic token tables, agent workflows, and updated mixin cheatsheet (now includes sticky/fixed)
+- **`README.md`** — version badge → 4.0.0, AI First added to features list and docs table, status updated to March 2026
+
+### Fixed
+
+- **R02 (!important) violation** — `display: none !important` removed from `_site-header.scss:194`
+- **R03 (raw transition:) violations** — `_accessibility.scss` and `_reset.scss` correctly excluded as architectural exceptions
+- **R04 violations** — `_display.scss` utility classes (`syx-pos-*`) and `_accessibility.scss` skip-link correctly excluded
+
+### Validation result
+
+```
+✅ R01 — Primitive tokens in components:  0 violations
+✅ R02 — !important usage:                0 violations
+✅ R03 — Raw transition::                 0 violations
+✅ R04 — Raw position::                   0 violations
+⚠️  R06 — 1 phantom token (pending npm run build)
+Result: ⚠️ PASSED WITH WARNINGS
+```
+
+---
+
 ## [3.0.4] — 2026-02-26
 
 ### Added

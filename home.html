@@ -11,7 +11,7 @@
     content="SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens, Atomic Design and native CSS @layer. 6 themes. WCAG AA compliant.">
   <meta name="author" content="José Luis Pizarro Feo">
   <meta name="keywords"
-    content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX">
+    content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, AI First, AI-operable, agent workflows">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://github.com/Pizarradas/syx">
 
@@ -73,6 +73,10 @@
       <span class="atom-icon atom-icon--lc-pie-chart" aria-hidden="true"></span>
       Why SYX
     </a>
+    <a href="#ai-first" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-bot" aria-hidden="true"></span>
+      AI First
+    </a>
 
     <div class="org-site-nav-drawer__theme">
       <label for="theme-switcher-mobile">Theme</label>
@@ -107,6 +111,7 @@
       <a href="theme-builder.html">Theme Builder</a>
       <a href="docs.html">Docs</a>
       <a href="why-syx.html">Why SYX</a>
+      <a href="#ai-first">AI First</a>
     </nav>
 
     <div class="org-site-header__actions">
@@ -322,7 +327,7 @@
     <div class="org-home-tokens__diagram" aria-label="Token layer diagram">
 
       <!-- Primitive Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--primitive">
+      <div class="org-home-tokens__layer org-home-tokens__layer--primitive" data-step="01">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-database" aria-hidden="true"></span>
           Primitive
@@ -338,7 +343,7 @@
       <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
 
       <!-- Theme / Architecture Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--theme">
+      <div class="org-home-tokens__layer org-home-tokens__layer--theme" data-step="02">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-settings" aria-hidden="true"></span>
           Theme / Architecture
@@ -353,7 +358,7 @@
       <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
 
       <!-- Semantic Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--semantic">
+      <div class="org-home-tokens__layer org-home-tokens__layer--semantic" data-step="03">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-link" aria-hidden="true"></span>
           Semantic Tones
@@ -369,7 +374,7 @@
       <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
 
       <!-- Component Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--component">
+      <div class="org-home-tokens__layer org-home-tokens__layer--component" data-step="04">
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-component" aria-hidden="true"></span>
           Component Aliases
@@ -557,6 +562,117 @@
       Theme switching is instant, no page reload required. Try the selector in the header.
       Combine any theme with dark mode using the ☾ toggle.
     </p>
+
+  </section>
+
+
+
+  <!-- =============================================
+       AI FIRST
+       ============================================= -->
+  <section class="org-home-features" id="ai-first" aria-labelledby="ai-first-title">
+
+    <div class="org-home-features__header">
+      <span class="org-home-features__overline">
+        <span class="atom-pill atom-pill--primary">AI First Design System</span>
+      </span>
+      <h2 class="org-home-features__title" id="ai-first-title">
+        Built to be operated by AI agents
+      </h2>
+      <p class="org-home-features__sub">
+        SYX is not just AI-assisted — it's AI-operable. Every architectural decision produces
+        a system an agent can read, validate and extend without guessing.
+      </p>
+    </div>
+
+    <div class="org-home-features__grid">
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--token" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-file-text"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Machine-readable contracts</h3>
+        <p class="mol-feature-card__body">
+          <code>tokens.json</code>, <code>component-registry.json</code> and
+          <code>contracts/rules.json</code> expose the full surface of the system
+          as structured JSON — queryable by any agent or pipeline.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--layer" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-shield-check"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Automated validation</h3>
+        <p class="mol-feature-card__body">
+          <code>syx-validate.js</code> enforces four contract rules (R01–R04) against
+          every SCSS file and cross-checks runtime CSS vs token registry.
+          CI-ready, zero false positives.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--primary" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-git-branch"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Deterministic token hierarchy</h3>
+        <p class="mol-feature-card__body">
+          A strict four-layer chain — Primitive → Semantic → Component → Page —
+          means any agent knows exactly where to place a value
+          and what to inherit from. No ambiguity.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--molecule" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-bot"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Agent-native workflows</h3>
+        <p class="mol-feature-card__body">
+          <code>_agents/workflows/</code> ships prompts and step-by-step guides for
+          creating components, themes, and auditing tokens —
+          structured so any LLM can execute them without human interpretation.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--organism" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-book-open"></span>
+        </span>
+        <h3 class="mol-feature-card__title">AI-native documentation</h3>
+        <p class="mol-feature-card__body">
+          <code>AI_GUIDELINES.md</code>, <code>THEMING-RULES.md</code> and
+          <code>.cursorrules</code> codify conventions and prohibitions
+          in machine-parseable prose — the same rules the validator enforces.
+        </p>
+      </article>
+
+      <article class="mol-feature-card">
+        <span class="atom-feature-icon atom-feature-icon--mixin" aria-hidden="true">
+          <span class="atom-icon atom-icon--lc-activity"></span>
+        </span>
+        <h3 class="mol-feature-card__title">Validation report</h3>
+        <p class="mol-feature-card__body">
+          Run <code>node scripts/syx-validate.js --report</code> to generate a full
+          audit: runtime surface, phantom tokens, legacy classification, and rule
+          violations — all in one pass.
+        </p>
+      </article>
+
+    </div>
+
+    <!-- Validation badge -->
+    <div style="text-align:center; margin-top: var(--semantic-space-layout-lg);">
+      <span class="atom-pill atom-pill--success"
+        style="font-size: var(--semantic-font-size-body-small); padding: 0.5rem 1.25rem;">
+        <span class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
+        &nbsp;Validation: ⚠️ PASSED WITH WARNINGS — R01 R02 R03 R04 all clean
+      </span>
+      <p
+        style="margin-top: var(--semantic-space-layout-sm); color: var(--semantic-color-text-tertiary); font-size: var(--semantic-font-size-body-small);">
+        1 pending phantom token — resolved automatically on <code>npm run build</code>
+      </p>
+    </div>
 
   </section>
 

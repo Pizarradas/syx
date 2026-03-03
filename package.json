@@ -13,10 +13,13 @@
     "postcss:core": "postcss css/styles-core.css --replace --no-map",
     "lint": "stylelint \"scss/**/*.scss\" --config .stylelintrc.json",
     "lint:fix": "stylelint \"scss/**/*.scss\" --config .stylelintrc.json --fix",
+    "validate": "node scripts/syx-validate.js",
+    "validate:report": "node scripts/syx-validate.js --report",
+    "validate:strict": "node scripts/syx-validate.js --strict",
     "validate:tokens": "node scripts/validate-tokens.js",
     "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
-    "check": "npm run validate:tokens && npm run build"
+    "check": "npm run validate:report && npm run build"
   },
   "keywords": [
     "design-system",

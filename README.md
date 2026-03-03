@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-3.0.3-7c3aed)
+![Version](https://img.shields.io/badge/version-4.0.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -21,6 +21,7 @@ SYX is a **component-first design system** that provides:
 - A **multi-context bundle system** (docs / app / marketing / blog per theme)
 - **CSS `@layer`** for specificity management without `!important`
 - **Fluid typography** with `clamp()` on every scale step
+- **AI First contracts layer** — machine-readable token registry, component inventory, automated validation (`syx-validate.js`) and agent-native workflows
 
 ---
 
@@ -119,14 +120,17 @@ syx/
 
 ## Documentation
 
-| Document                                                                | Description                           |
-| ----------------------------------------------------------------------- | ------------------------------------- |
-| [ARCHITECTURE.md](scss/ARCHITECTURE.md)                                 | Technical architecture deep-dive      |
-| [GETTING-STARTED.md](scss/GETTING-STARTED.md)                           | Step-by-step guide for new developers |
-| [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference              |
-| [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                    |
-| [CONTRIBUTING.md](scss/CONTRIBUTING.md)                                 | Contribution guidelines               |
-| [themes/\_template/README.md](scss/themes/_template/README.md)          | How to create a new theme             |
+| Document                                                                | Description                                         |
+| ----------------------------------------------------------------------- | --------------------------------------------------- |
+| [ARCHITECTURE.md](scss/ARCHITECTURE.md)                                 | Technical architecture deep-dive                    |
+| [GETTING-STARTED.md](scss/GETTING-STARTED.md)                           | Step-by-step guide for new developers               |
+| [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, workflows |
+| [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |
+| [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference                            |
+| [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                                  |
+| [CONTRIBUTING.md](scss/CONTRIBUTING.md)                                 | Contribution guidelines                             |
+| [themes/\_template/README.md](scss/themes/_template/README.md)          | How to create a new theme                           |
+| [contracts/validation-report.md](contracts/validation-report.md)        | Last automated validation report                    |
 
 ---
 
@@ -177,6 +181,8 @@ Utilities always win over components. No `!important` needed.
 
 ---
 
-## Score (Feb 2026)
+## Status (March 2026)
 
-**100/100** — Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility utilities, and `@layer` specificity management are all production-ready. Public documentation site (`home.html`, `docs.html`, `why-syx.html`) is fully built and deployed.
+- **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
+- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01/R02/R03/R04 all clean. 1 phantom token closes on `npm run build`.
+- Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.
