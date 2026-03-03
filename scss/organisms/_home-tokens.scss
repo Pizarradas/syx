@@ -1,0 +1,229 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// ORG: home-tokens
+// ===============================================
+// Token architecture visualization — mobile-first CSS Grid.
+//
+// Layout strategy:
+//   mobile  (< 600px)  : 1-column vertical stack — each card full-width
+//   phablet (≥ 600px)  : 2×2 grid — pairs of cards
+//   laptop  (≥ 1024px) : 4-column row — all cards in one line
+//
+// Arrows between steps are replaced by a circle step-number
+// (positioned absolutely on the card) that works on all viewports.
+// ===============================================
+@mixin org-home-tokens($theme: null) {
+  @layer syx.organisms {
+
+  .org-home-tokens {
+    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
+    background-color: var(--semantic-color-bg-secondary);
+    overflow: hidden;
+
+    // &__header
+    &__header {
+      text-align: center;
+      margin-bottom: var(--semantic-space-layout-lg);
+
+      .org-home-tokens__title {
+        font-family: var(--semantic-font-family-heading);
+        font-size: clamp(1.75rem, 4vw, 2.75rem);
+        font-weight: var(--semantic-font-weight-black);
+        color: var(--semantic-color-text-primary);
+        letter-spacing: -0.025em;
+        margin: 0 auto var(--semantic-space-component-sm);
+      }
+
+      .org-home-tokens__sub {
+        font-size: var(--semantic-font-size-body);
+        color: var(--semantic-color-text-secondary);
+        max-width: 55ch;
+        margin: 0 auto;
+        line-height: var(--semantic-line-height-body);
+      }
+    }
+
+    // &__diagram — CSS Grid, mobile-first
+    &__diagram {
+      display: grid;
+      grid-template-columns: 1fr;          // mobile: 1 column
+      grid-template-rows: auto;
+      gap: var(--semantic-space-layout-sm);
+      max-width: 68rem;
+      margin: 0 auto var(--semantic-space-layout-lg);
+      width: 100%;
+      box-sizing: border-box;
+
+      @include breakpoint(phablet) {
+        grid-template-columns: 1fr 1fr;    // phablet: 2 columns
+      }
+
+      @include breakpoint(laptop) {
+        grid-template-columns: repeat(4, 1fr); // desktop: 4 columns in a row
+        gap: 0;                                // tight, joined borders
+      }
+    }
+
+    // &__arrow — hidden completely (replaced by step numbers on cards)
+    &__arrow {
+      display: none;
+    }
+
+    // &__layer — one step card
+    &__layer {
+      display: flex;
+      flex-direction: column;
+      gap: var(--semantic-space-component-md);
+      padding: var(--semantic-space-layout-sm);
+      border: 1px solid var(--semantic-color-border-subtle);
+      border-radius: var(--semantic-border-radius-lg, 1rem);
+      background-color: var(--semantic-color-bg-primary);
+      box-sizing: border-box;
+      position: relative;
+
+      // Step connector arrow decorations — visible from laptop
+      // Added via pseudo element on non-last cards
+      &:not(:last-child)::after {
+        content: none;
+
+        @include breakpoint(laptop) {
+          content: '→';
+          position: absolute;
+          right: calc(-1 * var(--semantic-space-component-sm) - 0.6rem);
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 1.25rem;
+          color: var(--semantic-color-text-secondary);
+          z-index: 1;
+          pointer-events: none;
+        }
+      }
+
+      // Joined borders at laptop (adjacent cards share one border)
+      @include breakpoint(laptop) {
+        border-radius: 0;
+
+        &:first-child {
+          border-top-left-radius: var(--semantic-border-radius-lg, 1rem);
+          border-bottom-left-radius: var(--semantic-border-radius-lg, 1rem);
+        }
+
+        &:last-child {
+          border-top-right-radius: var(--semantic-border-radius-lg, 1rem);
+          border-bottom-right-radius: var(--semantic-border-radius-lg, 1rem);
+        }
+
+        &:not(:last-child) {
+          border-right: none;
+        }
+      }
+
+      // Step number badge — top right corner
+      &::before {
+        content: attr(data-step);
+        position: absolute;
+        top: var(--semantic-space-component-sm);
+        right: var(--semantic-space-component-sm);
+        font-size: var(--semantic-font-size-overline);
+        font-weight: var(--semantic-font-weight-bold);
+        color: var(--semantic-color-text-tertiary);
+        letter-spacing: 0.05em;
+        opacity: 0.5;
+      }
+
+      // --primitive
+      &--primitive {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-blue-50, #eff6ff);
+          color: var(--primitive-color-blue-700, #1d4ed8);
+          border-color: var(--primitive-color-blue-200, #bfdbfe);
+        }
+      }
+
+      // --theme
+      &--theme {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-orange-50, #fff7ed);
+          color: var(--primitive-color-orange-700, #c2410c);
+          border-color: var(--primitive-color-orange-200, #fed7aa);
+        }
+      }
+
+      // --semantic
+      &--semantic {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-purple-50, #f5f3ff);
+          color: var(--primitive-color-purple-700, #6d28d9);
+          border-color: var(--primitive-color-purple-200, #ddd6fe);
+        }
+      }
+
+      // --component
+      &--component {
+        .org-home-tokens__layer-badge {
+          background-color: var(--primitive-color-green-50, #f0fdf4);
+          color: var(--primitive-color-green-700, #15803d);
+          border-color: var(--primitive-color-green-200, #bbf7d0);
+        }
+      }
+    }
+
+    // &__layer-badge
+    &__layer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: var(--semantic-font-size-overline);
+      font-weight: var(--semantic-font-weight-bold);
+      letter-spacing: var(--semantic-letter-spacing-wide);
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      align-self: flex-start;
+    }
+
+    // &__layer-title
+    &__layer-title {
+      font-family: var(--semantic-font-family-heading);
+      font-size: var(--semantic-font-size-h5);
+      font-weight: var(--semantic-font-weight-bold);
+      color: var(--semantic-color-text-primary);
+      margin: 0;
+    }
+
+    // &__layer-desc
+    &__layer-desc {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--semantic-color-text-secondary);
+      line-height: var(--semantic-line-height-body);
+      margin: 0;
+    }
+
+    // &__rule — bottom rule with key message
+    &__rule {
+      text-align: center;
+      padding: var(--semantic-space-layout-sm);
+      border: 1px solid var(--semantic-color-border-subtle);
+      border-radius: var(--semantic-border-radius-lg, 1rem);
+      background-color: var(--semantic-color-bg-primary);
+      max-width: 68rem;
+      margin: 0 auto;
+
+      p {
+        margin: 0;
+        font-size: var(--semantic-font-size-body-small);
+        color: var(--semantic-color-text-secondary);
+      }
+
+      strong {
+        color: var(--semantic-color-text-primary);
+      }
+    }
+  }
+
+  } // end @layer syx.organisms
+}

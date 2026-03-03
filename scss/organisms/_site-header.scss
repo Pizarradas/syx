@@ -1,0 +1,263 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// ORG: site-header
+// ===============================================
+// Mobile-first sticky site header with hamburger nav overlay.
+// Composes: atom-icon, atom-btn
+// JS: toggles [data-nav-open] on <body> to open/close mobile nav.
+// ===============================================
+@mixin org-site-header($theme: null) {
+  @layer syx.organisms {
+
+  // ── Variables ──────────────────────────────
+  $header-h:    3.75rem;
+  $mob-nav-z:   200;
+  $overlay-z:   199;
+  $header-z:    201;
+
+  // ── Sticky wrapper ──────────────────────────
+  .org-site-header {
+    @include sticky($top: 0);
+    z-index: $header-z;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-h;
+    padding: 0 var(--semantic-space-layout-md);
+    background-color: var(--semantic-color-bg-primary);
+    border-bottom: 1px solid var(--semantic-color-border-subtle);
+    width: 100%;
+    // Glassmorphism polish
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    background-color: color-mix(in srgb, var(--semantic-color-bg-primary) 90%, transparent);
+    @include transition(box-shadow 0.2s ease);
+
+    &.is-scrolled {
+      box-shadow: 0 2px 16px color-mix(in srgb, black 8%, transparent);
+    }
+
+    // ── Brand ──────────────────────────────────
+    &__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--semantic-space-component-sm);
+      font-family: var(--semantic-font-family-heading);
+      font-size: var(--semantic-font-size-h4);
+      font-weight: var(--semantic-font-weight-black);
+      color: var(--semantic-color-text-primary);
+      text-decoration: none;
+      letter-spacing: -0.03em;
+      flex-shrink: 0;
+      @include transition(color 0.2s ease);
+
+      .atom-icon {
+        color: var(--semantic-color-primary);
+      }
+
+      &:hover { color: var(--semantic-color-primary); }
+    }
+
+    // ── Desktop nav — hidden below 1280px ──────────
+    &__nav {
+      display: none;
+      align-items: center;
+      gap: var(--semantic-space-component-lg, 1.5rem);
+
+      @include breakpoint(xl) {
+        display: flex;
+      }
+
+      a {
+        font-family: var(--semantic-font-family-body);
+        font-size: var(--semantic-font-size-body-small);
+        font-weight: var(--semantic-font-weight-medium);
+        color: var(--semantic-color-text-secondary);
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+        @include transition(color 0.2s ease);
+        padding: 0.25rem 0;
+        border-bottom: 2px solid transparent;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--semantic-color-primary);
+          border-bottom-color: var(--semantic-color-primary);
+          outline: none;
+        }
+      }
+    }
+
+    // ── Right-side actions (desktop) ───────────
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--semantic-space-component-sm);
+    }
+
+    // ── Theme select — show from 1280px ──────────
+    &__theme-select {
+      display: none;
+
+      @include breakpoint(xl) {
+        display: block;
+      }
+    }
+
+    // ── Hamburger button — visible only on mobile ──
+    &__burger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      @include size(2.5rem);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 0.5rem;
+      @include transition(background-color 0.15s ease);
+
+      @include breakpoint(xl) {
+        display: none;
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--semantic-color-bg-secondary);
+        outline: none;
+      }
+
+      // Three burger lines
+      &-line {
+        display: block;
+        width: 1.375rem;
+        height: 2px;
+        background-color: var(--semantic-color-text-primary);
+        border-radius: 2px;
+        transform-origin: center;
+        @include transition(transform 0.3s ease, opacity 0.2s ease, background-color 0.2s ease);
+      }
+    }
+  }
+
+  // ── Burger open state ──────────────────────
+  body[data-nav-open] {
+    overflow: hidden; // prevent scroll behind overlay
+
+    .org-site-header__burger {
+      .org-site-header__burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .org-site-header__burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      .org-site-header__burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    }
+  }
+
+  // ── Mobile nav overlay ─────────────────────
+  .org-site-nav-overlay {
+    @include fixed();
+    inset: 0;
+    z-index: $overlay-z;
+    background-color: color-mix(in srgb, black 50%, transparent);
+    opacity: 0;
+    pointer-events: none;
+    @include transition(opacity 0.3s ease);
+
+    body[data-nav-open] & {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+
+  // ── Mobile nav drawer ─────────────────────
+  .org-site-nav-drawer {
+    @include fixed($top: $header-h, $left: 0, $right: 0);
+    z-index: $mob-nav-z;
+    background-color: var(--semantic-color-bg-primary);
+    border-bottom: 1px solid var(--semantic-color-border-subtle);
+    padding: var(--semantic-space-layout-sm) var(--semantic-space-layout-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--semantic-space-component-sm);
+    transform: translateY(-110%);
+    @include transition(transform 0.35s cubic-bezier(0.4, 0, 0.2, 1));
+    box-shadow: 0 16px 32px color-mix(in srgb, black 12%, transparent);
+
+    @include breakpoint(xl) {
+      display: none;
+    }
+
+    body[data-nav-open] & {
+      transform: translateY(0);
+    }
+
+    // Nav links inside drawer
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: var(--semantic-space-component-sm);
+      padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
+      font-family: var(--semantic-font-family-body);
+      font-size: var(--semantic-font-size-body);
+      font-weight: var(--semantic-font-weight-medium);
+      color: var(--semantic-color-text-primary);
+      text-decoration: none;
+      border-radius: 0.5rem;
+      @include transition(background-color 0.15s ease, color 0.15s ease);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--semantic-color-bg-secondary);
+        color: var(--semantic-color-primary);
+        outline: none;
+      }
+    }
+
+    // Theme select inside drawer
+    &__theme {
+      margin-top: var(--semantic-space-component-sm);
+      padding-top: var(--semantic-space-component-md);
+      border-top: 1px solid var(--semantic-color-border-subtle);
+
+      label {
+        display: block;
+        font-size: var(--semantic-font-size-overline);
+        font-weight: var(--semantic-font-weight-bold);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--semantic-color-text-secondary);
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // ── Dark mode toggle button ────────────────
+  .org-site-header__darkmode {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include size(2.25rem);
+    background: none;
+    border: 1px solid var(--semantic-color-border-subtle);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: var(--semantic-color-text-secondary);
+    @include transition(background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--semantic-color-bg-secondary);
+      color: var(--semantic-color-primary);
+      border-color: var(--semantic-color-primary);
+      outline: none;
+    }
+
+    .atom-icon { pointer-events: none; }
+  }
+
+  } // end @layer syx.organisms
+}
