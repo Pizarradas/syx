@@ -11,8 +11,12 @@
     "watch": "sass --watch scss:css --style=expanded --no-source-map",
     "postcss": "postcss css/*.css --replace --no-map",
     "postcss:core": "postcss css/styles-core.css --replace --no-map",
-    "lint": "echo \"TODO: Add stylelint\" && exit 0",
-    "export:tokens": "node scripts/export-tokens.js"
+    "lint": "stylelint \"scss/**/*.scss\" --config .stylelintrc.json",
+    "lint:fix": "stylelint \"scss/**/*.scss\" --config .stylelintrc.json --fix",
+    "validate:tokens": "node scripts/validate-tokens.js",
+    "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
+    "export:tokens": "node scripts/export-tokens.js",
+    "check": "npm run validate:tokens && npm run build"
   },
   "keywords": [
     "design-system",
@@ -27,7 +31,10 @@
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "postcss-cli": "^11.0.0",
-    "sass": "^1.77.0"
+    "sass": "^1.77.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-order": "^6.0.0"
   },
   "browserslist": [
     "last 2 versions",
