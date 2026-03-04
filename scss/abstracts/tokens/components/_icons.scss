@@ -1,0 +1,13 @@
+// COMPONENT TOKENS: ICONS
+// ================================================
+// Icon-specific tokens that reference semantic tokens
+// ================================================
+
+:root {
+  // ICON: SIZES
+  // ================================================
+  --component-icon-size-sm: var(--semantic-space-component-sm); // 16px
+  --component-icon-size-md: calc(6 * var(--semantic-space-component-xs)); // 24px (default)
+  --component-icon-size-lg: var(--semantic-space-component-lg); // 32px
+  --component-icon-size-xl: calc(10 * var(--semantic-space-component-xs)); // 40px
+}

@@ -1,0 +1,140 @@
+// PRIMITIVE TOKENS: COLORS
+// ================================================
+// Foundation color values without semantic meaning
+// These are the base palette that semantic tokens reference
+// ================================================
+
+:root {
+  // SYSTEM COLORS
+  // ================================================
+  --primitive-color-black: oklch(0 0 0);
+  --primitive-color-white: oklch(1 0 0);
+
+  // GRAY SCALE
+  // ================================================
+  --primitive-color-gray-50: oklch(0.97 0 0);
+  --primitive-color-gray-100: oklch(0.93 0 0);
+  --primitive-color-gray-200: oklch(0.88 0 0);
+  --primitive-color-gray-300: oklch(0.80 0 0);
+  --primitive-color-gray-400: oklch(0.70 0 0);
+  --primitive-color-gray-500: oklch(0.60 0 0);
+  --primitive-color-gray-600: oklch(0.51 0 0);
+  --primitive-color-gray-700: oklch(0.42 0 0);
+  --primitive-color-gray-800: oklch(0.32 0 0);
+  --primitive-color-gray-900: oklch(0.22 0 0);
+
+  // BRAND COLORS - PURPLE
+  // ================================================
+  --primitive-color-purple-50: oklch(0.97 0.017 292.209);
+  --primitive-color-purple-100: oklch(0.93 0.043 291.611);
+  --primitive-color-purple-200: oklch(0.88 0.09 290.251);
+  --primitive-color-purple-300: oklch(0.80 0.186 284.567);
+  --primitive-color-purple-400: oklch(0.70 0.19 278.846);
+  --primitive-color-purple-500: oklch(0.60 0.118 280.644); // Original Base
+  --primitive-color-purple-600: oklch(0.51 0.1 281.395);
+  --primitive-color-purple-700: oklch(0.42 0.082 282.423);
+  --primitive-color-purple-800: oklch(0.32 0.062 283.903);
+  --primitive-color-purple-900: oklch(0.22 0.041 287.021);
+
+  // BRAND COLORS - PINK
+  // ================================================
+  --primitive-color-pink-50: oklch(0.97 0.024 354.284); // Original
+  --primitive-color-pink-100: oklch(0.93 0.061 357.51);
+  --primitive-color-pink-200: oklch(0.88 0.127 0.003);
+  --primitive-color-pink-300: oklch(0.80 0.19 3.538);
+  --primitive-color-pink-400: oklch(0.70 0.221 6.474);
+  --primitive-color-pink-500: oklch(0.60 0.239 9.566); // Original Base
+  --primitive-color-pink-600: oklch(0.51 0.254 16.626);
+  --primitive-color-pink-700: oklch(0.42 0.215 16.014);
+  --primitive-color-pink-800: oklch(0.32 0.174 15.009);
+  --primitive-color-pink-900: oklch(0.22 0.13 13.064);
+
+  // BRAND COLORS - BLUE
+  // ================================================
+  --primitive-color-blue-50: oklch(0.97 0.027 285.097);
+  --primitive-color-blue-100: oklch(0.93 0.069 284.088);
+  --primitive-color-blue-200: oklch(0.88 0.144 281.475);
+  --primitive-color-blue-300: oklch(0.80 0.218 276.885);
+  --primitive-color-blue-400: oklch(0.70 0.252 273.552);
+  --primitive-color-blue-500: oklch(0.60 0.275 270.486); // Original Base
+  --primitive-color-blue-600: oklch(0.51 0.312 264.075);
+  --primitive-color-blue-700: oklch(0.42 0.264 264.082);
+  --primitive-color-blue-800: oklch(0.32 0.213 264.093);
+  --primitive-color-blue-900: oklch(0.22 0.158 264.114);
+
+  // BRAND COLORS - GREEN
+  // ================================================
+  --primitive-color-green-50: oklch(0.97 0.021 158.247);
+  --primitive-color-green-100: oklch(0.93 0.052 157.46);
+  --primitive-color-green-200: oklch(0.88 0.103 155.902);
+  --primitive-color-green-300: oklch(0.80 0.191 151.588);
+  --primitive-color-green-400: oklch(0.70 0.203 148.868);
+  --primitive-color-green-500: oklch(0.60 0.14 149.363); // Original Base
+  --primitive-color-green-600: oklch(0.51 0.116 149.694);
+  --primitive-color-green-700: oklch(0.42 0.09 150.23);
+  --primitive-color-green-800: oklch(0.32 0.063 151.418);
+  --primitive-color-green-900: oklch(0.22 0.043 153.713);
+
+  // BRAND COLORS - YELLOW
+  // ================================================
+  --primitive-color-yellow-50: oklch(0.97 0.019 91.436);
+  --primitive-color-yellow-100: oklch(0.93 0.046 91.61);
+  --primitive-color-yellow-200: oklch(0.88 0.09 91.639);
+  --primitive-color-yellow-300: oklch(0.80 0.127 91.064);
+  --primitive-color-yellow-400: oklch(0.70 0.154 89.335);
+  --primitive-color-yellow-500: oklch(0.60 0.163 86.856); // Original Base
+  --primitive-color-yellow-600: oklch(0.51 0.152 85.734);
+  --primitive-color-yellow-700: oklch(0.42 0.126 86.127);
+  --primitive-color-yellow-800: oklch(0.32 0.098 86.786);
+  --primitive-color-yellow-900: oklch(0.22 0.068 88.181);
+
+  // BRAND COLORS - BROWN
+  // ================================================
+  --primitive-color-brown-50: oklch(0.97 0.015 41.19);
+  --primitive-color-brown-100: oklch(0.93 0.059 40.943);
+  --primitive-color-brown-200: oklch(0.88 0.124 40.648);
+  --primitive-color-brown-300: oklch(0.80 0.186 38.946);
+  --primitive-color-brown-400: oklch(0.70 0.17 37.551);
+  --primitive-color-brown-500: oklch(0.60 0.116 38.211); // Original Base
+  --primitive-color-brown-600: oklch(0.51 0.097 38.614);
+  --primitive-color-brown-700: oklch(0.42 0.077 39.393);
+  --primitive-color-brown-800: oklch(0.32 0.056 41.356);
+  --primitive-color-brown-900: oklch(0.22 0.033 48.665);
+
+  // BRAND COLORS - RED
+  // ================================================
+  --primitive-color-red-50: oklch(0.97 0.021 4.878);
+  --primitive-color-red-100: oklch(0.93 0.053 5.862);
+  --primitive-color-red-200: oklch(0.88 0.112 8.017);
+  --primitive-color-red-300: oklch(0.80 0.171 11.214);
+  --primitive-color-red-400: oklch(0.70 0.219 16.101);
+  --primitive-color-red-500: oklch(0.60 0.244 22.773); // Original Base
+  --primitive-color-red-600: oklch(0.51 0.205 22.32);
+  --primitive-color-red-700: oklch(0.42 0.165 21.562);
+  --primitive-color-red-800: oklch(0.32 0.122 20.025);
+  --primitive-color-red-900: oklch(0.22 0.075 15.388);
+
+  // STATE COLORS
+  // ================================================
+  --primitive-color-success-500: oklch(0.60 0.181 143.399);
+  --primitive-color-error-500: oklch(0.60 0.143 25.074);
+  --primitive-color-warning-500: oklch(0.60 0.171 106.05);
+
+  // SOCIAL MEDIA BRAND COLORS
+  // ================================================
+  // NOTE (M-08): Estos colores están definidos en hex de forma intencional.
+  // Son brand colors oficiales de terceros (Facebook, Instagram, etc.) que
+  // no deben derivarse de la paleta del sistema. Son valores fijos por contrato
+  // de marca, no tokens temáticos. No modificar.
+  --primitive-color-facebook: oklch(0.60 0.108 263.58);
+  --primitive-color-instagram-blue: oklch(0.60 0.085 244.612);
+  --primitive-color-instagram-purple: oklch(0.60 0.195 310.162);
+  --primitive-color-linkedin: oklch(0.60 0.13 242.274);
+  --primitive-color-paypal-blue: oklch(0.60 0.144 237.468);
+  --primitive-color-paypal-blue-dark: oklch(0.60 0.153 261.333);
+  --primitive-color-pinterest: oklch(0.60 0.236 25.536);
+  --primitive-color-twitter: oklch(0.60 0.107 240.795);
+  --primitive-color-whatsapp-green: oklch(0.60 0.187 147.061);
+  --primitive-color-whatsapp-green-dark: oklch(0.60 0.175 142.527);
+  --primitive-color-youtube: oklch(0.60 0.209 27.019);
+}

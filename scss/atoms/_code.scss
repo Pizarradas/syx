@@ -1,0 +1,72 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: code
+// ===============================================
+// Styled code block for displaying HTML/CSS/SCSS snippets.
+// Use .atom-code for preformatted code display.
+// ===============================================
+@mixin atom-code($theme: null) {
+  @layer syx.atoms {
+    .atom-code {
+      background: var(--semantic-color-bg-inverse);
+      color: var(--semantic-color-text-inverse);
+      font-family: var(--semantic-font-family-mono);
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      padding: var(--semantic-space-layout-md);
+      border-radius: var(--semantic-border-radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      border: 1px solid var(--semantic-color-border-subtle);
+      margin-bottom: var(--semantic-space-layout-sm);
+      display: block;
+      max-width: 100%;
+
+      // Syntax highlight tokens
+      // Usage: <span class="atom-code__tag">div</span>
+      &__tag {
+        color: var(--semantic-color-primary);
+      }
+
+      // html tags
+      &__attr {
+        color: var(--semantic-color-secondary);
+      }
+
+      // attributes
+      &__val {
+        color: var(--semantic-color-tertiary);
+      }
+
+      // values
+      &__cmt {
+        color: var(--semantic-color-text-disabled);
+        font-style: italic;
+      }
+
+      // comments
+      &__cls {
+        color: var(--semantic-color-quaternary);
+      }
+
+      // class names
+
+      // &--inline: for short inline snippets
+      &--inline {
+        display: inline;
+        padding: 0.1em 0.4em;
+        font-size: 0.8em;
+        border-radius: 4px;
+        white-space: nowrap;
+        background: var(--semantic-color-bg-tertiary);
+        color: var(--semantic-color-text-primary);
+        border: 1px solid var(--semantic-color-border-subtle);
+      }
+    }
+  }
+
+  // end @layer syx.atoms
+}

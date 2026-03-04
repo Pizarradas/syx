@@ -1,0 +1,168 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// atom: form
+// ===============================================
+// API: .atom-label · .atom-input-wrapper · .atom-input · .atom-select
+// ===============================================
+@mixin atom-form($theme: null) {
+  @layer syx.atoms {
+    // -----------------------------------------------
+    // LABEL — @canonical
+    // -----------------------------------------------
+    .atom-label {
+      display: block;
+      font-family: var(--component-form-field-font-family);
+      font-size: var(--component-form-field-font-size);
+      font-weight: var(--semantic-font-weight-medium);
+      line-height: var(--component-form-field-line-height);
+      color: var(--component-form-field-color);
+      margin-bottom: var(--component-form-field-label-margin-bottom);
+    }
+
+    // -----------------------------------------------
+    // INPUT WRAPPER — @canonical
+    // -----------------------------------------------
+    .atom-input-wrapper {
+      @include relative();
+      display: flex;
+      align-items: stretch;
+    }
+
+    // -----------------------------------------------
+    // INPUT — @canonical
+    // For: <input type="text|email|password|number|…">
+    // and <textarea>
+    // -----------------------------------------------
+    .atom-input {
+      display: block;
+      width: 100%;
+      height: var(--component-form-field-min-height);
+      box-sizing: border-box;
+      @include padding(
+        var(--component-form-field-padding-y)
+          var(--component-form-field-padding-x)
+      );
+      @include border(
+        all,
+        var(--component-form-field-border-width),
+        solid,
+        var(--component-form-field-border)
+      );
+      @include border-radius(var(--component-form-field-border-radius));
+      background-color: var(--component-form-field-bg);
+      font-family: var(--component-form-field-font-family);
+      font-size: var(--component-form-field-font-size);
+      line-height: var(--component-form-field-line-height);
+      color: var(--component-form-field-color);
+      @include transition(border-color 0.15s ease, box-shadow 0.15s ease);
+
+      &::placeholder {
+        color: var(--component-form-field-placeholder);
+      }
+
+      &:hover:not(:disabled) {
+        border-color: var(--semantic-color-primary);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--component-form-field-border-focus);
+        box-shadow: var(--component-form-field-shadow-focus);
+      }
+
+      &:disabled {
+        background-color: var(--component-form-field-bg-disabled);
+        border-color: var(--component-form-field-color-disabled);
+        cursor: not-allowed;
+      }
+    }
+
+    // -----------------------------------------------
+    // SELECT — @canonical
+    // For: <select>
+    // Shares design tokens with .atom-input but needs its own rules:
+    //   · appearance: none to enable custom styling
+    //   · vertical centering via line-height trick (not padding-y)
+    //     because padding-y > inner space in a fixed-height box
+    //   · extra right padding for the custom chevron arrow
+    // -----------------------------------------------
+    .atom-select {
+      display: block;
+      width: 100%;
+      // Fixed height (not min-height) required for the line-height centering trick
+      height: var(--component-form-field-min-height);
+      box-sizing: border-box;
+      // No vertical padding — text is centred by setting line-height = inner height
+      padding-top: 0;
+      padding-bottom: 0;
+      // line-height = field height − top border − bottom border
+      line-height: calc(
+        var(--component-form-field-min-height) -
+        (var(--component-form-field-border-width) * 2)
+      );
+      // Horizontal: standard inset on the left, extra room for the chevron on the right
+      padding-left: var(--component-form-field-padding-x);
+      padding-right: calc(var(--component-form-field-padding-x) * 2.5);
+      @include border(
+        all,
+        var(--component-form-field-border-width),
+        solid,
+        var(--component-form-field-border)
+      );
+      @include border-radius(var(--component-form-field-border-radius));
+      background-color: var(--component-form-field-bg);
+      font-family: var(--component-form-field-font-family);
+      font-size: var(--component-form-field-font-size);
+      color: var(--component-form-field-color);
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      @include transition(border-color 0.15s ease, box-shadow 0.15s ease);
+
+      &:hover:not(:disabled) {
+        border-color: var(--semantic-color-primary);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--component-form-field-border-focus);
+        box-shadow: var(--component-form-field-shadow-focus);
+      }
+
+      &:disabled {
+        background-color: var(--component-form-field-bg-disabled);
+        border-color: var(--component-form-field-color-disabled);
+        cursor: not-allowed;
+      }
+    }
+
+    // -----------------------------------------------
+    // CUSTOM CHEVRON ARROW — for .atom-select wrapper
+    // -----------------------------------------------
+    .atom-input-wrapper:has(.atom-select) {
+      &::after {
+        content: "";
+        pointer-events: none;
+        @include position(
+          absolute,
+          50%,
+          var(--component-form-field-padding-x),
+          null,
+          null
+        );
+        transform: translateY(-50%);
+        @include size(1em);
+        background-image: var(
+          --icon-user-interface-chevron-down,
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")
+        );
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+    }
+  } // end @layer syx.atoms
+}

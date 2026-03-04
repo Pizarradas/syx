@@ -1,0 +1,175 @@
+// CORE
+// ===============================================
+@use "../../abstracts/index" as *;
+// ===============================================
+
+// THEME-AWARE MIXIN HELPER: backgrounds
+// Generates .syx-bg-* classes. Some blocks use @if $theme for compile-time
+// theme branching — this cannot be replaced by CSS custom properties alone.
+// Note: color is set on the container directly; children inherit via CSS
+// cascade. Components with their own color tokens are unaffected.
+// ===============================================
+@mixin helper-backgrounds($theme: null) {
+  @layer syx.utilities {
+    // .syx-bg
+    .syx-bg {
+      // &-auto
+      &-auto {
+        background-size: auto;
+      }
+
+      // &-cover
+      &-cover {
+        background-size: cover;
+      }
+
+      // &-contain
+      &-contain {
+        background-size: contain;
+      }
+
+      // color
+      &-color {
+        // &-black
+        &-black {
+          background-color: var(--primitive-color-black);
+
+          @if $theme == 'example-02' {
+            color: var(--primitive-color-white);
+          }
+
+          @if $theme == example-01 {
+            color: var(--semantic-color-primary);
+          }
+        }
+
+        // &-white
+        &-white {
+          background-color: var(--primitive-color-white);
+        }
+
+        // &-blue
+        &-blue {
+          // &-facebook
+          &-facebook {
+            background-color: var(--primitive-color-facebook);
+          }
+
+          // &-instagram
+          &-instagram {
+            background-color: var(--primitive-color-instagram-blue);
+          }
+
+          // &-twitter
+          &-twitter {
+            background-color: var(--primitive-color-twitter);
+          }
+        }
+
+        // &-green
+        &-green {
+          // &-whatsapp
+          &-whatsapp {
+            background-color: var(--primitive-color-whatsapp-green);
+
+            // &-drk
+            &-drk {
+              // &-1
+              &-1 {
+                background-color: var(--primitive-color-whatsapp-green-dark);
+              }
+            }
+          }
+        }
+
+        // &-purple
+        &-purple {
+          // &-instagram
+          &-instagram {
+            background-color: var(--primitive-color-instagram-purple);
+          }
+        }
+
+        // &-transparent
+        &-transparent {
+          // &-mo
+          &-mo {
+            @include breakpoint(mobile-only) {
+              background-color: transparent;
+            }
+          }
+
+          // &-sm — 768px → 48em
+          &-sm {
+            @include min-screen(48em) {
+              background-color: transparent;
+            }
+          }
+
+          // &-md — 1024px → 64em
+          &-md {
+            @include min-screen(64em) {
+              background-color: transparent;
+            }
+          }
+
+          // &-lg — 1280px → 80em
+          &-lg {
+            @include min-screen(80em) {
+              background-color: transparent;
+            }
+          }
+        }
+
+        // &-primary
+        &-primary {
+          background-color: var(--semantic-color-primary);
+
+          @if $theme == 'example-02' {
+            color: var(--primitive-color-white);
+          }
+
+          @if $theme == example-01 {
+            color: var(--primitive-color-white);
+          }
+
+          // &-lt
+          &-lt {
+            // &-1
+            &-1 {
+              background-color: var(--semantic-color-bg-secondary);
+            }
+          }
+        }
+
+        // &-secondary
+        &-secondary {
+          background-color: var(--semantic-color-secondary);
+
+          // &-lt
+          &-lt {
+            // &-1
+            &-1 {
+              background-color: var(--semantic-color-bg-tertiary);
+            }
+          }
+        }
+
+        // &-tertiary
+        &-tertiary {
+          background-color: var(--semantic-color-tertiary);
+        }
+
+        // &-quaternary
+        &-quaternary {
+          background-color: var(--semantic-color-quaternary);
+        }
+
+        // &-quinary
+        &-quinary {
+          background-color: var(--semantic-color-quinary);
+        }
+      }
+    }
+  }
+}

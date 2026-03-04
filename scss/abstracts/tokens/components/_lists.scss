@@ -1,0 +1,32 @@
+// COMPONENT TOKENS: LISTS
+// ================================================
+// List-specific tokens that reference semantic tokens
+// ================================================
+
+:root {
+  // LIST: ORDERED
+  // ================================================
+  --component-list-ordered-margin-top: 0;
+  --component-list-ordered-margin-bottom: 0;
+  --component-list-ordered-gap: var(--semantic-space-stack-xl);
+  --component-list-ordered-item-margin-top: var(--semantic-space-stack-lg);
+  --component-list-ordered-counter-size: var(--semantic-space-component-lg);
+  --component-list-ordered-counter-font-size: var(--semantic-font-size-sm);
+  --component-list-ordered-counter-line-height: var(--semantic-space-component-lg);
+
+  // LIST: UNORDERED LEVEL 1
+  // ================================================
+  --component-list-lvl1-gap: var(--semantic-space-stack-md);
+  --component-list-item-margin-top: var(--semantic-space-stack-sm);
+  --component-list-icon-size: var(--semantic-space-component-sm);
+
+  // LIST: UNORDERED LEVEL 2
+  // ================================================
+  --component-list-lvl2-margin-left: var(--semantic-space-component-sm);
+  --component-list-lvl2-gap: var(--semantic-space-stack-xl);
+
+  // LIST: UNORDERED LEVEL 3
+  // ================================================
+  --component-list-lvl3-margin-left: var(--semantic-space-component-sm);
+  --component-list-lvl3-gap: var(--semantic-space-stack-xl);
+}

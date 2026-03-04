@@ -1,0 +1,79 @@
+// ATOM: PILL / BADGE
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-pill($theme: null) {
+  @layer syx.atoms {
+    .atom-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--semantic-space-component-xs, 0.25rem) * 2) calc(var(--semantic-space-component-xs, 0.25rem) * 6);
+      border-radius: 999px;
+      font-size: var(--semantic-font-size-overline);
+      font-weight: var(--semantic-font-weight-bold);
+      letter-spacing: var(--semantic-letter-spacing-wide);
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+
+      // Default (neutral)
+      background-color: var(--semantic-color-bg-tertiary);
+      color: var(--semantic-color-text-secondary);
+
+      // --primary
+      &--primary {
+        background-color: var(--primitive-color-blue-50);
+        color: var(--primitive-color-blue-600);
+        border: 1px solid var(--primitive-color-blue-200);
+      }
+
+      // --secondary
+      &--secondary {
+        background-color: var(--primitive-color-purple-50);
+        color: var(--primitive-color-purple-600);
+        border: 1px solid var(--primitive-color-purple-200);
+      }
+
+      // --success
+      &--success {
+        background-color: var(--primitive-color-green-50);
+        color: var(--primitive-color-green-600);
+      }
+
+      // --warning
+      &--warning {
+        background-color: var(--primitive-color-yellow-50);
+        color: var(--primitive-color-yellow-700);
+      }
+
+      // --danger
+      &--danger {
+        background-color: var(--primitive-color-red-50);
+        color: var(--primitive-color-red-600);
+      }
+
+      // --dark
+      &--dark {
+        background-color: var(--semantic-color-bg-inverse);
+        color: var(--semantic-color-text-inverse);
+      }
+
+      // --neutral (for general subtle badges)
+      &--neutral {
+        background-color: var(--semantic-color-bg-tertiary);
+        border: 1px solid var(--semantic-color-border-subtle);
+        color: var(--semantic-color-text-secondary);
+      }
+
+      // --subtle
+      &--subtle {
+        background-color: transparent;
+        border: 1px solid var(--semantic-color-border-default);
+        color: var(--semantic-color-text-tertiary);
+      }
+    }
+  }
+
+  // end @layer syx.atoms
+}

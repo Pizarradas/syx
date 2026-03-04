@@ -1,0 +1,87 @@
+// SYX â THEME CONFIG MAP
+// ===============================================
+// Dart Sass compile-time config per theme.
+// Use for structural differences that tokens cannot
+// express without unnecessary complexity:
+//   â¢ Sidenav side (left/right)
+//   â¢ Logo size overrides
+//   â¢ Border-radius exceptions
+//   â¢ Breakpoint-specific deviations
+//
+// â Use this map for: layout structure, positions,
+//    Sass-only values resolved at compile-time.
+// â Do NOT use this for: colors, spacing, typography
+//    â those belong to CSS Custom Properties tokens.
+// ===============================================
+@use 'sass:map';
+
+// -----------------------------------------------
+// THEME CONFIG
+// -----------------------------------------------
+// Keys map to the $theme argument passed to mixins:
+//   @include org-header('syx');       â map key: 'syx'
+//   @include org-header('example-02');   â map key: 'example-02'
+// -----------------------------------------------
+$theme-config: (
+
+  // example-01 â Syx (default)
+  'syx': (
+    header-sidenav-side:   left,
+    header-logo-size:      2rem,
+    header-logo-size-md:   2.5rem,
+    header-border-bottom:  false,
+  ),
+
+  // example-02 â example-02
+  'example-02': (
+    header-sidenav-side:   right,       // sidenav opens from the right
+    header-logo-size:      2.4rem,
+    header-logo-size-md:   3rem,
+    header-border-bottom:  true,        // bottom border on header bar
+  ),
+
+  // example-03 â Coral
+  'coral': (
+    header-sidenav-side:   left,
+    header-logo-size:      2rem,
+    header-logo-size-md:   2.5rem,
+    header-border-bottom:  false,
+  ),
+
+  // example-04 â Forest
+  'forest': (
+    header-sidenav-side:   left,
+    header-logo-size:      2rem,
+    header-logo-size-md:   2.5rem,
+    header-border-bottom:  false,
+  ),
+
+  // example-05 â Midnight
+  'midnight': (
+    header-sidenav-side:   left,
+    header-logo-size:      2rem,
+    header-logo-size-md:   2.5rem,
+    header-border-bottom:  false,
+  ),
+
+) !default;
+
+// -----------------------------------------------
+// HELPER FUNCTION: theme-cfg($theme, $key, $fallback)
+// -----------------------------------------------
+// Returns a value from the $theme-config map,
+// or $fallback if the theme or key doesn't exist.
+//
+// Usage inside any mixin:
+//   width: theme-cfg($theme, 'header-logo-size', 2rem);
+// -----------------------------------------------
+@function theme-cfg($theme, $key, $fallback: null) {
+  @if $theme == null or not map.has-key($theme-config, $theme) {
+    @return $fallback;
+  }
+  $cfg: map.get($theme-config, $theme);
+  $value: map.get($cfg, $key);
+  @if $value != null { @return $value; }
+  @return $fallback;
+}
+
