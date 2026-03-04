@@ -44,19 +44,19 @@
   <style id="docs-page-css">
     /* ── Docs layout shell ─────────────────────────────── */
     .docs-layout {
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
+      display: block;
+      /* Mobile first default */
       position: relative;
     }
 
     /* ── Sidebar ────────────────────────────────────────── */
     .docs-sidebar {
+      display: none;
+      /* Hidden on mobile */
       width: 224px;
       min-width: 224px;
       position: sticky;
       top: 64px;
-      /* below the fixed header */
       max-height: calc(100vh - 64px);
       overflow-y: auto;
       padding: 1.5rem 0 2rem 0;
@@ -139,9 +139,9 @@
 
     /* ── Content area ───────────────────────────────────── */
     .docs-content {
-      flex: 1;
+      padding: 0 1rem 3rem 1rem;
+      /* Mobile default: give 1rem breathing room */
       min-width: 0;
-      padding: 0 1.5rem 4rem 2rem;
     }
 
     /* ── Hero ───────────────────────────────────────────── */
@@ -271,8 +271,8 @@
     /* ── Back to top button ─────────────────────────────── */
     .docs-back-top {
       position: fixed;
-      right: 1.5rem;
-      bottom: 1.5rem;
+      right: 1rem;
+      bottom: 1rem;
       z-index: 900;
       width: 2.5rem;
       height: 2.5rem;
@@ -313,23 +313,26 @@
       margin-bottom: .875rem;
     }
 
-    /* ── Responsive: hide sidebar on mobile ─────────────── */
-    @media (max-width: 860px) {
+    /* ── Responsive: Desktop layout (Mobile First) ──────── */
+    @media (min-width: 861px) {
       .docs-layout {
-        display: block;
+        display: flex;
+        align-items: flex-start;
+        gap: 0;
       }
 
       .docs-sidebar {
-        display: none;
+        display: block;
       }
 
       .docs-content {
-        padding: 0 0 3rem 0;
+        flex: 1;
+        padding: 0 1.5rem 4rem 2rem;
       }
 
       .docs-back-top {
-        right: 1rem;
-        bottom: 1rem;
+        right: 1.5rem;
+        bottom: 1.5rem;
       }
     }
   </style>
@@ -443,7 +446,7 @@
         class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-sm"
         aria-label="View on GitHub" target="_blank" rel="noopener">
         <span class="atom-icon atom-icon--lc-github" aria-hidden="true"></span>
-        GitHub
+        <span class="syx-d-sm-up">GitHub</span>
       </a>
 
       <!-- Hamburger — mobile only -->
@@ -597,7 +600,8 @@
             </h3>
 
             <!-- Visual flowchart -->
-            <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50" role="img" aria-label="Layer decision flowchart">
+            <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50 syx-overflow-auto" role="img"
+              aria-label="Layer decision flowchart">
               <div class="syx-d-flex syx-flex-col syx-gap-2">
 
                 <div class="syx-d-flex syx-items-center syx-gap-2">
@@ -1556,7 +1560,8 @@ safelist: [/^atom-btn--/, /^is-/];
 
         <section class="syx-mb-5" id="helper-dimensions">
           <h3 class="atom-title atom-title--h5 syx-mb-3">Dimensions — .syx-size-*</h3>
-          <p class="atom-txt syx-text-gray syx-mb-3">Square size tokens mapping to <code>--dimension-1…5</code>. For
+          <p class="atom-txt syx-text-gray syx-mb-3">Square size tokens mapping to <code>--primitive-size-1…5</code>.
+            For
             icons, avatars, thumbnails.</p>
           <div class="syx-d-flex syx-items-center syx-gap-3 syx-flex-wrap">
             <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">

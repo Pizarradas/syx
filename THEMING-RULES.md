@@ -144,4 +144,4 @@ En la versión V4, el sistema estandariza estrictamente el ciclo de vida de los 
 1. **Tokens Primitivos (Primitives):** Paletas crudas (ej. `purple-500`, `space-base`).
 2. **Arquitectura y Tema (Theme Config):** Variables estructurales cross-componentes que definen el aspecto y tacto *general* del sistema, tales como focus rings, bordes base o radios (ej. `--theme-focus-ring-width`, `--semantic-border-width`).
 3. **Tonos Semánticos (Tones):** Responsables exclusivamente de feedback universal, renombrados como `--semantic-tone-*` para evitar colisión con estados de interacción (ej. `--semantic-tone-success-bg`).
-4. **Aliases de Componente (Components):** Propiedades explícitas dedicadas que consumen de los niveles superiores. Un botón nunca define `--color-primary`, consume su prop propia, e.g. `--btn-primary-text`, la cual a su vez reacciona al modo oscuro.
+4. **Aliases de Componente (Components):** Propiedades explícitas dedicadas que consumen de los niveles superiores. Un botón nunca define `--semantic-color-primary`, consume su prop propia, e.g. `--btn-primary-text`, la cual a su vez reacciona al modo oscuro.
