@@ -1,0 +1,178 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOL: theme-swatch-card
+// ===============================================
+// Preview card for a SYX theme: color swatch + name + color pills.
+// Usage:
+//   <div class="mol-theme-card">
+//     <div class="mol-theme-card__swatch mol-theme-card__swatch--01"></div>
+//     <div class="mol-theme-card__body">
+//       <span class="mol-theme-card__name">Purple / Blue</span>
+//       <div class="mol-theme-card__colors">
+//         <span class="mol-theme-card__dot mol-theme-card__dot--primary"></span>
+//         <span class="mol-theme-card__dot mol-theme-card__dot--secondary"></span>
+//       </div>
+//     </div>
+//   </div>
+// ===============================================
+@mixin mol-theme-card($theme: null) {
+  @layer syx.molecules {
+
+    .mol-theme-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--semantic-color-border-subtle);
+      border-radius: var(--semantic-border-radius-lg, 1rem);
+      overflow: hidden;
+      @include transition(border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease);
+      cursor: pointer;
+
+      &:hover,
+      &.is-active {
+        border-color: var(--semantic-color-primary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 14%, transparent);
+      }
+
+      &.is-active {
+        .mol-theme-card__swatch::after {
+          opacity: 1;
+        }
+      }
+
+      // &__swatch — color preview block
+      &__swatch {
+        position: relative;
+        height: 4.5rem;
+        background: var(--semantic-color-primary);
+
+        // Active checkmark overlay
+        &::after {
+          content: '';
+          @include absolute($top: 50%, $right: 0.75rem);
+          @include size(1.25rem);
+          transform: translateY(-50%);
+          background-color: white;
+          border-radius: 50%;
+          opacity: 0;
+          @include transition(opacity 0.2s ease);
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 65%;
+        }
+
+        // Per-theme swatch colors (overridden by each theme's tokens via CSS custom props)
+        &--01 {
+          background: linear-gradient(135deg, oklch(0.60 0.23 276.966) 0%, oklch(0.60 0.165 70.08) 100%);
+        }
+
+        &--02 {
+          background: linear-gradient(135deg, oklch(0.60 0.247 293.009) 0%, oklch(0.60 0.241 6.902) 100%);
+        }
+
+        &--03 {
+          background: linear-gradient(135deg, oklch(0.60 0.181 22.839) 0%, oklch(0.60 0.171 70.604) 100%);
+        }
+
+        &--04 {
+          background: linear-gradient(135deg, oklch(0.60 0.182 151.711) 0%, oklch(0.60 0.136 154.449) 100%);
+        }
+
+        &--05 {
+          background: linear-gradient(135deg, oklch(0.60 0.074 256.04) 0%, oklch(0.60 0.139 91.059) 100%);
+        }
+
+        &--06 {
+          background: linear-gradient(135deg, oklch(0.75 0.15 190) 0%, oklch(0.65 0.25 300) 100%);
+        }
+      }
+
+      // &__body
+      &__body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
+        background-color: var(--semantic-color-bg-primary);
+        gap: var(--semantic-space-component-sm);
+      }
+
+      // &__name
+      &__name {
+        font-family: var(--semantic-font-family-body);
+        font-size: var(--semantic-font-size-body-small);
+        font-weight: var(--semantic-font-weight-medium);
+        color: var(--semantic-color-text-primary);
+      }
+
+      // &__colors — row of color dots
+      &__colors {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+      }
+
+      // &__dot
+      &__dot {
+        @include size(0.875rem);
+        border-radius: 50%;
+        border: 1px solid var(--semantic-color-border-subtle);
+
+        &--01-a {
+          background-color: oklch(0.60 0.23 276.966);
+        }
+
+        &--01-b {
+          background-color: oklch(0.60 0.165 70.08);
+        }
+
+        &--02-a {
+          background-color: oklch(0.60 0.247 293.009);
+        }
+
+        &--02-b {
+          background-color: oklch(0.60 0.241 6.902);
+        }
+
+        &--03-a {
+          background-color: oklch(0.60 0.181 22.839);
+        }
+
+        &--03-b {
+          background-color: oklch(0.60 0.171 70.604);
+        }
+
+        &--04-a {
+          background-color: oklch(0.60 0.182 151.711);
+        }
+
+        &--04-b {
+          background-color: oklch(0.60 0.136 154.449);
+        }
+
+        &--05-a {
+          background-color: oklch(0.60 0.074 256.04);
+        }
+
+        &--05-b {
+          background-color: oklch(0.60 0.139 91.059);
+        }
+
+        &--06-a {
+          background-color: oklch(0.75 0.15 190);
+        }
+
+        &--06-b {
+          background-color: oklch(0.65 0.25 300);
+        }
+      }
+    }
+
+  }
+
+  // end @layer syx.molecules
+}

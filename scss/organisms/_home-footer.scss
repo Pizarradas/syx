@@ -1,0 +1,105 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// ORG: home-footer
+// ===============================================
+// Footer for the SYX home page.
+// Composes: atom-link, atom-pill, atom-icon
+// ===============================================
+@mixin org-home-footer($theme: null) {
+  @layer syx.organisms {
+
+  .org-home-footer {
+    padding: var(--semantic-space-layout-md) var(--semantic-space-layout-md);
+    border-top: 1px solid var(--semantic-color-border-subtle);
+    background-color: var(--semantic-color-bg-primary);
+
+    // &__inner — flex row
+    &__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--semantic-space-component-md);
+      align-items: center;
+      text-align: center;
+      max-width: 72rem;
+      margin: 0 auto;
+
+      @include breakpoint(tablet) {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+    }
+
+    // &__brand
+    &__brand {
+      display: flex;
+      align-items: center;
+      gap: var(--semantic-space-component-sm);
+      font-family: var(--semantic-font-family-heading);
+      font-size: var(--semantic-font-size-h5);
+      font-weight: var(--semantic-font-weight-bold);
+      color: var(--semantic-color-text-primary);
+      text-decoration: none;
+
+      &:hover { color: var(--semantic-color-primary); }
+    }
+
+    // &__meta
+    &__meta {
+      font-size: var(--semantic-font-size-overline);
+      color: var(--semantic-color-text-secondary);
+      line-height: 1.6;
+
+      strong {
+        color: var(--semantic-color-text-primary);
+      }
+    }
+
+    // &__nav — footer links
+    &__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--semantic-space-component-sm) var(--semantic-space-component-md);
+      justify-content: center;
+
+      @include breakpoint(tablet) {
+        justify-content: flex-end;
+      }
+    }
+
+    // &__link
+    &__link {
+      font-size: var(--semantic-font-size-body-small);
+      color: var(--semantic-color-text-secondary);
+      text-decoration: none;
+      @include transition(color 0.2s ease);
+
+      &:hover {
+        color: var(--semantic-color-primary);
+      }
+    }
+
+    // &__divider
+    &__divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--semantic-color-border-subtle);
+      margin: var(--semantic-space-component-md) 0;
+    }
+
+    // &__credit — bottom credit bar
+    &__credit {
+      width: 100%;
+      text-align: center;
+      font-size: var(--semantic-font-size-overline);
+      color: var(--semantic-color-text-secondary);
+      padding-top: var(--semantic-space-component-md);
+      border-top: 1px solid var(--semantic-color-border-subtle);
+    }
+  }
+
+  } // end @layer syx.organisms
+}
