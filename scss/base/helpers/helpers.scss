@@ -1,0 +1,16 @@
+// BASE/HELPERS — THEME-AWARE INTERNAL MIXINS
+// ================================================
+// Only theme-aware helpers remain here — mixins that receive
+// a $theme parameter and are called from theme setup files.
+//
+// All public utility classes (.syx-*) live in utilities/
+// @see ../../utilities/_index.scss
+// ================================================
+
+@forward 'icons';
+@forward 'font-sizes';
+@forward 'dimensions';
+@forward 'spacers';
+@forward 'fonts';
+@forward 'backgrounds';
+// ================================================
