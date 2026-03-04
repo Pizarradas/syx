@@ -188,9 +188,18 @@ function crossCheck(sourceTokens, runtimeData) {
   const runtimeKeys = new Set(Object.keys(runtimeData.tokens));
   const sourceKeys  = new Set(Object.keys(sourceTokens));
 
-  const phantoms     = [...sourceKeys].filter(k => !runtimeKeys.has(k));  // in JSON, not in CSS
+  // Phantoms: in tokens.json but not in runtime CSS.
+  // Exclude tokens with status "deprecated" or "reserved" — these are intentionally
+  // not emitted in runtime and carry explicit documentation for why they're absent.
+  const phantoms = [...sourceKeys].filter(k => {
+    if (runtimeKeys.has(k)) return false;
+    const status = sourceTokens[k]?.status;
+    if (status === 'deprecated' || status === 'reserved') return false;
+    return true;
+  });
+  // R05: any official-prefix token in CSS not in tokens.json (previously only --component-*)
   const undocumented = [...runtimeKeys]
-    .filter(k => !sourceKeys.has(k) && k.startsWith('--component-'));     // component- in CSS, not in JSON
+    .filter(k => !sourceKeys.has(k) && isOfficial(k));
 
   return { phantoms, undocumented };
 }
@@ -326,7 +335,11 @@ function runScssChecks(scssFiles) {
     'scss/organisms/_home-layers.scss',      // showroom: layer visualization uses palette tints
   ];
   const R03_EXCEPTIONS = ['mixins/', 'scss/utilities/_accessibility.scss', 'scss/base/_reset.scss'];
-  const R04_EXCEPTIONS = ['mixins/', 'scss/base/_reset.scss', 'scss/utilities/_accessibility.scss', 'scss/utilities/_display.scss'];
+  const R04_EXCEPTIONS = [
+    'mixins/', 'scss/base/_reset.scss', 'scss/utilities/_accessibility.scss',
+    'scss/utilities/_display.scss',
+    'scss/organisms/_home-tokens.scss', // showroom: position:absolute used intentionally for layer visualisation
+  ];
 
   for (const { rel, content } of scssFiles) {
     const lines = content.split('\n');
@@ -536,23 +549,47 @@ function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViol
     md += `### ✅ No phantom tokens\n\n`;
   }
   if (crossCheckResult.undocumented.length > 0) {
-    md += `### ⚠️ Undocumented Component Tokens (${crossCheckResult.undocumented.length})\n`;
-    md += `_Runtime CSS has --component-* tokens not in tokens.json_\n\n`;
-    crossCheckResult.undocumented.slice(0, 30).forEach(p => { md += `- \`${p}\`\n`; });
-    if (crossCheckResult.undocumented.length > 30) md += `- … and ${crossCheckResult.undocumented.length - 30} more\n`;
-    md += '\n';
+    md += `### ⚠️ Undocumented Official Tokens (${crossCheckResult.undocumented.length})\n`;
+    md += `_Runtime CSS has official-prefix tokens not in tokens.json_\n\n`;
+    // Group by prefix
+    const groups = {};
+    crossCheckResult.undocumented.forEach(k => {
+      const prefix = k.replace(/^--/, '').split('-')[0];
+      groups[prefix] = groups[prefix] || [];
+      groups[prefix].push(k);
+    });
+    Object.entries(groups).forEach(([prefix, keys]) => {
+      md += `**--${prefix}-\* (${keys.length})**\n`;
+      keys.slice(0, 10).forEach(p => { md += `- \`${p}\`\n`; });
+      if (keys.length > 10) md += `- … and ${keys.length - 10} more\n`;
+      md += '\n';
+    });
   } else {
-    md += `### ✅ All component tokens documented\n\n`;
+    md += `### ✅ All official tokens documented\n\n`;
   }
 
-  md += `## Legacy Vars (R07) — ${Object.keys(legacyVars).length} found\n\n`;
-  if (Object.keys(legacyVars).length > 0) {
-    md += `_No official SYX prefix. Requires investigation._\n\n`;
-    Object.keys(legacyVars).slice(0, 20).forEach(v => {
-      md += `- \`${v}\` → \`${legacyVars[v].value?.substring(0, 60) || ''}\`\n`;
-    });
-    if (Object.keys(legacyVars).length > 20) md += `- … and ${Object.keys(legacyVars).length - 20} more (see contracts/lint-contract.json)\n`;
-    md += '\n';
+  const legacyCount = Object.keys(legacyVars).length;
+  md += `## Legacy Vars (R07) — ${legacyCount} found\n\n`;
+  if (legacyCount > 0) {
+    // Lifecycle summary table
+    const keep    = Object.entries(legacyVars).filter(([,v]) => v.status === 'keep');
+    const migrate = Object.entries(legacyVars).filter(([,v]) => v.status === 'migrate');
+    const kill    = Object.entries(legacyVars).filter(([,v]) => v.status === 'kill');
+
+    md += `| Lifecycle | Count | Action |\n|---|---|---|\n`;
+    md += `| 🔒 keep    | ${keep.length}   | External dependency or intentional contract. No action. |\n`;
+    md += `| 🔄 migrate | ${migrate.length} | Has a SYX equivalent. Replace \`var(old)\` → \`var(new)\`. |\n`;
+    md += `| 🗑️ kill    | ${kill.length}   | No SYX equivalent. Remove from codebase. |\n\n`;
+
+    if (migrate.length > 0) {
+      md += `### Top migration candidates\n\n`;
+      migrate.slice(0, 10).forEach(([v, data]) => {
+        const rep = data.replacedBy ? ` → \`${data.replacedBy}\`` : '';
+        md += `- \`${v}\`${rep}\n`;
+      });
+      if (migrate.length > 10) md += `- … and ${migrate.length - 10} more (see contracts/lint-contract.json)\n`;
+      md += '\n';
+    }
   }
 
   md += `## SCSS Rule Violations\n\n`;
