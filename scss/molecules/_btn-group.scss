@@ -1,0 +1,18 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOL: btn-group
+// ===============================================
+@mixin mol-btn-group($theme: null) {
+  @layer syx.molecules {
+  .mol-btn-group,
+  .cont-set-btn {  // @deprecated - use .mol-btn-group
+    display: flex;
+    gap: var(--mol-btn-group-gap, 1rem);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  } // end @layer syx.molecules
+}

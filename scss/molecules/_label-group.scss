@@ -1,0 +1,18 @@
+// CORE
+// ===============================================
+@use "../abstracts/index" as *;
+// ===============================================
+
+// MOL: label-group
+// ===============================================
+@mixin mol-label-group($theme: null) {
+  @layer syx.molecules {
+  .mol-label-group,
+  .cont-set-label {  // @deprecated - use .mol-label-group
+    display: flex;
+    gap: var(--mol-label-group-gap, 0.5rem);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  } // end @layer syx.molecules
+}
