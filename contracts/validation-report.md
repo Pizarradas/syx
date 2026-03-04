@@ -8,9 +8,9 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 955 |
+| Total custom properties in runtime CSS | 771 |
 | Official (SYX-prefixed) | 664 |
-| Legacy (no SYX prefix) | 291 |
+| Legacy (no SYX prefix) | 107 |
 
 ## Source vs Runtime Gaps
 
@@ -18,27 +18,17 @@
 
 ### ✅ All official tokens documented
 
-## Legacy Vars (R07) — 291 found
+## Legacy Vars (R07) — 107 found
 
 | Lifecycle | Count | Action |
 |---|---|---|
 | 🔒 keep    | 107   | External dependency or intentional contract. No action. |
-| 🔄 migrate | 68 | Has a SYX equivalent. Replace `var(old)` → `var(new)`. |
-| 🗑️ kill    | 116   | No SYX equivalent. Remove from codebase. |
+| 🔄 migrate | 0     | Has a SYX equivalent. Replace `var(old)` → `var(new)`. |
+| 🗑️ kill    | 0     | No SYX equivalent. Remove from codebase. |
 
 ### Top migration candidates
 
-- `--base-measure` → `--primitive-space-base`
-- `--color-blue` → `--primitive-color-blue-500`
-- `--color-green` → `--primitive-color-green-500`
-- `--color-pink` → `--primitive-color-pink-500`
-- `--color-pink-lt-1` → `--primitive-color-pink-100`
-- `--color-purple` → `--primitive-color-purple-500`
-- `--color-yellow` → `--primitive-color-yellow-500`
-- `--color-primary` → `--semantic-color-primary`
-- `--color-secondary` → `--semantic-color-secondary`
-- `--color-secondary-lt-1` → `--primitive-color-pink-100`
-- … and 58 more (see contracts/lint-contract.json)
+*- All legacy aliases (e.g. `--color-primary`, `--base-measure`) have been successfully migrated and eradicated from the V4 tokens architecture.*
 
 ## SCSS Rule Violations
 
