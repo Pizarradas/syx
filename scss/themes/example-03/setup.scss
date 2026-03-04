@@ -1,0 +1,130 @@
+// CORE
+// ===============================================
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use 'theme' as *;
+// ===============================================
+
+// :ROOT
+// ===============================================
+@include universal-values();    // Universal values (RRSS icons, external brands, etc.)
+@include theme-example-03();    // Complete Coral theme (primitives + variables)
+// ===============================================
+
+// FONT SETUP
+// ===============================================
+// Playfair Display â editorial serif
+@include font-family("Google-Playfair-Display--regular",
+  "#{$fonts-path}/google-playfair-display/PlayfairDisplay-Regular",
+  400,
+  normal,
+  eot woff2 woff ttf svg);
+
+@include font-family("Google-Playfair-Display--bold",
+  "#{$fonts-path}/google-playfair-display/PlayfairDisplay-Bold",
+  700,
+  normal,
+  eot woff2 woff ttf svg);
+
+// Space Grotesk â fallback for UI elements
+@include font-family("Google-Space-Grotesk--regular",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
+  400,
+  normal,
+  eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--bold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
+  700,
+  normal,
+  eot woff2 woff ttf svg);
+// ===============================================
+
+// RESET: global
+// ===============================================
+@include resets-global(example-03);
+@include elements-base(example-03);
+// ===============================================
+
+// HELPER: all
+// ===============================================
+
+
+
+
+
+
+
+
+
+
+
+@include helper-icons();
+// ===============================================
+
+// LAYOUT: grid
+// ===============================================
+@include layout-grid(example-03);
+// ===============================================
+
+// HELPER: theme
+// ===============================================
+@include helper-font-sizes(example-03);
+@include helper-dimensions(example-03);
+ // @deprecated
+@include helper-spacer(example-03);
+
+@include helper-fonts(example-03);
+@include helper-backgrounds(example-03);
+// ===============================================
+
+// SYX ATOMS
+// ===============================================
+@include atom-breadcrumb(example-03);
+@include atom-btn(example-03);
+@include atom-code(example-03);
+@include atom-check(example-03);
+@include atom-feature-icon(example-03);
+@include atom-form(example-03);
+@include atom-icon(example-03);
+@include atom-icon-lucide(example-03);
+@include atom-label(example-03);
+@include atom-link(example-03);
+@include atom-list(example-03);
+@include atom-pagination(example-03);
+@include atom-pill(example-03);
+@include atom-radio(example-03);
+@include atom-stat(example-03);
+@include atom-switch(example-03);
+@include atom-table(example-03);
+@include atom-title(example-03);
+@include atom-txt(example-03);
+// ===============================================
+
+// SYX MOLECULES
+// ===============================================
+@include mol-btn-group(example-03);
+@include mol-code-snippet(example-03);
+@include mol-feature-card(example-03);
+@include mol-form-field(example-03);
+@include mol-form-field-set(example-03);
+@include mol-label-group(example-03);
+@include mol-theme-card(example-03);
+// ===============================================
+
+// SYX ORGANISMS
+// ===============================================
+@include org-home-cta(example-03);
+@include org-home-features(example-03);
+@include org-home-footer(example-03);
+@include org-home-hero(example-03);
+@include org-home-layers(example-03);
+@include org-home-themes(example-03);
+@include org-home-tokens(example-03);
+@include org-site-header(example-03);
+// ===============================================

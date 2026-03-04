@@ -1,0 +1,224 @@
+// SCSS for the Theme Builder
+// We are importing base utilities from SYX but adding custom UI logic for the builder sidebar
+
+@use '../abstracts/mixins/media-queries' as *;
+
+.theme-builder {
+    display: flex;
+    flex-direction: column;
+    /* Mobile first stack */
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--primitive-color-white);
+
+    @include min-screen(861px) {
+        flex-direction: row;
+    }
+
+    &__sidebar {
+        width: 100%;
+        flex-shrink: 0;
+        height: 45vh;
+        /* Split screen on mobile */
+        overflow-y: auto;
+        background-color: var(--primitive-color-gray-900);
+        border-bottom: 1px solid var(--primitive-color-gray-800);
+
+        @include min-screen(861px) {
+            width: 320px;
+            height: 100%;
+            border-bottom: none;
+            border-right: 1px solid var(--primitive-color-gray-800);
+        }
+
+        padding: calc(4 * var(--primitive-space-base));
+        display: flex;
+        flex-direction: column;
+        gap: calc(5 * var(--primitive-space-base));
+
+        /* Custom scrollbar for webkit */
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var(--primitive-color-gray-700);
+            border-radius: 10px;
+        }
+    }
+
+    &__preview {
+        flex-grow: 1;
+        height: 100%;
+        overflow-y: auto;
+        background-color: var(--semantic-color-bg-primary);
+        color: var(--semantic-color-text-primary);
+        padding: calc(5 * var(--primitive-space-base));
+        position: relative;
+    }
+
+    // Builder Specific Components
+    &__group {
+        display: flex;
+        flex-direction: column;
+        gap: calc(3 * var(--primitive-space-base));
+        padding-bottom: calc(4 * var(--primitive-space-base));
+        border-bottom: 1px solid var(--primitive-color-gray-800);
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &__group-title {
+        color: var(--primitive-color-gray-100);
+        font-size: var(--primitive-font-size-md);
+        font-weight: 600;
+        margin: 0;
+    }
+
+    &__control {
+        display: flex;
+        flex-direction: column;
+        gap: calc(1 * var(--primitive-space-base));
+
+        label {
+            color: var(--primitive-color-gray-400);
+            font-size: var(--primitive-font-size-sm);
+            display: flex;
+            justify-content: space-between;
+
+            span.val {
+                color: var(--primitive-color-blue-400);
+                font-family: monospace;
+            }
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: var(--primitive-color-blue-500);
+            height: 4px;
+            appearance: auto;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            background-color: var(--primitive-color-gray-800);
+            border: 1px solid var(--primitive-color-gray-700);
+            color: var(--primitive-color-white);
+            padding: calc(2 * var(--primitive-space-base));
+            border-radius: var(--theme-radius);
+            font-size: var(--primitive-font-size-sm);
+
+            &:focus {
+                outline: none;
+                border-color: var(--primitive-color-blue-500);
+            }
+        }
+    }
+}
+
+// Custom Theme Builder Helpers
+// These replace the non-existent utilities previously used in the HTML.
+.tb {
+    &-mb-3 {
+        margin-bottom: calc(3 * var(--primitive-space-base));
+    }
+
+    &-mb-4 {
+        margin-bottom: calc(4 * var(--primitive-space-base));
+    }
+
+    &-mb-5 {
+        margin-bottom: calc(5 * var(--primitive-space-base));
+    }
+
+    &-mt-4 {
+        margin-top: calc(4 * var(--primitive-space-base));
+    }
+
+    &-mt-5 {
+        margin-top: calc(5 * var(--primitive-space-base));
+    }
+
+    &-py-3 {
+        padding-top: calc(3 * var(--primitive-space-base));
+        padding-bottom: calc(3 * var(--primitive-space-base));
+    }
+
+    &-py-5 {
+        padding-top: calc(5 * var(--primitive-space-base));
+        padding-bottom: calc(5 * var(--primitive-space-base));
+    }
+
+    &-px-4 {
+        padding-left: calc(4 * var(--primitive-space-base));
+        padding-right: calc(4 * var(--primitive-space-base));
+    }
+
+    &-mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-d-flex {
+        display: flex;
+    }
+
+    &-align-center {
+        align-items: center;
+    }
+
+    &-justify-between {
+        justify-content: space-between;
+    }
+
+    &-gap-3 {
+        gap: calc(3 * var(--primitive-space-base));
+    }
+
+    &-h-full {
+        height: 100%;
+    }
+
+    &-w-full {
+        width: 100%;
+    }
+
+    &-bg-white {
+        background-color: var(--semantic-color-bg-primary);
+    }
+
+    &-bg-gray-100 {
+        background-color: var(--semantic-color-bg-secondary);
+    }
+
+    &-bg-gray-900 {
+        background-color: var(--semantic-color-bg-inverse);
+    }
+
+    &-text-white {
+        color: var(--semantic-color-text-inverse);
+    }
+
+    &-token-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: calc(1 * var(--primitive-space-base)) calc(2 * var(--primitive-space-base));
+        background-color: var(--semantic-color-bg-secondary);
+        color: var(--semantic-color-text-secondary);
+        border: 1px solid var(--semantic-color-border-subtle);
+        border-radius: calc(0.5 * var(--theme-radius, 0.5rem));
+        font-family: var(--semantic-font-family-mono, monospace);
+        font-size: var(--primitive-font-size-sm);
+        white-space: nowrap;
+        line-height: 1;
+    }
+}
