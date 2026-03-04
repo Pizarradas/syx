@@ -1,0 +1,58 @@
+// SYX BUNDLE: CORE
+// ================================================
+// The leanest functional bundle — production-ready minimum.
+// Excludes ALL showroom/documentation-specific components.
+//
+// What's IN:
+//   ✓ Full token system (CSS custom properties via theme setup)
+//   ✓ Reset + base element styles
+//   ✓ Fluid typography + spacing scale
+//   ✓ Essential atoms: btn, form, check, radio, switch,
+//      link, breadcrumb, icon, icon-lucide, label, pill, list, table,
+//      title, txt, pagination
+//   ✓ Essential molecules: form-field, btn-group,
+//      label-group, form-field-set
+//   ✓ Core organism: site-header
+//   ✓ Display/flex/spacing utilities
+//   ✓ Dark mode
+//
+// What's OUT (documentation/showroom only):
+//   ✕ atom-code      — code syntax block (doc component)
+//   ✕ pages/*
+//
+// Bundle size goal: < 120KB uncompressed, < 50KB gzip.
+// ================================================
+
+@mixin syx-bundle-core($theme: null) {
+
+  // ATOMS — production essentials only
+  // ================================================
+  @include atom-breadcrumb($theme);
+  @include atom-btn($theme);
+  @include atom-check($theme);
+  @include atom-form($theme);
+  @include atom-icon($theme);
+  @include atom-icon-lucide($theme);
+  @include atom-label($theme);
+  @include atom-link($theme);
+  @include atom-list($theme);
+  @include atom-pagination($theme);
+  @include atom-pill($theme);
+  @include atom-radio($theme);
+  @include atom-switch($theme);
+  @include atom-table($theme);
+  @include atom-title($theme);
+  @include atom-txt($theme);
+  // NOT included: atom-code
+
+  // MOLECULES — all are production-relevant
+  // ================================================
+  @include mol-form-field($theme);
+  @include mol-btn-group($theme);
+  @include mol-label-group($theme);
+  @include mol-form-field-set($theme);
+
+  // ORGANISMS — site header
+  // ================================================
+  @include org-site-header($theme);
+}
