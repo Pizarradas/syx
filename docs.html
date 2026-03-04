@@ -8,7 +8,7 @@
   <!-- Primary meta -->
   <title>SYX Design System — Component Gallery &amp; API Docs</title>
   <meta name="description"
-    content="SYX Design System component gallery — full visual reference ordered by @layer hierarchy: utilities → layout → atoms → molecules → organisms. 6 themes, WCAG AA.">
+    content="SYX Design System component gallery — full visual reference ordered by @layer hierarchy: utilities &rarr; layout &rarr; atoms &rarr; molecules &rarr; organisms. 6 themes, WCAG AA.">
   <meta name="author" content="José Luis Pizarro Feo">
   <meta name="keywords"
     content="CSS design system, design tokens, CSS @layer, Atomic Design, component gallery, WCAG, SYX, Dart Sass">
@@ -35,11 +35,309 @@
 
   <!-- Theme stylesheet — swapped by JS on theme change -->
   <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+
+  <!-- ═══════════════════════════════════════════════════════
+       DOCS LAYOUT — embedded page-level styles
+       All rules are scoped to .docs-* and .docs-layout
+       to avoid leaking into SYX component demos.
+  ═══════════════════════════════════════════════════════ -->
+  <style id="docs-page-css">
+    /* ── Docs layout shell ─────────────────────────────── */
+    .docs-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      position: relative;
+    }
+
+    /* ── Sidebar ────────────────────────────────────────── */
+    .docs-sidebar {
+      width: 224px;
+      min-width: 224px;
+      position: sticky;
+      top: 64px;
+      /* below the fixed header */
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+      padding: 1.5rem 0 2rem 0;
+      border-right: 1px solid var(--semantic-color-border, rgba(0, 0, 0, .1));
+      flex-shrink: 0;
+    }
+
+    .docs-sidebar::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .docs-sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .docs-sidebar::-webkit-scrollbar-thumb {
+      background: var(--semantic-color-border, rgba(0, 0, 0, .15));
+      border-radius: 2px;
+    }
+
+    .docs-sidebar__group {
+      margin-bottom: 1.25rem;
+    }
+
+    .docs-sidebar__group-label {
+      display: block;
+      font-size: .625rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--semantic-color-text-secondary, #888);
+      padding: 0 1rem .375rem 1rem;
+      margin-bottom: .25rem;
+    }
+
+    .docs-sidebar__link {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .375rem 1rem;
+      font-size: .8125rem;
+      color: var(--semantic-color-text-secondary, #555);
+      text-decoration: none;
+      border-radius: 0;
+      border-left: 2px solid transparent;
+      transition: color .15s, background .15s, border-color .15s;
+      line-height: 1.3;
+    }
+
+    .docs-sidebar__link:hover {
+      color: var(--semantic-color-text-primary, #111);
+      background: var(--semantic-color-bg-secondary, rgba(0, 0, 0, .04));
+    }
+
+    .docs-sidebar__link.is-active {
+      color: var(--semantic-color-primary, #6d28d9);
+      border-left-color: var(--semantic-color-primary, #6d28d9);
+      font-weight: 600;
+      background: var(--semantic-color-bg-secondary, rgba(109, 40, 217, .06));
+    }
+
+    .docs-sidebar__link .atom-icon {
+      opacity: .6;
+      flex-shrink: 0;
+    }
+
+    .docs-sidebar__link.is-active .atom-icon {
+      opacity: 1;
+    }
+
+    /* Sub-items (guide sections 1–6) */
+    .docs-sidebar__sub {
+      margin-left: 1rem;
+    }
+
+    .docs-sidebar__sub .docs-sidebar__link {
+      font-size: .75rem;
+      padding: .25rem 1rem .25rem .75rem;
+    }
+
+    /* ── Content area ───────────────────────────────────── */
+    .docs-content {
+      flex: 1;
+      min-width: 0;
+      padding: 0 1.5rem 4rem 2rem;
+    }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .docs-hero {
+      padding: 2.5rem 0 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--semantic-color-border, rgba(0, 0, 0, .1));
+    }
+
+    .docs-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      font-size: .6875rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--semantic-color-primary, #6d28d9);
+      background: var(--semantic-color-bg-secondary, rgba(109, 40, 217, .08));
+      border: 1px solid var(--semantic-color-primary, #6d28d9);
+      border-radius: 999px;
+      padding: .25rem .75rem;
+      margin-bottom: 1rem;
+    }
+
+    .docs-hero__title {
+      margin-bottom: .5rem;
+    }
+
+    .docs-hero__lead {
+      margin-bottom: 1.25rem;
+      max-width: 52ch;
+    }
+
+    .docs-hero__stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .docs-hero__stat {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8125rem;
+      color: var(--semantic-color-text-secondary, #555);
+      background: var(--semantic-color-bg-secondary, rgba(0, 0, 0, .04));
+      border: 1px solid var(--semantic-color-border, rgba(0, 0, 0, .1));
+      border-radius: .375rem;
+      padding: .3125rem .625rem;
+    }
+
+    .docs-hero__stat strong {
+      font-weight: 700;
+      color: var(--semantic-color-text-primary, #111);
+    }
+
+    /* ── Section dividers ───────────────────────────────── */
+    .docs-section-divider {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-top: 3rem;
+      margin-bottom: 1.25rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--semantic-color-border, rgba(0, 0, 0, .1));
+    }
+
+    .docs-section-divider__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .375rem;
+      font-size: .6875rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .25rem .625rem;
+      border-radius: .25rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .docs-section-divider__badge--guide {
+      background: #1e1e2e;
+      color: #fff;
+    }
+
+    .docs-section-divider__badge--util {
+      background: hsl(250, 80%, 60%);
+      color: #fff;
+    }
+
+    .docs-section-divider__badge--layout {
+      background: hsl(200, 80%, 40%);
+      color: #fff;
+    }
+
+    .docs-section-divider__badge--atom {
+      background: hsl(150, 60%, 38%);
+      color: #fff;
+    }
+
+    .docs-section-divider__badge--molecule {
+      background: hsl(35, 90%, 48%);
+      color: #fff;
+    }
+
+    .docs-section-divider__badge--organism {
+      background: hsl(0, 70%, 52%);
+      color: #fff;
+    }
+
+    .docs-section-divider__line {
+      flex: 1;
+      height: 1px;
+      background: var(--semantic-color-border, rgba(0, 0, 0, .1));
+    }
+
+    .docs-section-divider__layer {
+      font-size: .6875rem;
+      color: var(--semantic-color-text-secondary, #888);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── Back to top button ─────────────────────────────── */
+    .docs-back-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      z-index: 900;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--semantic-color-primary, #6d28d9);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .18);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .2s, transform .2s;
+    }
+
+    .docs-back-top.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .docs-back-top:hover {
+      background: var(--semantic-color-primary-dark, #5b21b6);
+    }
+
+    /* ── Guide section number badges ────────────────────── */
+    .docs-guide-section {
+      border-left: 3px solid var(--semantic-color-primary, #6d28d9);
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+      padding-top: .25rem;
+    }
+
+    .docs-guide-section>h3 {
+      margin-bottom: .875rem;
+    }
+
+    /* ── Responsive: hide sidebar on mobile ─────────────── */
+    @media (max-width: 860px) {
+      .docs-layout {
+        display: block;
+      }
+
+      .docs-sidebar {
+        display: none;
+      }
+
+      .docs-content {
+        padding: 0 0 3rem 0;
+      }
+
+      .docs-back-top {
+        right: 1rem;
+        bottom: 1rem;
+      }
+    }
+  </style>
 </head>
 
 <!--
-  @layer order: syx.reset → syx.base → syx.tokens → syx.atoms → syx.molecules → syx.utilities
-  Gallery order mirrors hierarchy: Utilities (most primitive) → Layout → Atoms → Molecules
+  @layer order: syx.reset &rarr; syx.base &rarr; syx.tokens &rarr; syx.atoms &rarr; syx.molecules &rarr; syx.organisms &rarr; syx.utilities
+  Gallery order mirrors hierarchy: Utilities (most specific) &rarr; Layout &rarr; Atoms &rarr; Molecules &rarr; Organisms
 -->
 
 <body class="syx syx--theme-example-01">
@@ -159,235 +457,337 @@
 
   </header>
 
-  <main class="layout-grid" id="main-content" aria-label="Component gallery">
-    <div class="layout-grid__col-xs-12 syx-py-5">
+  <!-- ── Docs 2-column layout wrapper ─────────────────────── -->
+  <div class="docs-layout">
 
-      <!-- ─── HERO ─── -->
-      <section class="syx-mb-5">
-        <h1 class="atom-title atom-title--h1 syx-mb-2">SYX Design System</h1>
-        <p class="atom-txt atom-txt--primary">Component Gallery v4.0.0 — ordered by <strong>layer hierarchy</strong>:
-          utilities → layout → atoms → molecules.</p>
-        <nav aria-label="Jump to section" class="syx-mt-3">
-          <div class="mol-btn-group">
-            <a href="#guide" class="atom-btn atom-btn--secondary atom-btn--size-sm atom-btn--has-icon">
-              <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
-              Authoring Guide
-            </a>
-            <a href="#utilities" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Utilities</a>
-            <a href="#layout" class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-sm">Layout</a>
-            <a href="#atoms" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Atoms</a>
-            <a href="#molecules" class="atom-btn atom-btn--quaternary atom-btn--size-sm">Molecules</a>
-          </div>
-        </nav>
-      </section>
+    <!-- ── Sidebar TOC ──────────────────────────────────────── -->
+    <aside class="docs-sidebar" aria-label="Documentation navigation" id="docs-sidebar">
 
-      <!-- ══════════════════════════════════════════
-       LAYER 0 — AUTHORING GUIDE
-  ══════════════════════════════════════════ -->
-      <section id="guide" aria-labelledby="guide-heading" class="syx-mb-5">
+      <div class="docs-sidebar__group">
+        <span class="docs-sidebar__group-label">Guide</span>
+        <a href="#guide" class="docs-sidebar__link" data-nav-section="guide">
+          <span class="atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
+          Authoring Guide
+        </a>
+        <div class="docs-sidebar__sub">
+          <a href="#guide-layers" class="docs-sidebar__link" data-nav-section="guide-layers">1 Where does code
+            go?</a>
+          <a href="#guide-html" class="docs-sidebar__link" data-nav-section="guide-html">2 HTML Authoring</a>
+          <a href="#guide-scss" class="docs-sidebar__link" data-nav-section="guide-scss">3 SCSS Efficiency</a>
+          <a href="#guide-mixins" class="docs-sidebar__link" data-nav-section="guide-mixins">4 Mixin Deep-Dive</a>
+          <a href="#guide-tips" class="docs-sidebar__link" data-nav-section="guide-tips">5 Tips &amp; Gotchas</a>
+          <a href="#guide-checklist" class="docs-sidebar__link" data-nav-section="guide-checklist">6 Checklist</a>
+        </div>
+      </div>
 
-        <h2 class="atom-title atom-title--h2 syx-mb-1" id="guide-heading">Authoring Guide</h2>
-        <p class="atom-txt syx-text-gray syx-mb-4">Practical decision rules for writing HTML and SCSS with SYX. Read
-          this before creating any component.</p>
+      <div class="docs-sidebar__group">
+        <span class="docs-sidebar__group-label">Reference</span>
+        <a href="#utilities" class="docs-sidebar__link" data-nav-section="utilities">
+          <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
+          Utilities
+        </a>
+        <a href="#layout" class="docs-sidebar__link" data-nav-section="layout">
+          <span class="atom-icon atom-icon--lc-layout atom-icon--sm" aria-hidden="true"></span>
+          Layout
+        </a>
+        <a href="#atoms" class="docs-sidebar__link" data-nav-section="atoms">
+          <span class="atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
+          Atoms
+        </a>
+        <a href="#molecules" class="docs-sidebar__link" data-nav-section="molecules">
+          <span class="atom-icon atom-icon--lc-package atom-icon--sm" aria-hidden="true"></span>
+          Molecules
+        </a>
+        <a href="#organisms" class="docs-sidebar__link" data-nav-section="organisms">
+          <span class="atom-icon atom-icon--lc-box atom-icon--sm" aria-hidden="true"></span>
+          Organisms
+        </a>
+      </div>
 
-        <!-- ── §1: Where does my code go? ─────────────────── -->
-        <section class="syx-mb-5" id="guide-layers" aria-labelledby="guide-layers-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-layers-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§1</span>
-            Where does my code go? — Decision flowchart
-          </h3>
+      <div class="docs-sidebar__group">
+        <span class="docs-sidebar__group-label">Links</span>
+        <a href="home.html" class="docs-sidebar__link">
+          <span class="atom-icon atom-icon--lc-home atom-icon--sm" aria-hidden="true"></span>
+          Home
+        </a>
+        <a href="why-syx.html" class="docs-sidebar__link">
+          <span class="atom-icon atom-icon--lc-pie-chart atom-icon--sm" aria-hidden="true"></span>
+          Why SYX
+        </a>
+        <a href="https://github.com/Pizarradas/syx" class="docs-sidebar__link" target="_blank" rel="noopener">
+          <span class="atom-icon atom-icon--lc-github atom-icon--sm" aria-hidden="true"></span>
+          GitHub
+        </a>
+      </div>
 
-          <!-- Visual flowchart -->
-          <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50" role="img" aria-label="Layer decision flowchart">
-            <div class="syx-d-flex syx-flex-col syx-gap-2">
+    </aside>
 
-              <div class="syx-d-flex syx-items-center syx-gap-2">
-                <span class="atom-pill atom-pill--dark">Is it a single CSS property with no markup dependency?</span>
-                <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
-                <span class="atom-pill atom-pill--secondary"><code>.syx-*</code> &rarr; <strong>Util</strong>
-                  <code>utilities/</code></span>
-              </div>
+    <!-- ── Main content area ────────────────────────────────── -->
+    <main class="docs-content" id="main-content" aria-label="Component gallery">
+      <div class="syx-py-5">
 
-              <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
-                <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
-                  aria-hidden="true"></span>
-                <span class="atom-pill">No &darr; Is it a single, self-contained HTML element?</span>
-                <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
-                <span class="atom-pill atom-pill--primary"><code>atom-*</code> &rarr; <strong>Atom</strong>
-                  <code>atoms/</code></span>
-              </div>
-
-              <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
-                <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
-                  aria-hidden="true"></span>
-                <span class="atom-pill">No &darr; Does it compose 2+ atoms that always travel together?</span>
-                <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
-                <span class="atom-pill atom-pill--success"><code>mol-*</code> &rarr; <strong>Molecule</strong>
-                  <code>molecules/</code></span>
-              </div>
-
-              <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
-                <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
-                  aria-hidden="true"></span>
-                <span class="atom-pill">No &darr; Is it a full UI section (header, hero, footer)?</span>
-                <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
-                <span class="atom-pill atom-pill--warning"><code>org-*</code> &rarr; <strong>Organism</strong>
-                  <code>organisms/</code></span>
-              </div>
-
-              <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
-                <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
-                  aria-hidden="true"></span>
-                <span class="atom-pill">No &darr; Is it a one-off layout override for a single page?</span>
-                <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
-                <span class="atom-pill atom-pill--danger">Page &rarr; <code>pages/</code> or
-                  <code>bundle-*.scss</code></span>
-              </div>
-
+        <!-- ─── HERO ─── -->
+        <section class="docs-hero" aria-labelledby="docs-hero-title">
+          <span class="docs-hero__eyebrow">
+            <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+            Component Gallery v4.0.0
+          </span>
+          <h1 class="atom-title atom-title--h1 docs-hero__title" id="docs-hero-title">SYX Design System</h1>
+          <p class="atom-txt atom-txt--primary docs-hero__lead">Ordered by <strong>layer hierarchy</strong>:
+            utilities &rarr; layout &rarr; atoms &rarr; molecules &rarr; organisms.</p>
+          <div class="docs-hero__stats" role="list" aria-label="System stats">
+            <div class="docs-hero__stat" role="listitem">
+              <span class="atom-icon atom-icon--lc-layers atom-icon--sm atom-icon--color-primary"
+                aria-hidden="true"></span>
+              <strong>7</strong> layers
+            </div>
+            <div class="docs-hero__stat" role="listitem">
+              <span class="atom-icon atom-icon--lc-code atom-icon--sm" aria-hidden="true"></span>
+              <strong>665</strong> tokens
+            </div>
+            <div class="docs-hero__stat" role="listitem">
+              <span class="atom-icon atom-icon--lc-sun atom-icon--sm" aria-hidden="true"></span>
+              <strong>6</strong> themes
+            </div>
+            <div class="docs-hero__stat" role="listitem">
+              <span class="atom-icon atom-icon--lc-check atom-icon--sm atom-icon--color-state-ok"
+                aria-hidden="true"></span>
+              WCAG AA
+            </div>
+            <div class="docs-hero__stat" role="listitem">
+              <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
+              Zero dependencies
             </div>
           </div>
-
-          <!-- Reference table -->
-          <p class="syx-type-overline syx-text-gray syx-mb-2">Quick reference</p>
-          <div class="syx-mb-4" style="overflow-x:auto">
-            <table class="atom-table" style="min-width:600px">
-              <thead>
-                <tr>
-                  <th>Layer</th>
-                  <th>Prefix</th>
-                  <th>When to use</th>
-                  <th>Anti-pattern</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="atom-pill atom-pill--secondary">Util</span></td>
-                  <td><code>.syx-</code></td>
-                  <td>Single CSS property: display, spacing, color, visibility</td>
-                  <td>Never add visual design to a utility class</td>
-                </tr>
-                <tr>
-                  <td><span class="atom-pill atom-pill--primary">Atom</span></td>
-                  <td><code>atom-</code></td>
-                  <td>Smallest reusable building block: btn, icon, label, pill, input</td>
-                  <td>Don't compose atoms inside atoms</td>
-                </tr>
-                <tr>
-                  <td><span class="atom-pill atom-pill--success">Mol</span></td>
-                  <td><code>mol-</code></td>
-                  <td>Composition of 2+ atoms that always travel together</td>
-                  <td>If sub-parts make sense independently → separate atoms</td>
-                </tr>
-                <tr>
-                  <td><span class="atom-pill atom-pill--warning">Org</span></td>
-                  <td><code>org-</code></td>
-                  <td>Complete UI section; appears across multiple pages</td>
-                  <td>Don't put page-unique content inside an organism</td>
-                </tr>
-                <tr>
-                  <td><span class="atom-pill atom-pill--danger">Page</span></td>
-                  <td>—</td>
-                  <td>Layout tweaks exclusive to one specific page</td>
-                  <td>Don't duplicate component logic in page-level styles</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Rule of thumb callout -->
-          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-3">
-            <p class="atom-txt"><strong>Rule of thumb:</strong> Utilities are <em>adjectives</em>
-              (<code>.syx-d-flex</code> → the display <em>is</em> flex). Components are <em>nouns</em>
-              (<code>.mol-card</code> → a card). If you're unsure between atom and molecule: <em>would the sub-parts
-                ever make sense independently?</em> Yes → separate atoms. No → molecule.</p>
-          </div>
-
-          <!-- Worked examples -->
-          <p class="syx-type-overline syx-text-gray syx-mb-2">Worked examples</p>
-          <div class="syx-border syx-p-3 syx-bg-gray-50">
-            <div class="syx-d-flex syx-flex-col syx-gap-2">
-              <div class="syx-d-flex syx-gap-2 syx-items-center">
-                <span class="atom-pill atom-pill--primary">atom</span>
-                <span class="atom-txt">"I need a button" → <code>atom-btn</code></span>
-              </div>
-              <div class="syx-d-flex syx-gap-2 syx-items-center">
-                <span class="atom-pill atom-pill--primary">atom</span>
-                <span class="atom-txt">"Button with icon" → <code>atom-btn + atom-icon</code> composed in HTML,
-                  <strong>not</strong> a new mol-</span>
-              </div>
-              <div class="syx-d-flex syx-gap-2 syx-items-center">
-                <span class="atom-pill atom-pill--success">mol</span>
-                <span class="atom-txt">"Search field" → <code>mol-search</code> (input + icon + btn always
-                  together)</span>
-              </div>
-              <div class="syx-d-flex syx-gap-2 syx-items-center">
-                <span class="atom-pill atom-pill--warning">org</span>
-                <span class="atom-txt">"Site header" → <code>org-site-header</code></span>
-              </div>
-              <div class="syx-d-flex syx-gap-2 syx-items-center">
-                <span class="atom-pill atom-pill--secondary">util</span>
-                <span class="atom-txt">"Center a div on this page" → <code>.syx-mx-auto</code> or
-                  <code>.syx-text-center</code></span>
-              </div>
+          <nav aria-label="Jump to section">
+            <div class="mol-btn-group">
+              <a href="#guide" class="atom-btn atom-btn--secondary atom-btn--size-sm atom-btn--has-icon">
+                <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
+                Authoring Guide
+              </a>
+              <a href="#utilities" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Utilities</a>
+              <a href="#layout" class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-sm">Layout</a>
+              <a href="#atoms" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Atoms</a>
+              <a href="#molecules" class="atom-btn atom-btn--quaternary atom-btn--size-sm">Molecules</a>
             </div>
-          </div>
+          </nav>
         </section>
 
-        <!-- ── §2: HTML Authoring ──────────────────────────── -->
-        <section class="syx-mb-5" id="guide-html" aria-labelledby="guide-html-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-html-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§2</span>
-            HTML Authoring
-          </h3>
+        <!-- ══════════════════════════════════════════
+       LAYER 0 — AUTHORING GUIDE
+  ══════════════════════════════════════════ -->
+        <section id="guide" aria-labelledby="guide-heading" class="syx-mb-5">
 
-          <!-- 2.1 Semantic -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">2.1 — Semantics first</h4>
-          <p class="atom-txt syx-text-gray syx-mb-2">Always start with the semantically correct element, then apply SYX
-            classes. Never choose an element because of its default browser style.</p>
-          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
-            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
-              <p class="syx-type-overline syx-text-success syx-mb-2">✅ Correct</p>
-              <pre class="atom-code"><code>&lt;nav aria-label="Main navigation" class="org-navbar"&gt;
+          <div class="docs-section-divider" aria-hidden="true">
+            <span class="docs-section-divider__badge docs-section-divider__badge--guide">
+              <span class="atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
+              Authoring Guide
+            </span>
+            <span class="docs-section-divider__line"></span>
+            <span class="docs-section-divider__layer">1–6 rules</span>
+          </div>
+          <h2 class="atom-title atom-title--h2 syx-mb-1" id="guide-heading">Authoring Guide</h2>
+          <p class="atom-txt syx-text-gray syx-mb-4">Practical decision rules for writing HTML and SCSS with SYX. Read
+            this before creating any component.</p>
+
+          <!-- ── 1: Where does my code go? ─────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-layers" aria-labelledby="guide-layers-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-layers-heading">
+              Where does my code go? — Decision flowchart
+            </h3>
+
+            <!-- Visual flowchart -->
+            <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50" role="img" aria-label="Layer decision flowchart">
+              <div class="syx-d-flex syx-flex-col syx-gap-2">
+
+                <div class="syx-d-flex syx-items-center syx-gap-2">
+                  <span class="atom-pill atom-pill--dark">Is it a single CSS property with no markup dependency?</span>
+                  <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
+                  <span class="atom-pill atom-pill--secondary"><code>.syx-*</code> &rarr; <strong>Util</strong>
+                    <code>utilities/</code></span>
+                </div>
+
+                <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
+                  <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
+                    aria-hidden="true"></span>
+                  <span class="atom-pill">No &darr; Is it a single, self-contained HTML element?</span>
+                  <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
+                  <span class="atom-pill atom-pill--primary"><code>atom-*</code> &rarr; <strong>Atom</strong>
+                    <code>atoms/</code></span>
+                </div>
+
+                <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
+                  <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
+                    aria-hidden="true"></span>
+                  <span class="atom-pill">No &darr; Does it compose 2+ atoms that always travel together?</span>
+                  <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
+                  <span class="atom-pill atom-pill--success"><code>mol-*</code> &rarr; <strong>Molecule</strong>
+                    <code>molecules/</code></span>
+                </div>
+
+                <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
+                  <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
+                    aria-hidden="true"></span>
+                  <span class="atom-pill">No &darr; Is it a full UI section (header, hero, footer)?</span>
+                  <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
+                  <span class="atom-pill atom-pill--warning"><code>org-*</code> &rarr; <strong>Organism</strong>
+                    <code>organisms/</code></span>
+                </div>
+
+                <div class="syx-d-flex syx-items-center syx-gap-2 syx-ml-4">
+                  <span class="atom-icon atom-icon--lc-corner-down-right atom-icon--sm syx-text-gray"
+                    aria-hidden="true"></span>
+                  <span class="atom-pill">No &darr; Is it a one-off layout override for a single page?</span>
+                  <span class="atom-icon atom-icon--lc-arrow-right atom-icon--sm" aria-hidden="true"></span>
+                  <span class="atom-pill atom-pill--danger">Page &rarr; <code>pages/</code> or
+                    <code>bundle-*.scss</code></span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Reference table -->
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Quick reference</p>
+            <div class="syx-mb-4" style="overflow-x:auto">
+              <table class="atom-table" style="min-width:600px">
+                <thead>
+                  <tr>
+                    <th>Layer</th>
+                    <th>Prefix</th>
+                    <th>When to use</th>
+                    <th>Anti-pattern</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="atom-pill atom-pill--secondary">Util</span></td>
+                    <td><code>.syx-</code></td>
+                    <td>Single CSS property: display, spacing, color, visibility</td>
+                    <td>Never add visual design to a utility class</td>
+                  </tr>
+                  <tr>
+                    <td><span class="atom-pill atom-pill--primary">Atom</span></td>
+                    <td><code>atom-</code></td>
+                    <td>Smallest reusable building block: btn, icon, label, pill, input</td>
+                    <td>Don't compose atoms inside atoms</td>
+                  </tr>
+                  <tr>
+                    <td><span class="atom-pill atom-pill--success">Mol</span></td>
+                    <td><code>mol-</code></td>
+                    <td>Composition of 2+ atoms that always travel together</td>
+                    <td>If sub-parts make sense independently &rarr; separate atoms</td>
+                  </tr>
+                  <tr>
+                    <td><span class="atom-pill atom-pill--warning">Org</span></td>
+                    <td><code>org-</code></td>
+                    <td>Complete UI section; appears across multiple pages</td>
+                    <td>Don't put page-unique content inside an organism</td>
+                  </tr>
+                  <tr>
+                    <td><span class="atom-pill atom-pill--danger">Page</span></td>
+                    <td>—</td>
+                    <td>Layout tweaks exclusive to one specific page</td>
+                    <td>Don't duplicate component logic in page-level styles</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Rule of thumb callout -->
+            <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-3">
+              <p class="atom-txt"><strong>Rule of thumb:</strong> Utilities are <em>adjectives</em>
+                (<code>.syx-d-flex</code> &rarr; the display <em>is</em> flex). Components are <em>nouns</em>
+                (<code>.mol-card</code> &rarr; a card). If you're unsure between atom and molecule: <em>would the
+                  sub-parts
+                  ever make sense independently?</em> Yes &rarr; separate atoms. No &rarr; molecule.</p>
+            </div>
+
+            <!-- Worked examples -->
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Worked examples</p>
+            <div class="syx-border syx-p-3 syx-bg-gray-50">
+              <div class="syx-d-flex syx-flex-col syx-gap-2">
+                <div class="syx-d-flex syx-gap-2 syx-items-center">
+                  <span class="atom-pill atom-pill--primary">atom</span>
+                  <span class="atom-txt">"I need a button" &rarr; <code>atom-btn</code></span>
+                </div>
+                <div class="syx-d-flex syx-gap-2 syx-items-center">
+                  <span class="atom-pill atom-pill--primary">atom</span>
+                  <span class="atom-txt">"Button with icon" &rarr; <code>atom-btn + atom-icon</code> composed in HTML,
+                    <strong>not</strong> a new mol-</span>
+                </div>
+                <div class="syx-d-flex syx-gap-2 syx-items-center">
+                  <span class="atom-pill atom-pill--success">mol</span>
+                  <span class="atom-txt">"Search field" &rarr; <code>mol-search</code> (input + icon + btn always
+                    together)</span>
+                </div>
+                <div class="syx-d-flex syx-gap-2 syx-items-center">
+                  <span class="atom-txt">"Site header" &rarr; <code>org-site-header</code></span>
+                </div>
+                <div class="syx-d-flex syx-gap-2 syx-items-center">
+                  <span class="atom-pill atom-pill--secondary">util</span>
+                  <span class="atom-txt">"Center a div on this page" &rarr; <code>.syx-mx-auto</code> or
+                    <code>.syx-text-center</code></span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ── 2: HTML Authoring ──────────────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-html" aria-labelledby="guide-html-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-html-heading">
+              HTML Authoring
+            </h3>
+
+            <!-- 2.1 Semantic -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">2.1 — Semantics first</h4>
+            <p class="atom-txt syx-text-gray syx-mb-2">Always start with the semantically correct element, then apply
+              SYX
+              classes. Never choose an element because of its default browser style.</p>
+            <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
+              <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
+                <p class="syx-type-overline syx-text-success syx-mb-2">✅ Correct</p>
+                <pre class="atom-code"><code>&lt;nav aria-label="Main navigation" class="org-navbar"&gt;
   &lt;ul class="org-navbar__list" role="list"&gt;
     &lt;li&gt;&lt;a href="/" class="atom-link"&gt;Home&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
-            </div>
-            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
-              <p class="syx-type-overline syx-text-error syx-mb-2">❌ Wrong — div soup</p>
-              <pre class="atom-code"><code>&lt;div class="org-navbar"&gt;
+              </div>
+              <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
+                <p class="syx-type-overline syx-text-error syx-mb-2">❌ Wrong — div soup</p>
+                <pre class="atom-code"><code>&lt;div class="org-navbar"&gt;
   &lt;div class="org-navbar__list"&gt;
     &lt;div&gt;&lt;span class="atom-link"&gt;Home&lt;/span&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+              </div>
             </div>
-          </div>
 
-          <!-- 2.2 BEM in HTML -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">2.2 — BEM in HTML</h4>
-          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-3">
-            <ul class="atom-list syx-mb-0">
-              <li><strong>Block + modifier always together.</strong> Never write a modifier without the base block
-                class:
-                <code>atom-btn atom-btn--primary</code> ✅ — <code>atom-btn--primary</code> alone ❌
-              </li>
-              <li><strong>Max 2 BEM depth levels.</strong> If you need <code>__element__sub</code>, those are two
-                independent elements.</li>
-              <li><strong>Dynamic states → <code>is-</code></strong>, not BEM modifiers. BEM modifiers are permanent
-                variants; <code>is-open</code>, <code>is-loading</code> are JS-driven state.</li>
-            </ul>
-          </div>
-          <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Correct --&gt;
+            <!-- 2.2 BEM in HTML -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">2.2 — BEM in HTML</h4>
+            <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-3">
+              <ul class="atom-list syx-mb-0">
+                <li><strong>Block + modifier always together.</strong> Never write a modifier without the base block
+                  class:
+                  <code>atom-btn atom-btn--primary</code> ✅ — <code>atom-btn--primary</code> alone ❌
+                </li>
+                <li><strong>Max 2 BEM depth levels.</strong> If you need <code>__element__sub</code>, those are two
+                  independent elements.</li>
+                <li><strong>Dynamic states &rarr; <code>is-</code></strong>, not BEM modifiers. BEM modifiers are
+                  permanent
+                  variants; <code>is-open</code>, <code>is-loading</code> are JS-driven state.</li>
+              </ul>
+            </div>
+            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Correct --&gt;
 &lt;button class="atom-btn atom-btn--primary"&gt;          &lt;!-- block + modifier --&gt;
   &lt;span class="atom-btn__icon" aria-hidden="true"&gt;   &lt;!-- element --&gt;
 &lt;/button&gt;
 &lt;button class="atom-btn is-loading"&gt;                &lt;!-- dynamic state --&gt;</code></pre>
 
-          <!-- 2.3 Composing -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">2.3 — Compose in HTML, not in SCSS</h4>
-          <p class="atom-txt syx-text-gray syx-mb-2">Organisms and molecules are composed in HTML. Keep SCSS partials
-            free of cross-layer selector references.</p>
-          <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Composed in HTML — molecules inside organisms --&gt;
+            <!-- 2.3 Composing -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">2.3 — Compose in HTML, not in SCSS</h4>
+            <p class="atom-txt syx-text-gray syx-mb-2">Organisms and molecules are composed in HTML. Keep SCSS partials
+              free of cross-layer selector references.</p>
+            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Composed in HTML — molecules inside organisms --&gt;
 &lt;header class="org-header"&gt;
   &lt;div class="org-header__inner layout-grid"&gt;
     &lt;a href="/" class="atom-link org-header__logo"&gt;…&lt;/a&gt;
@@ -402,68 +802,68 @@
 &lt;!-- ❌ Wrong — organism SCSS references a molecule selector --&gt;
 /* organisms/_header.scss */
 .org-header .mol-btn-group { margin-left: auto; } ← coupling between layers</code></pre>
-          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
-            <p class="atom-txt syx-mb-0"><strong>Valid exception:</strong> an organism CAN define layout-level
-              <code>gap</code> or <code>grid-template-areas</code> for its direct children. What it cannot do is
-              redefine the internal styles of a molecule.
-            </p>
-          </div>
+            <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+              <p class="atom-txt syx-mb-0"><strong>Valid exception:</strong> an organism CAN define layout-level
+                <code>gap</code> or <code>grid-template-areas</code> for its direct children. What it cannot do is
+                redefine the internal styles of a molecule.
+              </p>
+            </div>
 
-          <!-- 2.4 A11y table -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">2.4 — Accessibility (required)</h4>
-          <div class="syx-mb-4" style="overflow-x:auto">
-            <table class="atom-table" style="min-width:540px">
-              <thead>
-                <tr>
-                  <th>Element</th>
-                  <th>Required attributes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>&lt;img&gt;</code></td>
-                  <td><code>alt=""</code> (decorative) or <code>alt="description"</code> (informative)</td>
-                </tr>
-                <tr>
-                  <td><code>&lt;button&gt;</code> icon-only</td>
-                  <td><code>aria-label="…"</code> always</td>
-                </tr>
-                <tr>
-                  <td><code>&lt;a&gt;</code> icon-only</td>
-                  <td><code>aria-label="…"</code> always</td>
-                </tr>
-                <tr>
-                  <td><code>&lt;nav&gt;</code></td>
-                  <td><code>aria-label="…"</code> to distinguish multiple navs</td>
-                </tr>
-                <tr>
-                  <td><code>&lt;section&gt;</code></td>
-                  <td><code>aria-labelledby="id-heading"</code> pointing to the section's <code>&lt;h*&gt;</code></td>
-                </tr>
-                <tr>
-                  <td>Interactive state</td>
-                  <td><code>aria-expanded</code>, <code>aria-current</code>, <code>aria-selected</code> as appropriate
-                  </td>
-                </tr>
-                <tr>
-                  <td>Decorative icons</td>
-                  <td><code>aria-hidden="true"</code> on all decorative <code>&lt;span class="atom-icon"&gt;</code>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Icon-only button done right --&gt;
+            <!-- 2.4 A11y table -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">2.4 — Accessibility (required)</h4>
+            <div class="syx-mb-4" style="overflow-x:auto">
+              <table class="atom-table" style="min-width:540px">
+                <thead>
+                  <tr>
+                    <th>Element</th>
+                    <th>Required attributes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>&lt;img&gt;</code></td>
+                    <td><code>alt=""</code> (decorative) or <code>alt="description"</code> (informative)</td>
+                  </tr>
+                  <tr>
+                    <td><code>&lt;button&gt;</code> icon-only</td>
+                    <td><code>aria-label="…"</code> always</td>
+                  </tr>
+                  <tr>
+                    <td><code>&lt;a&gt;</code> icon-only</td>
+                    <td><code>aria-label="…"</code> always</td>
+                  </tr>
+                  <tr>
+                    <td><code>&lt;nav&gt;</code></td>
+                    <td><code>aria-label="…"</code> to distinguish multiple navs</td>
+                  </tr>
+                  <tr>
+                    <td><code>&lt;section&gt;</code></td>
+                    <td><code>aria-labelledby="id-heading"</code> pointing to the section's <code>&lt;h*&gt;</code></td>
+                  </tr>
+                  <tr>
+                    <td>Interactive state</td>
+                    <td><code>aria-expanded</code>, <code>aria-current</code>, <code>aria-selected</code> as appropriate
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Decorative icons</td>
+                    <td><code>aria-hidden="true"</code> on all decorative <code>&lt;span class="atom-icon"&gt;</code>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Icon-only button done right --&gt;
 &lt;button class="atom-btn atom-btn--ghost atom-btn--circle"
         aria-label="Close menu"&gt;
   &lt;span class="atom-icon atom-icon--lc-x" aria-hidden="true"&gt;&lt;/span&gt;
 &lt;/button&gt;</code></pre>
 
-          <!-- 2.5 Grid -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">2.5 — Layout Grid</h4>
-          <p class="atom-txt syx-text-gray syx-mb-2">Use <code>.layout-grid</code> for all main content areas. Never
-            invent ad-hoc flex containers for page structure.</p>
-          <pre class="atom-code"><code>&lt;!-- ✅ Standard responsive layout --&gt;
+            <!-- 2.5 Grid -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">2.5 — Layout Grid</h4>
+            <p class="atom-txt syx-text-gray syx-mb-2">Use <code>.layout-grid</code> for all main content areas. Never
+              invent ad-hoc flex containers for page structure.</p>
+            <pre class="atom-code"><code>&lt;!-- ✅ Standard responsive layout --&gt;
 &lt;main class="layout-grid"&gt;
   &lt;div class="layout-grid__col-xs-12 layout-grid__col-md-8"&gt;&lt;!-- main --&gt;&lt;/div&gt;
   &lt;aside class="layout-grid__col-xs-12 layout-grid__col-md-4"&gt;&lt;!-- sidebar --&gt;&lt;/aside&gt;
@@ -477,46 +877,45 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-        </section>
+          </section>
 
-        <!-- ── §3: SCSS Efficiency ────────────────────────── -->
-        <section class="syx-mb-5" id="guide-scss" aria-labelledby="guide-scss-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-scss-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§3</span>
-            SCSS for efficient CSS output
-          </h3>
-          <p class="atom-txt syx-text-gray syx-mb-3">Every SCSS decision carries a cost in the compiled CSS. These
-            rules keep the output lean.</p>
+          <!-- ── 3: SCSS Efficiency ────────────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-scss" aria-labelledby="guide-scss-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-scss-heading">
+              SCSS for efficient CSS output
+            </h3>
+            <p class="atom-txt syx-text-gray syx-mb-3">Every SCSS decision carries a cost in the compiled CSS. These
+              rules keep the output lean.</p>
 
-          <!-- 3.1 Nesting -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">3.1 — Max 3 nesting levels</h4>
-          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
-            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
-              <p class="syx-type-overline syx-text-success syx-mb-2">✅ Efficient — max 3 levels</p>
-              <pre class="atom-code"><code>.org-header {
+            <!-- 3.1 Nesting -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">3.1 — Max 3 nesting levels</h4>
+            <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
+              <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
+                <p class="syx-type-overline syx-text-success syx-mb-2">✅ Efficient — max 3 levels</p>
+                <pre class="atom-code"><code>.org-header {
   &__nav {         // level 2
     &--open { … } // level 3
   }
 }
 // Output: .org-header__nav--open {}</code></pre>
-            </div>
-            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
-              <p class="syx-type-overline syx-text-error syx-mb-2">❌ Expensive — 5 levels</p>
-              <pre class="atom-code"><code>.org-header {
+              </div>
+              <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
+                <p class="syx-type-overline syx-text-error syx-mb-2">❌ Expensive — 5 levels</p>
+                <pre class="atom-code"><code>.org-header {
   &__nav {
     &__list {
       &__item {
         &--active { … }
 // Output: .org-header__nav__list__item--active</code></pre>
+              </div>
             </div>
-          </div>
 
-          <!-- 3.2 @mixin wrapper -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">3.2 — The @mixin wrapper pattern (mandatory)</h4>
-          <p class="atom-txt syx-text-gray syx-mb-2">Every component MUST be wrapped in a <code>@mixin</code> with a
-            <code>$theme</code> parameter. This enables selective inclusion and multi-theme support.
-          </p>
-          <pre class="atom-code syx-mb-4"><code>// ✅ Correct
+            <!-- 3.2 @mixin wrapper -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">3.2 — The @mixin wrapper pattern (mandatory)</h4>
+            <p class="atom-txt syx-text-gray syx-mb-2">Every component MUST be wrapped in a <code>@mixin</code> with a
+              <code>$theme</code> parameter. This enables selective inclusion and multi-theme support.
+            </p>
+            <pre class="atom-code syx-mb-4"><code>// ✅ Correct
 @mixin mol-card($theme: null) {
   @layer syx.molecules {
     .mol-card { /* base */ }
@@ -530,11 +929,11 @@
 // ❌ Wrong — top-level rules cannot be excluded from any bundle
 .mol-card { … }</code></pre>
 
-          <!-- 3.3 null-safe -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">3.3 — Null-safe shorthand</h4>
-          <p class="atom-txt syx-text-gray syx-mb-2">SYX mixins skip <code>null</code> values. Use this to avoid
-            emitting unnecessary properties.</p>
-          <pre class="atom-code syx-mb-4"><code>// ✅ Only emits padding-top and padding-bottom — no left/right
+            <!-- 3.3 null-safe -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">3.3 — Null-safe shorthand</h4>
+            <p class="atom-txt syx-text-gray syx-mb-2">SYX mixins skip <code>null</code> values. Use this to avoid
+              emitting unnecessary properties.</p>
+            <pre class="atom-code syx-mb-4"><code>// ✅ Only emits padding-top and padding-bottom — no left/right
 @include padding(var(--semantic-space-inset-md) null);
 
 // ❌ Raw CSS always emits all 4 properties (sets left/right to 0)
@@ -542,57 +941,57 @@ padding: var(--semantic-space-inset-md) 0;
 
 // ✅ Horizontal centering without touching top/bottom
 @include margin(null auto);
-// → margin-right: auto; margin-left: auto;</code></pre>
+// &rarr; margin-right: auto; margin-left: auto;</code></pre>
 
-          <!-- 3.4 token map -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">3.4 — Token → CSS output</h4>
-          <div class="syx-mb-4" style="overflow-x:auto">
-            <table class="atom-table" style="min-width:580px">
-              <thead>
-                <tr>
-                  <th>SCSS</th>
-                  <th>CSS output</th>
-                  <th>Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>var(--component-btn-primary-bg)</code></td>
-                  <td><code>var(--component-btn-primary-bg)</code></td>
-                  <td>1 property, runtime theming ✅</td>
-                </tr>
-                <tr>
-                  <td><code>var(--primitive-color-blue-500)</code></td>
-                  <td><code>var(--primitive-color-blue-500)</code></td>
-                  <td>❌ Skips semantic layer</td>
-                </tr>
-                <tr>
-                  <td><code>#3b82f6</code></td>
-                  <td><code>#3b82f6</code></td>
-                  <td>❌ Breaks theming</td>
-                </tr>
-                <tr>
-                  <td><code>@include size(100%, 48px)</code></td>
-                  <td><code>width:100%;height:48px</code></td>
-                  <td>null-safe ✅</td>
-                </tr>
-                <tr>
-                  <td><code>@include flex-center()</code></td>
-                  <td><code>display:flex;align-items:center;justify-content:center</code></td>
-                  <td>3 props in 1 include ✅</td>
-                </tr>
-                <tr>
-                  <td><code>@include transition(color 0.2s ease)</code></td>
-                  <td><code>transition:…; @media(prefers-reduced-motion){transition:none}</code></td>
-                  <td>Auto reduced-motion guard ✅</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <!-- 3.4 token map -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">3.4 — Token &rarr; CSS output</h4>
+            <div class="syx-mb-4" style="overflow-x:auto">
+              <table class="atom-table" style="min-width:580px">
+                <thead>
+                  <tr>
+                    <th>SCSS</th>
+                    <th>CSS output</th>
+                    <th>Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>var(--component-btn-primary-bg)</code></td>
+                    <td><code>var(--component-btn-primary-bg)</code></td>
+                    <td>1 property, runtime theming ✅</td>
+                  </tr>
+                  <tr>
+                    <td><code>var(--primitive-color-blue-500)</code></td>
+                    <td><code>var(--primitive-color-blue-500)</code></td>
+                    <td>❌ Skips semantic layer</td>
+                  </tr>
+                  <tr>
+                    <td><code>#3b82f6</code></td>
+                    <td><code>#3b82f6</code></td>
+                    <td>❌ Breaks theming</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include size(100%, 48px)</code></td>
+                    <td><code>width:100%;height:48px</code></td>
+                    <td>null-safe ✅</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include flex-center()</code></td>
+                    <td><code>display:flex;align-items:center;justify-content:center</code></td>
+                    <td>3 props in 1 include ✅</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include transition(color 0.2s ease)</code></td>
+                    <td><code>transition:…; @media(prefers-reduced-motion){transition:none}</code></td>
+                    <td>Auto reduced-motion guard ✅</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <!-- 3.5 property order -->
-          <h4 class="atom-title atom-title--h5 syx-mb-2">3.5 — Property order inside a rule</h4>
-          <pre class="atom-code"><code>.syx-component {
+            <!-- 3.5 property order -->
+            <h4 class="atom-title atom-title--h5 syx-mb-2">3.5 — Property order inside a rule</h4>
+            <pre class="atom-code"><code>.syx-component {
   // 1. Positioning
   @include absolute($top: 0, $left: 0);
 
@@ -629,120 +1028,119 @@ padding: var(--semantic-space-inset-md) 0;
   &amp;__icon { … }
   &amp;__label { … }
 }</code></pre>
-        </section>
+          </section>
 
-        <!-- ── §4: Mixin Deep-Dive ────────────────────────── -->
-        <section class="syx-mb-5" id="guide-mixins" aria-labelledby="guide-mixins-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-mixins-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§4</span>
-            Mixin Deep-Dive
-          </h3>
+          <!-- ── 4: Mixin Deep-Dive ────────────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-mixins" aria-labelledby="guide-mixins-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-mixins-heading">
+              Mixin Deep-Dive
+            </h3>
 
-          <!-- Mixin reference table -->
-          <div class="syx-mb-4" style="overflow-x:auto">
-            <table class="atom-table" style="min-width:560px">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Mixin</th>
-                  <th>Output / Note</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td rowspan="4"><strong>Position</strong></td>
-                  <td><code>@include absolute($top:0, $right:0)</code></td>
-                  <td><code>position:absolute;top:0;right:0</code> — null-safe</td>
-                </tr>
-                <tr>
-                  <td><code>@include relative()</code></td>
-                  <td><code>position:relative</code> — use even without coords</td>
-                </tr>
-                <tr>
-                  <td><code>@include fixed($bottom:0)</code></td>
-                  <td><code>position:fixed;bottom:0</code></td>
-                </tr>
-                <tr>
-                  <td><code>@include sticky($top:0)</code></td>
-                  <td><code>position:sticky;top:0</code></td>
-                </tr>
-                <tr>
-                  <td rowspan="3"><strong>Spacing</strong></td>
-                  <td><code>@include padding(Yval null)</code></td>
-                  <td>Only top+bottom — left/right not emitted</td>
-                </tr>
-                <tr>
-                  <td><code>@include padding(Y X)</code></td>
-                  <td>Top+bottom = Y, Left+right = X</td>
-                </tr>
-                <tr>
-                  <td><code>@include margin(null auto)</code></td>
-                  <td>Only margin-left+right: auto</td>
-                </tr>
-                <tr>
-                  <td rowspan="2"><strong>Flex</strong></td>
-                  <td><code>@include flex-center()</code></td>
-                  <td><code>display:flex;align-items:center;justify-content:center</code></td>
-                </tr>
-                <tr>
-                  <td><code>@include flex-between()</code></td>
-                  <td><code>display:flex;align-items:center;justify-content:space-between</code></td>
-                </tr>
-                <tr>
-                  <td><strong>Transition</strong></td>
-                  <td><code>@include transition(color 0.2s ease)</code></td>
-                  <td>Adds <code>prefers-reduced-motion</code> guard automatically ⭐</td>
-                </tr>
-                <tr>
-                  <td rowspan="4"><strong>Media</strong></td>
-                  <td><code>@include breakpoint(tablet)</code></td>
-                  <td><code>min-width: 50em</code> — mobile-first</td>
-                </tr>
-                <tr>
-                  <td><code>@include breakpoint(desktop)</code></td>
-                  <td><code>min-width: 70em</code></td>
-                </tr>
-                <tr>
-                  <td><code>@include darkmode</code></td>
-                  <td><code>@media(prefers-color-scheme:dark)</code></td>
-                </tr>
-                <tr>
-                  <td><code>@include min-screen(48em)</code></td>
-                  <td>Custom value — always <code>em</code>, never <code>px</code></td>
-                </tr>
-                <tr>
-                  <td rowspan="2"><strong>A11y</strong></td>
-                  <td><code>@include sr-only()</code></td>
-                  <td>Visually hidden, accessible to screen readers</td>
-                </tr>
-                <tr>
-                  <td><code>@include focus-ring()</code></td>
-                  <td>WCAG focus outline — use only inside <code>:focus-visible</code></td>
-                </tr>
-                <tr>
-                  <td rowspan="2"><strong>Text</strong></td>
-                  <td><code>@include truncate(200px)</code></td>
-                  <td>Single-line ellipsis</td>
-                </tr>
-                <tr>
-                  <td><code>@include ellipsis(3)</code></td>
-                  <td>Multi-line clamp to 3 lines</td>
-                </tr>
-                <tr>
-                  <td><strong>Border</strong></td>
-                  <td><code>@include border(top, 1px, solid, var(--color))</code></td>
-                  <td>Or <code>all</code> for all 4 sides</td>
-                </tr>
-                <tr>
-                  <td><strong>Size</strong></td>
-                  <td><code>@include size(100%, 48px)</code></td>
-                  <td><code>width:100%;height:48px</code> — null-safe</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <!-- Mixin reference table -->
+            <div class="syx-mb-4" style="overflow-x:auto">
+              <table class="atom-table" style="min-width:560px">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Mixin</th>
+                    <th>Output / Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td rowspan="4"><strong>Position</strong></td>
+                    <td><code>@include absolute($top:0, $right:0)</code></td>
+                    <td><code>position:absolute;top:0;right:0</code> — null-safe</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include relative()</code></td>
+                    <td><code>position:relative</code> — use even without coords</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include fixed($bottom:0)</code></td>
+                    <td><code>position:fixed;bottom:0</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>@include sticky($top:0)</code></td>
+                    <td><code>position:sticky;top:0</code></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3"><strong>Spacing</strong></td>
+                    <td><code>@include padding(Yval null)</code></td>
+                    <td>Only top+bottom — left/right not emitted</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include padding(Y X)</code></td>
+                    <td>Top+bottom = Y, Left+right = X</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include margin(null auto)</code></td>
+                    <td>Only margin-left+right: auto</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><strong>Flex</strong></td>
+                    <td><code>@include flex-center()</code></td>
+                    <td><code>display:flex;align-items:center;justify-content:center</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>@include flex-between()</code></td>
+                    <td><code>display:flex;align-items:center;justify-content:space-between</code></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Transition</strong></td>
+                    <td><code>@include transition(color 0.2s ease)</code></td>
+                    <td>Adds <code>prefers-reduced-motion</code> guard automatically ⭐</td>
+                  </tr>
+                  <tr>
+                    <td rowspan="4"><strong>Media</strong></td>
+                    <td><code>@include breakpoint(tablet)</code></td>
+                    <td><code>min-width: 50em</code> — mobile-first</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include breakpoint(desktop)</code></td>
+                    <td><code>min-width: 70em</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>@include darkmode</code></td>
+                    <td><code>@media(prefers-color-scheme:dark)</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>@include min-screen(48em)</code></td>
+                    <td>Custom value — always <code>em</code>, never <code>px</code></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><strong>A11y</strong></td>
+                    <td><code>@include sr-only()</code></td>
+                    <td>Visually hidden, accessible to screen readers</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include focus-ring()</code></td>
+                    <td>WCAG focus outline — use only inside <code>:focus-visible</code></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="2"><strong>Text</strong></td>
+                    <td><code>@include truncate(200px)</code></td>
+                    <td>Single-line ellipsis</td>
+                  </tr>
+                  <tr>
+                    <td><code>@include ellipsis(3)</code></td>
+                    <td>Multi-line clamp to 3 lines</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Border</strong></td>
+                    <td><code>@include border(top, 1px, solid, var(--color))</code></td>
+                    <td>Or <code>all</code> for all 4 sides</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Size</strong></td>
+                    <td><code>@include size(100%, 48px)</code></td>
+                    <td><code>width:100%;height:48px</code> — null-safe</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <pre class="atom-code syx-mb-3"><code>// ✅ Mobile-first with breakpoints
+            <pre class="atom-code syx-mb-3"><code>// ✅ Mobile-first with breakpoints
 .org-hero__title {
   font-size: var(--semantic-font-size-xl);      // mobile
 
@@ -756,77 +1154,76 @@ padding: var(--semantic-space-inset-md) 0;
 
 // ✅ Focus ring only inside :focus-visible
 &amp;:focus-visible { @include focus-ring(); }</code></pre>
-        </section>
+          </section>
 
-        <!-- ── §5: Tips & Gotchas ─────────────────────────── -->
-        <section class="syx-mb-5" id="guide-tips" aria-labelledby="guide-tips-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-tips-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§5</span>
-            Tips, Patterns &amp; Gotchas
-          </h3>
+          <!-- ── 5: Tips & Gotchas ─────────────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-tips" aria-labelledby="guide-tips-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-tips-heading">
+              Tips, Patterns &amp; Gotchas
+            </h3>
 
-          <div class="syx-d-flex syx-flex-col syx-gap-3">
+            <div class="syx-d-flex syx-flex-col syx-gap-3">
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--danger syx-mr-1">!</span>
-                The "wrong layer" trap
-              </p>
-              <p class="atom-txt syx-mb-1">Utilities are <em>adjectives</em>. If you're inventing a visual utility,
-                you're in the wrong layer.</p>
-              <pre class="atom-code"><code>❌ &lt;div class="syx-card-featured"&gt; → this is a molecule, not a utility
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--danger syx-mr-1">1</span>
+                  The "wrong layer" trap
+                </p>
+                <p class="atom-txt syx-mb-1">Utilities are <em>adjectives</em>. If you're inventing a visual utility,
+                  you're in the wrong layer.</p>
+                <pre class="atom-code"><code>❌ &lt;div class="syx-card-featured"&gt; &rarr; this is a molecule, not a utility
 ✅ &lt;div class="mol-card mol-card--featured"&gt;</code></pre>
-            </div>
+              </div>
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--warning syx-mr-1">!</span>
-                Don't use @include for single-property CSS
-              </p>
-              <p class="atom-txt syx-mb-1">Mixins add value when they include null-safety or extra logic. For simple
-                properties, use raw CSS.</p>
-              <pre class="atom-code"><code>❌ @include color(var(--component-x-color));  → doesn't exist, adds no value
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--warning syx-mr-1">2</span>
+                  Don't use @include for single-property CSS
+                </p>
+                <p class="atom-txt syx-mb-1">Mixins add value when they include null-safety or extra logic. For simple
+                  properties, use raw CSS.</p>
+                <pre class="atom-code"><code>❌ @include color(var(--component-x-color));  &rarr; doesn't exist, adds no value
 ✅ color: var(--component-x-color);
 ✅ opacity: 0.5;
 ✅ cursor: pointer;
 ✅ z-index: var(--semantic-z-index-dropdown);</code></pre>
-            </div>
+              </div>
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--warning syx-mr-1">!</span>
-                Let @layer resolve specificity
-              </p>
-              <p class="atom-txt syx-mb-1">Never increase specificity to win a style conflict. If a component isn't
-                winning, it's a layer assignment problem.</p>
-              <pre class="atom-code"><code>❌ .org-header .atom-btn--primary { background: red; }  → forced specificity
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--warning syx-mr-1">3</span>
+                  Let @layer resolve specificity
+                </p>
+                <p class="atom-txt syx-mb-1">Never increase specificity to win a style conflict. If a component isn't
+                  winning, it's a layer assignment problem.</p>
+                <pre class="atom-code"><code>❌ .org-header .atom-btn--primary { background: red; }  &rarr; forced specificity
 ✅ Use .syx-* utilities — they always win via @layer syx.utilities</code></pre>
-            </div>
+              </div>
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--danger syx-mr-1">!</span>
-                Token without fallback → silent bug in other themes
-              </p>
-              <p class="atom-txt syx-mb-1">If you define a token only in one theme's <code>_theme.scss</code>, the
-                other themes inherit an empty value.</p>
-              <pre class="atom-code"><code>// ❌ Only in themes/example-02/_theme.scss:
---component-header-bg: hsl(0, 0%, 5%);  → themes 01,03,04,05 get no value
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--danger syx-mr-1">4</span>
+                  Token without fallback &rarr; silent bug in other themes
+                </p>
+                <p class="atom-txt syx-mb-1">If you define a token only in one theme's <code>_theme.scss</code>, the
+                  other themes inherit an empty value.</p>
+                <pre class="atom-code"><code>// ❌ Only in themes/example-02/_theme.scss:
+--component-header-bg: hsl(0, 0%, 5%);  &rarr; themes 01,03,04,05 get no value
 
 // ✅ Always define the fallback in abstracts/tokens/components/_header.scss:
 --component-header-bg: var(--semantic-color-bg-primary); // default
 // Then override only in the theme that needs it</code></pre>
-            </div>
+              </div>
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--secondary syx-mr-1">i</span>
-                $theme parameter flow
-              </p>
-              <pre class="atom-code"><code>// setup.scss → passes the theme name to the mixin
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--secondary syx-mr-1">5</span>
+                  $theme parameter flow
+                </p>
+                <pre class="atom-code"><code>// setup.scss &rarr; passes the theme name to the mixin
 @include org-header("example-02");
 
-// organisms/_header.scss → three methods based on type of difference
+// organisms/_header.scss &rarr; three methods based on type of difference
 @mixin org-header($theme: null) {
   // Method 1 — CSS token (automatic, all themes)
   background: var(--component-header-bg);
@@ -837,976 +1234,1006 @@ padding: var(--semantic-space-inset-md) 0;
   // Method 3 — direct @if (1–2 themes only)
   @if $theme == "example-02" { backdrop-filter: blur(8px); }
 }</code></pre>
-            </div>
+              </div>
 
-            <div class="syx-border syx-p-3 syx-bg-gray-50">
-              <p class="atom-title atom-title--h6 syx-mb-1">
-                <span class="atom-pill atom-pill--secondary syx-mr-1">i</span>
-                PurgeCSS: protect dynamic JS classes
-              </p>
-              <pre class="atom-code"><code>// postcss.config.js — safelist
+              <div class="syx-border syx-p-3 syx-bg-gray-50">
+                <p class="atom-title atom-title--h6 syx-mb-1">
+                  <span class="atom-pill atom-pill--secondary syx-mr-1">6</span>
+                  PurgeCSS: protect dynamic JS classes
+                </p>
+                <pre class="atom-code"><code>// postcss.config.js — safelist
 safelist: [/^atom-btn--/, /^is-/];
 
 // Or include class names in an HTML comment (PurgeCSS scans content):
 &lt;!-- is-open is-active is-loading atom-btn--danger --&gt;</code></pre>
-            </div>
+              </div>
 
+            </div>
+          </section>
+
+          <!-- ── 6: Quick Checklist ───────────────────────── -->
+          <section class="docs-guide-section syx-mb-5" id="guide-checklist" aria-labelledby="guide-checklist-heading">
+            <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-checklist-heading">
+              Quick decision checklist
+            </h3>
+            <p class="atom-txt syx-text-gray syx-mb-3">Before writing any new code, ask yourself:</p>
+            <div style="overflow-x:auto">
+              <table class="atom-table" style="min-width:560px">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>The answer determines…</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Is this a reusable UI piece?</td>
+                    <td>Yes &rarr; component (atom/mol/org). No &rarr; page/util</td>
+                  </tr>
+                  <tr>
+                    <td>How many HTML elements does it need?</td>
+                    <td>1 &rarr; atom. 2–5 atoms &rarr; molecule. Full section &rarr; org</td>
+                  </tr>
+                  <tr>
+                    <td>Does it need theme-aware colors/spacing?</td>
+                    <td>Yes &rarr; use component tokens &rarr; <code>var(--component-*)</code></td>
+                  </tr>
+                  <tr>
+                    <td>Will it appear on multiple pages?</td>
+                    <td>Yes &rarr; component layer. No &rarr; page layer</td>
+                  </tr>
+                  <tr>
+                    <td>Is it a one-off CSS property tweak?</td>
+                    <td>Yes &rarr; utility class <code>.syx-*</code></td>
+                  </tr>
+                  <tr>
+                    <td>Does it need JavaScript interaction?</td>
+                    <td>Add a <code>.js-</code> hook class — never style <code>.js-</code> classes</td>
+                  </tr>
+                  <tr>
+                    <td>Am I adding a raw value (oklch, px…)?</td>
+                    <td>🛑 Stop &rarr; use a token instead</td>
+                  </tr>
+                  <tr>
+                    <td>Am I writing <code>transition:</code> without <code>@include</code>?</td>
+                    <td>🛑 Stop &rarr; <code>@include transition()</code></td>
+                  </tr>
+                  <tr>
+                    <td>Am I using <code>position: absolute</code> without <code>@include</code>?</td>
+                    <td>🛑 Stop &rarr; <code>@include absolute()</code></td>
+                  </tr>
+                  <tr>
+                    <td>Am I using <code>!important</code>?</td>
+                    <td>🛑 Stop &rarr; check the <code>@layer</code> order instead</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+        </section><!-- /#guide -->
+
+        <!-- ══════════════════════════════════════════
+       LAYER 1 — UTILITIES  @layer syx.utilities
+  ══════════════════════════════════════════ -->
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--util">
+            <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
+            Utilities
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">@layer syx.utilities</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="utilities" aria-label="Layer 1 — Utilities">Utilities</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.utilities</code> — highest specificity. Always wins
+          over atoms and molecules.</p>
+
+        <!-- Typography Scale -->
+        <section class="syx-mb-5" id="util-type">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            Typography Scale — .syx-type-*
+          </h3>
+          <div class="syx-d-flex syx-flex-col syx-gap-3 syx-mb-4">
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-display-1</code><span
+                class="syx-type-display-1">Display Hero</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h1</code><span
+                class="syx-type-h1">Heading One</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h2</code><span
+                class="syx-type-h2">Heading Two</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h3</code><span
+                class="syx-type-h3">Heading Three</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body-large</code><span
+                class="syx-type-body-large">Body large text.</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body</code><span
+                class="syx-type-body">Body standard text.</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body-small</code><span
+                class="syx-type-body-small">Body small.</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-caption</code><span
+                class="syx-type-caption">Caption — metadata.</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-label</code><span
+                class="syx-type-label">Label text.</span></div>
+            <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-overline</code><span
+                class="syx-type-overline">Overline — Section category</span></div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Text utilities</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-2">
+            <div class="syx-text-center syx-border syx-p-2">syx-text-center</div>
+            <div class="syx-text-uppercase syx-border syx-p-2">syx-text-uppercase</div>
+            <div class="syx-font-bold syx-border syx-p-2">syx-font-bold</div>
+            <div class="syx-font-medium syx-border syx-p-2">syx-font-medium</div>
+            <div class="syx-text-underline syx-border syx-p-2">syx-text-underline</div>
+            <div class="syx-text-strikethrough syx-border syx-p-2">syx-text-strikethrough</div>
+            <div class="syx-max-w-50ch syx-border syx-p-2">syx-max-w-50ch</div>
           </div>
         </section>
 
-        <!-- ── §6: Quick Checklist ───────────────────────── -->
-        <section class="syx-mb-5" id="guide-checklist" aria-labelledby="guide-checklist-heading">
-          <h3 class="atom-title atom-title--h4 syx-mb-3" id="guide-checklist-heading">
-            <span class="atom-pill atom-pill--dark syx-mr-1">§6</span>
-            Quick decision checklist
+        <!-- Text Colors -->
+        <section class="syx-mb-5" id="util-colors">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Text
+            Colors — .syx-text-*</h3>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-mb-3">
+            <span class="syx-text-primary syx-font-bold">.syx-text-primary</span>
+            <span class="syx-text-secondary syx-font-bold">.syx-text-secondary</span>
+            <span class="syx-text-gray">.syx-text-gray</span>
+            <span class="syx-text-muted">.syx-text-muted</span>
+            <span class="syx-text-error">.syx-text-error</span>
+            <span class="syx-text-success">.syx-text-success</span>
+            <span class="syx-text-warning">.syx-text-warning</span>
+            <span class="syx-text-white syx-bg-dark syx-px-2">.syx-text-white</span>
+            <span class="syx-text-inverse syx-bg-primary syx-px-2">.syx-text-inverse</span>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Social brand</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3">
+            <span class="syx-text-facebook syx-font-bold">.syx-text-facebook</span>
+            <span class="syx-text-twitter syx-font-bold">.syx-text-twitter</span>
+            <span class="syx-text-instagram syx-font-bold">.syx-text-instagram</span>
+            <span class="syx-text-whatsapp syx-font-bold">.syx-text-whatsapp</span>
+          </div>
+        </section>
+
+        <!-- Backgrounds -->
+        <section class="syx-mb-5" id="util-backgrounds">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Backgrounds — .syx-bg-* · .syx-bg-color-*</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Semantic (_text.scss)</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-2 syx-mb-3">
+            <div class="syx-bg-white syx-border syx-px-3 syx-py-1">bg-white</div>
+            <div class="syx-bg-gray-50 syx-border syx-px-3 syx-py-1">bg-gray-50</div>
+            <div class="syx-bg-gray-100 syx-px-3 syx-py-1">bg-gray-100</div>
+            <div class="syx-bg-primary syx-text-white syx-px-3 syx-py-1">bg-primary</div>
+            <div class="syx-bg-primary-light syx-px-3 syx-py-1">bg-primary-light</div>
+            <div class="syx-bg-dark syx-text-white syx-px-3 syx-py-1">bg-dark</div>
+            <div class="syx-bg-error syx-text-white syx-px-3 syx-py-1">bg-error</div>
+            <div class="syx-bg-success syx-text-white syx-px-3 syx-py-1">bg-success</div>
+            <div class="syx-bg-warning syx-px-3 syx-py-1">bg-warning</div>
+            <div class="syx-bg-info syx-text-white syx-px-3 syx-py-1">bg-info</div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Theme-aware helpers (_backgrounds.scss)</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-2">
+            <div class="syx-bg-color-primary syx-text-white syx-px-3 syx-py-1">.syx-bg-color-primary</div>
+            <div class="syx-bg-color-secondary syx-px-3 syx-py-1">.syx-bg-color-secondary</div>
+            <div class="syx-bg-color-black syx-text-white syx-px-3 syx-py-1">.syx-bg-color-black</div>
+            <div class="syx-bg-color-blue-facebook syx-text-white syx-px-3 syx-py-1">Facebook</div>
+            <div class="syx-bg-color-blue-twitter syx-text-white syx-px-3 syx-py-1">Twitter</div>
+            <div class="syx-bg-color-blue-instagram syx-text-white syx-px-3 syx-py-1">Instagram</div>
+            <div class="syx-bg-color-green-whatsapp syx-text-white syx-px-3 syx-py-1">WhatsApp</div>
+          </div>
+        </section>
+
+        <!-- Spacing -->
+        <section class="syx-mb-5" id="util-spacing">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Spacing — .syx-m/p-*</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Margin bottom scale (0–5)</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-2 syx-mb-3">
+            <div class="syx-mb-0 syx-border syx-p-2">mb-0</div>
+            <div class="syx-mb-1 syx-border syx-p-2">mb-1</div>
+            <div class="syx-mb-2 syx-border syx-p-2">mb-2</div>
+            <div class="syx-mb-3 syx-border syx-p-2">mb-3</div>
+            <div class="syx-mb-4 syx-border syx-p-2">mb-4</div>
+            <div class="syx-mb-5 syx-border syx-p-2">mb-5</div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Padding scale (1–5) · shorthands</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-2">
+            <div class="syx-p-1 syx-border syx-bg-gray-100">p-1</div>
+            <div class="syx-p-2 syx-border syx-bg-gray-100">p-2</div>
+            <div class="syx-p-3 syx-border syx-bg-gray-100">p-3</div>
+            <div class="syx-p-4 syx-border syx-bg-gray-100">p-4</div>
+            <div class="syx-p-5 syx-border syx-bg-gray-100">p-5</div>
+            <div class="syx-px-3 syx-py-1 syx-border syx-bg-gray-100">px-3 py-1</div>
+            <div class="syx-mx-auto syx-border syx-p-2 syx-bg-gray-100">mx-auto</div>
+          </div>
+        </section>
+
+        <!-- Display · Flex · Grid -->
+        <section class="syx-mb-5" id="util-display">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Display · Flex · Gap · Position</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-d-flex + gaps + wrap</p>
+          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-bg-gray-50 syx-p-3 syx-mb-3">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Item A</button>
+            <button type="button" class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-sm">Item
+              B</button>
+            <span class="atom-pill atom-pill--success">Pill</span>
+            <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" aria-hidden="true"></span>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-justify-between + .syx-items-center</p>
+          <div class="syx-d-flex syx-justify-between syx-items-center syx-border syx-p-3 syx-mb-3">
+            <span class="atom-title atom-title--h6">Section title</span>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm">Action</button>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-d-grid + .syx-gap-3</p>
+          <div class="layout-grid__nested syx-gap-3">
+            <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 1</div>
+            <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 2</div>
+            <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 3</div>
+            <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 4</div>
+          </div>
+        </section>
+
+        <!-- Media -->
+        <section class="syx-mb-5" id="util-media">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Media
+            — img-fluid · embed · object-fit</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-img-fluid</p>
+          <div class="layout-grid__nested syx-mb-3">
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-8 layout-grid__col-md-5">
+              <img src="https://picsum.photos/seed/syx/640/320" alt="Responsive demo" class="syx-img-fluid">
+            </div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-embed--16by9</p>
+          <div class="layout-grid__nested syx-mb-3">
+            <div class="layout-grid__col-xs-12 layout-grid__col-md-8">
+              <div class="syx-embed syx-embed--16by9">
+                <iframe class="syx-embed__item" width="560" height="315"
+                  src="https://www.youtube.com/embed/vq_LG0xk2r8?si=rG1u7Dn41UzyGZSe" title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Object-fit · Background-size classes</p>
+          <div class="mol-label-group">
+            <span class="atom-pill">.syx-obj-cover</span>
+            <span class="atom-pill">.syx-obj-contain</span>
+            <span class="atom-pill">.syx-obj-fill</span>
+            <span class="atom-pill">.syx-bg-cover</span>
+            <span class="atom-pill">.syx-bg-contain</span>
+          </div>
+        </section>
+
+        <!-- Accessibility -->
+        <section class="syx-mb-5" id="util-a11y">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Accessibility — .syx-sr-only · skip-link ·
+            motion-safe
           </h3>
-          <p class="atom-txt syx-text-gray syx-mb-3">Before writing any new code, ask yourself:</p>
-          <div style="overflow-x:auto">
-            <table class="atom-table" style="min-width:560px">
+          <div class="syx-border syx-p-3">
+            <p class="atom-title atom-title--h6 syx-mb-2">Skip Link — focus to reveal (Tab key)</p>
+            <div class="syx-d-flex syx-flex-col syx-gap-2">
+              <div class="syx-border syx-p-3"><strong>.syx-sr-only</strong> — Visually hidden but accessible to screen
+                readers.<span class="syx-sr-only">Hidden text for assistive technology.</span></div>
+              <div class="syx-border syx-p-3"><strong>.syx-sr-only-focusable</strong> — Becomes visible on keyboard
+                focus.
+              </div>
+              <div class="syx-border syx-p-3 syx-motion-safe"><strong>.syx-motion-safe</strong> — Removes animations for
+                <code>prefers-reduced-motion</code>.
+              </div>
+            </div>
+            <p class="syx-type-overline syx-text-gray syx-mt-3 syx-mb-2">Responsive visibility</p>
+            <div class="mol-label-group">
+              <span class="atom-pill">.syx-d-sm-only</span>
+              <span class="atom-pill">.syx-d-sm-up</span>
+              <span class="atom-pill">.syx-d-md-up</span>
+              <span class="atom-pill">.syx-d-lg-up</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+       HELPERS  @layer syx.base (theme-aware)
+  ══════════════════════════════════════════ -->
+        <section class="syx-mb-5" id="helper-font-sizes">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Font Sizes — .syx-font-size-*</h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Responsive scale. Values map to <code>--font-size-1…5</code>
+            tokens.
+            Sizes 2–5 scale up at <code>$breakpoint-md</code>.</p>
+          <div class="syx-d-flex syx-flex-col syx-gap-2">
+            <div class="syx-d-flex syx-items-center syx-gap-3"><code
+                class="syx-type-caption syx-text-gray">.syx-font-size-1</code><span class="syx-font-size-1">Font size
+                1</span></div>
+            <div class="syx-d-flex syx-items-center syx-gap-3"><code
+                class="syx-type-caption syx-text-gray">.syx-font-size-2</code><span class="syx-font-size-2">Font size
+                2</span></div>
+            <div class="syx-d-flex syx-items-center syx-gap-3"><code
+                class="syx-type-caption syx-text-gray">.syx-font-size-3</code><span class="syx-font-size-3">Font size
+                3</span></div>
+            <div class="syx-d-flex syx-items-center syx-gap-3"><code
+                class="syx-type-caption syx-text-gray">.syx-font-size-4</code><span class="syx-font-size-4">Font size
+                4</span></div>
+            <div class="syx-d-flex syx-items-center syx-gap-3"><code
+                class="syx-type-caption syx-text-gray">.syx-font-size-5</code><span class="syx-font-size-5">Font size
+                5</span></div>
+          </div>
+        </section>
+
+        <section class="syx-mb-5" id="helper-dimensions">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Dimensions — .syx-size-*</h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Square size tokens mapping to <code>--dimension-1…5</code>. For
+            icons, avatars, thumbnails.</p>
+          <div class="syx-d-flex syx-items-center syx-gap-3 syx-flex-wrap">
+            <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
+              <div class="syx-size-1 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-1</code>
+            </div>
+            <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
+              <div class="syx-size-2 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-2</code>
+            </div>
+            <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
+              <div class="syx-size-3 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-3</code>
+            </div>
+            <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
+              <div class="syx-size-4 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-4</code>
+            </div>
+            <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
+              <div class="syx-size-5 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-5</code>
+            </div>
+          </div>
+        </section>
+
+        <section class="syx-mb-5" id="helper-spacer">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Spacer <span
+              class="atom-pill atom-pill--warning syx-ml-1">@deprecated</span></h3>
+          <p class="atom-txt syx-text-gray">Legacy spacing classes kept for backward compatibility. Prefer
+            <code>syx-mt-*</code> / <code>syx-pt-*</code> from the spacing utility.
+          </p>
+          <div class="mol-label-group syx-mt-2">
+            <span class="atom-pill">.syx-spacer-gap-t-1</span>
+            <span class="atom-pill">.syx-spacer-inner-t-1</span>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+       LAYER 2 — LAYOUT  @layer syx.base
+  ══════════════════════════════════════════ -->
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--layout">
+            <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+            Layout
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">@layer syx.base</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="layout" aria-label="Layer 2 — Layout Grid">Layout Grid</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.base</code> — structural foundation. 12-column
+          responsive grid.</p>
+
+        <section class="syx-mb-5" id="layout-grid">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">layout-grid — xs / sm / md breakpoints</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Column spans at xs</p>
+          <div class="layout-grid layout-grid--no-padding syx-mb-3">
+            <div class="layout-grid__col-xs-12 syx-bg-primary syx-text-white syx-p-2 syx-text-center"><code
+                class="syx-type-caption syx-text-white">col-xs-12</code></div>
+            <div class="layout-grid__col-xs-6 syx-bg-primary-light syx-p-2 syx-text-center"><code
+                class="syx-type-caption">col-xs-6</code></div>
+            <div class="layout-grid__col-xs-6 syx-bg-primary-light syx-p-2 syx-text-center"><code
+                class="syx-type-caption">col-xs-6</code></div>
+            <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
+                class="syx-type-caption">xs-4</code></div>
+            <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
+                class="syx-type-caption">xs-4</code></div>
+            <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
+                class="syx-type-caption">xs-4</code></div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Responsive — xs-12 &rarr; sm-6 &rarr; md-4 (resize to see)
+          </p>
+          <div class="layout-grid layout-grid--no-padding syx-mb-3">
+            <div
+              class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-primary syx-text-white syx-p-3 syx-text-center">
+              A</div>
+            <div
+              class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-primary-light syx-p-3 syx-text-center">
+              B</div>
+            <div
+              class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-gray-100 syx-p-3 syx-text-center">
+              C</div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Modifiers: --no-gap · __nested · --is-edge2edge</p>
+          <div class="layout-grid layout-grid--no-gap layout-grid--no-padding">
+            <div class="layout-grid__col-xs-8 syx-bg-primary syx-text-white syx-p-3"><code
+                class="syx-type-caption syx-text-white">--no-gap · xs-8</code></div>
+            <div class="layout-grid__col-xs-4 syx-bg-dark syx-text-white syx-p-3 syx-text-center"><code
+                class="syx-type-caption syx-text-white">xs-4</code></div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════
+       LAYER 3 — ATOMS  @layer syx.atoms
+  ══════════════════════════════════════════ -->
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--atom">
+            <span class="atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
+            Atoms
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">@layer syx.atoms</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="atoms" aria-label="Layer 3 — Atoms">Atoms</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.atoms</code> — smallest reusable components.</p>
+
+        <!-- Breadcrumb -->
+        <section class="syx-mb-4" id="atom-breadcrumb">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Breadcrumb</h3>
+          <nav aria-label="Breadcrumb">
+            <ol class="atom-breadcrumb">
+              <li class="atom-breadcrumb__item"><a href="#" class="atom-breadcrumb__link"><span
+                    class="atom-icon atom-icon--lc-home atom-icon--sm" aria-hidden="true"></span> Home</a></li>
+              <li class="atom-breadcrumb__item"><a href="#" class="atom-breadcrumb__link">Design System</a></li>
+              <li class="atom-breadcrumb__item"><span aria-current="page">Gallery</span></li>
+            </ol>
+          </nav>
+        </section>
+
+        <!-- Buttons -->
+        <section class="syx-mb-5" id="atom-btn">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Buttons — .atom-btn</h3>
+
+          <!-- OUTLINE — all 4 colors -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Outline (no <code>--filled</code>) · default size</p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button" class="atom-btn atom-btn--primary">Primary</button>
+            <button type="button" class="atom-btn atom-btn--secondary">Secondary</button>
+            <button type="button" class="atom-btn atom-btn--tertiary">Tertiary</button>
+            <button type="button" class="atom-btn atom-btn--quaternary">Quaternary</button>
+            <button type="button" class="atom-btn atom-btn--primary" disabled>Disabled</button>
+          </div>
+
+          <!-- FILLED — all 4 colors -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Filled (<code>--filled</code>) · default size</p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled">Primary</button>
+            <button type="button" class="atom-btn atom-btn--secondary atom-btn--filled">Secondary</button>
+            <button type="button" class="atom-btn atom-btn--tertiary atom-btn--filled">Tertiary</button>
+            <button type="button" class="atom-btn atom-btn--quaternary atom-btn--filled">Quaternary</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled" disabled>Disabled</button>
+          </div>
+
+          <!-- SIZES — outline -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — <code>--size-sm</code> · <code>--size-md</code> ·
+            <code>--size-lg</code> (outline)
+          </p>
+          <div class="mol-btn-group syx-mb-2">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm">Small</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--size-md">Medium</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--size-lg">Large</button>
+          </div>
+
+          <!-- SIZES — filled -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — filled</p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Small</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">Medium</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-lg">Large</button>
+          </div>
+
+          <!-- CIRCLE — icon only -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Circle — <code>--circle</code> with <code>atom-icon</code>
+            ·
+            sm · md · lg</p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--circle atom-btn--size-sm"
+              aria-label="Home sm">
+              <span class="atom-icon atom-icon--lc-home atom-icon--sm atom-icon--color-white" aria-hidden="true"></span>
+            </button>
+            <button type="button"
+              class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--circle atom-btn--size-md"
+              aria-label="Home md">
+              <span class="atom-icon atom-icon--lc-home atom-icon--md atom-icon--color-white" aria-hidden="true"></span>
+            </button>
+            <button type="button"
+              class="atom-btn atom-btn--tertiary atom-btn--filled atom-btn--circle atom-btn--size-lg"
+              aria-label="Home lg">
+              <span class="atom-icon atom-icon--lc-home atom-icon--lg atom-icon--color-white" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="atom-btn atom-btn--quaternary atom-btn--circle atom-btn--size-md"
+              aria-label="Home outline">
+              <span class="atom-icon atom-icon--lc-home atom-icon--md" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <!-- WITH ICON — atom-btn--has-icon variant -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2"><code>atom-btn--has-icon</code> — icon size + gap
+            auto-controlled by <code>--size-*</code></p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button"
+              class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm atom-btn--has-icon">
+              <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
+              Home sm
+            </button>
+            <button type="button"
+              class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-md atom-btn--has-icon">
+              <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
+              Home md
+            </button>
+            <button type="button"
+              class="atom-btn atom-btn--tertiary atom-btn--filled atom-btn--size-lg atom-btn--has-icon">
+              <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
+              Home lg
+            </button>
+            <button type="button" class="atom-btn atom-btn--quaternary atom-btn--size-md atom-btn--has-icon">
+              <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
+              Search
+            </button>
+          </div>
+
+
+
+          <!-- STATES summary -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">States — normal · hover (hover me) · focus-visible (Tab) ·
+            disabled</p>
+          <div class="mol-btn-group">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Normal</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm"
+              disabled>Disabled
+              filled</button>
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm" disabled>Disabled
+              outline</button>
+          </div>
+        </section>
+
+
+        <!-- Pills & Labels -->
+        <section class="syx-mb-4" id="atom-pill">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Pills · Labels</h3>
+          <div class="mol-label-group syx-mb-3">
+            <span class="atom-pill">Neutral</span>
+            <span class="atom-pill atom-pill--primary">Primary</span>
+            <span class="atom-pill atom-pill--secondary">Secondary</span>
+            <span class="atom-pill atom-pill--success">Success</span>
+            <span class="atom-pill atom-pill--warning">Warning</span>
+            <span class="atom-pill atom-pill--danger">Danger</span>
+            <span class="atom-pill atom-pill--dark">Dark</span>
+          </div>
+          <div class="syx-d-flex syx-gap-3">
+            <label class="atom-label">atom-label</label>
+            <label class="atom-label atom-label--primary">atom-label--primary</label>
+          </div>
+        </section>
+
+        <!-- Links -->
+        <section class="syx-mb-4" id="atom-link">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Link</h3>
+          <p>Paragraph with an <a href="#" class="atom-link atom-link--primary">inline primary link</a> — hover to see
+            the
+            fill effect. And <a href="#" class="atom-link atom-link--primary">another link</a>.</p>
+        </section>
+
+        <!-- Icons -->
+        <section class="syx-mb-5" id="atom-icon">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Icons — .atom-icon</h3>
+
+          <!-- Legacy set -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Legacy system — <code>--ui-*</code> /
+            <code>--arrow-*</code>
+            / <code>--rrss-*</code>
+          </p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-4">
+            <span class="atom-icon atom-icon--lc-arrow-right" role="img" aria-label="arrow-default"></span>
+            <span class="atom-icon atom-icon--lc-chevron-right" role="img" aria-label="arrow-double"></span>
+            <span class="atom-icon atom-icon--lc-menu" role="img" aria-label="bars"></span>
+            <span class="atom-icon atom-icon--lc-mail" role="img" aria-label="email"></span>
+            <span class="atom-icon atom-icon--lc-x" role="img" aria-label="cancel"></span>
+            <span class="atom-icon atom-icon--lc-home" role="img" aria-label="home"></span>
+            <span class="atom-icon atom-icon--lc-check" role="img" aria-label="tick"></span>
+            <span class="atom-icon atom-icon--lc-warning" role="img" aria-label="exclamation"></span>
+          </div>
+
+          <!-- Lucide: Navigation -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Navigation <code>--lc-*</code></p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
+            <span class="atom-icon atom-icon--lc-home" aria-hidden="true" title="--lc-home"></span>
+            <span class="atom-icon atom-icon--lc-menu" aria-hidden="true" title="--lc-menu"></span>
+            <span class="atom-icon atom-icon--lc-x" aria-hidden="true" title="--lc-x"></span>
+            <span class="atom-icon atom-icon--lc-chevron-right" aria-hidden="true" title="--lc-chevron-right"></span>
+            <span class="atom-icon atom-icon--lc-chevron-left" aria-hidden="true" title="--lc-chevron-left"></span>
+            <span class="atom-icon atom-icon--lc-chevron-down" aria-hidden="true" title="--lc-chevron-down"></span>
+            <span class="atom-icon atom-icon--lc-chevron-up" aria-hidden="true" title="--lc-chevron-up"></span>
+            <span class="atom-icon atom-icon--lc-arrow-right" aria-hidden="true" title="--lc-arrow-right"></span>
+            <span class="atom-icon atom-icon--lc-arrow-left" aria-hidden="true" title="--lc-arrow-left"></span>
+          </div>
+
+          <!-- Lucide: Actions -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Actions</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
+            <span class="atom-icon atom-icon--lc-search" aria-hidden="true" title="--lc-search"></span>
+            <span class="atom-icon atom-icon--lc-plus" aria-hidden="true" title="--lc-plus"></span>
+            <span class="atom-icon atom-icon--lc-minus" aria-hidden="true" title="--lc-minus"></span>
+            <span class="atom-icon atom-icon--lc-check" aria-hidden="true" title="--lc-check"></span>
+            <span class="atom-icon atom-icon--lc-trash" aria-hidden="true" title="--lc-trash"></span>
+            <span class="atom-icon atom-icon--lc-pencil" aria-hidden="true" title="--lc-pencil"></span>
+            <span class="atom-icon atom-icon--lc-download" aria-hidden="true" title="--lc-download"></span>
+            <span class="atom-icon atom-icon--lc-copy" aria-hidden="true" title="--lc-copy"></span>
+            <span class="atom-icon atom-icon--lc-external-link" aria-hidden="true" title="--lc-external-link"></span>
+            <span class="atom-icon atom-icon--lc-filter" aria-hidden="true" title="--lc-filter"></span>
+          </div>
+
+          <!-- Lucide: Status + User -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Status · User</p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-4">
+            <span class="atom-icon atom-icon--lc-info" aria-hidden="true" title="--lc-info"></span>
+            <span class="atom-icon atom-icon--lc-warning" aria-hidden="true" title="--lc-warning"></span>
+            <span class="atom-icon atom-icon--lc-success" aria-hidden="true" title="--lc-success"></span>
+            <span class="atom-icon atom-icon--lc-error" aria-hidden="true" title="--lc-error"></span>
+            <span class="atom-icon atom-icon--lc-user" aria-hidden="true" title="--lc-user"></span>
+            <span class="atom-icon atom-icon--lc-settings" aria-hidden="true" title="--lc-settings"></span>
+          </div>
+
+          <!-- Sizes -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — <code>--sm</code> · <code>--md</code> ·
+            <code>--lg</code> · <code>--xl</code>
+          </p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
+            <span class="atom-icon atom-icon--lc-home atom-icon--sm" role="img" aria-label="sm"></span>
+            <span class="atom-icon atom-icon--lc-home atom-icon--md" role="img" aria-label="md"></span>
+            <span class="atom-icon atom-icon--lc-home atom-icon--lg" role="img" aria-label="lg"></span>
+            <span class="atom-icon atom-icon--lc-home atom-icon--xl" role="img" aria-label="xl"></span>
+          </div>
+
+          <!-- Color modifiers via filter tokens -->
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Color modifiers — <code>--color-primary</code> ·
+            <code>--color-state-ok</code> · <code>--color-state-ko</code> · <code>--color-state-warning</code>
+          </p>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center">
+            <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" role="img" aria-label="primary"></span>
+            <span class="atom-icon atom-icon--lc-check atom-icon--color-state-ok" role="img" aria-label="ok"></span>
+            <span class="atom-icon atom-icon--lc-x atom-icon--color-state-ko" role="img" aria-label="ko"></span>
+            <span class="atom-icon atom-icon--lc-warning atom-icon--color-state-warning" role="img"
+              aria-label="warning"></span>
+            <span class="atom-icon atom-icon--lc-user atom-icon--color-secondary" role="img"
+              aria-label="secondary"></span>
+          </div>
+        </section>
+
+
+        <!-- Title & Text -->
+        <section class="syx-mb-4" id="atom-title">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Title · Txt</h3>
+          <p class="atom-title atom-title--h1">H1 Title</p>
+          <p class="atom-title atom-title--h2">H2 Title</p>
+          <p class="atom-title atom-title--h3">H3 Title</p>
+          <p class="atom-title atom-title--h4">H4 Title</p>
+          <p class="atom-title atom-title--h5">H5 Title</p>
+          <p class="atom-title atom-title--h6">H6 Title</p>
+          <p class="atom-txt atom-txt--primary">Body paragraph with <code>atom-txt--primary</code>. Includes semantic
+            bottom margin for vertical rhythm.</p>
+          <p class="atom-txt atom-txt--primary">Second paragraph to demonstrate consistent spacing between text blocks.
+          </p>
+        </section>
+
+        <!-- Form -->
+        <section class="syx-mb-4" id="atom-form">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Form — label · input · input-wrapper</h3>
+          <div class="layout-grid__nested">
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
+              <label class="atom-label" for="demo-form-text">Text</label>
+              <div class="atom-input-wrapper"><input id="demo-form-text" class="atom-input" type="text"
+                  placeholder="Enter text…">
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
+              <label class="atom-label" for="demo-form-disabled">Disabled</label>
+              <div class="atom-input-wrapper"><input id="demo-form-disabled" class="atom-input" type="text"
+                  value="Not editable" disabled>
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
+              <label class="atom-label" for="demo-form-select">Select</label>
+              <div class="atom-input-wrapper"><select id="demo-form-select" class="atom-select">
+                  <option>Option A</option>
+                  <option>Option B</option>
+                </select></div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
+              <label class="atom-label" for="demo-form-textarea">Textarea</label>
+              <textarea id="demo-form-textarea" class="atom-input" rows="2" placeholder="Longer…"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Check & Switch -->
+        <section class="syx-mb-4" id="atom-check">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Check · Switch</h3>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-5">
+            <fieldset style="border:0;padding:0;margin:0;">
+              <legend class="atom-label syx-mb-2">Demo Checkboxes</legend>
+              <div class="syx-d-flex syx-flex-col syx-gap-3">
+                <label class="atom-check"><input class="atom-check__input" type="checkbox"
+                    id="demo-check-unchecked"><span class="atom-check__label">Unchecked</span></label>
+                <label class="atom-check"><input class="atom-check__input" type="checkbox" id="demo-check-checked"
+                    checked><span class="atom-check__label">Checked</span></label>
+                <label class="atom-check"><input class="atom-check__input" type="checkbox" id="demo-check-disabled"
+                    disabled><span class="atom-check__label">Disabled</span></label>
+              </div>
+            </fieldset>
+            <fieldset style="border:0;padding:0;margin:0;">
+              <legend class="atom-label syx-mb-2">Demo Switches</legend>
+              <div class="syx-d-flex syx-flex-col syx-gap-3">
+                <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-off"><span
+                    class="atom-switch__slider"></span><span class="atom-switch__label">Off</span></label>
+                <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-on"
+                    checked><span class="atom-switch__slider"></span><span class="atom-switch__label">On</span></label>
+                <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-disabled"
+                    disabled><span class="atom-switch__slider"></span><span
+                    class="atom-switch__label">Disabled</span></label>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- Lists -->
+        <section class="syx-mb-4" id="atom-list">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Lists</h3>
+          <div class="syx-d-flex syx-flex-wrap syx-gap-5">
+            <ul class="atom-list atom-list--primary">
+              <li class="atom-list__item">First item</li>
+              <li class="atom-list__item">Second item
+                <ul class="atom-list__lvl2">
+                  <li class="atom-list__item atom-list__lvl2-item">Nested A</li>
+                  <li class="atom-list__item atom-list__lvl2-item">Nested B</li>
+                </ul>
+              </li>
+              <li class="atom-list__item">Third item</li>
+            </ul>
+            <ol class="atom-list atom-list--ordered">
+              <li class="atom-list__item">First ordered</li>
+              <li class="atom-list__item">Second ordered</li>
+              <li class="atom-list__item">Third ordered</li>
+            </ol>
+          </div>
+        </section>
+
+        <!-- Table -->
+        <section class="syx-mb-4" id="atom-table">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Table</h3>
+          <div class="atom-table--resp">
+            <table class="atom-table atom-table--primary syx-w-full" aria-label="SYX components registry">
               <thead>
                 <tr>
-                  <th>Question</th>
-                  <th>The answer determines…</th>
+                  <th class="atom-table__th" scope="col">Component</th>
+                  <th class="atom-table__th" scope="col">Layer</th>
+                  <th class="atom-table__th" scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Is this a reusable UI piece?</td>
-                  <td>Yes → component (atom/mol/org). No → page/util</td>
+                  <td class="atom-table__td">atom-btn</td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--primary">syx.atoms</span></td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--success">Stable</span></td>
                 </tr>
                 <tr>
-                  <td>How many HTML elements does it need?</td>
-                  <td>1 → atom. 2–5 atoms → molecule. Full section → org</td>
+                  <td class="atom-table__td">mol-card</td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--secondary">syx.molecules</span></td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--success">Stable</span></td>
                 </tr>
                 <tr>
-                  <td>Does it need theme-aware colors/spacing?</td>
-                  <td>Yes → use component tokens → <code>var(--component-*)</code></td>
-                </tr>
-                <tr>
-                  <td>Will it appear on multiple pages?</td>
-                  <td>Yes → component layer. No → page layer</td>
-                </tr>
-                <tr>
-                  <td>Is it a one-off CSS property tweak?</td>
-                  <td>Yes → utility class <code>.syx-*</code></td>
-                </tr>
-                <tr>
-                  <td>Does it need JavaScript interaction?</td>
-                  <td>Add a <code>.js-</code> hook class — never style <code>.js-</code> classes</td>
-                </tr>
-                <tr>
-                  <td>Am I adding a raw value (oklch, px…)?</td>
-                  <td>🛑 Stop → use a token instead</td>
-                </tr>
-                <tr>
-                  <td>Am I writing <code>transition:</code> without <code>@include</code>?</td>
-                  <td>🛑 Stop → <code>@include transition()</code></td>
-                </tr>
-                <tr>
-                  <td>Am I using <code>position: absolute</code> without <code>@include</code>?</td>
-                  <td>🛑 Stop → <code>@include absolute()</code></td>
-                </tr>
-                <tr>
-                  <td>Am I using <code>!important</code>?</td>
-                  <td>🛑 Stop → check the <code>@layer</code> order instead</td>
+                  <td class="atom-table__td">syx-d-flex</td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--dark">syx.utilities</span></td>
+                  <td class="atom-table__td"><span class="atom-pill atom-pill--warning">Always wins</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
-      </section><!-- /#guide -->
+        <!-- Pagination -->
+        <section class="syx-mb-5" id="atom-pagination">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Pagination</h3>
+          <nav aria-label="Pagination">
+            <ul class="atom-pagination">
+              <li class="atom-pagination__item atom-pagination__item--is-disabled atom-pagination__item--is-prev">
+                <button type="button" class="atom-pagination__trigger" disabled aria-label="Previous"></button>
+              </li>
+              <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">1</button></li>
+              <li class="atom-pagination__item atom-pagination__item--is-active"><button type="button"
+                  class="atom-pagination__trigger" aria-current="page">2</button></li>
+              <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">3</button></li>
+              <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">4</button></li>
+              <li class="atom-pagination__item atom-pagination__item--is-next"><button type="button"
+                  class="atom-pagination__trigger" aria-label="Next"></button></li>
+            </ul>
+          </nav>
+        </section>
 
-      <!-- ══════════════════════════════════════════
-       LAYER 1 — UTILITIES  @layer syx.utilities
-  ══════════════════════════════════════════ -->
-      <h2 class="atom-title atom-title--h2 syx-mb-1" id="utilities" aria-label="Layer 1 — Utilities">Utilities</h2>
-      <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.utilities</code> — highest specificity. Always wins
-        over atoms and molecules.</p>
-
-      <!-- Typography Scale -->
-      <section class="syx-mb-5" id="util-type">
-        <h3 class="atom-title atom-title--h5 syx-mb-3">
-          <span class="atom-pill atom-pill--dark syx-mr-1">util</span>Typography Scale — .syx-type-*
-        </h3>
-        <div class="syx-d-flex syx-flex-col syx-gap-3 syx-mb-4">
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-display-1</code><span
-              class="syx-type-display-1">Display Hero</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h1</code><span
-              class="syx-type-h1">Heading One</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h2</code><span
-              class="syx-type-h2">Heading Two</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-h3</code><span
-              class="syx-type-h3">Heading Three</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body-large</code><span
-              class="syx-type-body-large">Body large text.</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body</code><span
-              class="syx-type-body">Body standard text.</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-body-small</code><span
-              class="syx-type-body-small">Body small.</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-caption</code><span
-              class="syx-type-caption">Caption — metadata.</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-label</code><span
-              class="syx-type-label">Label text.</span></div>
-          <div><code class="syx-type-caption syx-text-gray syx-d-block syx-mb-1">.syx-type-overline</code><span
-              class="syx-type-overline">Overline — Section category</span></div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Text utilities</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-2">
-          <div class="syx-text-center syx-border syx-p-2">syx-text-center</div>
-          <div class="syx-text-uppercase syx-border syx-p-2">syx-text-uppercase</div>
-          <div class="syx-font-bold syx-border syx-p-2">syx-font-bold</div>
-          <div class="syx-font-medium syx-border syx-p-2">syx-font-medium</div>
-          <div class="syx-text-underline syx-border syx-p-2">syx-text-underline</div>
-          <div class="syx-text-strikethrough syx-border syx-p-2">syx-text-strikethrough</div>
-          <div class="syx-max-w-50ch syx-border syx-p-2">syx-max-w-50ch</div>
-        </div>
-      </section>
-
-      <!-- Text Colors -->
-      <section class="syx-mb-5" id="util-colors">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span class="atom-pill atom-pill--dark syx-mr-1">util</span>Text
-          Colors — .syx-text-*</h3>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-mb-3">
-          <span class="syx-text-primary syx-font-bold">.syx-text-primary</span>
-          <span class="syx-text-secondary syx-font-bold">.syx-text-secondary</span>
-          <span class="syx-text-gray">.syx-text-gray</span>
-          <span class="syx-text-muted">.syx-text-muted</span>
-          <span class="syx-text-error">.syx-text-error</span>
-          <span class="syx-text-success">.syx-text-success</span>
-          <span class="syx-text-warning">.syx-text-warning</span>
-          <span class="syx-text-white syx-bg-dark syx-px-2">.syx-text-white</span>
-          <span class="syx-text-inverse syx-bg-primary syx-px-2">.syx-text-inverse</span>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Social brand</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3">
-          <span class="syx-text-facebook syx-font-bold">.syx-text-facebook</span>
-          <span class="syx-text-twitter syx-font-bold">.syx-text-twitter</span>
-          <span class="syx-text-instagram syx-font-bold">.syx-text-instagram</span>
-          <span class="syx-text-whatsapp syx-font-bold">.syx-text-whatsapp</span>
-        </div>
-      </section>
-
-      <!-- Backgrounds -->
-      <section class="syx-mb-5" id="util-backgrounds">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">util</span>Backgrounds — .syx-bg-* · .syx-bg-color-*</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Semantic (_text.scss)</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-2 syx-mb-3">
-          <div class="syx-bg-white syx-border syx-px-3 syx-py-1">bg-white</div>
-          <div class="syx-bg-gray-50 syx-border syx-px-3 syx-py-1">bg-gray-50</div>
-          <div class="syx-bg-gray-100 syx-px-3 syx-py-1">bg-gray-100</div>
-          <div class="syx-bg-primary syx-text-white syx-px-3 syx-py-1">bg-primary</div>
-          <div class="syx-bg-primary-light syx-px-3 syx-py-1">bg-primary-light</div>
-          <div class="syx-bg-dark syx-text-white syx-px-3 syx-py-1">bg-dark</div>
-          <div class="syx-bg-error syx-text-white syx-px-3 syx-py-1">bg-error</div>
-          <div class="syx-bg-success syx-text-white syx-px-3 syx-py-1">bg-success</div>
-          <div class="syx-bg-warning syx-px-3 syx-py-1">bg-warning</div>
-          <div class="syx-bg-info syx-text-white syx-px-3 syx-py-1">bg-info</div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Theme-aware helpers (_backgrounds.scss)</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-2">
-          <div class="syx-bg-color-primary syx-text-white syx-px-3 syx-py-1">.syx-bg-color-primary</div>
-          <div class="syx-bg-color-secondary syx-px-3 syx-py-1">.syx-bg-color-secondary</div>
-          <div class="syx-bg-color-black syx-text-white syx-px-3 syx-py-1">.syx-bg-color-black</div>
-          <div class="syx-bg-color-blue-facebook syx-text-white syx-px-3 syx-py-1">Facebook</div>
-          <div class="syx-bg-color-blue-twitter syx-text-white syx-px-3 syx-py-1">Twitter</div>
-          <div class="syx-bg-color-blue-instagram syx-text-white syx-px-3 syx-py-1">Instagram</div>
-          <div class="syx-bg-color-green-whatsapp syx-text-white syx-px-3 syx-py-1">WhatsApp</div>
-        </div>
-      </section>
-
-      <!-- Spacing -->
-      <section class="syx-mb-5" id="util-spacing">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">util</span>Spacing — .syx-m/p-*</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Margin bottom scale (0–5)</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-2 syx-mb-3">
-          <div class="syx-mb-0 syx-border syx-p-2">mb-0</div>
-          <div class="syx-mb-1 syx-border syx-p-2">mb-1</div>
-          <div class="syx-mb-2 syx-border syx-p-2">mb-2</div>
-          <div class="syx-mb-3 syx-border syx-p-2">mb-3</div>
-          <div class="syx-mb-4 syx-border syx-p-2">mb-4</div>
-          <div class="syx-mb-5 syx-border syx-p-2">mb-5</div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Padding scale (1–5) · shorthands</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-2">
-          <div class="syx-p-1 syx-border syx-bg-gray-100">p-1</div>
-          <div class="syx-p-2 syx-border syx-bg-gray-100">p-2</div>
-          <div class="syx-p-3 syx-border syx-bg-gray-100">p-3</div>
-          <div class="syx-p-4 syx-border syx-bg-gray-100">p-4</div>
-          <div class="syx-p-5 syx-border syx-bg-gray-100">p-5</div>
-          <div class="syx-px-3 syx-py-1 syx-border syx-bg-gray-100">px-3 py-1</div>
-          <div class="syx-mx-auto syx-border syx-p-2 syx-bg-gray-100">mx-auto</div>
-        </div>
-      </section>
-
-      <!-- Display · Flex · Grid -->
-      <section class="syx-mb-5" id="util-display">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">util</span>Display · Flex · Gap · Position</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-d-flex + gaps + wrap</p>
-        <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-bg-gray-50 syx-p-3 syx-mb-3">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Item A</button>
-          <button type="button" class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-sm">Item B</button>
-          <span class="atom-pill atom-pill--success">Pill</span>
-          <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" aria-hidden="true"></span>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-justify-between + .syx-items-center</p>
-        <div class="syx-d-flex syx-justify-between syx-items-center syx-border syx-p-3 syx-mb-3">
-          <span class="atom-title atom-title--h6">Section title</span>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm">Action</button>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-d-grid + .syx-gap-3</p>
-        <div class="layout-grid__nested syx-gap-3">
-          <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 1</div>
-          <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 2</div>
-          <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 3</div>
-          <div class="layout-grid__col-xs-6 layout-grid__col-sm-3 syx-border syx-p-2 syx-text-center">Col 4</div>
-        </div>
-      </section>
-
-      <!-- Media -->
-      <section class="syx-mb-5" id="util-media">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span class="atom-pill atom-pill--dark syx-mr-1">util</span>Media
-          — img-fluid · embed · object-fit</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-img-fluid</p>
-        <div class="layout-grid__nested syx-mb-3">
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-8 layout-grid__col-md-5">
-            <img src="https://picsum.photos/seed/syx/640/320" alt="Responsive demo" class="syx-img-fluid">
-          </div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-embed--16by9</p>
-        <div class="layout-grid__nested syx-mb-3">
-          <div class="layout-grid__col-xs-12 layout-grid__col-md-8">
-            <div class="syx-embed syx-embed--16by9">
-              <iframe class="syx-embed__item" width="560" height="315"
-                src="https://www.youtube.com/embed/vq_LG0xk2r8?si=rG1u7Dn41UzyGZSe" title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Object-fit · Background-size classes</p>
-        <div class="mol-label-group">
-          <span class="atom-pill">.syx-obj-cover</span>
-          <span class="atom-pill">.syx-obj-contain</span>
-          <span class="atom-pill">.syx-obj-fill</span>
-          <span class="atom-pill">.syx-bg-cover</span>
-          <span class="atom-pill">.syx-bg-contain</span>
-        </div>
-      </section>
-
-      <!-- Accessibility -->
-      <section class="syx-mb-5" id="util-a11y">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">util</span>Accessibility — .syx-sr-only · skip-link · motion-safe
-        </h3>
-        <div class="syx-border syx-p-3">
-          <p class="atom-title atom-title--h6 syx-mb-2">Skip Link — focus to reveal (Tab key)</p>
-          <div class="syx-d-flex syx-flex-col syx-gap-2">
-            <div class="syx-border syx-p-3"><strong>.syx-sr-only</strong> — Visually hidden but accessible to screen
-              readers.<span class="syx-sr-only">Hidden text for assistive technology.</span></div>
-            <div class="syx-border syx-p-3"><strong>.syx-sr-only-focusable</strong> — Becomes visible on keyboard focus.
-            </div>
-            <div class="syx-border syx-p-3 syx-motion-safe"><strong>.syx-motion-safe</strong> — Removes animations for
-              <code>prefers-reduced-motion</code>.
-            </div>
-          </div>
-          <p class="syx-type-overline syx-text-gray syx-mt-3 syx-mb-2">Responsive visibility</p>
-          <div class="mol-label-group">
-            <span class="atom-pill">.syx-d-sm-only</span>
-            <span class="atom-pill">.syx-d-sm-up</span>
-            <span class="atom-pill">.syx-d-md-up</span>
-            <span class="atom-pill">.syx-d-lg-up</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ══════════════════════════════════════════
-       HELPERS  @layer syx.base (theme-aware)
-  ══════════════════════════════════════════ -->
-      <section class="syx-mb-5" id="helper-font-sizes">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">helper</span>Font Sizes — .syx-font-size-*</h3>
-        <p class="atom-txt syx-text-gray syx-mb-3">Responsive scale. Values map to <code>--font-size-1…5</code> tokens.
-          Sizes 2–5 scale up at <code>$breakpoint-md</code>.</p>
-        <div class="syx-d-flex syx-flex-col syx-gap-2">
-          <div class="syx-d-flex syx-items-center syx-gap-3"><code
-              class="syx-type-caption syx-text-gray">.syx-font-size-1</code><span class="syx-font-size-1">Font size
-              1</span></div>
-          <div class="syx-d-flex syx-items-center syx-gap-3"><code
-              class="syx-type-caption syx-text-gray">.syx-font-size-2</code><span class="syx-font-size-2">Font size
-              2</span></div>
-          <div class="syx-d-flex syx-items-center syx-gap-3"><code
-              class="syx-type-caption syx-text-gray">.syx-font-size-3</code><span class="syx-font-size-3">Font size
-              3</span></div>
-          <div class="syx-d-flex syx-items-center syx-gap-3"><code
-              class="syx-type-caption syx-text-gray">.syx-font-size-4</code><span class="syx-font-size-4">Font size
-              4</span></div>
-          <div class="syx-d-flex syx-items-center syx-gap-3"><code
-              class="syx-type-caption syx-text-gray">.syx-font-size-5</code><span class="syx-font-size-5">Font size
-              5</span></div>
-        </div>
-      </section>
-
-      <section class="syx-mb-5" id="helper-dimensions">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">helper</span>Dimensions — .syx-size-*</h3>
-        <p class="atom-txt syx-text-gray syx-mb-3">Square size tokens mapping to <code>--dimension-1…5</code>. For
-          icons, avatars, thumbnails.</p>
-        <div class="syx-d-flex syx-items-center syx-gap-3 syx-flex-wrap">
-          <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
-            <div class="syx-size-1 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-1</code>
-          </div>
-          <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
-            <div class="syx-size-2 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-2</code>
-          </div>
-          <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
-            <div class="syx-size-3 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-3</code>
-          </div>
-          <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
-            <div class="syx-size-4 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-4</code>
-          </div>
-          <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-1">
-            <div class="syx-size-5 syx-bg-primary"></div><code class="syx-type-caption syx-text-gray">size-5</code>
-          </div>
-        </div>
-      </section>
-
-      <section class="syx-mb-5" id="helper-spacer">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">helper</span>Spacer <span
-            class="atom-pill atom-pill--warning syx-ml-1">@deprecated</span></h3>
-        <p class="atom-txt syx-text-gray">Legacy spacing classes kept for backward compatibility. Prefer
-          <code>syx-mt-*</code> / <code>syx-pt-*</code> from the spacing utility.
-        </p>
-        <div class="mol-label-group syx-mt-2">
-          <span class="atom-pill">.syx-spacer-gap-t-1</span>
-          <span class="atom-pill">.syx-spacer-inner-t-1</span>
-        </div>
-      </section>
-
-      <!-- ══════════════════════════════════════════
-       LAYER 2 — LAYOUT  @layer syx.base
-  ══════════════════════════════════════════ -->
-      <h2 class="atom-title atom-title--h2 syx-mt-4 syx-mb-1" id="layout" aria-label="Layer 2 — Layout Grid">Layout Grid
-      </h2>
-      <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.base</code> — structural foundation. 12-column
-        responsive grid.</p>
-
-      <section class="syx-mb-5" id="layout-grid">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--dark syx-mr-1">layout</span>layout-grid — xs / sm / md breakpoints</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Column spans at xs</p>
-        <div class="layout-grid layout-grid--no-padding syx-mb-3">
-          <div class="layout-grid__col-xs-12 syx-bg-primary syx-text-white syx-p-2 syx-text-center"><code
-              class="syx-type-caption syx-text-white">col-xs-12</code></div>
-          <div class="layout-grid__col-xs-6 syx-bg-primary-light syx-p-2 syx-text-center"><code
-              class="syx-type-caption">col-xs-6</code></div>
-          <div class="layout-grid__col-xs-6 syx-bg-primary-light syx-p-2 syx-text-center"><code
-              class="syx-type-caption">col-xs-6</code></div>
-          <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
-              class="syx-type-caption">xs-4</code></div>
-          <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
-              class="syx-type-caption">xs-4</code></div>
-          <div class="layout-grid__col-xs-4 syx-bg-gray-200 syx-p-2 syx-text-center"><code
-              class="syx-type-caption">xs-4</code></div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Responsive — xs-12 → sm-6 → md-4 (resize to see)</p>
-        <div class="layout-grid layout-grid--no-padding syx-mb-3">
-          <div
-            class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-primary syx-text-white syx-p-3 syx-text-center">
-            A</div>
-          <div
-            class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-primary-light syx-p-3 syx-text-center">
-            B</div>
-          <div
-            class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4 syx-bg-gray-100 syx-p-3 syx-text-center">
-            C</div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Modifiers: --no-gap · __nested · --is-edge2edge</p>
-        <div class="layout-grid layout-grid--no-gap layout-grid--no-padding">
-          <div class="layout-grid__col-xs-8 syx-bg-primary syx-text-white syx-p-3"><code
-              class="syx-type-caption syx-text-white">--no-gap · xs-8</code></div>
-          <div class="layout-grid__col-xs-4 syx-bg-dark syx-text-white syx-p-3 syx-text-center"><code
-              class="syx-type-caption syx-text-white">xs-4</code></div>
-        </div>
-      </section>
-
-      <!-- ══════════════════════════════════════════
-       LAYER 3 — ATOMS  @layer syx.atoms
-  ══════════════════════════════════════════ -->
-      <h2 class="atom-title atom-title--h2 syx-mt-4 syx-mb-1" id="atoms" aria-label="Layer 3 — Atoms">Atoms</h2>
-      <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.atoms</code> — smallest reusable components.</p>
-
-      <!-- Breadcrumb -->
-      <section class="syx-mb-4" id="atom-breadcrumb">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Breadcrumb</h3>
-        <nav aria-label="Breadcrumb">
-          <ol class="atom-breadcrumb">
-            <li class="atom-breadcrumb__item"><a href="#" class="atom-breadcrumb__link"><span
-                  class="atom-icon atom-icon--lc-home atom-icon--sm" aria-hidden="true"></span> Home</a></li>
-            <li class="atom-breadcrumb__item"><a href="#" class="atom-breadcrumb__link">Design System</a></li>
-            <li class="atom-breadcrumb__item"><span aria-current="page">Gallery</span></li>
-          </ol>
-        </nav>
-      </section>
-
-      <!-- Buttons -->
-      <section class="syx-mb-5" id="atom-btn">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Buttons — .atom-btn</h3>
-
-        <!-- OUTLINE — all 4 colors -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Outline (no <code>--filled</code>) · default size</p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button" class="atom-btn atom-btn--primary">Primary</button>
-          <button type="button" class="atom-btn atom-btn--secondary">Secondary</button>
-          <button type="button" class="atom-btn atom-btn--tertiary">Tertiary</button>
-          <button type="button" class="atom-btn atom-btn--quaternary">Quaternary</button>
-          <button type="button" class="atom-btn atom-btn--primary" disabled>Disabled</button>
-        </div>
-
-        <!-- FILLED — all 4 colors -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Filled (<code>--filled</code>) · default size</p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled">Primary</button>
-          <button type="button" class="atom-btn atom-btn--secondary atom-btn--filled">Secondary</button>
-          <button type="button" class="atom-btn atom-btn--tertiary atom-btn--filled">Tertiary</button>
-          <button type="button" class="atom-btn atom-btn--quaternary atom-btn--filled">Quaternary</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled" disabled>Disabled</button>
-        </div>
-
-        <!-- SIZES — outline -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — <code>--size-sm</code> · <code>--size-md</code> ·
-          <code>--size-lg</code> (outline)
-        </p>
-        <div class="mol-btn-group syx-mb-2">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm">Small</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--size-md">Medium</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--size-lg">Large</button>
-        </div>
-
-        <!-- SIZES — filled -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — filled</p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Small</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">Medium</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-lg">Large</button>
-        </div>
-
-        <!-- CIRCLE — icon only -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Circle — <code>--circle</code> with <code>atom-icon</code> ·
-          sm · md · lg</p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--circle atom-btn--size-sm"
-            aria-label="Home sm">
-            <span class="atom-icon atom-icon--lc-home atom-icon--sm atom-icon--color-white" aria-hidden="true"></span>
-          </button>
-          <button type="button" class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--circle atom-btn--size-md"
-            aria-label="Home md">
-            <span class="atom-icon atom-icon--lc-home atom-icon--md atom-icon--color-white" aria-hidden="true"></span>
-          </button>
-          <button type="button" class="atom-btn atom-btn--tertiary atom-btn--filled atom-btn--circle atom-btn--size-lg"
-            aria-label="Home lg">
-            <span class="atom-icon atom-icon--lc-home atom-icon--lg atom-icon--color-white" aria-hidden="true"></span>
-          </button>
-          <button type="button" class="atom-btn atom-btn--quaternary atom-btn--circle atom-btn--size-md"
-            aria-label="Home outline">
-            <span class="atom-icon atom-icon--lc-home atom-icon--md" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <!-- WITH ICON — atom-btn--has-icon variant -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2"><code>atom-btn--has-icon</code> — icon size + gap
-          auto-controlled by <code>--size-*</code></p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button"
-            class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm atom-btn--has-icon">
-            <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
-            Home sm
-          </button>
-          <button type="button"
-            class="atom-btn atom-btn--secondary atom-btn--filled atom-btn--size-md atom-btn--has-icon">
-            <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
-            Home md
-          </button>
-          <button type="button"
-            class="atom-btn atom-btn--tertiary atom-btn--filled atom-btn--size-lg atom-btn--has-icon">
-            <span class="atom-icon atom-icon--lc-home atom-icon--color-white" aria-hidden="true"></span>
-            Home lg
-          </button>
-          <button type="button" class="atom-btn atom-btn--quaternary atom-btn--size-md atom-btn--has-icon">
-            <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
-            Search
-          </button>
-        </div>
-
-
-
-        <!-- STATES summary -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">States — normal · hover (hover me) · focus-visible (Tab) ·
-          disabled</p>
-        <div class="mol-btn-group">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Normal</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm" disabled>Disabled
-            filled</button>
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--size-sm" disabled>Disabled outline</button>
-        </div>
-      </section>
-
-
-      <!-- Pills & Labels -->
-      <section class="syx-mb-4" id="atom-pill">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Pills · Labels</h3>
-        <div class="mol-label-group syx-mb-3">
-          <span class="atom-pill">Neutral</span>
-          <span class="atom-pill atom-pill--primary">Primary</span>
-          <span class="atom-pill atom-pill--secondary">Secondary</span>
-          <span class="atom-pill atom-pill--success">Success</span>
-          <span class="atom-pill atom-pill--warning">Warning</span>
-          <span class="atom-pill atom-pill--danger">Danger</span>
-          <span class="atom-pill atom-pill--dark">Dark</span>
-        </div>
-        <div class="syx-d-flex syx-gap-3">
-          <label class="atom-label">atom-label</label>
-          <label class="atom-label atom-label--primary">atom-label--primary</label>
-        </div>
-      </section>
-
-      <!-- Links -->
-      <section class="syx-mb-4" id="atom-link">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Link</h3>
-        <p>Paragraph with an <a href="#" class="atom-link atom-link--primary">inline primary link</a> — hover to see the
-          fill effect. And <a href="#" class="atom-link atom-link--primary">another link</a>.</p>
-      </section>
-
-      <!-- Icons -->
-      <section class="syx-mb-5" id="atom-icon">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Icons — .atom-icon</h3>
-
-        <!-- Legacy set -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Legacy system — <code>--ui-*</code> / <code>--arrow-*</code>
-          / <code>--rrss-*</code></p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-4">
-          <span class="atom-icon atom-icon--lc-arrow-right" role="img" aria-label="arrow-default"></span>
-          <span class="atom-icon atom-icon--lc-chevron-right" role="img" aria-label="arrow-double"></span>
-          <span class="atom-icon atom-icon--lc-menu" role="img" aria-label="bars"></span>
-          <span class="atom-icon atom-icon--lc-mail" role="img" aria-label="email"></span>
-          <span class="atom-icon atom-icon--lc-x" role="img" aria-label="cancel"></span>
-          <span class="atom-icon atom-icon--lc-home" role="img" aria-label="home"></span>
-          <span class="atom-icon atom-icon--lc-check" role="img" aria-label="tick"></span>
-          <span class="atom-icon atom-icon--lc-warning" role="img" aria-label="exclamation"></span>
-        </div>
-
-        <!-- Lucide: Navigation -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Navigation <code>--lc-*</code></p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
-          <span class="atom-icon atom-icon--lc-home" aria-hidden="true" title="--lc-home"></span>
-          <span class="atom-icon atom-icon--lc-menu" aria-hidden="true" title="--lc-menu"></span>
-          <span class="atom-icon atom-icon--lc-x" aria-hidden="true" title="--lc-x"></span>
-          <span class="atom-icon atom-icon--lc-chevron-right" aria-hidden="true" title="--lc-chevron-right"></span>
-          <span class="atom-icon atom-icon--lc-chevron-left" aria-hidden="true" title="--lc-chevron-left"></span>
-          <span class="atom-icon atom-icon--lc-chevron-down" aria-hidden="true" title="--lc-chevron-down"></span>
-          <span class="atom-icon atom-icon--lc-chevron-up" aria-hidden="true" title="--lc-chevron-up"></span>
-          <span class="atom-icon atom-icon--lc-arrow-right" aria-hidden="true" title="--lc-arrow-right"></span>
-          <span class="atom-icon atom-icon--lc-arrow-left" aria-hidden="true" title="--lc-arrow-left"></span>
-        </div>
-
-        <!-- Lucide: Actions -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Actions</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
-          <span class="atom-icon atom-icon--lc-search" aria-hidden="true" title="--lc-search"></span>
-          <span class="atom-icon atom-icon--lc-plus" aria-hidden="true" title="--lc-plus"></span>
-          <span class="atom-icon atom-icon--lc-minus" aria-hidden="true" title="--lc-minus"></span>
-          <span class="atom-icon atom-icon--lc-check" aria-hidden="true" title="--lc-check"></span>
-          <span class="atom-icon atom-icon--lc-trash" aria-hidden="true" title="--lc-trash"></span>
-          <span class="atom-icon atom-icon--lc-pencil" aria-hidden="true" title="--lc-pencil"></span>
-          <span class="atom-icon atom-icon--lc-download" aria-hidden="true" title="--lc-download"></span>
-          <span class="atom-icon atom-icon--lc-copy" aria-hidden="true" title="--lc-copy"></span>
-          <span class="atom-icon atom-icon--lc-external-link" aria-hidden="true" title="--lc-external-link"></span>
-          <span class="atom-icon atom-icon--lc-filter" aria-hidden="true" title="--lc-filter"></span>
-        </div>
-
-        <!-- Lucide: Status + User -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Lucide — Status · User</p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-4">
-          <span class="atom-icon atom-icon--lc-info" aria-hidden="true" title="--lc-info"></span>
-          <span class="atom-icon atom-icon--lc-warning" aria-hidden="true" title="--lc-warning"></span>
-          <span class="atom-icon atom-icon--lc-success" aria-hidden="true" title="--lc-success"></span>
-          <span class="atom-icon atom-icon--lc-error" aria-hidden="true" title="--lc-error"></span>
-          <span class="atom-icon atom-icon--lc-user" aria-hidden="true" title="--lc-user"></span>
-          <span class="atom-icon atom-icon--lc-settings" aria-hidden="true" title="--lc-settings"></span>
-        </div>
-
-        <!-- Sizes -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Sizes — <code>--sm</code> · <code>--md</code> ·
-          <code>--lg</code> · <code>--xl</code>
-        </p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center syx-mb-3">
-          <span class="atom-icon atom-icon--lc-home atom-icon--sm" role="img" aria-label="sm"></span>
-          <span class="atom-icon atom-icon--lc-home atom-icon--md" role="img" aria-label="md"></span>
-          <span class="atom-icon atom-icon--lc-home atom-icon--lg" role="img" aria-label="lg"></span>
-          <span class="atom-icon atom-icon--lc-home atom-icon--xl" role="img" aria-label="xl"></span>
-        </div>
-
-        <!-- Color modifiers via filter tokens -->
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Color modifiers — <code>--color-primary</code> ·
-          <code>--color-state-ok</code> · <code>--color-state-ko</code> · <code>--color-state-warning</code>
-        </p>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-3 syx-items-center">
-          <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" role="img" aria-label="primary"></span>
-          <span class="atom-icon atom-icon--lc-check atom-icon--color-state-ok" role="img" aria-label="ok"></span>
-          <span class="atom-icon atom-icon--lc-x atom-icon--color-state-ko" role="img" aria-label="ko"></span>
-          <span class="atom-icon atom-icon--lc-warning atom-icon--color-state-warning" role="img"
-            aria-label="warning"></span>
-          <span class="atom-icon atom-icon--lc-user atom-icon--color-secondary" role="img"
-            aria-label="secondary"></span>
-        </div>
-      </section>
-
-
-      <!-- Title & Text -->
-      <section class="syx-mb-4" id="atom-title">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Title · Txt</h3>
-        <p class="atom-title atom-title--h1">H1 Title</p>
-        <p class="atom-title atom-title--h2">H2 Title</p>
-        <p class="atom-title atom-title--h3">H3 Title</p>
-        <p class="atom-title atom-title--h4">H4 Title</p>
-        <p class="atom-title atom-title--h5">H5 Title</p>
-        <p class="atom-title atom-title--h6">H6 Title</p>
-        <p class="atom-txt atom-txt--primary">Body paragraph with <code>atom-txt--primary</code>. Includes semantic
-          bottom margin for vertical rhythm.</p>
-        <p class="atom-txt atom-txt--primary">Second paragraph to demonstrate consistent spacing between text blocks.
-        </p>
-      </section>
-
-      <!-- Form -->
-      <section class="syx-mb-4" id="atom-form">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Form — label · input · input-wrapper</h3>
-        <div class="layout-grid__nested">
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
-            <label class="atom-label" for="demo-form-text">Text</label>
-            <div class="atom-input-wrapper"><input id="demo-form-text" class="atom-input" type="text"
-                placeholder="Enter text…">
-            </div>
-          </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
-            <label class="atom-label" for="demo-form-disabled">Disabled</label>
-            <div class="atom-input-wrapper"><input id="demo-form-disabled" class="atom-input" type="text"
-                value="Not editable" disabled>
-            </div>
-          </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
-            <label class="atom-label" for="demo-form-select">Select</label>
-            <div class="atom-input-wrapper"><select id="demo-form-select" class="atom-select">
-                <option>Option A</option>
-                <option>Option B</option>
-              </select></div>
-          </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-3">
-            <label class="atom-label" for="demo-form-textarea">Textarea</label>
-            <textarea id="demo-form-textarea" class="atom-input" rows="2" placeholder="Longer…"></textarea>
-          </div>
-        </div>
-      </section>
-
-      <!-- Check & Switch -->
-      <section class="syx-mb-4" id="atom-check">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Check · Switch</h3>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-5">
-          <fieldset style="border:0;padding:0;margin:0;">
-            <legend class="atom-label syx-mb-2">Demo Checkboxes</legend>
-            <div class="syx-d-flex syx-flex-col syx-gap-3">
-              <label class="atom-check"><input class="atom-check__input" type="checkbox" id="demo-check-unchecked"><span
-                  class="atom-check__label">Unchecked</span></label>
-              <label class="atom-check"><input class="atom-check__input" type="checkbox" id="demo-check-checked"
-                  checked><span class="atom-check__label">Checked</span></label>
-              <label class="atom-check"><input class="atom-check__input" type="checkbox" id="demo-check-disabled"
-                  disabled><span class="atom-check__label">Disabled</span></label>
-            </div>
-          </fieldset>
-          <fieldset style="border:0;padding:0;margin:0;">
-            <legend class="atom-label syx-mb-2">Demo Switches</legend>
-            <div class="syx-d-flex syx-flex-col syx-gap-3">
-              <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-off"><span
-                  class="atom-switch__slider"></span><span class="atom-switch__label">Off</span></label>
-              <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-on"
-                  checked><span class="atom-switch__slider"></span><span class="atom-switch__label">On</span></label>
-              <label class="atom-switch"><input class="atom-switch__input" type="checkbox" id="demo-switch-disabled"
-                  disabled><span class="atom-switch__slider"></span><span
-                  class="atom-switch__label">Disabled</span></label>
-            </div>
-          </fieldset>
-        </div>
-      </section>
-
-      <!-- Lists -->
-      <section class="syx-mb-4" id="atom-list">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Lists</h3>
-        <div class="syx-d-flex syx-flex-wrap syx-gap-5">
-          <ul class="atom-list atom-list--primary">
-            <li class="atom-list__item">First item</li>
-            <li class="atom-list__item">Second item
-              <ul class="atom-list__lvl2">
-                <li class="atom-list__item atom-list__lvl2-item">Nested A</li>
-                <li class="atom-list__item atom-list__lvl2-item">Nested B</li>
-              </ul>
-            </li>
-            <li class="atom-list__item">Third item</li>
-          </ul>
-          <ol class="atom-list atom-list--ordered">
-            <li class="atom-list__item">First ordered</li>
-            <li class="atom-list__item">Second ordered</li>
-            <li class="atom-list__item">Third ordered</li>
-          </ol>
-        </div>
-      </section>
-
-      <!-- Table -->
-      <section class="syx-mb-4" id="atom-table">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Table</h3>
-        <div class="atom-table--resp">
-          <table class="atom-table atom-table--primary syx-w-full" aria-label="SYX components registry">
-            <thead>
-              <tr>
-                <th class="atom-table__th" scope="col">Component</th>
-                <th class="atom-table__th" scope="col">Layer</th>
-                <th class="atom-table__th" scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="atom-table__td">atom-btn</td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--primary">syx.atoms</span></td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--success">Stable</span></td>
-              </tr>
-              <tr>
-                <td class="atom-table__td">mol-card</td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--secondary">syx.molecules</span></td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--success">Stable</span></td>
-              </tr>
-              <tr>
-                <td class="atom-table__td">syx-d-flex</td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--dark">syx.utilities</span></td>
-                <td class="atom-table__td"><span class="atom-pill atom-pill--warning">Always wins</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- Pagination -->
-      <section class="syx-mb-5" id="atom-pagination">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Pagination</h3>
-        <nav aria-label="Pagination">
-          <ul class="atom-pagination">
-            <li class="atom-pagination__item atom-pagination__item--is-disabled atom-pagination__item--is-prev"><button
-                type="button" class="atom-pagination__trigger" disabled aria-label="Previous"></button></li>
-            <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">1</button></li>
-            <li class="atom-pagination__item atom-pagination__item--is-active"><button type="button"
-                class="atom-pagination__trigger" aria-current="page">2</button></li>
-            <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">3</button></li>
-            <li class="atom-pagination__item"><button type="button" class="atom-pagination__trigger">4</button></li>
-            <li class="atom-pagination__item atom-pagination__item--is-next"><button type="button"
-                class="atom-pagination__trigger" aria-label="Next"></button></li>
-          </ul>
-        </nav>
-      </section>
-
-      <!-- atom-code -->
-      <section class="syx-mb-4" id="atom-code">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Code — syntax highlight</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">.atom-code — block</p>
-        <pre class="atom-code"><span class="atom-code__tag">.atom-btn</span> {
+        <!-- atom-code -->
+        <section class="syx-mb-4" id="atom-code">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Code — syntax highlight</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.atom-code — block</p>
+          <pre class="atom-code"><span class="atom-code__tag">.atom-btn</span> {
   <span class="atom-code__attr">background-color</span>: <span class="atom-code__val">var(--component-btn-primary-bg)</span>;
   <span class="atom-code__attr">color</span>: <span class="atom-code__val">var(--component-btn-primary-color)</span>;
   <span class="atom-code__cmt">/* token-driven — no hardcoded values */</span>
 }</pre>
-        <p class="syx-type-overline syx-text-gray syx-mb-2 syx-mt-3">.atom-code--inline</p>
-        <p class="atom-txt">Use <code class="atom-code atom-code--inline">@layer syx.utilities</code> to ensure
-          utilities always win.</p>
-      </section>
+          <p class="syx-type-overline syx-text-gray syx-mb-2 syx-mt-3">.atom-code--inline</p>
+          <p class="atom-txt">Use <code class="atom-code atom-code--inline">@layer syx.utilities</code> to ensure
+            utilities always win.</p>
+        </section>
 
-      <!-- atom-radio -->
-      <section class="syx-mb-5" id="atom-radio">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--primary syx-mr-1">atom</span>Radio</h3>
-        <fieldset style="border:0;padding:0;margin:0;">
-          <legend class="atom-label syx-mb-2">Demo Radio Group</legend>
-          <div class="syx-d-flex syx-flex-col syx-gap-3">
-            <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
-                id="demo-radio-alpha" value="a"><span class="atom-radio__label">Option Alpha</span></label>
-            <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
-                id="demo-radio-beta" value="b" checked><span class="atom-radio__label">Option Beta
-                (selected)</span></label>
-            <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
-                id="demo-radio-gamma" value="c" disabled><span class="atom-radio__label">Option Gamma
-                (disabled)</span></label>
-          </div>
-        </fieldset>
-      </section>
+        <!-- atom-radio -->
+        <section class="syx-mb-5" id="atom-radio">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Radio</h3>
+          <fieldset style="border:0;padding:0;margin:0;">
+            <legend class="atom-label syx-mb-2">Demo Radio Group</legend>
+            <div class="syx-d-flex syx-flex-col syx-gap-3">
+              <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
+                  id="demo-radio-alpha" value="a"><span class="atom-radio__label">Option Alpha</span></label>
+              <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
+                  id="demo-radio-beta" value="b" checked><span class="atom-radio__label">Option Beta
+                  (selected)</span></label>
+              <label class="atom-radio"><input class="atom-radio__input" type="radio" name="demo-radio"
+                  id="demo-radio-gamma" value="c" disabled><span class="atom-radio__label">Option Gamma
+                  (disabled)</span></label>
+            </div>
+          </fieldset>
+        </section>
 
-      <!-- ══════════════════════════════════════════
+        <!-- ══════════════════════════════════════════
        LAYER 4 — MOLECULES  @layer syx.molecules
   ══════════════════════════════════════════ -->
-      <h2 class="atom-title atom-title--h2 syx-mt-4 syx-mb-1" id="molecules" aria-label="Layer 4 — Molecules">Molecules
-      </h2>
-      <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.molecules</code> — compositions of atoms.</p>
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--molecule">
+            <span class="atom-icon atom-icon--lc-package atom-icon--sm" aria-hidden="true"></span>
+            Molecules
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">@layer syx.molecules</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="molecules" aria-label="Layer 4 — Molecules">Molecules</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.molecules</code> — compositions of atoms.</p>
 
-      <!-- Cards -->
-      <!-- mol-card is opt-in — not included in the base architecture compile.
+        <!-- Cards -->
+        <!-- mol-card is opt-in — not included in the base architecture compile.
        Add @include mol-card(example-01) to setup.scss to enable. -->
 
 
-      <!-- Form Fields -->
-      <section class="syx-mb-4" id="mol-form-field">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--secondary syx-mr-1">mol</span>Form Field — states</h3>
-        <div class="layout-grid__nested">
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
-            <div class="mol-form-field"><label class="atom-label" for="ff1">Normal</label>
-              <div class="atom-input-wrapper"><input id="ff1" class="atom-input" type="text" placeholder="Normal state">
+        <!-- Form Fields -->
+        <section class="syx-mb-4" id="mol-form-field">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Form Field — states</h3>
+          <div class="layout-grid__nested">
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
+              <div class="mol-form-field"><label class="atom-label" for="ff1">Normal</label>
+                <div class="atom-input-wrapper"><input id="ff1" class="atom-input" type="text"
+                    placeholder="Normal state">
+                </div>
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
+              <div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ff2">Error</label>
+                <div class="atom-input-wrapper"><input id="ff2" class="atom-input" type="text" value="invalid"
+                    aria-describedby="ff2-msg" aria-invalid="true"></div><span id="ff2-msg" class="mol-form-field__msg"
+                  role="alert">Validation error.</span>
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
+              <div class="mol-form-field mol-form-field--is-success"><label class="atom-label" for="ff3">Success</label>
+                <div class="atom-input-wrapper"><input id="ff3" class="atom-input" type="text" value="valid_value"
+                    aria-describedby="ff3-msg"></div>
+                <span id="ff3-msg" class="mol-form-field__msg">Looks good!</span>
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
+              <div class="mol-form-field mol-form-field--is-warning"><label class="atom-label" for="ff4">Warning</label>
+                <div class="atom-input-wrapper"><input id="ff4" class="atom-input" type="text" value="weak"
+                    aria-describedby="ff4-msg"></div><span id="ff4-msg" class="mol-form-field__msg">Consider
+                  improving.</span>
+              </div>
+            </div>
+            <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
+              <div class="mol-form-field mol-form-field--has-select"><label class="atom-label" for="ff5">Select</label>
+                <div class="atom-input-wrapper"><select id="ff5" class="atom-select">
+                    <option>Choose…</option>
+                    <option>Option A</option>
+                  </select></div>
               </div>
             </div>
           </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
-            <div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ff2">Error</label>
-              <div class="atom-input-wrapper"><input id="ff2" class="atom-input" type="text" value="invalid"
-                  aria-describedby="ff2-msg" aria-invalid="true"></div><span id="ff2-msg" class="mol-form-field__msg"
-                role="alert">Validation error.</span>
+        </section>
+
+        <!-- Btn Group / Label Group -->
+        <section class="syx-mb-5" id="mol-groups">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Btn Group · Label Group</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">mol-btn-group</p>
+          <div class="mol-btn-group syx-mb-4">
+            <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Save</button>
+            <button type="button" class="atom-btn atom-btn--secondary atom-btn--size-sm">Discard</button>
+            <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Preview</button>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">mol-label-group</p>
+          <div class="mol-label-group">
+            <span class="atom-pill atom-pill--primary">SYX</span>
+            <span class="atom-pill atom-pill--secondary">Design System</span>
+            <span class="atom-pill atom-pill--success">v4.0.0</span>
+            <span class="atom-pill atom-pill--warning">Beta features</span>
+            <span class="atom-pill atom-pill--dark">Production ready</span>
+          </div>
+        </section>
+
+        <!-- Form Field Set -->
+        <section class="syx-mb-5" id="mol-form-field-set">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Form Field Set — group wrapper</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Default (vertical stack)</p>
+          <div class="mol-form-field-set syx-mb-3">
+            <div class="mol-form-field"><label class="atom-label" for="ffs1">First name</label>
+              <div class="atom-input-wrapper"><input id="ffs1" class="atom-input" type="text" placeholder="Jane"></div>
+            </div>
+            <div class="mol-form-field"><label class="atom-label" for="ffs2">Last name</label>
+              <div class="atom-input-wrapper"><input id="ffs2" class="atom-input" type="text" placeholder="Doe"></div>
+            </div>
+            <div class="mol-form-field"><label class="atom-label" for="ffs3">Email</label>
+              <div class="atom-input-wrapper"><input id="ffs3" class="atom-input" type="email"
+                  placeholder="jane@example.com"></div>
             </div>
           </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
-            <div class="mol-form-field mol-form-field--is-success"><label class="atom-label" for="ff3">Success</label>
-              <div class="atom-input-wrapper"><input id="ff3" class="atom-input" type="text" value="valid_value"
-                  aria-describedby="ff3-msg"></div>
-              <span id="ff3-msg" class="mol-form-field__msg">Looks good!</span>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">--inline (horizontal wrap with flex: 1 1 auto)</p>
+          <div class="mol-form-field-set mol-form-field-set--inline">
+            <div class="mol-form-field"><label class="atom-label" for="ffs4">City</label>
+              <div class="atom-input-wrapper"><input id="ffs4" class="atom-input" type="text" placeholder="Madrid">
+              </div>
             </div>
-          </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
-            <div class="mol-form-field mol-form-field--is-warning"><label class="atom-label" for="ff4">Warning</label>
-              <div class="atom-input-wrapper"><input id="ff4" class="atom-input" type="text" value="weak"
-                  aria-describedby="ff4-msg"></div><span id="ff4-msg" class="mol-form-field__msg">Consider
-                improving.</span>
+            <div class="mol-form-field"><label class="atom-label" for="ffs5">Postal code</label>
+              <div class="atom-input-wrapper"><input id="ffs5" class="atom-input" type="text" placeholder="28001"></div>
             </div>
-          </div>
-          <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
-            <div class="mol-form-field mol-form-field--has-select"><label class="atom-label" for="ff5">Select</label>
-              <div class="atom-input-wrapper"><select id="ff5" class="atom-select">
-                  <option>Choose…</option>
-                  <option>Option A</option>
+            <div class="mol-form-field"><label class="atom-label" for="ffs6">Country</label>
+              <div class="atom-input-wrapper"><select id="ffs6" class="atom-select">
+                  <option>Spain</option>
+                  <option>France</option>
                 </select></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Btn Group / Label Group -->
-      <section class="syx-mb-5" id="mol-groups">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--secondary syx-mr-1">mol</span>Btn Group · Label Group</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">mol-btn-group</p>
-        <div class="mol-btn-group syx-mb-4">
-          <button type="button" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Save</button>
-          <button type="button" class="atom-btn atom-btn--secondary atom-btn--size-sm">Discard</button>
-          <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Preview</button>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">mol-label-group</p>
-        <div class="mol-label-group">
-          <span class="atom-pill atom-pill--primary">SYX</span>
-          <span class="atom-pill atom-pill--secondary">Design System</span>
-          <span class="atom-pill atom-pill--success">v4.0.0</span>
-          <span class="atom-pill atom-pill--warning">Beta features</span>
-          <span class="atom-pill atom-pill--dark">Production ready</span>
-        </div>
-      </section>
-
-      <!-- Form Field Set -->
-      <section class="syx-mb-5" id="mol-form-field-set">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span
-            class="atom-pill atom-pill--secondary syx-mr-1">mol</span>Form Field Set — group wrapper</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Default (vertical stack)</p>
-        <div class="mol-form-field-set syx-mb-3">
-          <div class="mol-form-field"><label class="atom-label" for="ffs1">First name</label>
-            <div class="atom-input-wrapper"><input id="ffs1" class="atom-input" type="text" placeholder="Jane"></div>
-          </div>
-          <div class="mol-form-field"><label class="atom-label" for="ffs2">Last name</label>
-            <div class="atom-input-wrapper"><input id="ffs2" class="atom-input" type="text" placeholder="Doe"></div>
-          </div>
-          <div class="mol-form-field"><label class="atom-label" for="ffs3">Email</label>
-            <div class="atom-input-wrapper"><input id="ffs3" class="atom-input" type="email"
-                placeholder="jane@example.com"></div>
-          </div>
-        </div>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">--inline (horizontal wrap with flex: 1 1 auto)</p>
-        <div class="mol-form-field-set mol-form-field-set--inline">
-          <div class="mol-form-field"><label class="atom-label" for="ffs4">City</label>
-            <div class="atom-input-wrapper"><input id="ffs4" class="atom-input" type="text" placeholder="Madrid"></div>
-          </div>
-          <div class="mol-form-field"><label class="atom-label" for="ffs5">Postal code</label>
-            <div class="atom-input-wrapper"><input id="ffs5" class="atom-input" type="text" placeholder="28001"></div>
-          </div>
-          <div class="mol-form-field"><label class="atom-label" for="ffs6">Country</label>
-            <div class="atom-input-wrapper"><select id="ffs6" class="atom-select">
-                <option>Spain</option>
-                <option>France</option>
-              </select></div>
-          </div>
-        </div>
-      </section>
+        </section>
 
 
-      <!-- ══════════════════════════════════════════
+        <!-- ══════════════════════════════════════════
        LAYER 5 — ORGANISMS  @layer syx.organisms
   ══════════════════════════════════════════ -->
-      <h2 class="atom-title atom-title--h2 syx-mt-4 syx-mb-1" id="organisms" aria-label="Layer 5 — Organisms">Organisms
-      </h2>
-      <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.organisms</code> — compositions of molecules + atoms
-        forming page-level sections.</p>
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--organism">
+            <span class="atom-icon atom-icon--lc-box atom-icon--sm" aria-hidden="true"></span>
+            Organisms
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">@layer syx.organisms</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="organisms" aria-label="Layer 5 — Organisms">Organisms</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4"><code>@layer syx.organisms</code> — compositions of molecules + atoms
+          forming page-level sections.</p>
 
-      <section class="syx-mb-5" id="org-site-header">
-        <h3 class="atom-title atom-title--h5 syx-mb-3"><span class="atom-pill atom-pill--dark syx-mr-1">org</span>Site
-          Header — brand + nav + actions</h3>
-        <p class="syx-type-overline syx-text-gray syx-mb-2">Live example — the header at the top of this page is this
-          organism</p>
-        <header class="org-site-header syx-mb-3">
-          <a href="#" class="org-site-header__brand" aria-label="Brand Home">
-            <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" aria-hidden="true"></span>
-            Brand Name
-          </a>
-          <nav class="org-site-header__nav" aria-label="Primary navigation example">
-            <div class="mol-btn-group">
-              <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">About</a>
-              <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">Docs</a>
-              <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">Blog</a>
+        <section class="syx-mb-5" id="org-site-header">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">Site
+            Header — brand + nav + actions</h3>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Live example — the header at the top of this page is this
+            organism</p>
+          <header class="org-site-header syx-mb-3">
+            <a href="#" class="org-site-header__brand" aria-label="Brand Home">
+              <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" aria-hidden="true"></span>
+              Brand Name
+            </a>
+            <nav class="org-site-header__nav" aria-label="Primary navigation example">
+              <div class="mol-btn-group">
+                <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">About</a>
+                <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">Docs</a>
+                <a href="#" class="atom-btn atom-btn--secondary atom-btn--size-sm">Blog</a>
+              </div>
+            </nav>
+            <div class="org-site-header__actions">
+              <a href="#" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Get started</a>
             </div>
-          </nav>
-          <div class="org-site-header__actions">
-            <a href="#" class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">Get started</a>
-          </div>
-        </header>
-        <p class="atom-txt syx-text-gray">Composes: <code>atom-icon</code> · <code>atom-btn</code> ·
-          <code>mol-btn-group</code>. Add more organisms to <code>scss/organisms/</code> and forward from
-          <code>organisms/index.scss</code>.
-        </p>
-      </section>
+          </header>
+          <p class="atom-txt syx-text-gray">Composes: <code>atom-icon</code> · <code>atom-btn</code> ·
+            <code>mol-btn-group</code>. Add more organisms to <code>scss/organisms/</code> and forward from
+            <code>organisms/index.scss</code>.
+          </p>
+        </section>
 
-    </div><!-- /.layout-grid__col-xs-12 -->
-  </main><!-- /.layout-grid #main-content -->
+      </div><!-- /.layout-grid__col-xs-12 -->
+    </main><!-- /.docs-content.layout-grid #main-content -->
+
+  </div><!-- /.docs-layout -->
 
 
   <!-- =============================================
@@ -1845,7 +2272,10 @@ safelist: [/^atom-btn--/, /^is-/];
     </p>
   </footer>
 
-
+  <!-- ── Back to top ─────────────────────────────────── -->
+  <button class="docs-back-top" id="docs-back-top" aria-label="Back to top" title="Back to top">
+    <span class="atom-icon atom-icon--lc-arrow-up atom-icon--sm atom-icon--color-white" aria-hidden="true"></span>
+  </button>
 
   <script>
     (function () {
@@ -1886,7 +2316,7 @@ safelist: [/^atom-btn--/, /^is-/];
       }
 
       // Normalise: docs stores 'example-01'; home stores 'example-01' too,
-      // but legacy docs used '01'. Convert short format → long if needed.
+      // but legacy docs used '01'. Convert short format &rarr; long if needed.
       function normTheme(raw) {
         if (!raw) return null;
         if (/^\d+$/.test(raw)) return 'example-' + raw.padStart(2, '0');
@@ -1970,6 +2400,58 @@ safelist: [/^atom-btn--/, /^is-/];
       });
 
       // ── Header scroll shadow ──────────────────────────────────
+      // ── Back to top ────────────────────────────────────────
+      var backTop = document.getElementById('docs-back-top');
+      if (backTop) {
+        window.addEventListener('scroll', function () {
+          if (window.scrollY > 300) {
+            backTop.classList.add('is-visible');
+          } else {
+            backTop.classList.remove('is-visible');
+          }
+        }, { passive: true });
+        backTop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // ── Sidebar active section tracking ───────────────────
+      (function () {
+        if (!('IntersectionObserver' in window)) return;
+        var sidebarLinks = document.querySelectorAll('#docs-sidebar [data-nav-section]');
+        if (!sidebarLinks.length) return;
+
+        var sectionIds = [];
+        sidebarLinks.forEach(function (link) {
+          var id = link.getAttribute('data-nav-section');
+          if (id) sectionIds.push(id);
+        });
+
+        var activeSectionId = null;
+
+        function setActive(id) {
+          if (id === activeSectionId) return;
+          activeSectionId = id;
+          sidebarLinks.forEach(function (link) {
+            var linkId = link.getAttribute('data-nav-section');
+            link.classList.toggle('is-active', linkId === id);
+          });
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              setActive(entry.target.id);
+            }
+          });
+        }, { rootMargin: '-64px 0px -60% 0px', threshold: 0 });
+
+        sectionIds.forEach(function (id) {
+          var el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+      }());
+
       if (header && 'IntersectionObserver' in window) {
         var sentinel = document.createElement('div');
         sentinel.setAttribute('aria-hidden', 'true');

@@ -8,7 +8,7 @@
   <!-- Primary meta -->
   <title>SYX Design System — CSS Tokens, @layer &amp; Atomic Design</title>
   <meta name="description"
-    content="SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens, Atomic Design and native CSS @layer. 6 themes. WCAG AA compliant.">
+    content="SYX is a modular CSS design system with zero external dependencies, built on a 7-layer token architecture, Atomic Design and native CSS @layer. 6 themes. WCAG AA compliant.">
   <meta name="author" content="José Luis Pizarro Feo">
   <meta name="keywords"
     content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, AI First, AI-operable, agent workflows">
@@ -20,14 +20,14 @@
   <meta property="og:site_name" content="SYX Design System">
   <meta property="og:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta property="og:description"
-    content="Modular CSS design system with zero external dependencies. Three-layer Design Tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
+    content="Modular CSS design system with zero external dependencies. 7-layer token architecture (Primitive, Semantic, Component + Layout, Reset, Icon, Theme), Atomic Design, native @layer. 6 themes. WCAG AA.">
   <meta property="og:url" content="https://github.com/Pizarradas/syx">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta name="twitter:description"
-    content="Modular CSS design system — zero dependencies, three-layer tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
+    content="Modular CSS design system — zero dependencies, 7-layer tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
   <meta name="twitter:creator" content="@Pizarradas">
 
   <!-- Theme color (mobile browser chrome) -->
@@ -35,6 +35,7 @@
 
   <!-- Theme stylesheet — swapped by JS on theme change -->
   <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+
 </head>
 
 <body class="syx syx--theme-example-01">
@@ -170,7 +171,7 @@
     </h1>
 
     <p class="org-home-hero__sub">
-      SYX is a modular CSS design system with zero external dependencies, built on three-layer Design Tokens,
+      SYX is a modular CSS design system with zero external dependencies, built on a 7-layer token architecture,
       Atomic Design and native <code>@layer</code>. Compatible with any front-end stack.
     </p>
 
@@ -246,10 +247,12 @@
         <span class="atom-feature-icon atom-feature-icon--token" aria-hidden="true">
           <span class="atom-icon atom-icon--lc-coins"></span>
         </span>
-        <h3 class="mol-feature-card__title">4-Layer Design Tokens</h3>
+        <h3 class="mol-feature-card__title">7-Layer Token Architecture</h3>
         <p class="mol-feature-card__body">
-          Primitive → Theme/Architecture → Semantic Tones → Component Aliases. A strict CSS variable hierarchy that
-          separates raw values from structural logic, semantic meaning, and per-component implementation.
+          3 application layers (Primitive &rarr; Semantic &rarr; Component) plus 4 system layers (Layout, Reset, Icon,
+          Theme).
+          A strict CSS variable hierarchy that separates raw values from structural logic, semantic meaning, and
+          per-component implementation.
         </p>
       </article>
 
@@ -318,84 +321,146 @@
   <section class="org-home-tokens" id="tokens" aria-labelledby="tokens-title">
 
     <div class="org-home-tokens__header">
-      <h2 class="org-home-tokens__title" id="tokens-title">4-Layer Token Architecture</h2>
+      <div class="org-home-tokens__overline">
+        <span class="atom-pill atom-pill--subtle">
+          <span class="atom-icon atom-icon--lc-coins atom-icon--sm" aria-hidden="true"></span>
+          Token Cascade
+        </span>
+      </div>
+      <h2 class="org-home-tokens__title" id="tokens-title">7-Layer Token Architecture</h2>
       <p class="org-home-tokens__sub">
-        A CSS variable system with a strict cascade direction: from the most abstract to the most concrete.
+        A CSS variable system with a strict cascade direction — from the most abstract to the most concrete.
+        Each layer can only reference the one above it, never below.
       </p>
     </div>
 
-    <div class="org-home-tokens__diagram" aria-label="Token layer diagram">
+    <div class="org-home-tokens__diagram" role="list" aria-label="Token layer cascade diagram">
 
-      <!-- Primitive Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--primitive" data-step="01">
+      <!-- ── Layer 01: Primitive ───────────────────── -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--primitive" role="listitem">
+
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-database" aria-hidden="true"></span>
           Primitive
         </span>
+
         <h3 class="org-home-tokens__layer-title">Raw values</h3>
         <p class="org-home-tokens__layer-desc">Numbers, colors and scales without context. Never used directly in
-          components.</p>
-        <code class="atom-code">--primitive-color-purple-600</code>
-        <code class="atom-code">--primitive-space-base</code>
+          components — they are the source of truth for all other layers.</p>
+
+        <div class="org-home-tokens__codes" role="list" aria-label="Primitive token examples">
+          <code class="atom-code" role="listitem">--primitive-color-purple-600</code>
+          <code class="atom-code" role="listitem">--primitive-space-base</code>
+          <code class="atom-code" role="listitem">--primitive-font-size-md</code>
+        </div>
+
+        <span class="org-home-tokens__step" aria-label="Step 1">01</span>
       </div>
 
-      <!-- Arrow -->
-      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+      <!-- ── Connector ──────────────────────────────── -->
+      <div class="org-home-tokens__connector" aria-hidden="true">
+        <div class="org-home-tokens__connector-line"></div>
+        <span class="org-home-tokens__connector-arrow">↓</span>
+        <span class="org-home-tokens__connector-label">consumed by</span>
+        <div class="org-home-tokens__connector-line"></div>
+      </div>
 
-      <!-- Theme / Architecture Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--theme" data-step="02">
+      <!-- ── Layer 02: Theme / Architecture ────────── -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--theme" role="listitem">
+
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-settings" aria-hidden="true"></span>
-          Theme / Architecture
+          Theme / Arch
         </span>
+
         <h3 class="org-home-tokens__layer-title">Structural Config</h3>
-        <p class="org-home-tokens__layer-desc">Universal layout choices, radiuses, and dynamic theme focus styles.</p>
-        <code class="atom-code">--theme-radius</code>
-        <code class="atom-code">--theme-focus-ring-width</code>
+        <p class="org-home-tokens__layer-desc">Universal layout choices, border-radius, focus ring behaviour and dynamic
+          theme structural decisions. Shared across all components.</p>
+
+        <div class="org-home-tokens__codes" role="list" aria-label="Theme token examples">
+          <code class="atom-code" role="listitem">--theme-radius</code>
+          <code class="atom-code" role="listitem">--theme-focus-ring-width</code>
+          <code class="atom-code" role="listitem">--theme-transition-speed</code>
+        </div>
+
+        <span class="org-home-tokens__step" aria-label="Step 2">02</span>
       </div>
 
-      <!-- Arrow -->
-      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+      <!-- ── Connector ──────────────────────────────── -->
+      <div class="org-home-tokens__connector" aria-hidden="true">
+        <div class="org-home-tokens__connector-line"></div>
+        <span class="org-home-tokens__connector-arrow">↓</span>
+        <span class="org-home-tokens__connector-label">aliases into</span>
+        <div class="org-home-tokens__connector-line"></div>
+      </div>
 
-      <!-- Semantic Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--semantic" data-step="03">
+      <!-- ── Layer 03: Semantic Tones ──────────────── -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--semantic" role="listitem">
+
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-link" aria-hidden="true"></span>
           Semantic Tones
         </span>
+
         <h3 class="org-home-tokens__layer-title">Contextual feedback</h3>
-        <p class="org-home-tokens__layer-desc">Functional aliases determining success, warning, error, and primary
-          states.</p>
-        <code class="atom-code">--semantic-color-primary</code>
-        <code class="atom-code">--semantic-tone-success-bg</code>
+        <p class="org-home-tokens__layer-desc">Functional aliases that carry meaning: primary actions, success states,
+          warnings, errors. Redefined per-theme — components never change.</p>
+
+        <div class="org-home-tokens__codes" role="list" aria-label="Semantic token examples">
+          <code class="atom-code" role="listitem">--semantic-color-primary</code>
+          <code class="atom-code" role="listitem">--semantic-tone-success-bg</code>
+          <code class="atom-code" role="listitem">--semantic-color-text-secondary</code>
+        </div>
+
+        <span class="org-home-tokens__step" aria-label="Step 3">03</span>
       </div>
 
-      <!-- Arrow -->
-      <div class="org-home-tokens__arrow" aria-hidden="true">→</div>
+      <!-- ── Connector ──────────────────────────────── -->
+      <div class="org-home-tokens__connector" aria-hidden="true">
+        <div class="org-home-tokens__connector-line"></div>
+        <span class="org-home-tokens__connector-arrow">↓</span>
+        <span class="org-home-tokens__connector-label">scoped into</span>
+        <div class="org-home-tokens__connector-line"></div>
+      </div>
 
-      <!-- Component Layer -->
-      <div class="org-home-tokens__layer org-home-tokens__layer--component" data-step="04">
+      <!-- ── Layer 04: Component Aliases ───────────── -->
+      <div class="org-home-tokens__layer org-home-tokens__layer--component" role="listitem">
+
         <span class="org-home-tokens__layer-badge">
           <span class="atom-icon atom-icon--lc-component" aria-hidden="true"></span>
           Component Aliases
         </span>
+
         <h3 class="org-home-tokens__layer-title">Dedicated properties</h3>
-        <p class="org-home-tokens__layer-desc">Component-specific boundaries. Allows robust dark-mode overrides.</p>
-        <code class="atom-code">--btn-primary-text</code>
-        <code class="atom-code">--component-card-padding</code>
+        <p class="org-home-tokens__layer-desc">Component-specific CSS variables that create a stable contract between
+          design and code. Enables robust dark-mode and per-variant overrides without touching component SCSS.</p>
+
+        <div class="org-home-tokens__codes" role="list" aria-label="Component token examples">
+          <code class="atom-code" role="listitem">--btn-primary-text</code>
+          <code class="atom-code" role="listitem">--component-card-padding</code>
+          <code class="atom-code" role="listitem">--input-border-color</code>
+        </div>
+
+        <span class="org-home-tokens__step" aria-label="Step 4">04</span>
       </div>
 
-    </div>
+    </div><!-- /.org-home-tokens__diagram -->
 
-    <div class="org-home-tokens__rule">
-      <p>
+    <!-- ── Golden Rule callout ───────────────────── -->
+    <aside class="org-home-tokens__rule" aria-label="Golden rule">
+      <span class="org-home-tokens__rule-icon" aria-hidden="true">
+        <span class="atom-icon atom-icon--lc-shield-check atom-icon--sm"></span>
+      </span>
+      <p class="org-home-tokens__rule-body">
         <strong>Golden rule:</strong> Components only consume <strong>component aliases</strong> or <strong>semantic
-          tones</strong>. They never reach directly into primitives. This guarantees that switching themes requires
-        changing zero component code.
+          tones</strong>.
+        They never reach directly into primitives. This guarantees that switching themes requires changing
+        <strong>zero component code</strong>.
       </p>
-    </div>
+    </aside>
 
   </section>
+
 
 
   <!-- =============================================
@@ -446,7 +511,8 @@
 
         <div class="org-home-layers__stack-item org-home-layers__stack-item--tokens">
           <span class="org-home-layers__stack-item-name">syx.tokens</span>
-          <span class="org-home-layers__stack-item-desc">CSS Variables · Primitive, Semantic, Component</span>
+          <span class="org-home-layers__stack-item-desc">CSS Variables · Primitive, Semantic, Component, Layout, Reset,
+            Icon, Theme</span>
         </div>
 
         <div class="org-home-layers__stack-item org-home-layers__stack-item--base">
@@ -617,7 +683,7 @@
         </span>
         <h3 class="mol-feature-card__title">Deterministic token hierarchy</h3>
         <p class="mol-feature-card__body">
-          A strict four-layer chain — Primitive → Semantic → Component → Page —
+          A strict four-layer chain — Primitive &rarr; Semantic &rarr; Component &rarr; Page —
           means any agent knows exactly where to place a value
           and what to inherit from. No ambiguity.
         </p>
@@ -659,19 +725,6 @@
         </p>
       </article>
 
-    </div>
-
-    <!-- Validation badge -->
-    <div style="text-align:center; margin-top: var(--semantic-space-layout-lg);">
-      <span class="atom-pill atom-pill--success"
-        style="font-size: var(--semantic-font-size-body-small); padding: 0.5rem 1.25rem;">
-        <span class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"></span>
-        &nbsp;Validation: ⚠️ PASSED WITH WARNINGS — R01 R02 R03 R04 all clean
-      </span>
-      <p
-        style="margin-top: var(--semantic-space-layout-sm); color: var(--semantic-color-text-tertiary); font-size: var(--semantic-font-size-body-small);">
-        1 pending phantom token — resolved automatically on <code>npm run build</code>
-      </p>
     </div>
 
   </section>
@@ -810,7 +863,7 @@
       // Normalise: docs.html saves '01'; home.html saves 'example-01'
       try {
         var savedTheme = sessionStorage.getItem('syx-theme');
-        // Convert short format '01' → 'example-01' if needed
+        // Convert short format '01' &rarr; 'example-01' if needed
         if (savedTheme && /^\d+$/.test(savedTheme)) {
           savedTheme = 'example-' + savedTheme.padStart(2, '0');
         }
