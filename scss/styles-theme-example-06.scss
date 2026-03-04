@@ -1,0 +1,19 @@
+// SYX — Entry point: example-06
+// ================================================
+// Compiles to: css/styles-theme-example-06.css
+// Prepros entry point for theme example-06 (Cyber/Tech).
+// For context-specific bundles, use:
+//   themes/example-06/bundle-app.scss
+//   themes/example-06/bundle-marketing.scss
+//   themes/example-06/bundle-blog.scss
+// ================================================
+
+// THEME SETUP (tokens + reset + helpers + atoms + molecules + organisms)
+@use 'themes/example-06/setup';
+
+// LAYOUT
+
+// UTILITIES (text, display, spacing utility classes)
+@use 'utilities/index' as *;
+
+// PAGES â€” excluded for index.html (showroom/docs pages not needed)

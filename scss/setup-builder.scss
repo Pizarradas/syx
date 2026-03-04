@@ -1,0 +1,124 @@
+// ===============================================
+// THEME BUILDER - DEDICATED SETUP
+// ===============================================
+// This compiler generates css/styles-theme-builder.css
+// It uses a neutral baseline to allow JS custom properties
+// to be easily visualized without clashing with example themes.
+// ===============================================
+
+// CORE
+@use "abstracts/index" as *;
+@use "base/index" as *;
+@use "layout/grids/grid" as *;
+@use "atoms/index" as *;
+@use "molecules/index" as *;
+@use "organisms/index" as *;
+@use "themes/_base/universal" as *;
+@use "pages/theme-builder"; // Sidebar styles
+
+// :ROOT
+// ===============================================
+@include universal-values();
+
+// We inject a basic empty theme block here. 
+// JavaScript will populate all variables dynamically.
+:root {
+    // Spacing Base
+    --primitive-space-base: 0.25rem;
+    --theme-radius: 0.75rem;
+
+    // Inter Font Stack (Default)
+    --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --semantic-font-family-primary: var(--primitive-font-family-inter);
+    --semantic-font-family-primary-bold: var(--primitive-font-family-inter);
+    --semantic-font-family-heading: var(--primitive-font-family-inter);
+    --reset-html-font: normal normal 400 16px/24px var(--primitive-font-family-inter);
+
+    // Fallback defaults so the page isn't broken on first load
+    --semantic-color-bg-primary: oklch(1 0 0);
+    --semantic-color-bg-secondary: oklch(0.97 0 0);
+    --semantic-color-bg-tertiary: oklch(0.93 0 0);
+    --semantic-color-border-subtle: oklch(0.88 0 0);
+    --semantic-color-border-default: oklch(0.8 0 0);
+    --semantic-color-border-strong: oklch(0.7 0 0);
+    --semantic-color-text-primary: oklch(0.22 0 0);
+    --semantic-color-text-secondary: oklch(0.42 0 0);
+
+    --primitive-color-brand-base: oklch(0.6 0.2 250);
+    --semantic-color-primary: var(--primitive-color-brand-base);
+
+    --layout-max-width: calc(360 * var(--primitive-space-base));
+}
+
+// DARK MODE
+// ===============================================
+// Prepares the environment for the JS toggle
+// ===============================================
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        @include dark-mode-tokens();
+    }
+}
+
+:root[data-theme="dark"] {
+    @include dark-mode-tokens();
+}
+
+// FONT SETUP
+// ===============================================
+@include font-family("Google-Inter--regular",
+    "#{$fonts-path}/google-inter/Inter-Regular",
+    400,
+    normal,
+    eot woff2 woff ttf svg);
+@include font-family("Google-Inter--medium",
+    "#{$fonts-path}/google-inter/Inter-Medium",
+    500,
+    normal,
+    eot woff2 woff ttf svg);
+
+// RESET: global
+// ===============================================
+@include resets-global(example-01); // We map to example-01 config but override visually via JS
+@include elements-base(example-01);
+
+// HELPER: all
+// ===============================================
+@include helper-icons();
+@include layout-grid(example-01);
+@include helper-font-sizes(example-01);
+@include helper-dimensions(example-01);
+@include helper-fonts(example-01);
+@include helper-backgrounds(example-01);
+
+// SYX ATOMS
+// ===============================================
+@include atom-breadcrumb(example-01);
+@include atom-btn(example-01);
+@include atom-code(example-01);
+@include atom-pill(example-01);
+@include atom-check(example-01);
+@include atom-form(example-01);
+@include atom-icon(example-01);
+@include atom-label(example-01);
+@include atom-link(example-01);
+@include atom-list(example-01);
+@include atom-pagination(example-01);
+@include atom-radio(example-01);
+@include atom-switch(example-01);
+@include atom-table(example-01);
+@include atom-title(example-01);
+@include atom-txt(example-01);
+@include atom-icon-lucide(example-01);
+
+// SYX MOLECULES
+// ===============================================
+@include mol-form-field(example-01);
+@include mol-btn-group(example-01);
+@include mol-label-group(example-01);
+@include mol-form-field-set(example-01);
+
+// SYX ORGANISMS
+// ===============================================
+@include org-site-header(example-01);
+// ===============================================
