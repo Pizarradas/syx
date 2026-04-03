@@ -14,9 +14,30 @@ Before doing anything else, read:
 
 When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response.
 
+### Resource Tiers
+
+Modes are calibrated by complexity and AI resource consumption. Choose the right tier for the task to avoid spending context budget unnecessarily.
+
+| Tier | Mode | Cost | Files loaded | Output artifacts | Typical turns |
+|---|---|---|---|---|---|
+| 1 | `[SYX: SKETCH]:` | ⚡ Minimal | 0 | 1 HTML file (inline styles) | 1 |
+| 2 | `[SYX: UX]:` | 🔵 Light | 1 (`component-registry.json`) | HTML structure + states | 1–2 |
+| 3 | `[SYX: CREATIVE]:` | 🟡 Medium | 0–1 | HTML + CSS (self-contained) | 1–2 |
+| 4 | `[SYX: TOKEN]:` | 🟠 Medium-High | 2 (`tokens.json`, `rules.json`) | Token SCSS files | 2–3 |
+| 5 | `[SYX: THEME]:` | 🟠 Medium-High | 3 (`tokens.json`, theme file, `rules.json`) | Theme SCSS bundle | 2–3 |
+| 6 | `[SYX: UI]:` | 🔴 High | 4+ (tokens, registry, rules, component files) | SCSS + token file + registry entry | 3–4 |
+| 7 | `[SYX: AUDIT]:` | 🔴 High | N (component tree being audited) | Violation report | 2–4 |
+| 8 | `[SYX: MIGRATE]:` | 🔴 Very High | N+ (all files referencing the migrated variable) | Migration plan + diffs | 4–6 |
+
+> **Tip:** Start with SKETCH or UX to validate the concept. Escalate to TOKEN → UI → AUDIT only when the idea is confirmed.
+
+### Mode Reference
+
 | Prefix | Mode file | When to use |
 |---|---|---|
+| `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | Quick POCs, wireframes, flow diagrams, layout experiments — no token/registry checks |
 | `[SYX: UX]:` | `_agents/modes/ux.md` | Component selection, HTML structure, accessibility, interaction design |
+| `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | Experimental builds, awwwards-style pages, advanced CSS techniques, creative exploration |
 | `[SYX: UI]:` | `_agents/modes/ui.md` | SCSS implementation, token usage, code generation, contract compliance |
 | `[SYX: TOKEN]:` | `_agents/modes/token.md` | Token architecture, creating/migrating tokens, token audits |
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | Creating or modifying themes, OKLCH scales, dark mode |

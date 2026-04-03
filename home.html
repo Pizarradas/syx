@@ -696,10 +696,10 @@
         <p class="mol-feature-card__body">
           <code>_agents/</code> ships step-by-step workflows
           (<code>create-component</code>, <code>create-theme</code>, <code>audit-tokens</code>,
-          <code>update-changelog</code>) and a mode system — prefix any prompt with
-          <code>[SYX: UI]:</code>, <code>[SYX: UX]:</code>, <code>[SYX: TOKEN]:</code>,
-          <code>[SYX: THEME]:</code>, <code>[SYX: AUDIT]:</code> or <code>[SYX: MIGRATE]:</code>
-          to activate a specialist lens before any response.
+          <code>update-changelog</code>) and 8 specialist modes — from the zero-cost
+          <code>[SYX: SKETCH]:</code> prototyper to the full-depth
+          <code>[SYX: MIGRATE]:</code> specialist. Each mode has a defined role, a resource tier,
+          and constrained output, so the right expertise activates before any response is generated.
         </p>
       </article>
 
@@ -739,57 +739,125 @@
         </h3>
         <p class="org-home-features__modes-sub">
           Prefix any message with <code>[SYX: MODE]:</code> to route it to a specialist agent.
-          Each mode has a defined role, constrained output, and reads the same contracts layer —
-          so the right expertise activates before any response is generated.
+          8 modes ordered by resource cost — from a zero-context sketch to a full codebase migration.
+          Pick the lowest tier that serves the task; escalate only when the concept is confirmed.
         </p>
       </div>
 
       <div class="org-home-features__modes-table-wrap">
-        <table class="atom-table" aria-label="SYX agent mode system">
+        <table class="atom-table atom-table--primary" aria-label="SYX agent mode system">
           <thead>
             <tr>
-              <th class="atom-table__th" scope="col">Prefix</th>
               <th class="atom-table__th" scope="col">Mode</th>
-              <th class="atom-table__th" scope="col">Role</th>
+              <th class="atom-table__th" scope="col">AI cost</th>
+              <th class="atom-table__th" scope="col">Best for</th>
               <th class="atom-table__th" scope="col">Output</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="atom-table__td"><code>[SYX: UX]:</code></td>
-              <td class="atom-table__td"><strong>UX</strong></td>
-              <td class="atom-table__td">UX consultant</td>
-              <td class="atom-table__td">Semantic HTML, component selection, accessibility notes, interaction states</td>
+              <td class="atom-table__td">
+                <code>[SYX: SKETCH]:</code><br>
+                <strong>SKETCH</strong><br>
+                <small>Rapid prototyper</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 1 — Minimal">⚡ Minimal</span><br>
+                <small>0 files · 1 turn</small>
+              </td>
+              <td class="atom-table__td">Wireframes, flows, layout POCs — before committing to an idea</td>
+              <td class="atom-table__td">Self-contained HTML with inline styles, Mermaid diagrams, handoff note</td>
             </tr>
             <tr>
-              <td class="atom-table__td"><code>[SYX: UI]:</code></td>
-              <td class="atom-table__td"><strong>UI</strong></td>
-              <td class="atom-table__td">Senior SCSS developer</td>
-              <td class="atom-table__td">Token-compliant SCSS, pre-flight contract checklist, mixin enforcement, R01–R08 validation</td>
+              <td class="atom-table__td">
+                <code>[SYX: UX]:</code><br>
+                <strong>UX</strong><br>
+                <small>UX consultant</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 2 — Light">🔵 Light</span><br>
+                <small>1 file · 1–2 turns</small>
+              </td>
+              <td class="atom-table__td">Component decisions, HTML structure, accessibility, interaction states, UI hierarchy</td>
+              <td class="atom-table__td">Semantic HTML, state inventory, WCAG AA notes, handoff notes for UI mode</td>
             </tr>
             <tr>
-              <td class="atom-table__td"><code>[SYX: TOKEN]:</code></td>
-              <td class="atom-table__td"><strong>TOKEN</strong></td>
-              <td class="atom-table__td">Token architect</td>
-              <td class="atom-table__td">4-tier token design, naming decisions, <code>tokens.json</code> registry entries</td>
+              <td class="atom-table__td">
+                <code>[SYX: CREATIVE]:</code><br>
+                <strong>CREATIVE</strong><br>
+                <small>Experimental creative director</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 3 — Medium">🟡 Medium</span><br>
+                <small>0–1 files · 1–2 turns</small>
+              </td>
+              <td class="atom-table__td">Experimental landing pages, Awwwards-level concepts, advanced CSS — contract-free zone</td>
+              <td class="atom-table__td">Self-contained HTML + CSS, scroll-driven animations, variable fonts, technique log + promotion path</td>
             </tr>
             <tr>
-              <td class="atom-table__td"><code>[SYX: THEME]:</code></td>
-              <td class="atom-table__td"><strong>THEME</strong></td>
-              <td class="atom-table__td">Theme designer</td>
-              <td class="atom-table__td">OKLCH color scales, <code>_theme.scss</code> authoring, dark mode inversion, surface token coverage</td>
+              <td class="atom-table__td">
+                <code>[SYX: TOKEN]:</code><br>
+                <strong>TOKEN</strong><br>
+                <small>Token architect</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 4 — Medium-High">🟠 Medium-high</span><br>
+                <small>2 files · 2–3 turns</small>
+              </td>
+              <td class="atom-table__td">Create or migrate tokens, audit the semantic layer, decide primitive → semantic → component mappings</td>
+              <td class="atom-table__td">4-tier token design, <code>tokens.json</code> entries, <code>_token.scss</code> files</td>
             </tr>
             <tr>
-              <td class="atom-table__td"><code>[SYX: AUDIT]:</code></td>
-              <td class="atom-table__td"><strong>AUDIT</strong></td>
-              <td class="atom-table__td">QA reviewer</td>
-              <td class="atom-table__td">R01–R08 inspection, structure and naming violations, structured verdict report</td>
+              <td class="atom-table__td">
+                <code>[SYX: THEME]:</code><br>
+                <strong>THEME</strong><br>
+                <small>Theme designer</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 5 — Medium-High">🟠 Medium-high</span><br>
+                <small>3 files · 2–3 turns</small>
+              </td>
+              <td class="atom-table__td">Create or modify themes, OKLCH color scales, dark mode inversion, surface token coverage</td>
+              <td class="atom-table__td">OKLCH scales, full <code>_theme.scss</code>, surface token coverage, dark mode variant</td>
             </tr>
             <tr>
-              <td class="atom-table__td"><code>[SYX: MIGRATE]:</code></td>
-              <td class="atom-table__td"><strong>MIGRATE</strong></td>
-              <td class="atom-table__td">Migration specialist</td>
-              <td class="atom-table__td">Legacy variable resolution, per-variable impact analysis, safe replacement workflow</td>
+              <td class="atom-table__td">
+                <code>[SYX: UI]:</code><br>
+                <strong>UI</strong><br>
+                <small>Senior SCSS developer</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 6 — High">🔴 High</span><br>
+                <small>4+ files · 3–4 turns</small>
+              </td>
+              <td class="atom-table__td">Implement new components or modify existing ones with full R01–R08 contract compliance</td>
+              <td class="atom-table__td">Contract-compliant SCSS, token file, pre-flight checklist, mixin enforcement, registry entry + validation command</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td">
+                <code>[SYX: AUDIT]:</code><br>
+                <strong>AUDIT</strong><br>
+                <small>QA reviewer</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 7 — High">🔴 High</span><br>
+                <small>N files · 2–4 turns</small>
+              </td>
+              <td class="atom-table__td">Validate R01–R08 compliance, detect naming and structure violations, codebase health check</td>
+              <td class="atom-table__td">Per-rule verdict report, violations with exact line, correction recommendations</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td">
+                <code>[SYX: MIGRATE]:</code><br>
+                <strong>MIGRATE</strong><br>
+                <small>Migration specialist</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 8 — Very High">🔴 Very high</span><br>
+                <small>N+ files · 4–6 turns</small>
+              </td>
+              <td class="atom-table__td">Replace legacy variables, per-variable impact analysis, safe migration without breaking existing themes</td>
+              <td class="atom-table__td">Per-variable migration plan, exact diffs, theme and bundle impact analysis</td>
             </tr>
           </tbody>
         </table>

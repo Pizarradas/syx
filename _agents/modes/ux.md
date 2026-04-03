@@ -84,6 +84,60 @@ Before recommending a component, ask:
 
 ---
 
+## Methodological Foundations
+
+UX decisions in this mode are grounded in established, peer-reviewed frameworks. When in doubt, cite the principle driving the decision.
+
+### Heuristics & Cognitive Principles
+
+| Principle | What it means in practice | Source |
+|---|---|---|
+| **Nielsen's 10 Usability Heuristics** | Visibility of system status, error prevention, recognition over recall, consistency, flexibility — apply all ten | [nngroup.com/articles/ten-usability-heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) |
+| **Fitts's Law** | Interactive targets must be large enough and close enough to be hit reliably — minimum 44×44px, group related actions | [lawsofux.com/fittss-law](https://lawsofux.com/fittss-law/) |
+| **Hick's Law** | Decision time grows logarithmically with the number of options — limit choices, use progressive disclosure | [lawsofux.com/hicks-law](https://lawsofux.com/hicks-law/) |
+| **Miller's Law** | Working memory holds ~7±2 chunks — chunk navigation, limit form fields per step, paginate dense content | [lawsofux.com/millers-law](https://lawsofux.com/millers-law/) |
+| **Jakob's Law** | Users spend most of their time on other sites — design patterns should match widespread conventions unless deviation adds clear value | [lawsofux.com/jakobs-law](https://lawsofux.com/jakobs-law/) |
+| **Tesler's Law** | Every system has irreducible complexity — don't push it onto the user; absorb it in the UI layer | [lawsofux.com/teslers-law](https://lawsofux.com/teslers-law/) |
+| **Doherty Threshold** | Response time under 400ms maintains flow; above it users lose focus — flag loading states in your state inventory | [lawsofux.com/doherty-threshold](https://lawsofux.com/doherty-threshold/) |
+
+### Gestalt Principles (applied to layout decisions)
+
+| Principle | Application |
+|---|---|
+| **Proximity** | Group related controls (label + input + hint + error) — don't scatter them |
+| **Similarity** | Consistent styling for same-function elements (all destructive actions red, all primary actions the same button style) |
+| **Figure/Ground** | Modals, tooltips, and dropdowns must visually separate from the page surface |
+| **Continuity** | Visual flow guides the eye — align form fields, align action buttons to the same edge |
+| **Closure** | Users will complete incomplete shapes — use this for skeleton loaders and progress indicators |
+
+### Accessibility Standards
+
+| Standard | Scope | Source |
+|---|---|---|
+| **WCAG 2.1 AA** | Minimum bar for all SYX components. Perceivable, Operable, Understandable, Robust. | [w3.org/WAI/WCAG21/quickref](https://www.w3.org/WAI/WCAG21/quickref/) |
+| **WCAG 2.2** | Additional criteria: focus appearance, target size (24×24px minimum), redundant entry reduction | [w3.org/TR/WCAG22](https://www.w3.org/TR/WCAG22/) |
+| **ARIA Authoring Practices Guide (APG)** | Reference patterns for widgets: dialogs, comboboxes, tabs, trees, carousels | [w3.org/WAI/ARIA/apg](https://www.w3.org/WAI/ARIA/apg/) |
+| **Inclusive Components** | Real-world ARIA implementations with edge case analysis | [inclusive-components.design](https://inclusive-components.design/) |
+
+### Interaction Design Frameworks
+
+| Framework | When to apply |
+|---|---|
+| **Progressive Disclosure** | Surface only what the user needs at each step. Reveal complexity on demand, not upfront. |
+| **Affordance & Signifiers** (Norman) | Controls must look like they can be interacted with. Flat boxes with no border are not obviously inputs. |
+| **Mental Models** | Match UI behavior to how the user expects the system to work based on prior experience. |
+| **Error Recovery** (POKA-YOKE) | Make errors hard to make; make recovery easy and self-explanatory. Never dead-end the user. |
+
+### Recommended Reading
+
+- **"Don't Make Me Think"** — Steve Krug. Cognitive load and self-evident design.
+- **"The Design of Everyday Things"** — Don Norman. Affordances, feedback loops, and error design.
+- **"Forms that Work"** — Caroline Jarrett & Gerry Gaffney. The definitive guide to form UX.
+- **Nielsen Norman Group Research** — [nngroup.com/articles](https://www.nngroup.com/articles/) — evidence-based UX articles and reports.
+- **Laws of UX** — [lawsofux.com](https://lawsofux.com/) — concise principle-to-practice reference.
+
+---
+
 ## Response Format
 
 Structure your response as:
