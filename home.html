@@ -159,7 +159,7 @@
   <section class="org-home-hero" id="hero" aria-labelledby="hero-headline">
 
     <span class="org-home-hero__overline">
-      <span class="atom-pill atom-pill--primary">SYX v4 · CSS Design System</span>
+      <span class="atom-pill atom-pill--primary">SYX v4.2 · CSS Design System</span>
     </span>
 
     <h1 class="org-home-hero__headline" id="hero-headline">
@@ -692,11 +692,14 @@
         <span class="atom-feature-icon atom-feature-icon--molecule" aria-hidden="true">
           <span class="atom-icon atom-icon--lc-bot"></span>
         </span>
-        <h3 class="mol-feature-card__title">Agent-native workflows</h3>
+        <h3 class="mol-feature-card__title">Agent-native workflows &amp; modes</h3>
         <p class="mol-feature-card__body">
-          <code>_agents/workflows/</code> ships prompts and step-by-step guides for
-          creating components, themes, and auditing tokens —
-          structured so any LLM can execute them without human interpretation.
+          <code>_agents/</code> ships step-by-step workflows
+          (<code>create-component</code>, <code>create-theme</code>, <code>audit-tokens</code>,
+          <code>update-changelog</code>) and a mode system — prefix any prompt with
+          <code>[SYX: UI]:</code>, <code>[SYX: UX]:</code>, <code>[SYX: TOKEN]:</code>,
+          <code>[SYX: THEME]:</code>, <code>[SYX: AUDIT]:</code> or <code>[SYX: MIGRATE]:</code>
+          to activate a specialist lens before any response.
         </p>
       </article>
 
@@ -706,9 +709,10 @@
         </span>
         <h3 class="mol-feature-card__title">AI-native documentation</h3>
         <p class="mol-feature-card__body">
-          <code>AI_GUIDELINES.md</code>, <code>THEMING-RULES.md</code> and
-          <code>.cursorrules</code> codify conventions and prohibitions
-          in machine-parseable prose — the same rules the validator enforces.
+          <code>AGENTS.md</code> and <code>CLAUDE.md</code> are tool-agnostic entry points
+          (OpenAI Codex, Claude Code, Cursor, Copilot) that load <code>AI_GUIDELINES.md</code>,
+          the contracts layer, and the mode system — so any agent starts with full context
+          and zero guessing.
         </p>
       </article>
 
@@ -725,6 +729,73 @@
       </article>
 
     </div>
+
+    <!-- Mode System reference table -->
+    <div class="org-home-features__modes" aria-labelledby="modes-table-title">
+
+      <div class="org-home-features__modes-header">
+        <h3 class="org-home-features__modes-title" id="modes-table-title">
+          Mode System — activate a specialist lens
+        </h3>
+        <p class="org-home-features__modes-sub">
+          Prefix any message with <code>[SYX: MODE]:</code> to route it to a specialist agent.
+          Each mode has a defined role, constrained output, and reads the same contracts layer —
+          so the right expertise activates before any response is generated.
+        </p>
+      </div>
+
+      <div class="org-home-features__modes-table-wrap">
+        <table class="atom-table" aria-label="SYX agent mode system">
+          <thead>
+            <tr>
+              <th class="atom-table__th" scope="col">Prefix</th>
+              <th class="atom-table__th" scope="col">Mode</th>
+              <th class="atom-table__th" scope="col">Role</th>
+              <th class="atom-table__th" scope="col">Output</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: UX]:</code></td>
+              <td class="atom-table__td"><strong>UX</strong></td>
+              <td class="atom-table__td">UX consultant</td>
+              <td class="atom-table__td">Semantic HTML, component selection, accessibility notes, interaction states</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: UI]:</code></td>
+              <td class="atom-table__td"><strong>UI</strong></td>
+              <td class="atom-table__td">Senior SCSS developer</td>
+              <td class="atom-table__td">Token-compliant SCSS, pre-flight contract checklist, mixin enforcement, R01–R08 validation</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: TOKEN]:</code></td>
+              <td class="atom-table__td"><strong>TOKEN</strong></td>
+              <td class="atom-table__td">Token architect</td>
+              <td class="atom-table__td">4-tier token design, naming decisions, <code>tokens.json</code> registry entries</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: THEME]:</code></td>
+              <td class="atom-table__td"><strong>THEME</strong></td>
+              <td class="atom-table__td">Theme designer</td>
+              <td class="atom-table__td">OKLCH color scales, <code>_theme.scss</code> authoring, dark mode inversion, surface token coverage</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: AUDIT]:</code></td>
+              <td class="atom-table__td"><strong>AUDIT</strong></td>
+              <td class="atom-table__td">QA reviewer</td>
+              <td class="atom-table__td">R01–R08 inspection, structure and naming violations, structured verdict report</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td"><code>[SYX: MIGRATE]:</code></td>
+              <td class="atom-table__td"><strong>MIGRATE</strong></td>
+              <td class="atom-table__td">Migration specialist</td>
+              <td class="atom-table__td">Legacy variable resolution, per-variable impact analysis, safe replacement workflow</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /.org-home-features__modes -->
 
   </section>
 
@@ -778,7 +849,7 @@
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.0.0<br>
+        <strong>SYX Design System</strong> · v4.2.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 

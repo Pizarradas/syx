@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.0] — 2026-04-03
+
+### Added
+
+- **`CLAUDE.md`** — tool-specific entry point for Claude Code; loads `AI_GUIDELINES.md`, contracts layer, and routes to the mode system
+- **`AGENTS.md`** — agnostic entry point for OpenAI Codex, Cursor, GitHub Copilot, Windsurf and any other AI tool; self-contained with base rules, token tier contract, and workflow references
+- **`_agents/modes/` — mode system (6 modes):**
+  - `ux.md` — UX consultant mode: component selection, semantic HTML, accessibility, interaction states. Never writes SCSS.
+  - `ui.md` — Senior SCSS developer mode: token-compliant code generation, pre-flight contract checklist, mixin enforcement
+  - `token.md` — Token architect mode: 4-tier token design, naming conventions, `tokens.json` registry management
+  - `theme.md` — Theme designer mode: OKLCH scale generation, `_theme.scss` authoring, dark mode inversion rules, mandatory surface token checklist
+  - `audit.md` — QA reviewer mode: full R01–R08 inspection, structure/naming/mixin compliance, structured verdict reports
+  - `migrate.md` — Migration specialist mode: legacy variable resolution using `lint-contract.json`, per-variable impact analysis and replacement workflow
+- **`_agents/modes/README.md`** — mode system documentation with activation syntax, boundary definitions, and recommended multi-mode workflow
+
+### Changed
+
+- **`home.html` — AI First section:**
+  - "Agent-native workflows" card updated to list all 4 workflows by name and document the mode system with all 6 prefixes
+  - "AI-native documentation" card updated to feature `AGENTS.md` and `CLAUDE.md` as primary entry points with tool-agnostic framing
+- **`README.md`** — version badge → 4.2.0, Status section and docs table updated to reflect new files
+
+---
+
 ## [4.1.0] — 2026-03-03
 
 ### Added

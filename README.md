@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.0.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.2.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -95,11 +95,12 @@ syx/
 │   └── themes/                  # Theme definitions
 │       ├── _shared/             # Shared core + 4 bundle definitions
 │       ├── _template/           # Template for new themes
-│       ├── example-01/          # Theme 01 (Purple/Blue)
-│       ├── example-02/          # Theme 02 (Dark)
-│       ├── example-03/          # Theme 03 (Blue)
-│       ├── example-04/          # Theme 04 (Green)
-│       └── example-05/          # Theme 05 (Yellow)
+│       ├── example-01/          # Theme 01 (Indigo/Amber)
+│       ├── example-02/          # Theme 02 (Purple/Pink)
+│       ├── example-03/          # Theme 03 (Coral/Orange)
+│       ├── example-04/          # Theme 04 (Forest/Earth)
+│       ├── example-05/          # Theme 05 (Midnight/Gold)
+│       └── example-06/          # Theme 06 (Cyber/OKLCH)
 │
 ├── css/                         # Compiled output (committed for zero-install use)
 │   └── prod/                    # PurgeCSS-optimized output
@@ -108,12 +109,13 @@ syx/
 ├── img/                         # Images and icons
 │
 ├── index.html                   # Redirect wrapper
-├── home.html                    # Live demo / landing page
+├── home.html                    # Landing page (AI First, features, tokens, themes)
 ├── docs.html                    # Complete unified documentation (Foundations, Components, Guidelines)
-├── docs-elements.html           # (Legacy) Base HTML elements
-├── docs-utilities.html          # (Legacy) Utility classes reference
-├── docs-developer-guide.html    # (Legacy) Mixin and token practical reference
-└── why-syx.html                 # Competitive analysis (7 sector committees)
+├── why-syx.html                 # Competitive analysis (7 sector committees)
+├── theme-builder.html           # Interactive theme builder (OKLCH, live preview)
+├── CLAUDE.md                    # Claude Code entry point — mode system, base rules
+├── AGENTS.md                    # Agnostic AI entry point (Codex, Cursor, Copilot…)
+└── AI_GUIDELINES.md             # AI First field guide — contracts, tokens, mixins
 ```
 
 ---
@@ -124,7 +126,10 @@ syx/
 | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | [ARCHITECTURE.md](scss/ARCHITECTURE.md)                                 | Technical architecture deep-dive                    |
 | [GETTING-STARTED.md](scss/GETTING-STARTED.md)                           | Step-by-step guide for new developers               |
-| [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, workflows |
+| [AGENTS.md](AGENTS.md)                                                  | Agnostic AI entry point (Codex, Cursor, Copilot…) — mode system, base rules, workflows |
+| [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
+| [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
+| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 6 specialist lenses activated by `[SYX: MODE]:` prefix |
 | [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |
 | [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference                            |
 | [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                                  |
@@ -184,5 +189,5 @@ Utilities always win over components. No `!important` needed.
 ## Status (March 2026)
 
 - **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
-- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01/R02/R03/R04 all clean. 1 phantom token closes on `npm run build`.
+- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (6 modes) fully operational. 1 phantom token closes on `npm run build`.
 - Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.
