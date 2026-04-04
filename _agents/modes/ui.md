@@ -31,6 +31,177 @@ Before writing a single line of SCSS, verify:
 
 ---
 
+## Visual Design Principles
+
+These principles govern **how** you implement, not just **what** you implement. A component that passes R01–R04 but violates these principles is not finished.
+
+---
+
+### 1. The 4px Base Grid
+
+Every spacing value — padding, margin, gap, size — must resolve to a multiple of 4px. This is non-negotiable. The SYX semantic space tokens already follow this grid. Never introduce spacing that breaks it.
+
+```
+4px  → micro (icon gaps, tight labels)
+8px  → xs
+12px → sm
+16px → md  ← default body rhythm
+24px → lg
+32px → xl
+48px → 2xl
+64px → 3xl
+```
+
+If a value doesn't land on the grid, it's a sign the token doesn't exist yet — create it.
+
+---
+
+### 2. Typography Implementation Rules
+
+Font size alone is not typography. Apply all of the following when implementing any text-bearing component:
+
+| Text role | `line-height` | `letter-spacing` | `font-weight` |
+|---|---|---|---|
+| Display / hero | `1.05–1.15` | `-0.03em` to `-0.05em` | `700–800` |
+| Heading h2–h3 | `1.2–1.3` | `-0.02em` to `-0.03em` | `600–700` |
+| Heading h4–h5 | `1.3–1.4` | `-0.01em` | `600` |
+| Body / paragraph | `1.5–1.65` | `0` | `400` |
+| UI label / caption | `1.3–1.4` | `+0.01em` to `+0.02em` | `500–600` |
+| Overline / eyebrow | `1.2` | `+0.08em` to `+0.12em` | `600` |
+| Monospace / code | `1.6` | `0` | `400` |
+
+**Fluid type** — use `clamp()` for any heading that appears in a hero or display context:
+```scss
+font-size: clamp(var(--component-{name}-font-size-min), 4vw + 1rem, var(--component-{name}-font-size-max));
+```
+
+Never set `line-height` in `px`. It must be unitless or a semantic token.
+
+---
+
+### 3. Color — 60 / 30 / 10 Distribution
+
+Within any component, color usage follows this ratio:
+
+- **60 %** → neutral surfaces, backgrounds (`--semantic-color-bg-*`)
+- **30 %** → secondary elements, subtle text, borders (`--semantic-color-text-secondary`, `--semantic-color-border-*`)
+- **10 %** → action color, primary interactive elements (`--semantic-color-primary`)
+
+**Never use action colors for decoration.** If you're tempted to use `--semantic-color-primary` on a non-interactive element, you're misusing it. Use a neutral with appropriate weight instead.
+
+**Contrast minimum:**
+- Normal text (< 18pt / < 14pt bold): **4.5:1** against its background
+- Large text (≥ 18pt / ≥ 14pt bold): **3:1**
+- UI components and focus rings: **3:1**
+
+Always verify contrast at implementation time — don't assume the design file is correct.
+
+---
+
+### 4. Elevation System
+
+Shadow communicates proximity to the user. Use one level per elevation tier. Never skip levels, never mix levels on the same component.
+
+| Level | Token | Typical use |
+|---|---|---|
+| 0 | no shadow | Flat elements, table rows, list items |
+| 1 | `--semantic-shadow-sm` | Cards, inputs, select dropdowns at rest |
+| 2 | `--semantic-shadow-md` | Dropdowns open, tooltips, floating labels |
+| 3 | `--semantic-shadow-lg` | Modals, drawers, popovers |
+| 4 | `--semantic-shadow-xl` | Command palettes, full-screen overlays |
+
+A card (Level 1) inside a modal (Level 3) does not gain a second shadow. Child elements inherit the elevation context of their container.
+
+---
+
+### 5. Motion — Duration, Easing, and Distance
+
+Motion must feel **physical**, not mechanical. Apply these rules to every `@include transition()` and `animation`:
+
+| Interaction type | Duration | Easing | When |
+|---|---|---|---|
+| Color / opacity change | `150ms` | `ease` | Hover tints, focus rings |
+| Micro-interaction | `200ms` | `ease` | Checkbox check, switch toggle |
+| Position / size change | `250–300ms` | `cubic-bezier(0.4, 0, 0.2, 1)` | Dropdown open, accordion expand |
+| Entry (element appears) | `300–400ms` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Toast in, modal in (spring) |
+| Exit (element disappears) | **75% of entry** | `ease-in` | Toast out, modal out — exits are always faster |
+| Long-distance / page | `400–500ms` | `cubic-bezier(0.4, 0, 0.2, 1)` | Page transitions, drawer |
+
+**Rules:**
+- Never animate `width`, `height`, or `top/left/right/bottom` — they cause layout thrash. Use `transform` and `opacity` instead (GPU-composited).
+- Never use `all` in a transition. Name each property explicitly.
+- `will-change: transform` only on elements that are currently animating — remove it after.
+- Every `animation` must include `@include reduced-motion { animation: none; }`.
+
+---
+
+### 6. State Visual Language — Beyond Color
+
+**WCAG 1.4.1 (Use of Color):** Color cannot be the sole means of conveying a state. Every state must have at least two visual cues. Use this matrix:
+
+| State | Required visual cues |
+|---|---|
+| **Hover** | Background tint + underline or subtle `transform: translateY(-1px)` |
+| **Focus-visible** | `@include focus-ring()` — 2px outline, 2px offset, 3:1 contrast |
+| **Active / Pressed** | `transform: scale(0.97)` or inset shadow (`box-shadow: inset 0 2px 4px …`) |
+| **Disabled** | `opacity: var(--semantic-opacity-disabled)` + `cursor: not-allowed` — not just gray |
+| **Error** | Border color change + background tint + error icon + error text |
+| **Success** | Border color change + success icon + success text |
+| **Loading** | Spinner or skeleton + `pointer-events: none` + `aria-busy="true"` on the container |
+
+The focus ring via `@include focus-ring()` must meet WCAG 2.2 criterion 2.4.11:
+- Minimum area: perimeter of the component × 2px
+- Contrast: 3:1 between focused and unfocused state
+- Not clipped by `overflow: hidden` on any ancestor
+
+---
+
+### 7. Optical Corrections
+
+Mathematical precision often looks wrong. Apply these optical adjustments:
+
+**Nested border-radius (radius compensation):**
+When a child sits inside a rounded parent with padding, the child's radius must be:
+```
+child-radius = parent-radius − parent-padding
+```
+If `parent-radius = 12px` and `parent-padding = 8px`, then `child-radius = 4px`. Using `12px` on the child produces a "bulging corner" artifact.
+
+**Icon-to-text alignment:**
+Icons align to the **optical center** of the text cap-height, not the mathematical center of the line-height. For inline icons next to text, use `vertical-align: middle` as a starting point and adjust via `transform: translateY(-1px)` if the cap-height produces misalignment.
+
+**Button optical padding:**
+Horizontal padding should be 1.5–2× the vertical padding for buttons to feel visually balanced:
+```scss
+// Correct — wider horizontally
+@include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
+// Where padding-x = 1.5–2× padding-y
+```
+
+**Visual weight of outlines:**
+An `outline-width: 2px` on a dark background looks thinner than on a light background. On dark surfaces, use `outline-width: 2.5px` or `var(--semantic-focus-ring-width-inverse)`.
+
+---
+
+### 8. Density
+
+Components must support three density contexts without layout breakage. Implement via modifier:
+
+| Density | Class | Padding-y multiplier | Font-size |
+|---|---|---|---|
+| Compact | `--compact` | `× 0.75` | One step down (`0.875rem` if body is `1rem`) |
+| Default | _(none)_ | `× 1` | As designed |
+| Comfortable | `--comfortable` | `× 1.375` | As designed |
+
+Implement using token overrides on the component root, not by hardcoding values:
+```scss
+.atom-btn--compact {
+  --component-btn-padding-y: calc(var(--component-btn-padding-y) * 0.75);
+}
+```
+
+---
+
 ## What You Output
 
 ### For a new component:
@@ -186,6 +357,48 @@ Use `@if $theme ==` only for one-off rules in 1–2 specific themes:
 
 ---
 
+## Visual Quality Checklist
+
+Run this after the contract checklist. A component is not done until all items pass.
+
+**Typography**
+- [ ] `line-height` matches the role table (display / heading / body / label)
+- [ ] `letter-spacing` applied correctly (negative on headings, positive on labels/overlines)
+- [ ] No `line-height` in `px` — unitless or token only
+- [ ] Fluid type with `clamp()` on any display or hero heading
+
+**Spacing**
+- [ ] All spacing values resolve to multiples of 4px
+- [ ] Button horizontal padding ≥ 1.5× vertical padding
+- [ ] Nested components apply radius compensation (`child-radius = parent-radius − padding`)
+
+**Color**
+- [ ] 60/30/10 distribution respected — no decorative use of action color
+- [ ] Contrast ≥ 4.5:1 for normal text, ≥ 3:1 for large text and UI components
+- [ ] No state communicated by color alone — minimum 2 visual cues per state
+
+**Elevation**
+- [ ] Shadow level matches the component's elevation tier (0–4)
+- [ ] No shadow mixing between parent and child at the same elevation
+
+**Motion**
+- [ ] No `all` in `transition` — each property named explicitly
+- [ ] No `width`/`height`/`top`/`left` animated — `transform` + `opacity` only
+- [ ] Duration and easing match the interaction type table
+- [ ] Exit duration = 75% of entry duration
+- [ ] `@include reduced-motion { … }` present on every animation
+
+**States**
+- [ ] All 7 states covered: default, hover, focus-visible, active, disabled, error, loading
+- [ ] Focus ring via `@include focus-ring()` — not a custom implementation
+- [ ] Disabled = opacity token + `cursor: not-allowed`, not just color change
+- [ ] Error state has ≥ 3 visual cues (border + bg tint + icon or text)
+
+**Density**
+- [ ] Component works without breakage at `--compact` and `--comfortable`
+
+---
+
 ## Response Format
 
 Structure your response as:
@@ -193,6 +406,10 @@ Structure your response as:
 ```
 ## Contract Check
 R01 ✅ / R02 ✅ / R03 ✅ / R04 ✅  (or flag violations)
+
+## Visual Quality Check
+Typography ✅ | Spacing ✅ | Color ✅ | Elevation ✅ | Motion ✅ | States ✅ | Density ✅
+(list any item that needs attention or a follow-up token)
 
 ## Token File
 [scss/abstracts/tokens/components/_{name}.scss]
