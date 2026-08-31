@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.27.0] — 2026-08-31
+
+### Fixed
+
+- **Los ocho modos y la capa de confianza decían cosas distintas.** Los modos son de antes que `contracts/trust.json`, y habían quedado mandando exactamente lo que el contrato prohíbe: THEME escribiendo en `scss/themes/`, TOKEN en la capa semántica, MIGRATE en `scss/base/`. Ningún agente hizo nada malo con ello todavía, pero la posibilidad estaba escrita en el repositorio: **dos documentos del mismo proyecto contradiciéndose, y el agente obedeciendo al que lee primero**.
+
+- **Cada modo abre ahora con un bloque `Trust`** de cuatro líneas —qué escribe, qué solo recomienda, qué lee, y qué debería preguntar en vez de leer— con las rutas contrastadas contra el contrato. **THEME pasa a ser un modo de análisis y recomendación**: diseña la escala, escribe el fichero entero y lo entrega; lo pone una persona. Es lo que ya era de hecho, solo que ahora lo dice. TOKEN y MIGRATE quedan partidos por la mitad, que es donde estaba la frontera de verdad: la capa de componente sale por `propose.js`, la de arriba se recomienda.
+
+- **AGENTS.md listaba seis modos y CLAUDE.md ocho.** Hay ocho ficheros. Un agente que entrara por AGENTS.md no sabía que existían SKETCH ni CREATIVE. Llevaba así desde que se añadieron.
+
+- **La tabla de coste prometía ficheros que ya no hace falta cargar.** Decía «4+ ficheros» para UI cuando con el servidor MCP registrado son cero y una llamada. Se conserva la cifra sin MCP —sigue siendo cierta para quien no lo registre— y se añade la columna que importa: qué preguntar en cada modo.
+
+### Added
+
+- **`npm run check:modos`**, y con él la coherencia deja de ser una promesa. Comprueba ocho cosas, y las que importan son dos: que **ninguna ruta declarada como escribible sea `human`** según `contracts/trust.json`, y que los tres índices listen los mismos modos que hay en disco. Las otras seis lo acompañan: que lo declarado como «solo recomiendo» sea humano de verdad, que quien anuncia permiso de propuesta nombre `propose.js`, que el bloque cubra todas las rutas que el modo nombra, y que las herramientas que manda pedir **existan** —eso se le pregunta al servidor MCP por `tools/list`, no a una lista escrita en el guardián.
+
+  Se comprobó al revés antes de darlo por bueno: con el `theme.md` anterior y el `AGENTS.md` anterior, el guardián se pone rojo por los dos motivos. Un guardián que no se ha visto fallar no es un guardián.
+
+- La lista de modos **se lee del directorio**, no de una constante con ocho nombres. Esa constante habría envejecido el día que alguien añadiera un modo, y en silencio.
+
+### Notes
+
+- `contracts/lint-contract.json` está en `human` por el `default`, así que MIGRATE ya no puede actualizarlo por su cuenta: deja el diff escrito y lo aplica quien fusiona. **Puede que ese fichero merezca estar en `pr`** — es una decisión de contrato, y el contrato es humano a propósito.
+- Registrar un fichero de tokens nuevo (`@forward` en `scss/abstracts/tokens/index.scss`) también es humano. Encaja con que `propose.js` se niegue a inventar familias nuevas: crear un fichero es decidir una estructura, no colocar un token.
+- Sigue pendiente la decisión de idioma: los modos y la documentación están en inglés, la capa de contratos y los guardianes en español.
+
+---
+
 ## [4.26.0] — 2026-08-31
 
 ### Added

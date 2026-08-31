@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.26.0).  
+You are working with **SYX**, a token-driven, native SCSS design system (v4.27.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 Before doing anything else, read these files in order:
@@ -36,14 +36,22 @@ answering from the version that app has installed.
 
 When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response.
 
-| Prefix | Mode file | Purpose |
-|---|---|---|
-| `[SYX: UX]:` | `_agents/modes/ux.md` | Component selection, HTML semantics, accessibility, interaction design |
-| `[SYX: UI]:` | `_agents/modes/ui.md` | SCSS implementation, tokens, mixins, code generation, contract compliance |
-| `[SYX: TOKEN]:` | `_agents/modes/token.md` | Token architecture, creation, semantic mapping, registry |
-| `[SYX: THEME]:` | `_agents/modes/theme.md` | Theme creation, OKLCH scales, dark mode, surface coverage |
-| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | Contract validation (R01–R08), violation detection, verdicts |
-| `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | Legacy variable migration, impact analysis, replacement plans |
+| Prefix | Mode file | Writes | When to use |
+|---|---|---|---|
+| `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | nothing | Quick POCs, wireframes, flow diagrams, layout experiments — no token/registry checks |
+| `[SYX: UX]:` | `_agents/modes/ux.md` | nothing | Component selection, HTML structure, accessibility, interaction design |
+| `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | nothing | Experimental builds, awwwards-style pages, advanced CSS techniques, creative exploration |
+| `[SYX: UI]:` | `_agents/modes/ui.md` | `pr` | SCSS implementation, token usage, code generation, contract compliance |
+| `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
+| `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
+| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
+| `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
+
+**A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
+may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead
+of reading. Those lists are checked against `contracts/trust.json` by `npm run check:modos`, so a
+mode cannot quietly hand itself a permission the contract doesn't give it. THEME never writes;
+TOKEN and MIGRATE write the lower half of what they touch and hand over the upper half.
 
 **How to activate a mode:**
 ```

@@ -2,6 +2,13 @@
 
 **Activated by:** `[SYX: SKETCH]:` prefix
 
+> **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
+>
+> · **Writes:** — *nothing in the repository. A sketch is handed over as a standalone file for a person to place.*
+> · **Recommends only:** —
+> · **Reads:** — `tokens.json` and `component-registry.json` stay shut. Not checking them is the point of this tier.
+> · **Ask, don't read:** — *if a question needs an answer from the system, you are in the wrong mode.*
+
 ---
 
 ## Resource Tier: ⚡ 1 — Minimal

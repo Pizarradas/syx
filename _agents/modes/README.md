@@ -18,29 +18,39 @@ Prefix your message with `[SYX: MODE]:` to activate a mode:
 
 Modes are calibrated by AI context consumption and output complexity. Pick the lowest tier that serves your need — escalate only when the concept is confirmed.
 
-| Tier | Mode | Cost | Typical turns |
-|---|---|---|---|
-| 1 | **SKETCH** | ⚡ Minimal | 1 |
-| 2 | **UX** | 🔵 Light | 1–2 |
-| 3 | **CREATIVE** | 🟡 Medium | 1–2 |
-| 4 | **TOKEN** | 🟠 Medium-High | 2–3 |
-| 5 | **THEME** | 🟠 Medium-High | 2–3 |
-| 6 | **UI** | 🔴 High | 3–4 |
-| 7 | **AUDIT** | 🔴 High | 2–4 |
-| 8 | **MIGRATE** | 🔴 Very High | 4–6 |
+| Tier | Mode | Cost | Typical turns | Ask instead of reading |
+|---|---|---|---|---|
+| 1 | **SKETCH** | ⚡ Minimal | 1 | — |
+| 2 | **UX** | 🔵 Light | 1–2 | `list_components`, `get_component` |
+| 3 | **CREATIVE** | 🟡 Medium | 1–2 | `get_component`, `find_token_by_value` |
+| 4 | **TOKEN** | 🟠 Medium-High | 2–3 | `get_token`, `classify_change` |
+| 5 | **THEME** | 🟠 Medium-High | 2–3 | `get_token` (per theme + mode) |
+| 6 | **UI** | 🔴 High | 3–4 | `get_component`, `get_mixin`, `validate_snippet` |
+| 7 | **AUDIT** | 🔴 High | 2–4 | `validate_snippet`, `scan_for_drift` |
+| 8 | **MIGRATE** | 🔴 Very High | 4–6 | `find_token_by_value`, `scan_for_drift` |
+
+The cost of a mode used to be measured in files loaded. With the MCP server registered
+(`npm run mcp`, or `npx -y syx-mcp`) most of those reads become one call that returns one
+answer — the last column says which. The tier still ranks the *work*, not the reading.
 
 ## Available Modes
 
-| Mode | File | Role | Output |
-|---|---|---|---|
-| **SKETCH** | `sketch.md` | Rapid prototyper | Self-contained HTML + inline styles, Mermaid diagrams, layout sketches |
-| **UX** | `ux.md` | UX consultant | HTML structure, component selection, accessibility, interaction states |
-| **CREATIVE** | `creative.md` | Creative director | Experimental HTML + CSS, advanced techniques, awwwards-quality builds |
-| **UI** | `ui.md` | Senior SCSS developer | Token files, component SCSS, registration, contract validation |
-| **TOKEN** | `token.md` | Token architect | Token creation, semantic mapping, registry management |
-| **THEME** | `theme.md` | Theme designer | OKLCH scales, `_theme.scss`, surface token coverage, dark mode |
-| **AUDIT** | `audit.md` | QA reviewer | R01–R08 violations, structure/naming checks, verdicts |
-| **MIGRATE** | `migrate.md` | Migration specialist | Legacy var resolution, impact analysis, per-variable replacement plans |
+| Mode | File | Role | Writes | Output |
+|---|---|---|---|---|
+| **SKETCH** | `sketch.md` | Rapid prototyper | nothing | Self-contained HTML + inline styles, Mermaid diagrams, layout sketches |
+| **UX** | `ux.md` | UX consultant | nothing | HTML structure, component selection, accessibility, interaction states |
+| **CREATIVE** | `creative.md` | Creative director | nothing | Experimental HTML + CSS, advanced techniques, awwwards-quality builds |
+| **UI** | `ui.md` | Senior SCSS developer | `pr` | Token files, component SCSS, registration, contract validation |
+| **TOKEN** | `token.md` | Token architect | `pr` / recommends | Token creation, semantic mapping, registry management |
+| **THEME** | `theme.md` | Theme designer | recommends | OKLCH scales, `_theme.scss`, surface token coverage, dark mode |
+| **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R08 violations, structure/naming checks, verdicts |
+| **MIGRATE** | `migrate.md` | Migration specialist | `pr` / recommends | Legacy var resolution, impact analysis, per-variable replacement plans |
+
+The **Writes** column is not advice, it is `contracts/trust.json` read through
+`scripts/lib/confianza.js`. Each mode file opens with a `Trust` block listing the paths it may
+write, the paths it may only recommend, and the tools it should ask instead of reading files;
+`npm run check:modos` fails if any of those lists disagrees with the contract. A mode never
+grants a permission — it inherits one.
 
 ## Mode Boundaries
 
@@ -52,6 +62,10 @@ Modes are intentionally siloed:
 - **UI mode** never makes UX decisions. It implements what UX mode specified.
 - **TOKEN mode** never touches component SCSS. It only manages the token layer.
 - **AUDIT mode** never modifies code. It reports and recommends.
+- **THEME mode** never writes. Everything a theme touches reaches all seven bundles at once, so
+  the mode designs the theme in full and a person puts it in.
+- **No mode commits to a shared branch.** What a mode may write, it writes through
+  `node scripts/propose.js`: branch, commit and evidence, for a person to merge.
 
 This boundary is deliberate. A UX pass and a UI pass on the same problem produce better results than a combined response that tries to do both at once.
 
@@ -66,7 +80,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
    → Defines token names and semantic mappings
 
 3. [SYX: UI]: Implement the mol-search-autocomplete component
-   → Writes SCSS, creates token file, validates R01–R04
+   → Writes SCSS, proposes the token file (`node scripts/propose.js token`), validates R01–R04
 
 4. [SYX: AUDIT]: Review the new mol-search-autocomplete
    → Confirms compliance, flags anything missed
@@ -99,5 +113,10 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 ## Adding a New Mode
 
 1. Create `_agents/modes/{mode-name}.md`
-2. Define: role, priorities, output format, constraints, response template, example
-3. Add a row to the table in `AGENTS.md` and `CLAUDE.md`
+2. Open it with the `Trust` block — Writes / Recommends only / Reads / Ask, don't read — before
+   anything else. Copy the shape from an existing mode; the paths must agree with
+   `contracts/trust.json`, and a `human` path can never appear under **Writes**
+3. Define: role, priorities, output format, constraints, response template, example
+4. Add a row to the table in `AGENTS.md`, `CLAUDE.md` **and** this file — all three are checked
+5. Run `npm run check:modos`. It fails if the three tables disagree, if the block is missing, or
+   if a mode hands itself a permission the contract doesn't give it

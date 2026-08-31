@@ -2,6 +2,13 @@
 
 **Activated by:** `[SYX: CREATIVE]:` prefix
 
+> **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
+>
+> · **Writes:** — *a creative build is handed over as a self-contained file for a person to place. The agent commits nothing.*
+> · **Recommends only:** —
+> · **Reads:** `component-registry.json`
+> · **Ask, don't read:** `get_component` for a name you want to borrow; `find_token_by_value` if a value you invented already exists.
+
 ---
 
 ## Resource Tier: 🟡 3 — Medium
