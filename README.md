@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.16.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.17.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -154,6 +154,50 @@ and `component-registry.json`, both generated from source and arbitrated against
 compiled CSS — so everything it returns exists. The server and the Node API in Option B
 answer from the same layer (`scripts/lib/consulta.js`), so an agent and an application
 get the same answer to the same question.
+
+---
+
+## The proposal path (how an agent writes)
+
+Reading is safe; writing is not. SYX grades what an agent may change by how far
+the change travels — the boundary follows the direction of the cascade the system
+already declares. The three tiers live in `contracts/trust.json`, so they can be
+read without running anything, and `classify_change` serves them over MCP.
+
+| Tier | What | Why |
+| ---- | ---- | --- |
+| **Automatic** | Docs, changelog, derived artifacts | A mistake is visible in the diff and reaches nothing compiled |
+| **Via proposal** | Component tokens, components, utilities | Scoped to one component — reviewable at a glance, but it ships |
+| **Human only** | Primitives, semantics, themes, mixins, the guards, the rules themselves | One change lands in all 7 themes at once, or changes the criteria everything else is judged by |
+
+Anything that matches no pattern falls to **human only**. `contracts/rules.json`,
+`contracts/trust.json` and `scripts/` are human-only on purpose: an agent that
+could rewrite the rules it is judged by, or the guard that judges it, would not
+have permissions — it would have a suggestion.
+
+```bash
+# Where does this change sit?
+npm run propose classify scss/atoms/_btn.scss CHANGELOG.md
+
+# Propose a component token — nobody says which file it goes in
+npm run propose token -- --name --component-feature-card-glow \
+  --value "var(--semantic-shadow-md)" --why "Optional lift for the featured card"
+```
+
+The destination is deduced from the token's family (which file already declares
+`--component-feature-card-*`), never from a lookup table that would go stale. Then
+the tool writes it, recompiles the CSS, runs the validator **over the result**, and
+only if that is green does it create a branch, a commit and an evidence file in
+`contracts/propuestas/`. If it is not green, there is no branch. Review starts with
+the proof in front of you instead of a claim that it works.
+
+It refuses, with the reason and whose call it is: a primitive or semantic token, a
+literal colour (naming the semantic token that already holds it), a value that skips
+the semantic layer, a token that already exists, an invented family, and a dirty
+working tree. **It never pushes on its own** — it prints the exact command. `--pr`
+publishes and opens the PR, and has to be asked for.
+
+`npm run check:propuesta` exercises all of it in a throwaway copy of the tree.
 
 ---
 

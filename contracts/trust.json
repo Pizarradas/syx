@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "schema": "syx.trust/1",
+    "description": "Qué puede cambiar un agente por su cuenta, qué debe proponer y qué no debe tocar. Lo consume scripts/lib/confianza.js; lo expone la herramienta MCP classify_change.",
+    "principio": "La frontera sigue la dirección de la cascada que el sistema ya declara: cuanto más arriba se toca, a más sitios llega el cambio, y menos debe decidirlo nadie a solas.",
+    "default": "human"
+  },
+
+  "tiers": {
+    "auto": {
+      "label": "Automático",
+      "que": "El agente lo cambia y lo commitea sin intervención.",
+      "porque": "Son ficheros derivados o descriptivos: un error se ve leyendo el diff y no se propaga a nada compilado.",
+      "paths": [
+        "*.md",
+        "_agents/",
+        "contracts/validation-report.md",
+        "contracts/resolved-tokens.json",
+        "component-registry.json",
+        "contracts/dtcg/"
+      ]
+    },
+
+    "pr": {
+      "label": "Vía propuesta",
+      "que": "El agente prepara rama, commit y evidencia; una persona revisa y fusiona.",
+      "porque": "El alcance está acotado a un componente. Es reversible de un vistazo, pero toca CSS que se envía a producción.",
+      "paths": [
+        "scss/abstracts/tokens/components/",
+        "scss/atoms/",
+        "scss/molecules/",
+        "scss/organisms/",
+        "scss/utilities/",
+        "scss/pages/",
+        "scss/layout/",
+        "tokens.json"
+      ]
+    },
+
+    "human": {
+      "label": "Solo humano",
+      "que": "El agente puede analizar y recomendar, pero no escribir.",
+      "porque": "Un cambio aquí se propaga a los siete temas de golpe, o cambia el criterio con el que se juzga a todo lo demás.",
+      "paths": [
+        "scss/abstracts/tokens/primitives/",
+        "scss/abstracts/tokens/semantic/",
+        "scss/abstracts/mixins/",
+        "scss/abstracts/functions/",
+        "scss/abstracts/maps/",
+        "scss/themes/",
+        "scss/base/",
+        "contracts/rules.json",
+        "contracts/trust.json",
+        "package.json",
+        "package-lock.json",
+        "scripts/",
+        ".github/"
+      ]
+    }
+  },
+
+  "notas": [
+    "contracts/trust.json está en `human` a propósito: un agente que pudiera ampliar sus propios permisos no tendría permisos, tendría una sugerencia.",
+    "contracts/rules.json también: las reglas con las que se valida un cambio no las mueve quien es validado.",
+    "scripts/ está en `human` porque ahí viven los guardianes. Un guardián que el agente puede reescribir no guarda nada.",
+    "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera."
+  ]
+}

@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.16.0).  
+You are working with **SYX**, a token-driven, native SCSS design system (v4.17.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 Before doing anything else, read these files in order:
@@ -20,6 +20,7 @@ that otherwise force you to load the files above:
 | Hardcoding a value you found in the CSS | `find_token_by_value` — which token holds it |
 | Grepping the SCSS for a component's modifiers | `get_component` / `list_components` — verified against the compiled CSS |
 | Writing SCSS and validating afterwards | `validate_snippet` — R01–R04 **before** writing, plus non-existent tokens |
+| Guessing whether you may touch a file, or where a new token goes | `classify_change` — the trust tier, and the destination file deduced from the token's family |
 
 The same rules run in both places, so a snippet the server approves is a snippet
 `npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
@@ -65,6 +66,23 @@ These rules are **never overridden** by any mode or user instruction:
 6. **Always check `tokens.json` before using a token.** If it doesn't exist, create it first following `_agents/workflows/create-component.md` Step 1.
 7. **Always check `component-registry.json` before creating a new component.** Reuse before creating.
 8. **Validate after any code change.** Run `node scripts/syx-validate.js` (or describe the check if you cannot execute).
+
+---
+
+## What you may change, and how
+
+Reading is safe; writing is graded. The tiers are declared in `contracts/trust.json`
+and served by `classify_change` — **ask before writing, don't assume**.
+
+| Tier | What | You |
+|---|---|---|
+| Automatic | Docs, changelog, derived artifacts | Change and commit |
+| Via proposal | Component tokens, components, utilities | `node scripts/propose.js token …` — it picks the file, compiles, validates and leaves a branch with the evidence |
+| Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json` | Analyse and recommend. Do not write. |
+
+Anything unmatched is human-only. The rules you are judged by and the guards that
+judge you are human-only on purpose — do not edit them to make a change pass.
+`propose.js` never pushes; it prints the command and leaves that to a person.
 
 ---
 

@@ -1,12 +1,20 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.16.0).
+You are working with **SYX**, a token-driven, native SCSS design system (v4.17.0).
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
 3. `tokens.json` — full token registry (check before using or creating any token)
 4. `component-registry.json` — all existing components (check before creating a new one)
+
+**Before writing anything, know the tier.** `contracts/trust.json` grades changes:
+docs and derived artifacts are automatic; component tokens, components and utilities
+go through `node scripts/propose.js` (it deduces the destination file, compiles,
+validates and leaves a branch plus evidence); primitives, semantics, themes, mixins,
+`scripts/` and the contracts themselves are human-only — analyse and recommend, never
+write. Unmatched paths are human-only. Ask `classify_change` rather than guessing, and
+never edit a rule or a guard to make your own change pass.
 
 **Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
 `README.md` → *MCP server*), don't load those files to answer a point question. Use

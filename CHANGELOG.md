@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.17.0] — 2026-08-31
+
+### Added
+
+- **Vía de propuesta con confianza graduada.** `scripts/propose.js`. Un agente propone un token de componente y el sistema decide **dónde va** —sin que nadie se lo diga—, lo escribe, recompila el CSS, ejecuta el validador **sobre el resultado**, y solo si eso está verde crea la rama, el commit y la evidencia. Si no está verde, no hay rama.
+
+  El punto no es automatizar el commit. Hasta ahora un agente proponía en prosa —«añade este token a `_cards.scss`»— y revisar consistía en creerle o en repetir su trabajo. Ahora la revisión empieza con el fichero modificado, el CSS recompilado y el validador ya ejecutado.
+
+- **`contracts/trust.json` — los tres niveles, declarados como datos.** Automático (documentación, artefactos derivados), vía propuesta (tokens de componente, componentes, utilidades) y solo humano (primitivos, semánticos, temas, mixins, los guardianes y las propias reglas). La frontera sigue la dirección de la cascada que el sistema ya declaraba: cuanto más arriba se toca, a más sitios llega.
+
+  Lo que no encaja en ningún patrón cae en **solo humano** por defecto. `contracts/rules.json`, `contracts/trust.json` y `scripts/` son solo humanos a propósito: un agente que pudiera reescribir las reglas por las que se le juzga, o el guardián que le juzga, no tendría permisos — tendría una sugerencia.
+
+- **`scripts/lib/confianza.js`** — clasifica rutas y deduce el destino de un token. La colocación **no** sale de una tabla `card → _cards.scss`, que envejecería en silencio en cuanto alguien partiera un fichero: sale del prefijo común más largo con los tokens que ya existen, desempatando por cuántos de esa familia guarda cada fichero. `--component-table-*` vive en `_tables.scss` (19 tokens) y también en `_surfaces.scss` (7); sin contarlos, ganaría el que devolviera primero el `readdir`.
+
+- **Herramienta MCP `classify_change`** — un agente pregunta el nivel de un cambio y el fichero de un token antes de tocar nada. Séptima herramienta del servidor; también disponible como `syx.classifyChange()` en la API del paquete.
+
+- **`scripts/check-propuesta.js`** — 17 comprobaciones sobre una copia aislada del árbol. Diez son negativas, y en ese orden a propósito: un permiso mal dado no avisa, hay que ir a buscarlo. Cada negativa comprueba además que **no dejó rastro** en el árbol.
+
+### Fixed
+
+- **Un `var(--primitive-…)` se colaba como valor de un token de componente.** La comprobación pasaba el valor por `revisar()` fingiendo un fichero en `scss/abstracts/`, que es justo la carpeta que R01 exceptúa — así que el validador lo aprobaba. La regla que importaba no era «dónde vive el fichero» sino «qué capa salta el valor», y no son lo mismo. Ahora se comprueba el valor directamente.
+
+  Lo encontró `check-propuesta.js` en su primera ejecución. Y lo tapó de inmediato: el token colado hizo fallar a los cuatro casos siguientes por la razón equivocada. De ahí que cada negativa verifique ahora el árbol.
+
+- El guardián del registro de componentes, estrenado en 4.15.0, dijo exactamente qué difería (`_meta.version: 4.16.0 → 4.17.0`) en vez de solo que no coincidía. Funcionó como se esperaba.
+
+---
+
 ## [4.16.0] — 2026-08-31
 
 ### Added

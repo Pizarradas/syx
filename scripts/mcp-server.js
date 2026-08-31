@@ -116,6 +116,26 @@ const HERRAMIENTAS = [
     },
     run: (a) => syx.validateSnippet(a),
   },
+
+  {
+    name: 'classify_change',
+    description: 'Antes de tocar nada: qué nivel de confianza tiene cambiar estos ficheros (automático, vía propuesta o solo humano) y, si preguntas por un token nuevo, en qué fichero va — deducido de su familia, no de una tabla. Sin argumentos, devuelve los tres niveles y qué abarca cada uno.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        paths: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Rutas relativas al repositorio que el cambio tocaría',
+        },
+        token: {
+          type: 'string',
+          description: 'Un token --component-* que quieras crear; responde con el fichero donde debe ir',
+        },
+      },
+    },
+    run: (a) => syx.classifyChange(a),
+  },
 ];
 
 // ─── JSON-RPC sobre stdio ────────────────────────────────────────────────────

@@ -25,6 +25,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
 const { revisar, tokensInexistentes, DESCRIPCIONES } = require('./rules');
+const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 
 function crearConsulta({ root } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
@@ -209,6 +210,28 @@ function crearConsulta({ root } = {}) {
     };
   }
 
+  /**
+   * Qué nivel de confianza tiene un cambio y, si se pregunta por un token,
+   * dónde iría.
+   *
+   * Va aquí y no solo en la herramienta MCP porque la respuesta debe ser la
+   * misma la pregunte quien la pregunte: el agente antes de escribir, el script
+   * de propuesta al escribir, y la aplicación que audite después.
+   */
+  function classifyChange({ paths = [], token } = {}) {
+    const salida = { contrato: contrato()._meta };
+    if (paths.length) salida.cambio = clasificarCambios(paths);
+    if (token) {
+      salida.token = token;
+      salida.destino = destinoDeToken(token);
+      if (salida.destino.resuelto) {
+        salida.nivelDelDestino = clasificarCambios([salida.destino.fichero]);
+      }
+    }
+    if (!paths.length && !token) salida.niveles = contrato().tiers;
+    return salida;
+  }
+
   return {
     root: ROOT,
     get version() {
@@ -222,6 +245,7 @@ function crearConsulta({ root } = {}) {
     listComponents,
     getComponent,
     validateSnippet,
+    classifyChange,
   };
 }
 

@@ -56,10 +56,10 @@ comprobar('initialize responde con protocolo y nombre', async () => {
   if (r.result.serverInfo?.name !== 'syx') throw new Error('serverInfo.name inesperado');
 });
 
-comprobar('tools/list expone las 6 herramientas con esquema', async () => {
+comprobar('tools/list expone las 7 herramientas con esquema', async () => {
   const r = await rpc('tools/list', {});
   const t = r.result.tools;
-  if (t.length !== 6) throw new Error(`esperaba 6 herramientas, hay ${t.length}`);
+  if (t.length !== 7) throw new Error(`esperaba 7 herramientas, hay ${t.length}`);
   for (const x of t) {
     if (!x.description) throw new Error(`${x.name} sin descripción`);
     if (x.inputSchema?.type !== 'object') throw new Error(`${x.name} con esquema mal formado`);
@@ -125,6 +125,14 @@ comprobar('validate_snippet aprueba un fragmento conforme', async () => {
     arguments: { code: '.atom-x {\n  color: var(--semantic-color-primary);\n}' },
   }));
   if (!r.conforme) throw new Error('deberia ser conforme: ' + JSON.stringify(r.violaciones));
+});
+
+comprobar('classify_change deduce el fichero de un token y el nivel de un cambio', async () => {
+  const t = salida(await rpc('tools/call', { name: 'classify_change', arguments: { token: '--component-pill-glow' } }));
+  if (!t.destino?.resuelto) throw new Error('no deduce el destino');
+  if (!t.destino.fichero.endsWith('_pills.scss')) throw new Error(`lo manda a ${t.destino.fichero}`);
+  const c = salida(await rpc('tools/call', { name: 'classify_change', arguments: { paths: ['CHANGELOG.md', 'scss/themes/example-01/_theme.scss'] } }));
+  if (c.cambio.tier !== 'human') throw new Error(`nivel ${c.cambio.tier}: un cambio no es más libre que su fichero más delicado`);
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {
