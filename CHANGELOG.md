@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.11.0] — 2026-08-31
+
+Coherencia del número de versión en todo el repositorio, y la fila de controles de la cabecera pasa a ser una familia.
+
+### Fixed
+
+- **El número de versión estaba en cuatro sitios y ninguno coincidía.** `package.json` iba por 4.10.0 mientras el escudo del `README.md` decía **4.2.0**, `CLAUDE.md` y `AGENTS.md` decían **v4.1.0** y el paquete raíz de `package-lock.json` seguía en **4.2.0**. Todos al día.
+- **«6 themes»** en `README.md`, `CLAUDE.md` y `AGENTS.md`, cuando son 7 desde que existe el tema blueprint — y la home ya decía 7. De paso, `AGENTS.md` y `CLAUDE.md` afirmaban «4 bundle contexts» por tema y `example-01` y `syx-sketch` tienen 5.
+- **«The four machine-enforceable rules (R01–R04)»** en `CLAUDE.md`, `AGENTS.md` y `AI_GUIDELINES.md` — la misma afirmación que ya se corrigió en la home en 4.9.1, que se había quedado en los tres ficheros de entrada para agentes. El validador implementa R01–R07; R08 está declarada en `contracts/rules.json` pero no implementada.
+
+- **Los tres controles de la cabecera venían de tres sitios distintos y se notaba.** Medido a 1440: el selector de tema **48 px** de alto (átomo de formulario), el conmutador de modo **36 px** (literales a pelo: `2.25rem`, trazo de 1 px, radio de `0.5rem`) y el botón de GitHub **52 px** (átomo de botón, trazo de 2 px). Tres alturas, tres radios y dos grosores de trazo en una fila con 16 px de hueco: el conmutador quedaba 12 px más bajo que sus vecinos y flotando entre los dos. Ahora los tres miden 44 px y comparten radio y trazo, tomados del botón —que es el control con más presencia, así que los otros dos se acercan a él y no al revés—. La hamburguesa entra en la misma familia: en móvil va pegada al conmutador y medía 40 px contra sus 44.
+
+### Added
+
+- `--component-header-control-height`, `--component-header-control-radius` y `--component-header-control-border-width`. El ajuste vive en la cabecera, no en los átomos: `.atom-select` y `.atom-btn` siguen midiendo lo que miden en un formulario o en el hero.
+
+- **`scripts/check-version.js`** (`npm run check:version`, incluido en `npm run check`). Compara las diez citas de versión contra `package.json` y falla si alguna se descuelga. No toca las citas históricas —«Versions evaluated: SYX v4.2.0» en `why-syx.html`, los «v4.0.0» de `AUDIT_REPORT.md` y `TOKEN-GUIDE.md`— que son correctas tal cual y que un reemplazo masivo ya rompió una vez.
+
+### Notes
+
+Se probó dar la sombra dura también al selector y al conmutador, para que los tres leyeran como una familia de tarjetas levantadas. Se descartó: en oscuro ensucia y, sobre todo, la sombra es la señal de «acción principal» en este tema — repartirla entre los tres la diluye. El botón la conserva en solitario.
+
+Verificado en los 7 temas: los tres controles con la misma altura en todos (44 px, o 50 en `example-03`, que tiene su propia escala). Cero desbordamiento a 1920/1440/1280/768/390, contraste 0/0 en `home.html` y `why-syx.html` en los dos modos, R01–R06 limpias y simetría completa.
+
+---
+
 ## [4.10.0] — 2026-08-31
 
 La figura del hero pasa de un alzado plano a un **alzado axonométrico** de la pila de `@layer`, y se levanta al entrar en la página.

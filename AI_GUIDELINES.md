@@ -37,7 +37,7 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 | -------------------------------- | ---------------------------------------------------------------- |
 | `tokens.json`                    | Full token registry with type, rawValue, status                  |
 | `component-registry.json`        | All components: atoms, molecules, organisms                      |
-| `contracts/rules.json`           | The four enforceable rules (R01–R04)                             |
+| `contracts/rules.json`           | The contract rules. R01–R07 implemented; R08 declared, not yet   |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
 | `contracts/validation-report.md` | Human-readable audit report                                      |
 

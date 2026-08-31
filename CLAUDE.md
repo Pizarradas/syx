@@ -1,10 +1,10 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.1.0).
+You are working with **SYX**, a token-driven, native SCSS design system (v4.11.0).
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
-2. `contracts/rules.json` — the four machine-enforceable rules (R01–R04)
+2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
 3. `tokens.json` — full token registry (check before using or creating any token)
 4. `component-registry.json` — all existing components (check before creating a new one)
 
@@ -58,7 +58,7 @@ These rules are never overridden by any mode:
 - **Never hardcode design values** (hex colors, raw px/rem literals). Use tokens.
 - **Check `tokens.json` before using a token.** If it doesn't exist, create it first.
 - **Check `component-registry.json` before creating a component.** Reuse before creating.
-- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R04 compliance.
+- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R07 compliance. R01–R04 are errors; R05–R07 are warnings (undocumented tokens, phantom entries, unprefixed legacy vars).
 
 ---
 
@@ -82,7 +82,7 @@ scss/abstracts/tokens/    — 4-tier token system (primitives → semantic → c
 scss/atoms/               — 19 single-purpose components
 scss/molecules/           — 7 composite components
 scss/organisms/           — 8 complex sections
-scss/themes/example-*/    — 6 named themes, each with 4 bundle contexts
+scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 4-5 bundle contexts
 contracts/                — machine-readable validation output
 _agents/                  — workflows, prompts, and modes
 scripts/syx-validate.js   — contract validator (run after any change)

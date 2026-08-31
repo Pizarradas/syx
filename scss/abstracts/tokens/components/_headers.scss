@@ -10,6 +10,16 @@
   --component-header-padding-y: var(--semantic-space-component-md);
   --component-header-z-index: 5;
 
+  // FAMILIA DE CONTROLES DE LA CABECERA
+  // ================================================
+  // El selector de tema, el conmutador de modo y el botón de GitHub van uno al
+  // lado del otro pero venían de tres sitios distintos: 48, 36 y 52 px de alto,
+  // radios de 4, 8 y 4 px y trazos de 1 y 2 px. Estos tres tokens los igualan
+  // sin tocar el aspecto de esos componentes en el resto del sitio.
+  --component-header-control-height: 2.75rem;
+  --component-header-control-radius: var(--component-button-border-radius);
+  --component-header-control-border-width: var(--component-button-border-width);
+
   // HEADER: COLORS
   // ================================================
   --component-header-bg: transparent; // Default

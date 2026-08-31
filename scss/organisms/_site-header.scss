@@ -108,6 +108,33 @@
       display: flex;
       align-items: center;
       gap: var(--semantic-space-component-sm);
+
+      // Los tres controles de la cabecera comparten alto, radio y trazo. El
+      // ajuste vive AQUÍ y no en los átomos: .atom-select y .atom-btn siguen
+      // midiendo lo que miden en un formulario o en el hero; lo que se iguala
+      // es su convivencia en esta fila.
+      .atom-select,
+      .atom-btn {
+        height: var(--component-header-control-height);
+        min-height: var(--component-header-control-height);
+        border-radius: var(--component-header-control-radius);
+      }
+
+      .atom-select {
+        border-width: var(--component-header-control-border-width);
+        // El truco de centrado del átomo calcula line-height contra la altura
+        // del campo de formulario; con la altura nueva hay que rehacerlo.
+        line-height: calc(
+          var(--component-header-control-height) -
+          (var(--component-header-control-border-width) * 2)
+        );
+      }
+
+      .atom-btn {
+        padding-block: 0;
+        display: inline-flex;
+        align-items: center;
+      }
     }
 
     // ── Theme select — show from 1280px ──────────
@@ -126,12 +153,14 @@
       justify-content: center;
       align-items: center;
       gap: 5px;
-      @include size(2.5rem);
+      // Mismo cuadrado que el conmutador de modo, que es su vecino en móvil:
+      // medía 2.5rem contra sus 2.75rem y el radio era otro.
+      @include size(var(--component-header-control-height));
       background: none;
       border: none;
       cursor: pointer;
       padding: 0.25rem;
-      border-radius: 0.5rem;
+      border-radius: var(--component-header-control-radius);
       @include transition(background-color 0.15s ease);
 
       @include breakpoint(xl) {
@@ -265,10 +294,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    @include size(2.25rem);
+    // Cuadrado de la altura de la familia. Antes eran literales —2.25rem de
+    // lado, trazo de 1 px y radio de 0.5rem— y quedaba 12 px más bajo y más
+    // redondeado que los dos controles de al lado.
+    @include size(var(--component-header-control-height));
     background: none;
-    border: 1px solid var(--semantic-color-border-subtle);
-    border-radius: 0.5rem;
+    border: var(--component-header-control-border-width) solid var(--semantic-color-border-default);
+    border-radius: var(--component-header-control-radius);
     cursor: pointer;
     color: var(--semantic-color-text-secondary);
     @include transition(background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease);
