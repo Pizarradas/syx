@@ -59,10 +59,10 @@
       @include transition(color 0.2s ease);
 
       .atom-icon {
-        color: var(--semantic-color-primary);
+        color: var(--semantic-color-primary-text);
       }
 
-      &:hover { color: var(--semantic-color-primary); }
+      &:hover { color: var(--semantic-color-primary-text); }
     }
 
     // ── Desktop nav — hidden below 1280px ──────────
@@ -89,8 +89,8 @@
 
         &:hover,
         &:focus-visible {
-          color: var(--semantic-color-primary);
-          border-bottom-color: var(--semantic-color-primary);
+          color: var(--semantic-color-primary-text);
+          border-bottom-color: var(--semantic-color-primary-text);
         }
         
         // Anillo de foco real. Antes esta regla hacía `outline: none` y
@@ -230,7 +230,7 @@
       &:hover,
       &:focus-visible {
         background-color: var(--semantic-color-bg-secondary);
-        color: var(--semantic-color-primary);
+        color: var(--semantic-color-primary-text);
       }
       
       // Anillo de foco real. Antes esta regla hacía `outline: none` y
@@ -276,7 +276,7 @@
     &:hover,
     &:focus-visible {
       background-color: var(--semantic-color-bg-secondary);
-      color: var(--semantic-color-primary);
+      color: var(--semantic-color-primary-text);
       border-color: var(--semantic-color-primary);
     }
     

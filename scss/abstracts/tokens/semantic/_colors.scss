@@ -13,6 +13,52 @@
   --semantic-color-quaternary: var(--primitive-color-green-500);
   --semantic-color-quinary: var(--primitive-color-yellow-500);
 
+  // BRAND COLORS — VARIANTE DE TINTA
+  // ================================================
+  // Los roles de arriba son de RELLENO: botones, píldoras, muestras. Como
+  // TINTA no valen, y no por descuido de un tema: los `*-500` de todos los
+  // temas están a luminancia OKLCH 0,60, que es justo el punto de cruce —
+  // ~4,0:1 contra blanco y ~4,3:1 contra tinta, así que no llega a 4,5 en
+  // NINGUNA de las dos direcciones. Medido en los seis temas de ejemplo: 11
+  // de sus 18 roles de marca no sirven de texto sobre ningún fondo, y de ahí
+  // salía el 92 % de sus 463 fallos de contraste.
+  //
+  // Por defecto caen al rol de relleno, así que un tema que no los declare se
+  // comporta exactamente como hoy. Un tema que sí los declare elige un tono
+  // más oscuro en claro y más claro en oscuro, y recupera el contraste sin
+  // mover el color de sus rellenos.
+  --semantic-color-primary-text: var(--semantic-color-primary);
+  --semantic-color-secondary-text: var(--semantic-color-secondary);
+  --semantic-color-tertiary-text: var(--semantic-color-tertiary);
+  --semantic-color-quaternary-text: var(--semantic-color-quaternary);
+  --semantic-color-quinary-text: var(--semantic-color-quinary);
+}
+
+// La tinta se DERIVA del propio color de marca: misma tonalidad y mismo croma,
+// solo baja la luminosidad hasta salir de la zona muerta. Así ningún tema
+// cambia de color — el azul sigue siendo su azul, el coral su coral—, solo se
+// oscurece lo justo para leerse. Elegir a mano un peldaño de la rampa saltaba
+// de familia (el azul acababa en morado) y eso sí habría cambiado la marca.
+//
+// Va dentro de @supports a propósito: donde no haya sintaxis de color relativa
+// no se declara nada y el token se queda con el valor de arriba, que es el
+// comportamiento de hoy. Nunca deja texto sin color.
+@supports (color: oklch(from red l c h)) {
+  :root {
+    // Luminosidad de la tinta. Es un token porque no todos los temas parten de
+    // fondo claro: example-03, -04 y -05 son oscuros ya en su modo base, y ahí
+    // la tinta tiene que ir hacia arriba aunque no estemos en "modo oscuro".
+    --semantic-brand-text-lightness: 0.45;
+
+    --semantic-color-primary-text: oklch(from var(--semantic-color-primary) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-secondary-text: oklch(from var(--semantic-color-secondary) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-tertiary-text: oklch(from var(--semantic-color-tertiary) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-quaternary-text: oklch(from var(--semantic-color-quaternary) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-quinary-text: oklch(from var(--semantic-color-quinary) var(--semantic-brand-text-lightness) c h);
+  }
+}
+
+:root {
   // BACKGROUND COLORS
   // ================================================
   --semantic-color-bg-primary: var(--primitive-color-white);

@@ -184,7 +184,7 @@
   // Un color por capa. Antes eran primitivos escritos dentro del
   // organismo, invisibles para cualquier tema.
   --component-layer-utilities-accent: var(--semantic-color-primary);
-  --component-layer-utilities-color: var(--semantic-color-primary);
+  --component-layer-utilities-color: var(--semantic-color-primary-text);
   --component-layer-utilities-bg: color-mix(in srgb, var(--semantic-color-primary) 5%, var(--semantic-color-bg-primary));
   --component-layer-organisms-accent: var(--primitive-color-green-500);
   --component-layer-organisms-color: var(--primitive-color-green-600);
@@ -244,13 +244,13 @@
 
   --component-token-component-accent: var(--semantic-color-primary);
   --component-token-component-badge-bg: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
-  --component-token-component-badge-color: var(--semantic-color-primary);
+  --component-token-component-badge-color: var(--semantic-color-primary-text);
   --component-token-component-badge-border: color-mix(in srgb, var(--semantic-color-primary) 20%, transparent);
   --component-token-component-step-color: var(--component-token-step-color);
 
   --component-token-connector-line: linear-gradient( to bottom, var(--semantic-color-border-default), var(--semantic-color-primary) );
   --component-token-connector-opacity: 0.35;
-  --component-token-connector-arrow-color: var(--semantic-color-primary);
+  --component-token-connector-arrow-color: var(--semantic-color-primary-text);
 
   --component-token-rule-bg: color-mix(in srgb, var(--semantic-color-primary) 6%, transparent);
   --component-token-rule-border-width: 1.5px;

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.9.0] — 2026-08-31
+
+Repaso de los seis temas de ejemplo. Salieron dos cosas: una **rota de verdad** y una de arquitectura de color.
+
+### Fixed
+
+- **El botón de modo oscuro no hacía nada en 6 de los 7 temas.** Hay dos entradas al modo oscuro —la media query del sistema y el `[data-theme="dark"]` manual— y `example-01` a `example-05` solo llamaban a `dark-mode-tokens()` en la primera. Con el sistema operativo en claro, pulsar "oscuro" cambiaba cuatro acentos y dejaba la página clara: el modo oscuro solo se veía si el sistema ya estaba en oscuro, o sea justo cuando el botón no hace falta.
+
+  `example-06` era peor: reasignaba los fondos a mano pero **no los colores de texto**, así que en esa misma situación quedaba texto casi negro sobre fondo casi negro — **1,18:1**, ilegible. Ahora 16,55:1. Verificado en los siete temas: los siete responden al botón.
+
+- **Los roles de marca no sirven de texto, y no por descuido de un tema.** Los `*-500` están todos a luminosidad OKLCH 0,60, que es el punto de cruce: **~4,0:1 contra blanco y ~4,3:1 contra tinta**, así que no llega a 4,5 en ninguna de las dos direcciones. Medido: **11 de los 18 roles de marca de los seis temas no valen de texto sobre ningún fondo**, y de ahí salía el **92 % de sus 463 fallos de contraste**.
+
+### Added
+
+- **`--semantic-color-*-text`**, la variante de tinta de cada rol de marca. Se **deriva** del propio color con sintaxis de color relativa —misma tonalidad, mismo croma, solo cambia la luminosidad— en vez de elegir a mano un peldaño de la rampa, que saltaba de familia y habría cambiado la marca (el azul de `example-01` acababa en morado). Los rellenos no se tocan.
+
+  Va dentro de `@supports`: donde no haya sintaxis de color relativa no se declara nada y el token se queda con el valor de hoy. Nunca deja texto sin color.
+
+- **`--semantic-brand-text-lightness`** (0,45 sobre claro, 0,80 sobre oscuro). Es un token porque no todos los temas parten de fondo claro: `example-03`, `-04` y `-05` son oscuros ya en su modo base y ahí la tinta tiene que ir hacia arriba aunque no sea "modo oscuro".
+
+- **El guardián de simetría ahora cubre los temas sin mixin propio.** Antes los saltaba con un "se omite" y por eso nadie vio el fallo del oscuro manual en cinco temas. Comprueba que las dos entradas al oscuro activen, contando llaves en vez de fiarse de la indentación.
+
+### Notes
+
+Contraste de los seis temas: **463 → 331**. Lo que queda son otras dos causas, ya separadas y medidas, que no entran en esta tanda:
+
+- **Texto oscuro sobre relleno de marca** (cabeceras de tabla, botones rellenos, píldoras numeradas): ~90 fallos. Falta el token simétrico, una tinta *para ir encima* del color de marca.
+- **`--semantic-color-text-secondary` demasiado claro** en `example-01` (3,65:1) y `example-05` (4,36:1): ~150 fallos. Es un valor concreto de cada tema, no un fallo de arquitectura.
+
+`home.html` y `why-syx.html` siguen a 0/0 con el tema blueprint en los dos modos a 1440/768/390. Cero desbordamiento y desfase de cabecera 0 en los 7 temas. R01–R06 limpias, 31/31 bundles.
+
+---
+
 ## [4.8.0] — 2026-08-31
 
 Revisión de rejilla y aprovechamiento del espacio, medida antes de tocar nada. Había **tres anchos de contenido conviviendo** en la misma página sin relación entre sí, y la cabecera no compartía columna con el contenido.
@@ -20,7 +53,7 @@ Revisión de rejilla y aprovechamiento del espacio, medida antes de tocar nada. 
 ### Fixed
 
 - **La cabecera no compartía columna con la página.** Llevaba `padding: 0 40px` fijo mientras las secciones se centran en su columna: **320 px de desfase a 1920 y 460 a 2200**. El logo flotaba en la esquina sin ninguna relación con el título de la primera sección. Ahora usa la misma canaleta; medido a trece anchos de 1024 a 2400, el desfase es 0 en todos. Los otros seis temas no cambian: en ellos el token vale exactamente lo que valía el literal.
-- **Tres topes de ancho escritos a mano** que no tenían relación con `--layout-max-width`: `72rem` (1152 px) en las rejillas de tarjetas y de temas, `64rem` (1024 px) en la pila de capas. La sección de capas dejaba 176 px muertos a la derecha; las rejillas, 288. La columna la fija la página, no cada rejilla.
+- **Cinco topes de ancho escritos a mano** que no tenían relación con `--layout-max-width`: `72rem` (1152 px) en las rejillas de tarjetas y de temas, `64rem` (1024 px) en la pila de capas, y otros dos `72rem` en el pie y en la sección de capas. La sección de capas dejaba 176 px muertos a la derecha; las rejillas, el pie y las capas, 288. La columna la fija la página, no cada rejilla.
 - **Las filas de la pila de capas no compartían rejilla.** La columna de la insignia iba en `auto`, así que cada fila la medía por su propio texto —89, 114, 132 y 155 px— y la descripción arrancaba en cuatro sitios distintos, con 25 px de salto entre filas contiguas. Ahora la columna tiene ancho de token.
 - **`auto-fill` no sabe parar.** Al ensanchar la columna, las 6 tarjetas caían en **4+2** y los 7 temas en **5+2**, con huecos. El mínimo de cada rejilla lleva ahora un suelo dinámico —la parte que le tocaría a una columna del reparto deseado—, así que una columna de más nunca cabe: 3+3 y 4+3 desde 1200 px hasta cualquier anchura, y degradan a 2 y a 1 al estrecharse.
 - **La descripción de cada capa llegaba a ~160 caracteres por línea** con la columna nueva. Medida de lectura a 75ch.

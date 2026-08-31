@@ -20,7 +20,10 @@
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--semantic-space-layout-lg);
-      max-width: 72rem;
+      // Cuarto y quinto tope escritos a mano, los dos a 72rem: el pie y la
+      // sección de capas se quedaban en 1152 px dentro de una página de 1440,
+      // así que se desalineaban con todo lo de encima. La columna la fija la
+      // página.
       margin: 0 auto;
       align-items: center;
 

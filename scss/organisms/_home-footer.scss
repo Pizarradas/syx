@@ -24,7 +24,10 @@
       gap: var(--semantic-space-component-md);
       align-items: center;
       text-align: center;
-      max-width: 72rem;
+      // Cuarto y quinto tope escritos a mano, los dos a 72rem: el pie y la
+      // sección de capas se quedaban en 1152 px dentro de una página de 1440,
+      // así que se desalineaban con todo lo de encima. La columna la fija la
+      // página.
       margin: 0 auto;
 
       @include breakpoint(tablet) {
@@ -45,7 +48,7 @@
       color: var(--semantic-color-text-primary);
       text-decoration: none;
 
-      &:hover { color: var(--semantic-color-primary); }
+      &:hover { color: var(--semantic-color-primary-text); }
     }
 
     // &__meta
@@ -79,7 +82,7 @@
       @include transition(color var(--semantic-duration-base) var(--semantic-easing-standard));
 
       &:hover {
-        color: var(--semantic-color-primary);
+        color: var(--semantic-color-primary-text);
       }
     }
 

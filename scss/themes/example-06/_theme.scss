@@ -288,6 +288,13 @@
     }
 
     :root[data-theme="dark"] {
+        // Este bloque reasignaba los FONDOS a mano pero no los colores de
+        // TEXTO. Con el sistema operativo en claro y el botón en oscuro, el
+        // texto se quedaba en su valor claro —casi negro— sobre un fondo casi
+        // negro: 1,18:1, ilegible. El mixin va primero y las líneas de abajo
+        // lo afinan, que es justo lo que este tema quería.
+        @include dark-mode-tokens();
+
         --semantic-color-border-focus: var(--semantic-color-primary);
         --semantic-color-bg-primary: var(--primitive-color-space-950);
         --semantic-color-bg-secondary: var(--primitive-color-space-900);

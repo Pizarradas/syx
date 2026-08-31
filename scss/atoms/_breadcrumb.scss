@@ -43,7 +43,7 @@
 
     // &__link â anchor/span inside each item
     &__link {
-      color: var(--semantic-color-primary);
+      color: var(--semantic-color-primary-text);
       text-decoration: none;
       @include transition(
         color var(--semantic-duration-fast) var(--semantic-easing-standard),
@@ -52,7 +52,7 @@
       font-size: var(--semantic-font-size-body-small);
 
       &:hover {
-        color: var(--semantic-color-primary);
+        color: var(--semantic-color-primary-text);
         text-decoration: underline;
       }
 

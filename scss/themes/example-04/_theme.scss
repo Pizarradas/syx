@@ -10,6 +10,11 @@
 
 @mixin theme-example-04 {
   :root {
+    // Este tema es OSCURO en su modo base, así que la tinta de marca va
+    // hacia arriba y no hacia abajo: con el 0.45 por defecto salía un
+    // dorado apagado sobre fondo oscuro y no llegaba a 4,5:1.
+    --semantic-brand-text-lightness: 0.80;
+
     // ================================================
     // SECCIí“N 1: PRIMITIVOS
     // ================================================
@@ -307,6 +312,14 @@
   }
 
   :root[data-theme="dark"] {
+    // El modo oscuro manual no reasignaba NADA de superficie: este bloque
+    // retocaba botones y enlaces pero nunca llamaba a dark-mode-tokens(), que
+    // es quien cambia fondos, textos y bordes. Resultado: con el sistema
+    // operativo en claro, pulsar el botón de oscuro no hacía nada visible —
+    // la página seguía clara con un par de acentos cambiados. Solo se veía el
+    // modo oscuro si el sistema ya estaba en oscuro, o sea justo cuando el
+    // botón no hacía falta.
+    @include dark-mode-tokens();
     --semantic-color-border-focus: var(--semantic-color-primary);
     --semantic-color-link-default: var(--primitive-color-earth-500);
     --semantic-color-link-hover: var(--primitive-color-forest-50);
@@ -324,6 +337,8 @@
   }
 
   :root[data-theme="light"] {
+    // Al forzar claro sí hay fondo claro: la tinta vuelve abajo.
+    --semantic-brand-text-lightness: 0.45;
     --semantic-color-bg-primary: var(--primitive-color-sage-50);
     --semantic-color-bg-secondary: var(--primitive-color-sage-100);
     --semantic-color-bg-tertiary: var(--primitive-color-forest-50);

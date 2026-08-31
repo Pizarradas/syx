@@ -55,8 +55,37 @@ function main() {
     const scss = fs.readFileSync(path.join(THEMES_DIR, theme, '_theme.scss'), 'utf8');
     const darkBody = mixinBody(scss, `${theme}-dark-tokens`) ?? mixinBody(scss, 'dark-tokens');
 
+    // Un tema sin mixin propio se apoya en dark-mode-tokens(). Ahí el fallo
+    // no es de simetría de tokens sino de ACTIVACIÓN: hay dos entradas al modo
+    // oscuro —la media query y el [data-theme="dark"] manual— y llamar solo a
+    // la primera deja el botón de tema sin efecto cuando el sistema operativo
+    // está en claro, que es justo cuando hace falta. Cinco de los seis temas de
+    // ejemplo estaban así y ninguna regla lo veía.
     if (!darkBody) {
-      console.log(`   ${theme.padEnd(16)} sin mixin de oscuro propio — se omite`);
+      const enMedia = /@media\s*\(prefers-color-scheme:\s*dark\)[\s\S]*?dark-mode-tokens\(\)/.test(scss);
+      // El cierre del bloque se busca contando llaves, no por indentación:
+      // example-06 anida con cuatro espacios y un `\n  }` no lo encontraba,
+      // así que el guardián lo daba por roto después de arreglarlo.
+      const enManual = (() => {
+        const i = scss.search(/:root\[data-theme="dark"\]\s*\{/);
+        if (i === -1) return false;
+        let j = scss.indexOf('{', i), depth = 0, end = j;
+        for (; end < scss.length; end++) {
+          if (scss[end] === '{') depth++;
+          else if (scss[end] === '}' && --depth === 0) break;
+        }
+        return /dark-mode-tokens\(\)/.test(scss.slice(j, end));
+      })();
+
+      if (enMedia && !enManual) {
+        problemas++;
+        console.log(`❌ ${theme.padEnd(16)} el oscuro manual no llama a dark-mode-tokens()`);
+        console.log(`   ${' '.repeat(16)} con el sistema en claro, el botón de tema no cambia el fondo`);
+      } else if (enMedia && enManual) {
+        console.log(`✅ ${theme.padEnd(16)} sin mixin propio · las dos entradas al oscuro activan`);
+      } else {
+        console.log(`   ${theme.padEnd(16)} sin mixin de oscuro propio — se omite`);
+      }
       continue;
     }
     const lightBody = mixinBody(scss, `${theme}-light-tokens`);

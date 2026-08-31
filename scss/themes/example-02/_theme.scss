@@ -308,6 +308,14 @@
   }
 
   :root[data-theme="dark"] {
+    // El modo oscuro manual no reasignaba NADA de superficie: este bloque
+    // retocaba botones y enlaces pero nunca llamaba a dark-mode-tokens(), que
+    // es quien cambia fondos, textos y bordes. Resultado: con el sistema
+    // operativo en claro, pulsar el botón de oscuro no hacía nada visible —
+    // la página seguía clara con un par de acentos cambiados. Solo se veía el
+    // modo oscuro si el sistema ya estaba en oscuro, o sea justo cuando el
+    // botón no hacía falta.
+    @include dark-mode-tokens();
     --semantic-color-border-focus: var(--semantic-color-primary);
     --btn-primary-filled-text: oklch(0.193 0.069 300.442);
     --btn-secondary-filled-text: oklch(0.193 0.069 300.442);
