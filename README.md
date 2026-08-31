@@ -7,7 +7,7 @@
 
 > A modern, token-driven SCSS design system built on Atomic Design principles.  
 > Zero external CSS dependencies. Dart Sass native.  
-> Built by **José Luis Pizarro Feo**
+> Built by **José Luis Pizarro**
 
 ---
 
