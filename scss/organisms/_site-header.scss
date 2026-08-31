@@ -26,7 +26,11 @@
     align-items: center;
     justify-content: space-between;
     height: $header-h;
-    padding: 0 var(--semantic-space-layout-md);
+    // Misma canaleta que las secciones, no un valor fijo. Con 40 px clavados,
+    // el logo se quedaba pegado al borde mientras el contenido se centraba en
+    // su columna: 320 px de desfase a 1920 y 460 a 2200. El logo flotaba en la
+    // esquina sin relación con el título de la primera sección.
+    padding: 0 var(--component-section-padding-inline);
     background-color: var(--semantic-color-bg-primary);
     border-bottom: 1px solid var(--semantic-color-border-subtle);
     width: 100%;

@@ -1,3 +1,16 @@
 node_modules/
 .sass-cache/
 *.log
+
+# `npm run build:css` corre `sass scss:css`, que replica TODO el árbol de
+# parciales en css/ (css/atoms/, css/themes/bundle-*.css…). Solo los ocho
+# puntos de entrada de css/ son entregables; el resto es subproducto de la
+# compilación y ensuciaba `git status` en cada build.
+css/abstracts/
+css/atoms/
+css/base/
+css/layout/
+css/molecules/
+css/organisms/
+css/themes/
+css/utilities/

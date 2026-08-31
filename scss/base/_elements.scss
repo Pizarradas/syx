@@ -9,6 +9,12 @@
 @mixin elements-base($theme: null) {
 @layer syx.base {
 
+    // Contador de secciones. Solo se declara aquí; quien lo pinta es la
+    // cabecera de cada organismo, y solo si el tema enciende
+    // --component-section-index-content. Sin eso, no emite nada.
+    body {
+      counter-reset: syx-section;
+    }
 // LISTS
 // ===============================================
 ul, ol {

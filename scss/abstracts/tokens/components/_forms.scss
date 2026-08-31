@@ -65,7 +65,10 @@
 
   // FORM FIELD: WARNING STATE
   // ================================================
-  --component-form-field-warning-color: var(--semantic-color-state-warning);
+  // El ámbar de estado está pensado como RELLENO. Como TEXTO sobre claro se
+  // queda en 3,2:1, así que se admite un token específico para el texto y se
+  // cae al de siempre si el tema no lo define: ningún tema existente cambia.
+  --component-form-field-warning-color: var(--semantic-color-state-warning-text, var(--semantic-color-state-warning));
   --component-form-field-warning-border: var(--semantic-color-state-warning);
 
   // FORM GROUP: SPACING

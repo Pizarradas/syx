@@ -43,6 +43,28 @@
   --component-section-rule-color: var(--semantic-color-border-strong);
   --component-section-rule-spacing: 0;
 
+  // NUMERACIÓN Y COTA — el gesto de plano
+  // ================================================
+  // Apagados por defecto (`content: none`, grosor 0), así que ningún tema
+  // existente cambia. El tema que los quiera solo tiene que encenderlos.
+  --component-section-index-content: none;
+  --component-section-index-font: var(--semantic-font-family-mono);
+  --component-section-index-size: var(--semantic-font-size-overline);
+  --component-section-index-color: var(--semantic-color-text-tertiary);
+  --component-section-index-gap: 0.75rem;
+  // Línea de cota: el trazo horizontal que sale del número, con topes en
+  // los extremos, como la acotación de un plano.
+  --component-section-tick-width: 0;
+  --component-section-tick-color: var(--semantic-color-border-default);
+  --component-section-tick-height: 0.5rem;
+  // Epígrafe de sección: por defecto conserva el aspecto de píldora. Un tema
+  // puede quitarle la caja para que lea como etiqueta de cajetín, junto al
+  // número de sección, en vez de como un chip más.
+  --component-section-overline-bg: initial;
+  --component-section-overline-border-width: initial;
+  --component-section-overline-padding: initial;
+  --component-section-overline-color: initial;
+
   // HERO
   // ================================================
   // Alineación: `center` es el valor histórico. Un tema editorial
@@ -55,6 +77,38 @@
   --component-hero-content-inline: auto;
   --component-hero-padding-block-start: calc(var(--semantic-space-layout-xl) * 1.5);
   --component-hero-scroll-hint-align: center;
+
+  // HERO A DOS COLUMNAS + FIGURA
+  // ================================================
+  // Por defecto una sola columna y sin figura: ningún tema existente cambia.
+  // La figura se pinta como MÁSCARA, no como imagen, para que la tiña
+  // --component-hero-figure-color y siga al modo claro/oscuro con un token.
+  // Canaleta común de las rejillas de página. Antes cada organismo elegía la
+  // suya (16 px en las tarjetas, 24 px en los temas) y las columnas de dos
+  // secciones seguidas no cuadraban entre sí.
+  --component-grid-gutter: var(--semantic-space-component-md);
+
+  // Ancho de la columna de la insignia en la pila de capas. Estaba en `auto`,
+  // así que cada fila la medía por su propio texto (89, 114, 132 y 155 px) y
+  // la descripción arrancaba en cuatro sitios distintos.
+  --component-token-layer-badge-width: 10rem;
+
+  --component-hero-columns: 1fr;
+  --component-hero-column-gap: 0;
+  --component-hero-figure: none;
+  --component-hero-figure-color: var(--semantic-color-border-default);
+  --component-hero-figure-opacity: 1;
+  --component-hero-figure-size: contain;
+  --component-hero-figure-min-height: 0;
+  // Cuántas filas abarca la figura. El hero de la home tiene 7 hijos;
+  // el tope es holgado a propósito porque las filas implícitas que
+  // sobran quedan vacías y no miden nada.
+  --component-hero-figure-row-span: 20;
+  // Variantes para pantalla ancha. Por defecto repiten el valor de una
+  // columna, así que activar la segunda es cosa exclusiva del tema.
+  --component-hero-columns-wide: var(--component-hero-columns);
+  --component-hero-column-gap-wide: var(--component-hero-column-gap);
+  --component-hero-figure-display-wide: none;
 
   // Telón de fondo. Puede ser un degradado, una retícula
   // (`var(--semantic-bg-grid)`) o `none`.

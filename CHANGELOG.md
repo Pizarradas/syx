@@ -7,6 +7,67 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.8.0] — 2026-08-31
+
+Revisión de rejilla y aprovechamiento del espacio, medida antes de tocar nada. Había **tres anchos de contenido conviviendo** en la misma página sin relación entre sí, y la cabecera no compartía columna con el contenido.
+
+### Changed
+
+- **La columna sube de 1200 a 1440 px.** Con 1200, una pantalla de 1920 usaba el 63 % y una de 2200 el 55 %. Ahora 75 % y 65 %. Las tarjetas de característica pasan de 373 a 464 px y sus títulos dejan de partirse en dos líneas.
+- **El suelo de la canaleta crece con la pantalla**, `clamp(1.5rem, 3.5vw, 4.5rem)` en vez de `1.5rem` fijo. Con el mínimo de móvil clavado y la columna a 1440, un portátil de 1440 dejaba el logo y el botón de GitHub tocando el borde.
+- **Canaleta común entre rejillas** (`--component-grid-gutter`). Las tarjetas iban a 16 px y los temas a 24, así que las columnas de dos secciones seguidas no cuadraban.
+
+### Fixed
+
+- **La cabecera no compartía columna con la página.** Llevaba `padding: 0 40px` fijo mientras las secciones se centran en su columna: **320 px de desfase a 1920 y 460 a 2200**. El logo flotaba en la esquina sin ninguna relación con el título de la primera sección. Ahora usa la misma canaleta; medido a trece anchos de 1024 a 2400, el desfase es 0 en todos. Los otros seis temas no cambian: en ellos el token vale exactamente lo que valía el literal.
+- **Tres topes de ancho escritos a mano** que no tenían relación con `--layout-max-width`: `72rem` (1152 px) en las rejillas de tarjetas y de temas, `64rem` (1024 px) en la pila de capas. La sección de capas dejaba 176 px muertos a la derecha; las rejillas, 288. La columna la fija la página, no cada rejilla.
+- **Las filas de la pila de capas no compartían rejilla.** La columna de la insignia iba en `auto`, así que cada fila la medía por su propio texto —89, 114, 132 y 155 px— y la descripción arrancaba en cuatro sitios distintos, con 25 px de salto entre filas contiguas. Ahora la columna tiene ancho de token.
+- **`auto-fill` no sabe parar.** Al ensanchar la columna, las 6 tarjetas caían en **4+2** y los 7 temas en **5+2**, con huecos. El mínimo de cada rejilla lleva ahora un suelo dinámico —la parte que le tocaría a una columna del reparto deseado—, así que una columna de más nunca cabe: 3+3 y 4+3 desde 1200 px hasta cualquier anchura, y degradan a 2 y a 1 al estrecharse.
+- **La descripción de cada capa llegaba a ~160 caracteres por línea** con la columna nueva. Medida de lectura a 75ch.
+
+### Notes
+
+`layout-grid`, la rejilla de 12 columnas del sistema, **no se usa ni una vez en la home**: cada organismo declara la suya. De ahí venían los tres anchos. Esta tanda los alinea a todos contra la misma columna, pero la unificación de raíz —colgar los ocho organismos de `layout-grid`— sigue pendiente y probablemente pida cambios en el HTML.
+
+Sin regresiones: contraste 0/0 en `home.html` y `why-syx.html` en claro y oscuro a 1440/768/390, `docs.html` estable en 14/18, cero desbordamiento en las 18 combinaciones, R01–R06 limpias, simetría completa, 31/31 bundles.
+
+---
+
+## [4.7.0] — 2026-08-31
+
+Rediseño **sin tocar una línea de HTML**: todo sale de CSS moderno —subgrid, container queries, contadores y máscaras— sobre el marcado que ya había.
+
+### Added
+
+- **Subgrid en las tarjetas de característica.** Las tarjetas de una misma fila comparten ahora la rejilla del contenedor, así que icono, título y cuerpo se alinean entre columnas aunque un título ocupe dos líneas y el de al lado una. Verificado: los tres títulos de la primera fila arrancan en 1650 px y los tres cuerpos en 1739.
+- **Container query en la rejilla de tarjetas.** La tarjeta ajusta su relleno según el ancho de SU contenedor, no el de la ventana: la misma tarjeta se comporta bien en una rejilla de tres y en una de una sin media queries nuevas.
+- **Numeración de sección con cota**, con contadores CSS: `SEC 01`, `SEC 02`… en versalita monoespaciada sobre una regla que cruza la columna, con un tope vertical al final. Es un `::before` y un `::after` de la cabecera; el HTML no cambia y el número se recalcula solo si se reordenan las secciones.
+- **Figura técnica en el hero.** El hueco de la derecha —el hero era una columna centrada con media pantalla vacía— lleva un alzado acotado de la pila de `@layer`: siete barras, las tres primeras rayadas a 45° como un corte de sección, línea de cota con flechas, tirantes a cada barra, marcas de registro y marcas de esquina de hoja. Va como **máscara**, no como imagen, así que la tiñe un token y sigue al modo claro/oscuro sola. Es decorativa: vive en un `::after` y no la ve un lector de pantalla. Solo aparece a partir de portátil.
+- `--component-pill-gap`: hueco entre el icono y el texto de una píldora. No existía, así que cualquier `.atom-icon` dentro de una píldora se pegaba a la primera letra.
+- `--semantic-color-state-warning-text`, separado del ámbar de relleno.
+- Valores por defecto para los doce `--component-docs-badge-*`.
+
+### Fixed
+
+- **La escala de puntuación de `why-syx.html` tenía un peldaño que no cumplía AA.** `blue-400` es la zona muerta de la rampa: 3,79:1 con blanco y 4,35:1 con tinta —no pasa con NINGÚN color de texto— y el paso 4 estaba justo ahí. En claro el 4 sube a `blue-500` (6,76:1) y el 5 a `blue-700` (10,86:1); en oscuro suben a `blue-300` (7,38:1) y `blue-200` (10,54:1). El comentario del fichero afirmaba "todos por encima de 4,5:1" y era falso; ahora dice el peor caso medido.
+- **El ámbar de estado como TEXTO daba 3,2:1** sobre claro, y lo usaban la etiqueta y el mensaje de `mol-form-field--is-warning`. Sirve como relleno, no como tinta: el texto tiene ahora su propio tono (5,21:1) y se cae al de siempre si un tema no lo define.
+- **Un `<code>` con `.syx-text-white` quedaba en 1,16:1.** La pastilla trae su propia pareja fondo+tinta y la utilidad solo cambiaba la tinta: blanco sobre pastilla pálida. Dejarla transparente tampoco valía —en oscuro las baldosas de color son claras—, así que la pastilla reafirma su pareja y se lee sobre cualquier baldosa, en los dos modos.
+- **Los doce tokens `--component-docs-badge-*` vivían solo dentro de `syx-sketch`.** `docs.html` con cualquier otro tema se quedaba con las insignias de capa sin pintar. Ahora tienen valor por defecto en la capa de componente, hecho con roles semánticos.
+- **La cota de la sección 02 se quedaba corta.** La dibuja el `::before` de la cabecera, y la cabecera de `org-home-tokens` llevaba `max-width: 52rem`: la regla medía 832 px mientras las de las demás secciones cruzaban 1200. La medida de lectura pasa a los hijos de texto; la cabecera cruza la columna entera.
+
+### Notes
+
+Sobre el `::after` del hero hubo dos fallos que conviene dejar escritos, porque los dos son sutiles:
+
+- El `display` estaba en el bloque de la media query y la regla base se emitía **después** con la misma especificidad (0,1,1), así que ganaba siempre y la figura se quedaba en `none`. Ahora el breakpoint se anida dentro de la propia regla y el orden de origen deja de importar.
+- `grid-row: 1 / -1` **no** abarca la rejilla: la línea `-1` es el final de la rejilla EXPLÍCITA, y aquí solo hay columnas declaradas. Con las siete filas implícitas, `-1` resolvía a la línea 1 y la figura ocupaba una sola fila.
+
+Contraste verificado sobre píxeles renderizados, en claro y oscuro, a 1440 / 768 / 390: `home.html` y `why-syx.html` a **0 fallos en las seis combinaciones**; `docs.html` baja de 19 a 14 en claro y se queda en 18 en oscuro. Cero desbordamiento horizontal en las 18 combinaciones. R01–R06 limpias, simetría claro/oscuro completa (167 tokens), 31/31 bundles.
+
+El lector de contraste de esta tanda también se corrigió: tomaba el color modal de la caja entera, y para un elemento recortado por un contenedor con `overflow` muestreaba zona no pintada, dando falsos 1,00:1. Ahora recorta contra cada ancestro con `overflow` antes de muestrear.
+
+---
+
 ## [4.6.1] — 2026-08-31
 
 ### Fixed

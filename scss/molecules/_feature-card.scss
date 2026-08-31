@@ -18,9 +18,22 @@
   @layer syx.molecules {
 
   .mol-feature-card {
-    display: flex;
-    flex-direction: column;
+    // De flex a grid para poder heredar las filas de la rejilla padre.
+    // Con flex, cada tarjeta reparte su altura por su cuenta: un titular de
+    // dos líneas empujaba su cuerpo de texto y las tarjetas de una misma fila
+    // no alineaban entre sí. Con `subgrid` las tres filas —icono, titular,
+    // cuerpo— son las MISMAS para toda la fila, así que se alinean solas.
+    display: grid;
+    grid-template-rows: auto auto 1fr;
     gap: var(--semantic-space-component-md);
+
+    // La rejilla padre reserva 3 filas por tarjeta (ver _home-features).
+    // Si el navegador no soporta subgrid, la tarjeta conserva sus propias
+    // filas y el resultado es el de antes: degradación limpia.
+    @supports (grid-template-rows: subgrid) {
+      grid-row: span var(--component-feature-card-row-span);
+      grid-template-rows: subgrid;
+    }
     padding: var(--semantic-space-layout-md);
     background-color: var(--component-feature-card-bg);
     border:

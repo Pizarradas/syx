@@ -127,6 +127,9 @@
   --semantic-color-state-error: var(--semantic-tone-error-bg);
   --semantic-color-state-success: var(--semantic-tone-success-bg);
   --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  // Ámbar de TEXTO, más oscuro que el de relleno: 5,21:1 sobre blanco
+  // frente a los 3,2:1 del ámbar de estado.
+  --semantic-color-state-warning-text: oklch(0.54 0.15 72);
   --component-score-1-bg: var(--semantic-color-bg-primary);
   --component-score-1-color: var(--semantic-color-text-tertiary);
   --component-score-1-border: var(--semantic-color-border-default);
@@ -136,12 +139,16 @@
   --component-score-3-bg: var(--primitive-color-blue-200);
   --component-score-3-color: var(--semantic-color-text-primary);
   --component-score-3-border: var(--primitive-color-blue-300);
-  --component-score-4-bg: var(--primitive-color-blue-400);
+  // blue-400 es la zona muerta de la rampa: 3,79:1 con blanco y 4,35:1 con
+  // tinta. No pasa AA con NINGÚN color de texto, así que el paso 4 se va a
+  // blue-500 (6,76:1 con blanco) y el 5 a blue-700 (10,86:1), que además
+  // mantiene la rampa oscureciéndose peldaño a peldaño.
+  --component-score-4-bg: var(--primitive-color-blue-500);
   --component-score-4-color: oklch(1 0 0);
-  --component-score-4-border: var(--primitive-color-blue-400);
-  --component-score-5-bg: var(--primitive-color-blue-600);
+  --component-score-4-border: var(--primitive-color-blue-500);
+  --component-score-5-bg: var(--primitive-color-blue-700);
   --component-score-5-color: oklch(1 0 0);
-  --component-score-5-border: var(--primitive-color-blue-600);
+  --component-score-5-border: var(--primitive-color-blue-700);
   --component-section-divider-color: var(--semantic-color-border-default);
   --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, transparent 0%, var(--semantic-color-bg-primary) 78% ), var(--semantic-bg-grid);
   --component-hero-accent-color: var(--semantic-color-primary);
@@ -337,6 +344,9 @@
   --semantic-color-state-error: var(--semantic-tone-error-bg);
   --semantic-color-state-success: var(--semantic-tone-success-bg);
   --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  // En oscuro el ámbar de estado ya da 10,46:1 sobre el fondo: el texto usa
+  // el mismo y no hace falta un tono aparte.
+  --semantic-color-state-warning-text: var(--semantic-tone-warning-bg);
   // Escala de puntuación: rampa invertida para fondo oscuro.
   --component-score-1-bg: var(--primitive-color-gray-800);
   --component-score-1-color: var(--primitive-color-gray-400);
@@ -347,12 +357,14 @@
   --component-score-3-bg: var(--primitive-color-blue-800);
   --component-score-3-color: var(--primitive-color-blue-100);
   --component-score-3-border: var(--primitive-color-blue-700);
-  --component-score-4-bg: var(--primitive-color-blue-400);
+  // Misma zona muerta: blue-400 daba 4,56:1 con gray-900, justo en el filo.
+  // En oscuro la rampa ACLARA, así que 4 y 5 suben un peldaño: 7,38 y 10,54.
+  --component-score-4-bg: var(--primitive-color-blue-300);
   --component-score-4-color: var(--primitive-color-gray-900);
-  --component-score-4-border: var(--primitive-color-blue-400);
-  --component-score-5-bg: var(--primitive-color-blue-300);
+  --component-score-4-border: var(--primitive-color-blue-300);
+  --component-score-5-bg: var(--primitive-color-blue-200);
   --component-score-5-color: var(--primitive-color-gray-900);
-  --component-score-5-border: var(--primitive-color-blue-300);
+  --component-score-5-border: var(--primitive-color-blue-200);
 
 
 
@@ -736,7 +748,11 @@
     // ================================================
     // Ancho máximo más estrecho que example-01 (1440px → 1200px):
     // el aire lateral es parte del look.
-    --layout-max-width: calc(300 * var(--base-measure));
+    // 1440 px, no 1200: con 1200 una pantalla de 1920 usaba el 63 % y una de
+    // 2200 el 55 %. Las tarjetas pasan de 373 a 456 px de ancho. El texto
+    // largo no se alarga por esto: titulares y párrafos llevan su propia
+    // medida de lectura, independiente de la columna.
+    --layout-max-width: calc(360 * var(--base-measure));
     --layout-pad-1: calc(2 * var(--base-measure));
     --layout-gap-1: calc(var(--base-measure));
     --layout-pad-2: calc(3 * var(--base-measure));
@@ -1061,6 +1077,16 @@
     // vacío por encima. Se queda en el mismo aire que el resto de secciones.
     --component-hero-padding-block-start: var(--semantic-space-layout-xl);
     --component-hero-scroll-hint-align: flex-start;
+    // La mitad derecha del hero dejaba de ser un hueco: lleva el alzado
+    // acotado de la pila de 7 capas, dibujado a trazo. Solo a partir de
+    // pantalla grande; por debajo, el hero sigue a una columna.
+    --component-hero-figure: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20340%20440'%20fill='none'%20stroke='%23000'%20stroke-width='1.5'%20stroke-linecap='square'%3E%3Cdefs%3E%3Cpattern%20id='h'%20width='8'%20height='8'%20patternUnits='userSpaceOnUse'%20patternTransform='rotate%2845%29'%3E%3Cline%20x1='0'%20y1='0'%20x2='0'%20y2='8'%20stroke='%23000'%20stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Cline%20x1='10'%20y1='10'%20x2='23'%20y2='10'/%3E%3Cline%20x1='10'%20y1='10'%20x2='10'%20y2='23'/%3E%3Cline%20x1='330'%20y1='10'%20x2='317'%20y2='10'/%3E%3Cline%20x1='330'%20y1='10'%20x2='330'%20y2='23'/%3E%3Cline%20x1='10'%20y1='430'%20x2='23'%20y2='430'/%3E%3Cline%20x1='10'%20y1='430'%20x2='10'%20y2='417'/%3E%3Cline%20x1='330'%20y1='430'%20x2='317'%20y2='430'/%3E%3Cline%20x1='330'%20y1='430'%20x2='330'%20y2='417'/%3E%3Cline%20x1='34'%20y1='44'%20x2='34'%20y2='366'/%3E%3Cpolyline%20points='30,55%2034,45%2038,55'/%3E%3Cpolyline%20points='30,355%2034,365%2038,355'/%3E%3Crect%20x='78'%20y='44'%20width='238'%20height='34'%20fill='url%28%23h%29'/%3E%3Cline%20x1='41'%20y1='61'%20x2='69'%20y2='61'/%3E%3Cline%20x1='323'%20y1='61'%20x2='331'%20y2='61'/%3E%3Crect%20x='78'%20y='92'%20width='238'%20height='34'%20fill='url%28%23h%29'/%3E%3Cline%20x1='41'%20y1='109'%20x2='69'%20y2='109'/%3E%3Cline%20x1='323'%20y1='109'%20x2='331'%20y2='109'/%3E%3Crect%20x='78'%20y='140'%20width='238'%20height='34'%20fill='url%28%23h%29'/%3E%3Cline%20x1='41'%20y1='157'%20x2='69'%20y2='157'/%3E%3Cline%20x1='323'%20y1='157'%20x2='331'%20y2='157'/%3E%3Crect%20x='78'%20y='188'%20width='238'%20height='34'%20fill='none'/%3E%3Cline%20x1='41'%20y1='205'%20x2='69'%20y2='205'/%3E%3Cline%20x1='323'%20y1='205'%20x2='331'%20y2='205'/%3E%3Crect%20x='78'%20y='236'%20width='238'%20height='34'%20fill='none'/%3E%3Cline%20x1='41'%20y1='253'%20x2='69'%20y2='253'/%3E%3Cline%20x1='323'%20y1='253'%20x2='331'%20y2='253'/%3E%3Crect%20x='78'%20y='284'%20width='238'%20height='34'%20fill='none'/%3E%3Cline%20x1='41'%20y1='301'%20x2='69'%20y2='301'/%3E%3Cline%20x1='323'%20y1='301'%20x2='331'%20y2='301'/%3E%3Crect%20x='78'%20y='332'%20width='238'%20height='34'%20fill='none'/%3E%3Cline%20x1='41'%20y1='349'%20x2='69'%20y2='349'/%3E%3Cline%20x1='323'%20y1='349'%20x2='331'%20y2='349'/%3E%3Cline%20x1='78'%20y1='392'%20x2='316'%20y2='392'/%3E%3Cline%20x1='78'%20y1='386'%20x2='78'%20y2='398'/%3E%3Cline%20x1='316'%20y1='386'%20x2='316'%20y2='398'/%3E%3C/svg%3E");
+    --component-hero-figure-color: var(--semantic-color-border-strong);
+    --component-hero-figure-opacity: 0.55;
+    --component-hero-figure-min-height: 26rem;
+    --component-hero-columns-wide: minmax(0, 1fr) minmax(0, 0.72fr);
+    --component-hero-column-gap-wide: var(--semantic-space-layout-lg);
+    --component-hero-figure-display-wide: block;
     --component-hero-sub-max-width: 52ch;
 
     // Cabeceras de sección a la izquierda y más contenidas. Antes las cuatro
@@ -1070,7 +1096,12 @@
     // Columna de contenido de 75rem centrada, con 1,5rem de guardia mínima
     // a los lados. Sin esto, alinear a la izquierda pegaba el texto al borde
     // de la pantalla en monitores anchos.
-    --component-section-padding-inline: max(1.5rem, calc((100% - var(--layout-max-width)) / 2));
+    // El suelo de la canaleta crece con la pantalla en vez de quedarse en el
+    // valor de móvil: con 1.5rem clavados y la columna a 1440, un portátil de
+    // 1440 dejaba el logo y el botón de GitHub tocando el borde. El segundo
+    // término manda en cuanto la pantalla supera la columna.
+    --component-section-padding-inline:
+      max(clamp(1.5rem, 3.5vw, 4.5rem), calc((100% - var(--layout-max-width)) / 2));
     --component-section-padding-block: var(--semantic-space-layout-xl);
     --component-section-align: left;
     --component-section-justify: flex-start;
@@ -1080,6 +1111,18 @@
     --component-section-rule-width: 1px;
     --component-section-rule-color: var(--semantic-color-border-strong);
     --component-section-rule-spacing: calc(4 * var(--base-measure));
+    // Numeración de plano encendida: "01 —" sobre una regla que cruza la
+    // columna y termina en un tope vertical. Es el gesto que convierte una
+    // sucesión de secciones en las láminas de un plano.
+    --component-section-index-content: "SEC " counter(syx-section, decimal-leading-zero);
+    --component-section-tick-width: 1px;
+    --component-section-tick-color: var(--semantic-color-border-default);
+    --component-section-index-color: var(--semantic-color-text-tertiary);
+    --component-section-tick-height: 0.5rem;
+    --component-section-overline-bg: transparent;
+    --component-section-overline-border-width: 0;
+    --component-section-overline-padding: 0;
+    --component-section-overline-color: var(--semantic-color-primary);
 
 
     // DIAGRAMA DE TOKENS — la misma paleta que el resto.

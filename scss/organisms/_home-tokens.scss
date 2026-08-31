@@ -18,10 +18,52 @@
       background-image: var(--component-section-bg-image);
 
       &__header {
+      // Numeración de plano: el número de sección sobre una regla que cruza
+      // la columna, con un tope vertical al final. Todo en los
+      // pseudoelementos, que en este organismo estaban libres.
+      position: relative;
+      counter-increment: syx-section;
+
+      &::before {
+        content: var(--component-section-index-content);
+        display: block;
+        font-family: var(--component-section-index-font);
+        font-size: var(--component-section-index-size);
+        letter-spacing: var(--semantic-letter-spacing-wide);
+        color: var(--component-section-index-color);
+        padding-bottom: var(--component-section-index-gap);
+        margin-bottom: var(--component-section-index-gap);
+        border-bottom: var(--component-section-tick-width) solid var(--component-section-tick-color);
+      }
+
+      // Tope de la cota, al extremo derecho de la regla.
+      &::after {
+        content: "";
+        @include absolute($top: 0, $right: 0);
+        width: var(--component-section-tick-width);
+        height: var(--component-section-tick-height);
+        background-color: var(--component-section-tick-color);
+        transform: translateY(calc(var(--component-section-index-size) + var(--component-section-index-gap)));
+      }
+      // El epígrafe vive dentro de la cabecera numerada: si el tema lo pide,
+      // pierde la caja y queda como etiqueta, no como chip.
+      .atom-pill {
+        background-color: var(--component-section-overline-bg);
+        border-width: var(--component-section-overline-border-width);
+        padding: var(--component-section-overline-padding);
+        color: var(--component-section-overline-color);
+      }
+
         text-align: var(--component-section-align);
-        max-width: 52rem;
         margin-inline: var(--component-section-header-margin-inline);
         margin-block-end: var(--semantic-space-layout-lg);
+
+        // La medida de lectura se aplica al TEXTO, no a la cabecera: si la
+        // cabecera se estrecha, se estrecha con ella la regla del número de
+        // sección, y la cota de la 02 salía más corta que la del resto.
+        > *:not(.org-home-tokens__overline) {
+          max-width: 52rem;
+        }
       }
 
       &__overline {
@@ -48,7 +90,9 @@
 
       // ── Diagram container ───────────────────────────
       &__diagram {
-        max-width: 64rem;
+        // Sin tope propio: llevaba 64rem (1024 px) mientras el resto de la
+        // página iba a la columna completa, así que la sección dejaba un
+        // hueco muerto a la derecha que no tenía ninguna razón de ser.
         margin-inline: var(--component-section-header-margin-inline);
         display: flex;
         flex-direction: column;
@@ -78,7 +122,7 @@
 
         // Desktop: horizontal strip layout
         @include breakpoint(phablet) {
-          grid-template-columns: auto 1fr auto;
+          grid-template-columns: var(--component-token-layer-badge-width) 1fr auto;
           grid-template-rows: auto auto;
           align-items: start;
           gap: 0.5rem 1.5rem;
@@ -245,6 +289,10 @@
         color: var(--semantic-color-text-secondary);
         margin: 0;
         line-height: 1.5;
+        // Medida de lectura. La descripción ocupa la columna entera de la
+        // tarjeta, así que con la columna de página a 1440 llegaba a unos 160
+        // caracteres por línea: el ojo pierde el renglón al volver.
+        max-width: 75ch;
 
         @include breakpoint(phablet) {
           grid-column: 2;

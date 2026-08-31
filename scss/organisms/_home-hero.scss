@@ -36,8 +36,63 @@
       z-index: 0;
     }
 
+    // Rejilla de dos columnas. El ::before (el telón) está fuera de flujo,
+    // así que no ocupa celda; los hijos van todos a la primera columna y la
+    // segunda queda para la figura del ::after. Con --component-hero-columns
+    // a 1fr —el valor por defecto— esto se comporta exactamente como antes.
+    display: grid;
+    grid-template-columns: var(--component-hero-columns);
+    column-gap: var(--component-hero-column-gap);
+    align-content: start;
+
+    // La segunda columna solo aparece cuando hay sitio de sobra. Por debajo
+    // de portátil el hero sigue siendo una columna y la figura no se genera.
+    @include breakpoint(laptop) {
+      grid-template-columns: var(--component-hero-columns-wide);
+      column-gap: var(--component-hero-column-gap-wide);
+    }
+
+    // Figura técnica: alzado acotado de la pila de @layer. Es DECORATIVA —
+    // no aporta información que no esté en el texto— y por eso vive en un
+    // pseudoelemento, invisible para lectores de pantalla.
+    &::after {
+      content: "";
+      // El `display` vive AQUÍ dentro y no en el bloque de la media query de
+      // arriba: ambas reglas tienen la misma especificidad (0,1,1) y esta se
+      // emite después, así que ganaba siempre y la figura se quedaba en
+      // `none`. Anidando el breakpoint dentro de la propia regla el orden de
+      // origen deja de importar.
+      display: var(--component-hero-figure-display, none);
+
+      @include breakpoint(laptop) {
+        display: var(--component-hero-figure-display-wide);
+      }
+
+      grid-column: 2;
+      // `1 / -1` NO sirve: la línea -1 es el final de la rejilla EXPLÍCITA, y
+      // aquí solo hay columnas declaradas; las 7 filas son implícitas, así que
+      // -1 resolvía a la línea 1 y la figura ocupaba una sola fila. Se abarca
+      // por span, con un tope holgado: las filas implícitas que sobren quedan
+      // vacías y miden 0.
+      grid-row: 1 / span var(--component-hero-figure-row-span);
+      align-self: center;
+      min-height: var(--component-hero-figure-min-height);
+      background-color: var(--component-hero-figure-color);
+      opacity: var(--component-hero-figure-opacity);
+      mask-image: var(--component-hero-figure);
+      mask-size: var(--component-hero-figure-size);
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-image: var(--component-hero-figure);
+      -webkit-mask-size: var(--component-hero-figure-size);
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      pointer-events: none;
+    }
+
     // All direct children above gradient
     > * {
+      grid-column: 1;
       position: relative;
       z-index: 1;
     }

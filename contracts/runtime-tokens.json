@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T13:29:00.239Z",
+    "generatedAt": "2026-08-31T15:36:51.011Z",
     "source": "css/styles-theme-example-01.css",
     "stats": {
-      "total": 1253,
-      "official": 998,
+      "total": 1322,
+      "official": 1067,
       "legacy": 255
     }
   },
@@ -899,21 +899,21 @@
       "category": "primitive"
     },
     "--primitive-font-size-2xl": {
-      "value": "clamp(2.441rem, 2.33rem + 0.47vw, 2.747rem)",
+      "value": "clamp(1.875rem, 1.63rem + 1.05vw, 2.747rem)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "primitive"
     },
     "--primitive-font-size-3xl": {
-      "value": "clamp(3.052rem, 2.91rem + 0.58vw, 3.433rem)",
+      "value": "clamp(2.125rem, 1.75rem + 1.6vw, 3.433rem)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "primitive"
     },
     "--primitive-font-size-4xl": {
-      "value": "clamp(3.815rem, 3.63rem + 0.73vw, 4.291rem)",
+      "value": "clamp(2.5rem, 1.9rem + 2.57vw, 4.291rem)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3126,6 +3126,34 @@
       ],
       "category": "component"
     },
+    "--component-button-disabled-bg": {
+      "value": "var(--semantic-color-state-disabled)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-disabled-border": {
+      "value": "var(--semantic-color-state-disabled)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-disabled-color": {
+      "value": "var(--semantic-color-text-disabled)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-disabled-filled-color": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-form-field-color": {
       "value": "var(--semantic-color-text-primary)",
       "usedInSelectors": [
@@ -3330,7 +3358,7 @@
       "category": "component"
     },
     "--component-form-field-warning-color": {
-      "value": "var(--semantic-color-state-warning)",
+      "value": "var(--semantic-color-state-warning-text, var(--semantic-color-state-warning))",
       "usedInSelectors": [
         ":root"
       ],
@@ -4162,6 +4190,27 @@
       ],
       "category": "component"
     },
+    "--component-table-min-width": {
+      "value": "44rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-table-scroll-mask": {
+      "value": "var(--semantic-color-bg-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-table-scroll-hint": {
+      "value": "color-mix(in srgb, var(--semantic-color-text-primary) 14%, transparent)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-title-h1": {
       "value": "var(--semantic-font-size-h1)",
       "usedInSelectors": [
@@ -4506,28 +4555,28 @@
       "category": "component"
     },
     "--component-icon-size-sm": {
-      "value": "var(--semantic-space-component-sm)",
+      "value": "1rem",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-icon-size-md": {
-      "value": "calc(6 * var(--semantic-space-component-xs))",
+      "value": "1.5rem",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-icon-size-lg": {
-      "value": "var(--semantic-space-component-lg)",
+      "value": "2rem",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-icon-size-xl": {
-      "value": "calc(10 * var(--semantic-space-component-xs))",
+      "value": "2.5rem",
       "usedInSelectors": [
         ":root"
       ],
@@ -4676,6 +4725,13 @@
       ],
       "category": "component"
     },
+    "--component-feature-card-row-span": {
+      "value": "3",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-theme-card-bg": {
       "value": "var(--semantic-color-bg-primary)",
       "usedInSelectors": [
@@ -4754,7 +4810,7 @@
       "category": "component"
     },
     "--component-theme-card-check-bg": {
-      "value": "var(--semantic-color-bg-primary)",
+      "value": "oklch(1 0 0)",
       "usedInSelectors": [
         ":root"
       ],
@@ -5075,6 +5131,13 @@
       ],
       "category": "component"
     },
+    "--component-theme-card-swatch-sketch-image": {
+      "value": "repeating-linear-gradient(to right, oklch(0.498 0.282 266.24 / 0.16) 0 1px, transparent 1px 12px), repeating-linear-gradient(to bottom, oklch(0.498 0.282 266.24 / 0.16) 0 1px, transparent 1px 12px)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-theme-card-dot-sketch-a": {
       "value": "oklch(0.498 0.282 266.24)",
       "usedInSelectors": [
@@ -5257,6 +5320,27 @@
       ],
       "category": "component"
     },
+    "--component-pill-dark-bg": {
+      "value": "var(--primitive-color-gray-900)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-pill-dark-color": {
+      "value": "oklch(1 0 0)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-pill-dark-border-color": {
+      "value": "var(--primitive-color-gray-900)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-pill-subtle-bg": {
       "value": "transparent",
       "usedInSelectors": [
@@ -5399,6 +5483,90 @@
     },
     "--component-feature-icon-mixin-color": {
       "value": "var(--primitive-color-red-600)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-layout-bg": {
+      "value": "var(--semantic-color-bg-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-layout-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-layout-border": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-atom-bg": {
+      "value": "var(--semantic-color-bg-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-atom-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-atom-border": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-molecule-bg": {
+      "value": "var(--semantic-color-bg-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-molecule-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-molecule-border": {
+      "value": "var(--semantic-color-border-strong)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-organism-bg": {
+      "value": "var(--semantic-color-bg-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-organism-color": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-docs-badge-organism-border": {
+      "value": "var(--semantic-color-bg-inverse)",
       "usedInSelectors": [
         ":root"
       ],
@@ -5607,6 +5775,41 @@
       ],
       "category": "component"
     },
+    "--component-code-syntax-tag": {
+      "value": "var(--semantic-color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-code-syntax-attr": {
+      "value": "var(--semantic-color-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-code-syntax-val": {
+      "value": "var(--semantic-color-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-code-syntax-comment": {
+      "value": "var(--semantic-color-text-disabled)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-code-syntax-fn": {
+      "value": "var(--semantic-color-quaternary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-section-title-font-size": {
       "value": "clamp(1.75rem, 4vw, 2.75rem)",
       "usedInSelectors": [
@@ -5733,6 +5936,90 @@
       ],
       "category": "component"
     },
+    "--component-section-index-content": {
+      "value": "none",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-index-font": {
+      "value": "var(--semantic-font-family-mono)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-index-size": {
+      "value": "var(--semantic-font-size-overline)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-index-color": {
+      "value": "var(--semantic-color-text-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-index-gap": {
+      "value": "0.75rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-tick-width": {
+      "value": "0",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-tick-color": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-tick-height": {
+      "value": "0.5rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-overline-bg": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-overline-border-width": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-overline-padding": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-section-overline-color": {
+      "value": "initial",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-hero-text-align": {
       "value": "center",
       "usedInSelectors": [
@@ -5770,6 +6057,83 @@
     },
     "--component-hero-scroll-hint-align": {
       "value": "center",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-columns": {
+      "value": "1fr",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-column-gap": {
+      "value": "0",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure": {
+      "value": "none",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-color": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-opacity": {
+      "value": "1",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-size": {
+      "value": "contain",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-min-height": {
+      "value": "0",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-row-span": {
+      "value": "20",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-columns-wide": {
+      "value": "var(--component-hero-columns)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-column-gap-wide": {
+      "value": "var(--component-hero-column-gap)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-hero-figure-display-wide": {
+      "value": "none",
       "usedInSelectors": [
         ":root"
       ],
@@ -6036,6 +6400,20 @@
     },
     "--component-cta-shadow-hard-color": {
       "value": "var(--semantic-shadow-hard-color)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-cta-border-block-width": {
+      "value": "0",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-cta-border-color": {
+      "value": "var(--semantic-color-border-strong)",
       "usedInSelectors": [
         ":root"
       ],
@@ -6498,6 +6876,111 @@
     },
     "--component-token-rule-icon-radius": {
       "value": "var(--semantic-border-radius-circle)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-1-bg": {
+      "value": "var(--semantic-color-bg-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-1-color": {
+      "value": "var(--semantic-color-text-tertiary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-1-border": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-2-bg": {
+      "value": "var(--primitive-color-blue-100)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-2-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-2-border": {
+      "value": "var(--primitive-color-blue-200)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-3-bg": {
+      "value": "var(--primitive-color-blue-200)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-3-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-3-border": {
+      "value": "var(--primitive-color-blue-300)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-4-bg": {
+      "value": "var(--primitive-color-blue-400)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-4-color": {
+      "value": "oklch(1 0 0)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-4-border": {
+      "value": "var(--primitive-color-blue-400)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-5-bg": {
+      "value": "var(--primitive-color-blue-600)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-5-color": {
+      "value": "oklch(1 0 0)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-score-5-border": {
+      "value": "var(--primitive-color-blue-600)",
       "usedInSelectors": [
         ":root"
       ],

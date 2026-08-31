@@ -40,6 +40,18 @@
     color: oklch(1 0 0);
   }
 
+  // Un <code> en línea trae su propia pareja fondo+tinta. Al ponerle
+  // .syx-text-white encima solo cambiaba la TINTA: blanco sobre la pastilla
+  // pálida, 1,16:1. Y dejar la pastilla transparente tampoco vale, porque en
+  // oscuro las baldosas de color son claras y el blanco se vuelve a caer.
+  // Una pastilla autosuficiente no se deja recolorear a medias: reafirma su
+  // pareja y se lee en los dos modos, encima de la baldosa que sea.
+  code.syx-text-white,
+  .syx-text-white > code {
+    background: var(--component-code-inline-bg);
+    color: var(--component-code-inline-color);
+  }
+
   .syx-text-gray {
     color: var(--semantic-color-text-secondary);
   }

@@ -18,6 +18,42 @@
 
     // &__header
     &__header {
+      // Numeración de plano: el número de sección sobre una regla que cruza
+      // la columna, con un tope vertical al final. Todo en los
+      // pseudoelementos, que en este organismo estaban libres.
+      position: relative;
+      counter-increment: syx-section;
+
+      &::before {
+        content: var(--component-section-index-content);
+        display: block;
+        font-family: var(--component-section-index-font);
+        font-size: var(--component-section-index-size);
+        letter-spacing: var(--semantic-letter-spacing-wide);
+        color: var(--component-section-index-color);
+        padding-bottom: var(--component-section-index-gap);
+        margin-bottom: var(--component-section-index-gap);
+        border-bottom: var(--component-section-tick-width) solid var(--component-section-tick-color);
+      }
+
+      // Tope de la cota, al extremo derecho de la regla.
+      &::after {
+        content: "";
+        @include absolute($top: 0, $right: 0);
+        width: var(--component-section-tick-width);
+        height: var(--component-section-tick-height);
+        background-color: var(--component-section-tick-color);
+        transform: translateY(calc(var(--component-section-index-size) + var(--component-section-index-gap)));
+      }
+      // El epígrafe vive dentro de la cabecera numerada: si el tema lo pide,
+      // pierde la caja y queda como etiqueta, no como chip.
+      .atom-pill {
+        background-color: var(--component-section-overline-bg);
+        border-width: var(--component-section-overline-border-width);
+        padding: var(--component-section-overline-padding);
+        color: var(--component-section-overline-color);
+      }
+
       text-align: var(--component-section-align);
       margin-bottom: var(--semantic-space-layout-lg);
 
@@ -50,15 +86,45 @@
     // &__grid — auto-fill responsive grid
     &__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
-      gap: var(--semantic-space-layout-sm);
-      max-width: 72rem;
+      // Filas implícitas de altura automática: cada tarjeta ocupa 3 y las
+      // comparte con las de su fila. Es lo que hace posible el subgrid.
+      grid-auto-rows: auto;
+      // Contenedor de consulta: las tarjetas se adaptan al ancho que les toca
+      // dentro de la rejilla, no al del viewport. Da igual si esta rejilla
+      // cae a 3, 2 o 1 columna: la tarjeta sabe cuánto mide de verdad.
+      container-type: inline-size;
+      container-name: syx-card-grid;
+      // Como mucho 3 columnas, y menos cuando no quepan. `auto-fill` con un
+      // mínimo fijo no sabe parar: al ensanchar la columna a 1440 metía una
+      // cuarta y las 6 tarjetas caían en 4+2, con dos huecos. El mínimo lleva
+      // ahora un suelo dinámico —la parte que le tocaría a una de 3— así que
+      // una cuarta nunca cabe, pero sí se baja a 2 y a 1 al estrecharse.
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(min(100%, max(18rem, (100% - 2 * var(--component-grid-gutter)) / 3)), 1fr)
+      );
+      gap: var(--component-grid-gutter);
+      // Sin tope propio. Había un `max-width: 72rem` (1152 px) escrito a mano
+      // dentro de una columna de 1440: un tercer ancho, sin relación con
+      // --layout-max-width, que dejaba 288 px muertos a la derecha de la
+      // sección. La columna la fija la página, no cada rejilla.
       margin-inline: var(--component-section-header-margin-inline);
     }
 
     // &__modes — mode system reference table
+    // Cuando la rejilla se queda estrecha (una sola columna), las tarjetas
+    // aprietan su interior. Va por container query y no por media query:
+    // lo que importa es el espacio que le toca a la tarjeta, no el ancho de
+    // la ventana. Si mañana esta rejilla vive en una barra lateral, funciona
+    // igual sin tocar nada.
+    @container syx-card-grid (max-width: 30rem) {
+      .mol-feature-card {
+        padding: var(--semantic-space-component-lg);
+        gap: var(--semantic-space-component-sm);
+      }
+    }
+
     &__modes {
-      max-width: 72rem;
       margin: var(--semantic-space-layout-lg) auto 0;
       border-top: var(--component-section-divider-width) solid var(--component-section-divider-color);
       padding-top: var(--semantic-space-layout-md);

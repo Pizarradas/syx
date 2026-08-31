@@ -8,6 +8,10 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      // Hueco entre el icono y el texto. La píldora no lo tenía, así que
+      // cualquier .atom-icon dentro se pegaba a la primera letra; sin la caja
+      // (epígrafes del tema blueprint) quedaba encima.
+      gap: var(--component-pill-gap);
       padding: calc(var(--semantic-space-component-xs, 0.25rem) * 2) calc(var(--semantic-space-component-xs, 0.25rem) * 6);
       border-radius: var(--component-pill-border-radius);
       font-size: var(--semantic-font-size-overline);
