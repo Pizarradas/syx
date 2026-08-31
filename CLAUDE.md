@@ -1,6 +1,6 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.17.0).
+You are working with **SYX**, a token-driven, native SCSS design system (v4.18.0).
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
@@ -15,6 +15,8 @@ validates and leaves a branch plus evidence); primitives, semantics, themes, mix
 `scripts/` and the contracts themselves are human-only — analyse and recommend, never
 write. Unmatched paths are human-only. Ask `classify_change` rather than guessing, and
 never edit a rule or a guard to make your own change pass.
+
+**To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.
 
 **Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
 `README.md` → *MCP server*), don't load those files to answer a point question. Use

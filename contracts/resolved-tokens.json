@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T18:11:52.518Z",
+    "generatedAt": "2026-08-31T18:28:37.046Z",
     "generator": "scripts/build-token-snapshot.js",
     "source": "css/styles-theme-*.css",
     "shape": "Tres capas que se apilan. `base` lleva los tokens que valen lo mismo en TODOS los temas; themes[tema].light solo lo propio del tema; themes[tema].dark solo lo que cambia en oscuro. Valor en claro: { ...base, ...light }. En oscuro: { ...base, ...light, ...dark }. Un valor que empiece por \"@asset/\" se resuelve contra el mapa `assets`. El índice inverso valor → tokens no se guarda: se deriva de esto en una pasada. `unresolved` lista los tokens que computan a vacío y por qué.",

@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.18.0] — 2026-08-31
+
+### Added
+
+- **Escáner de desviación.** `npx syx-scan` (o `npm run scan`) lee el HTML y el CSS de una aplicación que consume SYX y señala dónde se ha apartado, comparando contra **la versión de SYX que esa aplicación tiene instalada**, que es la única comparación que significa algo. Cierra la fase P2 y el plan agentic.
+
+  Lo que busca no es «esto no me gusta», es que la aplicación afirme un valor que el sistema ya no dice. El caso puro es `var(--semantic-color-primary, #6d28d9)`: el día que se escribió, el primario era ese morado; hoy es un azul. El fallback es una copia caducada y nadie se entera, porque el navegador solo lo usa el día que el token falta.
+
+- **Sobre nuestra propia página de documentación encuentra 35 desviaciones reales**, todas verificadas contra el CSS compilado antes de darlas por buenas:
+  - 22 fallbacks caducados en la hoja de `docs.html` — nueve de ellos ese `#6d28d9` morado donde el sistema dice `oklch(0.498 0.282 266.24)`.
+  - `--semantic-color-primary-dark`, que no existe: la página pinta `#5b21b6` **siempre**, creyendo que es una excepción.
+  - `.atom-txt` usada 32 veces cuando el CSS solo declara `.atom-txt--primary`. En `why-syx.html`, 43 veces más.
+  - Cuatro iconos que no pintan nada: `--lc-layout`, `--lc-code`, `--lc-corner-down-right`, `--lc-arrow-up`. Existen 51 iconos `lc-*`; la página usa 40, y cuatro de esos no están.
+  - En `why-syx.html`, `.atom-icon--lc-users` cuando el icono se llama `--lc-user`. Una `s`.
+
+  `home.html` sale con cero hallazgos graves, que es el control que hacía falta: si todo estuviera rojo, el escáner no estaría midiendo nada.
+
+- **`scan_for_drift`** como octava herramienta MCP, `syx.scan()` en la API del paquete y `syx-scan` como segundo `bin`. Desde una aplicación instalada, `npx syx-scan "src/**/*.html"` no necesita nada más.
+
+- `scripts/check-escaner.js` — 13 comprobaciones. **Siete de lo que debe encontrar y seis de lo que NO debe**, y las segundas pesan más: un escáner con falsos positivos se ignora entero a la tercera ejecución, y entonces da igual lo bien que detecte. Se ignora el contenido de `<pre>`, `<code>`, `<script>` y `<textarea>` antes de mirar nada, porque una página de documentación enseña justo lo que aquí sería un error.
+
+- Distingue un asidero de JavaScript de una clase muerta: `.syx--theme-syx-sketch` no la declara ningún CSS, pero el script cambia de tema construyendo `syx--theme-${nombre}`. Llamar a eso un error una vez basta para que nadie vuelva a leer el informe.
+
+### Changed
+
+- El escáner no arregla nada **a propósito**. Un escáner que además arregla es un escáner en el que hay que confiar antes de haberlo leído. Lo que encuentra entra por `scripts/propose.js` o por las manos de alguien. Por defecto sale con código 0; `--fallar-si-alta` es para quien quiera romper una integración continua a conciencia.
+
+---
+
 ## [4.17.0] — 2026-08-31
 
 ### Added

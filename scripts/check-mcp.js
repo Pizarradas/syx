@@ -56,10 +56,10 @@ comprobar('initialize responde con protocolo y nombre', async () => {
   if (r.result.serverInfo?.name !== 'syx') throw new Error('serverInfo.name inesperado');
 });
 
-comprobar('tools/list expone las 7 herramientas con esquema', async () => {
+comprobar('tools/list expone las 8 herramientas con esquema', async () => {
   const r = await rpc('tools/list', {});
   const t = r.result.tools;
-  if (t.length !== 7) throw new Error(`esperaba 7 herramientas, hay ${t.length}`);
+  if (t.length !== 8) throw new Error(`esperaba 8 herramientas, hay ${t.length}`);
   for (const x of t) {
     if (!x.description) throw new Error(`${x.name} sin descripción`);
     if (x.inputSchema?.type !== 'object') throw new Error(`${x.name} con esquema mal formado`);
@@ -133,6 +133,12 @@ comprobar('classify_change deduce el fichero de un token y el nivel de un cambio
   if (!t.destino.fichero.endsWith('_pills.scss')) throw new Error(`lo manda a ${t.destino.fichero}`);
   const c = salida(await rpc('tools/call', { name: 'classify_change', arguments: { paths: ['CHANGELOG.md', 'scss/themes/example-01/_theme.scss'] } }));
   if (c.cambio.tier !== 'human') throw new Error(`nivel ${c.cambio.tier}: un cambio no es más libre que su fichero más delicado`);
+});
+
+comprobar('scan_for_drift ve la desviación de docs.html', async () => {
+  const r = salida(await rpc('tools/call', { name: 'scan_for_drift', arguments: { files: ['docs.html'] } }));
+  if (!r.total) throw new Error('no encuentra nada en una página que sí se ha desviado');
+  if (!r.porTipo['fallback-desviado']) throw new Error('no ve los fallbacks caducados');
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {

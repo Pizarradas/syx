@@ -136,6 +136,21 @@ const HERRAMIENTAS = [
     },
     run: (a) => syx.classifyChange(a),
   },
+
+  {
+    name: 'scan_for_drift',
+    description: 'Lee ficheros .html o .css de una aplicación y señala dónde se ha apartado del sistema: fallbacks que ya no son el valor real del token, tokens que no existen, colores a pelo que ya son token, clases y modificadores que no pintan nada. No modifica nada.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        files: { type: 'array', items: { type: 'string' }, description: 'Rutas a ficheros .html o .css' },
+        theme: { type: 'string', description: 'Tema contra el que comparar. Por defecto syx-sketch' },
+        mode: { type: 'string', enum: ['light', 'dark'] },
+      },
+      required: ['files'],
+    },
+    run: (a) => syx.scan(a),
+  },
 ];
 
 // ─── JSON-RPC sobre stdio ────────────────────────────────────────────────────

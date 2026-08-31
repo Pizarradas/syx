@@ -1,6 +1,6 @@
 {
   "name": "syx-design-system",
-  "version": "4.17.0",
+  "version": "4.18.0",
   "description": "A modern, token-driven SCSS design system built on Atomic Design principles. Ships its own contracts and an MCP server, so agents and apps can query it instead of reading it.",
   "main": "index.js",
   "exports": {
@@ -15,7 +15,8 @@
     "./mcp": "./scripts/mcp-server.js"
   },
   "bin": {
-    "syx-mcp": "scripts/mcp-server.js"
+    "syx-mcp": "scripts/mcp-server.js",
+    "syx-scan": "scripts/scan-drift.js"
   },
   "files": [
     "index.js",
@@ -63,7 +64,7 @@
     "validate:tokens": "node scripts/validate-tokens.js",
     "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
-    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run check:mcp && npm run check:package && npm run build",
+    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:package && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
@@ -76,6 +77,8 @@
     "check:consumible": "node scripts/check-consumible.js",
     "check:propuesta": "node scripts/check-propuesta.js",
     "propose": "node scripts/propose.js",
+    "scan": "node scripts/scan-drift.js",
+    "check:escaner": "node scripts/check-escaner.js",
     "prepublishOnly": "npm run check && npm run check:consumible"
   },
   "keywords": [

@@ -26,6 +26,7 @@ const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
 const { revisar, tokensInexistentes, DESCRIPCIONES } = require('./rules');
 const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
+const { escanear } = require('./escaner');
 
 function crearConsulta({ root } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
@@ -232,7 +233,16 @@ function crearConsulta({ root } = {}) {
     return salida;
   }
 
-  return {
+  /**
+   * Escanea ficheros de una aplicación consumidora y devuelve la desviación.
+   * `escaner.js` recibe esta misma capa como argumento: compara contra la
+   * versión de SYX desde la que se llama, que es la única comparación que
+   * significa algo.
+   */
+  const scan = ({ files = [], theme = 'syx-sketch', mode = 'light' } = {}) =>
+    escanear({ files, syx: api, theme, mode });
+
+  const api = {
     root: ROOT,
     get version() {
       return JSON.parse(fs.readFileSync(F.pkg, 'utf8')).version;
@@ -246,7 +256,10 @@ function crearConsulta({ root } = {}) {
     getComponent,
     validateSnippet,
     classifyChange,
+    scan,
   };
+
+  return api;
 }
 
 module.exports = { crearConsulta };

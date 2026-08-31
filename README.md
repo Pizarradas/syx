@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.17.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.18.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -198,6 +198,40 @@ working tree. **It never pushes on its own** — it prints the exact command. `-
 publishes and opens the PR, and has to be asked for.
 
 `npm run check:propuesta` exercises all of it in a throwaway copy of the tree.
+
+---
+
+## Drift scanner (for apps that consume SYX)
+
+A design system only stays a system if what ships still matches it. `syx-scan`
+reads an app's HTML and CSS and reports where it has drifted — comparing against
+**the version of SYX that app has installed**, which is the only comparison that
+means anything.
+
+```bash
+npx syx-scan "src/**/*.html" src/app.css          # from a consuming app
+npm run scan -- docs.html --todo                  # from this repo
+npx syx-scan app/ --json > drift.json             # for CI
+```
+
+| What it finds | Why it matters |
+| ------------- | -------------- |
+| `var(--token, #6d28d9)` where the token is now blue | The fallback is a copy of a value that expired. Nobody notices, because the browser only uses it the day the token is missing |
+| `var(--token-that-never-existed, …)` | The app paints the fallback **always**, believing it's an exception |
+| A colour written by hand that already is a token | Names the semantic token that holds it |
+| `.atom-icon--lc-users` when the icon is `--lc-user` | The modifier paints nothing at all |
+| A `syx-`/`atom-` class the compiled CSS never declares | Same |
+| `!important` and raw `position` in consumer CSS | SYX governs the cascade with `@layer`; an `!important` outside voids it |
+
+It ignores everything inside `<pre>`, `<code>`, `<script>` and `<textarea>` — a
+documentation page teaches exactly what would otherwise be an error, and a scanner
+that shouts at every example is a scanner people turn off. It also tells a dead
+class apart from a JavaScript hook, and says nothing about colours that are the
+app's own.
+
+**It fixes nothing, on purpose.** What it finds goes through `scripts/propose.js`
+or through someone's hands. By default it exits 0; `--fallar-si-alta` makes it
+fail a build.
 
 ---
 

@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.17.0).  
+You are working with **SYX**, a token-driven, native SCSS design system (v4.18.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 Before doing anything else, read these files in order:
@@ -21,6 +21,7 @@ that otherwise force you to load the files above:
 | Grepping the SCSS for a component's modifiers | `get_component` / `list_components` — verified against the compiled CSS |
 | Writing SCSS and validating afterwards | `validate_snippet` — R01–R04 **before** writing, plus non-existent tokens |
 | Guessing whether you may touch a file, or where a new token goes | `classify_change` — the trust tier, and the destination file deduced from the token's family |
+| Eyeballing whether an app still matches the system | `scan_for_drift` — expired fallbacks, phantom classes, hand-written values that are already tokens |
 
 The same rules run in both places, so a snippet the server approves is a snippet
 `npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
