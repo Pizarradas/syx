@@ -306,7 +306,7 @@ Includes: display, flexbox, spacing, text alignment, media, accessibility.
 3. ✅ Accessibility: `.syx-sr-only`, `.syx-skip-link`, `.syx-motion-safe` added to `_a11y.scss`
 4. ✅ `color-mix()` for button hover tints
 5. ✅ Dark mode: card, borders and utilities respect the theme
-6. ✅ **Core bundle** (`styles-core.scss`): production-ready, no documentation overhead. **138 KB** without PurgeCSS, **~110 KB** with PurgeCSS.
+6. ⛔️ **Core bundle** (`styles-core.scss`): retired in v4.14.0. Its source never existed in the repo, and five of the six components it was meant to exclude are gone. The per-context bundles do the same job better and actually ship: `bundle-app` is 38 KB gzipped against the full theme's 52 KB.
 7. ✅ **`_template` neutral theme (Section 3)**: buttons and forms have minimal visual identity with no SYX branding. Ideal base for new projects.
 8. ✅ **Sass deprecation warnings** fixed in `_directional.scss`, `_font.scss`, `_triangle.scss`, `_theme-config.scss`.
 

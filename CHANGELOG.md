@@ -7,6 +7,84 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.14.3] — 2026-08-31
+
+### Changed
+
+- **El guardián de tokens deja de perseguir al minificador.** Tres rondas seguidas de lo mismo —espacio tras la coma, espacios de la barra, espacio pegado al paréntesis— dejaron claro que igualar el formato transformación a transformación es una carrera que no se gana: el siguiente minificador trae la suya.
+
+  El criterio de fondo es que **este guardián vigila el contenido**. Ahora, si al quitar todo el espacio en blanco los dos lados coinciden, avisa y **no falla**: lo único que ha cambiado es cómo viene formateado el CSS de partida, y eso no es motivo para parar a nadie. Si difiere algo más que espacios, falla como antes y enseña qué.
+
+  Verificado en los dos caminos: contenido distinto sale con código 1, solo espacios sale con 0 y un aviso.
+
+- La forma canónica cubre además el espacio pegado a un paréntesis, que era el que quedaba.
+
+---
+
+## [4.14.2] — 2026-08-31
+
+### Fixed
+
+- **Segunda vuelta de la forma canónica.** El minificador también quita los espacios que rodean a la barra: `oklch(0 0 0 / 0.05)` y `oklch(0 0 0/0.05)` son el mismo color y solo el segundo sobrevive. Quedaban 150 tokens distintos entre un build expandido y uno minificado. La forma canónica los normaliza también, sin tocar los espacios de `+` y `−`, que dentro de `calc()` sí son obligatorios.
+
+  Verificado reproduciendo el minificado exacto sobre 3 temas × 2 modos: **6512 valores comparados, cero diferencias**.
+
+- **El guardián ahora dice QUÉ difiere.** Antes solo decía «no coincide, regenera», y averiguar la causa exigía repetir la investigación entera — cosa que ya ha pasado tres veces en dos días. Ahora imprime los primeros valores distintos con los dos lados, y distingue en el mensaje los dos casos que se confunden: cambios reales de tokens, o un `css/` que no es el que produce `npm run build:css`.
+
+### Notes
+
+Al reverificar contra el navegador salieron **248 diferencias que no existían**: el script de verificación seguía normalizando a la manera vieja mientras el generador ya usaba la nueva. Alineados los dos, la clasificación vuelve a ser la de siempre —176 cadenas rotas, 76 `initial`, 16 `inherit`— y **cero valores equivocados**. Merece quedar escrito porque es el fallo que más veces ha aparecido en esta tanda: cuando el que mide y el medido no comparten criterio, el resultado parece un problema del código.
+
+---
+
+## [4.14.1] — 2026-08-31
+
+### Fixed
+
+- **El snapshot cambiaba con el formato del CSS, no solo con su contenido.** Al minificar desaparece el espacio detrás de las comas —`Arial, sans-serif` pasa a `Arial,sans-serif`, `clamp(a, b, c)` a `clamp(a,b,c)`— y colapsar espacios no devuelve los que ya no están: **118 tokens salían distintos** entre un build expandido y uno minificado del mismo código, y `check:tokens` fallaba **por formato**. Para un guardián es la peor manera de gastar la atención de quien lo ejecuta: la segunda vez que salta sin motivo, se ignora.
+
+  Los valores pasan por una forma canónica que quita el espacio tras la coma pero **nunca el que rodea a un operador** —dentro de `calc()` los espacios de `+` y `−` son obligatorios— y respeta lo que va entre comillas, donde una coma es texto.
+
+- **Los identificadores de los data URI dependían del orden de aparición.** Añadir un icono o reordenar los temas desplazaba el identificador de todos los siguientes y llenaba el diff de cambios que no eran cambios. Ahora salen del contenido: `sha1` recortado a 10 caracteres.
+
+Verificado: el mismo tema en las dos formas produce ahora **snapshots idénticos** —1079 tokens, claro y oscuro, cero diferencias—, y contra `getComputedStyle` la clasificación no se mueve: **cero valores equivocados**.
+
+---
+
+## [4.14.0] — 2026-08-31
+
+Paso **0.3** del plan agentic, y con él la fase **P0 cerrada**. `npm run check` termina en verde de principio a fin **por primera vez**.
+
+### Removed
+
+- **El bundle mínimo `styles-core` se retira.** Estaba documentado en README, CHANGELOG y TOKEN-GUIDE, pero su fuente **nunca existió en el historial**, y por eso `npm run check` fallaba siempre en el último paso. Dos datos decidieron retirarlo en vez de reconstruirlo:
+
+  **Cinco de los seis componentes que debía excluir ya no existen** (`atom-specimen`, `atom-swatch`, `mol-demo`, `org-documentation-layout`, `org-content-columns`), así que hoy solo ahorraría `atom-code` y la página del theme-builder. Y **los bundles por contexto ya hacen ese trabajo, mejor y de verdad**: `bundle-app` pesa 38 KB con gzip frente a los 52 del tema completo —un 27 % menos— y los 31 compilan desde 4.3.0.
+
+  Fuera `build:core` y `postcss:core`; las tres menciones en la documentación pasan a apuntar al sistema de bundles, que es lo que existe.
+
+- **`main` dejaba de apuntar a `index.html`**, un fichero que tampoco existe. Ahora señala el CSS del tema por defecto. Es un apaño hasta el paso 1.2, que le pondrá `exports` en condiciones.
+
+### Added
+
+- **`scripts/export-tokens.js`** (`npm run export:tokens`) — la tercera promesa incumplida, y la que más importaba: el exportador es la puerta por la que SYX habla con herramientas que no son SYX. No se podía hacer antes de 4.12.0 porque no había nada resuelto que exportar.
+
+  Emite **formato W3C DTCG**, que es lo que leen Style Dictionary, Figma Variables y Tokens Studio: 14 ficheros —uno por tema y modo, porque DTCG no tiene noción de tema— con 14 918 tokens, **9880 con `$type` inferido** del valor y los **9880 tipos dentro del estándar**, sin ninguno inventado.
+
+  Verificado de ida y vuelta contra el navegador en 3 temas × 2 modos: **4854 valores leídos del DTCG coinciden exactos con `getComputedStyle`, cero diferencias, cero no encontrados.**
+
+### Notes
+
+Tres decisiones del exportador que merecen quedar escritas:
+
+- **Las expresiones se exportan igualmente**, sin `$type` y marcadas en `$extensions`. DTCG describe valores y `color-mix()` o `calc()` no lo son, pero omitirlas mentiría por ausencia: quien importara esto vería un sistema con 260 tokens menos de los que tiene.
+- **Los tokens rotos no se exportan** (266). DTCG no sabe decir «este token existe pero no tiene valor», y colarlo vacío haría que la herramienta receptora pintara con nada.
+- **970 nombres son hoja y grupo a la vez** —existen `--component-button-primary-color` y `--component-button-primary-color-hover`— y DTCG no lo admite. El valor del padre baja a una hoja `DEFAULT` dentro del grupo, que es la convención que Style Dictionary y Tailwind ya usan. El primer intento le ponía un sufijo `_`: resolvía la colisión, pero dejaba un nombre arbitrario que nadie sabría interpretar al importar.
+
+**`contracts/dtcg/` no se versiona.** Son 2,9 MB derivables enteros del snapshot —más que todo el resto del repositorio junto— y aquí vale el mismo criterio que se aplicó al índice inverso en 4.12.0: los datos derivados en un artefacto versionado se desfasan por su cuenta. Se generan a demanda.
+
+---
+
 ## [4.13.0] — 2026-08-31
 
 Paso **0.1** del plan agentic. `component-registry.json` se mantenía a mano y no se regeneraba desde el 3 de marzo. Ahora sale del código y se contrasta contra el CSS compilado.

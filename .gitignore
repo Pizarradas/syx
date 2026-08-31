@@ -14,3 +14,10 @@ css/molecules/
 css/organisms/
 css/themes/
 css/utilities/
+
+# La exportación DTCG son 2,9 MB derivables enteros de
+# contracts/resolved-tokens.json. Se genera a demanda con
+# `npm run export:tokens` y no se versiona: los datos derivados en un artefacto
+# versionado se desfasan por su cuenta, y aquí además pesan más que todo el
+# resto del repositorio junto.
+contracts/dtcg/

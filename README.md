@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.13.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.14.3-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -54,7 +54,8 @@ Open `index.html` in your browser to see the full live demo.
 ```bash
 npm install
 npm run build        # compiles all 7 themes
-npm run build:core   # compiles minimal production bundle (styles-core.css)
+npm run build:tokens # regenerates contracts/resolved-tokens.json
+npm run export:tokens # exports the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
 npm run build:prod   # compiles + runs PurgeCSS on all themes
 npm run watch        # watches theme-01 for changes
 npm run watch:all    # watches all themes
@@ -91,7 +92,7 @@ syx/
 │   ├── utilities/               # Display, spacing, text utilities
 │   ├── pages/                   # Page-specific styles
 │   │
-│   ├── styles-core.scss         # Minimal production bundle entry point
+│   ├── styles-theme-*.scss      # One entry point per theme
 │   └── themes/                  # Theme definitions
 │       ├── _shared/             # Shared core + 4 bundle definitions
 │       ├── _template/           # Template for new themes
@@ -182,7 +183,7 @@ Utilities always win over components. No `!important` needed.
 | example-04  | Forest / Earth  | app, docs, marketing, blog           |
 | example-05  | Midnight / Gold | app, docs, marketing, blog           |
 | example-06  | Cyber (OKLCH)   | app, docs, marketing, blog           |
-| `_template` | Neutral (core)  | `styles-core.css` — production-ready |
+| `_template` | Neutral (core)  | base for new themes, not shipped     |
 
 ---
 

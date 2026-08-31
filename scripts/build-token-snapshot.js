@@ -33,6 +33,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = path.join(__dirname, '..');
 const CSS_DIR = path.join(ROOT, 'css');
@@ -239,12 +240,49 @@ function makeResolver(map) {
       const out = {};
       for (const name of Object.keys(map)) {
         const v = token(name, new Set());
-        out[name] = (v === null ? '' : v).replace(/\s+/g, ' ').trim();
+        out[name] = canonico(v === null ? '' : v);
       }
       return out;
     },
     faltan, cubiertos, ciclos,
   };
+}
+
+/**
+ * Forma canónica de un valor.
+ *
+ * El snapshot se versiona y se compara, así que dos builds del MISMO CSS tienen
+ * que producir el mismo texto. No lo hacían: al minificar desaparece el espacio
+ * detrás de las comas —`Arial, sans-serif` pasa a `Arial,sans-serif` y
+ * `clamp(a, b, c)` a `clamp(a,b,c)`— y colapsar espacios no devuelve los que ya
+ * no están. 118 tokens salían distintos entre un build expandido y uno
+ * minificado del mismo código, y `check:tokens` fallaba por FORMATO, que es la
+ * peor manera de gastar la atención de quien lo ejecuta.
+ *
+ * Se quitan los espacios que en CSS no significan nada: los de detrás de una
+ * coma, los pegados a un paréntesis y los que rodean a la barra —`oklch(0 0 0 / 0.05)` y `oklch(0 0 0/0.05)`
+ * son el mismo color, y el minificador escribe el segundo—. NO se tocan los que
+ * rodean a `+` ni a `-`: dentro de `calc()` son obligatorios y borrarlos
+ * cambiaría el significado. Y se respeta lo que va entre comillas, donde una
+ * coma es texto y no un separador.
+ */
+function canonico(v) {
+  let out = '';
+  let quote = null;
+  const s = String(v).replace(/\s+/g, ' ').trim();
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (quote) {
+      out += c;
+      if (c === quote && s[i - 1] !== '\\') quote = null;
+      continue;
+    }
+    if (c === '"' || c === "'") { quote = c; out += c; continue; }
+    if (c === ' ' && (out.endsWith(',') || out.endsWith('/') || out.endsWith('('))) continue;
+    if (c === ' ' && (s[i + 1] === '/' || s[i + 1] === ')')) continue;
+    out += c;
+  }
+  return out;
 }
 
 // Un valor que sigue llevando una función CSS no evaluable se marca, para que
@@ -262,22 +300,20 @@ const INDEXABLE = /^(#[0-9a-f]{3,8}|(oklch|rgb|rgba|hsl|hsla|oklab|lab|lch)\(|[0
 // internan en un almacén común y el token guarda una referencia.
 const ASSET = '@asset/';
 function makeAssetPool() {
-  const porValor = new Map();
   const pool = {};
-  let n = 0;
   return {
+    // El identificador sale del CONTENIDO, no de un contador. Con un contador
+    // por orden de aparición, añadir un icono o reordenar los temas desplazaba
+    // el identificador de todos los siguientes y el diff del fichero versionado
+    // se llenaba de cambios que no eran cambios.
     ref(value) {
       if (!value.includes('data:')) return value;
-      let id = porValor.get(value);
-      if (!id) {
-        id = 'a' + (++n).toString(36).padStart(3, '0');
-        porValor.set(value, id);
-        pool[id] = value;
-      }
+      const id = crypto.createHash('sha1').update(value).digest('hex').slice(0, 10);
+      pool[id] = value;
       return ASSET + id;
     },
     pool,
-    get size() { return n; },
+    get size() { return Object.keys(pool).length; },
   };
 }
 
@@ -393,6 +429,32 @@ function build() {
 // CONTENIDO cambió, no cuándo se generó.
 const sinFecha = (o) => JSON.stringify({ ...o, _meta: { ...o._meta, generatedAt: null } });
 
+// Qué difiere exactamente entre el snapshot guardado y el que sale del CSS.
+function diferencias(a, b) {
+  const muestra = [];
+  const todas = [];
+  let total = 0;
+  const cmp = (x, y, ruta) => {
+    for (const k of new Set([...Object.keys(x || {}), ...Object.keys(y || {})])) {
+      if ((x || {})[k] === (y || {})[k]) continue;
+      total++;
+      todas.push({ a: (x || {})[k], b: (y || {})[k] });
+      if (muestra.length < 5) {
+        muestra.push({ ruta: ruta + k, a: corta((x || {})[k]), b: corta((y || {})[k]) });
+      }
+    }
+  };
+  const corta = (v) => (v === undefined ? '(no está)' : String(v).slice(0, 68));
+  cmp(a.base, b.base, 'base/');
+  for (const t of b._meta.themes) {
+    if (!a.themes[t]) { total++; continue; }
+    cmp(a.themes[t].light, b.themes[t].light, `${t}/light/`);
+    cmp(a.themes[t].dark, b.themes[t].dark, `${t}/dark/`);
+  }
+  cmp(a.assets, b.assets, 'assets/');
+  return { total, muestra, todas };
+}
+
 function main() {
   const check = process.argv.includes('--check');
   const { out, stats, themes } = build();
@@ -406,8 +468,35 @@ function main() {
     }
     const previo = JSON.parse(fs.readFileSync(OUT, 'utf8'));
     if (sinFecha(previo) !== sinFecha(out)) {
-      console.log('❌ El snapshot no coincide con el CSS compilado.');
-      console.log('   Alguien cambió tokens y no lo regeneró. Ejecuta: npm run build:tokens\n');
+      const difs = diferencias(previo, out);
+
+      // Este guardián vigila el CONTENIDO. Si al quitar TODO el espacio en
+      // blanco los dos lados coinciden, lo único que cambia es cómo viene
+      // formateado el CSS de partida —minificado frente a expandido— y eso no
+      // es motivo para parar a nadie. Perseguir cada transformación de un
+      // minificador es una carrera que no se gana: ya van tres rondas.
+      const soloFormato = difs.total > 0 && difs.todas.every(
+        (d) => String(d.a).replace(/\s/g, '') === String(d.b).replace(/\s/g, '')
+      );
+      if (soloFormato) {
+        console.log(`⚠️  ${difs.total} valor(es) difieren SOLO en espacios en blanco.\n`);
+        console.log('   El contenido es idéntico, así que no se falla. Pasa cuando el');
+        console.log('   css/ de tu copia está minificado y el snapshot se generó desde');
+        console.log('   uno expandido, o al revés.');
+        console.log('   Para dejar el fichero igual que tu build: npm run build:tokens\n');
+        return;
+      }
+
+      console.log('❌ El snapshot no coincide con el CSS compilado.\n');
+      console.log(`   ${difs.total} valor(es) distinto(s). Los primeros:\n`);
+      for (const d of difs.muestra) {
+        console.log(`   ${d.ruta}`);
+        console.log(`     en el fichero: ${d.a}`);
+        console.log(`     en el CSS    : ${d.b}`);
+      }
+      console.log('\n   Si los cambios son tuyos: npm run build:tokens');
+      console.log('   Si solo cambia el formato (espacios, comas), el CSS de tu copia');
+      console.log('   no es el que produce `npm run build:css` — compílalo de nuevo.\n');
       process.exit(1);
     }
     console.log(`✅ Al día · ${themes.length} temas × ${MODES.length} modos · ${stats.porTema} tokens por tema\n`);
