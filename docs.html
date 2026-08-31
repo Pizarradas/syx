@@ -499,6 +499,20 @@
       </div>
 
       <div class="docs-sidebar__group">
+        <span class="docs-sidebar__group-label">Agentic</span>
+        <a href="#agentic" class="docs-sidebar__link" data-nav-section="agentic">
+          <span class="atom-icon atom-icon--lc-bot atom-icon--sm" aria-hidden="true"></span>
+          Agentic Design System
+        </a>
+        <div class="docs-sidebar__sub">
+          <a href="#agentic-ask" class="docs-sidebar__link" data-nav-section="agentic-ask">1 Ask</a>
+          <a href="#agentic-write" class="docs-sidebar__link" data-nav-section="agentic-write">2 Write</a>
+          <a href="#agentic-detect" class="docs-sidebar__link" data-nav-section="agentic-detect">3 Detect</a>
+          <a href="#agentic-guards" class="docs-sidebar__link" data-nav-section="agentic-guards">4 What runs on its own</a>
+        </div>
+      </div>
+
+      <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Reference</span>
         <a href="#utilities" class="docs-sidebar__link" data-nav-section="utilities">
           <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
@@ -548,7 +562,7 @@
         <section class="docs-hero" aria-labelledby="docs-hero-title">
           <span class="docs-hero__eyebrow">
             <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
-            Component Gallery v4.20.0
+            Component Gallery v4.21.0
           </span>
           <h1 class="atom-title atom-title--h1 docs-hero__title" id="docs-hero-title">SYX Design System</h1>
           <p class="atom-txt atom-txt--primary docs-hero__lead">Ordered by <strong>layer hierarchy</strong>:
@@ -1331,6 +1345,364 @@ safelist: [/^atom-btn--/, /^is-/];
           </section>
 
         </section><!-- /#guide -->
+
+        <!-- ══════════════════════════════════════════
+       AGENTIC DESIGN SYSTEM
+  ══════════════════════════════════════════ -->
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--guide">
+            <span class="atom-icon atom-icon--lc-bot atom-icon--sm" aria-hidden="true"></span>
+            Agentic
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">contracts/ · scripts/</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="agentic" aria-label="Agentic Design System">Agentic Design
+          System</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4">A design system is agentic when an agent can <strong>ask</strong> it
+          instead of reading it, <strong>write</strong> to it through a path that says no, and let it
+          <strong>detect</strong> where a shipped app has drifted away. Those three verbs are the whole of this
+          section.</p>
+
+        <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-5">
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Why it isn't just "AI-friendly docs"</p>
+          <p class="atom-txt syx-mb-0">Documentation an agent has to <em>read</em> is documentation it has to fit in
+            context, resolve in its head, and trust. Answering &ldquo;what colour is the primary button in Blueprint
+            dark?&rdquo; used to mean loading 274&nbsp;KB of <code>tokens.json</code> plus 317&nbsp;KB of
+            <code>token-contract.json</code> and walking the cascade by hand. That is where invented token names come
+            from. Here it is one call, and the answer is the value the browser would paint.</p>
+        </div>
+
+        <!-- ─── 1 · ASK ─── -->
+        <section class="syx-mb-5" id="agentic-ask">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            1 &mdash; Ask: the MCP server and the Node API
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Two front doors, one implementation
+            (<code>scripts/lib/consulta.js</code>). An agent speaking MCP and an application calling
+            <code>require()</code> must get the same answer to the same question &mdash; two copies of a criterion
+            always end up disagreeing.</p>
+
+          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Register it in any MCP client</p>
+              <pre class="atom-code"><code>{
+  "mcpServers": {
+    "syx": { "command": "npx", "args": ["-y", "syx-mcp"] }
+  }
+}</code></pre>
+            </div>
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Or from your own code</p>
+              <pre class="atom-code"><code>const syx = require('syx-design-system');
+
+syx.getToken({
+  token: '--component-button-primary-filled-bg',
+  theme: 'syx-sketch', mode: 'dark'
+}).value;   // → oklch(0.740 0.133 267)</code></pre>
+            </div>
+          </div>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">The eight tools</p>
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:620px">
+              <thead>
+                <tr>
+                  <th>Tool</th>
+                  <th>Answers</th>
+                  <th>Instead of</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>list_themes</code></td>
+                  <td>Which themes and modes exist</td>
+                  <td>Guessing a theme name</td>
+                </tr>
+                <tr>
+                  <td><code>get_token</code></td>
+                  <td>A token's real value in a theme and mode, with the alias chain that produces it</td>
+                  <td>Resolving the cascade by hand</td>
+                </tr>
+                <tr>
+                  <td><code>find_token_by_value</code></td>
+                  <td>Which token holds this colour or measure</td>
+                  <td>Hardcoding a value found in the CSS</td>
+                </tr>
+                <tr>
+                  <td><code>list_components</code></td>
+                  <td>The inventory, with layer and base classes</td>
+                  <td>Grepping the SCSS tree</td>
+                </tr>
+                <tr>
+                  <td><code>get_component</code></td>
+                  <td>Classes, modifiers, elements, states and tokens of one component</td>
+                  <td>Reading four files and hoping</td>
+                </tr>
+                <tr>
+                  <td><code>validate_snippet</code></td>
+                  <td>R01&ndash;R04 over SCSS <strong>before</strong> it is written, plus non-existent tokens</td>
+                  <td>Writing first and validating later</td>
+                </tr>
+                <tr>
+                  <td><code>classify_change</code></td>
+                  <td>The trust tier of a change, and where a new token belongs</td>
+                  <td>Assuming you may touch a file</td>
+                </tr>
+                <tr>
+                  <td><code>scan_for_drift</code></td>
+                  <td>Where an app has drifted from the system</td>
+                  <td>Reading its CSS looking for smells</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="atom-txt syx-text-gray syx-mb-0">No dependencies: plain JSON-RPC over stdio. Everything it returns
+            is arbitrated against the compiled CSS, so what comes out of it exists.</p>
+        </section>
+
+        <!-- ─── 2 · WRITE ─── -->
+        <section class="syx-mb-5" id="agentic-write">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            2 &mdash; Write: graded trust
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Reading is safe; writing is not. What an agent may change is
+            graded by <strong>how far the change travels</strong> &mdash; the boundary follows the direction of the
+            cascade this system already declares. The tiers live in <code>contracts/trust.json</code>, as data, so
+            they can be read without running anything.</p>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:640px">
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>What</th>
+                  <th>Why there</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="atom-pill atom-pill--secondary">Automatic</span></td>
+                  <td>Docs, changelog, generated artifacts</td>
+                  <td>A mistake is visible in the diff and reaches nothing compiled</td>
+                </tr>
+                <tr>
+                  <td><span class="atom-pill atom-pill--primary">Via proposal</span></td>
+                  <td>Component tokens, components, utilities, page styles</td>
+                  <td>Scoped to one component &mdash; reviewable at a glance, but it ships</td>
+                </tr>
+                <tr>
+                  <td><span class="atom-pill">Human only</span></td>
+                  <td>Primitives, semantics, themes, mixins, <code>scripts/</code>, <code>rules.json</code>,
+                    <code>trust.json</code></td>
+                  <td>One change lands in all 7 themes at once, or changes the criteria everything else is judged by
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+            <ul class="atom-list syx-mb-0">
+              <li><strong>Anything unmatched falls to human-only.</strong> The default errs toward the side that only
+                costs a wait.</li>
+              <li><strong>The rules and the guards are human-only on purpose.</strong> An agent that could rewrite the
+                rule it is judged by, or the guard that judges it, would not have permissions &mdash; it would have a
+                suggestion.</li>
+            </ul>
+          </div>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">The proposal path</p>
+          <pre class="atom-code syx-mb-3"><code># Where does this change sit?
+npm run propose classify scss/atoms/_btn.scss CHANGELOG.md
+
+# Propose a component token — nobody says which file it goes in
+npm run propose token -- --name --component-feature-card-glow \
+  --value "var(--semantic-shadow-md)" --why "Optional lift for the featured card"</code></pre>
+
+          <p class="atom-txt syx-text-gray syx-mb-3">The destination is <strong>deduced from the token's family</strong>
+            &mdash; which file already declares <code>--component-feature-card-*</code> &mdash; never from a lookup
+            table that would quietly go stale. Then the tool writes it, recompiles the CSS, runs the validator
+            <strong>over the result</strong>, and only if that is green does it create a branch, a commit and an
+            evidence file in <code>contracts/propuestas/</code>. If it is not green, there is no branch. Review starts
+            with the proof in front of you instead of a claim that it works. It never pushes: it prints the command.</p>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">What it refuses, and says why</p>
+          <div class="syx-mb-0" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:560px">
+              <thead>
+                <tr>
+                  <th>You ask for</th>
+                  <th>It answers</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>A primitive or semantic token</td>
+                  <td>Human only &mdash; and offers to prepare the analysis instead</td>
+                </tr>
+                <tr>
+                  <td>A literal colour as the value</td>
+                  <td>Names the semantic token that already holds that colour</td>
+                </tr>
+                <tr>
+                  <td>A value pointing at <code>--primitive-*</code></td>
+                  <td>That skips the semantic layer, one floor down</td>
+                </tr>
+                <tr>
+                  <td>A token that already exists</td>
+                  <td>Changing one isn't proposing a new one</td>
+                </tr>
+                <tr>
+                  <td>A family nobody declares</td>
+                  <td>Offers the declared families that look like it &mdash; usually the name was wrong</td>
+                </tr>
+                <tr>
+                  <td>Anything, with a dirty working tree</td>
+                  <td>A proposal has to be only the proposal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── 3 · DETECT ─── -->
+        <section class="syx-mb-5" id="agentic-detect">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            3 &mdash; Detect: drift in a consuming app
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">A design system only stays a system if what ships still matches
+            it. <code>syx-scan</code> reads an app's HTML and CSS and reports where it has drifted &mdash; comparing
+            against <strong>the version of SYX that app has installed</strong>, which is the only comparison that means
+            anything.</p>
+
+          <pre class="atom-code syx-mb-4"><code>npx syx-scan "src/**/*.html" src/app.css   # from a consuming app
+npm run scan -- docs.html --todo           # from this repo
+npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:640px">
+              <thead>
+                <tr>
+                  <th>What it finds</th>
+                  <th>Why it matters</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>var(--token, #6d28d9)</code> where the token is now blue</td>
+                  <td>The fallback is a copy of a value that expired. Nobody notices, because the browser only uses it
+                    the day the token is missing</td>
+                </tr>
+                <tr>
+                  <td><code>var(--never-existed, …)</code></td>
+                  <td>The app paints the fallback <strong>always</strong>, believing it's an exception</td>
+                </tr>
+                <tr>
+                  <td>A colour written by hand that already is a token</td>
+                  <td>Names the semantic token that holds it</td>
+                </tr>
+                <tr>
+                  <td><code>.atom-icon--lc-users</code> when the icon is <code>--lc-user</code></td>
+                  <td>The modifier paints nothing at all &mdash; one letter, invisible in review</td>
+                </tr>
+                <tr>
+                  <td><code>!important</code> and raw <code>position</code> in consumer CSS</td>
+                  <td>SYX governs the cascade with <code>@layer</code>; an <code>!important</code> outside voids it</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Two things it deliberately does not do</p>
+            <ul class="atom-list syx-mb-0">
+              <li><strong>It never shouts at an example.</strong> Everything inside <code>&lt;pre&gt;</code>,
+                <code>&lt;code&gt;</code>, <code>&lt;script&gt;</code> and <code>&lt;textarea&gt;</code> is ignored
+                before it looks at anything: a documentation page teaches exactly what would otherwise be an error, and
+                a scanner that cries at every sample is a scanner people switch off. It also tells a dead class apart
+                from a JavaScript hook, and from a class the CSS reaches through
+                <code>[class*=&hellip;]</code> rather than by name.</li>
+              <li><strong>It fixes nothing.</strong> A scanner that also repairs is a scanner you must trust before
+                you've read it. What it finds goes through the proposal path above, or through someone's hands.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ─── 4 · GUARDS ─── -->
+        <section class="syx-mb-5" id="agentic-guards">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            4 &mdash; What runs on its own
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">None of the above is worth much if it only runs when somebody
+            remembers. <code>npm run check</code> chains nine steps, and GitHub Actions runs them on every push across
+            Node 18, 20 and 22 &mdash; with the heavier ones (packing and installing the package for real, exercising
+            the proposal path) reserved for pull requests, so nobody is tempted to switch it off.</p>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:600px">
+              <thead>
+                <tr>
+                  <th>Guard</th>
+                  <th>Refuses to let through</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>check:limpio</code></td>
+                  <td>A committed CSS that isn't what compiling produces &mdash; half the system measures itself
+                    against that file</td>
+                </tr>
+                <tr>
+                  <td><code>validate</code></td>
+                  <td>R01&ndash;R07: primitives in components, <code>!important</code>, raw
+                    <code>transition</code>/<code>position</code></td>
+                </tr>
+                <tr>
+                  <td><code>check:themes</code></td>
+                  <td>A theme whose dark mode doesn't mirror its light mode</td>
+                </tr>
+                <tr>
+                  <td><code>check:version</code></td>
+                  <td>Ten version citations drifting apart &mdash; historical ones stay put on purpose</td>
+                </tr>
+                <tr>
+                  <td><code>check:tokens</code></td>
+                  <td>A resolved-token snapshot that no longer matches the CSS</td>
+                </tr>
+                <tr>
+                  <td><code>check:registry</code></td>
+                  <td>A component inventory that no longer matches the code &mdash; and it says what differs</td>
+                </tr>
+                <tr>
+                  <td><code>check:mcp</code></td>
+                  <td>A server that answers wrongly, or not at all, over the real protocol</td>
+                </tr>
+                <tr>
+                  <td><code>check:escaner</code></td>
+                  <td>A scanner with false positives &mdash; six of its fifteen checks are things it must
+                    <strong>not</strong> report</td>
+                </tr>
+                <tr>
+                  <td><code>check:package</code></td>
+                  <td>An <code>exports</code> path, a binary or a font the published package wouldn't actually
+                    deliver</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">The rule underneath all of it</p>
+            <p class="atom-txt syx-mb-0"><strong>One criterion, several consumers.</strong> The cascade resolver, the
+              contract rules and the queries live once, in <code>scripts/lib/</code>, and are shared by the validator,
+              the MCP server, the installed package, the proposal path and the scanner. Two copies of the same
+              criterion always end up saying different things &mdash; and then the system tells the agent one thing and
+              the application another. That failure repeated more than any other while this was being built, which is
+              why it is the one rule written down.</p>
+          </div>
+        </section>
 
         <!-- ══════════════════════════════════════════
        LAYER 1 — UTILITIES  @layer syx.utilities
@@ -2266,7 +2638,7 @@ safelist: [/^atom-btn--/, /^is-/];
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.20.0<br>
+        <strong>SYX Design System</strong> · v4.21.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 

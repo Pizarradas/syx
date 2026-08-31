@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.21.0] — 2026-08-31
+
+### Added
+
+- **Apartado «Agentic Design System» en `docs.html`**, con su grupo propio en la barra lateral y cuatro subsecciones. Todo lo construido en las siete versiones anteriores vivía en el README y en este changelog, es decir, en dos sitios donde nadie entra a preguntar cómo se usa algo.
+
+  Está ordenado por los tres verbos que definen el concepto, no por los ficheros que lo implementan: **preguntar** (el servidor MCP y la API de Node, con la tabla de las ocho herramientas y qué evita cada una), **escribir** (los tres niveles de confianza, la vía de propuesta y la tabla de lo que se niega y por qué), **detectar** (el escáner, qué encuentra y las dos cosas que deliberadamente no hace) y **lo que corre solo** (los nueve guardianes y qué impide cada uno).
+
+- Cierra con la regla que sostiene el resto: **un solo criterio, varios consumidores**. Es el fallo que más se repitió construyendo esto, y por eso es la única regla escrita en la página.
+
+### Verified
+
+- El apartado **no añade desviación**: `docs.html` sigue con los mismos cuatro hallazgos de gravedad baja que ya tenía. Ninguna clase inventada, ningún valor a pelo, ningún token que no exista — comprobado con el propio escáner, que es lo mínimo exigible a la página que lo documenta.
+- Las 39 clases usadas existen en el CSS compilado, comprobadas antes de escribir el marcado.
+- Renderizado en claro y oscuro, a 390, 768 y 1440 px: sin desbordamiento horizontal. Las tablas y los bloques de código hacen scroll dentro de su contenedor, como los del resto de la página.
+
+---
+
 ## [4.20.0] — 2026-08-31
 
 ### Fixed
