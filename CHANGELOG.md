@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.9.1] — 2026-08-31
+
+Repaso de veracidad de la sección «Why SYX» de la home y de la página `why-syx.html`. Cada afirmación contrastada contra el repositorio; las de terceros, contra sus notas de versión.
+
+### Fixed
+
+- **Dos totales del ranking no cuadraban con la suma de su propia columna.** Tailwind sumaba 40 y figuraba con 38; Chakra sumaba 36 y figuraba con 34. El orden del ranking no cambia, pero los números sí eran falsos.
+- **«~110kb CSS»** salía del bundle mínimo `styles-core.css`, que **no existe en el repositorio** — su fuente `styles-core.scss` no está ni ha estado nunca en el historial, aunque README, CHANGELOG y TOKEN-GUIDE la documenten. Lo que se entrega de verdad son los bundles de tema: 289–346 KB sin comprimir, **44–50 KB con gzip**, que es lo que viaja por la red. Ese es el número que aparece ahora.
+- **«Switching theme is a single HTML attribute change» era falso.** Cada tema es un bundle CSS aparte y el conmutador cambia el `href` de la hoja **y** la clase del `<body>`; el `data-syx-theme` es, según el comentario del propio JS, «for reference». La frase dice ahora lo que de verdad pasa: se cambia un enlace de hoja de estilos y ningún componente.
+- **«four contract rules (R01–R04)»** se quedó corto: el validador implementa **siete** (R01–R07), y `contracts/rules.json` declara además R08, que no está implementada. También se ha quitado «zero false positives»: no es una propiedad demostrable, y esta misma sesión encontró falsos positivos en el medidor de contraste.
+- **El pie se contradecía a sí mismo**: «MIT License» y «All rights reserved» en líneas seguidas. La MIT concede expresamente los derechos que la otra frase se reserva, y el `LICENSE` del repo es MIT, así que sobraba la segunda. Corregido en las tres páginas.
+- **Regresión propia de 4.7.0**: el reemplazo masivo de número de versión pisó la línea «Versions evaluated: SYX v4.2.0» de `why-syx.html`, que no es un distintivo de versión actual sino la constancia de qué se evaluó en abril. Hacía que un análisis fechado en abril afirmara haber evaluado una versión publicada en agosto. Restaurada a v4.2.0.
+
+### Changed
+
+- **La nota de versiones dice ahora qué ha quedado atrás.** Desde abril de 2026 han salido **Material UI v9** y **Ant Design v6**; ninguno se ha reevaluado, así que se declara como foto fechada en vez de como ranking vivo. Tailwind CSS v4 y Bootstrap v5 siguen siendo las mayores actuales, y esas etiquetas se quedan.
+
+### Notes
+
+Lo que se comprobó y **estaba bien**: las 7 capas de token (`tokens.json` tiene exactamente `primitives, semantic, component, reset, layout, theme, icon`); «no `!important`» —las seis apariciones en `scss/` son comentarios que dicen que se quitó—; los cuatro mixins citados (`size()`, `absolute()`, `transition()`, `breakpoint()`) existen; `_agents/` trae los cuatro flujos y los ocho modos que la tabla anuncia; `AGENTS.md`, `CLAUDE.md` y `AI_GUIDELINES.md` existen; 7 temas reales; cero dependencias de ejecución.
+
+Dos cosas quedan como criterio tuyo, no como error: la cita del comité sobre el flujo con IA enumera **siete** modos y hay ocho (falta `CREATIVE`), y el 4 sobre 5 en accesibilidad convive con los 331 fallos de contraste que los seis temas de ejemplo siguen acumulando.
+
+---
+
 ## [4.9.0] — 2026-08-31
 
 Repaso de los seis temas de ejemplo. Salieron dos cosas: una **rota de verdad** y una de arquitectura de color.

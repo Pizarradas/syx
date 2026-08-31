@@ -289,8 +289,8 @@
         </span>
         <h3 class="mol-feature-card__title">Multi-theme, Zero Duplication</h3>
         <p class="mol-feature-card__body">
-          7 production-ready themes. Each redefines only its semantic tokens — components never change.
-          Switching theme is a single HTML attribute change.
+          7 production-ready themes. Each redefines only its semantic tokens — components never change,
+          so switching theme means swapping one stylesheet link, not touching a single component.
         </p>
       </article>
 
@@ -688,9 +688,10 @@
         </span>
         <h3 class="mol-feature-card__title">Automated validation</h3>
         <p class="mol-feature-card__body">
-          <code>syx-validate.js</code> enforces four contract rules (R01–R04) against
-          every SCSS file and cross-checks runtime CSS vs token registry.
-          CI-ready, zero false positives.
+          <code>syx-validate.js</code> enforces seven contract rules (R01–R07) against
+          every SCSS file and cross-checks runtime CSS against the token registry —
+          undocumented tokens, phantom entries and unprefixed legacy vars included.
+          CI-ready, exits non-zero on violations.
         </p>
       </article>
 
@@ -931,7 +932,7 @@
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.9.0<br>
+        <strong>SYX Design System</strong> · v4.9.1<br>
         Modular CSS design system · Zero external dependencies
       </div>
 
@@ -950,7 +951,7 @@
 
     <p class="org-home-footer__credit">
       SYX Design System · Built with Dart Sass, native @layer and Atomic Design · MIT License<br>
-      <strong>© 2026 José Luis Pizarro</strong> — All rights reserved
+      <strong>© 2026 José Luis Pizarro</strong>
     </p>
   </footer>
 
