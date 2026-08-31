@@ -1,194 +1,791 @@
 {
   "_meta": {
-    "version": "3.0.3",
-    "generated": "2026-03-03",
-    "description": "SYX Design System — Machine-readable component inventory for AI tooling and automation.",
+    "version": "4.13.0",
+    "generated": "2026-08-31",
+    "generator": "scripts/build-component-registry.js",
+    "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
+    "note": "Todo se genera salvo `description` y `usage`, que son prosa escrita a mano y se conservan entre regeneraciones. `tokenFiles` sustituye al antiguo `tokenFile`: un componente puede leer tokens declarados en varios ficheros, y el anterior apuntaba a rutas que no existían.",
     "layers": {
-      "syx.atoms": "Single-purpose components. Prefix: atom-",
-      "syx.molecules": "Compositions of 2+ atoms. Prefix: mol-",
-      "syx.organisms": "Full UI sections. Prefix: org-"
+      "syx.atoms": "Componentes de un solo propósito. Prefijo: atom-",
+      "syx.molecules": "Composiciones de 2 o más átomos. Prefijo: mol-",
+      "syx.organisms": "Secciones completas de interfaz. Prefijo: org-"
     }
   },
   "atoms": [
     {
-      "name": "btn",
-      "layer": "atom",
-      "file": "scss/atoms/_btn.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_btn.scss",
-      "classes": ["atom-btn"],
-      "modifiers": ["atom-btn--primary", "atom-btn--secondary", "atom-btn--ghost", "atom-btn--filled", "atom-btn--outlined", "atom-btn--danger", "atom-btn--sm", "atom-btn--md", "atom-btn--lg", "atom-btn--circle", "atom-btn--full"],
-      "elements": ["atom-btn__icon", "atom-btn__label"],
-      "states": ["is-loading", "is-active", ":disabled", ":focus-visible"],
-      "tokens": ["--component-btn-primary-bg", "--component-btn-primary-bg-hover", "--component-btn-primary-color", "--component-btn-radius", "--component-btn-padding-y", "--component-btn-padding-x", "--component-btn-font-size", "--component-btn-font-weight", "--component-btn-border-width"]
-    },
-    {
       "name": "breadcrumb",
       "layer": "atom",
       "file": "scss/atoms/_breadcrumb.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_breadcrumb.scss",
-      "classes": ["atom-breadcrumb"],
-      "elements": ["atom-breadcrumb__item", "atom-breadcrumb__link", "atom-breadcrumb__separator"],
-      "tokens": ["--component-breadcrumb-color", "--component-breadcrumb-color-active", "--component-breadcrumb-separator-color"]
+      "tokenFiles": [],
+      "classes": [
+        "atom-breadcrumb"
+      ],
+      "modifiers": [],
+      "elements": [
+        "atom-breadcrumb__item",
+        "atom-breadcrumb__link"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": []
+    },
+    {
+      "name": "btn",
+      "layer": "atom",
+      "file": "scss/atoms/_btn.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_buttons.scss",
+        "scss/abstracts/tokens/components/_icons.scss"
+      ],
+      "classes": [
+        "atom-btn"
+      ],
+      "modifiers": [
+        "atom-btn--circle",
+        "atom-btn--filled",
+        "atom-btn--has-icon",
+        "atom-btn--primary",
+        "atom-btn--quaternary",
+        "atom-btn--secondary",
+        "atom-btn--size-lg",
+        "atom-btn--size-md",
+        "atom-btn--size-sm",
+        "atom-btn--tertiary"
+      ],
+      "elements": [],
+      "states": [
+        ":active",
+        ":disabled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [
+        "atom-icon"
+      ],
+      "tokens": [
+        "--component-button-active-offset-x",
+        "--component-button-active-offset-y",
+        "--component-button-border-radius",
+        "--component-button-border-radius-circle",
+        "--component-button-border-style",
+        "--component-button-border-width",
+        "--component-button-disabled-bg",
+        "--component-button-disabled-border",
+        "--component-button-disabled-color",
+        "--component-button-disabled-filled-color",
+        "--component-button-font-family",
+        "--component-button-font-size",
+        "--component-button-font-size-lg",
+        "--component-button-font-size-md",
+        "--component-button-font-size-sm",
+        "--component-button-line-height",
+        "--component-button-primary-bg-hover",
+        "--component-button-primary-border-hover",
+        "--component-button-primary-color",
+        "--component-button-primary-color-hover",
+        "--component-button-primary-filled-bg",
+        "--component-button-primary-filled-bg-hover",
+        "--component-button-primary-filled-border-hover",
+        "--component-button-primary-filled-color",
+        "--component-button-primary-filled-color-hover",
+        "--component-button-quaternary-bg-hover",
+        "--component-button-quaternary-border-hover",
+        "--component-button-quaternary-color",
+        "--component-button-quaternary-color-hover",
+        "--component-button-quaternary-filled-bg",
+        "--component-button-quaternary-filled-bg-hover",
+        "--component-button-quaternary-filled-border-hover",
+        "--component-button-quaternary-filled-color",
+        "--component-button-quaternary-filled-color-hover",
+        "--component-button-secondary-bg-hover",
+        "--component-button-secondary-border-hover",
+        "--component-button-secondary-color",
+        "--component-button-secondary-color-hover",
+        "--component-button-secondary-filled-bg",
+        "--component-button-secondary-filled-bg-hover",
+        "--component-button-secondary-filled-border-hover",
+        "--component-button-secondary-filled-color",
+        "--component-button-secondary-filled-color-hover",
+        "--component-button-shadow",
+        "--component-button-shadow-active",
+        "--component-button-shadow-hover",
+        "--component-button-size-lg",
+        "--component-button-size-md",
+        "--component-button-size-sm",
+        "--component-button-tertiary-bg-hover",
+        "--component-button-tertiary-border-hover",
+        "--component-button-tertiary-color",
+        "--component-button-tertiary-color-hover",
+        "--component-button-tertiary-filled-bg",
+        "--component-button-tertiary-filled-bg-hover",
+        "--component-button-tertiary-filled-border-hover",
+        "--component-button-tertiary-filled-color",
+        "--component-button-tertiary-filled-color-hover",
+        "--component-button-transition-duration",
+        "--component-button-transition-duration-active",
+        "--component-button-transition-easing",
+        "--component-icon-size-lg",
+        "--component-icon-size-md",
+        "--component-icon-size-sm"
+      ]
     },
     {
       "name": "check",
       "layer": "atom",
       "file": "scss/atoms/_check.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_check.scss",
-      "classes": ["atom-check"],
-      "elements": ["atom-check__input", "atom-check__label"],
-      "states": [":checked", ":disabled", ":focus-visible"],
-      "tokens": ["--component-check-bg", "--component-check-bg-checked", "--component-check-border", "--component-check-color", "--component-check-size"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "atom-check"
+      ],
+      "modifiers": [],
+      "elements": [
+        "atom-check__input",
+        "atom-check__label"
+      ],
+      "states": [
+        ":checked",
+        ":disabled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-check-bg",
+        "--component-check-bg-checked",
+        "--component-check-border-color",
+        "--component-check-border-color-hover",
+        "--component-check-border-radius",
+        "--component-check-border-width",
+        "--component-check-gap",
+        "--component-check-mark-height",
+        "--component-check-mark-rotation",
+        "--component-check-mark-thickness",
+        "--component-check-mark-width",
+        "--component-check-shadow-focus",
+        "--component-check-size",
+        "--component-check-status-disabled-opacity",
+        "--component-check-transition-duration",
+        "--component-check-transition-easing",
+        "--component-form-field-border-focus",
+        "--component-form-field-color",
+        "--component-form-field-font-size",
+        "--component-form-field-line-height",
+        "--component-form-field-transition-easing"
+      ]
     },
     {
       "name": "code",
       "layer": "atom",
       "file": "scss/atoms/_code.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_code.scss",
-      "classes": ["atom-code"],
-      "modifiers": ["atom-code--block", "atom-code--inline"],
-      "tokens": ["--component-code-bg", "--component-code-color", "--component-code-radius", "--component-code-font-family"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_surfaces.scss"
+      ],
+      "classes": [
+        "atom-code"
+      ],
+      "modifiers": [
+        "atom-code--inline"
+      ],
+      "elements": [
+        "atom-code__attr",
+        "atom-code__cls",
+        "atom-code__cmt",
+        "atom-code__tag",
+        "atom-code__val"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-code-bg",
+        "--component-code-border-color",
+        "--component-code-border-radius",
+        "--component-code-border-width",
+        "--component-code-color",
+        "--component-code-font-size",
+        "--component-code-inline-border-color",
+        "--component-code-inline-border-radius",
+        "--component-code-inline-border-width",
+        "--component-code-inline-font-size",
+        "--component-code-line-height",
+        "--component-code-syntax-attr",
+        "--component-code-syntax-comment",
+        "--component-code-syntax-fn",
+        "--component-code-syntax-tag",
+        "--component-code-syntax-val"
+      ]
     },
     {
       "name": "feature-icon",
       "layer": "atom",
       "file": "scss/atoms/_feature-icon.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_feature-icon.scss",
-      "classes": ["atom-feature-icon"],
-      "modifiers": ["atom-feature-icon--primary", "atom-feature-icon--sm", "atom-feature-icon--md", "atom-feature-icon--lg"],
-      "tokens": ["--component-feature-icon-bg", "--component-feature-icon-color", "--component-feature-icon-size", "--component-feature-icon-radius"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_pills.scss"
+      ],
+      "classes": [
+        "atom-feature-icon"
+      ],
+      "modifiers": [
+        "atom-feature-icon--layer",
+        "atom-feature-icon--mixin",
+        "atom-feature-icon--molecule",
+        "atom-feature-icon--organism",
+        "atom-feature-icon--primary",
+        "atom-feature-icon--token"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-feature-icon-border-color",
+        "--component-feature-icon-border-radius",
+        "--component-feature-icon-border-style",
+        "--component-feature-icon-border-width",
+        "--component-feature-icon-layer-bg",
+        "--component-feature-icon-layer-color",
+        "--component-feature-icon-mixin-bg",
+        "--component-feature-icon-mixin-color",
+        "--component-feature-icon-molecule-bg",
+        "--component-feature-icon-molecule-color",
+        "--component-feature-icon-organism-bg",
+        "--component-feature-icon-organism-color",
+        "--component-feature-icon-shadow",
+        "--component-feature-icon-size",
+        "--component-feature-icon-token-bg",
+        "--component-feature-icon-token-color"
+      ]
     },
     {
       "name": "form",
       "layer": "atom",
       "file": "scss/atoms/_form.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_form.scss",
-      "classes": ["atom-form"],
-      "elements": ["atom-form__input", "atom-form__select", "atom-form__textarea"],
-      "states": [":focus-visible", ":disabled", ":invalid", ".is-error"],
-      "tokens": ["--component-form-bg", "--component-form-color", "--component-form-border", "--component-form-border-focus", "--component-form-radius", "--component-form-padding-y", "--component-form-padding-x"]
-    },
-    {
-      "name": "icon",
-      "layer": "atom",
-      "file": "scss/atoms/_icon.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_icon.scss",
-      "classes": ["atom-icon"],
-      "modifiers": ["atom-icon--sm", "atom-icon--md", "atom-icon--lg"],
-      "tokens": ["--component-icon-size-sm", "--component-icon-size-md", "--component-icon-size-lg", "--component-icon-color"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "atom-input",
+        "atom-input-wrapper",
+        "atom-label",
+        "atom-select"
+      ],
+      "modifiers": [],
+      "elements": [],
+      "states": [
+        ":disabled",
+        ":hover"
+      ],
+      "composedOf": [
+        "atom-label"
+      ],
+      "tokens": [
+        "--component-form-field-bg",
+        "--component-form-field-bg-disabled",
+        "--component-form-field-border",
+        "--component-form-field-border-focus",
+        "--component-form-field-border-radius",
+        "--component-form-field-border-width",
+        "--component-form-field-color",
+        "--component-form-field-color-disabled",
+        "--component-form-field-font-family",
+        "--component-form-field-font-size",
+        "--component-form-field-label-margin-bottom",
+        "--component-form-field-line-height",
+        "--component-form-field-min-height",
+        "--component-form-field-padding-x",
+        "--component-form-field-padding-y",
+        "--component-form-field-placeholder",
+        "--component-form-field-shadow-focus",
+        "--component-form-field-transition-duration",
+        "--component-form-field-transition-easing"
+      ]
     },
     {
       "name": "icon-lucide",
       "layer": "atom",
       "file": "scss/atoms/_icon-lucide.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_icon-lucide.scss",
-      "classes": ["atom-icon"],
+      "tokenFiles": [],
+      "classes": [
+        "atom-icon"
+      ],
+      "modifiers": [
+        "atom-icon--lc-activity",
+        "atom-icon--lc-arrow-left",
+        "atom-icon--lc-arrow-right",
+        "atom-icon--lc-atom",
+        "atom-icon--lc-book-open",
+        "atom-icon--lc-bot",
+        "atom-icon--lc-box",
+        "atom-icon--lc-check",
+        "atom-icon--lc-check-circle",
+        "atom-icon--lc-chevron-down",
+        "atom-icon--lc-chevron-left",
+        "atom-icon--lc-chevron-right",
+        "atom-icon--lc-chevron-up",
+        "atom-icon--lc-chevrons-down",
+        "atom-icon--lc-chevrons-right",
+        "atom-icon--lc-coins",
+        "atom-icon--lc-component",
+        "atom-icon--lc-copy",
+        "atom-icon--lc-database",
+        "atom-icon--lc-download",
+        "atom-icon--lc-error",
+        "atom-icon--lc-external-link",
+        "atom-icon--lc-file-text",
+        "atom-icon--lc-filter",
+        "atom-icon--lc-git-branch",
+        "atom-icon--lc-github",
+        "atom-icon--lc-home",
+        "atom-icon--lc-info",
+        "atom-icon--lc-layers",
+        "atom-icon--lc-link",
+        "atom-icon--lc-mail",
+        "atom-icon--lc-menu",
+        "atom-icon--lc-minus",
+        "atom-icon--lc-moon",
+        "atom-icon--lc-package",
+        "atom-icon--lc-palette",
+        "atom-icon--lc-pencil",
+        "atom-icon--lc-pie-chart",
+        "atom-icon--lc-plus",
+        "atom-icon--lc-rocket",
+        "atom-icon--lc-search",
+        "atom-icon--lc-settings",
+        "atom-icon--lc-shield-check",
+        "atom-icon--lc-success",
+        "atom-icon--lc-sun",
+        "atom-icon--lc-terminal",
+        "atom-icon--lc-trash",
+        "atom-icon--lc-user",
+        "atom-icon--lc-warning",
+        "atom-icon--lc-x",
+        "atom-icon--lc-zap"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [
+        "atom-icon"
+      ],
+      "tokens": [],
       "description": "Lucide icon set integration. Use CSS class modifiers --lc-{icon-name} on atom-icon.",
       "usage": "<span class=\"atom-icon --lc-home\" aria-hidden=\"true\"></span>"
+    },
+    {
+      "name": "icon",
+      "layer": "atom",
+      "file": "scss/atoms/_icon.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_icons.scss"
+      ],
+      "classes": [
+        "atom-icon"
+      ],
+      "modifiers": [
+        "atom-icon--arrow-default",
+        "atom-icon--arrow-double",
+        "atom-icon--color-black",
+        "atom-icon--color-primary",
+        "atom-icon--color-secondary",
+        "atom-icon--color-state-ko",
+        "atom-icon--color-state-ok",
+        "atom-icon--color-state-warning",
+        "atom-icon--color-white",
+        "atom-icon--content-bars",
+        "atom-icon--lg",
+        "atom-icon--md",
+        "atom-icon--rrss-email",
+        "atom-icon--sm",
+        "atom-icon--ui-cancel",
+        "atom-icon--ui-exclamation",
+        "atom-icon--ui-home",
+        "atom-icon--ui-tick",
+        "atom-icon--xl"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-icon-color",
+        "--component-icon-size-lg",
+        "--component-icon-size-md",
+        "--component-icon-size-sm",
+        "--component-icon-size-xl",
+        "--component-icon-source"
+      ]
     },
     {
       "name": "label",
       "layer": "atom",
       "file": "scss/atoms/_label.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_label.scss",
-      "classes": ["atom-label"],
-      "tokens": ["--component-label-color", "--component-label-font-size", "--component-label-font-weight"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_labels.scss"
+      ],
+      "classes": [
+        "atom-label"
+      ],
+      "modifiers": [
+        "atom-label--primary",
+        "atom-label--scope-1",
+        "atom-label--scope-2",
+        "atom-label--scope-3"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-label-border-radius",
+        "--component-label-padding-lg",
+        "--component-label-padding-md",
+        "--component-label-padding-sm"
+      ]
     },
     {
       "name": "link",
       "layer": "atom",
       "file": "scss/atoms/_link.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_link.scss",
-      "classes": ["atom-link"],
-      "modifiers": ["atom-link--muted", "atom-link--underline"],
-      "states": [":hover", ":visited", ":focus-visible"],
-      "tokens": ["--component-link-color", "--component-link-color-hover", "--component-link-color-visited"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_links.scss"
+      ],
+      "classes": [
+        "atom-link"
+      ],
+      "modifiers": [
+        "atom-link--primary"
+      ],
+      "elements": [],
+      "states": [
+        ":active",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-link-decoration-thickness",
+        "--component-link-primary-bg-hover",
+        "--component-link-primary-color",
+        "--component-link-primary-color-hover",
+        "--component-link-primary-shadow-focus"
+      ]
     },
     {
       "name": "list",
       "layer": "atom",
       "file": "scss/atoms/_list.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_list.scss",
-      "classes": ["atom-list"],
-      "modifiers": ["atom-list--ordered", "atom-list--unordered", "atom-list--unstyled", "atom-list--inline"],
-      "elements": ["atom-list__item"],
-      "tokens": ["--component-list-gap", "--component-list-marker-color"]
+      "tokenFiles": [],
+      "classes": [
+        "atom-list"
+      ],
+      "modifiers": [
+        "atom-list--ordered",
+        "atom-list--primary"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": []
     },
     {
       "name": "pagination",
       "layer": "atom",
       "file": "scss/atoms/_pagination.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_pagination.scss",
-      "classes": ["atom-pagination"],
-      "elements": ["atom-pagination__item", "atom-pagination__link", "atom-pagination__prev", "atom-pagination__next"],
-      "states": [".is-active", ":disabled"],
-      "tokens": ["--component-pagination-color", "--component-pagination-color-active", "--component-pagination-bg-active", "--component-pagination-radius"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_navigation.scss"
+      ],
+      "classes": [
+        "atom-pagination"
+      ],
+      "modifiers": [
+        "atom-pagination__item--is-active",
+        "atom-pagination__item--is-disabled",
+        "atom-pagination__item--is-next",
+        "atom-pagination__item--is-prev"
+      ],
+      "elements": [
+        "atom-pagination__item",
+        "atom-pagination__trigger"
+      ],
+      "states": [
+        ":disabled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-pagination-bg-active",
+        "--component-pagination-border-color-hover",
+        "--component-pagination-border-radius",
+        "--component-pagination-border-width",
+        "--component-pagination-color",
+        "--component-pagination-color-active",
+        "--component-pagination-color-disabled",
+        "--component-pagination-color-hover",
+        "--component-pagination-font-family",
+        "--component-pagination-gap",
+        "--component-pagination-icon-filter",
+        "--component-pagination-icon-size",
+        "--component-pagination-item-size",
+        "--component-pagination-shadow-focus"
+      ]
     },
     {
       "name": "pill",
       "layer": "atom",
       "file": "scss/atoms/_pill.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_pill.scss",
-      "classes": ["atom-pill"],
-      "modifiers": ["atom-pill--primary", "atom-pill--success", "atom-pill--warning", "atom-pill--error", "atom-pill--neutral", "atom-pill--sm", "atom-pill--lg"],
-      "tokens": ["--component-pill-bg", "--component-pill-color", "--component-pill-radius", "--component-pill-padding-y", "--component-pill-padding-x", "--component-pill-font-size"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_pills.scss"
+      ],
+      "classes": [
+        "atom-pill"
+      ],
+      "modifiers": [
+        "atom-pill--danger",
+        "atom-pill--dark",
+        "atom-pill--neutral",
+        "atom-pill--primary",
+        "atom-pill--secondary",
+        "atom-pill--subtle",
+        "atom-pill--success",
+        "atom-pill--warning"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-pill-border-radius",
+        "--component-pill-border-style",
+        "--component-pill-border-width",
+        "--component-pill-danger-bg",
+        "--component-pill-danger-color",
+        "--component-pill-dark-bg",
+        "--component-pill-dark-border-color",
+        "--component-pill-dark-color",
+        "--component-pill-gap",
+        "--component-pill-line-height",
+        "--component-pill-neutral-bg",
+        "--component-pill-neutral-border-color",
+        "--component-pill-neutral-color",
+        "--component-pill-primary-bg",
+        "--component-pill-primary-border-color",
+        "--component-pill-primary-color",
+        "--component-pill-secondary-bg",
+        "--component-pill-secondary-border-color",
+        "--component-pill-secondary-color",
+        "--component-pill-subtle-bg",
+        "--component-pill-subtle-border-color",
+        "--component-pill-subtle-color",
+        "--component-pill-success-bg",
+        "--component-pill-success-color",
+        "--component-pill-warning-bg",
+        "--component-pill-warning-color"
+      ]
     },
     {
       "name": "radio",
       "layer": "atom",
       "file": "scss/atoms/_radio.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_radio.scss",
-      "classes": ["atom-radio"],
-      "elements": ["atom-radio__input", "atom-radio__label"],
-      "states": [":checked", ":disabled", ":focus-visible"],
-      "tokens": ["--component-radio-bg", "--component-radio-bg-checked", "--component-radio-border", "--component-radio-size"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "atom-radio"
+      ],
+      "modifiers": [],
+      "elements": [
+        "atom-radio__input",
+        "atom-radio__label"
+      ],
+      "states": [
+        ":checked",
+        ":disabled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-form-field-border-focus",
+        "--component-form-field-color",
+        "--component-form-field-font-size",
+        "--component-form-field-line-height",
+        "--component-form-field-shadow-focus",
+        "--component-form-field-transition-easing",
+        "--component-radio-bg",
+        "--component-radio-bg-checked",
+        "--component-radio-border-color",
+        "--component-radio-border-color-hover",
+        "--component-radio-border-radius",
+        "--component-radio-border-width",
+        "--component-radio-checked-size",
+        "--component-radio-dot-border-radius",
+        "--component-radio-gap",
+        "--component-radio-size",
+        "--component-radio-status-disabled-opacity",
+        "--component-radio-transition-duration",
+        "--component-radio-transition-easing"
+      ]
     },
     {
       "name": "stat-counter",
       "layer": "atom",
       "file": "scss/atoms/_stat-counter.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_stat-counter.scss",
-      "classes": ["atom-stat-counter"],
-      "elements": ["atom-stat-counter__value", "atom-stat-counter__label", "atom-stat-counter__unit"],
-      "tokens": ["--component-stat-counter-value-size", "--component-stat-counter-value-color", "--component-stat-counter-label-color"]
+      "tokenFiles": [],
+      "classes": [
+        "atom-stat"
+      ],
+      "modifiers": [
+        "atom-stat--accent",
+        "atom-stat--light"
+      ],
+      "elements": [
+        "atom-stat__label",
+        "atom-stat__number"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": []
     },
     {
       "name": "switch",
       "layer": "atom",
       "file": "scss/atoms/_switch.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_switch.scss",
-      "classes": ["atom-switch"],
-      "elements": ["atom-switch__input", "atom-switch__track", "atom-switch__thumb", "atom-switch__label"],
-      "states": [":checked", ":disabled", ":focus-visible"],
-      "tokens": ["--component-switch-track-bg", "--component-switch-track-bg-checked", "--component-switch-thumb-bg", "--component-switch-size"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "atom-switch"
+      ],
+      "modifiers": [],
+      "elements": [
+        "atom-switch__input",
+        "atom-switch__label",
+        "atom-switch__slider"
+      ],
+      "states": [
+        ":checked",
+        ":disabled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-form-field-border-focus",
+        "--component-form-field-border-width",
+        "--component-form-field-color",
+        "--component-form-field-font-size",
+        "--component-form-field-line-height",
+        "--component-form-field-shadow-focus",
+        "--component-form-field-transition-easing",
+        "--component-switch-bg-off",
+        "--component-switch-bg-on",
+        "--component-switch-border-color",
+        "--component-switch-border-radius",
+        "--component-switch-height",
+        "--component-switch-slider-bg",
+        "--component-switch-slider-radius",
+        "--component-switch-slider-shadow",
+        "--component-switch-slider-size",
+        "--component-switch-status-disabled-opacity",
+        "--component-switch-transition-duration",
+        "--component-switch-transition-easing",
+        "--component-switch-width"
+      ]
     },
     {
       "name": "table",
       "layer": "atom",
       "file": "scss/atoms/_table.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_table.scss",
-      "classes": ["atom-table"],
-      "modifiers": ["atom-table--striped", "atom-table--bordered", "atom-table--compact"],
-      "tokens": ["--component-table-border", "--component-table-stripe-bg", "--component-table-head-bg", "--component-table-head-color", "--component-table-padding-y", "--component-table-padding-x"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_tables.scss"
+      ],
+      "classes": [
+        "atom-table"
+      ],
+      "modifiers": [
+        "atom-table--is-stick-thead",
+        "atom-table--primary",
+        "atom-table--resp"
+      ],
+      "elements": [
+        "atom-table__container",
+        "atom-table__td",
+        "atom-table__th"
+      ],
+      "states": [
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-table-bg-tfoot",
+        "--component-table-bg-th",
+        "--component-table-border-color",
+        "--component-table-border-width",
+        "--component-table-cell-padding-x",
+        "--component-table-cell-padding-y",
+        "--component-table-color-th",
+        "--component-table-min-width",
+        "--component-table-state-hover-bg",
+        "--component-table-state-hover-border-color",
+        "--component-table-state-hover-shadow",
+        "--component-table-sticky-active-bg",
+        "--component-table-sticky-active-color",
+        "--component-table-sticky-max-height",
+        "--component-table-th-font-family",
+        "--component-table-th-font-size",
+        "--component-table-th-line-height"
+      ]
     },
     {
       "name": "title",
       "layer": "atom",
       "file": "scss/atoms/_title.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_title.scss",
-      "classes": ["atom-title"],
-      "modifiers": ["atom-title--display", "atom-title--h1", "atom-title--h2", "atom-title--h3", "atom-title--h4", "atom-title--sm", "atom-title--xs"],
-      "tokens": ["--component-title-color", "--component-title-font-family", "--component-title-font-weight", "--component-title-line-height"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_titles.scss"
+      ],
+      "classes": [
+        "atom-title"
+      ],
+      "modifiers": [
+        "atom-title--h1",
+        "atom-title--h2",
+        "atom-title--h3",
+        "atom-title--h4",
+        "atom-title--h5",
+        "atom-title--h6"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-title-color",
+        "--component-title-font-family",
+        "--component-title-h1",
+        "--component-title-h2",
+        "--component-title-h3",
+        "--component-title-h4",
+        "--component-title-h5",
+        "--component-title-h6",
+        "--component-title-line-height",
+        "--component-title-margin-bottom"
+      ]
     },
     {
       "name": "txt",
       "layer": "atom",
       "file": "scss/atoms/_txt.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_txt.scss",
-      "classes": ["atom-txt"],
-      "modifiers": ["atom-txt--sm", "atom-txt--lg", "atom-txt--muted", "atom-txt--lead"],
-      "tokens": ["--component-txt-color", "--component-txt-font-size", "--component-txt-line-height"]
+      "tokenFiles": [],
+      "classes": [
+        "atom-txt"
+      ],
+      "modifiers": [
+        "atom-txt--primary"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": []
     }
   ],
   "molecules": [
@@ -196,151 +793,736 @@
       "name": "btn-group",
       "layer": "molecule",
       "file": "scss/molecules/_btn-group.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_btn-group.scss",
-      "classes": ["mol-btn-group"],
-      "modifiers": ["mol-btn-group--vertical"],
-      "composedOf": ["atom-btn"],
-      "tokens": ["--component-btn-group-gap"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_buttons.scss"
+      ],
+      "classes": [
+        "mol-btn-group"
+      ],
+      "modifiers": [],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-btn-group-gap"
+      ]
     },
     {
       "name": "code-snippet",
       "layer": "molecule",
       "file": "scss/molecules/_code-snippet.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_code-snippet.scss",
-      "classes": ["mol-code-snippet"],
-      "elements": ["mol-code-snippet__header", "mol-code-snippet__lang", "mol-code-snippet__copy", "mol-code-snippet__body"],
-      "composedOf": ["atom-code", "atom-btn"],
-      "tokens": ["--component-code-snippet-bg", "--component-code-snippet-header-bg", "--component-code-snippet-border", "--component-code-snippet-radius"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_cards.scss"
+      ],
+      "classes": [
+        "mol-code-snippet"
+      ],
+      "modifiers": [
+        "mol-code-snippet--ko",
+        "mol-code-snippet--neutral",
+        "mol-code-snippet--ok"
+      ],
+      "elements": [
+        "mol-code-snippet__body",
+        "mol-code-snippet__filename",
+        "mol-code-snippet__header",
+        "mol-code-snippet__label"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-code-snippet-border-color",
+        "--component-code-snippet-border-radius",
+        "--component-code-snippet-border-style",
+        "--component-code-snippet-border-width",
+        "--component-code-snippet-header-bg",
+        "--component-code-snippet-header-border-width",
+        "--component-code-snippet-ko-border-color",
+        "--component-code-snippet-ko-header-bg",
+        "--component-code-snippet-ko-header-border-color",
+        "--component-code-snippet-ko-label-color",
+        "--component-code-snippet-ok-border-color",
+        "--component-code-snippet-ok-header-bg",
+        "--component-code-snippet-ok-header-border-color",
+        "--component-code-snippet-ok-label-color",
+        "--component-code-snippet-shadow"
+      ]
     },
     {
       "name": "feature-card",
       "layer": "molecule",
       "file": "scss/molecules/_feature-card.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_feature-card.scss",
-      "classes": ["mol-feature-card"],
-      "elements": ["mol-feature-card__icon", "mol-feature-card__title", "mol-feature-card__body"],
-      "composedOf": ["atom-feature-icon", "atom-title", "atom-txt"],
-      "tokens": ["--component-feature-card-bg", "--component-feature-card-gap", "--component-feature-card-padding"]
-    },
-    {
-      "name": "form-field",
-      "layer": "molecule",
-      "file": "scss/molecules/_form-field.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_form-field.scss",
-      "classes": ["mol-form-field"],
-      "elements": ["mol-form-field__label", "mol-form-field__input", "mol-form-field__hint", "mol-form-field__error"],
-      "states": [".is-error", ".is-success"],
-      "composedOf": ["atom-label", "atom-form"],
-      "tokens": ["--component-form-field-gap", "--component-form-field-error-color", "--component-form-field-hint-color"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_cards.scss"
+      ],
+      "classes": [
+        "mol-feature-card"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-feature-card__body",
+        "mol-feature-card__cta",
+        "mol-feature-card__title"
+      ],
+      "states": [
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-feature-card-bg",
+        "--component-feature-card-border-color",
+        "--component-feature-card-border-color-hover",
+        "--component-feature-card-border-radius",
+        "--component-feature-card-border-style",
+        "--component-feature-card-border-width",
+        "--component-feature-card-hover-lift",
+        "--component-feature-card-row-span",
+        "--component-feature-card-shadow",
+        "--component-feature-card-shadow-hover"
+      ]
     },
     {
       "name": "form-field-set",
       "layer": "molecule",
       "file": "scss/molecules/_form-field-set.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_form-field-set.scss",
-      "classes": ["mol-form-field-set"],
-      "elements": ["mol-form-field-set__legend", "mol-form-field-set__fields"],
-      "composedOf": ["mol-form-field"],
-      "tokens": ["--component-form-field-set-gap", "--component-form-field-set-border"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "mol-form-field-set"
+      ],
+      "modifiers": [
+        "mol-form-field-set--inline"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [
+        "mol-form-field"
+      ],
+      "tokens": [
+        "--component-form-field-set-min-width",
+        "--component-form-group-gap"
+      ]
+    },
+    {
+      "name": "form-field",
+      "layer": "molecule",
+      "file": "scss/molecules/_form-field.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ],
+      "classes": [
+        "mol-form-field"
+      ],
+      "modifiers": [
+        "mol-form-field--has-select",
+        "mol-form-field--is-error",
+        "mol-form-field--is-success",
+        "mol-form-field--is-warning"
+      ],
+      "elements": [
+        "mol-form-field__msg"
+      ],
+      "states": [],
+      "composedOf": [
+        "atom-input",
+        "atom-label",
+        "atom-select"
+      ],
+      "tokens": [
+        "--component-form-field-color",
+        "--component-form-field-error-border",
+        "--component-form-field-error-color",
+        "--component-form-field-icon-position-right",
+        "--component-form-field-icon-size",
+        "--component-form-field-label-margin-bottom",
+        "--component-form-field-margin-bottom",
+        "--component-form-field-msg-font-size",
+        "--component-form-field-msg-line-height",
+        "--component-form-field-msg-margin-top",
+        "--component-form-field-success-border",
+        "--component-form-field-success-color",
+        "--component-form-field-warning-border",
+        "--component-form-field-warning-color"
+      ]
     },
     {
       "name": "label-group",
       "layer": "molecule",
       "file": "scss/molecules/_label-group.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_label-group.scss",
-      "classes": ["mol-label-group"],
-      "composedOf": ["atom-label"],
-      "tokens": ["--component-label-group-gap"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_labels.scss"
+      ],
+      "classes": [
+        "mol-label-group"
+      ],
+      "modifiers": [],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-label-group-gap"
+      ]
     },
     {
       "name": "theme-swatch-card",
       "layer": "molecule",
       "file": "scss/molecules/_theme-swatch-card.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_theme-swatch-card.scss",
-      "classes": ["mol-theme-swatch-card"],
-      "elements": ["mol-theme-swatch-card__header", "mol-theme-swatch-card__swatches", "mol-theme-swatch-card__swatch", "mol-theme-swatch-card__name"],
-      "tokens": ["--component-theme-swatch-card-bg", "--component-theme-swatch-card-radius", "--component-theme-swatch-card-border"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_cards.scss"
+      ],
+      "classes": [
+        "mol-theme-card"
+      ],
+      "modifiers": [
+        "mol-theme-card__dot--01-a",
+        "mol-theme-card__dot--01-b",
+        "mol-theme-card__dot--02-a",
+        "mol-theme-card__dot--02-b",
+        "mol-theme-card__dot--03-a",
+        "mol-theme-card__dot--03-b",
+        "mol-theme-card__dot--04-a",
+        "mol-theme-card__dot--04-b",
+        "mol-theme-card__dot--05-a",
+        "mol-theme-card__dot--05-b",
+        "mol-theme-card__dot--06-a",
+        "mol-theme-card__dot--06-b",
+        "mol-theme-card__dot--sketch-a",
+        "mol-theme-card__dot--sketch-b",
+        "mol-theme-card__swatch--01",
+        "mol-theme-card__swatch--02",
+        "mol-theme-card__swatch--03",
+        "mol-theme-card__swatch--04",
+        "mol-theme-card__swatch--05",
+        "mol-theme-card__swatch--06",
+        "mol-theme-card__swatch--sketch"
+      ],
+      "elements": [
+        "mol-theme-card__body",
+        "mol-theme-card__colors",
+        "mol-theme-card__dot",
+        "mol-theme-card__name",
+        "mol-theme-card__swatch"
+      ],
+      "states": [
+        ".is-active",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-theme-card-border-color",
+        "--component-theme-card-border-color-active",
+        "--component-theme-card-border-radius",
+        "--component-theme-card-border-style",
+        "--component-theme-card-border-width",
+        "--component-theme-card-check-bg",
+        "--component-theme-card-check-border-radius",
+        "--component-theme-card-dot-01-a",
+        "--component-theme-card-dot-01-b",
+        "--component-theme-card-dot-02-a",
+        "--component-theme-card-dot-02-b",
+        "--component-theme-card-dot-03-a",
+        "--component-theme-card-dot-03-b",
+        "--component-theme-card-dot-04-a",
+        "--component-theme-card-dot-04-b",
+        "--component-theme-card-dot-05-a",
+        "--component-theme-card-dot-05-b",
+        "--component-theme-card-dot-06-a",
+        "--component-theme-card-dot-06-b",
+        "--component-theme-card-dot-border-color",
+        "--component-theme-card-dot-border-radius",
+        "--component-theme-card-dot-border-width",
+        "--component-theme-card-dot-sketch-a",
+        "--component-theme-card-dot-sketch-b",
+        "--component-theme-card-hover-lift",
+        "--component-theme-card-shadow",
+        "--component-theme-card-shadow-hover",
+        "--component-theme-card-swatch-01-from",
+        "--component-theme-card-swatch-01-to",
+        "--component-theme-card-swatch-02-from",
+        "--component-theme-card-swatch-02-to",
+        "--component-theme-card-swatch-03-from",
+        "--component-theme-card-swatch-03-to",
+        "--component-theme-card-swatch-04-from",
+        "--component-theme-card-swatch-04-to",
+        "--component-theme-card-swatch-05-from",
+        "--component-theme-card-swatch-05-to",
+        "--component-theme-card-swatch-06-from",
+        "--component-theme-card-swatch-06-to",
+        "--component-theme-card-swatch-angle",
+        "--component-theme-card-swatch-border-radius",
+        "--component-theme-card-swatch-height",
+        "--component-theme-card-swatch-sketch-bg",
+        "--component-theme-card-swatch-sketch-image"
+      ]
     }
   ],
   "organisms": [
     {
-      "name": "site-header",
+      "name": "home-cta",
       "layer": "organism",
-      "file": "scss/organisms/_site-header.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_site-header.scss",
-      "classes": ["org-site-header"],
-      "elements": ["org-site-header__inner", "org-site-header__logo", "org-site-header__nav", "org-site-header__actions"],
-      "states": [".is-scrolled", ".is-menu-open"],
-      "composedOf": ["atom-btn", "atom-link", "atom-icon"],
-      "tokens": ["--component-site-header-height", "--component-site-header-bg", "--component-site-header-border", "--component-site-header-logo-size"]
-    },
-    {
-      "name": "home-hero",
-      "layer": "organism",
-      "file": "scss/organisms/_home-hero.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-hero.scss",
-      "classes": ["org-home-hero"],
-      "elements": ["org-home-hero__inner", "org-home-hero__eyebrow", "org-home-hero__title", "org-home-hero__body", "org-home-hero__actions"],
-      "composedOf": ["atom-title", "atom-txt", "atom-btn", "atom-pill"],
-      "tokens": ["--component-home-hero-bg", "--component-home-hero-padding-y"]
+      "file": "scss/organisms/_home-cta.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-cta"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-home-cta__actions",
+        "org-home-cta__code",
+        "org-home-cta__headline",
+        "org-home-cta__overline",
+        "org-home-cta__sub"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-cta-bg",
+        "--component-cta-border-block-width",
+        "--component-cta-border-color",
+        "--component-cta-code-bg",
+        "--component-cta-code-border-color",
+        "--component-cta-code-border-radius",
+        "--component-cta-code-border-width",
+        "--component-cta-code-color",
+        "--component-cta-color",
+        "--component-cta-decor-bg",
+        "--component-cta-decor-radius",
+        "--component-cta-decor-right",
+        "--component-cta-decor-size",
+        "--component-cta-decor-top",
+        "--component-cta-headline-font-size",
+        "--component-cta-overline-color",
+        "--component-cta-shadow-hard-color",
+        "--component-cta-sub-color",
+        "--component-section-padding-block",
+        "--component-section-padding-inline"
+      ]
     },
     {
       "name": "home-features",
       "layer": "organism",
       "file": "scss/organisms/_home-features.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-features.scss",
-      "classes": ["org-home-features"],
-      "elements": ["org-home-features__header", "org-home-features__grid"],
-      "composedOf": ["mol-feature-card"],
-      "tokens": ["--component-home-features-gap", "--component-home-features-padding-y"]
-    },
-    {
-      "name": "home-tokens",
-      "layer": "organism",
-      "file": "scss/organisms/_home-tokens.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-tokens.scss",
-      "classes": ["org-home-tokens"],
-      "elements": ["org-home-tokens__grid", "org-home-tokens__item"],
-      "tokens": ["--component-home-tokens-padding-y"]
-    },
-    {
-      "name": "home-themes",
-      "layer": "organism",
-      "file": "scss/organisms/_home-themes.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-themes.scss",
-      "classes": ["org-home-themes"],
-      "elements": ["org-home-themes__grid"],
-      "composedOf": ["mol-theme-swatch-card"],
-      "tokens": ["--component-home-themes-padding-y"]
-    },
-    {
-      "name": "home-cta",
-      "layer": "organism",
-      "file": "scss/organisms/_home-cta.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-cta.scss",
-      "classes": ["org-home-cta"],
-      "elements": ["org-home-cta__inner", "org-home-cta__title", "org-home-cta__body", "org-home-cta__actions"],
-      "composedOf": ["atom-title", "atom-txt", "atom-btn"],
-      "tokens": ["--component-home-cta-bg", "--component-home-cta-padding-y"]
-    },
-    {
-      "name": "home-layers",
-      "layer": "organism",
-      "file": "scss/organisms/_home-layers.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-layers.scss",
-      "classes": ["org-home-layers"],
-      "elements": ["org-home-layers__diagram", "org-home-layers__item"],
-      "tokens": ["--component-home-layers-padding-y"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss",
+        "scss/abstracts/tokens/components/_tables.scss"
+      ],
+      "classes": [
+        "org-home-features"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-home-features__grid",
+        "org-home-features__header",
+        "org-home-features__modes",
+        "org-home-features__modes-header",
+        "org-home-features__modes-sub",
+        "org-home-features__modes-table-wrap",
+        "org-home-features__modes-title",
+        "org-home-features__overline",
+        "org-home-features__sub",
+        "org-home-features__title"
+      ],
+      "states": [],
+      "composedOf": [
+        "atom-pill",
+        "mol-feature-card"
+      ],
+      "tokens": [
+        "--component-grid-gutter",
+        "--component-section-align",
+        "--component-section-bg-image",
+        "--component-section-divider-color",
+        "--component-section-divider-width",
+        "--component-section-header-margin-inline",
+        "--component-section-index-color",
+        "--component-section-index-content",
+        "--component-section-index-font",
+        "--component-section-index-gap",
+        "--component-section-index-size",
+        "--component-section-overline-bg",
+        "--component-section-overline-border-width",
+        "--component-section-overline-color",
+        "--component-section-overline-padding",
+        "--component-section-padding-block",
+        "--component-section-padding-inline",
+        "--component-section-tick-color",
+        "--component-section-tick-height",
+        "--component-section-tick-width",
+        "--component-section-title-font-size",
+        "--component-section-title-leading",
+        "--component-section-title-max-width",
+        "--component-section-title-tracking",
+        "--component-section-title-weight",
+        "--component-table-scroll-hint",
+        "--component-table-scroll-mask"
+      ]
     },
     {
       "name": "home-footer",
       "layer": "organism",
       "file": "scss/organisms/_home-footer.scss",
-      "tokenFile": "scss/abstracts/tokens/components/_home-footer.scss",
-      "classes": ["org-home-footer"],
-      "elements": ["org-home-footer__inner", "org-home-footer__nav", "org-home-footer__copy"],
-      "composedOf": ["atom-link"],
-      "tokens": ["--component-home-footer-bg", "--component-home-footer-border", "--component-home-footer-color"]
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-footer"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-home-footer__brand",
+        "org-home-footer__credit",
+        "org-home-footer__divider",
+        "org-home-footer__inner",
+        "org-home-footer__link",
+        "org-home-footer__meta",
+        "org-home-footer__nav"
+      ],
+      "states": [
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-footer-bg",
+        "--component-footer-border-color",
+        "--component-footer-border-width",
+        "--component-section-divider-color",
+        "--component-section-divider-width",
+        "--component-section-padding-block",
+        "--component-section-padding-inline"
+      ]
+    },
+    {
+      "name": "home-hero",
+      "layer": "organism",
+      "file": "scss/organisms/_home-hero.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-hero"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-home-hero__actions",
+        "org-home-hero__badge-row",
+        "org-home-hero__headline",
+        "org-home-hero__headline-accent",
+        "org-home-hero__overline",
+        "org-home-hero__scroll-hint",
+        "org-home-hero__stats",
+        "org-home-hero__sub"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-hero-accent-bg",
+        "--component-hero-accent-color",
+        "--component-hero-accent-decoration-color",
+        "--component-hero-accent-decoration-line",
+        "--component-hero-accent-decoration-offset",
+        "--component-hero-accent-decoration-thickness",
+        "--component-hero-accent-fill",
+        "--component-hero-backdrop",
+        "--component-hero-backdrop-height",
+        "--component-hero-backdrop-left",
+        "--component-hero-backdrop-top",
+        "--component-hero-backdrop-translate",
+        "--component-hero-backdrop-width",
+        "--component-hero-column-gap",
+        "--component-hero-column-gap-wide",
+        "--component-hero-columns",
+        "--component-hero-columns-wide",
+        "--component-hero-content-inline",
+        "--component-hero-figure",
+        "--component-hero-figure-build-duration",
+        "--component-hero-figure-display",
+        "--component-hero-figure-display-wide",
+        "--component-hero-figure-min-height",
+        "--component-hero-figure-opacity",
+        "--component-hero-figure-row-span",
+        "--component-hero-figure-size",
+        "--component-hero-headline-font-size",
+        "--component-hero-headline-leading",
+        "--component-hero-headline-max-width",
+        "--component-hero-headline-tracking",
+        "--component-hero-headline-weight",
+        "--component-hero-justify",
+        "--component-hero-padding-block-start",
+        "--component-hero-scroll-hint-align",
+        "--component-hero-stats-border-color",
+        "--component-hero-stats-border-width",
+        "--component-hero-sub-font-size",
+        "--component-hero-sub-max-width",
+        "--component-hero-text-align",
+        "--component-section-padding-block",
+        "--component-section-padding-inline"
+      ]
+    },
+    {
+      "name": "home-layers",
+      "layer": "organism",
+      "file": "scss/organisms/_home-layers.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-layers"
+      ],
+      "modifiers": [
+        "org-home-layers__stack-item--atoms",
+        "org-home-layers__stack-item--base",
+        "org-home-layers__stack-item--molecules",
+        "org-home-layers__stack-item--organisms",
+        "org-home-layers__stack-item--reset",
+        "org-home-layers__stack-item--tokens",
+        "org-home-layers__stack-item--utilities"
+      ],
+      "elements": [
+        "org-home-layers__body",
+        "org-home-layers__caption",
+        "org-home-layers__content",
+        "org-home-layers__inner",
+        "org-home-layers__overline",
+        "org-home-layers__stack-item",
+        "org-home-layers__stack-item-desc",
+        "org-home-layers__stack-item-name",
+        "org-home-layers__title",
+        "org-home-layers__visual"
+      ],
+      "states": [
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-layer-atoms-accent",
+        "--component-layer-atoms-color",
+        "--component-layer-base-accent",
+        "--component-layer-base-color",
+        "--component-layer-item-accent-width",
+        "--component-layer-item-bg",
+        "--component-layer-item-border-color",
+        "--component-layer-item-border-radius",
+        "--component-layer-item-border-width",
+        "--component-layer-item-gap",
+        "--component-layer-item-shadow-hover",
+        "--component-layer-molecules-accent",
+        "--component-layer-molecules-color",
+        "--component-layer-organisms-accent",
+        "--component-layer-organisms-color",
+        "--component-layer-reset-accent",
+        "--component-layer-reset-color",
+        "--component-layer-tokens-accent",
+        "--component-layer-tokens-color",
+        "--component-layer-utilities-accent",
+        "--component-layer-utilities-bg",
+        "--component-layer-utilities-color",
+        "--component-section-align",
+        "--component-section-padding-block",
+        "--component-section-padding-inline"
+      ]
+    },
+    {
+      "name": "home-themes",
+      "layer": "organism",
+      "file": "scss/organisms/_home-themes.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_cards.scss",
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-themes"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-home-themes__grid",
+        "org-home-themes__header",
+        "org-home-themes__note",
+        "org-home-themes__overline",
+        "org-home-themes__sub",
+        "org-home-themes__title"
+      ],
+      "states": [],
+      "composedOf": [
+        "atom-pill"
+      ],
+      "tokens": [
+        "--component-grid-gutter",
+        "--component-section-align",
+        "--component-section-bg-image",
+        "--component-section-header-margin-inline",
+        "--component-section-index-color",
+        "--component-section-index-content",
+        "--component-section-index-font",
+        "--component-section-index-gap",
+        "--component-section-index-size",
+        "--component-section-overline-bg",
+        "--component-section-overline-border-width",
+        "--component-section-overline-color",
+        "--component-section-overline-padding",
+        "--component-section-padding-block",
+        "--component-section-padding-inline",
+        "--component-section-tick-color",
+        "--component-section-tick-height",
+        "--component-section-tick-width",
+        "--component-section-title-font-size",
+        "--component-section-title-leading",
+        "--component-section-title-max-width",
+        "--component-section-title-tracking",
+        "--component-section-title-weight",
+        "--component-theme-grid-min"
+      ]
+    },
+    {
+      "name": "home-tokens",
+      "layer": "organism",
+      "file": "scss/organisms/_home-tokens.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-home-tokens"
+      ],
+      "modifiers": [
+        "org-home-tokens__layer--component",
+        "org-home-tokens__layer--primitive",
+        "org-home-tokens__layer--semantic",
+        "org-home-tokens__layer--theme"
+      ],
+      "elements": [
+        "org-home-tokens__codes",
+        "org-home-tokens__connector",
+        "org-home-tokens__connector-arrow",
+        "org-home-tokens__connector-label",
+        "org-home-tokens__connector-line",
+        "org-home-tokens__diagram",
+        "org-home-tokens__header",
+        "org-home-tokens__layer",
+        "org-home-tokens__layer-badge",
+        "org-home-tokens__layer-desc",
+        "org-home-tokens__layer-title",
+        "org-home-tokens__overline",
+        "org-home-tokens__rule",
+        "org-home-tokens__rule-body",
+        "org-home-tokens__rule-icon",
+        "org-home-tokens__step",
+        "org-home-tokens__sub",
+        "org-home-tokens__title"
+      ],
+      "states": [
+        ":hover"
+      ],
+      "composedOf": [
+        "atom-code",
+        "atom-icon",
+        "atom-pill"
+      ],
+      "tokens": [
+        "--component-section-align",
+        "--component-section-bg-image",
+        "--component-section-header-margin-inline",
+        "--component-section-index-color",
+        "--component-section-index-content",
+        "--component-section-index-font",
+        "--component-section-index-gap",
+        "--component-section-index-size",
+        "--component-section-justify",
+        "--component-section-overline-bg",
+        "--component-section-overline-border-width",
+        "--component-section-overline-color",
+        "--component-section-overline-padding",
+        "--component-section-padding-block",
+        "--component-section-padding-inline",
+        "--component-section-tick-color",
+        "--component-section-tick-height",
+        "--component-section-tick-width",
+        "--component-token-badge-border-width",
+        "--component-token-badge-radius",
+        "--component-token-component-accent",
+        "--component-token-component-badge-bg",
+        "--component-token-component-badge-border",
+        "--component-token-component-badge-color",
+        "--component-token-component-step-color",
+        "--component-token-connector-arrow-color",
+        "--component-token-connector-line",
+        "--component-token-connector-opacity",
+        "--component-token-layer-badge-width",
+        "--component-token-layer-bg",
+        "--component-token-layer-border-color",
+        "--component-token-layer-border-radius",
+        "--component-token-layer-border-width",
+        "--component-token-layer-hover-lift",
+        "--component-token-layer-shadow-hover",
+        "--component-token-layer-stripe-width",
+        "--component-token-primitive-accent",
+        "--component-token-primitive-badge-bg",
+        "--component-token-primitive-badge-border",
+        "--component-token-primitive-badge-color",
+        "--component-token-primitive-step-color",
+        "--component-token-rule-bg",
+        "--component-token-rule-border-color",
+        "--component-token-rule-border-radius",
+        "--component-token-rule-border-width",
+        "--component-token-rule-icon-bg",
+        "--component-token-rule-icon-color",
+        "--component-token-rule-icon-radius",
+        "--component-token-semantic-accent",
+        "--component-token-semantic-badge-bg",
+        "--component-token-semantic-badge-border",
+        "--component-token-semantic-badge-color",
+        "--component-token-semantic-step-color",
+        "--component-token-step-color",
+        "--component-token-step-radius",
+        "--component-token-theme-accent",
+        "--component-token-theme-badge-bg",
+        "--component-token-theme-badge-border",
+        "--component-token-theme-badge-color",
+        "--component-token-theme-step-color"
+      ]
+    },
+    {
+      "name": "site-header",
+      "layer": "organism",
+      "file": "scss/organisms/_site-header.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_headers.scss",
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "org-site-header",
+        "org-site-nav-drawer",
+        "org-site-nav-overlay"
+      ],
+      "modifiers": [],
+      "elements": [
+        "org-site-header__actions",
+        "org-site-header__brand",
+        "org-site-header__burger",
+        "org-site-header__burger-line",
+        "org-site-header__darkmode",
+        "org-site-header__nav",
+        "org-site-header__theme-select",
+        "org-site-nav-drawer__link",
+        "org-site-nav-drawer__theme"
+      ],
+      "states": [
+        ".is-scrolled",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [
+        "atom-btn",
+        "atom-icon",
+        "atom-select"
+      ],
+      "tokens": [
+        "--component-header-control-border-width",
+        "--component-header-control-height",
+        "--component-header-control-radius",
+        "--component-section-padding-inline"
+      ]
     }
   ],
   "utilities": {

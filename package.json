@@ -1,6 +1,6 @@
 {
   "name": "syx-design-system",
-  "version": "4.12.1",
+  "version": "4.13.0",
   "description": "A modern, token-driven SCSS design system built on Atomic Design principles.",
   "main": "index.html",
   "scripts": {
@@ -19,11 +19,13 @@
     "validate:tokens": "node scripts/validate-tokens.js",
     "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
-    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run build",
+    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
-    "check:tokens": "node scripts/build-token-snapshot.js --check"
+    "check:tokens": "node scripts/build-token-snapshot.js --check",
+    "build:registry": "node scripts/build-component-registry.js",
+    "check:registry": "node scripts/build-component-registry.js --check"
   },
   "keywords": [
     "design-system",

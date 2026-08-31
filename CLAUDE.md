@@ -1,6 +1,6 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.12.1).
+You are working with **SYX**, a token-driven, native SCSS design system (v4.13.0).
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet

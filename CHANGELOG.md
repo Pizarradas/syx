@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.13.0] — 2026-08-31
+
+Paso **0.1** del plan agentic. `component-registry.json` se mantenía a mano y no se regeneraba desde el 3 de marzo. Ahora sale del código y se contrasta contra el CSS compilado.
+
+### Fixed
+
+El registro que `CLAUDE.md` ordena consultar antes de escribir código estaba mayoritariamente equivocado, y un agente que lo obedeciera escribía clases y tokens inexistentes sin forma de saberlo:
+
+| | antes | ahora |
+|---|---:|---:|
+| rutas `tokenFile` rotas | **34 / 34** (100 %) | 0 / 33 |
+| modificadores que no existen en el CSS | **30 / 48** (63 %) | 0 / 158 |
+| tokens fuera de `tokens.json` | **81 / 111** (73 %) | 4 / 552 |
+
+Y además cubre mucho más: de 48 modificadores a **158**, de 111 tokens a **552**, con 107 elementos que antes no estaban.
+
+- **`tokenFile` pasa a `tokenFiles`** (array). Un componente lee tokens declarados en varios ficheros —`btn` toca `_buttons.scss` y `_icons.scss`— y el campo anterior, además de apuntar a rutas inexistentes, solo admitía una.
+
+### Added
+
+- **`scripts/build-component-registry.js`** (`npm run build:registry`) y **`npm run check:registry`**, dentro de `npm run check`, que falla si el registro se desfasa del código.
+
+  El árbitro es el **CSS compilado**: una clase entra en el registro solo si aparece de verdad en la hoja de estilos. Es lo que garantiza que no vuelvan los 30 modificadores fantasma. `description` y `usage` no se generan —son prosa escrita a mano— y sobreviven a cada regeneración.
+
+### Notes
+
+Tres fallos propios por el camino, todos del mismo tipo: **acusar de roto lo que funciona**, que es el vicio que este paso venía a corregir.
+
+- Al entrar en el primer `@mixin` se apilaba un contexto vacío en vez de `['']`, y el bucle sobre los padres no iteraba: salían **0 clases** en todos los ficheros.
+- Se marcaban como fantasma las clases intermedias del anidamiento. `&--is { &-fs { … } }` produce `.atom-table--is-fs` y de paso un `.atom-table--is` que no llega al CSS porque no lleva declaraciones propias. Eso es cómo se escribe el Sass, no deriva.
+- Se denunciaban tokens sin declarar que siempre se citan con `var(--x, fallback)`. Misma corrección que en 4.12.0.
+
+Y encontró cuatro cosas ciertas:
+
+- **`--component-check-bg` y `--component-radio-bg`** se usan **sin fallback** y no los declara nadie: la casilla y el radio se quedan sin fondo. `syx-validate` no lo veía porque R05 y R06 comparan declaraciones contra `tokens.json`, no el CONSUMO contra las declaraciones.
+- **`.atom-label` la declaran dos ficheros** (`_form.scss` y `_label.scss`) y **`.atom-icon` otros dos** (`_icon.scss` y `_icon-lucide.scss`). No es un fallo del generador, pero quien pregunte «¿dónde se define esta clase?» merece las dos respuestas, y ahora las tiene.
+
+---
+
 ## [4.12.1] — 2026-08-31
 
 ### Fixed
