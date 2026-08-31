@@ -80,6 +80,17 @@ const TOKEN_TO_FILE = {
   "activity": "activity",
   "check-circle": "circle-check",
   "pie-chart": "chart-pie",
+  // Añadidos en 4.20.0: los pedían docs.html y why-syx.html y no existían, así
+  // que el navegador pintaba un hueco. Los encontró el escáner de desviación.
+  "layout": "layout",
+  "code": "code",
+  "corner-down-right": "corner-down-right",
+  "arrow-up": "arrow-up",
+  "users": "users",
+  "award": "award",
+  "git-compare": "git-compare",
+  "briefcase": "briefcase",
+  "x-circle": "x-circle",
 };
 
 /** Minifica un SVG y lo codifica para caber dentro de url("…"). */

@@ -89,6 +89,7 @@ const TITULOS = {
   'clase-fantasma': 'Clases con pinta de SYX que el sistema no declara',
   'modificador-inventado': 'Modificadores que no pintan nada',
   contrato: 'Reglas del sistema rotas en el consumidor',
+  'base-sin-estilos': 'Bases sin estilos, con modificadores que sí existen',
   'gancho-js': 'Clases que solo usa el JavaScript',
 };
 const MARCA = { alta: '🔴', media: '🟠', baja: '·' };

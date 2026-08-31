@@ -56,6 +56,10 @@ const MUESTRA = `<!doctype html>
   <span class="atom-icon atom-icon--lc-inventadisimo"></span>
   <!-- 9 · clase con pinta de SYX que no existe -->
   <p class="atom-txtx">Hola</p>
+  <!-- 11 · la alcanza [class*=__item], aunque no exista como .clase: no debe salir -->
+  <ul class="atom-list atom-list--primary"><li class="atom-list__item">Uno</li></ul>
+  <!-- 12 · base sin estilos cuyos modificadores sí existen: aviso suave, no error -->
+  <p class="atom-txt atom-txt--primary">Cuerpo</p>
   <!-- 10 · lo mismo pero DENTRO de un ejemplo: nada de esto debe salir -->
   <pre><code>&lt;p class="atom-otro-inventado"&gt;
   color: var(--semantic-color-primary, #6d28d9);
@@ -116,6 +120,24 @@ comprobar('la clase con pinta de SYX que no existe, con la real al lado', () => 
   if (!h.sugerencia) throw new Error('no sugiere ninguna parecida');
 });
 
+comprobar('no denuncia una clase que pinta por selector de atributo', () => {
+  // `.atom-list--primary [class*=__item]` alcanza a `.atom-list__item` sin que
+  // ese nombre exista como selector de clase. Borrarla del marcado —que es lo
+  // que habría hecho quien leyera el informe— deja la lista sin iconos.
+  if (JSON.stringify(informe.hallazgos).includes('atom-list__item')) {
+    throw new Error('la denuncia, y el CSS sí la alcanza por [class*=__item]');
+  }
+});
+
+comprobar('una base sin estilos con modificadores reales es aviso, no error', () => {
+  const h = uno('base-sin-estilos', 'atom-txt');
+  if (h.gravedad !== 'baja') throw new Error(`gravedad ${h.gravedad}: la familia existe, solo falta la base`);
+  if (!h.detalle.includes('atom-txt--primary')) throw new Error('no enseña el modificador que sí existe');
+  if (informe.hallazgos.some((x) => x.tipo === 'clase-fantasma' && x.que.includes('.atom-txt '))) {
+    throw new Error('además la cuenta como clase inventada');
+  }
+});
+
 comprobar('distingue un asidero de JavaScript de una clase muerta', () => {
   const h = uno('gancho-js', 'syx--theme-syx-sketch');
   if (h.gravedad !== 'baja') throw new Error('un asidero no es un error grave');
@@ -142,7 +164,7 @@ comprobar('no señala las clases correctas', () => {
 });
 
 comprobar('NO señala nada de lo que hay dentro de un <pre> de ejemplo', () => {
-  const dentro = informe.hallazgos.filter((h) => h.linea >= 30);
+  const dentro = informe.hallazgos.filter((h) => h.linea >= 34);
   if (dentro.length) {
     throw new Error(`${dentro.length} hallazgo(s) en el ejemplo de código:\n     ${dentro.map((h) => `L${h.linea} ${h.que}`).join('\n     ')}`);
   }
@@ -153,22 +175,30 @@ comprobar('NO señala nada de lo que hay dentro de un <pre> de ejemplo', () => {
 
 // ─── Y sobre la aplicación consumidora de verdad ─────────────────────────────
 
-comprobar('sobre docs.html encuentra desviación real y comprobable', () => {
-  const r = escanear({ files: [path.join(ROOT, 'docs.html')], syx });
-  if (r.total < 10) throw new Error(`solo ${r.total} hallazgos: o la página está limpia o el escáner no mira`);
-  const fb = r.hallazgos.filter((h) => h.tipo === 'fallback-desviado');
-  if (!fb.length) throw new Error('no ve los fallbacks caducados de la hoja de la página');
-
-  // La comprobación que de verdad importa: cada clase que denuncia tiene que
-  // estar ausente del CSS compilado. Si una sola aparece, el escáner miente y
-  // todo lo demás deja de valer.
+comprobar('sobre las páginas reales no denuncia nada que sí exista', () => {
+  // No se comprueba CUÁNTA desviación encuentra: esa cifra baja según se
+  // arregla, y una prueba que exigiera un mínimo castigaría el progreso. Lo que
+  // se comprueba es la mitad falsable — que cada clase denunciada esté de
+  // verdad ausente del CSS, como selector de clase Y como selector de atributo.
+  // Si una sola apareciera, el escáner miente y lo demás deja de valer.
+  const paginas = ['home.html', 'docs.html', 'why-syx.html', 'theme-builder.html']
+    .map((f) => path.join(ROOT, f))
+    .filter((f) => fs.existsSync(f));
+  const r = escanear({ files: paginas, syx });
   const css = fs.readFileSync(syx.cssPath('syx-sketch'), 'utf8');
+  const atributos = [...css.matchAll(/\[class([*^$~|]?)=["']?([^"'\]]+)["']?\]/g)];
+
   for (const h of r.hallazgos.filter((x) => x.tipo === 'clase-fantasma' || x.tipo === 'modificador-inventado')) {
     const clase = h.que.match(/\.([a-zA-Z0-9_-]+)/)[1];
     if (new RegExp(`\\.${clase}(?![a-zA-Z0-9_-])`).test(css)) {
       throw new Error(`denuncia .${clase} y sí está en el CSS compilado`);
     }
+    for (const [, op, v] of atributos) {
+      const alcanza = op === '*' ? clase.includes(v) : op === '^' ? clase.startsWith(v) : op === '$' ? clase.endsWith(v) : clase === v;
+      if (alcanza) throw new Error(`denuncia .${clase} y la alcanza [class${op}=${v}]`);
+    }
   }
+  if (!r.hallazgos.length && !paginas.length) throw new Error('no ha leído ninguna página');
 });
 
 comprobar('sobre home.html no inventa desviación donde no la hay', () => {

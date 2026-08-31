@@ -135,10 +135,16 @@ comprobar('classify_change deduce el fichero de un token y el nivel de un cambio
   if (c.cambio.tier !== 'human') throw new Error(`nivel ${c.cambio.tier}: un cambio no es más libre que su fichero más delicado`);
 });
 
-comprobar('scan_for_drift ve la desviación de docs.html', async () => {
+comprobar('scan_for_drift devuelve un informe bien formado', async () => {
+  // No se exige que encuentre N desviaciones: esa cifra baja según se arreglan
+  // —ya rompió esta prueba una vez, por haber limpiado docs.html— y aquí lo que
+  // se comprueba es el protocolo. Que DETECTE lo prueba check-escaner.js con su
+  // fichero de mentira, donde la respuesta es conocida y no cambia sola.
   const r = salida(await rpc('tools/call', { name: 'scan_for_drift', arguments: { files: ['docs.html'] } }));
-  if (!r.total) throw new Error('no encuentra nada en una página que sí se ha desviado');
-  if (!r.porTipo['fallback-desviado']) throw new Error('no ve los fallbacks caducados');
+  if (r.ficheros !== 1) throw new Error(`dice haber leído ${r.ficheros} ficheros`);
+  if (typeof r.total !== 'number' || !Array.isArray(r.hallazgos)) throw new Error('informe mal formado');
+  if (r.total !== r.hallazgos.length) throw new Error('el total no cuadra con los hallazgos');
+  if (r.theme !== 'syx-sketch') throw new Error('no dice contra qué tema compara');
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {

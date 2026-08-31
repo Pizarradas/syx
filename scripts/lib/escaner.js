@@ -135,6 +135,25 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
   const clasesSistema = new Set([...cssSistema.matchAll(/\.([a-zA-Z][a-zA-Z0-9_-]*)/g)].map((m) => m[1]));
   const clasesSyx = [...clasesSistema].filter((c) => PREFIJOS_SYX.test(c));
 
+  // No todo lo que pinta se escribe como `.clase`.
+  //
+  // `.atom-list--primary [class*=__item]` alcanza a `.atom-list__item` sin que
+  // ese nombre aparezca nunca como selector de clase. La primera versión de
+  // este escáner denunció tres clases así, y estuvieron a punto de borrarse del
+  // marcado: habrían dejado la lista anidada sin iconos. Ojo con las comillas —
+  // el CSS compilado las omite (`[class*=__item]`), y una expresión que las
+  // exigiera no encontraría ninguno.
+  const porAtributo = [...cssSistema.matchAll(/\[class([*^$~|]?)=["']?([^"'\]]+)["']?\]/g)]
+    .map((m) => ({ op: m[1] || '=', v: m[2] }));
+  const alcanzadaPorAtributo = (c) =>
+    porAtributo.filter((a) =>
+      a.op === '*' ? c.includes(a.v)
+        : a.op === '^' ? c.startsWith(a.v)
+          : a.op === '$' ? c.endsWith(a.v)
+            : a.op === '~' || a.op === '=' ? c === a.v
+              : false
+    );
+
   for (const file of files) {
     const rel = path.relative(process.cwd(), file);
     const bruto = fs.readFileSync(file, 'utf8');
@@ -254,6 +273,27 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
           .sort((a, b) => a.d - b.d)
           .slice(0, 3)
           .map((x) => x.c);
+        const porAttr = alcanzadaPorAtributo(clase);
+        if (porAttr.length) continue; // la pinta un selector de atributo
+
+        // Una base sin estilos propios cuyos modificadores SÍ existen no es una
+        // clase inventada: es el ancla de una familia que el sistema declara.
+        // `.atom-txt` no emite nada, pero `.atom-txt--primary` sí, y de 18
+        // familias es la única a la que le falta la base. Eso es una pregunta de
+        // diseño para una persona, no 77 errores repetidos.
+        const familia = [...clasesSistema].filter((x) => x.startsWith(clase + '--'));
+        if (familia.length) {
+          añadir({
+            tipo: 'base-sin-estilos',
+            gravedad: 'baja',
+            file: rel, linea,
+            que: `.${clase} no declara nada${veces > 1 ? ` (${veces} usos)` : ''}`,
+            detalle: `Sus modificadores sí existen (${familia.slice(0, 3).map((f) => '.' + f).join(', ')}), así que la familia es real y solo falta la base.`,
+            sugerencia: 'O la base recibe los estilos que su nombre promete, o sobra en el marcado. Es una decisión de diseño.',
+          });
+          continue;
+        }
+
         const gancho = esGancho(clase);
         if (gancho) {
           añadir({

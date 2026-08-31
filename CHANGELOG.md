@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.20.0] — 2026-08-31
+
+### Fixed
+
+- **De 64 desviaciones a 19, y ninguna de gravedad alta.** Lo que queda son preguntas, no errores. El escáner del paso 2.2 se estrenó apuntando a nuestras propias páginas; esto es lo que salió de arreglarlas.
+
+- **27 fallbacks caducados retirados** de `docs.html` y `theme-builder.html`. Nueve eran el `#6d28d9` morado de una paleta anterior escrito junto a `--semantic-color-primary`, que hoy es azul. Antes de quitar ninguno se comprobó que los seis tokens implicados existen en los siete temas, en claro y en oscuro: un fallback solo sobra si el token nunca falta.
+
+- **Nueve iconos que no pintaban nada, ahora existen**: `layout`, `code`, `corner-down-right`, `arrow-up`, `users`, `award`, `git-compare`, `briefcase` y `x-circle`. `why-syx.html` pedía `lc-users` cuando el sistema solo tenía `lc-user` — una `s`. Los SVG vienen de `lucide-static@0.575.0`, la misma versión que los otros 51, no de la última: mezclar versiones de Lucide mezcla dos generaciones de trazo. Verificado en navegador: los nueve tienen máscara y pintan.
+
+- `--semantic-color-primary-dark` no existía y `docs.html` pintaba **siempre** su fallback `#5b21b6`. Ahora usa `--semantic-color-state-hover-primary`, que es el token que dice exactamente eso.
+
+- Retiradas del marcado las clases que no pintan nada: `.mol-card` (17 usos), `.syx-border-b`, `.syx-border-primary`, `.atom-switch--sm` (5) y la fila de la galería que documentaba `.syx-type-display-1`, una utilidad que el sistema no tiene. **Documentar lo que no existe es la peor clase de desviación**: se propaga a quien lee.
+
+### Fixed — en el propio escáner
+
+- **Denunciaba tres clases que sí pintan, y por poco se borran del marcado.** `.atom-list--primary [class*=__item]` alcanza a `.atom-list__item` sin que ese nombre aparezca nunca como selector de clase. Borrarlas —que es lo que haría cualquiera leyendo el informe— habría dejado las listas anidadas sin iconos.
+
+  El escáner ya lee los selectores de atributo. Ojo con el detalle que lo hacía invisible: el CSS compilado escribe `[class*=__item]` **sin comillas**, y una expresión que las exigiera no encuentra ninguno.
+
+- **Nuevo tipo `base-sin-estilos`, gravedad baja.** `.atom-txt` no emite nada, pero `.atom-txt--primary` sí. De 18 familias de componentes es la única sin clase base. Eso no son 77 errores repetidos en tres páginas: es una pregunta de diseño para una persona, y ahora el informe la hace una vez.
+
+### Changed
+
+- La prueba del escáner deja de exigir un mínimo de hallazgos sobre `docs.html`. Esa cifra baja según se arregla, y una prueba que exija un mínimo castiga el progreso: fallaba precisamente por haber limpiado la página. Ahora comprueba la mitad falsable — que ninguna clase denunciada exista en el CSS, ni como selector de clase ni por atributo. 15 comprobaciones.
+
+- Verificado en navegador que las tres páginas se pintan igual que antes: mismos colores, misma altura, sin desbordamiento. La única diferencia son los 67 px y tres nodos de la fila retirada de la galería.
+
+### Known
+
+- **Quedan 12 `!important` y dos `position` en crudo** en el CSS de página de `theme-builder.html` y `docs.html`. Son la propia herramienta peleándose con la cascada; tocarlos es rediseñar el builder, y eso no es limpieza.
+- `.syx--theme-builder` sigue en el `<body>` de `theme-builder.html` sin que nada la declare — y detrás hay algo mayor: **ningún CSS compilado declara `.syx--theme-*`**, en ningún tema, aunque el README las dé por obligatorias. O la clase gobierna algo o la documentación promete de más.
+- El sistema podría ganar `.mol-card`, `.syx-border-b` y `atom-switch--sm`: las páginas los pedían. Se han quitado en vez de inventarlos porque añadir un componente o una utilidad es una decisión de diseño, y quitarlos no cambió un píxel.
+
+---
+
 ## [4.19.0] — 2026-08-31
 
 ### Added
