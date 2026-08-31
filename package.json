@@ -1,6 +1,6 @@
 {
   "name": "syx-design-system",
-  "version": "4.27.0",
+  "version": "4.28.0",
   "description": "A modern, token-driven SCSS design system built on Atomic Design principles. Ships its own contracts and an MCP server, so agents and apps can query it instead of reading it.",
   "main": "index.js",
   "exports": {
@@ -64,11 +64,12 @@
     "validate:tokens": "node scripts/validate-tokens.js",
     "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
-    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:mixins && npm run check:modos && npm run check:encoding && npm run check:package && npm run build",
+    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:mixins && npm run check:modos && npm run check:encoding && npm run check:package && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
     "check:tokens": "node scripts/build-token-snapshot.js --check",
+    "check:huerfanos": "node scripts/check-huerfanos.js",
     "build:registry": "node scripts/build-component-registry.js",
     "check:registry": "node scripts/build-component-registry.js --check",
     "mcp": "node scripts/mcp-server.js",

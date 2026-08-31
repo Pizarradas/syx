@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T22:32:54.018Z",
+    "generatedAt": "2026-08-31T22:46:00.280Z",
     "source": "css/styles-theme-example-01.css",
     "stats": {
-      "total": 1352,
-      "official": 1079,
-      "legacy": 273
+      "total": 1357,
+      "official": 1082,
+      "legacy": 275
     }
   },
   "tokens": {
@@ -977,6 +977,13 @@
     },
     "--primitive-font-weight-bold": {
       "value": "700",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "primitive"
+    },
+    "--primitive-font-weight-black": {
+      "value": "900",
       "usedInSelectors": [
         ":root"
       ],
@@ -3083,7 +3090,7 @@
       "category": "component"
     },
     "--component-button-font-size-sm": {
-      "value": "var(--semantic-font-size-sm)",
+      "value": "var(--semantic-font-size-body-sm)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3523,6 +3530,13 @@
       ],
       "category": "component"
     },
+    "--component-check-bg": {
+      "value": "var(--semantic-color-bg-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-check-shadow-focus": {
       "value": "var(--semantic-shadow-focus)",
       "usedInSelectors": [
@@ -3531,7 +3545,7 @@
       "category": "component"
     },
     "--component-check-icon-image": {
-      "value": "var(--icon-check)",
+      "value": "var(--lc-icon-check)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3595,6 +3609,13 @@
     },
     "--component-radio-bg-checked": {
       "value": "var(--semantic-color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-radio-bg": {
+      "value": "var(--semantic-color-bg-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3678,14 +3699,14 @@
       "category": "component"
     },
     "--component-switch-icon-on": {
-      "value": "var(--icon-check)",
+      "value": "var(--lc-icon-check)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-switch-icon-off": {
-      "value": "var(--icon-close)",
+      "value": "var(--lc-icon-x)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4021,28 +4042,28 @@
       "category": "component"
     },
     "--component-pagination-icon-prev": {
-      "value": "var(--icon-chevron-left)",
+      "value": "var(--lc-icon-chevron-left)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-pagination-icon-next": {
-      "value": "var(--icon-chevron-right)",
+      "value": "var(--lc-icon-chevron-right)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-pagination-icon-first": {
-      "value": "var(--icon-chevron-double-left)",
+      "value": "var(--lc-icon-chevrons-left)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-pagination-icon-last": {
-      "value": "var(--icon-chevron-double-right)",
+      "value": "var(--lc-icon-chevrons-right)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4084,7 +4105,7 @@
       "category": "component"
     },
     "--component-list-ordered-counter-font-size": {
-      "value": "var(--semantic-font-size-sm)",
+      "value": "var(--semantic-font-size-body-sm)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4707,6 +4728,7 @@
         ".atom-icon--lc-chevron-up:before",
         ".atom-icon--lc-chevrons-right:before",
         ".atom-icon--lc-chevrons-down:before",
+        ".atom-icon--lc-chevrons-left:before",
         ".atom-icon--lc-arrow-right:before",
         ".atom-icon--lc-arrow-left:before",
         ".atom-icon--lc-search:before",
@@ -8781,6 +8803,13 @@
       ],
       "category": "legacy"
     },
+    "--lc-icon-chevrons-left": {
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E\")",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "legacy"
+    },
     "--lc-icon-arrow-right": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3Cpath d='m12 5 7 7-7 7' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
@@ -9198,6 +9227,13 @@
       "value": "before {",
       "usedInSelectors": [
         ".atom-icon--lc-chevrons-down:before"
+      ],
+      "category": "legacy"
+    },
+    "--lc-chevrons-left": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--lc-chevrons-left:before"
       ],
       "category": "legacy"
     },

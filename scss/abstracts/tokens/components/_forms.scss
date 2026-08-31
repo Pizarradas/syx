@@ -92,12 +92,14 @@
   --component-check-border-color-hover: var(--semantic-color-primary);
   --component-check-color-checked: var(--semantic-color-primary);
   --component-check-bg-checked: var(--semantic-color-primary);
+  // Fondo del checkbox sin marcar: solo existia --component-check-bg-checked, asi que el control se pintaba transparente sobre cualquier superficie
+  --component-check-bg: var(--semantic-color-bg-primary);
   --component-check-shadow-focus: var(--semantic-shadow-focus);
 
   // CHECKBOX: ICONS
   // ================================================
   // Assuming these are defined globally or need to be passed in
-  --component-check-icon-image: var(--icon-check);
+  --component-check-icon-image: var(--lc-icon-check);
 
   // RADIO: SIZING & SPACING
   // ================================================
@@ -113,6 +115,8 @@
   --component-radio-border-color-hover: var(--semantic-color-primary);
   --component-radio-color-checked: var(--semantic-color-primary);
   --component-radio-bg-checked: var(--semantic-color-primary);
+  // Fondo del radio sin marcar: mismo caso que el checkbox, solo existia --component-radio-bg-checked
+  --component-radio-bg: var(--semantic-color-bg-primary);
 
   // SWITCH: SIZING
   // ================================================
@@ -133,8 +137,8 @@
   // ================================================
   --component-switch-status-color-on: var(--semantic-color-state-success);
   --component-switch-status-color-off: var(--semantic-color-state-error);
-  --component-switch-icon-on: var(--icon-check); // Ensure these exist or use semantic icons
-  --component-switch-icon-off: var(--icon-close);
+  --component-switch-icon-on: var(--lc-icon-check); // Ensure these exist or use semantic icons
+  --component-switch-icon-off: var(--lc-icon-x);
   --component-switch-status-icon-filter: brightness(0) invert(1); // For white icons
 
   // FORM CONTROLS: MOVIMIENTO Y MARCAS

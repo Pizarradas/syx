@@ -24,11 +24,14 @@ $tokens-colors: (
   'white': var(--primitive-color-white),
   
   // Semantic Contexts
+  // Los cuatro nombres de aquí abajo no existían: `text-default`, `text-weak`,
+  // `bg-base` y `bg-subtle` nunca se declararon en ningún tema. Nadie lo notó
+  // porque este mapa está escrito y no lo consume nadie todavía.
   'primary': var(--semantic-color-primary),
-  'text': var(--semantic-color-text-default),
-  'text-weak': var(--semantic-color-text-weak),
-  'bg': var(--semantic-color-bg-base),
-  'bg-subtle': var(--semantic-color-bg-subtle),
+  'text': var(--semantic-color-text-primary),
+  'text-weak': var(--semantic-color-text-secondary),
+  'bg': var(--semantic-color-bg-primary),
+  'bg-subtle': var(--semantic-color-bg-secondary),
   
   // Status
   'success': var(--semantic-color-state-success),

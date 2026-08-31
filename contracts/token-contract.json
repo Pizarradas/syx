@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T22:32:54.018Z",
-    "totalTokens": 1080
+    "generatedAt": "2026-08-31T22:46:00.280Z",
+    "totalTokens": 1083
   },
   "tokens": {
     "--primitive-border-width-0": {
@@ -2084,6 +2084,16 @@
       "inRuntime": true,
       "usageCount": 4
     },
+    "--primitive-font-weight-black": {
+      "key": "font-weight-black",
+      "type": "FLOAT",
+      "value": 900,
+      "rawValue": "900",
+      "status": "active",
+      "layer": "primitive",
+      "inRuntime": true,
+      "usageCount": 1
+    },
     "--primitive-letter-spacing-tight": {
       "key": "letter-spacing-tight",
       "type": "STRING",
@@ -2531,7 +2541,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 10
+      "usageCount": 11
     },
     "--semantic-color-bg-secondary": {
       "key": "color-bg-secondary",
@@ -2541,7 +2551,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 11
+      "usageCount": 12
     },
     "--semantic-color-bg-tertiary": {
       "key": "color-bg-tertiary",
@@ -2571,7 +2581,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 19
+      "usageCount": 20
     },
     "--semantic-color-text-secondary": {
       "key": "color-text-secondary",
@@ -2581,7 +2591,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 15
+      "usageCount": 16
     },
     "--semantic-color-text-tertiary": {
       "key": "color-text-tertiary",
@@ -3201,7 +3211,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 4
+      "usageCount": 10
     },
     "--semantic-font-family-primary-bold": {
       "key": "font-family-primary-bold",
@@ -3301,7 +3311,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 3
     },
     "--semantic-font-size-h6": {
       "key": "font-size-h6",
@@ -3961,7 +3971,7 @@
       "layer": "semantic",
       "note": "Reservado: los temas lo declaran como initial. Existe para que una paleta de 7 roles pueda usarlo sin crear el token.",
       "inRuntime": true,
-      "usageCount": 1
+      "usageCount": 0
     },
     "--semantic-color-primary-text": {
       "key": "primary-text",
@@ -5102,6 +5112,16 @@
       "inRuntime": true,
       "usageCount": 1
     },
+    "--component-check-bg": {
+      "key": "check-bg",
+      "type": "ALIAS",
+      "value": "--semantic-color-bg-primary",
+      "rawValue": "var(--semantic-color-bg-primary)",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
     "--component-check-shadow-focus": {
       "key": "check-shadow-focus",
       "type": "ALIAS",
@@ -5207,6 +5227,16 @@
       "type": "ALIAS",
       "value": "--semantic-color-primary",
       "rawValue": "var(--semantic-color-primary)",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-radio-bg": {
+      "key": "radio-bg",
+      "type": "ALIAS",
+      "value": "--semantic-color-bg-primary",
+      "rawValue": "var(--semantic-color-bg-primary)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,

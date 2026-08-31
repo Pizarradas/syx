@@ -69,6 +69,10 @@
   --primitive-font-weight-medium: 500;
   --primitive-font-weight-semibold: 600;
   --primitive-font-weight-bold: 700;
+  // 900 — la capa semántica lo citaba desde antes de que existiera aquí, así
+  // que `--semantic-font-weight-black` no resolvía y seis componentes pintaban
+  // en 400 sin que nadie lo viera.
+  --primitive-font-weight-black: 900;
 
   // LETTER SPACING
   // ================================================

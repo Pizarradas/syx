@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T22:32:54.018Z",
-    "totalMappedTokens": 1453
+    "generatedAt": "2026-08-31T22:46:00.280Z",
+    "totalMappedTokens": 1441
   },
   "map": {
     "--primitive-fluid-space-xs": {
@@ -104,24 +104,79 @@
         "scss/utilities/_text.scss"
       ]
     },
-    "--semantic-color-text-default": {
+    "--semantic-color-text-primary": {
       "usages": [
-        "scss/abstracts/maps/_tokens.scss"
+        "scss/abstracts/maps/_tokens.scss",
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_pills.scss",
+        "scss/abstracts/tokens/components/_sections.scss",
+        "scss/abstracts/tokens/components/_tables.scss",
+        "scss/abstracts/tokens/components/_titles.scss",
+        "scss/atoms/_code.scss",
+        "scss/base/_elements.scss",
+        "scss/base/_token-aliases.scss",
+        "scss/molecules/_feature-card.scss",
+        "scss/molecules/_theme-swatch-card.scss",
+        "scss/organisms/_home-features.scss",
+        "scss/organisms/_home-footer.scss",
+        "scss/organisms/_home-hero.scss",
+        "scss/organisms/_home-layers.scss",
+        "scss/organisms/_home-themes.scss",
+        "scss/organisms/_home-tokens.scss",
+        "scss/organisms/_site-header.scss",
+        "scss/pages/_theme-builder.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
-    "--semantic-color-text-weak": {
+    "--semantic-color-text-secondary": {
       "usages": [
-        "scss/abstracts/maps/_tokens.scss"
+        "scss/abstracts/maps/_tokens.scss",
+        "scss/abstracts/tokens/components/_pills.scss",
+        "scss/atoms/_feature-icon.scss",
+        "scss/atoms/_stat-counter.scss",
+        "scss/molecules/_code-snippet.scss",
+        "scss/molecules/_feature-card.scss",
+        "scss/organisms/_home-features.scss",
+        "scss/organisms/_home-footer.scss",
+        "scss/organisms/_home-hero.scss",
+        "scss/organisms/_home-layers.scss",
+        "scss/organisms/_home-themes.scss",
+        "scss/organisms/_home-tokens.scss",
+        "scss/organisms/_site-header.scss",
+        "scss/pages/_theme-builder.scss",
+        "scss/themes/syx-sketch/_theme.scss",
+        "scss/utilities/_text.scss"
       ]
     },
-    "--semantic-color-bg-base": {
+    "--semantic-color-bg-primary": {
       "usages": [
-        "scss/abstracts/maps/_tokens.scss"
+        "scss/abstracts/maps/_tokens.scss",
+        "scss/abstracts/tokens/components/_cards.scss",
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_headers.scss",
+        "scss/abstracts/tokens/components/_sections.scss",
+        "scss/abstracts/tokens/components/_tables.scss",
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/molecules/_theme-swatch-card.scss",
+        "scss/organisms/_site-header.scss",
+        "scss/pages/_theme-builder.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
-    "--semantic-color-bg-subtle": {
+    "--semantic-color-bg-secondary": {
       "usages": [
-        "scss/abstracts/maps/_tokens.scss"
+        "scss/abstracts/maps/_tokens.scss",
+        "scss/abstracts/tokens/components/_cards.scss",
+        "scss/abstracts/tokens/components/_pills.scss",
+        "scss/atoms/_feature-icon.scss",
+        "scss/base/_token-aliases.scss",
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/organisms/_home-themes.scss",
+        "scss/organisms/_home-tokens.scss",
+        "scss/organisms/_site-header.scss",
+        "scss/pages/_theme-builder.scss",
+        "scss/themes/syx-sketch/_theme.scss",
+        "scss/utilities/_text.scss"
       ]
     },
     "--semantic-color-state-success": {
@@ -411,7 +466,7 @@
         "scss/base/_token-aliases.scss"
       ]
     },
-    "--semantic-font-size-sm": {
+    "--semantic-font-size-body-sm": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_lists.scss",
@@ -507,20 +562,6 @@
         "scss/abstracts/tokens/components/_surfaces.scss"
       ]
     },
-    "--semantic-color-bg-primary": {
-      "usages": [
-        "scss/abstracts/tokens/components/_cards.scss",
-        "scss/abstracts/tokens/components/_forms.scss",
-        "scss/abstracts/tokens/components/_headers.scss",
-        "scss/abstracts/tokens/components/_sections.scss",
-        "scss/abstracts/tokens/components/_tables.scss",
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_site-header.scss",
-        "scss/pages/_theme-builder.scss",
-        "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
     "--semantic-border-width-thin": {
       "usages": [
         "scss/abstracts/tokens/components/_cards.scss",
@@ -557,21 +598,6 @@
     "--semantic-border-radius-none": {
       "usages": [
         "scss/abstracts/tokens/components/_cards.scss"
-      ]
-    },
-    "--semantic-color-bg-secondary": {
-      "usages": [
-        "scss/abstracts/tokens/components/_cards.scss",
-        "scss/abstracts/tokens/components/_pills.scss",
-        "scss/atoms/_feature-icon.scss",
-        "scss/base/_token-aliases.scss",
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/organisms/_site-header.scss",
-        "scss/pages/_theme-builder.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/utilities/_text.scss"
       ]
     },
     "--component-theme-card-swatch-01-from": {
@@ -685,29 +711,6 @@
         "scss/abstracts/tokens/components/_cards.scss"
       ]
     },
-    "--semantic-color-text-primary": {
-      "usages": [
-        "scss/abstracts/tokens/components/_forms.scss",
-        "scss/abstracts/tokens/components/_pills.scss",
-        "scss/abstracts/tokens/components/_sections.scss",
-        "scss/abstracts/tokens/components/_tables.scss",
-        "scss/abstracts/tokens/components/_titles.scss",
-        "scss/atoms/_code.scss",
-        "scss/base/_elements.scss",
-        "scss/base/_token-aliases.scss",
-        "scss/molecules/_feature-card.scss",
-        "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/organisms/_site-header.scss",
-        "scss/pages/_theme-builder.scss",
-        "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
     "--semantic-color-border-default": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
@@ -815,15 +818,17 @@
         "scss/abstracts/tokens/components/_forms.scss"
       ]
     },
-    "--icon-check": {
+    "--lc-icon-check": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
+        "scss/atoms/_icon-lucide.scss",
         "scss/molecules/_form-field.scss"
       ]
     },
-    "--icon-close": {
+    "--lc-icon-x": {
       "usages": [
-        "scss/abstracts/tokens/components/_forms.scss"
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/atoms/_icon-lucide.scss"
       ]
     },
     "--semantic-duration-fast": {
@@ -964,29 +969,55 @@
     "--semantic-font-family-primary": {
       "usages": [
         "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/atoms/_stat-counter.scss",
         "scss/base/_token-aliases.scss",
+        "scss/molecules/_code-snippet.scss",
+        "scss/molecules/_feature-card.scss",
+        "scss/molecules/_theme-swatch-card.scss",
+        "scss/organisms/_home-hero.scss",
+        "scss/organisms/_site-header.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
     },
-    "--icon-chevron-left": {
+    "--lc-icon-chevron-left": {
       "usages": [
-        "scss/abstracts/tokens/components/_navigation.scss"
+        "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/atoms/_icon-lucide.scss",
+        "scss/atoms/_pagination.scss"
       ]
     },
-    "--icon-chevron-right": {
+    "--lc-icon-chevron-right": {
       "usages": [
-        "scss/abstracts/tokens/components/_navigation.scss"
+        "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/atoms/_icon-lucide.scss",
+        "scss/atoms/_pagination.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
-    "--icon-chevron-double-left": {
+    "--lc-icon-chevrons-left": {
       "usages": [
-        "scss/abstracts/tokens/components/_navigation.scss"
+        "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/atoms/_icon-lucide.scss"
       ]
     },
-    "--icon-chevron-double-right": {
+    "--lc-icon-chevrons-right": {
       "usages": [
-        "scss/abstracts/tokens/components/_navigation.scss"
+        "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/atoms/_icon-lucide.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-line-height-tight": {
@@ -1080,25 +1111,6 @@
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--semantic-color-text-secondary": {
-      "usages": [
-        "scss/abstracts/tokens/components/_pills.scss",
-        "scss/atoms/_feature-icon.scss",
-        "scss/atoms/_stat-counter.scss",
-        "scss/molecules/_code-snippet.scss",
-        "scss/molecules/_feature-card.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/organisms/_site-header.scss",
-        "scss/pages/_theme-builder.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/utilities/_text.scss"
       ]
     },
     "--primitive-color-gray-900": {
@@ -2661,33 +2673,9 @@
         "scss/atoms/_icon-lucide.scss"
       ]
     },
-    "--lc-icon-x": {
-      "usages": [
-        "scss/atoms/_icon-lucide.scss"
-      ]
-    },
     "--lc-icon-layers": {
       "usages": [
         "scss/atoms/_icon-lucide.scss"
-      ]
-    },
-    "--lc-icon-chevron-right": {
-      "usages": [
-        "scss/atoms/_icon-lucide.scss",
-        "scss/atoms/_pagination.scss",
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--lc-icon-chevron-left": {
-      "usages": [
-        "scss/atoms/_icon-lucide.scss",
-        "scss/atoms/_pagination.scss"
       ]
     },
     "--lc-icon-chevron-down": {
@@ -2698,18 +2686,6 @@
     "--lc-icon-chevron-up": {
       "usages": [
         "scss/atoms/_icon-lucide.scss"
-      ]
-    },
-    "--lc-icon-chevrons-right": {
-      "usages": [
-        "scss/atoms/_icon-lucide.scss",
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--lc-icon-chevrons-down": {
@@ -2738,11 +2714,6 @@
       ]
     },
     "--lc-icon-minus": {
-      "usages": [
-        "scss/atoms/_icon-lucide.scss"
-      ]
-    },
-    "--lc-icon-check": {
       "usages": [
         "scss/atoms/_icon-lucide.scss"
       ]
@@ -2809,7 +2780,8 @@
     },
     "--lc-icon-warning": {
       "usages": [
-        "scss/atoms/_icon-lucide.scss"
+        "scss/atoms/_icon-lucide.scss",
+        "scss/molecules/_form-field.scss"
       ]
     },
     "--lc-icon-success": {
@@ -3480,16 +3452,6 @@
     "--component-radio-status-disabled-opacity": {
       "usages": [
         "scss/atoms/_radio.scss"
-      ]
-    },
-    "--semantic-font-family-body": {
-      "usages": [
-        "scss/atoms/_stat-counter.scss",
-        "scss/molecules/_code-snippet.scss",
-        "scss/molecules/_feature-card.scss",
-        "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_site-header.scss"
       ]
     },
     "--component-switch-width": {
@@ -4254,11 +4216,6 @@
         "scss/base/helpers/_dimensions.scss"
       ]
     },
-    "--semantic-color-septenary": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
     "--font-weight-1": {
       "usages": [
         "scss/base/helpers/_fonts.scss",
@@ -4280,11 +4237,6 @@
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--font-weight-3": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
       ]
     },
     "--scope-1": {
@@ -4590,11 +4542,6 @@
       ]
     },
     "--component-form-field-success-border": {
-      "usages": [
-        "scss/molecules/_form-field.scss"
-      ]
-    },
-    "--icon-alert": {
       "usages": [
         "scss/molecules/_form-field.scss"
       ]
@@ -6679,10 +6626,6 @@
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
-    "--semantic-font-size-body-sm": {
-      "usages": [],
-      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
-    },
     "--semantic-font-weight-regular": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
@@ -7403,6 +7346,10 @@
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
+    "--semantic-color-septenary": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
     "--semantic-border-width": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
@@ -7700,6 +7647,10 @@
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
     "--lc-chevrons-down": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
+    "--lc-chevrons-left": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },

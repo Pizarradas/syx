@@ -8,9 +8,9 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 1352 |
-| Official (SYX-prefixed) | 1079 |
-| Legacy (no SYX prefix) | 273 |
+| Total custom properties in runtime CSS | 1357 |
+| Official (SYX-prefixed) | 1082 |
+| Legacy (no SYX prefix) | 275 |
 
 ## Source vs Runtime Gaps
 
@@ -18,11 +18,11 @@
 
 ### ✅ All official tokens documented
 
-## Legacy Vars (R07) — 273 found
+## Legacy Vars (R07) — 275 found
 
 | Lifecycle | Count | Action |
 |---|---|---|
-| 🔒 keep    | 125   | External dependency or intentional contract. No action. |
+| 🔒 keep    | 127   | External dependency or intentional contract. No action. |
 | 🔄 migrate | 27 | Has a SYX equivalent. Replace `var(old)` → `var(new)`. |
 | 🗑️ kill    | 121   | No SYX equivalent. Remove from codebase. |
 

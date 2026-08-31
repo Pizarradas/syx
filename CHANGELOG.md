@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.28.0] — 2026-08-31
+
+### Fixed
+
+- **Diecinueve referencias apuntaban a tokens que no declara nadie.** No faltaban tokens: **los nombres estaban mal escritos** y el correcto existía todo el tiempo con otro nombre. Un `var(--x)` sin fallback cuyo `--x` no existe no da error, no avisa y no rompe la compilación — la propiedad simplemente no se aplica. Es el fallo más caro que puede tener un sistema de tokens, porque no deja rastro.
+
+  | Se pedía | Existía como | Dónde |
+  |---|---|---|
+  | `--semantic-font-family-body` | `--semantic-font-family-primary` | 7 componentes: hero de portada, cabecera, tarjetas, contador |
+  | `--semantic-font-size-sm` | `--semantic-font-size-body-sm` | botones, listas, utilidades de accesibilidad |
+  | `--icon-check` · `--icon-close` · `--icon-alert` | `--lc-icon-check` · `--lc-icon-x` · `--lc-icon-warning` | switch, form-field |
+  | `--icon-chevron-*` · `--icon-chevron-double-*` | `--lc-icon-chevron-*` · `--lc-icon-chevrons-*` | paginación |
+
+- **`--primitive-font-weight-black` no existía**, así que `--semantic-font-weight-black` no resolvía y **seis titulares se pintaban en 400** donde el sistema decía 900: el titular del hero, la marca de la cabecera, el CTA de portada, los contadores y los títulos de sección. Declarado como `900` en la capa de primitivos.
+
+- **`--component-check-bg` y `--component-radio-bg`**, que dejaban el checkbox y el radio sin marcar con fondo transparente sobre cualquier superficie. Solo estaba declarada la variante `-checked`. Añadidos **por la vía de propuesta** (`node scripts/propose.js token`), que dedujo el fichero de destino de la familia, recompiló, validó y dejó la evidencia en `contracts/propuestas/`.
+
+- **`$tokens-colors` nombraba cuatro tokens inexistentes** — `text-default`, `text-weak`, `bg-base`, `bg-subtle`. No rompía nada porque **nadie consume ese mapa**, pero era una trampa cargada: el día que alguien generara utilidades con él habrían salido todas vacías.
+
+### Removed
+
+- **`.syx-font-weight-3`** y **`.syx-color-septenary`**. Las dos estaban muertas por los dos extremos: sus variables no las declara ninguno de los ocho temas, y las clases no aparecen en ninguna de las cuatro páginas. La segunda además se saltaba `senary` en una escala semántica que termina en `quinary`.
+
+### Added
+
+- **`npm run check:huerfanos`.** Conviene decirlo entero: **la mitad de esto ya se sabía**. `build-token-snapshot.js` listaba trece tokens que computan a vacío —el peso 900 de los titulares entre ellos— en **cada compilación**, como aviso. Un aviso que sale siempre y no tumba nada deja de leerse, y llevaba versiones ahí. La otra mitad no la veía nadie: el snapshot mira el grafo de tokens (`--a: var(--b)`), no el uso en propiedades, así que siete componentes pidiendo una familia de fuente inexistente no aparecían por ningún lado. De ahí las dos decisiones del guardián nuevo: mirar **de la referencia hacia dentro, incluidas las propiedades**, y **fallar en vez de avisar**. Se mide en el **CSS compilado, bundle por bundle**, no en el SCSS: un token puede estar declarado en un fichero que ese bundle no incluye, y entonces está declarado para el repositorio y huérfano para el navegador, que es el único que importa. Se mide además el SCSS, que lo dice antes de compilar.
+
+  Falla con los prefijos oficiales. Las variables heredadas sin prefijo se cuentan y se nombran pero no tumban nada: son deuda anterior a que hubiera con qué medirla. Comprobado en rojo por los dos caminos antes de darlo por bueno.
+
+- **`--lc-icon-chevrons-left`**, que la paginación pedía y no existía en el paquete de iconos. El SVG no se escribió a mano: se **espeja** `chevrons-right` sobre `x = 12`, que es la relación exacta que guardan los dos en Lucide. El dibujo no depende de mi memoria y se recalcula con una orden.
+
+### Notes
+
+- Quedan **doce variables heredadas** sin declarar (`--icon-logo`, `--filter-primary`, `--list-lvl*-icon-pic`, seis `--icon-user-interface-*`…). Son R07 y trabajo del modo MIGRATE; el guardián las cuenta y las nombra. Cuando lleguen a cero, `--fallar-si-legado` lo convierte en un guardián completo — **ese día será una decisión, no un descuido**.
+- **`propose.js` escribe el SCSS pero no registra el token en `tokens.json`**, así que R05 avisa después de cada propuesta —ha pasado con los dos de hoy, registrados a mano—. Es un cabo suelto de la vía de propuesta, no de esta corrección.
+- Cuatro tokens oficiales viven hoy de su fallback (`--component-hero-figure-display`, `--component-pagination-icon-filter`, `--semantic-color-primary-subtle`, `--semantic-size-icon-sm`). Un fallback es una decisión legítima, pero uno que se queda para siempre es un token que nunca llegó.
+
+---
+
 ## [4.27.0] — 2026-08-31
 
 ### Fixed
