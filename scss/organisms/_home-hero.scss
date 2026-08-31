@@ -11,6 +11,11 @@
 @mixin org-home-hero($theme: null) {
   @layer syx.organisms {
 
+  @keyframes syx-hero-figure-build {
+    from { clip-path: inset(100% 0 0 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+
   .org-home-hero {
     position: relative;
     overflow: hidden;
@@ -77,17 +82,31 @@
       grid-row: 1 / span var(--component-hero-figure-row-span);
       align-self: center;
       min-height: var(--component-hero-figure-min-height);
-      background-color: var(--component-hero-figure-color);
+
+      // IMAGEN DE FONDO, NO MÁSCARA. La máscara solo transporta ALFA: toda la
+      // figura salía teñida de un único color, así que no podía tener ni canto,
+      // ni relleno, ni acento — que es exactamente lo que la dejaba plana. Como
+      // imagen sí, a cambio de que el tema declare dos versiones, una por modo.
+      background-image: var(--component-hero-figure);
+      background-size: var(--component-hero-figure-size);
+      background-repeat: no-repeat;
+      background-position: center;
       opacity: var(--component-hero-figure-opacity);
-      mask-image: var(--component-hero-figure);
-      mask-size: var(--component-hero-figure-size);
-      mask-repeat: no-repeat;
-      mask-position: center;
-      -webkit-mask-image: var(--component-hero-figure);
-      -webkit-mask-size: var(--component-hero-figure-size);
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
       pointer-events: none;
+
+      // La pila se levanta al entrar: el recorte sube desde abajo, así que las
+      // placas aparecen en el mismo orden en que manda la cascada — reset
+      // primero, utilities al final. Se anima el recorte y no la opacidad para
+      // no pisar --component-hero-figure-opacity.
+      @media (prefers-reduced-motion: no-preference) {
+        // Curva lineal a propósito. Con --semantic-easing-out
+        // (cubic-bezier(0.16, 1, 0.3, 1)) al 30 % del tiempo ya estaba
+        // revelado el 85 %: la entrada era un parpadeo seguido de una cola
+        // que no se ve. En lineal las placas aparecen a ritmo constante, que
+        // además es como sale una lámina de un plóter.
+        animation: syx-hero-figure-build var(--component-hero-figure-build-duration)
+          var(--semantic-easing-linear) both;
+      }
     }
 
     // All direct children above gradient

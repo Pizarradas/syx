@@ -81,8 +81,6 @@
   // HERO A DOS COLUMNAS + FIGURA
   // ================================================
   // Por defecto una sola columna y sin figura: ningún tema existente cambia.
-  // La figura se pinta como MÁSCARA, no como imagen, para que la tiña
-  // --component-hero-figure-color y siga al modo claro/oscuro con un token.
   // Canaleta común de las rejillas de página. Antes cada organismo elegía la
   // suya (16 px en las tarjetas, 24 px en los temas) y las columnas de dos
   // secciones seguidas no cuadraban entre sí.
@@ -95,9 +93,12 @@
 
   --component-hero-columns: 1fr;
   --component-hero-column-gap: 0;
+  // La figura es una IMAGEN, no una máscara, así que trae su propio color y ya
+  // no hace falta un token para teñirla; a cambio, el tema declara una versión
+  // por modo. --component-hero-figure-color se retiró con la máscara.
   --component-hero-figure: none;
-  --component-hero-figure-color: var(--semantic-color-border-default);
   --component-hero-figure-opacity: 1;
+  --component-hero-figure-build-duration: 0.9s;
   --component-hero-figure-size: contain;
   --component-hero-figure-min-height: 0;
   // Cuántas filas abarca la figura. El hero de la home tiene 7 hijos;

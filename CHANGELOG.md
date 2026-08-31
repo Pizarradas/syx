@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.10.0] — 2026-08-31
+
+La figura del hero pasa de un alzado plano a un **alzado axonométrico** de la pila de `@layer`, y se levanta al entrar en la página.
+
+### Changed
+
+- **De máscara a imagen.** Una `mask-image` solo transporta **alfa**: toda la figura salía teñida de un único color, así que no podía tener canto, ni relleno, ni acento — que es exactamente lo que la dejaba plana. Como imagen de fondo sí, a cambio de que el tema declare **una versión por modo** en vez de un token de tinte. `--component-hero-figure-color` se retira con la máscara.
+- **Dibujo nuevo:** siete placas en isometría con canto, las dos de abajo rayadas a 45° como corte de sección, la de arriba en el azul del tema, tirantes discontinuos a la línea de cota, cota vertical acotada a las siete y marcas de esquina de hoja. Elegir esa proyección no es decorativo: la pila **es** la metáfora de `@layer`.
+- **Opacidad de 0,55 a 1** y altura mínima de 26 a 30 rem. El 55 % servía cuando la figura era monocroma y había que bajarle el peso; el dibujo ya trae su propia jerarquía —traza fina y azul pálido para lo secundario— y atenuarlo encima solo lo dejaba lavado.
+
+### Added
+
+- **Entrada al cargar.** El recorte sube desde abajo, así que las placas aparecen **en el orden que manda la cascada**: reset primero, utilities al final. Se anima el recorte y no la opacidad, para no pisar `--component-hero-figure-opacity`. Va dentro de `@media (prefers-reduced-motion: no-preference)`; verificado que con la preferencia activa no hay animación **ni recorte residual** — la figura se ve entera desde el primer fotograma.
+- `--component-hero-figure-build-duration` (0,9 s).
+
+### Fixed
+
+- **La curva de entrada era un parpadeo.** Con `--semantic-easing-out` —`cubic-bezier(0.16, 1, 0.3, 1)`— al 30 % del tiempo ya estaba revelado el 85 %, seguido de una cola que no se ve. Medido posicionando la animación con la API de animaciones, no a ojo. En lineal las placas aparecen a ritmo constante, que además es como sale una lámina de un plóter.
+- Dos defectos del primer dibujo, vistos al renderizarlo: la línea de cota **abarcaba solo cuatro placas de las siete** —tomaba el vértice trasero también para la de abajo, cuando el punto más bajo es el delantero más su canto— y el rayado en cuatro placas convertía el dibujo en una mancha de textura, sobre todo en oscuro. Ahora la cota abarca la pila entera y solo se rayan las dos de abajo.
+- El dato de peso de `why-syx.html`, publicado hace dos versiones, pasa de 44–50 a **43–51 kB con gzip**: las dos versiones de la figura añaden unos 15 kB en crudo al bundle del tema, que comprimen a uno.
+
+### Notes
+
+Verificado en los dos modos a 1920 / 1440 / 1024 / 768 / 390: la figura solo aparece a partir de portátil, cero desbordamiento en todos, contraste 0/0 en `home.html` y `why-syx.html`, R01–R06 limpias y simetría claro/oscuro completa (168 tokens).
+
+---
+
 ## [4.9.1] — 2026-08-31
 
 Repaso de veracidad de la sección «Why SYX» de la home y de la página `why-syx.html`. Cada afirmación contrastada contra el repositorio; las de terceros, contra sus notas de versión.
