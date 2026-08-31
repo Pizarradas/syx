@@ -95,6 +95,23 @@ function varsConFallback(css) {
   return fuera;
 }
 
+/**
+ * `var(--x)` a secas, sin fallback.
+ *
+ * Es el caso MÁS dañino de todos y el escáner no lo miraba: con fallback, un
+ * token inexistente pinta el fallback y algo se ve; sin él, la propiedad se
+ * queda sin valor y el elemento desaparece. Lo encontró una barra de progreso
+ * de `why-syx.html` que llevaba meses invisible porque citaba un
+ * `--primitive-color-orange-500` que no existe en ningún tema.
+ */
+function varsSinFallback(css) {
+  const fuera = [];
+  const re = /var\(\s*(--[a-z0-9-]+)\s*\)/gi;
+  let m;
+  while ((m = re.exec(css))) fuera.push({ token: m[1], indice: m.index });
+  return fuera;
+}
+
 const sinEspacios = (v) => String(v).replace(/\s+/g, '').toLowerCase();
 const ES_COLOR = /^(#[0-9a-f]{3,8}|(rgba?|hsla?|oklch|oklab|lab|lch|color)\(|transparent$|currentcolor$)/i;
 
@@ -191,6 +208,23 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
           que: `${v.token} tiene un fallback que ya no es su valor`,
           detalle: `la aplicación dice ${v.fallback} · el sistema dice ${real.value}`,
           sugerencia: 'Quita el fallback: hoy es una copia caducada, y el día que sirva pintará lo que no toca.',
+        });
+      }
+    }
+
+    // ── 1b. var() sin fallback de un token que no existe ───────────────────
+    for (const t of trozos) {
+      for (const v of varsSinFallback(t.css)) {
+        if (syx.getToken({ token: v.token, theme, mode }).encontrado) continue;
+        const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, v.indice).split('\n').length - 1;
+        const cerca = syx.getToken({ token: v.token, theme, mode }).sugerencias || [];
+        añadir({
+          tipo: 'token-inexistente',
+          gravedad: 'alta',
+          file: rel, linea,
+          que: `${v.token} no existe, y se usa sin fallback`,
+          detalle: 'La propiedad se queda sin valor: el elemento no se pinta. No hay nada que avise, ni en consola ni al compilar.',
+          sugerencia: cerca.length ? `¿Quisiste decir ${cerca.slice(0, 3).join(', ')}?` : null,
         });
       }
     }

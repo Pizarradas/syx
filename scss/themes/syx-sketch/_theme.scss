@@ -139,13 +139,22 @@
   --component-score-3-bg: var(--primitive-color-blue-200);
   --component-score-3-color: var(--semantic-color-text-primary);
   --component-score-3-border: var(--primitive-color-blue-300);
-  // blue-400 es la zona muerta de la rampa: 3,79:1 con blanco y 4,35:1 con
-  // tinta. No pasa AA con NINGÚN color de texto, así que el paso 4 se va a
-  // blue-500 (6,76:1 con blanco) y el 5 a blue-700 (10,86:1), que además
-  // mantiene la rampa oscureciéndose peldaño a peldaño.
-  --component-score-4-bg: var(--primitive-color-blue-500);
+  // El paso 4 NO puede ser blue-500, aunque el contraste invitara a ello.
+  //
+  // blue-400 es la zona muerta de la rampa —3,79:1 con blanco y 4,35:1 con
+  // tinta, no pasa AA con ningún texto—, así que el 4 se llevó a blue-500. Pero
+  // blue-500 es el color más saturado del tema, y eso rompía la rampa por otro
+  // lado: el 4 tiraba más del ojo que el 5, y el máximo se leía como si no lo
+  // fuera. La escala descendía en luminosidad pero la SATURACIÓN hacía cumbre
+  // en el peldaño equivocado.
+  //
+  // Este azul rebajado la arregla sin tocar el contraste: 5,60:1 con blanco
+  // —medido, no supuesto— y croma 0,120, por debajo del 0,220 del paso 5. Ahora
+  // la rampa sube en saturación y baja en luminosidad de principio a fin, y el
+  // 5 es a la vez el más oscuro y el más saturado.
+  --component-score-4-bg: oklch(0.520 0.120 266);
   --component-score-4-color: oklch(1 0 0);
-  --component-score-4-border: var(--primitive-color-blue-500);
+  --component-score-4-border: oklch(0.520 0.120 266);
   --component-score-5-bg: var(--primitive-color-blue-700);
   --component-score-5-color: oklch(1 0 0);
   --component-score-5-border: var(--primitive-color-blue-700);

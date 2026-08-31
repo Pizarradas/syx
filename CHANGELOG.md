@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.25.0] — 2026-08-31
+
+### Fixed
+
+- **El 5 vuelve a ser el máximo.** En la tabla de `why-syx.html` el peldaño 4 tiraba más del ojo que el 5, y la puntuación más alta se leía como si no lo fuera. La causa no era el contraste: la escala descendía en luminosidad, pero la **saturación hacía cumbre en el peldaño equivocado**. El 4 usaba `blue-500`, el color más saturado del tema.
+
+  El paso 4 pasa a un azul rebajado, `oklch(0.520 0.120 266)`: **5,60:1 con blanco —medido— y croma 0,120**, por debajo del 0,220 del paso 5. Ahora la rampa sube en saturación y baja en luminosidad de punta a punta, y el 5 es a la vez el más oscuro y el más saturado. Los cinco peldaños siguen por encima de 4,5:1; el más flojo pasa de 5,52 a 5,60. En oscuro la rampa ya estaba bien y no se toca.
+
+- **La sección «Global Ranking Winner», rehecha.** Tenía cuatro averías, tres de ellas invisibles leyendo el código:
+  - La **tarjeta del ganador no existía**: `border-width: 2px` sin estilo ni color, resto de dos clases que nunca se declararon. El contenido flotaba en el hueco.
+  - Los anchos fijos de 20 px y 120 px **partían números y nombres en dos líneas** — «Bootstra / p», y un «2» con su punto debajo, en las seis filas.
+  - La barra de Bootstrap **llevaba meses sin pintarse**: citaba `--primitive-color-orange-500`, que no existe en ningún tema.
+  - Seis colores distintos —verde, verde, amarillo, naranja, rojo, rojo— para ordenar seis barras **que ya venían ordenadas por su longitud**. El color no añadía información, la repetía, y encima con la escala arcoíris que esta misma página explica por qué se abandonó unas líneas más arriba.
+
+  Ahora es una rejilla con anchos en `ch`, un solo tono para las seis barras, cada fila con su «43 / 55» explícito, y una tarjeta de ganador con medalla y borde de verdad. Todo con tokens: cero px sueltos.
+
+- `theme-builder.html` citaba `--primitive-color-text-primary`, que tampoco existe, en el texto de la vista previa oscura.
+
+### Added
+
+- **El escáner detecta `var()` sin fallback de tokens que no existen.** Era su hueco más caro y no lo miraba: con fallback, un token inexistente pinta el fallback y algo se ve; **sin él, la propiedad se queda sin valor y el elemento desaparece**, sin aviso en consola ni al compilar.
+
+  Lo estrené sobre las cuatro páginas y encontró los dos casos de arriba a la primera. Y acto seguido me cazó a mí: de los tokens que escribí en el CSS nuevo del ranking, **tres no existían** —`--semantic-space-inset-lg`, `--semantic-border-radius-pill`, `--semantic-font-family-display`—. Estaban puestos de memoria, con nombres perfectamente plausibles. Dos comprobaciones más en `check:escaner`, 17 en total.
+
+### Verified
+
+- Contraste medido sobre el píxel pintado, no calculado de cabeza: los cinco peldaños en claro (5,52 · 12,60 · 10,06 · 5,60 · 10,86) y en oscuro (5,72 · 9,88 · 10,50 · 7,38 · 10,54).
+- `why-syx.html` baja de 6 hallazgos a 2, y los dos que quedan son los de siempre. Sin texto partido, sin barras sin pintar y sin desbordamiento a 390, 768 y 1440 px, en claro y en oscuro.
+
+---
+
 ## [4.24.0] — 2026-08-31
 
 ### Added

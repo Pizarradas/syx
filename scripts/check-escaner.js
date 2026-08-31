@@ -45,6 +45,10 @@ const MUESTRA = `<!doctype html>
     padding: 1rem !important;
     /* 5 · fallback que SÍ coincide: no debe salir */
     outline-color: var(--semantic-color-primary, oklch(0.498 0.282 266.24));
+    /* 13 · var() SIN fallback de un token que no existe: el peor caso */
+    box-shadow: var(--semantic-shadow-que-no-existe);
+    /* 14 · var() sin fallback de uno que SÍ existe: no debe salir */
+    border-radius: var(--semantic-border-radius-sm);
   }
   /* 6 · color propio de la aplicación, que no es de nadie: no debe salir */
   .marca { color: #ff00ff; }
@@ -99,6 +103,22 @@ comprobar('el fallback caducado, con los dos valores enfrentados', () => {
 comprobar('el token que no existe, y que por tanto se pinta siempre', () => {
   const h = uno('token-inexistente', '--semantic-color-inventado');
   if (!h.detalle.includes('#123456')) throw new Error('no dice qué se está pintando de verdad');
+});
+
+comprobar('el var() sin fallback de un token inexistente, como grave', () => {
+  // Es el caso más caro de todos: con fallback algo se pinta; sin él, la
+  // propiedad se queda sin valor y el elemento desaparece sin avisar. El
+  // escáner no lo miraba, y por eso una barra de why-syx.html llevaba meses
+  // invisible citando un --primitive-color-orange-500 que no existe.
+  const h = uno('token-inexistente', '--semantic-shadow-que-no-existe');
+  if (h.gravedad !== 'alta') throw new Error(`gravedad ${h.gravedad}`);
+  if (!/sin fallback/.test(h.que)) throw new Error('no dice que va sin fallback');
+});
+
+comprobar('no señala un var() sin fallback de un token que sí existe', () => {
+  if (JSON.stringify(informe.hallazgos).includes('--semantic-border-radius-sm')) {
+    throw new Error('denuncia un token que existe');
+  }
 });
 
 comprobar('el color a pelo, nombrando el token que ya lo tiene', () => {
@@ -164,7 +184,7 @@ comprobar('no señala las clases correctas', () => {
 });
 
 comprobar('NO señala nada de lo que hay dentro de un <pre> de ejemplo', () => {
-  const dentro = informe.hallazgos.filter((h) => h.linea >= 34);
+  const dentro = informe.hallazgos.filter((h) => h.linea >= 38);
   if (dentro.length) {
     throw new Error(`${dentro.length} hallazgo(s) en el ejemplo de código:\n     ${dentro.map((h) => `L${h.linea} ${h.que}`).join('\n     ')}`);
   }
