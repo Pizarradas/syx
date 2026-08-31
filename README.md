@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.18.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.19.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -232,6 +232,35 @@ app's own.
 **It fixes nothing, on purpose.** What it finds goes through `scripts/propose.js`
 or through someone's hands. By default it exits 0; `--fallar-si-alta` makes it
 fail a build.
+
+---
+
+## What runs, and when
+
+Eight guards, and none of them used to run unless somebody remembered to type
+`npm run check`. `.github/workflows/ci.yml` splits them by what they cost:
+
+| Job | When | What |
+| --- | ---- | ---- |
+| **Contratos** | every push · Node 18, 20, 22 | `check-limpio` (the committed CSS is the compiled one), then the whole `npm run check` chain |
+| **Entrega** | pull requests | `check:consumible` (packs and installs for real) and `check:propuesta` |
+| **Desviación** | every run, never fails | The drift report, written into the run summary |
+
+The heavy jobs are on PRs on purpose: paying a 10 MB pack on every `git push` is
+the surest way to get the whole thing switched off.
+
+`check-limpio` runs **first**, on the freshly cloned tree — `npm run check` ends
+by building, and after that there is no telling what was already there from what
+was just generated. `css/` is versioned deliberately (Option A above), and half
+the system measures itself against it: the registry uses it as arbiter, the
+scanner decides from it which class exists, the token snapshot comes out of it. A
+committed CSS that doesn't match the SCSS doesn't break the build — it makes every
+guard measure against a world that no longer exists.
+
+The drift job never fails the run. The scanner is a report, not a rule: today's
+drift predates the tool that measures it, and failing every push over it would only
+teach people to ignore red. When it reaches zero, `--fallar-si-alta` turns it into a
+real guard — and that will be a decision, not an oversight.
 
 ---
 

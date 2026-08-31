@@ -1,0 +1,115 @@
+# SYX — Integración continua
+# ═══════════════════════════
+# Durante cuatro versiones se construyeron ocho guardianes —temas, versión,
+# tokens, registro, MCP, escáner, paquete y el validador— y todos esperaban a
+# que alguien se acordara de escribir `npm run check`. Un guardián que depende
+# de la memoria de alguien no es un guardián, es una costumbre.
+#
+# CÓMO ESTÁ REPARTIDO
+#   contratos   en cada push · rápido · es el que decide si algo está roto
+#   entrega     solo en PR · lento · empaqueta e instala de verdad
+#   desviación  informativo · nunca rompe · deja el informe a la vista
+#
+# Lo lento va en los PR y no en cada push a propósito: `check:consumible`
+# empaqueta 10 MB y los instala, y `check:propuesta` copia el árbol y compila.
+# Pagar eso en cada `git push` haría que alguien acabara desactivando esto.
+
+name: SYX
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+# Un push nuevo sobre la misma rama cancela el anterior: lo que importa es el
+# veredicto del último commit, no la cola de los que ya no existen.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contratos:
+    name: Contratos · Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # `engines` promete >=18. Esta matriz es la primera vez que esa promesa
+        # se comprueba de verdad en vez de darse por buena.
+        node: ['18', '20', '22']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - run: npm ci
+
+      # Primero, y sobre el árbol recién clonado: comprueba que el CSS
+      # commiteado es exactamente el que sale de compilar. Va antes que nada
+      # porque `npm run check` termina compilando, y después ya no se podría
+      # distinguir lo que había de lo que acaba de generarse.
+      - name: El CSS commiteado es el compilado
+        run: node scripts/check-limpio.js --strict
+
+      # Validador R01–R07, simetría de temas, coherencia de versión, snapshot de
+      # tokens, registro de componentes, servidor MCP, escáner, paquete y build.
+      - name: npm run check
+        run: npm run check
+
+  entrega:
+    name: Entrega
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+
+      # `check-propuesta.js` crea ramas y commits en una copia en /tmp; sin
+      # identidad configurada, `git commit` falla dentro del contenedor.
+      - name: Identidad de git para las pruebas
+        run: |
+          git config --global user.email "ci@syx.local"
+          git config --global user.name "SYX CI"
+
+      - name: El paquete se instala y responde
+        run: npm run check:consumible
+
+      - name: La vía de propuesta acierta y se niega donde debe
+        run: npm run check:propuesta
+
+  desviacion:
+    name: Desviación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+
+      # NO rompe la ejecución. El escáner es un informe, no una regla: las
+      # desviaciones que hay hoy son anteriores a que existiera con qué medirlas,
+      # y tumbar cada push por ellas solo enseñaría a ignorar el rojo. Cuando
+      # lleguen a cero, `--fallar-si-alta` convierte esto en un guardián de
+      # verdad; ese día será una decisión, no un descuido.
+      - name: Informe de desviación
+        run: |
+          {
+            echo '## Desviación respecto al sistema'
+            echo
+            echo '```'
+            node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

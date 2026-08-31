@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.19.0] — 2026-08-31
+
+### Added
+
+- **Integración continua.** `.github/workflows/ci.yml`. Durante cuatro versiones se construyeron ocho guardianes y todos esperaban a que alguien se acordara de escribir `npm run check`. Un guardián que depende de la memoria de alguien no es un guardián, es una costumbre.
+
+  Tres trabajos, repartidos por lo que cuestan: **contratos** en cada push (la cadena entera, en Node 18, 20 y 22); **entrega** solo en los PR (`check:consumible` y `check:propuesta`, que empaquetan e instalan de verdad); **desviación** informativo, que deja el informe del escáner en el resumen de la ejecución sin romper nada.
+
+  Lo lento va en los PR a propósito. Pagar 10 MB de empaquetado en cada `git push` es la forma más segura de que alguien acabe desactivando esto.
+
+- **`scripts/check-limpio.js`** — comprueba que el CSS commiteado es exactamente el que sale de compilar. Es la comprobación que faltaba debajo de todas las demás: `css/` se versiona a propósito, y medio sistema se mide contra él — el registro lo usa de árbitro, el escáner decide con él qué clase existe, el snapshot sale de ahí. Un CSS commiteado que no corresponde al SCSS no rompe la compilación: hace que **todos** los guardianes midan contra un mundo que ya no existe.
+
+  Va lo primero en la integración continua, sobre el árbol recién clonado, porque `npm run check` termina compilando y después ya no se podría distinguir lo que había de lo que acaba de generarse. Con el árbol sucio avisa y sale con 0 —el trabajo a medias es indistinguible de la desviación que busca—; con `--strict`, que es como lo llama la CI, no poder medir es un fallo.
+
+### Fixed
+
+- **`git status --porcelain` recortado se comía la primera letra del primer fichero.** La salida empieza con dos columnas de estado y un espacio, y la primera columna suele ser un espacio: un `.trim()` sobre la salida entera convertía `contracts/…` en `ontracts/…`. Afectaba a `propose.js classify` sin argumentos, que clasificaba mal el primer fichero de la lista.
+
+  Lo encontró la prueba del guardián nuevo, denunciando un repositorio que estaba limpio. Dos síntomas, una causa.
+
+### Notes
+
+- `.github/` estaba ya en el nivel **solo humano** de `contracts/trust.json`, desde antes de que existiera. Un agente que pudiera editar el fichero de la integración continua podría desactivar todo lo que le vigila.
+- La matriz de Node incluye la 18 porque es lo que `engines` promete. Es la primera vez que esa promesa se comprueba en vez de darse por buena; si sale roja, o se arregla el código o se arregla la promesa.
+
+---
+
 ## [4.18.0] — 2026-08-31
 
 ### Added

@@ -59,7 +59,11 @@ const fin = (msg, code = 1) => { console.log(`\n${msg}\n`); process.exit(code); 
 
 function classify() {
   const rutas = process.argv.slice(3).filter((a) => !a.startsWith('--'));
-  const lista = rutas.length ? rutas : git('status', '--porcelain').split('\n').filter(Boolean).map((l) => l.slice(3));
+  // Sin `.trim()` sobre la salida entera: la primera línea de `status
+  // --porcelain` empieza por un espacio y recortarla deja al primer fichero sin
+  // su primera letra.
+  const lista = rutas.length ? rutas : execFileSync('git', ['status', '--porcelain'], { cwd: ROOT, encoding: 'utf8' })
+    .split('\n').filter((l) => l.trim()).map((l) => l.slice(3).trim());
 
   console.log('\n── CONFIANZA DEL CAMBIO ────────────────────────────────────────\n');
   if (!lista.length) fin('   Sin cambios que clasificar.', 0);
