@@ -7,6 +7,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.12.1] — 2026-08-31
+
+### Fixed
+
+- **El generador del snapshot dependía del formato del CSS de entrada.** Comparaba el texto de las media queries tal cual —`prefers-color-scheme: dark`, con espacio—, y al minificar ese espacio desaparece. Con un CSS minificado no reconocía **ningún** bloque de modo oscuro y emitía un snapshot incompleto **sin avisar de nada**: el peor tipo de fallo para un contrato.
+
+  Salió al sincronizar: `npm run check:tokens` falló en la máquina de José y el CSS de su copia de trabajo está minificado, mientras que `npm run build:css` emite `--style=expanded`. El guardián hizo exactamente su trabajo el primer día que existe.
+
+  Ahora el texto del at-rule se normaliza —sin espacios y en minúsculas— antes de compararlo. Verificado con el mismo tema en las dos formas: **1079 tokens, claro y oscuro, cero diferencias**. El snapshot generado no cambia respecto a 4.12.0 salvo la marca de tiempo.
+
+---
+
+## [4.12.0] — 2026-08-31
+
+Paso **0.2** del plan agentic. `tokens.json` es un registro de nombres, no de valores: 608 de sus 788 entradas guardan una referencia `var()` sin resolver y 318 tokens cambian entre claro y oscuro contra un esquema con un solo campo `value`. Ya no es el único sitio donde mirar.
+
+### Added
+
+- **`contracts/resolved-tokens.json`** — el valor real de cada token, en cada tema y en cada modo, con la cadena de alias ya resuelta. 7 temas × 2 modos, 1079 tokens por tema.
+
+  Tres capas que se apilan, para no repetir lo mismo catorce veces: `base` lleva los **431 tokens que valen igual en los siete temas** —lo cual además dice algo cierto: ese token no depende del tema—, cada tema guarda solo lo suyo, y el modo oscuro solo lo que cambia. Los 31 data URI de iconos se internan en un almacén común: eran el 2 % de las entradas y se llevaban el 56 % del peso, repetidos idénticos en los siete temas. De 2703 KB en el primer intento a **569 KB**.
+
+- **`scripts/build-token-snapshot.js`** (`npm run build:tokens`, encadenado a `build:css`) y **`npm run check:tokens`**, dentro de `npm run check`, que falla si alguien toca tokens y no regenera el snapshot.
+
+### Verified
+
+Contrastado token a token contra `getComputedStyle` en Chromium, en los 7 temas × 2 modos: **11 266 valores coinciden exactos**. Las 268 diferencias se clasificaron una a una y **ninguna es un valor equivocado** — son las tres formas de «este token no tiene valor», que el navegador representa todas igual (cadena vacía) y el snapshot distingue: 176 cadenas rotas, 76 `initial` y 16 `inherit` desde `:root`.
+
+Las **expresiones** —`color-mix()`, `calc()`, `oklch(from …)`, 261 por tema— quedan sin evaluar a propósito, con todas sus variables ya sustituidas. Van listadas en `expressions` para que quien consuma sepa que son expresiones y no literales.
+
+### Fixed
+
+- **El resolutor daba 281 ciclos falsos** en su primera versión: llevaba un único conjunto de «tokens ya vistos» para toda la resolución, así que un valor como `calc(var(--x) / 2) calc(var(--x) / 2)`, que cita el mismo token dos veces, tomaba la segunda por recursión. El camino tiene que ser **por rama**, no global. Reescrito con recursión, memoria y camino explícito.
+- **Denunciaba como rotos tokens que no lo están.** Uno sin declarar pero siempre citado con `var(--x, fallback)` funciona: el fallback es el mecanismo previsto. Ahora se separan los dos casos y solo se reporta el que se usa a pelo.
+
+### Notes
+
+El snapshot encontró **9 referencias rotas de verdad**, que llevaban ahí sin que ninguna regla las viera:
+
+- `--semantic-font-size-sm` — no existe; el nombre real es `--semantic-font-size-body-sm`. Se queda sin valor el tamaño de los botones pequeños y el contador de las listas ordenadas.
+- `--primitive-font-weight-black` — no existe. Se quedan sin peso los titulares de sección y el del hero.
+- Los siete `--icon-*` (`--icon-logo`, `--icon-check`, `--icon-close`, los cuatro chevrons) — ningún tema los declara, así que el icono del logo de la cabecera, el del check, el del switch y los cuatro de la paginación no tienen imagen.
+
+No se arreglan aquí: son de la capa de tokens, no del snapshot, y merecen su propia tanda con su verificación visual.
+
+**Se apartó del plan en un punto:** el índice inverso *valor → token* iba a guardarse en el fichero y no se guarda. Pesaba 305 KB, es derivable del mapa de temas en una sola pasada, y guardar datos derivados en un artefacto versionado significa que pueden quedarse desfasados por su cuenta. Lo construye en memoria quien lo necesite — el servidor MCP del paso 1.1 y el escáner de deriva del 2.2.
+
+**Se descartó usar un navegador para generar el snapshot**, aunque daría los valores finales ya evaluados: obliga a tener Chromium en la máquina y en CI, y resolviendo la cascada a mano se cubre el 100 % de los dos problemas que motivaban el paso —la cadena de alias y la dimensión de modo— sin instalar nada. El navegador se usó solo para verificar el resultado.
+
+---
+
 ## [4.11.0] — 2026-08-31
 
 Coherencia del número de versión en todo el repositorio, y la fila de controles de la cabecera pasa a ser una familia.

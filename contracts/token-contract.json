@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T15:36:51.011Z",
-    "totalTokens": 1068
+    "generatedAt": "2026-08-31T17:07:04.655Z",
+    "totalTokens": 1080
   },
   "tokens": {
     "--primitive-border-width-0": {
@@ -2112,7 +2112,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 2
+      "usageCount": 1
     },
     "--primitive-letter-spacing-wider": {
       "key": "letter-spacing-wider",
@@ -2481,7 +2481,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 36
+      "usageCount": 31
     },
     "--semantic-color-secondary": {
       "key": "color-secondary",
@@ -2491,7 +2491,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 15
+      "usageCount": 14
     },
     "--semantic-color-tertiary": {
       "key": "color-tertiary",
@@ -2501,7 +2501,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 10
+      "usageCount": 11
     },
     "--semantic-color-quaternary": {
       "key": "color-quaternary",
@@ -2511,7 +2511,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 9
+      "usageCount": 10
     },
     "--semantic-color-quinary": {
       "key": "color-quinary",
@@ -2521,7 +2521,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 2
+      "usageCount": 3
     },
     "--semantic-color-bg-primary": {
       "key": "color-bg-primary",
@@ -2621,7 +2621,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 4
+      "usageCount": 5
     },
     "--semantic-color-border-subtle": {
       "key": "color-border-subtle",
@@ -3011,7 +3011,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--semantic-space-layout-md": {
       "key": "space-layout-md",
@@ -3081,7 +3081,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 16
+      "usageCount": 17
     },
     "--semantic-space-component-lg": {
       "key": "space-component-lg",
@@ -3491,7 +3491,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 8
+      "usageCount": 9
     },
     "--semantic-letter-spacing-wider": {
       "key": "letter-spacing-wider",
@@ -3739,7 +3739,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--semantic-focus-ring-width": {
       "key": "focus-ring-width",
@@ -3960,6 +3960,72 @@
       "status": "active",
       "layer": "semantic",
       "note": "Reservado: los temas lo declaran como initial. Existe para que una paleta de 7 roles pueda usarlo sin crear el token.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-primary-text": {
+      "key": "primary-text",
+      "type": "ALIAS",
+      "value": "oklch(from var(--semantic-color-primary) var(--semantic-brand-text-lightness) c h)",
+      "rawValue": "var(--semantic-color-primary)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta de marca: se deriva del rol de relleno moviendo solo la luminosidad. Los roles de relleno estan a L=0.60, el punto de cruce que no pasa AA ni contra blanco ni contra tinta.",
+      "inRuntime": true,
+      "usageCount": 12
+    },
+    "--semantic-color-secondary-text": {
+      "key": "secondary-text",
+      "type": "ALIAS",
+      "value": "oklch(from var(--semantic-color-secondary) var(--semantic-brand-text-lightness) c h)",
+      "rawValue": "var(--semantic-color-secondary)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta de marca: se deriva del rol de relleno moviendo solo la luminosidad. Los roles de relleno estan a L=0.60, el punto de cruce que no pasa AA ni contra blanco ni contra tinta.",
+      "inRuntime": true,
+      "usageCount": 3
+    },
+    "--semantic-color-tertiary-text": {
+      "key": "tertiary-text",
+      "type": "ALIAS",
+      "value": "oklch(from var(--semantic-color-tertiary) var(--semantic-brand-text-lightness) c h)",
+      "rawValue": "var(--semantic-color-tertiary)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta de marca: se deriva del rol de relleno moviendo solo la luminosidad. Los roles de relleno estan a L=0.60, el punto de cruce que no pasa AA ni contra blanco ni contra tinta.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-quaternary-text": {
+      "key": "quaternary-text",
+      "type": "ALIAS",
+      "value": "oklch(from var(--semantic-color-quaternary) var(--semantic-brand-text-lightness) c h)",
+      "rawValue": "var(--semantic-color-quaternary)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta de marca: se deriva del rol de relleno moviendo solo la luminosidad. Los roles de relleno estan a L=0.60, el punto de cruce que no pasa AA ni contra blanco ni contra tinta.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-quinary-text": {
+      "key": "quinary-text",
+      "type": "ALIAS",
+      "value": "oklch(from var(--semantic-color-quinary) var(--semantic-brand-text-lightness) c h)",
+      "rawValue": "var(--semantic-color-quinary)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta de marca: se deriva del rol de relleno moviendo solo la luminosidad. Los roles de relleno estan a L=0.60, el punto de cruce que no pasa AA ni contra blanco ni contra tinta.",
+      "inRuntime": true,
+      "usageCount": 0
+    },
+    "--semantic-brand-text-lightness": {
+      "key": "brand-text-lightness",
+      "type": "NUMBER",
+      "value": "0.45",
+      "rawValue": "0.45",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Luminosidad OKLCH de la tinta de marca. 0.45 sobre fondo claro, 0.80 sobre oscuro. Un tema cuyo modo base ya es oscuro la sube en su propio :root.",
       "inRuntime": true,
       "usageCount": 1
     },
@@ -4511,7 +4577,7 @@
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 1
+      "usageCount": 2
     },
     "--component-button-border-radius": {
       "key": "button-border-radius",
@@ -4521,7 +4587,7 @@
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 1
+      "usageCount": 2
     },
     "--component-button-shadow-focus": {
       "key": "button-shadow-focus",
@@ -9344,7 +9410,7 @@
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 8
     },
     "--component-section-padding-block": {
       "key": "section-padding-block",
@@ -9936,16 +10002,6 @@
       "inRuntime": true,
       "usageCount": 1
     },
-    "--component-hero-figure-color": {
-      "key": "hero-figure-color",
-      "type": "ALIAS",
-      "value": "var(--semantic-color-border-default)",
-      "rawValue": "var(--semantic-color-border-default)",
-      "status": "active",
-      "layer": "component",
-      "inRuntime": true,
-      "usageCount": 1
-    },
     "--component-hero-figure-opacity": {
       "key": "hero-figure-opacity",
       "type": "NUMBER",
@@ -10135,6 +10191,80 @@
       "layer": "component",
       "inRuntime": true,
       "usageCount": 0
+    },
+    "--component-pill-gap": {
+      "key": "pill-gap",
+      "type": "DIMENSION",
+      "value": "0.375rem",
+      "rawValue": "0.375rem",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-grid-gutter": {
+      "key": "grid-gutter",
+      "type": "ALIAS",
+      "value": "var(--semantic-space-component-md)",
+      "rawValue": "var(--semantic-space-component-md)",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 2
+    },
+    "--component-token-layer-badge-width": {
+      "key": "token-layer-badge-width",
+      "type": "DIMENSION",
+      "value": "10rem",
+      "rawValue": "10rem",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-hero-figure-build-duration": {
+      "key": "hero-figure-build-duration",
+      "type": "DIMENSION",
+      "value": "0.9s",
+      "rawValue": "0.9s",
+      "status": "active",
+      "layer": "component",
+      "note": "Duracion de la entrada de la figura del hero: el recorte sube desde abajo y las placas aparecen en orden de cascada.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-header-control-height": {
+      "key": "header-control-height",
+      "type": "DIMENSION",
+      "value": "2.75rem",
+      "rawValue": "2.75rem",
+      "status": "active",
+      "layer": "component",
+      "note": "Familia de controles de la cabecera: selector de tema, conmutador de modo y boton comparten alto, radio y trazo. Antes median 48, 36 y 52 px con radios y trazos distintos.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-header-control-radius": {
+      "key": "header-control-radius",
+      "type": "ALIAS",
+      "value": "var(--component-button-border-radius)",
+      "rawValue": "var(--component-button-border-radius)",
+      "status": "active",
+      "layer": "component",
+      "note": "Familia de controles de la cabecera: selector de tema, conmutador de modo y boton comparten alto, radio y trazo. Antes median 48, 36 y 52 px con radios y trazos distintos.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-header-control-border-width": {
+      "key": "header-control-border-width",
+      "type": "ALIAS",
+      "value": "var(--component-button-border-width)",
+      "rawValue": "var(--component-button-border-width)",
+      "status": "active",
+      "layer": "component",
+      "note": "Familia de controles de la cabecera: selector de tema, conmutador de modo y boton comparten alto, radio y trazo. Antes median 48, 36 y 52 px con radios y trazos distintos.",
+      "inRuntime": true,
+      "usageCount": 1
     },
     "--reset-html-font": {
       "key": "html-font",

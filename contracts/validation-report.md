@@ -8,8 +8,8 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 1322 |
-| Official (SYX-prefixed) | 1067 |
+| Total custom properties in runtime CSS | 1334 |
+| Official (SYX-prefixed) | 1079 |
 | Legacy (no SYX prefix) | 255 |
 
 ## Source vs Runtime Gaps

@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-08-31T15:36:51.011Z",
-    "totalMappedTokens": 1423
+    "generatedAt": "2026-08-31T17:07:04.655Z",
+    "totalMappedTokens": 1435
   },
   "map": {
     "--primitive-fluid-space-xs": {
@@ -82,20 +82,15 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/components/_tables.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/atoms/_breadcrumb.scss",
-        "scss/atoms/_feature-icon.scss",
         "scss/atoms/_form.scss",
-        "scss/atoms/_icon.scss",
         "scss/atoms/_list.scss",
-        "scss/atoms/_stat-counter.scss",
         "scss/base/_elements.scss",
         "scss/base/_token-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
@@ -197,6 +192,22 @@
         "scss/abstracts/mixins/_helpers.scss"
       ]
     },
+    "--semantic-color-primary-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_buttons.scss",
+        "scss/abstracts/tokens/components/_headers.scss",
+        "scss/abstracts/tokens/components/_links.scss",
+        "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/abstracts/tokens/components/_sections.scss",
+        "scss/atoms/_breadcrumb.scss",
+        "scss/atoms/_feature-icon.scss",
+        "scss/atoms/_icon.scss",
+        "scss/atoms/_stat-counter.scss",
+        "scss/organisms/_home-footer.scss",
+        "scss/organisms/_home-tokens.scss",
+        "scss/organisms/_site-header.scss"
+      ]
+    },
     "--semantic-color-state-hover-primary": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
@@ -221,15 +232,21 @@
         "scss/utilities/_text.scss"
       ]
     },
+    "--semantic-color-secondary-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_buttons.scss",
+        "scss/atoms/_icon.scss",
+        "scss/atoms/_stat-counter.scss"
+      ]
+    },
     "--semantic-color-secondary": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_headers.scss",
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/atoms/_icon.scss",
-        "scss/atoms/_stat-counter.scss",
         "scss/base/_token-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
@@ -245,10 +262,16 @@
         "scss/abstracts/tokens/components/_buttons.scss"
       ]
     },
+    "--semantic-color-tertiary-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_buttons.scss"
+      ]
+    },
     "--semantic-color-tertiary": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/_token-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
@@ -264,10 +287,16 @@
         "scss/abstracts/tokens/components/_buttons.scss"
       ]
     },
+    "--semantic-color-quaternary-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_buttons.scss"
+      ]
+    },
     "--semantic-color-quaternary": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/base/_token-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
@@ -396,6 +425,7 @@
         "scss/abstracts/tokens/components/_headers.scss",
         "scss/abstracts/tokens/components/_labels.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
+        "scss/abstracts/tokens/components/_sections.scss",
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
@@ -683,6 +713,7 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_sections.scss",
+        "scss/organisms/_site-header.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -837,6 +868,18 @@
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/molecules/_form-field.scss"
+      ]
+    },
+    "--component-button-border-radius": {
+      "usages": [
+        "scss/abstracts/tokens/components/_headers.scss",
+        "scss/atoms/_btn.scss"
+      ]
+    },
+    "--component-button-border-width": {
+      "usages": [
+        "scss/abstracts/tokens/components/_headers.scss",
+        "scss/atoms/_btn.scss"
       ]
     },
     "--icon-logo": {
@@ -1534,6 +1577,18 @@
         "scss/themes/example-02/_theme.scss"
       ]
     },
+    "--semantic-color-quinary": {
+      "usages": [
+        "scss/abstracts/tokens/semantic/_colors.scss",
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--semantic-brand-text-lightness": {
+      "usages": [
+        "scss/abstracts/tokens/semantic/_colors.scss"
+      ]
+    },
     "--primitive-color-pink-50": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
@@ -1840,8 +1895,7 @@
     },
     "--primitive-letter-spacing-wide": {
       "usages": [
-        "scss/abstracts/tokens/semantic/_typography.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/abstracts/tokens/semantic/_typography.scss"
       ]
     },
     "--primitive-letter-spacing-wider": {
@@ -1895,11 +1949,6 @@
         "scss/atoms/_radio.scss",
         "scss/atoms/_switch.scss",
         "scss/organisms/_site-header.scss"
-      ]
-    },
-    "--component-button-border-width": {
-      "usages": [
-        "scss/atoms/_btn.scss"
       ]
     },
     "--component-button-border-style": {
@@ -2201,11 +2250,6 @@
         "scss/atoms/_btn.scss"
       ]
     },
-    "--component-button-border-radius": {
-      "usages": [
-        "scss/atoms/_btn.scss"
-      ]
-    },
     "--component-icon-size-md": {
       "usages": [
         "scss/atoms/_btn.scss",
@@ -2391,7 +2435,6 @@
       "usages": [
         "scss/atoms/_code.scss",
         "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
         "scss/organisms/_home-hero.scss",
         "scss/organisms/_home-layers.scss",
         "scss/organisms/_site-header.scss",
@@ -3183,6 +3226,11 @@
         "scss/atoms/_pagination.scss"
       ]
     },
+    "--component-pill-gap": {
+      "usages": [
+        "scss/atoms/_pill.scss"
+      ]
+    },
     "--component-pill-border-radius": {
       "usages": [
         "scss/atoms/_pill.scss"
@@ -3197,6 +3245,7 @@
         "scss/organisms/_home-hero.scss",
         "scss/organisms/_home-layers.scss",
         "scss/organisms/_home-themes.scss",
+        "scss/organisms/_home-tokens.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -4135,12 +4184,6 @@
         "scss/base/helpers/_fonts.scss"
       ]
     },
-    "--semantic-color-quinary": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
     "--dimension-1": {
       "usages": [
         "scss/base/helpers/_dimensions.scss"
@@ -4725,7 +4768,8 @@
         "scss/organisms/_home-hero.scss",
         "scss/organisms/_home-layers.scss",
         "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/organisms/_home-tokens.scss",
+        "scss/organisms/_site-header.scss"
       ]
     },
     "--component-cta-bg": {
@@ -4949,6 +4993,12 @@
         "scss/organisms/_home-themes.scss"
       ]
     },
+    "--component-grid-gutter": {
+      "usages": [
+        "scss/organisms/_home-features.scss",
+        "scss/organisms/_home-themes.scss"
+      ]
+    },
     "--component-section-divider-width": {
       "usages": [
         "scss/organisms/_home-features.scss",
@@ -5062,7 +5112,12 @@
         "scss/organisms/_home-hero.scss"
       ]
     },
-    "--component-hero-figure-color": {
+    "--component-hero-figure": {
+      "usages": [
+        "scss/organisms/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-size": {
       "usages": [
         "scss/organisms/_home-hero.scss"
       ]
@@ -5072,12 +5127,12 @@
         "scss/organisms/_home-hero.scss"
       ]
     },
-    "--component-hero-figure": {
+    "--component-hero-figure-build-duration": {
       "usages": [
         "scss/organisms/_home-hero.scss"
       ]
     },
-    "--component-hero-figure-size": {
+    "--semantic-easing-linear": {
       "usages": [
         "scss/organisms/_home-hero.scss"
       ]
@@ -5327,6 +5382,11 @@
         "scss/organisms/_home-tokens.scss"
       ]
     },
+    "--component-token-layer-badge-width": {
+      "usages": [
+        "scss/organisms/_home-tokens.scss"
+      ]
+    },
     "--component-token-layer-stripe-width": {
       "usages": [
         "scss/organisms/_home-tokens.scss"
@@ -5480,6 +5540,21 @@
     "--component-token-rule-icon-color": {
       "usages": [
         "scss/organisms/_home-tokens.scss"
+      ]
+    },
+    "--component-header-control-height": {
+      "usages": [
+        "scss/organisms/_site-header.scss"
+      ]
+    },
+    "--component-header-control-radius": {
+      "usages": [
+        "scss/organisms/_site-header.scss"
+      ]
+    },
+    "--component-header-control-border-width": {
+      "usages": [
+        "scss/organisms/_site-header.scss"
       ]
     },
     "--primitive-font-family-inter": {
@@ -6547,6 +6622,10 @@
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
+    "--semantic-color-quinary-text": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
     "--semantic-color-state-active": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
@@ -6624,10 +6703,6 @@
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
     "--semantic-shadow-card": {
-      "usages": [],
-      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
-    },
-    "--semantic-easing-linear": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },

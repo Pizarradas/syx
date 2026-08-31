@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.11.0).  
+You are working with **SYX**, a token-driven, native SCSS design system (v4.12.1).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 Before doing anything else, read these files in order:
