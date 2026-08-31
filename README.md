@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.21.0-7c3aed)
+![Version](https://img.shields.io/badge/version-4.23.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -147,7 +147,10 @@ From a clone instead of the installed package:
 | `find_token_by_value` | Which token holds this colour/measure (use before hardcoding one) |
 | `list_components` | The component inventory, layer and base classes |
 | `get_component` | Classes, modifiers, elements, states and tokens of one component |
-| `validate_snippet` | Runs R01–R04 over SCSS **before** it is written, and flags non-existent tokens |
+| `validate_snippet` | Runs R01–R04 over SCSS **before** it is written, flags non-existent tokens, and names the mixin to use instead |
+| `classify_change` | The trust tier of a change, and where a new token belongs |
+| `scan_for_drift` | Where a consuming app has drifted from the system |
+| `list_mixins` / `get_mixin` | The 44 mixins: signature, defaults, what they emit, how often each is used |
 
 No dependencies: plain JSON-RPC over stdio. It reads `contracts/resolved-tokens.json`
 and `component-registry.json`, both generated from source and arbitrated against the

@@ -335,4 +335,4 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
   };
 }
 
-module.exports = { escanear, trozosCss, clasesDe, varsConFallback, vaciar };
+module.exports = { escanear, trozosCss, clasesDe, varsConFallback, vaciar, distancia };

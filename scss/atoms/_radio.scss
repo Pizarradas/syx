@@ -14,7 +14,7 @@
     cursor: pointer;
     user-select: none;
 
-    // &__input â hidden native radio
+    // &__input — hidden native radio
     &__input {
       @include absolute();
       opacity: 0;
@@ -23,7 +23,7 @@
       pointer-events: none;
     }
 
-    // &__label â the visible label with custom radio circle
+    // &__label — the visible label with custom radio circle
     &__label {
       @include relative();
       display: inline-flex;

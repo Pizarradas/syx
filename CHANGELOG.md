@@ -7,6 +7,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.23.0] — 2026-08-31
+
+### Fixed
+
+- **240 secuencias mal codificadas, reparadas en 63 ficheros de `scss/`.** Texto UTF-8 que alguien guardó leyéndolo como Windows-1252: flechas, rayas, marcos y viñetas convertidos en basura. Estaban ahí desde hace tiempo y eran cosméticas — **hasta 4.22.0**. Desde que `get_mixin` sirve la descripción y los ejemplos de cada mixin tal como están escritos, esa basura la lee un agente para decidir qué escribir.
+
+  Se repara deshaciendo el paso exacto que lo rompió: los caracteres vuelven a bytes por cp1252 y esos bytes se decodifican como UTF-8. Sin tabla de pares escrita a mano, que habría dejado fuera justo el caso que nadie miró.
+
+  **La prueba de que era seguro: el CSS compilado no cambió ni un byte.** Los 240 arreglos caen todos dentro de comentarios `//`, que nunca llegan a la hoja de estilos. 63 ficheros modificados, `git status css/` vacío.
+
+- Y se retira de `scripts/lib/mixins.js` la reparación al vuelo que 4.22.0 hacía al servir. Sobra con la fuente limpia, y además era una pequeña mentira: lo que devolvía no era lo que había escrito en el fichero.
+
+### Added
+
+- **`check:encoding`, en la cadena de `npm run check`**, más `fix:encoding` para repararlo. Porque esto no lo causó nadie una vez: lo causa un editor mal configurado y volverá a pasar. Limpiar 240 apariciones a mano deja el repositorio bonito hasta el próximo guardado; un guardián convierte «se coló otra vez» en un fallo con nombre el mismo día.
+
+### Notes
+
+- **Dos veces se denunció a sí mismo, y las dos tenía razón.** La primera versión del reparador usaba una expresión regular y falló en las líneas de marco: el cuantificador goloso se llevaba el primer carácter del grupo siguiente, los cuatro bytes dejaban de ser UTF-8 válido y la línea entera se quedaba intacta — reparaba flechas y rayas y se dejaba 30 líneas. Se reescribió como un recorrido que lee el byte inicial y consume exactamente lo que ese byte anuncia.
+
+  Y su propio comentario de cabecera llevaba ejemplos literales del destrozo, así que el guardián se denunciaba a sí mismo y su `--fix` se comía sus ejemplos. Ahora describe con palabras lo que busca. Un guardián que no puede hablar de lo que persigue sin disparar su alarma tiene que cambiar de forma de hablar.
+
+---
+
+## [4.22.0] — 2026-08-31
+
+### Added
+
+- **Los mixins entran en el sistema agentic.** `list_mixins` y `get_mixin` como novena y décima herramienta MCP, y las mismas consultas en la API del paquete. Los 44 mixins con su firma, sus parámetros y valores por defecto, qué propiedades emite cada uno, a quién delega, quién le hace de alias y **cuántas veces se usa** — un dato que no estaba escrito en ninguna parte y que separa un mixin central de uno que no llama nadie.
+
+  Cerraba una asimetría que venía de origen: **R03 y R04 le decían a un agente lo que no puede escribir —`transition:` en crudo, `position: absolute`— y no había nada a lo que preguntar qué escribir en su lugar.** Su única salida eran 526 líneas de README en prosa. Un contrato que prohíbe sin ofrecer alternativa consultable produce lo mismo que produjo con los tokens: nombres inventados.
+
+- **`validate_snippet` ahora dice el recambio.** Caza un `position:` en crudo y responde `position()`, con sus cuatro alias —`absolute`, `fixed`, `relative`, `sticky`—, que es como se escribe de verdad en este repositorio. El recambio se **deduce**: qué mixin lleva el nombre de esa propiedad, o es el único que la emite. Cuando no está claro, no se ofrece ninguno.
+
+- **`scripts/lib/mixins.js`** — lee del SCSS, porque es el único sitio donde se puede leer: un token o una clase se pueden contrastar contra el CSS compilado, porque acaban ahí; un mixin no deja rastro reconocible, se disuelve en las declaraciones que genera. La firma, los parámetros, lo que emite y a quién llama se deducen del código; la descripción y los ejemplos se copian del comentario de encima, tal cual.
+
+- **`scripts/check-mixins.js`**, en la cadena de `npm run check`. La comprobación central es de ida y vuelta: **todo `@mixin` del SCSS aparece en la lista y todo lo que la lista dice está en el SCSS**, contado aparte y no contra una lista escrita a mano de 44 nombres que envejecería en silencio.
+
+### Fixed
+
+- Tres errores del lector, encontrados por su propia prueba antes de que salieran de aquí:
+  - **Los alias se buscaban en el sitio equivocado.** Un alias delega y por tanto NO emite la propiedad, así que buscarlo entre los que la emiten no encontraba ninguno. `position` se quedaba sin sus cuatro.
+  - **`margin()` y `padding()` no aparecían como recambio** de `margin:` y `padding:` porque no emiten nada por su cuenta: delegan en `syx-directional`. Son dos de los mixins más usados del repositorio. Ahora manda el nombre, que es la señal más fuerte.
+  - **Se ofrecía `aspect-ratio` como recambio de `display:`**, porque lo emite de paso y era el más usado. Un consejo malo dicho con seguridad. Ahora hace falta que la propiedad sea lo que ese mixin *es* —lleva su nombre o es lo único que emite— y si no, se calla.
+- Y un error de la prueba, no del código: daba por hecho que `border-radius` no tenía mixin. Lo tiene, con 6 usos. Se corrigió la prueba.
+- `distancia()` deja de estar solo en el escáner y se comparte: `get_mixin` sugiere por parecido, no por subcadena, que es lo que hace falta cuando alguien escribe «transicion».
+
+### Known
+
+- **26 de los 44 mixins no los llama nadie** y **9 no tienen descripción**. `check:mixins` lo cuenta en cada ejecución. Es material para un R08 de mixins, o para una poda.
+- Los comentarios de **63 ficheros de `scss/`** arrastran flechas mal codificadas (`â` donde debería haber `→`), de un guardado antiguo con la codificación equivocada. El lector las repara **al servir** para que la documentación llegue limpia a quien pregunte, pero los ficheros siguen igual: son 63, y arreglarlos es una limpieza aparte.
+
+---
+
 ## [4.21.0] — 2026-08-31
 
 ### Added

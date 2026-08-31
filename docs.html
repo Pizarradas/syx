@@ -562,7 +562,7 @@
         <section class="docs-hero" aria-labelledby="docs-hero-title">
           <span class="docs-hero__eyebrow">
             <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
-            Component Gallery v4.21.0
+            Component Gallery v4.23.0
           </span>
           <h1 class="atom-title atom-title--h1 docs-hero__title" id="docs-hero-title">SYX Design System</h1>
           <p class="atom-txt atom-txt--primary docs-hero__lead">Ordered by <strong>layer hierarchy</strong>:
@@ -1403,7 +1403,7 @@ syx.getToken({
             </div>
           </div>
 
-          <p class="syx-type-overline syx-text-gray syx-mb-2">The eight tools</p>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">The ten tools</p>
           <div class="syx-mb-4" style="overflow-x:auto">
             <table class="atom-table" style="min-width:620px">
               <thead>
@@ -1454,12 +1454,33 @@ syx.getToken({
                   <td>Where an app has drifted from the system</td>
                   <td>Reading its CSS looking for smells</td>
                 </tr>
+                <tr>
+                  <td><code>list_mixins</code></td>
+                  <td>The 44 mixins with their signature and how often each is used</td>
+                  <td>Reading 526 lines of README</td>
+                </tr>
+                <tr>
+                  <td><code>get_mixin</code></td>
+                  <td>One mixin's parameters and defaults, what it emits, who aliases it</td>
+                  <td>Guessing the arguments</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
-          <p class="atom-txt syx-text-gray syx-mb-0">No dependencies: plain JSON-RPC over stdio. Everything it returns
-            is arbitrated against the compiled CSS, so what comes out of it exists.</p>
+          <p class="atom-txt syx-text-gray syx-mb-3">No dependencies: plain JSON-RPC over stdio. Everything about
+            tokens and classes is arbitrated against the compiled CSS, so what comes out of it exists.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">The mixins are the half that only exists in the SCSS</p>
+            <p class="atom-txt syx-mb-0">A token or a class can be checked against the compiled CSS, because that is
+              where they end up. A mixin leaves no recognisable trace once compiled &mdash; it dissolves into the
+              declarations it generates. So it is read from the source, and it has to be: R03 and R04 tell an agent
+              what it may <em>not</em> write, and until now nothing told it what to write instead.
+              <code>validate_snippet</code> now names the replacement &mdash; catch a raw <code>position:</code> and it
+              answers <code>position()</code>, plus the four aliases (<code>absolute</code>, <code>fixed</code>,
+              <code>relative</code>, <code>sticky</code>) that are how it is actually written here.</p>
+          </div>
         </section>
 
         <!-- ─── 2 · WRITE ─── -->
@@ -1636,7 +1657,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             4 &mdash; What runs on its own
           </h3>
           <p class="atom-txt syx-text-gray syx-mb-3">None of the above is worth much if it only runs when somebody
-            remembers. <code>npm run check</code> chains nine steps, and GitHub Actions runs them on every push across
+            remembers. <code>npm run check</code> chains eleven steps, and GitHub Actions runs them on every push across
             Node 18, 20 and 22 &mdash; with the heavier ones (packing and installing the package for real, exercising
             the proposal path) reserved for pull requests, so nobody is tempted to switch it off.</p>
 
@@ -1683,6 +1704,15 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
                   <td><code>check:escaner</code></td>
                   <td>A scanner with false positives &mdash; six of its fifteen checks are things it must
                     <strong>not</strong> report</td>
+                </tr>
+                <tr>
+                  <td><code>check:mixins</code></td>
+                  <td>A mixin reader that invents one, or misses one &mdash; checked both ways against the SCSS</td>
+                </tr>
+                <tr>
+                  <td><code>check:encoding</code></td>
+                  <td>Text saved by reading UTF-8 as Windows-1252. Cosmetic until <code>get_mixin</code> started
+                    serving those comments to agents</td>
                 </tr>
                 <tr>
                   <td><code>check:package</code></td>
@@ -2638,7 +2668,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.21.0<br>
+        <strong>SYX Design System</strong> · v4.23.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 

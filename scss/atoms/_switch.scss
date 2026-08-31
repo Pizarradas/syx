@@ -14,7 +14,7 @@
     cursor: pointer;
     user-select: none;
 
-    // &__input â hidden native checkbox
+    // &__input — hidden native checkbox
     &__input {
       @include absolute();
       opacity: 0;
@@ -23,7 +23,7 @@
       pointer-events: none;
     }
 
-    // &__slider â the visual track + knob
+    // &__slider — the visual track + knob
     &__slider {
       @include relative();
       display: inline-block;
@@ -59,14 +59,14 @@
       }
     }
 
-    // &__label â visible text label
+    // &__label — visible text label
     &__label {
       font-size: var(--component-form-field-font-size);
       color: var(--component-form-field-color);
       line-height: var(--component-form-field-line-height);
     }
 
-    // Checked state â move knob right, turn track on
+    // Checked state — move knob right, turn track on
     &__input:checked + &__slider {
       background-color: var(--component-switch-bg-on);
       border-color: var(--component-switch-bg-on);

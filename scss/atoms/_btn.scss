@@ -238,8 +238,8 @@
     // --has-icon: self-contained icon+text variant
     // Controls layout, gap and icon size based on the active --size-* modifier.
     // Usage: add atom-btn--has-icon alongside any atom-btn--size-*
-    // The .atom-icon span needs no size modifier â€” --has-icon controls it.
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // The .atom-icon span needs no size modifier — --has-icon controls it.
+    // ─────────────────────────────────────────────────────────────
     &--has-icon {
       justify-content: flex-start;
       gap: var(--component-button-size-md); // default gap (md)
@@ -250,19 +250,19 @@
         @include size(var(--component-icon-size-md));
       }
 
-      // sm button â†’ sm gap + sm icon
+      // sm button → sm gap + sm icon
       &.atom-btn--size-sm {
         gap: var(--component-button-size-sm);
         .atom-icon { @include size(var(--component-icon-size-sm)); }
       }
 
-      // md button â†’ md gap + md icon
+      // md button → md gap + md icon
       &.atom-btn--size-md {
         gap: var(--component-button-size-md);
         .atom-icon { @include size(var(--component-icon-size-md)); }
       }
 
-      // lg button â†’ lg gap + lg icon
+      // lg button → lg gap + lg icon
       &.atom-btn--size-lg {
         gap: var(--component-button-size-lg);
         .atom-icon { @include size(var(--component-icon-size-lg)); }

@@ -37,8 +37,8 @@
 
     // Colors - State
     --primitive-color-success-500: oklch(0.60 0.137 150.069);
-    --primitive-color-error-500: oklch(0.60 0.181 22.839); // raised from oklch(0.60 0.215 27.325) â€” terminal red on black (~7.2:1, was 3.9:1)
-    --primitive-color-warning-500: oklch(0.60 0.153 91.605); // raised from oklch(0.60 0.157 58.318) â€” better visibility on dark terminal bg
+    --primitive-color-error-500: oklch(0.60 0.181 22.839); // raised from oklch(0.60 0.215 27.325) — terminal red on black (~7.2:1, was 3.9:1)
+    --primitive-color-warning-500: oklch(0.60 0.153 91.605); // raised from oklch(0.60 0.157 58.318) — better visibility on dark terminal bg
     --primitive-color-disabled: oklch(0.60 0.009 258.338);
 
     // Typography — DM Mono (monospace, technical-organic)
@@ -194,13 +194,13 @@
     --theme-focus-ring-width: 2px;
     --theme-radius: 0;
 
-    // Buttons â€” forest filled, dark-green text, square
+    // Buttons — forest filled, dark-green text, square
     --btn-primary-text: var(--primitive-color-forest-500);
     --btn-primary-filled-text: oklch(0.266 0.063 152.934); // dark forest on green (~15:1, was 2.3:1 with moss-950)
     --btn-secondary-text: var(--primitive-color-earth-500);
     --btn-secondary-filled-text: oklch(0.266 0.063 152.934); // dark forest on earth-green (~15:1, was 2.3:1)
     --btn-tertiary-text: var(--primitive-color-moss-900);
-    --btn-tertiary-filled-text: var(--primitive-color-sage-50); // near-black on moss â€” OK
+    --btn-tertiary-filled-text: var(--primitive-color-sage-50); // near-black on moss — OK
     --btn-quaternary-text: var(--primitive-color-forest-600);
     --btn-quaternary-filled-text: oklch(0.266 0.063 152.934); // dark forest on forest-600
 
@@ -236,10 +236,10 @@
     --list-lvl1-gap: calc(6 * var(--base-measure));
     --list-item-m-t: calc(4 * var(--base-measure));
     --list-icon-size: calc(4 * var(--base-measure));
-    --list-lvl1-icon-pic: var(--lc-icon-chevron-right); // Lucide â€” external SVG, no embedded data URI
+    --list-lvl1-icon-pic: var(--lc-icon-chevron-right); // Lucide — external SVG, no embedded data URI
     --list-lvl2-m-l: calc(6 * var(--base-measure));
     --list-lvl2-gap: calc(6 * var(--base-measure));
-    --list-lvl2-icon-pic: var(--lc-icon-chevrons-right); // Lucide â€” double chevron for nested items
+    --list-lvl2-icon-pic: var(--lc-icon-chevrons-right); // Lucide — double chevron for nested items
     --list-lvl3-m-l: calc(6 * var(--base-measure));
     --list-lvl3-gap: calc(6 * var(--base-measure));
 

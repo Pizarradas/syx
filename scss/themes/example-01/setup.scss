@@ -78,17 +78,17 @@
 @include elements-base(example-01);
 // ===============================================
 
-// HELPERS â€” theme-independent first, then theme-specific
+// HELPERS — theme-independent first, then theme-specific
 // ===============================================
 @include helper-icons();           // SVG icon background-image helpers
 @include helper-fonts(example-01); // @font-face font-weight helpers
 @include helper-font-sizes(example-01);
 @include helper-dimensions(example-01);
-@include helper-spacer(example-01); // @deprecated â€” kept for legacy compat
+@include helper-spacer(example-01); // @deprecated — kept for legacy compat
 @include helper-backgrounds(example-01);
 // ===============================================
 
-// LAYOUT: grid â€” after helpers, before components
+// LAYOUT: grid — after helpers, before components
 // ===============================================
 @include layout-grid(example-01);
 // ===============================================

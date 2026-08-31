@@ -140,17 +140,17 @@
     --filter-state-disabled: var(--primitive-filter-disabled);
 
     // Dark-first semantic tokens — toda la UI construida sobre oscuro
-    --semantic-color-text-primary: var(--primitive-color-gold-400); // gold-400 on black >4.5:1 âœ…
-    --semantic-color-text-secondary: var(--primitive-color-silver-100); // silver on black = 13.4:1 âœ…
-    --semantic-color-text-tertiary: oklch(0.734 0.063 247.945); // steel-blue â€” raised from oklch(0.475 0.075 250.273) (2.1:1 â†’ ~4.7:1 on dark-700)
+    --semantic-color-text-primary: var(--primitive-color-gold-400); // gold-400 on black >4.5:1 ✅
+    --semantic-color-text-secondary: var(--primitive-color-silver-100); // silver on black = 13.4:1 ✅
+    --semantic-color-text-tertiary: oklch(0.734 0.063 247.945); // steel-blue — raised from oklch(0.475 0.075 250.273) (2.1:1 → ~4.7:1 on dark-700)
     --semantic-color-text-inverse: var(--primitive-color-dark-950);
     --semantic-color-bg-primary: var(--primitive-color-dark-900);
     --semantic-color-bg-secondary: var(--primitive-color-dark-800);
     --semantic-color-bg-tertiary: var(--primitive-color-dark-700);
     --semantic-border-width: 1px;
     --semantic-outline-width: var(--theme-focus-ring-width);
-    --semantic-color-border-default: var(--primitive-color-dark-400); // raised from dark-600 â€” more visible borders
-    --semantic-color-border-subtle: var(--primitive-color-dark-500); // raised from dark-500 = 243B55 â€” slight improvement
+    --semantic-color-border-default: var(--primitive-color-dark-400); // raised from dark-600 — more visible borders
+    --semantic-color-border-subtle: var(--primitive-color-dark-500); // raised from dark-500 = 243B55 — slight improvement
     --semantic-shadow-sm: 0 1px 3px oklch(0 0 0 / 0.6), 0 1px 2px oklch(0 0 0 / 0.8);
     --semantic-shadow-card: 0 4px 16px oklch(0 0 0 / 0.5), 0 1px 4px oklch(0 0 0 / 0.7);
 
@@ -264,10 +264,10 @@
     --list-lvl1-gap: calc(6 * var(--base-measure));
     --list-item-m-t: calc(4 * var(--base-measure));
     --list-icon-size: calc(4 * var(--base-measure));
-    --list-lvl1-icon-pic: var(--lc-icon-chevron-right); // Lucide â€” external SVG, no embedded data URI
+    --list-lvl1-icon-pic: var(--lc-icon-chevron-right); // Lucide — external SVG, no embedded data URI
     --list-lvl2-m-l: calc(6 * var(--base-measure));
     --list-lvl2-gap: calc(6 * var(--base-measure));
-    --list-lvl2-icon-pic: var(--lc-icon-chevrons-right); // Lucide â€” double chevron for nested items
+    --list-lvl2-icon-pic: var(--lc-icon-chevrons-right); // Lucide — double chevron for nested items
     --list-lvl3-m-l: calc(6 * var(--base-measure));
     --list-lvl3-gap: calc(6 * var(--base-measure));
 

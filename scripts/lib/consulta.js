@@ -26,7 +26,8 @@ const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
 const { revisar, tokensInexistentes, DESCRIPCIONES } = require('./rules');
 const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
-const { escanear } = require('./escaner');
+const { leer: leerMixins, recambioPara } = require('./mixins');
+const { escanear, distancia } = require('./escaner');
 
 function crearConsulta({ root } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
@@ -42,6 +43,7 @@ function crearConsulta({ root } = {}) {
   let snap = null;
   let registro = null;
   let conocidos = null;
+  let mixins = null;
   const declaracionesCache = new Map();
   const invCache = new Map();
 
@@ -62,6 +64,11 @@ function crearConsulta({ root } = {}) {
       for (const nombre of Object.keys(v)) conocidos.add(nombre);
     }
   }
+
+  // Los mixins solo existen en el SCSS: un mixin no deja rastro reconocible en
+  // el CSS compilado, se disuelve en las declaraciones que genera. Se leen de la
+  // fuente, una vez.
+  const losMixins = () => (mixins = mixins || leerMixins(ROOT));
 
   const componentes = () => {
     cargar();
@@ -190,6 +197,45 @@ function crearConsulta({ root } = {}) {
     return { encontrado: true, ...c };
   }
 
+  const listMixins = ({ file } = {}) => {
+    const todos = losMixins();
+    return {
+      total: todos.length,
+      // El recuento de usos va delante a propósito: separa un mixin central de
+      // uno que no llama nadie, y eso no está escrito en ninguna parte.
+      mixins: todos
+        .filter((m) => !file || m.file.includes(file))
+        .map((m) => ({ name: m.name, signature: m.signature, uses: m.uses, file: m.file, emits: m.emits })),
+    };
+  };
+
+  function getMixin({ name }) {
+    const todos = losMixins();
+    const m = todos.find((x) => x.name === name || x.name === String(name).replace(/^@include\s+/, ''));
+    if (!m) {
+      return {
+        encontrado: false,
+        name,
+        // Por parecido y no solo por subcadena: quien pregunta por un mixin que
+        // no existe suele haberlo escrito casi bien —«transicion» por
+        // «transition»—, y ahí una coincidencia de subcadena no encuentra nada.
+        sugerencias: todos
+          .map((x) => ({ n: x.name, d: x.name.includes(name) || name.includes(x.name) ? 0 : distancia(name, x.name) }))
+          .filter((x) => x.d <= 4)
+          .sort((a, b) => a.d - b.d)
+          .slice(0, 6)
+          .map((x) => x.n),
+      };
+    }
+    return {
+      encontrado: true,
+      ...m,
+      // Quién delega en él y en quién delega: es lo que dice si hay una forma
+      // más corta de escribir lo mismo.
+      alias: todos.filter((x) => x.calls.includes(m.name)).map((x) => x.name),
+    };
+  }
+
   function validateSnippet({ code, path: rel = 'scss/atoms/_nuevo.scss' }) {
     cargar();
     const v = revisar(rel, code);
@@ -202,7 +248,15 @@ function crearConsulta({ root } = {}) {
       violaciones: Object.fromEntries(
         Object.entries(v)
           .filter(([, x]) => x.length)
-          .map(([k, x]) => [k, { regla: DESCRIPCIONES[k], casos: x }])
+          .map(([k, x]) => {
+            // R03 y R04 prohíben una propiedad en crudo. Decir cuál es el
+            // recambio es la mitad que faltaba: un contrato que prohíbe sin
+            // ofrecer alternativa consultable obliga a adivinar, y adivinar es
+            // de donde salen los nombres inventados.
+            const propiedad = { R03: 'transition', R04: 'position' }[k];
+            const recambio = propiedad ? recambioPara(propiedad, losMixins()) : null;
+            return [k, { regla: DESCRIPCIONES[k], casos: x, ...(recambio ? { recambio } : {}) }];
+          })
       ),
       tokensInexistentes: fuera,
       nota: rotos.length
@@ -257,6 +311,8 @@ function crearConsulta({ root } = {}) {
     validateSnippet,
     classifyChange,
     scan,
+    listMixins,
+    getMixin,
   };
 
   return api;

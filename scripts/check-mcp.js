@@ -56,10 +56,10 @@ comprobar('initialize responde con protocolo y nombre', async () => {
   if (r.result.serverInfo?.name !== 'syx') throw new Error('serverInfo.name inesperado');
 });
 
-comprobar('tools/list expone las 8 herramientas con esquema', async () => {
+comprobar('tools/list expone las 10 herramientas con esquema', async () => {
   const r = await rpc('tools/list', {});
   const t = r.result.tools;
-  if (t.length !== 8) throw new Error(`esperaba 8 herramientas, hay ${t.length}`);
+  if (t.length !== 10) throw new Error(`esperaba 10 herramientas, hay ${t.length}`);
   for (const x of t) {
     if (!x.description) throw new Error(`${x.name} sin descripción`);
     if (x.inputSchema?.type !== 'object') throw new Error(`${x.name} con esquema mal formado`);
@@ -145,6 +145,31 @@ comprobar('scan_for_drift devuelve un informe bien formado', async () => {
   if (typeof r.total !== 'number' || !Array.isArray(r.hallazgos)) throw new Error('informe mal formado');
   if (r.total !== r.hallazgos.length) throw new Error('el total no cuadra con los hallazgos');
   if (r.theme !== 'syx-sketch') throw new Error('no dice contra qué tema compara');
+});
+
+comprobar('get_mixin trae la firma y los parámetros leídos del SCSS', async () => {
+  const r = salida(await rpc('tools/call', { name: 'get_mixin', arguments: { name: 'position' } }));
+  if (!r.encontrado) throw new Error('no encuentra position');
+  if (!r.params.some((p) => p.name === '$top' && p.default === 'null')) throw new Error('no lee los valores por defecto');
+  // Los alias son la forma en que de verdad se escribe: nadie llama a
+  // `position(absolute, …)` teniendo `absolute(…)`.
+  if (!r.alias.includes('absolute')) throw new Error(`sin alias: ${JSON.stringify(r.alias)}`);
+});
+
+comprobar('list_mixins cuenta los usos, no solo los nombres', async () => {
+  const r = salida(await rpc('tools/call', { name: 'list_mixins', arguments: {} }));
+  if (r.total < 40) throw new Error(`solo ${r.total} mixins`);
+  if (!r.mixins.some((m) => m.uses > 0)) throw new Error('ninguno con usos: no está contando');
+});
+
+comprobar('validate_snippet dice QUÉ mixin usar, no solo que está mal', async () => {
+  const r = salida(await rpc('tools/call', {
+    name: 'validate_snippet',
+    arguments: { code: '.x {\n  transition: color 0.2s ease;\n  position: absolute;\n}' },
+  }));
+  if (r.violaciones.R03?.recambio?.mixin !== 'transition') throw new Error('R03 no ofrece recambio');
+  if (r.violaciones.R04?.recambio?.mixin !== 'position') throw new Error('R04 no ofrece recambio');
+  if (!r.violaciones.R04.recambio.alias.includes('absolute')) throw new Error('R04 no ofrece el alias corto');
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {

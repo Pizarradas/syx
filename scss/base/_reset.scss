@@ -3,7 +3,7 @@
 @use "../abstracts/index" as *;
 // ===============================================
 
-// CSS @layer declaration â establishes specificity order
+// CSS @layer declaration — establishes specificity order
 // Lower layers lose to higher layers regardless of selector specificity.
 // Order: reset < base < components < utilities
 // NOTE: @layer stack is declared once in the entrypoint (styles-core.scss).
@@ -14,7 +14,7 @@
 @mixin resets-global($theme: null) {
   @layer syx.reset {
     // -----------------------------------------------
-    // BOX MODEL â universal box-sizing
+    // BOX MODEL — universal box-sizing
     // -----------------------------------------------
     *,
     *::before,
@@ -150,7 +150,7 @@
     }
 
     // -----------------------------------------------
-    // MONOSPACE â grouped: code, kbd, samp, pre
+    // MONOSPACE — grouped: code, kbd, samp, pre
     // -----------------------------------------------
     code,
     kbd,
@@ -310,7 +310,7 @@
         display: none;
       }
 
-      // Chrome autofill â prevent bg flash
+      // Chrome autofill — prevent bg flash
       &:-webkit-autofill {
         transition:
           background-color 600000s 0s,

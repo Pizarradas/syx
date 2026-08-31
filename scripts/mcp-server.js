@@ -151,6 +151,27 @@ const HERRAMIENTAS = [
     },
     run: (a) => syx.scan(a),
   },
+
+  {
+    name: 'list_mixins',
+    description: 'Los mixins del sistema con su firma y cuántas veces se usa cada uno. Los mixins solo existen en el SCSS —no dejan rastro reconocible en el CSS compilado—, así que esto es lo único que hay para saber qué existe sin leerse la carpeta entera.',
+    inputSchema: {
+      type: 'object',
+      properties: { file: { type: 'string', description: 'Filtra por fichero, p. ej. positioning o helpers' } },
+    },
+    run: (a) => syx.listMixins(a),
+  },
+
+  {
+    name: 'get_mixin',
+    description: 'Todo lo de un mixin: firma, parámetros con sus valores por defecto, qué propiedades emite, a qué otros mixins llama, quién lo usa como alias y los ejemplos de su documentación. Pregúntalo ANTES de escribir CSS en crudo que una regla vaya a rechazar.',
+    inputSchema: {
+      type: 'object',
+      properties: { name: { type: 'string', description: 'p. ej. transition, absolute, size' } },
+      required: ['name'],
+    },
+    run: (a) => syx.getMixin(a),
+  },
 ];
 
 // ─── JSON-RPC sobre stdio ────────────────────────────────────────────────────
