@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.14.3).  
+You are working with **SYX**, a token-driven, native SCSS design system (v4.16.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 Before doing anything else, read these files in order:
@@ -9,6 +9,23 @@ Before doing anything else, read these files in order:
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
 3. `tokens.json` — full token registry with type, rawValue, and status for all 771 tokens
 4. `component-registry.json` — inventory of all atoms, molecules, and organisms
+
+**If your client speaks MCP, ask instead of reading.** `npm run mcp` starts a
+dependency-free stdio server (`scripts/mcp-server.js`) that answers the four questions
+that otherwise force you to load the files above:
+
+| Instead of | Ask |
+|---|---|
+| Resolving the cascade by hand to know a colour | `get_token` — real value in a given theme + mode, with its alias chain |
+| Hardcoding a value you found in the CSS | `find_token_by_value` — which token holds it |
+| Grepping the SCSS for a component's modifiers | `get_component` / `list_components` — verified against the compiled CSS |
+| Writing SCSS and validating afterwards | `validate_snippet` — R01–R04 **before** writing, plus non-existent tokens |
+
+The same rules run in both places, so a snippet the server approves is a snippet
+`npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
+in `README.md`. If you are working inside an app that depends on SYX rather than in this
+repository, `require('syx-design-system')` exposes the same six queries as a Node API,
+answering from the version that app has installed.
 
 ---
 
@@ -101,6 +118,9 @@ _agents/
   modes/                — mode definitions (ux, ui, token, theme, audit)
   workflows/            — step-by-step task guides
   prompts/              — copy-paste prompt templates
+index.js                — package entry point: the same six queries as an npm dependency
 scripts/
   syx-validate.js       — runs R01–R07 contract checks
+  mcp-server.js         — MCP server (stdio): tokens, components and validation on demand
+  lib/                  — shared engine: css-tokens.js, rules.js (R01–R04), consulta.js (the queries)
 ```

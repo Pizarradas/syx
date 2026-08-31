@@ -7,6 +7,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.16.0] — 2026-08-31
+
+### Added
+
+- **SYX se puede instalar.** Hasta ahora no había vehículo de entrega: ninguna aplicación podía traerse SYX, así que tampoco había dónde detectar que una aplicación se hubiera desviado del sistema. Ese era el agujero del paso 1.2.
+
+  `exports` con rutas separadas para cada tema (`syx-design-system/themes/syx-sketch.css`), para el SCSS fuente, para los contratos y para la API. `files` acotado: 295 ficheros, 2,4 MB comprimidos, sin el DTCG derivable ni los subproductos de compilación.
+
+- **`index.js` — la cara programable del paquete.** `main` apuntaba al CSS de un tema concreto, que era un parche y además una mentira: `require()` sobre un `.css` falla. Ahora `require('syx-design-system')` devuelve las seis consultas —`getToken`, `findTokenByValue`, `listComponents`, `getComponent`, `validateSnippet`, `listThemes`— más las rutas resueltas de cada artefacto.
+
+  **Los contratos viajan con el paquete**, y eso es lo que hace posible lo que viene: una aplicación valida contra la versión exacta que tiene instalada, no contra lo que hoy haya en `main`.
+
+- `bin` `syx-mcp`: el servidor MCP arranca desde el paquete instalado. El registro en un cliente pasa a ser `npx -y syx-mcp`, sin rutas absolutas al repositorio.
+
+- `scripts/check-package.js` — guardián de empaquetado, en la cadena de `npm run check`. Comprueba que cada ruta de `exports` viaja de verdad, que `main` es requerible, que el `bin` tiene shebang, que no se cuela nada derivable y que **el CSS no cita ficheros que se quedan fuera**. El error de empaquetado es silencioso por naturaleza: aquí todo funciona, y solo se rompe en la máquina de quien instala.
+
+- `scripts/check-consumible.js` — la prueba de verdad, a demanda (`npm run check:consumible`): empaqueta, instala en un proyecto de usar y tirar **fuera del repositorio** y desde allí importa un tema, lee los tokens resueltos, llama a la API y arranca el servidor MCP por su `bin`. Ocho comprobaciones, incluida una que verifica que nada resuelve fuera de `node_modules` — probando desde dentro del repositorio, Node encontraría los ficheros por ruta relativa y la prueba se respondería a sí misma.
+
+- `prepublishOnly` encadena `npm run check` y la prueba de consumo: no se publica sin pasar por las dos.
+
+### Changed
+
+- **La capa de consulta sale a `scripts/lib/consulta.js`.** El servidor MCP se queda solo con el protocolo (319 → 191 líneas) y comparte implementación con `index.js`. Un agente por MCP y una aplicación por `require` tienen que obtener la misma respuesta a la misma pregunta; con dos copias, no la obtendrían mucho tiempo.
+
+- `repository`, `homepage`, `bugs`, `engines` (`node >=18`) y `sideEffects` (`*.css`, `*.scss`, para que ningún empaquetador se coma las hojas al hacer tree-shaking).
+
+### Known
+
+- **Cuatro familias tipográficas que el CSS cita no están en el repositorio**: `google-inter`, `google-playfair-display`, `google-dm-mono` y `google-bebas-neue` — 35 `url()` sin destino, que afectan a `example-01`, `03`, `04`, `05`, `06` y a `setup-builder.css`. `syx-sketch` y `example-02` no dependen de ninguna. El navegador cae a la siguiente familia de la pila, así que no rompe, pero son 35 peticiones a 404. `check:package` lo avisa en cada ejecución sin hacer fallar la cadena: no lo causa el empaquetado y no es un guardián quien debe decidir cómo se arregla.
+
+---
+
+## [4.15.0] — 2026-08-31
+
+### Added
+
+- **Servidor MCP: el sistema de diseño se puede preguntar.** `scripts/mcp-server.js`, JSON-RPC sobre stdio y sin una sola dependencia. Seis herramientas: `list_themes`, `get_token`, `find_token_by_value`, `list_components`, `get_component` y `validate_snippet`.
+
+  El cambio de fondo no es tener un servidor, es **el orden de las cosas**. Hasta ahora un agente leía `tokens.json`, el registro y los ficheros de tema, resolvía la cascada de cabeza, escribía, y alguien validaba después. De ahí salían los nombres de token inventados: `--component-btn-primary-bg` en vez de `--component-button-primary-filled-bg` no lo detectaba nadie hasta compilar. Ahora `get_token` devuelve el valor que el navegador pintaría —tema y modo incluidos, con la cadena de alias que lo produce— y `validate_snippet` pasa R01–R04 **antes** de escribir, avisando además de los tokens que no existen.
+
+  Registro para cualquier cliente MCP en el README. `npm run mcp` lo arranca.
+
+- `scripts/check-mcp.js` — prueba de humo que lanza el servidor de verdad y le habla por stdio, como un cliente. Nueve comprobaciones a nivel de protocolo, no de funciones internas: lo que se rompe en un servidor MCP es el protocolo. Entra en la cadena de `npm run check` como `check:mcp`.
+
+### Changed
+
+- **Un solo motor, dos consumidores.** `scripts/lib/css-tokens.js` (resolución de la cascada, forma canónica, agrupación de assets) y `scripts/lib/rules.js` (R01–R04) salen de donde vivían y pasan a compartirse entre el generador del snapshot, el validador y el servidor.
+
+  El motivo es el error que más veces se repitió en las últimas versiones: dos copias del mismo criterio acaban diciendo cosas distintas, y entonces el instrumento de medida inventa problemas que no existen. Con una copia sola, un fragmento que el servidor aprueba es un fragmento que `npm run validate` aprueba, y lo será dentro de seis meses.
+
+  Verificado: el snapshot regenerado es idéntico byte a byte al de `HEAD` salvo la marca de tiempo, y el validador sigue dando 0 violaciones en R01–R04.
+
+- `get_token` añade la cadena de alias (`cadenaDeAlias`), que era lo que faltaba para responder «por qué» y no solo «cuánto».
+
+---
+
 ## [4.14.3] — 2026-08-31
 
 ### Changed

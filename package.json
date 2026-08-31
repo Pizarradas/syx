@@ -1,8 +1,54 @@
 {
   "name": "syx-design-system",
-  "version": "4.14.3",
-  "description": "A modern, token-driven SCSS design system built on Atomic Design principles.",
-  "main": "css/styles-theme-syx-sketch.css",
+  "version": "4.16.0",
+  "description": "A modern, token-driven SCSS design system built on Atomic Design principles. Ships its own contracts and an MCP server, so agents and apps can query it instead of reading it.",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./themes/*.css": "./css/styles-theme-*.css",
+    "./css/*": "./css/*",
+    "./scss/*": "./scss/*",
+    "./tokens.json": "./tokens.json",
+    "./component-registry.json": "./component-registry.json",
+    "./contracts/*": "./contracts/*",
+    "./mcp": "./scripts/mcp-server.js"
+  },
+  "bin": {
+    "syx-mcp": "scripts/mcp-server.js"
+  },
+  "files": [
+    "index.js",
+    "css/*.css",
+    "scss/",
+    "fonts/",
+    "scripts/",
+    "contracts/*.json",
+    "contracts/validation-report.md",
+    "tokens.json",
+    "component-registry.json",
+    "_agents/",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "AI_GUIDELINES.md",
+    "THEMING-RULES.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pizarradas/syx.git"
+  },
+  "homepage": "https://github.com/pizarradas/syx#readme",
+  "bugs": {
+    "url": "https://github.com/pizarradas/syx/issues"
+  },
   "scripts": {
     "start": "npm run watch",
     "build": "npm run build:css",
@@ -17,13 +63,18 @@
     "validate:tokens": "node scripts/validate-tokens.js",
     "validate:tokens:strict": "node scripts/validate-tokens.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
-    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run build",
+    "check": "npm run validate:report && npm run check:themes && npm run check:version && npm run check:tokens && npm run check:registry && npm run check:mcp && npm run check:package && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
     "check:tokens": "node scripts/build-token-snapshot.js --check",
     "build:registry": "node scripts/build-component-registry.js",
-    "check:registry": "node scripts/build-component-registry.js --check"
+    "check:registry": "node scripts/build-component-registry.js --check",
+    "mcp": "node scripts/mcp-server.js",
+    "check:mcp": "node scripts/check-mcp.js",
+    "check:package": "node scripts/check-package.js",
+    "check:consumible": "node scripts/check-consumible.js",
+    "prepublishOnly": "npm run check && npm run check:consumible"
   },
   "keywords": [
     "design-system",

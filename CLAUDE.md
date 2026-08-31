@@ -1,12 +1,20 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v4.14.3).
+You are working with **SYX**, a token-driven, native SCSS design system (v4.16.0).
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
 3. `tokens.json` — full token registry (check before using or creating any token)
 4. `component-registry.json` — all existing components (check before creating a new one)
+
+**Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
+`README.md` → *MCP server*), don't load those files to answer a point question. Use
+`get_token` for a token's real value in a theme and mode, `find_token_by_value` before
+hardcoding anything, `get_component` for a component's verified classes and modifiers,
+and `validate_snippet` to pass R01–R04 over SCSS **before** writing it. It runs the same
+rules as `npm run validate`, from `scripts/lib/rules.js`. In an app that installs SYX
+instead of cloning it, `require('syx-design-system')` gives the same six queries.
 
 ---
 
@@ -86,4 +94,7 @@ scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 4-5 bundle co
 contracts/                — machine-readable validation output
 _agents/                  — workflows, prompts, and modes
 scripts/syx-validate.js   — contract validator (run after any change)
+index.js                  — package entry point: the same six queries as an npm dependency
+scripts/mcp-server.js     — MCP server (stdio) — ask the system instead of reading it
+scripts/lib/              — shared engine: css-tokens.js, rules.js (R01–R04), consulta.js
 ```

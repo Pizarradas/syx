@@ -300,6 +300,54 @@ function leerProsaPrevia() {
 
 const sinFecha = (o) => JSON.stringify({ ...o, _meta: { ...o._meta, generated: null } });
 
+/**
+ * Qué difiere entre el registro guardado y el recién construido.
+ *
+ * Existe porque un guardián que solo dice «no coincide» obliga a reconstruir a
+ * ciegas para enterarse de qué había cambiado — y la primera vez que saltó, lo
+ * único distinto era el número de versión que el propio registro sella. Un
+ * guardián tiene que decir qué ha visto.
+ */
+function diferencias(previo, nuevo) {
+  const fuera = [];
+  for (const k of ['version', 'schema']) {
+    if (previo._meta?.[k] !== nuevo._meta?.[k]) {
+      fuera.push(`_meta.${k}: ${previo._meta?.[k]} → ${nuevo._meta?.[k]}`);
+    }
+  }
+  const porNombre = (o) => {
+    const m = new Map();
+    for (const g of GRUPOS) for (const c of o[g.key] || []) m.set(c.name, c);
+    return m;
+  };
+  const a = porNombre(previo);
+  const b = porNombre(nuevo);
+  for (const nombre of b.keys()) if (!a.has(nombre)) fuera.push(`componente nuevo: ${nombre}`);
+  for (const nombre of a.keys()) if (!b.has(nombre)) fuera.push(`componente que ya no está: ${nombre}`);
+  for (const [nombre, x] of a) {
+    const y = b.get(nombre);
+    if (!y) continue;
+    for (const campo of ['classes', 'modifiers', 'elements', 'states', 'tokens', 'tokenFiles', 'composedOf', 'file', 'layer', 'description', 'usage']) {
+      const va = JSON.stringify(x[campo]);
+      const vb = JSON.stringify(y[campo]);
+      if (va === vb) continue;
+      if (Array.isArray(x[campo]) && Array.isArray(y[campo])) {
+        const sa = new Set(x[campo]);
+        const sb = new Set(y[campo]);
+        const mas = y[campo].filter((v) => !sa.has(v));
+        const menos = x[campo].filter((v) => !sb.has(v));
+        const partes = [];
+        if (mas.length) partes.push(`+${mas.slice(0, 4).join(', ')}${mas.length > 4 ? ` (+${mas.length - 4})` : ''}`);
+        if (menos.length) partes.push(`−${menos.slice(0, 4).join(', ')}${menos.length > 4 ? ` (−${menos.length - 4})` : ''}`);
+        fuera.push(`${nombre}.${campo}: ${partes.join('  ') || 'mismo contenido, distinto orden'}`);
+      } else {
+        fuera.push(`${nombre}.${campo}: ${va} → ${vb}`);
+      }
+    }
+  }
+  return fuera;
+}
+
 function main() {
   const check = process.argv.includes('--check');
   const { salida, avisos, comps } = build();
@@ -310,8 +358,12 @@ function main() {
     const previo = leerPrevio();
     if (!previo) { console.log('❌ component-registry.json no existe. Ejecuta: npm run build:registry\n'); process.exit(1); }
     if (sinFecha(previo) !== sinFecha(salida)) {
-      console.log('❌ El registro no coincide con el código.');
-      console.log('   Ejecuta: npm run build:registry\n');
+      const difs = diferencias(previo, salida);
+      console.log('❌ El registro no coincide con el código.\n');
+      for (const d of difs.slice(0, 20)) console.log(`   · ${d}`);
+      if (difs.length > 20) console.log(`   … y ${difs.length - 20} más`);
+      if (!difs.length) console.log('   (difieren en algo que este informe no cubre — compara los ficheros)');
+      console.log('\n   Ejecuta: npm run build:registry\n');
       process.exit(1);
     }
     console.log(`✅ Al día · ${comps.length} componentes\n`);

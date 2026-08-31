@@ -323,58 +323,14 @@ function buildUsageMap(scssFiles, runtimeData) {
 }
 
 // ─── Module 6: SCSS Rule Checks (R01–R04) ────────────────────────────────────
+// Las reglas viven en lib/rules.js desde v4.15.0: el servidor MCP las necesita
+// para validar un fragmento ANTES de que se escriba, y dos copias de las mismas
+// reglas acaban diciendo cosas distintas.
+
+const { revisarTodos } = require('./lib/rules');
 
 function runScssChecks(scssFiles) {
-  const violations = { R01: [], R02: [], R03: [], R04: [] };
-
-  // Files excluded from specific rules because of intentional patterns
-  const R01_PALETTE_EXCEPTIONS = [
-    'scss/atoms/_feature-icon.scss',         // palette sub-tints with hardcoded fallbacks
-    'scss/atoms/_pill.scss',                 // pill color variants use specific palette tints
-    'scss/molecules/_code-snippet.scss',     // syntax highlighting palette colors
-    'scss/organisms/_home-layers.scss',      // showroom: layer visualization uses palette tints
-  ];
-  const R03_EXCEPTIONS = ['mixins/', 'scss/utilities/_accessibility.scss', 'scss/base/_reset.scss'];
-  const R04_EXCEPTIONS = [
-    'mixins/', 'scss/base/_reset.scss', 'scss/utilities/_accessibility.scss',
-    'scss/utilities/_display.scss',
-    'scss/organisms/_home-tokens.scss', // showroom: position:absolute used intentionally for layer visualisation
-  ];
-
-  for (const { rel, content } of scssFiles) {
-    const lines = content.split('\n');
-
-    lines.forEach((line, i) => {
-      const trimmed  = line.trim();
-      const lineNum  = i + 1;
-      const isComment = trimmed.startsWith('//') || trimmed.startsWith('*');
-      if (isComment) return;
-
-      // R01: --primitive-* in non-allowed files
-      const r01Ok = isR01Allowed(rel) || R01_PALETTE_EXCEPTIONS.some(p => rel.endsWith(p.replace(/^scss\//, '')));
-      if (!r01Ok && /var\(--primitive-/.test(line)) {
-        violations.R01.push({ file: rel, line: lineNum, content: trimmed });
-      }
-
-      // R02: !important
-      if (/!important/.test(line)) {
-        violations.R02.push({ file: rel, line: lineNum, content: trimmed });
-      }
-
-      // R03: raw transition: (not inside mixin definitions or accessibility)
-      if (!R03_EXCEPTIONS.some(p => rel.includes(p)) && /^\s+transition:\s/.test(line)) {
-        violations.R03.push({ file: rel, line: lineNum, content: trimmed });
-      }
-
-      // R04: raw position: absolute/fixed/sticky
-      if (!R04_EXCEPTIONS.some(p => rel.includes(p)) &&
-          /^\s+position:\s+(absolute|fixed|sticky)/.test(line)) {
-        violations.R04.push({ file: rel, line: lineNum, content: trimmed });
-      }
-    });
-  }
-
-  return violations;
+  return revisarTodos(scssFiles);
 }
 
 

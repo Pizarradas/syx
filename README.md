@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.14.3-7c3aed)
+![Version](https://img.shields.io/badge/version-4.16.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -49,7 +49,42 @@ Open `index.html` in your browser to see the full live demo.
 
 ---
 
-### Option B — Build from SCSS with npm
+### Option B — Install the package
+
+```bash
+npm install syx-design-system
+```
+
+```js
+// One theme, one line — the compiled CSS ships with the package
+import 'syx-design-system/themes/syx-sketch.css';
+```
+
+```js
+// …and the design system is queryable from your own code
+const syx = require('syx-design-system');
+
+syx.getToken({ token: '--component-button-primary-filled-bg', mode: 'dark' }).value;
+// → 'oklch(0.740 0.133 267)'
+
+syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exactos;
+syx.getComponent({ name: 'btn' }).modifiers;
+syx.validateSnippet({ code: '.card { color: var(--semantic-color-primary); }' }).conforme;
+```
+
+The **contracts travel with the package**, so your app validates against the exact
+version it has installed — not against whatever is on `main` today.
+
+| Subpath | What it is |
+| ------- | ---------- |
+| `syx-design-system` | Node API (the six queries above) + `paths` to every artifact |
+| `syx-design-system/themes/<theme>.css` | Compiled CSS for one theme |
+| `syx-design-system/scss/...` | SCSS source, to compile your own build |
+| `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
+| `syx-design-system/tokens.json`, `/component-registry.json` | Registries |
+| `npx syx-mcp` | The MCP server, from the installed package |
+
+### Option C — Build from SCSS with npm
 
 ```bash
 npm install
@@ -61,11 +96,64 @@ npm run watch        # watches theme-01 for changes
 npm run watch:all    # watches all themes
 ```
 
-### Option C — Dart Sass CLI directly
+### Option D — Dart Sass CLI directly
 
 ```bash
 sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=compressed --no-source-map
 ```
+
+---
+
+## MCP server (for AI agents)
+
+SYX ships an MCP server so an agent can **ask** the design system instead of reading it.
+Until now an agent had to open `tokens.json`, `component-registry.json` and the theme
+files, and resolve the cascade in its head — which is where wrong token names come from.
+The server answers with the value the browser would paint.
+
+```bash
+npm run mcp        # starts the server on stdio
+npm run check:mcp  # smoke test: talks to it like a client would
+```
+
+Register it in any MCP client (Claude Desktop, Claude Code, Cursor…):
+
+```json
+{
+  "mcpServers": {
+    "syx": { "command": "npx", "args": ["-y", "syx-mcp"] }
+  }
+}
+```
+
+From a clone instead of the installed package:
+
+```json
+{
+  "mcpServers": {
+    "syx": {
+      "command": "node",
+      "args": ["scripts/mcp-server.js"],
+      "cwd": "/absolute/path/to/syx"
+    }
+  }
+}
+```
+
+| Tool | Answers |
+| ---- | ------- |
+| `list_themes` | Which themes and modes exist |
+| `get_token` | The real value of a token in a theme + mode, with its alias chain |
+| `find_token_by_value` | Which token holds this colour/measure (use before hardcoding one) |
+| `list_components` | The component inventory, layer and base classes |
+| `get_component` | Classes, modifiers, elements, states and tokens of one component |
+| `validate_snippet` | Runs R01–R04 over SCSS **before** it is written, and flags non-existent tokens |
+
+No dependencies: plain JSON-RPC over stdio. It reads `contracts/resolved-tokens.json`
+and `component-registry.json`, both generated from source and arbitrated against the
+compiled CSS — so everything it returns exists. The server and the Node API in Option B
+answer from the same layer (`scripts/lib/consulta.js`), so an agent and an application
+get the same answer to the same question.
 
 ---
 
@@ -109,6 +197,7 @@ syx/
 ├── fonts/                       # Self-hosted webfonts
 ├── img/                         # Images and icons
 │
+├── index.js                     # Package entry point — the Node API
 ├── index.html                   # Redirect wrapper
 ├── home.html                    # Landing page (AI First, features, tokens, themes)
 ├── docs.html                    # Complete unified documentation (Foundations, Components, Guidelines)
