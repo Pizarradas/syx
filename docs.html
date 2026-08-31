@@ -510,6 +510,7 @@
           <a href="#agentic-detect" class="docs-sidebar__link" data-nav-section="agentic-detect">3 Detect</a>
           <a href="#agentic-guards" class="docs-sidebar__link" data-nav-section="agentic-guards">4 What runs on its own</a>
           <a href="#agentic-value" class="docs-sidebar__link" data-nav-section="agentic-value">5 What it buys you</a>
+          <a href="#agentic-examples" class="docs-sidebar__link" data-nav-section="agentic-examples">6 Worked examples</a>
         </div>
       </div>
 
@@ -563,7 +564,7 @@
         <section class="docs-hero" aria-labelledby="docs-hero-title">
           <span class="docs-hero__eyebrow">
             <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
-            Component Gallery v4.25.0
+            Component Gallery v4.26.0
           </span>
           <h1 class="atom-title atom-title--h1 docs-hero__title" id="docs-hero-title">SYX Design System</h1>
           <p class="atom-txt atom-txt--primary docs-hero__lead">Ordered by <strong>layer hierarchy</strong>:
@@ -1838,6 +1839,219 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             Everything above follows from that one change.</p>
         </section>
 
+        <!-- ─── 6 · WORKED EXAMPLES ─── -->
+        <section class="syx-mb-5" id="agentic-examples">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            6 &mdash; Four worked examples
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-4">Every block below is <strong>literal output</strong>, captured by
+            running the commands against this repository at v4.25.0. Nothing is mocked up; where a transcript ran long
+            it was cut at a line boundary and marked, never reworded.</p>
+
+          <h4 class="atom-title atom-title--h5 syx-mb-2">6.1 &mdash; An agent asks before it writes</h4>
+          <p class="atom-txt syx-text-gray syx-mb-3">The task: make the featured card react on hover. Five calls over
+            MCP, not one file opened. Watch the third &mdash; the rule stops the agent <em>and hands it the
+            replacement</em>, which is the half that used to be missing.</p>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">1 &middot; What is it, and which tokens does it consume?</p>
+            <pre class="atom-code syx-mb-4"><code>&rarr; get_component { "name": "feature-card" }
+
+{
+  "encontrado": true,
+  "name": "feature-card",
+  "layer": "molecule",
+  "classes": [
+    "mol-feature-card"
+  ],
+  "file": "scss/molecules/_feature-card.scss",
+  "tokens": [
+    "--component-feature-card-bg",
+    "--component-feature-card-border-color",
+  …</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">2 &middot; What colour does its border actually become on hover?</p>
+            <pre class="atom-code syx-mb-4"><code>&rarr; get_token { "token": "--component-feature-card-border-color-hover" }
+
+{
+  "encontrado": true,
+  "value": "oklch(0.239 0.014 267)",
+  "theme": "syx-sketch",
+  "mode": "light",
+  "cadena": [
+    {
+      "token": "--component-feature-card-border-color-hover",
+      "declarado": "var(--semantic-color-border-strong)"
+    },
+    {
+      "token": "--semantic-color-border-strong",
+      "declarado": "var(--primitive-color-ink)"
+    },
+  …</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">3 &middot; A snippet written from memory</p>
+            <pre class="atom-code syx-mb-4"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  transition: transform 0.2s ease;\n  position: relative;\n}" }
+
+{
+  "conforme": false,
+  "violaciones": {
+    "R03": {
+      "regla": "Sin `transition:` en crudo — usa el mixin transition()",
+      "casos": [
+        {
+          "file": "scss/molecules/_feature-card.scss",
+          "line": 2,
+          "content": "transition: transform 0.2s ease;"
+        }
+      ],
+      "recambio": {
+        "mixin": "transition",
+        "signature": "transition($props...)",
+        "alias": [],
+        "ejemplo": "  @include transition(opacity 0.2s ease, transform 0.3s ease);"
+      }
+    }
+  }
+  …</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">4 &middot; So how is that mixin written?</p>
+            <pre class="atom-code syx-mb-4"><code>&rarr; get_mixin { "name": "transition" }
+
+{
+  "encontrado": true,
+  "signature": "transition($props...)",
+  "params": [
+    {
+      "name": "$props",
+      "variadic": true
+    }
+  ],
+  "emits": [
+    "transition"
+  ],
+  …</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">5 &middot; The same snippet, now using the system</p>
+            <pre class="atom-code syx-mb-4"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  @include transition(transform 0.2s ease);\n  @include relative();\n}" }
+
+{
+  "conforme": true,
+  "violaciones": {},
+  "tokensInexistentes": []
+}</code></pre>
+
+          <p class="atom-txt syx-text-gray syx-mb-3">The keys come back in Spanish &mdash;
+            <code>encontrado</code>, <code>cadena</code>, <code>declarado</code>. That is the real payload, not a
+            translation: the contract layer was written in the language its author thinks in, and these transcripts
+            were not touched up to hide it.</p>
+
+          <p class="atom-txt syx-text-gray syx-mb-4">The alias chain in call 2 is the point: the agent didn't resolve
+            the cascade, it was handed component &rarr; semantic &rarr; primitive &rarr; the literal value the browser
+            paints. And in call 5 the same snippet comes back <code>conforme: true</code>.</p>
+
+          <h4 class="atom-title atom-title--h5 syx-mb-2">6.2 &mdash; A proposal, end to end</h4>
+          <p class="atom-txt syx-text-gray syx-mb-3">Nobody says which file the token belongs in.</p>
+
+          <pre class="atom-code syx-mb-3"><code>   token        --component-feature-card-glow
+   valor        var(--semantic-shadow-md)
+   destino      scss/abstracts/tokens/components/_cards.scss   (junto a --component-feature-card-bg)
+   deducido de  familia «feature-card», 2 segmento(s) en común
+   nivel        Vía propuesta — El alcance está acotado a un componente. Es reversible de un vistazo, pero toca CSS que se envía a producción.
+
+   escrito en scss/abstracts/tokens/components/_cards.scss:26
+
+   compilando y validando…
+Switched to a new branch 'syx/token-component-feature-card-glow'
+
+✅ Rama syx/token-component-feature-card-glow lista, un commit, validación en verde.
+   evidencia    contracts/propuestas/component-feature-card-glow.md
+   volver       git checkout principal
+
+   Para publicarla:
+   git push -u origin syx/token-component-feature-card-glow &amp;&amp; gh pr create --fill --body-file contracts/propuestas/component-feature-card-glow.md
+
+2bd75c1 feat(tokens): --component-feature-card-glow</code></pre>
+
+          <p class="atom-txt syx-text-gray syx-mb-3">And the evidence it leaves beside the commit, which is what a
+            reviewer opens first:</p>
+
+          <pre class="atom-code syx-mb-4"><code># Propuesta — `--component-feature-card-glow`
+**Generada por** `scripts/propose.js` · 2026-08-31T22:15:14.771Z · SYX v4.25.0
+## Qué
+| | |
+|---|---|
+| Token | `--component-feature-card-glow` |
+| Valor | `var(--semantic-shadow-md)` |
+| Fichero | `scss/abstracts/tokens/components/_cards.scss` |
+| Nivel de confianza | Vía propuesta — El alcance está acotado a un componente. Es reversible de un vistazo, pero toca CSS que se envía a producción. |
+**Por qué:** Realce opcional para la tarjeta destacada
+
+## Dónde va, y por qué ahí
+Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fichero (`--component-feature-card-bg`). Se insertó al final de su bloque para no partir la agrupación.
+…  (sigue el informe completo del validador, y qué revisar)</code></pre>
+
+          <h4 class="atom-title atom-title--h5 syx-mb-2">6.3 &mdash; What it refuses, and what it says instead</h4>
+          <p class="atom-txt syx-text-gray syx-mb-3">A system that stops an agent is worth more than one that lets it
+            through. None of these four wrote a single byte.</p>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">A primitive</p>
+            <pre class="atom-code syx-mb-4"><code>✋ --primitive-color-blue-999 es de la capa «primitive», que vive en scss/abstracts/tokens/primitives/
+   Nivel: Solo humano. Un cambio aquí se propaga a los siete temas de golpe, o cambia el criterio con el que se juzga a todo lo demás.
+
+   Lo que sí puede hacer un agente aquí es preparar el análisis: qué temas
+   se verían afectados y con qué valores. Escribirlo, no.</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">A colour written by hand</p>
+            <pre class="atom-code syx-mb-4"><code>   El valor es un color literal, y un token de componente debe apuntar a uno semántico.
+   Ese color ya es --semantic-color-primary, --semantic-color-border-focus, --semantic-color-link-active, --semantic-focus-ring-color, y 6 más.
+   Usa var(--semantic-color-primary) si es el papel que le corresponde.</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">A family nobody declares</p>
+            <pre class="atom-code syx-mb-4"><code>   Ningún token existente comparte familia con «--component-site-header-blur»: sería una familia nueva, y eso es decidir un fichero nuevo, no colocar un token.
+
+   Familias declaradas que se le parecen: header-bg, header-control, header-height, header-logo, header-padding, header-social, header-z, section-header
+
+   Puede que el nombre no siga la familia ya declarada. Si de verdad es nueva, crea el fichero a mano en scss/abstracts/tokens/components/.</code></pre>
+
+            <p class="syx-type-overline syx-text-gray syx-mb-2">A value that skips the semantic layer</p>
+            <pre class="atom-code syx-mb-4"><code>   El valor apunta a un primitivo, y un --component-* pasa por --semantic-*.
+   var(--primitive-color-blue-500)
+
+   Dar papel a un primitivo es trabajo de la capa semántica, que es solo humana.</code></pre>
+
+          <h4 class="atom-title atom-title--h5 syx-mb-2">6.4 &mdash; Auditing a page nobody was watching</h4>
+          <p class="atom-txt syx-text-gray syx-mb-3">This very site, today. It reported six a version ago; four were
+            fixed in v4.25.0 &mdash; among them a progress bar that had gone months without painting, because it named
+            a token that exists in no theme.</p>
+
+          <pre class="atom-code syx-mb-4"><code>── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────
+
+   comparado contra    syx-sketch · light · SYX v4.25.0
+   ficheros            1
+   hallazgos           2   (2 baja)
+
+   Bases sin estilos, con modificadores que sí existen  —  1
+   ──────────────────────────────────────────────────────────────
+   · why-syx.html:346  .atom-txt no declara nada (38 usos)
+      Sus modificadores sí existen (.atom-txt--primary), así que la familia es real y solo falta la base.
+      → O la base recibe los estilos que su nombre promete, o sobra en el marcado. Es una decisión de diseño.
+
+   Clases que solo usa el JavaScript  —  1
+   ──────────────────────────────────────────────────────────────
+   · why-syx.html:233  .syx--theme-syx-sketch no la declara ningún CSS
+      El script de la página sí la usa (syx--theme-…): parece un asidero de JavaScript, no una desviación.
+      → Si es un asidero, mejor un data-* que una clase: así nadie espera que pinte.
+
+   El escáner no arregla nada a propósito: lo que encuentra entra por
+   scripts/propose.js o por las manos de alguien.</code></pre>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="atom-txt syx-mb-0"><strong>Why these are literal and not illustrative.</strong> An example
+              written by hand proves the author's intention, not the system's behaviour &mdash; and it rots the first
+              time the behaviour changes, silently. These were captured by running the commands. When any of them
+              stops being true, the guards go red before this page does.</p>
+          </div>
+        </section>
+
         <!-- ══════════════════════════════════════════
        LAYER 1 — UTILITIES  @layer syx.utilities
   ══════════════════════════════════════════ -->
@@ -2772,7 +2986,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.25.0<br>
+        <strong>SYX Design System</strong> · v4.26.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 

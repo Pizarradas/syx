@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.26.0] — 2026-08-31
+
+### Added
+
+- **«Four worked examples», sexta subsección del apartado agentic.** Le faltaba a esa sección lo único que convence a quien llega de fuera: ver una tarea entera, no una tabla de promesas.
+
+  1. **Un agente preguntando antes de escribir**: cinco llamadas MCP para hacer que la tarjeta destacada reaccione al hover, sin abrir un fichero. La tercera es la que importa — la regla para al agente **y le da el recambio**.
+  2. **Una propuesta de principio a fin**: la deducción del fichero, la compilación, el validador, la rama y la evidencia que abre el revisor.
+  3. **Las cuatro negativas**, que venden más que los aciertos: un sistema que para a un agente da más confianza que uno que le deja hacer. Ninguna de las cuatro escribió un solo byte.
+  4. **La auditoría de esta misma web**, hoy.
+
+- **Todo es salida literal**, capturada ejecutando los comandos contra este repositorio en la 4.25.0. Donde una transcripción era larga se cortó por una línea entera y se marcó; nunca se reescribió. Un ejemplo redactado a mano demuestra la intención de quien lo escribe, no el comportamiento del sistema, y además caduca en silencio la primera vez que el comportamiento cambia. Estos caducan en rojo: si dejan de ser ciertos, los guardianes lo dicen antes que la página.
+
+### Notes
+
+- Las respuestas llegan con las claves en español —`encontrado`, `cadena`, `declarado`—, y así se han dejado. Es la carga real, no una traducción, y retocarla para la foto habría sido justo lo contrario de lo que la sección afirma. **Queda una decisión pendiente**: toda la capa de contratos —descripciones de las herramientas MCP incluidas— habla español, mientras el sitio y la documentación están en inglés.
+- Primera versión de la sección descartada antes de entregar: llamada y respuesta iban en bloques separados, lo que doblaba el alto sin añadir nada, y los rótulos habían salido en español dentro de una página en inglés.
+
+---
+
 ## [4.25.0] — 2026-08-31
 
 ### Fixed
