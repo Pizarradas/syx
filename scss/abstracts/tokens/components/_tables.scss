@@ -34,4 +34,8 @@
   --component-table-sticky-active-bg: var(--semantic-color-primary);
   --component-table-sticky-active-color: var(--semantic-color-text-inverse);
   --component-table-sticky-max-height: 450px; // Max height for sticky-thead tables
+  // Suelo de ancho para que la tabla haga scroll en vez de comprimirse.
+  --component-table-min-width: 44rem;
+  --component-table-scroll-mask: var(--semantic-color-bg-primary);
+  --component-table-scroll-hint: color-mix(in srgb, var(--semantic-color-text-primary) 14%, transparent);
 }

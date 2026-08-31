@@ -23,7 +23,7 @@
 //   --lg  (32px)
 //   --xl  (40px)
 //
-// Color modifiers (via filter):
+// Color modifiers (color exacto vía token):
 //   --color-primary
 //   --color-secondary
 //   --color-state-ok
@@ -49,9 +49,20 @@
         @include position(absolute, 0, 0, 0, 0);
         @include margin(auto);
         @include size(100%);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
+        // PINTADO POR MÁSCARA
+        // El SVG actúa de máscara y el color lo pone `background-color`,
+        // que por defecto es `currentColor`. Es lo que permite que un
+        // icono dentro de un contenedor con `color: X` salga en X, y que
+        // el modo oscuro funcione sin duplicar ficheros de iconos.
+        background-color: var(--component-icon-color);
+        mask-image: var(--component-icon-source);
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        -webkit-mask-image: var(--component-icon-source);
+        -webkit-mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: center;
       }
 
       // ===============================================
@@ -61,56 +72,56 @@
       // --arrow-default
       &--arrow-default {
         &:before {
-          background-image: var(--icon-arrow-default);
+          --component-icon-source: var(--icon-arrow-default);
         }
       }
 
       // --arrow-double
       &--arrow-double {
         &:before {
-          background-image: var(--icon-arrow-double);
+          --component-icon-source: var(--icon-arrow-double);
         }
       }
 
       // --content-bars
       &--content-bars {
         &:before {
-          background-image: var(--icon-content-bars);
+          --component-icon-source: var(--icon-content-bars);
         }
       }
 
       // --rrss-email
       &--rrss-email {
         &:before {
-          background-image: var(--icon-rrss-email);
+          --component-icon-source: var(--icon-rrss-email);
         }
       }
 
       // --ui-cancel
       &--ui-cancel {
         &:before {
-          background-image: var(--icon-user-interface-cancel);
+          --component-icon-source: var(--icon-user-interface-cancel);
         }
       }
 
       // --ui-exclamation
       &--ui-exclamation {
         &:before {
-          background-image: var(--icon-user-interface-exclamation-mark);
+          --component-icon-source: var(--icon-user-interface-exclamation-mark);
         }
       }
 
       // --ui-home
       &--ui-home {
         &:before {
-          background-image: var(--icon-user-interface-home);
+          --component-icon-source: var(--icon-user-interface-home);
         }
       }
 
       // --ui-tick
       &--ui-tick {
         &:before {
-          background-image: var(--icon-user-interface-tick);
+          --component-icon-source: var(--icon-user-interface-tick);
         }
       }
 
@@ -135,48 +146,51 @@
       }
 
       // ===============================================
-      // COLOR MODIFIERS (via CSS filter)
+      // COLOR MODIFIERS (color real, ya no filter)
+      // ===============================================
+      // Los filtros eran aproximaciones calculadas a ojo sobre un
+      // SVG negro. Con máscara, el color es exacto y sale del token.
       // ===============================================
 
       &--color-primary {
         &:before {
-          filter: var(--semantic-filter-primary);
+          --component-icon-color: var(--semantic-color-primary);
         }
       }
 
       &--color-secondary {
         &:before {
-          filter: var(--semantic-filter-secondary);
+          --component-icon-color: var(--semantic-color-secondary);
         }
       }
 
       &--color-state-ok {
         &:before {
-          filter: var(--semantic-filter-state-ok);
+          --component-icon-color: var(--semantic-color-state-success);
         }
       }
 
       &--color-state-ko {
         &:before {
-          filter: var(--semantic-filter-state-ko);
+          --component-icon-color: var(--semantic-color-state-error);
         }
       }
 
       &--color-state-warning {
         &:before {
-          filter: var(--semantic-filter-state-warning);
+          --component-icon-color: var(--semantic-color-state-warning);
         }
       }
 
       &--color-white {
         &:before {
-          filter: var(--semantic-filter-white);
+          --component-icon-color: oklch(1 0 0);
         }
       }
 
       &--color-black {
         &:before {
-          filter: var(--semantic-filter-black);
+          --component-icon-color: oklch(0 0 0);
         }
       }
     }

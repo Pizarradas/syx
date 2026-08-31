@@ -22,15 +22,23 @@
     flex-direction: column;
     gap: var(--semantic-space-component-md);
     padding: var(--semantic-space-layout-md);
-    background-color: var(--semantic-color-bg-primary);
-    border: 1px solid var(--semantic-color-border-subtle);
-    border-radius: var(--semantic-border-radius-lg, 1rem);
-    @include transition(border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease);
+    background-color: var(--component-feature-card-bg);
+    border:
+      var(--component-feature-card-border-width)
+      var(--component-feature-card-border-style)
+      var(--component-feature-card-border-color);
+    border-radius: var(--component-feature-card-border-radius);
+    box-shadow: var(--component-feature-card-shadow);
+    @include transition(
+      border-color var(--semantic-duration-base) var(--semantic-easing-standard),
+      box-shadow var(--semantic-duration-base) var(--semantic-easing-standard),
+      transform var(--semantic-duration-base) var(--semantic-easing-standard)
+    );
 
     &:hover {
-      border-color: var(--semantic-color-primary);
-      box-shadow: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
-      transform: translateY(-2px);
+      border-color: var(--component-feature-card-border-color-hover);
+      box-shadow: var(--component-feature-card-shadow-hover);
+      transform: translateY(var(--component-feature-card-hover-lift));
     }
 
     // &__title

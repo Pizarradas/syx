@@ -41,12 +41,15 @@
         width: var(--component-radio-size);
         height: var(--component-radio-size);
         border: var(--component-radio-border-width) solid var(--component-radio-border-color);
-        border-radius: 50%;
+        border-radius: var(--component-radio-border-radius);
         background-color: var(--component-radio-bg);
         @include transition(
-          border-color 0.15s ease,
-          background-color 0.15s ease,
-          box-shadow 0.15s ease
+          border-color var(--component-radio-transition-duration)
+            var(--component-form-field-transition-easing),
+          background-color var(--component-radio-transition-duration)
+            var(--component-form-field-transition-easing),
+          box-shadow var(--component-radio-transition-duration)
+            var(--component-form-field-transition-easing)
         );
       }
 
@@ -57,9 +60,12 @@
         transform: translateY(-50%) scale(0);
         width: var(--component-radio-checked-size);
         height: var(--component-radio-checked-size);
-        border-radius: 50%;
+        border-radius: var(--component-radio-dot-border-radius);
         background-color: var(--semantic-color-text-inverse);
-        @include transition(transform 0.15s cubic-bezier(0.16, 1, 0.3, 1));
+        @include transition(
+          transform var(--component-radio-transition-duration)
+            var(--component-radio-transition-easing)
+        );
       }
 
       // Hover
@@ -83,13 +89,14 @@
 
     // Focus visible
     &__input:focus-visible + &__label::before {
-      outline: 0.2rem solid var(--component-form-field-border-focus);
-      outline-offset: 2px;
+      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style)
+        var(--component-form-field-border-focus);
+      outline-offset: var(--semantic-focus-ring-offset);
     }
 
     // Disabled
     &__input:disabled + &__label {
-      opacity: 0.5;
+      opacity: var(--component-radio-status-disabled-opacity);
       cursor: not-allowed;
 
       &::before {

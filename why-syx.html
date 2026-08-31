@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-syx-theme="example-01">
+<html lang="en" data-syx-theme="syx-sketch">
 
 <head>
     <meta charset="UTF-8">
@@ -32,49 +32,76 @@
     <meta name="theme-color" content="#6d28d9">
 
     <!-- Theme stylesheet — swapped by JS on theme change -->
-    <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+    <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-syx-sketch.css">
 
     <style>
-        /* Custom utility for score highlights */
+        /* Escala de puntuación 1–5
+           ------------------------------------------------------------------
+           Antes eran cinco colores distintos (verde, turquesa, oliva, naranja,
+           rojo) con texto blanco encima: 2,45:1 en el peor caso, y una escala
+           que solo se lee si distingues esos cinco tonos entre sí.
+
+           Ahora es secuencial en un solo tono: el valor se lee por INTENSIDAD,
+           no por color. Funciona en escala de grises, funciona con cualquier
+           tipo de daltonismo, y ordena visualmente sin que haya que aprenderse
+           una leyenda. Los tres pasos claros llevan tinta; los dos oscuros,
+           blanco. Todos por encima de 4,5:1.
+
+           Los colores salen de los tokens del tema, así que la escala se
+           reconstruye sola si cambias de tema. */
         .score-circle {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             width: 2rem;
             height: 2rem;
-            border-radius: 50%;
-            font-weight: bold;
-            color: white;
+            border-radius: var(--semantic-border-radius-sm);
+            border: 1px solid var(--semantic-color-border-default);
+            font-family: var(--semantic-font-family-mono);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
         }
 
         .score-5 {
-            background-color: var(--primitive-color-green-600);
+            background-color: var(--component-score-5-bg);
+            border-color: var(--component-score-5-border);
+            color: var(--component-score-5-color);
         }
 
         .score-4 {
-            background-color: var(--primitive-color-green-400);
+            background-color: var(--component-score-4-bg);
+            border-color: var(--component-score-4-border);
+            color: var(--component-score-4-color);
         }
 
         .score-3 {
-            background-color: var(--primitive-color-yellow-500);
+            background-color: var(--component-score-3-bg);
+            border-color: var(--component-score-3-border);
+            color: var(--component-score-3-color);
         }
 
         .score-2 {
-            background-color: var(--primitive-color-orange-500);
+            background-color: var(--component-score-2-bg);
+            border-color: var(--component-score-2-border);
+            color: var(--component-score-2-color);
         }
 
         .score-1 {
-            background-color: var(--primitive-color-red-500);
+            background-color: var(--component-score-1-bg);
+            border-color: var(--component-score-1-border);
+            color: var(--component-score-1-color);
         }
 
+        /* El ganador se marca con la menta, el único acento del tema, y con
+           un trazo más grueso: no depende del color para leerse. */
         .score-winner {
-            border: 2px solid var(--primitive-color-yellow-400);
-            box-shadow: 0 0 8px rgba(250, 204, 21, 0.6);
+            border: 2px solid var(--primitive-color-green-500);
+            box-shadow: var(--semantic-shadow-hard-sm);
         }
     </style>
 </head>
 
-<body class="syx syx--theme-example-01">
+<body class="syx syx--theme-syx-sketch">
 
     <a href="#main-content" class="syx-skip-link">Skip to main content</a>
 
@@ -112,6 +139,7 @@
         <div class="org-site-nav-drawer__theme">
             <label for="theme-switcher-mobile">Theme</label>
             <select id="theme-switcher-mobile" class="atom-select" aria-label="Switch theme">
+                <option value="syx-sketch">SYX &mdash; Blueprint</option>
                 <option value="example-01">01 &mdash; Indigo</option>
                 <option value="example-02">02 &mdash; Purple</option>
                 <option value="example-03">03 &mdash; Coral</option>
@@ -145,6 +173,7 @@
             <!-- Theme select — desktop only -->
             <div class="org-site-header__theme-select">
                 <select id="theme-switcher" class="atom-select" aria-label="Switch theme">
+                    <option value="syx-sketch">SYX &mdash; Blueprint</option>
                     <option value="example-01">01 &mdash; Indigo</option>
                     <option value="example-02">02 &mdash; Purple</option>
                     <option value="example-03">03 &mdash; Coral</option>
@@ -786,6 +815,7 @@
 
             // ── Constants ────────────────────────────────
             var THEME_CSS = {
+        'syx-sketch': 'css/styles-theme-syx-sketch.css',
                 'example-01': 'css/styles-theme-example-01.css',
                 'example-02': 'css/styles-theme-example-02.css',
                 'example-03': 'css/styles-theme-example-03.css',
@@ -813,6 +843,11 @@
                 if (!THEME_CSS[theme]) return;
                 if (cssLink) cssLink.setAttribute('href', THEME_CSS[theme]);
                 root.setAttribute('data-syx-theme', theme);
+                // La clase del <body> se quedaba en el tema inicial al cambiar,
+                // así que body y hoja de estilos se contradecían.
+                document.body.className = document.body.className
+                  .replace(/\bsyx--theme-[a-z0-9-]+\b/g, '').trim();
+                document.body.classList.add('syx--theme-' + theme);
                 if (selDesk) selDesk.value = theme;
                 if (selMob) selMob.value = theme;
                 try { sessionStorage.setItem('syx-theme', theme); } catch (e) { }

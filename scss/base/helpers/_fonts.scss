@@ -10,6 +10,16 @@
 @mixin helper-fonts($theme: null) {
   @layer syx.utilities {
     .syx-font {
+      // Alias cortos de peso, usados en docs.html y nunca generados.
+      &-bold {
+        font-family: var(--semantic-font-family-primary-bold);
+        font-weight: var(--primitive-font-weight-bold);
+      }
+
+      &-medium {
+        font-weight: var(--primitive-font-weight-medium);
+      }
+
       // &-color
       &-color {
         // &-black

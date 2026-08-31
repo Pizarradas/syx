@@ -1,0 +1,112 @@
+// COMPONENT TOKENS: CARDS
+// ================================================
+// feature-card · theme-card · code-snippet
+// Antes, estas superficies escribían sus bordes, radios,
+// sombras y gradientes a mano. Con estos tokens un tema
+// puede reescribir el lenguaje de superficie completo
+// (p. ej. sombra dura sin blur en lugar de sombra difusa)
+// sin tocar ni un parcial de componente.
+// ================================================
+
+:root {
+  // FEATURE CARD
+  // ================================================
+  --component-feature-card-bg: var(--semantic-color-bg-primary);
+  --component-feature-card-border-width: var(--semantic-border-width-thin);
+  --component-feature-card-border-style: solid;
+  --component-feature-card-border-color: var(--semantic-color-border-subtle);
+  --component-feature-card-border-radius: var(--semantic-border-radius-lg);
+  --component-feature-card-shadow: var(--semantic-shadow-none);
+  --component-feature-card-border-color-hover: var(--semantic-color-primary);
+  --component-feature-card-shadow-hover: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
+  --component-feature-card-hover-lift: -2px;
+
+  // THEME CARD (theme-builder / home-themes)
+  // ================================================
+  --component-theme-card-bg: var(--semantic-color-bg-primary);
+  --component-theme-card-border-width: var(--semantic-border-width-thin);
+  --component-theme-card-border-style: solid;
+  --component-theme-card-border-color: var(--semantic-color-border-subtle);
+  --component-theme-card-border-radius: var(--semantic-border-radius-lg);
+  --component-theme-card-shadow: var(--semantic-shadow-none);
+  --component-theme-card-border-color-active: var(--semantic-color-primary);
+  --component-theme-card-shadow-hover: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 14%, transparent);
+  --component-theme-card-hover-lift: -3px;
+  --component-theme-card-swatch-height: 4.5rem;
+  --component-theme-card-swatch-border-radius: var(--semantic-border-radius-none);
+  // Literal: el círculo se dibuja sobre la muestra de color de la tarjeta,
+  // no sobre la página, así que no debe seguir al modo claro/oscuro.
+  --component-theme-card-check-bg: oklch(1 0 0);
+
+  --component-theme-card-check-border-radius: var(--semantic-border-radius-circle);
+  --component-theme-card-dot-border-radius: var(--semantic-border-radius-circle);
+  --component-theme-card-dot-border-width: var(--semantic-border-width-thin);
+  --component-theme-card-dot-border-color: var(--semantic-color-border-subtle);
+  // Ángulo del degradado de cada muestra. Un tema plano lo
+  // neutraliza poniendo los dos stops del gradiente al mismo color.
+  --component-theme-card-swatch-angle: 135deg;
+
+  // CODE SNIPPET
+  // ================================================
+  --component-code-snippet-border-width: var(--semantic-border-width-thin);
+  --component-code-snippet-border-style: solid;
+  --component-code-snippet-border-color: var(--semantic-color-border-subtle);
+  --component-code-snippet-border-radius: var(--semantic-border-radius-lg);
+  --component-code-snippet-shadow: var(--semantic-shadow-none);
+  --component-code-snippet-header-bg: var(--semantic-color-bg-secondary);
+  --component-code-snippet-header-border-width: var(--semantic-border-width-thin);
+
+  // THEME CARD — muestras de color de cada tema
+  // ================================================
+  // Dos paradas por tema. Un tema plano (sin degradados)
+  // solo tiene que igualar `-from` y `-to`.
+  --component-theme-card-swatch-01-from: oklch(0.60 0.23 276.966);
+  --component-theme-card-swatch-01-to: oklch(0.60 0.165 70.08);
+  --component-theme-card-swatch-02-from: oklch(0.60 0.247 293.009);
+  --component-theme-card-swatch-02-to: oklch(0.60 0.241 6.902);
+  --component-theme-card-swatch-03-from: oklch(0.60 0.181 22.839);
+  --component-theme-card-swatch-03-to: oklch(0.60 0.171 70.604);
+  --component-theme-card-swatch-04-from: oklch(0.60 0.182 151.711);
+  --component-theme-card-swatch-04-to: oklch(0.60 0.136 154.449);
+  --component-theme-card-swatch-05-from: oklch(0.60 0.074 256.04);
+  --component-theme-card-swatch-05-to: oklch(0.60 0.139 91.059);
+  --component-theme-card-swatch-06-from: oklch(0.75 0.15 190);
+  --component-theme-card-swatch-06-to: oklch(0.65 0.25 300);
+
+  // THEME CARD — puntos de la leyenda
+  // ================================================
+  --component-theme-card-dot-01-a: var(--component-theme-card-swatch-01-from);
+  --component-theme-card-dot-01-b: var(--component-theme-card-swatch-01-to);
+  --component-theme-card-dot-02-a: var(--component-theme-card-swatch-02-from);
+  --component-theme-card-dot-02-b: var(--component-theme-card-swatch-02-to);
+  --component-theme-card-dot-03-a: var(--component-theme-card-swatch-03-from);
+  --component-theme-card-dot-03-b: var(--component-theme-card-swatch-03-to);
+  --component-theme-card-dot-04-a: var(--component-theme-card-swatch-04-from);
+  --component-theme-card-dot-04-b: var(--component-theme-card-swatch-04-to);
+  --component-theme-card-dot-05-a: var(--component-theme-card-swatch-05-from);
+  --component-theme-card-dot-05-b: var(--component-theme-card-swatch-05-to);
+  --component-theme-card-dot-06-a: var(--component-theme-card-swatch-06-from);
+  --component-theme-card-dot-06-b: var(--component-theme-card-swatch-06-to);
+
+  // CODE SNIPPET — variantes correcto / incorrecto
+  // ================================================
+  --component-code-snippet-ok-border-color: var(--semantic-color-state-success);
+  --component-code-snippet-ok-header-bg: var(--primitive-color-green-50);
+  --component-code-snippet-ok-header-border-color: var(--primitive-color-green-200);
+  --component-code-snippet-ok-label-color: var(--primitive-color-green-700);
+  --component-code-snippet-ko-border-color: var(--semantic-color-state-error);
+  --component-code-snippet-ko-header-bg: var(--primitive-color-red-50);
+  --component-code-snippet-ko-header-border-color: var(--primitive-color-red-200);
+  --component-code-snippet-ko-label-color: var(--primitive-color-red-700);
+
+  // THEME CARD — muestra del tema Blueprint
+  // ================================================
+  // No lleva degradado: papel, retícula y tinta.
+  --component-theme-card-swatch-sketch-bg: oklch(1 0 0);
+  --component-theme-card-swatch-sketch-image: repeating-linear-gradient(to right, oklch(0.498 0.282 266.24 / 0.16) 0 1px, transparent 1px 12px), repeating-linear-gradient(to bottom, oklch(0.498 0.282 266.24 / 0.16) 0 1px, transparent 1px 12px);
+  --component-theme-card-dot-sketch-a: oklch(0.498 0.282 266.24);
+  --component-theme-card-dot-sketch-b: oklch(0.753 0.129 173);
+  // Ancho mínimo de tarjeta en la rejilla de temas. Con 11rem y 7 tarjetas
+  // caían 5 + 1 y la última quedaba huérfana; con 16rem caen 4 + 3.
+  --component-theme-grid-min: 16rem;
+}

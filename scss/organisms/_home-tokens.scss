@@ -12,18 +12,21 @@
 
     // ── Section wrapper ─────────────────────────────
     .org-home-tokens {
-      padding: var(--semantic-space-layout-lg) var(--semantic-space-layout-md);
-      background: var(--semantic-color-bg-secondary, rgba(109, 40, 217, 0.04));
+      padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
+      background-color: var(--semantic-color-bg-secondary);
+      background-image: var(--component-section-bg-image);
 
       &__header {
-        text-align: center;
+        text-align: var(--component-section-align);
         max-width: 52rem;
-        margin: 0 auto var(--semantic-space-layout-lg);
+        margin-inline: var(--component-section-header-margin-inline);
+        margin-block-end: var(--semantic-space-layout-lg);
       }
 
       &__overline {
         display: flex;
-        justify-content: center;
+        justify-content: var(--component-section-justify);
         margin-bottom: 0.75rem;
       }
 
@@ -46,7 +49,7 @@
       // ── Diagram container ───────────────────────────
       &__diagram {
         max-width: 64rem;
-        margin: 0 auto;
+        margin-inline: var(--component-section-header-margin-inline);
         display: flex;
         flex-direction: column;
         gap: 0;
@@ -58,16 +61,19 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 1rem;
-        border-radius: var(--theme-radius, 0.75rem);
-        border: 1.5px solid var(--semantic-color-border);
+        border-radius: var(--component-token-layer-border-radius);
+        border: var(--component-token-layer-border-width) solid var(--component-token-layer-border-color);
         padding: 1.5rem;
-        background: var(--semantic-color-bg-primary, #fff);
+        background-color: var(--component-token-layer-bg);
         position: relative;
-        transition: box-shadow 0.2s, transform 0.2s;
+        @include transition(
+          box-shadow var(--semantic-duration-base) var(--semantic-easing-standard),
+          transform var(--semantic-duration-base) var(--semantic-easing-standard)
+        );
 
         &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          transform: translateY(var(--component-token-layer-hover-lift));
+          box-shadow: var(--component-token-layer-shadow-hover);
         }
 
         // Desktop: horizontal strip layout
@@ -81,85 +87,85 @@
         // Left stripe accent per layer
         &::before {
           content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          width: 4px;
-          border-radius: var(--theme-radius, 0.75rem) 0 0 var(--theme-radius, 0.75rem);
+          @include absolute($top: 0, $bottom: 0, $left: 0);
+          width: var(--component-token-layer-stripe-width);
+          border-radius: var(--component-token-layer-border-radius) 0 0 var(--component-token-layer-border-radius);
         }
 
         // ── Layer color variants ────────────────────────
         &--primitive {
-          --_layer-hue: var(--semantic-color-info, #3b82f6);
+          --_layer-hue: var(--component-token-primitive-accent);
           
           &::before {
-            background: #3b82f6;
+            background-color: var(--component-token-primitive-accent);
           }
 
           .org-home-tokens__layer-badge {
-            background: rgba(59, 130, 246, 0.12);
-            color: #3b82f6;
-            border-color: rgba(59, 130, 246, 0.25);
+            background-color: var(--component-token-primitive-badge-bg);
+            color: var(--component-token-primitive-badge-color);
+            border-color: var(--component-token-primitive-badge-border);
           }
 
           .org-home-tokens__step {
-            background: #3b82f6;
+            background-color: var(--component-token-primitive-accent);
+            color: var(--component-token-primitive-step-color);
           }
         }
 
         &--theme {
-          --_layer-hue: var(--semantic-color-warning, #f59e0b);
+          --_layer-hue: var(--component-token-theme-accent);
           
           &::before {
-            background: #f59e0b;
+            background-color: var(--component-token-theme-accent);
           }
 
           .org-home-tokens__layer-badge {
-            background: rgba(245, 158, 11, 0.12);
-            color: #b45309;
-            border-color: rgba(245, 158, 11, 0.25);
+            background-color: var(--component-token-theme-badge-bg);
+            color: var(--component-token-theme-badge-color);
+            border-color: var(--component-token-theme-badge-border);
           }
 
           .org-home-tokens__step {
-            background: #f59e0b;
-            color: #111;
+            background-color: var(--component-token-theme-accent);
+            color: var(--component-token-theme-step-color);
           }
         }
 
         &--semantic {
-          --_layer-hue: var(--semantic-color-success, #10b981);
+          --_layer-hue: var(--component-token-semantic-accent);
           
           &::before {
-            background: #10b981;
+            background-color: var(--component-token-semantic-accent);
           }
 
           .org-home-tokens__layer-badge {
-            background: rgba(16, 185, 129, 0.12);
-            color: #059669;
-            border-color: rgba(16, 185, 129, 0.25);
+            background-color: var(--component-token-semantic-badge-bg);
+            color: var(--component-token-semantic-badge-color);
+            border-color: var(--component-token-semantic-badge-border);
           }
 
           .org-home-tokens__step {
-            background: #10b981;
+            background-color: var(--component-token-semantic-accent);
+            color: var(--component-token-semantic-step-color);
           }
         }
 
         &--component {
-          --_layer-hue: var(--semantic-color-primary, #6d28d9);
+          --_layer-hue: var(--component-token-component-accent);
           
           &::before {
-            background: var(--semantic-color-primary, #6d28d9);
+            background-color: var(--component-token-component-accent);
           }
 
           .org-home-tokens__layer-badge {
-            background: rgba(109, 40, 217, 0.1);
-            color: var(--semantic-color-primary, #6d28d9);
-            border-color: rgba(109, 40, 217, 0.2);
+            background-color: var(--component-token-component-badge-bg);
+            color: var(--component-token-component-badge-color);
+            border-color: var(--component-token-component-badge-border);
           }
 
           .org-home-tokens__step {
-            background: var(--semantic-color-primary, #6d28d9);
+            background-color: var(--component-token-component-accent);
+            color: var(--component-token-component-step-color);
           }
         }
       }
@@ -167,14 +173,18 @@
       // ── Step number badge (top-right) ───────────────
       &__step {
         display: inline-flex;
+        // En móvil la tarjeta es de una sola columna y el badge, como hijo
+        // de grid, se estiraba a los 292 px del ancho completo: una barra
+        // gigante con un "01" dentro. Con `justify-self` conserva su tamaño.
+        justify-self: start;
         align-items: center;
         justify-content: center;
         min-width: 1.75rem;
         height: 1.75rem;
-        border-radius: 999px;
+        border-radius: var(--component-token-step-radius);
         font-size: 0.6875rem;
         font-weight: 800;
-        color: #fff;
+        color: var(--component-token-step-color);
         letter-spacing: 0.05em;
         flex-shrink: 0;
         align-self: start;
@@ -191,8 +201,8 @@
         align-items: center;
         gap: 0.375rem;
         padding: 0.25rem 0.75rem;
-        border-radius: 999px;
-        border: 1px solid;
+        border-radius: var(--component-token-badge-radius);
+        border: var(--component-token-badge-border-width) solid;
         font-size: 0.6875rem;
         font-weight: 700;
         letter-spacing: 0.08em;
@@ -206,7 +216,7 @@
           align-self: center;
           margin-bottom: 0;
           flex-direction: column;
-          text-align: center;
+          text-align: var(--component-section-align);
           padding: 0.5rem 0.875rem;
         }
 
@@ -231,7 +241,7 @@
       }
 
       &__layer-desc {
-        font-size: var(--semantic-font-size-body-small, 0.875rem);
+        font-size: var(--semantic-font-size-body-small);
         color: var(--semantic-color-text-secondary);
         margin: 0;
         line-height: 1.5;
@@ -273,15 +283,13 @@
       &__connector-line {
         width: 2px;
         height: 1.5rem;
-        background: linear-gradient(to bottom,
-            var(--semantic-color-border),
-            var(--semantic-color-primary, #6d28d9));
-        opacity: 0.35;
+        background-image: var(--component-token-connector-line);
+        opacity: var(--component-token-connector-opacity);
       }
 
       &__connector-arrow {
         font-size: 1rem;
-        color: var(--semantic-color-primary, #6d28d9);
+        color: var(--component-token-connector-arrow-color);
         opacity: 0.6;
         line-height: 1;
       }
@@ -299,10 +307,10 @@
       &__rule {
         max-width: 52rem;
         margin: 2rem auto 0;
-        border: 1.5px solid var(--semantic-color-primary, #6d28d9);
-        border-radius: var(--theme-radius, 0.75rem);
+        border: var(--component-token-rule-border-width) solid var(--component-token-rule-border-color);
+        border-radius: var(--component-token-rule-border-radius);
         padding: 1.25rem 1.5rem;
-        background: rgba(109, 40, 217, 0.06);
+        background-color: var(--component-token-rule-bg);
         display: grid;
         gap: 0.75rem;
 
@@ -318,20 +326,20 @@
         justify-content: center;
         width: 2.5rem;
         height: 2.5rem;
-        border-radius: 50%;
-        background: var(--semantic-color-primary, #6d28d9);
-        color: #fff;
+        border-radius: var(--component-token-rule-icon-radius);
+        background-color: var(--component-token-rule-icon-bg);
+        color: var(--component-token-rule-icon-color);
         flex-shrink: 0;
       }
 
       &__rule-body {
-        font-size: var(--semantic-font-size-body-small, 0.875rem);
+        font-size: var(--semantic-font-size-body-small);
         color: var(--semantic-color-text-primary);
         line-height: 1.6;
         margin: 0;
 
         strong {
-          color: var(--semantic-color-primary, #6d28d9);
+          color: var(--semantic-color-primary);
         }
       }
     }

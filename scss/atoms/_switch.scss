@@ -30,12 +30,15 @@
       width: var(--component-switch-width);
       height: var(--component-switch-height);
       background-color: var(--component-switch-bg-off);
-      border-radius: 100px;
+      border-radius: var(--component-switch-border-radius);
       border: var(--component-form-field-border-width) solid var(--component-switch-border-color);
       @include transition(
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease
+        background-color var(--component-switch-transition-duration)
+          var(--component-form-field-transition-easing),
+        border-color var(--component-switch-transition-duration)
+          var(--component-form-field-transition-easing),
+        box-shadow var(--component-switch-transition-duration)
+          var(--component-form-field-transition-easing)
       );
       flex-shrink: 0;
 
@@ -48,8 +51,11 @@
         height: var(--component-switch-slider-size);
         background-color: var(--component-switch-slider-bg);
         border-radius: var(--component-switch-slider-radius);
-        box-shadow: var(--semantic-shadow-sm);
-        @include transition(transform 0.25s cubic-bezier(0.16, 1, 0.3, 1));
+        box-shadow: var(--component-switch-slider-shadow);
+        @include transition(
+          transform var(--component-switch-transition-duration)
+            var(--component-switch-transition-easing)
+        );
       }
     }
 
@@ -78,8 +84,9 @@
 
     // Focus visible
     &__input:focus-visible + &__slider {
-      outline: 0.2rem solid var(--component-form-field-border-focus);
-      outline-offset: 2px;
+      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style)
+        var(--component-form-field-border-focus);
+      outline-offset: var(--semantic-focus-ring-offset);
     }
 
     // Disabled

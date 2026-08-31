@@ -57,7 +57,12 @@
       font-size: var(--component-form-field-font-size);
       line-height: var(--component-form-field-line-height);
       color: var(--component-form-field-color);
-      @include transition(border-color 0.15s ease, box-shadow 0.15s ease);
+      @include transition(
+        border-color var(--component-form-field-transition-duration)
+          var(--component-form-field-transition-easing),
+        box-shadow var(--component-form-field-transition-duration)
+          var(--component-form-field-transition-easing)
+      );
 
       &::placeholder {
         color: var(--component-form-field-placeholder);
@@ -120,7 +125,12 @@
       appearance: none;
       -webkit-appearance: none;
       cursor: pointer;
-      @include transition(border-color 0.15s ease, box-shadow 0.15s ease);
+      @include transition(
+        border-color var(--component-form-field-transition-duration)
+          var(--component-form-field-transition-easing),
+        box-shadow var(--component-form-field-transition-duration)
+          var(--component-form-field-transition-easing)
+      );
 
       &:hover:not(:disabled) {
         border-color: var(--semantic-color-primary);

@@ -1,0 +1,82 @@
+// COMPONENT TOKENS: PILLS & FEATURE ICONS
+// ================================================
+// Ambos componentes codificaban su paleta con primitivos
+// directos (blue-50 / purple-600 / green-200…), lo que rompía
+// R01 y los dejaba fuera del alcance de cualquier tema.
+// Aquí quedan expuestos como contrato de componente.
+// ================================================
+
+:root {
+  // PILL — forma
+  // ================================================
+  --component-pill-border-radius: var(--semantic-border-radius-full);
+  --component-pill-border-width: var(--semantic-border-width-thin);
+  --component-pill-border-style: solid;
+  --component-pill-line-height: var(--primitive-line-height-tight);
+  --component-pill-font-size: var(--semantic-font-size-overline);
+
+  // PILL — variantes
+  // ================================================
+  --component-pill-primary-bg: var(--primitive-color-blue-50);
+  --component-pill-primary-color: var(--primitive-color-blue-600);
+  --component-pill-primary-border-color: var(--primitive-color-blue-200);
+
+  --component-pill-secondary-bg: var(--primitive-color-purple-50);
+  --component-pill-secondary-color: var(--primitive-color-purple-600);
+  --component-pill-secondary-border-color: var(--primitive-color-purple-200);
+
+  --component-pill-success-bg: var(--primitive-color-green-50);
+  --component-pill-success-color: var(--primitive-color-green-600);
+  --component-pill-success-border-color: var(--primitive-color-green-200);
+
+  --component-pill-warning-bg: var(--primitive-color-yellow-50);
+  --component-pill-warning-color: var(--primitive-color-yellow-700);
+  --component-pill-warning-border-color: var(--primitive-color-yellow-200);
+
+  --component-pill-danger-bg: var(--primitive-color-red-50);
+  --component-pill-danger-color: var(--primitive-color-red-600);
+  --component-pill-danger-border-color: var(--primitive-color-red-200);
+
+  --component-pill-neutral-bg: var(--semantic-color-bg-tertiary);
+  --component-pill-neutral-color: var(--semantic-color-text-secondary);
+  --component-pill-neutral-border-color: var(--semantic-color-border-subtle);
+
+  // Píldora de énfasis: superficie oscura SIEMPRE, no el rol "inverse"
+  // (que en modo oscuro es claro y la volvía del revés).
+  --component-pill-dark-bg: var(--primitive-color-gray-900);
+  --component-pill-dark-color: oklch(1 0 0);
+  --component-pill-dark-border-color: var(--primitive-color-gray-900);
+
+  --component-pill-subtle-bg: transparent;
+  --component-pill-subtle-color: var(--semantic-color-text-tertiary);
+  --component-pill-subtle-border-color: var(--semantic-color-border-default);
+
+  // FEATURE ICON — forma
+  // ================================================
+  --component-feature-icon-size: 3rem;
+  --component-feature-icon-border-radius: var(--semantic-border-radius-lg);
+  --component-feature-icon-border-width: var(--semantic-border-width-none);
+  --component-feature-icon-border-style: solid;
+  --component-feature-icon-border-color: transparent;
+  --component-feature-icon-shadow: var(--semantic-shadow-none);
+
+  // FEATURE ICON — variantes (una por capa de Atomic Design)
+  // ================================================
+  --component-feature-icon-atom-bg: var(--primitive-color-blue-50);
+  --component-feature-icon-atom-color: var(--primitive-color-blue-600);
+
+  --component-feature-icon-molecule-bg: var(--primitive-color-purple-50);
+  --component-feature-icon-molecule-color: var(--primitive-color-purple-600);
+
+  --component-feature-icon-organism-bg: var(--primitive-color-green-50);
+  --component-feature-icon-organism-color: var(--primitive-color-green-600);
+
+  --component-feature-icon-token-bg: var(--primitive-color-blue-50);
+  --component-feature-icon-token-color: var(--primitive-color-blue-600);
+
+  --component-feature-icon-layer-bg: var(--primitive-color-yellow-50);
+  --component-feature-icon-layer-color: var(--primitive-color-yellow-700);
+
+  --component-feature-icon-mixin-bg: var(--primitive-color-red-50);
+  --component-feature-icon-mixin-color: var(--primitive-color-red-600);
+}

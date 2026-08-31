@@ -9,68 +9,72 @@
       align-items: center;
       justify-content: center;
       padding: calc(var(--semantic-space-component-xs, 0.25rem) * 2) calc(var(--semantic-space-component-xs, 0.25rem) * 6);
-      border-radius: 999px;
+      border-radius: var(--component-pill-border-radius);
       font-size: var(--semantic-font-size-overline);
       font-weight: var(--semantic-font-weight-bold);
       letter-spacing: var(--semantic-letter-spacing-wide);
       text-transform: uppercase;
-      line-height: 1;
+      line-height: var(--component-pill-line-height);
       white-space: nowrap;
 
       // Default (neutral)
-      background-color: var(--semantic-color-bg-tertiary);
-      color: var(--semantic-color-text-secondary);
+      background-color: var(--component-pill-neutral-bg);
+      color: var(--component-pill-neutral-color);
 
       // --primary
       &--primary {
-        background-color: var(--primitive-color-blue-50);
-        color: var(--primitive-color-blue-600);
-        border: 1px solid var(--primitive-color-blue-200);
+        background-color: var(--component-pill-primary-bg);
+        color: var(--component-pill-primary-color);
+        border: var(--component-pill-border-width) var(--component-pill-border-style) var(--component-pill-primary-border-color);
       }
 
       // --secondary
       &--secondary {
-        background-color: var(--primitive-color-purple-50);
-        color: var(--primitive-color-purple-600);
-        border: 1px solid var(--primitive-color-purple-200);
+        background-color: var(--component-pill-secondary-bg);
+        color: var(--component-pill-secondary-color);
+        border: var(--component-pill-border-width) var(--component-pill-border-style) var(--component-pill-secondary-border-color);
       }
 
       // --success
       &--success {
-        background-color: var(--primitive-color-green-50);
-        color: var(--primitive-color-green-600);
+        background-color: var(--component-pill-success-bg);
+        color: var(--component-pill-success-color);
       }
 
       // --warning
       &--warning {
-        background-color: var(--primitive-color-yellow-50);
-        color: var(--primitive-color-yellow-700);
+        background-color: var(--component-pill-warning-bg);
+        color: var(--component-pill-warning-color);
       }
 
       // --danger
       &--danger {
-        background-color: var(--primitive-color-red-50);
-        color: var(--primitive-color-red-600);
+        background-color: var(--component-pill-danger-bg);
+        color: var(--component-pill-danger-color);
       }
 
       // --dark
       &--dark {
-        background-color: var(--semantic-color-bg-inverse);
-        color: var(--semantic-color-text-inverse);
+        // Tercera aparición del mismo patrón (tras .atom-code y .syx-bg-dark):
+        // el rol "inverse" se invierte en modo oscuro, así que una píldora
+        // llamada "dark" salía CLARA sobre fondo oscuro. Tokens propios.
+        background-color: var(--component-pill-dark-bg);
+        border: var(--component-pill-border-width) var(--component-pill-border-style) var(--component-pill-dark-border-color);
+        color: var(--component-pill-dark-color);
       }
 
       // --neutral (for general subtle badges)
       &--neutral {
-        background-color: var(--semantic-color-bg-tertiary);
-        border: 1px solid var(--semantic-color-border-subtle);
-        color: var(--semantic-color-text-secondary);
+        background-color: var(--component-pill-neutral-bg);
+        border: var(--component-pill-border-width) var(--component-pill-border-style) var(--component-pill-neutral-border-color);
+        color: var(--component-pill-neutral-color);
       }
 
       // --subtle
       &--subtle {
-        background-color: transparent;
-        border: 1px solid var(--semantic-color-border-default);
-        color: var(--semantic-color-text-tertiary);
+        background-color: var(--component-pill-subtle-bg);
+        border: var(--component-pill-border-width) var(--component-pill-border-style) var(--component-pill-subtle-border-color);
+        color: var(--component-pill-subtle-color);
       }
     }
   }

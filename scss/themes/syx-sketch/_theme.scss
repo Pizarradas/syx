@@ -1,0 +1,1148 @@
+// ================================================
+// SYX-SKETCH THEME — "BLUEPRINT"
+// ================================================
+// Part of SYX Design System
+//
+// Dirección visual: papel de dibujo técnico. Superficie clara,
+// trazo negro fino, sombra sólida sin difuminado, radios casi
+// nulos y cero degradados decorativos. El color aparece poco y
+// cuando aparece, manda.
+//
+// Paleta: la del portfolio de José Luis Pizarro.
+//   #1E3AFF  azul eléctrico   → primario (CTA, links, foco)
+//   #3BC9A7  menta            → secundario (estado, acento)
+//   #0F1B2D  navy             → superficie inversa / gris 900
+//   #414A5E  pizarra          → texto secundario / gris 700
+//   #1C1F26  tinta            → texto y trazo
+//   #E8EEFF  azul muy claro   → superficie terciaria
+//   #F5F7FA  blanco roto      → superficie secundaria
+//
+// Contraste verificado (WCAG 2.1):
+//   tinta / blanco ......... 16.50:1  AAA
+//   pizarra / blanco ........ 8.89:1  AAA
+//   gris-600 / blanco ....... 5.51:1  AA
+//   azul-500 / blanco ....... 6.77:1  AA   (y a la inversa)
+//   azul-600 / blanco ....... 8.65:1  AAA
+//   tinta / menta ........... 7.94:1  AAA
+//   menta / blanco .......... 2.08:1  ✗  → la menta NUNCA es texto
+//                                          sobre claro; solo relleno.
+// ================================================
+
+@use '../../abstracts/index' as *;
+
+// ================================================
+// MODO CLARO — tokens
+// ================================================
+// Simétrico a syx-sketch-dark-tokens. Existe porque el bloque de claro
+// forzado revertía 17 de los 166 tokens que cambia el oscuro: si el
+// sistema estaba en oscuro y el usuario pulsaba el toggle a claro, la
+// página quedaba a medias —fondo blanco con tarjetas, píldoras, botones
+// y telón del hero todavía en valores de oscuro—.
+//
+// Ahora hay UNA sola fuente para los valores claros y se aplica en dos
+// sitios: en :root (estado por defecto) y en :root[data-theme="light"]
+// (elección explícita del usuario). Los dos modos no pueden desincronizarse
+// porque cualquier token que añada el oscuro tiene que tener su pareja aquí.
+@mixin syx-sketch-light-tokens {
+  --semantic-color-bg-inverse: var(--primitive-color-gray-900);  // navy
+  --semantic-color-text-primary: var(--primitive-color-ink);      // 16.5:1
+  --semantic-color-text-secondary: var(--primitive-color-gray-700); // 8.9:1
+  --semantic-color-text-tertiary: var(--primitive-color-gray-600);  // 5.5:1
+  --semantic-color-text-inverse: oklch(1 0 0);
+  --semantic-shadow-none: none;
+  --semantic-shadow-xs: var(--semantic-shadow-hard-sm);
+  --semantic-shadow-sm: var(--semantic-shadow-hard-sm);
+  --semantic-shadow-md: var(--semantic-shadow-hard);
+  --semantic-shadow-lg: var(--semantic-shadow-hard-lg);
+  --semantic-shadow-xl: var(--semantic-shadow-hard-lg);
+  --semantic-shadow-card: none;
+  --semantic-color-primary: var(--primitive-color-blue-500);
+  --semantic-color-secondary: var(--primitive-color-green-400);
+  --semantic-color-tertiary: var(--primitive-color-gray-900);
+  --semantic-color-quaternary: var(--primitive-color-blue-700);
+  --component-token-component-accent: var(--primitive-color-blue-500);
+  --component-token-primitive-accent: var(--primitive-color-gray-400);
+  --semantic-color-link-default: var(--primitive-color-blue-600);
+  --semantic-color-link-hover: var(--primitive-color-ink);
+  --semantic-color-link-visited: var(--primitive-color-blue-700);
+  --semantic-color-link-active: var(--primitive-color-blue-500);
+  --semantic-color-state-hover-primary: var(--primitive-color-blue-600);
+  --semantic-color-state-hover-secondary: var(--primitive-color-green-500);
+  --semantic-focus-ring-color: var(--semantic-color-primary);
+  --semantic-color-placeholder: var(--primitive-color-gray-500);
+  --component-button-primary-filled-bg: var(--semantic-color-primary);
+  --component-button-primary-filled-border: var(--semantic-color-primary);
+  --component-button-primary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-primary-filled-color-hover: var(--semantic-color-text-inverse);
+  --btn-primary-filled-text: oklch(1 0 0);
+  --btn-secondary-filled-text: var(--primitive-color-ink);
+  --btn-tertiary-filled-text: oklch(1 0 0);
+  --btn-quaternary-filled-text: oklch(1 0 0);
+  --component-button-secondary-filled-color: var(--primitive-color-ink);
+  --component-button-secondary-filled-color-hover: var(--primitive-color-ink);
+  --component-button-secondary-color: var(--primitive-color-green-700);
+  --component-button-secondary-border: var(--primitive-color-green-700);
+  --component-pill-primary-bg: var(--primitive-color-blue-50);
+  --component-pill-primary-color: var(--primitive-color-blue-700);
+  --component-pill-primary-border-color: var(--primitive-color-blue-200);
+  --component-pill-secondary-bg: var(--primitive-color-green-50);
+  --component-pill-secondary-color: var(--primitive-color-green-700);
+  --component-pill-secondary-border-color: var(--primitive-color-green-200);
+  --component-pill-success-bg: var(--primitive-color-green-50);
+  --component-pill-success-color: var(--primitive-color-green-700);
+  --component-pill-neutral-bg: var(--semantic-color-bg-secondary);
+  --component-pill-neutral-color: var(--semantic-color-text-secondary);
+  --component-feature-icon-border-color: var(--semantic-color-border-strong);
+  --component-feature-icon-atom-bg: var(--primitive-color-blue-50);
+  --component-feature-icon-atom-color: var(--primitive-color-blue-700);
+  --component-feature-icon-molecule-bg: var(--primitive-color-green-50);
+  --component-feature-icon-molecule-color: var(--primitive-color-green-700);
+  --component-feature-icon-organism-bg: var(--primitive-color-gray-100);
+  --component-feature-icon-organism-color: var(--primitive-color-gray-800);
+  --component-feature-icon-token-bg: var(--primitive-color-blue-100);
+  --component-feature-icon-token-color: var(--primitive-color-blue-800);
+  --component-feature-icon-layer-bg: var(--primitive-color-gray-50);
+  --component-feature-icon-layer-color: var(--primitive-color-ink);
+  --component-feature-icon-mixin-bg: var(--primitive-color-green-100);
+  --component-feature-icon-mixin-color: var(--primitive-color-green-800);
+  --component-code-inline-bg: var(--primitive-color-blue-50);
+  --component-code-inline-color: var(--primitive-color-blue-800);
+  --component-pill-warning-bg: var(--primitive-color-yellow-50);
+  --component-pill-warning-color: var(--primitive-color-yellow-700);
+  --component-pill-warning-border-color: var(--primitive-color-yellow-200);
+  --component-pill-danger-bg: var(--primitive-color-red-50);
+  --component-pill-danger-color: var(--primitive-color-red-600);
+  --component-pill-danger-border-color: var(--primitive-color-red-200);
+  --component-pill-success-border-color: var(--primitive-color-green-200);
+  --component-code-inline-border-color: var(--primitive-color-blue-200);
+  --component-code-bg: var(--primitive-color-gray-900);
+  --component-table-base-state-hover-bg: var(--primitive-color-blue-50);
+  --component-table-base-th-bg: var(--semantic-color-bg-secondary);
+  --component-table-bg-th: var(--semantic-color-bg-inverse);
+  --component-table-state-hover-bg: var(--primitive-color-blue-50);
+  --semantic-bg-grid-color: color-mix(in srgb, var(--primitive-color-blue-500) 9%, transparent);
+  --semantic-tone-error-bg: var(--primitive-color-error-500);
+  --semantic-tone-success-bg: var(--primitive-color-success-500);
+  --semantic-tone-warning-bg: var(--primitive-color-warning-500);
+  --semantic-color-state-error: var(--semantic-tone-error-bg);
+  --semantic-color-state-success: var(--semantic-tone-success-bg);
+  --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  --component-score-1-bg: var(--semantic-color-bg-primary);
+  --component-score-1-color: var(--semantic-color-text-tertiary);
+  --component-score-1-border: var(--semantic-color-border-default);
+  --component-score-2-bg: var(--primitive-color-blue-100);
+  --component-score-2-color: var(--semantic-color-text-primary);
+  --component-score-2-border: var(--primitive-color-blue-200);
+  --component-score-3-bg: var(--primitive-color-blue-200);
+  --component-score-3-color: var(--semantic-color-text-primary);
+  --component-score-3-border: var(--primitive-color-blue-300);
+  --component-score-4-bg: var(--primitive-color-blue-400);
+  --component-score-4-color: oklch(1 0 0);
+  --component-score-4-border: var(--primitive-color-blue-400);
+  --component-score-5-bg: var(--primitive-color-blue-600);
+  --component-score-5-color: oklch(1 0 0);
+  --component-score-5-border: var(--primitive-color-blue-600);
+  --component-section-divider-color: var(--semantic-color-border-default);
+  --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, transparent 0%, var(--semantic-color-bg-primary) 78% ), var(--semantic-bg-grid);
+  --component-hero-accent-color: var(--semantic-color-primary);
+  --component-hero-accent-decoration-color: var(--primitive-color-green-400);
+  --component-hero-stats-border-color: var(--semantic-color-border-strong);
+  --component-cta-code-color: var(--primitive-color-blue-200);
+  --component-layer-utilities-bg: var(--primitive-color-blue-50);
+  --component-layer-utilities-color: var(--primitive-color-blue-600);
+  --component-layer-organisms-color: var(--primitive-color-green-700);
+  --component-layer-molecules-color: var(--primitive-color-blue-700);
+  --component-layer-atoms-color: var(--primitive-color-blue-600);
+  --component-layer-tokens-color: var(--primitive-color-green-700);
+  --component-layer-base-color: var(--primitive-color-gray-600);
+  --component-layer-reset-color: var(--primitive-color-gray-600);
+  --component-docs-badge-layout-bg: var(--primitive-color-gray-100);
+  --component-docs-badge-layout-color: var(--primitive-color-ink);
+  --component-docs-badge-layout-border: var(--primitive-color-gray-300);
+  --component-docs-badge-atom-bg: var(--primitive-color-blue-50);
+  --component-docs-badge-atom-color: var(--primitive-color-blue-800);
+  --component-docs-badge-atom-border: var(--primitive-color-blue-200);
+  --component-docs-badge-molecule-bg: var(--primitive-color-blue-200);
+  --component-docs-badge-molecule-color: var(--primitive-color-blue-900);
+  --component-docs-badge-molecule-border: var(--primitive-color-blue-300);
+  --component-docs-badge-organism-bg: var(--primitive-color-blue-600);
+  --component-docs-badge-organism-color: oklch(1 0 0);
+  --component-docs-badge-organism-border: var(--primitive-color-blue-600);
+  --component-button-disabled-filled-color: var(--semantic-color-text-inverse);
+  --component-token-primitive-badge-bg: var(--primitive-color-gray-50);
+  --component-token-primitive-badge-color: var(--primitive-color-gray-700);
+  --component-token-primitive-badge-border: var(--primitive-color-gray-300);
+  --component-token-theme-badge-bg: var(--primitive-color-blue-50);
+  --component-token-theme-badge-color: var(--primitive-color-blue-700);
+  --component-token-theme-badge-border: var(--primitive-color-blue-200);
+  --component-token-semantic-badge-bg: var(--primitive-color-green-50);
+  --component-token-semantic-badge-color: var(--primitive-color-green-700);
+  --component-token-semantic-badge-border: var(--primitive-color-green-200);
+  --component-token-component-badge-bg: var(--primitive-color-blue-100);
+  --component-token-component-badge-color: var(--primitive-color-blue-800);
+  --component-token-component-badge-border: var(--primitive-color-blue-300);
+  --component-token-component-step-color: oklch(1 0 0);
+  --component-token-rule-bg: var(--primitive-color-blue-50);
+  --component-token-rule-border-color: var(--semantic-color-border-strong);
+  --component-token-rule-icon-bg: var(--semantic-color-primary);
+  --component-token-rule-icon-color: oklch(1 0 0);
+  --semantic-color-bg-primary: oklch(1 0 0);                    // blanco
+  --semantic-color-bg-secondary: var(--primitive-color-gray-50); // #F5F7FA
+  --semantic-color-bg-tertiary: var(--primitive-color-blue-50);  // #E8EEFF
+  --semantic-color-border-subtle: var(--primitive-color-gray-200);
+  --semantic-color-border-default: var(--primitive-color-gray-300);
+  --semantic-color-border-strong: var(--primitive-color-ink);
+  --component-feature-card-bg: var(--semantic-color-bg-primary);
+  --component-feature-card-border-color: var(--semantic-color-border-default);
+  --component-theme-card-bg: var(--semantic-color-bg-primary);
+  --component-theme-card-border-color: var(--semantic-color-border-default);
+  --component-layer-item-bg: var(--semantic-color-bg-primary);
+  --component-layer-item-border-color: var(--semantic-color-border-default);
+  --component-token-layer-bg: var(--semantic-color-bg-primary);
+  --component-token-layer-border-color: var(--semantic-color-border-default);
+  --component-code-snippet-border-color: var(--semantic-color-border-strong);
+  --component-cta-bg: var(--semantic-bg-grid), linear-gradient( var(--primitive-color-gray-900), var(--primitive-color-gray-900) );
+  --component-footer-bg: var(--semantic-color-bg-secondary);
+  --component-footer-border-color: var(--semantic-color-border-strong);
+  --semantic-shadow-hard-color: var(--primitive-color-ink);
+  --component-cta-border-block-width: 0;
+  --component-cta-border-color: var(--semantic-color-border-strong);
+  --component-pill-dark-bg: var(--primitive-color-gray-900);
+  --component-pill-dark-color: oklch(1 0 0);
+  --component-pill-dark-border-color: var(--primitive-color-gray-900);
+}
+
+// ================================================
+// MODO OSCURO — tokens
+// ================================================
+// Declarado fuera del mixin del tema porque Sass no permite
+// anidar declaraciones de mixin. Se aplica dos veces: desde la
+// preferencia del sistema y desde [data-theme="dark"].
+@mixin syx-sketch-dark-tokens {
+  @include dark-mode-tokens();
+
+  --semantic-color-bg-inverse: oklch(1 0 0);
+
+  --semantic-color-text-primary: var(--primitive-color-gray-100);
+  --semantic-color-text-secondary: var(--primitive-color-gray-300);
+  --semantic-color-text-tertiary: var(--primitive-color-gray-400);
+  --semantic-color-text-inverse: var(--primitive-color-gray-900);
+
+
+  // Trazo y sombra en claro
+  --semantic-shadow-none: none;
+  --semantic-shadow-xs: var(--semantic-shadow-hard-sm);
+  --semantic-shadow-sm: var(--semantic-shadow-hard-sm);
+  --semantic-shadow-md: var(--semantic-shadow-hard);
+  --semantic-shadow-lg: var(--semantic-shadow-hard-lg);
+  --semantic-shadow-xl: var(--semantic-shadow-hard-lg);
+  --semantic-shadow-card: none;
+
+  // Azul de marca a 6.77:1 sobre blanco, pero sobre navy hay
+  // que subirlo: blue-300 da 7.39:1.
+  // El azul de marca (#1E3AFF) sobre navy da 1.60:1 — ilegible.
+  // En oscuro, el rol "primary" entero sube a blue-300 (7.39:1),
+  // no solo los enlaces: si no, los contadores del hero, las
+  // franjas y los bordes activos se quedan en el azul oscuro.
+  --semantic-color-primary: var(--primitive-color-blue-300);
+  --semantic-color-secondary: var(--primitive-color-green-300);
+  --semantic-color-tertiary: var(--primitive-color-gray-200);
+  --semantic-color-quaternary: var(--primitive-color-blue-200);
+  --component-token-component-accent: var(--primitive-color-blue-300);
+  --component-token-primitive-accent: var(--primitive-color-gray-500);
+  --semantic-color-link-default: var(--primitive-color-blue-300);
+  --semantic-color-link-hover: var(--primitive-color-green-400);
+  --semantic-color-link-visited: var(--primitive-color-blue-200);
+  --semantic-color-link-active: var(--primitive-color-blue-300);
+  --semantic-color-state-hover-primary: var(--primitive-color-blue-300);
+  --semantic-color-state-hover-secondary: var(--primitive-color-green-300);
+  --semantic-focus-ring-color: var(--primitive-color-blue-300);
+  --semantic-color-placeholder: var(--primitive-color-gray-500);
+
+  // Botones: el relleno se aclara y el texto pasa a navy.
+  --component-button-primary-filled-bg: var(--primitive-color-blue-300);
+  --component-button-primary-filled-border: var(--primitive-color-blue-300);
+  --component-button-primary-filled-color: var(--primitive-color-gray-900);
+  --component-button-primary-filled-color-hover: var(--primitive-color-gray-900);
+  --btn-primary-filled-text: var(--primitive-color-gray-900);
+  --btn-secondary-filled-text: var(--primitive-color-gray-900);
+  --btn-tertiary-filled-text: var(--primitive-color-gray-900);
+  --btn-quaternary-filled-text: var(--primitive-color-gray-900);
+  --component-button-secondary-filled-color: var(--primitive-color-gray-900);
+  --component-button-secondary-filled-color-hover: var(--primitive-color-gray-900);
+  --component-button-secondary-color: var(--primitive-color-green-300);
+  --component-button-secondary-border: var(--primitive-color-green-300);
+
+  // Superficies con color: en oscuro los tintes claros
+  // desaparecen, así que van a navy con trazo de color.
+  --component-pill-primary-bg: transparent;
+  --component-pill-primary-color: var(--primitive-color-blue-300);
+  --component-pill-primary-border-color: var(--primitive-color-blue-400);
+  --component-pill-secondary-bg: transparent;
+  --component-pill-secondary-color: var(--primitive-color-green-300);
+  --component-pill-secondary-border-color: var(--primitive-color-green-500);
+  --component-pill-success-bg: transparent;
+  --component-pill-success-color: var(--primitive-color-green-300);
+  --component-pill-neutral-bg: transparent;
+  --component-pill-neutral-color: var(--semantic-color-text-secondary);
+
+  --component-feature-icon-border-color: var(--semantic-color-border-default);
+  --component-feature-icon-atom-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-atom-color: var(--primitive-color-blue-300);
+  --component-feature-icon-molecule-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-molecule-color: var(--primitive-color-green-300);
+  --component-feature-icon-organism-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-organism-color: var(--primitive-color-gray-200);
+  --component-feature-icon-token-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-token-color: var(--primitive-color-blue-200);
+  --component-feature-icon-layer-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-layer-color: var(--primitive-color-gray-100);
+  --component-feature-icon-mixin-bg: var(--primitive-color-gray-800);
+  --component-feature-icon-mixin-color: var(--primitive-color-green-200);
+
+  --component-code-inline-bg: var(--primitive-color-gray-800);
+  --component-code-inline-color: var(--primitive-color-blue-200);
+  // Píldoras que quedaban sin adaptar: warning y danger conservaban su
+  // tinte claro y en oscuro se leían como pegatinas encendidas.
+  --component-pill-warning-bg: transparent;
+  --component-pill-warning-color: var(--semantic-tone-warning-bg);
+  --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
+  --component-pill-danger-bg: transparent;
+  --component-pill-danger-color: var(--semantic-tone-error-bg);
+  --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
+  --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
+  --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
+  // La píldora "dark" se invierte: sobre papel oscuro, la que destaca es la clara.
+  --component-pill-dark-bg: var(--primitive-color-gray-200);
+  --component-pill-dark-color: var(--primitive-color-gray-900);
+  --component-pill-dark-border-color: var(--primitive-color-gray-200);
+  --component-code-inline-border-color: var(--primitive-color-gray-700);
+  --component-code-bg: oklch(0.16 0.028 258);
+  --component-table-base-state-hover-bg: var(--primitive-color-gray-800);
+  --component-table-base-th-bg: var(--primitive-color-gray-800);
+  --component-table-bg-th: var(--primitive-color-gray-800);
+  --component-table-state-hover-bg: var(--primitive-color-gray-800);
+
+  // La retícula se atenúa: sobre navy, el mismo 9% deslumbra.
+  --semantic-bg-grid-color: color-mix(in srgb, var(--primitive-color-blue-300) 12%, transparent);
+  // Colores de estado en oscuro.
+  // dark-mode-tokens() deja los estados sin tocar a propósito ("brand colors
+  // and states do NOT change"), y para un fondo/badge es correcto: el color
+  // es el fondo y encima va texto. Pero utilidades como .syx-text-error los
+  // usan como COLOR DE TEXTO, y sobre navy el rojo se queda en 2,83:1.
+  // Aquí suben de luminosidad solo para el modo oscuro.
+  --semantic-tone-error-bg: oklch(0.72 0.17 25);       // 6,47:1 sobre navy
+  --semantic-tone-success-bg: oklch(0.78 0.13 168);    // 9,13:1
+  --semantic-tone-warning-bg: oklch(0.84 0.13 80);     // 10,46:1
+  --semantic-color-state-error: var(--semantic-tone-error-bg);
+  --semantic-color-state-success: var(--semantic-tone-success-bg);
+  --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  // Escala de puntuación: rampa invertida para fondo oscuro.
+  --component-score-1-bg: var(--primitive-color-gray-800);
+  --component-score-1-color: var(--primitive-color-gray-400);
+  --component-score-1-border: var(--primitive-color-gray-700);
+  --component-score-2-bg: var(--primitive-color-blue-900);
+  --component-score-2-color: var(--primitive-color-blue-200);
+  --component-score-2-border: var(--primitive-color-blue-800);
+  --component-score-3-bg: var(--primitive-color-blue-800);
+  --component-score-3-color: var(--primitive-color-blue-100);
+  --component-score-3-border: var(--primitive-color-blue-700);
+  --component-score-4-bg: var(--primitive-color-blue-400);
+  --component-score-4-color: var(--primitive-color-gray-900);
+  --component-score-4-border: var(--primitive-color-blue-400);
+  --component-score-5-bg: var(--primitive-color-blue-300);
+  --component-score-5-color: var(--primitive-color-gray-900);
+  --component-score-5-border: var(--primitive-color-blue-300);
+
+
+
+  // Secciones en oscuro
+  --component-section-divider-color: var(--primitive-color-gray-700);
+  --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, transparent 0%, var(--primitive-color-gray-900) 78% ), var(--semantic-bg-grid);
+  --component-hero-accent-color: var(--primitive-color-blue-300);
+  --component-hero-accent-decoration-color: var(--primitive-color-green-400);
+  --component-hero-stats-border-color: var(--primitive-color-gray-600);
+  --component-cta-code-color: var(--primitive-color-blue-200);
+  --component-layer-utilities-bg: var(--primitive-color-gray-800);
+  --component-layer-utilities-color: var(--primitive-color-blue-300);
+  --component-layer-organisms-color: var(--primitive-color-green-300);
+  --component-layer-molecules-color: var(--primitive-color-blue-200);
+  --component-layer-atoms-color: var(--primitive-color-blue-300);
+  --component-layer-tokens-color: var(--primitive-color-green-300);
+  --component-layer-base-color: var(--primitive-color-gray-300);
+  --component-layer-reset-color: var(--primitive-color-gray-400);
+  // En oscuro los tintes claros se invierten: fondo de página con trazo
+  // de color, igual que las píldoras.
+  --component-docs-badge-layout-bg: var(--primitive-color-gray-800);
+  --component-docs-badge-layout-color: var(--primitive-color-gray-200);
+  --component-docs-badge-layout-border: var(--primitive-color-gray-600);
+  --component-docs-badge-atom-bg: var(--primitive-color-gray-800);
+  --component-docs-badge-atom-color: var(--primitive-color-blue-300);
+  --component-docs-badge-atom-border: var(--primitive-color-blue-700);
+  --component-docs-badge-molecule-bg: var(--primitive-color-blue-800);
+  --component-docs-badge-molecule-color: var(--primitive-color-blue-100);
+  --component-docs-badge-molecule-border: var(--primitive-color-blue-600);
+  --component-docs-badge-organism-bg: var(--primitive-color-blue-300);
+  --component-docs-badge-organism-color: var(--primitive-color-gray-900);
+  --component-docs-badge-organism-border: var(--primitive-color-blue-300);
+  // El botón deshabilitado con relleno lleva texto oscuro sobre el gris.
+  --component-button-disabled-filled-color: var(--primitive-color-gray-900);
+
+
+  --component-token-primitive-badge-bg: var(--primitive-color-gray-900);
+  --component-token-primitive-badge-color: var(--primitive-color-gray-200);
+  --component-token-primitive-badge-border: var(--primitive-color-gray-600);
+  --component-token-theme-badge-bg: var(--primitive-color-gray-900);
+  --component-token-theme-badge-color: var(--primitive-color-blue-300);
+  --component-token-theme-badge-border: var(--primitive-color-blue-800);
+  --component-token-semantic-badge-bg: var(--primitive-color-gray-900);
+  --component-token-semantic-badge-color: var(--primitive-color-green-300);
+  --component-token-semantic-badge-border: var(--primitive-color-green-800);
+  --component-token-component-badge-bg: var(--primitive-color-gray-900);
+  --component-token-component-badge-color: var(--primitive-color-blue-200);
+  --component-token-component-badge-border: var(--primitive-color-blue-700);
+  --component-token-component-step-color: var(--primitive-color-gray-900);
+  --component-token-rule-bg: var(--primitive-color-gray-800);
+  --component-token-rule-border-color: var(--primitive-color-gray-600);
+  --component-token-rule-icon-bg: var(--primitive-color-blue-300);
+  --component-token-rule-icon-color: var(--primitive-color-gray-900);
+
+  // ================================================
+  // ELEVACIÓN EN OSCURO
+  // ================================================
+  // En claro el lenguaje se sostiene solo con el trazo: papel blanco y caja
+  // dibujada encima. En oscuro eso no basta —una línea gris sobre fondo gris
+  // no separa nada—, así que la profundidad tiene que venir de la
+  // LUMINOSIDAD: cuanto más elevada está una superficie, más clara es.
+  //
+  //   página        0.221   el papel, lo más oscuro
+  //   sección alt   0.265
+  //   tarjeta       0.305   claramente por encima de la página
+  //   franja CTA    0.355   el punto más alto
+  //
+  // Antes las tarjetas usaban bg-primary, o sea EL MISMO color que la página,
+  // y las secciones alternas quedaban más claras que las tarjetas: la
+  // escalera estaba plana y, a ratos, invertida.
+  --semantic-color-bg-primary: var(--primitive-color-gray-900);
+  --semantic-color-bg-secondary: oklch(0.265 0.036 259);
+  --semantic-color-bg-tertiary: oklch(0.305 0.032 262);
+
+  // Bordes un paso más claros: a 0.409 sobre 0.305 la caja no se leía.
+  --semantic-color-border-subtle: var(--primitive-color-gray-700);
+  --semantic-color-border-default: var(--primitive-color-gray-600);
+  --semantic-color-border-strong: var(--primitive-color-gray-300);
+
+  // Superficies elevadas
+  --component-feature-card-bg: oklch(0.305 0.032 262);
+  --component-feature-card-border-color: var(--primitive-color-gray-600);
+  --component-theme-card-bg: oklch(0.305 0.032 262);
+  --component-theme-card-border-color: var(--primitive-color-gray-600);
+  --component-layer-item-bg: oklch(0.305 0.032 262);
+  --component-layer-item-border-color: var(--primitive-color-gray-600);
+  --component-token-layer-bg: oklch(0.305 0.032 262);
+  --component-token-layer-border-color: var(--primitive-color-gray-600);
+  --component-code-snippet-border-color: var(--primitive-color-gray-600);
+
+  // La franja del CTA: en claro es la isla oscura sobre papel blanco. En
+  // oscuro tiene que seguir siendo un corte, así que sube al escalón más
+  // alto en vez de fundirse con la página.
+  --component-cta-bg: var(--semantic-bg-grid), linear-gradient(oklch(0.355 0.042 263), oklch(0.355 0.042 263));
+
+  // Footer: un escalón por encima de la página, igual que en claro.
+  --component-footer-bg: oklch(0.265 0.036 259);
+  --component-footer-border-color: var(--primitive-color-gray-500);
+
+  // La sombra dura se aclara: sobre superficies de 0.305, un gris de 0.52
+  // apenas se veía. El "papel levantado" debe leerse igual que en claro.
+  --semantic-shadow-hard-color: var(--primitive-color-gray-400);
+  --component-cta-border-block-width: 2px;
+  --component-cta-border-color: var(--primitive-color-gray-500);
+  // El chip de código en línea estaba a 0.30, el mismo tono que las tarjetas
+  // tras subirlas: dentro de una tarjeta desaparecía. Sube un escalón más y
+  // se tiñe de azul para que se lea como chip y no como fondo.
+  --component-code-inline-bg: oklch(0.345 0.055 265);
+  --component-code-inline-border-color: oklch(0.42 0.08 265);
+  --component-code-inline-color: var(--primitive-color-blue-200);
+  // Píldoras que quedaban sin adaptar: warning y danger conservaban su
+  // tinte claro y en oscuro se leían como pegatinas encendidas.
+  --component-pill-warning-bg: transparent;
+  --component-pill-warning-color: var(--semantic-tone-warning-bg);
+  --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
+  --component-pill-danger-bg: transparent;
+  --component-pill-danger-color: var(--semantic-tone-error-bg);
+  --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
+  --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
+  --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
+  // La píldora "dark" se invierte: sobre papel oscuro, la que destaca es la clara.
+  --component-pill-dark-bg: var(--primitive-color-gray-200);
+  --component-pill-dark-color: var(--primitive-color-gray-900);
+  --component-pill-dark-border-color: var(--primitive-color-gray-200);
+}
+
+@mixin theme-syx-sketch {
+  :root {
+    // ================================================
+    // SECCIÓN 1: PRIMITIVOS
+    // ================================================
+
+    // Spacing — base de 4px: la retícula del papel milimetrado
+    --primitive-space-base: 0.25rem;
+
+    // Colors — NEUTROS
+    // Grises con matiz frío (H≈265): no son grises puros, llevan
+    // el azul de la marca dentro. Es lo que evita que el blueprint
+    // se vea sucio junto al azul eléctrico.
+    --primitive-color-gray-50: oklch(0.975 0.005 258.3);  // #F5F7FA
+    --primitive-color-gray-100: oklch(0.940 0.008 262);   // #E8EBF1
+    --primitive-color-gray-200: oklch(0.895 0.012 265);   // #D8DCE5
+    --primitive-color-gray-300: oklch(0.830 0.015 265);   // #C2C7D1
+    --primitive-color-gray-400: oklch(0.730 0.020 265);   // #A2A8B5
+    --primitive-color-gray-500: oklch(0.630 0.025 265);   // #828999
+    --primitive-color-gray-600: oklch(0.520 0.030 265);   // #60697B  AA sobre blanco
+    --primitive-color-gray-700: oklch(0.409 0.036 265.9); // #414A5E  pizarra
+    --primitive-color-gray-800: oklch(0.300 0.032 262);   // #252E3E
+    --primitive-color-gray-900: oklch(0.221 0.039 258.3); // #0F1B2D  navy
+
+    // Tinta — el color del trazo. Ligeramente más cálido que el
+    // navy para que el texto no compita con las superficies oscuras.
+    --primitive-color-ink: oklch(0.239 0.014 267);        // #1C1F26
+
+    // Colors — AZUL ELÉCTRICO (primario)
+    --primitive-color-blue-50: oklch(0.950 0.024 270.3);  // #E8EEFF
+    --primitive-color-blue-100: oklch(0.910 0.043 268);   // #D5E1FF
+    --primitive-color-blue-200: oklch(0.840 0.079 267);   // #B3CAFF
+    --primitive-color-blue-300: oklch(0.740 0.133 267);   // #85A7FF
+    --primitive-color-blue-400: oklch(0.620 0.204 266.5); // #4D7AFF
+    --primitive-color-blue-500: oklch(0.498 0.282 266.24);// #1E3AFF  marca
+    --primitive-color-blue-600: oklch(0.440 0.260 266);   // #152BDE
+    --primitive-color-blue-700: oklch(0.380 0.220 265);   // #0825B4
+    --primitive-color-blue-800: oklch(0.310 0.160 264);   // #03217F
+    --primitive-color-blue-900: oklch(0.250 0.100 262);   // #041D50
+
+    // Colors — MENTA (secundario)
+    // Escala construida hacia abajo porque la menta de marca es
+    // clara (L=0.75): los pasos 600-900 existen para poder usarla
+    // como texto sin romper contraste.
+    --primitive-color-green-50: oklch(0.965 0.022 174);   // #E5F9F2
+    --primitive-color-green-100: oklch(0.930 0.045 174);  // #CAF2E5
+    --primitive-color-green-200: oklch(0.880 0.075 173.5);// #A3E8D3
+    --primitive-color-green-300: oklch(0.820 0.105 173);  // #75DABE
+    --primitive-color-green-400: oklch(0.753 0.129 173);  // #3BC9A7  marca
+    --primitive-color-green-500: oklch(0.690 0.134 172);  // #00B692
+    --primitive-color-green-600: oklch(0.600 0.119 170);  // #009675
+    --primitive-color-green-700: oklch(0.500 0.102 168);  // #007558  AA sobre blanco
+    --primitive-color-green-800: oklch(0.400 0.084 166);  // #00563D
+    --primitive-color-green-900: oklch(0.310 0.065 165);  // #003A28
+
+    // Colors - State
+    // Éxito = la menta oscura, para que el sistema hable un solo idioma.
+    --primitive-color-success-500: oklch(0.500 0.102 168);
+    --primitive-color-error-500: oklch(0.520 0.215 27.5);
+    --primitive-color-warning-500: oklch(0.660 0.150 72);
+    --primitive-color-disabled: oklch(0.730 0.020 265);
+
+    // Typography — Space Grotesk en todo el sistema.
+    // Es una grotesca de rasgos técnicos (terminaciones rectas,
+    // 'a' de un solo piso en cursiva, números tabulares) y es la
+    // única familia con las 5 variables ya en /fonts. Syne, que
+    // usan los example-*, es demasiado expresiva para un boceto.
+    --primitive-font-family-space-grotesk-light: "Google-Space-Grotesk--light", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-regular: "Google-Space-Grotesk--regular", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-medium: "Google-Space-Grotesk--medium", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-bold: "Google-Space-Grotesk--bold", Arial, sans-serif;
+    // Monoespaciada del sistema: anotaciones, cotas y código.
+    // Sin fichero local, así que va con pila de respaldo.
+    --primitive-font-family-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+    // Icons - Theme Specific
+    --primitive-icon-arrow-default: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8299 11.2897L10.5899 7.0497C10.497 6.95598 10.3864 6.88158 10.2645 6.83081C10.1427 6.78004 10.012 6.75391 9.87994 6.75391C9.74793 6.75391 9.61723 6.78004 9.49537 6.83081C9.37351 6.88158 9.26291 6.95598 9.16994 7.0497C8.98369 7.23707 8.87915 7.49052 8.87915 7.7547C8.87915 8.01889 8.98369 8.27234 9.16994 8.4597L12.7099 11.9997L9.16994 15.5397C8.98369 15.7271 8.87915 15.9805 8.87915 16.2447C8.87915 16.5089 8.98369 16.7623 9.16994 16.9497C9.26338 17.0424 9.3742 17.1157 9.49604 17.1655C9.61787 17.2152 9.74834 17.2405 9.87994 17.2397C10.0115 17.2405 10.142 17.2152 10.2638 17.1655C10.3857 17.1157 10.4965 17.0424 10.5899 16.9497L14.8299 12.7097C14.9237 12.6167 14.9981 12.5061 15.0488 12.3843C15.0996 12.2624 15.1257 12.1317 15.1257 11.9997C15.1257 11.8677 15.0996 11.737 15.0488 11.6151C14.9981 11.4933 14.9237 11.3827 14.8299 11.2897Z" fill="black"/></svg>');
+    --primitive-icon-arrow-double: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.46002 8.28978C8.27172 8.09617 8.01422 7.98529 7.74416 7.98154C7.47411 7.97779 7.21363 8.08147 7.02002 8.26978C6.82641 8.45808 6.71554 8.71558 6.71179 8.98564C6.70804 9.25569 6.81172 9.51617 7.00002 9.70978L9.34002 11.9998L7.00002 14.2898C6.90629 14.3827 6.8319 14.4933 6.78113 14.6152C6.73036 14.7371 6.70422 14.8678 6.70422 14.9998C6.70422 15.1318 6.73036 15.2625 6.78113 15.3844C6.8319 15.5062 6.90629 15.6168 7.00002 15.7098C7.09298 15.8035 7.20359 15.8779 7.32545 15.9287C7.4473 15.9794 7.57801 16.0056 7.71002 16.0056C7.84203 16.0056 7.97274 15.9794 8.0946 15.9287C8.21646 15.8779 8.32706 15.8035 8.42002 15.7098L11.42 12.7098C11.5138 12.6168 11.5881 12.5062 11.6389 12.3844C11.6897 12.2625 11.7158 12.1318 11.7158 11.9998C11.7158 11.8678 11.6897 11.7371 11.6389 11.6152C11.5881 11.4933 11.5138 11.3827 11.42 11.2898L8.46002 8.28978ZM16.96 11.2898L13.96 8.28978C13.7717 8.10147 13.5163 7.99569 13.25 7.99569C12.9837 7.99569 12.7283 8.10147 12.54 8.28978C12.3517 8.47808 12.2459 8.73348 12.2459 8.99978C12.2459 9.26608 12.3517 9.52147 12.54 9.70978L14.84 11.9998L12.54 14.2898C12.4463 14.3827 12.3719 14.4933 12.3211 14.6152C12.2704 14.7371 12.2442 14.8678 12.2442 14.9998C12.2442 15.1318 12.2704 15.2625 12.3211 15.3844C12.3719 15.5062 12.4463 15.6168 12.54 15.7098C12.633 15.8035 12.7436 15.8779 12.8654 15.9287C12.9873 15.9794 13.118 16.0056 13.25 16.0056C13.382 16.0056 13.5127 15.9794 13.6346 15.9287C13.7565 15.8779 13.8671 15.8035 13.96 15.7098L16.96 12.7098C17.0564 12.6195 17.134 12.511 17.1882 12.3906C17.2424 12.2701 17.2723 12.1401 17.276 12.0081C17.2797 11.8761 17.2572 11.7446 17.2099 11.6213C17.1625 11.498 17.0912 11.3854 17 11.2898H16.96Z" fill="black"/></svg>');
+    --primitive-icon-content-bars: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8H21C21.2652 8 21.5196 7.89464 21.7071 7.70711C21.8946 7.51957 22 7.26522 22 7C22 6.73478 21.8946 6.48043 21.7071 6.29289C21.5196 6.10536 21.2652 6 21 6H3C2.73478 6 2.48043 6.10536 2.29289 6.29289C2.10536 6.48043 2 6.73478 2 7C2 7.26522 2.10536 7.51957 2.29289 7.70711C2.48043 7.89464 2.73478 8 3 8ZM21 16H3C2.73478 16 2.48043 16.1054 2.29289 16.2929C2.10536 16.4804 2 16.7348 2 17C2 17.2652 2.10536 17.5196 2.29289 17.7071C2.48043 17.8946 2.73478 18 3 18H21C21.2652 18 21.5196 17.8946 21.7071 17.7071C21.8946 17.5196 22 17.2652 22 17C22 16.7348 21.8946 16.4804 21.7071 16.2929C21.5196 16.1054 21.2652 16 21 16ZM21 11H3C2.73478 11 2.48043 11.1054 2.29289 11.2929C2.10536 11.4804 2 11.7348 2 12C2 12.2652 2.10536 12.5196 2.29289 12.7071C2.48043 12.8946 2.73478 13 3 13H21C21.2652 13 21.5196 12.8946 21.7071 12.7071C21.8946 12.5196 22 12.2652 22 12C22 11.7348 21.8946 11.4804 21.7071 11.2929C21.5196 11.1054 21.2652 11 21 11Z" fill="black"/></svg>');
+    --primitive-icon-rrss-email: url('#{$icon-path},<svg width="20" height="16" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.125 4.69112L12.219 10.375H12.214C11.6352 10.95 10.8505 11.2487 9.98582 11.2487C9.12152 11.2487 8.33677 10.95 7.75685 10.375H7.74135L1.875 4.6949V2.53153C4.2241 4.85363 8.49967 9 8.49967 9H8.50103C8.88358 9.4 9.40435 9.56993 9.979 9.56993C10.5877 9.56993 11.1355 9.325 11.523 8.9H11.5257L18.125 2.50128V4.69112ZM17.7874 0H0V13.425C0 14.6452 0.989025 15.625 2.20922 15.625H20C20 15.625 20 2.18857 20 2.15745C20 0.93745 19.0081 0 17.7874 0Z" fill="black"/></svg>');
+    --primitive-icon-ui-cancel: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.4099 12.0002L17.7099 7.71019C17.8982 7.52188 18.004 7.26649 18.004 7.00019C18.004 6.73388 17.8982 6.47849 17.7099 6.29019C17.5216 6.10188 17.2662 5.99609 16.9999 5.99609C16.7336 5.99609 16.4782 6.10188 16.2899 6.29019L11.9999 10.5902L7.70994 6.29019C7.52164 6.10188 7.26624 5.99609 6.99994 5.99609C6.73364 5.99609 6.47824 6.10188 6.28994 6.29019C6.10164 6.47849 5.99585 6.73388 5.99585 7.00019C5.99585 7.26649 6.10164 7.52188 6.28994 7.71019L10.5899 12.0002L6.28994 16.2902C6.19621 16.3831 6.12182 16.4937 6.07105 16.6156C6.02028 16.7375 5.99414 16.8682 5.99414 17.0002C5.99414 17.1322 6.02028 17.2629 6.07105 17.3848C6.12182 17.5066 6.19621 17.6172 6.28994 17.7102C6.3829 17.8039 6.4935 17.8783 6.61536 17.9291C6.73722 17.9798 6.86793 18.006 6.99994 18.006C7.13195 18.006 7.26266 17.9798 7.38452 17.9291C7.50638 17.8783 7.61698 17.8039 7.70994 17.7102L11.9999 13.4102L16.2899 17.7102C16.3829 17.8039 16.4935 17.8783 16.6154 17.9291C16.7372 17.9798 16.8679 18.006 16.9999 18.006C17.132 18.006 17.2627 17.9798 17.3845 17.9291C17.5064 17.8783 17.617 17.8039 17.7099 17.7102C17.8037 17.6172 17.8781 17.5066 17.9288 17.3848C17.9796 17.2629 18.0057 17.1322 18.0057 17.0002C18.0057 16.8682 17.9796 16.7375 17.9288 16.6156C17.8781 16.4937 17.8037 16.3831 17.7099 16.2902L13.4099 12.0002Z" fill="black"/></svg>');
+    --primitive-icon-ui-exclamation: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16C11.8022 16 11.6089 16.0587 11.4444 16.1686C11.28 16.2784 11.1518 16.4346 11.0761 16.6173C11.0004 16.8001 10.9806 17.0011 11.0192 17.1951C11.0578 17.3891 11.153 17.5673 11.2929 17.7071C11.4327 17.847 11.6109 17.9422 11.8049 17.9808C11.9989 18.0194 12.2 17.9996 12.3827 17.9239C12.5654 17.8482 12.7216 17.72 12.8315 17.5556C12.9414 17.3911 13 17.1978 13 17C13 16.7348 12.8946 16.4805 12.7071 16.2929C12.5196 16.1054 12.2652 16 12 16ZM22.67 17.47L14.62 3.47003C14.3598 3.00354 13.9798 2.61498 13.5192 2.3445C13.0586 2.07401 12.5341 1.9314 12 1.9314C11.4659 1.9314 10.9414 2.07401 10.4808 2.3445C10.0202 2.61498 9.64019 3.00354 9.38 3.47003L1.38 17.47C1.1108 17.924 0.966143 18.441 0.960644 18.9688C0.955146 19.4966 1.089 20.0166 1.34869 20.4761C1.60837 20.9356 1.9847 21.3185 2.43968 21.5861C2.89466 21.8536 3.41219 21.9964 3.94 22H20.06C20.5921 22.0053 21.1159 21.8689 21.5779 21.6049C22.0399 21.341 22.4234 20.9589 22.689 20.4978C22.9546 20.0368 23.0928 19.5134 23.0895 18.9814C23.0862 18.4493 22.9414 17.9277 22.67 17.47ZM20.94 19.47C20.8523 19.626 20.7245 19.7556 20.5697 19.8453C20.4149 19.935 20.2389 19.9815 20.06 19.98H3.94C3.76111 19.9815 3.5851 19.935 3.43032 19.8453C3.27554 19.7556 3.14765 19.626 3.06 19.47C2.97223 19.318 2.92603 19.1456 2.92603 18.97C2.92603 18.7945 2.97223 18.622 3.06 18.47L11.06 4.47003C11.1439 4.30623 11.2714 4.16876 11.4284 4.07277C11.5855 3.97678 11.766 3.92599 11.95 3.92599C12.134 3.92599 12.3145 3.97678 12.4716 4.07277C12.6286 4.16876 12.7561 4.30623 12.84 4.47003L20.89 18.47C20.9892 18.6199 21.0462 18.7937 21.055 18.9732C21.0638 19.1527 21.0241 19.3312 20.94 19.49V19.47ZM12 8.00003C11.7348 8.00003 11.4804 8.10538 11.2929 8.29292C11.1054 8.48046 11 8.73481 11 9.00003V13C11 13.2652 11.1054 13.5196 11.2929 13.7071C11.4804 13.8947 11.7348 14 12 14C12.2652 14 12.5196 13.8947 12.7071 13.7071C12.8946 13.5196 13 13.2652 13 13V9.00003C13 8.73481 12.8946 8.48046 12.7071 8.29292C12.5196 8.10538 12.2652 8.00003 12 8.00003Z" fill="black"/></svg>');
+    --primitive-icon-ui-home: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.0001 7.99952L14.0001 2.73952C13.4501 2.24756 12.738 1.97559 12.0001 1.97559C11.2622 1.97559 10.5501 2.24756 10.0001 2.73952L4.00009 7.99952C3.68246 8.28359 3.42899 8.63207 3.25657 9.02176C3.08414 9.41145 2.99671 9.8334 3.00009 10.2595V18.9995C3.00009 19.7952 3.31617 20.5582 3.87877 21.1208C4.44138 21.6834 5.20445 21.9995 6.00009 21.9995H18.0001C18.7957 21.9995 19.5588 21.6834 20.1214 21.1208C20.684 20.5582 21.0001 19.7952 21.0001 18.9995V10.2495C21.0021 9.82508 20.9139 9.40506 20.7416 9.0172C20.5692 8.62934 20.3165 8.28247 20.0001 7.99952ZM14.0001 19.9995H10.0001V14.9995C10.0001 14.7343 10.1055 14.4799 10.293 14.2924C10.4805 14.1049 10.7349 13.9995 11.0001 13.9995H13.0001C13.2653 13.9995 13.5197 14.1049 13.7072 14.2924C13.8947 14.4799 14.0001 14.7343 14.0001 14.9995V19.9995ZM19.0001 18.9995C19.0001 19.2647 18.8947 19.5191 18.7072 19.7066C18.5197 19.8942 18.2653 19.9995 18.0001 19.9995H16.0001V14.9995C16.0001 14.2039 15.684 13.4408 15.1214 12.8782C14.5588 12.3156 13.7957 11.9995 13.0001 11.9995H11.0001C10.2044 11.9995 9.44138 12.3156 8.87877 12.8782C8.31616 13.4408 8.00009 14.2039 8.00009 14.9995V19.9995H6.00009C5.73488 19.9995 5.48052 19.8942 5.29299 19.7066C5.10545 19.5191 5.00009 19.2647 5.00009 18.9995V10.2495C5.00027 10.1075 5.03069 9.96721 5.08931 9.8379C5.14794 9.70858 5.23343 9.59323 5.3401 9.49952L11.3401 4.24952C11.5226 4.0892 11.7572 4.00078 12.0001 4.00078C12.243 4.00078 12.4776 4.0892 12.6601 4.24952L18.6601 9.49952C18.7668 9.59323 18.8523 9.70858 18.9109 9.8379C18.9695 9.96721 18.9999 10.1075 19.0001 10.2495V18.9995Z" fill="black"/></svg>');
+    --primitive-icon-ui-tick: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.7099 7.20986C18.617 7.11613 18.5064 7.04174 18.3845 6.99097C18.2627 6.9402 18.132 6.91406 17.9999 6.91406C17.8679 6.91406 17.7372 6.9402 17.6154 6.99097C17.4935 7.04174 17.3829 7.11613 17.29 7.20986L9.83995 14.6699L6.70995 11.5299C6.61343 11.4366 6.49949 11.3633 6.37463 11.3141C6.24978 11.2649 6.11645 11.2408 5.98227 11.2431C5.84809 11.2454 5.71568 11.2741 5.5926 11.3276C5.46953 11.3811 5.35819 11.4583 5.26495 11.5549C5.17171 11.6514 5.0984 11.7653 5.04919 11.8902C4.99999 12.015 4.97586 12.1484 4.97818 12.2825C4.9805 12.4167 5.00923 12.5491 5.06272 12.6722C5.11622 12.7953 5.19343 12.9066 5.28995 12.9999L9.12995 16.8399C9.22291 16.9336 9.33351 17.008 9.45537 17.0588C9.57723 17.1095 9.70794 17.1357 9.83995 17.1357C9.97196 17.1357 10.1027 17.1095 10.2245 17.0588C10.3464 17.008 10.457 16.9336 10.55 16.8399L18.7099 8.67986C18.8115 8.58622 18.8925 8.47257 18.9479 8.34607C19.0033 8.21957 19.0319 8.08296 19.0319 7.94486C19.0319 7.80676 19.0033 7.67015 18.9479 7.54365C18.8925 7.41715 18.8115 7.3035 18.7099 7.20986Z" fill="black"/></svg>');
+
+    // Filters - Color
+    // Aproximaciones para teñir iconos SVG externos.
+    --primitive-filter-brown: invert(18%) sepia(39%) saturate(2629%) hue-rotate(357deg) brightness(95%) contrast(92%);
+    --primitive-filter-blue: brightness(0) saturate(100%) invert(19%) sepia(94%) saturate(6000%) hue-rotate(238deg) brightness(103%) contrast(112%);
+    --primitive-filter-success: brightness(0) saturate(100%) invert(38%) sepia(64%) saturate(600%) hue-rotate(129deg) brightness(95%) contrast(101%);
+    --primitive-filter-error: invert(26%) sepia(84%) saturate(6466%) hue-rotate(356deg) brightness(76%) contrast(131%);
+    --primitive-filter-warning: invert(35%) sepia(55%) saturate(1731%) hue-rotate(33deg) brightness(92%);
+    --primitive-filter-disabled: grayscale(1);
+
+    // ================================================
+    // SECCIÓN 2: VARIABLES DEL TEMA
+    // ================================================
+
+    --base-measure: var(--primitive-space-base);
+
+    // Icons (theme-specific)
+    --icon-arrow-default: var(--primitive-icon-arrow-default);
+    --icon-arrow-double: var(--primitive-icon-arrow-double);
+    --icon-content-bars: var(--primitive-icon-content-bars);
+    --icon-rrss-email: var(--primitive-icon-rrss-email);
+    --icon-user-interface-cancel: var(--primitive-icon-ui-cancel);
+    --icon-user-interface-exclamation-mark: var(--primitive-icon-ui-exclamation);
+    --icon-user-interface-home: var(--primitive-icon-ui-home);
+    --icon-user-interface-tick: var(--primitive-icon-ui-tick);
+
+    // Fonts — alias legacy
+    --font-weight-1: var(--primitive-font-family-space-grotesk-medium);
+    --font-weight-2: var(--primitive-font-family-space-grotesk-bold);
+    --font-bold: var(--font-weight-2);
+
+    // ================================================
+    // COLOR SEMÁNTICO
+    // ================================================
+    // El reparto: el azul es el único color que pide acción.
+    // La menta señala estado (correcto, activo, disponible).
+    // Todo lo demás es tinta sobre papel.
+    --semantic-color-quinary: var(--primitive-color-error-500);
+    --semantic-color-senary: initial;
+    --semantic-color-septenary: initial;
+
+    // Superficies — el papel
+
+    // Texto — tinta
+    --semantic-color-text-disabled: var(--primitive-color-gray-400);
+
+    // Trazo — tres pesos. `strong` es tinta pura: es el borde
+    // "dibujado" y también el color de la sombra dura.
+    --semantic-color-border-focus: var(--semantic-color-primary);
+    --semantic-border-width: 1px;
+    --semantic-outline-width: var(--theme-focus-ring-width);
+
+    // Enlaces — azul-600 (8.65:1) en lugar del azul de marca:
+    // el texto corrido necesita más contraste que un botón.
+
+    // Estados interactivos
+    --semantic-color-state-hover-tertiary: var(--primitive-color-ink);
+    --semantic-color-state-hover-quaternary: var(--primitive-color-blue-800);
+    --semantic-color-state-active: var(--primitive-color-blue-700);
+    --semantic-color-state-disabled: var(--primitive-color-disabled);
+    --semantic-color-state-focus: var(--semantic-color-primary);
+
+
+    --semantic-color-selection-text: oklch(1 0 0);
+    --semantic-color-selection-bg: var(--semantic-color-primary);
+    --reset-selection-color: var(--semantic-color-selection-text);
+    --reset-selection-bg: var(--semantic-color-selection-bg);
+
+    // ================================================
+    // FORMA: radios casi nulos
+    // ================================================
+    // Con base 4px la escala ya cae donde queremos, pero la
+    // fijamos explícitamente porque es una decisión de diseño,
+    // no una consecuencia aritmética.
+    --semantic-border-radius-none: 0;
+    --semantic-border-radius-sm: 0.125rem;    // 2px
+    --semantic-border-radius-default: 0.25rem; // 4px
+    --semantic-border-radius-lg: 0.375rem;    // 6px
+    --semantic-border-radius-xl: 0.5rem;      // 8px  — techo del tema
+    --semantic-border-radius-2xl: 0.5rem;     // 8px  — deliberadamente igual
+    --semantic-border-radius-full: 9999px;    // solo switch y avatares
+    --semantic-border-radius-circle: 50%;
+
+    // ================================================
+    // PROFUNDIDAD: sombra sólida, nunca difuminada
+    // ================================================
+    // Toda la escala de elevación se reasigna a sombras duras.
+    // Un componente que pida `--semantic-shadow-md` recibe papel
+    // levantado, no un halo gris.
+    --semantic-shadow-hard-offset: 0.25rem;
+    --semantic-shadow-inner: none;
+    --semantic-shadow-focus: 0 0 0 0.1875rem color-mix(in srgb, var(--semantic-focus-ring-color) 35%, transparent);
+
+    // Retícula de papel milimetrado — apagada por defecto en la
+    // capa semántica, encendida aquí. Los organismos la piden
+    // con `background-image: var(--semantic-bg-grid)`.
+    --semantic-bg-grid-size: 1.5rem;
+    --semantic-bg-grid-width: 1px;
+
+    // ================================================
+    // MOVIMIENTO: seco, sin rebote
+    // ================================================
+    // Un boceto no hace muelles. Curva casi lineal y duraciones
+    // por debajo de lo habitual del sistema.
+    --semantic-duration-instant: 0.06s;
+    --semantic-duration-fast: 0.1s;
+    --semantic-duration-base: 0.16s;
+    --semantic-duration-slow: 0.28s;
+    --semantic-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --semantic-easing-out: cubic-bezier(0.2, 0, 0, 1);
+
+    // Foco: grueso y azul. Es el único elemento del tema al que
+    // se le permite gritar.
+    --semantic-focus-ring-width: 0.1875rem; // 3px
+    --semantic-focus-ring-offset: 0.125rem;
+    --theme-focus-ring-width: 0.1875rem;
+
+    // ================================================
+    // TIPOGRAFÍA
+    // ================================================
+    --semantic-font-family-primary: var(--primitive-font-family-space-grotesk-regular);
+    --semantic-font-family-primary-bold: var(--primitive-font-family-space-grotesk-bold);
+    --semantic-font-family-heading: var(--primitive-font-family-space-grotesk-bold);
+    --semantic-font-family-heading-md: var(--primitive-font-family-space-grotesk-medium);
+    --semantic-font-family-mono: var(--primitive-font-family-mono);
+
+    // Filters
+    --filter-primary: var(--primitive-filter-blue);
+    --filter-secondary: var(--primitive-filter-success);
+    --filter-state-ok: var(--primitive-filter-success);
+    --filter-state-warning: var(--primitive-filter-warning);
+    --filter-state-disabled: var(--primitive-filter-disabled);
+    --filter-color-brown: initial;
+    --filter-color-blue: var(--primitive-filter-blue);
+
+    // ================================================
+    // RESET
+    // ================================================
+    // El papel es blanco. Por defecto el sistema pinta el <body> con
+    // bg-secondary, lo que dejaba un escalón visible donde termina el
+    // telón del hero (que se funde a bg-primary).
+    --reset-body-background-color: var(--semantic-color-bg-primary);
+    --reset-html-font: normal normal 400 16px/24px var(--semantic-font-family-primary);
+    --reset-body-font-size: var(--semantic-font-size-body);
+    --reset-body-line-height: var(--primitive-line-height-relaxed);
+    --reset-h-font-family: var(--semantic-font-family-heading);
+    // Los example-* fijan los encabezados con calc(n × 4px), lo que
+    // los deja diminutos y sin escala. Aquí van a la escala fluida
+    // que ya existe en primitivos y nunca se estaba usando.
+    --reset-h1-size: var(--semantic-font-size-h1);
+    --reset-h1-line-height: var(--primitive-line-height-tight);
+    --reset-h1-letter-spacing: var(--primitive-letter-spacing-display);
+    --reset-h2-size: var(--semantic-font-size-h2);
+    --reset-h2-line-height: var(--primitive-line-height-snug);
+    --reset-h2-letter-spacing: var(--primitive-letter-spacing-tight);
+    --reset-h3-size: var(--semantic-font-size-h3);
+    --reset-h3-line-height: var(--primitive-line-height-snug);
+    --reset-h3-letter-spacing: var(--primitive-letter-spacing-tight);
+    --reset-h4-size: var(--semantic-font-size-h4);
+    --reset-h4-line-height: var(--primitive-line-height-snug);
+    --reset-h4-letter-spacing: var(--primitive-letter-spacing-tight);
+    --reset-h5-size: var(--semantic-font-size-h5);
+    --reset-h5-line-height: var(--primitive-line-height-snug);
+    --reset-h5-letter-spacing: var(--primitive-letter-spacing-normal);
+    --reset-h6-size: var(--semantic-font-size-h6);
+    --reset-h6-line-height: var(--primitive-line-height-snug);
+    --reset-h6-letter-spacing: var(--primitive-letter-spacing-normal);
+
+    // ================================================
+    // LAYOUT
+    // ================================================
+    // Ancho máximo más estrecho que example-01 (1440px → 1200px):
+    // el aire lateral es parte del look.
+    --layout-max-width: calc(300 * var(--base-measure));
+    --layout-pad-1: calc(2 * var(--base-measure));
+    --layout-gap-1: calc(var(--base-measure));
+    --layout-pad-2: calc(3 * var(--base-measure));
+    --layout-gap-2: calc(3 * var(--base-measure));
+    --layout-pad-3: calc(4 * var(--base-measure));
+    --layout-gap-3: calc(4 * var(--base-measure));
+    --layout-pad-4: calc(6 * var(--base-measure));
+    --layout-gap-4: calc(6 * var(--base-measure));
+    --layout-pad-5: calc(8 * var(--base-measure));
+    --layout-gap-5: calc(8 * var(--base-measure));
+    --gap-1: calc(2 * var(--base-measure));
+    --inner-1: calc(var(--base-measure));
+    --scope-1: calc(2 * var(--base-measure));
+    --scope-2: calc(2.5 * var(--base-measure));
+    --scope-3: calc(3 * var(--base-measure));
+    --scope-4: calc(4 * var(--base-measure));
+    --scope-5: calc(5 * var(--base-measure));
+    --scope-6: calc(5.4 * var(--base-measure));
+
+    // Theme
+    --theme-focus: 0 0 0 var(--semantic-focus-ring-width) var(--semantic-focus-ring-color);
+    --theme-w-border: 1px;
+    --theme-radius: var(--semantic-border-radius-default);
+
+    // ================================================
+    // COMPONENTES — donde se nota el boceto
+    // ================================================
+
+    // BOTÓN: trazo de 2px y papel levantado.
+    // Reposo = elevado 2px · hover = elevado 4px · click = aplastado
+    // contra el papel, desplazándose justo lo que medía la sombra.
+    --component-button-border-width: 0.125rem;
+    --component-button-border-style: solid;
+    --component-button-border-radius: var(--semantic-border-radius-default);
+    --component-button-border-radius-circle: var(--semantic-border-radius-circle);
+    --component-button-shadow: var(--semantic-shadow-hard-sm);
+    --component-button-shadow-hover: var(--semantic-shadow-hard);
+    --component-button-shadow-active: none;
+    --component-button-active-offset-x: 0.125rem;
+    --component-button-active-offset-y: 0.125rem;
+    --component-button-transition-duration: var(--semantic-duration-base);
+    --component-button-transition-duration-active: var(--semantic-duration-instant);
+    --component-button-transition-easing: var(--semantic-easing-standard);
+
+    // Texto de los botones rellenos: blanco sobre azul (6.77:1) y
+    // tinta sobre menta (7.94:1). La menta jamás lleva blanco.
+    --btn-primary-text: var(--semantic-color-primary);
+    --btn-secondary-text: var(--primitive-color-green-700);
+    --btn-tertiary-text: var(--semantic-color-tertiary);
+    --btn-quaternary-text: var(--semantic-color-quaternary);
+    --component-btn-group-gap: calc(3 * var(--base-measure));
+
+    // TARJETAS: rectángulo dibujado. Sin sombra en reposo; al
+    // pasar por encima, el papel se levanta y el trazo se vuelve
+    // tinta. Sin desplazamiento vertical: lo que se mueve es la
+    // sombra, no la tarjeta.
+    --component-feature-card-border-width: 0.0625rem;
+    --component-feature-card-border-radius: var(--semantic-border-radius-default);
+    --component-feature-card-shadow: none;
+    --component-feature-card-border-color-hover: var(--semantic-color-border-strong);
+    --component-feature-card-shadow-hover: var(--semantic-shadow-hard);
+    --component-feature-card-hover-lift: 0px;
+
+    --component-theme-card-border-width: 0.0625rem;
+    --component-theme-card-border-radius: var(--semantic-border-radius-default);
+    --component-theme-card-shadow: none;
+    --component-theme-card-border-color-active: var(--semantic-color-border-strong);
+    --component-theme-card-shadow-hover: var(--semantic-shadow-hard);
+    --component-theme-card-hover-lift: 0px;
+    --component-theme-card-swatch-border-radius: 0;
+    --component-theme-card-dot-border-radius: var(--semantic-border-radius-sm);
+    --component-theme-card-dot-border-color: var(--semantic-color-border-strong);
+
+    // PÍLDORAS: rectangulares. Quitar el radio de 999px es el
+    // gesto que más cambia la percepción del sistema.
+    --component-pill-border-radius: var(--semantic-border-radius-sm);
+    --component-pill-border-width: 0.0625rem;
+    --component-pill-neutral-border-color: var(--semantic-color-border-default);
+
+    // ICONOS DE CARACTERÍSTICA: cuadrados con trazo, como una
+    // casilla de plano. Cada capa de Atomic Design conserva su
+    // color, pero pasado por la paleta del tema.
+    --component-feature-icon-border-radius: var(--semantic-border-radius-default);
+    --component-feature-icon-border-width: 0.0625rem;
+    --component-feature-icon-shadow: var(--semantic-shadow-hard-sm);
+
+    // CÓDIGO: la muestra técnica. Fondo navy, trazo tinta.
+    --component-code-color: var(--primitive-color-gray-100);
+    --component-code-border-radius: var(--semantic-border-radius-default);
+    --component-code-border-width: 0.0625rem;
+    --component-code-border-color: var(--semantic-color-border-strong);
+    --component-code-line-height: 1.7;
+    --component-code-inline-border-radius: var(--semantic-border-radius-sm);
+    --component-code-snippet-border-width: 0.0625rem;
+    --component-code-snippet-border-radius: var(--semantic-border-radius-default);
+    --component-code-snippet-shadow: var(--semantic-shadow-hard-sm);
+    --component-code-snippet-header-bg: var(--semantic-color-bg-secondary);
+
+    // SUPERFICIES BASE
+    --component-blockquote-bg: var(--semantic-color-bg-secondary);
+    --component-blockquote-color: var(--semantic-color-text-secondary);
+    --component-blockquote-border-width: 0.125rem;
+    --component-blockquote-border-color: var(--semantic-color-border-strong);
+    --component-blockquote-border-radius: 0;
+    --component-hr-thickness: 1px;
+    --component-hr-color: var(--semantic-color-border-default);
+    // Tabla base (elementos <table> sin clase, en docs y artículos)
+    --component-table-base-border-color: var(--semantic-color-border-subtle);
+    --component-table-base-th-color: var(--semantic-color-text-primary);
+    --component-table-base-th-border-width: 0.125rem;
+    --component-table-base-th-border-color: var(--semantic-color-border-strong);
+    // atom-table: la cabecera pasa de azul de marca a navy. El azul
+    // eléctrico queda reservado para lo que se puede pulsar.
+    --component-table-color-th: oklch(1 0 0);
+    --component-table-th-font-family: var(--semantic-font-family-heading);
+    --component-table-border-width: 1px;
+    --component-table-border-color: var(--semantic-color-border-subtle);
+    --component-table-state-hover-border-color: var(--semantic-color-border-strong);
+    --component-table-state-hover-shadow: none;
+
+    // FORMULARIOS: campos rectangulares con trazo visible.
+    --component-form-field-border-radius: var(--semantic-border-radius-default);
+    --component-switch-border-radius: var(--semantic-border-radius-sm);
+    --component-switch-slider-shadow: var(--semantic-shadow-hard-sm);
+    --component-radio-border-radius: var(--semantic-border-radius-circle);
+    --component-radio-dot-border-radius: var(--semantic-border-radius-circle);
+
+    // Form (alias legacy)
+    --form-font-family: var(--semantic-font-family-primary);
+    --form-font-size: var(--semantic-font-size-body);
+    --form-line-height: calc(6 * var(--base-measure));
+    --form-inner-field: calc(4 * var(--base-measure));
+    --form-height-size: calc(12 * var(--base-measure));
+
+    // Breadcrumb
+    --breadcrumb-gap: calc(4 * var(--base-measure));
+    --breadcrumb-item-highlighted-p-x: calc(4 * var(--base-measure));
+    --breadcrumb-item-icon-p-r: calc(-4 * var(--base-measure));
+    --breadcrumb-item-icon-size: calc(4 * var(--base-measure));
+    --breadcrumb-item-icon-pic: var(--icon-arrow-default);
+
+    // Check
+    --check-gap: calc(10 * var(--base-measure));
+    --check-line-height: calc(8 * var(--base-measure));
+    --check-uncheck-size: calc(6 * var(--base-measure));
+    --check-checked-icon-size: calc(6 * var(--base-measure));
+    --check-checked-icon-pic: var(--icon-user-interface-tick);
+
+    // List ordered
+    --list-ordered-m-t: calc(0 * var(--base-measure));
+    --list-ordered-m-b: calc(0 * var(--base-measure));
+    --list-ordered-gap: calc(8 * var(--base-measure));
+    --list-ordered-item-m-t: calc(2 * var(--base-measure));
+    --list-ordered-counter-size: calc(6 * var(--base-measure));
+    --list-ordered-counter-font-size: calc(3 * var(--base-measure));
+    --list-ordered-counter-line-height: calc(6 * var(--base-measure));
+
+    // List
+    --list-lvl1-gap: calc(6 * var(--base-measure));
+    --list-item-m-t: calc(3 * var(--base-measure));
+    --list-icon-size: calc(4 * var(--base-measure));
+    --list-lvl1-icon-pic: var(--lc-icon-chevron-right);
+    --list-lvl2-m-l: calc(6 * var(--base-measure));
+    --list-lvl2-gap: calc(6 * var(--base-measure));
+    --list-lvl2-icon-pic: var(--lc-icon-chevrons-right);
+    --list-lvl3-m-l: calc(6 * var(--base-measure));
+    --list-lvl3-gap: calc(6 * var(--base-measure));
+
+    // Pagination
+    --pagination-gap: calc(2 * var(--base-measure));
+    --pagination-item-size: calc(10 * var(--base-measure));
+    --pagination-icon-size: calc(6 * var(--base-measure));
+    --pagination-back-icon-pic: var(--icon-arrow-double);
+    --pagination-prev-icon-pic: var(--icon-arrow-default);
+    --pagination-next-icon-pic: var(--icon-arrow-default);
+    --pagination-forward-icon-pic: var(--icon-arrow-double);
+
+    // Radio
+    --radio-gap: calc(10 * var(--base-measure));
+    --radio-line-height: calc(8 * var(--base-measure));
+    --radio-uncheck-size: calc(6 * var(--base-measure));
+    --radio-checked-size: calc(2 * var(--base-measure));
+
+    // Switch
+    --switch-w-size: calc(14 * var(--base-measure));
+    --switch-h-size: calc(7 * var(--base-measure));
+    --switch-slider-w-size: calc(6 * var(--base-measure));
+    --switch-slider-h-size: calc(6 * var(--base-measure));
+    --switch-slider-background-color: var(--semantic-color-bg-primary);
+    --switch-slider-radius: var(--semantic-border-radius-sm);
+    --switch-status-w-size: calc(8 * var(--base-measure));
+    --switch-status-h-size: calc(0 * var(--base-measure));
+    --switch-status-icon-size: calc(5 * var(--base-measure));
+    --switch-status-icon-ok-pic: var(--icon-user-interface-tick);
+    --switch-status-icon-ko-pic: var(--icon-user-interface-cancel);
+    --switch-status-icon-filter: var(--filter-primary);
+    --switch-status-disabled: 0.5;
+
+    // Table
+    --table-th-font-size: var(--semantic-font-size-body-small);
+    --table-th-line-height: calc(6 * var(--base-measure));
+
+    // Text
+    --txt-m-b: calc(4 * var(--base-measure));
+
+    // Container: group: form-field
+    --cont-group-form-field-m-b: calc(5 * var(--base-measure));
+    --cont-group-form-field-icon-p-r: calc(2 * var(--base-measure));
+    --cont-group-form-field-icon-size: calc(6 * var(--base-measure));
+    --cont-group-form-field-success-icon-pic: var(--icon-user-interface-tick);
+    --cont-group-form-field-warning-icon-pic: var(--icon-user-interface-exclamation-mark);
+
+    // ================================================
+    // SECCIONES DE LA HOME
+    // ================================================
+
+    // Titulares de sección: un punto menos de tamaño y de peso
+    // que el original. En un boceto la jerarquía la marca el
+    // espacio, no el cuerpo de letra.
+    --component-section-title-font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    --component-section-title-weight: var(--primitive-font-weight-bold);
+    --component-section-title-tracking: -0.02em;
+    --component-section-title-max-width: 26ch;
+    --component-section-divider-width: 1px;
+    // Papel milimetrado de fondo en las secciones que lo piden.
+    --component-section-bg-image: var(--semantic-bg-grid);
+
+    // HERO — la retícula sustituye al degradado radial.
+    // Se compone en dos capas: encima, un óvalo que se funde con
+    // el papel; debajo, la retícula. Así la cuadrícula se ve en
+    // el centro y desaparece hacia los bordes, sin corte duro.
+    --component-hero-backdrop-width: 100%;
+    --component-hero-backdrop-height: min(640px, 72vh);
+    --component-hero-backdrop-top: 0;
+    --component-hero-backdrop-left: 0;
+    --component-hero-backdrop-translate: none;
+
+    --component-hero-headline-font-size: clamp(2.75rem, 6.5vw, 4.5rem);
+    --component-hero-headline-weight: var(--primitive-font-weight-bold);
+    --component-hero-headline-leading: 1;
+    --component-hero-headline-tracking: -0.035em;
+    --component-hero-headline-max-width: 16ch;
+
+    // La palabra destacada deja de ser un degradado recortado
+    // (que en pantallas sin soporte se ve invisible) y pasa a
+    // azul plano con un subrayado en menta: el gesto de marcador
+    // sobre el papel.
+    --component-hero-accent-bg: none;
+    --component-hero-accent-fill: currentColor;
+    --component-hero-accent-decoration-line: underline;
+    --component-hero-accent-decoration-thickness: 0.09em;
+    --component-hero-accent-decoration-offset: 0.14em;
+
+    --component-hero-sub-font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+    --component-hero-sub-max-width: 46ch;
+    --component-hero-stats-border-width: 0.125rem;
+
+    // CTA — navy sólido con retícula. `background-image` no acepta
+    // un color suelto, así que el plano va como linear-gradient de
+    // una sola parada.
+    --component-cta-color: oklch(1 0 0);
+    --component-cta-overline-color: var(--primitive-color-green-300);
+    --component-cta-sub-color: var(--primitive-color-gray-300);
+    --component-cta-headline-font-size: clamp(1.75rem, 3.8vw, 2.75rem);
+    // Fuera el círculo decorativo: no hay formas gratuitas.
+    --component-cta-decor-bg: transparent;
+    --component-cta-code-bg: color-mix(in srgb, oklch(0 0 0) 35%, transparent);
+    --component-cta-code-border-color: var(--primitive-color-gray-600);
+    --component-cta-code-border-radius: var(--semantic-border-radius-default);
+    --component-cta-shadow-hard-color: var(--primitive-color-gray-600);
+
+    // LAYERS — la pila de @layer en azul/menta/gris.
+    // Los `-accent` son la franja lateral (solo forma) y los
+    // `-color` son texto: por eso van dos pasos más oscuros.
+    --component-layer-item-border-width: 1px;
+    --component-layer-item-border-radius: var(--semantic-border-radius-default);
+    --component-layer-item-accent-width: 0.25rem;
+    --component-layer-item-gap: 0.5rem;
+    --component-layer-item-shadow-hover: -0.25rem 0 0 0 var(--semantic-color-primary), var(--semantic-shadow-hard-sm);
+    --component-layer-utilities-accent: var(--primitive-color-blue-500);
+    --component-layer-organisms-accent: var(--primitive-color-green-500);
+    --component-layer-molecules-accent: var(--primitive-color-blue-300);
+    --component-layer-atoms-accent: var(--primitive-color-blue-400);
+    --component-layer-tokens-accent: var(--primitive-color-green-400);
+    --component-layer-base-accent: var(--primitive-color-gray-400);
+    --component-layer-reset-accent: var(--primitive-color-gray-300);
+
+    // FOOTER — cerrado con trazo grueso, como el pie de un plano.
+    --component-footer-border-width: 0.125rem;
+    // Sintaxis del código, elegida contra el navy del bloque, no contra la
+    // página. Con los roles de marca por defecto, `val` era el navy del
+    // propio fondo: texto invisible.
+    --component-code-syntax-tag: var(--primitive-color-blue-300);
+    --component-code-syntax-attr: var(--primitive-color-green-300);
+    --component-code-syntax-val: var(--primitive-color-blue-100);
+    --component-code-syntax-comment: var(--primitive-color-gray-500);
+    --component-code-syntax-fn: var(--primitive-color-green-200);
+
+    // Badges de capa de docs.html. Secuencia neutro → azul creciente.
+
+    // ================================================
+    // RITMO Y ALINEACIÓN — la pasada de diseño
+    // ================================================
+
+    // Escala de layout más generosa. El sistema separa layout de componente
+    // justo para esto: las secciones respiran el doble sin que botones,
+    // tarjetas o formularios se inflen ni un píxel.
+    --semantic-space-layout-md: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+    --semantic-space-layout-lg: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+    --semantic-space-layout-xl: clamp(4.5rem, 2rem + 9vw, 8rem);
+    --semantic-space-layout-xxl: clamp(6rem, 3rem + 12vw, 11rem);
+
+    // Hero alineado a la izquierda. Un boceto no se centra: se apoya en el
+    // margen, como el texto de un plano. Además deja el titular y el
+    // subtítulo en la misma vertical, que es lo que hace legible el salto
+    // de tamaño entre ambos.
+    --component-hero-text-align: left;
+    --component-hero-justify: flex-start;
+    --component-hero-content-inline: 0 auto;
+    --component-hero-headline-max-width: 15ch;
+    // El hero ya arranca con la retícula y la píldora: no necesita 12rem de
+    // vacío por encima. Se queda en el mismo aire que el resto de secciones.
+    --component-hero-padding-block-start: var(--semantic-space-layout-xl);
+    --component-hero-scroll-hint-align: flex-start;
+    --component-hero-sub-max-width: 52ch;
+
+    // Cabeceras de sección a la izquierda y más contenidas. Antes las cuatro
+    // eran idénticas —pill centrada, titular grande, subtítulo— y la página
+    // se leía como cuatro bloques iguales. Ahora la jerarquía es: el hero
+    // manda, las secciones acompañan.
+    // Columna de contenido de 75rem centrada, con 1,5rem de guardia mínima
+    // a los lados. Sin esto, alinear a la izquierda pegaba el texto al borde
+    // de la pantalla en monitores anchos.
+    --component-section-padding-inline: max(1.5rem, calc((100% - var(--layout-max-width)) / 2));
+    --component-section-padding-block: var(--semantic-space-layout-xl);
+    --component-section-align: left;
+    --component-section-justify: flex-start;
+    --component-section-header-margin-inline: 0 auto;
+    --component-section-title-font-size: clamp(1.5rem, 2.6vw, 2rem);
+    --component-section-title-max-width: 22ch;
+    --component-section-rule-width: 1px;
+    --component-section-rule-color: var(--semantic-color-border-strong);
+    --component-section-rule-spacing: calc(4 * var(--base-measure));
+
+
+    // DIAGRAMA DE TOKENS — la misma paleta que el resto.
+    // El naranja y el morado originales no existen en este tema:
+    // las 4 capas se distinguen por posición en la escala azul→menta,
+    // no por colores sin relación entre sí.
+    --component-token-layer-border-width: 1px;
+    --component-token-layer-border-radius: var(--semantic-border-radius-default);
+    --component-token-layer-shadow-hover: var(--semantic-shadow-hard);
+    --component-token-layer-hover-lift: 0px;
+    --component-token-layer-stripe-width: 0.25rem;
+
+    // Badges y numeración: rectangulares, como el resto del tema.
+    --component-token-step-radius: var(--semantic-border-radius-sm);
+    --component-token-badge-radius: var(--semantic-border-radius-sm);
+    --component-token-badge-border-width: 1px;
+
+    --component-token-primitive-step-color: var(--primitive-color-ink);
+
+    --component-token-theme-accent: var(--primitive-color-blue-300);
+    --component-token-theme-step-color: var(--primitive-color-ink);
+
+    --component-token-semantic-accent: var(--primitive-color-green-400);
+    --component-token-semantic-step-color: var(--primitive-color-ink);
+
+
+    // El conector deja de ser un degradado y pasa a línea de cota.
+    --component-token-connector-line: linear-gradient( var(--semantic-color-border-strong), var(--semantic-color-border-strong) );
+    --component-token-connector-opacity: 0.5;
+    --component-token-connector-arrow-color: var(--semantic-color-primary);
+
+    --component-token-rule-border-width: 0.125rem;
+    --component-token-rule-border-radius: var(--semantic-border-radius-default);
+    --component-token-rule-icon-radius: var(--semantic-border-radius-default);
+    // Valores del modo claro (ver el mixin arriba).
+    @include syx-sketch-light-tokens;
+  }
+
+  // ================================================
+  // MODO OSCURO — "blueprint invertido"
+  // ================================================
+  // El papel pasa a ser navy y la tinta, blanca. La sombra dura
+  // no puede seguir siendo negra (sería invisible): pasa a un
+  // gris claro, como el trazo de tiza sobre pizarra.
+  // Doble activación: preferencia del SO + [data-theme="dark"].
+  // ================================================
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      @include syx-sketch-dark-tokens;
+    }
+  }
+
+  // Override manual — gana sobre la @media
+  :root[data-theme="dark"] {
+    @include syx-sketch-dark-tokens;
+  }
+
+  // Modo claro forzado — revierte lo que la @media pudiera haber
+  // aplicado cuando el usuario elige claro explícitamente.
+  // Claro forzado: exactamente los mismos valores que el estado por defecto.
+  :root[data-theme="light"] {
+    @include syx-sketch-light-tokens;
+  }
+
+}

@@ -33,6 +33,21 @@
     color: var(--primitive-color-gray-400);
   }
 
+  // Estas tres se usan 103 veces en docs.html y no existían: la clase no
+  // aplicaba nada y el texto se quedaba con el color heredado (blanco sobre
+  // blanco en los swatches de fondo negro).
+  .syx-text-white {
+    color: oklch(1 0 0);
+  }
+
+  .syx-text-gray {
+    color: var(--semantic-color-text-secondary);
+  }
+
+  .syx-text-muted {
+    color: var(--semantic-color-text-tertiary);
+  }
+
   .syx-text-inverse {
     color: var(--semantic-color-text-inverse);
   }

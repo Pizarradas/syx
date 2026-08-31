@@ -8,6 +8,16 @@
 //        @include syx-bundle-marketing($theme);
 // ================================================
 
+// Los mixins que este fichero invoca se declaran en otros ficheros:
+// sin estos @use, Sass los resuelve como indefinidos (un mixin se
+// resuelve en el fichero donde se escribe, no en el que lo incluye).
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+
 @mixin syx-bundle-marketing($theme: null) {
 
   // ATOMS

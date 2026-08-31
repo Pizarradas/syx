@@ -89,7 +89,7 @@
             content: counter(list-number);
             @include position(absolute, -0.25rem, null, null, 0);
             @include size(var(--list-ordered-counter-size));
-            @include border-radius(50%);
+            @include border-radius(var(--semantic-border-radius-circle));
             counter-increment: list-number;
             font-size: var(--list-ordered-counter-font-size);
             line-height: var(--list-ordered-counter-line-height);

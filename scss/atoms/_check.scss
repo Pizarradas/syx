@@ -45,9 +45,12 @@
         border-radius: var(--component-check-border-radius);
         background-color: var(--component-check-bg);
         @include transition(
-          border-color 0.15s ease,
-          background-color 0.15s ease,
-          box-shadow 0.15s ease
+          border-color var(--component-check-transition-duration)
+            var(--component-form-field-transition-easing),
+          background-color var(--component-check-transition-duration)
+            var(--component-form-field-transition-easing),
+          box-shadow var(--component-check-transition-duration)
+            var(--component-form-field-transition-easing)
         );
       }
 
@@ -56,15 +59,18 @@
         content: "";
         @include absolute($top: 0, $right: calc(100% - var(--component-check-size)), $bottom: 0, $left: 0);
         margin: auto;
-        width: 5px;
-        height: 9px;
-        border-right: 2px solid transparent;
-        border-bottom: 2px solid transparent;
-        transform: rotate(45deg) scale(0) translateY(-1px);
+        width: var(--component-check-mark-width);
+        height: var(--component-check-mark-height);
+        border-right: var(--component-check-mark-thickness) solid transparent;
+        border-bottom: var(--component-check-mark-thickness) solid transparent;
+        transform: rotate(var(--component-check-mark-rotation)) scale(0)
+          translateY(-1px);
         transform-origin: center;
         @include transition(
-          transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
-          border-color 0.15s ease
+          transform var(--component-check-transition-duration)
+            var(--component-check-transition-easing),
+          border-color var(--component-check-transition-duration)
+            var(--component-form-field-transition-easing)
         );
       }
 
@@ -85,19 +91,21 @@
       &::after {
         border-right-color: var(--semantic-color-text-inverse);
         border-bottom-color: var(--semantic-color-text-inverse);
-        transform: rotate(45deg) scale(1) translateY(-1px);
+        transform: rotate(var(--component-check-mark-rotation)) scale(1)
+          translateY(-1px);
       }
     }
 
     // Focus visible
     &__input:focus-visible + &__label::before {
-      outline: 0.2rem solid var(--component-form-field-border-focus);
-      outline-offset: 2px;
+      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style)
+        var(--component-form-field-border-focus);
+      outline-offset: var(--semantic-focus-ring-offset);
     }
 
     // Disabled
     &__input:disabled + &__label {
-      opacity: 0.5;
+      opacity: var(--component-check-status-disabled-opacity);
       cursor: not-allowed;
 
       &::before {

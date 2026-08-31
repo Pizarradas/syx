@@ -24,17 +24,25 @@
     .mol-theme-card {
       display: flex;
       flex-direction: column;
-      border: 1px solid var(--semantic-color-border-subtle);
-      border-radius: var(--semantic-border-radius-lg, 1rem);
+      border:
+        var(--component-theme-card-border-width)
+        var(--component-theme-card-border-style)
+        var(--component-theme-card-border-color);
+      border-radius: var(--component-theme-card-border-radius);
+      box-shadow: var(--component-theme-card-shadow);
       overflow: hidden;
-      @include transition(border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease);
+      @include transition(
+        border-color var(--semantic-duration-base) var(--semantic-easing-standard),
+        transform var(--semantic-duration-base) var(--semantic-easing-standard),
+        box-shadow var(--semantic-duration-base) var(--semantic-easing-standard)
+      );
       cursor: pointer;
 
       &:hover,
       &.is-active {
-        border-color: var(--semantic-color-primary);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 14%, transparent);
+        border-color: var(--component-theme-card-border-color-active);
+        transform: translateY(var(--component-theme-card-hover-lift));
+        box-shadow: var(--component-theme-card-shadow-hover);
       }
 
       &.is-active {
@@ -46,7 +54,8 @@
       // &__swatch — color preview block
       &__swatch {
         position: relative;
-        height: 4.5rem;
+        height: var(--component-theme-card-swatch-height);
+        border-radius: var(--component-theme-card-swatch-border-radius);
         background: var(--semantic-color-primary);
 
         // Active checkmark overlay
@@ -55,11 +64,16 @@
           @include absolute($top: 50%, $right: 0.75rem);
           @include size(1.25rem);
           transform: translateY(-50%);
-          background-color: white;
-          border-radius: 50%;
+          background-color: var(--component-theme-card-check-bg);
+          border-radius: var(--component-theme-card-check-border-radius);
           opacity: 0;
-          @include transition(opacity 0.2s ease);
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+          @include transition(opacity var(--semantic-duration-base) var(--semantic-easing-standard));
+          // El check va dentro de un círculo claro que se pinta encima de la
+          // muestra de color, no de la página: por eso el círculo es literal y
+          // el trazo, oscuro. El bug estaba en el token del círculo, que
+          // apuntaba a bg-primary y en modo oscuro lo volvía negro — check
+          // negro sobre círculo negro.
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C1F26' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
           background-repeat: no-repeat;
           background-position: center;
           background-size: 65%;
@@ -67,27 +81,58 @@
 
         // Per-theme swatch colors (overridden by each theme's tokens via CSS custom props)
         &--01 {
-          background: linear-gradient(135deg, oklch(0.60 0.23 276.966) 0%, oklch(0.60 0.165 70.08) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-01-from, oklch(0.60 0.23 276.966)) 0%,
+            var(--component-theme-card-swatch-01-to, oklch(0.60 0.165 70.08)) 100%
+          );
         }
 
         &--02 {
-          background: linear-gradient(135deg, oklch(0.60 0.247 293.009) 0%, oklch(0.60 0.241 6.902) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-02-from, oklch(0.60 0.247 293.009)) 0%,
+            var(--component-theme-card-swatch-02-to, oklch(0.60 0.241 6.902)) 100%
+          );
         }
 
         &--03 {
-          background: linear-gradient(135deg, oklch(0.60 0.181 22.839) 0%, oklch(0.60 0.171 70.604) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-03-from, oklch(0.60 0.181 22.839)) 0%,
+            var(--component-theme-card-swatch-03-to, oklch(0.60 0.171 70.604)) 100%
+          );
         }
 
         &--04 {
-          background: linear-gradient(135deg, oklch(0.60 0.182 151.711) 0%, oklch(0.60 0.136 154.449) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-04-from, oklch(0.60 0.182 151.711)) 0%,
+            var(--component-theme-card-swatch-04-to, oklch(0.60 0.136 154.449)) 100%
+          );
         }
 
         &--05 {
-          background: linear-gradient(135deg, oklch(0.60 0.074 256.04) 0%, oklch(0.60 0.139 91.059) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-05-from, oklch(0.60 0.074 256.04)) 0%,
+            var(--component-theme-card-swatch-05-to, oklch(0.60 0.139 91.059)) 100%
+          );
         }
 
         &--06 {
-          background: linear-gradient(135deg, oklch(0.75 0.15 190) 0%, oklch(0.65 0.25 300) 100%);
+          background: linear-gradient(
+            var(--component-theme-card-swatch-angle),
+            var(--component-theme-card-swatch-06-from, oklch(0.75 0.15 190)) 0%,
+            var(--component-theme-card-swatch-06-to, oklch(0.65 0.25 300)) 100%
+          );
+        }
+
+        // Blueprint: la única muestra que no es un degradado. Papel con
+        // retícula y una franja de tinta: representa al tema tal cual es.
+        &--sketch {
+          background-color: var(--component-theme-card-swatch-sketch-bg);
+          background-image: var(--component-theme-card-swatch-sketch-image);
         }
       }
 
@@ -119,55 +164,66 @@
       // &__dot
       &__dot {
         @include size(0.875rem);
-        border-radius: 50%;
-        border: 1px solid var(--semantic-color-border-subtle);
+        border-radius: var(--component-theme-card-dot-border-radius);
+        border:
+          var(--component-theme-card-dot-border-width)
+          solid
+          var(--component-theme-card-dot-border-color);
 
         &--01-a {
-          background-color: oklch(0.60 0.23 276.966);
+          background-color: var(--component-theme-card-dot-01-a, oklch(0.60 0.23 276.966));
         }
 
         &--01-b {
-          background-color: oklch(0.60 0.165 70.08);
+          background-color: var(--component-theme-card-dot-01-b, oklch(0.60 0.165 70.08));
         }
 
         &--02-a {
-          background-color: oklch(0.60 0.247 293.009);
+          background-color: var(--component-theme-card-dot-02-a, oklch(0.60 0.247 293.009));
         }
 
         &--02-b {
-          background-color: oklch(0.60 0.241 6.902);
+          background-color: var(--component-theme-card-dot-02-b, oklch(0.60 0.241 6.902));
         }
 
         &--03-a {
-          background-color: oklch(0.60 0.181 22.839);
+          background-color: var(--component-theme-card-dot-03-a, oklch(0.60 0.181 22.839));
         }
 
         &--03-b {
-          background-color: oklch(0.60 0.171 70.604);
+          background-color: var(--component-theme-card-dot-03-b, oklch(0.60 0.171 70.604));
         }
 
         &--04-a {
-          background-color: oklch(0.60 0.182 151.711);
+          background-color: var(--component-theme-card-dot-04-a, oklch(0.60 0.182 151.711));
         }
 
         &--04-b {
-          background-color: oklch(0.60 0.136 154.449);
+          background-color: var(--component-theme-card-dot-04-b, oklch(0.60 0.136 154.449));
         }
 
         &--05-a {
-          background-color: oklch(0.60 0.074 256.04);
+          background-color: var(--component-theme-card-dot-05-a, oklch(0.60 0.074 256.04));
         }
 
         &--05-b {
-          background-color: oklch(0.60 0.139 91.059);
+          background-color: var(--component-theme-card-dot-05-b, oklch(0.60 0.139 91.059));
         }
 
         &--06-a {
-          background-color: oklch(0.75 0.15 190);
+          background-color: var(--component-theme-card-dot-06-a, oklch(0.75 0.15 190));
         }
 
         &--06-b {
-          background-color: oklch(0.65 0.25 300);
+          background-color: var(--component-theme-card-dot-06-b, oklch(0.65 0.25 300));
+        }
+
+        &--sketch-a {
+          background-color: var(--component-theme-card-dot-sketch-a);
+        }
+
+        &--sketch-b {
+          background-color: var(--component-theme-card-dot-sketch-b);
         }
       }
     }

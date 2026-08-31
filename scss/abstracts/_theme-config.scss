@@ -62,7 +62,17 @@ $theme-config: (
     header-logo-size:      2rem,
     header-logo-size-md:   2.5rem,
     header-border-bottom:  false,
+  ),
+  // syx-sketch — Blueprint: la dirección visual nueva del sitio.
+  // Regla bajo la cabecera: en un plano, las secciones van separadas
+  // por una línea, no por una sombra.
+  'syx-sketch': (
+    header-sidenav-side:   left,
+    header-logo-size:      2rem,
+    header-logo-size-md:   2.5rem,
+    header-border-bottom:  true,
   ),
+
 
 ) !default;
 

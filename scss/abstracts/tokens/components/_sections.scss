@@ -1,0 +1,230 @@
+// COMPONENT TOKENS: SECTIONS (organisms de la home)
+// ================================================
+// Los organismos home-* llevaban escritas a mano las decisiones
+// que definen la dirección visual del sitio: el degradado radial
+// del hero, el degradado del CTA, el círculo decorativo, los
+// tamaños de titular y la alineación. Con eso, cambiar de look
+// obligaba a editar los organismos — y por tanto a cambiárselo
+// a los 6 temas a la vez.
+//
+// Estos tokens mueven esas decisiones a la capa de tema. Los
+// valores por defecto reproducen exactamente el aspecto actual.
+// ================================================
+
+:root {
+  // SECCIÓN — valores compartidos por features / themes / layers
+  // ================================================
+  --component-section-title-font-size: clamp(1.75rem, 4vw, 2.75rem);
+  --component-section-title-weight: var(--semantic-font-weight-black);
+  --component-section-title-tracking: -0.025em;
+  --component-section-title-leading: var(--semantic-line-height-heading);
+  --component-section-title-max-width: 30ch;
+  --component-section-divider-width: var(--semantic-border-width-thin);
+  --component-section-divider-color: var(--semantic-color-border-subtle);
+  --component-section-bg: transparent;
+  --component-section-bg-image: none;
+  // Alineación de las cabeceras de sección. `center` es el valor histórico:
+  // pill + titular grande + subtítulo, los cuatro bloques iguales, lo que
+  // deja la página sin ritmo. Un tema editorial las alinea a la izquierda.
+  // Columna de contenido. El valor por defecto reproduce el comportamiento
+  // anterior (padding lateral fijo, contenido a todo lo ancho). Un tema
+  // puede convertirlo en columna centrada con `max()`:
+  //   max(<gutter mínimo>, calc((100% - <ancho de columna>) / 2))
+  // Así el contenido nunca toca el borde en móvil y queda centrado en
+  // pantalla grande, sin necesidad de un div contenedor en el HTML.
+  --component-section-padding-inline: var(--semantic-space-layout-md);
+  --component-section-padding-block: var(--semantic-space-layout-xl);
+  --component-section-align: center;
+  --component-section-justify: center;
+  --component-section-header-margin-inline: auto;
+  --component-section-header-max-width: none;
+  // Regla horizontal bajo la cabecera de sección. Apagada por defecto.
+  --component-section-rule-width: 0;
+  --component-section-rule-color: var(--semantic-color-border-strong);
+  --component-section-rule-spacing: 0;
+
+  // HERO
+  // ================================================
+  // Alineación: `center` es el valor histórico. Un tema editorial
+  // o de agencia lo pone a `left` / `flex-start`.
+  --component-hero-text-align: center;
+  --component-hero-justify: center;
+  --component-hero-content-margin: 0 auto;
+  // Margen lateral del bloque de texto del hero: `auto` centra, `0 auto`
+  // lo alinea a la izquierda respetando el max-width.
+  --component-hero-content-inline: auto;
+  --component-hero-padding-block-start: calc(var(--semantic-space-layout-xl) * 1.5);
+  --component-hero-scroll-hint-align: center;
+
+  // Telón de fondo. Puede ser un degradado, una retícula
+  // (`var(--semantic-bg-grid)`) o `none`.
+  --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, color-mix(in srgb, var(--semantic-color-primary) 18%, transparent) 0%, transparent 70% );
+  --component-hero-backdrop-width: min(900px, 120vw);
+  --component-hero-backdrop-height: min(600px, 80vw);
+  --component-hero-backdrop-top: 0;
+  --component-hero-backdrop-left: 50%;
+  --component-hero-backdrop-translate: translateX(-50%);
+
+  --component-hero-headline-font-size: clamp(2.5rem, 7vw, 5rem);
+  --component-hero-headline-weight: var(--semantic-font-weight-black);
+  --component-hero-headline-leading: 1.05;
+  --component-hero-headline-tracking: -0.03em;
+  --component-hero-headline-max-width: 18ch;
+
+  // Palabra destacada del titular. Por defecto es texto recortado
+  // sobre un degradado; poniendo `-accent-fill: currentColor` y
+  // `-accent-bg: none` pasa a ser color plano.
+  --component-hero-accent-bg: linear-gradient( 135deg, var(--semantic-color-primary) 0%, var(--semantic-color-secondary) 100% );
+  --component-hero-accent-fill: transparent;
+  --component-hero-accent-color: inherit;
+  --component-hero-accent-decoration-line: none;
+  --component-hero-accent-decoration-color: currentColor;
+  --component-hero-accent-decoration-thickness: auto;
+  --component-hero-accent-decoration-offset: auto;
+
+  --component-hero-sub-font-size: clamp(1rem, 2.5vw, 1.25rem);
+  --component-hero-sub-max-width: 52ch;
+  --component-hero-stats-border-width: var(--semantic-border-width-thin);
+  --component-hero-stats-border-color: var(--semantic-color-border-subtle);
+
+  // CTA FINAL
+  // ================================================
+  --component-cta-bg: linear-gradient( 135deg, var(--semantic-color-primary) 0%, var(--semantic-color-secondary) 100% );
+  --component-cta-color: var(--semantic-color-text-inverse);
+  --component-cta-overline-color: color-mix(in srgb, var(--semantic-color-text-inverse) 75%, transparent);
+  --component-cta-sub-color: color-mix(in srgb, var(--semantic-color-text-inverse) 80%, transparent);
+  --component-cta-headline-font-size: clamp(1.75rem, 4vw, 3rem);
+
+  // Círculo decorativo de la esquina. `-decor-bg: transparent`
+  // lo apaga sin tocar el organismo.
+  --component-cta-decor-bg: color-mix(in srgb, var(--semantic-color-text-inverse) 8%, transparent);
+  --component-cta-decor-size: 20rem;
+  --component-cta-decor-radius: var(--semantic-border-radius-circle);
+  --component-cta-decor-top: -4rem;
+  --component-cta-decor-right: -4rem;
+
+  --component-cta-code-bg: color-mix(in srgb, oklch(0 0 0) 20%, transparent);
+  --component-cta-code-border-width: var(--semantic-border-width-thin);
+  --component-cta-code-border-color: color-mix(in srgb, var(--semantic-color-text-inverse) 20%, transparent);
+  --component-cta-code-border-radius: 0.5rem;
+  --component-cta-code-color: var(--semantic-color-text-inverse);
+  // La sombra dura es tinta negra: sobre un CTA oscuro sería
+  // invisible. Este token permite reasignarla dentro de la sección.
+  --component-cta-shadow-hard-color: var(--semantic-shadow-hard-color);
+  // Marco de la franja. En claro no hace falta —la franja oscura sobre papel
+  // blanco ya es un corte evidente—, pero en oscuro el salto de luminosidad
+  // disponible es mucho menor y el trazo termina de separarla.
+  --component-cta-border-block-width: 0;
+  --component-cta-border-color: var(--semantic-color-border-strong);
+
+  // LAYERS — la pila de @layer
+  // ================================================
+  --component-layer-item-bg: var(--semantic-color-bg-primary);
+  --component-layer-item-border-width: var(--semantic-border-width-thin);
+  --component-layer-item-border-color: var(--semantic-color-border-subtle);
+  --component-layer-item-border-radius: 0.5rem;
+  --component-layer-item-accent-width: 3px;
+  --component-layer-item-gap: 0.375rem;
+  --component-layer-item-shadow-hover: -4px 0 0 var(--semantic-color-primary), 0 2px 8px oklch(0 0 0 / 0.08);
+
+  // Un color por capa. Antes eran primitivos escritos dentro del
+  // organismo, invisibles para cualquier tema.
+  --component-layer-utilities-accent: var(--semantic-color-primary);
+  --component-layer-utilities-color: var(--semantic-color-primary);
+  --component-layer-utilities-bg: color-mix(in srgb, var(--semantic-color-primary) 5%, var(--semantic-color-bg-primary));
+  --component-layer-organisms-accent: var(--primitive-color-green-500);
+  --component-layer-organisms-color: var(--primitive-color-green-600);
+  --component-layer-molecules-accent: var(--primitive-color-purple-400);
+  --component-layer-molecules-color: var(--primitive-color-purple-600);
+  --component-layer-atoms-accent: var(--primitive-color-blue-400);
+  --component-layer-atoms-color: var(--primitive-color-blue-600);
+  --component-layer-tokens-accent: var(--primitive-color-yellow-400);
+  --component-layer-tokens-color: var(--primitive-color-yellow-700);
+  --component-layer-base-accent: var(--primitive-color-gray-400);
+  --component-layer-base-color: var(--primitive-color-gray-600);
+  --component-layer-reset-accent: var(--primitive-color-gray-300);
+  --component-layer-reset-color: var(--primitive-color-gray-500);
+
+  // FOOTER
+  // ================================================
+  --component-footer-bg: var(--semantic-color-bg-primary);
+  --component-footer-border-width: var(--semantic-border-width-thin);
+  --component-footer-border-color: var(--semantic-color-border-subtle);
+
+  // TOKENS — el diagrama "7-Layer Token Architecture"
+  // ================================================
+  // Esta sección era la más opaca del sitio: 39 valores en crudo
+  // (#3b82f6, #f59e0b, #10b981, rgba(...) de los badges, sombra
+  // difusa, píldoras de 999px) que ningún tema podía alcanzar.
+  --component-token-layer-bg: var(--semantic-color-bg-primary);
+  --component-token-layer-border-width: 1.5px;
+  --component-token-layer-border-color: var(--semantic-color-border-default);
+  --component-token-layer-border-radius: var(--theme-radius);
+  --component-token-layer-shadow-hover: 0 8px 32px oklch(0 0 0 / 0.1);
+  --component-token-layer-hover-lift: -2px;
+  --component-token-layer-stripe-width: 4px;
+
+  --component-token-step-radius: var(--semantic-border-radius-full);
+  --component-token-step-color: var(--semantic-color-text-inverse);
+  --component-token-badge-radius: var(--semantic-border-radius-full);
+  --component-token-badge-border-width: var(--semantic-border-width-thin);
+
+  // Una tríada por capa: franja lateral, fondo de badge y texto.
+  --component-token-primitive-accent: var(--primitive-color-blue-500);
+  --component-token-primitive-badge-bg: color-mix(in srgb, var(--component-token-primitive-accent) 12%, transparent);
+  --component-token-primitive-badge-color: var(--component-token-primitive-accent);
+  --component-token-primitive-badge-border: color-mix(in srgb, var(--component-token-primitive-accent) 25%, transparent);
+  --component-token-primitive-step-color: var(--component-token-step-color);
+
+  --component-token-theme-accent: var(--primitive-color-yellow-500);
+  --component-token-theme-badge-bg: color-mix(in srgb, var(--component-token-theme-accent) 12%, transparent);
+  --component-token-theme-badge-color: var(--primitive-color-yellow-700);
+  --component-token-theme-badge-border: color-mix(in srgb, var(--component-token-theme-accent) 25%, transparent);
+  --component-token-theme-step-color: var(--semantic-color-text-primary);
+
+  --component-token-semantic-accent: var(--primitive-color-green-500);
+  --component-token-semantic-badge-bg: color-mix(in srgb, var(--component-token-semantic-accent) 12%, transparent);
+  --component-token-semantic-badge-color: var(--primitive-color-green-600);
+  --component-token-semantic-badge-border: color-mix(in srgb, var(--component-token-semantic-accent) 25%, transparent);
+  --component-token-semantic-step-color: var(--component-token-step-color);
+
+  --component-token-component-accent: var(--semantic-color-primary);
+  --component-token-component-badge-bg: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
+  --component-token-component-badge-color: var(--semantic-color-primary);
+  --component-token-component-badge-border: color-mix(in srgb, var(--semantic-color-primary) 20%, transparent);
+  --component-token-component-step-color: var(--component-token-step-color);
+
+  --component-token-connector-line: linear-gradient( to bottom, var(--semantic-color-border-default), var(--semantic-color-primary) );
+  --component-token-connector-opacity: 0.35;
+  --component-token-connector-arrow-color: var(--semantic-color-primary);
+
+  --component-token-rule-bg: color-mix(in srgb, var(--semantic-color-primary) 6%, transparent);
+  --component-token-rule-border-width: 1.5px;
+  --component-token-rule-border-color: var(--semantic-color-primary);
+  --component-token-rule-border-radius: var(--theme-radius);
+  --component-token-rule-icon-bg: var(--semantic-color-primary);
+  --component-token-rule-icon-color: var(--semantic-color-text-inverse);
+  --component-token-rule-icon-radius: var(--semantic-border-radius-circle);
+
+  // ESCALA DE PUNTUACIÓN (why-syx)
+  // ================================================
+  // Secuencial de un solo tono: el valor se lee por intensidad, no por
+  // color. En claro va de casi-blanco a azul intenso; en oscuro hay que
+  // INVERTIR la rampa, porque sobre fondo navy lo intenso es lo claro.
+  // Si no, el 1 sería el que más brilla y la escala se leería al revés.
+  --component-score-1-bg: var(--semantic-color-bg-primary);
+  --component-score-1-color: var(--semantic-color-text-tertiary);
+  --component-score-1-border: var(--semantic-color-border-default);
+  --component-score-2-bg: var(--primitive-color-blue-100);
+  --component-score-2-color: var(--semantic-color-text-primary);
+  --component-score-2-border: var(--primitive-color-blue-200);
+  --component-score-3-bg: var(--primitive-color-blue-200);
+  --component-score-3-color: var(--semantic-color-text-primary);
+  --component-score-3-border: var(--primitive-color-blue-300);
+  --component-score-4-bg: var(--primitive-color-blue-400);
+  --component-score-4-color: oklch(1 0 0);
+  --component-score-4-border: var(--primitive-color-blue-400);
+  --component-score-5-bg: var(--primitive-color-blue-600);
+  --component-score-5-color: oklch(1 0 0);
+  --component-score-5-border: var(--primitive-color-blue-600);
+}

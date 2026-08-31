@@ -19,8 +19,12 @@
   @layer syx.molecules {
 
   .mol-code-snippet {
-    border: 1px solid var(--semantic-color-border-subtle);
-    border-radius: var(--semantic-border-radius-lg, 1rem);
+    border:
+      var(--component-code-snippet-border-width)
+      var(--component-code-snippet-border-style)
+      var(--component-code-snippet-border-color);
+    border-radius: var(--component-code-snippet-border-radius);
+    box-shadow: var(--component-code-snippet-shadow);
     overflow: hidden;
 
     // &__header
@@ -29,8 +33,11 @@
       align-items: center;
       justify-content: space-between;
       padding: calc(var(--semantic-space-component-xs, 0.25rem)) var(--semantic-space-component-md);
-      background-color: var(--semantic-color-bg-secondary);
-      border-bottom: 1px solid var(--semantic-color-border-subtle);
+      background-color: var(--component-code-snippet-header-bg);
+      border-bottom:
+        var(--component-code-snippet-header-border-width)
+        var(--component-code-snippet-border-style)
+        var(--component-code-snippet-border-color);
       gap: var(--semantic-space-component-sm);
     }
 
@@ -45,7 +52,7 @@
 
     // &__filename — optional
     &__filename {
-      font-family: var(--semantic-font-family-mono, monospace);
+      font-family: var(--semantic-font-family-mono);
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);
     }
@@ -59,29 +66,29 @@
 
     // --ok variant (correct example)
     &--ok {
-      border-color: var(--semantic-color-state-success, #16a34a);
+      border-color: var(--component-code-snippet-ok-border-color, var(--semantic-color-state-success, #16a34a));
 
       .mol-code-snippet__header {
-        background-color: var(--primitive-color-green-50, #f0fdf4);
-        border-bottom-color: var(--primitive-color-green-200, #bbf7d0);
+        background-color: var(--component-code-snippet-ok-header-bg, oklch(0.97 0.021 158.247));
+        border-bottom-color: var(--component-code-snippet-ok-header-border-color, oklch(0.88 0.103 155.902));
       }
 
       .mol-code-snippet__label {
-        color: var(--primitive-color-green-700, #15803d);
+        color: var(--component-code-snippet-ok-label-color, oklch(0.42 0.09 150.23));
       }
     }
 
     // --ko variant (incorrect example)
     &--ko {
-      border-color: var(--semantic-color-state-error, #dc2626);
+      border-color: var(--component-code-snippet-ko-border-color, var(--semantic-color-state-error, #dc2626));
 
       .mol-code-snippet__header {
-        background-color: var(--primitive-color-red-50, #fff1f2);
-        border-bottom-color: var(--primitive-color-red-200, #fecaca);
+        background-color: var(--component-code-snippet-ko-header-bg, oklch(0.97 0.021 4.878));
+        border-bottom-color: var(--component-code-snippet-ko-header-border-color, oklch(0.88 0.112 8.017));
       }
 
       .mol-code-snippet__label {
-        color: var(--primitive-color-red-700, #b91c1c);
+        color: var(--component-code-snippet-ko-label-color, oklch(0.42 0.165 21.562));
       }
     }
 

@@ -1,0 +1,51 @@
+// SYX — THEME: syx-sketch | BUNDLE: app
+// ================================================
+// Interfaz de aplicación: formularios, tablas, controles.
+// ================================================
+
+// CORE
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-app' as *;
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-syx-sketch();
+
+// FONTS — Space Grotesk (5 variables)
+// ================================================
+@include font-family("Google-Space-Grotesk--light",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Light",
+  300, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--regular",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
+  400, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--medium",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Medium",
+  500, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--semibold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-SemiBold",
+  600, normal, eot woff2 woff ttf svg);
+
+@include font-family("Google-Space-Grotesk--bold",
+  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
+  700, normal, eot woff2 woff ttf svg);
+
+// CORE (reset + helpers + grid)
+// ================================================
+@include syx-core(syx-sketch);
+
+// BUNDLE
+// ================================================
+@include syx-bundle-app(syx-sketch);

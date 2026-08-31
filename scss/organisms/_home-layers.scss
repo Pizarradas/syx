@@ -12,7 +12,8 @@
   @layer syx.organisms {
 
   .org-home-layers {
-    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
+    padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
 
     // &__inner — two-column layout
     &__inner {
@@ -59,7 +60,7 @@
     &__visual {
       display: flex;
       flex-direction: column;
-      gap: 0.375rem;
+      gap: var(--component-layer-item-gap);
     }
 
     // &__stack-item — individual layer bar
@@ -68,19 +69,22 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
-      border-radius: 0.5rem;
-      border: 1px solid var(--semantic-color-border-subtle);
-      background-color: var(--semantic-color-bg-primary);
-      @include transition(transform 0.2s ease, box-shadow 0.2s ease);
+      border-radius: var(--component-layer-item-border-radius);
+      border: var(--component-layer-item-border-width) solid var(--component-layer-item-border-color);
+      background-color: var(--component-layer-item-bg);
+      @include transition(
+        transform var(--semantic-duration-base) var(--semantic-easing-standard),
+        box-shadow var(--semantic-duration-base) var(--semantic-easing-standard)
+      );
       gap: var(--semantic-space-component-sm);
 
       &:hover {
-        box-shadow: -4px 0 0 var(--semantic-color-primary), 0 2px 8px rgba(0,0,0,0.08);
+        box-shadow: var(--component-layer-item-shadow-hover);
       }
 
       // Layer name (left)
       &-name {
-        font-family: var(--semantic-font-family-mono, monospace);
+        font-family: var(--semantic-font-family-mono);
         font-size: var(--semantic-font-size-body-small);
         color: var(--semantic-color-text-primary);
         font-weight: var(--semantic-font-weight-medium);
@@ -95,39 +99,39 @@
 
       // Colored left accent bar per layer
       &--utilities {
-        border-left: 3px solid var(--semantic-color-primary);
-        background-color: color-mix(in srgb, var(--semantic-color-primary) 5%, var(--semantic-color-bg-primary));
-        .org-home-layers__stack-item-name { color: var(--semantic-color-primary); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-utilities-accent);
+        background-color: var(--component-layer-utilities-bg);
+        .org-home-layers__stack-item-name { color: var(--component-layer-utilities-color); }
       }
 
       &--organisms {
-        border-left: 3px solid var(--primitive-color-green-500, #22c55e);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-green-600, #16a34a); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-organisms-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-organisms-color); }
       }
 
       &--molecules {
-        border-left: 3px solid var(--primitive-color-purple-400, #a78bfa);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-purple-600, #7c3aed); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-molecules-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-molecules-color); }
       }
 
       &--atoms {
-        border-left: 3px solid var(--primitive-color-blue-400, #60a5fa);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-blue-600, #2563eb); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-atoms-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-atoms-color); }
       }
 
       &--tokens {
-        border-left: 3px solid var(--primitive-color-yellow-400, #facc15);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-yellow-700, #a16207); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-tokens-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-tokens-color); }
       }
 
       &--base {
-        border-left: 3px solid var(--primitive-color-gray-400, #9ca3af);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-gray-600, #4b5563); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-base-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-base-color); }
       }
 
       &--reset {
-        border-left: 3px solid var(--primitive-color-gray-300, #d1d5db);
-        .org-home-layers__stack-item-name { color: var(--primitive-color-gray-500, #6b7280); }
+        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-reset-accent);
+        .org-home-layers__stack-item-name { color: var(--component-layer-reset-color); }
       }
     }
 
@@ -135,7 +139,7 @@
     &__caption {
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);
-      text-align: center;
+      text-align: var(--component-section-align);
       margin-top: var(--semantic-space-component-md);
       letter-spacing: var(--semantic-letter-spacing-wide);
       text-transform: uppercase;

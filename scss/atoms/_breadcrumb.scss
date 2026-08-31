@@ -45,7 +45,10 @@
     &__link {
       color: var(--semantic-color-primary);
       text-decoration: none;
-      @include transition(color 0.15s ease, text-decoration 0.15s ease);
+      @include transition(
+        color var(--semantic-duration-fast) var(--semantic-easing-standard),
+        text-decoration var(--semantic-duration-fast) var(--semantic-easing-standard)
+      );
       font-size: var(--semantic-font-size-body-small);
 
       &:hover {
@@ -54,7 +57,8 @@
       }
 
       &:focus-visible {
-        outline: 0.2rem solid var(--component-form-field-border-focus);
+        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+        outline-offset: var(--semantic-focus-ring-offset);
         border-radius: 2px;
       }
 

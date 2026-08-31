@@ -1,17 +1,22 @@
 {
   "_meta": {
-    "generatedAt": "2026-03-04T11:49:56.339Z"
+    "generatedAt": "2026-08-31T13:29:00.239Z"
   },
   "stats": {
-    "sourceTokens": 665,
-    "runtimeTokens": 955,
-    "officialRuntime": 664,
-    "legacyRuntime": 291,
-    "phantomTokens": 0,
-    "undocumentedTokens": 0
+    "sourceTokens": 998,
+    "runtimeTokens": 1253,
+    "officialRuntime": 998,
+    "legacyRuntime": 255,
+    "phantomTokens": 1,
+    "undocumentedTokens": 2
   },
-  "phantomTokens": [],
-  "undocumentedComponentTokens": [],
+  "phantomTokens": [
+    "--component-theme-card-swatch-sketch-image"
+  ],
+  "undocumentedComponentTokens": [
+    "--semantic-color-senary",
+    "--semantic-color-septenary"
+  ],
   "legacyVars": {
     "--base-measure": {
       "value": "var(--primitive-space-base)",
@@ -22,248 +27,6 @@
       "recommendation": "Migrate → --primitive-space-base",
       "replacedBy": "--primitive-space-base",
       "replaceWith": "var(--primitive-space-base)"
-    },
-    "--color-blue": {
-      "value": "var(--primitive-color-blue-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-blue-500",
-      "replacedBy": "--primitive-color-blue-500",
-      "replaceWith": "var(--primitive-color-blue-500)"
-    },
-    "--color-green": {
-      "value": "var(--primitive-color-green-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-green-500",
-      "replacedBy": "--primitive-color-green-500",
-      "replaceWith": "var(--primitive-color-green-500)"
-    },
-    "--color-pink": {
-      "value": "var(--primitive-color-pink-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-pink-500",
-      "replacedBy": "--primitive-color-pink-500",
-      "replaceWith": "var(--primitive-color-pink-500)"
-    },
-    "--color-pink-lt-1": {
-      "value": "var(--primitive-color-pink-50)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-pink-100",
-      "replacedBy": "--primitive-color-pink-100",
-      "replaceWith": "var(--primitive-color-pink-100)"
-    },
-    "--color-purple": {
-      "value": "var(--primitive-color-purple-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-purple-500",
-      "replacedBy": "--primitive-color-purple-500",
-      "replaceWith": "var(--primitive-color-purple-500)"
-    },
-    "--color-yellow": {
-      "value": "var(--primitive-color-yellow-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-yellow-500",
-      "replacedBy": "--primitive-color-yellow-500",
-      "replaceWith": "var(--primitive-color-yellow-500)"
-    },
-    "--color-primary": {
-      "value": "var(--semantic-color-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-primary",
-      "replacedBy": "--semantic-color-primary",
-      "replaceWith": "var(--semantic-color-primary)"
-    },
-    "--color-secondary": {
-      "value": "var(--semantic-color-secondary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-secondary",
-      "replacedBy": "--semantic-color-secondary",
-      "replaceWith": "var(--semantic-color-secondary)"
-    },
-    "--color-secondary-lt-1": {
-      "value": "var(--semantic-color-bg-secondary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-color-pink-100",
-      "replacedBy": "--primitive-color-pink-100",
-      "replaceWith": "var(--primitive-color-pink-100)"
-    },
-    "--color-tertiary": {
-      "value": "var(--semantic-color-tertiary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-tertiary",
-      "replacedBy": "--semantic-color-tertiary",
-      "replaceWith": "var(--semantic-color-tertiary)"
-    },
-    "--color-quaternary": {
-      "value": "var(--semantic-color-quaternary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-quaternary",
-      "replacedBy": "--semantic-color-quaternary",
-      "replaceWith": "var(--semantic-color-quaternary)"
-    },
-    "--color-quinary": {
-      "value": "var(--semantic-color-quinary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-quinary",
-      "replacedBy": "--semantic-color-quinary",
-      "replaceWith": "var(--semantic-color-quinary)"
-    },
-    "--color-selector-placeholder": {
-      "value": "var(--semantic-color-placeholder)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-action-link": {
-      "value": "var(--semantic-color-link-default)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-link-default",
-      "replacedBy": "--semantic-color-link-default",
-      "replaceWith": "var(--semantic-color-link-default)"
-    },
-    "--color-action-selection": {
-      "value": "var(--semantic-color-selection-text)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-selection-bg",
-      "replacedBy": "--semantic-color-selection-bg",
-      "replaceWith": "var(--semantic-color-selection-bg)"
-    },
-    "--background-action-selection": {
-      "value": "var(--semantic-color-selection-bg)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-selection-bg",
-      "replacedBy": "--semantic-color-selection-bg",
-      "replaceWith": "var(--semantic-color-selection-bg)"
-    },
-    "--color-state-disabled": {
-      "value": "var(--semantic-color-disabled-bg)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-disabled",
-      "replacedBy": "--semantic-color-state-disabled",
-      "replaceWith": "var(--semantic-color-state-disabled)"
-    },
-    "--color-state-focus": {
-      "value": "var(--semantic-focus-ring-color)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-focus",
-      "replacedBy": "--semantic-color-state-focus",
-      "replaceWith": "var(--semantic-color-state-focus)"
-    },
-    "--color-state-hover-primary": {
-      "value": "var(--semantic-color-state-hover-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-hover-primary",
-      "replacedBy": "--semantic-color-state-hover-primary",
-      "replaceWith": "var(--semantic-color-state-hover-primary)"
-    },
-    "--color-state-hover-secondary": {
-      "value": "var(--semantic-color-state-hover-secondary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-state-hover-tertiary": {
-      "value": "var(--semantic-color-state-hover-tertiary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-state-hover-quaternary": {
-      "value": "var(--semantic-color-state-hover-quaternary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-state-ok": {
-      "value": "var(--semantic-color-state-success)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-success",
-      "replacedBy": "--semantic-color-state-success",
-      "replaceWith": "var(--semantic-color-state-success)"
-    },
-    "--color-state-ko": {
-      "value": "var(--semantic-color-state-error)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-error",
-      "replacedBy": "--semantic-color-state-error",
-      "replaceWith": "var(--semantic-color-state-error)"
-    },
-    "--color-state-warning": {
-      "value": "var(--semantic-color-state-warning)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-warning",
-      "replacedBy": "--semantic-color-state-warning",
-      "replaceWith": "var(--semantic-color-state-warning)"
     },
     "--font-family-1": {
       "value": "var(--semantic-font-family-primary)",
@@ -450,7 +213,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-primary-font-color": {
-      "value": "var(--btn-primary-text)",
+      "value": "var(--semantic-color-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -466,7 +229,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-secondary-font-color": {
-      "value": "var(--btn-secondary-text)",
+      "value": "var(--semantic-color-secondary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -482,7 +245,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-tertiary-font-color": {
-      "value": "var(--btn-tertiary-text)",
+      "value": "var(--semantic-color-tertiary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -498,7 +261,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-quaternary-font-color": {
-      "value": "var(--btn-quaternary-text)",
+      "value": "var(--semantic-color-quaternary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -746,7 +509,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--cont-group-form-field-icon-size": {
-      "value": "var(--primitive-size-1)",
+      "value": "var(--semantic-size-icon-sm, var(--primitive-size-1))",
       "usedInSelectors": [
         ":root"
       ],
@@ -889,118 +652,6 @@
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
-    "--color-black": {
-      "value": "black",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-white": {
-      "value": "white",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-grey-80pct": {
-      "value": "hsl(0,0%,80%)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-fb-blue": {
-      "value": "#3b5998",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-instagram-blue": {
-      "value": "#3f729b",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-instagram-purple": {
-      "value": "#8a3ab9",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-linkedin-blue": {
-      "value": "#0077b5",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-paypal-blue": {
-      "value": "#009cde",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-paypal-blue-drk-1": {
-      "value": "#003087",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-pinterest-red": {
-      "value": "#e60023",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-twitter-blue": {
-      "value": "#5ea9dd",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-whatsapp-green": {
-      "value": "#41c75d",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-whatsapp-green-drk-1": {
-      "value": "#40a73b",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brand-youtube-red": {
-      "value": "#cc181e",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
     "--filter-color-black": {
       "value": "invert(0%) sepia(40%) saturate(20%) hue-rotate(356deg) brightness(90%) contrast(104%)",
       "usedInSelectors": [
@@ -1016,78 +667,6 @@
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--color-primary-base": {
-      "value": "var(--primitive-color-blue-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-primary-light": {
-      "value": "var(--primitive-color-blue-50)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-secondary-base": {
-      "value": "var(--primitive-color-cyan-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-accent-base": {
-      "value": "var(--primitive-color-orange-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brown": {
-      "value": "var(--color-primary-base)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-brown-lt-1": {
-      "value": "var(--color-primary-light)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-red": {
-      "value": "var(--primitive-color-error-500)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-senary": {
-      "value": "initial",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-septenary": {
-      "value": "initial",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--filter-primary": {
       "value": "brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1800%) hue-rotate(230deg) brightness(95%) contrast(95%)",
@@ -1154,7 +733,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-primary-text": {
-      "value": "var(--color-primary)",
+      "value": "var(--semantic-color-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1164,13 +743,14 @@
     "--btn-primary-filled-text": {
       "value": "oklch(0.22 0.032 264.665)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-secondary-text": {
-      "value": "var(--color-secondary)",
+      "value": "var(--semantic-color-secondary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1180,13 +760,14 @@
     "--btn-secondary-filled-text": {
       "value": "oklch(0.21 0.032 264.665)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-tertiary-text": {
-      "value": "var(--color-tertiary)",
+      "value": "var(--semantic-color-tertiary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1202,7 +783,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--btn-quaternary-text": {
-      "value": "var(--color-quaternary)",
+      "value": "var(--semantic-color-quaternary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1356,7 +937,8 @@
     "--btn-primary-bg-hover": {
       "value": "oklch(0.70 0.204 277.117)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -1364,189 +946,260 @@
     "--btn-secondary-bg-hover": {
       "value": "oklch(0.88 0.115 95.746)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--facebook-primary": {
-      "value": "before{background:var(--icon-rrss-facebook) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--facebook-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--github-primary": {
-      "value": "before{background:var(--icon-rrss-github) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--github-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--instagram-primary": {
-      "value": "before{background:var(--icon-rrss-instagram) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--instagram-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--linkedin-primary": {
-      "value": "before{background:var(--icon-rrss-linkedin) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--linkedin-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--pinterest-primary": {
-      "value": "before{background:var(--icon-rrss-pinterest) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--pinterest-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--snapchat-primary": {
-      "value": "before{background:var(--icon-rrss-snapchat) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--snapchat-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--twitter-primary": {
-      "value": "before{background:var(--icon-rrss-twitter) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--twitter-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--whatsapp-primary": {
-      "value": "before{background:var(--icon-rrss-whatsapp) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--whatsapp-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--youtube-primary": {
-      "value": "before{background:var(--icon-rrss-youtube) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--youtube-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--primary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--primary:not(.atom-btn--filled)",
+        ".atom-link--primary:after",
+        ".atom-link--primary:hover",
+        ".atom-link--primary:focus-visible",
+        ".atom-link--primary:active"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--secondary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--secondary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--tertiary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--tertiary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--quaternary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--quaternary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--filled": {
-      "value": "disabled{background-color:var(--semantic-color-disabled-bg)",
+      "value": "disabled {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn.atom-btn--filled:disabled"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--arrow-default": {
-      "value": "before{background-image:var(--icon-arrow-default)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--arrow-default:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--arrow-double": {
-      "value": "before{background-image:var(--icon-arrow-double)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--arrow-double:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--content-bars": {
-      "value": "before{background-image:var(--icon-content-bars)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--content-bars:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--rrss-email": {
-      "value": "before{background-image:var(--icon-rrss-email)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--rrss-email:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-cancel": {
-      "value": "before{background-image:var(--icon-user-interface-cancel)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-cancel:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-exclamation": {
-      "value": "before{background-image:var(--icon-user-interface-exclamation-mark)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-exclamation:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-home": {
-      "value": "before{background-image:var(--icon-user-interface-home)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-home:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-tick": {
-      "value": "before{background-image:var(--icon-user-interface-tick)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-tick:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
+    "--color-primary": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-primary:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-primary",
+      "replacedBy": "--semantic-color-primary",
+      "replaceWith": "var(--semantic-color-primary)"
+    },
+    "--color-secondary": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-secondary:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-secondary",
+      "replacedBy": "--semantic-color-secondary",
+      "replaceWith": "var(--semantic-color-secondary)"
+    },
+    "--color-state-ok": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-state-ok:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-success",
+      "replacedBy": "--semantic-color-state-success",
+      "replaceWith": "var(--semantic-color-state-success)"
+    },
+    "--color-state-ko": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-state-ko:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-error",
+      "replacedBy": "--semantic-color-state-error",
+      "replaceWith": "var(--semantic-color-state-error)"
+    },
+    "--color-state-warning": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-state-warning:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate → --semantic-color-state-warning",
+      "replacedBy": "--semantic-color-state-warning",
+      "replaceWith": "var(--semantic-color-state-warning)"
+    },
+    "--color-white": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-white:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
+    "--color-black": {
+      "value": "before {",
+      "usedInSelectors": [
+        ".atom-icon--color-black:before"
+      ],
+      "status": "migrate",
+      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
+    },
     "--lc-icon-home": {
-      "value": "url(\"../img/icons/lucide/home.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-home' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8' /%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1554,7 +1207,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-menu": {
-      "value": "url(\"../img/icons/lucide/menu.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-menu' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M4 5h16' /%3E%3Cpath d='M4 12h16' /%3E%3Cpath d='M4 19h16' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1562,7 +1215,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-x": {
-      "value": "url(\"../img/icons/lucide/x.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-x' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M18 6 6 18' /%3E%3Cpath d='m6 6 12 12' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1570,7 +1223,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-layers": {
-      "value": "url(\"../img/icons/lucide/layers.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z' /%3E%3Cpath d='M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12' /%3E%3Cpath d='M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1578,7 +1231,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevron-right": {
-      "value": "url(\"../img/icons/lucide/chevron-right.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m9 18 6-6-6-6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1586,7 +1239,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevron-left": {
-      "value": "url(\"../img/icons/lucide/chevron-left.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-left' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m15 18-6-6 6-6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1594,7 +1247,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevron-down": {
-      "value": "url(\"../img/icons/lucide/chevron-down.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-down' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m6 9 6 6 6-6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1602,7 +1255,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevron-up": {
-      "value": "url(\"../img/icons/lucide/chevron-up.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-up' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m18 15-6-6-6 6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1610,7 +1263,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevrons-right": {
-      "value": "url(\"../img/icons/lucide/chevrons-right.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1618,7 +1271,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-chevrons-down": {
-      "value": "url(\"../img/icons/lucide/chevrons-down.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m7 6 5 5 5-5' /%3E%3Cpath d='m7 13 5 5 5-5' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1626,7 +1279,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-arrow-right": {
-      "value": "url(\"../img/icons/lucide/arrow-right.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3Cpath d='m12 5 7 7-7 7' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1634,7 +1287,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-arrow-left": {
-      "value": "url(\"../img/icons/lucide/arrow-left.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-left' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m12 19-7-7 7-7' /%3E%3Cpath d='M19 12H5' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1642,7 +1295,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-search": {
-      "value": "url(\"../img/icons/lucide/search.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-search' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m21 21-4.34-4.34' /%3E%3Ccircle cx='11' cy='11' r='8' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1650,7 +1303,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-plus": {
-      "value": "url(\"../img/icons/lucide/plus.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-plus' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3Cpath d='M12 5v14' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1658,7 +1311,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-minus": {
-      "value": "url(\"../img/icons/lucide/minus.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-minus' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1666,7 +1319,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-check": {
-      "value": "url(\"../img/icons/lucide/check.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20 6 9 17l-5-5' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1674,7 +1327,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-trash": {
-      "value": "url(\"../img/icons/lucide/trash-2.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-trash-2' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 11v6' /%3E%3Cpath d='M14 11v6' /%3E%3Cpath d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6' /%3E%3Cpath d='M3 6h18' /%3E%3Cpath d='M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1682,7 +1335,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-pencil": {
-      "value": "url(\"../img/icons/lucide/pencil.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-pencil' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z' /%3E%3Cpath d='m15 5 4 4' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1690,7 +1343,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-download": {
-      "value": "url(\"../img/icons/lucide/download.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-download' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 15V3' /%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /%3E%3Cpath d='m7 10 5 5 5-5' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1698,7 +1351,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-copy": {
-      "value": "url(\"../img/icons/lucide/copy.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-copy' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1706,7 +1359,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-external-link": {
-      "value": "url(\"../img/icons/lucide/external-link.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-external-link' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 3h6v6' /%3E%3Cpath d='M10 14 21 3' /%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1714,7 +1367,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-filter": {
-      "value": "url(\"../img/icons/lucide/filter.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-filter' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1722,7 +1375,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-rocket": {
-      "value": "url(\"../img/icons/lucide/rocket.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5' /%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09' /%3E%3Cpath d='M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z' /%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1730,7 +1383,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-terminal": {
-      "value": "url(\"../img/icons/lucide/terminal.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 19h8' /%3E%3Cpath d='m4 17 6-6-6-6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1738,7 +1391,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-book-open": {
-      "value": "url(\"../img/icons/lucide/book-open.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 7v14' /%3E%3Cpath d='M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1746,7 +1399,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-github": {
-      "value": "url(\"../img/icons/lucide/github.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' /%3E%3Cpath d='M9 18c-4.51 2-5-2-7-2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1754,7 +1407,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-zap": {
-      "value": "url(\"../img/icons/lucide/zap.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1762,7 +1415,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-info": {
-      "value": "url(\"../img/icons/lucide/info.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-info' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='M12 16v-4' /%3E%3Cpath d='M12 8h.01' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1770,7 +1423,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-warning": {
-      "value": "url(\"../img/icons/lucide/alert-triangle.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-alert-triangle' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3' /%3E%3Cpath d='M12 9v4' /%3E%3Cpath d='M12 17h.01' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1778,7 +1431,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-success": {
-      "value": "url(\"../img/icons/lucide/circle-check.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1786,7 +1439,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-error": {
-      "value": "url(\"../img/icons/lucide/circle-x.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-x' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m15 9-6 6' /%3E%3Cpath d='m9 9 6 6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1794,7 +1447,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-shield-check": {
-      "value": "url(\"../img/icons/lucide/shield-check.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1802,7 +1455,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-moon": {
-      "value": "url(\"../img/icons/lucide/moon.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1810,7 +1463,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-sun": {
-      "value": "url(\"../img/icons/lucide/sun.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='4' /%3E%3Cpath d='M12 2v2' /%3E%3Cpath d='M12 20v2' /%3E%3Cpath d='m4.93 4.93 1.41 1.41' /%3E%3Cpath d='m17.66 17.66 1.41 1.41' /%3E%3Cpath d='M2 12h2' /%3E%3Cpath d='M20 12h2' /%3E%3Cpath d='m6.34 17.66-1.41 1.41' /%3E%3Cpath d='m19.07 4.93-1.41 1.41' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1818,7 +1471,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-palette": {
-      "value": "url(\"../img/icons/lucide/palette.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z' /%3E%3Ccircle cx='13.5' cy='6.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='17.5' cy='10.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='6.5' cy='12.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='8.5' cy='7.5' r='.5' fill='currentColor' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1826,7 +1479,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-user": {
-      "value": "url(\"../img/icons/lucide/user.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-user' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2' /%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1834,7 +1487,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-settings": {
-      "value": "url(\"../img/icons/lucide/settings.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-settings' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915' /%3E%3Ccircle cx='12' cy='12' r='3' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1842,7 +1495,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-mail": {
-      "value": "url(\"../img/icons/lucide/mail.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-mail' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' /%3E%3Crect x='2' y='4' width='20' height='16' rx='2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1850,7 +1503,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-database": {
-      "value": "url(\"../img/icons/lucide/database.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cellipse cx='12' cy='5' rx='9' ry='3' /%3E%3Cpath d='M3 5V19A9 3 0 0 0 21 19V5' /%3E%3Cpath d='M3 12A9 3 0 0 0 21 12' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1858,7 +1511,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-link": {
-      "value": "url(\"../img/icons/lucide/link.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71' /%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1866,7 +1519,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-component": {
-      "value": "url(\"../img/icons/lucide/box.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z' /%3E%3Cpath d='m3.3 7 8.7 5 8.7-5' /%3E%3Cpath d='M12 22V12' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1874,7 +1527,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-box": {
-      "value": "url(\"../img/icons/lucide/box.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z' /%3E%3Cpath d='m3.3 7 8.7 5 8.7-5' /%3E%3Cpath d='M12 22V12' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1882,7 +1535,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-coins": {
-      "value": "url(\"../img/icons/lucide/coins.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M13.744 17.736a6 6 0 1 1-7.48-7.48' /%3E%3Cpath d='M15 6h1v4' /%3E%3Cpath d='m6.134 14.768.866-.5 2 3.464' /%3E%3Ccircle cx='16' cy='8' r='6' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1890,7 +1543,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-atom": {
-      "value": "url(\"../img/icons/lucide/atom.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='1' /%3E%3Cpath d='M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z' /%3E%3Cpath d='M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1898,7 +1551,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-package": {
-      "value": "url(\"../img/icons/lucide/package.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z' /%3E%3Cpath d='M12 22V12' /%3E%3Cpolyline points='3.29 7 12 12 20.71 7' /%3E%3Cpath d='m7.5 4.27 9 5.15' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1906,7 +1559,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-file-text": {
-      "value": "url(\"../img/icons/lucide/file-text.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z' /%3E%3Cpath d='M14 2v5a1 1 0 0 0 1 1h5' /%3E%3Cpath d='M10 9H8' /%3E%3Cpath d='M16 13H8' /%3E%3Cpath d='M16 17H8' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1914,7 +1567,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-git-branch": {
-      "value": "url(\"../img/icons/lucide/git-branch.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 6a9 9 0 0 0-9 9V3' /%3E%3Ccircle cx='18' cy='6' r='3' /%3E%3Ccircle cx='6' cy='18' r='3' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1922,7 +1575,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-bot": {
-      "value": "url(\"../img/icons/lucide/bot.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 8V4H8' /%3E%3Crect width='16' height='12' x='4' y='8' rx='2' /%3E%3Cpath d='M2 14h2' /%3E%3Cpath d='M20 14h2' /%3E%3Cpath d='M15 13v2' /%3E%3Cpath d='M9 13v2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1930,7 +1583,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-activity": {
-      "value": "url(\"../img/icons/lucide/activity.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1938,7 +1591,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-check-circle": {
-      "value": "url(\"../img/icons/lucide/circle-check.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1946,7 +1599,7 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-icon-pie-chart": {
-      "value": "url(\"../img/icons/lucide/chart-pie.svg\")",
+      "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z' /%3E%3Cpath d='M21.21 15.89A10 10 0 1 1 8 2.83' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
@@ -1954,441 +1607,484 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-home": {
-      "value": "before{background-image:url(\"../img/icons/lucide/home.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-home:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-menu": {
-      "value": "before{background-image:url(\"../img/icons/lucide/menu.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-menu:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-x": {
-      "value": "before{background-image:url(\"../img/icons/lucide/x.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-x:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-layers": {
-      "value": "before{background-image:url(\"../img/icons/lucide/layers.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-layers:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-right": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevron-right.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-left": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevron-left.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-left:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-down": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevron-down.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-down:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-up": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevron-up.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-up:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevrons-right": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevrons-right.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevrons-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevrons-down": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chevrons-down.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevrons-down:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-arrow-right": {
-      "value": "before{background-image:url(\"../img/icons/lucide/arrow-right.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-arrow-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-arrow-left": {
-      "value": "before{background-image:url(\"../img/icons/lucide/arrow-left.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-arrow-left:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-search": {
-      "value": "before{background-image:url(\"../img/icons/lucide/search.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-search:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-plus": {
-      "value": "before{background-image:url(\"../img/icons/lucide/plus.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-plus:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-minus": {
-      "value": "before{background-image:url(\"../img/icons/lucide/minus.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-minus:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-check": {
-      "value": "before{background-image:url(\"../img/icons/lucide/check.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-check:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-trash": {
-      "value": "before{background-image:url(\"../img/icons/lucide/trash-2.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-trash:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-pencil": {
-      "value": "before{background-image:url(\"../img/icons/lucide/pencil.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-pencil:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-download": {
-      "value": "before{background-image:url(\"../img/icons/lucide/download.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-download:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-copy": {
-      "value": "before{background-image:url(\"../img/icons/lucide/copy.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-copy:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-external-link": {
-      "value": "before{background-image:url(\"../img/icons/lucide/external-link.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-external-link:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-filter": {
-      "value": "before{background-image:url(\"../img/icons/lucide/filter.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-filter:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-rocket": {
-      "value": "before{background-image:url(\"../img/icons/lucide/rocket.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-rocket:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-terminal": {
-      "value": "before{background-image:url(\"../img/icons/lucide/terminal.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-terminal:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-book-open": {
-      "value": "before{background-image:url(\"../img/icons/lucide/book-open.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-book-open:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-github": {
-      "value": "before{background-image:url(\"../img/icons/lucide/github.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-github:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-zap": {
-      "value": "before{background-image:url(\"../img/icons/lucide/zap.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-zap:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-info": {
-      "value": "before{background-image:url(\"../img/icons/lucide/info.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-info:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-warning": {
-      "value": "before{background-image:url(\"../img/icons/lucide/alert-triangle.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-warning:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-success": {
-      "value": "before{background-image:url(\"../img/icons/lucide/circle-check.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-success:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-error": {
-      "value": "before{background-image:url(\"../img/icons/lucide/circle-x.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-error:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-shield-check": {
-      "value": "before{background-image:url(\"../img/icons/lucide/shield-check.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-shield-check:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-moon": {
-      "value": "before{background-image:url(\"../img/icons/lucide/moon.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-moon:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-sun": {
-      "value": "before{background-image:url(\"../img/icons/lucide/sun.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-sun:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-palette": {
-      "value": "before{background-image:url(\"../img/icons/lucide/palette.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-palette:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-user": {
-      "value": "before{background-image:url(\"../img/icons/lucide/user.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-user:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-settings": {
-      "value": "before{background-image:url(\"../img/icons/lucide/settings.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-settings:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-mail": {
-      "value": "before{background-image:url(\"../img/icons/lucide/mail.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-mail:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-database": {
-      "value": "before{background-image:url(\"../img/icons/lucide/database.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-database:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-link": {
-      "value": "before{background-image:url(\"../img/icons/lucide/link.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-link:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-component": {
-      "value": "before{background-image:url(\"../img/icons/lucide/box.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-component:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-box": {
-      "value": "before{background-image:url(\"../img/icons/lucide/box.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-box:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-coins": {
-      "value": "before{background-image:url(\"../img/icons/lucide/coins.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-coins:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-atom": {
-      "value": "before{background-image:url(\"../img/icons/lucide/atom.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-atom:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-package": {
-      "value": "before{background-image:url(\"../img/icons/lucide/package.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-package:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-file-text": {
-      "value": "before{background-image:url(\"../img/icons/lucide/file-text.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-file-text:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-git-branch": {
-      "value": "before{background-image:url(\"../img/icons/lucide/git-branch.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-git-branch:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-bot": {
-      "value": "before{background-image:url(\"../img/icons/lucide/bot.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-bot:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-activity": {
-      "value": "before{background-image:url(\"../img/icons/lucide/activity.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-activity:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-check-circle": {
-      "value": "before{background-image:url(\"../img/icons/lucide/circle-check.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-check-circle:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-pie-chart": {
-      "value": "before{background-image:url(\"../img/icons/lucide/chart-pie.svg\")",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-pie-chart:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--has-select": {
-      "value": "not([class*=\"--is-\"]):before{opacity:1",
+      "value": "not([class*=\"--is-\"]):before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--has-select:not([class*=\"--is-\"]):before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-error": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-error:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-success": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-success:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-warning": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-warning:before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--_layer-hue": {
+      "value": "var(--component-token-primitive-accent)",
+      "usedInSelectors": [
+        ".org-home-tokens__layer--primitive",
+        ".org-home-tokens__layer--theme",
+        ".org-home-tokens__layer--semantic",
+        ".org-home-tokens__layer--component"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--primitive": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".org-home-tokens__layer--primitive::before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--theme": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".org-home-tokens__layer--theme::before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--semantic": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".org-home-tokens__layer--semantic::before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--component": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".org-home-tokens__layer--component::before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."

@@ -14,21 +14,24 @@
   .org-home-hero {
     position: relative;
     overflow: hidden;
-    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
-    padding-top: calc(var(--semantic-space-layout-xl) * 1.5);
-    text-align: center;
+    padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
+    padding-block-start: var(--component-hero-padding-block-start);
+    text-align: var(--component-hero-text-align);
 
     // Radial gradient backdrop
     &::before {
       content: '';
-      @include absolute($top: 0, $left: 50%);
-      @include size(min(900px, 120vw), min(600px, 80vw));
-      transform: translateX(-50%);
-      background: radial-gradient(
-        ellipse at 50% 0%,
-        color-mix(in srgb, var(--semantic-color-primary) 18%, transparent) 0%,
-        transparent 70%
+      @include absolute(
+        $top: var(--component-hero-backdrop-top),
+        $left: var(--component-hero-backdrop-left)
       );
+      @include size(
+        var(--component-hero-backdrop-width),
+        var(--component-hero-backdrop-height)
+      );
+      transform: var(--component-hero-backdrop-translate);
+      background-image: var(--component-hero-backdrop);
       pointer-events: none;
       z-index: 0;
     }
@@ -48,41 +51,44 @@
     // &__headline
     &__headline {
       font-family: var(--semantic-font-family-heading);
-      font-size: clamp(2.5rem, 7vw, 5rem);
-      font-weight: var(--semantic-font-weight-black);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
+      font-size: var(--component-hero-headline-font-size);
+      font-weight: var(--component-hero-headline-weight);
+      line-height: var(--component-hero-headline-leading);
+      letter-spacing: var(--component-hero-headline-tracking);
       color: var(--semantic-color-text-primary);
-      margin: 0 auto var(--semantic-space-component-md);
-      max-width: 18ch;
+      margin-inline: var(--component-hero-content-inline);
+      margin-block-end: var(--semantic-space-component-md);
+      max-width: var(--component-hero-headline-max-width);
 
       // Gradient on the key word
       &-accent {
-        background: linear-gradient(
-          135deg,
-          var(--semantic-color-primary) 0%,
-          var(--semantic-color-secondary, #3b82f6) 100%
-        );
+        background-image: var(--component-hero-accent-bg);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         background-clip: text;
+        -webkit-text-fill-color: var(--component-hero-accent-fill);
+        color: var(--component-hero-accent-color);
+        text-decoration-line: var(--component-hero-accent-decoration-line);
+        text-decoration-color: var(--component-hero-accent-decoration-color);
+        text-decoration-thickness: var(--component-hero-accent-decoration-thickness);
+        text-underline-offset: var(--component-hero-accent-decoration-offset);
       }
     }
 
     // &__sub
     &__sub {
       font-family: var(--semantic-font-family-body);
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-size: var(--component-hero-sub-font-size);
       line-height: var(--semantic-line-height-body);
       color: var(--semantic-color-text-secondary);
-      max-width: 52ch;
-      margin: 0 auto var(--semantic-space-layout-sm);
+      max-width: var(--component-hero-sub-max-width);
+      margin-inline: var(--component-hero-content-inline);
+      margin-block-end: var(--semantic-space-layout-sm);
     }
 
     // &__actions
     &__actions {
       display: flex;
-      justify-content: center;
+      justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-component-md);
       margin-bottom: var(--semantic-space-layout-lg);
@@ -91,7 +97,7 @@
     // &__badge-row — row of feature pills
     &__badge-row {
       display: flex;
-      justify-content: center;
+      justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-component-sm);
       margin-bottom: var(--semantic-space-layout-lg);
@@ -100,11 +106,11 @@
     // &__stats — row of atom-stat blocks
     &__stats {
       display: flex;
-      justify-content: center;
+      justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-layout-md);
       padding-top: var(--semantic-space-layout-sm);
-      border-top: 1px solid var(--semantic-color-border-subtle);
+      border-top: var(--component-hero-stats-border-width) solid var(--component-hero-stats-border-color);
       margin-top: var(--semantic-space-layout-sm);
     }
 
@@ -112,7 +118,7 @@
     &__scroll-hint {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: var(--component-hero-scroll-hint-align);
       gap: 0.25rem;
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);

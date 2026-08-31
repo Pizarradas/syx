@@ -8,6 +8,10 @@
 @mixin atom-table($theme: null) {
   @layer syx.atoms {
   .atom-table {
+      // Ancho mínimo: sin él, el navegador comprime las columnas hasta
+      // dejarlas en una palabra por línea antes de permitir scroll. Con un
+      // suelo, la tabla mantiene su forma y el contenedor hace scroll.
+      min-width: var(--component-table-min-width);
     word-break: normal;
 
     // &__container

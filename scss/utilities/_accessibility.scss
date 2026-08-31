@@ -49,7 +49,7 @@
       position: fixed;
       top: var(--semantic-space-layout-sm);
       left: var(--semantic-space-layout-sm);
-      z-index: 9999;
+      z-index: var(--semantic-z-index-skip-link, 9999);
       padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
       background: var(--semantic-color-primary);
       color: var(--semantic-color-text-inverse);

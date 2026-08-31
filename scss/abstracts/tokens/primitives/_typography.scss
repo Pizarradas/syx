@@ -16,6 +16,17 @@
 
 
   // FONT SIZES — MAJOR THIRD SCALE (×1.250)
+  //
+  // NOTA sobre los tres escalones grandes (2xl, 3xl, 4xl): eran "fluidos"
+  // solo de nombre. El 4xl iba de 61 px a 68,7 px — un 12 % de recorrido
+  // entre un móvil de 390 px y un monitor de 1440. En la práctica, un h1 de
+  // 61 px en una columna de 350 px: una palabra larga como "Architecture" no
+  // cabía y se salía del contenedor.
+  //
+  // Ahora el suelo baja a un tamaño usable en móvil y el techo se mantiene:
+  // el 4xl va de 40 px a 68,7 px. Los escalones pequeños (xs…xl) no se tocan;
+  // ahí el rango corto sí era correcto, porque el texto de lectura no debe
+  // cambiar tanto de tamaño.
   // ================================================
   // Step -2 | xs     | 10.24px â 11.52px
   --primitive-font-size-xs: clamp(0.64rem, 0.61rem + 0.14vw, 0.72rem);
@@ -36,13 +47,13 @@
   --primitive-font-size-xl: clamp(1.953rem, 1.86rem + 0.37vw, 2.197rem);
 
   // Step +4 | 2xl    | 39.06px â 43.95px
-  --primitive-font-size-2xl: clamp(2.441rem, 2.33rem + 0.47vw, 2.747rem);
+  --primitive-font-size-2xl: clamp(1.875rem, 1.63rem + 1.05vw, 2.747rem);
 
   // Step +5 | 3xl    | 48.83px â 54.93px
-  --primitive-font-size-3xl: clamp(3.052rem, 2.91rem + 0.58vw, 3.433rem);
+  --primitive-font-size-3xl: clamp(2.125rem, 1.75rem + 1.6vw, 3.433rem);
 
   // Step +6 | 4xl    | 61.04px â 68.67px
-  --primitive-font-size-4xl: clamp(3.815rem, 3.63rem + 0.73vw, 4.291rem);
+  --primitive-font-size-4xl: clamp(2.5rem, 1.9rem + 2.57vw, 4.291rem);
 
   // LINE HEIGHTS
   // ================================================

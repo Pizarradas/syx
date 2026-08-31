@@ -1,0 +1,56 @@
+// SEMANTIC TOKENS: MOTION
+// ================================================
+// Duraciones y curvas de aceleración del sistema.
+// Antes de esta capa, cada componente escribía sus propios
+// literales (0.15s / 0.2s / 0.25s / 0.3s) y el tema no podía
+// intervenir en el ritmo de las interacciones.
+//
+// Uso en componentes:
+//   @include transition(color var(--semantic-duration-fast) var(--semantic-easing-standard));
+//
+// Un tema puede acelerar o frenar TODO el sistema redefiniendo
+// estas cuatro duraciones en su _theme.scss.
+// ================================================
+
+:root {
+  // DURATIONS
+  // ================================================
+  --semantic-duration-instant: 0.08s; // feedback táctil (:active)
+  --semantic-duration-fast: 0.15s;    // controles de formulario, focus
+  --semantic-duration-base: 0.25s;    // botones, cards, hover general
+  --semantic-duration-slow: 0.4s;     // transiciones de superficie, drawers
+
+  // EASINGS
+  // ================================================
+  --semantic-easing-standard: ease;                          // por defecto
+  --semantic-easing-out: cubic-bezier(0.16, 1, 0.3, 1);      // entradas, "spring" suave
+  --semantic-easing-in-out: ease-in-out;                     // ida y vuelta
+  --semantic-easing-linear: linear;                          // spinners, progreso
+
+  // FOCUS RING
+  // ================================================
+  // Centraliza el anillo de foco: 6 componentes escribían
+  // `outline: 0.2rem solid` a mano.
+  --semantic-focus-ring-width: 0.125rem; // 2px
+  --semantic-focus-ring-offset: 0.125rem; // 2px
+  --semantic-focus-ring-style: solid;
+
+  // MOTION PREFERENCES
+  // ================================================
+  // Respeta prefers-reduced-motion sin tocar cada componente:
+  // basta con que los componentes consuman los tokens de duración.
+}
+
+@media (prefers-reduced-motion: reduce) {
+  // `:root:root` y no `:root`: cada tema redefine estas duraciones en su
+  // propio bloque :root, que se emite DESPUÉS de este fichero y ganaba por
+  // orden de aparición. Duplicar el selector sube la especificidad (0,2,0
+  // frente a 0,1,0) y la preferencia del usuario gana siempre, venga el
+  // tema que venga.
+  :root:root {
+    --semantic-duration-instant: 0.01ms;
+    --semantic-duration-fast: 0.01ms;
+    --semantic-duration-base: 0.01ms;
+    --semantic-duration-slow: 0.01ms;
+  }
+}

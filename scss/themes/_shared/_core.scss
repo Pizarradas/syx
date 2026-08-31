@@ -1,44 +1,48 @@
 // SYX BUNDLE: CORE
 // ================================================
 // Shared foundation included in EVERY bundle.
-// Contains: fonts, reset, helpers, grid, theme tokens.
+// Contains: reset, base elements, helpers, grid.
 // Never includes atoms, molecules or organisms.
 // ================================================
-// Usage: @use '../_bundles/core' as *; @include syx-core($theme);
+// Usage: @use '../_shared/core' as *; @include syx-core($theme);
 // ================================================
+// NOTA (fix): este fichero llamaba a 13 helpers que ya no existen
+// (helper-animations, helper-positioning, helper-hides,
+// helper-displays, helper-alignments, helper-images,
+// helper-embedded, helper-maps, helper-objects, helper-texts,
+// helper-links, helper-scopes, helper-gap). Se eliminaron al
+// migrar las clases .syx-* a utilities/, pero las llamadas se
+// quedaron aquí, así que NINGÚN bundle-*.scss compilaba en
+// ninguno de los 6 temas. Ahora la lista refleja los helpers
+// que realmente existen — los mismos que invocan los setup.scss.
+// Las utilidades .syx-* se incluyen desde el entry point con
+// `@use 'utilities/index'`, no desde aquí.
+// ================================================
+
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
 
 @mixin syx-core($theme: null) {
 
-  // RESET: global
+  // RESET + ELEMENTOS BASE
   // ================================================
   @include resets-global($theme);
+  @include elements-base($theme);
 
-  // HELPERS: base
+  // HELPERS: independientes del tema
   // ================================================
-  @include helper-animations();
-  @include helper-positioning();
-  @include helper-hides();
-  @include helper-displays();
-  @include helper-alignments();
-  @include helper-images();
-  @include helper-embedded();
-  @include helper-maps();
-  @include helper-objects();
-  @include helper-texts();
-  @include helper-links();
   @include helper-icons();
+
+  // HELPERS: dependientes del tema
+  // ================================================
+  @include helper-font-sizes($theme);
+  @include helper-dimensions($theme);
+  @include helper-spacer($theme); // @deprecated — compatibilidad
+  @include helper-fonts($theme);
+  @include helper-backgrounds($theme);
 
   // LAYOUT: grid
   // ================================================
   @include layout-grid($theme);
-
-  // HELPERS: theme-aware
-  // ================================================
-  @include helper-font-sizes($theme);
-  @include helper-dimensions($theme);
-  @include helper-scopes($theme); // @deprecated â kept for compatibility
-  @include helper-spacer($theme);
-  @include helper-gap($theme);
-  @include helper-fonts($theme);
-  @include helper-backgrounds($theme);
 }

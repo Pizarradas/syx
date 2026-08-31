@@ -7,6 +7,138 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.6.1] — 2026-08-31
+
+### Fixed
+
+- **El modo claro forzado estaba roto.** El bloque de oscuro redefine **166 tokens** y `:root[data-theme="light"]` solo revertía **17**. Consecuencia: con el sistema operativo en oscuro, pulsar el toggle a claro dejaba la página a medias —fondo blanco, pero telón del hero, tarjetas, píldoras, chips de código y botones todavía en valores de oscuro—, ilegible. Solo se veía el diseño claro real si el sistema ya estaba en claro, así que quien tuviera el equipo en oscuro nunca llegaba a verlo.
+
+  El arreglo es estructural, no un parche: los valores claros dependientes de modo salen a un `@mixin syx-sketch-light-tokens`, simétrico al de oscuro, y se aplican en dos sitios — `:root` (estado por defecto) y `:root[data-theme="light"]` (elección explícita). Una sola fuente para los dos.
+
+- `--component-pill-dark-bg`, `-color` y `-border-color` se referenciaban desde `_pill.scss` pero nunca llegaron a declararse, así que `.atom-pill--dark` se quedaba sin fondo en modo claro.
+
+### Added
+
+- **`scripts/check-theme-symmetry.js`** (`npm run check:themes`, incluido en `npm run check`). Compara token a token el bloque claro y el oscuro de cada tema y falla si el oscuro cambia algo que el claro forzado no revierte. Ninguna regla R01–R08 detectaba esto: token a token, todo era válido; el fallo estaba en lo que *faltaba*.
+
+---
+
+## [4.6.0] — 2026-08-31
+
+Recorrido comparando claro y oscuro tramo a tramo. El modo oscuro no estaba mal de contraste —eso ya se había medido— sino de **estructura**: todo se aplanaba contra la página.
+
+### Fixed
+
+- **El modo oscuro no tenía escalera de elevación.** Las tarjetas usaban `bg-primary`, o sea EL MISMO color que la página, y las secciones alternas quedaban más claras que las tarjetas: la jerarquía estaba plana y, a ratos, invertida. En claro el lenguaje se sostiene solo con el trazo —papel blanco, caja dibujada encima—, pero en oscuro una línea gris sobre fondo gris no separa nada. Ahora la profundidad viene de la luminosidad: página 0.221 → sección alterna 0.265 → tarjeta 0.305 → franja CTA 0.355, con los bordes un paso más claros y la sombra dura aclarada para que el "papel levantado" se lea igual que en claro.
+- **La franja del CTA se fundía con la página.** En claro es la isla oscura sobre papel blanco; en oscuro el salto de luminosidad disponible es mucho menor, así que además de subir al escalón más alto lleva un trazo de 2 px arriba y abajo.
+- **`atom-pill--dark` usaba el rol `inverse`** — tercera aparición del mismo patrón, tras `.atom-code` y `.syx-bg-dark`. El "inverso" de una página oscura es claro, así que una píldora llamada *dark* salía CLARA sobre fondo oscuro.
+- **Las píldoras `warning` y `danger` no tenían adaptación a oscuro** y conservaban su tinte claro: en `docs.html` los chips `ORG` y `PAGE` se leían como pegatinas encendidas sobre la tabla oscura.
+- **El check del selector de tema era negro sobre círculo negro** en modo oscuro: `--component-theme-card-check-bg` apuntaba a `bg-primary`. El círculo se pinta sobre la muestra de color de la tarjeta, no sobre la página, así que ahora es un valor literal.
+- **El chip de código en línea desaparecía dentro de las tarjetas** una vez subidas: quedaba al mismo tono. Sube un escalón más y se tiñe de azul.
+- `.syx-bg-dark` seguía apuntando a `bg-inverse` (la corrección de 4.4.0 no llegó a aplicarse por un reemplazo fallido en silencio).
+
+### Notes
+
+Contraste final, verificado sobre píxeles renderizados: `home.html` y `why-syx.html` a **0 fallos en claro y en oscuro**; `docs.html` en 19/17, todos en los cuadrados de muestra que documentan las propias utilidades. Cero desbordamiento horizontal en las 12 combinaciones de página × anchura. R01–R04 a 0, 31/31 bundles.
+
+---
+
+## [4.5.0] — 2026-08-31
+
+Todo lo de esta versión sale de recorrer el sitio a mano, pantalla por pantalla, en escritorio, tablet y móvil, y de usarlo: abrir el menú, cambiar de tema, tabular, pasar el ratón.
+
+### Fixed
+
+- **Los iconos medían 8×8 px en móvil.** `--component-icon-size-*` apuntaba a `--semantic-space-component-*`, que es una escala FLUIDA de 8–16 px. Los comentarios ya decían 16/24/32/40; ahora los valores lo cumplen. Los iconos del menú móvil eran motas.
+- **La escala tipográfica grande no era fluida.** El paso `4xl` iba de 61 px a 68,7 px: un 12 % de recorrido entre un móvil de 390 px y un monitor de 1440. Un h1 de 61 px en una columna de 350 px no cabía y se salía del contenedor. Ahora `4xl` va de 40 a 67 px, `3xl` de 34 a 51 y `2xl` de 30 a 41. Los pasos pequeños no se tocan: ahí el rango corto era correcto.
+- **`word-break: break-word` en los hijos del grid** partía palabras por la mitad aunque cupieran enteras en la línea siguiente ("Theme Architect / ure"). Es un valor obsoleto que se comporta como `overflow-wrap: anywhere`. Sustituido por `word-break: normal` + `overflow-wrap: break-word`, que solo parte cuando no hay alternativa.
+- **Las tablas se comprimían en vez de hacer scroll.** Sin `min-width`, el navegador estrujaba las columnas hasta dejarlas en una palabra por línea antes de permitir desplazamiento. Con un suelo de 44rem la tabla mantiene su forma y el contenedor se desplaza. Añadido además un aviso visual de scroll con el truco de sombras de `background-attachment: local`, que aparece y desaparece solo, sin JavaScript.
+- **Los badges de paso (01–04) se estiraban a 292 px** en móvil: como hijos de un grid de una sola columna pasaban de ser un chip de 28 px a una barra a todo lo ancho. `justify-self: start`.
+- **La clase del `<body>` no seguía al tema.** Al cambiar de tema, `body` y hoja de estilos se contradecían. También `data-syx-theme` del `<html>` seguía diciendo `example-01` en las tres páginas.
+- **`docs.html`: cinco enlaces equivalentes con cinco tratamientos de botón distintos** (relleno azul, relleno menta, dos contornos de colores y otro contorno). Unificados. Contadores a 7 temas.
+- El comando de compilación del CTA de la home seguía apuntando a `example-01`.
+
+### Notes
+
+Dos cosas que parecían fallos y no lo eran, comprobadas antes de tocar nada: el scrim del menú móvil **sí funciona** (muestreo de píxeles: 126,126,126 = blanco al 50 %), y el "negro" bajo el theme-builder en las capturas es un artefacto de fotografiar a página completa un layout de `100vh`, no contenido perdido. Los botones del hero en móvil miden 190 y 191 px: la diferencia que parecía haber era la sombra.
+
+`theme-builder.html` usa su propio tema y queda fuera de este trabajo. `example-03` es un tema oscuro con serif por diseño, pero le faltan los ficheros de Playfair Display en `fonts/`, así que cae a Georgia sin avisar — mismo caso que Inter en los demás `example-*`.
+
+---
+
+## [4.4.0] — 2026-08-31
+
+### Added
+
+- **`docs.html` y `why-syx.html` usan el tema Blueprint.** El sitio dejaba de ser coherente en cuanto pulsabas "Docs".
+- **Tarjeta del tema Blueprint** en la rejilla de temas de la home, con muestra propia (papel + retícula, la única sin degradado). Contadores actualizados a 7 temas y tarjeta activa desacoplada de `example-01`.
+- **`main` y enlace de salto en `home.html`.** Las otras dos páginas ya los tenían.
+- **Utilidades que faltaban y se usaban igualmente:** `.syx-text-white`, `.syx-text-gray`, `.syx-text-muted`, `.syx-bg-white`, `.syx-bg-dark`, `.syx-bg-gray-50/100/200`, `.syx-font-bold`, `.syx-font-medium`. `docs.html` las invocaba 100+ veces sin que existieran.
+- **Tokens de sintaxis del código** (`--component-code-syntax-*`), **de botón deshabilitado** (`--component-button-disabled-*`), **de badge de docs**, **de escala de puntuación** y de **columna de contenido** (`--component-section-padding-inline/-block`).
+
+### Changed
+
+- **Pasada de diseño sobre el tema:** hero y cabeceras de sección alineados a la izquierda dentro de una columna de 75rem centrada; escala de espaciado de layout ampliada (el sistema ya separaba layout de componente para esto, así que las secciones respiran el doble sin inflar los componentes); titulares de sección un punto por debajo para que el hero mande; rejilla de temas de 5+1 a 4+3.
+- **Escala 1–5 de `why-syx.html`**: de cinco colores distintos con texto blanco (2,45:1 en el peor caso) a una secuencial de un solo tono, que se lee por intensidad y funciona en escala de grises. La rampa se invierte en modo oscuro, porque sobre fondo navy lo intenso es lo claro.
+- **Badges de capa de `docs.html`**: de cuatro colores HSL sueltos a una secuencia neutro → azul creciente que sigue la jerarquía real.
+- **Breakpoints primitivos en `em`**, para cuadrar con `$syx-breakpoints`, que ya lo estaba.
+- **Colores de estado en modo oscuro** subidos de luminosidad: `dark-mode-tokens()` los deja intactos a propósito, lo cual es correcto para un fondo pero no para utilidades como `.syx-text-error`, que los usan como color de texto (2,83:1 sobre navy).
+
+### Fixed
+
+- **`--semantic-color-disabled-bg` y `--semantic-color-disabled-border` no existen.** Una custom property inexistente invalida la declaración entera, así que el botón deshabilitado con relleno quedaba en fondo transparente con texto blanco: **invisible sobre página clara, en los 7 temas**.
+- **El bloque de código se invertía en modo oscuro.** `.atom-code` usaba `--semantic-color-bg-inverse` / `-text-inverse`; en una página oscura el "inverso" es claro, así que el bloque se volvía blanco y los colores de sintaxis desaparecían. Mismo fallo en `.syx-bg-dark`.
+- **Los colores de sintaxis salían de los roles de marca** (primary/secondary/tertiary), pensados para el fondo de la página, no para el del código. Con un tema de marca oscura, `--val` era el mismo navy del fondo.
+- **`example-01`: seis tokens semánticos con la luminosidad clavada en `0.60`** (3 fondos + 3 bordes), en contra de sus propios comentarios. El `<body>` salía gris medio. Corregir esos seis valores elimina 319 de los 400 fallos de contraste de `docs.html`. Los `*-500` de la capa de primitivos SÍ están a 0.60 a propósito y no se han tocado.
+- **La cabecera anulaba el anillo de foco** (`outline: none` en sus cuatro reglas `:focus-visible`), dejando solo un subrayado idéntico al hover y por debajo del área que pide WCAG 2.2 (2.4.11). El anillo va ahora en reglas de foco propias, no compartidas con `:hover`.
+- **Sliders del theme-builder con 4 px de área de pulsación** (WCAG 2.5.8 pide 24) y sin foco visible.
+- `.syx-skip-link` y `--semantic-color-border` (token inexistente) en los estilos embebidos de `docs.html`.
+- Los dos selectores de tema de `docs.html` daban nombres distintos a los mismos temas.
+
+### Notes
+
+Contraste verificado renderizando y muestreando los píxeles reales de cada caja, no leyendo el CSS: es la única forma de ver fondos pintados por `::before`, degradados y retículas. Resultado en las tres páginas del tema: **620 → 38 fallos**; `home.html` y `why-syx.html` a **0** en claro y en oscuro. `theme-builder.html` usa su propio tema y queda fuera de este trabajo (78 fallos sin tocar).
+
+**Corrección a la auditoría previa:** el hallazgo de WCAG 1.4.4 (la cabecera desbordando con el texto al 200 %) era un **falso positivo**. Se simuló con `html{font-size:32px}`, que no mueve la base `em` de una media query. Con el tamaño de fuente por defecto del navegador a 32 px —el caso real— la nav colapsa a hamburguesa y el desbordamiento es 0. Igualmente, el aviso de que `example-02…05` compartían el bug de luminosidad era **incorrecto**: solo afecta a `example-01`.
+
+---
+
+## [4.3.0] — 2026-08-31
+
+### Added
+
+- **Tema `syx-sketch` ("Blueprint")** — nueva dirección visual del sitio, ahora el tema por defecto de `home.html`. Papel claro, trazo de tinta, sombra sólida sin difuminado, radios casi nulos, cero degradados decorativos y retícula de papel milimetrado. Paleta del portfolio de José Luis Pizarro en OKLCH (azul eléctrico `#1E3AFF` primario, menta `#3BC9A7` secundaria). Tipografía: Space Grotesk en las 5 variables. Incluye `setup.scss` y los 5 bundles.
+- **Capa de tokens de movimiento** (`semantic/_motion.scss`) — `--semantic-duration-{instant,fast,base,slow}`, `--semantic-easing-{standard,out,in-out,linear}` y el anillo de foco (`--semantic-focus-ring-{width,offset,style}`), con guarda `prefers-reduced-motion`. Hasta ahora cada componente escribía sus propias duraciones (`0.15s` / `0.2s` / `0.25s` / `0.3s`) y ningún tema podía intervenir en el ritmo.
+- **Sombras duras y retícula** (`semantic/_shadows.scss`) — `--semantic-shadow-hard{,-sm,-lg}` y `--semantic-bg-grid`, apagada por defecto (`--semantic-bg-grid-color: transparent`).
+- **Escala de z-index** (`semantic/_spacing.scss`) — `--semantic-z-index-*`, para sustituir literales como el `9999` del skip-link.
+- **Tokens de componente nuevos**: `components/_cards.scss` (feature-card, theme-card, code-snippet), `_pills.scss` (pill, feature-icon), `_surfaces.scss` (blockquote, hr, code, tabla base) y `_sections.scss` (organismos `home-*`: telón del hero, fondo del CTA, capas, diagrama de tokens, footer). 316 tokens registrados en `tokens.json`.
+- **`scripts/build-lucide-tokens.js`** — regenera los tokens de icono Lucide incrustando los SVG como data URI.
+
+### Changed
+
+- **Los iconos se pintan con `mask-image` + `background-color: currentColor`**, no con `background-image`. Antes eran SVG externos con el color dentro del fichero: siempre negros, invisibles sobre fondo oscuro en los 6 temas. Los modificadores `--color-*` pasan de `filter:` (aproximaciones calculadas a ojo) a color exacto vía `--component-icon-color`.
+- **Iconos Lucide incrustados como data URI** (~17 KB). Chrome bloquea una máscara SVG de otro origen y con `file://` cada fichero es un origen opaco: el sitio abierto en local se quedaba sin iconos. Los SVG de `img/icons/lucide/` siguen siendo la fuente de verdad.
+- **Atoms, molecules, organisms y base reconectados a tokens**: sombras, radios, bordes, duraciones, anillos de foco y paletas de variante dejan de estar escritos a mano. Los valores por defecto reproducen el aspecto anterior, así que `example-01…06` no cambian.
+- Cabecera de `_icon-lucide.scss`: la licencia de Lucide es **ISC**, no Apache 2.0.
+
+### Fixed
+
+- **Ningún `bundle-*.scss` compilaba, en ninguno de los 6 temas.** `themes/_shared/_core.scss` y los `_shared/bundle-*.scss` no importaban nada (los mixins se resuelven en el fichero que los declara), y además `_core.scss` invocaba 13 helpers eliminados al migrar las clases `.syx-*` a `utilities/`. Los 30 bundles existentes compilan ya; con los 5 nuevos, 31 de 31.
+- **R03** — última `transition:` en crudo (`organisms/_home-tokens.scss:66`). R01–R04 quedan a 0 violaciones.
+- **R01** — 12 primitivos usados dentro de `organisms/_home-layers.scss` y 24 valores `oklch()` en `molecules/_theme-swatch-card.scss`.
+- Prefijo no oficial `--mol-*` (R07) en `_btn-group.scss` y `_label-group.scss` → `--component-*`.
+- Valores de custom property partidos en varias líneas: invisibles para cualquier parser por líneas, incluido `syx-validate.js` (R06).
+- `atoms/_code.scss` usaba `--semantic-border-radius-md`, que no existe en la escala (sm / default / lg / xl / 2xl) y resolvía a 0.
+- `base/_reset.scss`: dos `box-shadow: 0 0 0 rgb(255,255,255)` sin efecto en `a:focus` y `button:focus`.
+- `atoms/_breadcrumb.scss` tomaba su color de foco de `--component-form-field-border-focus` (acoplamiento indebido a formularios).
+
+### Known issues
+
+- **`example-01…05`: la luminosidad de varios tokens está fijada a `0.60`.** Afecta a `bg-secondary`, `bg-tertiary`, `bg-inverse` y a los tres `border-*`. Los comentarios contradicen los valores (`// deep indigo-black` sobre un gris medio). Consecuencia visible: el `<body>` de esos temas se pinta gris medio. No corregido para no alterar temas fuera del encargo.
+- `example-01…06` declaran `@font-face` de **Inter**, pero `fonts/` solo contiene Space Grotesk y Syne: la fuente cae al system font sin avisar.
+
+---
+
 ## [4.2.0] — 2026-04-03
 
 ### Added

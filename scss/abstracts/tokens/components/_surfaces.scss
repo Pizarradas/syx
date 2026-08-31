@@ -1,0 +1,65 @@
+// COMPONENT TOKENS: BASE SURFACES
+// ================================================
+// Elementos HTML sin clase que _elements.scss estilaba con
+// primitivos directos: blockquote, hr, code, pre y las celdas
+// de tabla. Sin estos tokens, un tema no podía cambiar el
+// aspecto de la documentación ni del código embebido.
+// ================================================
+
+:root {
+  // BLOCKQUOTE
+  // ================================================
+  --component-blockquote-bg: var(--primitive-color-gray-50);
+  --component-blockquote-color: var(--primitive-color-gray-600);
+  --component-blockquote-border-width: var(--primitive-border-width-4);
+  --component-blockquote-border-style: solid;
+  --component-blockquote-border-color: var(--semantic-color-primary);
+  --component-blockquote-border-radius: 0 var(--theme-radius) var(--theme-radius) 0;
+
+  // HR
+  // ================================================
+  --component-hr-thickness: var(--primitive-border-width-1);
+  --component-hr-color: var(--primitive-color-gray-200);
+  --component-hr-style: solid;
+
+  // CODE — inline
+  // ================================================
+  --component-code-inline-bg: var(--primitive-color-gray-100);
+  --component-code-inline-color: var(--primitive-color-red-600);
+  --component-code-inline-border-radius: 0.25rem;
+  --component-code-inline-border-width: var(--semantic-border-width-thin);
+  --component-code-inline-border-color: var(--semantic-color-border-subtle);
+  --component-code-inline-font-size: 0.9em;
+
+  // CODE — block
+  // ================================================
+  --component-code-bg: var(--primitive-color-gray-900);
+  --component-code-color: var(--primitive-color-gray-100);
+  --component-code-border-radius: var(--theme-radius);
+  --component-code-border-width: var(--semantic-border-width-thin);
+  --component-code-border-color: var(--semantic-color-border-subtle);
+  --component-code-font-size: 0.8125rem;
+  --component-code-line-height: 1.7;
+
+  // TABLE — celdas (complementa _tables.scss)
+  // ================================================
+  --component-table-base-border-width: var(--primitive-border-width-1);
+  --component-table-base-border-color: var(--primitive-color-gray-200);
+  --component-table-base-th-bg: var(--primitive-color-gray-50);
+  --component-table-base-th-color: var(--primitive-color-gray-800);
+  --component-table-base-th-border-width: var(--primitive-border-width-2);
+  --component-table-base-th-border-color: var(--primitive-color-gray-300);
+  --component-table-base-state-hover-bg: var(--primitive-color-gray-50);
+
+  // CODE — colores de sintaxis
+  // ================================================
+  // Elegidos contra --component-code-bg (siempre oscuro), no contra el
+  // fondo de la página. Por defecto reproducen los roles de marca que
+  // usaba _code.scss; un tema con colores de marca oscuros DEBE
+  // redefinirlos o el código se vuelve ilegible.
+  --component-code-syntax-tag: var(--semantic-color-primary);
+  --component-code-syntax-attr: var(--semantic-color-secondary);
+  --component-code-syntax-val: var(--semantic-color-tertiary);
+  --component-code-syntax-comment: var(--semantic-color-text-disabled);
+  --component-code-syntax-fn: var(--semantic-color-quaternary);
+}

@@ -17,7 +17,10 @@
       display: inline-flex;
       overflow: hidden;
       word-wrap: break-word;
-      @include transition(color 0.3s ease-in-out, box-shadow 0.3s ease-in-out);
+      @include transition(
+        color var(--semantic-duration-base) var(--semantic-easing-in-out),
+        box-shadow var(--semantic-duration-base) var(--semantic-easing-in-out)
+      );
       color: var(--component-link-primary-color);
       background-color: transparent;
       box-shadow: inset 0 0 0 0 var(--component-link-primary-bg-hover);
@@ -39,7 +42,8 @@
 
       // &:focus-visible
       &:focus-visible {
-        outline: 0.2rem solid var(--component-link-primary-shadow-focus);
+        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-link-primary-shadow-focus);
+        outline-offset: var(--semantic-focus-ring-offset);
       }
 
       // &:active

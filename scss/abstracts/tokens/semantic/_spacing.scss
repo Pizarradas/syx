@@ -49,4 +49,17 @@
   --semantic-space-stack-md: var(--primitive-space-3); // 24px
   --semantic-space-stack-lg: var(--primitive-space-4); // 32px
   --semantic-space-stack-xl: var(--primitive-space-6); // 48px
+
+  // Z-INDEX
+  // ================================================
+  // Escala de apilamiento. Antes solo existía como literales
+  // sueltos (9999 en el skip-link).
+  --semantic-z-index-base: 0;
+  --semantic-z-index-dropdown: 100;
+  --semantic-z-index-sticky: 200;
+  --semantic-z-index-overlay: 300;
+  --semantic-z-index-drawer: 400;
+  --semantic-z-index-modal: 500;
+  --semantic-z-index-toast: 600;
+  --semantic-z-index-skip-link: 9999;
 }

@@ -6,8 +6,23 @@
 :root {
   // ICON: SIZES
   // ================================================
-  --component-icon-size-sm: var(--semantic-space-component-sm); // 16px
-  --component-icon-size-md: calc(6 * var(--semantic-space-component-xs)); // 24px (default)
-  --component-icon-size-lg: var(--semantic-space-component-lg); // 32px
-  --component-icon-size-xl: calc(10 * var(--semantic-space-component-xs)); // 40px
+  // Tamaños reales, no tokens de espaciado.
+  // Estos cuatro apuntaban a --semantic-space-component-*, que es una escala
+  // FLUIDA (8-16px según el viewport). Resultado: en móvil los iconos de
+  // 16px medían 8×8 px — los del menú de navegación eran motas.
+  // Los comentarios ya decían 16/24/32/40; ahora los valores lo cumplen.
+  --component-icon-size-sm: 1rem;    // 16px
+  --component-icon-size-md: 1.5rem;  // 24px (por defecto)
+  --component-icon-size-lg: 2rem;    // 32px
+  --component-icon-size-xl: 2.5rem;  // 40px
+
+  // ICON: PINTADO
+  // ================================================
+  // Los iconos se pintan como máscara rellena de color, no como
+  // imagen de fondo. Así heredan `currentColor` y responden al
+  // tema y al modo oscuro. Antes eran SVG externos con su color
+  // dentro del fichero: siempre negros, invisibles sobre fondo
+  // oscuro en los 6 temas.
+  --component-icon-color: currentColor;
+  --component-icon-source: none;
 }

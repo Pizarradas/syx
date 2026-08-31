@@ -124,17 +124,24 @@
     --semantic-color-text-disabled: oklch(0.60 0.009 258.338);
 
     // Backgrounds — pure white + soft blue-tinted gray
+    // NOTA: estos seis tokens (3 fondos + 3 bordes) tenían la luminosidad
+    // fijada en 0.60, en contra de lo que dicen sus propios comentarios
+    // ("very faint", "deep indigo-black"). El <body> salía gris medio y
+    // arrastraba ~400 fallos de contraste en docs.html. Los *-500 de la
+    // sección de primitivos SÍ están a 0.60 a propósito: todos los colores
+    // de marca y estado comparten luminosidad, que es lo que hace que su
+    // contraste sea predecible.
     --semantic-color-bg-primary: oklch(1 0 0);
-    --semantic-color-bg-secondary: oklch(0.60 0.007 268.549); // very faint indigo tint
-    --semantic-color-bg-tertiary: oklch(0.60 0.015 269.986); // soft indigo wash
-    --semantic-color-bg-inverse: oklch(0.60 0.059 280.513); // deep indigo-black
+    --semantic-color-bg-secondary: oklch(0.98 0.007 268.549); // very faint indigo tint
+    --semantic-color-bg-tertiary: oklch(0.96 0.015 269.986); // soft indigo wash
+    --semantic-color-bg-inverse: oklch(0.20 0.059 280.513); // deep indigo-black
 
     // Borders — cool grays
-    --semantic-color-border-subtle: oklch(0.60 0.006 264.531);
+    --semantic-color-border-subtle: oklch(0.92 0.006 264.531);
     --semantic-border-width: 1px;
     --semantic-outline-width: var(--theme-focus-ring-width);
-    --semantic-color-border-default: oklch(0.60 0.009 258.338);
-    --semantic-color-border-strong: oklch(0.60 0.019 261.325);
+    --semantic-color-border-default: oklch(0.87 0.009 258.338);
+    --semantic-color-border-strong: oklch(0.78 0.019 261.325);
 
     // State
     --semantic-focus-ring-color: var(--semantic-color-primary);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-syx-theme="example-01">
+<html lang="en" data-syx-theme="syx-sketch">
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <!-- Primary meta -->
   <title>SYX Design System — CSS Tokens, @layer &amp; Atomic Design</title>
   <meta name="description"
-    content="SYX is a modular CSS design system with zero external dependencies, built on a 7-layer token architecture, Atomic Design and native CSS @layer. 6 themes. WCAG AA compliant.">
+    content="SYX is a modular CSS design system with zero external dependencies, built on a 7-layer token architecture, Atomic Design and native CSS @layer. 7 themes. WCAG AA compliant.">
   <meta name="author" content="José Luis Pizarro">
   <meta name="keywords"
     content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, AI First, AI-operable, agent workflows">
@@ -20,25 +20,27 @@
   <meta property="og:site_name" content="SYX Design System">
   <meta property="og:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta property="og:description"
-    content="Modular CSS design system with zero external dependencies. 7-layer token architecture (Primitive, Semantic, Component + Layout, Reset, Icon, Theme), Atomic Design, native @layer. 6 themes. WCAG AA.">
+    content="Modular CSS design system with zero external dependencies. 7-layer token architecture (Primitive, Semantic, Component + Layout, Reset, Icon, Theme), Atomic Design, native @layer. 7 themes. WCAG AA.">
   <meta property="og:url" content="https://github.com/Pizarradas/syx">
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SYX Design System — CSS Tokens, @layer &amp; Atomic Design">
   <meta name="twitter:description"
-    content="Modular CSS design system — zero dependencies, 7-layer tokens, Atomic Design, native @layer. 6 themes. WCAG AA.">
+    content="Modular CSS design system — zero dependencies, 7-layer tokens, Atomic Design, native @layer. 7 themes. WCAG AA.">
   <meta name="twitter:creator" content="@Pizarradas">
 
   <!-- Theme color (mobile browser chrome) -->
   <meta name="theme-color" content="#6d28d9">
 
   <!-- Theme stylesheet — swapped by JS on theme change -->
-  <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-example-01.css">
+  <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-syx-sketch.css">
 
 </head>
 
-<body class="syx syx--theme-example-01">
+<body class="syx syx--theme-syx-sketch">
+
+  <a href="#main-content" class="syx-skip-link">Skip to main content</a>
 
   <!-- =============================================
        MOBILE NAV OVERLAY + DRAWER
@@ -82,6 +84,7 @@
     <div class="org-site-nav-drawer__theme">
       <label for="theme-switcher-mobile">Theme</label>
       <select id="theme-switcher-mobile" class="atom-select" aria-label="Switch theme">
+        <option value="syx-sketch">SYX — Blueprint</option>
         <option value="example-01">01 — Indigo</option>
         <option value="example-02">02 — Purple</option>
         <option value="example-03">03 — Coral</option>
@@ -118,6 +121,7 @@
       <!-- Theme select — desktop only -->
       <div class="org-site-header__theme-select">
         <select id="theme-switcher" class="atom-select" aria-label="Switch theme">
+          <option value="syx-sketch">SYX &mdash; Blueprint</option>
           <option value="example-01">01 &mdash; Indigo</option>
           <option value="example-02">02 &mdash; Purple</option>
           <option value="example-03">03 &mdash; Coral</option>
@@ -156,6 +160,8 @@
   <!-- =============================================
        HERO
        ============================================= -->
+  <main id="main-content" role="main">
+
   <section class="org-home-hero" id="hero" aria-labelledby="hero-headline">
 
     <span class="org-home-hero__overline">
@@ -176,7 +182,7 @@
 
     <div class="org-home-hero__badge-row" aria-label="Key capabilities">
       <span class="atom-pill atom-pill--neutral">Zero dependencies</span>
-      <span class="atom-pill atom-pill--neutral">6 themes</span>
+      <span class="atom-pill atom-pill--neutral">7 themes</span>
       <span class="atom-pill atom-pill--neutral">@layer native</span>
       <span class="atom-pill atom-pill--neutral">WCAG AA</span>
       <span class="atom-pill atom-pill--neutral">Dart Sass</span>
@@ -205,7 +211,7 @@
         <span class="atom-stat__label">Molecules</span>
       </div>
       <div class="atom-stat">
-        <span class="atom-stat__number">6</span>
+        <span class="atom-stat__number">7</span>
         <span class="atom-stat__label">Themes</span>
       </div>
       <div class="atom-stat">
@@ -283,7 +289,7 @@
         </span>
         <h3 class="mol-feature-card__title">Multi-theme, Zero Duplication</h3>
         <p class="mol-feature-card__body">
-          6 production-ready themes. Each redefines only its semantic tokens — components never change.
+          7 production-ready themes. Each redefines only its semantic tokens — components never change.
           Switching theme is a single HTML attribute change.
         </p>
       </article>
@@ -540,7 +546,7 @@
       <span class="org-home-themes__overline">
         <span class="atom-pill atom-pill--subtle">Production-ready multi-theming</span>
       </span>
-      <h2 class="org-home-themes__title" id="themes-title">6 themes, zero component changes</h2>
+      <h2 class="org-home-themes__title" id="themes-title">7 themes, zero component changes</h2>
       <p class="org-home-themes__sub">
         Each theme redefines only the semantic tokens. Components stay intact.
         Activate a theme by selecting it in the header — or set <code>data-syx-theme="example-XX"</code>
@@ -550,8 +556,20 @@
 
     <div class="org-home-themes__grid" role="list" aria-label="Available SYX themes">
 
-      <div class="mol-theme-card is-active" role="listitem" data-theme="example-01" tabindex="0"
-        aria-label="Theme 01 — Indigo / Amber (active)">
+      <div class="mol-theme-card is-active" role="listitem" data-theme="syx-sketch" tabindex="0"
+        aria-label="Theme SYX — Blueprint (active)">
+        <div class="mol-theme-card__swatch mol-theme-card__swatch--sketch" aria-hidden="true"></div>
+        <div class="mol-theme-card__body">
+          <span class="mol-theme-card__name">Blueprint</span>
+          <div class="mol-theme-card__colors" aria-hidden="true">
+            <span class="mol-theme-card__dot mol-theme-card__dot--sketch-a"></span>
+            <span class="mol-theme-card__dot mol-theme-card__dot--sketch-b"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mol-theme-card" role="listitem" data-theme="example-01" tabindex="0"
+        aria-label="Theme 01 — Indigo / Amber">
         <div class="mol-theme-card__swatch mol-theme-card__swatch--01" aria-hidden="true"></div>
         <div class="mol-theme-card__body">
           <span class="mol-theme-card__name">Indigo / Amber</span>
@@ -893,7 +911,7 @@
 
     <code class="org-home-cta__code" aria-label="Compilation command">
       <span class="atom-icon atom-icon--lc-terminal" aria-hidden="true"></span>
-      sass scss/themes/example-01/bundle-home.scss css/theme-01-bundle-home.css
+      sass scss/themes/syx-sketch/bundle-home.scss css/styles-theme-syx-sketch.css
     </code>
 
   </section>
@@ -902,6 +920,8 @@
   <!-- =============================================
        FOOTER
        ============================================= -->
+  </main>
+
   <footer class="org-home-footer" role="contentinfo">
     <div class="org-home-footer__inner">
 
@@ -945,6 +965,7 @@
       // ── Constants ────────────────────────────────
       // Map each theme key to its compiled CSS filename
       var THEME_CSS = {
+        'syx-sketch': 'css/styles-theme-syx-sketch.css',
         'example-01': 'css/styles-theme-example-01.css',
         'example-02': 'css/styles-theme-example-02.css',
         'example-03': 'css/styles-theme-example-03.css',
@@ -978,6 +999,11 @@
 
         // 2. Keep data attribute for reference
         root.setAttribute('data-syx-theme', theme);
+
+        // 2b. La clase del <body> se quedaba en el tema inicial al cambiar de
+        //     tema, así que body y hoja de estilos se contradecían.
+        body.className = body.className.replace(/\bsyx--theme-[a-z0-9-]+\b/g, '').trim();
+        body.classList.add('syx--theme-' + theme);
 
         // 3. Sync selects
         if (selDesk) selDesk.value = theme;

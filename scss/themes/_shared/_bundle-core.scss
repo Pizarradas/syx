@@ -23,6 +23,16 @@
 // Bundle size goal: < 120KB uncompressed, < 50KB gzip.
 // ================================================
 
+// Los mixins que este bundle invoca viven en otros ficheros: sin
+// estos @use, Sass los resuelve como indefinidos (los mixins se
+// resuelven en el fichero que los declara, no en el que lo incluye).
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+
 @mixin syx-bundle-core($theme: null) {
 
   // ATOMS — production essentials only

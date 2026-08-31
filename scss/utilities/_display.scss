@@ -358,9 +358,12 @@
   // ANIMATIONS
   // ================================================
   .syx-fade-in {
+    // NOTE: la curva cubic-bezier(0.39, 0.575, 0.565, 1) (easeOutSine) no
+    // coincide con ninguna de las curvas semánticas actuales
+    // (standard/out/in-out/linear), por lo que se mantiene literal.
     @include animate(
       fadeIn,
-      1.2s,
+      var(--semantic-duration-slow),
       cubic-bezier(0.39, 0.575, 0.565, 1),
       null,
       null,

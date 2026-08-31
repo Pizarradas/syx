@@ -12,12 +12,14 @@
   @layer syx.organisms {
 
   .org-home-themes {
-    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
+    padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
     background-color: var(--semantic-color-bg-secondary);
+    background-image: var(--component-section-bg-image);
 
     // &__header
     &__header {
-      text-align: center;
+      text-align: var(--component-section-align);
       margin-bottom: var(--semantic-space-layout-lg);
 
       .org-home-themes__overline {
@@ -27,19 +29,20 @@
 
       .org-home-themes__title {
         font-family: var(--semantic-font-family-heading);
-        font-size: clamp(1.75rem, 4vw, 2.75rem);
-        line-height: var(--semantic-line-height-heading);
-        font-weight: var(--semantic-font-weight-black);
+        font-size: var(--component-section-title-font-size);
+        line-height: var(--component-section-title-leading);
+        font-weight: var(--component-section-title-weight);
         color: var(--semantic-color-text-primary);
-        letter-spacing: -0.025em;
-        margin: 0 auto var(--semantic-space-component-md);
-        max-width: 30ch;
+        letter-spacing: var(--component-section-title-tracking);
+        margin-inline: var(--component-section-header-margin-inline);
+        margin-block-end: var(--semantic-space-component-md);
+        max-width: var(--component-section-title-max-width);
       }
 
       .org-home-themes__sub {
         color: var(--semantic-color-text-secondary);
         max-width: 55ch;
-        margin: 0 auto;
+        margin-inline: var(--component-section-header-margin-inline);
         line-height: var(--semantic-line-height-body);
       }
     }
@@ -47,19 +50,20 @@
     // &__grid — 5-col responsive grid
     &__grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--component-theme-grid-min)), 1fr));
       gap: var(--semantic-space-component-md);
       max-width: 72rem;
-      margin: 0 auto var(--semantic-space-layout-lg);
+      margin-inline: var(--component-section-header-margin-inline);
+        margin-block-end: var(--semantic-space-layout-lg);
     }
 
     // &__note — info below the grid
     &__note {
-      text-align: center;
+      text-align: var(--component-section-align);
       font-size: var(--semantic-font-size-body-small);
       color: var(--semantic-color-text-secondary);
       max-width: 55ch;
-      margin: 0 auto;
+      margin-inline: var(--component-section-header-margin-inline);
       line-height: var(--semantic-line-height-body);
     }
   }

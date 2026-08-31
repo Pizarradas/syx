@@ -24,9 +24,25 @@
   // CARD SHADOW
   // ================================================
   // Subtle multi-layer shadow for card surfaces
-  --semantic-shadow-card:
-    0 1px 3px oklch(0 0 0 / 0.04),
-    0 4px 12px oklch(0 0 0 / 0.03);
+  --semantic-shadow-card: 0 1px 3px oklch(0 0 0 / 0.04), 0 4px 12px oklch(0 0 0 / 0.03);
+
+  // HARD / OFFSET SHADOWS  (blueprint · sketch)
+  // ================================================
+  // Sombra sólida sin difuminado: el "papel levantado" del
+  // lenguaje boceto. Los temas que no lo usen simplemente
+  // no consumen estos tokens.
+  --semantic-shadow-hard-color: var(--semantic-color-border-strong);
+  --semantic-shadow-hard-offset: 0.25rem; // 4px
+  --semantic-shadow-hard-sm: calc(var(--semantic-shadow-hard-offset) / 2) calc(var(--semantic-shadow-hard-offset) / 2) 0 0 var(--semantic-shadow-hard-color);
+  --semantic-shadow-hard: var(--semantic-shadow-hard-offset) var(--semantic-shadow-hard-offset) 0 0 var(--semantic-shadow-hard-color);
+  --semantic-shadow-hard-lg: calc(var(--semantic-shadow-hard-offset) * 1.5) calc(var(--semantic-shadow-hard-offset) * 1.5) 0 0 var(--semantic-shadow-hard-color);
+
+  // BLUEPRINT GRID  (retícula de fondo)
+  // ================================================
+  // Papel milimetrado. `--semantic-bg-grid-color: transparent`
+  // lo desactiva sin tocar ningún componente.
+  --semantic-bg-grid-size: 1.5rem;
+  --semantic-bg-grid-color: transparent;
+  --semantic-bg-grid-width: 1px;
+  --semantic-bg-grid: repeating-linear-gradient( to right, var(--semantic-bg-grid-color) 0, var(--semantic-bg-grid-color) var(--semantic-bg-grid-width), transparent var(--semantic-bg-grid-width), transparent var(--semantic-bg-grid-size) ), repeating-linear-gradient( to bottom, var(--semantic-bg-grid-color) 0, var(--semantic-bg-grid-color) var(--semantic-bg-grid-width), transparent var(--semantic-bg-grid-width), transparent var(--semantic-bg-grid-size) );
 }
-
-

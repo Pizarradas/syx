@@ -12,9 +12,10 @@
   @layer syx.organisms {
 
   .org-home-footer {
-    padding: var(--semantic-space-layout-md) var(--semantic-space-layout-md);
-    border-top: 1px solid var(--semantic-color-border-subtle);
-    background-color: var(--semantic-color-bg-primary);
+    padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
+    border-top: var(--component-footer-border-width) solid var(--component-footer-border-color);
+    background-color: var(--component-footer-bg);
 
     // &__inner — flex row
     &__inner {
@@ -75,7 +76,7 @@
       font-size: var(--semantic-font-size-body-small);
       color: var(--semantic-color-text-secondary);
       text-decoration: none;
-      @include transition(color 0.2s ease);
+      @include transition(color var(--semantic-duration-base) var(--semantic-easing-standard));
 
       &:hover {
         color: var(--semantic-color-primary);
@@ -85,8 +86,8 @@
     // &__divider
     &__divider {
       width: 100%;
-      height: 1px;
-      background-color: var(--semantic-color-border-subtle);
+      height: var(--component-section-divider-width);
+      background-color: var(--component-section-divider-color);
       margin: var(--semantic-space-component-md) 0;
     }
 
@@ -97,7 +98,7 @@
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);
       padding-top: var(--semantic-space-component-md);
-      border-top: 1px solid var(--semantic-color-border-subtle);
+      border-top: var(--component-section-divider-width) solid var(--component-section-divider-color);
     }
   }
 

@@ -35,7 +35,14 @@
 
     // > *
     > * {
-      word-break: break-word;
+      // `word-break: break-word` es un valor obsoleto y no estándar que se
+      // comporta como `overflow-wrap: anywhere`: parte palabras por la mitad
+      // AUNQUE quepan enteras en la línea siguiente. Por eso un titular como
+      // "Theme Architecture" salía "Theme Architect / ure".
+      // `overflow-wrap: break-word` solo parte cuando la palabra no cabe de
+      // ninguna manera, que es lo que se quería.
+      word-break: normal;
+      overflow-wrap: break-word;
     }
 
     // &__col

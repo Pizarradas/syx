@@ -110,4 +110,32 @@
   // Large (Scope 3)
   --component-button-size-lg: var(--semantic-space-component-lg); // 32px
   --component-button-font-size-lg: var(--semantic-font-size-h6);
+
+  // BUTTON: FORMA Y MOVIMIENTO
+  // ================================================
+  // Extraído de _btn.scss, donde estaba hardcodeado.
+  // Es lo que permite a un tema pasar de "botón redondeado
+  // con sombra difusa" a "botón cuadrado con sombra dura".
+  --component-button-border-radius-circle: var(--semantic-border-radius-circle);
+  --component-button-border-style: solid;
+  --component-button-shadow: var(--semantic-shadow-none);
+  --component-button-shadow-hover: var(--semantic-shadow-none);
+  --component-button-shadow-active: var(--semantic-shadow-none);
+  --component-button-transition-duration: var(--semantic-duration-base);
+  --component-button-transition-easing: var(--semantic-easing-standard);
+  // Desplazamiento al pulsar. Con sombra dura, este offset
+  // debe igualar el de la sombra para simular el "click" físico.
+  --component-button-active-offset-x: 0;
+  --component-button-active-offset-y: 1px;
+  // Duración del `transform` al pulsar: más corta que el resto
+  // para que el feedback táctil no se sienta blando.
+  --component-button-transition-duration-active: 0.1s;
+  --component-btn-group-gap: 1rem;
+
+  // BUTTON: DESHABILITADO
+  // ================================================
+  --component-button-disabled-bg: var(--semantic-color-state-disabled);
+  --component-button-disabled-border: var(--semantic-color-state-disabled);
+  --component-button-disabled-color: var(--semantic-color-text-disabled);
+  --component-button-disabled-filled-color: var(--semantic-color-text-inverse);
 }

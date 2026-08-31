@@ -1,3 +1,10 @@
+// NOTA: los colores de sintaxis salían de los roles de marca
+// (primary / secondary / tertiary / quaternary). Esos roles están
+// pensados para el fondo de la PÁGINA, pero el bloque de código
+// siempre tiene fondo oscuro: en cuanto un tema elige un color de
+// marca oscuro, el token se vuelve invisible sobre el código. Ahora
+// hay tokens propios, elegidos contra la superficie del código.
+
 // CORE
 // ===============================================
 @use "../abstracts/index" as *;
@@ -11,16 +18,21 @@
 @mixin atom-code($theme: null) {
   @layer syx.atoms {
     .atom-code {
-      background: var(--semantic-color-bg-inverse);
-      color: var(--semantic-color-text-inverse);
+      // Antes usaba --semantic-color-bg-inverse / -text-inverse. En modo
+      // oscuro esos roles se invierten (el "inverso" de una página oscura
+      // es claro), así que el bloque de código se volvía BLANCO y los
+      // colores de sintaxis, pensados para fondo oscuro, desaparecían.
+      // El código siempre es superficie oscura: tiene sus propios tokens.
+      background: var(--component-code-bg);
+      color: var(--component-code-color);
       font-family: var(--semantic-font-family-mono);
-      font-size: 0.8125rem;
-      line-height: 1.7;
+      font-size: var(--component-code-font-size);
+      line-height: var(--component-code-line-height);
       padding: var(--semantic-space-layout-md);
-      border-radius: var(--semantic-border-radius-md);
+      border-radius: var(--component-code-border-radius);
       overflow-x: auto;
       white-space: pre;
-      border: 1px solid var(--semantic-color-border-subtle);
+      border: var(--component-code-border-width) solid var(--component-code-border-color);
       margin-bottom: var(--semantic-space-layout-sm);
       display: block;
       max-width: 100%;
@@ -28,28 +40,28 @@
       // Syntax highlight tokens
       // Usage: <span class="atom-code__tag">div</span>
       &__tag {
-        color: var(--semantic-color-primary);
+        color: var(--component-code-syntax-tag);
       }
 
       // html tags
       &__attr {
-        color: var(--semantic-color-secondary);
+        color: var(--component-code-syntax-attr);
       }
 
       // attributes
       &__val {
-        color: var(--semantic-color-tertiary);
+        color: var(--component-code-syntax-val);
       }
 
       // values
       &__cmt {
-        color: var(--semantic-color-text-disabled);
+        color: var(--component-code-syntax-comment);
         font-style: italic;
       }
 
       // comments
       &__cls {
-        color: var(--semantic-color-quaternary);
+        color: var(--component-code-syntax-fn);
       }
 
       // class names
@@ -58,12 +70,12 @@
       &--inline {
         display: inline;
         padding: 0.1em 0.4em;
-        font-size: 0.8em;
-        border-radius: 4px;
+        font-size: var(--component-code-inline-font-size);
+        border-radius: var(--component-code-inline-border-radius);
         white-space: nowrap;
         background: var(--semantic-color-bg-tertiary);
         color: var(--semantic-color-text-primary);
-        border: 1px solid var(--semantic-color-border-subtle);
+        border: var(--component-code-inline-border-width) solid var(--component-code-inline-border-color);
       }
     }
   }

@@ -28,6 +28,33 @@
         background-size: contain;
       }
 
+      // Alias cortos de superficie. docs.html los usa 30 veces y no
+      // existían: la clase no pintaba nada y el texto blanco que llevan
+      // encima quedaba sobre fondo blanco.
+      &-white {
+        background-color: var(--semantic-color-bg-primary);
+      }
+
+      &-dark {
+        // Literal, NO --semantic-color-bg-inverse: el "inverso" de una página
+        // oscura es claro, así que en modo oscuro esta utilidad se volvía
+        // blanca y el .syx-text-white que lleva encima desaparecía.
+        // "dark" significa oscuro siempre.
+        background-color: var(--primitive-color-gray-900);
+      }
+
+      &-gray-50 {
+        background-color: var(--semantic-color-bg-secondary);
+      }
+
+      &-gray-100 {
+        background-color: var(--semantic-color-bg-tertiary);
+      }
+
+      &-gray-200 {
+        background-color: var(--semantic-color-border-subtle);
+      }
+
       // color
       &-color {
         // &-black

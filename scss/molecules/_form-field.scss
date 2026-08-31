@@ -87,7 +87,10 @@
         border-color: var(--component-form-field-error-border);
         &:focus {
            border-color: var(--component-form-field-error-border);
-           box-shadow: 0 0 0 1px var(--component-form-field-error-border);
+           box-shadow: var(
+             --component-form-field-error-shadow-focus,
+             0 0 0 1px var(--component-form-field-error-border)
+           );
         }
       }
 

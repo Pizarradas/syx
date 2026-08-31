@@ -45,15 +45,21 @@ table {
   
   th, td {
     padding: var(--layout-pad-2) var(--layout-pad-3);
-    border-bottom: 1px solid var(--primitive-color-gray-200);
+    border-bottom:
+      var(--component-table-base-border-width)
+      solid
+      var(--component-table-base-border-color);
     text-align: left;
   }
 
   th {
-    font-family: var(--primitive-font-family-syne-bold);
-    color: var(--primitive-color-gray-800);
-    border-bottom: 2px solid var(--primitive-color-gray-300);
-    background-color: var(--primitive-color-gray-50);
+    font-family: var(--semantic-font-family-heading);
+    color: var(--component-table-base-th-color);
+    border-bottom:
+      var(--component-table-base-th-border-width)
+      solid
+      var(--component-table-base-th-border-color);
+    background-color: var(--component-table-base-th-bg);
   }
 
   td {
@@ -62,7 +68,7 @@ table {
 
   // Hover effect on rows
   tbody tr:hover {
-    background-color: var(--primitive-color-gray-50);
+    background-color: var(--component-table-base-state-hover-bg);
   }
 }
 
@@ -88,40 +94,43 @@ a:not([class*="atom-btn"]) {
 }
 
 blockquote {
-  border-left: 4px solid var(--semantic-color-primary);
+  border-left:
+    var(--component-blockquote-border-width)
+    var(--component-blockquote-border-style)
+    var(--component-blockquote-border-color);
   padding-left: var(--layout-pad-4);
   margin-left: 0;
   margin-right: 0;
   font-style: italic;
-  color: var(--primitive-color-gray-600);
-  background: var(--primitive-color-gray-50);
+  color: var(--component-blockquote-color);
+  background: var(--component-blockquote-bg);
   padding: var(--layout-pad-3);
-  border-radius: 0 var(--theme-radius) var(--theme-radius) 0;
+  border-radius: var(--component-blockquote-border-radius);
 }
 
 hr {
   border: 0;
-  height: 1px;
-  background: var(--primitive-color-gray-200);
+  height: var(--component-hr-thickness);
+  background: var(--component-hr-color);
   margin: var(--layout-gap-5) 0;
 }
 
 // CODE
 // ===============================================
 code {
-  background: var(--primitive-color-gray-100);
-  color: var(--primitive-color-red-600);
+  background: var(--component-code-inline-bg);
+  color: var(--component-code-inline-color);
   padding: 0.2em 0.4em;
-  border-radius: 4px;
-  font-size: 0.9em;
-  font-family: monospace;
+  border-radius: var(--component-code-inline-border-radius);
+  font-size: var(--component-code-inline-font-size);
+  font-family: var(--semantic-font-family-mono);
 }
 
 pre {
-  background: var(--primitive-color-gray-900);
-  color: var(--primitive-color-gray-100);
+  background: var(--component-code-bg);
+  color: var(--component-code-color);
   padding: var(--layout-pad-3);
-  border-radius: var(--theme-radius);
+  border-radius: var(--component-code-border-radius);
   overflow-x: auto;
   margin-bottom: var(--layout-gap-3);
 

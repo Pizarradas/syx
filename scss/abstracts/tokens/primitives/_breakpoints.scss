@@ -2,15 +2,29 @@
 // ===============================================
 // Mobile-first breakpoint system
 // These are the foundation breakpoint values used across the design system
+//
+// EN `em`, PARA CUADRAR CON $syx-breakpoints
+// Este mapa es la capa de primitivos; el que usan de verdad las media
+// queries es $syx-breakpoints (abstracts/mixins/_media-queries.scss), que
+// ya estaba en `em`. Tenerlos en px aquí y en em allí significaba que
+// `@include breakpoint(xl)` y `$breakpoint-xl` no cortaban en el mismo
+// sitio si alguien usaba el alias legacy en una media query propia.
+//
+// Por qué em y no px: los `em` de una media query se calculan sobre el
+// tamaño de letra POR DEFECTO DEL NAVEGADOR (16 px salvo que el usuario lo
+// cambie), no sobre el `font-size` de :root. Así, si alguien pone su
+// navegador en "letra muy grande", el breakpoint se mueve con él y el
+// layout cambia cuando debe. Verificado: con la fuente por defecto a 32 px,
+// `min-width: 80em` deja de cumplirse y la nav pasa a hamburguesa.
 // ===============================================
 
 // Breakpoint primitive tokens
 $token-breakpoint-xs: 0;
-$token-breakpoint-sm: 600px;      // 37.5em - Small devices (phones)
-$token-breakpoint-md: 768px;      // 48em - Medium devices (tablets)
-$token-breakpoint-lg: 1024px;     // 64em - Large devices (laptops)
-$token-breakpoint-xl: 1280px;     // 80em - Extra large devices (desktops)
-$token-breakpoint-xxl: 1440px;    // 90em - Extra extra large devices (wide screens)
+$token-breakpoint-sm: 37.5em;     // 600px  - Small devices (phones)
+$token-breakpoint-md: 48em;       // 768px  - Medium devices (tablets)
+$token-breakpoint-lg: 64em;       // 1024px - Large devices (laptops)
+$token-breakpoint-xl: 80em;       // 1280px - Extra large devices (desktops)
+$token-breakpoint-xxl: 90em;      // 1440px - Extra extra large devices (wide screens)
 
 // Breakpoint map for iteration
 $token-breakpoints: (

@@ -133,4 +133,35 @@
   --component-switch-icon-on: var(--icon-check); // Ensure these exist or use semantic icons
   --component-switch-icon-off: var(--icon-close);
   --component-switch-status-icon-filter: brightness(0) invert(1); // For white icons
+
+  // FORM CONTROLS: MOVIMIENTO Y MARCAS
+  // ================================================
+  // Duraciones y curvas que antes vivían como literales en
+  // _form, _check, _radio y _switch.
+  --component-form-field-transition-duration: var(--semantic-duration-fast);
+  --component-form-field-transition-easing: var(--semantic-easing-standard);
+
+  // CHECK — la marca de verificación
+  --component-check-mark-width: 0.3125rem;  // 5px
+  --component-check-mark-height: 0.5625rem; // 9px
+  --component-check-mark-thickness: var(--primitive-border-width-2);
+  --component-check-mark-rotation: 45deg;
+  --component-check-transition-duration: var(--semantic-duration-fast);
+  --component-check-transition-easing: var(--semantic-easing-out);
+  --component-check-status-disabled-opacity: var(--primitive-opacity-50);
+
+  // RADIO
+  --component-radio-border-radius: var(--semantic-border-radius-circle);
+  --component-radio-dot-border-radius: var(--semantic-border-radius-circle);
+  --component-radio-transition-duration: var(--semantic-duration-fast);
+  --component-radio-transition-easing: var(--semantic-easing-out);
+  --component-radio-status-disabled-opacity: var(--primitive-opacity-50);
+
+  // SWITCH
+  --component-switch-border-radius: var(--semantic-border-radius-full);
+  --component-switch-slider-shadow: var(--semantic-shadow-sm);
+  --component-switch-transition-duration: var(--semantic-duration-base);
+  --component-switch-transition-easing: var(--semantic-easing-out);
+  --component-form-field-error-shadow-focus: 0 0 0 1px var(--component-form-field-error-border);
+  --component-form-field-set-min-width: 12.5rem;
 }

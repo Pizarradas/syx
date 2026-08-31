@@ -122,7 +122,7 @@
       -webkit-text-decoration-skip: objects;
 
       &:focus {
-        box-shadow: 0 0 0 rgb(255, 255, 255);
+        box-shadow: var(--semantic-shadow-none);
       }
 
       &:active {
@@ -138,7 +138,7 @@
       text-transform: none;
 
       &:focus {
-        box-shadow: 0 0 0 rgb(255, 255, 255);
+        box-shadow: var(--semantic-shadow-none);
       }
     }
 
@@ -156,7 +156,7 @@
     kbd,
     samp,
     pre {
-      font-family: monospace, monospace;
+      font-family: var(--semantic-font-family-mono);
       font-size: 1em;
     }
 
@@ -365,7 +365,7 @@
       min-height: 13rem;
       font-size: inherit;
       line-height: inherit;
-      border-radius: 0;
+      border-radius: var(--component-form-field-border-radius);
     }
 
     // -----------------------------------------------

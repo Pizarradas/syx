@@ -87,7 +87,14 @@
         &:focus-visible {
           color: var(--semantic-color-primary);
           border-bottom-color: var(--semantic-color-primary);
-          outline: none;
+        }
+        
+        // Anillo de foco real. Antes esta regla hacía `outline: none` y
+        // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
+        // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
+        &:focus-visible {
+          outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+          outline-offset: var(--semantic-focus-ring-offset);
         }
       }
     }
@@ -130,7 +137,14 @@
       &:hover,
       &:focus-visible {
         background-color: var(--semantic-color-bg-secondary);
-        outline: none;
+      }
+      
+      // Anillo de foco real. Antes esta regla hacía `outline: none` y
+      // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
+      // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
+      &:focus-visible {
+        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+        outline-offset: var(--semantic-focus-ring-offset);
       }
 
       // Three burger lines
@@ -213,7 +227,14 @@
       &:focus-visible {
         background-color: var(--semantic-color-bg-secondary);
         color: var(--semantic-color-primary);
-        outline: none;
+      }
+      
+      // Anillo de foco real. Antes esta regla hacía `outline: none` y
+      // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
+      // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
+      &:focus-visible {
+        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+        outline-offset: var(--semantic-focus-ring-offset);
       }
     }
 
@@ -253,7 +274,14 @@
       background-color: var(--semantic-color-bg-secondary);
       color: var(--semantic-color-primary);
       border-color: var(--semantic-color-primary);
-      outline: none;
+    }
+    
+    // Anillo de foco real. Antes esta regla hacía `outline: none` y
+    // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
+    // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
+    &:focus-visible {
+      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+      outline-offset: var(--semantic-focus-ring-offset);
     }
 
     .atom-icon { pointer-events: none; }

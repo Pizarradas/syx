@@ -117,10 +117,16 @@
             width: 100%;
             background: transparent;
             margin: 0.5rem 0;
+            /* El área de pulsación medía 4 px de alto: lo que mide la barra.
+               WCAG 2.5.8 pide 24. La barra sigue viéndose fina; lo que crece
+               es la zona sensible, invisible pero es la que se toca. */
+            height: 1.5rem;
+            cursor: pointer;
         }
 
-        .theme-builder__control input[type="range"]:focus {
-            outline: none;
+        .theme-builder__control input[type="range"]:focus-visible {
+            outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+            outline-offset: var(--semantic-focus-ring-offset);
         }
 
         /* WebKit Track */

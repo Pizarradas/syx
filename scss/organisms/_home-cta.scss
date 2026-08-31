@@ -12,9 +12,14 @@
   @layer syx.organisms {
 
   .org-home-cta {
+    border-block: var(--component-cta-border-block-width) solid var(--component-cta-border-color);
+    // Reasigna la sombra dura dentro de la sección: el valor
+    // global es tinta y aquí el fondo puede ser oscuro.
+    --semantic-shadow-hard-color: var(--component-cta-shadow-hard-color);
     position: relative;
     overflow: hidden;
-    padding: var(--semantic-space-layout-xl) var(--semantic-space-layout-md);
+    padding-block: var(--component-section-padding-block);
+    padding-inline: var(--component-section-padding-inline);
     text-align: center;
 
     // Gradient background
@@ -22,21 +27,20 @@
       content: '';
       @include absolute($top: 0, $left: 0);
       @include size(100%);
-      background: linear-gradient(
-        135deg,
-        var(--semantic-color-primary) 0%,
-        var(--semantic-color-secondary, color-mix(in srgb, var(--semantic-color-primary) 70%, #3b82f6)) 100%
-      );
+      background-image: var(--component-cta-bg);
       z-index: 0;
     }
 
     // Decorative circle
     &::after {
       content: '';
-      @include absolute($top: -4rem, $right: -4rem);
-      @include size(20rem);
-      background: color-mix(in srgb, white 8%, transparent);
-      border-radius: 50%;
+      @include absolute(
+        $top: var(--component-cta-decor-top),
+        $right: var(--component-cta-decor-right)
+      );
+      @include size(var(--component-cta-decor-size));
+      background: var(--component-cta-decor-bg);
+      border-radius: var(--component-cta-decor-radius);
       z-index: 0;
       pointer-events: none;
     }
@@ -51,7 +55,7 @@
     &__overline {
       display: block;
       margin-bottom: var(--semantic-space-component-md);
-      color: color-mix(in srgb, white 75%, transparent);
+      color: var(--component-cta-overline-color);
       font-size: var(--semantic-font-size-overline);
       font-weight: var(--semantic-font-weight-bold);
       letter-spacing: 0.1em;
@@ -61,10 +65,10 @@
     // &__headline
     &__headline {
       font-family: var(--semantic-font-family-heading);
-      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-size: var(--component-cta-headline-font-size);
       line-height: var(--semantic-line-height-heading);
       font-weight: var(--semantic-font-weight-black);
-      color: white;
+      color: var(--component-cta-color);
       letter-spacing: -0.025em;
       margin: 0 auto var(--semantic-space-component-md);
       max-width: 28ch;
@@ -74,7 +78,7 @@
     &__sub {
       font-size: var(--semantic-font-size-body);
       line-height: var(--semantic-line-height-body);
-      color: color-mix(in srgb, white 80%, transparent);
+      color: var(--component-cta-sub-color);
       max-width: 52ch;
       margin: 0 auto var(--semantic-space-layout-md);
     }
@@ -94,12 +98,12 @@
       gap: var(--semantic-space-component-sm);
       margin-top: var(--semantic-space-layout-sm);
       padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
-      border-radius: 0.5rem;
-      background-color: color-mix(in srgb, black 20%, transparent);
-      border: 1px solid color-mix(in srgb, white 20%, transparent);
-      font-family: var(--semantic-font-family-mono, monospace);
+      border-radius: var(--component-cta-code-border-radius);
+      background-color: var(--component-cta-code-bg);
+      border: var(--component-cta-code-border-width) solid var(--component-cta-code-border-color);
+      font-family: var(--semantic-font-family-mono);
       font-size: var(--semantic-font-size-body-small);
-      color: white;
+      color: var(--component-cta-code-color);
     }
   }
 

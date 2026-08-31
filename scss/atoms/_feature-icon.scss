@@ -19,10 +19,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    @include size(3rem);
-    border-radius: 12px;
+    @include size(var(--component-feature-icon-size));
+    border-radius: var(--component-feature-icon-border-radius);
+    border: var(--component-feature-icon-border-width) var(--component-feature-icon-border-style) var(--component-feature-icon-border-color);
+    box-shadow: var(--component-feature-icon-shadow);
     flex-shrink: 0;
-    @include transition(transform 0.2s ease, box-shadow 0.2s ease);
+    @include transition(
+      transform var(--semantic-duration-fast) var(--semantic-easing-standard),
+      box-shadow var(--semantic-duration-fast) var(--semantic-easing-standard)
+    );
 
     // Default — neutral
     background-color: var(--semantic-color-bg-secondary);
@@ -36,32 +41,32 @@
 
     // --molecule (molecules layer)
     &--molecule {
-      background-color: var(--primitive-color-purple-50, #f5f3ff);
-      color: var(--primitive-color-purple-600, #7c3aed);
+      background-color: var(--component-feature-icon-molecule-bg);
+      color: var(--component-feature-icon-molecule-color);
     }
 
     // --organism (organisms layer)
     &--organism {
-      background-color: var(--primitive-color-green-50, #f0fdf4);
-      color: var(--primitive-color-green-600, #16a34a);
+      background-color: var(--component-feature-icon-organism-bg);
+      color: var(--component-feature-icon-organism-color);
     }
 
     // --token
     &--token {
-      background-color: var(--primitive-color-blue-50, #eff6ff);
-      color: var(--primitive-color-blue-600, #2563eb);
+      background-color: var(--component-feature-icon-token-bg);
+      color: var(--component-feature-icon-token-color);
     }
 
     // --layer
     &--layer {
-      background-color: var(--primitive-color-yellow-50, #fefce8);
-      color: var(--primitive-color-yellow-700, #a16207);
+      background-color: var(--component-feature-icon-layer-bg);
+      color: var(--component-feature-icon-layer-color);
     }
 
     // --mixin
     &--mixin {
-      background-color: var(--primitive-color-red-50, #fff1f2);
-      color: var(--primitive-color-red-600, #dc2626);
+      background-color: var(--component-feature-icon-mixin-bg);
+      color: var(--component-feature-icon-mixin-color);
     }
   }
 
