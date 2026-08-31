@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.24.0] — 2026-08-31
+
+### Added
+
+- **«What this buys you», quinta subsección del apartado agentic en `docs.html`.** Las cuatro anteriores explican cómo funciona; faltaba el porqué, y sin él la sección describía una máquina sin decir qué se gana poniéndola.
+
+  Siete filas, cada una con su antes y su ahora, y **todas las cifras medidas en este repositorio**, no estimadas: 597 KB de ficheros para responder una pregunta frente a los 352 bytes que devuelve `get_token`; los 81 de 111 nombres de token inexistentes que el registro llegó a arrastrar; las 526 líneas de README que `get_mixin` sustituye por 1 KB; los 64 hallazgos de desviación que bajaron a 19 en una pasada.
+
+- **Y un recuadro con lo que NO se gana**, que es lo que hace creíble al resto. Los agentes siguen equivocándose: varios de los errores de esta misma capa los encontraron sus propios guardianes — un `var(--primitive-…)` colándose por una regla que exceptuaba la carpeta a la que iba, tres clases denunciadas como muertas que el CSS sí alcanzaba, un reparador que se comía sus propios ejemplos. Lo que se gana no es un sistema que no pueda equivocarse: es uno donde equivocarse tiene nombre y número de línea el mismo día.
+
+  Y el gusto sigue siendo humano. Si un color es el color correcto, si un componente debe existir, cuál es la jerarquía de una página: los niveles de confianza ya lo decían, y ahora la página lo dice en voz alta.
+
+### Verified
+
+- Sin desviación nueva: `docs.html` sigue con los mismos cuatro hallazgos de gravedad baja. Renderizado en claro y oscuro y a 390 px sin desbordamiento horizontal.
+
+---
+
 ## [4.23.0] — 2026-08-31
 
 ### Fixed

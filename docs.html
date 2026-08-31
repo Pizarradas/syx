@@ -509,6 +509,7 @@
           <a href="#agentic-write" class="docs-sidebar__link" data-nav-section="agentic-write">2 Write</a>
           <a href="#agentic-detect" class="docs-sidebar__link" data-nav-section="agentic-detect">3 Detect</a>
           <a href="#agentic-guards" class="docs-sidebar__link" data-nav-section="agentic-guards">4 What runs on its own</a>
+          <a href="#agentic-value" class="docs-sidebar__link" data-nav-section="agentic-value">5 What it buys you</a>
         </div>
       </div>
 
@@ -562,7 +563,7 @@
         <section class="docs-hero" aria-labelledby="docs-hero-title">
           <span class="docs-hero__eyebrow">
             <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
-            Component Gallery v4.23.0
+            Component Gallery v4.24.0
           </span>
           <h1 class="atom-title atom-title--h1 docs-hero__title" id="docs-hero-title">SYX Design System</h1>
           <p class="atom-txt atom-txt--primary docs-hero__lead">Ordered by <strong>layer hierarchy</strong>:
@@ -1734,6 +1735,109 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
           </div>
         </section>
 
+        <!-- ─── 5 · WHAT IT BUYS YOU ─── -->
+        <section class="syx-mb-5" id="agentic-value">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            5 &mdash; What this buys you
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-4">The argument is not that agents stop making mistakes. It is that
+            the expensive mistakes become cheap to catch, and the cheap ones stop happening at all. Every figure below
+            is measured in this repository, not estimated.</p>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:660px">
+              <thead>
+                <tr>
+                  <th>What changes</th>
+                  <th>Before</th>
+                  <th>Now</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>A question costs a question</strong>, not a file dump</td>
+                  <td>Load <code>tokens.json</code> + <code>token-contract.json</code> &mdash; <strong>597&nbsp;KB</strong>
+                    &mdash; and walk the cascade by hand</td>
+                  <td><code>get_token</code> answers in <strong>352&nbsp;bytes</strong>, with the alias chain, and it
+                    is the value the browser paints</td>
+                </tr>
+                <tr>
+                  <td><strong>Wrong names never get written</strong></td>
+                  <td>Write, compile, notice later. The component registry once carried <strong>81 of 111</strong>
+                    token names that did not exist &mdash; the rules compared declarations, never consumption</td>
+                  <td><code>validate_snippet</code> runs the same R01&ndash;R04 <strong>before</strong> the file is
+                    written, and flags every token that isn't real</td>
+                </tr>
+                <tr>
+                  <td><strong>Nobody has to say where things go</strong></td>
+                  <td>Tell the agent the file, or let it guess and review the guess</td>
+                  <td>The destination is deduced from the token's family &mdash; from what the code already declares,
+                    not from a table someone maintains</td>
+                </tr>
+                <tr>
+                  <td><strong>A prohibition comes with its alternative</strong></td>
+                  <td>R03 and R04 said what not to write. The answer lived in <strong>526 lines</strong> of README
+                    prose</td>
+                  <td><code>get_mixin</code> answers in <strong>1&nbsp;KB</strong>, and the rule itself now names the
+                    replacement mixin and its aliases</td>
+                </tr>
+                <tr>
+                  <td><strong>Drift is measurable, so it can go down</strong></td>
+                  <td>&ldquo;It looks fine&rdquo; &mdash; a stale <code>#6d28d9</code> sitting in a fallback for
+                    months, invisible because the browser never uses it</td>
+                  <td>One pass over our own four pages: <strong>64 findings &rarr; 19</strong>, none severe, each one
+                    verified against the compiled CSS</td>
+                </tr>
+                <tr>
+                  <td><strong>Speed is bounded by review, not by trust</strong></td>
+                  <td>Either the agent may write everything, or it may write nothing</td>
+                  <td>Three tiers: docs move on their own, components arrive as a branch with the validator already
+                    green, primitives don't move at all</td>
+                </tr>
+                <tr>
+                  <td><strong>The agent and your app get the same answer</strong></td>
+                  <td>The contract lives in prose, and prose drifts from the code silently</td>
+                  <td>One implementation in <code>scripts/lib/</code>, shared by the validator, the MCP server, the
+                    installed package, the proposal path and the scanner</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">What it does not buy you</p>
+              <ul class="atom-list syx-mb-0">
+                <li><strong>Agents that don't get it wrong.</strong> Several of the bugs in this very layer were found
+                  by its own guards: a <code>var(--primitive-…)</code> slipping past a rule that exempted the folder it
+                  was headed for, three classes reported as dead that the CSS reached through
+                  <code>[class*=&hellip;]</code>, a repair pass that ate its own examples. The value isn't a system
+                  that cannot be wrong &mdash; it's one where being wrong gets a name and a line number the same day.
+                </li>
+                <li><strong>Taste.</strong> Whether a colour is the right colour, whether a component should exist,
+                  what the hierarchy of a page should be. The tiers say so out loud: primitives, semantics and themes
+                  are human-only, and anything unclassified defaults there too.</li>
+              </ul>
+            </div>
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Who it pays off for</p>
+              <ul class="atom-list syx-mb-0">
+                <li><strong>Whoever reviews.</strong> A proposal arrives compiled, validated and with the evidence
+                  attached, instead of a paragraph claiming it works.</li>
+                <li><strong>Whoever consumes.</strong> An app can ask the version it has installed &mdash; the only
+                  comparison that means anything &mdash; and find out it drifted before a user does.</li>
+                <li><strong>Whoever maintains.</strong> Eleven guards run on every push. The registry, the token
+                  snapshot and the component inventory are generated from the code, so they cannot quietly disagree
+                  with it.</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="atom-txt syx-text-gray syx-mb-0">The short version: <strong>a design system stops being
+            documentation an agent has to believe, and becomes a service it can query and a gate it has to pass.</strong>
+            Everything above follows from that one change.</p>
+        </section>
+
         <!-- ══════════════════════════════════════════
        LAYER 1 — UTILITIES  @layer syx.utilities
   ══════════════════════════════════════════ -->
@@ -2668,7 +2772,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
       </a>
 
       <div class="org-home-footer__meta">
-        <strong>SYX Design System</strong> · v4.23.0<br>
+        <strong>SYX Design System</strong> · v4.24.0<br>
         Modular CSS design system · Zero external dependencies
       </div>
 
