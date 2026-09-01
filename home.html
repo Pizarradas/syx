@@ -717,8 +717,11 @@
           (<code>create-component</code>, <code>create-theme</code>, <code>audit-tokens</code>,
           <code>update-changelog</code>) and 8 specialist modes — from the zero-cost
           <code>[SYX: SKETCH]:</code> prototyper to the full-depth
-          <code>[SYX: MIGRATE]:</code> specialist. Each mode has a defined role, a resource tier,
-          and constrained output, so the right expertise activates before any response is generated.
+          <code>[SYX: MIGRATE]:</code> specialist. Every mode opens with two declared blocks:
+          <strong>Trust</strong>, the paths it may write, graded by <code>contracts/trust.json</code>
+          and verified by <code>npm run check:modos</code> — a mode never grants itself a permission,
+          it inherits one — and <strong>Knowledge</strong>, the reading list it pulls from
+          <code>mind-system/</code>. Knowledge informs; it never overrides a rule.
         </p>
       </article>
 
@@ -757,9 +760,12 @@
           Mode System — activate a specialist lens
         </h3>
         <p class="org-home-features__modes-sub">
-          Prefix any message with <code>[SYX: MODE]:</code> to route it to a specialist agent.
-          8 modes ordered by resource cost — from a zero-context sketch to a full codebase migration.
+          Prefix any message with <code>[SYX: MODE]:</code> to route it to a specialist agent —
+          or <code>/syx MODE …</code> in Claude Code, same grammar, same eight files.
           Pick the lowest tier that serves the task; escalate only when the concept is confirmed.
+          Compose them with <code>&rarr;</code> (pipeline) and <code>+</code> (evaluative), where
+          <code>+</code> groups first: <code>[SYX: UX &rarr; UI + AUDIT]:</code> is
+          <code>UX &rarr; (UI + AUDIT)</code>.
         </p>
       </div>
 
@@ -769,6 +775,7 @@
             <tr>
               <th class="atom-table__th" scope="col">Mode</th>
               <th class="atom-table__th" scope="col">AI cost</th>
+              <th class="atom-table__th" scope="col">Writes</th>
               <th class="atom-table__th" scope="col">Best for</th>
               <th class="atom-table__th" scope="col">Output</th>
             </tr>
@@ -784,6 +791,7 @@
                 <span title="Tier 1 — Minimal">⚡ Minimal</span><br>
                 <small>0 files · 1 turn</small>
               </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong></td>
               <td class="atom-table__td">Wireframes, flows, layout POCs — before committing to an idea</td>
               <td class="atom-table__td">Self-contained HTML with inline styles, Mermaid diagrams, handoff note</td>
             </tr>
@@ -797,6 +805,7 @@
                 <span title="Tier 2 — Light">🔵 Light</span><br>
                 <small>1 file · 1–2 turns</small>
               </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong></td>
               <td class="atom-table__td">Component decisions, HTML structure, accessibility, interaction states, UI hierarchy</td>
               <td class="atom-table__td">Semantic HTML, state inventory, WCAG AA notes, handoff notes for UI mode</td>
             </tr>
@@ -810,6 +819,7 @@
                 <span title="Tier 3 — Medium">🟡 Medium</span><br>
                 <small>0–1 files · 1–2 turns</small>
               </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong></td>
               <td class="atom-table__td">Experimental landing pages, Awwwards-level concepts, advanced CSS — contract-free zone</td>
               <td class="atom-table__td">Self-contained HTML + CSS, scroll-driven animations, variable fonts, technique log + promotion path</td>
             </tr>
@@ -823,8 +833,9 @@
                 <span title="Tier 4 — Medium-High">🟠 Medium-high</span><br>
                 <small>2 files · 2–3 turns</small>
               </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><code>pr</code><br><small>via propose.js</small></td>
               <td class="atom-table__td">Create or migrate tokens, audit the semantic layer, decide primitive → semantic → component mappings</td>
-              <td class="atom-table__td">4-tier token design, <code>tokens.json</code> entries, <code>_token.scss</code> files</td>
+              <td class="atom-table__td">4-tier token design, <code>tokens.json</code> entries, component token files in <code>scss/abstracts/tokens/components/</code></td>
             </tr>
             <tr>
               <td class="atom-table__td">
@@ -836,7 +847,8 @@
                 <span title="Tier 5 — Medium-High">🟠 Medium-high</span><br>
                 <small>3 files · 2–3 turns</small>
               </td>
-              <td class="atom-table__td">Create or modify themes, OKLCH color scales, dark mode inversion, surface token coverage</td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong><br><small>recommends only</small></td>
+              <td class="atom-table__td">Design or revise a theme — OKLCH scales, dark mode inversion, surface token coverage. A theme reaches all seven bundles at once, so the mode designs it in full and a person installs it</td>
               <td class="atom-table__td">OKLCH scales, full <code>_theme.scss</code>, surface token coverage, dark mode variant</td>
             </tr>
             <tr>
@@ -849,7 +861,8 @@
                 <span title="Tier 6 — High">🔴 High</span><br>
                 <small>4+ files · 3–4 turns</small>
               </td>
-              <td class="atom-table__td">Implement new components or modify existing ones with full R01–R08 contract compliance</td>
+              <td class="atom-table__td" style="white-space: nowrap;"><code>pr</code><br><small>via propose.js</small></td>
+              <td class="atom-table__td">Implement new components or modify existing ones under the R01–R04 contract rules, checked before the file is written</td>
               <td class="atom-table__td">Contract-compliant SCSS, token file, pre-flight checklist, mixin enforcement, registry entry + validation command</td>
             </tr>
             <tr>
@@ -862,7 +875,8 @@
                 <span title="Tier 7 — High">🔴 High</span><br>
                 <small>N files · 2–4 turns</small>
               </td>
-              <td class="atom-table__td">Validate R01–R08 compliance, detect naming and structure violations, codebase health check</td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong></td>
+              <td class="atom-table__td">Validate the contract rules — R01–R04 are errors, R05–R07 warnings, R08 is declared but not yet implemented — plus naming and structure checks</td>
               <td class="atom-table__td">Per-rule verdict report, violations with exact line, correction recommendations</td>
             </tr>
             <tr>
@@ -875,12 +889,22 @@
                 <span title="Tier 8 — Very High">🔴 Very high</span><br>
                 <small>N+ files · 4–6 turns</small>
               </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><code>pr</code><br><small>via propose.js</small></td>
               <td class="atom-table__td">Replace legacy variables, per-variable impact analysis, safe migration without breaking existing themes</td>
               <td class="atom-table__td">Per-variable migration plan, exact diffs, theme and bundle impact analysis</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <p class="org-home-features__modes-sub syx-mt-3">
+        <strong>What &ldquo;AI cost&rdquo; counts.</strong> The file column is what a mode has to open
+        when it can <em>only</em> open files. With the MCP server registered
+        (<code>npx -y syx-mcp</code>) most of those reads collapse into one call that returns one
+        answer, and the tier ranks the work rather than the reading. It counts interrogating the
+        system — tokens, registry, contracts — not the knowledge a mode loads to reason with, which
+        is a separate axis declared per mode.
+      </p>
 
     </div><!-- /.org-home-features__modes -->
 
