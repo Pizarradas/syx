@@ -109,21 +109,35 @@ El del brief, con tres cambios y un recorte:
 - **Fuera `validationRules`.** Un patrón no valida. Si alguna vez hace falta,
   es una regla en `rules.json`, no un campo aquí.
 
-## Los tres primeros patrones
+## Los primeros patrones
 
-Tres, no los cinco a ocho que pedía el brief, y solo con uso demostrado en
-disco. Un patrón escrito sin una página que lo respalde es una opinión con
-esquema.
+Solo con uso demostrado en disco. Un patrón escrito sin una página que lo
+respalde es una opinión con esquema.
 
 | id | Respaldo real |
 |---|---|
-| `equal-card-grid` | `org-home-features` + `mol-feature-card`, con su `avoidWhen` ya escrito en el registro |
+| `equal-card-grid` | `org-home-features` + `mol-feature-card` aquí, y `1fr 1fr 1fr` en tres portadas de ATLAS |
 | `media-stage` | los cuatro reportajes de ATLAS y `mol-bg-media` |
 | `form-flow` | `mol-form-field` + `mol-form-field-set` + `mol-btn-group`, los tres ya en el sistema |
+| `feature-rail` | `1fr var(--sidebar)` en cuatro portadas de ATLAS — ver la corrección de abajo |
 
-`feature-rail` **no** entra todavía: es el patrón editorial estrella del brief,
-pero en este repositorio no hay ninguna página que lo use. Entra cuando ATLAS
-lo estrene.
+**Corrección (2026-09-01).** La primera versión de este documento dejaba
+`feature-rail` fuera «porque en este repositorio no hay ninguna página que lo
+use». El dato era falso por mirar donde no era: las portadas viven en
+`syx--atlas`, y cuatro comparten la misma rejilla.
+
+Pero el respaldo real dice algo más interesante que «sí, entra». En ATLAS ese
+raíl **no lleva noticias secundarias: lleva publicidad** — `--sidebar` resuelve
+a `var(--ad-medium-w)`, 300px exactos. Geométricamente es el mismo 8/4 que
+describe cualquier manual como *feature + rail*; semánticamente es otra cosa, y
+cae en `06.3-publicidad-integrada.md`, que es dominio de ATLAS.
+
+Eso convierte a `feature-rail` en la primera prueba del reparto: **el núcleo
+declara la geometría y los roles; ATLAS declara qué ocupa el raíl.** Un
+registro de patrones que solo guardase la rejilla fundiría dos patrones
+distintos en uno, y recomendaría un raíl publicitario a quien pidió historias
+secundarias. Si el reparto de este documento no sirve para separarlos, el
+reparto está mal.
 
 ## El guardián
 
