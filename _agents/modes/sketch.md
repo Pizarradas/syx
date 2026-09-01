@@ -6,8 +6,16 @@
 >
 > · **Writes:** — *nothing in the repository. A sketch is handed over as a standalone file for a person to place.*
 > · **Recommends only:** —
-> · **Reads:** — `tokens.json` and `component-registry.json` stay shut. Not checking them is the point of this tier.
+> · **Reads:** — `tokens.json` and `component-registry.json` stay shut. Not checking them is the point of this tier. `mind-system/knowledges/` opens only on request, per the block below.
 > · **Ask, don't read:** — *if a question needs an answer from the system, you are in the wrong mode.*
+
+> **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
+> It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
+> the module is the thing that needs fixing. Paths below are relative to that folder.
+>
+> · **Always:** — *nothing. Tier 1 buys its speed by reading nothing, and knowledge is a read.* The BEM and 320px rules stated below are that cortex already internalised.
+> · **On request:** `motion/04-glosario/index.md` when the brief uses motion vocabulary (parallax, scrub, magnetic, cascade) and the sketch has to name the effect for whoever builds it · `vendors/awesome-design/index.md` when the brief cites a known aesthetic ("like Stripe", "Notion-ish") · `syx/component-patterns.md` and `front/mobile-first.md` only if someone disputes the naming or the breakpoint direction.
+> · **Tags:** `#sketch` `#prototype` `#rapid` `#no-production`
 
 ---
 

@@ -6,8 +6,18 @@
 >
 > · **Writes:** — *a creative build is handed over as a self-contained file for a person to place. The agent commits nothing.*
 > · **Recommends only:** —
-> · **Reads:** `component-registry.json`
+> · **Reads:** `component-registry.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `get_component` for a name you want to borrow; `find_token_by_value` if a value you invented already exists.
+
+> **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
+> It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
+> the module is the thing that needs fixing. Paths below are relative to that folder.
+>
+> · **Always:** `ui/motion-principles.md` — the physical layer (easing, duration, GPU-composited properties, reduced-motion). It outranks any library pattern: a GSAP recipe that breaks these is wrong, not clever. · `branding/perception-of-prestige-foundations.md`.
+> · **When relevant:** `ui/color-theory.md` · `ui/typography-systems.md` · `ui/practical-ui.md` · `syx/component-patterns.md` as a naming guide, applied loosely.
+> · **With GSAP:** `motion/01-fundamentos/modelo-mental.md` and `motion/01-fundamentos/vocabulario-base.md` for the four layers (what changes, when, what triggers it, what it means) · `motion/02-capacidades/index.md` for what the library can do · `motion/03-patrones/` for the named pattern itself.
+> · **On request:** `branding/perception-of-prestige.rules.md` when the brief demands premium, luxury or authority · `motion/04-glosario/index.md` to check the effect asked for has an operative name · `vendors/awesome-design/index.md` when the brief names a reference.
+> · **Tags:** `#creative` `#experimental` `#motion` `#visual` `#awwwards`
 
 ---
 

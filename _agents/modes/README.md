@@ -52,6 +52,15 @@ write, the paths it may only recommend, and the tools it should ask instead of r
 `npm run check:modos` fails if any of those lists disagrees with the contract. A mode never
 grants a permission — it inherits one.
 
+Below `Trust`, every mode also opens with a `Knowledge` block: which modules of the cortex under
+`mind-system/knowledges/` it loads, and when — **Always**, **When relevant**, **On request**, and
+for CREATIVE **With GSAP**. Knowledge is the other half of a mode: `Trust` says what it may write,
+`Knowledge` says what it reasons with. The two are not symmetric in force. A permission is a
+ceiling and a module is an argument, so knowledge never authorises anything and never wins against
+a rule — if a module recommends what R01 forbids, the module is what needs fixing. The wiring seen
+from both sides, including the reverse index that reveals modules no mode loads, is
+`mind-system/routing.md`.
+
 ## Mode Boundaries
 
 Modes are intentionally siloed:
@@ -116,7 +125,12 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 2. Open it with the `Trust` block — Writes / Recommends only / Reads / Ask, don't read — before
    anything else. Copy the shape from an existing mode; the paths must agree with
    `contracts/trust.json`, and a `human` path can never appear under **Writes**
-3. Define: role, priorities, output format, constraints, response template, example
-4. Add a row to the table in `AGENTS.md`, `CLAUDE.md` **and** this file — all three are checked
-5. Run `npm run check:modos`. It fails if the three tables disagree, if the block is missing, or
+3. Follow it with the `Knowledge` block — Always / When relevant / On request / Tags. Both blocks
+   live **above** the first `## ` heading. Declare `mind-system/knowledges/` in **Reads** so any
+   cortex path the body mentions stays covered by the guardian
+4. Define: role, priorities, output format, constraints, response template, example
+5. Add a row to the table in `AGENTS.md`, `CLAUDE.md` **and** this file — all three are checked
+6. Add the mode's column to the matrix and its modules to the reverse index in
+   `mind-system/routing.md`. A knowledge module that no mode loads is a module nobody will open
+7. Run `npm run check:modos`. It fails if the three tables disagree, if the block is missing, or
    if a mode hands itself a permission the contract doesn't give it

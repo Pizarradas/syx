@@ -32,9 +32,36 @@ answering from the version that app has installed.
 
 ---
 
+## Two layers: the engine and the cortex
+
+```
+_agents/        ENGINE  — what a mode does, in what format, under what permission ceiling.
+                          Always loaded. Guarded by `npm run check:modos`. Ships with the package.
+mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCAG, scale models,
+                          prestige, motion, and the ATLAS editorial rules. Loaded on demand.
+                          Informs; never executes. Not published to npm.
+```
+
+**Precedence, highest first.** When two documents in this repository disagree, the higher rung wins — no exceptions by context:
+
+| # | Authority | Decides | Checked? |
+|---|---|---|---|
+| 1 | `contracts/trust.json` | Who may write what | ✅ `classify_change` |
+| 2 | `contracts/rules.json` | R01–R08 | ✅ `npm run validate` |
+| 3 | `_agents/modes/*.md` → `Trust` block | Each mode's ceiling | ✅ `npm run check:modos` |
+| 4 | `mind-system/governance/` | How ATLAS and the modes compose | ⚠️ declared only |
+| 5 | `mind-system/atlas-rules/` | Editorial decisions (guest domain) | ⚠️ declared only |
+| 6 | `mind-system/knowledges/` | The reasoning | ⚠️ declared only |
+
+A knowledge module never authorises anything, never creates a token, and never wins an
+argument against a rule. If a module recommends what R01 forbids, the module is what needs
+fixing. Entry point: `mind-system/README.md`.
+
+---
+
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response.
+When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when).
 
 | Prefix | Mode file | Writes | When to use |
 |---|---|---|---|
@@ -142,10 +169,17 @@ scss/
   organisms/            — 8 components
   themes/*/             — 7 themes (6 example-* + syx-sketch) × 4-5 bundles
 contracts/              — machine-readable validation output
-_agents/
-  modes/                — mode definitions (ux, ui, token, theme, audit)
+_agents/                — THE ENGINE (ships with the package)
+  modes/                — the 8 mode definitions, one copy each, Trust + Knowledge blocks
   workflows/            — step-by-step task guides
   prompts/              — copy-paste prompt templates
+mind-system/            — THE CORTEX (not published)
+  README.md             — the two layers and the precedence ladder
+  constitution.md       — mode domains, overlaps, composition protocols
+  routing.md            — the synapses: which knowledge module feeds which mode, and when
+  governance/           — ATLAS ↔ modes composition
+  atlas-rules/          — editorial rules (guest domain)
+  knowledges/           — the corpus: ux · ui · front · syx · branding · motion · vendors
 index.js                — package entry point: the same six queries as an npm dependency
 scripts/
   syx-validate.js       — runs R01–R07 contract checks

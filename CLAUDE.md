@@ -29,9 +29,38 @@ instead of cloning it, `require('syx-design-system')` gives the same six queries
 
 ---
 
+## Two layers: the engine and the cortex
+
+```
+_agents/        ENGINE  — what a mode does, in what format, under what permission ceiling.
+                          Always loaded. Guarded by `npm run check:modos`. Ships with the package.
+mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCAG, scale models,
+                          prestige, motion, and the ATLAS editorial rules. Loaded on demand.
+                          Informs; never executes. Not published to npm.
+```
+
+**Precedence, highest first.** When two documents in this repository disagree, the higher rung wins — no exceptions by context:
+
+| # | Authority | Decides | Checked? |
+|---|---|---|---|
+| 1 | `contracts/trust.json` | Who may write what | ✅ `classify_change` |
+| 2 | `contracts/rules.json` | R01–R08 | ✅ `npm run validate` |
+| 3 | `_agents/modes/*.md` → `Trust` block | Each mode's ceiling | ✅ `npm run check:modos` |
+| 4 | `mind-system/governance/` | How ATLAS and the modes compose | ⚠️ declared only |
+| 5 | `mind-system/atlas-rules/` | Editorial decisions (guest domain) | ⚠️ declared only |
+| 6 | `mind-system/knowledges/` | The reasoning | ⚠️ declared only |
+
+A knowledge module never authorises anything, never creates a token, and never wins an argument
+against a rule: if one recommends what R01 forbids, the module is what needs fixing. When
+`[ATLAS]:` wraps a mode, ATLAS decides **what** to build and **why** — editorial level, hierarchy,
+density, proportion, zone, advertising — and nothing above rung 5. Entry point:
+`mind-system/README.md`; the mode↔knowledge wiring is `mind-system/routing.md`.
+
+---
+
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response.
+When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when).
 
 ### Resource Tiers
 
@@ -53,6 +82,13 @@ become a call that returns the one answer, and the column that matters is the la
 | 8 | `[SYX: MIGRATE]:` | 🔴 Very High | N+ (all files referencing the migrated variable) | `find_token_by_value`, `get_token`, `scan_for_drift` | 4–6 |
 
 > **Tip:** Start with SKETCH or UX to validate the concept. Escalate to TOKEN → UI → AUDIT only when the idea is confirmed.
+
+**The tier measures interrogating the system, not the cortex.** They are two separate axes and
+adding them together gives a wrong number. The tier counts what it costs to ask SYX (`tokens.json`,
+`component-registry.json`, `contracts/`); the mode's `Knowledge` block counts what it costs to load
+the corpus. CREATIVE is tier 3 and still loads the whole `motion/` domain when there is GSAP: cheap
+in system reads, expensive in corpus. SKETCH is the one disciplined exception — its tier 1 is bought
+by reading nothing, so its `Knowledge` block has no **Always** line at all.
 
 ### Mode Reference
 
@@ -113,7 +149,10 @@ scss/molecules/           — 7 composite components
 scss/organisms/           — 8 complex sections
 scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 4-5 bundle contexts
 contracts/                — machine-readable validation output
-_agents/                  — workflows, prompts, and modes
+_agents/                  — THE ENGINE: modes (Trust + Knowledge blocks), workflows, prompts
+mind-system/              — THE CORTEX: README (precedence), constitution, routing,
+                            governance/ (ATLAS ↔ modes), atlas-rules/ (guest domain),
+                            knowledges/ (ux · ui · front · syx · branding · motion · vendors)
 scripts/syx-validate.js   — contract validator (run after any change)
 index.js                  — package entry point: the same six queries as an npm dependency
 scripts/mcp-server.js     — MCP server (stdio) — ask the system instead of reading it
