@@ -395,6 +395,10 @@
       <span class="atom-icon atom-icon--lc-box" aria-hidden="true"></span>
       Organisms
     </a>
+    <a href="#modes" class="org-site-nav-drawer__link">
+      <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+      Modes
+    </a>
     <a href="why-syx.html" class="org-site-nav-drawer__link">
       <span class="atom-icon atom-icon--lc-pie-chart" aria-hidden="true"></span>
       Why SYX
@@ -515,6 +519,21 @@
       </div>
 
       <div class="docs-sidebar__group">
+        <span class="docs-sidebar__group-label">Modes</span>
+        <a href="#modes" class="docs-sidebar__link" data-nav-section="modes">
+          <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+          The Mode System
+        </a>
+        <div class="docs-sidebar__sub">
+          <a href="#modes-eight" class="docs-sidebar__link" data-nav-section="modes-eight">1 The eight modes</a>
+          <a href="#modes-invoke" class="docs-sidebar__link" data-nav-section="modes-invoke">2 Two doors, one room</a>
+          <a href="#modes-compose" class="docs-sidebar__link" data-nav-section="modes-compose">3 Composing modes</a>
+          <a href="#modes-blocks" class="docs-sidebar__link" data-nav-section="modes-blocks">4 Trust &amp; Knowledge</a>
+          <a href="#modes-cortex" class="docs-sidebar__link" data-nav-section="modes-cortex">5 Engine &amp; cortex</a>
+        </div>
+      </div>
+
+      <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Reference</span>
         <a href="#utilities" class="docs-sidebar__link" data-nav-section="utilities">
           <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
@@ -599,6 +618,7 @@
                 <span class="atom-icon atom-icon--lc-book-open" aria-hidden="true"></span>
                 Authoring Guide
               </a>
+              <a href="#modes" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Modes</a>
               <a href="#utilities" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Utilities</a>
               <a href="#layout" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Layout</a>
               <a href="#atoms" class="atom-btn atom-btn--tertiary atom-btn--size-sm">Atoms</a>
@@ -1659,7 +1679,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             4 &mdash; What runs on its own
           </h3>
           <p class="atom-txt syx-text-gray syx-mb-3">None of the above is worth much if it only runs when somebody
-            remembers. <code>npm run check</code> chains eleven steps, and GitHub Actions runs them on every push across
+            remembers. <code>npm run check</code> chains twelve checks and a build, and GitHub Actions runs them on every push across
             Node 18, 20 and 22 &mdash; with the heavier ones (packing and installing the package for real, exercising
             the proposal path) reserved for pull requests, so nobody is tempted to switch it off.</p>
 
@@ -1710,6 +1730,16 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
                 <tr>
                   <td><code>check:mixins</code></td>
                   <td>A mixin reader that invents one, or misses one &mdash; checked both ways against the SCSS</td>
+                </tr>
+                <tr>
+                  <td><code>check:huerfanos</code></td>
+                  <td>A partial that no index imports &mdash; code that compiles into nothing and is read as if it
+                    shipped</td>
+                </tr>
+                <tr>
+                  <td><code>check:modos</code></td>
+                  <td>A mode whose <code>Trust</code> block promises what <code>trust.json</code> forbids, or an index
+                    that lists a different set of modes than the folder holds</td>
                 </tr>
                 <tr>
                   <td><code>check:encoding</code></td>
@@ -2049,6 +2079,362 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
               written by hand proves the author's intention, not the system's behaviour &mdash; and it rots the first
               time the behaviour changes, silently. These were captured by running the commands. When any of them
               stops being true, the guards go red before this page does.</p>
+          </div>
+        </section>
+
+
+        <!-- ══════════════════════════════════════════
+       MODE SYSTEM — _agents/modes/ · mind-system/
+  ══════════════════════════════════════════ -->
+        <div class="docs-section-divider" aria-hidden="true">
+          <span class="docs-section-divider__badge docs-section-divider__badge--guide">
+            <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+            Modes
+          </span>
+          <span class="docs-section-divider__line"></span>
+          <span class="docs-section-divider__layer">_agents/ · mind-system/</span>
+        </div>
+        <h2 class="atom-title atom-title--h2 syx-mb-1" id="modes" aria-label="The mode system">The Mode System</h2>
+        <p class="atom-txt syx-text-gray syx-mb-4">The section above is how the system answers and guards itself. This
+          one is how you drive it. A <strong>mode</strong> is a lens: instead of a general-purpose answer, you get one
+          tuned to a single discipline, with a declared permission ceiling and a declared reading list. There are
+          eight, and they are deliberately siloed &mdash; a UX pass and a UI pass on the same problem produce a better
+          result than one answer trying to be both.</p>
+
+        <!-- ─── 1 · THE EIGHT ─── -->
+        <section class="syx-mb-5" id="modes-eight">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            1 &mdash; The eight modes
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Ordered by tier, which ranks how much context the mode spends.
+            <strong>Use the lowest tier that does the job.</strong> Start at SKETCH or UX to check the idea is worth
+            anything; escalate to TOKEN &rarr; UI &rarr; AUDIT once it is confirmed.</p>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:680px">
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>Mode</th>
+                  <th>Role</th>
+                  <th>Writes</th>
+                  <th>Produces</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><code>[SYX: SKETCH]:</code></td>
+                  <td>Rapid prototyper</td>
+                  <td>nothing</td>
+                  <td>Self-contained HTML + inline styles, diagrams, layout sketches</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><code>[SYX: UX]:</code></td>
+                  <td>UX consultant</td>
+                  <td>nothing</td>
+                  <td>Semantic HTML, component choice, accessibility, interaction states</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><code>[SYX: CREATIVE]:</code></td>
+                  <td>Creative director</td>
+                  <td>nothing</td>
+                  <td>Experimental HTML + CSS, advanced technique, awwwards-grade builds</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><code>[SYX: TOKEN]:</code></td>
+                  <td>Token architect</td>
+                  <td><code>pr</code> / recommends</td>
+                  <td>Token files, semantic mapping, registry entries</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><code>[SYX: THEME]:</code></td>
+                  <td>Theme designer</td>
+                  <td>recommends</td>
+                  <td>OKLCH scales, <code>_theme.scss</code>, surface token coverage, dark mode</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><code>[SYX: UI]:</code></td>
+                  <td>Senior SCSS developer</td>
+                  <td><code>pr</code></td>
+                  <td>Component SCSS, component tokens, registration, R01&ndash;R04 compliance</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td><code>[SYX: AUDIT]:</code></td>
+                  <td>QA reviewer</td>
+                  <td>nothing</td>
+                  <td>R01&ndash;R08 violations, structure and naming checks, a verdict</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td><code>[SYX: MIGRATE]:</code></td>
+                  <td>Migration specialist</td>
+                  <td><code>pr</code> / recommends</td>
+                  <td>Legacy variable resolution, impact analysis, one variable at a time</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">The tier measures the system, not the cortex</p>
+            <p class="atom-txt syx-mb-0">Two separate axes, and adding them gives a wrong number. The tier counts what
+              it costs to interrogate SYX &mdash; <code>tokens.json</code>, the registry, the contracts. The mode's
+              <code>Knowledge</code> block counts what it costs to load the reading list. CREATIVE is tier 3 and still
+              pulls the whole motion domain when there is GSAP: cheap in system reads, expensive in corpus. SKETCH is
+              the one disciplined exception &mdash; its tier 1 is bought by reading nothing at all, so it has no
+              <em>Always</em> line.</p>
+          </div>
+        </section>
+
+        <!-- ─── 2 · HOW TO INVOKE ─── -->
+        <section class="syx-mb-5" id="modes-invoke">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            2 &mdash; Two doors, one room
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">The prefix is the <strong>portable</strong> form. It is plain
+            text, so it survives into Claude Code, Codex, Cursor or anything else that ingests
+            <code>AGENTS.md</code>. It is a convention, though: nothing forces a client to honour it.</p>
+
+          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Portable &mdash; any agent</p>
+              <pre class="atom-code"><code>[SYX: UI]: implement the atom-tag
+component with --primary and --neutral
+
+[SYX: AUDIT]: review
+scss/organisms/_site-header.scss</code></pre>
+            </div>
+            <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Claude Code &mdash; the slash command</p>
+              <pre class="atom-code"><code>/syx UI implement the atom-tag component
+
+/syx UX &rarr; TOKEN &rarr; UI + AUDIT
+     a search field with autocomplete</code></pre>
+            </div>
+          </div>
+
+          <p class="atom-txt syx-text-gray syx-mb-3"><code>.claude/commands/syx.md</code> takes the same grammar and
+            resolves to the same eight files. It is a <strong>pointer, not a copy</strong>, so there is nothing to keep
+            in sync. What it adds is that the harness runs it: autocomplete, and the mode file gets read because the
+            command says so rather than because an agent remembered a convention.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Two decisions that look wrong and aren't</p>
+            <p class="atom-txt syx-mb-2"><strong>One command, not eight.</strong> Eight would be eight near-identical
+              files restating what each mode is &mdash; the duplication this system spent a refactor removing.</p>
+            <p class="atom-txt syx-mb-0"><strong>A command, not a skill.</strong> A skill auto-invokes on its
+              description, and here that is a defect: modes are lenses chosen on purpose, and choosing the lens chooses
+              the tier, which is what the turn costs. Neither form picks a mode on its own.</p>
+          </div>
+        </section>
+
+        <!-- ─── 3 · COMPOSITION ─── -->
+        <section class="syx-mb-5" id="modes-compose">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            3 &mdash; Composing modes
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">Two operators. <code>&rarr;</code> is a <strong>pipeline</strong>:
+            each mode's output is the next one's input. <code>+</code> is <strong>evaluative</strong>: both modes work
+            the same artifact and both outputs come back together.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">The grouping rule</p>
+            <p class="atom-txt syx-mb-0"><strong><code>+</code> groups before <code>&rarr;</code>.</strong> The
+              <code>+</code> binds the modes that share an artifact; the <code>&rarr;</code> chains those groups. So
+              <code>[SYX: UX &rarr; UI + AUDIT]:</code> reads as <code>UX &rarr; (UI + AUDIT)</code>: UX first, then UI
+              implements while AUDIT verifies that same output. For any other grouping, split into turns.</p>
+          </div>
+
+          <p class="atom-txt syx-text-gray syx-mb-3">A middle step with no work <strong>does not stop the
+              pipeline</strong>. If TOKEN finds every token it needed already exists, it hands off explicitly &mdash;
+            &ldquo;use these&rdquo; &mdash; and the chain continues. Aborting is the user's call, not the mode's.</p>
+
+          <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-0">
+            <div style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Valid</p>
+              <table class="atom-table">
+                <tbody>
+                  <tr>
+                    <td><code>SKETCH &rarr; UX</code></td>
+                    <td>Check an idea before formalising it</td>
+                  </tr>
+                  <tr>
+                    <td><code>UX &rarr; TOKEN &rarr; UI</code></td>
+                    <td>The standard new-component flow</td>
+                  </tr>
+                  <tr>
+                    <td><code>UX &rarr; TOKEN &rarr; UI + AUDIT</code></td>
+                    <td>The same, verified</td>
+                  </tr>
+                  <tr>
+                    <td><code>TOKEN &rarr; THEME + AUDIT</code></td>
+                    <td>New theme with coverage check</td>
+                  </tr>
+                  <tr>
+                    <td><code>CREATIVE &rarr; TOKEN &rarr; UI</code></td>
+                    <td>An experiment into production</td>
+                  </tr>
+                  <tr>
+                    <td><code>AUDIT &rarr; MIGRATE</code></td>
+                    <td>Technical debt, if there are few variables</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="flex:1;min-width:280px">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Invalid, and why</p>
+              <table class="atom-table">
+                <tbody>
+                  <tr>
+                    <td><code>SKETCH + AUDIT</code></td>
+                    <td>SKETCH is exempt from the contracts AUDIT enforces</td>
+                  </tr>
+                  <tr>
+                    <td><code>CREATIVE + AUDIT</code></td>
+                    <td>Same. Use <code>CREATIVE &rarr; TOKEN &rarr; UI + AUDIT</code></td>
+                  </tr>
+                  <tr>
+                    <td><code>UI &rarr; TOKEN</code></td>
+                    <td>Backwards. TOKEN defines, UI consumes</td>
+                  </tr>
+                  <tr>
+                    <td><code>THEME &rarr; UI</code></td>
+                    <td>THEME produces no component for UI to process</td>
+                  </tr>
+                  <tr>
+                    <td><code>MIGRATE + AUDIT</code></td>
+                    <td>Only <code>AUDIT &rarr; MIGRATE</code> makes sense</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── 4 · THE TWO BLOCKS ─── -->
+        <section class="syx-mb-5" id="modes-blocks">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            4 &mdash; Every mode opens with two blocks
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">This is the head of
+            <code>_agents/modes/ui.md</code>, unedited. <code>Trust</code> says what the mode may write;
+            <code>Knowledge</code> says what it reasons with.</p>
+
+          <pre class="atom-code syx-mb-4"><code>&gt; **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
+&gt;
+&gt; · **Writes:** `scss/atoms/`, `scss/molecules/`, … — tier `pr`: prepare the change
+&gt;   with `node scripts/propose.js`. A person merges.
+&gt; · **Recommends only:** `scss/abstracts/mixins/`, `scss/base/` — say so and stop there.
+&gt; · **Reads:** `contracts/rules.json`, `component-registry.json`, `mind-system/knowledges/`
+&gt; · **Ask, don't read:** `get_component` before duplicating one, `get_mixin` before writing
+&gt;   a property R03 or R04 rejects, `validate_snippet` **before** writing the file.
+
+&gt; **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
+&gt; It informs; it never executes.
+&gt;
+&gt; · **Always:** `syx/scss-pipeline.md` · `syx/component-patterns.md` · `syx/token-system.md`
+&gt; · **When relevant:** `ui/refactoring-ui.md` for spacing and composition calls · …
+&gt; · **On request:** `motion/03-patrones/` for a GSAP effect named in the brief</code></pre>
+
+          <p class="atom-txt syx-text-gray syx-mb-3"><strong>The two are not symmetric in force.</strong> A permission
+            is a ceiling; a module is an argument. Knowledge never authorises anything and never wins against a rule
+            &mdash; if a module recommends what R01 forbids, the module is what needs fixing.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">A mode never grants a permission &mdash; it inherits
+              one</p>
+            <p class="atom-txt syx-mb-0"><code>npm run check:modos</code> reads every <code>Trust</code> block and
+              compares it against <code>contracts/trust.json</code>. It fails if a mode lists a
+              <code>human</code> path under <em>Writes</em>, if it claims to only recommend somewhere it could actually
+              write, if it announces the proposal path without naming <code>propose.js</code>, if it mentions a file
+              none of its three lists covers, if it tells you to ask an MCP tool that does not exist, or if the three
+              indexes list a different set of modes than the folder holds. It exists because three modes once did
+              command exactly what the contract forbids, and nothing measured it: a mode is read, not executed.</p>
+          </div>
+        </section>
+
+        <!-- ─── 5 · THE CORTEX ─── -->
+        <section class="syx-mb-5" id="modes-cortex">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            5 &mdash; The engine and the cortex
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-3">The modes are the engine. Behind them sits
+            <code>mind-system/</code>, the cortex: colour theory, UX laws, WCAG, scale models, brand perception, a
+            motion language, and the editorial rules of a consuming product. It loads on demand, per the
+            <code>Knowledge</code> block, and it is not published to npm.</p>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Precedence, highest first</p>
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:620px">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Authority</th>
+                  <th>Decides</th>
+                  <th>Checked?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><code>contracts/trust.json</code></td>
+                  <td>Who may write what</td>
+                  <td>yes &mdash; <code>classify_change</code></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><code>contracts/rules.json</code></td>
+                  <td>R01&ndash;R08</td>
+                  <td>yes &mdash; <code>npm run validate</code></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><code>_agents/modes/*.md</code> &rarr; <code>Trust</code></td>
+                  <td>Each mode's ceiling</td>
+                  <td>yes &mdash; <code>npm run check:modos</code></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><code>mind-system/governance/</code></td>
+                  <td>How editorial context composes with the modes</td>
+                  <td>declared only</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><code>mind-system/atlas-rules/</code></td>
+                  <td>Editorial decisions (guest domain)</td>
+                  <td>declared only</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><code>mind-system/knowledges/</code></td>
+                  <td>The reasoning</td>
+                  <td>declared only</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="atom-txt syx-text-gray syx-mb-3"><strong>A rung never beats one above it.</strong> That is the
+            whole rule, and it is what keeps a markdown file from overruling a machine-checked contract. Rungs 1&ndash;3
+            are verified; 4&ndash;6 are written down and not yet guarded, which this page says out loud rather than
+            implying otherwise.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Everything in the cortex passes the SYX filter</p>
+            <p class="atom-txt syx-mb-0">A knowledge module may reason however it likes, but the moment it shows
+              <em>how to write something</em>, it writes SYX. Its code blocks go through the same
+              <code>scripts/lib/rules.js</code> that validates the repository, and because R01 depends on the layer
+              &mdash; <code>var(--primitive-*)</code> is correct in a theme and forbidden in a component &mdash; each
+              block declares where it lives. A block that breaks a rule is only valid if it is marked as the
+              anti-pattern it is.</p>
           </div>
         </section>
 

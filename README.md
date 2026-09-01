@@ -307,6 +307,19 @@ syx/
 ├── fonts/                       # Self-hosted webfonts
 ├── img/                         # Images and icons
 │
+├── _agents/                     # THE ENGINE — loaded always, ships with the package
+│   ├── modes/                   # 8 mode definitions (Trust + Knowledge blocks)
+│   ├── workflows/               # Step-by-step task guides
+│   └── prompts/                 # Copy-paste prompt templates
+│
+├── mind-system/                 # THE CORTEX — loaded on demand, not published
+│   ├── README.md                # The two layers and the precedence ladder
+│   ├── constitution.md          # Mode domains, overlaps, composition protocols
+│   ├── routing.md               # Which knowledge module feeds which mode, and when
+│   ├── governance/              # Editorial context ↔ modes composition
+│   ├── atlas-rules/             # Editorial rules (guest domain)
+│   └── knowledges/              # ux · ui · front · syx · branding · motion · vendors
+│
 ├── index.js                     # Package entry point — the Node API
 ├── index.html                   # Redirect wrapper
 ├── home.html                    # Landing page (AI First, features, tokens, themes)
@@ -330,6 +343,8 @@ syx/
 | [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
 | [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
 | [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 8 specialist lenses activated by `[SYX: MODE]:` prefix |
+| [mind-system/README.md](mind-system/README.md)                          | The cortex — precedence ladder, engine vs. knowledge |
+| [mind-system/routing.md](mind-system/routing.md)                        | Mode ↔ knowledge wiring, with the reverse index |
 | [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |
 | [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference                            |
 | [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                                  |

@@ -195,6 +195,36 @@ node scripts/syx-validate.js
 
 ---
 
+## 🎛️ The Mode System
+
+Before a workflow, pick a lens. A **mode** tunes the whole response to one discipline and declares
+what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE …` in Claude Code — and
+**read `_agents/modes/{mode}.md` before answering**:
+
+| Tier | Mode | Does | Writes |
+| :--- | :--- | :--- | :--- |
+| 1 | `[SYX: SKETCH]:` | Throwaway visual prototype | nothing |
+| 2 | `[SYX: UX]:` | Structure, flow, accessibility | nothing |
+| 3 | `[SYX: CREATIVE]:` | Experimental build, exempt from contracts | nothing |
+| 4 | `[SYX: TOKEN]:` | Token architecture | `pr` / recommends |
+| 5 | `[SYX: THEME]:` | OKLCH scales, `_theme.scss` | recommends |
+| 6 | `[SYX: UI]:` | Component SCSS | `pr` |
+| 7 | `[SYX: AUDIT]:` | R01–R08 conformance | nothing |
+| 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
+
+Use the **lowest tier that does the job**. Compose them with `→` (pipeline) and `+` (evaluative),
+where **`+` groups before `→`** — so `[SYX: UX → UI + AUDIT]:` is `UX → (UI + AUDIT)`.
+
+Every mode file opens with two blocks. **`Trust`** is its permission ceiling, graded by
+`contracts/trust.json` and verified by `npm run check:modos` — a mode never grants a permission, it
+inherits one. **`Knowledge`** is its reading list from `mind-system/knowledges/`, the cortex that
+carries the reasoning (colour theory, UX laws, WCAG, scale models, motion). Knowledge informs; it
+never executes. **If a module recommends what a rule above forbids, the rule wins.**
+
+Full detail: `_agents/modes/README.md`, and `mind-system/README.md` for the precedence ladder.
+
+---
+
 ## 🤖 Agent Workflows
 
 SYX ships pre-built agent workflows in `_agents/workflows/`:
