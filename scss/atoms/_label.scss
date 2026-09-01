@@ -14,23 +14,6 @@
       @include border-radius(var(--component-label-border-radius));
     }
 
-    // &--scope
-    &--scope {
-      // &-1
-      &-1 {
-        @include padding(var(--component-label-padding-sm));
-      }
-
-      // &-2
-      &-2 {
-        @include padding(var(--component-label-padding-md)); 
-      }
-
-      // &-3
-      &-3 {
-        @include padding(var(--component-label-padding-lg)); 
-      }
-    }
   }
   } // end @layer syx.atoms
 }

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "4.28.0",
-    "generated": "2026-08-31",
+    "generated": "2026-09-01",
     "generator": "scripts/build-component-registry.js",
     "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
@@ -452,22 +452,16 @@
         "atom-label"
       ],
       "modifiers": [
-        "atom-label--primary",
-        "atom-label--scope-1",
-        "atom-label--scope-2",
-        "atom-label--scope-3"
+        "atom-label--primary"
       ],
       "elements": [],
       "states": [],
       "composedOf": [],
       "tokens": [
-        "--component-label-border-radius",
-        "--component-label-padding-lg",
-        "--component-label-padding-md",
-        "--component-label-padding-sm"
+        "--component-label-border-radius"
       ],
-      "description": "[scope: system-reusable] Caution: two different things claim .atom-label. This file styles a small scope marker (--scope-1/-2/-3, --primary); scss/atoms/_form.scss declares the same class as a form field label. Check which one the compiled CSS gives you before relying on either, and prefer atom-pill for a standalone tag.",
-      "usage": "<span class=\"atom-label atom-label--scope-1\">Scope</span>"
+      "description": "[scope: system-reusable] Caution: two different things claim .atom-label. This file adds only the --primary variant (a border radius); scss/atoms/_form.scss declares the same class as a form field label and owns its type and colour. Check which one the compiled CSS gives you before relying on either, and prefer atom-pill for a standalone tag.",
+      "usage": "<span class=\"atom-label atom-label--primary\">Draft</span>"
     },
     {
       "name": "link",
