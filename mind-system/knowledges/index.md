@@ -71,7 +71,7 @@ knowledges/
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio branding | — |
 | `perception-of-prestige-foundations.md` | Psicología cognitiva del prestigio: modelo PRI, processing fluency, heurísticos de Cialdini, semiótica del lujo | CREATIVE, UX (on-demand) |
-| `perception-of-prestige.rules.md` | 17 reglas operativas con checks y output template para auditoría de percepción | CREATIVE (on-demand), AUDIT (on-demand) |
+| `perception-of-prestige.rules.md` | 18 reglas operativas con checks y output template para auditoría de percepción | CREATIVE (on-demand), AUDIT (on-demand) |
 
 ### `motion/` — Lenguaje de animación con GSAP
 

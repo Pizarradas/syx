@@ -9,7 +9,7 @@ Fundamentos de percepción de marca, credibilidad y prestigio visual. Respalda l
 | Módulo | Qué aporta |
 |--------|-----------|
 | `perception-of-prestige-foundations.md` | Psicología cognitiva del prestigio: modelo PRI, processing fluency, heurísticos de Cialdini, semiótica del lujo |
-| `perception-of-prestige.rules.md` | 17 reglas operativas (R-TYP, R-SPC, R-COL, R-SYS, R-AUT, R-DET, R-ESC) con checks y output template para auditoría |
+| `perception-of-prestige.rules.md` | 18 reglas operativas (R-TYP, R-SPC, R-COL, R-SYS, R-AUT, R-DET, R-ESC) con checks y output template para auditoría |
 
 ---
 

@@ -200,6 +200,9 @@ Every token you create must be added to `tokens.json`:
 
 ## Response Format
 
+Close with the `## Why` block. Its format, its threshold and what this mode owes lines
+for are specified once in `_agents/decision-record.md`.
+
 ```
 ## Tier Placement
 [which tier, which file]
@@ -218,7 +221,10 @@ Every token you create must be added to `tokens.json`:
  or «recommendation, a person applies it» for the semantic and primitive tiers]
 
 ## Notes
-[anything relevant: gaps, naming decisions, open questions]
+[anything relevant: coverage gaps, open questions]
+
+## Why
+[tier placement, and any token created where an existing one nearly fit — one line each]
 ```
 
 ---

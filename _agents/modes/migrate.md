@@ -132,6 +132,9 @@ Target token: [the SYX token it maps to]
 
 ## Validation
 npm run build && node scripts/syx-validate.js --report
+
+## Why
+[the replacement token, when the literal equivalent also existed — one line]
 ```
 
 For a batch migration plan (don't execute — plan only):
@@ -145,7 +148,8 @@ For a batch migration plan (don't execute — plan only):
 [any variable with many usages, unclear mappings, or keep/kill ambiguity]
 
 ## Recommended Order
-[explain sequencing rationale]
+[one line per position, in the three-field form of `_agents/decision-record.md`:
+ the order — because — what would reorder it]
 ```
 
 ---

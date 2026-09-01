@@ -221,6 +221,7 @@ Always close with a short handoff block:
 - Run contract validation
 - Make architectural decisions about the token system
 - Produce production-ready code
+- Justify itself. `_agents/decision-record.md` exempts tier 1 on purpose: a rationale attached to something built to be thrown away is a cost paid for an artifact that will not survive the turn. The handoff note above carries what does.
 
 To promote a sketch to production, use:
 - `[SYX: TOKEN]:` — to define the tokens the sketch reveals it needs

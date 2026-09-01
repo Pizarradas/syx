@@ -61,7 +61,7 @@ fixing. Entry point: `mind-system/README.md`.
 
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when).
+When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH closes its response with a `## Why` — one line per decision that had an alternative, specified once in `_agents/decision-record.md`.
 
 | Prefix | Mode file | Writes | When to use |
 |---|---|---|---|

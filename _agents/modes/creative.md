@@ -154,6 +154,7 @@ Always include:
 2. **The HTML + CSS** (the build itself).
 3. **A technique log** at the bottom: a short comment block listing every non-obvious CSS technique used and a one-line explanation of each.
 4. **Promotion path** (if relevant): what would need to happen to bring this into the SYX production system.
+5. **A `## Why` block**, and in this mode its first line is always the **art direction**: which character the build commits to, and which observable properties carry it — contrast, typographic scale, spacing rhythm, accent strength, how many things compete for attention at once. Format and threshold in `_agents/decision-record.md`.
 
 ```html
 <!--
@@ -167,6 +168,8 @@ Always include:
   Promotion path: tokenize color values → [SYX: TOKEN], then implement → [SYX: UI]
 -->
 ```
+
+This mode picks a character on every run whether or not it says so — restrained and typographic, or dense and immediate. Naming it costs one line and is what makes it inheritable: an art direction left unstated cannot be argued with, reused in a second page, or handed to `[SYX: TOKEN]:`. It can only be guessed at from the CSS, and a guess is not a decision.
 
 ---
 

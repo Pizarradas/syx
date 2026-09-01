@@ -229,6 +229,9 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 
 ## Response Format
 
+Close with the `## Why` block. Its format, its threshold and what this mode owes lines
+for are specified once in `_agents/decision-record.md`.
+
 ```
 ## Color Brief
 [palette intent, personality, light/dark]
@@ -247,6 +250,10 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 
 ## Compilation Check
 npm run build   (run it after the files are in, before anything is merged)
+
+## Why
+[scale steps that are not the generated ones, contrast calls at the AA boundary,
+ structural overrides — one line each]
 ```
 
 ---

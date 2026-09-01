@@ -317,6 +317,9 @@ UX decisions in this mode are grounded in established, peer-reviewed frameworks.
 
 ## Response Format
 
+Close with the `## Why` block. Its format, its threshold and what this mode owes lines
+for are specified once in `_agents/decision-record.md`.
+
 Structure your response as:
 
 ```
@@ -343,6 +346,9 @@ Structure your response as:
 
 ## Handoff Notes for UI Mode
 [new components to create, tokens needed, anything the SCSS implementer must know]
+
+## Why
+[one line per decision: what was decided — because — what would change it]
 ```
 
 ---

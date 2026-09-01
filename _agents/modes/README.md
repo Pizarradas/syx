@@ -83,6 +83,14 @@ a rule — if a module recommends what R01 forbids, the module is what needs fix
 from both sides, including the reverse index that reveals modules no mode loads, is
 `mind-system/routing.md`.
 
+Where `Trust` and `Knowledge` open a mode, the **`## Why` block closes its response**: one line
+per decision that had a competent alternative, in the form *what was decided — because — what
+would change it*. The third field is the one that matters; a justification nobody can falsify is
+decoration. The format, the threshold for owing a line, and what each mode specifically owes live
+once in `_agents/decision-record.md` — no mode file restates them, for the same reason there is one
+`/syx` command instead of eight. SKETCH is exempt, and the exemption is argued there rather than
+assumed.
+
 ## Composing Modes
 
 Two operators combine modes in a single invocation:
@@ -173,7 +181,10 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 3. Follow it with the `Knowledge` block — Always / When relevant / On request / Tags. Both blocks
    live **above** the first `## ` heading. Declare `mind-system/knowledges/` in **Reads** so any
    cortex path the body mentions stays covered by the guardian
-4. Define: role, priorities, output format, constraints, response template, example
+4. Define: role, priorities, output format, constraints, response template, example. The
+   response template ends with `## Why`, and the mode gets a row in the table of
+   `_agents/decision-record.md` naming which decisions it owes lines for — an empty row is an
+   exemption, and an exemption needs an argument
 5. Add a row to the table in `AGENTS.md`, `CLAUDE.md` **and** this file — all three are checked
 6. Add the mode's column to the matrix and its modules to the reverse index in
    `mind-system/routing.md`. A knowledge module that no mode loads is a module nobody will open

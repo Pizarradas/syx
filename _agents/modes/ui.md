@@ -437,6 +437,9 @@ Run this after the contract checklist. A component is not done until all items p
 
 ## Response Format
 
+Close with the `## Why` block. Its format, its threshold and what this mode owes lines
+for are specified once in `_agents/decision-record.md`.
+
 Structure your response as:
 
 ```
@@ -461,6 +464,9 @@ Typography ✅ | Spacing ✅ | Color ✅ | Elevation ✅ | Motion ✅ | States �
 
 ## Validation
 node scripts/syx-validate.js
+
+## Why
+[one line per decision: what was decided — because — what would change it]
 ```
 
 ---

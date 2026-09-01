@@ -114,7 +114,7 @@ Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano 
 
 **Motion.** `ui/motion-principles.md` es la capa física — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion` — y **prevalece sobre todo el dominio `motion/`**, que es la capa de librería. Una receta de GSAP que rompa un principio físico está mal, no está siendo audaz. CREATIVE carga la primera siempre y la segunda solo cuando hay GSAP, en ese orden y a propósito.
 
-**Prestigio.** `branding/perception-of-prestige.rules.md` trae 17 reglas con su propio formato de informe. Cuando AUDIT las usa, lo que encuentra es **asesor**: no lleva número R, no aparece en la capa 1 del informe y no convierte por sí solo un PASS en FAIL. Mezclar una recomendación de percepción con una violación de contrato devalúa las dos.
+**Prestigio.** `branding/perception-of-prestige.rules.md` trae 18 reglas con su propio formato de informe. Cuando AUDIT las usa, lo que encuentra es **asesor**: no lleva número R, no aparece en la capa 1 del informe y no convierte por sí solo un PASS en FAIL. Mezclar una recomendación de percepción con una violación de contrato devalúa las dos.
 
 ---
 
