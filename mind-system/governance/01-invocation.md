@@ -115,7 +115,7 @@ Ambos modos operan sobre el mismo artefacto. Sus outputs se presentan juntos en 
 
 ### Precedencia al mezclar `→` y `+`
 
-`→` tiene mayor precedencia que `+`. La expresión se agrupa de derecha a izquierda sobre `+`:
+**`+` agrupa antes que `→`.** El `+` une a los modos que comparten artefacto; el `→` encadena esos grupos. Se lee siempre de izquierda a derecha, resolviendo primero cada `+`:
 
 ```
 [ATLAS]: ... utilizando [SYX: UX → UI + AUDIT]

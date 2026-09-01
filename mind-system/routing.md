@@ -125,7 +125,7 @@ Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano 
 | `→` | `[SYX: UX → UI]:` | **Pipeline.** El output de cada modo es el input del siguiente. Un paso a la vez. |
 | `+` | `[SYX: UI + AUDIT]:` | **Evaluativa.** Ambos modos operan sobre el mismo input; los dos outputs se presentan juntos. |
 
-**Precedencia**: `→` pesa más que `+`. `[SYX: UX → UI + AUDIT]:` se lee `UX → (UI + AUDIT)`. Para otra agrupación, separar en turnos.
+**Agrupación**: `+` agrupa antes que `→`. El `+` une a los modos que comparten artefacto; el `→` encadena esos grupos. `[SYX: UX → UI + AUDIT]:` se lee `UX → (UI + AUDIT)`: UX primero, y después UI implementa mientras AUDIT verifica ese mismo output. Para otra agrupación, separar en turnos.
 
 En un pipeline, si un paso intermedio no tiene trabajo, **el pipeline no se detiene**: continúa con los recursos existentes y emite un handoff explícito.
 

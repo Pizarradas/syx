@@ -101,7 +101,7 @@ Ambos modos operan sobre el mismo artefacto y sus outputs se presentan juntos.
 [SYX: UI + AUDIT]: implementa y valida el componente atom-badge
 ```
 
-**Precedencia**: `→` pesa más que `+`. `[SYX: UX → UI + AUDIT]:` se lee `UX → (UI + AUDIT)`. La tabla completa de combinaciones válidas e inválidas está en `routing.md`.
+**Agrupación**: `+` agrupa antes que `→`. `[SYX: UX → UI + AUDIT]:` se lee `UX → (UI + AUDIT)`. La tabla completa de combinaciones válidas e inválidas está en `routing.md`.
 
 ---
 

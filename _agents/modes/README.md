@@ -14,6 +14,28 @@ Prefix your message with `[SYX: MODE]:` to activate a mode:
 [SYX: AUDIT]: Review scss/organisms/_site-header.scss for contract violations
 ```
 
+The prefix is the **portable** form: it is plain text, so it works in Claude Code, Codex, Cursor or
+anything else that ingests `AGENTS.md`. It is a convention, though — nothing forces a client to
+honour it.
+
+In Claude Code there is a second door to the same room, `.claude/commands/syx.md`:
+
+```
+/syx UI implement the atom-tag component with --primary and --neutral variants
+/syx UX → TOKEN → UI + AUDIT a search field with autocomplete
+/syx ATLAS UX → UI a section front for markets
+```
+
+It takes the same grammar and resolves to the same eight files — it is a pointer, not a copy, so
+there is nothing to keep in sync. What it adds is that the harness runs it: autocomplete on `/syx`,
+and the mode file gets read because the command says to, instead of because an agent remembered a
+convention. There is deliberately **one** command rather than eight: eight would be eight
+near-identical files restating what each mode is, which is the duplication this system just spent a
+refactor removing.
+
+Neither form auto-selects a mode. Choosing the lens — and therefore the tier, and therefore what
+the turn costs — stays with the person asking.
+
 ## Resource Tiers
 
 Modes are calibrated by AI context consumption and output complexity. Pick the lowest tier that serves your need — escalate only when the concept is confirmed.
@@ -60,6 +82,29 @@ ceiling and a module is an argument, so knowledge never authorises anything and 
 a rule — if a module recommends what R01 forbids, the module is what needs fixing. The wiring seen
 from both sides, including the reverse index that reveals modules no mode loads, is
 `mind-system/routing.md`.
+
+## Composing Modes
+
+Two operators combine modes in a single invocation:
+
+| Operator | Syntax | Meaning |
+|---|---|---|
+| `→` | `[SYX: UX → UI]:` | **Pipeline.** Each mode's output is the next one's input. One step at a time. |
+| `+` | `[SYX: UI + AUDIT]:` | **Evaluative.** Both modes work on the same artifact; both outputs come back together. |
+
+**`+` groups before `→`.** The `+` binds the modes that share an artifact; the `→` chains those
+groups. So `[SYX: UX → UI + AUDIT]:` reads as `UX → (UI + AUDIT)`: UX first, then UI implements
+while AUDIT verifies that same output. For any other grouping, split into turns.
+
+If a middle step turns out to have no work — TOKEN finds every token it needed already exists —
+**the pipeline does not stop.** It continues with what exists and hands off explicitly. Aborting is
+the user's call, not the mode's.
+
+Not every pair composes. `SKETCH + AUDIT` and `CREATIVE + AUDIT` are contradictions (both modes are
+exempt from the contracts AUDIT enforces); `UI → TOKEN` and `THEME → UI` run the dependency
+backwards. The full table of valid and invalid combinations is in `mind-system/routing.md`, and the
+combinations that carry editorial context (`[ATLAS]: … utilizando [SYX: …]`) are in
+`mind-system/governance/01-invocation.md`.
 
 ## Mode Boundaries
 

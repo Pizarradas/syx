@@ -62,6 +62,13 @@ density, proportion, zone, advertising — and nothing above rung 5. Entry point
 
 When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when).
 
+Two operators compose modes: `→` is a pipeline (each output feeds the next), `+` is evaluative
+(both modes work the same artifact). **`+` groups before `→`**, so `[SYX: UX → UI + AUDIT]:` reads
+as `UX → (UI + AUDIT)`. The `/syx` slash command (`.claude/commands/syx.md`) takes the same grammar
+and resolves to the same files — use it when the user types `/syx`, and honour the prefix when they
+type that instead. Neither form picks a mode on its own: choosing the lens picks the tier, and the
+tier is what the turn costs.
+
 ### Resource Tiers
 
 Modes are calibrated by complexity and AI resource consumption. Choose the right tier for the task to avoid spending context budget unnecessarily.

@@ -175,6 +175,43 @@ comprobar('cada modo declara de qué se alimenta', () => {
 
 Y añadir un punto 8 a la cabecera del fichero, donde enumeras qué comprueba.
 
+### El cuarto índice que nadie vigila
+
+`check-modos.js` compara `CLAUDE.md`, `AGENTS.md` y `_agents/modes/README.md`. **No mira `README.md`**, que es la cara pública del repositorio — y ahí decía *«Mode system — 6 specialist lenses»* y *«Mode system (6 modes) fully operational»*. Seis de ocho: exactamente el fallo que ese guardián nació para cazar, en el único índice que quedó fuera de su lista. Ya está corregido; falta que no pueda repetirse.
+
+Dos formas, y la segunda es mejor:
+
+```js
+// (a) añadir README.md a la lista de índices — pero su tabla no lista modos,
+//     solo el recuento, así que enTabla() no sirve.
+// (b) comprobar el RECUENTO alli donde se afirme, en cualquier .md del repo:
+comprobar('nadie afirma un numero de modos equivocado', () => {
+  const malos = [];
+  const NUM = { seis: 6, six: 6, siete: 7, seven: 7, ocho: 8, eight: 8 };
+  for (const f of ['README.md', 'CLAUDE.md', 'AGENTS.md', '_agents/modes/README.md']) {
+    for (const m of leer(f).matchAll(/\b(\d+|seis|six|siete|seven|ocho|eight)\s+(?:specialist\s+)?(?:lenses|modes|modos)\b/gi)) {
+      const n = NUM[m[1].toLowerCase()] ?? Number(m[1]);
+      if (n !== MODOS.length) malos.push(`${f}: dice ${m[0]} y hay ${MODOS.length}`);
+    }
+  }
+  if (malos.length) throw new Error(malos.join(' · '));
+});
+```
+
+Excluir `CHANGELOG.md`: ahí un «seis modos» es un hecho histórico correcto, no una afirmación desfasada.
+
+### El comando y los modos, sincronizados
+
+`.claude/commands/syx.md` nombra los ocho modos en su gramática. Es un puntero, no una copia, pero la lista de nombres sí se duplica y puede envejecer:
+
+```js
+comprobar('el comando /syx conoce los mismos modos que hay en disco', () => {
+  const t = leer('.claude/commands/syx.md');
+  const faltan = MODOS.filter((m) => !new RegExp(`\\b${m.toUpperCase()}\\b`).test(t));
+  if (faltan.length) throw new Error(`/syx no nombra: ${faltan.join(', ')}`);
+});
+```
+
 Detalle de implementación que conviene conservar: el bloque `Knowledge` va **dentro de la cabecera**, antes del primer `## `. No es cosmético. La comprobación 5 (*«el bloque cubre todas las rutas que el modo nombra»*) solo mira el cuerpo, así que las rutas del córtex no la disparan; y para que sí queden cubiertas si alguien las nombra en el cuerpo, cada modo declara `mind-system/knowledges/` en su línea **Reads**. Ese es el motivo de que `Reads` cambiara en los ocho.
 
 ---

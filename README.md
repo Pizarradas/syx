@@ -329,7 +329,7 @@ syx/
 | [AGENTS.md](AGENTS.md)                                                  | Agnostic AI entry point (Codex, Cursor, Copilot…) — mode system, base rules, workflows |
 | [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
 | [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
-| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 6 specialist lenses activated by `[SYX: MODE]:` prefix |
+| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 8 specialist lenses activated by `[SYX: MODE]:` prefix |
 | [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |
 | [abstracts/mixins/README.md](scss/abstracts/mixins/README.md)           | Complete mixin reference                            |
 | [abstracts/tokens/TOKEN-GUIDE.md](scss/abstracts/tokens/TOKEN-GUIDE.md) | Token system guide                                  |
@@ -389,5 +389,5 @@ Utilities always win over components. No `!important` needed.
 ## Status (March 2026)
 
 - **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
-- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (6 modes) fully operational. 1 phantom token closes on `npm run build`.
+- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (8 modes) fully operational. 1 phantom token closes on `npm run build`.
 - Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.
