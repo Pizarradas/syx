@@ -196,10 +196,12 @@ somebody might ship, it is not an invariant.
 - **BRAND never writes component SCSS.** Not one rule under `scss/{layer}/`. If the identity needs a
   component that does not exist, name it and hand it to UX.
 - **BRAND never mints component tokens.** `--component-*` is TOKEN's tier and a component's business.
-- **BRAND does not do the OKLCH arithmetic THEME does.** It decides the hue, the chroma envelope and
-  whether the theme is light or dark; THEME builds the ten steps and checks the contrast. Running
-  alone, BRAND produces the scale anyway — but that is BRAND standing in for THEME, and the response
-  says so rather than letting an unchecked scale pass as a checked one.
+- **BRAND never emits `_theme.scss`.** Not the file, not "the relevant part of the file", not as a
+  convenience. It decides the hue, the chroma envelope and whether the theme is light or dark, and
+  it names the semantic tokens each axis targets; THEME builds the ten OKLCH steps, checks the
+  contrast and writes the file. A user who asks for the file is asking for `BRAND → THEME`, and the
+  answer is to say so and run the second step — not to produce an unchecked scale that looks like a
+  checked one.
 - **BRAND does not audit.** It states the invariants. Checking a codebase against them is AUDIT,
   running the branding rules module as an advisor — no R number, and never a PASS turned FAIL on
   its own.
@@ -217,6 +219,33 @@ contract  contrast   names    code
 THEME turns the colour axis into a checked ten-step scale. Running THEME first inverts the
 dependency — it produces a palette with no identity to answer to, which is how six of the seven
 themes ended up recolours.
+
+### The line between BRAND and THEME
+
+The two modes look alike — both recommend rather than write, both touch `scss/themes/`, both load
+`syx/theme-system.md` and `syx/color-oklch.md`, and THEME's whole reading list is inside BRAND's.
+The question of whether one of them is redundant is a fair one, and the answer is the same one the
+mode system already gives for UX and UI: **one decides intent, the other implements it.**
+
+| | BRAND | THEME |
+|---|---|---|
+| Decides | which of the seven axes move, and where to | the ten OKLCH steps, the 12 surface tokens, the dark inversion |
+| Asks the user | yes — the register, then the axes | no — it receives a decision and executes it |
+| Produces | a specification, a contract, a provenance | a file: `_theme.scss`, `$theme-config`, the entry point |
+| Fails when | it invents a value | it invents a direction |
+| Costs | tier 9, once per identity | tier 5, every time a theme is touched |
+
+The last row is the practical reason not to merge them. Most theme work is not an identity: it is
+*change the accent in example-04*, *add a dark variant*, *fix a contrast at the AA boundary*. That is
+a two-turn job, and routing it through a seven-axis interview with the prestige corpus loaded would
+make the cheap job expensive — which is the failure the whole tier table exists to prevent. And the
+reverse merge is worse: an identity decided inside the file that carries it is an identity nobody
+can inherit, argue with, or apply to a second theme.
+
+So the boundary is a hard one. **BRAND never emits `_theme.scss` and THEME never decides an axis.**
+If THEME arrives from BRAND, the axes are already settled: it builds them, and if one cannot be
+built as specified — a chroma that leaves AA unreachable — it says so and hands the conflict back
+rather than quietly choosing a different one.
 
 `BRAND + AUDIT` is valid, and unusual: unlike CREATIVE, BRAND's output already names real tokens, so
 AUDIT has something to check — that every name exists in `tokens.json`, and that no handed-over
@@ -248,14 +277,12 @@ for are specified once in the decision record.
 ## Voice & Imagery
 [prose, for UX and CREATIVE — not tokens]
 
-## _theme.scss
-[full file content, sections 1–3, ready to paste]
-
-## Files for a person to create
-[list with paths — you write the content, you do not write the files]
-
-## Handover
-[what THEME still owes: scales, contrast checks. What UX and CREATIVE inherit.]
+## Handover to THEME
+[the identity as a specification THEME can build from, never as file content:
+ · colour — hue, chroma envelope, neutral temperature, light or dark, accent hue
+ · the six other axes — each as the semantic tokens it targets and the direction it moves them
+ · what THEME still owes: the ten OKLCH steps, the 12 surface tokens, the AA contrast checks
+ · what UX and CREATIVE inherit: the register, the contract, voice and imagery]
 
 ## What I chose for you
 [only the axes marked IA, one line each, and the single sentence that reopens them:

@@ -39,6 +39,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BRAND es tier 9 leyendo tres ficheros.** El tier ordena el trabajo, no la lectura —lo dice ya `_agents/modes/README.md`— y el trabajo de BRAND es el único que tiene que salir coherente consigo mismo en siete ejes a la vez. Va al final de la tabla en vez de entre UI y AUDIT por una razón más sosa: los números se citan en tres índices, y renumerar ocho filas para insertar una cuesta más de lo que vale el orden.
 
+### Changed
+
+- **BRAND ya no emite `_theme.scss`, y esa era la única duplicación real con THEME.** La pregunta —¿no hacen lo mismo?— estaba bien traída: los dos recomiendan en vez de escribir, los dos tocan `scss/themes/`, y **la lista de lectura entera de THEME está dentro de la de BRAND**. Pero la función no es la misma; lo que estaba mal era el entregable. BRAND se había quedado sacando el fichero de tema —con una cláusula que decía «cuando BRAND corre solo, hace la escala igualmente, pero eso es BRAND haciendo de THEME», que es la forma educada de admitir un solape.
+
+  Ahora la frontera es dura: **BRAND nunca emite `_theme.scss` y THEME nunca decide un eje.** Es la misma división que ya existe entre UX y UI —uno decide la intención, el otro la implementa— un escalón más arriba. BRAND entrega el tono, la envolvente de croma, claro u oscuro y los tokens semánticos a los que apunta cada eje; THEME construye los diez pasos OKLCH, los 12 tokens de superficie y el fichero.
+
+  **Fusionarlos habría salido caro por los dos lados.** La mayor parte del trabajo de tema no es una identidad: es *cambia el acento de example-04*, *añade una variante oscura*, *arregla un contraste en el límite AA* —dos turnos, tier 5— y meterlo por una entrevista de siete ejes con el corpus de prestigio cargado es exactamente el fallo que la tabla de tiers existe para evitar. Al revés es peor: una identidad decidida dentro del fichero que la transporta es una identidad que nadie puede heredar, discutir ni aplicar a un segundo tema.
+
+- **THEME dice ahora qué hace cuando llega desde BRAND**: construye la dirección que recibe y, si no se puede construir —un croma que deja AA inalcanzable en el paso de texto—, **devuelve el conflicto en vez de elegir otra dirección en silencio**. Ese es el único modo de fallo del pipeline, porque produce un tema que ya no coincide con la identidad que todo lo de aguas abajo cree heredar.
+
 ### Notes
 
 - **Falta el salto de versión.** `package.json` es `human`, y con él `package-lock.json` y las citas de `home.html`, `docs.html` y `why-syx.html`. Esta entrada queda en `[Unreleased]` a propósito: `check:version` compara la última entrada numerada del changelog con `package.json`, y `[Unreleased]` no la desestabiliza.

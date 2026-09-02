@@ -68,7 +68,7 @@ answer — the last column says which. The tier still ranks the *work*, not the 
 | **THEME** | `theme.md` | Theme designer | recommends | OKLCH scales, `_theme.scss`, surface token coverage, dark mode |
 | **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R08 violations, structure/naming checks, verdicts |
 | **MIGRATE** | `migrate.md` | Migration specialist | `pr` / recommends | Legacy var resolution, impact analysis, per-variable replacement plans |
-| **BRAND** | `brand.md` | Brand identity architect | recommends | A two-round interview, then the seven identity axes with their provenance, the identity contract, `_theme.scss`, the handover to THEME |
+| **BRAND** | `brand.md` | Brand identity architect | recommends | A two-round interview, then the seven identity axes with their provenance, the identity contract, and the specification THEME builds from. Never the theme file itself |
 
 The **Writes** column is not advice, it is `contracts/trust.json` read through
 `scripts/lib/confianza.js`. Each mode file opens with a `Trust` block listing the paths it may
@@ -132,8 +132,12 @@ Modes are intentionally siloed:
 - **THEME mode** never writes. Everything a theme touches reaches all seven bundles at once, so
   the mode designs the theme in full and a person puts it in.
 - **BRAND mode** never writes either, and never designs a page. It decides what every page
-  inherits — the seven identity axes — and hands the colour axis to THEME to be scaled and
-  contrast-checked.
+  inherits — the seven identity axes — and hands them to THEME to be scaled and contrast-checked.
+  **BRAND never emits `_theme.scss` and THEME never decides an axis.** That line is what keeps the
+  two from being one mode: THEME's whole reading list sits inside BRAND's, so the only thing
+  separating them is that one decides intent and the other implements it — the same split as UX and
+  UI, one rung up. Merging them would route *change the accent in example-04* through a seven-axis
+  interview, which is the cheap-job-made-expensive failure the tier table exists to prevent.
 - **No mode commits to a shared branch.** What a mode may write, it writes through
   `node scripts/propose.js`: branch, commit and evidence, for a person to merge.
 
@@ -171,10 +175,12 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 ### New identity workflow (the most expensive, and the one that pays for itself)
 ```
 1. [SYX: BRAND]: A complete identity for {the brief}
-   → Seven axes decided together, the identity contract, a _theme.scss ready to paste
+   → Two-round interview, then seven axes decided together with their provenance,
+     the identity contract, and the spec for step 2. No theme file: that is THEME's.
 
 2. [SYX: THEME]: Build the scale for the identity BRAND just handed over
-   → Ten OKLCH steps, the 12 surface tokens, AA contrast checked
+   → Ten OKLCH steps, the 12 surface tokens, AA contrast checked, _theme.scss written out.
+     It builds the direction it was given; it does not pick a different one.
 
 3. (Only if an axis needs a name that does not exist) [SYX: TOKEN]: …
    → Tier placement for the new family
