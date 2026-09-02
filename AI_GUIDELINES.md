@@ -211,9 +211,15 @@ what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE �
 | 6 | `[SYX: UI]:` | Component SCSS | `pr` |
 | 7 | `[SYX: AUDIT]:` | R01–R08 conformance | nothing |
 | 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
+| 9 | `[SYX: BRAND]:` | A complete visual identity — the seven axes at once | recommends |
 
 Use the **lowest tier that does the job**. Compose them with `→` (pipeline) and `+` (evaluative),
 where **`+` groups before `→`** — so `[SYX: UX → UI + AUDIT]:` is `UX → (UI + AUDIT)`.
+
+The tier is the cost of the turn, not the order of the work. BRAND sits last because it is the most
+expensive response in the system — seven identity axes that have to come out consistent with each
+other — but it runs **first** in the chain it belongs to: `BRAND → THEME → TOKEN → UI`. Running
+THEME before BRAND inverts the dependency and yields a palette with no identity to answer to.
 
 Every mode file opens with two blocks. **`Trust`** is its permission ceiling, graded by
 `contracts/trust.json` and verified by `npm run check:modos` — a mode never grants a permission, it

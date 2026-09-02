@@ -525,7 +525,7 @@
           The Mode System
         </a>
         <div class="docs-sidebar__sub">
-          <a href="#modes-eight" class="docs-sidebar__link" data-nav-section="modes-eight">1 The eight modes</a>
+          <a href="#modes-eight" class="docs-sidebar__link" data-nav-section="modes-eight">1 The nine modes</a>
           <a href="#modes-invoke" class="docs-sidebar__link" data-nav-section="modes-invoke">2 Two doors, one room</a>
           <a href="#modes-compose" class="docs-sidebar__link" data-nav-section="modes-compose">3 Composing modes</a>
           <a href="#modes-blocks" class="docs-sidebar__link" data-nav-section="modes-blocks">4 Trust &amp; Knowledge</a>
@@ -2098,13 +2098,13 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
         <p class="atom-txt syx-text-gray syx-mb-4">The section above is how the system answers and guards itself. This
           one is how you drive it. A <strong>mode</strong> is a lens: instead of a general-purpose answer, you get one
           tuned to a single discipline, with a declared permission ceiling and a declared reading list. There are
-          eight, and they are deliberately siloed &mdash; a UX pass and a UI pass on the same problem produce a better
+          nine, and they are deliberately siloed &mdash; a UX pass and a UI pass on the same problem produce a better
           result than one answer trying to be both.</p>
 
-        <!-- ─── 1 · THE EIGHT ─── -->
+        <!-- ─── 1 · THE NINE ─── -->
         <section class="syx-mb-5" id="modes-eight">
           <h3 class="atom-title atom-title--h5 syx-mb-3">
-            1 &mdash; The eight modes
+            1 &mdash; The nine modes
           </h3>
           <p class="atom-txt syx-text-gray syx-mb-3">Ordered by tier, which ranks how much context the mode spends.
             <strong>Use the lowest tier that does the job.</strong> Start at SKETCH or UX to check the idea is worth
@@ -2178,18 +2178,29 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
                   <td><code>pr</code> / recommends</td>
                   <td>Legacy variable resolution, impact analysis, one variable at a time</td>
                 </tr>
+                <tr>
+                  <td>9</td>
+                  <td><code>[SYX: BRAND]:</code></td>
+                  <td>Brand identity architect</td>
+                  <td>recommends</td>
+                  <td>The seven identity axes decided together, the identity contract, <code>_theme.scss</code>, the handover to THEME</td>
+                </tr>
               </tbody>
             </table>
           </div>
 
           <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
             <p class="syx-type-overline syx-text-gray syx-mb-2">The tier measures the system, not the cortex</p>
-            <p class="atom-txt syx-mb-0">Two separate axes, and adding them gives a wrong number. The tier counts what
+            <p class="atom-txt syx-mb-2">Two separate axes, and adding them gives a wrong number. The tier counts what
               it costs to interrogate SYX &mdash; <code>tokens.json</code>, the registry, the contracts. The mode's
               <code>Knowledge</code> block counts what it costs to load the reading list. CREATIVE is tier 3 and still
               pulls the whole motion domain when there is GSAP: cheap in system reads, expensive in corpus. SKETCH is
               the one disciplined exception &mdash; its tier 1 is bought by reading nothing at all, so it has no
               <em>Always</em> line.</p>
+            <p class="atom-txt syx-mb-0">BRAND is the second exception, in the opposite direction. It reads three
+              files and still sits at tier 9, because the tier ranks the work and BRAND's work is the only one that
+              has to come out internally consistent across seven axes at once. The expensive part is the coherence
+              check, not the reads.</p>
           </div>
         </section>
 
@@ -2221,13 +2232,13 @@ scss/organisms/_site-header.scss</code></pre>
           </div>
 
           <p class="atom-txt syx-text-gray syx-mb-3"><code>.claude/commands/syx.md</code> takes the same grammar and
-            resolves to the same eight files. It is a <strong>pointer, not a copy</strong>, so there is nothing to keep
+            resolves to the same nine files. It is a <strong>pointer, not a copy</strong>, so there is nothing to keep
             in sync. What it adds is that the harness runs it: autocomplete, and the mode file gets read because the
             command says so rather than because an agent remembered a convention.</p>
 
           <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
             <p class="syx-type-overline syx-text-gray syx-mb-2">Two decisions that look wrong and aren't</p>
-            <p class="atom-txt syx-mb-2"><strong>One command, not eight.</strong> Eight would be eight near-identical
+            <p class="atom-txt syx-mb-2"><strong>One command, not nine.</strong> Nine would be nine near-identical
               files restating what each mode is &mdash; the duplication this system spent a refactor removing.</p>
             <p class="atom-txt syx-mb-0"><strong>A command, not a skill.</strong> A skill auto-invokes on its
               description, and here that is a defect: modes are lenses chosen on purpose, and choosing the lens chooses
@@ -2285,6 +2296,14 @@ scss/organisms/_site-header.scss</code></pre>
                     <td><code>AUDIT &rarr; MIGRATE</code></td>
                     <td>Technical debt, if there are few variables</td>
                   </tr>
+                  <tr>
+                    <td><code>BRAND &rarr; THEME</code></td>
+                    <td>A full identity: BRAND decides the seven axes, THEME builds and contrast-checks the scale</td>
+                  </tr>
+                  <tr>
+                    <td><code>BRAND + AUDIT</code></td>
+                    <td>Identity verified &mdash; every token it names exists, every block it hands over passes R01&ndash;R04</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -2311,6 +2330,14 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr>
                     <td><code>MIGRATE + AUDIT</code></td>
                     <td>Only <code>AUDIT &rarr; MIGRATE</code> makes sense</td>
+                  </tr>
+                  <tr>
+                    <td><code>UI &rarr; BRAND</code></td>
+                    <td>Backwards. An identity is decided before what wears it</td>
+                  </tr>
+                  <tr>
+                    <td><code>THEME &rarr; BRAND</code></td>
+                    <td>Backwards and more expensive: a palette with no identity to answer to</td>
                   </tr>
                 </tbody>
               </table>

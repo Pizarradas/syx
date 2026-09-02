@@ -308,7 +308,7 @@ syx/
 ├── img/                         # Images and icons
 │
 ├── _agents/                     # THE ENGINE — loaded always, ships with the package
-│   ├── modes/                   # 8 mode definitions (Trust + Knowledge blocks)
+│   ├── modes/                   # 9 mode definitions (Trust + Knowledge blocks)
 │   ├── workflows/               # Step-by-step task guides
 │   └── prompts/                 # Copy-paste prompt templates
 │
@@ -342,7 +342,7 @@ syx/
 | [AGENTS.md](AGENTS.md)                                                  | Agnostic AI entry point (Codex, Cursor, Copilot…) — mode system, base rules, workflows |
 | [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
 | [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
-| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 8 specialist lenses activated by `[SYX: MODE]:` prefix |
+| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 9 specialist lenses activated by `[SYX: MODE]:` prefix |
 | [mind-system/README.md](mind-system/README.md)                          | The cortex — precedence ladder, engine vs. knowledge |
 | [mind-system/routing.md](mind-system/routing.md)                        | Mode ↔ knowledge wiring, with the reverse index |
 | [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |
@@ -404,5 +404,5 @@ Utilities always win over components. No `!important` needed.
 ## Status (March 2026)
 
 - **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
-- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (8 modes) fully operational. 1 phantom token closes on `npm run build`.
+- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (9 modes) fully operational. 1 phantom token closes on `npm run build`.
 - Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.

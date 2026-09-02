@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [Unreleased]
+
+### Added
+
+- **`[SYX: BRAND]:`, el noveno modo — arquitecto de identidad visual.** La capa semántica ya llevaba siete ejes de identidad —color, tipografía, espacio, forma, elevación, movimiento y estado— y **un solo tema de siete los mueve todos**: `syx-sketch`. Los otros seis mueven color, familia tipográfica y la rampa de sombra, y nada más; radio, duración, easing y tracking son idénticos en los seis. No es un fallo de esos temas: es lo que pasa cuando el único modo que posee una decisión de identidad es THEME y **la lista obligatoria de THEME son doce tokens de color**. La arquitectura soportaba una identidad completa desde hace versiones. Nadie la estaba pidiendo.
+
+  La otra mitad del hueco estaba aguas abajo. CREATIVE elige un carácter en cada ejecución y `_agents/decision-record.md` ya le obliga a escribirlo; pero un carácter escrito **por página** es un carácter que se vuelve a decidir en cada página. BRAND es donde se decide una vez, de modo que un CREATIVE posterior **hereda** una identidad en vez de inventarla — y su línea de dirección de arte pasa de invención a desviación, que es mucho más barato de discutir.
+
+- **Los siete ejes, cada uno con su tier y su familia de tokens real.** La tabla del modo no es un consejo: es el escalón que `contracts/trust.json` califica, y equivocarlo es lo que convierte una decisión de identidad en una violación de R01 seis componentes más tarde.
+
+- **La regla de cobertura.** Una identidad que mueve menos de **tres** ejes tiene que llamarse recoloreado, con esas palabras. Es la distinción que los seis temas de ejemplo nunca tuvieron que hacer, y la que separa un cambio reversible de un vistazo de uno que no lo es.
+
+- **El contrato de identidad.** Entre cinco y nueve invariantes falsables —*«el acento aparece como mucho una vez por viewport»* entra; *«transmite confianza y modernidad»* se borra— que es lo que permite que AUDIT compruebe después una identidad en vez de admirarla.
+
+- **`BRAND → THEME` como pipeline canónico**, y `THEME → BRAND` declarado inválido en `mind-system/routing.md`: produce una paleta sin identidad a la que responder, que es exactamente cómo seis de los siete temas acabaron siendo recoloreados. `BRAND + AUDIT` **sí** es válido, a diferencia de `CREATIVE + AUDIT`: BRAND nombra tokens reales, así que hay algo que comprobar.
+
+### Changed
+
+- **BRAND no escribe nada.** Todo lo que toca una identidad —primitivos, semánticos, temas, `_theme-config.scss`— es `human` en el contrato, así que el modo decide, escribe los ficheros enteros y los entrega. Mismo techo que THEME, y por el mismo motivo. `npm run check:modos` lo verifica: 8/8 comprobaciones, 9 modos.
+
+- **Cableado en los índices que ya se vigilan** (`CLAUDE.md`, `AGENTS.md`, `_agents/modes/README.md`), en `_agents/decision-record.md`, en `mind-system/routing.md` —columna en la matriz, índice inverso y las dos tablas de composición— y en `.claude/commands/syx.md`. Los índices del córtex (`knowledges/index.md`, `branding/`, `syx/`, `front/`) también, por el argumento de siempre: dos documentos del mismo repositorio contradiciéndose es peor que no tener ninguno.
+
+- **BRAND es tier 9 leyendo tres ficheros.** El tier ordena el trabajo, no la lectura —lo dice ya `_agents/modes/README.md`— y el trabajo de BRAND es el único que tiene que salir coherente consigo mismo en siete ejes a la vez. Va al final de la tabla en vez de entre UI y AUDIT por una razón más sosa: los números se citan en tres índices, y renumerar ocho filas para insertar una cuesta más de lo que vale el orden.
+
+### Notes
+
+- **Falta el salto de versión.** `package.json` es `human`, y con él `package-lock.json` y las citas de `home.html`, `docs.html` y `why-syx.html`. Esta entrada queda en `[Unreleased]` a propósito: `check:version` compara la última entrada numerada del changelog con `package.json`, y `[Unreleased]` no la desestabiliza.
+- **`scripts/check-modos.js` sigue rotulando su primera comprobación «los ocho modos».** Es cosmético —el test lee el directorio y contó nueve—, pero `scripts/` es `human` por diseño: el guardián no lo reescribe quien es vigilado.
+- **BRAND no tiene entrada en `mind-system/constitution.md`, `governance/02-mode-delta.md` ni `atlas-rules/12-workflow/12.0-integracion-modes.md`.** Son escalones 4–5 de la escalera de precedencia: decidir qué significa BRAND **dentro de ATLAS** —si una identidad editorial es el mismo objeto que una identidad de producto— es una decisión editorial, no de cableado.
+
+---
+
 ## [4.28.0] — 2026-08-31
 
 ### Fixed
