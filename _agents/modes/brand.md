@@ -7,7 +7,7 @@
 > · **Writes:** —
 > · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/primitives/`, `scss/abstracts/tokens/semantic/`, `scss/abstracts/_theme-config.scss` — an identity lands on the top three rungs of the cascade and reaches all seven bundles at once, so every path it touches is human-only. **BRAND is an analysis and recommendation mode**: it decides the identity, writes the files out in full and hands them over. A person puts them in.
 > · **Reads:** `contracts/rules.json`, `contracts/trust.json`, `tokens.json`, `component-registry.json`, `mind-system/knowledges/`
-> · **Ask, don't read:** `get_token` with `theme` and `mode` for what a browser really paints on an axis before deciding to move it — re-reading a theme file cannot resolve an alias chain; `find_token_by_value` before inventing a value the system already has a name for; `list_components` to know what the identity actually has to dress.
+> · **Ask, don't read:** `get_token` with `theme` and `mode` for what a browser really paints on an axis before deciding to move it — re-reading a theme file cannot resolve an alias chain; `find_token_by_value` before inventing a value the system already has a name for; `list_components` to know what the identity actually has to dress; and, before handing anything over, `validate_snippet` on every block a person will paste and `classify_change` for where each axis actually lands. The last two are what stop an identity being a specification SYX cannot execute.
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
@@ -49,8 +49,9 @@ decided once, so that a later CREATIVE inherits an identity instead of inventing
 2. **All seven axes get a position.** Including "inherits the default" — but stated, and argued.
 3. **Coherence over strength.** Two axes pulling opposite ways cost more than any single axis wins.
    A geometric sans, a 1.618 scale and 24px radii are three decisions that do not know each other.
-4. **Tier discipline.** Every decision lands on exactly one rung: raw values in primitives, aliases
-   in the theme, nothing at all in component files.
+4. **Buildable in SYX, or it is not a decision.** Every axis has to resolve to token families that
+   exist, land on exactly one rung — raw values in primitives, aliases in the theme, nothing at all
+   in component files — and survive R01–R04. An identity the system cannot execute is a mood board.
 5. **Falsifiable invariants.** The identity ships with a contract AUDIT can check, not with adjectives.
 6. **Existing names first.** Ask `find_token_by_value` before minting a value. An identity that
    invents a token family the system already has is drift with better intentions.
@@ -191,6 +192,67 @@ somebody might ship, it is not an invariant.
 
 ---
 
+## Landing it in SYX
+
+An identity that cannot be built out of what SYX already has is not an identity, it is a mood board
+with token names on it. This section is what makes the difference, and it is not optional: a mode
+that produces a beautiful specification the system cannot execute has spent tier 9 to make SYX
+irrelevant to its own identity.
+
+### The architectural fact this rests on
+
+R01 forbids `var(--primitive-*)` in a component file. Every atom, molecule and organism reads only
+`--component-*` and `--semantic-*`, and every `--component-*` resolves to a `--semantic-*`. That one
+rule is what makes an identity **installable**: move the theme layer and the whole component tree
+repaints, across every bundle, without a single line of component SCSS being touched.
+
+That is the entire reason this mode can exist. So it inherits the rule as its own hard test:
+
+> **An identity that requires editing component SCSS is not an identity. It is a redesign, and it
+> has to be named as one.**
+
+Run every axis against that before handing anything over. If *shape: pill* cannot be expressed by
+moving `--semantic-border-radius-*`, the axis is asking for a component change — say so, name the
+component, and hand it to UX and UI. Do not slip a `--component-*` override into the theme's
+section 3 and call the axis done: that is one identity decision hidden in a place nobody looks,
+which is how the next identity discovers it the hard way.
+
+### The three questions before the handover
+
+1. **Does every token I named exist?** Ask `get_token`. A name that does not resolve paints nothing
+   and reports nothing — the most expensive failure a token system has, and one this repository has
+   already paid for once.
+2. **Does every axis land in exactly one tier?** Raw values in primitives, aliases in the theme,
+   never a literal below. Ask `classify_change` for the destination, use the axis table for the tier.
+3. **Would any block I hand over fail R01–R04?** Ask `validate_snippet` **before** writing it, not
+   after. BRAND hands over blocks a person pastes; one that fails validation costs them the round trip.
+
+### When an axis has no token family to land in
+
+Say so, and route it. A new semantic family is TOKEN's tier and a proposal, never something invented
+inside a theme. **An identity that mints its own vocabulary is drift with a brand book attached** —
+it looks like a system and behaves like a one-off, and the second theme is where that becomes
+visible.
+
+### What proves it landed
+
+The chain does not end at the file. The identity is real when:
+
+```
+npm run build       every bundle compiles, all seven themes
+npm run validate    R01–R07 over the result — R05 catches a token the theme uses but nobody declared
+scan_for_drift      over the pages built with it
+```
+
+That last one is the one that matters for products. **A page built on a BRAND identity should not
+contain a single hand-written design value.** If it needs a hex, a raw `px` or a bespoke rule to
+express the identity, it has found either a missing token or a missing component — and both are
+findings that go back up the chain, not exceptions to grant locally. Pages are assembled out of what
+`component-registry.json` already lists; the identity reaches them through the theme, which is the
+whole point of having built the cascade this way.
+
+---
+
 ## Boundaries
 
 - **BRAND never writes component SCSS.** Not one rule under `scss/{layer}/`. If the identity needs a
@@ -209,11 +271,20 @@ somebody might ship, it is not an invariant.
 ## Handover
 
 ```
-BRAND  →  THEME  →  TOKEN  →  UI
-  ↑         ↑         ↑        ↑
- axes +   scale +   the new   the
-contract  contrast   names    code
+BRAND  →  THEME  →  TOKEN  →  UI  ──────►  the product
+  ↑         ↑         ↑        ↑              ↑
+ axes +   scale +   the new   the       pages assembled from
+contract  contrast   names    code      registered components,
+                                        inheriting the identity
+                                        through the cascade —
+                                        zero hand-written values
 ```
+
+The arrow past UI is the one that justifies the mode. An identity stops at a specification only if
+somebody lets it: in SYX it reaches production by moving the theme layer, and every component picks
+it up because R01 already forced them to read semantics instead of values. **TOKEN and UI are
+conditional steps** — they run only if an axis needed a name that did not exist, or a component that
+did not exist. Most identities skip both, and that is the system working, not the pipeline failing.
 
 `BRAND → THEME` is the pipeline that matters: BRAND decides which axes move and in which direction,
 THEME turns the colour axis into a checked ten-step scale. Running THEME first inverts the
@@ -276,6 +347,12 @@ for are specified once in the decision record.
 
 ## Voice & Imagery
 [prose, for UX and CREATIVE — not tokens]
+
+## Buildability
+[the three questions answered, in three lines: every token named exists · every axis lands
+ on one tier · no handed-over block fails R01–R04. Plus, if any axis could not be expressed
+ in the token layer, the component it actually needs and who it goes to. This section is
+ short when everything checks out and it is the most important one when it does not.]
 
 ## Handover to THEME
 [the identity as a specification THEME can build from, never as file content:
@@ -342,6 +419,22 @@ left inheriting — and the last four are the ones the `## Why` has to defend.
 
 The same request ending in *"decide tú"* skips both rounds and returns this same table with all
 seven rows marked `IA`. Nothing else about the response changes.
+
+**Buildability:**
+
+```
+✓ Every token named resolves — the six axes move --semantic-color-*, --semantic-font-*,
+  --semantic-border-radius-*, --semantic-shadow-*, --semantic-duration-* and
+  --semantic-focus-*, all of which exist.
+✓ Each axis lands on one tier: raw OKLCH in primitives, aliases in the theme, nothing below.
+✓ No block handed over fails R01–R04.
+⚠ Shape wanted a different radius on controls than on containers. SYX has both names, so it
+  lands in the theme — but if it had wanted a radius that varies per component, that is a
+  component decision, not an identity one, and it would have gone to UX and UI instead.
+```
+
+Nothing goes to TOKEN and nothing goes to UI: the identity installs by moving the theme layer, and
+R01 does the rest. That is the normal outcome, and it is the whole argument for the architecture.
 
 **Two invariants from its contract:**
 

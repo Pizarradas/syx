@@ -182,14 +182,27 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
    → Ten OKLCH steps, the 12 surface tokens, AA contrast checked, _theme.scss written out.
      It builds the direction it was given; it does not pick a different one.
 
-3. (Only if an axis needs a name that does not exist) [SYX: TOKEN]: …
-   → Tier placement for the new family
+3. (Only if an axis needed a name that does not exist) [SYX: TOKEN]: …
+   → Tier placement for the new family, via propose.js
 
-4. [SYX: AUDIT]: Check the pages against the identity contract
-   → Contract violations as R-findings; identity invariants as advisory
+4. (Only if an axis needed a component that does not exist) [SYX: UX → UI]: …
+   → The component the identity asked for, built to contract
+
+5. npm run build && npm run validate
+   → Every bundle compiles, R01–R07 clean. This is where an identity stops being a document.
+
+6. [SYX: AUDIT]: Check the pages against the identity contract
+   → Contract violations as R-findings; identity invariants as advisory; scan_for_drift
+     over the pages — a hand-written value is the identity leaking out of the system
 ```
 The order is the point. Running THEME first produces a palette with no identity to answer to —
 which is how six of the seven themes in this repository became recolours.
+
+**Steps 3 and 4 are conditional, and most identities skip both.** That is the system working, not
+the pipeline falling short: R01 already forces every component to read `--semantic-*` instead of
+values, so moving the theme layer repaints the whole tree without touching component SCSS. An
+identity that *cannot* skip them is telling you something — it needs vocabulary or components SYX
+does not have yet, and BRAND has to say which, not improvise around it.
 
 ### Creative exploration workflow
 ```
