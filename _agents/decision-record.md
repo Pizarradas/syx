@@ -56,6 +56,15 @@ justify: cite it and move on. Five lines is the working ceiling for one response
 Needing more than five means the response is making too many decisions at once and
 should have been two turns.
 
+**BRAND is the one exception, and it is argued rather than assumed.** Deciding seven
+things at once is not a symptom there, it is the definition of the mode, and splitting
+it into two turns is exactly what its interview already does. Its ceiling is one line
+per axis the user delegated (`IA`) or left inheriting, plus at most two. An identity the
+user configured themselves owes almost no lines; one they handed over entirely owes
+seven. The length of the block becomes a readout of how much was decided on their
+behalf — which is the right thing for it to measure, and the reason the exception is
+worth making rather than working around.
+
 ---
 
 ## What is not a why
@@ -85,7 +94,7 @@ stands. If it does, delete the line and write the real reason.
 | **THEME** | Scale steps that are not the generated ones · a contrast decision at the AA boundary · a structural override in `$theme-config` |
 | **AUDIT** | **Severity and the fix, never the violation.** The rule states the violation. What needs justifying is why this one is an error and that one a warning, and why the recommended fix is the cheapest correct one |
 | **MIGRATE** | Queue order · risk classification · a replacement token chosen over the literal equivalent |
-| **BRAND** | **Every axis position that had a competent alternative** — and, above all, **every axis deliberately left inheriting**: an axis that does not move is the cheapest decision to make silently and the one nobody downstream can tell apart from an oversight · the register chosen over the one the brief also allowed · an invariant that costs something elsewhere |
+| **BRAND** | **Every axis the user delegated (`IA`) and every axis left inheriting** — those two are the whole point: an axis the user chose is their call and owes nothing, an axis you chose for them owes an argument they can reject, and an axis that simply did not move is the cheapest decision to make silently and the one nobody downstream can tell apart from an oversight · the register chosen over the one the brief also allowed · an invariant that costs something elsewhere |
 
 CREATIVE's row is the one that changes behaviour most. That mode already picks a
 character on every run — restrained and typographic, or dense and immediate — and

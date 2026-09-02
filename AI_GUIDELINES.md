@@ -211,7 +211,7 @@ what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE �
 | 6 | `[SYX: UI]:` | Component SCSS | `pr` |
 | 7 | `[SYX: AUDIT]:` | R01–R08 conformance | nothing |
 | 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
-| 9 | `[SYX: BRAND]:` | A complete visual identity — the seven axes at once | recommends |
+| 9 | `[SYX: BRAND]:` | A complete visual identity — asks you axis by axis, or decides them all | recommends |
 
 Use the **lowest tier that does the job**. Compose them with `→` (pipeline) and `+` (evaluative),
 where **`+` groups before `→`** — so `[SYX: UX → UI + AUDIT]:` is `UX → (UI + AUDIT)`.

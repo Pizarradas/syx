@@ -15,6 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   La otra mitad del hueco estaba aguas abajo. CREATIVE elige un carácter en cada ejecución y `_agents/decision-record.md` ya le obliga a escribirlo; pero un carácter escrito **por página** es un carácter que se vuelve a decidir en cada página. BRAND es donde se decide una vez, de modo que un CREATIVE posterior **hereda** una identidad en vez de inventarla — y su línea de dirección de arte pasa de invención a desviación, que es mucho más barato de discutir.
 
+- **BRAND pregunta antes de decidir, y deja que no le contesten.** El modo abre con una **entrevista de dos rondas**: la primera es una sola pregunta —a quién va dirigido, qué debe señalar en dos segundos, qué no puede parecer— y es la única que insiste, porque es la única de la que se derivan las otras siete. La segunda son **los siete ejes en un solo bloque**, cada línea con sus opciones concretas, el valor por defecto que BRAND propondría y `IA` como respuesta siempre disponible. Nunca siete preguntas en siete turnos.
+
+  **Lo que no se contesta no se vuelve a preguntar: se delega.** Un hueco en blanco es una delegación, no un silencio, y `[SYX: BRAND]: … decide tú` se salta las dos rondas enteras. Los valores por defecto no son relleno: se derivan del registro de la ronda 1, porque quien no conteste nada tiene que recibir igualmente una identidad coherente — que es el objetivo entero.
+
+  De ahí la **columna de procedencia** en el mapa de ejes: `tú`, `IA` o `hereda`. No es decoración. Una identidad en la que el usuario no distingue qué decidió él es una identidad que no puede discutir, y que va a desconfiar en silencio. Solo los ejes `IA` y `hereda` deben una línea de `## Why`; los que eligió el usuario no deben ninguna, porque no son decisiones tuyas.
+
+  Con eso, **el largo del bloque `## Why` pasa a medir cuánto decidiste en su nombre**, que es exactamente lo que conviene que mida. Obliga a una excepción al techo de cinco líneas del registro de decisiones —argumentada ahí, no supuesta—: decidir siete cosas a la vez no es un síntoma en BRAND, es la definición del modo, y partirlo en dos turnos es justo lo que ya hace la entrevista.
+
 - **Los siete ejes, cada uno con su tier y su familia de tokens real.** La tabla del modo no es un consejo: es el escalón que `contracts/trust.json` califica, y equivocarlo es lo que convierte una decisión de identidad en una violación de R01 seis componentes más tarde.
 
 - **La regla de cobertura.** Una identidad que mueve menos de **tres** ejes tiene que llamarse recoloreado, con esas palabras. Es la distinción que los seis temas de ejemplo nunca tuvieron que hacer, y la que separa un cambio reversible de un vistazo de uno que no lo es.

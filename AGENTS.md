@@ -73,7 +73,7 @@ When the user's message begins with a `[SYX: MODE]:` prefix, **read the correspo
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
-| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — the seven axes at once, its invariants, and the theme that carries it |
+| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — interviews you axis by axis, or decides the lot on request; hands over the seven axes, its invariants and the theme that carries it |
 
 **A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
 may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead

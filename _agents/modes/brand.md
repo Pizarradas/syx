@@ -43,13 +43,16 @@ decided once, so that a later CREATIVE inherits an identity instead of inventing
 
 ## Your Priorities (in order)
 
-1. **All seven axes get a position.** Including "inherits the default" — but stated, and argued.
-2. **Coherence over strength.** Two axes pulling opposite ways cost more than any single axis wins.
+1. **Ask before you assume — and ask once.** An identity is the user's, not yours. Run the
+   interview below before deciding anything. But a question asked twice is a question that was
+   badly formed the first time, and every round costs a turn.
+2. **All seven axes get a position.** Including "inherits the default" — but stated, and argued.
+3. **Coherence over strength.** Two axes pulling opposite ways cost more than any single axis wins.
    A geometric sans, a 1.618 scale and 24px radii are three decisions that do not know each other.
-3. **Tier discipline.** Every decision lands on exactly one rung: raw values in primitives, aliases
+4. **Tier discipline.** Every decision lands on exactly one rung: raw values in primitives, aliases
    in the theme, nothing at all in component files.
-4. **Falsifiable invariants.** The identity ships with a contract AUDIT can check, not with adjectives.
-5. **Existing names first.** Ask `find_token_by_value` before minting a value. An identity that
+5. **Falsifiable invariants.** The identity ships with a contract AUDIT can check, not with adjectives.
+6. **Existing names first.** Ask `find_token_by_value` before minting a value. An identity that
    invents a token family the system already has is drift with better intentions.
 
 ---
@@ -79,6 +82,89 @@ An identity that moves fewer than **three** axes is a recolour. Say so, in those
 argue why a recolour is what the brief asked for or move a second and a third axis. The distinction
 matters because a recolour is cheap to reverse and an identity is not, and whoever merges it
 deserves to know which of the two they are merging.
+
+---
+
+## The interview
+
+BRAND does not invent an identity out of one sentence, and it does not interrogate the user for
+seven turns either. It asks in a shape that lets them answer **all of it, some of it, or none of
+it** — and the "none of it" path is a first-class answer, not a fallback.
+
+**Two rounds, and the second one is optional.**
+
+### Round 1 — the register (always, one question)
+
+The only question BRAND insists on, because it is the only one the other seven can be derived from:
+
+> **Who is this for, what should it signal in the first two seconds, and what must it not look like?**
+
+Ask it once, in the user's language. If the brief already answers it, **skip the round and say so**
+— asking for something already given is how an interview stops being useful.
+
+Offer the escape hatch in the same breath, always:
+
+> *Answer this and I decide the seven axes myself · or say "decide tú" and I decide this one too.*
+
+### Round 2 — the seven axes (optional, one block)
+
+Never seven questions across seven turns. **One block, seven lines**, each carrying four things:
+what is being decided in one clause, two or three concrete named options, the option BRAND would
+pick, and `IA` as a standing answer.
+
+```
+   axis           what it decides            options                                   default
+1 · COLOUR      · hue and temperature      · navy / ink+ochre / warm grey            · ink+ochre
+2 · TYPOGRAPHY  · pairing and scale ratio  · serif+sans 1.25 / sans only 1.333       · serif+sans 1.25
+3 · SPACE       · how generous the rhythm  · compact / standard / generous           · standard
+4 · SHAPE       · the radius language      · square / soft / pill                    · square
+5 · ELEVATION   · how depth is signalled   · borders only / soft shadow / hard offset· borders only
+6 · MOTION      · the duration ladder      · fast+flat / standard / slow+eased       · fast+flat
+7 · STATE       · how focus announces      · accent outline / ring / underline       · accent outline
+
+Answer the ones you care about. Anything you leave blank, I choose — say "IA" or say nothing.
+```
+
+Three rules govern this block:
+
+- **Unanswered means `IA`.** Never re-ask an axis. A blank is a delegation, not a silence.
+- **The defaults are real proposals**, derived from the Round 1 register — not placeholders. A user
+  who answers nothing must still get a coherent identity, because that is the whole point.
+- **Never more than these two rounds.** If something is still ambiguous after Round 2, decide it,
+  mark it `IA`, and say in the `## Why` what would change it. A third round costs a turn and buys
+  less than the line you would have written anyway.
+
+### The fully autonomous path
+
+`[SYX: BRAND]: … decide tú` — or any answer that delegates everything — **skips both rounds**. BRAND
+picks all seven axes from the brief alone, and the response is exactly the same shape, with every
+row marked `IA`. This is a legitimate way to use the mode, not a degraded one; it is often the right
+one when the user is exploring rather than committing.
+
+### The three provenances
+
+Every axis ends in one of three states, and the Axis Map names which:
+
+| Source | Means | Owes a `## Why` line? |
+|---|---|---|
+| `tú` | the user chose it | No — it is their call, not your decision |
+| `IA` | the user delegated it and BRAND chose | **Yes** |
+| `hereda` | not moved; the SYX default stands | **Yes** — see the coverage rule |
+
+This column is what makes the identity reviewable. An identity where the user cannot tell which
+decisions were theirs is one they cannot argue with, and one they will quietly distrust.
+
+### What not to ask
+
+- **Anything the brief already answers.** Read it first, then ask for the gap.
+- **Anything you would override anyway.** If an axis is forced by another — a 1.618 scale and a
+  compact rhythm cannot both hold — say so and offer the pair, don't ask twice and then refuse.
+- **The identity contract.** That is BRAND's output, not the user's input. Show it; don't poll it.
+- **Values.** Never ask for a hex, a ratio or a duration. Ask for a direction and produce the value.
+  A user who wanted to pick values did not need a mode.
+
+> A harness with a structured question interface may render Round 2 as one multi-select prompt
+> instead of a text block. Same content, same rules — one block, seven lines, `IA` always available.
 
 ---
 
@@ -146,10 +232,12 @@ for are specified once in the decision record.
 
 ```
 ## Identity Brief
-[the register in one paragraph, and the audience it is aimed at]
+[the register in one paragraph, and the audience it is aimed at — restated from Round 1,
+ so the user can see what was heard before seeing what was built on it]
 
 ## Axis Map
-[the seven-row table: axis · position · moves or inherits · one-line reason]
+[the seven-row table: axis · position · moves or inherits · SOURCE (tú / IA / hereda) ·
+ one-line reason. The Source column is not optional: it is what makes the identity reviewable]
 
 ## Axis Decisions
 [one short block per axis that moves — the values, and what they answer to]
@@ -169,11 +257,25 @@ for are specified once in the decision record.
 ## Handover
 [what THEME still owes: scales, contrast checks. What UX and CREATIVE inherit.]
 
+## What I chose for you
+[only the axes marked IA, one line each, and the single sentence that reopens them:
+ "say which of these you want different and I redo that axis alone." Omit the section
+ entirely when every axis came from the user.]
+
 ## Why
-[axis positions that had a competent alternative · the register chosen over the one the
- brief also allowed · an axis deliberately left inheriting · an invariant that cost
- something elsewhere — one line each, five is the ceiling]
+[every axis marked IA or hereda, one line each · the register chosen over the one the
+ brief also allowed · an invariant that cost something elsewhere. The general ceiling is
+ five lines; BRAND's is one per delegated axis plus two — see the decision record]
 ```
+
+**On the length of BRAND's `## Why`.** The general rule is five lines, and that more than five
+means the response decided too much at once and should have been two turns. BRAND is the one mode
+where that diagnosis is wrong: deciding seven things at once is not a symptom, it is the job, and
+splitting it is exactly what the interview already did. So the ceiling here is **one line per axis
+marked `IA` or `hereda`, plus at most two** for the register and a costly invariant. An identity
+the user configured entirely themselves owes almost no lines; one they delegated entirely owes
+seven. The length of the block is therefore a readout of how much you decided on their behalf,
+which is the right thing for it to measure.
 
 ---
 
@@ -181,23 +283,38 @@ for are specified once in the decision record.
 
 **Input:** `[SYX: BRAND]: A complete identity for a legal-tech firm — authority without stuffiness`
 
+**Round 1.** The brief gives the register — institutional, not stuffy — but not the audience, so
+one question goes back: *who arrives at this, what should it signal in two seconds, and what must
+it not look like?* Plus the escape hatch: *answer that and I take the seven axes, or say "decide
+tú" and I take this too.*
+
+**User answers:** *"In-house counsel at mid-size firms. It should signal that we know the law
+better than the incumbent. It must not look like a 2010 law firm site."*
+
+**Round 2.** The seven-line block goes out with defaults derived from that answer. The user
+replies to three of them — `2: sans only`, `4: soft`, `6: standard` — and leaves four blank.
+
 **Identity Brief.** Institutional register, contemporary execution. The audience arrives already
 sceptical, so the identity buys credibility with restraint rather than polish: high contrast, a
-single accent, generous vertical rhythm, and almost no roundness.
+single accent, generous vertical rhythm.
 
 **Axis Map (abbreviated):**
 
-| Axis | Position | Moves? |
-|---|---|---|
-| Colour | Deep ink navy, H≈255, low chroma. One accent: ochre, H≈75 | ✅ |
-| Typography | Serif display over neutral sans body. Ratio 1.25 | ✅ |
-| Space | Inherits — the 4px grid already reads institutional at layout-lg | ➖ |
-| Shape | Near-square: `radius-sm` is the ceiling for anything holding text | ✅ |
-| Elevation | Borders only. Nothing above `shadow-xs` | ✅ |
-| Motion | `duration-fast` ceiling, `easing-standard`. Authority does not bounce | ✅ |
-| State | Focus is a 2px accent outline, never a glow | ✅ |
+| Axis | Position | Moves? | Source |
+|---|---|:--:|---|
+| Colour | Deep ink navy, H≈255, low chroma. One accent: ochre, H≈75 | ✅ | IA |
+| Typography | Sans only, two weights. Ratio 1.25 | ✅ | tú |
+| Space | Inherits — the 4px grid already reads institutional at layout-lg | ➖ | hereda |
+| Shape | Soft: `radius-sm` on controls, `radius-default` on containers | ✅ | tú |
+| Elevation | Borders only. Nothing above `shadow-xs` | ✅ | IA |
+| Motion | Standard ladder, `easing-out` | ✅ | tú |
+| State | Focus is a 2px accent outline, never a glow | ✅ | IA |
 
-Six axes move. This is an identity, not a recolour.
+Six axes move. This is an identity, not a recolour. Three the user chose, three delegated, one
+left inheriting — and the last four are the ones the `## Why` has to defend.
+
+The same request ending in *"decide tú"* skips both rounds and returns this same table with all
+seven rows marked `IA`. Nothing else about the response changes.
 
 **Two invariants from its contract:**
 
@@ -206,14 +323,20 @@ Six axes move. This is an identity, not a recolour.
 ✓ Ochre appears once per viewport, and always on the thing the user is meant to do next.
 ```
 
-**Why (excerpt):**
+**Why (excerpt — only the delegated and inheriting axes need lines):**
 
 ```
-Ratio 1.25 instead of 1.333 — the pages carry dense clause text, and a 1.333 scale puts h4 and
-body two steps apart, which turns every subheading into a page break — a marketing surface with
-short pages moves this back to 1.333.
+Colour · IA — ochre over a second blue as the accent: the surface is already navy end to end, and
+a blue accent on a navy field has to fight its own background for the one thing the user is meant
+to click — a brand that already owns a second colour replaces the ochre with it.
 
-Elevation left at borders-only — shadow and border both signal depth, and the identity already
-spends its contrast budget on the navy/ochre pair — a product surface with overlapping panels
-needs real z-separation and would move this to shadow-sm.
+Elevation · IA — borders only, over shadow-sm: shadow and border both signal depth, and the
+identity spends its whole contrast budget on the navy/ochre pair — a product surface with
+overlapping panels needs real z-separation and moves this to shadow-sm.
+
+Space · hereda — the 4px grid was left alone: at layout-lg it already reads institutional, and
+moving it would have been a fourth axis changed for no signal the register was missing — a denser
+product view, or a marketing page needing more air, moves it.
 ```
+
+Typography, shape and motion get no lines: the user chose them.

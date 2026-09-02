@@ -68,7 +68,7 @@ answer — the last column says which. The tier still ranks the *work*, not the 
 | **THEME** | `theme.md` | Theme designer | recommends | OKLCH scales, `_theme.scss`, surface token coverage, dark mode |
 | **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R08 violations, structure/naming checks, verdicts |
 | **MIGRATE** | `migrate.md` | Migration specialist | `pr` / recommends | Legacy var resolution, impact analysis, per-variable replacement plans |
-| **BRAND** | `brand.md` | Brand identity architect | recommends | The seven identity axes, the identity contract, `_theme.scss`, the handover to THEME |
+| **BRAND** | `brand.md` | Brand identity architect | recommends | A two-round interview, then the seven identity axes with their provenance, the identity contract, `_theme.scss`, the handover to THEME |
 
 The **Writes** column is not advice, it is `contracts/trust.json` read through
 `scripts/lib/confianza.js`. Each mode file opens with a `Trust` block listing the paths it may
