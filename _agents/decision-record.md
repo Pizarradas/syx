@@ -4,9 +4,9 @@ Every mode that chooses something closes its response with a `## Why`. This file
 defines the format once. The mode files name **which** decisions they owe a line
 for; none of them restates the format.
 
-That split is deliberate. Eight copies of a rationale template would be eight
+That split is deliberate. Nine copies of a rationale template would be nine
 things to keep in sync, which is the duplication the mode refactor removed when
-it settled on one `/syx` command instead of eight.
+it settled on one `/syx` command instead of nine.
 
 ---
 
@@ -85,12 +85,19 @@ stands. If it does, delete the line and write the real reason.
 | **THEME** | Scale steps that are not the generated ones · a contrast decision at the AA boundary · a structural override in `$theme-config` |
 | **AUDIT** | **Severity and the fix, never the violation.** The rule states the violation. What needs justifying is why this one is an error and that one a warning, and why the recommended fix is the cheapest correct one |
 | **MIGRATE** | Queue order · risk classification · a replacement token chosen over the literal equivalent |
+| **BRAND** | **Every axis position that had a competent alternative** — and, above all, **every axis deliberately left inheriting**: an axis that does not move is the cheapest decision to make silently and the one nobody downstream can tell apart from an oversight · the register chosen over the one the brief also allowed · an invariant that costs something elsewhere |
 
 CREATIVE's row is the one that changes behaviour most. That mode already picks a
 character on every run — restrained and typographic, or dense and immediate — and
 until now picked it silently, which meant the decision could not be inherited,
 argued with, or repeated. Writing it down does not constrain the choice. It makes
 the choice exist outside the response that made it.
+
+BRAND's row is the same idea one rung up, and it is why the two rows have to be
+read together. CREATIVE writes its character down *per page*; BRAND writes it down
+*once*, as seven axis positions a later CREATIVE inherits instead of re-deciding.
+When a BRAND identity exists, CREATIVE's art-direction line stops being an
+invention and becomes a deviation — which is a much cheaper thing to argue with.
 
 ---
 

@@ -13,6 +13,7 @@ knowledges/
   front/     → Implementación front: semántica HTML, CSS architecture, a11y, mobile-first
   syx/       → Sistema SYX específico: tokens, SCSS pipeline, componentes, temas, color
   branding/  → Percepción de marca: prestigio, credibilidad, semiótica visual, autoridad
+               Es el suelo de BRAND: los siete ejes de una identidad se deciden aquí
   motion/    → Lenguaje de animación con GSAP: capacidades, patrones, glosario para prompts
 ```
 
@@ -37,10 +38,10 @@ knowledges/
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio UI | — |
 | `refactoring-ui.md` | Spacing, jerarquía visual, composición (Wathan & Schoger) | UI mode |
-| `color-theory.md` | Distribución 60/30/10, semántica del color | TOKEN, THEME |
-| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | UI mode |
-| `motion-principles.md` | Easing, duración, GPU-composited properties | UI, CREATIVE |
-| `practical-ui.md` | Correcciones ópticas, densidad, elevación | CREATIVE, UI |
+| `color-theory.md` | Distribución 60/30/10, semántica del color | TOKEN, THEME, BRAND |
+| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | UI, BRAND |
+| `motion-principles.md` | Easing, duración, GPU-composited properties | UI, CREATIVE, BRAND |
+| `practical-ui.md` | Correcciones ópticas, densidad, elevación | CREATIVE, UI, BRAND |
 
 ### `front/` — Front-end implementation
 
@@ -59,19 +60,19 @@ knowledges/
 | Módulo | Contenido | Cargado por |
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio SYX | — |
-| `token-system.md` | Cuatro tiers, contratos, naming convention | TOKEN, UI, AUDIT, MIGRATE |
+| `token-system.md` | Cuatro tiers, contratos, naming convention | TOKEN, UI, AUDIT, MIGRATE, BRAND |
 | `scss-pipeline.md` | @mixin template, @layer, mixins de referencia | UI, AUDIT |
 | `component-patterns.md` | BEM, prefijos atom/mol/org, estructura de componente | UI, AUDIT, SKETCH, MIGRATE |
-| `theme-system.md` | Estructura de `_theme.scss`, secciones obligatorias | THEME, AUDIT |
-| `color-oklch.md` | Por qué OKLCH, construcción de escalas, dark mode | TOKEN, THEME |
+| `theme-system.md` | Estructura de `_theme.scss`, secciones obligatorias | THEME, AUDIT, BRAND |
+| `color-oklch.md` | Por qué OKLCH, construcción de escalas, dark mode | TOKEN, THEME, BRAND |
 
 ### `branding/` — Percepción de marca
 
 | Módulo | Contenido | Cargado por |
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio branding | — |
-| `perception-of-prestige-foundations.md` | Psicología cognitiva del prestigio: modelo PRI, processing fluency, heurísticos de Cialdini, semiótica del lujo | CREATIVE, UX (on-demand) |
-| `perception-of-prestige.rules.md` | 18 reglas operativas con checks y output template para auditoría de percepción | CREATIVE (on-demand), AUDIT (on-demand) |
+| `perception-of-prestige-foundations.md` | Psicología cognitiva del prestigio: modelo PRI, processing fluency, heurísticos de Cialdini, semiótica del lujo | CREATIVE, UX (on-demand), BRAND (siempre) |
+| `perception-of-prestige.rules.md` | 18 reglas operativas con checks y output template para auditoría de percepción | CREATIVE (on-demand), AUDIT (on-demand), BRAND (on-demand) |
 
 ### `motion/` — Lenguaje de animación con GSAP
 
@@ -104,7 +105,7 @@ Conocimiento de fuentes externas integrado en el sistema. **No se carga automát
 
 | Biblioteca | Contenido | Cargado por |
 |-----------|-----------|-------------|
-| `vendors/awesome-design/index.md` | Catálogo de 58 DESIGN.md de empresas reales (Vercel, Stripe, Linear, Apple…) organizados por estética, tipografía y filosofía de sombras/bordes | CREATIVE, SKETCH, THEME (on-demand) |
+| `vendors/awesome-design/index.md` | Catálogo de 58 DESIGN.md de empresas reales (Vercel, Stripe, Linear, Apple…) organizados por estética, tipografía y filosofía de sombras/bordes | CREATIVE, SKETCH, THEME, BRAND (on-demand) |
 | `vendors/awesome-design/awesome-design-md-main/design-md/[empresa]/DESIGN.md` | DESIGN.md individual de cada una de las 58 empresas | On-demand por nombre |
 
 ---

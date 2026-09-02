@@ -73,12 +73,14 @@ When the user's message begins with a `[SYX: MODE]:` prefix, **read the correspo
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
+| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — the seven axes at once, its invariants, and the theme that carries it |
 
 **A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
 may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead
 of reading. Those lists are checked against `contracts/trust.json` by `npm run check:modos`, so a
 mode cannot quietly hand itself a permission the contract doesn't give it. THEME never writes;
-TOKEN and MIGRATE write the lower half of what they touch and hand over the upper half.
+BRAND never writes either. TOKEN and MIGRATE write the lower half of what they touch and hand over
+the upper half.
 
 **How to activate a mode:**
 ```
@@ -170,7 +172,7 @@ scss/
   themes/*/             — 7 themes (6 example-* + syx-sketch) × 4-5 bundles
 contracts/              — machine-readable validation output
 _agents/                — THE ENGINE (ships with the package)
-  modes/                — the 8 mode definitions, one copy each, Trust + Knowledge blocks
+  modes/                — the 9 mode definitions, one copy each, Trust + Knowledge blocks
   workflows/            — step-by-step task guides
   prompts/              — copy-paste prompt templates
 mind-system/            — THE CORTEX (not published)

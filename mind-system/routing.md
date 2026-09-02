@@ -24,39 +24,39 @@ Ninguna de las cuatro autoriza nada. El conocimiento informa; la regla ejecuta.
 
 `●` Always · `○` When relevant · `◐` With GSAP · `·` On request · `✓` Self-check
 
-| Módulo | SKETCH | UX | CREATIVE | TOKEN | THEME | UI | AUDIT | MIGRATE |
-|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| `ux/laws-of-ux.md` | | ● | | | | | | |
-| `ux/nielsen-heuristics.md` | | ● | | | | | | |
-| `ux/dont-make-me-think.md` | | ○ | | | | | | |
-| `ux/microinteractions.md` | | ○ | | | | | | |
-| `ux/strategic-writing-for-ux.md` | | ○ | | | | | | |
-| `ui/refactoring-ui.md` | | | | | | ○ | | |
-| `ui/color-theory.md` | | | ○ | ○ | ○ | | | |
-| `ui/typography-systems.md` | | | ○ | | | ○ | | |
-| `ui/motion-principles.md` | | | ● | | | ○ | | |
-| `ui/practical-ui.md` | | | ○ | | | | | |
-| `front/html-semantics.md` | | ● | | | | | | |
-| `front/mobile-first.md` | · | ● | | | | ● | ○ | |
-| `front/accessibility-wcag.md` | | ● | | | | | ○ | |
-| `front/progressive-enhancement.md` | | ● | | | | | ○ | |
-| `front/javascript-patterns.md` | | ○ | | | | | | |
-| `front/css-architecture.md` | | | | | | ○ | | |
-| `front/size-models.md` | | | | ○ | ○ | | | |
-| `front/size-models-checklist.md` | | | | ✓ | | | ○ | |
-| `syx/token-system.md` | | | | ● | ● | ● | ● | ● |
-| `syx/scss-pipeline.md` | | | | | | ● | ● | |
-| `syx/component-patterns.md` | · | | ○ | | | ● | ● | ○ |
-| `syx/theme-system.md` | | | | | ● | | ○ | |
-| `syx/color-oklch.md` | | | | ○ | ● | | | |
-| `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | |
-| `branding/perception-of-prestige.rules.md` | | | · | | | | · | |
-| `motion/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | |
-| `motion/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | |
-| `motion/02-capacidades/index.md` | | | ◐ | | | | | |
-| `motion/03-patrones/` | | | ◐ | | | · | | |
-| `motion/04-glosario/index.md` | · | | · | | | | | |
-| `vendors/awesome-design/` | · | | · | | ○ | | | |
+| Módulo | SKETCH | UX | CREATIVE | TOKEN | THEME | UI | AUDIT | MIGRATE | BRAND |
+|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| `ux/laws-of-ux.md` | | ● | | | | | | | |
+| `ux/nielsen-heuristics.md` | | ● | | | | | | | |
+| `ux/dont-make-me-think.md` | | ○ | | | | | | | |
+| `ux/microinteractions.md` | | ○ | | | | | | | |
+| `ux/strategic-writing-for-ux.md` | | ○ | | | | | | | |
+| `ui/refactoring-ui.md` | | | | | | ○ | | | |
+| `ui/color-theory.md` | | | ○ | ○ | ○ | | | | ● |
+| `ui/typography-systems.md` | | | ○ | | | ○ | | | ● |
+| `ui/motion-principles.md` | | | ● | | | ○ | | | ○ |
+| `ui/practical-ui.md` | | | ○ | | | | | | ○ |
+| `front/html-semantics.md` | | ● | | | | | | | |
+| `front/mobile-first.md` | · | ● | | | | ● | ○ | | |
+| `front/accessibility-wcag.md` | | ● | | | | | ○ | | |
+| `front/progressive-enhancement.md` | | ● | | | | | ○ | | |
+| `front/javascript-patterns.md` | | ○ | | | | | | | |
+| `front/css-architecture.md` | | | | | | ○ | | | |
+| `front/size-models.md` | | | | ○ | ○ | | | | ○ |
+| `front/size-models-checklist.md` | | | | ✓ | | | ○ | | |
+| `syx/token-system.md` | | | | ● | ● | ● | ● | ● | ● |
+| `syx/scss-pipeline.md` | | | | | | ● | ● | | |
+| `syx/component-patterns.md` | · | | ○ | | | ● | ● | ○ | |
+| `syx/theme-system.md` | | | | | ● | | ○ | | ● |
+| `syx/color-oklch.md` | | | | ○ | ● | | | | ● |
+| `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● |
+| `branding/perception-of-prestige.rules.md` | | | · | | | | · | | · |
+| `motion/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | |
+| `motion/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | |
+| `motion/02-capacidades/index.md` | | | ◐ | | | | | | |
+| `motion/03-patrones/` | | | ◐ | | | · | | | |
+| `motion/04-glosario/index.md` | · | | · | | | | | | |
+| `vendors/awesome-design/` | · | | · | | ○ | | | | · |
 
 ---
 
@@ -72,30 +72,30 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | | `microinteractions` | UX |
 | | `strategic-writing-for-ux` | UX |
 | `ui/` | `refactoring-ui` | UI |
-| | `color-theory` | CREATIVE · TOKEN · THEME |
-| | `typography-systems` | CREATIVE · UI |
-| | `motion-principles` | CREATIVE · UI |
-| | `practical-ui` | CREATIVE |
+| | `color-theory` | CREATIVE · TOKEN · THEME · BRAND |
+| | `typography-systems` | CREATIVE · UI · BRAND |
+| | `motion-principles` | CREATIVE · UI · BRAND |
+| | `practical-ui` | CREATIVE · BRAND |
 | `front/` | `html-semantics` | UX |
 | | `css-architecture` | UI |
 | | `mobile-first` | SKETCH · UX · UI · AUDIT |
 | | `progressive-enhancement` | UX · AUDIT |
 | | `accessibility-wcag` | UX · AUDIT |
 | | `javascript-patterns` | UX |
-| | `size-models` | TOKEN · THEME |
+| | `size-models` | TOKEN · THEME · BRAND |
 | | `size-models-checklist` | TOKEN · AUDIT |
-| `syx/` | `token-system` | TOKEN · THEME · UI · AUDIT · MIGRATE |
+| `syx/` | `token-system` | TOKEN · THEME · UI · AUDIT · MIGRATE · BRAND |
 | | `scss-pipeline` | UI · AUDIT |
 | | `component-patterns` | SKETCH · CREATIVE · UI · AUDIT · MIGRATE |
-| | `theme-system` | THEME · AUDIT |
-| | `color-oklch` | TOKEN · THEME |
-| `branding/` | `perception-of-prestige-foundations` | UX · CREATIVE |
-| | `perception-of-prestige.rules` | CREATIVE · AUDIT |
+| | `theme-system` | THEME · AUDIT · BRAND |
+| | `color-oklch` | TOKEN · THEME · BRAND |
+| `branding/` | `perception-of-prestige-foundations` | UX · CREATIVE · BRAND |
+| | `perception-of-prestige.rules` | CREATIVE · AUDIT · BRAND |
 | `motion/` | `01-fundamentos/*` | CREATIVE · UI |
 | | `02-capacidades/index` | CREATIVE |
 | | `03-patrones/*` (10 patrones) | CREATIVE · UI |
 | | `04-glosario/index` | SKETCH · CREATIVE |
-| `vendors/` | `awesome-design/*` | SKETCH · CREATIVE · THEME |
+| `vendors/` | `awesome-design/*` | SKETCH · CREATIVE · THEME · BRAND |
 
 **Sin modo, a propósito** — son navegación o andamiaje de autor, no corpus:
 
@@ -154,6 +154,9 @@ Abortar es decisión del usuario, no del modo.
 | `[SYX: THEME + AUDIT]:` | Diseñar tema y verificar cobertura |
 | `[SYX: UX + AUDIT]:` | Propuesta HTML con verificación de jerarquía y ARIA |
 | `[SYX: TOKEN + AUDIT]:` | Definir tokens y verificar R05–R08 |
+| `[SYX: BRAND → THEME]:` | Identidad completa: BRAND decide los siete ejes, THEME construye y contrasta la escala |
+| `[SYX: BRAND → THEME → UI]:` | Identidad completa hasta el componente que la estrena |
+| `[SYX: BRAND + AUDIT]:` | Identidad verificada: que cada token nombrado exista y que ningún bloque entregado rompa R01–R04 |
 
 ### Combinaciones inválidas
 
@@ -165,6 +168,8 @@ Abortar es decisión del usuario, no del modo.
 | `UI → TOKEN` | El orden es al revés. TOKEN define, UI implementa. |
 | `THEME → UI` | THEME opera en `_theme.scss`. No genera componentes para que UI procese. |
 | `MIGRATE + AUDIT` | AUDIT detecta, MIGRATE resuelve. Solo tiene sentido `AUDIT → MIGRATE`. |
+| `UI → BRAND` | El orden es al revés. Una identidad se decide antes que lo que la viste. |
+| `THEME → BRAND` | Igual de invertido, y más caro: produce una paleta sin identidad a la que responder. Es exactamente como seis de los siete temas acabaron siendo recoloreados. |
 | `[ATLAS]:` sin modo | `[ATLAS]:` es un envoltorio, no un modo. Necesita al menos un `[SYX: MODE]`. |
 
 Para las combinaciones con contexto editorial (`[ATLAS]: … utilizando [SYX: …]`), ver `governance/01-invocation.md`.

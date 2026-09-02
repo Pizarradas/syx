@@ -21,13 +21,13 @@ Fundamentos de implementación front-end que respaldan las reglas técnicas de l
 
 ## Relación con los modos
 
-| Módulo | UX | UI | SKETCH | AUDIT | TOKEN | THEME |
-|--------|----|----|--------|-------|-------|-------|
-| `html-semantics.md` | ✓ | — | — | ✓ | — | — |
-| `css-architecture.md` | — | ✓ | — | ✓ | — | — |
-| `mobile-first.md` | ✓ | ✓ | ✓ | ✓ | — | — |
-| `progressive-enhancement.md` | ✓ | ✓ | — | ✓ | — | — |
-| `accessibility-wcag.md` | ✓ | — | — | ✓ | — | — |
-| `javascript-patterns.md` | ✓ | — | — | — | — | — |
-| `size-models.md` | — | ✓ | — | — | ✓ | ✓ |
-| `size-models-checklist.md` | — | — | — | ✓ | ✓ | — |
+| Módulo | UX | UI | SKETCH | AUDIT | TOKEN | THEME | BRAND |
+|--------|----|----|--------|-------|-------|-------|-------|
+| `html-semantics.md` | ✓ | — | — | ✓ | — | — | — |
+| `css-architecture.md` | — | ✓ | — | ✓ | — | — | — |
+| `mobile-first.md` | ✓ | ✓ | ✓ | ✓ | — | — | — |
+| `progressive-enhancement.md` | ✓ | ✓ | — | ✓ | — | — | — |
+| `accessibility-wcag.md` | ✓ | — | — | ✓ | — | — | — |
+| `javascript-patterns.md` | ✓ | — | — | — | — | — | — |
+| `size-models.md` | — | ✓ | — | — | ✓ | ✓ | ✓ |
+| `size-models-checklist.md` | — | — | — | ✓ | ✓ | — | — |

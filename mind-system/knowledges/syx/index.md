@@ -18,13 +18,13 @@ Conocimiento específico del sistema SYX: tokens, pipeline SCSS, patrones de com
 
 ## Relación con los modos
 
-| Módulo | TOKEN | UI | THEME | AUDIT | MIGRATE |
-|--------|-------|-----|-------|-------|---------|
-| `token-system.md` | ✓ | ✓ | ✓ | ✓ | ✓ |
-| `scss-pipeline.md` | — | ✓ | — | ✓ | — |
-| `component-patterns.md` | — | ✓ | — | ✓ | ✓ |
-| `theme-system.md` | — | — | ✓ | ✓ | — |
-| `color-oklch.md` | ✓ | — | ✓ | — | — |
+| Módulo | TOKEN | UI | THEME | AUDIT | MIGRATE | BRAND |
+|--------|-------|-----|-------|-------|---------|-------|
+| `token-system.md` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `scss-pipeline.md` | — | ✓ | — | ✓ | — | — |
+| `component-patterns.md` | — | ✓ | — | ✓ | ✓ | — |
+| `theme-system.md` | — | — | ✓ | ✓ | — | ✓ |
+| `color-oklch.md` | ✓ | — | ✓ | — | — | ✓ |
 
 ---
 

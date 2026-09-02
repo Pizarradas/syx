@@ -10,7 +10,7 @@ Activate the SYX mode system for this request: **$ARGUMENTS**
 1. **Read the grammar off the argument.** Everything up to the first word that is not a mode name
    or an operator is the invocation; the rest is the task.
 
-   - Modes: `SKETCH` `UX` `CREATIVE` `TOKEN` `THEME` `UI` `AUDIT` `MIGRATE` (case-insensitive).
+   - Modes: `SKETCH` `UX` `CREATIVE` `TOKEN` `THEME` `UI` `AUDIT` `MIGRATE` `BRAND` (case-insensitive).
    - `→` (or `->`) is a **pipeline**: each mode's output is the next one's input.
    - `+` is **evaluative**: both modes work the same artifact, both outputs come back together.
    - **`+` groups before `→`.** `UX → UI + AUDIT` is `UX → (UI + AUDIT)`.
@@ -38,11 +38,13 @@ Activate the SYX mode system for this request: **$ARGUMENTS**
 
 - **Invalid compositions**: `SKETCH + AUDIT` and `CREATIVE + AUDIT` (both modes are exempt from the
   very contracts AUDIT enforces), `UI → TOKEN` and `THEME → UI` (dependency backwards),
-  `MIGRATE + AUDIT` (only `AUDIT → MIGRATE` makes sense). Say so and propose the correct form
-  instead of running it anyway. The full table is in `mind-system/routing.md`.
+  `MIGRATE + AUDIT` (only `AUDIT → MIGRATE` makes sense), `UI → BRAND` and `THEME → BRAND` (an
+  identity is decided before the palette that carries it). Say so and propose the correct form
+  instead of running it anyway. `BRAND + AUDIT` **is** valid — BRAND names real tokens, so there is
+  something to check. The full table is in `mind-system/routing.md`.
 - **A pipeline step with no work does not stop the pipeline.** Hand off explicitly — "these tokens
   already exist, use them" — and continue. Aborting is the user's call.
 - **No mode commits to a shared branch.** What a mode may write, it writes through
   `node scripts/propose.js`.
-- **If no mode is named**, do not guess one. List the eight with their tiers and ask which lens the
+- **If no mode is named**, do not guess one. List the nine with their tiers and ask which lens the
   task wants — picking a tier for the user is picking how much their turn costs.

@@ -1,6 +1,6 @@
 # Knowledge Branding — Índice
 
-Fundamentos de percepción de marca, credibilidad y prestigio visual. Respalda las decisiones de CREATIVE, UX y AUDIT cuando el objetivo es comunicar autoridad, confianza o posicionamiento premium.
+Fundamentos de percepción de marca, credibilidad y prestigio visual. Respalda las decisiones de CREATIVE, UX y AUDIT cuando el objetivo es comunicar autoridad, confianza o posicionamiento premium, y es el **suelo del modo BRAND**, que decide una identidad entera —los siete ejes— en vez de un registro por página.
 
 ---
 
@@ -29,6 +29,8 @@ Fundamentos de percepción de marca, credibilidad y prestigio visual. Respalda l
 
 | Modo | Archivo | Cuándo |
 |------|---------|--------|
+| BRAND | `perception-of-prestige-foundations.md` | Siempre — el registro es la primera decisión de una identidad, antes que cualquier eje |
+| BRAND | `perception-of-prestige.rules.md` | On-demand — cuando el brief pide premium, autoridad o credibilidad con esas palabras |
 | CREATIVE | `perception-of-prestige-foundations.md` | Siempre — fundamento para decisiones de registro premium |
 | CREATIVE | `perception-of-prestige.rules.md` | On-demand — cuando el brief exige premium/credibilidad explícita |
 | UX | `perception-of-prestige-foundations.md` | On-demand — cuando el contexto implica confianza, autoridad o conversión |

@@ -87,6 +87,7 @@ become a call that returns the one answer, and the column that matters is the la
 | 6 | `[SYX: UI]:` | 🔴 High | 4+ (tokens, registry, rules, component files) | `get_component`, `get_mixin`, `validate_snippet` | 3–4 |
 | 7 | `[SYX: AUDIT]:` | 🔴 High | N (component tree being audited) | `validate_snippet`, `scan_for_drift` | 2–4 |
 | 8 | `[SYX: MIGRATE]:` | 🔴 Very High | N+ (all files referencing the migrated variable) | `find_token_by_value`, `get_token`, `scan_for_drift` | 4–6 |
+| 9 | `[SYX: BRAND]:` | 🔴 Very High | 3 (`tokens.json`, `rules.json`, `component-registry.json`) | `get_token` (per axis), `find_token_by_value`, `list_components` | 3–5 |
 
 > **Tip:** Start with SKETCH or UX to validate the concept. Escalate to TOKEN → UI → AUDIT only when the idea is confirmed.
 
@@ -96,6 +97,13 @@ adding them together gives a wrong number. The tier counts what it costs to ask 
 the corpus. CREATIVE is tier 3 and still loads the whole `motion/` domain when there is GSAP: cheap
 in system reads, expensive in corpus. SKETCH is the one disciplined exception — its tier 1 is bought
 by reading nothing, so its `Knowledge` block has no **Always** line at all.
+
+**BRAND is the second exception, in the opposite direction.** It reads three files and still sits at
+tier 9, because the tier ranks the work and BRAND's work is the only one that has to come out
+internally consistent across seven axes at once. The expensive part is the coherence check, not the
+reads. It sits at the end of the table rather than between UI and AUDIT for a duller reason: the
+numbers are cited in three indices, and renumbering eight rows to insert one costs more than the
+ordering is worth.
 
 ### Mode Reference
 
@@ -109,12 +117,13 @@ by reading nothing, so its `Knowledge` block has no **Always** line at all.
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
+| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — the seven axes at once, its invariants, and the theme that carries it |
 
 **A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
 may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead
 of reading. Those lists are checked against `contracts/trust.json` by `npm run check:modos`, so a
-mode cannot quietly hand itself a permission the contract doesn't give it. THEME never writes;
-TOKEN and MIGRATE write the lower half of what they touch and hand over the upper half.
+mode cannot quietly hand itself a permission the contract doesn't give it. THEME and BRAND never
+write; TOKEN and MIGRATE write the lower half of what they touch and hand over the upper half.
 
 If no prefix is present, use the base rules below and apply common sense about which mode is most relevant.
 

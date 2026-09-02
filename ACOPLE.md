@@ -202,7 +202,7 @@ Excluir `CHANGELOG.md`: ahí un «seis modos» es un hecho histórico correcto, 
 
 ### El comando y los modos, sincronizados
 
-`.claude/commands/syx.md` nombra los ocho modos en su gramática. Es un puntero, no una copia, pero la lista de nombres sí se duplica y puede envejecer:
+`.claude/commands/syx.md` nombra los nueve modos en su gramática. Es un puntero, no una copia, pero la lista de nombres sí se duplica y puede envejecer:
 
 ```js
 comprobar('el comando /syx conoce los mismos modos que hay en disco', () => {
