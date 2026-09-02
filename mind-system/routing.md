@@ -156,6 +156,8 @@ Abortar es decisión del usuario, no del modo.
 | `[SYX: TOKEN + AUDIT]:` | Definir tokens y verificar R05–R08 |
 | `[SYX: BRAND → THEME]:` | Identidad completa: BRAND decide los siete ejes, THEME construye y contrasta la escala |
 | `[SYX: BRAND → THEME → UI]:` | Identidad completa hasta el componente que la estrena |
+| `[SYX: BRAND → CREATIVE]:` | Página experimental que **hereda** registro y contrato en vez de elegir carácter. La dirección de arte de CREATIVE pasa a ser una desviación declarada, no una invención |
+| `[SYX: BRAND → THEME → CREATIVE]:` | Lo mismo, pero además con los tokens ya construidos: la página hereda la identidad **y** los valores que la pintan |
 | `[SYX: BRAND + AUDIT]:` | Identidad verificada: que cada token nombrado exista y que ningún bloque entregado rompa R01–R04 |
 
 ### Combinaciones inválidas

@@ -39,7 +39,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **BRAND es tier 9 leyendo tres ficheros.** El tier ordena el trabajo, no la lectura —lo dice ya `_agents/modes/README.md`— y el trabajo de BRAND es el único que tiene que salir coherente consigo mismo en siete ejes a la vez. Va al final de la tabla en vez de entre UI y AUDIT por una razón más sosa: los números se citan en tres índices, y renumerar ocho filas para insertar una cuesta más de lo que vale el orden.
 
+### Added
+
+- **AUDIT sabe auditar un contrato de identidad.** `BRAND + AUDIT` estaba declarado válido desde esta misma versión y no tenía mecanismo: `audit.md` mencionaba «identidad» dos veces en todo el fichero. Ahora trae la sección entera —cómo se convierte cada forma de invariante en una búsqueda, no en un juicio— y **dos veredictos en vez de uno**:
+
+  ```
+  Contract: PASS / FAIL / PASS WITH WARNINGS   ← R01–R08, lo zanja el validador
+  Identity: ADHERES / DEVIATES (n)             ← los invariantes, asesor
+  ```
+
+  Una página puede ser `Contract: PASS · Identity: DEVIATES (3)` y es un resultado perfectamente coherente: no rompe ninguna regla del sistema y sí tres promesas de su propia marca. **Fundirlos en un veredicto pierde justo la información que el lector necesitaba.** Un hallazgo de identidad no lleva número R, no convierte un PASS en FAIL y va debajo de los de contrato — la misma regla que ya gobernaba el módulo de prestigio, y por el mismo motivo: mezclar una preferencia con una ley devalúa las dos.
+
+  Con la vuelta que faltaba: **si un invariante no se puede convertir en una búsqueda, no era falsable**, y entonces el hallazgo es sobre el contrato, no sobre la página. Se cita la línea y se devuelve a BRAND. Un contrato de identidad lleno de invariantes infalsables produce auditorías que siempre pasan y que nadie se cree.
+
+- **`BRAND → CREATIVE` y `BRAND → THEME → CREATIVE`, declaradas válidas.** Era el caso de uso que justifica el modo y no estaba en la tabla. `creative.md` dice ahora qué cambia cuando llega una identidad: **la línea de dirección de arte pasa de invención a desviación**, que es una afirmación que alguien puede aceptar o rechazar. CREATIVE sigue exento de R01–R08 y puede apartarse de un invariante —**esa exención nunca cubrió el silencio**: apartarse es una decisión creativa legítima, y decir de cuál y por qué es lo que evita que una identidad muera a base de excepciones razonables.
+
+- **`DECISION-product-context.md`.** El hueco P0 del informe del 2026-09-02, comprobado: cero apariciones en el repositorio. Decisión: **`product-context.json` en la raíz, tier `pr`, servido por MCP, y explícitamente no un modo** — no escribe nada que otro no escriba, no tiene techo propio y no razona; se declara una vez y lo leen todos. Con el reparto frente a BRAND y ATLAS escrito en una tabla, porque es lo que decide si la capa sirve o estorba, y con la regla que impide el vertedero: **un campo entra solo si cambia una decisión concreta de un modo concreto, y el campo nombra cuál.**
+
 ### Changed
+
+- **`DECISION-patrones.md` fija el esquema de un patrón.** La decisión de dónde vive estaba cerrada desde el 2026-09-01; faltaba la forma, y sin ella el fichero no se podía escribir el día que llegara el permiso. El informe de evaluación llegó a la misma capa por otro camino —la llamó *recipes*— y aportó la pieza que faltaba: **`avoid_when` obligatorio**. Un patrón que solo dice cuándo usarlo se aplica siempre, y ahí es donde una capa de conocimiento compositivo degenera en la biblioteca de plantillas que el propio informe pide no construir.
 
 - **BRAND ya no emite `_theme.scss`, y esa era la única duplicación real con THEME.** La pregunta —¿no hacen lo mismo?— estaba bien traída: los dos recomiendan en vez de escribir, los dos tocan `scss/themes/`, y **la lista de lectura entera de THEME está dentro de la de BRAND**. Pero la función no es la misma; lo que estaba mal era el entregable. BRAND se había quedado sacando el fichero de tema —con una cláusula que decía «cuando BRAND corre solo, hace la escala igualmente, pero eso es BRAND haciendo de THEME», que es la forma educada de admitir un solape.
 

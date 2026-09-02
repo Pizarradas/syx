@@ -151,6 +151,51 @@ Sin esto, la capa de patrones sería el primer sitio del sistema donde se puede
 mentir sin que salte nada. `scripts/` es `human`, así que lo escribes tú o me
 lo pides como borrador.
 
+## El esquema de un patrón
+
+Lo que la decisión no fijaba y ahora sí, para que el fichero se pueda escribir el
+día que llegue el permiso en vez de abrir otra ronda. Los campos vienen del
+informe de evaluación del 2026-09-02, que llegó a la misma capa por otro camino
+—la llamó *recipes*— y aportó la parte que faltaba: **cuándo no usarlo**.
+
+```jsonc
+{
+  "id": "editorial.hero.dominant",
+  "purpose": "Establecer un único foco editorial inequívoco.",
+
+  "use_when":   ["una historia tiene autoridad N1",
+                 "las de apoyo siguen siendo relevantes"],
+  "avoid_when": ["varias historias tienen peso equivalente"],
+
+  "structure":  { "primary": 8, "secondary": 4 },
+  "alternatives": ["9/3", "apilado en móvil"],
+
+  "requires":   ["headline", "deck", "metadata"],
+  "components": ["mol-feature-card", "atom-title"],
+
+  "reasoning":  "La historia dominante necesita más presencia estructural que su contexto."
+}
+```
+
+Tres decisiones sobre el esquema, y las tres por el mismo motivo:
+
+- **`avoid_when` es obligatorio.** Un patrón que solo dice cuándo usarlo se aplica
+  siempre. Es la diferencia entre conocimiento compositivo y una plantilla con
+  buenas intenciones, y es lo que impide que `patterns.json` se convierta en la
+  biblioteca de templates que el propio informe pide no construir.
+- **`alternatives` en vez de una sola estructura.** Un patrón con una única
+  respuesta es un layout. Con alternativas es una decisión, y encaja con el
+  registro de decisiones: la alternativa nombrada es el segundo campo del `## Why`.
+- **`components` cita `component-registry.json`.** Un patrón que nombra componentes
+  que no existen es deriva con formato de esquema. Si un patrón necesita uno que
+  no está, eso es un hallazgo para UX y UI, no un campo libre.
+
+Lo que el esquema **no** lleva: nada editorial. Ni nivel, ni zona, ni densidad. Eso
+es el peldaño 5 y vive en `atlas-rules/`, referenciado por id, que es justo el
+reparto que esta decisión ya cerró.
+
+---
+
 ## El primer trazo
 
 `patterns.json` no existe, no encaja en ningún patrón de `trust.json`, y por el
