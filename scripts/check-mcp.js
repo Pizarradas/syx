@@ -56,10 +56,10 @@ comprobar('initialize responde con protocolo y nombre', async () => {
   if (r.result.serverInfo?.name !== 'syx') throw new Error('serverInfo.name inesperado');
 });
 
-comprobar('tools/list expone las 10 herramientas con esquema', async () => {
+comprobar('tools/list expone las 11 herramientas con esquema', async () => {
   const r = await rpc('tools/list', {});
   const t = r.result.tools;
-  if (t.length !== 10) throw new Error(`esperaba 10 herramientas, hay ${t.length}`);
+  if (t.length !== 11) throw new Error(`esperaba 11 herramientas, hay ${t.length}`);
   for (const x of t) {
     if (!x.description) throw new Error(`${x.name} sin descripción`);
     if (x.inputSchema?.type !== 'object') throw new Error(`${x.name} con esquema mal formado`);
@@ -170,6 +170,39 @@ comprobar('validate_snippet dice QUÉ mixin usar, no solo que está mal', async 
   if (r.violaciones.R03?.recambio?.mixin !== 'transition') throw new Error('R03 no ofrece recambio');
   if (r.violaciones.R04?.recambio?.mixin !== 'position') throw new Error('R04 no ofrece recambio');
   if (!r.violaciones.R04.recambio.alias.includes('absolute')) throw new Error('R04 no ofrece el alias corto');
+});
+
+comprobar('get_figma_spec devuelve números, no CSS, y cambia con el modo', async () => {
+  const pedir = (mode) => rpc('tools/call', { name: 'get_figma_spec', arguments: { component: 'btn', mode } });
+  const a = salida(await pedir('light'));
+  const b = salida(await pedir('dark'));
+  if (!a.encontrado) throw new Error('btn no encontrado');
+  if (a.figmaName !== 'atom/btn') throw new Error(`nombre en Figma inesperado: ${a.figmaName}`);
+  if (!a.clases.base.includes('atom-btn')) throw new Error('no lleva la clase del registro');
+
+  // Lo que justifica que esta herramienta exista: un nodo de Figma no acepta
+  // `oklch(…)`. Si aquí sale una cadena de CSS, el agente la copiaría tal cual.
+  const fill = a.propiedades.find((p) => p.token === '--component-button-primary-filled-bg');
+  if (!fill) throw new Error('sin el fondo del botón primario');
+  if (fill.propiedad !== 'fills') throw new Error(`lo manda a ${fill.propiedad}`);
+  if (typeof fill.valor?.r !== 'number') throw new Error('el color no viene en RGB numérico');
+
+  const oscuro = b.propiedades.find((p) => p.token === fill.token);
+  if (JSON.stringify(fill.valor) === JSON.stringify(oscuro.valor)) {
+    throw new Error('claro y oscuro dan el mismo color: la dimensión de modo no llega');
+  }
+
+  // Un tipo en una propiedad que no lo admite es peor que la propiedad ausente.
+  for (const p of a.propiedades) {
+    if (p.tipo === 'STRING' && !p.propiedad.startsWith('fontName')) {
+      throw new Error(`${p.token} mete un STRING en ${p.propiedad}`);
+    }
+  }
+  // Y lo descartado se descarta con motivo, que es lo que impide que un agente
+  // salga a buscar en Figma algo que Figma no tiene.
+  for (const lista of [a.sinTraducir, a.sinPropiedad]) {
+    if (lista.some((x) => !x.motivo)) throw new Error('hay descartes sin motivo');
+  }
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {

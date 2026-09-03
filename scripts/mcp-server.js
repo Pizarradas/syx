@@ -172,6 +172,21 @@ const HERRAMIENTAS = [
     },
     run: (a) => syx.getMixin(a),
   },
+
+  {
+    name: 'get_figma_spec',
+    description: 'Un componente de SYX en la forma que entiende la Plugin API de Figma: cada token con su propiedad de nodo (cornerRadius, fills, strokeWeight…), su valor ya convertido —colores en RGB de 0 a 1, medidas en píxeles— y el nombre de la variable. Pregúntalo ANTES de crear nada en Figma: get_component da nombres de token, y un nodo necesita números. Dice también qué NO se pudo traducir y por qué.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        component: { type: 'string', description: 'p. ej. btn, feature-card, site-header' },
+        theme: { type: 'string', description: 'Por defecto syx-sketch' },
+        mode: { type: 'string', enum: ['light', 'dark'], description: 'Por defecto light' },
+      },
+      required: ['component'],
+    },
+    run: (a) => syx.getFigmaSpec(a),
+  },
 ];
 
 // ─── JSON-RPC sobre stdio ────────────────────────────────────────────────────

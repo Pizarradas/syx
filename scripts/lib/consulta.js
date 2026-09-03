@@ -28,6 +28,7 @@ const { revisar, tokensInexistentes, DESCRIPCIONES } = require('./rules');
 const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
+const figma = require('./figma');
 
 function crearConsulta({ root } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
@@ -173,6 +174,27 @@ function crearConsulta({ root } = {}) {
     return { value: buscado, theme, mode, exactos, parciales };
   }
 
+  /**
+   * Todos los tokens de un tema y un modo, ya resueltos y con los assets
+   * sustituidos. Es la cascada `base → light → dark` que aplican también
+   * `getToken` y el índice inverso, ofrecida entera.
+   *
+   * NO ES UNA HERRAMIENTA MCP, Y ES DELIBERADO
+   * Devuelve más de mil pares: servírselo a un agente sería justo lo que este
+   * servidor existe para evitar. Existe para los exportadores, que necesitan
+   * recorrerlo todo y que, si no la tuvieran, volverían a escribir la cascada
+   * por su cuenta —que es como acaban divergiendo dos copias del mismo criterio.
+   */
+  function listTokens({ theme = 'syx-sketch', mode = 'light', layer } = {}) {
+    const mapa = efectivo(theme, mode);
+    const tokens = {};
+    for (const [k, v] of Object.entries(mapa)) {
+      if (layer && k.replace(/^--/, '').split('-')[0] !== layer) continue;
+      tokens[k] = resolverAsset(v);
+    }
+    return { theme, mode, total: Object.keys(tokens).length, tokens };
+  }
+
   const listComponents = ({ layer } = {}) => ({
     total: componentes().length,
     components: componentes()
@@ -195,6 +217,91 @@ function crearConsulta({ root } = {}) {
       };
     }
     return { encontrado: true, ...c };
+  }
+
+  /**
+   * Un componente de SYX en la forma que entiende la Plugin API de Figma.
+   *
+   * POR QUÉ NO BASTA CON getComponent
+   * `getComponent` devuelve NOMBRES de token —`--component-button-border-radius`—
+   * y un agente que está creando un nodo en Figma necesita un NÚMERO y la
+   * propiedad donde ponerlo: `cornerRadius: 8`. Sin esta consulta, ese agente
+   * traduce por su cuenta entre lo que SYX dice y lo que Figma acepta, y ahí es
+   * exactamente donde nace la desviación que `scan_for_drift` existe para cazar,
+   * solo que en el otro lado del puente y sin nadie mirando.
+   *
+   * QUÉ ES HECHO Y QUÉ ES INFERENCIA
+   * Las clases, los modificadores y los tokens vienen del registro, que se
+   * contrasta contra el CSS compilado: son hechos. El reparto de tokens por
+   * variante y por estado se DEDUCE del nombre —`--component-button-primary-bg`
+   * cae bajo `atom-btn--primary` porque comparte el segmento—, y va marcado como
+   * inferencia. Mezclar las dos cosas sin decirlo convertiría una fuente
+   * verificada en una fuente creíble, que no es lo mismo.
+   */
+  function getFigmaSpec({ component, theme = 'syx-sketch', mode = 'light' }) {
+    const c = getComponent({ name: component });
+    if (!c.encontrado) return c;
+
+    const mapa = efectivo(theme, mode);
+    const segmentos = c.modifiers.map(figma.segmentoDe).filter(Boolean);
+
+    const propiedades = [];
+    const sinTraducir = [];
+    const sinPropiedad = [];
+    const porVariante = {};
+
+    for (const token of c.tokens) {
+      const trad = figma.aVariable(token, resolverAsset(mapa[token]));
+      if (trad.omitido) { sinTraducir.push({ token, motivo: trad.omitido }); continue; }
+
+      const propiedad = figma.propiedadDe(token);
+      if (!propiedad) {
+        sinPropiedad.push({ token, motivo: 'sin propiedad equivalente en un nodo de Figma' });
+        continue;
+      }
+      if (!figma.encaja(trad.tipo, propiedad)) {
+        sinPropiedad.push({ token, motivo: `${trad.tipo} no encaja en ${propiedad}` });
+        continue;
+      }
+
+      // El segmento más largo que encaje, para que `size-lg` gane a `size`.
+      const variante = segmentos
+        .filter((s) => new RegExp('(^|-)' + s + '(-|$)').test(token.replace(/^--/, '')))
+        .sort((a, b) => b.length - a.length)[0] || null;
+      const estado = figma.estadoDe(token);
+
+      propiedades.push({
+        token,
+        variable: figma.aNombreFigma(token),
+        propiedad,
+        tipo: trad.tipo,
+        valor: trad.valor,
+        ...(trad.hex ? { hex: trad.hex } : {}),
+        variante,
+        estado,
+      });
+      const clave = variante || 'base';
+      porVariante[clave] = (porVariante[clave] || 0) + 1;
+    }
+
+    return {
+      encontrado: true,
+      component: c.name,
+      layer: c.layer,
+      theme,
+      mode,
+      // El nombre que debería llevar el componente en Figma. Sale de la clase
+      // base, no del nombre corto: la clase es lo que después tendrá que casar
+      // con el código, y `atom-btn` es lo que se escribe en el HTML.
+      figmaName: c.classes[0].replace('-', '/'),
+      clases: { base: c.classes, modificadores: c.modifiers, estados: c.states },
+      composedOf: c.composedOf,
+      propiedades,
+      variantes: porVariante,
+      sinPropiedad,
+      sinTraducir,
+      inferencia: 'El reparto por `variante` y `estado` se deduce del nombre del token. Las clases y los tokens no: vienen del registro, contrastado contra el CSS compilado.',
+    };
   }
 
   const listMixins = ({ file } = {}) => {
@@ -306,8 +413,10 @@ function crearConsulta({ root } = {}) {
     listThemes,
     getToken,
     findTokenByValue,
+    listTokens,
     listComponents,
     getComponent,
+    getFigmaSpec,
     validateSnippet,
     classifyChange,
     scan,

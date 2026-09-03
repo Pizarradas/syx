@@ -151,12 +151,71 @@ From a clone instead of the installed package:
 | `classify_change` | The trust tier of a change, and where a new token belongs |
 | `scan_for_drift` | Where a consuming app has drifted from the system |
 | `list_mixins` / `get_mixin` | The 44 mixins: signature, defaults, what they emit, how often each is used |
+| `get_figma_spec` | One component in the shape Figma's Plugin API understands: node property, converted value, variable name |
 
 No dependencies: plain JSON-RPC over stdio. It reads `contracts/resolved-tokens.json`
 and `component-registry.json`, both generated from source and arbitrated against the
 compiled CSS — so everything it returns exists. The server and the Node API in Option B
 answer from the same layer (`scripts/lib/consulta.js`), so an agent and an application
 get the same answer to the same question.
+
+---
+
+## Figma
+
+Two exports, one translation layer, and the point of both is the same: **SYX sets the
+pace, Figma follows.** Not the other way round.
+
+```bash
+npm run export:figma    # contracts/figma/<theme>.figma.json  (7 files)
+npm run check:figma     # fails if those files are stale
+```
+
+Each file carries the whole library for one theme: two **variable collections**
+(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 34
+components with the node property each token maps to.
+
+| In SYX | In Figma |
+| ------ | -------- |
+| `--component-button-border-radius: 0.25rem` | `cornerRadius: 4` |
+| `--semantic-color-primary: oklch(0.498 0.282 266.24)` | variable `semantic/color/primary`, `{r:0.1175, g:0.2275, b:0.9999, a:1}` |
+| `.atom-btn--primary` | variant property `primary` on component `atom/btn` |
+
+**Why this and not the DTCG export.** `npm run export:tokens` already speaks the W3C
+standard, and Style Dictionary is happy with it. Figma is not: a COLOR variable stores
+numeric `{r,g,b,a}`, and SYX is written entirely in `oklch()`. A DTCG file containing
+`oklch(0.498 0.282 266.24)` imports as text or doesn't import at all. The conversion is
+the real border, and no format crosses it — a function does, in `scripts/lib/figma.js`,
+the same one `get_figma_spec` answers from, so the imported variable and the value an
+agent paints cannot diverge.
+
+**Three decisions worth knowing before you import:**
+
+- **Primitives don't go up.** R01 forbids a component from reading a `--primitive-*` in
+  CSS; shipping them to Figma as pickable variables would open in design exactly the
+  shortcut the contract closes in code.
+- **One file per theme, not one with fourteen modes.** Figma caps modes per collection
+  by plan (four on Professional). A theme is a library; its two modes are light and dark.
+- **What can't be translated is listed, not hidden.** ~250 tokens per theme stay out —
+  fluid `clamp()` type, `color-mix()`, relative units, shadows, gradients, embedded SVGs.
+  Each one appears in `omitidos` with its reason. A system that exports 543 tokens and
+  keeps quiet about the 247 it dropped lies by omission.
+
+Bind node properties **to the variables**, don't copy the values: a copied value loses
+dark mode. The per-property `valores.light` / `valores.dark` are there so you can verify
+a binding without opening Figma.
+
+### With Figma's own MCP server
+
+Register both servers and the loop closes: `get_figma_spec` says what SYX means,
+Figma's write tools (`use_figma`, which runs Plugin API code) put it on the canvas.
+Ask SYX before creating anything — `get_component` returns token *names*, and a node
+needs numbers.
+
+What is **not** in this repo, and can't be: **Code Connect**. Mapping a Figma component
+back to `<button class="atom-btn atom-btn--primary">` needs node IDs, which only exist
+once the components exist in a file. `component-registry.json` already holds the verified
+classes for it; the mapping is the half that has to be done from the Figma side.
 
 ---
 

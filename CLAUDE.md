@@ -18,11 +18,14 @@ never edit a rule or a guard to make your own change pass.
 
 **To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.
 
+**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 34 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
+
 **Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
 `README.md` → *MCP server*), don't load those files to answer a point question. Use
 `get_token` for a token's real value in a theme and mode, `find_token_by_value` before
 hardcoding anything, `get_component` for a component's verified classes and modifiers,
 `get_mixin` before writing a property a rule will reject — R03 and R04 say what you may not write, and `get_mixin` says what to write instead —
+`get_figma_spec` before creating anything in Figma — `get_component` returns token *names*, and a Figma node needs numbers —
 and `validate_snippet` to pass R01–R04 over SCSS **before** writing it (it now names the replacement mixin itself). It runs the same
 rules as `npm run validate`, from `scripts/lib/rules.js`. In an app that installs SYX
 instead of cloning it, `require('syx-design-system')` gives the same six queries.

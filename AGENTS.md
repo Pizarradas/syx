@@ -23,6 +23,7 @@ that otherwise force you to load the files above:
 | Guessing whether you may touch a file, or where a new token goes | `classify_change` — the trust tier, and the destination file deduced from the token's family |
 | Eyeballing whether an app still matches the system | `scan_for_drift` — expired fallbacks, phantom classes, hand-written values that are already tokens |
 | Reading 526 lines of mixin README to find the right `@include` | `list_mixins` / `get_mixin` — signature, defaults, what it emits, who aliases it |
+| Translating an `oklch()` or a `rem` by hand to draw in Figma | `get_figma_spec` — node property, converted value and variable name, per theme and mode |
 
 The same rules run in both places, so a snippet the server approves is a snippet
 `npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
