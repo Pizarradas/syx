@@ -34,237 +34,6 @@
     <!-- Theme stylesheet — swapped by JS on theme change -->
     <link id="syx-theme-css" rel="stylesheet" href="css/styles-theme-syx-sketch.css">
 
-    <style>
-        /* Escala de puntuación 1–5
-           ------------------------------------------------------------------
-           Antes eran cinco colores distintos (verde, turquesa, oliva, naranja,
-           rojo) con texto blanco encima: 2,45:1 en el peor caso, y una escala
-           que solo se lee si distingues esos cinco tonos entre sí.
-
-           Ahora es secuencial en un solo tono: el valor se lee por INTENSIDAD,
-           no por color. Funciona en escala de grises, funciona con cualquier
-           tipo de daltonismo, y ordena visualmente sin que haya que aprenderse
-           una leyenda. Los tres pasos claros llevan tinta; los dos oscuros,
-           blanco. Todos por encima de 4,5:1 — medido, no supuesto: el peldaño
-           más flojo es 5,60:1.
-
-           La rampa sube en saturación y baja en luminosidad de punta a punta.
-           Durante un tiempo no fue así: el paso 4 usaba el azul de marca, el
-           color más saturado del tema, y tiraba más del ojo que el 5. El máximo
-           se leía como si no lo fuera. Un degradado secuencial solo funciona si
-           las DOS dimensiones avanzan en el mismo sentido.
-
-           Los colores salen de los tokens del tema, así que la escala se
-           reconstruye sola si cambias de tema. */
-        .score-circle {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2rem;
-            height: 2rem;
-            border-radius: var(--semantic-border-radius-sm);
-            border: 1px solid var(--semantic-color-border-default);
-            font-family: var(--semantic-font-family-mono);
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .score-5 {
-            background-color: var(--component-score-5-bg);
-            border-color: var(--component-score-5-border);
-            color: var(--component-score-5-color);
-        }
-
-        .score-4 {
-            background-color: var(--component-score-4-bg);
-            border-color: var(--component-score-4-border);
-            color: var(--component-score-4-color);
-        }
-
-        .score-3 {
-            background-color: var(--component-score-3-bg);
-            border-color: var(--component-score-3-border);
-            color: var(--component-score-3-color);
-        }
-
-        .score-2 {
-            background-color: var(--component-score-2-bg);
-            border-color: var(--component-score-2-border);
-            color: var(--component-score-2-color);
-        }
-
-        .score-1 {
-            background-color: var(--component-score-1-bg);
-            border-color: var(--component-score-1-border);
-            color: var(--component-score-1-color);
-        }
-
-        /* ── RANKING GLOBAL ─────────────────────────────────────────────
-           Se rehízo entero. Lo anterior eran estilos en línea con seis colores
-           distintos —verde, verde, amarillo, naranja, rojo, rojo— para ordenar
-           seis barras que YA venían ordenadas por su longitud. El color no
-           añadía información: la repetía, y encima con la escala arcoíris que
-           esta misma página explica por qué se abandonó unas líneas más arriba.
-           Ahora todas las barras comparten tono y solo cambia lo que de verdad
-           mide algo, que es cuánto ocupan.
-
-           Y arrastraba tres averías que no se veían leyendo el código:
-             · el naranja citaba --primitive-color-orange-500, que no existe en
-               ningún tema, así que la barra de Bootstrap llevaba meses sin
-               pintarse;
-             · los anchos fijos de 20 px y 120 px partían los números y los
-               nombres en dos líneas («Bootstra / p»);
-             · la tarjeta del ganador tenía `border-width: 2px` sin estilo ni
-               color, herencia de dos clases que nunca existieron, así que no
-               había tarjeta: el contenido flotaba en el hueco. */
-        .rank__list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .rank__row {
-            display: grid;
-            /* En ch y no en px: el ancho lo marca el texto que va dentro, así
-               que nada se parte aunque cambie la tipografía o el tamaño base. */
-            grid-template-columns: 2.5ch minmax(11ch, 14ch) 1fr auto;
-            align-items: center;
-            gap: var(--semantic-space-inline-md);
-            padding: var(--semantic-space-stack-sm) 0;
-            border-bottom: 1px solid var(--semantic-color-border-subtle);
-        }
-
-        .rank__row:last-child { border-bottom: 0; }
-
-        .rank__pos {
-            font-family: var(--semantic-font-family-mono);
-            font-variant-numeric: tabular-nums;
-            color: var(--semantic-color-text-tertiary);
-            text-align: right;
-        }
-
-        .rank__name {
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .rank__bar {
-            display: block;
-            height: var(--semantic-space-stack-sm);
-            background: var(--semantic-color-bg-secondary);
-            border: 1px solid var(--semantic-color-border-subtle);
-            border-radius: var(--semantic-border-radius-full);
-            overflow: hidden;
-        }
-
-        /* Un solo tono para las seis. La longitud ya ordena; el color solo
-           tendría que decir «esto es una puntuación», y con uno basta. */
-        .rank__fill {
-            display: block;
-            height: 100%;
-            background: var(--component-score-4-bg);
-            border-radius: inherit;
-        }
-
-        .rank__pts {
-            font-family: var(--semantic-font-family-mono);
-            font-variant-numeric: tabular-nums;
-            font-size: var(--semantic-font-size-body-small);
-            color: var(--semantic-color-text-secondary);
-            white-space: nowrap;
-        }
-
-        /* La tarjeta del ganador: ahora existe. Borde de 2 px en el azul del
-           tema, que es lo que las clases desaparecidas querían decir. */
-        .rank__winner {
-            border: 2px solid var(--semantic-color-primary);
-            border-radius: var(--semantic-border-radius-lg);
-            padding: var(--semantic-space-component-lg);
-            text-align: center;
-            height: 100%;
-        }
-
-        .rank__medal {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: var(--semantic-border-radius-full);
-            background: var(--semantic-color-primary);
-            color: var(--semantic-color-primary-text);
-            margin-bottom: var(--semantic-space-stack-sm);
-        }
-
-        .rank__medal .atom-icon { width: 1.75rem; height: 1.75rem; }
-
-        .rank__winner-rank {
-            color: var(--semantic-color-text-tertiary);
-            margin-bottom: var(--semantic-space-stack-xs);
-        }
-
-        .rank__winner-score {
-            font-family: var(--semantic-font-family-heading);
-            font-size: var(--semantic-font-size-h1);
-            font-weight: 700;
-            font-variant-numeric: tabular-nums;
-            line-height: 1;
-            color: var(--semantic-color-primary);
-            margin: 0 0 var(--semantic-space-stack-md);
-        }
-
-        .rank__winner-max {
-            font-family: var(--semantic-font-family-mono);
-            font-size: var(--semantic-font-size-body-small);
-            font-weight: 400;
-            color: var(--semantic-color-text-tertiary);
-            margin-left: 0.35em;
-        }
-
-        /* El ganador se marca con la menta, el único acento del tema, y con
-           un trazo más grueso: no depende del color para leerse. */
-        .score-winner {
-            border: 2px solid var(--primitive-color-green-500);
-            box-shadow: var(--semantic-shadow-hard-sm);
-        }
-        /* ── ETIQUETA DE EVIDENCIA ──────────────────────────────────────
-           Dice de qué está hecha cada afirmación: medida, comprobable o
-           juicio. No es decoración — es lo que separa un dato de una
-           opinión, y sin ella la tabla entera se lee como si todo fuera lo
-           mismo. Se distinguen por texto y por borde, no solo por color:
-           en escala de grises las tres siguen siendo legibles. */
-        .ev {
-            display: inline-block;
-            font-family: var(--semantic-font-family-mono);
-            font-size: var(--semantic-font-size-caption);
-            line-height: 1.4;
-            padding: 0.1em 0.5em;
-            border: 1px solid var(--semantic-color-border-default);
-            border-radius: var(--semantic-border-radius-sm);
-            white-space: nowrap;
-            color: var(--semantic-color-text-secondary);
-        }
-
-        .ev--m {
-            border-color: var(--component-score-5-border);
-            background: var(--component-score-5-bg);
-            color: var(--component-score-5-color);
-        }
-
-        .ev--c {
-            border-color: var(--component-score-3-border);
-            background: var(--component-score-3-bg);
-            color: var(--component-score-3-color);
-        }
-
-        .ev--j { border-style: dashed; }
-
-        .ev--new {
-            border-style: dotted;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-    </style>
 </head>
 
 <body class="syx syx--theme-syx-sketch">
@@ -425,18 +194,18 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td>A number produced by running something against this repository</td>
                                 <td>The command is printed next to it. Run it.</td>
                             </tr>
                             <tr>
-                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
                                 <td>A fact about a system that is public and unambiguous — licence, current major,
                                     whether it requires a JS framework, whether it ships runtime JS</td>
                                 <td>Open the project's own documentation. Sources listed at the foot of this page.</td>
                             </tr>
                             <tr>
-                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
                                 <td>An opinion. Informed, argued, and still an opinion</td>
                                 <td>You can't. Read the rubric and disagree with it if you do.</td>
                             </tr>
@@ -481,9 +250,9 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left">Weight of a theme bundle</td>
-                                <td style="text-align:left"><strong>41.6 – 49.1 kB gzipped</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">256–341 kB
-                                        raw · 33.3–37.4 kB brotli · 7 themes</span></td>
+                                <td style="text-align:left"><strong>42.5 – 50.1 kB gzipped</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">262–348 kB
+                                        raw · 34.0–38.1 kB brotli · 7 themes</span></td>
                                 <td style="text-align:left"><code>gzip -9</code> over <code>css/styles-theme-*.css</code></td>
                             </tr>
                             <tr>
@@ -508,7 +277,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Cascade control</td>
-                                <td style="text-align:left"><strong>7 named layers</strong>, 49 <code>@layer</code>
+                                <td style="text-align:left"><strong>7 named layers</strong>, 53 <code>@layer</code>
                                     blocks<br>
                                     <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">reset ·
                                         base · tokens · atoms · molecules · organisms · utilities</span></td>
@@ -516,19 +285,19 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Component inventory</td>
-                                <td style="text-align:left"><strong>34</strong> — 19 atoms, 7 molecules, 8 organisms</td>
+                                <td style="text-align:left"><strong>38</strong> — 21 atoms, 9 molecules, 8 organisms</td>
                                 <td style="text-align:left"><code>component-registry.json</code>, generated from source
                                     and arbitrated against the compiled CSS</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left">Tokens per theme</td>
-                                <td style="text-align:left"><strong>1,082</strong> — 233 primitive, 166 semantic, 624
+                                <td style="text-align:left"><strong>1,088</strong> — 233 primitive, 166 semantic, 630
                                     component, 59 other</td>
                                 <td style="text-align:left"><code>contracts/resolved-tokens.json</code></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left">Source size</td>
-                                <td style="text-align:left"><strong>178 SCSS files · 17,238 lines</strong></td>
+                                <td style="text-align:left"><strong>182 SCSS files · 17,655 lines</strong></td>
                                 <td style="text-align:left"><code>scss/</code></td>
                             </tr>
                             <tr>
@@ -555,11 +324,13 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Browser floor</td>
-                                <td style="text-align:left"><strong>Chrome 119 · Safari 16.4 · Firefox 128</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">set by 6
-                                        uses of relative colour <code>oklch(from …)</code>; without those it would be
-                                        Chrome 111 / Safari 16.2</span></td>
-                                <td style="text-align:left">Feature scan of the compiled CSS</td>
+                                <td style="text-align:left"><strong>Chrome 111 · Safari 16.2 · Firefox 121</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">set by
+                                        <code>color-mix()</code> (50 uses) and <code>:has()</code>. The two newest
+                                        features used — relative colour and <code>subgrid</code> — sit behind
+                                        <code>@supports</code> with a fallback, so they raise nothing</span></td>
+                                <td style="text-align:left">Feature scan of the compiled CSS, counting only what is
+                                    <em>not</em> guarded</td>
                             </tr>
                         </tbody>
                     </table>
@@ -598,7 +369,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left"><strong>1. Frontend architecture</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">Explicit cascade control, no specificity hacks in shipped
                                     output, dependency count near zero</td>
                                 <td style="text-align:left">Specificity managed by ordering and luck; deep dependency
@@ -606,92 +377,92 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>2. Agnosticism &amp; integration</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
                                 <td style="text-align:left">Drops into any HTML from any language with a stylesheet
                                     link</td>
                                 <td style="text-align:left">Requires one specific JS framework to render anything</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>3. Styling architecture</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
                                 <td style="text-align:left">Multi-tier token system, themable without touching component
                                     code, dark mode as a first-class dimension</td>
                                 <td style="text-align:left">Hard-coded values, theming by overriding</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>4. Ready-made UI</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
                                 <td style="text-align:left">Data grids, date pickers, comboboxes, the long tail — all
                                     present</td>
                                 <td style="text-align:left">Primitives only; anything complex is yours to build</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>5. Art direction</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
                                 <td style="text-align:left">No default look survives customisation; the system does not
                                     sign the design</td>
                                 <td style="text-align:left">Recognisable at a glance as that library</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>6. Technical debt</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
                                 <td style="text-align:left">Upgrades are not forced by someone else's release cycle;
                                     no transitive vulnerability surface</td>
                                 <td style="text-align:left">Majors break the UI layer; upgrades are projects</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>7. Performance &amp; SEO</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">Renders with zero JavaScript; server-rendered HTML is the
                                     normal case, not a mode</td>
                                 <td style="text-align:left">Styling requires a JS runtime at render time</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>8. Accessibility</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">Accessible behaviour ships with the components, contrast is
                                     enforced by a guard, not by care</td>
                                 <td style="text-align:left">Accessibility is entirely the consumer's problem</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>9. Override friction</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">Your CSS wins by design, without escalating specificity</td>
                                 <td style="text-align:left"><code>!important</code> is the documented answer</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>10. Learning curve</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
                                 <td style="text-align:left">A competent developer ships something correct on day one</td>
                                 <td style="text-align:left">Weeks before output stops fighting the system</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>11. AI-native workflow</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">An agent can query the system, be refused by it, and be told
                                     what to write instead — machine-checked</td>
                                 <td style="text-align:left">An agent reads documentation and guesses</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>12. Ecosystem &amp; support</strong> <span
-                                        class="ev ev--new">new</span></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
+                                        class="atom-evidence atom-evidence--new">new</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
                                 <td style="text-align:left">Large contributor base, answers findable, people to hire who
                                     already know it</td>
                                 <td style="text-align:left">One maintainer. If they stop, it stops.</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>13. Interactive behaviour</strong> <span
-                                        class="ev ev--new">new</span></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
+                                        class="atom-evidence atom-evidence--new">new</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
                                 <td style="text-align:left">Modals, dropdowns, focus traps and keyboard handling ship
                                     working</td>
                                 <td style="text-align:left">Ships appearance only; every behaviour is yours to write</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>14. Browser floor</strong> <span
-                                        class="ev ev--new">new</span></td>
-                                <td><span class="ev ev--m">Measured</span></td>
+                                        class="atom-evidence atom-evidence--new">new</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
                                 <td style="text-align:left">Works on browsers several years old without a build step
                                     that back-ports</td>
                                 <td style="text-align:left">Requires the newest engines to render correctly</td>
@@ -727,164 +498,164 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left"><strong>1. Frontend architecture</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>2. Agnosticism &amp; integration</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>3. Styling architecture</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>4. Ready-made UI</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>5. Art direction</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>6. Technical debt</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>7. Performance &amp; SEO</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>8. Accessibility</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>9. Override friction</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>10. Learning curve</strong></td>
-                                <td><span class="ev ev--j">Judged</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="atom-evidence atom-evidence--judged">Judged</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>11. AI-native workflow</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
+                                <td><span class="atom-score atom-score--2">2</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>12. Ecosystem &amp; support</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>13. Interactive behaviour</strong></td>
-                                <td><span class="ev ev--c">Checkable</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="atom-evidence atom-evidence--checkable">Checkable</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--1">1</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>14. Browser floor</strong></td>
-                                <td><span class="ev ev--m">Measured</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="atom-evidence atom-evidence--measured">Measured</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--3">3</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--5 atom-score--top" title="Highest in this row">5</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
+                                <td><span class="atom-score atom-score--4">4</span></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="text-align:left">Total</th>
                                 <th>/ 70</th>
-                                <th>51</th>
+                                <th>52</th>
                                 <th>55</th>
                                 <th>50</th>
                                 <th>49</th>
@@ -900,10 +671,26 @@
                     <p class="syx-type-overline syx-text-gray syx-mb-2">What changed against the April 2026 version</p>
                     <p class="atom-txt syx-mb-0">SYX's accessibility score went from <strong>4 to 3</strong> because the
                         contrast measurement below contradicted it, and its learning curve from <strong>4 to 3</strong>
-                        because 17,238 lines of SCSS, nine agent modes and eight contract rules are not a four. Ant
+                        because 17,655 lines of SCSS, nine agent modes and eight contract rules are not a four. Ant
                         Design rose from 21 to 39 and Material UI from 28 to 41, mostly because they were being scored
                         at versions two majors old and because the three new criteria are criteria they win. Under the
-                        old eleven criteria SYX scored 89.1% of the maximum; under these fourteen it scores 72.9%.</p>
+                        old eleven criteria SYX scored 89.1% of the maximum; under these fourteen it scores 74.3%.</p>
+                    <p class="atom-txt syx-mb-0" style="margin-top:0.75rem"><strong>One correction already made to this
+                            page.</strong> The first version of it scored SYX 2 on browser floor and claimed a Chrome 119
+                        floor, because the feature scan counted <code>oklch(from …)</code> without checking that it sits
+                        inside an <code>@supports</code> block with a fallback. It does. The real floor is Chrome 111,
+                        the score is 3, and the total moved from 51 to 52. The error is recorded here rather than
+                        quietly fixed, because a page arguing for measurement should show what happens when a
+                        measurement is wrong.</p>
+                    <p class="atom-txt syx-mb-0" style="margin-top:0.75rem"><strong>And one more, because
+                            the page changed what it measures.</strong> The CSS behind this page used to live in a
+                        <code>&lt;style&gt;</code> block inside it — a scoring scale, a ranking list, an evidence tag
+                        and a comparison card, none of them in the system they were arguing for. They are now four real
+                        components (<code>atom-score</code>, <code>atom-evidence</code>, <code>mol-ranking</code>,
+                        <code>mol-compare-card</code>) with their tokens in the token layer. That is why the inventory
+                        reads 38 and not 34, the source 182 files and not 178, and a theme bundle 42.5&ndash;50.1&nbsp;kB
+                        and not 41.6&ndash;49.1. A page that measures a system it is not part of would have kept the
+                        older, smaller numbers.</p>
                 </div>
             </section>
 
@@ -917,54 +704,54 @@
 
                 <div class="layout-grid__nested syx-mb-4">
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
-                        <div class="rank__winner">
-                            <span class="rank__medal">
+                        <div class="mol-ranking__winner">
+                            <span class="mol-ranking__medal">
                                 <span class="atom-icon atom-icon--lc-award" aria-hidden="true"></span>
                             </span>
-                            <p class="syx-type-overline rank__winner-rank">1st place</p>
+                            <p class="syx-type-overline mol-ranking__rank">1st place</p>
                             <h3 class="atom-title atom-title--h3 syx-mb-2">Shadcn UI</h3>
-                            <p class="rank__winner-score">55<span class="rank__winner-max">/ 70</span></p>
+                            <p class="mol-ranking__score">55<span class="mol-ranking__max">/ 70</span></p>
                             <p class="atom-txt syx-text-gray syx-mb-0">Loses only on framework lock-in — and wins
                                 everywhere that ready-made, accessible behaviour counts.</p>
                         </div>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-8">
-                        <ol class="rank__list">
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:92.7%"></span></span>
-                                <span class="rank__pts"><strong>51</strong> / 70</span>
+                        <ol class="mol-ranking">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:94.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>52</strong> / 70</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Tailwind CSS</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:90.9%"></span></span>
-                                <span class="rank__pts"><strong>50</strong> / 70</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Tailwind CSS</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:90.9%"></span></span>
+                                <span class="mol-ranking__pts"><strong>50</strong> / 70</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:90.9%"></span></span>
-                                <span class="rank__pts"><strong>50</strong> / 70</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:90.9%"></span></span>
+                                <span class="mol-ranking__pts"><strong>50</strong> / 70</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:89.1%"></span></span>
-                                <span class="rank__pts"><strong>49</strong> / 70</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:89.1%"></span></span>
+                                <span class="mol-ranking__pts"><strong>49</strong> / 70</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">Material UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:74.5%"></span></span>
-                                <span class="rank__pts"><strong>41</strong> / 70</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">Material UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:74.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>41</strong> / 70</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:70.9%"></span></span>
-                                <span class="rank__pts"><strong>39</strong> / 70</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:70.9%"></span></span>
+                                <span class="mol-ranking__pts"><strong>39</strong> / 70</span>
                             </li>
                         </ol>
                     </div>
@@ -993,49 +780,49 @@
                 <div class="syx-border syx-p-3 syx-mb-4">
                     <h3 class="atom-title atom-title--h5 syx-mb-1">Legacy &amp; server-rendered</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">JSP · PHP · .NET · Rails — the browser is modern, the server is not</p>
-                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads, tied with Shadcn UI.</p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.87</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:97.4%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.77</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:98.2%"></span></span>
-                                <span class="rank__pts"><strong>3.70</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:95.7%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.70</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:98.2%"></span></span>
-                                <span class="rank__pts"><strong>3.70</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:95.7%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.70</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:91.2%"></span></span>
-                                <span class="rank__pts"><strong>3.43</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:88.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.43</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:75.2%"></span></span>
-                                <span class="rank__pts"><strong>2.83</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:73.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.83</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:71.7%"></span></span>
-                                <span class="rank__pts"><strong>2.70</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:69.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.70</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1045,48 +832,48 @@
                     <h3 class="atom-title atom-title--h5 syx-mb-1">React product under time-to-market pressure</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Ship the admin panel this quarter</p>
                     <p class="atom-txt syx-mb-3" style="font-size:0.9rem"><strong>SYX comes 7th of 7 here.</strong></p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>4.08</strong> / 5</span>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>4.08</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:95.3%"></span></span>
-                                <span class="rank__pts"><strong>3.88</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:95.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.88</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:92.5%"></span></span>
-                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:92.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.77</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">4</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:84.9%"></span></span>
-                                <span class="rank__pts"><strong>3.46</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">4</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:84.9%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.46</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:80.2%"></span></span>
-                                <span class="rank__pts"><strong>3.27</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:80.2%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.27</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:79.2%"></span></span>
-                                <span class="rank__pts"><strong>3.23</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:79.2%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.23</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:77.4%"></span></span>
-                                <span class="rank__pts"><strong>3.15</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:78.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.19</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1096,48 +883,48 @@
                     <h3 class="atom-title atom-title--h5 syx-mb-1">Multi-brand &amp; white-label</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">One codebase, many identities, rebranded per client</p>
                     <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>4.07</strong> / 5</span>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>4.14</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:97.4%"></span></span>
-                                <span class="rank__pts"><strong>3.96</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:95.7%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.96</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:92.1%"></span></span>
-                                <span class="rank__pts"><strong>3.75</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:90.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.75</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">4</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:84.2%"></span></span>
-                                <span class="rank__pts"><strong>3.43</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">4</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:82.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.43</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:79.8%"></span></span>
-                                <span class="rank__pts"><strong>3.25</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:78.4%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.25</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:63.2%"></span></span>
-                                <span class="rank__pts"><strong>2.57</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:62.1%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.57</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:61.4%"></span></span>
-                                <span class="rank__pts"><strong>2.50</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:60.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.50</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1147,48 +934,48 @@
                     <h3 class="atom-title atom-title--h5 syx-mb-1">Public sector &amp; regulated accessibility</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Conformance is audited by someone who is not you</p>
                     <p class="atom-txt syx-mb-3" style="font-size:0.9rem"><strong>SYX comes 7th of 7 here.</strong></p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>4.16</strong> / 5</span>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>4.16</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:93.3%"></span></span>
-                                <span class="rank__pts"><strong>3.88</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:93.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.88</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:91.3%"></span></span>
-                                <span class="rank__pts"><strong>3.80</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:91.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.80</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">4</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:84.6%"></span></span>
-                                <span class="rank__pts"><strong>3.52</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">4</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:84.6%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.52</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:80.8%"></span></span>
-                                <span class="rank__pts"><strong>3.36</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:80.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.36</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:79.8%"></span></span>
-                                <span class="rank__pts"><strong>3.32</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:79.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.32</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:72.1%"></span></span>
-                                <span class="rank__pts"><strong>3.00</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:75.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.12</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1198,48 +985,48 @@
                     <h3 class="atom-title atom-title--h5 syx-mb-1">Codebase driven mostly by AI agents</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">The main author of the CSS is not a person</p>
                     <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>4.12</strong> / 5</span>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>4.16</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:95.1%"></span></span>
-                                <span class="rank__pts"><strong>3.92</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:94.2%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.92</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:86.4%"></span></span>
-                                <span class="rank__pts"><strong>3.56</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:85.6%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.56</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">4</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:81.6%"></span></span>
-                                <span class="rank__pts"><strong>3.36</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">4</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:80.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.36</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:79.6%"></span></span>
-                                <span class="rank__pts"><strong>3.28</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:78.8%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.28</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:63.1%"></span></span>
-                                <span class="rank__pts"><strong>2.60</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:62.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.60</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:61.2%"></span></span>
-                                <span class="rank__pts"><strong>2.52</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:60.6%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.52</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1249,48 +1036,48 @@
                     <h3 class="atom-title atom-title--h5 syx-mb-1">Content site where SEO decides</h3>
                     <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Time to first byte is the product</p>
                     <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
-                    <ol class="rank__list syx-mb-3">
-                            <li class="rank__row">
-                                <span class="rank__pos">1</span>
-                                <span class="rank__name">SYX</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
-                                <span class="rank__pts"><strong>3.93</strong> / 5</span>
+                    <ol class="mol-ranking syx-mb-3">
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">1</span>
+                                <span class="mol-ranking__name">SYX</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:100.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>4.04</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">2</span>
-                                <span class="rank__name">Tailwind</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:99.1%"></span></span>
-                                <span class="rank__pts"><strong>3.89</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">2</span>
+                                <span class="mol-ranking__name">Tailwind</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:96.3%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.89</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">3</span>
-                                <span class="rank__name">Shadcn UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:97.2%"></span></span>
-                                <span class="rank__pts"><strong>3.81</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">3</span>
+                                <span class="mol-ranking__name">Shadcn UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:94.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.81</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">4</span>
-                                <span class="rank__name">Bootstrap</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:91.5%"></span></span>
-                                <span class="rank__pts"><strong>3.59</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">4</span>
+                                <span class="mol-ranking__name">Bootstrap</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:89.0%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.59</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">5</span>
-                                <span class="rank__name">Chakra UI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:83.0%"></span></span>
-                                <span class="rank__pts"><strong>3.26</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">5</span>
+                                <span class="mol-ranking__name">Chakra UI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:80.7%"></span></span>
+                                <span class="mol-ranking__pts"><strong>3.26</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">6</span>
-                                <span class="rank__name">MUI</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:66.0%"></span></span>
-                                <span class="rank__pts"><strong>2.59</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">6</span>
+                                <span class="mol-ranking__name">MUI</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:64.2%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.59</strong> / 5</span>
                             </li>
-                            <li class="rank__row">
-                                <span class="rank__pos">7</span>
-                                <span class="rank__name">Ant Design</span>
-                                <span class="rank__bar"><span class="rank__fill" style="width:63.2%"></span></span>
-                                <span class="rank__pts"><strong>2.48</strong> / 5</span>
+                            <li class="mol-ranking__row">
+                                <span class="mol-ranking__pos">7</span>
+                                <span class="mol-ranking__name">Ant Design</span>
+                                <span class="mol-ranking__bar"><span class="mol-ranking__fill" style="width:61.5%"></span></span>
+                                <span class="mol-ranking__pts"><strong>2.48</strong> / 5</span>
                             </li>
                     </ol>
                     <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
@@ -1300,11 +1087,12 @@
                 <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
                     <p class="syx-type-overline syx-text-gray syx-mb-2">Where a weighted average still lies</p>
                     <p class="atom-txt syx-mb-0">A weight expresses <em>how much something matters</em>. It cannot
-                        express <em>a hard constraint</em>. In the legacy profile SYX and Shadcn UI tie at exactly
-                        3.77 — but if the stack cannot run React, Shadcn UI is not a close second, it is
-                        <strong>unavailable</strong>, and so are Chakra UI, Material UI and Ant Design. Four of the seven
-                        systems on this page disqualify themselves before scoring begins. Read the tie as arithmetic,
-                        not as advice.</p>
+                        express <em>a hard constraint</em>. In the legacy profile SYX leads at 3.87 and Shadcn UI follows
+                        at 3.77 — a gap of a tenth, which reads as a close race. It is not one: if the stack cannot run
+                        React, Shadcn UI is not a near miss, it is <strong>unavailable</strong>, and so are Chakra UI,
+                        Material UI and Ant Design. Four of the seven systems here disqualify themselves before scoring
+                        begins, and no weighting can show that. Read every number on this page as arithmetic, not as
+                        advice.</p>
                 </div>
             </section>
 
@@ -1354,7 +1142,7 @@
                             <p class="atom-txt syx-mb-3">Ecosystem and support scores <strong>1</strong>. There is one
                                 author, no contributor base, no Stack Overflow tag, no pool of developers who already
                                 know it, and no answer to &ldquo;what happens if he stops&rdquo; other than the MIT
-                                licence and 17,238 readable lines.</p>
+                                licence and 17,655 readable lines.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">For a system whole products are built on, this is
                                 a real risk and not a rhetorical one.</p>
                         </div>
@@ -1364,21 +1152,22 @@
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">A modern
                                 browser floor</span>
-                            <p class="atom-txt syx-mb-3">The compiled CSS uses relative colour —
-                                <code>oklch(from …)</code>, 6 occurrences — which sets the floor at <strong>Chrome 119 ·
-                                    Safari 16.4 · Firefox 128</strong>. It also uses <code>color-mix()</code> 50 times
-                                and <code>oklch()</code> 289 times. There is no fallback build.</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray">On the legacy stacks SYX claims to serve, the
-                                server may be old but the browser cannot be. Bootstrap scores 5 here and SYX scores
-                                2.</p>
+                            <p class="atom-txt syx-mb-3">The floor is <strong>Chrome 111 · Safari 16.2 · Firefox
+                                    121</strong>, set by <code>color-mix()</code> (50 uses) and <code>:has()</code>.
+                                <code>oklch()</code> appears 289 times. There is no fallback build for any of it: on an
+                                older engine the colours do not degrade, they fail.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">The two newest features — relative colour and
+                                <code>subgrid</code> — are the ones handled properly, behind <code>@supports</code> with
+                                a fallback. Everything else is assumed. On the legacy stacks SYX claims to serve the
+                                server may be old, but the browser cannot be. Bootstrap scores 5 here; SYX scores 3.</p>
                         </div>
                     </div>
 
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">34
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">38
                                 components</span>
-                            <p class="atom-txt syx-mb-3">19 atoms, 7 molecules, 8 organisms. There is no data grid, no
+                            <p class="atom-txt syx-mb-3">21 atoms, 9 molecules, 8 organisms. There is no data grid, no
                                 date picker, no combobox, no virtualised table, no file upload. Ant Design and Material
                                 UI have all of them and score 5 on ready-made UI; SYX scores 2.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">If your product is an admin panel, this is the
@@ -1390,7 +1179,7 @@
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Not a small
                                 system to learn</span>
-                            <p class="atom-txt syx-mb-3">17,238 lines of SCSS across 178 files, 1,082 tokens per theme,
+                            <p class="atom-txt syx-mb-3">17,655 lines of SCSS across 182 files, 1,088 tokens per theme,
                                 a four-tier token cascade, eight contract rules, nine agent modes and eleven MCP tools.
                                 The pay-off is that an agent can be told no by a machine instead of by a reviewer — but
                                 the surface a human has to hold is not small.</p>
@@ -1405,113 +1194,194 @@
            PROS & CONS
       ══════════════════════════════════════════ -->
             <section id="pros-cons" aria-labelledby="pros-cons-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-4" id="pros-cons-heading">System by system</h2>
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="pros-cons-heading">System by system</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">What each one is good and bad at, and — the part that
+                    actually decides a choice — the kind of business, stack and team it fits. Several of these
+                    &ldquo;choose something else&rdquo; lines are not preferences but gates: four of the seven systems
+                    here cannot be installed at all without React.</p>
 
                 <div class="layout-grid__nested">
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">SYX Design System</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> Zero runtime dependencies and zero client-side JavaScript; 41.6&ndash;49.1&nbsp;kB gzipped per theme; specificity solved by seven named <code>@layer</code>s with <strong>0</strong> <code>!important</code> in shipped CSS; drops into any server-rendered HTML; the only system here an agent can query, be refused by, and be corrected by.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> 34 components and no interactive behaviour at all; one maintainer; requires Chrome&nbsp;119 / Safari&nbsp;16.4; the six demo themes fail WCAG&nbsp;AA in 39 of 84 measured text pairs.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">SYX Design System</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">Zero runtime dependencies and zero client-side JavaScript; 42.5&ndash;50.1&nbsp;kB gzipped per theme; specificity solved by seven named <code>@layer</code>s with <strong>0</strong> <code>!important</code> in shipped CSS; drops into any server-rendered HTML; the only system here an agent can query, be refused by, and be corrected by.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">38 components and no interactive behaviour at all; one maintainer; requires Chrome&nbsp;111 / Safari&nbsp;16.2; the six demo themes fail WCAG&nbsp;AA in 39 of 84 measured text pairs.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">A product sold to several clients under their own brands — a banking portal, a booking engine, a school platform — where rebranding is swapping one CSS file, not a release. A Rails, Laravel, Django, .NET&nbsp;MVC or JSP application that renders HTML on the server and has no route to React. A content or commerce site where time to first byte is the business. A team of one to three people who cannot afford anyone else&rsquo;s upgrade cycle. A codebase where an agent writes most of the CSS and needs a machine, not a reviewer, to tell it no.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">An admin console that needs a data grid, a date range picker and a combobox in week one. Any team that has to hire people who already know the system. A public service whose accessibility conformance is audited by someone else, because the accessible <em>behaviour</em> is not here to audit. A corporate estate locked to old browsers. Any organisation that needs a vendor to call.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Shadcn UI</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> Accessible behaviour ships working (Radix/Base UI primitives); you own the component code outright, so there is no library to be blocked by; strong 2026 registry and first-class agent tooling.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> React only — official support covers no other framework, which removes it entirely from server-rendered stacks; carries Tailwind as a hard dependency; every project owns a copy, so fixes do not arrive by upgrading.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Shadcn UI</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">Accessible behaviour ships working (Radix/Base UI primitives); you own the component code outright, so there is no library to be blocked by; strong 2026 registry and first-class agent tooling.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">React only — official support covers no other framework, which removes it entirely from server-rendered stacks; carries Tailwind as a hard dependency; every project owns a copy, so fixes do not arrive by upgrading.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">A React or Next.js product being built now by a team that wants to move fast and still own what it ships. A startup where the design will change ten times and nobody wants to fight a library to change it. Anywhere Tailwind is already the house style.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">Any stack that is not React — this is a gate, not a drawback. An organisation with many products that wants one fix to reach all of them: everybody owns a copy, so patches are a migration. A shop where Tailwind is ruled out by policy or taste.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Tailwind CSS</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> No framework requirement and no runtime; production CSS is small because unused utilities never ship; enormous ecosystem; total design freedom.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> Markup carries the design, so refactoring means editing every element that used it; governance is a convention, not a mechanism; ships no components and no behaviour.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Tailwind CSS</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">No framework requirement and no runtime; production CSS is small because unused utilities never ship; enormous ecosystem; total design freedom.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">Markup carries the design, so refactoring means editing every element that used it; governance is a convention, not a mechanism; ships no components and no behaviour.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">Agencies and studios shipping many sites that must not look alike. Marketing and campaign pages with a short life and a strong art direction. Any backend language, since the output is only CSS. Small teams with tight design review, where the convention holds because everyone is in the room.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">A large team without design governance: the system drifts and nothing stops it. Templates edited by many hands across years, where the design lives in markup nobody dares refactor. A team that expected components — there are none, and behaviour is entirely yours.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Bootstrap</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> The lowest learning curve here and by far the largest pool of developers who already know it; the CSS works without its JavaScript; supports the oldest browsers of any system on this page.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> Overriding it is a fight, and <code>!important</code> is still the common answer; the default look is recognisable at a glance; CSS-variable theming arrived late and is partial.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Bootstrap</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">The lowest learning curve here and by far the largest pool of developers who already know it; the CSS works without its JavaScript; supports the oldest browsers of any system on this page.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">Overriding it is a fight, and <code>!important</code> is still the common answer; the default look is recognisable at a glance; CSS-variable theming arrived late and is partial.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">Internal tools, intranets and back offices where working beats distinctive. Public administration and any estate with old browsers and long procurement. Teams with rotating contractors, because the onboarding cost is close to zero. Prototypes that must exist on Friday.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">A consumer product whose brand is the argument — the default look shows through everything, and removing it costs more than starting elsewhere. Any team that will spend its time overriding rather than building.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Chakra UI</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> Excellent token model and one of the best accessibility stories here; v3 was a ground-up rewrite with recipes and Ark UI, and it shows.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> React only; v3 deliberately kept Emotion to preserve dynamic styling, so styling still costs at runtime — the zero-runtime path is Panda, which is a different product.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Chakra UI</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">Excellent token model and one of the best accessibility stories here; v3 was a ground-up rewrite with recipes and Ark UI, and it shows.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">React only; v3 deliberately kept Emotion to preserve dynamic styling, so styling still costs at runtime — the zero-runtime path is Panda, which is a different product.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">React B2B SaaS and dashboards where accessibility matters and the styling happens behind a login, so a runtime cost is affordable. Teams that value developer experience and a real token model over raw delivery speed.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">Anything not React. Public, SEO-driven pages where styling at runtime is paid on every first render. A team that specifically needs zero-runtime styling — that road is Panda, which is a different product with a different migration.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Material UI</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> The most complete component set on this page, battle-tested at scale, with data-grid and date tooling that nothing else here matches; v9 is current and actively developed.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> React only; heavy; the Material look resists removal, so bespoke art direction fights the library the whole way; overriding it is the hardest of the seven.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Material UI</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">The most complete component set on this page, battle-tested at scale, with data-grid and date tooling that nothing else here matches; v9 is current and actively developed.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">React only; heavy; the Material look resists removal, so bespoke art direction fights the library the whole way; overriding it is the hardest of the seven.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">Enterprise React applications with a long component tail — scheduling, reporting, back-office CRUD. Teams that would rather buy the data grid than build it, and that can use commercial support. Products where looking like Material is neutral or wanted.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">Brand-led consumer design: you will fight the library from the first screen to the last. Marketing sites and anything measured on load. Small teams, who pay the full weight and use a fraction of it.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <h3 class="atom-title atom-title--h4">Ant Design</h3>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
-                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>For:</strong> Data-dense components — tables, filters, forms — are its reason to exist and it is very good at them; v6 improved CSS-variable support and React 19 compatibility.</span>
-                            </p>
-                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
-                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
-                                    style="transform: translateY(2px);"></span>
-                                <span><strong>Against:</strong> React only; the strongest visual signature of any system here; the heaviest to make look like something else; the largest surface to learn.</span>
-                            </p>
-                        </div>
+                        <article class="mol-compare-card">
+                            <h3 class="atom-title atom-title--h4 mol-compare-card__name">Ant Design</h3>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--pro">
+                                <span class="syx-type-overline mol-compare-card__label">Strengths</span>
+                                <p class="atom-txt syx-mb-0">Data-dense components — tables, filters, forms — are its reason to exist and it is very good at them; v6 improved CSS-variable support and React 19 compatibility.</p>
+                            </div>
+
+                            <div class="mol-compare-card__block mol-compare-card__block--con">
+                                <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
+                                <p class="atom-txt syx-mb-0">React only; the strongest visual signature of any system here; the heaviest to make look like something else; the largest surface to learn.</p>
+                            </div>
+
+                            <div class="mol-compare-card__fit">
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Reach for it when</span>
+                                    <p class="atom-txt syx-mb-0">Data-dense back offices: fintech consoles, logistics and operations panels, internal ERP-style tools where a table with thirty columns, filters and bulk actions is the actual product. Strong fit in the ecosystems where it is already the default.</p>
+                                </div>
+                                <div class="mol-compare-card__block">
+                                    <span class="syx-type-overline syx-text-gray mol-compare-card__label">Choose something else when</span>
+                                    <p class="atom-txt syx-mb-0">Consumer-facing brand work — the visual signature is the strongest here and the most expensive to remove. Public marketing pages. Any team that needs a small bundle or a short learning curve.</p>
+                                </div>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </section>

@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 515,
-      "omitidas": 274,
+      "variables": 518,
+      "omitidas": 277,
       "fueraDeAlcance": {
         "primitive": 234,
         "icon": 17,
@@ -21,7 +21,7 @@
         "layout": 12,
         "theme": 4
       },
-      "componentes": 34
+      "componentes": 38
     }
   },
   "collections": [
@@ -6739,6 +6739,24 @@
           }
         },
         {
+          "name": "component/ranking/medal/icon/size",
+          "type": "FLOAT",
+          "token": "--component-ranking-medal-icon-size",
+          "valuesByMode": {
+            "light": 28,
+            "dark": 28
+          }
+        },
+        {
+          "name": "component/ranking/medal/size",
+          "type": "FLOAT",
+          "token": "--component-ranking-medal-size",
+          "valuesByMode": {
+            "light": 56,
+            "dark": 56
+          }
+        },
+        {
           "name": "component/score/1/bg",
           "type": "COLOR",
           "token": "--component-score-1-bg",
@@ -7081,6 +7099,15 @@
           "hexByMode": {
             "light": "#ffffff",
             "dark": "#ffffff"
+          }
+        },
+        {
+          "name": "component/score/size",
+          "type": "FLOAT",
+          "token": "--component-score-size",
+          "valuesByMode": {
+            "light": 32,
+            "dark": 32
           }
         },
         {
@@ -10667,6 +10694,168 @@
       ]
     },
     {
+      "component": "evidence",
+      "layer": "atom",
+      "figmaName": "atom/evidence",
+      "clases": {
+        "base": [
+          "atom-evidence"
+        ],
+        "modificadores": [
+          "atom-evidence--checkable",
+          "atom-evidence--judged",
+          "atom-evidence--measured",
+          "atom-evidence--new"
+        ],
+        "estados": []
+      },
+      "composedOf": [],
+      "variantes": {
+        "base": 6
+      },
+      "propiedades": [
+        {
+          "token": "--component-score-3-bg",
+          "variable": "component/score/3/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-3-border",
+          "variable": "component/score/3/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.6176,
+              "g": 0.6659,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6176,
+              "g": 0.6659,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-3-color",
+          "variable": "component/score/3/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.4542,
+              "g": 0.4653,
+              "b": 0.772,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-bg",
+          "variable": "component/score/5/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-border",
+          "variable": "component/score/5/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-color",
+          "variable": "component/score/5/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        }
+      ],
+      "sinPropiedad": [],
+      "sinTraducir": [
+        {
+          "token": "--component-evidence-padding",
+          "motivo": "valor no traducible a una variable de Figma"
+        }
+      ]
+    },
+    {
       "component": "feature-icon",
       "layer": "atom",
       "figmaName": "atom/feature-icon",
@@ -12521,6 +12710,380 @@
       ]
     },
     {
+      "component": "score",
+      "layer": "atom",
+      "figmaName": "atom/score",
+      "clases": {
+        "base": [
+          "atom-score"
+        ],
+        "modificadores": [
+          "atom-score--1",
+          "atom-score--2",
+          "atom-score--3",
+          "atom-score--4",
+          "atom-score--5",
+          "atom-score--top"
+        ],
+        "estados": []
+      },
+      "composedOf": [],
+      "variantes": {
+        "1": 3,
+        "2": 3,
+        "3": 3,
+        "4": 3,
+        "5": 3,
+        "base": 1
+      },
+      "propiedades": [
+        {
+          "token": "--component-score-1-bg",
+          "variable": "component/score/1/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "1",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-1-border",
+          "variable": "component/score/1/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "1",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-1-color",
+          "variable": "component/score/1/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "1",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6205,
+              "g": 0.6205,
+              "b": 0.6205,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-2-bg",
+          "variable": "component/score/2/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "2",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.8844,
+              "g": 0.8883,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8844,
+              "g": 0.8883,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-2-border",
+          "variable": "component/score/2/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "2",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-2-color",
+          "variable": "component/score/2/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "2",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.4542,
+              "g": 0.4653,
+              "b": 0.772,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-3-bg",
+          "variable": "component/score/3/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "3",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7831,
+              "g": 0.7975,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-3-border",
+          "variable": "component/score/3/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "3",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.6176,
+              "g": 0.6659,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6176,
+              "g": 0.6659,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-3-color",
+          "variable": "component/score/3/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "3",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.4542,
+              "g": 0.4653,
+              "b": 0.772,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-4-bg",
+          "variable": "component/score/4/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "4",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-4-border",
+          "variable": "component/score/4/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "4",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-4-color",
+          "variable": "component/score/4/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "4",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-bg",
+          "variable": "component/score/5/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "5",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-border",
+          "variable": "component/score/5/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "5",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.2037,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-5-color",
+          "variable": "component/score/5/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "5",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-score-size",
+          "variable": "component/score/size",
+          "propiedad": "width · height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 32,
+            "dark": 32
+          }
+        }
+      ],
+      "sinPropiedad": [],
+      "sinTraducir": []
+    },
+    {
       "component": "stat-counter",
       "layer": "atom",
       "figmaName": "atom/stat",
@@ -13496,6 +14059,26 @@
       ]
     },
     {
+      "component": "compare-card",
+      "layer": "molecule",
+      "figmaName": "mol/compare-card",
+      "clases": {
+        "base": [
+          "mol-compare-card"
+        ],
+        "modificadores": [
+          "mol-compare-card__block--con",
+          "mol-compare-card__block--pro"
+        ],
+        "estados": []
+      },
+      "composedOf": [],
+      "variantes": {},
+      "propiedades": [],
+      "sinPropiedad": [],
+      "sinTraducir": []
+    },
+    {
       "component": "feature-card",
       "layer": "molecule",
       "figmaName": "mol/feature-card",
@@ -13913,6 +14496,83 @@
       ],
       "sinPropiedad": [],
       "sinTraducir": []
+    },
+    {
+      "component": "ranking",
+      "layer": "molecule",
+      "figmaName": "mol/ranking",
+      "clases": {
+        "base": [
+          "mol-ranking"
+        ],
+        "modificadores": [],
+        "estados": []
+      },
+      "composedOf": [
+        "atom-icon"
+      ],
+      "variantes": {
+        "base": 3
+      },
+      "propiedades": [
+        {
+          "token": "--component-ranking-medal-icon-size",
+          "variable": "component/ranking/medal/icon/size",
+          "propiedad": "width · height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 28,
+            "dark": 28
+          }
+        },
+        {
+          "token": "--component-ranking-medal-size",
+          "variable": "component/ranking/medal/size",
+          "propiedad": "width · height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 56,
+            "dark": 56
+          }
+        },
+        {
+          "token": "--component-score-4-bg",
+          "variable": "component/score/4/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5114,
+              "g": 0.5455,
+              "b": 1,
+              "a": 1
+            }
+          }
+        }
+      ],
+      "sinPropiedad": [],
+      "sinTraducir": [
+        {
+          "token": "--component-ranking-columns",
+          "motivo": "valor no traducible a una variable de Figma"
+        },
+        {
+          "token": "--component-ranking-max-offset",
+          "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        }
+      ]
     },
     {
       "component": "theme-swatch-card",
@@ -16430,6 +17090,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-evidence-padding",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
       "token": "--component-feature-card-border-radius",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -16800,6 +17464,14 @@
     {
       "token": "--component-radio-transition-duration",
       "motivo": "duración: Figma no guarda tiempo en variables"
+    },
+    {
+      "token": "--component-ranking-columns",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-ranking-max-offset",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
     },
     {
       "token": "--component-section-index-font",

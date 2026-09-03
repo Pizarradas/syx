@@ -1,0 +1,80 @@
+// ATOM: SCORE
+// ===============================================
+// Una puntuación de 1 a 5 dentro de una casilla.
+//
+// POR QUÉ EXISTE ESTE FICHERO Y NO EXISTÍA ANTES
+// Los quince tokens `--component-score-*` llevaban en
+// `abstracts/tokens/components/_sections.scss` desde hace versiones, pero las
+// reglas que los gastaban vivían en un `<style>` dentro de why-syx.html. Era un
+// componente a medio construir: la mitad de arriba en la arquitectura y la
+// mitad de abajo en una página. Cualquiera que cambiara un token no tenía forma
+// de saber quién lo pintaba, y `scan_for_drift` no podía verlo porque el CSS no
+// estaba en el sistema.
+//
+// LA ESCALA SE LEE POR INTENSIDAD, NO POR COLOR
+// Un solo tono que sube en saturación y baja en luminosidad de punta a punta.
+// Funciona en escala de grises y con cualquier daltonismo, y ordena sin que
+// haya que aprenderse una leyenda. Los tres peldaños claros llevan tinta; los
+// dos oscuros, blanco. El reparto está en los tokens, no aquí.
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-score($theme: null) {
+  @layer syx.atoms {
+    .atom-score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--component-score-size);
+      height: var(--component-score-size);
+      border: var(--semantic-border-width-thin) solid var(--semantic-color-border-default);
+      border-radius: var(--semantic-border-radius-sm);
+      font-family: var(--semantic-font-family-mono);
+      font-weight: var(--semantic-font-weight-bold);
+
+      // Sin esto los dígitos bailan de fila en fila y una columna de números
+      // deja de leerse como una columna.
+      font-variant-numeric: tabular-nums;
+
+      // Los cinco peldaños. Van del 1 al 5 y no al revés a propósito: el número
+      // que se ve es el mismo que el modificador que se escribe.
+      &--1 {
+        background-color: var(--component-score-1-bg);
+        border-color: var(--component-score-1-border);
+        color: var(--component-score-1-color);
+      }
+
+      &--2 {
+        background-color: var(--component-score-2-bg);
+        border-color: var(--component-score-2-border);
+        color: var(--component-score-2-color);
+      }
+
+      &--3 {
+        background-color: var(--component-score-3-bg);
+        border-color: var(--component-score-3-border);
+        color: var(--component-score-3-color);
+      }
+
+      &--4 {
+        background-color: var(--component-score-4-bg);
+        border-color: var(--component-score-4-border);
+        color: var(--component-score-4-color);
+      }
+
+      &--5 {
+        background-color: var(--component-score-5-bg);
+        border-color: var(--component-score-5-border);
+        color: var(--component-score-5-color);
+      }
+
+      // El máximo de una fila. Se marca con trazo y sombra además del color,
+      // para que siga distinguiéndose sin él.
+      &--top {
+        border-width: var(--semantic-border-width-default);
+        border-color: var(--semantic-color-success);
+        box-shadow: var(--semantic-shadow-hard-sm);
+      }
+    }
+  } // end @layer syx.atoms
+}

@@ -1,0 +1,88 @@
+// MOLECULE: COMPARE CARD
+// ===============================================
+// Una ficha por sistema comparado: qué hace bien, qué hace mal, y —lo que de
+// verdad decide una elección— a quién le encaja y a quién no.
+//
+// EL FALLO QUE CORRIGE
+// La primera versión de esto no tenía tarjeta: era un título suelto, dos
+// párrafos de color y, al final, una caja con borde. La caja se leía como si
+// fuera la tarjeta y el título quedaba flotando fuera de ella. Y como el
+// contenedor real no tenía borde, nadie veía que las columnas YA se estiraban a
+// la misma altura: la ficha corta parecía terminar antes y dejar un agujero,
+// cuando lo que faltaba era el borde que lo explicara.
+//
+// POR QUÉ EL COLOR NO PINTA LOS PÁRRAFOS
+// Porque medio contenido en verde y medio en rojo se lee como una alarma, y no
+// lo es: es la mitad de una ficha. Se midió antes de cambiarlo — `success` da
+// 5,68:1 y `error` 6,11:1 sobre este fondo en claro, 9,13:1 y 6,47:1 en oscuro,
+// así que AA no era el problema. El acento pasa al borde lateral y a la
+// etiqueta; el cuerpo va en color de texto normal, que es el que se lee.
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-compare-card($theme: null) {
+  @layer syx.molecules {
+    .mol-compare-card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: var(--semantic-space-component-lg);
+      border: var(--semantic-border-width-thin) solid var(--semantic-color-border-default);
+      border-radius: var(--semantic-border-radius-lg);
+      background: var(--semantic-color-bg-primary);
+
+      &__name {
+        padding-bottom: var(--semantic-space-stack-sm);
+        margin-bottom: var(--semantic-space-stack-md);
+        border-bottom: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+      }
+
+      &__block {
+        margin-bottom: var(--semantic-space-stack-md);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        // El acento va en el borde, no en el texto.
+        &--pro,
+        &--con {
+          padding-left: var(--semantic-space-inline-md);
+          border-left: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+        }
+
+        &--pro {
+          border-left-color: var(--semantic-color-success);
+
+          > .mol-compare-card__label {
+            color: var(--semantic-color-success);
+          }
+        }
+
+        &--con {
+          border-left-color: var(--semantic-color-error);
+
+          > .mol-compare-card__label {
+            color: var(--semantic-color-error);
+          }
+        }
+      }
+
+      &__label {
+        display: block;
+        margin-bottom: var(--semantic-space-stack-xs);
+      }
+
+      // Qué es y para quién son dos preguntas distintas, así que se separan.
+      // `margin-top: auto` manda esta mitad al pie: en una fila de dos, el
+      // encaje de ambas fichas queda alineado aunque los pros y contras midan
+      // distinto, y el hueco sobrante cae en medio, donde parece aire y no un
+      // error de maquetación.
+      &__fit {
+        margin-top: auto;
+        padding-top: var(--semantic-space-stack-md);
+        border-top: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+      }
+    }
+  } // end @layer syx.molecules
+}

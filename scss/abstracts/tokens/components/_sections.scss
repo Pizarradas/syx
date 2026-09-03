@@ -267,6 +267,19 @@
   // color. En claro va de casi-blanco a azul intenso; en oscuro hay que
   // INVERTIR la rampa, porque sobre fondo navy lo intenso es lo claro.
   // Si no, el 1 sería el que más brilla y la escala se leería al revés.
+  // Lado de la casilla. Estaba a pelo en la hoja de why-syx.html mientras los
+  // quince colores de abajo ya vivían aquí: media escala en la arquitectura y
+  // media en una página.
+  // Fija a propósito, no fluida: la casilla es cuadrada y lleva un solo dígito,
+  // así que crecer con el viewport solo la desalinearía de su fila.
+  --component-score-size: 2rem;
+  --component-ranking-max-offset: 0.35em;
+  --component-ranking-medal-icon-size: 1.75rem;
+  --component-ranking-medal-size: 3.5rem;
+  // Rejilla de una fila de clasificación: posición · nombre · barra · puntos.
+  // En ch y no en px a propósito — el ancho lo marca el texto que entra, así
+  // que ningún nombre se parte en dos líneas al cambiar la tipografía.
+  --component-ranking-columns: 2.5ch minmax(11ch, 14ch) 1fr auto;
   --component-score-1-bg: var(--semantic-color-bg-primary);
   --component-score-1-color: var(--semantic-color-text-tertiary);
   --component-score-1-border: var(--semantic-color-border-default);

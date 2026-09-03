@@ -1,0 +1,130 @@
+// MOLECULE: RANKING
+// ===============================================
+// Una clasificación: la tarjeta del primero y la lista de los demás con su
+// barra.
+//
+// QUÉ APRENDIÓ ESTE COMPONENTE ANTES DE SER UNO
+// Vivía en un `<style>` de why-syx.html y arrastró tres averías que solo se
+// ven ejecutando, no leyendo:
+//   · las barras se coloreaban con seis tonos distintos para ordenar seis filas
+//     que YA venían ordenadas por su longitud. El color repetía la información
+//     en vez de añadirla — y encima con la escala arcoíris que la propia página
+//     explica por qué se abandona. Ahora todas comparten tono y solo cambia lo
+//     que de verdad mide algo, que es cuánto ocupan;
+//   · uno de esos tonos citaba `--primitive-color-orange-500`, que no existe en
+//     ningún tema, así que una barra llevaba meses sin pintarse. Aquí no puede
+//     repetirse: R01 impide que un componente lea un primitivo;
+//   · los anchos iban en píxeles y partían los nombres en dos líneas
+//     («Bootstra / p»). Van en `ch`, así que el ancho lo marca el texto que
+//     entra y nada se rompe al cambiar de tipografía o de tamaño base.
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-ranking($theme: null) {
+  @layer syx.molecules {
+    .mol-ranking {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      // Una fila: posición · nombre · barra · puntos.
+      &__row {
+        display: grid;
+        grid-template-columns: var(--component-ranking-columns);
+        align-items: center;
+        gap: var(--semantic-space-inline-md);
+        padding: var(--semantic-space-stack-sm) 0;
+        border-bottom: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      &__pos {
+        font-family: var(--semantic-font-family-mono);
+        font-variant-numeric: tabular-nums;
+        color: var(--semantic-color-text-tertiary);
+        text-align: right;
+      }
+
+      &__name {
+        font-weight: var(--semantic-font-weight-bold);
+        white-space: nowrap;
+      }
+
+      &__bar {
+        display: block;
+        height: var(--semantic-space-stack-sm);
+        background: var(--semantic-color-bg-secondary);
+        border: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+        border-radius: var(--semantic-border-radius-full);
+        overflow: hidden;
+      }
+
+      &__fill {
+        display: block;
+        height: 100%;
+        background: var(--component-score-4-bg);
+        border-radius: inherit;
+      }
+
+      &__pts {
+        font-family: var(--semantic-font-family-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: var(--semantic-font-size-body-small);
+        color: var(--semantic-color-text-secondary);
+        white-space: nowrap;
+      }
+
+      // El primero, en tarjeta aparte.
+      &__winner {
+        border: var(--semantic-border-width-default) solid var(--semantic-color-primary);
+        border-radius: var(--semantic-border-radius-lg);
+        padding: var(--semantic-space-component-lg);
+        text-align: center;
+        height: 100%;
+      }
+
+      &__medal {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--component-ranking-medal-size);
+        height: var(--component-ranking-medal-size);
+        border-radius: var(--semantic-border-radius-full);
+        background: var(--semantic-color-primary);
+        color: var(--semantic-color-primary-text);
+        margin-bottom: var(--semantic-space-stack-sm);
+
+        .atom-icon {
+          width: var(--component-ranking-medal-icon-size);
+          height: var(--component-ranking-medal-icon-size);
+        }
+      }
+
+      &__rank {
+        color: var(--semantic-color-text-tertiary);
+        margin-bottom: var(--semantic-space-stack-xs);
+      }
+
+      &__score {
+        font-family: var(--semantic-font-family-heading);
+        font-size: var(--semantic-font-size-h1);
+        font-weight: var(--semantic-font-weight-bold);
+        font-variant-numeric: tabular-nums;
+        line-height: var(--semantic-line-height-tight);
+        color: var(--semantic-color-primary);
+        margin: 0 0 var(--semantic-space-stack-md);
+      }
+
+      &__max {
+        font-family: var(--semantic-font-family-mono);
+        font-size: var(--semantic-font-size-body-small);
+        font-weight: var(--semantic-font-weight-regular);
+        color: var(--semantic-color-text-tertiary);
+        margin-left: var(--component-ranking-max-offset);
+      }
+    }
+  } // end @layer syx.molecules
+}

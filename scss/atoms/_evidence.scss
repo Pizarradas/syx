@@ -1,0 +1,66 @@
+// ATOM: EVIDENCE
+// ===============================================
+// La etiqueta que dice de qué está hecha una afirmación: medida, comprobable o
+// juicio.
+//
+// POR QUÉ ES UN ÁTOMO Y NO UNA PÍLDORA MÁS
+// `atom-pill` sirve para nombrar una cosa —una categoría, un estado, un tema—.
+// Esto nombra otra: la PROCEDENCIA de un dato, que es lo único que separa un
+// número de una opinión en una tabla comparativa. Y no se distingue solo por
+// color: `--judged` va con trazo discontinuo y `--new` con punteado, para que
+// las tres sigan diferenciándose en escala de grises y con cualquier
+// daltonismo. Una píldora con ocho modificadores de color no puede decir eso.
+//
+// Nace de why-syx.html, donde se usa 34 veces, pero el problema que resuelve es
+// de cualquier documento que mezcle medición y criterio — un informe de AUDIT,
+// por ejemplo.
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-evidence($theme: null) {
+  @layer syx.atoms {
+    .atom-evidence {
+      display: inline-block;
+      padding: var(--component-evidence-padding);
+      border: var(--semantic-border-width-thin) solid var(--semantic-color-border-default);
+      border-radius: var(--semantic-border-radius-sm);
+      font-family: var(--semantic-font-family-mono);
+      font-size: var(--semantic-font-size-caption);
+      line-height: var(--semantic-line-height-caption);
+      color: var(--semantic-color-text-secondary);
+
+      // Nunca parte en dos: la etiqueta es una unidad de lectura y una celda
+      // estrecha la rompería justo por la mitad de la palabra.
+      white-space: nowrap;
+
+      // Medido: sale de ejecutar algo. Es el peldaño más fuerte, y lleva el
+      // mismo relleno que el 5 de la escala de puntuación a propósito — en esta
+      // página las dos cosas significan «lo más sólido que hay aquí».
+      &--measured {
+        background-color: var(--component-score-5-bg);
+        border-color: var(--component-score-5-border);
+        color: var(--component-score-5-color);
+      }
+
+      // Comprobable: es público y se verifica abriendo la documentación ajena.
+      &--checkable {
+        background-color: var(--component-score-3-bg);
+        border-color: var(--component-score-3-border);
+        color: var(--component-score-3-color);
+      }
+
+      // Juicio: no se comprueba, se discute. El trazo discontinuo es la señal,
+      // y funciona sin color.
+      &--judged {
+        border-style: dashed;
+      }
+
+      // Criterio añadido en una revisión posterior.
+      &--new {
+        border-style: dotted;
+        text-transform: uppercase;
+        letter-spacing: var(--semantic-letter-spacing-wide);
+      }
+    }
+  } // end @layer syx.atoms
+}

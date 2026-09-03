@@ -16,4 +16,8 @@
   --component-label-font-size: var(--semantic-font-size-body-small);
   --component-label-line-height: var(--semantic-line-height-normal);
   --component-label-group-gap: 0.5rem;
+  // Etiqueta de procedencia (atom-evidence). En em y no en rem: el relleno
+  // acompaña al tamaño de letra de la etiqueta, que es más pequeño que el
+  // del cuerpo.
+  --component-evidence-padding: 0.1em 0.5em;
 }

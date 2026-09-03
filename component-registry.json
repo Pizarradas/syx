@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "4.28.0",
-    "generated": "2026-08-31",
+    "generated": "2026-09-03",
     "generator": "scripts/build-component-registry.js",
     "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
@@ -227,6 +227,36 @@
       ],
       "description": "[scope: domain-reusable] Code shown as content, on its own dark surface that ignores the page theme so a dark brand colour cannot make the syntax invisible. --inline for a fragment inside a sentence. The __tag/__attr/__val/__cls/__cmt elements are the syntax roles; nothing else colours code. Use in technical and documentation products, not as a generic panel.",
       "usage": "<pre class=\"atom-code\"><code>&lt;<span class=\"atom-code__tag\">button</span> <span class=\"atom-code__attr\">class</span>=<span class=\"atom-code__val\">\"atom-btn\"</span>&gt;</code></pre>"
+    },
+    {
+      "name": "evidence",
+      "layer": "atom",
+      "file": "scss/atoms/_evidence.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_labels.scss",
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "atom-evidence"
+      ],
+      "modifiers": [
+        "atom-evidence--checkable",
+        "atom-evidence--judged",
+        "atom-evidence--measured",
+        "atom-evidence--new"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-evidence-padding",
+        "--component-score-3-bg",
+        "--component-score-3-border",
+        "--component-score-3-color",
+        "--component-score-5-bg",
+        "--component-score-5-border",
+        "--component-score-5-color"
+      ]
     },
     {
       "name": "feature-icon",
@@ -664,6 +694,46 @@
       "usage": "<label class=\"atom-radio\"><input class=\"atom-radio__input\" type=\"radio\" name=\"theme\" value=\"dark\"><span class=\"atom-radio__label\">Dark</span></label>"
     },
     {
+      "name": "score",
+      "layer": "atom",
+      "file": "scss/atoms/_score.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "atom-score"
+      ],
+      "modifiers": [
+        "atom-score--1",
+        "atom-score--2",
+        "atom-score--3",
+        "atom-score--4",
+        "atom-score--5",
+        "atom-score--top"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-score-1-bg",
+        "--component-score-1-border",
+        "--component-score-1-color",
+        "--component-score-2-bg",
+        "--component-score-2-border",
+        "--component-score-2-color",
+        "--component-score-3-bg",
+        "--component-score-3-border",
+        "--component-score-3-color",
+        "--component-score-4-bg",
+        "--component-score-4-border",
+        "--component-score-4-color",
+        "--component-score-5-bg",
+        "--component-score-5-border",
+        "--component-score-5-color",
+        "--component-score-size"
+      ]
+    },
+    {
       "name": "stat-counter",
       "layer": "atom",
       "file": "scss/atoms/_stat-counter.scss",
@@ -899,6 +969,28 @@
       "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\"><code>color: var(--semantic-color-text-primary);</code></pre></div>"
     },
     {
+      "name": "compare-card",
+      "layer": "molecule",
+      "file": "scss/molecules/_compare-card.scss",
+      "tokenFiles": [],
+      "classes": [
+        "mol-compare-card"
+      ],
+      "modifiers": [
+        "mol-compare-card__block--con",
+        "mol-compare-card__block--pro"
+      ],
+      "elements": [
+        "mol-compare-card__block",
+        "mol-compare-card__fit",
+        "mol-compare-card__label",
+        "mol-compare-card__name"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": []
+    },
+    {
       "name": "feature-card",
       "layer": "molecule",
       "file": "scss/molecules/_feature-card.scss",
@@ -1021,6 +1113,42 @@
       ],
       "description": "[scope: system-reusable] Row of labels or pills sharing one gap, wrapping when it must. Use it for a tag list or a set of markers on one line. .cont-set-label is a deprecated alias.",
       "usage": "<div class=\"mol-label-group\"><span class=\"atom-pill atom-pill--neutral\">SCSS</span><span class=\"atom-pill atom-pill--neutral\">Tokens</span></div>"
+    },
+    {
+      "name": "ranking",
+      "layer": "molecule",
+      "file": "scss/molecules/_ranking.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_sections.scss"
+      ],
+      "classes": [
+        "mol-ranking"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-ranking__bar",
+        "mol-ranking__fill",
+        "mol-ranking__max",
+        "mol-ranking__medal",
+        "mol-ranking__name",
+        "mol-ranking__pos",
+        "mol-ranking__pts",
+        "mol-ranking__rank",
+        "mol-ranking__row",
+        "mol-ranking__score",
+        "mol-ranking__winner"
+      ],
+      "states": [],
+      "composedOf": [
+        "atom-icon"
+      ],
+      "tokens": [
+        "--component-ranking-columns",
+        "--component-ranking-max-offset",
+        "--component-ranking-medal-icon-size",
+        "--component-ranking-medal-size",
+        "--component-score-4-bg"
+      ]
     },
     {
       "name": "theme-swatch-card",
