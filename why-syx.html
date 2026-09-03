@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary meta -->
-    <title>SYX Design System — Why SYX: Competitive Analysis</title>
+    <title>SYX Design System — Why SYX: A Measured Comparison</title>
     <meta name="description"
-        content="An honest, expert-driven competitive analysis of SYX vs Tailwind CSS, Material UI, Chakra UI, and Ant Design across 7 key disciplines and enterprise sectors.">
+        content="A self-assessment of SYX against Shadcn UI, Tailwind CSS, Chakra UI, Bootstrap, Material UI and Ant Design across 14 criteria, separating measured facts from checkable facts from opinion. SYX comes second overall.">
     <meta name="author" content="José Luis Pizarro">
     <meta name="keywords"
         content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, Tailwind CSS, Material UI, Chakra UI, Ant Design">
@@ -18,14 +18,14 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="SYX Design System">
-    <meta property="og:title" content="SYX Design System — Why SYX: Competitive Analysis">
-    <meta property="og:description" content="Honest expert committee analysis of SYX versus the top competitors.">
+    <meta property="og:title" content="SYX Design System — Why SYX: A Measured Comparison">
+    <meta property="og:description" content="Written by the author of SYX. Measured, checkable and judged claims kept apart. SYX comes second overall.">
     <meta property="og:url" content="https://github.com/Pizarradas/syx">
 
     <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SYX Design System — Why SYX: Competitive Analysis">
-    <meta name="twitter:description" content="Honest expert committee analysis of SYX versus the top competitors.">
+    <meta name="twitter:title" content="SYX Design System — Why SYX: A Measured Comparison">
+    <meta name="twitter:description" content="Written by the author of SYX. Measured, checkable and judged claims kept apart. SYX comes second overall.">
     <meta name="twitter:creator" content="@Pizarradas">
 
     <!-- Theme color (mobile browser chrome) -->
@@ -227,6 +227,43 @@
             border: 2px solid var(--primitive-color-green-500);
             box-shadow: var(--semantic-shadow-hard-sm);
         }
+        /* ── ETIQUETA DE EVIDENCIA ──────────────────────────────────────
+           Dice de qué está hecha cada afirmación: medida, comprobable o
+           juicio. No es decoración — es lo que separa un dato de una
+           opinión, y sin ella la tabla entera se lee como si todo fuera lo
+           mismo. Se distinguen por texto y por borde, no solo por color:
+           en escala de grises las tres siguen siendo legibles. */
+        .ev {
+            display: inline-block;
+            font-family: var(--semantic-font-family-mono);
+            font-size: var(--semantic-font-size-caption);
+            line-height: 1.4;
+            padding: 0.1em 0.5em;
+            border: 1px solid var(--semantic-color-border-default);
+            border-radius: var(--semantic-border-radius-sm);
+            white-space: nowrap;
+            color: var(--semantic-color-text-secondary);
+        }
+
+        .ev--m {
+            border-color: var(--component-score-5-border);
+            background: var(--component-score-5-bg);
+            color: var(--component-score-5-color);
+        }
+
+        .ev--c {
+            border-color: var(--component-score-3-border);
+            background: var(--component-score-3-bg);
+            color: var(--component-score-3-color);
+        }
+
+        .ev--j { border-style: dashed; }
+
+        .ev--new {
+            border-style: dotted;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
     </style>
 </head>
 
@@ -342,50 +379,342 @@
 
             <!-- ─── HERO ─── -->
             <section class="syx-mb-5">
-                <h1 class="atom-title atom-title--h1 syx-mb-2">Why SYX: A Critical Analysis</h1>
-                <p class="atom-txt atom-txt--primary">
-                    An honest, direct comparative analysis between <strong>SYX, Tailwind CSS, Shadcn UI, Material UI,
-                        Chakra UI, Ant Design, and Bootstrap</strong>. Valued by a committee of experts across 11
-                    disciplines to reveal true strengths and weaknesses.
+                <h1 class="atom-title atom-title--h1 syx-mb-2">Why SYX: A Measured Comparison</h1>
+                <p class="atom-txt atom-txt--primary syx-mb-3">
+                    A comparison of <strong>SYX against Shadcn UI, Tailwind CSS, Chakra UI, Bootstrap, Material UI and
+                        Ant Design</strong> across fourteen criteria. Every number about SYX on this page is produced by
+                    a command you can run; every claim about the other six is a fact you can check in a minute; every
+                    opinion is labelled as one.
+                </p>
+                <p class="atom-txt syx-text-gray syx-mb-0">
+                    <strong>SYX does not win the overall total.</strong> It comes second. Where it wins, and where it
+                    loses badly, is below.
                 </p>
             </section>
 
             <!-- ══════════════════════════════════════════
-           COMMITTEE EVALUATION
+           METHOD
       ══════════════════════════════════════════ -->
-            <section id="committee" aria-labelledby="committee-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-4" id="committee-heading">Expert Committee Evaluation</h2>
-                <p class="atom-txt syx-mb-4">
-                    Each system was evaluated on a scale from <strong>1 (Poor) to 5 (Excellent)</strong> across eleven
-                    critical disciplines in frontend engineering, design, AI operability, and operations.
-                </p>
+            <section id="method" aria-labelledby="method-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="method-heading">How to read this page</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">The method comes first because without it the numbers below
+                    are decoration.</p>
 
-                <div class="syx-mb-4" style="background: var(--semantic-color-bg-secondary);">
-                    <p class="atom-txt syx-mb-1" style="font-size: 0.85rem;">
-                        <strong>Analysis conducted:</strong> April 2026 &nbsp;·&nbsp;
-                        <strong>Versions evaluated:</strong>
-                        SYX v4.2.0 &nbsp;·&nbsp;
-                        Tailwind CSS v4 &nbsp;·&nbsp;
-                        Shadcn UI (2025) &nbsp;·&nbsp;
-                        Chakra UI v3 &nbsp;·&nbsp;
-                        Bootstrap v5 &nbsp;·&nbsp;
-                        Material UI v6 &nbsp;·&nbsp;
-                        Ant Design v5
-                    </p>
-                    <p class="atom-txt syx-mb-0" style="font-size: 0.8rem; color: var(--semantic-color-text-secondary);">
-                        Scores reflect each system's capabilities at the versions listed — this is a dated
-                        snapshot, not a live ranking. Since April 2026, Material UI has shipped v9 and Ant Design
-                        v6; neither was re-evaluated here, and both may score differently today. Tailwind CSS v4
-                        and Bootstrap v5 are still the current majors.
-                    </p>
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">Conflict of interest, stated up front</p>
+                    <p class="atom-txt syx-mb-0">This page is written by the author of SYX. It is a
+                        <strong>self-assessment, not an independent review</strong>, and no committee, panel or
+                        interview produced it. An earlier version of this page presented seven quotations attributed to
+                        job titles — &ldquo;Lead Frontend Engineer&rdquo;, &ldquo;VP of Engineering&rdquo; and so on.
+                        Those people did not exist and the quotes were written here. They have been removed, and what
+                        replaced them is the rubric that was missing: the criteria each score was given against, so you
+                        can disagree with the standard instead of guessing at it.</p>
                 </div>
 
-                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-4 syx-overflow-auto">
-                    <table class="atom-table" style="min-width: 1200px; text-align: center;">
+                <p class="atom-txt syx-mb-3">Every row in the tables carries one of three labels. They are not
+                    decoration either — they say how much weight a claim can bear:</p>
+
+                <div class="syx-mb-4" style="overflow-x:auto">
+                    <table class="atom-table" style="min-width:680px">
                         <thead>
                             <tr>
-                                <th style="text-align: left;">Discipline / Variable</th>
-                                <th>Criteria Evaluated</th>
+                                <th>Label</th>
+                                <th>What it means</th>
+                                <th>How you check it</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td>A number produced by running something against this repository</td>
+                                <td>The command is printed next to it. Run it.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td>A fact about a system that is public and unambiguous — licence, current major,
+                                    whether it requires a JS framework, whether it ships runtime JS</td>
+                                <td>Open the project's own documentation. Sources listed at the foot of this page.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td>An opinion. Informed, argued, and still an opinion</td>
+                                <td>You can't. Read the rubric and disagree with it if you do.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+                    <p class="atom-txt syx-mb-1" style="font-size:0.85rem">
+                        <strong>Re-measured:</strong> September 2026 &nbsp;·&nbsp;
+                        <strong>Versions:</strong>
+                        SYX v4.28.0 &nbsp;·&nbsp; Shadcn UI (2026 registry) &nbsp;·&nbsp; Tailwind CSS 4.3 &nbsp;·&nbsp;
+                        Chakra UI 3.36 &nbsp;·&nbsp; Bootstrap 5.3.8 &nbsp;·&nbsp; Material UI 9 &nbsp;·&nbsp;
+                        Ant Design 6
+                    </p>
+                    <p class="atom-txt syx-mb-0" style="font-size:0.8rem;color:var(--semantic-color-text-secondary)">
+                        The previous version of this page scored SYX v4.2.0 against Material UI v6 and Ant Design v5 in
+                        April 2026, and kept those scores after both shipped a new major. That is fixed here: MUI v9 and
+                        Ant Design v6 are scored, and three criteria were added. Scores are a dated snapshot, not a live
+                        ranking.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           MEASURED FACTS
+      ══════════════════════════════════════════ -->
+            <section id="measured" aria-labelledby="measured-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="measured-heading">Measured: what SYX actually is</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">Nothing in this table is an estimate or a round number.
+                    Each row names the command that produces it, against SYX v4.28.0.</p>
+
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-4 syx-overflow-auto">
+                    <table class="atom-table" style="min-width:820px">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">Claim</th>
+                                <th style="text-align:left">Measurement</th>
+                                <th style="text-align:left">Where it comes from</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:left">Weight of a theme bundle</td>
+                                <td style="text-align:left"><strong>41.6 – 49.1 kB gzipped</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">256–341 kB
+                                        raw · 33.3–37.4 kB brotli · 7 themes</span></td>
+                                <td style="text-align:left"><code>gzip -9</code> over <code>css/styles-theme-*.css</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Runtime dependencies</td>
+                                <td style="text-align:left"><strong>0</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">0 peer
+                                        dependencies · 7 devDependencies, none shipped</span></td>
+                                <td style="text-align:left"><code>package.json</code> → <code>dependencies: {}</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Client-side JavaScript in the package</td>
+                                <td style="text-align:left"><strong>0 bytes</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">the JS that
+                                        ships is Node tooling — the MCP server and the validators. This documentation
+                                        site loads 9.5 kB of its own, which is the site's, not the system's</span></td>
+                                <td style="text-align:left"><code>package.json</code> → <code>files[]</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><code>!important</code> in shipped CSS</td>
+                                <td style="text-align:left"><strong>0</strong> — across all 7 themes</td>
+                                <td style="text-align:left"><code>npm run validate</code> (rule R02)</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Cascade control</td>
+                                <td style="text-align:left"><strong>7 named layers</strong>, 49 <code>@layer</code>
+                                    blocks<br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">reset ·
+                                        base · tokens · atoms · molecules · organisms · utilities</span></td>
+                                <td style="text-align:left"><code>css/styles-theme-syx-sketch.css</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Component inventory</td>
+                                <td style="text-align:left"><strong>34</strong> — 19 atoms, 7 molecules, 8 organisms</td>
+                                <td style="text-align:left"><code>component-registry.json</code>, generated from source
+                                    and arbitrated against the compiled CSS</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Tokens per theme</td>
+                                <td style="text-align:left"><strong>1,082</strong> — 233 primitive, 166 semantic, 624
+                                    component, 59 other</td>
+                                <td style="text-align:left"><code>contracts/resolved-tokens.json</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Source size</td>
+                                <td style="text-align:left"><strong>178 SCSS files · 17,238 lines</strong></td>
+                                <td style="text-align:left"><code>scss/</code></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Agentic surface</td>
+                                <td style="text-align:left"><strong>11 MCP tools · 9 modes · 5 workflows · 16
+                                        guards</strong></td>
+                                <td style="text-align:left"><code>scripts/mcp-server.js</code>, <code>_agents/</code>,
+                                    <code>package.json</code> scripts</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Contrast, reference theme</td>
+                                <td style="text-align:left"><strong>14 / 14 text pairs pass WCAG AA</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">worst case
+                                        6.76:1 · <code>syx-sketch</code>, light and dark</span></td>
+                                <td style="text-align:left">WCAG 2.1 relative luminance over the resolved tokens</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Contrast, the six demo themes</td>
+                                <td style="text-align:left"><strong>45 / 84 pass — 39 failures</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">worst case
+                                        1.14:1, white on near-white</span></td>
+                                <td style="text-align:left">Same measurement. See <a href="#loses">Where SYX
+                                        loses</a>.</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">Browser floor</td>
+                                <td style="text-align:left"><strong>Chrome 119 · Safari 16.4 · Firefox 128</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">set by 6
+                                        uses of relative colour <code>oklch(from …)</code>; without those it would be
+                                        Chrome 111 / Safari 16.2</span></td>
+                                <td style="text-align:left">Feature scan of the compiled CSS</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+                    <p class="atom-txt syx-mb-0"><strong>What is deliberately absent.</strong> There are no kilobyte
+                        figures for the other six systems on this page. A bundle size for Tailwind, MUI or Ant Design
+                        depends entirely on what you import and how you build, so any single number would be a number
+                        chosen to win. The size comparison that <em>is</em> fair — does the system require a JavaScript
+                        runtime at all — is criterion 7, and it is scored, not invented.</p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           RUBRIC
+      ══════════════════════════════════════════ -->
+            <section id="rubric" aria-labelledby="rubric-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="rubric-heading">The fourteen criteria</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">Three criteria are new: <strong>ecosystem &amp;
+                        support</strong>, <strong>interactive behaviour</strong> and <strong>browser floor</strong>.
+                    They were added because SYX scores 1, 1 and 2 on them, and a comparison whose author only measured
+                    what he wins is not a comparison. Each row says what a 5 and a 1 mean, so the score can be argued
+                    with.</p>
+
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-0 syx-overflow-auto">
+                    <table class="atom-table" style="min-width:880px">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">Criterion</th>
+                                <th style="text-align:left">Evidence</th>
+                                <th style="text-align:left">5 means</th>
+                                <th style="text-align:left">1 means</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:left"><strong>1. Frontend architecture</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">Explicit cascade control, no specificity hacks in shipped
+                                    output, dependency count near zero</td>
+                                <td style="text-align:left">Specificity managed by ordering and luck; deep dependency
+                                    tree</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>2. Agnosticism &amp; integration</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td style="text-align:left">Drops into any HTML from any language with a stylesheet
+                                    link</td>
+                                <td style="text-align:left">Requires one specific JS framework to render anything</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>3. Styling architecture</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td style="text-align:left">Multi-tier token system, themable without touching component
+                                    code, dark mode as a first-class dimension</td>
+                                <td style="text-align:left">Hard-coded values, theming by overriding</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>4. Ready-made UI</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td style="text-align:left">Data grids, date pickers, comboboxes, the long tail — all
+                                    present</td>
+                                <td style="text-align:left">Primitives only; anything complex is yours to build</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>5. Art direction</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td style="text-align:left">No default look survives customisation; the system does not
+                                    sign the design</td>
+                                <td style="text-align:left">Recognisable at a glance as that library</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>6. Technical debt</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td style="text-align:left">Upgrades are not forced by someone else's release cycle;
+                                    no transitive vulnerability surface</td>
+                                <td style="text-align:left">Majors break the UI layer; upgrades are projects</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>7. Performance &amp; SEO</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">Renders with zero JavaScript; server-rendered HTML is the
+                                    normal case, not a mode</td>
+                                <td style="text-align:left">Styling requires a JS runtime at render time</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>8. Accessibility</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">Accessible behaviour ships with the components, contrast is
+                                    enforced by a guard, not by care</td>
+                                <td style="text-align:left">Accessibility is entirely the consumer's problem</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>9. Override friction</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">Your CSS wins by design, without escalating specificity</td>
+                                <td style="text-align:left"><code>!important</code> is the documented answer</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>10. Learning curve</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td style="text-align:left">A competent developer ships something correct on day one</td>
+                                <td style="text-align:left">Weeks before output stops fighting the system</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>11. AI-native workflow</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">An agent can query the system, be refused by it, and be told
+                                    what to write instead — machine-checked</td>
+                                <td style="text-align:left">An agent reads documentation and guesses</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>12. Ecosystem &amp; support</strong> <span
+                                        class="ev ev--new">new</span></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td style="text-align:left">Large contributor base, answers findable, people to hire who
+                                    already know it</td>
+                                <td style="text-align:left">One maintainer. If they stop, it stops.</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>13. Interactive behaviour</strong> <span
+                                        class="ev ev--new">new</span></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td style="text-align:left">Modals, dropdowns, focus traps and keyboard handling ship
+                                    working</td>
+                                <td style="text-align:left">Ships appearance only; every behaviour is yours to write</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>14. Browser floor</strong> <span
+                                        class="ev ev--new">new</span></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td style="text-align:left">Works on browsers several years old without a build step
+                                    that back-ports</td>
+                                <td style="text-align:left">Requires the newest engines to render correctly</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           SCORE MATRIX
+      ══════════════════════════════════════════ -->
+            <section id="committee" aria-labelledby="committee-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="committee-heading">The scores</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">1 (poor) to 5 (excellent) against the rubric above. The
+                    outlined cell is the highest score in that row.</p>
+
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-4 syx-overflow-auto">
+                    <table class="atom-table" style="min-width:1200px;text-align:center">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">Criterion</th>
+                                <th>Evidence</th>
                                 <th>SYX</th>
                                 <th>Shadcn UI</th>
                                 <th>Tailwind</th>
@@ -397,299 +726,677 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="text-align: left;"><strong>1. Frontend Architecture</strong></td>
-                                <td>DX, Build size, CSS Layers</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td style="text-align:left"><strong>1. Frontend architecture</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;"><strong>2. Agnosticism & Integration</strong></td>
-                                <td>Framework lock-in, Legacy tech</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;"><strong>3. Styling Architecture</strong></td>
-                                <td>Theming engine, Tokens</td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>4. Pre-built UI UX</strong></td>
-                                <td>Widgets, Out-of-the-box</td>
+                                <td style="text-align:left"><strong>2. Agnosticism &amp; integration</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;"><strong>5. Art Direction & Flexibility</strong></td>
-                                <td>Bespoke aesthetics, Uniqueness</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>6. Tech Debt / Maintenance</strong></td>
-                                <td>Long-term debt, Upgrades</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td style="text-align:left"><strong>3. Styling architecture</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>7. Performance & SEO</strong></td>
-                                <td>Load speed, JS overhead</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td style="text-align:left"><strong>4. Ready-made UI</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>8. Accessibility (A11y)</strong></td>
-                                <td>WCAG native primitives, Focus</td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td style="text-align:left"><strong>5. Art direction</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: left;"><strong>9. Override Friction</strong></td>
-                                <td>Specificity wars, !important</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-3">3</span></td>
-                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>10. Learning Curve</strong></td>
-                                <td>Onboarding time, APIs</td>
+                                <td style="text-align:left"><strong>6. Technical debt</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>7. Performance &amp; SEO</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>8. Accessibility</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>9. Override friction</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>10. Learning curve</strong></td>
+                                <td><span class="ev ev--j">Judged</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
                             </tr>
                             <tr>
-                                <td style="text-align: left;"><strong>11. AI-Native Workflow</strong></td>
-                                <td>Agent modes, contracts, AI operability</td>
-                                <td><span class="score-circle score-5 score-winner" title="Winner">5</span></td>
+                                <td style="text-align:left"><strong>11. AI-native workflow</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
                                 <td><span class="score-circle score-4">4</span></td>
                                 <td><span class="score-circle score-3">3</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
                                 <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>12. Ecosystem &amp; support</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
                                 <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>13. Interactive behaviour</strong></td>
+                                <td><span class="ev ev--c">Checkable</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-1">1</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>14. Browser floor</strong></td>
+                                <td><span class="ev ev--m">Measured</span></td>
+                                <td><span class="score-circle score-2">2</span></td>
+                                <td><span class="score-circle score-3">3</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-5 score-winner" title="Highest in this row">5</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
+                                <td><span class="score-circle score-4">4</span></td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th style="text-align:left">Total</th>
+                                <th>/ 70</th>
+                                <th>51</th>
+                                <th>55</th>
+                                <th>50</th>
+                                <th>49</th>
+                                <th>50</th>
+                                <th>41</th>
+                                <th>39</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-            </section>
 
-            <!-- ══════════════════════════════════════════
-           COMMITTEE INSIGHTS
-      ══════════════════════════════════════════ -->
-            <section id="insights" aria-labelledby="insights-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-4" id="insights-heading">What the Experts Said</h2>
-
-                <div class="layout-grid__nested">
-
-                    <!-- 1. Frontend -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Frontend
-                                Architecture</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Tailwind is fast for quick
-                                prototypes, but maintaining massive class strings across hundreds of views becomes a
-                                nightmare. SYX brings sanity back with native @layer and predictable BEM structures."
-                            </p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Lead Frontend Engineer</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 2. Integration / Agnosticism -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Integration &
-                                Agnosticism</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Shadcn UI is brilliant, but it
-                                restricts us strictly to React/Vue and Tailwind CSS. We still run legacy .NET apps. SYX
-                                is completely agnostic and drops right in without disrupting server-rendered HTML."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Systems Architect</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 3. Styling & Tokens -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Styling &
-                                Tokens</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Chakra UI handles design tokens
-                                beautifully, but it locks our visual identity entirely to React. SYX delivers the exact
-                                same 4-tier token architecture explicitly through native CSS variables, freeing us to
-                                design once for any platform."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Visual Design Lead</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 4. Override Friction -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Override
-                                Friction</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Fighting Material UI or Bootstrap
-                                overrides is exhausting. Everyone uses !important tags to win specificity wars. With
-                                SYX's @layer design, standard component CSS naturally wins because of layer hierarchy,
-                                zero !important needed."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— CSS Operations Manager</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 5. Art Direction -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Art
-                                Direction</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Tailwind gives me total freedom to
-                                ruin a design if I'm not careful. SYX enforces systemic consistency—like its fluid
-                                typography primitives—without locking me into a 'Google' aesthetic like Material UI
-                                inherently does."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— Art Director</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 6. Management -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Tech
-                                Debt</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"Technical debt is my biggest fear.
-                                With SYX's zero dependencies, we don't have to worry about the JavaScript framework
-                                treadmill breaking our UI layer every two years or chasing NPM vulnerabilities."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— VP of Engineering</strong></p>
-                        </div>
-                    </div>
-
-                    <!-- 7. AI-Native Workflow -->
-                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
-                        <div class="syx-h-full">
-                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">AI-Native Workflow</span>
-                            <p class="atom-txt syx-mb-3" style="font-style: italic;">"SYX is the only system where the AI agent knows exactly what it can and cannot do before writing a single line. The mode system — SKETCH, UX, UI, TOKEN, THEME, AUDIT, MIGRATE — routes each task to a specialist lens with a defined resource cost. With Tailwind or MUI, the AI just guesses."</p>
-                            <p class="atom-txt syx-mb-0 syx-text-gray"><strong>— AI Engineering Lead</strong></p>
-                        </div>
-                    </div>
-
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">What changed against the April 2026 version</p>
+                    <p class="atom-txt syx-mb-0">SYX's accessibility score went from <strong>4 to 3</strong> because the
+                        contrast measurement below contradicted it, and its learning curve from <strong>4 to 3</strong>
+                        because 17,238 lines of SCSS, nine agent modes and eight contract rules are not a four. Ant
+                        Design rose from 21 to 39 and Material UI from 28 to 41, mostly because they were being scored
+                        at versions two majors old and because the three new criteria are criteria they win. Under the
+                        old eleven criteria SYX scored 89.1% of the maximum; under these fourteen it scores 72.9%.</p>
                 </div>
             </section>
 
             <!-- ══════════════════════════════════════════
-           GLOBAL SCORE
+           GLOBAL RANKING
       ══════════════════════════════════════════ -->
             <section id="global" aria-labelledby="global-score-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-1" id="global-score-heading">Global Ranking Winner</h2>
-                <p class="atom-txt syx-text-gray syx-mb-4">Sum of the eleven discipline scores above, out of a
-                    possible 55.</p>
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="global-score-heading">The unweighted total</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">Sum of the fourteen scores, out of 70. Every criterion counts
+                    the same.</p>
 
-                <div class="layout-grid__nested">
+                <div class="layout-grid__nested syx-mb-4">
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
                         <div class="rank__winner">
                             <span class="rank__medal">
                                 <span class="atom-icon atom-icon--lc-award" aria-hidden="true"></span>
                             </span>
                             <p class="syx-type-overline rank__winner-rank">1st place</p>
-                            <h3 class="atom-title atom-title--h3 syx-mb-2">SYX</h3>
-                            <p class="rank__winner-score">49<span class="rank__winner-max">/ 55</span></p>
-                            <p class="atom-txt syx-text-gray syx-mb-0">The ultimate balance of performance,
-                                maintainability, and agnosticism.</p>
+                            <h3 class="atom-title atom-title--h3 syx-mb-2">Shadcn UI</h3>
+                            <p class="rank__winner-score">55<span class="rank__winner-max">/ 70</span></p>
+                            <p class="atom-txt syx-text-gray syx-mb-0">Loses only on framework lock-in — and wins
+                                everywhere that ready-made, accessible behaviour counts.</p>
                         </div>
                     </div>
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-8">
                         <ol class="rank__list">
-                                <li class="rank__row">
-                                    <span class="rank__pos">2</span>
-                                    <span class="rank__name">Shadcn UI</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 78.2%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>43</strong> / 55</span>
-                                </li>
-                                <li class="rank__row">
-                                    <span class="rank__pos">3</span>
-                                    <span class="rank__name">Tailwind CSS</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 72.7%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>40</strong> / 55</span>
-                                </li>
-                                <li class="rank__row">
-                                    <span class="rank__pos">4</span>
-                                    <span class="rank__name">Chakra UI</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 65.5%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>36</strong> / 55</span>
-                                </li>
-                                <li class="rank__row">
-                                    <span class="rank__pos">5</span>
-                                    <span class="rank__name">Bootstrap</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 58.2%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>32</strong> / 55</span>
-                                </li>
-                                <li class="rank__row">
-                                    <span class="rank__pos">6</span>
-                                    <span class="rank__name">Material UI</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 50.9%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>28</strong> / 55</span>
-                                </li>
-                                <li class="rank__row">
-                                    <span class="rank__pos">7</span>
-                                    <span class="rank__name">Ant Design</span>
-                                    <span class="rank__bar">
-                                        <span class="rank__fill" style="width: 38.2%"></span>
-                                    </span>
-                                    <span class="rank__pts"><strong>21</strong> / 55</span>
-                                </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:92.7%"></span></span>
+                                <span class="rank__pts"><strong>51</strong> / 70</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Tailwind CSS</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:90.9%"></span></span>
+                                <span class="rank__pts"><strong>50</strong> / 70</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:90.9%"></span></span>
+                                <span class="rank__pts"><strong>50</strong> / 70</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:89.1%"></span></span>
+                                <span class="rank__pts"><strong>49</strong> / 70</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">Material UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:74.5%"></span></span>
+                                <span class="rank__pts"><strong>41</strong> / 70</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:70.9%"></span></span>
+                                <span class="rank__pts"><strong>39</strong> / 70</span>
+                            </li>
                         </ol>
+                    </div>
+                </div>
+
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">Why this number is the weakest thing on the page</p>
+                    <p class="atom-txt syx-mb-0">An unweighted total assumes all fourteen criteria matter equally. No
+                        team has ever decided that way. A government service and a seed-stage React product do not
+                        weight <em>ready-made UI</em> and <em>browser floor</em> the same, and the ranking flips
+                        completely depending on which one you are. It is published here because hiding it would be
+                        worse — but the section below is the one to read.</p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           PROFILES
+      ══════════════════════════════════════════ -->
+            <section id="profiles" aria-labelledby="profiles-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="profiles-heading">Weighted by profile</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">The same fourteen scores, with each criterion weighted 0–3
+                    for six kinds of project. <strong>The weights are published</strong> — a weighted ranking whose
+                    weights are hidden is worse than an unweighted one, because it buries the decision instead of making
+                    it. SYX comes first in four of these and <strong>last in two</strong>.</p>
+
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">Legacy &amp; server-rendered</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">JSP · PHP · .NET · Rails — the browser is modern, the server is not</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads, tied with Shadcn UI.</p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:98.2%"></span></span>
+                                <span class="rank__pts"><strong>3.70</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:98.2%"></span></span>
+                                <span class="rank__pts"><strong>3.70</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:91.2%"></span></span>
+                                <span class="rank__pts"><strong>3.43</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:75.2%"></span></span>
+                                <span class="rank__pts"><strong>2.83</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:71.7%"></span></span>
+                                <span class="rank__pts"><strong>2.70</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>3 · 3 · 2 · 2 · 1 · 3 · 2 · 2 · 3 · 2 · 1 · 2 · 1 · 3</code></p>
+                </div>
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">React product under time-to-market pressure</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Ship the admin panel this quarter</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem"><strong>SYX comes 7th of 7 here.</strong></p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>4.08</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:95.3%"></span></span>
+                                <span class="rank__pts"><strong>3.88</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:92.5%"></span></span>
+                                <span class="rank__pts"><strong>3.77</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">4</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:84.9%"></span></span>
+                                <span class="rank__pts"><strong>3.46</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:80.2%"></span></span>
+                                <span class="rank__pts"><strong>3.27</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:79.2%"></span></span>
+                                <span class="rank__pts"><strong>3.23</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:77.4%"></span></span>
+                                <span class="rank__pts"><strong>3.15</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>2 · 0 · 2 · 3 · 1 · 2 · 2 · 2 · 1 · 3 · 1 · 3 · 3 · 1</code></p>
+                </div>
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">Multi-brand &amp; white-label</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">One codebase, many identities, rebranded per client</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>4.07</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:97.4%"></span></span>
+                                <span class="rank__pts"><strong>3.96</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:92.1%"></span></span>
+                                <span class="rank__pts"><strong>3.75</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">4</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:84.2%"></span></span>
+                                <span class="rank__pts"><strong>3.43</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:79.8%"></span></span>
+                                <span class="rank__pts"><strong>3.25</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:63.2%"></span></span>
+                                <span class="rank__pts"><strong>2.57</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:61.4%"></span></span>
+                                <span class="rank__pts"><strong>2.50</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>2 · 2 · 3 · 1 · 3 · 3 · 2 · 2 · 3 · 1 · 2 · 1 · 1 · 2</code></p>
+                </div>
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">Public sector &amp; regulated accessibility</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Conformance is audited by someone who is not you</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem"><strong>SYX comes 7th of 7 here.</strong></p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>4.16</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:93.3%"></span></span>
+                                <span class="rank__pts"><strong>3.88</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:91.3%"></span></span>
+                                <span class="rank__pts"><strong>3.80</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">4</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:84.6%"></span></span>
+                                <span class="rank__pts"><strong>3.52</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:80.8%"></span></span>
+                                <span class="rank__pts"><strong>3.36</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:79.8%"></span></span>
+                                <span class="rank__pts"><strong>3.32</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:72.1%"></span></span>
+                                <span class="rank__pts"><strong>3.00</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>1 · 2 · 1 · 2 · 0 · 2 · 2 · 3 · 1 · 2 · 0 · 3 · 3 · 3</code></p>
+                </div>
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">Codebase driven mostly by AI agents</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">The main author of the CSS is not a person</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>4.12</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:95.1%"></span></span>
+                                <span class="rank__pts"><strong>3.92</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:86.4%"></span></span>
+                                <span class="rank__pts"><strong>3.56</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">4</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:81.6%"></span></span>
+                                <span class="rank__pts"><strong>3.36</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:79.6%"></span></span>
+                                <span class="rank__pts"><strong>3.28</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:63.1%"></span></span>
+                                <span class="rank__pts"><strong>2.60</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:61.2%"></span></span>
+                                <span class="rank__pts"><strong>2.52</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>3 · 2 · 2 · 1 · 1 · 3 · 1 · 2 · 3 · 1 · 3 · 1 · 1 · 1</code></p>
+                </div>
+                <div class="syx-border syx-p-3 syx-mb-4">
+                    <h3 class="atom-title atom-title--h5 syx-mb-1">Content site where SEO decides</h3>
+                    <p class="atom-txt syx-text-gray syx-mb-2" style="font-size:0.9rem">Time to first byte is the product</p>
+                    <p class="atom-txt syx-mb-3" style="font-size:0.9rem">SYX leads this profile.</p>
+                    <ol class="rank__list syx-mb-3">
+                            <li class="rank__row">
+                                <span class="rank__pos">1</span>
+                                <span class="rank__name">SYX</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:100.0%"></span></span>
+                                <span class="rank__pts"><strong>3.93</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">2</span>
+                                <span class="rank__name">Tailwind</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:99.1%"></span></span>
+                                <span class="rank__pts"><strong>3.89</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">3</span>
+                                <span class="rank__name">Shadcn UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:97.2%"></span></span>
+                                <span class="rank__pts"><strong>3.81</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">4</span>
+                                <span class="rank__name">Bootstrap</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:91.5%"></span></span>
+                                <span class="rank__pts"><strong>3.59</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">5</span>
+                                <span class="rank__name">Chakra UI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:83.0%"></span></span>
+                                <span class="rank__pts"><strong>3.26</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">6</span>
+                                <span class="rank__name">MUI</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:66.0%"></span></span>
+                                <span class="rank__pts"><strong>2.59</strong> / 5</span>
+                            </li>
+                            <li class="rank__row">
+                                <span class="rank__pos">7</span>
+                                <span class="rank__name">Ant Design</span>
+                                <span class="rank__bar"><span class="rank__fill" style="width:63.2%"></span></span>
+                                <span class="rank__pts"><strong>2.48</strong> / 5</span>
+                            </li>
+                    </ol>
+                    <p class="syx-type-overline syx-text-gray syx-mb-1">Weights, criteria 1&ndash;14</p>
+                    <p class="atom-txt syx-mb-0"><code>2 · 3 · 1 · 1 · 3 · 2 · 3 · 2 · 2 · 2 · 1 · 1 · 1 · 3</code></p>
+                </div>
+
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">Where a weighted average still lies</p>
+                    <p class="atom-txt syx-mb-0">A weight expresses <em>how much something matters</em>. It cannot
+                        express <em>a hard constraint</em>. In the legacy profile SYX and Shadcn UI tie at exactly
+                        3.77 — but if the stack cannot run React, Shadcn UI is not a close second, it is
+                        <strong>unavailable</strong>, and so are Chakra UI, Material UI and Ant Design. Four of the seven
+                        systems on this page disqualify themselves before scoring begins. Read the tie as arithmetic,
+                        not as advice.</p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
+           WHERE SYX LOSES
+      ══════════════════════════════════════════ -->
+            <section id="loses" aria-labelledby="loses-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="loses-heading">Where SYX loses</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">Five reasons not to use it, with the measurement behind
+                    each.</p>
+
+                <div class="layout-grid__nested">
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Contrast in
+                                the demo themes</span>
+                            <p class="atom-txt syx-mb-3">Of 98 text colour pairs measured across 7 themes × 2 modes,
+                                <strong>39 fail WCAG AA</strong>. All 39 are in the six <code>example-*</code>
+                                demonstration themes, which ship in the package and were never contrast-audited. The
+                                worst is a filled tertiary button in <code>example-06</code> light: white text on
+                                <code>#c9faf6</code>, <strong>1.14:1</strong> — effectively invisible. The reference
+                                theme <code>syx-sketch</code> passes 14 of 14, worst case 6.76:1.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">This is why criterion 8 scores 3, not 4. No guard
+                                enforces contrast; <code>npm run validate</code> checks R01–R07 and none of them is
+                                about colour.</p>
+                        </div>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">No interactive
+                                behaviour</span>
+                            <p class="atom-txt syx-mb-3">SYX ships <strong>zero bytes of client-side JavaScript</strong>.
+                                That is the reason it scores 5 on performance and <strong>1 on interactive
+                                    behaviour</strong>: a modal that traps focus, a dropdown that handles arrow keys, a
+                                combobox that announces itself to a screen reader — none of that exists here. You write
+                                it, and you get its accessibility right yourself.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">Shadcn UI, Chakra UI, MUI and Ant Design all
+                                score 5 here, and they deserve it.</p>
+                        </div>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">One
+                                maintainer</span>
+                            <p class="atom-txt syx-mb-3">Ecosystem and support scores <strong>1</strong>. There is one
+                                author, no contributor base, no Stack Overflow tag, no pool of developers who already
+                                know it, and no answer to &ldquo;what happens if he stops&rdquo; other than the MIT
+                                licence and 17,238 readable lines.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">For a system whole products are built on, this is
+                                a real risk and not a rhetorical one.</p>
+                        </div>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">A modern
+                                browser floor</span>
+                            <p class="atom-txt syx-mb-3">The compiled CSS uses relative colour —
+                                <code>oklch(from …)</code>, 6 occurrences — which sets the floor at <strong>Chrome 119 ·
+                                    Safari 16.4 · Firefox 128</strong>. It also uses <code>color-mix()</code> 50 times
+                                and <code>oklch()</code> 289 times. There is no fallback build.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">On the legacy stacks SYX claims to serve, the
+                                server may be old but the browser cannot be. Bootstrap scores 5 here and SYX scores
+                                2.</p>
+                        </div>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">34
+                                components</span>
+                            <p class="atom-txt syx-mb-3">19 atoms, 7 molecules, 8 organisms. There is no data grid, no
+                                date picker, no combobox, no virtualised table, no file upload. Ant Design and Material
+                                UI have all of them and score 5 on ready-made UI; SYX scores 2.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">If your product is an admin panel, this is the
+                                paragraph that decides it.</p>
+                        </div>
+                    </div>
+
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Not a small
+                                system to learn</span>
+                            <p class="atom-txt syx-mb-3">17,238 lines of SCSS across 178 files, 1,082 tokens per theme,
+                                a four-tier token cascade, eight contract rules, nine agent modes and eleven MCP tools.
+                                The pay-off is that an agent can be told no by a machine instead of by a reviewer — but
+                                the surface a human has to hold is not small.</p>
+                            <p class="atom-txt syx-mb-0 syx-text-gray">Bootstrap scores 5 on learning curve. SYX scores
+                                3, down from 4 in the previous version of this page.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -698,116 +1405,111 @@
            PROS & CONS
       ══════════════════════════════════════════ -->
             <section id="pros-cons" aria-labelledby="pros-cons-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-4" id="pros-cons-heading">Detailed Pros & Cons</h2>
+                <h2 class="atom-title atom-title--h2 syx-mb-4" id="pros-cons-heading">System by system</h2>
 
                 <div class="layout-grid__nested">
-                    <!-- SYX -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">SYX Design System</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> Zero dependencies, semantic BEM classes, extreme
-                                    performance (43&ndash;51&nbsp;kB gzipped per theme bundle), no JS lock-in,
-                                    solves specificity natively with
-                                    <code>@layer</code>.</span>
+                                <span><strong>For:</strong> Zero runtime dependencies and zero client-side JavaScript; 41.6&ndash;49.1&nbsp;kB gzipped per theme; specificity solved by seven named <code>@layer</code>s with <strong>0</strong> <code>!important</code> in shipped CSS; drops into any server-rendered HTML; the only system here an agent can query, be refused by, and be corrected by.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> Smaller out-of-the-box complex component library compared
-                                    to Ant or MUI.</span>
+                                <span><strong>Against:</strong> 34 components and no interactive behaviour at all; one maintainer; requires Chrome&nbsp;119 / Safari&nbsp;16.4; the six demo themes fail WCAG&nbsp;AA in 39 of 84 measured text pairs.</span>
                             </p>
                         </div>
                     </div>
-                    <!-- Shadcn UI -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">Shadcn UI</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> Excellent developer experience, fully accessible components
-                                    (Radix), gives full ownership of component code.</span>
+                                <span><strong>For:</strong> Accessible behaviour ships working (Radix/Base UI primitives); you own the component code outright, so there is no library to be blocked by; strong 2026 registry and first-class agent tooling.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> Tied to Tailwind and React/Vue ecosystems, heavily
-                                    boilerplate-heavy for large projects.</span>
+                                <span><strong>Against:</strong> React only — official support covers no other framework, which removes it entirely from server-rendered stacks; carries Tailwind as a hard dependency; every project owns a copy, so fixes do not arrive by upgrading.</span>
                             </p>
                         </div>
                     </div>
-                    <!-- Tailwind -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">Tailwind CSS</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> Unmatched development speed, ultimate design freedom, tiny
-                                    production sizes.</span>
+                                <span><strong>For:</strong> No framework requirement and no runtime; production CSS is small because unused utilities never ship; enormous ecosystem; total design freedom.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> "Class soup" HTML, painful to refactor components without
-                                    JS abstraction wrappers, difficult design governance.</span>
+                                <span><strong>Against:</strong> Markup carries the design, so refactoring means editing every element that used it; governance is a convention, not a mechanism; ships no components and no behaviour.</span>
                             </p>
                         </div>
                     </div>
-                    <!-- Bootstrap -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">Bootstrap</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> The fastest learning curve, well-known everywhere, massive
-                                    ecosystem of themes.</span>
+                                <span><strong>For:</strong> The lowest learning curve here and by far the largest pool of developers who already know it; the CSS works without its JavaScript; supports the oldest browsers of any system on this page.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> Very high override friction, looks "like Bootstrap" out of
-                                    the box, bloated utility classes.</span>
+                                <span><strong>Against:</strong> Overriding it is a fight, and <code>!important</code> is still the common answer; the default look is recognisable at a glance; CSS-variable theming arrived late and is partial.</span>
                             </p>
                         </div>
                     </div>
-                    <!-- Chakra -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">Chakra UI</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> Excellent token implementation, extremely
-                                    developer-friendly React props, great accessiblity.</span>
+                                <span><strong>For:</strong> Excellent token model and one of the best accessibility stories here; v3 was a ground-up rewrite with recipes and Ark UI, and it shows.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> Tied exclusively to React, CSS-in-JS runtime overhead
-                                    affects initial page load.</span>
+                                <span><strong>Against:</strong> React only; v3 deliberately kept Emotion to preserve dynamic styling, so styling still costs at runtime — the zero-runtime path is Panda, which is a different product.</span>
                             </p>
                         </div>
                     </div>
-                    <!-- Material UI -->
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <h3 class="atom-title atom-title--h4">Material UI</h3>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
                                     class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Pros:</strong> Massive ecosystem, covers almost every possible component
-                                    need, very battle-tested.</span>
+                                <span><strong>For:</strong> The most complete component set on this page, battle-tested at scale, with data-grid and date tooling that nothing else here matches; v9 is current and actively developed.</span>
                             </p>
                             <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
                                     class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
                                     style="transform: translateY(2px);"></span>
-                                <span><strong>Cons:</strong> High customization friction (everything looks like Google),
-                                    heavy bundle sizes, tied to React.</span>
+                                <span><strong>Against:</strong> React only; heavy; the Material look resists removal, so bespoke art direction fights the library the whole way; overriding it is the hardest of the seven.</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
+                        <div class="syx-h-full">
+                            <h3 class="atom-title atom-title--h4">Ant Design</h3>
+                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-success syx-mb-1"><span
+                                    class="atom-icon atom-icon--lc-check-circle" aria-hidden="true"
+                                    style="transform: translateY(2px);"></span>
+                                <span><strong>For:</strong> Data-dense components — tables, filters, forms — are its reason to exist and it is very good at them; v6 improved CSS-variable support and React 19 compatibility.</span>
+                            </p>
+                            <p class="atom-txt syx-d-flex syx-items-baseline syx-gap-2 syx-text-error syx-mb-0"><span
+                                    class="atom-icon atom-icon--lc-x-circle" aria-hidden="true"
+                                    style="transform: translateY(2px);"></span>
+                                <span><strong>Against:</strong> React only; the strongest visual signature of any system here; the heaviest to make look like something else; the largest surface to learn.</span>
                             </p>
                         </div>
                     </div>
@@ -815,70 +1517,71 @@
             </section>
 
             <!-- ══════════════════════════════════════════
-           SECTOR FIT MAP
+           SOURCES
       ══════════════════════════════════════════ -->
-            <section id="sectors" aria-labelledby="sectors-fit-heading" class="syx-mb-5">
-                <h2 class="atom-title atom-title--h2 syx-mb-4" id="sectors-fit-heading">Sector Fit Recommendation</h2>
+            <section id="sources" aria-labelledby="sources-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="sources-heading">Sources and versions</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">Checked September 2026. Every &ldquo;checkable&rdquo; claim on
+                    this page resolves to one of these.</p>
 
-                <div class="syx-border syx-bg-gray-50 syx-p-3">
-                    <ul class="atom-list syx-mb-0" style="list-style: none; padding: 0;">
-                        <li class="syx-mb-4 syx-pb-4"
-                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">1. E-Commerce & Retail: <span
-                                    class="syx-text-primary">SYX / Tailwind</span></h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> SEO and fast time-to-first-byte are
-                                critical. SYX provides extreme performance (0 JS overhead) and makes multi-brand or
-                                seasonal theming effortless through tokens, while Tailwind excels for highly custom
-                                marketing campaigns.</p>
-                        </li>
-                        <li class="syx-mb-4 syx-pb-4"
-                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">2. Government & Enterprise Legacy: <span
-                                    class="syx-text-primary">SYX / Bootstrap</span></h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Decades of maintenance on legacy stacks
-                                (JSP, PHP, Java) make modern React tools impossible. Bootstrap is standard, but highly
-                                conflicted. SYX explicitly shields its cascade using <code>@layer</code>, slotting
-                                seamlessly into old HTML structures without !important wars.</p>
-                        </li>
-                        <li class="syx-mb-4 syx-pb-4"
-                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">3. Startups & Fast Iteration JS apps: <span
-                                    class="syx-text-primary">Shadcn UI / Tailwind</span></h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> When velocity and owning your codebase in
-                                a bleeding-edge Next.js/React environment is the only goal, Shadcn UI and Tailwind
-                                provide the best modern developer experience without the rigid constraints of
-                                traditional libraries.</p>
-                        </li>
-                        <li class="syx-mb-4 syx-pb-4"
-                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">4. B2B SaaS & White-label Dashboards: <span
-                                    class="syx-text-primary">Chakra UI / SYX</span></h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Chakra provides excellent out-of-the-box
-                                React components. SYX wins for "White-label" capabilities, letting businesses rebrand
-                                massive dashboards per-client instantly just by swapping an OKLCH token theme CSS file.
-                            </p>
-                        </li>
-                        <li class="syx-mb-4 syx-pb-4"
-                            style="border-bottom: 1px solid var(--primitive-color-gray-200);">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">5. Finance & Data-Heavy Apps: <span
-                                    class="syx-text-primary">Ant Design / SYX</span></h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Ant Design has incredibly powerful
-                                complex data grids. SYX is preferred when the sheer mass of financial data tables causes
-                                React's virtual DOM to lag, relying instead on lightweight SCSS-rendered semantic
-                                tables.</p>
-                        </li>
-                        <li class="syx-mb-0">
-                            <h4 class="atom-title atom-title--h4 syx-mb-1">6. Educational Tech & Hardware Logistics:
-                                <span class="syx-text-primary">MUI / SYX</span>
-                            </h4>
-                            <p class="atom-txt syx-mb-0"><strong>Why:</strong> Logistics terminals require huge
-                                hit-areas where MUI shines. SYX's fluid typography ensures it degrades beautifully on
-                                ancient, slow hardware typical in schools or warehouses without heavy JavaScript
-                                payloads.</p>
-                        </li>
-                    </ul>
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-0 syx-overflow-auto">
+                    <table class="atom-table" style="min-width:760px">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">System</th>
+                                <th style="text-align:left">Version scored</th>
+                                <th style="text-align:left">Requires a JS framework?</th>
+                                <th style="text-align:left">Ships runtime JS?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align:left"><strong>SYX</strong></td>
+                                <td style="text-align:left">4.28.0</td>
+                                <td style="text-align:left">No — a stylesheet link</td>
+                                <td style="text-align:left">No</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Shadcn UI</strong></td>
+                                <td style="text-align:left">2026 registry, Tailwind v4 + React 19</td>
+                                <td style="text-align:left">Yes — React</td>
+                                <td style="text-align:left">Yes</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Tailwind CSS</strong></td>
+                                <td style="text-align:left">4.3</td>
+                                <td style="text-align:left">No</td>
+                                <td style="text-align:left">No</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Chakra UI</strong></td>
+                                <td style="text-align:left">3.36</td>
+                                <td style="text-align:left">Yes — React</td>
+                                <td style="text-align:left">Yes — v3 kept Emotion, so styling stays partly at runtime</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Bootstrap</strong></td>
+                                <td style="text-align:left">5.3.8</td>
+                                <td style="text-align:left">No</td>
+                                <td style="text-align:left">Optional — the CSS works alone; the components need its JS</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Material UI</strong></td>
+                                <td style="text-align:left">9</td>
+                                <td style="text-align:left">Yes — React</td>
+                                <td style="text-align:left">Yes</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left"><strong>Ant Design</strong></td>
+                                <td style="text-align:left">6</td>
+                                <td style="text-align:left">Yes — React</td>
+                                <td style="text-align:left">Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
+
 
         </div>
     </main>
