@@ -156,6 +156,7 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 | Create theme | `_agents/workflows/create-theme.md` | Clone template, configure new theme |
 | Audit tokens | `_agents/workflows/audit-tokens.md` | Full token health check |
 | Update changelog | `_agents/workflows/update-changelog.md` | Conventional Commits changelog |
+| Export to Figma | `_agents/workflows/export-to-figma.md` | Stand up the SYX library in Figma: variables, components, and what won't travel |
 
 ---
 

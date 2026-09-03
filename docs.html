@@ -515,6 +515,7 @@
           <a href="#agentic-guards" class="docs-sidebar__link" data-nav-section="agentic-guards">4 What runs on its own</a>
           <a href="#agentic-value" class="docs-sidebar__link" data-nav-section="agentic-value">5 What it buys you</a>
           <a href="#agentic-examples" class="docs-sidebar__link" data-nav-section="agentic-examples">6 Worked examples</a>
+          <a href="#agentic-figma" class="docs-sidebar__link" data-nav-section="agentic-figma">7 Out to Figma</a>
         </div>
       </div>
 
@@ -1384,7 +1385,7 @@ safelist: [/^atom-btn--/, /^is-/];
         <p class="atom-txt syx-text-gray syx-mb-4">A design system is agentic when an agent can <strong>ask</strong> it
           instead of reading it, <strong>write</strong> to it through a path that says no, and let it
           <strong>detect</strong> where a shipped app has drifted away. Those three verbs are the whole of this
-          section.</p>
+          section &mdash; and section 7 is what happens when the consumer is not an app but Figma.</p>
 
         <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-5">
           <p class="syx-type-overline syx-text-gray syx-mb-2">Why it isn't just "AI-friendly docs"</p>
@@ -2079,6 +2080,141 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
               written by hand proves the author's intention, not the system's behaviour &mdash; and it rots the first
               time the behaviour changes, silently. These were captured by running the commands. When any of them
               stops being true, the guards go red before this page does.</p>
+          </div>
+        </section>
+
+        <!-- ─── 7 · OUT TO FIGMA ─── -->
+        <section class="syx-mb-5" id="agentic-figma">
+          <h3 class="atom-title atom-title--h5 syx-mb-3">
+            7 &mdash; Out to Figma
+          </h3>
+          <p class="atom-txt syx-text-gray syx-mb-4">The first six sections are about an agent operating the system
+            from the inside. This one is the same system pointed outward, and the direction is not negotiable:
+            <strong>SYX is the source, Figma is a consumer</strong> &mdash; like an app is a consumer. Nothing here
+            reads a design and writes SCSS.</p>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Why the DTCG export wasn't enough</p>
+            <p class="atom-txt syx-mb-0"><code>npm run export:tokens</code> has spoken W3C DTCG since v4.12.0, and
+              Style Dictionary is happy with it. Figma is not: a <code>COLOR</code> variable stores numeric
+              <code>{r,g,b,a}</code>, and this system is written entirely in <code>oklch()</code>. A DTCG file
+              containing <code>oklch(0.498 0.282 266.24)</code> imports as text or doesn't import at all.
+              <strong>The real border is not a format &mdash; it's a conversion</strong>, which is why it lives in a
+              function (<code>scripts/lib/figma.js</code>) and not in a template. The same function answers
+              <code>get_figma_spec</code> and writes the export, so the variable you import and the value an agent
+              paints cannot diverge.</p>
+          </div>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:660px">
+              <thead>
+                <tr>
+                  <th>In SYX</th>
+                  <th>In Figma</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>--component-button-border-radius: 0.25rem</code></td>
+                  <td><code>cornerRadius: 4</code></td>
+                </tr>
+                <tr>
+                  <td><code>--semantic-color-primary: oklch(0.498 0.282 266.24)</code></td>
+                  <td>variable <code>semantic/color/primary</code> &mdash; <code>{r:0.1175, g:0.2275, b:0.9999, a:1}</code></td>
+                </tr>
+                <tr>
+                  <td><code>.atom-btn--primary</code></td>
+                  <td>variant property <code>primary</code> on component <code>atom/btn</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Ask, per component &mdash; while drawing</p>
+          <pre class="atom-code syx-mb-4"><code>&rarr; get_figma_spec { "component": "btn", "theme": "syx-sketch", "mode": "dark" }
+
+{
+  "figmaName": "atom/btn",
+  "clases": { "base": ["atom-btn"], "modificadores": ["atom-btn--primary", …] },
+  "propiedades": [
+    {
+      "token":     "--component-button-primary-filled-bg",
+      "variable":  "component/button/primary/filled/bg",
+      "propiedad": "fills",
+      "tipo":      "COLOR",
+      "valor":     { "r": 0.5216, "g": 0.6555, "b": 0.9994, "a": 1 },
+      "hex":       "#85a7ff",
+      "variante":  "primary",
+      "estado":    "default"
+    }, …40 in total
+  ],
+  "sinTraducir": [
+    { "token": "--component-button-font-size",
+      "motivo": "expresión CSS: solo un navegador la reduce" }, …
+  ]
+}</code></pre>
+
+          <p class="syx-type-overline syx-text-gray syx-mb-2">Or export the whole library</p>
+          <pre class="atom-code syx-mb-4"><code>npm run export:figma   # &rarr; contracts/figma/&lt;theme&gt;.figma.json   (7 files)
+npm run check:figma    # fails if those files are stale
+
+   example-01    515 variables · 34 componentes · 274 omitidas
+   …
+   syx-sketch    543 variables · 34 componentes · 247 omitidas
+
+   3635 variables · 1879 omitidas con motivo</code></pre>
+
+          <p class="atom-txt syx-text-gray syx-mb-3">Two variable collections per theme &mdash;
+            <code>SYX · Semantic</code> and <code>SYX · Component</code> &mdash; each with a <code>light</code> and a
+            <code>dark</code> mode, plus the 34 components with the node property every token maps to. Three decisions
+            are worth knowing before you import:</p>
+
+          <div class="syx-mb-4" style="overflow-x:auto">
+            <table class="atom-table" style="min-width:660px">
+              <thead>
+                <tr>
+                  <th>Decision</th>
+                  <th>Because</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Primitives don't go up</strong> &mdash; 233 per theme stay out</td>
+                  <td>R01 forbids a component from reading a <code>--primitive-*</code> in CSS. Shipping them as
+                    pickable Figma variables would open in design the shortcut the contract closes in code</td>
+                </tr>
+                <tr>
+                  <td><strong>One file per theme</strong>, not one with fourteen modes</td>
+                  <td>Figma caps modes per collection by plan &mdash; four on Professional. A theme is a library; its
+                    two modes are light and dark</td>
+                </tr>
+                <tr>
+                  <td><strong>What can't be translated is listed</strong>, not hidden</td>
+                  <td>247 tokens in <code>syx-sketch</code>: 180 CSS expressions (the fluid <code>clamp()</code> type
+                    is most of them), 19 relative units, 15 shadows, 11 durations, 8 embedded SVGs, 2 gradients.
+                    Each one carries its reason, and the reason says where the thing <em>does</em> live in Figma</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-4">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Bind, don't paste</p>
+            <p class="atom-txt syx-mb-0">Node properties must be <strong>bound to the variables</strong>. A pasted
+              value is correct in light mode and wrong in dark, and nothing will tell you. The per-property
+              <code>valores.light</code> / <code>valores.dark</code> exist so a binding can be verified without opening
+              Figma. And <code>inferencia</code> marks the seam: classes and tokens come from the registry, arbitrated
+              against compiled CSS &mdash; the split by variant and state is deduced from token names.</p>
+          </div>
+
+          <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
+            <p class="syx-type-overline syx-text-gray syx-mb-2">What this repository cannot ship: Code Connect</p>
+            <p class="atom-txt syx-mb-0">Mapping a Figma component back to
+              <code>&lt;button class="atom-btn atom-btn--primary"&gt;</code> needs <strong>node IDs</strong>, which do
+              not exist until the components exist in a real file. What does ship is the input:
+              <code>component-registry.json</code> already holds the verified classes, and <code>figmaName</code> is
+              the pairing key. The step-by-step order is in
+              <code>_agents/workflows/export-to-figma.md</code>.</p>
           </div>
         </section>
 

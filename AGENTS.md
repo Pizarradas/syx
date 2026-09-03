@@ -159,6 +159,7 @@ Step-by-step workflows for common tasks:
 | Create a new theme | `_agents/workflows/create-theme.md` |
 | Audit token health | `_agents/workflows/audit-tokens.md` |
 | Update CHANGELOG | `_agents/workflows/update-changelog.md` |
+| Take the system into Figma | `_agents/workflows/export-to-figma.md` |
 
 ---
 

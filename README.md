@@ -91,6 +91,7 @@ npm install
 npm run build        # compiles all 7 themes
 npm run build:tokens # regenerates contracts/resolved-tokens.json
 npm run export:tokens # exports the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
+npm run export:figma # exports variables + components for Figma (contracts/figma/, see below)
 npm run build:prod   # compiles + runs PurgeCSS on all themes
 npm run watch        # watches theme-01 for changes
 npm run watch:all    # watches all themes
@@ -204,6 +205,13 @@ agent paints cannot diverge.
 Bind node properties **to the variables**, don't copy the values: a copied value loses
 dark mode. The per-property `valores.light` / `valores.dark` are there so you can verify
 a binding without opening Figma.
+
+**Why this one is versioned and `contracts/dtcg/` is not.** Both are derived and both
+weigh about 3 MB, so the difference is not size — it is the guard. `contracts/figma/` has
+`npm run check:figma` in the `npm run check` chain, so it cannot go stale without CI
+going red; the DTCG export has none, and a derived artifact nobody checks rots on its
+own. Versioning it means a designer can be handed the JSON without running npm. If you
+ever drop the guard, drop the versioning with it.
 
 ### With Figma's own MCP server
 

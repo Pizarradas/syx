@@ -26,6 +26,10 @@
 6.  **NEVER declare `transition:` or `position:` directly.**
     - ❌ `transition: opacity 0.2s ease;` → ✅ `@include transition(opacity 0.2s ease);`
     - ❌ `position: sticky; top: 0;` → ✅ `@include sticky($top: 0);`
+7.  **NEVER hand-convert a value for Figma.**
+    - ❌ working out that `oklch(0.498 0.282 266.24)` is roughly `#1e3aff`
+    - ✅ `get_figma_spec` / `scripts/lib/figma.js` — one conversion, or the library drifts from its own system.
+    - `contracts/figma/` is generated. A wrong value there is a wrong token upstream: fix the token, regenerate.
 
 ---
 
@@ -40,6 +44,8 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 | `contracts/rules.json`           | The contract rules. R01–R07 implemented; R08 declared, not yet   |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
 | `contracts/validation-report.md` | Human-readable audit report                                      |
+| `contracts/dtcg/`                | W3C DTCG export — Style Dictionary, Tokens Studio             |
+| `contracts/figma/`               | Figma export — variable collections + components, per theme     |
 
 ### Running validation
 
@@ -47,6 +53,17 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 node scripts/syx-validate.js           # Quick check (console only)
 node scripts/syx-validate.js --report  # Full audit + write contracts/
 ```
+
+### Exporting outward
+
+```bash
+npm run export:tokens   # → contracts/dtcg/    W3C DTCG, one file per theme + mode
+npm run export:figma    # → contracts/figma/   variables + components, one file per theme
+npm run check:figma     # fails if the Figma export is stale
+```
+
+Both read `contracts/resolved-tokens.json`, which is built from the **compiled** CSS —
+so a change you have not compiled does not exist for either. Run `npm run build` first.
 
 ### Current contract rules
 
@@ -241,6 +258,7 @@ SYX ships pre-built agent workflows in `_agents/workflows/`:
 | `/create-theme`     | See workflow file | Clone template and configure new theme        |
 | `/audit-tokens`     | See workflow file | Run full token health check                   |
 | `/update-changelog` | See workflow file | Maintain CHANGELOG using Conventional Commits |
+| `/export-to-figma`  | See workflow file | Stand up the SYX library in Figma, in the right order |
 
 ---
 
