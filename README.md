@@ -77,7 +77,7 @@ version it has installed — not against whatever is on `main` today.
 
 | Subpath | What it is |
 | ------- | ---------- |
-| `syx-design-system` | Node API (the six queries above) + `paths` to every artifact |
+| `syx-design-system` | Node API (the queries above, same surface as the MCP server) + `paths` to every artifact |
 | `syx-design-system/themes/<theme>.css` | Compiled CSS for one theme |
 | `syx-design-system/scss/...` | SCSS source, to compile your own build |
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
@@ -92,9 +92,7 @@ npm run build        # compiles all 7 themes
 npm run build:tokens # regenerates contracts/resolved-tokens.json
 npm run export:tokens # exports the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
 npm run export:figma # exports variables + components for Figma (contracts/figma/, see below)
-npm run build:prod   # compiles + runs PurgeCSS on all themes
-npm run watch        # watches theme-01 for changes
-npm run watch:all    # watches all themes
+npm run watch        # watches all themes for changes
 ```
 
 ### Option D — Dart Sass CLI directly
@@ -345,28 +343,30 @@ syx/
 │   │   │   ├── primitives/      # Raw values (colors, spacing, fonts)
 │   │   │   ├── semantic/        # Contextual aliases (color-primary, etc.)
 │   │   │   └── components/      # Per-component tokens (btn, form, header…)
-│   │   ├── mixins/              # 15 SYX native mixins
+│   │   ├── mixins/              # 44 SYX native mixins
 │   │   ├── functions/
 │   │   └── maps/
 │   │
 │   ├── base/                    # Reset, elements, helpers
 │   ├── atoms/                   # 21 atomic components
-│   ├── molecules/               # 6 composite components
-│   ├── organisms/               # 4 complex components
+│   ├── molecules/               # 9 composite components
+│   ├── organisms/               # 8 complex components
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities
 │   ├── pages/                   # Page-specific styles
 │   │
 │   ├── styles-theme-*.scss      # One entry point per theme
 │   └── themes/                  # Theme definitions
-│       ├── _shared/             # Shared core + 4 bundle definitions
+│       ├── _base/               # Universal layer, shared by every theme
+│       ├── _shared/             # Shared core + 5 bundle definitions
 │       ├── _template/           # Template for new themes
 │       ├── example-01/          # Theme 01 (Indigo/Amber)
 │       ├── example-02/          # Theme 02 (Purple/Pink)
 │       ├── example-03/          # Theme 03 (Coral/Orange)
 │       ├── example-04/          # Theme 04 (Forest/Earth)
 │       ├── example-05/          # Theme 05 (Midnight/Gold)
-│       └── example-06/          # Theme 06 (Cyber/OKLCH)
+│       ├── example-06/          # Theme 06 (Cyber/OKLCH)
+│       └── syx-sketch/          # Theme 07 (grayscale, SKETCH mode)
 │
 ├── css/                         # Compiled output (committed for zero-install use)
 │   └── prod/                    # PurgeCSS-optimized output
@@ -409,6 +409,7 @@ syx/
 | [AGENTS.md](AGENTS.md)                                                  | Agnostic AI entry point (Codex, Cursor, Copilot…) — mode system, base rules, workflows |
 | [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
 | [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
+| [_agents/architecture.md](_agents/architecture.md)                      | The ecosystem as diagrams-as-code; [architecture.json](_agents/architecture.json) is the same graph, machine-readable |
 | [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 9 specialist lenses activated by `[SYX: MODE]:` prefix |
 | [mind-system/README.md](mind-system/README.md)                          | The cortex — precedence ladder, engine vs. knowledge |
 | [mind-system/routing.md](mind-system/routing.md)                        | Mode ↔ knowledge wiring, with the reverse index |

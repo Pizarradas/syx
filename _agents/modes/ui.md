@@ -4,7 +4,7 @@
 
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
-> · **Writes:** `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/utilities/`, `scss/abstracts/tokens/components/`, `tokens.json`, `component-registry.json` — tier `pr`: prepare the change with `node scripts/propose.js`, which leaves a branch and its evidence. A person merges.
+> · **Writes:** `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/utilities/`, `scss/abstracts/tokens/components/`, `tokens.json` — tier `pr`: prepare the change with `node scripts/propose.js`, which leaves a branch and its evidence. A person merges. Also `component-registry.json` — tier `auto`: it is a derived artifact (`npm run build:registry`) and commits directly.
 > · **Recommends only:** `scss/abstracts/mixins/`, `scss/base/` — if the component you are writing needs a new mixin or a change to the base layer, say so and stop there.
 > · **Reads:** `contracts/rules.json`, `component-registry.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `get_component` before duplicating one, `get_token` for a real value, `get_mixin` before writing a property R03 or R04 rejects — it names the replacement — and `validate_snippet` **before** writing the file, not after.

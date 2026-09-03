@@ -7,11 +7,11 @@ Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
-3. `tokens.json` — full token registry with type, rawValue, and status for all 771 tokens
+3. `tokens.json` — full token registry with type, rawValue, and status for all 1089 tokens
 4. `component-registry.json` — inventory of all atoms, molecules, and organisms
 
 **If your client speaks MCP, ask instead of reading.** `npm run mcp` starts a
-dependency-free stdio server (`scripts/mcp-server.js`) that answers the four questions
+dependency-free stdio server (`scripts/mcp-server.js`) that answers the questions
 that otherwise force you to load the files above:
 
 | Instead of | Ask |
@@ -28,7 +28,7 @@ that otherwise force you to load the files above:
 The same rules run in both places, so a snippet the server approves is a snippet
 `npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
 in `README.md`. If you are working inside an app that depends on SYX rather than in this
-repository, `require('syx-design-system')` exposes the same six queries as a Node API,
+repository, `require('syx-design-system')` exposes the same queries as a Node API,
 answering from the version that app has installed.
 
 ---
@@ -62,14 +62,14 @@ fixing. Entry point: `mind-system/README.md`.
 
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH closes its response with a `## Why` — one line per decision that had an alternative, specified once in `_agents/decision-record.md`.
+When the user's message begins with a `[SYX: MODE]:` prefix, **read the corresponding mode file before responding** and let its instructions govern your entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH answers for its decisions with `## Why` lines — one line per decision that had an alternative, specified once in `_agents/decision-record.md`. AUDIT and MIGRATE attach the line to each finding or variable instead of closing with a block.
 
 | Prefix | Mode file | Writes | When to use |
 |---|---|---|---|
 | `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | nothing | Quick POCs, wireframes, flow diagrams, layout experiments — no token/registry checks |
 | `[SYX: UX]:` | `_agents/modes/ux.md` | nothing | Component selection, HTML structure, accessibility, interaction design |
 | `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | nothing | Experimental builds, awwwards-style pages, advanced CSS techniques, creative exploration |
-| `[SYX: UI]:` | `_agents/modes/ui.md` | `pr` | SCSS implementation, token usage, code generation, contract compliance |
+| `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, code generation, contract compliance — SCSS via `propose.js`, `component-registry.json` direct |
 | `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
@@ -168,12 +168,13 @@ Step-by-step workflows for common tasks:
 ```
 scss/
   abstracts/tokens/     — 4-tier token system
-  atoms/                — 19 components
-  molecules/            — 7 components
+  atoms/                — 21 components
+  molecules/            — 9 components
   organisms/            — 8 components
   themes/*/             — 7 themes (6 example-* + syx-sketch) × 4-5 bundles
 contracts/              — machine-readable validation output
 _agents/                — THE ENGINE (ships with the package)
+  architecture.md       — the ecosystem as diagrams-as-code (architecture.json: same graph, machine-readable)
   modes/                — the 9 mode definitions, one copy each, Trust + Knowledge blocks
   workflows/            — step-by-step task guides
   prompts/              — copy-paste prompt templates
@@ -184,7 +185,7 @@ mind-system/            — THE CORTEX (not published)
   governance/           — ATLAS ↔ modes composition
   atlas-rules/          — editorial rules (guest domain)
   knowledges/           — the corpus: ux · ui · front · syx · branding · motion · vendors
-index.js                — package entry point: the same six queries as an npm dependency
+index.js                — package entry point: the same queries as an npm dependency
 scripts/
   syx-validate.js       — runs R01–R07 contract checks
   mcp-server.js         — MCP server (stdio): tokens, components and validation on demand

@@ -91,7 +91,8 @@ would change it*. The third field is the one that matters; a justification nobod
 decoration. The format, the threshold for owing a line, and what each mode specifically owes live
 once in `_agents/decision-record.md` — no mode file restates them, for the same reason there is one
 `/syx` command instead of nine. SKETCH is exempt, and the exemption is argued there rather than
-assumed.
+assumed; AUDIT and MIGRATE attach the line to each finding or variable instead of closing with a
+block, and that placement is argued there too.
 
 ## Composing Modes
 
@@ -226,7 +227,8 @@ does not have yet, and BRAND has to say which, not improvise around it.
    live **above** the first `## ` heading. Declare `mind-system/knowledges/` in **Reads** so any
    cortex path the body mentions stays covered by the guardian
 4. Define: role, priorities, output format, constraints, response template, example. The
-   response template ends with `## Why`, and the mode gets a row in the table of
+   response template ends with `## Why` (or places the lines per finding, as AUDIT and
+   MIGRATE do), and the mode gets a row in the table of
    `_agents/decision-record.md` naming which decisions it owes lines for — an empty row is an
    exemption, and an exemption needs an argument
 5. Add a row to the table in `AGENTS.md`, `CLAUDE.md` **and** this file — all three are checked

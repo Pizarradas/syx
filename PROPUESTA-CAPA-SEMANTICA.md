@@ -6,7 +6,7 @@
 > `contracts/`, que `contracts/trust.json` marca `human`. Un agente puede
 > analizarlas y redactarlas; firmarlas no.
 
-Lo que **sí** está hecho, y no necesita esta propuesta: los 34 componentes del
+Lo que **sí** está hecho, y no necesita esta propuesta: los 38 componentes del
 registro ya tienen `description` y `usage`, y cada `description` abre con
 `[scope: system-reusable | domain-reusable | product-specific]`. Sobrevive a
 `npm run build:registry` y `get_component` ya lo devuelve. Este documento pide
@@ -106,7 +106,7 @@ campo nuevo es peor que no tenerlo, porque da una garantía falsa.
 
 Un fichero, cuatro puntos, sin cambio de esquema en el JSON (los campos son
 opcionales, así que un consumidor viejo no se entera). El riesgo real no es el
-código: es que siete campos a mano por 34 componentes se pudran si nadie los
+código: es que siete campos a mano por 38 componentes se pudran si nadie los
 revisa. Mitigación posible, para después: un aviso de `check:registry` cuando
 un componente tiene `avoidWhen` vacío, al nivel de aviso, nunca de error.
 

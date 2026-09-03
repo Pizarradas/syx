@@ -23,11 +23,11 @@ Fundamentos de implementación front-end que respaldan las reglas técnicas de l
 
 | Módulo | UX | UI | SKETCH | AUDIT | TOKEN | THEME | BRAND |
 |--------|----|----|--------|-------|-------|-------|-------|
-| `html-semantics.md` | ✓ | — | — | ✓ | — | — | — |
-| `css-architecture.md` | — | ✓ | — | ✓ | — | — | — |
+| `html-semantics.md` | ✓ | — | — | — | — | — | — |
+| `css-architecture.md` | — | ✓ | — | — | — | — | — |
 | `mobile-first.md` | ✓ | ✓ | ✓ | ✓ | — | — | — |
-| `progressive-enhancement.md` | ✓ | ✓ | — | ✓ | — | — | — |
+| `progressive-enhancement.md` | ✓ | — | — | ✓ | — | — | — |
 | `accessibility-wcag.md` | ✓ | — | — | ✓ | — | — | — |
 | `javascript-patterns.md` | ✓ | — | — | — | — | — | — |
-| `size-models.md` | — | ✓ | — | — | ✓ | ✓ | ✓ |
+| `size-models.md` | — | — | — | — | ✓ | ✓ | ✓ |
 | `size-models-checklist.md` | — | — | — | ✓ | ✓ | — | — |

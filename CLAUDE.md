@@ -18,7 +18,7 @@ never edit a rule or a guard to make your own change pass.
 
 **To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.
 
-**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 34 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
+**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 38 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
 
 **Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
 `README.md` → *MCP server*), don't load those files to answer a point question. Use
@@ -27,8 +27,10 @@ hardcoding anything, `get_component` for a component's verified classes and modi
 `get_mixin` before writing a property a rule will reject — R03 and R04 say what you may not write, and `get_mixin` says what to write instead —
 `get_figma_spec` before creating anything in Figma — `get_component` returns token *names*, and a Figma node needs numbers —
 and `validate_snippet` to pass R01–R04 over SCSS **before** writing it (it now names the replacement mixin itself). It runs the same
-rules as `npm run validate`, from `scripts/lib/rules.js`. In an app that installs SYX
-instead of cloning it, `require('syx-design-system')` gives the same six queries.
+rules as `npm run validate`, from `scripts/lib/rules.js`. The server exposes eleven tools
+in total — `list_themes` and `list_mixins` round out the nine above; the full table is in
+`README.md`. In an app that installs SYX instead of cloning it,
+`require('syx-design-system')` gives the same queries as a Node API.
 
 ---
 
@@ -63,7 +65,7 @@ density, proportion, zone, advertising — and nothing above rung 5. Entry point
 
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH closes its response with a `## Why` — one line per decision that had an alternative, specified once in `_agents/decision-record.md`.
+When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH answers for its decisions with `## Why` lines — one line per decision that had an alternative, specified once in `_agents/decision-record.md`. AUDIT and MIGRATE attach the line to each finding or variable instead of closing with a block; that placement is argued there too.
 
 Two operators compose modes: `→` is a pipeline (each output feeds the next), `+` is evaluative
 (both modes work the same artifact). **`+` groups before `→`**, so `[SYX: UX → UI + AUDIT]:` reads
@@ -115,7 +117,7 @@ ordering is worth.
 | `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | nothing | Quick POCs, wireframes, flow diagrams, layout experiments — no token/registry checks |
 | `[SYX: UX]:` | `_agents/modes/ux.md` | nothing | Component selection, HTML structure, accessibility, interaction design |
 | `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | nothing | Experimental builds, awwwards-style pages, advanced CSS techniques, creative exploration |
-| `[SYX: UI]:` | `_agents/modes/ui.md` | `pr` | SCSS implementation, token usage, code generation, contract compliance |
+| `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, code generation, contract compliance — SCSS via `propose.js`, `component-registry.json` direct |
 | `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
@@ -164,17 +166,19 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 
 ```
 scss/abstracts/tokens/    — 4-tier token system (primitives → semantic → component)
-scss/atoms/               — 19 single-purpose components
-scss/molecules/           — 7 composite components
+scss/atoms/               — 21 single-purpose components
+scss/molecules/           — 9 composite components
 scss/organisms/           — 8 complex sections
 scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 4-5 bundle contexts
 contracts/                — machine-readable validation output
 _agents/                  — THE ENGINE: modes (Trust + Knowledge blocks), workflows, prompts
+_agents/architecture.md   — the ecosystem as diagrams-as-code; architecture.json is the
+                            same graph machine-readable — start here to frame any change
 mind-system/              — THE CORTEX: README (precedence), constitution, routing,
                             governance/ (ATLAS ↔ modes), atlas-rules/ (guest domain),
                             knowledges/ (ux · ui · front · syx · branding · motion · vendors)
 scripts/syx-validate.js   — contract validator (run after any change)
-index.js                  — package entry point: the same six queries as an npm dependency
+index.js                  — package entry point: the same queries as an npm dependency
 scripts/mcp-server.js     — MCP server (stdio) — ask the system instead of reading it
 scripts/lib/              — shared engine: css-tokens.js, rules.js (R01–R04), consulta.js
 ```

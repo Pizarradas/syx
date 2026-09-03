@@ -6,7 +6,7 @@ Qué módulo del córtex entra en qué modo, y cuándo. Es el cableado entre `mi
 
 ---
 
-## Las cuatro formas de cargar
+## Las cinco formas de cargar
 
 | Etiqueta | Significado |
 |---|---|
@@ -16,7 +16,7 @@ Qué módulo del córtex entra en qué modo, y cuándo. Es el cableado entre `mi
 | **On request** | Solo si el brief lo pide o lo nombra. Nunca por iniciativa propia. |
 | **Self-check** | Solo TOKEN. Se lee al final, contra el propio output, no al principio. |
 
-Ninguna de las cuatro autoriza nada. El conocimiento informa; la regla ejecuta.
+Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 
 ---
 
@@ -56,7 +56,7 @@ Ninguna de las cuatro autoriza nada. El conocimiento informa; la regla ejecuta.
 | `motion/02-capacidades/index.md` | | | ◐ | | | | | | |
 | `motion/03-patrones/` | | | ◐ | | | · | | | |
 | `motion/04-glosario/index.md` | · | | · | | | | | | |
-| `vendors/awesome-design/` | · | | · | | ○ | | | | · |
+| `vendors/awesome-design/` | · | | · | | · | | | | · |
 
 ---
 
@@ -185,6 +185,6 @@ No son modos ni conocimiento: son input estructurado y procedimientos.
 | Carpeta | Qué es | Contenido |
 |---|---|---|
 | `_agents/prompts/` | Plantillas de invocación | `new-atom` · `new-molecule` (→ UI) · `review-component` · `theme-audit` (→ AUDIT) |
-| `_agents/workflows/` | Procedimientos paso a paso | `create-component` (TOKEN+UI) · `create-theme` (TOKEN+THEME) · `audit-tokens` (AUDIT) · `update-changelog` |
+| `_agents/workflows/` | Procedimientos paso a paso | `create-component` (TOKEN+UI) · `create-theme` (TOKEN+THEME) · `audit-tokens` (AUDIT) · `update-changelog` · `export-to-figma` |
 
 Viven en `_agents/` y no aquí: son operativos, no conceptuales.

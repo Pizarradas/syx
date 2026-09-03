@@ -38,10 +38,10 @@ knowledges/
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio UI | — |
 | `refactoring-ui.md` | Spacing, jerarquía visual, composición (Wathan & Schoger) | UI mode |
-| `color-theory.md` | Distribución 60/30/10, semántica del color | TOKEN, THEME, BRAND |
-| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | UI, BRAND |
-| `motion-principles.md` | Easing, duración, GPU-composited properties | UI, CREATIVE, BRAND |
-| `practical-ui.md` | Correcciones ópticas, densidad, elevación | CREATIVE, UI, BRAND |
+| `color-theory.md` | Distribución 60/30/10, semántica del color | CREATIVE, TOKEN, THEME, BRAND |
+| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | CREATIVE, UI, BRAND |
+| `motion-principles.md` | Easing, duración, GPU-composited properties | CREATIVE, UI, BRAND |
+| `practical-ui.md` | Correcciones ópticas, densidad, elevación | CREATIVE, BRAND |
 
 ### `front/` — Front-end implementation
 
@@ -54,6 +54,8 @@ knowledges/
 | `progressive-enhancement.md` | Capas HTML/CSS/JS independientes | UX, AUDIT |
 | `accessibility-wcag.md` | WCAG 2.1/2.2 AA, ARIA, gestión del foco | UX, AUDIT |
 | `javascript-patterns.md` | Patrones JS para interactividad accesible | UX mode |
+| `size-models.md` | Modelos de dimensionado y primitivos de escala | TOKEN, THEME, BRAND |
+| `size-models-checklist.md` | Checklist de dimensionado — TOKEN lo lee contra su propio output | TOKEN (self-check), AUDIT |
 
 ### `syx/` — Sistema SYX
 

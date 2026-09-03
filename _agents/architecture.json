@@ -1,0 +1,166 @@
+{
+  "_meta": {
+    "schema": "syx.architecture/1",
+    "description": "Machine-readable map of the SYX ecosystem: layers, precedence, who generates what, who guards what, and how modes compose. Written for any AI agent, not one in particular. The human-readable twin, with the same graph as Mermaid diagrams, is _agents/architecture.md.",
+    "rule": "This file DESCRIBES; it never authorises. Every entry carries a `source`: the file it is derived from. When this map and its source disagree, the source wins and this map is what needs fixing.",
+    "antiDrift": "No mutable inventory is duplicated here. Counts, paths and per-item detail stay in the machine-readable file that already owns them (`countSource` / `see` fields point there). This file only encodes what otherwise exists in prose alone.",
+    "maintainedBy": "tier auto (contracts/trust.json: `_agents/`) — update it in the same change that alters the shape it describes"
+  },
+
+  "layers": [
+    {
+      "id": "contracts",
+      "name": "The law",
+      "paths": ["contracts/rules.json", "contracts/trust.json"],
+      "role": "What may be written (trust tiers) and what code must look like (R01-R08). Nothing outranks them.",
+      "writable": "human-only, on purpose: the judged do not edit the judge"
+    },
+    {
+      "id": "engine",
+      "name": "The engine",
+      "paths": ["_agents/"],
+      "role": "What a mode does, in what format, under which permission ceiling. Modes (Trust + Knowledge blocks), workflows, prompts, decision-record, this map.",
+      "writable": "auto",
+      "guardedBy": "check:modos",
+      "shipsToNpm": true
+    },
+    {
+      "id": "cortex",
+      "name": "The cortex",
+      "paths": ["mind-system/"],
+      "role": "Why a decision is right: governance (ATLAS composition), atlas-rules (guest editorial domain), knowledges (the corpus), routing (derived wiring), constitution. Informs; never executes, never authorises.",
+      "writable": "auto today via the `*.md` pattern; ACOPLE.md proposes human for governance/, atlas-rules/, constitution.md and README.md — pending decision",
+      "shipsToNpm": false,
+      "note": "Shipped docs reference these paths; an npm consumer does not have them. Known, intentional, unguarded."
+    },
+    {
+      "id": "source",
+      "name": "The source",
+      "paths": ["scss/"],
+      "role": "4-tier token system (primitives -> semantic -> component), atoms, molecules, organisms, utilities, layout, pages, themes.",
+      "writable": "mixed: components/utilities/component-tokens are pr (via propose.js); primitives, semantic, mixins, themes, base are human-only",
+      "see": "contracts/trust.json tiers.*.paths"
+    },
+    {
+      "id": "derived",
+      "name": "Derived artifacts",
+      "paths": ["css/", "tokens.json", "component-registry.json", "contracts/resolved-tokens.json", "contracts/figma/", "contracts/dtcg/", "contracts/validation-report.md", "mind-system/routing.md"],
+      "role": "Everything generated from the source or from the modes. Never edited by hand except the prose fields the generators preserve (registry `description`/`usage`).",
+      "writable": "auto (regenerate, do not hand-edit)"
+    },
+    {
+      "id": "guards",
+      "name": "The guards",
+      "paths": ["scripts/"],
+      "role": "Validators and generators. `npm run check` chains them all.",
+      "writable": "human-only: a guard the agent can rewrite guards nothing"
+    },
+    {
+      "id": "query",
+      "name": "The query surface",
+      "paths": ["scripts/mcp-server.js", "index.js", "scripts/lib/consulta.js"],
+      "role": "Ask the system instead of reading it. MCP server (stdio) and the Node API answer from the same layer (consulta.js), so agent and application get the same answer.",
+      "writable": "human-only (lives in scripts/)"
+    }
+  ],
+
+  "precedence": {
+    "description": "When two documents disagree, the higher rung wins - no exceptions by context.",
+    "source": ["CLAUDE.md", "AGENTS.md", "mind-system/README.md"],
+    "rungs": [
+      { "rank": 1, "authority": "contracts/trust.json", "decides": "who may write what", "checkedBy": "classify_change" },
+      { "rank": 2, "authority": "contracts/rules.json", "decides": "R01-R08", "checkedBy": "npm run validate" },
+      { "rank": 3, "authority": "_agents/modes/*.md Trust block", "decides": "each mode's ceiling", "checkedBy": "npm run check:modos" },
+      { "rank": 4, "authority": "mind-system/governance/", "decides": "how ATLAS and the modes compose", "checkedBy": null },
+      { "rank": 5, "authority": "mind-system/atlas-rules/", "decides": "editorial decisions (guest domain)", "checkedBy": null },
+      { "rank": 6, "authority": "mind-system/knowledges/", "decides": "the reasoning", "checkedBy": null }
+    ]
+  },
+
+  "trustTiers": {
+    "description": "Three write tiers. The boundary follows the cascade: the higher a file sits, the more places a change reaches, the less an agent decides alone. Unmatched paths default to human.",
+    "source": "contracts/trust.json",
+    "tiers": ["auto (change and commit)", "pr (propose.js: branch + evidence, a person merges)", "human (analyse and recommend, never write)"],
+    "paths": "see contracts/trust.json tiers.*.paths - not duplicated here",
+    "resolver": "scripts/lib/confianza.js clasificarRuta(): longest matching pattern wins; `*.md` matches markdown at any depth"
+  },
+
+  "modes": {
+    "description": "Nine lenses over a task, activated by the `[SYX: MODE]:` prefix or `/syx`. A mode grants no permission: its Trust block is checked against trust.json by check:modos. Tier = cost of interrogating the system, not of loading the cortex - two separate axes.",
+    "source": ["_agents/modes/", "CLAUDE.md", "_agents/modes/README.md"],
+    "list": [
+      { "tier": 1, "mode": "SKETCH", "writes": "nothing" },
+      { "tier": 2, "mode": "UX", "writes": "nothing" },
+      { "tier": 3, "mode": "CREATIVE", "writes": "nothing" },
+      { "tier": 4, "mode": "TOKEN", "writes": "pr + recommends" },
+      { "tier": 5, "mode": "THEME", "writes": "recommends" },
+      { "tier": 6, "mode": "UI", "writes": "auto + pr" },
+      { "tier": 7, "mode": "AUDIT", "writes": "nothing" },
+      { "tier": 8, "mode": "MIGRATE", "writes": "pr + recommends" },
+      { "tier": 9, "mode": "BRAND", "writes": "recommends" }
+    ],
+    "grammar": {
+      "pipeline": "A -> B : each output feeds the next",
+      "evaluative": "A + B : both modes work the same artifact",
+      "grouping": "+ binds before ->, so UX -> UI + AUDIT reads UX -> (UI + AUDIT)",
+      "validCombos": "mind-system/routing.md (Combinaciones válidas / inválidas)",
+      "atlasWrapper": "[ATLAS]: wraps a mode and decides what/why at rung 5 authority; it is not a mode itself"
+    },
+    "knowledgeWiring": "each mode's Knowledge block is the source; mind-system/routing.md is the derived two-way view"
+  },
+
+  "inventory": {
+    "description": "Counts live in the generated files, not here.",
+    "components": { "countSource": "component-registry.json (atoms/molecules/organisms/utilities keys)" },
+    "tokens": { "countSource": "tokens.json (leaf entries per section)" },
+    "themes": { "countSource": "scss/themes/ (example-* + syx-sketch; _base/_shared/_template are infrastructure)" },
+    "mixins": { "countSource": "npm run check:mixins / list_mixins" },
+    "figma": { "countSource": "contracts/figma/<theme>.figma.json _meta.cuentas" }
+  },
+
+  "queries": {
+    "description": "Same answering layer everywhere: scripts/lib/consulta.js.",
+    "mcpTools": ["list_themes", "get_token", "find_token_by_value", "list_components", "get_component", "validate_snippet", "classify_change", "scan_for_drift", "list_mixins", "get_mixin", "get_figma_spec"],
+    "mcpToolsSource": "scripts/mcp-server.js (HERRAMIENTAS)",
+    "nodeApi": "require('syx-design-system') - the same queries plus path helpers and listTokens (deliberately not an MCP tool)",
+    "cli": ["npx syx-mcp (server)", "npx syx-scan (drift scanner)"]
+  },
+
+  "edges": [
+    { "from": "scss/", "to": "css/", "rel": "generates", "via": "npm run build (sass + postcss)" },
+    { "from": "scss/ + css/", "to": "tokens.json, contracts/resolved-tokens.json", "rel": "generates", "via": "npm run build:tokens (build-token-snapshot.js)" },
+    { "from": "scss/ + css/", "to": "component-registry.json", "rel": "generates", "via": "npm run build:registry (prose fields preserved)" },
+    { "from": "contracts/resolved-tokens.json", "to": "contracts/figma/*.figma.json", "rel": "generates", "via": "npm run export:figma (scripts/lib/figma.js does every unit/colour conversion)" },
+    { "from": "tokens.json", "to": "contracts/dtcg/", "rel": "generates", "via": "npm run export:tokens (W3C DTCG)" },
+    { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R07) and validate_snippet; R08 declared, not yet implemented" },
+    { "from": "contracts/trust.json", "to": "every write", "rel": "gates", "via": "scripts/lib/confianza.js -> classify_change and propose.js" },
+    { "from": "_agents/modes/* Trust blocks", "to": "contracts/trust.json", "rel": "checked-against", "via": "npm run check:modos (also keeps CLAUDE.md, AGENTS.md and _agents/modes/README.md listing the same modes)" },
+    { "from": "_agents/modes/* Knowledge blocks", "to": "mind-system/routing.md", "rel": "is-derived-view", "via": "hand-maintained today; guard B (check-conocimiento.js) specified in ACOPLE.md, not built" },
+    { "from": "mind-system/knowledges/", "to": "modes at reasoning time", "rel": "informs", "via": "routing labels: Always / When relevant / With GSAP / On request / Self-check - none of them authorises anything" },
+    { "from": "contracts/resolved-tokens.json + component-registry.json", "to": "MCP server / Node API", "rel": "answers-from", "via": "scripts/lib/consulta.js" }
+  ],
+
+  "guards": {
+    "description": "npm run check chains them; prepublishOnly adds check:consumible. Source: package.json scripts.",
+    "map": [
+      { "script": "validate", "guards": "R01-R04 errors + R05-R07 warnings over scss and tokens.json" },
+      { "script": "check:themes", "guards": "theme symmetry across the seven themes" },
+      { "script": "check:version", "guards": "version citations agree with package.json" },
+      { "script": "check:tokens", "guards": "tokens.json snapshot in sync with source" },
+      { "script": "check:huerfanos", "guards": "orphan files" },
+      { "script": "check:registry", "guards": "component-registry.json in sync with compiled CSS" },
+      { "script": "check:mcp", "guards": "MCP server answers like a client would see" },
+      { "script": "check:escaner", "guards": "the drift scanner itself" },
+      { "script": "check:figma", "guards": "figma export in sync" },
+      { "script": "check:mixins", "guards": "mixin docs point at real code" },
+      { "script": "check:modos", "guards": "mode Trust blocks vs trust.json, and the three mode indices" },
+      { "script": "check:encoding", "guards": "no mojibake" },
+      { "script": "check:package", "guards": "npm pack contents" }
+    ],
+    "unguarded": [
+      "rungs 4-6 (mind-system) - declared only",
+      "mode Knowledge blocks vs routing.md (guard B pending, see ACOPLE.md)",
+      "self-containment of the npm package against mind-system/ references"
+    ]
+  }
+}

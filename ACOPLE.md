@@ -67,7 +67,7 @@ scss/themes/example-03/_theme.scss                          human →  human
 |---|---|---|
 | `mind-system/governance/` | `human` | Es el criterio con el que se juzga la composición de dos sistemas. Mismo argumento que `contracts/rules.json`. |
 | `mind-system/atlas-rules/` | `human` | Es ley editorial. Tu propio `11.1` ya dice que una *revisión* solo la aprueba el equipo de diseño del sistema; esto lo hace cierto en vez de escrito. |
-| `mind-system/constitution.md` | `human` | Define dominios y solapamientos de los ocho modos. |
+| `mind-system/constitution.md` | `human` | Define dominios y solapamientos de los nueve modos. |
 | `mind-system/README.md` | `human` | Contiene la escalera de precedencia. Un agente que pueda editarla puede reordenarla. |
 | `mind-system/routing.md` | **sigue `auto`** | Es un artefacto **derivado**: la fuente son los bloques `Knowledge` de los modos, que ya están vigilados. Ponerlo en `human` cobraría un peaje cada vez que un modo añade una línea, sin proteger nada que no esté protegido aguas arriba. Lo que hace falta ahí es el guardián B, no un candado. |
 | `mind-system/knowledges/` | **sigue `auto`** | Corpus, no ley. Encaja en la definición de `auto` que tú escribiste: *«un error se ve leyendo el diff y no se propaga a nada compilado»*. Y el escalón 6 de la escalera ya le impide ganar una discusión contra una regla. |
