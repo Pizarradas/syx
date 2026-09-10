@@ -17,6 +17,11 @@
   $mob-nav-z:   200;
   $overlay-z:   199;
   $header-z:    201;
+  // Ancho máximo del selector de tema en la franja xl→xxl. Medido en
+  // Chromium: a ancho natural (194px) deja la cabecera a 17px de rozar;
+  // acotado a 9rem la holgura sube a 41px y la opción larga aún se lee
+  // («SYX — Bluep…»). Desde xxl recupera su ancho natural.
+  $select-max-w: 9rem;
 
   // ── Sticky wrapper ──────────────────────────
   .org-site-header {
@@ -152,6 +157,19 @@
 
       @include breakpoint(xl) {
         display: block;
+
+        .atom-select {
+          max-width: $select-max-w;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      @include breakpoint(xxl) {
+        .atom-select {
+          max-width: none;
+        }
       }
     }
 
