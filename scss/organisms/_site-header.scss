@@ -17,10 +17,10 @@
   $mob-nav-z:   200;
   $overlay-z:   199;
   $header-z:    201;
-  // Ancho máximo del selector de tema en la franja xl→xxl. Medido en
+  // Ancho máximo del selector de tema en la franja xl→wide. Medido en
   // Chromium: a ancho natural (194px) deja la cabecera a 17px de rozar;
   // acotado a 9rem la holgura sube a 41px y la opción larga aún se lee
-  // («SYX — Bluep…»). Desde xxl recupera su ancho natural.
+  // («SYX — Bluep…»). Desde wide recupera su ancho natural.
   $select-max-w: 9rem;
 
   // ── Sticky wrapper ──────────────────────────
@@ -73,9 +73,12 @@
     // ── Desktop nav — hidden below 1280px ──────────
     // Con nueve enlaces (la nav enlaza al Storybook), a 1280-1366px la fila
     // con gap lg quedaba a 0px del selector de tema — medido con la nav
-    // forzada visible en Chromium. La solución no es subir el corte a xxl
-    // (deja hamburguesa en pantallas grandes): es compactar el gap en la
-    // franja xl→xxl (43px de holgura a 1280) y devolverlo a lg desde xxl.
+    // forzada visible en Chromium. La solución no es subir el corte (deja
+    // hamburguesa en pantallas grandes): es compactar el gap en la franja
+    // xl→wide (43px de holgura a 1280) y devolverlo a lg desde wide.
+    // Ojo: el breakpoint de 90em se llama `wide` en $syx-breakpoints; un
+    // nombre desconocido (p. ej. xxl) no falla — @warn y el bloque se
+    // descarta en silencio.
     &__nav {
       display: none;
       align-items: center;
@@ -85,7 +88,7 @@
         display: flex;
       }
 
-      @include breakpoint(xxl) {
+      @include breakpoint(wide) {
         gap: var(--semantic-space-component-lg, 1.5rem);
       }
 
@@ -166,7 +169,7 @@
         }
       }
 
-      @include breakpoint(xxl) {
+      @include breakpoint(wide) {
         .atom-select {
           max-width: none;
         }
