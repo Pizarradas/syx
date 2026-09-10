@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introducción" />
+
+# SYX Design System
+
+**Token-driven · SCSS nativo · sin framework.** 38 componentes (21 átomos,
+9 moléculas, 8 organismos) construidos sobre un sistema de tokens de 4 capas
+(primitivos → semánticos → de componente → tema) con contratos validados por
+máquina (R01–R08): sin `!important`, sin valores hardcodeados, sin primitivos
+en componentes.
+
+## Cómo usar este catálogo
+
+- **Toolbar superior** — cambia entre los **7 temas** y entre modo **claro y
+  oscuro**. Todo el catálogo repinta en vivo: los componentes no cambian de
+  markup, solo de tokens.
+- **Tokens** — el registro completo con muestras vivas: cambia el tema en la
+  toolbar y observa cómo los mismos nombres pintan distinto.
+- **Atoms / Molecules / Organisms** — cada componente trae *Playground* (con
+  controls derivados de sus modifiers), una story por eje de variación y la
+  pestaña **Docs** con su descripción y el contrato de markup real.
+
+## Un sistema, tres frameworks
+
+Este catálogo HTML es la línea base: renderiza el markup del registro,
+verbatim, con CSS puro. Los catálogos [React](../react/) y [Vue 3](../vue/)
+muestran los mismos 38 componentes como wrappers **generados** desde
+`component-registry.json` — cero componentes escritos a mano — y un pixel-diff
+automático (64 stories × 2 pares = 128 comparaciones, **0 divergencias**)
+demuestra que el traslado es sin pérdida.
+
+Las stories, los wrappers y este catálogo entero se regeneran desde el
+registro en cada build: no pueden desviarse del sistema porque no existen por
+separado de él.
+
+## Enlaces
+
+- [Repositorio](https://github.com/pizarradas/syx)
+- [Sitio del sistema](https://pizarradas.github.io/syx/home.html)
+- [Catálogo React](../react/) · [Catálogo Vue 3](../vue/)

@@ -1,0 +1,97 @@
+# SYX — Publicación en GitHub Pages
+# ══════════════════════════════════
+# Hasta ahora Pages servía la rama main tal cual (modo "deploy from branch"):
+# home.html, docs.html y compañía funcionaban porque están commiteados. El
+# sandbox de portabilidad rompe ese supuesto a propósito — sus catálogos son
+# derivados que no se versionan — así que la publicación pasa a ser un build:
+# este workflow construye los tres Storybooks, monta el sitio completo y lo
+# despliega. Las páginas de siempre siguen en su sitio; los catálogos quedan
+# en /storybook/.
+#
+# REQUIERE UN CAMBIO DE AJUSTE (una vez, manual): Settings → Pages → Source:
+# "GitHub Actions". Hasta ese clic, este workflow construye y valida pero el
+# despliegue final no sustituye al de la rama.
+#
+# La portabilidad (pixel-diff HTML↔React↔Vue) se ejecuta aquí como informe,
+# no como guardián que tumba el despliegue: mismo criterio que el job de
+# desviación en ci.yml — un check nuevo se gana el derecho a romper builds
+# demostrando primero que no flaquea. Cuando lleve unas semanas en verde,
+# quitarle el continue-on-error será una decisión, no un descuido.
+
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Construir sitio + catálogos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Dependencias de los tres Storybooks
+        run: |
+          npm ci --prefix storybook --no-fund --no-audit
+          npm ci --prefix storybook/frameworks/react --no-fund --no-audit
+          npm ci --prefix storybook/frameworks/vue --no-fund --no-audit
+
+      - name: Generar y construir los tres catálogos
+        run: npm --prefix storybook run build:all
+
+      - name: Portabilidad (informe, no guardián)
+        continue-on-error: true
+        run: |
+          (cd storybook && npx playwright install --with-deps chromium)
+          {
+            echo '## Portabilidad HTML ↔ React ↔ Vue'
+            echo
+            echo '```'
+            node storybook/check-portabilidad.mjs || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Montar el sitio
+        run: |
+          mkdir -p _site/storybook
+          cp *.html robots.txt site.webmanifest browserconfig.xml _site/
+          cp -r css js fonts img assets _site/
+          # La raíz de Pages con branch-mode la resolvía Jekyll renderizando el
+          # README; con Actions no hay Jekyll, así que la portada es home.html.
+          printf '<!doctype html><meta http-equiv="refresh" content="0; url=home.html">' > _site/index.html
+          cp storybook/site-index.html _site/storybook/index.html
+          cp -r storybook/storybook-static _site/storybook/html
+          cp -r storybook/frameworks/react/storybook-static _site/storybook/react
+          cp -r storybook/frameworks/vue/storybook-static _site/storybook/vue
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    name: Desplegar
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

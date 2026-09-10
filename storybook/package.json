@@ -1,0 +1,28 @@
+{
+  "name": "syx-storybook",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sandbox de portabilidad de SYX: catálogo Storybook generado desde component-registry.json. No se publica; es evidencia, no producto.",
+  "type": "module",
+  "scripts": {
+    "spec": "node generate-spec.mjs",
+    "stories": "node generate-stories.mjs",
+    "tokens-docs": "node generate-tokens.mjs",
+    "generate": "npm run spec && npm run stories && npm run tokens-docs",
+    "dev": "npm run generate && storybook dev -p 6006",
+    "build": "npm run generate && storybook build",
+    "build:react": "npm --prefix frameworks/react run build",
+    "build:vue": "npm --prefix frameworks/vue run build",
+    "build:all": "npm run build && npm run build:react && npm run build:vue",
+    "check:portabilidad": "node check-portabilidad.mjs"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/html-vite": "^8.6.0",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0",
+    "storybook": "^8.6.0",
+    "vite": "^5.4.0"
+  }
+}

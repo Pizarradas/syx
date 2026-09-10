@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SYX — Storybook de portabilidad</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { margin: 0; font-family: system-ui, sans-serif; min-height: 100vh; display: grid; place-items: center; background: #fafaf8; color: #1a1a1a; }
+    @media (prefers-color-scheme: dark) { body { background: #16161a; color: #ececec; } }
+    main { max-width: 40rem; padding: 3rem 1.5rem; }
+    h1 { font-size: 1.6rem; margin: 0 0 .4rem; }
+    p { line-height: 1.55; opacity: .85; }
+    ul { list-style: none; padding: 0; display: grid; gap: .8rem; margin-top: 2rem; }
+    a.card { display: block; padding: 1rem 1.25rem; border: 1px solid #8884; border-radius: .6rem; text-decoration: none; color: inherit; }
+    a.card:hover { border-color: #888a; }
+    a.card strong { display: block; margin-bottom: .2rem; }
+    a.card span { font-size: .85rem; opacity: .7; }
+    footer { margin-top: 2.5rem; font-size: .8rem; opacity: .6; }
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SYX — un sistema, tres frameworks</h1>
+    <p>
+      Los 38 componentes de SYX renderizados por tres runtimes distintos desde
+      una única fuente: <code>component-registry.json</code>. Los wrappers de
+      React y Vue están <em>generados</em>, no escritos — cero excepciones
+      manuales — y un pixel-diff automático comprueba que los tres catálogos
+      pintan idéntico.
+    </p>
+    <ul>
+      <li><a class="card" href="html/"><strong>HTML</strong><span>La línea base: el markup del registro, verbatim. CSS puro.</span></a></li>
+      <li><a class="card" href="react/"><strong>React</strong><span>Wrappers JSX generados: props tipadas desde los modifiers.</span></a></li>
+      <li><a class="card" href="vue/"><strong>Vue 3</strong><span>Los mismos wrappers como render functions de Vue.</span></a></li>
+    </ul>
+    <footer>
+      <a href="https://github.com/pizarradas/syx">Repositorio</a> ·
+      <a href="../">Sitio del sistema</a>
+    </footer>
+  </main>
+</body>
+</html>

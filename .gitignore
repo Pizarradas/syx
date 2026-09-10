@@ -15,6 +15,19 @@ css/organisms/
 css/themes/
 css/utilities/
 
+# El sandbox de portabilidad genera spec/ y stories/ desde
+# component-registry.json en cada `npm run generate`, y storybook-static/ es
+# el build. Versionar derivados que se regeneran solos es invitar al drift:
+# solo se versionan los generadores y la configuración.
+storybook/spec/
+storybook/stories/
+storybook/storybook-static/
+storybook/frameworks/*/src/
+storybook/frameworks/*/stories/
+storybook/frameworks/*/storybook-static/
+storybook/portability-diffs/
+storybook/portability-report.json
+
 # La exportación DTCG son 2,9 MB derivables enteros de
 # contracts/resolved-tokens.json. Se genera a demanda con
 # `npm run export:tokens` y no se versiona: los datos derivados en un artefacto
