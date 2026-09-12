@@ -1,0 +1,28 @@
+// SYX SITE LAYER
+// ===============================================
+// Components built exclusively for SYX's own pages
+// (home.html, docs.html, why-syx.html). They are NOT
+// part of the design system: the component registry
+// does not scan this folder and the storybook does not
+// generate stories for it. A consumer replicating SYX
+// can delete scss/site/ (and every reference to
+// syx-bundle-site) and nothing in the system breaks.
+// ===============================================
+
+// Atoms (why-syx.html)
+@forward 'evidence';
+@forward 'score';
+
+// Molecules (why-syx.html + home.html)
+@forward 'compare-card';
+@forward 'ranking';
+@forward 'theme-swatch-card';
+
+// Organisms (home.html + site chrome)
+@forward 'home-cta';
+@forward 'home-features';
+@forward 'home-footer';
+@forward 'home-hero';
+@forward 'home-layers';
+@forward 'home-themes';
+@forward 'home-tokens';

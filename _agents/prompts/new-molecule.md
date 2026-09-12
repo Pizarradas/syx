@@ -38,9 +38,9 @@ HTML example of usage:
 Output:
 1. Token file: scss/abstracts/tokens/components/_{name}.scss
 2. Component SCSS file: scss/molecules/_{name}.scss
-3. The @forward lines for both index files
+3. The @forward lines for both index files, plus the one-line `@include mol-{name}($theme);` for `scss/themes/_shared/_bundle-full.scss` (without it the molecule compiles in no theme)
 4. A usage HTML example
-5. The JSON entry for component-registry.json
+5. The `description` and `usage` strings for the registry — the rest of `component-registry.json` is generated (`npm run build:registry`), never written by hand
 ```
 
 ---
@@ -60,9 +60,9 @@ Elements needed: __icon, __content, __title, __body
 
 HTML example:
 <div class="mol-alert mol-alert--info" role="alert">
-  <span class="atom-icon --lc-info" aria-hidden="true"></span>
+  <span class="atom-icon atom-icon--lc-info" aria-hidden="true"></span>
   <div class="mol-alert__content">
-    <p class="mol-alert__title atom-title atom-title--sm">Note</p>
+    <p class="mol-alert__title atom-title atom-title--h6">Note</p>
     <p class="mol-alert__body atom-txt">Your changes have been saved.</p>
   </div>
 </div>

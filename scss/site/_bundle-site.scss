@@ -1,0 +1,40 @@
+// SYX BUNDLE: SITE
+// ================================================
+// The site layer in one include: everything SYX's own
+// pages need on top of the design system. This is the
+// only entry point to scss/site/ — remove the folder
+// and the two lines that reference this bundle in each
+// theme's setup.scss / bundle-home.scss, and the system
+// compiles clean without it.
+// ================================================
+// Usage: @use '../../site/bundle-site' as *;
+//        @include syx-bundle-site($theme);
+// ================================================
+
+// Los mixins que este fichero invoca se declaran en otros ficheros:
+// sin este @use, Sass los resuelve como indefinidos (un mixin se
+// resuelve en el fichero donde se escribe, no en el que lo incluye).
+@use 'index' as *;
+
+@mixin syx-bundle-site($theme: null) {
+  // ATOMS (why-syx.html)
+  // ================================================
+  @include atom-evidence($theme);
+  @include atom-score($theme);
+
+  // MOLECULES (why-syx.html + home.html)
+  // ================================================
+  @include mol-compare-card($theme);
+  @include mol-ranking($theme);
+  @include mol-theme-card($theme);
+
+  // ORGANISMS (home.html + site chrome)
+  // ================================================
+  @include org-home-cta($theme);
+  @include org-home-features($theme);
+  @include org-home-footer($theme);
+  @include org-home-hero($theme);
+  @include org-home-layers($theme);
+  @include org-home-themes($theme);
+  @include org-home-tokens($theme);
+}

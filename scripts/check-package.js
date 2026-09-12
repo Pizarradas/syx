@@ -43,8 +43,11 @@ const avisos = [];
 
 let manifiesto;
 try {
-  const salida = execFileSync('npm', ['pack', '--dry-run', '--json'], {
+  // En Windows npm es npm.cmd y execFileSync sin shell no lo encuentra (ENOENT).
+  const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+  const salida = execFileSync(npm, ['pack', '--dry-run', '--json'], {
     cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+    shell: process.platform === 'win32',
   });
   manifiesto = JSON.parse(salida)[0];
 } catch (e) {

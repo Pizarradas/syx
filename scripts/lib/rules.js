@@ -24,7 +24,7 @@ const R01_PERMITIDO = [
   'scss/setup.scss',
   'scss/utilities/',
   'scss/pages/',
-  'scss/organisms/_home-tokens.scss',
+  'scss/site/_home-tokens.scss', // token showroom del sitio: muestra primitivos a propósito
 ];
 
 // Excepciones por patrón deliberado, no por descuido.
@@ -32,13 +32,13 @@ const R01_EXCEPCIONES = [
   'scss/atoms/_feature-icon.scss',
   'scss/atoms/_pill.scss',
   'scss/molecules/_code-snippet.scss',
-  'scss/organisms/_home-layers.scss',
+  'scss/site/_home-layers.scss',
 ];
 const R03_EXCEPCIONES = ['mixins/', 'scss/utilities/_accessibility.scss', 'scss/base/_reset.scss'];
 const R04_EXCEPCIONES = [
   'mixins/', 'scss/base/_reset.scss', 'scss/utilities/_accessibility.scss',
   'scss/utilities/_display.scss',
-  'scss/organisms/_home-tokens.scss',
+  'scss/site/_home-tokens.scss',
 ];
 
 const DESCRIPCIONES = {

@@ -25,7 +25,7 @@ You are a **migration specialist** for SYX. Your job is to eliminate legacy CSS 
 
 1. **Impact first, edit second.** Find every usage of the variable before touching any file.
 2. **Use `lint-contract.json` as your source of truth.** It has the migration target for every legacy var.
-3. **Never break a theme.** Every migration must leave all 6 themes compiling correctly.
+3. **Never break a theme.** Every migration must leave all 7 themes compiling correctly.
 4. **One variable at a time.** Don't batch migrations across unrelated variables in a single pass.
 5. **Leave the `lint-contract.json` update written out.** The contract must reflect current reality, but it is human-only: give the exact diff so the person who merges applies it in the same move.
 
@@ -209,7 +209,7 @@ Object.entries(vars).forEach(([name, data]) => {
 **Usages Found:**
 ```
 scss/base/_elements.scss:14    gap: var(--base-measure);
-scss/layout/_grid.scss:8       padding: var(--base-measure);
+scss/layout/grids/_grid.scss:8       padding: var(--base-measure);
 ```
 
 **Tier Check:** Both usages are in `scss/base/` and `scss/layout/` — these are allowed to use `--primitive-*` tokens. No R01 violation. Replacement is safe as-is.
@@ -225,7 +225,7 @@ gap: var(--base-measure);
 gap: var(--primitive-space-base);
 ```
 
-`scss/layout/_grid.scss:8`
+`scss/layout/grids/_grid.scss:8`
 ```scss
 // Before
 @include padding(var(--base-measure));

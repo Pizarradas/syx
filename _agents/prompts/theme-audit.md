@@ -36,7 +36,7 @@ Report any that are missing.
 
 ### Violation 2: Semantic tokens assigned directly (not via primitives)
 In a branded theme, --semantic-* tokens should be assigned from --primitive-* tokens, not from raw values.
-Exception: the _template theme's Section 3 (Neutral Brand) is allowed to set semantics directly.
+Exception: the _template theme (neutral by design) is allowed to set semantics directly in its `theme-template` mixin.
 
 ❌ --semantic-color-bg-primary: oklch(0.98 0.01 240);  ← raw value in a branded theme
 ✅ --semantic-color-bg-primary: var(--primitive-color-brand-50);  ← via primitive

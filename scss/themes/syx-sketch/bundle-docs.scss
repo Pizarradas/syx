@@ -12,7 +12,7 @@
 @use '../../organisms/index' as *;
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
-@use '../_shared/bundle-docs' as *;
+@use '../_shared/bundle-full' as *;
 @use 'theme' as *;
 
 // THEME TOKENS
@@ -20,27 +20,9 @@
 @include universal-values();
 @include theme-syx-sketch();
 
-// FONTS — Space Grotesk (5 variables)
+// FONTS (declared once in _theme.scss)
 // ================================================
-@include font-family("Google-Space-Grotesk--light",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Light",
-  300, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--regular",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-  400, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--medium",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Medium",
-  500, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--semibold",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-SemiBold",
-  600, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--bold",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-  700, normal, eot woff2 woff ttf svg);
+@include theme-syx-sketch-fonts();
 
 // CORE (reset + helpers + grid)
 // ================================================
@@ -48,4 +30,4 @@
 
 // BUNDLE
 // ================================================
-@include syx-bundle-docs(syx-sketch);
+@include syx-bundle-full(syx-sketch);

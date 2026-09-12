@@ -130,7 +130,7 @@ Modes are intentionally siloed:
 - **UI mode** never makes UX decisions. It implements what UX mode specified.
 - **TOKEN mode** never touches component SCSS. It only manages the token layer.
 - **AUDIT mode** never modifies code. It reports and recommends.
-- **THEME mode** never writes. Everything a theme touches reaches all seven bundles at once, so
+- **THEME mode** never writes. Everything a theme touches reaches all seven themes at once, so
   the mode designs the theme in full and a person puts it in.
 - **BRAND mode** never writes either, and never designs a page. It decides what every page
   inherits — the seven identity axes — and hands them to THEME to be scaled and contrast-checked.

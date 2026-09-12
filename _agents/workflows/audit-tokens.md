@@ -16,11 +16,17 @@ Use this workflow to perform a health check on the SYX token system. Run it befo
 Run the following command from the project root:
 
 ```bash
-# Search for primitive token usage outside of _theme.scss and _reset.scss
-grep -rn "var(--primitive-" scss/ --include="*.scss" | grep -v "_theme.scss" | grep -v "_reset.scss" | grep -v "tokens/primitives/"
+# R01 lives in scripts/lib/rules.js — the validator knows every allowed
+# path (abstracts/, themes/, base/, utilities/, pages/, setup-builder.scss,
+# per-file exemptions). A hand-rolled grep reproduces none of that:
+npm run validate
 ```
 
-**Expected result:** No matches. Every match is a violation that must be fixed by replacing with the appropriate `--semantic-*` token.
+**Expected result:** `PASSED`. Every R01 line it reports is a violation to
+fix by replacing the `--primitive-*` reference with the appropriate
+`--semantic-*` token. (A raw grep for `var(--primitive-` over `scss/`
+returns ~350 legitimate matches in exempt layers — do not use it as the
+check.)
 
 ---
 
@@ -94,9 +100,9 @@ const registry = require('./component-registry.json');
 const fs = require('fs');
 const all = [...registry.atoms, ...registry.molecules, ...registry.organisms];
 all.forEach(c => {
-  if (c.tokenFile && !fs.existsSync(c.tokenFile)) {
-    console.log('MISSING token file:', c.tokenFile);
-  }
+  (c.tokenFiles || []).forEach(tf => {
+    if (!fs.existsSync(tf)) console.log('MISSING token file:', c.name, tf);
+  });
 });
 console.log('Token file check complete.');
 "
@@ -132,7 +138,7 @@ After running all audits, document findings in `AUDIT_REPORT.md`:
 ### Clean Audits
 
 - [x] Audit 5 (!important): 0 violations
-- [x] Audit 7 (compilation): All 6 themes compile clean
+- [x] Audit 7 (compilation): All 7 themes compile clean
 
 ### Action Items
 

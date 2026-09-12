@@ -239,8 +239,8 @@ Theme CSS applies token values that cannot be assumed to meet WCAG without verif
 /* 1. Text elements */
 .your-component [class*="atom-title"] { color: #111827; } /* 16.8:1 — AAA */
 .your-component .atom-txt            { color: #374151; } /* 10.7:1 — AAA */
-.your-component .atom-txt--muted,
-.your-component .mol-form-field__hint { color: #6b7280; } /* 4.6:1 — AA minimum */
+.your-component .atom-txt,
+.your-component .mol-form-field__msg { color: #6b7280; } /* 4.6:1 — AA minimum */
 
 /* 2. Colored surfaces (badges, pills, status dots, filled buttons)
    Never use var(--token, currentColor) as a background fallback —
@@ -360,36 +360,35 @@ Structure your response as:
 **Output:**
 
 **Components Used:**
-- `mol-form-field` — wraps input + label + hint + error
-- `atom-form` (input type="password") — the field itself
-- `atom-btn--ghost` with `atom-icon` — the toggle button
+- `mol-form-field` — wraps input + label + msg (hint or error)
+- `atom-input` inside `atom-input-wrapper` (input type="password") — the field itself
+- `atom-btn--tertiary atom-btn--circle` with `atom-icon` — the toggle button
 
 **HTML Structure:**
 ```html
 <div class="mol-form-field">
   <label class="atom-label" for="password">Password</label>
-  <div class="mol-form-field__input-wrapper">
+  <span class="atom-input-wrapper">
     <input
-      class="atom-form"
+      class="atom-input"
       type="password"
       id="password"
       name="password"
-      aria-describedby="password-hint password-error"
+      aria-describedby="password-msg"
       autocomplete="current-password"
     />
     <button
-      class="atom-btn atom-btn--ghost atom-btn--icon-only"
+      class="atom-btn atom-btn--tertiary atom-btn--circle"
       type="button"
       aria-label="Show password"
       aria-pressed="false"
     >
+      <!-- no eye icon ships yet: check the atom-icon--lc-* list before picking -->
       <span class="atom-icon" aria-hidden="true"><!-- eye icon --></span>
     </button>
-  </div>
-  <span class="mol-form-field__hint" id="password-hint">At least 8 characters</span>
-  <span class="mol-form-field__error" id="password-error" role="alert" hidden>
-    Password is required
   </span>
+  <span class="mol-form-field__msg" id="password-msg">At least 8 characters</span>
+  <!-- on error: add mol-form-field--is-error to the root and role="alert" to the msg -->
 </div>
 ```
 

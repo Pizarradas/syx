@@ -8,14 +8,13 @@ Cada subdirectorio representa un **tema visual completo** del sistema. Un tema d
 
 ```
 themes/
-├── _base/          # Tokens base compartidos por todos los temas
-├── _shared/        # Mixins y setup compartido entre temas
+├── _base/          # Valores universales (RRSS, marcas externas) + stack @layer
+├── _shared/        # syx-core + los bundles compartidos (_bundle-full, _bundle-app…)
 ├── _template/      # Plantilla neutral para crear nuevos temas
 ├── example-01/     # Tema 1
-│   ├── setup.scss       ← Punto de entrada del tema
-│   ├── _tokens.scss     ← Override de tokens primitivos
-│   ├── _overrides.scss  ← Overrides de componentes específicos
-│   └── ...
+│   ├── _theme.scss      ← ÚNICO fichero por-tema de verdad: tokens + theme-x-fonts()
+│   ├── _setup.scss      ← ~15 líneas de cableado (solo cambia el nombre del tema)
+│   └── bundle-*.scss    ← Bundles de contexto (app, docs, marketing, blog)
 ├── example-02/
 └── ...
 ```
@@ -28,14 +27,13 @@ El bundle de compilación (`scss/styles-theme-example-01.scss`) importa el tema 
 
 1. `@use "themes/example-01/setup"` — que ejecuta toda la cadena de setup
    - `@include universal-values()` emite automáticamente el stack `@layer` como primera regla CSS
-2. Cada `setup.scss` llama a los mixins del tema:
-   - `@include theme-example-01` — aplica los tokens primitivos
-   - `@include helper-backgrounds($theme)` — genera `.syx-bg-*`
-   - `@include helper-fonts($theme)` — genera `.syx-font-*`
-   - `@include helper-font-sizes($theme)` — genera `.syx-font-size-*`
-   - `@include helper-dimensions($theme)` — genera `.syx-size-*`
-   - `@include helper-spacer($theme)` — genera `.syx-spacer-*`
-   - `@include helper-icons($theme)` — genera `.syx-icon--*`
+2. Cada `_setup.scss` hace exactamente seis llamadas:
+   - `@include universal-values()` — valores universales + stack `@layer`
+   - `@include theme-example-01()` — tokens del tema (`_theme.scss`)
+   - `@include theme-example-01-fonts()` — los `@font-face` (declarados una vez en `_theme.scss`)
+   - `@include syx-core(example-01)` — reset, elementos base, helpers `.syx-*` y grid (`_shared/_core.scss`)
+   - `@include syx-bundle-full(example-01)` — todos los componentes del sistema (`_shared/_bundle-full.scss`)
+   - `@include syx-bundle-site(example-01)` — la capa site (solo los temas del sitio de SYX; desmontable)
 
 ---
 
@@ -51,7 +49,7 @@ La plantilla `_template/` es un tema neutral con identidad visual mínima: sin c
 
 ### 2. Definir los tokens primitivos
 
-En `themes/mi-marca/_tokens.scss`, sobreescribir **solo los primitivos**:
+En `themes/mi-marca/_theme.scss`, sobreescribir **solo los primitivos**:
 
 ```scss
 @mixin theme-mi-marca {
@@ -70,33 +68,29 @@ En `themes/mi-marca/_tokens.scss`, sobreescribir **solo los primitivos**:
 
 > **Regla de oro**: Solo overrides de primitivos. Los tokens semánticos y de componente cascadean automáticamente desde los primitivos. No hardcodees valores en los overrides.
 
-### 3. Registrar el tema en `setup.scss`
+### 3. Ajustar `_setup.scss`
+
+Sustituir "template" por el nombre del tema — nada más. Los helpers los
+emite `syx-core()` y la lista de componentes vive en
+`themes/_shared/_bundle-full.scss`:
 
 ```scss
-// themes/mi-marca/setup.scss
-@use "../../base/helpers" as helpers;
-@use "./_tokens" as *;
-
-// Aplicar tokens del tema
-@include theme-mi-marca;
-
-// Generar clases de helpers con el contexto del tema
-@include helpers.helper-backgrounds("mi-marca");
-@include helpers.helper-fonts("mi-marca");
-@include helpers.helper-font-sizes("mi-marca");
-@include helpers.helper-dimensions("mi-marca");
-@include helpers.helper-spacer("mi-marca");
-@include helpers.helper-icons("mi-marca");
+// themes/mi-marca/_setup.scss
+@include universal-values();
+@include theme-mi-marca();
+@include theme-mi-marca-fonts();  // ← las fuentes, declaradas en _theme.scss
+@include syx-core(mi-marca);
+@include syx-bundle-full(mi-marca);
 ```
 
-### 4. Crear el bundle de compilación
+### 4. Crear el punto de entrada
 
 Crear `scss/styles-theme-mi-marca.scss`:
 
 ```scss
-// El @layer order es emitido automáticamente por universal-values() en setup.scss
+// El @layer order es emitido automáticamente por universal-values() en _setup.scss
 @use "themes/mi-marca/setup";
-// ... resto de @use de atoms, molecules, etc.
+@use "utilities/index" as *;  // las utilidades .syx-* entran SOLO por aquí
 ```
 
 ### 5. Compilar
@@ -131,7 +125,7 @@ Tokens base que actúan como fallback si un tema no los overrides. Todos los tem
 
 - `--semantic-*` — se calculan automáticamente desde los primitivos
 - `--component-*` — igual, se calculan desde semánticos
-- Excepciones: hay casos muy específicos de `_overrides.scss` donde un componente concreto de un tema necesita un ajuste visual que el sistema de tokens no puede expresar
+- Excepciones: cuando un componente concreto necesita en un solo tema un ajuste visual que el sistema de tokens no puede expresar, se resuelve con un bloque `@if $theme == "nombre"` dentro del parcial del componente
 
 ---
 

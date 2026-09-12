@@ -46,7 +46,7 @@ Tier 1 — Primitives      scss/abstracts/tokens/primitives/
 Tier 2 — Semantic        scss/abstracts/tokens/semantic/
   Contextual roles. Theme-agnostic names.
   --semantic-color-primary: var(--primitive-color-brand-500);
-  --semantic-space-inset-md: calc(var(--primitive-space-base) * 4);
+  --semantic-space-component-md: calc(var(--primitive-space-base) * 4);
   ↓ referenced by component tokens and occasionally by utilities
 
 Tier 3 — Component       scss/abstracts/tokens/components/
@@ -94,8 +94,8 @@ Examples:
 --primitive-space-base
 --semantic-color-bg-primary
 --semantic-color-text-secondary
---semantic-border-radius-md
---semantic-space-inset-lg
+--semantic-border-radius-default
+--semantic-space-component-lg
 --component-btn-primary-bg
 --component-btn-primary-bg-hover
 --component-form-border-focus
@@ -154,7 +154,7 @@ Every theme must define all tokens in these categories. If any are missing, flag
 
 **Space:**
 ```
---semantic-space-inset-xs / -sm / -md / -lg / -xl
+--semantic-space-layout-* · --semantic-space-component-* · --semantic-space-stack-* · --semantic-space-inline-*
 --semantic-space-stack-xs / -sm / -md / -lg / -xl
 --semantic-space-inline-xs / -sm / -md / -lg / -xl
 ```
@@ -164,7 +164,7 @@ Every theme must define all tokens in these categories. If any are missing, flag
 --semantic-font-size-overline / -body-small / -body / -body-large
 --semantic-font-weight-regular / -medium / -bold / -black
 --semantic-font-family-base / -mono
---semantic-line-height-tight / -base / -loose
+--semantic-line-height-tight / -snug / -normal / -relaxed / -body / -heading / -caption
 ```
 
 **Shape:**
@@ -175,8 +175,8 @@ Every theme must define all tokens in these categories. If any are missing, flag
 
 **Motion:**
 ```
---semantic-transition-duration-fast / -base / -slow
---semantic-transition-easing-default / -in / -out
+--semantic-duration-instant / -fast / -base / -slow
+--semantic-easing-standard / -out / -in-out / -linear
 ```
 
 ---
@@ -243,8 +243,8 @@ for are specified once in `_agents/decision-record.md`.
   --component-tooltip-bg:           var(--semantic-color-bg-inverse, oklch(0.15 0 0));
   --component-tooltip-color:        var(--semantic-color-text-inverse);
   --component-tooltip-border-radius: var(--semantic-border-radius-sm);
-  --component-tooltip-padding-y:    var(--semantic-space-inset-xs);
-  --component-tooltip-padding-x:    var(--semantic-space-inset-sm);
+  --component-tooltip-padding-y:    var(--semantic-space-component-xs);
+  --component-tooltip-padding-x:    var(--semantic-space-component-sm);
   --component-tooltip-font-size:    var(--semantic-font-size-body-small);
   --component-tooltip-max-width:    18rem;
   --component-tooltip-shadow:       var(--semantic-shadow-md, none);
@@ -256,4 +256,4 @@ for are specified once in `_agents/decision-record.md`.
 
 **Registration:** Add `@forward "components/tooltip";` to `scss/abstracts/tokens/index.scss`
 
-**Notes:** `--semantic-color-bg-inverse` and `--semantic-shadow-md` may not exist — ask `get_token` before using either. If one is missing, that is a **semantic** addition: describe it, justify it and hand it over. Do not add it yourself, and do not work around it with a fallback that hides the gap.
+**Notes:** `--semantic-color-bg-inverse` and `--semantic-shadow-md` exist today, but verify with `get_token` before using them — this note is the pattern for any token you assume. If one is missing, that is a **semantic** addition: describe it, justify it and hand it over. Do not add it yourself, and do not work around it with a fallback that hides the gap.

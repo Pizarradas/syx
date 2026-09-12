@@ -160,7 +160,7 @@ Motion must feel **physical**, not mechanical. Apply these rules to every `@incl
 | **Hover** | Background tint + underline or subtle `transform: translateY(-1px)` |
 | **Focus-visible** | `@include focus-ring()` — 2px outline, 2px offset, 3:1 contrast |
 | **Active / Pressed** | `transform: scale(0.97)` or inset shadow (`box-shadow: inset 0 2px 4px …`) |
-| **Disabled** | `opacity: var(--semantic-opacity-disabled)` + `cursor: not-allowed` — not just gray |
+| **Disabled** | `color: var(--semantic-color-state-disabled)` + `cursor: not-allowed` — not just gray |
 | **Error** | Border color change + background tint + error icon + error text |
 | **Success** | Border color change + success icon + success text |
 | **Loading** | Spinner or skeleton + `pointer-events: none` + `aria-busy="true"` on the container |
@@ -221,6 +221,11 @@ Layer 4 — Motion        transitions and animation, always inside @include redu
 
 ### 9. Density
 
+> **Aspirational, not yet shipped:** no system component implements
+> `--compact`/`--comfortable` today — sizing ships as `--size-sm/-md/-lg`
+> (see `atom-btn`). Apply this section when a brief asks for density,
+> following the pattern below; do not report its absence as a violation.
+
 Components must support three density contexts without layout breakage. Implement via modifier:
 
 | Density | Class | Padding-y multiplier | Font-size |
@@ -271,9 +276,9 @@ When you need a token that doesn't exist:
   --component-{name}-color:        var(--semantic-color-text-primary);
   --component-{name}-border:       var(--semantic-color-border-default);
   --component-{name}-border-width: var(--semantic-border-width);
-  --component-{name}-radius:       var(--semantic-border-radius-md);
-  --component-{name}-padding-y:    var(--semantic-space-inset-md);
-  --component-{name}-padding-x:    var(--semantic-space-inset-lg);
+  --component-{name}-radius:       var(--semantic-border-radius-default);
+  --component-{name}-padding-y:    var(--semantic-space-component-md);
+  --component-{name}-padding-x:    var(--semantic-space-component-lg);
 }
 ```
 
@@ -331,7 +336,7 @@ When you need a token that doesn't exist:
 
       &:disabled,
       &[aria-disabled="true"] {
-        opacity: var(--semantic-opacity-disabled);
+        color: var(--semantic-color-state-disabled);
         cursor: not-allowed;
         pointer-events: none;
       }
@@ -359,11 +364,6 @@ Use CSS custom properties for values that differ between themes (they resolve at
 background: var(--component-header-bg); // each theme sets this differently in _theme.scss
 ```
 
-Use Sass map lookup for structural differences compiled at build-time:
-```scss
-@if theme-cfg($theme, "header-layout", "horizontal") == "vertical" { … }
-```
-
 Use `@if $theme ==` only for one-off rules in 1–2 specific themes:
 ```scss
 @if $theme == "example-03" {
@@ -382,7 +382,7 @@ Use `@if $theme ==` only for one-off rules in 1–2 specific themes:
 | Flexbox | `@include flex-center()` / `@include flex-between()` |
 | Spacing | `@include padding(y x)` / `@include margin(null auto)` |
 | Border | `@include border(all, var(--w), solid, var(--c))` |
-| Border radius | `@include border-radius(var(--semantic-border-radius-md))` |
+| Border radius | `@include border-radius(var(--semantic-border-radius-default))` |
 | Size | `@include size(100%, 3rem)` |
 | Motion | `@include transition(opacity 0.2s ease)` |
 | Responsive | `@include breakpoint(tablet) { … }` |
@@ -431,7 +431,7 @@ Run this after the contract checklist. A component is not done until all items p
 - [ ] Error state has ≥ 3 visual cues (border + bg tint + icon or text)
 
 **Density**
-- [ ] Component works without breakage at `--compact` and `--comfortable`
+- [ ] Component works without breakage at its size modifiers (`--size-sm/-md/-lg`; density modifiers only if the brief asked for them)
 
 ---
 
@@ -483,7 +483,7 @@ node scripts/syx-validate.js
   --component-skeleton-bg:            var(--semantic-color-bg-secondary);
   --component-skeleton-shimmer-color: var(--semantic-color-bg-tertiary);
   --component-skeleton-radius:        var(--semantic-border-radius-sm);
-  --component-skeleton-height-line:   var(--semantic-space-inset-sm);
+  --component-skeleton-height-line:   var(--semantic-space-component-sm);
   --component-skeleton-height-block:  var(--semantic-space-stack-xl);
 }
 ```

@@ -18,11 +18,11 @@
    @mixin theme-your-theme-name {
    ```
 
-3. **Update setup.scss**:
-   - Replace all instances of `template` with `your-theme-name`
-   - Update font declarations
-   - Update mixin call: `@include theme-your-theme-name();`
-   - The `@layer` order declaration is emitted automatically by `universal-values()` — **do not add it manually** to `setup.scss`.
+3. **Update _setup.scss**:
+   - Replace all instances of `template` with `your-theme-name` — nothing else:
+     the component list lives in `themes/_shared/_bundle-full.scss` and the
+     font list in this theme's `_theme.scss` (`theme-your-theme-name-fonts()`)
+   - The `@layer` order declaration is emitted automatically by `universal-values()` — **do not add it manually** to `_setup.scss`.
 
 4. **Customize `_theme.scss`**:
 
@@ -76,29 +76,31 @@
    "build:your-theme": "sass scss/styles-theme-your-theme-name.scss css/styles-theme-your-theme-name.css --style=compressed --no-source-map"
    ```
 
-## Using `_template` as a Production Bundle
+## Minimal Production Bundle
 
-The `_template` theme is already configured as a **neutral, brand-agnostic baseline** in `styles-core.scss`. Use it directly for projects where you want SYX components without any brand identity:
+For SYX components without showroom overhead, every theme compiles
+`bundle-core.scss` — the leanest functional bundle, defined once in
+`themes/_shared/_bundle-core.scss`:
 
 ```bash
-npm run build:core   # → css/styles-core.css  (138 KB)
-npm run purge:core   # → css/prod/styles-core.css (~110 KB, with PurgeCSS)
+sass scss/themes/your-theme-name/bundle-core.scss dist/core.css --style=compressed
+# measured on example-01: 203 KB raw · 36 KB gzip (goal: < 50 KB gzip)
 ```
-
-See `home.html` and `docs.html` for a live reference of the documentation site footprint.
 
 ## Theme Structure
 
 ```
 themes/
   your-theme-name/
-    _theme.scss    # All theme values (primitives + variables + dark-mode)
-    setup.scss     # Theme setup and component includes (no manual @layer needed)
-    bundle-app.scss       # (optional) App context bundle
-    bundle-docs.scss      # (optional) Documentation context bundle
-    bundle-marketing.scss # (optional) Marketing/landing context bundle
-    bundle-blog.scss      # (optional) Blog/editorial context bundle
+    _theme.scss    # All theme values (primitives + variables + dark-mode + theme-x-fonts())
+    _setup.scss    # ~15 lines of wiring (no manual @layer, no component list)
+    bundle-app.scss       # App context bundle
+    bundle-blog.scss      # Blog/editorial context bundle
+    bundle-core.scss      # Minimal production bundle
+    bundle-docs.scss      # Documentation context bundle
+    bundle-marketing.scss # Marketing/landing context bundle
 ```
+(The SYX site themes also carry a `bundle-home.scss` for `home.html`.)
 
 ## Tips
 

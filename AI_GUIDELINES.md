@@ -85,8 +85,8 @@ so a change you have not compiled does not exist for either. Run `npm run build`
 | Level               | Prefix    | Path              | Example                        |
 | :------------------ | :-------- | :---------------- | :----------------------------- |
 | **Atoms**           | `.atom-`  | `scss/atoms/`     | `.atom-btn`, `.atom-icon`      |
-| **Molecules**       | `.mol-`   | `scss/molecules/` | `.mol-card`, `.mol-search`     |
-| **Organisms**       | `.org-`   | `scss/organisms/` | `.org-navbar`, `.org-footer`   |
+| **Molecules**       | `.mol-`   | `scss/molecules/` | `.mol-feature-card`, `.mol-form-field` |
+| **Organisms**       | `.org-`   | `scss/organisms/` | `.org-site-header`             |
 | **Templates/Pages** | (Context) | `scss/pages/`     | `.page-home`, `.tpl-dashboard` |
 
 ### 2. Token Architecture
@@ -202,6 +202,10 @@ When asked to "create a new component X":
 
 - Add `@forward "x";` to the corresponding index file (`scss/molecules/index.scss`).
 - Add `@forward "components/x";` to `scss/abstracts/tokens/index.scss`.
+- Add `@include mol-x($theme);` **once** to `scss/themes/_shared/_bundle-full.scss`
+  (and to the context bundles that need it) — never to per-theme `_setup.scss`
+  files, which are generated boilerplate. Without this line the component
+  compiles in no theme.
 - Add entry to `component-registry.json`.
 
 **Step 4: Validate**

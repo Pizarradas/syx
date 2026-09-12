@@ -19,8 +19,14 @@
 // What's OUT (documentation/showroom only):
 //   ✕ atom-code      — code syntax block (doc component)
 //   ✕ pages/*
+//   ✕ scss/site/*    — SYX's own pages (home-*, evidence, score, …)
 //
-// Bundle size goal: < 120KB uncompressed, < 50KB gzip.
+// Bundle size, MEASURED (2026-09-12, example-01, sass compressed):
+//   203 KB raw · 36 KB gzip.
+// Goal: < 50 KB gzip — met. The old "< 120 KB uncompressed" goal
+// was never measured and is not realistic while every bundle
+// carries the full token system; gzip is the delivery metric.
+// Compiled by every theme: themes/{name}/bundle-core.scss.
 // ================================================
 
 // Los mixins que este bundle invoca viven en otros ficheros: sin

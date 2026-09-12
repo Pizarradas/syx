@@ -2,6 +2,12 @@
 
 > Practical decision rules for writing HTML and SCSS with SYX. Read this before writing your first component.
 
+> **On example names:** code samples in this guide use hypothetical components
+> (`mol-card`, `org-header`, `mol-search`, `org-hero`…) to illustrate patterns.
+> They are **not** part of the system — the real inventory is the *Current
+> Inventory* table below (19 atoms · 6 molecules · 1 organism: `site-header`).
+> Check `component-registry.json` (or `list_components`) before using any name.
+
 ---
 
 ## 1. Choosing the Right Layer
@@ -24,8 +30,12 @@ Does it combine 2+ atoms to form one logical UI unit?
   └─ NO  ↓
 
 Does it represent a full UI section that users can perceive as a distinct region?
-(header, footer, sidebar, hero, feature grid, documentation-layout)
+(a header, a footer, a sidebar — today the only system organism is site-header)
   └─ YES → organism (org-*)          (scss/organisms/)
+  └─ NO  ↓
+
+Is it furniture for SYX's own pages (home.html, docs.html, why-syx.html)?
+  └─ YES → site layer                (scss/site/ — outside the registry)
   └─ NO  ↓
 
 Is it a one-off layout or override for a specific page only?
@@ -141,7 +151,7 @@ Organisms and molecules are composed in HTML, not in SCSS. Keep SCSS partials fr
 </header>
 
 <!-- ❌ Wrong — organism's SCSS file hard-codes inner molecule styles -->
-/* organisms/_header.scss */ .org-header .mol-btn-group { margin-left: auto; } ←
+/* organisms/_site-header.scss */ .org-site-header .mol-btn-group { margin-left: auto; } ←
 coupling between layers
 ```
 
@@ -253,12 +263,16 @@ Every component MUST be wrapped in a `@mixin` with a `$theme` parameter. This is
 }
 ```
 
-The mixin is called from inside a theme's `setup.scss`:
+The mixin is registered **once**, in `themes/_shared/_bundle-full.scss` —
+never in a per-theme `_setup.scss`, which is generated boilerplate:
 
 ```scss
-// themes/example-01/setup.scss
-@include mol-card("example-01");
+// themes/_shared/_bundle-full.scss
+@include mol-card($theme);
 ```
+
+Every theme's `_setup.scss` compiles that bundle, so one line reaches all
+seven themes.
 
 ### 3.3 Avoiding Selector Repetition
 
@@ -312,12 +326,13 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 
 ### Current Inventory
 
-| Layer     | Count | Examples                                                                                                                                                 |
-| --------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atoms     | 19    | btn, form, check, radio, switch, link, breadcrumb, pagination, icon, icon-lucide, label, pill, list, table, title, txt, code, feature-icon, stat-counter |
-| Molecules | 7     | card, form-field, btn-group, label-group, form-field-set, feature-card, theme-swatch-card                                                                |
-| Organisms | 8     | header, navbar, content-columns, documentation-layout, home-hero, home-features, home-tokens, home-themes                                                |
-| Pages     | 3     | home, docs, why-syx                                                                                                                                      |
+| Layer       | Count | Contents                                                                                                                                                 |
+| ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
+| Molecules   | 6     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group                                                                           |
+| Organisms   | 1     | site-header                                                                                                                                              |
+| Site layer  | 12    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card, theme-swatch-card |
+| Pages       | 1     | theme-builder                                                                                                                                            |
 
 ---
 
@@ -597,51 +612,50 @@ Never write rules to fight specificity. If a component style isn't winning, the 
 // or use a utility since .syx-* always wins via @layer syx.utilities
 ```
 
-### 5.4 Always Test All 6 Themes
+### 5.4 Always Test All 7 Themes
 
-Adding a CSS Custom Property to one theme's `_theme.scss` without a fallback in `setup.scss` will cause the other themes to inherit an empty value.
+Adding a CSS Custom Property to one theme's `_theme.scss` without a global fallback will cause the other themes to inherit an empty value.
 
 ```scss
 // themes/example-02/_theme.scss
 --component-header-bg: hsl(0, 0%, 5%); // ← only defined here
 
-// Result: themes 01, 03, 04, 05 get no value → visual bug
+// Result: the other six themes get no value → visual bug
 
-// ✅ Define a fallback in abstracts/tokens/components/_header.scss
+// ✅ Define a fallback in abstracts/tokens/components/_headers.scss
 :root {
   --component-header-bg: var(--semantic-color-bg-primary); // default fallback
 }
 // Then override in the theme that needs it
 ```
 
-Run `sass --watch scss/styles-theme-example-{01..05}.scss` after any token change.
+Run `npm run watch` (`sass --watch scss:css`) after any token change; `npm run check:setups` verifies the seven themes stay symmetrical.
 
 ### 5.5 `$theme` Parameter Flow
 
-When a mixin has theme-specific logic, the `$theme` string must flow from `setup.scss`:
+When a mixin has theme-specific logic, the `$theme` string must flow from `_setup.scss`:
 
 ```scss
-// themes/example-02/setup.scss
-@include org-header("example-02"); // ← theme name passed here
+// themes/example-02/_setup.scss
+@include syx-bundle-full("example-02"); // ← theme name flows into every mixin
 
-// organisms/_header.scss
-@mixin org-header($theme: null) {
-  .org-header {
+// organisms/_site-header.scss
+@mixin org-site-header($theme: null) {
+  .org-site-header {
     // Method 1 — CSS token (automatic)
     background: var(--component-header-bg);
 
-    // Method 2 — Sass map (for structural differences)
-    @if theme-cfg($theme, "header-sidenav-side", left) == right {
-      right: 0;
-    }
-
-    // Method 3 — direct @if (for 1-2 themes only)
+    // Method 2 — direct @if (for 1-2 themes only)
     @if $theme == "example-02" {
       backdrop-filter: blur(8px);
     }
   }
 }
 ```
+
+> The old Method 2 (a `$theme-config` Sass map read with `theme-cfg()`) was
+> retired on 2026-09-12: nothing ever called it. Structural differences are
+> tokens or `@if $theme` blocks.
 
 > Never hardcode a theme name in a partial without `@if $theme == "…"`.
 

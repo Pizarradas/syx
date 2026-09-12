@@ -1,6 +1,6 @@
 # base/helpers/
 
-Mixins **tema-conscientes** que generan clases `.syx-*` dentro de `@layer syx.utilities`. Se llaman desde cada `themes/{nombre}/setup.scss`, recibiendo el parámetro `$theme` que les permite distinguir qué theme está compilando.
+Mixins **tema-conscientes** que generan clases `.syx-*` dentro de `@layer syx.utilities`. Se llaman desde `themes/_shared/_core.scss` (`syx-core($theme)`), que cada `_setup.scss` y cada `bundle-*.scss` incluyen; reciben el parámetro `$theme` que les permite distinguir qué theme está compilando.
 
 **Prefijo de clases generadas**: `.syx-*`
 **Layer**: `@layer syx.utilities`
@@ -18,7 +18,6 @@ Usa las clases de `base/helpers/` para:
 - **Colores de texto** temáticos (`.syx-font-color-primary`, `.syx-font-color-brand-*`)
 - **Tipografía** con escala de fuentes del tema (`.syx-font-size-1` a `.syx-font-size-5`)
 - **Dimensiones** del sistema de dimensiones del tema (`.syx-size-1` a `.syx-size-5`)
-- **Espaciado temático** (`.syx-spacer-gap-t-1`, `.syx-spacer-inner-t-1`)
 - **Iconos de RRSS** (`.syx-icon`, `.syx-icon--facebook-primary`, etc.)
 - **Pesos y familias de fuente** del tema (`.syx-font-weight-light`, `.syx-font-scope-*`)
 
@@ -126,21 +125,9 @@ Tamaños width/height del sistema de dimensiones del tema. Los tokens `--dimensi
 
 ---
 
-### `_spacers.scss` — Espaciado temático (`helper-spacer`)
-
-Márgenes y paddings usando el sistema de gaps e inners del tema. Los tokens `--gap-{n}` e `--inner-{n}` los define cada tema.
-
-```html
-<!-- Gap (spacing exterior / entre secciones) -->
-<section class="syx-spacer-gap-t-1"><!-- margin-top gap-1 del tema --></section>
-<section class="syx-spacer-gap-b-2"><!-- margin-bottom gap-2 --></section>
-
-<!-- Inner (padding interior / dentro de componentes) -->
-<div class="syx-spacer-inner-t-1"><!-- padding-top inner-1 --></div>
-<div class="syx-spacer-inner-x-2"><!-- padding inline inner-2 --></div>
-```
-
-> Para espaciado no-temático (valores numéricos fijos), usa `utilities/_spacing.scss`.
+> **`helper-spacer` retirado (2026-09-12):** las clases `.syx-spacer-*` no
+> tenían ningún uso real en el sitio ni en el sistema. Para espaciado usa
+> `utilities/_spacing.scss` (`.syx-mt-*`, `.syx-pt-*`, …).
 
 ---
 
@@ -172,7 +159,7 @@ Usar siempre `aria-hidden="true"` en iconos decorativos. Si el icono **es** la e
 
 ## Cómo funciona internamente
 
-1. `themes/example-01/setup.scss` llama `@include helper-backgrounds('example-01')`
+1. `syx-core(example-01)` (en `themes/_shared/_core.scss`) llama `@include helper-backgrounds(example-01)`
 2. El mixin compila las clases `.syx-bg-color-*` con los tokens del tema
 3. Las clases se envuelven en `@layer syx.utilities` → siempre ganan sobre componentes
 4. El CSS final de cada tema tiene sus propias variaciones de estas clases
@@ -183,4 +170,4 @@ Usar siempre `aria-hidden="true"` en iconos decorativos. Si el icono **es** la e
 2. Definir `@mixin helper-mi-helper($theme: null) { @layer syx.utilities { ... } }`
 3. Usar `.syx-*` como prefijo para las clases generadas
 4. `@forward` en `helpers/helpers.scss`
-5. Llamar `@include helper-mi-helper($theme)` en los `setup.scss` de cada tema
+5. Llamar `@include helper-mi-helper($theme)` una sola vez en `themes/_shared/_core.scss` (`syx-core`)

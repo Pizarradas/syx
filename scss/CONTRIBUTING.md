@@ -99,7 +99,10 @@ Follow this order for consistency:
 - [ ] Component tokens defined in `abstracts/tokens/components/_{name}.scss`
 - [ ] Token file registered in `abstracts/tokens/index.scss`
 - [ ] Component mixin registered in `{layer}/index.scss`
-- [ ] Compiles without errors in all 6 themes
+- [ ] Included **once** in `themes/_shared/_bundle-full.scss` (and in the
+      context bundles that need it: `_bundle-app`, `_bundle-marketing`, …) —
+      never in per-theme `_setup.scss` files, which are generated boilerplate
+- [ ] Compiles without errors in all 7 themes
 
 ### File Template
 
@@ -267,7 +270,7 @@ All new utilities **must**:
 Before submitting any change:
 
 - [ ] `sass scss/styles-theme-example-01.scss --style=compressed --no-source-map` compiles without errors
-- [ ] All 6 themes compile without errors
+- [ ] All 7 themes compile without errors
 - [ ] No hardcoded values (colors, spacing, font sizes)
 - [ ] No `!important`
 - [ ] No raw `transition:` (use `@include transition()`)
@@ -276,6 +279,23 @@ Before submitting any change:
 - [ ] Token naming follows the convention
 - [ ] BEM naming follows the `syx-` prefix convention
 - [ ] New tokens are documented in `TOKEN-GUIDE.md` if significant
+
+---
+
+## What to Touch for Each Change
+
+The single-file answer for the four most common contributions:
+
+| I want to add…    | Touch                                                                                                                              |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **A component**   | Its partial in `{layer}/`, its tokens in `abstracts/tokens/components/`, one line in `{layer}/index.scss`, one line in `themes/_shared/_bundle-full.scss` |
+| **A theme**       | Copy `themes/_template/` → new folder; fill `_theme.scss` (tokens + `theme-x-fonts()`); replace "template" in `_setup.scss`; add `scss/styles-theme-{name}.scss` |
+| **A token**       | The right tier file under `abstracts/tokens/` (primitives → semantic → components); per-theme values in each `themes/*/_theme.scss` |
+| **A utility**     | `utilities/` if theme-independent; a `base/helpers/` mixin if it needs `$theme` (see *Where Do New Utility Classes Go?*)            |
+| **A font**        | `theme-{name}-fonts()` in that theme's `_theme.scss` — the setup and every bundle already call it                                    |
+
+Nothing on this list touches per-theme `_setup.scss` or `bundle-*.scss`:
+those files are stable wiring, not registries.
 
 ---
 
@@ -294,4 +314,4 @@ Before submitting any change:
 | New utility (public)     | `scss/utilities/_{name}.scss` + `utilities/index.scss` |
 | Theme-aware helper mixin | `scss/base/helpers/_{name}.scss`                       |
 
-> **Note on `base/helpers/`:** Files here contain _theme-aware mixins_ that receive a `$theme` parameter and are called from theme `setup.scss` files. They **do** generate public `.syx-*` classes (e.g. `.syx-bg-color-primary`, `.syx-icon--facebook-primary`) inside `@layer syx.utilities`, so they win over components without `!important`. The deprecated `.u-*` prefix and all old `.helper-*` class names have been removed.
+> **Note on `base/helpers/`:** Files here contain _theme-aware mixins_ that receive a `$theme` parameter and are called once from `themes/_shared/_core.scss` (`syx-core($theme)`), which every `_setup.scss` and `bundle-*.scss` includes. They **do** generate public `.syx-*` classes (e.g. `.syx-bg-color-primary`, `.syx-icon--facebook-primary`) inside `@layer syx.utilities`, so they win over components without `!important`. The deprecated `.u-*` prefix and all old `.helper-*` class names have been removed.

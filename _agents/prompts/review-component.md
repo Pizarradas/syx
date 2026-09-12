@@ -14,6 +14,11 @@ Review the following SCSS against these strict rules. For each violation found, 
 - The violation type
 - The correct replacement
 
+> Scope note: this checklist is broader than the machine contract. Only some
+> of these rules are `contracts/rules.json` R01–R08; the rest (raw `padding:`/
+> `margin:` shorthand, naming, ordering…) are house style — report them as
+> style findings, not as contract violations.
+
 ## Rules to check:
 
 ### Rule 1: No raw values

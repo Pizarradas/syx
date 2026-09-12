@@ -1,0 +1,70 @@
+// ================================================
+// SURFACE + RESET TOKENS — CANONICAL LAYER
+// ================================================
+// This is NOT a compatibility file. These are the surface tokens
+// that page-level and component SCSS are allowed to consume, and
+// the --reset-* tokens the global reset reads.
+//
+// RULE: pages and components use ONLY these surface tokens —
+// never --primitive-color-* directly. Each _theme.scss overrides
+// them to create its identity.
+//
+// The values are fallbacks expressed through primitives (never hex)
+// so they stay consistent with the token system; the definitions in
+// abstracts/tokens/semantic/ are the primary source and each theme
+// wins over both at :root level.
+//
+// Previously buried inside _token-aliases.scss ("compatibility
+// aliases") — split out because the canonical contract of the
+// system should not live in a file named after what is deprecated.
+// ================================================
+
+:root {
+  // ------------------------------------------------
+  // SURFACE TOKENS — FALLBACK UNIVERSAL
+  // ------------------------------------------------
+  // Backgrounds
+  --semantic-color-bg-primary: var(--primitive-color-white);
+  --semantic-color-bg-secondary: var(--primitive-color-gray-50);
+  --semantic-color-bg-tertiary: var(--primitive-color-gray-100);
+  // Borders
+  --semantic-color-border-default: var(--primitive-color-gray-300);
+  --semantic-color-border-subtle: var(--primitive-color-gray-200);
+  --semantic-color-border-strong: var(--primitive-color-gray-400);
+  // Text
+  --semantic-color-text-primary: var(--primitive-color-gray-900);
+  --semantic-color-text-secondary: var(--primitive-color-gray-600);
+  --semantic-color-text-tertiary: var(--primitive-color-gray-400);
+  --semantic-color-text-inverse: var(--primitive-color-white);
+  --semantic-color-text-on-primary: var(--primitive-color-white);
+
+  // ------------------------------------------------
+  // RESET TOKENS — consumed by base/_reset.scss
+  // ------------------------------------------------
+  --reset-html-font: normal normal 500 16px/18px var(--semantic-font-family-primary);
+  --reset-body-color: var(--semantic-color-text-primary);
+  --reset-body-background-color: var(--semantic-color-bg-secondary);
+  --reset-body-font-size: var(--semantic-font-size-body);
+  --reset-body-line-height: calc(3 * var(--primitive-space-base));
+  --reset-selection-color: var(--semantic-color-selection-text);
+  --reset-selection-bg: var(--semantic-color-selection-bg);
+  --reset-h-font-family: var(--semantic-font-family-heading);
+  --reset-h1-size: var(--semantic-font-size-h1);
+  --reset-h1-line-height: var(--semantic-line-height-tight);
+  --reset-h1-letter-spacing: var(--semantic-letter-spacing-tight);
+  --reset-h2-size: var(--semantic-font-size-h2);
+  --reset-h2-line-height: var(--semantic-line-height-snug);
+  --reset-h2-letter-spacing: var(--semantic-letter-spacing-normal);
+  --reset-h3-size: var(--semantic-font-size-h3);
+  --reset-h3-line-height: var(--semantic-line-height-snug);
+  --reset-h3-letter-spacing: var(--semantic-letter-spacing-normal);
+  --reset-h4-size: var(--semantic-font-size-h4);
+  --reset-h4-line-height: var(--semantic-line-height-snug);
+  --reset-h4-letter-spacing: var(--semantic-letter-spacing-normal);
+  --reset-h5-size: var(--semantic-font-size-h5);
+  --reset-h5-line-height: var(--semantic-line-height-snug);
+  --reset-h5-letter-spacing: var(--semantic-letter-spacing-normal);
+  --reset-h6-size: var(--semantic-font-size-h6);
+  --reset-h6-line-height: var(--semantic-line-height-snug);
+  --reset-h6-letter-spacing: var(--semantic-letter-spacing-normal);
+}

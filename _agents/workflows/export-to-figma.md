@@ -60,16 +60,16 @@ CSS — so a change that hasn't been compiled yet does not exist for this workfl
 ## Step 2: Pick the theme, and know what won't travel
 
 One file per theme: `contracts/figma/<theme>.figma.json`. Each carries two variable
-collections with a `light` and a `dark` mode, plus the 38 components.
+collections with a `light` and a `dark` mode, plus the 26 components.
 
 Read `_meta.cuentas` before anything else:
 
 ```json
 "cuentas": {
-  "variables": 543,
-  "omitidas": 247,
+  "variables": 546,
+  "omitidas": 250,
   "fueraDeAlcance": { "primitive": 233, "icon": 17, "reset": 26, "layout": 12, "theme": 4 },
-  "componentes": 34
+  "componentes": 26
 }
 ```
 

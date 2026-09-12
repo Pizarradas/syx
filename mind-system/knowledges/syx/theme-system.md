@@ -23,19 +23,42 @@ Un tema SYX es una configuración de primitivos de color y valores estructurales
 
 ```
 scss/themes/{name}/
-├── _theme.scss           ← Único archivo que normalmente se edita
-├── setup.scss            ← Ensambla el bundle completo
-├── bundle-app.scss       ← Contexto app (todos los componentes)
+├── _theme.scss           ← Único archivo que normalmente se edita:
+│                            tokens + @mixin theme-{name}-fonts (las fuentes)
+├── _setup.scss           ← ~15 líneas de cableado generadas; solo cambia el nombre
+├── bundle-app.scss       ← Contexto app
+├── bundle-blog.scss      ← Contexto blog/editorial
+├── bundle-core.scss      ← Bundle mínimo de producción
 ├── bundle-docs.scss      ← Contexto documentación
-├── bundle-marketing.scss ← Contexto marketing/landing
-└── bundle-blog.scss      ← Contexto blog/editorial
+└── bundle-marketing.scss ← Contexto marketing/landing
 ```
 
-**Regla:** `_theme.scss` es el único archivo que cambia por tema. Editar `setup.scss` solo para registrar componentes nuevos específicos del tema.
+El punto de entrada real es `scss/styles-theme-{name}.scss`, que hace
+`@use 'themes/{name}/setup'` (resuelve `_setup.scss`) y añade las
+utilidades. Los temas del sitio de SYX incluyen además
+`@include syx-bundle-site($theme)` (capa `scss/site/`, desmontable), y
+`example-01`/`syx-sketch` llevan un `bundle-home.scss`.
+
+**Regla:** `_theme.scss` es el único archivo que cambia por tema. Los
+componentes NO se registran en `_setup.scss`: la lista vive una sola vez
+en `scss/themes/_shared/_bundle-full.scss` (`syx-bundle-full`).
 
 ---
 
-### `_theme.scss` — tres secciones
+### `_theme.scss` — tres secciones + el mixin de fuentes
+
+Todo el contenido vive dentro de `@mixin theme-{name} { :root { … } }`
+(el `_setup.scss` hace `@include theme-{name}()`), y las fuentes en un
+segundo mixin `@mixin theme-{name}-fonts { @include font-family(…); }` que
+llaman el setup y todos los bundles — la lista de `@font-face` se declara
+una sola vez por tema.
+
+**Nota de nombres:** no existe una familia `--primitive-color-brand-*` ni
+el escalón `-950`. Los temas reales **rebindean** familias primitivas
+existentes (`--primitive-color-blue-500`, `--primitive-color-cyan-500`,
+`--primitive-color-gray-*`… con comentario `// rebind:`); las escalas van
+de `-50` a `-900`. Los nombres `brand-*`/`accent-*` de los ejemplos
+siguientes son didácticos.
 
 **Sección 1 — Color Primitivos** (solo `oklch()` aquí):
 ```scss
@@ -87,9 +110,9 @@ scss/themes/{name}/
 --semantic-color-bg-tertiary:  var(--primitive-color-brand-200);  // 0.82 L
 
 // DARK: bg-primary = más oscuro, bg-tertiary = menos oscuro
---semantic-color-bg-primary:   var(--primitive-color-brand-950);  // 0.10 L
---semantic-color-bg-secondary: var(--primitive-color-brand-900);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-800);  // 0.23 L
+--semantic-color-bg-primary:   var(--primitive-color-brand-900);  // 0.22 L
+--semantic-color-bg-secondary: var(--primitive-color-brand-800);
+--semantic-color-bg-tertiary:  var(--primitive-color-brand-700);  // 0.42 L
 
 // DARK: texto inverso
 --semantic-color-text-primary:   var(--primitive-color-brand-50);
@@ -102,21 +125,16 @@ scss/themes/{name}/
 
 ---
 
-### Variaciones estructurales (`$theme-config`)
+### Variaciones estructurales
 
-Si el tema tiene diferencias de layout (posición del sidebar, tamaño del logo):
+Si el tema tiene diferencias de layout (posición del sidebar, tamaño del
+logo), se expresan como tokens `--component-*` sobreescritos en su
+`_theme.scss`; para una diferencia que ningún token puede llevar, un bloque
+`@if $theme == "{name}"` dentro del parcial del componente.
 
-```scss
-// En scss/abstracts/_theme-config.scss
-$theme-config: (
-  "{name}": (
-    header-sidenav-side: right,
-    header-logo-size: 3rem,
-  )
-);
-```
-
-Solo añadir claves que difieren del default. No duplicar configuración que ya existe.
+> El mapa `$theme-config` y `theme-cfg()` fueron retirados el 2026-09-12:
+> ningún componente los llamó nunca y sus claves habían derivado de los
+> nombres reales de los temas.
 
 ---
 
@@ -145,7 +163,8 @@ Antes de declarar un tema completo:
 - [ ] ¿Los semánticos referencian primitivos (no valores raw)?
 - [ ] ¿Los 12 tokens de superficie están definidos?
 - [ ] ¿El dark mode tiene bg-primary como el valor más oscuro?
-- [ ] ¿Las variaciones estructurales están en `$theme-config` (no en SCSS de componente)?
+- [ ] ¿Las variaciones estructurales son tokens `--component-*` (o, como último recurso, `@if $theme ==` en el parcial)?
+- [ ] ¿Las fuentes del tema están declaradas una sola vez, en `@mixin theme-{name}-fonts` dentro de `_theme.scss`?
 - [ ] ¿El contraste `text-primary` / `bg-primary` cumple WCAG AA (≥ 4.5:1)?
 - [ ] ¿El contraste `text-inverse` / `color-primary` cumple WCAG AA (≥ 4.5:1)?
 - [ ] ¿Todos los bundles compilan sin errores tras el cambio?

@@ -162,10 +162,10 @@ For layouts, components, UI states, and interactive prototypes.
 
 <!--
   Tokens needed when promoting to [SYX: UI]:
-  - #2563eb → var(--semantic-color-action-primary)
-  - #ffffff → var(--semantic-color-text-on-action)
-  - 10px / 16px → var(--semantic-space-inset-sm) / var(--semantic-space-inset-md)
-  - 6px radius → var(--semantic-border-radius-md)
+  - #2563eb → var(--semantic-color-primary)
+  - #ffffff → var(--semantic-color-text-inverse)
+  - 10px / 16px → var(--semantic-space-component-sm) / var(--semantic-space-component-md)
+  - 6px radius → var(--semantic-border-radius-default)
 -->
 ```
 
@@ -208,7 +208,7 @@ Always close with a short handoff block:
 ```
 <!-- Handoff to [SYX: UI]: -->
 <!-- Components to implement: atom-btn (--primary, --ghost) -->
-<!-- Tokens to define: bg, text-on-action, radius, padding-y, padding-x -->
+<!-- Tokens to define: bg, text-inverse, radius, padding-y, padding-x -->
 <!-- States to handle: default, hover, focus, disabled -->
 ```
 

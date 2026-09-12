@@ -3,7 +3,8 @@
 @use '../abstracts/index' as *;
 
 // NOTE: _root.scss removed — deprecated, content migrated to themes/_base/universal.scss
-@forward 'token-aliases'; // Backward compatibility aliases — see milestone in _token-aliases.scss
+@forward 'surface-tokens';     // CANONICAL: surface + reset tokens (the only ones pages may use)
+@forward 'deprecated-aliases'; // Legacy aliases — retirada: v5.0 (ver cabecera)
 @forward 'reset';
 @forward 'elements';
 @forward 'helpers/helpers';

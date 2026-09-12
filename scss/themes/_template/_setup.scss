@@ -1,0 +1,38 @@
+// ================================================
+// TEMPLATE THEME SETUP
+// ================================================
+// Copy this file when creating a new theme.
+// Replace "template" with your theme name — that's all:
+// the component list lives in _shared/_bundle-full.scss and
+// the font list in this theme's _theme.scss (theme-x-fonts).
+// ================================================
+
+// CORE
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-full' as *;
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-template();
+
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-template-fonts();
+
+// CORE (reset + elements + helpers + grid)
+// ================================================
+@include syx-core(template);
+
+// FULL SYSTEM BUNDLE (every atom, molecule, organism)
+// ================================================
+@include syx-bundle-full(template);
+
+// SITE LAYER — only the SYX site themes include it. A new theme
+// for a real product should NOT: it is SYX-page furniture.
+// If this theme must render the SYX site, add:
+//   @use '../../site/bundle-site' as *;   (in the CORE block)
+//   @include syx-bundle-site(template);   (here)
+// ================================================

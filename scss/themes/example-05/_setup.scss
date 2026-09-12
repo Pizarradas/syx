@@ -1,0 +1,36 @@
+// SYX — THEME: example-05 | SETUP (full showroom bundle)
+// ================================================
+// Compiled by scss/styles-theme-example-05.scss. Everything the SYX
+// site pages need: theme tokens, fonts, core, the full system
+// bundle and the site layer. Context bundles for consumers
+// (app, blog, docs, marketing) live next to this file.
+// ================================================
+
+// CORE
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-full' as *;
+@use '../../site/bundle-site' as *; // SITE LAYER — removable
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-example-05();
+
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-example-05-fonts();
+
+// CORE (reset + elements + helpers + grid)
+// ================================================
+@include syx-core(example-05);
+
+// FULL SYSTEM BUNDLE (every atom, molecule, organism)
+// ================================================
+@include syx-bundle-full(example-05);
+
+// SITE LAYER — páginas propias de SYX (home.html, docs.html, why-syx.html).
+// No es parte del sistema: borra scss/site/ y este bloque para desacoplarlo.
+// ================================================
+@include syx-bundle-site(example-05);

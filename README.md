@@ -171,7 +171,7 @@ npm run check:figma     # fails if those files are stale
 ```
 
 Each file carries the whole library for one theme: two **variable collections**
-(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 34
+(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 26
 components with the node property each token maps to.
 
 | In SYX | In Figma |
@@ -305,7 +305,7 @@ fail a build.
 
 ## What runs, and when
 
-Eight guards, and none of them used to run unless somebody remembered to type
+Fourteen guards, and none of them used to run unless somebody remembered to type
 `npm run check`. `.github/workflows/ci.yml` splits them by what they cost:
 
 | Job | When | What |
@@ -338,19 +338,20 @@ real guard — and that will be a decision, not an oversight.
 syx/
 │
 ├── scss/                        # All source SCSS
-│   ├── abstracts/               # Tokens, mixins, functions, maps
+│   ├── abstracts/               # Tokens, mixins, maps, paths
 │   │   ├── tokens/
 │   │   │   ├── primitives/      # Raw values (colors, spacing, fonts)
 │   │   │   ├── semantic/        # Contextual aliases (color-primary, etc.)
 │   │   │   └── components/      # Per-component tokens (btn, form, header…)
 │   │   ├── mixins/              # 44 SYX native mixins
-│   │   ├── functions/
-│   │   └── maps/
+│   │   ├── maps/
+│   │   └── _paths.scss          # Compile-time config (fonts/images paths)
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 21 atomic components
-│   ├── molecules/               # 9 composite components
-│   ├── organisms/               # 8 complex components
+│   ├── atoms/                   # 19 atomic components
+│   ├── molecules/               # 6 composite components
+│   ├── organisms/               # 1 complex component (site-header)
+│   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities
 │   ├── pages/                   # Page-specific styles

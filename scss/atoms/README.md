@@ -67,26 +67,24 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 
 ---
 
-### `atom-form` — Campo de texto / Select / Textarea
+### `atom-form` — Campo de texto / Select
 
 ```html
-<!-- Input text -->
-<input class="syx-form syx-form--text" type="text" placeholder="Escribe..." />
+<!-- Input con label -->
+<label class="atom-label" for="email">Email</label>
+<span class="atom-input-wrapper">
+  <input class="atom-input" id="email" type="email" placeholder="Escribe..." />
+</span>
 
 <!-- Select -->
-<select class="syx-form syx-form--select">
-  <option>Opción 1</option>
-</select>
-
-<!-- Textarea -->
-<textarea class="syx-form syx-form--textarea"></textarea>
-
-<!-- Status variants -->
-<input class="syx-form syx-form--text syx-form--error" type="text" />
-<input class="syx-form syx-form--text syx-form--success" type="text" />
+<span class="atom-input-wrapper">
+  <select class="atom-select">
+    <option>Opción 1</option>
+  </select>
+</span>
 ```
 
-> Siempre envuelve el campo en `syx-form-field` (mol) para obtener el espaciado y label correctos.
+> Siempre envuelve el campo en `mol-form-field` para obtener el espaciado y label correctos.
 
 ---
 

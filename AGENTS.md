@@ -8,7 +8,7 @@ Before doing anything else, read these files in order:
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
 3. `tokens.json` — full token registry with type, rawValue, and status for all 1089 tokens
-4. `component-registry.json` — inventory of all atoms, molecules, and organisms
+4. `component-registry.json` — inventory of all atoms, molecules, organisms and utilities
 
 **If your client speaks MCP, ask instead of reading.** `npm run mcp` starts a
 dependency-free stdio server (`scripts/mcp-server.js`) that answers the questions
@@ -132,7 +132,7 @@ judge you are human-only on purpose — do not edit them to make a change pass.
 |---|---|---|---|
 | Atom | `atom-` | `scss/atoms/` | Single HTML element, no dependencies |
 | Molecule | `mol-` | `scss/molecules/` | Combines 2+ atoms into one logical unit |
-| Organism | `org-` | `scss/organisms/` | Full UI section (header, hero, etc.) |
+| Organism | `org-` | `scss/organisms/` | Full UI section (today: site-header) |
 | Utility | `syx-` | `scss/utilities/` | Pure CSS helper, no markup dependency |
 
 ---
@@ -168,10 +168,12 @@ Step-by-step workflows for common tasks:
 ```
 scss/
   abstracts/tokens/     — 4-tier token system
-  atoms/                — 21 components
-  molecules/            — 9 components
-  organisms/            — 8 components
-  themes/*/             — 7 themes (6 example-* + syx-sketch) × 4-5 bundles
+  atoms/                — 19 components
+  molecules/            — 6 components
+  organisms/            — 1 component (site-header)
+  site/                 — SITE LAYER: 12 pieces used only by SYX's own pages,
+                          outside the registry and the storybook; removable
+  themes/*/             — 7 themes (6 example-* + syx-sketch) × 5-6 bundles (app, blog, core, docs, marketing; + home in the two SYX site themes)
 contracts/              — machine-readable validation output
 _agents/                — THE ENGINE (ships with the package)
   architecture.md       — the ecosystem as diagrams-as-code (architecture.json: same graph, machine-readable)

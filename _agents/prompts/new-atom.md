@@ -36,7 +36,10 @@ Output:
 1. Token file content
 2. Component SCSS file content
 3. The @forward line to add in both index files
-4. The JSON entry to add to component-registry.json
+4. The one-line `@include atom-{name}($theme);` for `scss/themes/_shared/_bundle-full.scss`
+   (without it the atom compiles in no theme) — plus the context bundles that need it
+5. The `description` and `usage` strings for the registry — the rest of
+   `component-registry.json` is generated: run `npm run build:registry`, never write entries by hand
 ```
 
 ---

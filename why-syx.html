@@ -290,7 +290,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Component inventory</td>
-                                <td style="text-align:left"><strong>38</strong> — 21 atoms, 9 molecules, 8 organisms</td>
+                                <td style="text-align:left"><strong>26</strong> — 19 atoms, 6 molecules, 1 organism</td>
                                 <td style="text-align:left"><code>component-registry.json</code>, generated from source
                                     and arbitrated against the compiled CSS</td>
                             </tr>
@@ -302,7 +302,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Source size</td>
-                                <td style="text-align:left"><strong>182 SCSS files · 17,655 lines</strong></td>
+                                <td style="text-align:left"><strong>186 SCSS files · 16,809 lines</strong></td>
                                 <td style="text-align:left"><code>scss/</code></td>
                             </tr>
                             <tr>
@@ -676,7 +676,7 @@
                     <p class="syx-type-overline syx-text-gray syx-mb-2">What changed against the April 2026 version</p>
                     <p class="atom-txt syx-mb-0">SYX's accessibility score went from <strong>4 to 3</strong> because the
                         contrast measurement below contradicted it, and its learning curve from <strong>4 to 3</strong>
-                        because 17,655 lines of SCSS, nine agent modes and eight contract rules are not a four. Ant
+                        because 16,809 lines of SCSS, nine agent modes and eight contract rules are not a four. Ant
                         Design rose from 21 to 39 and Material UI from 28 to 41, mostly because they were being scored
                         at versions two majors old and because the three new criteria are criteria they win. Under the
                         old eleven criteria SYX scored 89.1% of the maximum; under these fourteen it scores 74.3%.</p>
@@ -688,14 +688,15 @@
                         quietly fixed, because a page arguing for measurement should show what happens when a
                         measurement is wrong.</p>
                     <p class="atom-txt syx-mb-0" style="margin-top:0.75rem"><strong>And one more, because
-                            the page changed what it measures.</strong> The CSS behind this page used to live in a
+                            the page changed what it measures — twice.</strong> The CSS behind this page used to live in a
                         <code>&lt;style&gt;</code> block inside it — a scoring scale, a ranking list, an evidence tag
-                        and a comparison card, none of them in the system they were arguing for. They are now four real
-                        components (<code>atom-score</code>, <code>atom-evidence</code>, <code>mol-ranking</code>,
-                        <code>mol-compare-card</code>) with their tokens in the token layer. That is why the inventory
-                        reads 38 and not 34, the source 182 files and not 178, and a theme bundle 42.5&ndash;50.1&nbsp;kB
-                        and not 41.6&ndash;49.1. A page that measures a system it is not part of would have kept the
-                        older, smaller numbers.</p>
+                        and a comparison card, none of them in the system they were arguing for. First they became four
+                        real components (<code>atom-score</code>, <code>atom-evidence</code>, <code>mol-ranking</code>,
+                        <code>mol-compare-card</code>) with their tokens in the token layer. Then honesty cut the other
+                        way: they only ever served this page, so they now live in <code>scss/site/</code> — the site
+                        layer, outside the registry — and the inventory reads 26 because a system should not count its
+                        own advertising as product. Same tokens, same pipeline, same contracts; just not sold as
+                        components.</p>
                 </div>
             </section>
 
@@ -1147,7 +1148,7 @@
                             <p class="atom-txt syx-mb-3">Ecosystem and support scores <strong>1</strong>. There is one
                                 author, no contributor base, no Stack Overflow tag, no pool of developers who already
                                 know it, and no answer to &ldquo;what happens if he stops&rdquo; other than the MIT
-                                licence and 17,655 readable lines.</p>
+                                licence and 16,809 readable lines.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">For a system whole products are built on, this is
                                 a real risk and not a rhetorical one.</p>
                         </div>
@@ -1172,7 +1173,7 @@
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">38
                                 components</span>
-                            <p class="atom-txt syx-mb-3">21 atoms, 9 molecules, 8 organisms. There is no data grid, no
+                            <p class="atom-txt syx-mb-3">19 atoms, 6 molecules, 1 organism. There is no data grid, no
                                 date picker, no combobox, no virtualised table, no file upload. Ant Design and Material
                                 UI have all of them and score 5 on ready-made UI; SYX scores 2.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">If your product is an admin panel, this is the
@@ -1184,7 +1185,7 @@
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Not a small
                                 system to learn</span>
-                            <p class="atom-txt syx-mb-3">17,655 lines of SCSS across 182 files, 1,088 tokens per theme,
+                            <p class="atom-txt syx-mb-3">16,809 lines of SCSS across 186 files, 1,088 tokens per theme,
                                 a four-tier token cascade, eight contract rules, nine agent modes and eleven MCP tools.
                                 The pay-off is that an agent can be told no by a machine instead of by a reviewer — but
                                 the surface a human has to hold is not small.</p>
@@ -1217,7 +1218,7 @@
 
                             <div class="mol-compare-card__block mol-compare-card__block--con">
                                 <span class="syx-type-overline mol-compare-card__label">Weaknesses</span>
-                                <p class="atom-txt syx-mb-0">38 components and no interactive behaviour at all; one maintainer; requires Chrome&nbsp;111 / Safari&nbsp;16.2; the six demo themes fail WCAG&nbsp;AA in 39 of 84 measured text pairs.</p>
+                                <p class="atom-txt syx-mb-0">26 components and no interactive behaviour at all; one maintainer; requires Chrome&nbsp;111 / Safari&nbsp;16.2; the six demo themes fail WCAG&nbsp;AA in 39 of 84 measured text pairs.</p>
                             </div>
 
                             <div class="mol-compare-card__fit">

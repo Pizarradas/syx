@@ -114,16 +114,20 @@ Todo componente SYX sigue un template estricto: un mixin con parámetro `$theme`
 
 ```scss
 @layer syx.reset,
-       syx.tokens,
        syx.base,
+       syx.tokens,
        syx.atoms,
        syx.molecules,
        syx.organisms,
-       syx.utilities,
-       syx.themes;
+       syx.utilities;
 ```
 
-La última capa declarada gana en caso de conflicto, independientemente de especificidad.
+La última capa declarada gana en caso de conflicto, independientemente de
+especificidad. Dos matices que importan: `syx.tokens` está **reservada y
+vacía a propósito** — los `:root` de tokens se emiten SIN capa, porque lo
+no-capado gana a cualquier capa y así ningún estilo capado puede pisar un
+token —; y no existe ninguna capa `syx.themes`: un tema gana redefiniendo
+tokens en `:root`, no por capa.
 
 ---
 
@@ -136,7 +140,7 @@ La última capa declarada gana en caso de conflicto, independientemente de espec
 | Flexbox | `@include flex-center()` / `@include flex-between()` |
 | Spacing | `@include padding(y x)` / `@include margin(null auto)` |
 | Border | `@include border(all, var(--w), solid, var(--c))` |
-| Border radius | `@include border-radius(var(--semantic-border-radius-md))` |
+| Border radius | `@include border-radius(var(--semantic-border-radius-default))` |
 | Size | `@include size(100%, 3rem)` |
 | Motion | `@include transition(opacity 0.2s ease)` |
 | Responsive | `@include breakpoint(tablet) { … }` |
@@ -155,8 +159,7 @@ La última capa declarada gana en caso de conflicto, independientemente de espec
 // CSS custom properties para valores que difieren entre temas (runtime)
 background: var(--component-header-bg);
 
-// Sass map para diferencias estructurales (build-time)
-@if theme-cfg($theme, "header-layout", "horizontal") == "vertical" { … }
+// (theme-cfg() y su mapa Sass fueron retirados el 2026-09-12: nadie los llamó nunca)
 
 // @if $theme == para one-offs en 1-2 temas específicos
 @if $theme == "example-03" {

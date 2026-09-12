@@ -39,8 +39,9 @@ All commits follow the [Conventional Commits](https://www.conventionalcommits.or
 | ---------- | -------------------------------------------------- |
 | `atom`     | `feat(atom): add stat-counter component`           |
 | `molecule` | `fix(molecule): correct form-field focus ring`     |
-| `organism` | `feat(organism): add home-cta section`             |
-| `token`    | `feat(token): add semantic-space-inset-xl`         |
+| `organism` | `feat(organism): add site-header skip-link`       |
+| `site`     | `feat(site): add home-layers section` (capa site, scss/site/) |
+| `token`    | `feat(token): add semantic-space-component-xl`         |
 | `theme`    | `feat(theme): add midnight theme`                  |
 | `mixin`    | `fix(mixin): make border-radius null-safe`         |
 | `build`    | `chore(build): add validate-tokens script`         |
@@ -81,7 +82,7 @@ The changelog follows [Keep a Changelog](https://keepachangelog.com/) with Conve
 
 ---
 
-## [3.0.3] — 2026-02-XX
+## [4.28.1] — 2026-09-XX
 ```
 
 ---
@@ -117,7 +118,7 @@ Before bumping the version:
 - [ ] `## [Unreleased]` section has all changes documented
 - [ ] `package.json` version updated (`"version": "X.Y.Z"`)
 - [ ] `README.md` version badge updated
-- [ ] All 6 themes compile: `npm run build`
+- [ ] All 7 themes compile: `npm run build`
 - [ ] `node scripts/validate-tokens.js` passes with no critical errors
 - [ ] `## [Unreleased]` renamed to `## [X.Y.Z] — {date}`
 - [ ] New empty `## [Unreleased]` section added at top
