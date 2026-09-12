@@ -253,10 +253,10 @@ Every component MUST be wrapped in a `@mixin` with a `$theme` parameter. This is
 }
 ```
 
-The mixin is called from inside a theme's `setup.scss`:
+The mixin is called from inside a theme's `_setup.scss`:
 
 ```scss
-// themes/example-01/setup.scss
+// themes/example-01/_setup.scss
 @include mol-card("example-01");
 ```
 
@@ -315,9 +315,9 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 | Layer       | Count | Contents                                                                                                                                                 |
 | ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
-| Molecules   | 7     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group, theme-swatch-card                                                        |
+| Molecules   | 6     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group                                                                           |
 | Organisms   | 1     | site-header                                                                                                                                              |
-| Site layer  | 11    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card |
+| Site layer  | 12    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card, theme-swatch-card |
 | Pages       | 1     | theme-builder                                                                                                                                            |
 
 ---
@@ -600,7 +600,7 @@ Never write rules to fight specificity. If a component style isn't winning, the 
 
 ### 5.4 Always Test All 6 Themes
 
-Adding a CSS Custom Property to one theme's `_theme.scss` without a fallback in `setup.scss` will cause the other themes to inherit an empty value.
+Adding a CSS Custom Property to one theme's `_theme.scss` without a fallback in `_setup.scss` will cause the other themes to inherit an empty value.
 
 ```scss
 // themes/example-02/_theme.scss
@@ -619,10 +619,10 @@ Run `sass --watch scss/styles-theme-example-{01..05}.scss` after any token chang
 
 ### 5.5 `$theme` Parameter Flow
 
-When a mixin has theme-specific logic, the `$theme` string must flow from `setup.scss`:
+When a mixin has theme-specific logic, the `$theme` string must flow from `_setup.scss`:
 
 ```scss
-// themes/example-02/setup.scss
+// themes/example-02/_setup.scss
 @include org-header("example-02"); // ← theme name passed here
 
 // organisms/_header.scss

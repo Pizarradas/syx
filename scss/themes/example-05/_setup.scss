@@ -1,137 +1,36 @@
+// SYX — THEME: example-05 | SETUP (full showroom bundle)
+// ================================================
+// Compiled by scss/styles-theme-example-05.scss. Everything the SYX
+// site pages need: theme tokens, fonts, core, the full system
+// bundle and the site layer. Context bundles for consumers
+// (app, blog, docs, marketing) live next to this file.
+// ================================================
+
 // CORE
-// ===============================================
-@use '../../abstracts/index' as *;
-@use '../../base/index' as *;
-@use '../../layout/grids/grid' as *;
-@use '../../atoms/index' as *;
-@use '../../molecules/index' as *;
-@use '../../organisms/index' as *;
-@use '../../site/bundle-site' as *; // SITE LAYER — removable
 @use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-full' as *;
+@use '../../site/bundle-site' as *; // SITE LAYER — removable
 @use 'theme' as *;
-// ===============================================
 
-// :ROOT
-// ===============================================
-@include universal-values();    // Universal values (RRSS icons, external brands, etc.)
-@include theme-example-05();    // Complete Midnight theme (primitives + variables)
-// ===============================================
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-example-05();
 
-// FONT SETUP
-// ===============================================
-// Bebas Neue — condensed display for headings
-@include font-family("Google-Bebas-Neue--regular",
-  "#{$fonts-path}/google-bebas-neue/BebasNeue-Regular",
-  400,
-  normal,
-  eot woff2 woff ttf svg);
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-example-05-fonts();
 
-// Inter — clean sans-serif for body text
-@include font-family("Google-Inter--regular",
-  "#{$fonts-path}/google-inter/Inter-Regular",
-  400,
-  normal,
-  eot woff2 woff ttf svg);
+// CORE (reset + elements + helpers + grid)
+// ================================================
+@include syx-core(example-05);
 
-@include font-family("Google-Inter--medium",
-  "#{$fonts-path}/google-inter/Inter-Medium",
-  500,
-  normal,
-  eot woff2 woff ttf svg);
-
-// Space Grotesk — fallback for UI elements
-@include font-family("Google-Space-Grotesk--regular",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-  400,
-  normal,
-  eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--bold",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-  700,
-  normal,
-  eot woff2 woff ttf svg);
-// ===============================================
-
-// RESET: global
-// ===============================================
-@include resets-global(example-05);
-@include elements-base(example-05);
-// ===============================================
-
-// HELPER: all
-// ===============================================
-
-
-
-
-
-
-
-
-
-
-
-@include helper-icons();
-// ===============================================
-
-// LAYOUT: grid
-// ===============================================
-@include layout-grid(example-05);
-// ===============================================
-
-// HELPER: theme
-// ===============================================
-@include helper-font-sizes(example-05);
-@include helper-dimensions(example-05);
- // @deprecated
-@include helper-spacer(example-05);
-
-@include helper-fonts(example-05);
-@include helper-backgrounds(example-05);
-// ===============================================
-
-// SYX ATOMS
-// ===============================================
-@include atom-breadcrumb(example-05);
-@include atom-btn(example-05);
-@include atom-code(example-05);
-@include atom-check(example-05);
-@include atom-feature-icon(example-05);
-@include atom-form(example-05);
-@include atom-icon(example-05);
-@include atom-icon-lucide(example-05);
-@include atom-label(example-05);
-@include atom-link(example-05);
-@include atom-list(example-05);
-@include atom-pagination(example-05);
-@include atom-pill(example-05);
-@include atom-radio(example-05);
-@include atom-stat(example-05);
-@include atom-switch(example-05);
-@include atom-table(example-05);
-@include atom-title(example-05);
-@include atom-txt(example-05);
-// ===============================================
-
-// SYX MOLECULES
-// ===============================================
-@include mol-btn-group(example-05);
-@include mol-code-snippet(example-05);
-@include mol-feature-card(example-05);
-@include mol-form-field(example-05);
-@include mol-form-field-set(example-05);
-@include mol-label-group(example-05);
-@include mol-theme-card(example-05);
-// ===============================================
-
-// SYX ORGANISMS
-// ===============================================
-@include org-site-header(example-05);
-// ===============================================
+// FULL SYSTEM BUNDLE (every atom, molecule, organism)
+// ================================================
+@include syx-bundle-full(example-05);
 
 // SITE LAYER — páginas propias de SYX (home.html, docs.html, why-syx.html).
 // No es parte del sistema: borra scss/site/ y este bloque para desacoplarlo.
-// ===============================================
+// ================================================
 @include syx-bundle-site(example-05);
-// ===============================================

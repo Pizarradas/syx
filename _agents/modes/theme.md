@@ -49,15 +49,15 @@ Every theme lives in its own isolated folder:
 
 ```
 scss/themes/{name}/
-├── _theme.scss           ← ONLY file you normally edit: primitive overrides + semantic mapping
-├── setup.scss            ← Assembles the full bundle (touch only if adding theme-specific components)
+├── _theme.scss           ← ONLY file you normally edit: primitive overrides + semantic mapping + theme-x-fonts()
+├── _setup.scss           ← Generated boilerplate (~15 lines); components register in _shared/_bundle-full.scss, not here
 ├── bundle-app.scss       ← App context (all components)
 ├── bundle-docs.scss      ← Documentation context
 ├── bundle-marketing.scss ← Marketing/landing context
 └── bundle-blog.scss      ← Blog/editorial context
 ```
 
-**Rule:** `_theme.scss` is the only file that should change per-theme. If you're editing `setup.scss` for something other than registering a new component, that's a signal you might be doing it wrong.
+**Rule:** `_theme.scss` is the only file that should change per-theme. If you're editing `_setup.scss` at all, that's a signal you might be doing it wrong: new components register once in `themes/_shared/_bundle-full.scss`.
 
 ---
 
@@ -222,7 +222,7 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 2. **Primitive scale** — full 10-step OKLCH scale for brand + accent
 3. **`_theme.scss` content** — sections 1, 2, and optionally 3
 4. **`$theme-config` entry** — only if structural differences exist
-5. **`setup.scss` diff** — only if new components need wiring
+5. **`_setup.scss`** — generated boilerplate (theme name swap only; components wire in `_shared/_bundle-full.scss`)
 6. **Entry point** — `scss/styles-theme-{name}.scss`
 7. **`package.json` diff** — build script addition
 

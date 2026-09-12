@@ -1,6 +1,6 @@
 # base/helpers/
 
-Mixins **tema-conscientes** que generan clases `.syx-*` dentro de `@layer syx.utilities`. Se llaman desde cada `themes/{nombre}/setup.scss`, recibiendo el parámetro `$theme` que les permite distinguir qué theme está compilando.
+Mixins **tema-conscientes** que generan clases `.syx-*` dentro de `@layer syx.utilities`. Se llaman desde `themes/_shared/_core.scss` (`syx-core($theme)`), que cada `_setup.scss` y cada `bundle-*.scss` incluyen; reciben el parámetro `$theme` que les permite distinguir qué theme está compilando.
 
 **Prefijo de clases generadas**: `.syx-*`
 **Layer**: `@layer syx.utilities`
@@ -172,7 +172,7 @@ Usar siempre `aria-hidden="true"` en iconos decorativos. Si el icono **es** la e
 
 ## Cómo funciona internamente
 
-1. `themes/example-01/setup.scss` llama `@include helper-backgrounds('example-01')`
+1. `syx-core(example-01)` (en `themes/_shared/_core.scss`) llama `@include helper-backgrounds(example-01)`
 2. El mixin compila las clases `.syx-bg-color-*` con los tokens del tema
 3. Las clases se envuelven en `@layer syx.utilities` → siempre ganan sobre componentes
 4. El CSS final de cada tema tiene sus propias variaciones de estas clases
@@ -183,4 +183,4 @@ Usar siempre `aria-hidden="true"` en iconos decorativos. Si el icono **es** la e
 2. Definir `@mixin helper-mi-helper($theme: null) { @layer syx.utilities { ... } }`
 3. Usar `.syx-*` como prefijo para las clases generadas
 4. `@forward` en `helpers/helpers.scss`
-5. Llamar `@include helper-mi-helper($theme)` en los `setup.scss` de cada tema
+5. Llamar `@include helper-mi-helper($theme)` una sola vez en `themes/_shared/_core.scss` (`syx-core`)

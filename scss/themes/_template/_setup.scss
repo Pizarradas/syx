@@ -1,101 +1,38 @@
 // ================================================
 // TEMPLATE THEME SETUP
 // ================================================
-// Copy this file when creating a new theme
-// Replace "template" with your theme name
+// Copy this file when creating a new theme.
+// Replace "template" with your theme name — that's all:
+// the component list lives in _shared/_bundle-full.scss and
+// the font list in this theme's _theme.scss (theme-x-fonts).
 // ================================================
 
 // CORE
-// ===============================================
-@use '../../abstracts/index' as *;
-@use '../../base/index' as *;
-@use '../../layout/grids/grid' as *;
-@use '../../atoms/index' as *;
-@use '../../molecules/index' as *;
 @use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-full' as *;
 @use 'theme' as *;
-// ===============================================
 
-// :ROOT
-// ===============================================
-@include universal-values();  // Universal values (RRSS icons, external brands, etc.)
-@include theme-template();     // Complete theme (primitives + variables)
-// ===============================================
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-template();
 
-// FONT SETUP
-// ===============================================
-// Add your @font-face declarations or @include font-family() calls here
-// Example:
-// @include font-family("Your-Font-Regular",
-//   "#{$fonts-path}/your-font/YourFont-Regular",
-//   500,
-//   normal,
-//   eot woff2 woff ttf svg);
-// ===============================================
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-template-fonts();
 
-// RESET: global
-// ===============================================
-@include resets-global(template);  // Change "template" to your theme name
-// ===============================================
+// CORE (reset + elements + helpers + grid)
+// ================================================
+@include syx-core(template);
 
-// HELPER: all
-// ===============================================
+// FULL SYSTEM BUNDLE (every atom, molecule, organism)
+// ================================================
+@include syx-bundle-full(template);
 
-
-
-
-
-
-
-
-
-
-
-@include helper-icons();
-// ===============================================
-
-// LAYOUT: grid
-// ===============================================
-@include layout-grid(template);  // Change "template" to your theme name
-// ===============================================
-
-// HELPER: theme
-// ===============================================
-@include helper-font-sizes(template);
-@include helper-dimensions(template);
- // @deprecated
-@include helper-spacer(template);
-
-@include helper-fonts(template);
-@include helper-backgrounds(template);
-// ===============================================
-
-// SYX ATOMS
-// ===============================================
-@include atom-breadcrumb(template);
-@include atom-btn(template);
-@include atom-check(template);
-@include atom-form(template);
-@include atom-icon(template);
-@include atom-label(template);
-@include atom-link(template);
-@include atom-list(template);
-@include atom-pagination(template);
-@include atom-radio(template);
-@include atom-switch(template);
-@include atom-table(template);
-@include atom-title(template);
-@include atom-txt(template);
-// ===============================================
-
-// SYX MOLECULES
-// ===============================================
-@include mol-form-field(template);
-@include mol-btn-group(template);
-@include mol-label-group(template);
-@include mol-form-field-set(template);
-// ===============================================
-
-// SYX ORGANISMS
-// ===============================================
-// ===============================================
+// SITE LAYER — only the SYX site themes include it. A new theme
+// for a real product should NOT: it is SYX-page furniture.
+// If this theme must render the SYX site, add:
+//   @use '../../site/bundle-site' as *;   (in the CORE block)
+//   @include syx-bundle-site(template);   (here)
+// ================================================

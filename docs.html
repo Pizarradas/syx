@@ -988,7 +988,7 @@
   }
 }
 
-// Called from themes/example-01/setup.scss:
+// Called from themes/example-01/_setup.scss:
 @include mol-card("example-01");
 
 // ❌ Wrong — top-level rules cannot be excluded from any bundle
@@ -1285,7 +1285,7 @@ padding: var(--semantic-space-inset-md) 0;
                   <span class="atom-pill atom-pill--secondary syx-mr-1">5</span>
                   $theme parameter flow
                 </p>
-                <pre class="atom-code"><code>// setup.scss &rarr; passes the theme name to the mixin
+                <pre class="atom-code"><code>// _setup.scss &rarr; passes the theme name to the mixin
 @include org-header("example-02");
 
 // organisms/_header.scss &rarr; three methods based on type of difference
@@ -3384,7 +3384,7 @@ scss/organisms/_site-header.scss</code></pre>
 
         <!-- Cards -->
         <!-- mol-card is opt-in — not included in the base architecture compile.
-       Add @include mol-card(example-01) to setup.scss to enable. -->
+       Add @include mol-card(example-01) to _bundle-full.scss to enable. -->
 
 
         <!-- Form Fields -->

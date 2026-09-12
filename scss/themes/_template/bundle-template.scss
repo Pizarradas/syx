@@ -17,7 +17,7 @@
 @use '../../organisms/index' as *;
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
-@use '../_shared/bundle-docs' as *;  // ← swap for bundle-app / bundle-marketing / bundle-blog
+@use '../_shared/bundle-full' as *;  // ← swap for bundle-app / bundle-marketing / bundle-blog
 @use 'theme' as *;
 
 // THEME TOKENS
@@ -25,9 +25,9 @@
 @include universal-values();
 // @include theme-THEME_NAME();  // ← uncomment and replace THEME_NAME
 
-// FONTS
+// FONTS (declared once in _theme.scss)
 // ================================================
-// Copy @include font-family() declarations from an existing theme's bundle-docs.scss
+// @include theme-THEME_NAME-fonts();  // ← uncomment and replace THEME_NAME
 
 // CORE (reset + helpers + grid)
 // ================================================
@@ -35,4 +35,4 @@
 
 // BUNDLE
 // ================================================
-// @include syx-bundle-docs(THEME_NAME);  // ← uncomment and replace THEME_NAME + bundle type
+// @include syx-bundle-full(THEME_NAME);  // ← uncomment and replace THEME_NAME + bundle type

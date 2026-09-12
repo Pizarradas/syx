@@ -10,11 +10,15 @@
 ┌─────────────────────────────────────────────────────────────┐
 │  THEMES                                                     │
 │  themes/example-01/  themes/example-02/  …                 │
-│  setup.scss + bundle-app/docs/marketing/blog.scss           │
+│  _setup.scss + bundle-app/docs/marketing/blog.scss          │
 ├─────────────────────────────────────────────────────────────┤
-│  PAGES          pages/_landing.scss  pages/_docs.scss       │
+│  SITE           site/ — SYX's own pages only (home-*,       │
+│                 evidence, score, ranking, compare-card,     │
+│                 theme-swatch-card). Removable wholesale.    │
 ├─────────────────────────────────────────────────────────────┤
-│  ORGANISMS      header, documentation-layout, …             │
+│  PAGES          pages/_theme-builder.scss                   │
+├─────────────────────────────────────────────────────────────┤
+│  ORGANISMS      site-header                                 │
 ├─────────────────────────────────────────────────────────────┤
 │  MOLECULES      form-field, btn-group, label-group, …       │
 ├─────────────────────────────────────────────────────────────┤
@@ -47,15 +51,38 @@ SYX uses native CSS `@layer` to manage specificity without `!important`.
 | --------------- | ------------------------------------- | ---------- |
 | `syx.reset`     | Browser reset                         | —          |
 | `syx.base`      | Element defaults, theme-aware helpers | reset      |
-| `syx.tokens`    | CSS custom property tokens            | base       |
+| `syx.tokens`    | **Reserved — empty on purpose**       | base       |
 | `syx.atoms`     | Atomic components                     | tokens     |
 | `syx.molecules` | Composite components                  | atoms      |
-| `syx.organisms` | Complex UI sections                   | molecules  |
+| `syx.organisms` | Complex UI sections (+ site layer)    | molecules  |
 | `syx.utilities` | All public utility classes (`.syx-*`) | everything |
 
 **Result:** Utility classes always override component styles. No `!important` needed anywhere.
 
-> **Note on `helpers/`:** The `base/helpers/` folder contains _theme-aware mixins_ (`helper-fonts`, `helper-icons`, `helper-backgrounds`, etc.) that receive a `$theme` parameter and are called from theme `setup.scss` files. They **do** generate public `.syx-*` classes (e.g. `.syx-font-color-primary`, `.syx-bg-color-primary`, `.syx-icon--facebook-primary`) wrapped in `@layer syx.utilities` — so they win over all component layers without `!important`. Public utilities that are **not** theme-dependent (display, spacing, text, media, a11y) live exclusively in `utilities/`.
+> **Why `syx.tokens` is empty:** the `:root` blocks that declare tokens are
+> deliberately emitted **outside** any `@layer` — unlayered styles beat every
+> layer, so token values can never be accidentally overridden by a layered
+> rule. The layer name stays in the declaration to keep the slot reserved.
+
+### What is emitted, and in what order
+
+Every `styles-theme-*.css` deliverable is produced by the same sequence
+(driven by `themes/{name}/_setup.scss` plus the entry point):
+
+1. **Default tokens** — `abstracts/` token partials, unlayered `:root`.
+2. **`@layer` order declaration** — emitted once by `universal-values()`
+   (never write it by hand; see `themes/_template/README.md`).
+3. **Theme `:root`** — `theme-{name}()` primitive/semantic overrides.
+4. **`@font-face`** — `theme-{name}-fonts()`, declared once per theme in
+   `_theme.scss` and reused by the setup and every bundle.
+5. **Reset + base elements + helpers + grid** — `syx-core({name})`.
+6. **All system components** — `syx-bundle-full({name})`.
+7. **Site layer** — `syx-bundle-site({name})`, only in the SYX site builds.
+8. **Utilities** — `@use 'utilities/index'` from the **root entry point
+   only**, never from a bundle. That is why `.syx-*` utilities exist in the
+   eight root deliverables but not inside `css/themes/*/bundle-*.css`.
+
+> **Note on `helpers/`:** The `base/helpers/` folder contains _theme-aware mixins_ (`helper-fonts`, `helper-icons`, `helper-backgrounds`, etc.) that receive a `$theme` parameter and are called once from `themes/_shared/_core.scss` (`syx-core($theme)`), which every `_setup.scss` and `bundle-*.scss` includes. They **do** generate public `.syx-*` classes (e.g. `.syx-font-color-primary`, `.syx-bg-color-primary`, `.syx-icon--facebook-primary`) wrapped in `@layer syx.utilities` — so they win over all component layers without `!important`. Public utilities that are **not** theme-dependent (display, spacing, text, media, a11y) live exclusively in `utilities/`.
 
 ---
 
@@ -129,31 +156,41 @@ Each theme lives in `themes/{name}/` and contains:
 
 ```
 themes/example-01/
-├── _theme.scss          # Primitive overrides (colors, spacing, fonts)
-├── setup.scss           # Assembles the full theme
+├── _theme.scss          # Primitive overrides + theme-x-fonts() (single font list)
+├── _setup.scss          # ~15 lines: tokens, fonts, syx-core, syx-bundle-full, site layer
 ├── bundle-app.scss      # App context bundle
 ├── bundle-docs.scss     # Documentation context bundle
 ├── bundle-marketing.scss# Marketing/landing context bundle
 └── bundle-blog.scss     # Blog/editorial context bundle
 ```
 
+The component list lives **once** in `themes/_shared/_bundle-full.scss` and
+the font list **once** in each theme's `_theme.scss` — neither is repeated
+per theme file. Adding a component to the system touches `_bundle-full.scss`
+only; adding a font touches one `_theme.scss` only.
+
 ### Bundle System
 
 Each bundle includes only what that context needs:
 
 ```scss
-// bundle-app.scss — includes everything
-@use "setup";
-@use "../../atoms/index";
-@use "../../molecules/index";
-@use "../../organisms/index";
-@use "../../utilities/index";
+// bundle-app.scss — the real pattern
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-app' as *;
+@use 'theme' as *;
 
-// bundle-marketing.scss — lighter, no complex forms
-@use "setup";
-@use "../../atoms/index";
-@use "../../pages/landing";
+@include universal-values();
+@include theme-example-01();
+@include theme-example-01-fonts();  // font list lives in _theme.scss
+@include syx-core(example-01);
+@include syx-bundle-app(example-01);
 ```
+
+Which components each context includes is defined once in
+`themes/_shared/_bundle-{app,blog,docs,marketing,full,core}.scss`.
+Bundles never include `.syx-*` utilities — those enter only from the root
+entry points (see *What is emitted, and in what order*).
 
 ### Creating a New Theme
 
@@ -168,9 +205,7 @@ There are no per-theme copies of SCSS files.
 
 ```
 organisms/
-  _header.scss        # one file, handles syx + example-02 + coral + forest + midnight
-  _navbar.scss
-  …
+  _site-header.scss   # one file, handles all seven themes internally
 ```
 
 ### The 3 Methods
@@ -270,9 +305,9 @@ Pages          — Page-specific overrides and layouts
 | Layer       | Count | Contents                                                                                                                                                 |
 | ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
-| Molecules   | 7     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group, theme-swatch-card                                                        |
+| Molecules   | 6     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group                                                                           |
 | Organisms   | 1     | site-header                                                                                                                                              |
-| Site layer  | 11    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card |
+| Site layer  | 12    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card, theme-swatch-card |
 | Pages       | 1     | theme-builder                                                                                                                                            |
 
 ---
@@ -308,7 +343,7 @@ Pages          — Page-specific overrides and layouts
 | --------------- | ------------------------------------------ |
 | Atom            | `atoms/_btn.scss`                          |
 | Molecule        | `molecules/_form-field.scss`               |
-| Organism        | `organisms/_header.scss`                   |
+| Organism        | `organisms/_site-header.scss`              |
 | Token primitive | `abstracts/tokens/primitives/_colors.scss` |
 | Token semantic  | `abstracts/tokens/semantic/_colors.scss`   |
 | Token component | `abstracts/tokens/components/_btn.scss`    |
@@ -318,18 +353,19 @@ Pages          — Page-specific overrides and layouts
 ## Compilation Entry Points
 
 ```
-styles-theme-example-01.scss  →  css/styles-theme-example-01.css
-                                  (imports themes/example-01/setup.scss)
+scss/styles-theme-{name}.scss  →  css/styles-theme-{name}.css   (×7 themes)
+                                  (imports themes/{name}/_setup.scss
+                                   + utilities/index — utilities enter HERE)
+scss/setup-builder.scss        →  css/setup-builder.css          (theme-builder.html)
 
-styles-core.scss               →  css/styles-core.css
-                                  (neutral template theme, no docs components)
-                                  css/prod/styles-core.css (+ PurgeCSS)
-
-themes/example-01/bundle-app.scss      →  css/theme-01-bundle-app.css
-themes/example-01/bundle-docs.scss     →  css/theme-01-bundle-docs.css
-themes/example-01/bundle-marketing.scss→  css/theme-01-bundle-marketing.css
-themes/example-01/bundle-blog.scss     →  css/theme-01-bundle-blog.css
+themes/{name}/bundle-*.scss    →  css/themes/{name}/bundle-*.css (byproducts)
 ```
+
+**Only the eight root files of `css/` are deliverables** (the seven
+`styles-theme-*.css` plus `setup-builder.css`); `package.json` publishes
+`css/*.css` and nothing deeper. Everything else under `css/` (per-folder
+`index.css`, `css/themes/**`, `css/site/**`) is a compilation byproduct —
+`.gitignore` documents this and keeps it out of version control.
 
 ---
 

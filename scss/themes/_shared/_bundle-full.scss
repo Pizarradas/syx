@@ -1,11 +1,13 @@
-// SYX BUNDLE: DOCS
+// SYX BUNDLE: FULL
 // ================================================
-// Complete bundle for internal design system documentation.
-// Includes ALL atoms, molecules, and organisms.
+// The full system bundle: EVERY atom, molecule and organism.
+// Adding a component to the system means adding it here, once —
+// every theme's _setup.scss and bundle-docs.scss compile this.
 // ⚠ Not for production — use context bundles instead.
+// (Formerly syx-bundle-docs; renamed because "full" is what it is.)
 // ================================================
-// Usage: @use '../_bundles/bundle-docs' as *;
-//        @include syx-bundle-docs($theme);
+// Usage: @use '../_shared/bundle-full' as *;
+//        @include syx-bundle-full($theme);
 // ================================================
 
 // Los mixins que este fichero invoca se declaran en otros ficheros:
@@ -18,7 +20,7 @@
 @use '../../molecules/index' as *;
 @use '../../organisms/index' as *;
 
-@mixin syx-bundle-docs($theme: null) {
+@mixin syx-bundle-full($theme: null) {
   // ATOMS — all
   // ================================================
   @include atom-breadcrumb($theme);
@@ -49,7 +51,6 @@
   @include mol-form-field($theme);
   @include mol-form-field-set($theme);
   @include mol-label-group($theme);
-  @include mol-theme-card($theme);
 
   // ORGANISMS — all
   // ================================================

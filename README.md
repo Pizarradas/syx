@@ -349,7 +349,7 @@ syx/
 │   │
 │   ├── base/                    # Reset, elements, helpers
 │   ├── atoms/                   # 19 atomic components
-│   ├── molecules/               # 7 composite components
+│   ├── molecules/               # 6 composite components
 │   ├── organisms/               # 1 complex component (site-header)
 │   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system

@@ -153,15 +153,20 @@ Add to `scss/{layer}/index.scss`:
 
 // turbo
 
-## Step 5: Add to Theme setup.scss files
+## Step 5: Register in the shared full bundle
 
-For each theme that should include this component, add to `scss/themes/{theme}/setup.scss`:
+Add **one** line to `scss/themes/_shared/_bundle-full.scss`, in its layer
+section, alphabetically:
 
 ```scss
-@include {prefix}-{name}();
-// or with theme:
-@include {prefix}-{name}("{theme-name}");
+@include {prefix}-{name}($theme);
 ```
+
+Every theme's `_setup.scss` compiles that bundle, so the component reaches
+all seven themes with a single edit. Do **not** touch per-theme `_setup.scss`
+files. If the component belongs in a production context, add the same line
+to the matching `_bundle-app` / `_bundle-marketing` / `_bundle-blog` /
+`_bundle-core` in `_shared/` as well.
 
 ---
 
@@ -172,7 +177,7 @@ Run for each theme:
 ```bash
 sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=compressed --no-source-map
 sass scss/styles-theme-example-02.scss css/styles-theme-example-02.css --style=compressed --no-source-map
-# ...repeat for all 6 themes
+# ...repeat for all 7 themes
 ```
 
 Or shorthand: `npm run build`

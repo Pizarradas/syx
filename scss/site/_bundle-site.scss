@@ -22,10 +22,11 @@
   @include atom-evidence($theme);
   @include atom-score($theme);
 
-  // MOLECULES (why-syx.html)
+  // MOLECULES (why-syx.html + home.html)
   // ================================================
   @include mol-compare-card($theme);
   @include mol-ranking($theme);
+  @include mol-theme-card($theme);
 
   // ORGANISMS (home.html + site chrome)
   // ================================================

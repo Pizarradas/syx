@@ -13,7 +13,7 @@
 @use '../../organisms/index' as *;
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
-@use '../_shared/bundle-docs' as *;
+@use '../_shared/bundle-full' as *;
 @use '../../site/bundle-site' as *; // SITE LAYER — removable
 @use 'theme' as *;
 
@@ -22,31 +22,9 @@
 @include universal-values();
 @include theme-example-01();
 
-// FONTS
+// FONTS (declared once in _theme.scss)
 // ================================================
-@include font-family("Google-Inter--regular",
-  "#{$fonts-path}/google-inter/Inter-Regular",
-  400, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Inter--medium",
-  "#{$fonts-path}/google-inter/Inter-Medium",
-  500, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Syne--medium",
-  "#{$fonts-path}/google-syne/Syne-Regular",
-  500, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Syne--bold",
-  "#{$fonts-path}/google-syne/Syne-Bold",
-  800, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--regular",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-  400, normal, eot woff2 woff ttf svg);
-
-@include font-family("Google-Space-Grotesk--bold",
-  "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-  700, normal, eot woff2 woff ttf svg);
+@include theme-example-01-fonts();
 
 // CORE (reset + helpers + grid)
 // ================================================
@@ -54,7 +32,7 @@
 
 // BUNDLE: all system components
 // ================================================
-@include syx-bundle-docs(example-01);
+@include syx-bundle-full(example-01);
 
 // SITE LAYER — SYX's own pages (home.html, docs.html, why-syx.html).
 // Not part of the system: delete scss/site/ and this include to detach.

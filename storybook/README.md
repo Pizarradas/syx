@@ -66,10 +66,10 @@ Toolbar global: tema (los 7 de `css/styles-theme-*.css`) × modo
 
 ## Fases
 
-- [x] **1. Spec neutral** — `generate-spec.mjs`. 27 componentes, 8 ejes, 45 flags.
+- [x] **1. Spec neutral** — `generate-spec.mjs`. 26 componentes, 8 ejes, 45 flags.
 - [x] **2. Storybook HTML** — línea base visual (este directorio).
 - [x] **3. Wrappers React y Vue generados** — `frameworks/react/` y
-      `frameworks/vue/`: 27 componentes cada uno, cero escritos a mano.
+      `frameworks/vue/`: 26 componentes cada uno, cero escritos a mano.
 - [x] **4. `npm run check:portabilidad`** — pixel-diff HTML ↔ React ↔ Vue por
       story (Playground + ejes + flags), Chromium vía Playwright, umbral 0,1 %
       de píxeles con el antialiasing descontado.
@@ -97,8 +97,8 @@ secciones propias:
 
 Última pasada completa (local, Chromium):
 
-- **50 stories × 2 pares (HTML↔React, HTML↔Vue) = 100 comparaciones, 0 divergencias.**
-- 27 wrappers React (media 36 líneas, máx. 82) y 27 Vue (media 45, máx. 94),
+- **49 stories × 2 pares (HTML↔React, HTML↔Vue) = 98 comparaciones, 0 divergencias.**
+- 26 wrappers React (media 36 líneas, máx. 82) y 26 Vue (media 46, máx. 94),
   todos generados; **cero componentes escritos a mano, una sola regla de
   derivación añadida en todo el traslado** (la de palabras reservadas, abajo).
 

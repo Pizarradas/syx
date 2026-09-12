@@ -15,8 +15,8 @@ Duplicate `scss/themes/_template/` into a new folder with your theme name (lower
 
 ```
 scss/themes/{your-theme-name}/
-├── _theme.scss           ← Primitive overrides (colors, spacing, fonts)
-├── setup.scss            ← Assembles the full theme
+├── _theme.scss           ← Primitive overrides + theme-x-fonts() (the font list)
+├── _setup.scss           ← ~15 lines of wiring; only theme names change
 ├── bundle-app.scss       ← App context bundle
 ├── bundle-docs.scss      ← Documentation context bundle
 ├── bundle-marketing.scss ← Marketing/landing context bundle
@@ -73,20 +73,24 @@ Open `scss/themes/{name}/_theme.scss`. This file ONLY overrides primitive tokens
 
 ---
 
-## Step 3: Configure setup.scss
+## Step 3: Configure `_setup.scss` and the fonts
 
-Open `scss/themes/{name}/setup.scss`. This file assembles everything for this theme. Ensure all component mixins that have theme-specific behavior are called with the theme name:
+`scss/themes/{name}/_setup.scss` is generated boilerplate: replace every
+occurrence of "template" with your theme name and you are done — the
+component list lives in `themes/_shared/_bundle-full.scss`, never here:
 
 ```scss
-// themes/{name}/setup.scss
-@use "theme";
-@use "../../abstracts/index" as *;
-// ... other @use imports ...
-
-// Pass theme name to mixins that use $theme parameter:
-@include org-site-header("{theme-name}");
-// etc.
+// themes/{name}/_setup.scss
+@include universal-values();
+@include theme-{name}();
+@include theme-{name}-fonts();   // ← the font list, declared in _theme.scss
+@include syx-core({name});
+@include syx-bundle-full({name});
 ```
+
+Declare the theme's fonts once, in `_theme.scss`, inside
+`@mixin theme-{name}-fonts { … }` — the setup and every `bundle-*.scss`
+call that mixin instead of repeating the `@include font-family()` list.
 
 ---
 

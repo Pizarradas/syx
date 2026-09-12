@@ -18,11 +18,11 @@
    @mixin theme-your-theme-name {
    ```
 
-3. **Update setup.scss**:
-   - Replace all instances of `template` with `your-theme-name`
-   - Update font declarations
-   - Update mixin call: `@include theme-your-theme-name();`
-   - The `@layer` order declaration is emitted automatically by `universal-values()` — **do not add it manually** to `setup.scss`.
+3. **Update _setup.scss**:
+   - Replace all instances of `template` with `your-theme-name` — nothing else:
+     the component list lives in `themes/_shared/_bundle-full.scss` and the
+     font list in this theme's `_theme.scss` (`theme-your-theme-name-fonts()`)
+   - The `@layer` order declaration is emitted automatically by `universal-values()` — **do not add it manually** to `_setup.scss`.
 
 4. **Customize `_theme.scss`**:
 
@@ -93,7 +93,7 @@ See `home.html` and `docs.html` for a live reference of the documentation site f
 themes/
   your-theme-name/
     _theme.scss    # All theme values (primitives + variables + dark-mode)
-    setup.scss     # Theme setup and component includes (no manual @layer needed)
+    _setup.scss    # ~15 lines of wiring (no manual @layer, no component list)
     bundle-app.scss       # (optional) App context bundle
     bundle-docs.scss      # (optional) Documentation context bundle
     bundle-marketing.scss # (optional) Marketing/landing context bundle
