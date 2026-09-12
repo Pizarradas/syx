@@ -33,7 +33,7 @@ existe si alguien la respeta al escribir. Un campo la haría verificable.
 
 | Campo | Tipo | Qué contesta | Por qué merece ser campo y no prosa |
 |---|---|---|---|
-| `scope` | enum: `system-reusable` · `domain-reusable` · `product-specific` | ¿Puede otro producto usar esto? | Es filtrable. Un agente que construye fuera de este repo quiere pedir *solo* `system-reusable` y hoy tiene que leer 34 párrafos para saberlo. |
+| `scope` | enum: `system-reusable` · `domain-reusable` · `product-specific` | ¿Puede otro producto usar esto? | Es filtrable. Un agente que construye fuera de este repo quiere pedir *solo* `system-reusable` y hoy tiene que leer 26 párrafos para saberlo. |
 | `useWhen` | `string[]` | ¿Cuándo es la elección correcta? | Cada entrada es una condición que se puede casar contra un intent. En prosa no se puede casar nada. |
 | `avoidWhen` | `string[]` | ¿Cuándo es la elección equivocada? | Es el campo del hueco 3.2: sin él, un agente solo sabe que `mol-feature-card` *existe*. |
 | `alternatives` | `string[]` (nombres del propio registro) | Si este no, ¿cuál? | Un `avoidWhen` sin salida deja al agente parado o inventando. Validable: los nombres tienen que existir. |

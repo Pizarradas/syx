@@ -606,7 +606,7 @@
             </div>
             <div class="docs-hero__stat" role="listitem">
               <span class="atom-icon atom-icon--lc-code atom-icon--sm" aria-hidden="true"></span>
-              <strong>665</strong> tokens
+              <strong>1,088</strong> tokens
             </div>
             <div class="docs-hero__stat" role="listitem">
               <span class="atom-icon atom-icon--lc-sun atom-icon--sm" aria-hidden="true"></span>
@@ -1285,18 +1285,15 @@ padding: var(--semantic-space-inset-md) 0;
                   <span class="atom-pill atom-pill--secondary syx-mr-1">5</span>
                   $theme parameter flow
                 </p>
-                <pre class="atom-code"><code>// _setup.scss &rarr; passes the theme name to the mixin
-@include org-header("example-02");
+                <pre class="atom-code"><code>// _bundle-full.scss &rarr; passes the theme name to the mixin, once for all themes
+@include org-site-header($theme);
 
-// organisms/_header.scss &rarr; three methods based on type of difference
-@mixin org-header($theme: null) {
+// organisms/_site-header.scss &rarr; two methods based on type of difference
+@mixin org-site-header($theme: null) {
   // Method 1 — CSS token (automatic, all themes)
   background: var(--component-header-bg);
 
-  // Method 2 — Sass map (structural differences)
-  @if theme-cfg($theme, "header-sidenav-side", left) == right { right: 0; }
-
-  // Method 3 — direct @if (1–2 themes only)
+  // Method 2 — direct @if (1–2 themes only)
   @if $theme == "example-02" { backdrop-filter: blur(8px); }
 }</code></pre>
               </div>
@@ -2175,7 +2172,7 @@ npm run check:figma    # fails if those files are stale
 
           <p class="atom-txt syx-text-gray syx-mb-3">Two variable collections per theme &mdash;
             <code>SYX · Semantic</code> and <code>SYX · Component</code> &mdash; each with a <code>light</code> and a
-            <code>dark</code> mode, plus the 34 components with the node property every token maps to. Three decisions
+            <code>dark</code> mode, plus the 26 components with the node property every token maps to. Three decisions
             are worth knowing before you import:</p>
 
           <div class="syx-mb-4" style="overflow-x:auto">

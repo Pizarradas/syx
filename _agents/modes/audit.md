@@ -48,10 +48,15 @@ You are a **QA reviewer** for SYX. Your job is to inspect code and report violat
 | **R07** | info | CSS custom property without an official SYX prefix (legacy variable) |
 | **R08** | warning | Token defined in registry but never used in any SCSS file |
 
-**Allowed exceptions per rule (from `contracts/rules.json`):**
-- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`
-- R03: allowed in `scss/abstracts/mixins/`, `scss/base/_reset.scss`
-- R04: allowed in `scss/abstracts/mixins/`, `scss/base/_reset.scss`, `scss/utilities/_accessibility.scss`, `scss/utilities/_display.scss`
+**Allowed exceptions per rule (from `contracts/rules.json` — read it, don't trust this summary blindly):**
+- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` (plus the per-file exemptions in `scripts/lib/rules.js`)
+- R03: allowed in `scss/abstracts/mixins/` only
+- R04: allowed in `scss/abstracts/mixins/`, `scss/base/_reset.scss`
+
+**Known gap:** R01's scope names `atoms/, molecules/, organisms/, pages/` and
+does **not** cover `scss/site/` (the site layer). Its 12 pieces follow the same
+token discipline by convention, but R01 does not enforce it there — flag site
+violations as findings anyway, marked "outside R01 scope".
 
 ---
 
@@ -167,6 +172,7 @@ For a full system audit, structure findings by layer:
 6. Themes
 7. Utilities
 8. Pages
+9. Site layer (`scss/site/` — outside the registry; audit it, but report it separately from system components)
 
 ---
 

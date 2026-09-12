@@ -5,7 +5,7 @@
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
 > · **Writes:** —
-> · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/primitives/`, `scss/abstracts/tokens/semantic/` — an identity lands on the top three rungs of the cascade and reaches all seven bundles at once, so every path it touches is human-only. **BRAND is an analysis and recommendation mode**: it decides the identity, writes the files out in full and hands them over. A person puts them in.
+> · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/primitives/`, `scss/abstracts/tokens/semantic/` — an identity lands on the top three rungs of the cascade and reaches all seven themes at once, so every path it touches is human-only. **BRAND is an analysis and recommendation mode**: it decides the identity, writes the files out in full and hands them over. A person puts them in.
 > · **Reads:** `contracts/rules.json`, `contracts/trust.json`, `tokens.json`, `component-registry.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `get_token` with `theme` and `mode` for what a browser really paints on an axis before deciding to move it — re-reading a theme file cannot resolve an alias chain; `find_token_by_value` before inventing a value the system already has a name for; `list_components` to know what the identity actually has to dress; and, before handing anything over, `validate_snippet` on every block a person will paste and `classify_change` for where each axis actually lands. The last two are what stop an identity being a specification SYX cannot execute.
 
@@ -72,7 +72,7 @@ violation six components later.
 | 4 | **Shape** | the radius language — square, soft, pill — and the border weight | theme | `--semantic-border-radius-*`, `--semantic-border-width-*` |
 | 5 | **Elevation** | how depth is signalled: diffuse shadow, hard offset, or borders only | theme | `--semantic-shadow-*` |
 | 6 | **Motion** | the duration ladder and the easing signature | theme | `--semantic-duration-*`, `--semantic-easing-*` |
-| 7 | **State** | how focus, hover and error announce themselves | theme | `--semantic-color-state-*`, `--semantic-focus-*`, `--semantic-outline-*` |
+| 7 | **State** | how focus, hover and error announce themselves | theme | `--semantic-color-state-*`, `--semantic-focus-*`, `--semantic-outline-width` |
 
 Two further axes exist and are **not tokens** — voice and imagery. Decide them anyway, in prose, and
 hand them to UX and CREATIVE. An identity whose photographic direction goes unstated gets one per page.

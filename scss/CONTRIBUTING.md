@@ -270,7 +270,7 @@ All new utilities **must**:
 Before submitting any change:
 
 - [ ] `sass scss/styles-theme-example-01.scss --style=compressed --no-source-map` compiles without errors
-- [ ] All 6 themes compile without errors
+- [ ] All 7 themes compile without errors
 - [ ] No hardcoded values (colors, spacing, font sizes)
 - [ ] No `!important`
 - [ ] No raw `transition:` (use `@include transition()`)

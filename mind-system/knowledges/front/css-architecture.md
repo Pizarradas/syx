@@ -26,19 +26,23 @@ La cascada CSS determina qué regla "gana" cuando múltiples reglas aplican al m
 **Stack de layers en SYX:**
 ```scss
 @layer syx.reset,
-       syx.tokens,
        syx.base,
+       syx.tokens,
        syx.atoms,
        syx.molecules,
        syx.organisms,
-       syx.utilities,
-       syx.themes;
+       syx.utilities;
 ```
 
-Las capas se declaran en orden de menos a más prioritario. Un estilo en `syx.themes` sobreescribe `syx.atoms` sin necesidad de mayor especificidad.
+Las capas se declaran en orden de menos a más prioritario. La capa más alta
+es `syx.utilities`: una utility `.syx-*` sobreescribe cualquier componente
+sin necesidad de mayor especificidad. `syx.tokens` está **reservada y vacía
+a propósito**: los `:root` de tokens se emiten sin capa (lo no-capado gana a
+toda capa), y por eso un tema gana redefiniendo tokens en `:root` — no
+existe ninguna capa `syx.themes`.
 
 **Por qué es relevante para los modos:**
-- Permite a los temas sobreescribir tokens de componente sin `!important`
+- Permite a los temas sobreescribir valores vía tokens en `:root` sin `!important`
 - Garantiza que las utilities (clases helper) ganen sobre componentes cuando se necesita
 - Hace previsible qué regla aplica sin calcular especificidad
 
@@ -57,7 +61,7 @@ Inline style (style="…")          → 1,0,0,0
 !important                        → gana todo (anti-patrón)
 ```
 
-**La solución en SYX:** `@layer` elimina la necesidad de combatir especificidad. Si un token de tema necesita sobreescribir un componente, está en una capa superior — no necesita `!important`.
+**La solución en SYX:** `@layer` elimina la necesidad de combatir especificidad. Un tema no compite con los componentes: redefine los tokens en `:root` (sin capa, gana a todo) y el componente pinta el valor nuevo — no necesita `!important`.
 
 ---
 
@@ -89,9 +93,9 @@ Las `@layer` en SYX son **cascade layers** (no origin layers). La prioridad es:
 2. User styles (user preferences)
 3. Author styles ← aquí están las @layer de SYX
    3a. syx.reset
-   3b. syx.tokens
-   3c. ...
-   3n. syx.themes
+   3b. syx.base
+   3c. ... (hasta syx.utilities)
+   3z. estilos SIN capa ← los :root de tokens; ganan a toda capa
 4. !important (invertido: user > author)
 ```
 

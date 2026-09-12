@@ -18,11 +18,17 @@ Answer these questions before writing any code:
 2. Does it combine 2+ atoms into one logical UI unit?
    → **Molecule** (`scss/molecules/`, prefix `mol-`)
 
-3. Does it represent a full UI section (header, hero, feature grid)?
+3. Does it represent a full UI section (a header, a footer, a sidebar)?
    → **Organism** (`scss/organisms/`, prefix `org-`)
 
 4. Is it a pure CSS helper with no markup dependency?
    → **Utility** (`scss/utilities/`, prefix `syx-`) — this is NOT a component.
+
+5. Does it exist **only** for SYX's own pages (`home.html`, `docs.html`,
+   `why-syx.html`)? → **Site layer** (`scss/site/`). It keeps its `atom-`/
+   `mol-`/`org-` class prefix but does NOT enter the registry, the storybook
+   or `_bundle-full.scss`: register it with one line in
+   `scss/site/_bundle-site.scss` instead, and skip Steps 5 and 7 below.
 
 > **If unsure between atom and molecule:** ask "Would these sub-parts ever make sense independently?" If yes → separate atoms. If no → molecule.
 
@@ -40,9 +46,9 @@ Create `scss/abstracts/tokens/components/_{name}.scss`:
   --component-{name}-color:         var(--semantic-color-text-primary);
   --component-{name}-border:        var(--semantic-color-border-default);
   --component-{name}-border-width:  var(--semantic-border-width);
-  --component-{name}-radius:        var(--semantic-border-radius-md);
-  --component-{name}-padding-y:     var(--semantic-space-inset-md);
-  --component-{name}-padding-x:     var(--semantic-space-inset-lg);
+  --component-{name}-radius:        var(--semantic-border-radius-default);
+  --component-{name}-padding-y:     var(--semantic-space-component-md);
+  --component-{name}-padding-x:     var(--semantic-space-component-lg);
   // Add only the tokens this component actually needs
 }
 ```
@@ -188,21 +194,21 @@ Fix any errors before proceeding.
 
 // turbo
 
-## Step 7: Update component-registry.json
+## Step 7: Regenerate component-registry.json
 
-Add an entry to `component-registry.json`:
+The registry is a **generated artifact** — never write entries by hand
+(its `_meta` says so: `tokenFiles` replaced the old hand-written `tokenFile`
+precisely because manual entries pointed at files that did not exist):
 
-```json
-{
-  "name": "{name}",
-  "layer": "atom|molecule|organism",
-  "file": "scss/{layer}/_{name}.scss",
-  "tokenFile": "scss/abstracts/tokens/components/_{name}.scss",
-  "classes": ["{prefix}-{name}", "{prefix}-{name}--modifier"],
-  "elements": ["{prefix}-{name}__element"],
-  "tokens": ["--component-{name}-bg", "--component-{name}-color"]
-}
+```bash
+npm run build:registry
 ```
+
+The builder scans `scss/atoms|molecules|organisms/`, verifies every class
+and modifier against the compiled CSS, and preserves only two hand-written
+fields between regenerations: **`description`** and **`usage`**. Write those
+two for the new component (the storybook renders `usage` verbatim), then run
+`npm run check:registry` to confirm everything is in sync.
 
 ---
 
@@ -213,6 +219,6 @@ Before committing:
 - [ ] Token file created and registered
 - [ ] Component file created with `@mixin` wrapper and `@layer`
 - [ ] Registered in `{layer}/index.scss`
-- [ ] All 6 themes compile without errors
+- [ ] All 7 themes compile without errors
 - [ ] No hardcoded values, no `!important`, no raw `transition:` or `position:`
-- [ ] `component-registry.json` updated
+- [ ] `component-registry.json` regenerated (`npm run build:registry`) with `description` + `usage` written

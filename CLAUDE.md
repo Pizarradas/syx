@@ -173,7 +173,7 @@ scss/site/                — SITE LAYER: 12 pieces used only by SYX's own pages
                             (home-*, evidence, score, ranking, compare-card,
                             theme-swatch-card). Outside the registry and the
                             storybook; removable.
-scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 4-5 bundle contexts
+scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 6 bundle contexts
 contracts/                — machine-readable validation output
 _agents/                  — THE ENGINE: modes (Trust + Knowledge blocks), workflows, prompts
 _agents/architecture.md   — the ecosystem as diagrams-as-code; architecture.json is the

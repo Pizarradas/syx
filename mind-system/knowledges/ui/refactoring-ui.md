@@ -110,7 +110,7 @@ En muchas interfaces, los labels añaden noise sin añadir información que no s
   - El usuario necesita comparar múltiples instancias del mismo dato
 ```
 
-**En SYX:** los componentes `atom-data-label` y sus pares se usan cuando el contexto no es suficiente — no como default para todo dato visible.
+**En SYX:** los componentes `atom-label` y `mol-label-group` se usan cuando el contexto no es suficiente — no como default para todo dato visible.
 
 ---
 

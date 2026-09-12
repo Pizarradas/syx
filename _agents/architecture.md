@@ -182,6 +182,7 @@ to rot.
 flowchart TB
     CHECK["npm run check"] --> V["validate — R01–R04 errors,<br/>R05–R07 warnings"]
     CHECK --> T1["check:themes — symmetry across 7 themes"]
+    CHECK --> T1b["check:setups — selector symmetry across the 7 entry points,<br/>fonts only via theme-x-fonts()"]
     CHECK --> T2["check:version — version citations"]
     CHECK --> T3["check:tokens — snapshot sync"]
     CHECK --> T4["check:huerfanos — orphans"]

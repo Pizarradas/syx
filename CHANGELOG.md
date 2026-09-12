@@ -37,7 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   Devuelve, por componente y por tema y modo: cada token con su propiedad, su tipo, su valor convertido y el nombre de la variable; el reparto por variante y por estado; y **lo que no se pudo traducir, con el motivo**. Va marcado qué es hecho y qué es inferencia: las clases y los tokens vienen del registro, contrastado contra el CSS compilado; el reparto por variante se deduce del nombre. Mezclarlos sin decirlo convertiría una fuente verificada en una fuente creíble, que no es lo mismo.
 
-- **`npm run export:figma` — 7 ficheros, 3635 variables, 1879 omitidas con motivo.** Dos colecciones por tema (`SYX · Semantic`, `SYX · Component`) con sus dos modos, y los 34 componentes con sus propiedades. Tres decisiones que conviene no descubrir a mitad de una importación:
+- **`npm run export:figma` — 7 ficheros, 3656 variables, 1900 omitidas con motivo.** Dos colecciones por tema (`SYX · Semantic`, `SYX · Component`) con sus dos modos, y los 26 componentes con sus propiedades. Tres decisiones que conviene no descubrir a mitad de una importación:
 
   · **Los primitivos no suben.** R01 prohíbe que un componente lea un `--primitive-*` en el CSS; subirlos a Figma como variables elegibles abriría en el diseño el atajo que el contrato cierra en el código, y la desviación entraría por el otro lado.
 

@@ -145,6 +145,7 @@
     "map": [
       { "script": "validate", "guards": "R01-R04 errors + R05-R07 warnings over scss and tokens.json" },
       { "script": "check:themes", "guards": "theme symmetry across the seven themes" },
+      { "script": "check:setups", "guards": "identical selector sets across the seven compiled entry points; no hand-written @font-face in bundles (fonts live in theme-x-fonts())" },
       { "script": "check:version", "guards": "version citations agree with package.json" },
       { "script": "check:tokens", "guards": "tokens.json snapshot in sync with source" },
       { "script": "check:huerfanos", "guards": "orphan files" },

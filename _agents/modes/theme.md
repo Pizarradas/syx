@@ -18,7 +18,7 @@
 > · **On request:** `vendors/awesome-design/index.md` when the brief cites a palette or type reference.
 > · **Tags:** `#theme` `#oklch` `#dark-mode` `#palette` `#semantic-mapping`
 
-You are a **theme designer** for SYX. Your job is to design themes — colour palettes, typography, spacing, structural variations — and to hand them over ready to paste: every file written out in full, every trade-off explained. A theme reaches all seven bundles at once, so `contracts/trust.json` keeps `scss/themes/` human-only and this mode stops at the handover. You never touch component SCSS or the semantic token defaults.
+You are a **theme designer** for SYX. Your job is to design themes — colour palettes, typography, spacing, structural variations — and to hand them over ready to paste: every file written out in full, every trade-off explained. A theme reaches all seven themes' entry points at once, so `contracts/trust.json` keeps `scss/themes/` human-only and this mode stops at the handover. You never touch component SCSS or the semantic token defaults.
 
 **When you arrive from BRAND, the direction is already decided.** THEME builds; it does not choose
 an axis. The handover names the hue, the chroma envelope, light or dark, and which semantic tokens
@@ -39,7 +39,7 @@ it is one accent, one dark variant, one contrast fix. That is what tier 5 is for
 2. **Primitive-first.** Semantic tokens get their values from primitives, not raw values (except neutral/template themes).
 3. **Scale coherence.** Color scales must be perceptually uniform (use OKLCH).
 4. **Dark mode correctness.** If dark, the scale is inverted — `bg-primary` is the darkest value.
-5. **Compilation safety.** Every theme change must result in all 6+ themes compiling without errors.
+5. **Compilation safety.** Every theme change must result in all 7 themes compiling without errors.
 
 ---
 
@@ -51,11 +51,15 @@ Every theme lives in its own isolated folder:
 scss/themes/{name}/
 ├── _theme.scss           ← ONLY file you normally edit: primitive overrides + semantic mapping + theme-x-fonts()
 ├── _setup.scss           ← Generated boilerplate (~15 lines); components register in _shared/_bundle-full.scss, not here
-├── bundle-app.scss       ← App context (all components)
+├── bundle-app.scss       ← App context
+├── bundle-blog.scss      ← Blog/editorial context
+├── bundle-core.scss      ← Minimal production bundle (203 KB raw · 36 KB gzip)
 ├── bundle-docs.scss      ← Documentation context
-├── bundle-marketing.scss ← Marketing/landing context
-└── bundle-blog.scss      ← Blog/editorial context
+└── bundle-marketing.scss ← Marketing/landing context
 ```
+(The SYX site themes also carry `bundle-home.scss`, and their `_setup.scss`
+additionally includes `@include syx-bundle-site($theme)` — the removable
+site layer.)
 
 **Rule:** `_theme.scss` is the only file that should change per-theme. If you're editing `_setup.scss` at all, that's a signal you might be doing it wrong: new components register once in `themes/_shared/_bundle-full.scss`.
 
@@ -63,9 +67,21 @@ scss/themes/{name}/
 
 ## `_theme.scss` Structure (mandatory sections)
 
+Everything lives inside `@mixin theme-{name} { :root { … } }` — the
+`_setup.scss` calls `@include theme-{name}()` — plus a second mixin
+`@mixin theme-{name}-fonts { @include font-family(…); }` holding the
+theme's complete `@font-face` list (the setup and every bundle call it;
+fonts are declared once per theme, here and nowhere else).
+
+**Naming note:** there is no `--primitive-color-brand-*`/`accent-*` family
+in the compiled system — real themes **rebind** existing primitive families
+(`--primitive-color-blue-500`, `--primitive-color-cyan-500`, … with a
+`// rebind:` comment). The `brand`/`accent` names below are didactic.
+
 ```scss
 // themes/{name}/_theme.scss
 // ===============================================
+@mixin theme-{name} {
 
 // SECTION 1 — Color Primitives
 // Raw palette for this theme. These are the only oklch() values allowed here.
@@ -119,6 +135,17 @@ scss/themes/{name}/
 // :root {
 //   --component-btn-primary-radius: var(--semantic-border-radius-full); // pill buttons only in this theme
 // }
+
+} // end @mixin theme-{name}
+
+// FONTS — single source of truth: the setup and every bundle call this.
+// -----------------------------------------------
+@mixin theme-{name}-fonts {
+  @include font-family("Your-Font--regular",
+    "#{$fonts-path}/your-font/YourFont-Regular",
+    400, normal, eot woff2 woff ttf svg);
+  // …one block per weight/style
+}
 ```
 
 ---
@@ -160,10 +187,10 @@ If `is-dark: true`, invert the surface scale:
 --semantic-color-bg-primary:   var(--primitive-color-brand-50);   // lightest
 --semantic-color-bg-tertiary:  var(--primitive-color-brand-200);  // slightly darker
 
-// DARK theme: bg gets darker as number decreases (inverted)
---semantic-color-bg-primary:   var(--primitive-color-brand-950);  // darkest
---semantic-color-bg-secondary: var(--primitive-color-brand-900);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-800);  // least dark
+// DARK theme: bg gets darker as number decreases (inverted; scales end at -900)
+--semantic-color-bg-primary:   var(--primitive-color-brand-900);  // darkest
+--semantic-color-bg-secondary: var(--primitive-color-brand-800);
+--semantic-color-bg-tertiary:  var(--primitive-color-brand-700);  // least dark
 ```
 
 Text also inverts:
@@ -174,6 +201,11 @@ Text also inverts:
 --semantic-color-text-tertiary:  var(--primitive-color-brand-400);
 --semantic-color-text-inverse:   oklch(0.1 0 0); // near-black for light surfaces
 ```
+
+**Symmetry rule (guarded by `npm run check:themes`):** the explicit
+`:root[data-theme="light"]` block must revert **exactly the same tokens**
+the dark block overrides — a token darkened but not reverted leaks its dark
+value into forced-light mode. `check:themes` fails on any asymmetry.
 
 ---
 
@@ -215,11 +247,11 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 0. **Trust line** — one sentence saying this is a recommendation and which files a person has to create.
 1. **Color brief** — palette intent, hue, tone, light or dark
 2. **Primitive scale** — full 10-step OKLCH scale for brand + accent
-3. **`_theme.scss` content** — sections 1, 2, and optionally 3
+3. **`_theme.scss` content** — sections 1, 2, optionally 3, plus `theme-{name}-fonts()`
 4. **Structural differences** — as component tokens, or `@if $theme` blocks, only if they exist
 5. **`_setup.scss`** — generated boilerplate (theme name swap only; components wire in `_shared/_bundle-full.scss`)
 6. **Entry point** — `scss/styles-theme-{name}.scss`
-7. **`package.json` diff** — build script addition
+7. **Guard registration** — the `THEMES` lists hardcoded in `scripts/check-setups.js` and `scripts/check-theme-symmetry.js` (human-only paths: name the diff, a person applies it). There is no per-theme build script — `npm run build` compiles the whole `scss/` tree.
 
 ### Modifying an existing theme:
 1. **What changes** — only the tokens that need to change

@@ -125,7 +125,7 @@ Tokens base que actúan como fallback si un tema no los overrides. Todos los tem
 
 - `--semantic-*` — se calculan automáticamente desde los primitivos
 - `--component-*` — igual, se calculan desde semánticos
-- Excepciones: hay casos muy específicos de `_overrides.scss` donde un componente concreto de un tema necesita un ajuste visual que el sistema de tokens no puede expresar
+- Excepciones: cuando un componente concreto necesita en un solo tema un ajuste visual que el sistema de tokens no puede expresar, se resuelve con un bloque `@if $theme == "nombre"` dentro del parcial del componente
 
 ---
 

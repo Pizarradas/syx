@@ -32,7 +32,7 @@
 │                 └─ helper-* mixins: theme-aware, generate   │
 │                    .syx-* classes in @layer syx.utilities   │
 ├─────────────────────────────────────────────────────────────┤
-│  ABSTRACTS      tokens · mixins · functions · maps          │
+│  ABSTRACTS      tokens · mixins · maps · paths              │
 │  (never compiled directly — always @used by other layers)   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -126,7 +126,7 @@ No meaning.            General UI feel.         Meaningful state.        Compone
 
 ## Mixin Library
 
-15 files in `abstracts/mixins/`. All mixins are **null-safe** — passing `null` skips that property. The library exposes **27 mixins** across those 15 files.
+15 files in `abstracts/mixins/`. All mixins are **null-safe** — passing `null` skips that property. The library exposes **44 mixins** across those files.
 
 ```
 mixins/
@@ -188,7 +188,7 @@ Each bundle includes only what that context needs:
 ```
 
 Which components each context includes is defined once in
-`themes/_shared/_bundle-{app,blog,docs,marketing,full,core}.scss`.
+`themes/_shared/_bundle-{app,blog,core,full,marketing}.scss`.
 Bundles never include `.syx-*` utilities — those enter only from the root
 entry points (see *What is emitted, and in what order*).
 
@@ -357,4 +357,4 @@ themes/{name}/bundle-*.scss    →  css/themes/{name}/bundle-*.css (byproducts)
 | Bundle-per-context                   | Smaller CSS per page type, no unused styles      |
 | PurgeCSS on production builds        | Removes unused selectors, ~20–30% size reduction |
 | Bourbon philosophy for mixins        | Concise, well-documented, DRY                    |
-| Single-Partial Multi-Theme           | One file per component, 3-method pattern inside  |
+| Single-Partial Multi-Theme           | One file per component, 2-method pattern inside  |

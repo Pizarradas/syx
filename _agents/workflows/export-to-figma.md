@@ -66,10 +66,10 @@ Read `_meta.cuentas` before anything else:
 
 ```json
 "cuentas": {
-  "variables": 543,
-  "omitidas": 247,
+  "variables": 546,
+  "omitidas": 250,
   "fueraDeAlcance": { "primitive": 233, "icon": 17, "reset": 26, "layout": 12, "theme": 4 },
-  "componentes": 34
+  "componentes": 26
 }
 ```
 

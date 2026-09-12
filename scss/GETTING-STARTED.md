@@ -21,11 +21,16 @@
 ### With npm (recommended)
 
 ```bash
-npm install                # install dependencies (Sass + PurgeCSS)
-npm run build              # compile all 6 themes
-npm run build:core         # compile minimal production bundle
-npm run build:prod         # compile all themes + run PurgeCSS
-npm run watch              # watch theme-01 for changes
+npm install                # install dependencies (Sass + PostCSS)
+npm run build              # compile everything: the 7 themes + all bundles
+npm run watch              # watch the whole scss/ tree for changes
+```
+
+For the minimal production bundle, compile a theme's `bundle-core.scss`:
+
+```bash
+sass scss/themes/example-01/bundle-core.scss dist/core.css --style=compressed
+# measured: 203 KB raw · 36 KB gzip (goal: < 50 KB gzip)
 ```
 
 ### With Dart Sass CLI
@@ -113,16 +118,18 @@ touch scss/atoms/_tooltip.scss
 // atom: tooltip
 // ===============================================
 @mixin atom-tooltip($theme: null) {
-  .syx-tooltip {
-    @include relative();
-    display: inline-block;
+  @layer syx.atoms {
+    .atom-tooltip {
+      @include relative();
+      display: inline-block;
 
-    // &__content
-    &__content {
-      @include absolute($top: calc(100% + 0.5rem), $left: 50%);
-      @include padding(var(--semantic-space-inset-sm));
-      @include transition(opacity 0.2s ease, transform 0.2s ease);
-      // ... rest of styles
+      // &__content
+      &__content {
+        @include absolute($top: calc(100% + 0.5rem), $left: 50%);
+        @include padding(var(--semantic-space-inset-sm));
+        @include transition(opacity 0.2s ease, transform 0.2s ease);
+        // ... rest of styles
+      }
     }
   }
 }
@@ -162,7 +169,18 @@ touch scss/atoms/_tooltip.scss
 @forward "components/tooltip"; // add this line
 ```
 
-### Step 6 — Compile and verify
+### Step 6 — Include it in the shared full bundle
+
+```scss
+// scss/themes/_shared/_bundle-full.scss  (one line, reaches all 7 themes)
+@include atom-tooltip($theme);
+```
+
+Never add component includes to per-theme `_setup.scss` files — they are
+generated boilerplate; the component list lives only in `_bundle-full.scss`
+(plus the context bundles that need it).
+
+### Step 7 — Compile and verify
 
 ```bash
 sass scss/styles-theme-example-01.scss css/test.css
@@ -172,18 +190,19 @@ sass scss/styles-theme-example-01.scss css/test.css
 
 ### Option B — Minimal production bundle
 
+Every theme ships `bundle-core.scss` — the leanest functional bundle,
+defined once in `themes/_shared/_bundle-core.scss` (no showroom components,
+no site layer):
+
 ```bash
-npm run build:core         # compiles styles-core.css (138 KB, no docs overhead)
-npm run purge:core         # + PurgeCSS for production (~110 KB)
+sass scss/themes/example-01/bundle-core.scss dist/core.css --style=compressed
 ```
 
-Link in HTML:
+Measured (example-01): **203 KB raw · 36 KB gzip** — goal < 50 KB gzip.
 
 ```html
-<link rel="stylesheet" href="css/styles-core.css" />
+<link rel="stylesheet" href="dist/core.css" />
 ```
-
-See `demo-bundle-weight.html` for a live reference.
 
 ---
 
