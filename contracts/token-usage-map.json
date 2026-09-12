@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-12T09:24:23.339Z",
+    "generatedAt": "2026-09-12T09:39:11.553Z",
     "totalMappedTokens": 1447
   },
   "map": {
@@ -58,7 +58,7 @@
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
@@ -88,8 +88,8 @@
         "scss/atoms/_list.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/base/_elements.scss",
-        "scss/base/_token-aliases.scss",
         "scss/organisms/_site-header.scss",
         "scss/site/_ranking.scss",
         "scss/site/_theme-swatch-card.scss",
@@ -115,7 +115,7 @@
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/atoms/_code.scss",
         "scss/base/_elements.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/molecules/_feature-card.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
@@ -174,7 +174,7 @@
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/atoms/_feature-icon.scss",
         "scss/base/helpers/_backgrounds.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
         "scss/site/_home-themes.scss",
@@ -310,7 +310,7 @@
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -336,7 +336,7 @@
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -360,7 +360,7 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -420,7 +420,7 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_tables.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/utilities/_accessibility.scss"
       ]
     },
@@ -429,7 +429,8 @@
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_tables.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/site/_home-cta.scss",
         "scss/site/_home-features.scss",
@@ -442,7 +443,7 @@
     "--semantic-line-height-snug": {
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_surface-tokens.scss"
       ]
     },
     "--semantic-border-width-default": {
@@ -462,7 +463,7 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_labels.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_accessibility.scss"
       ]
@@ -474,7 +475,7 @@
         "scss/abstracts/tokens/components/_links.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
         "scss/abstracts/tokens/components/_tables.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--semantic-font-size-body-sm": {
@@ -509,7 +510,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -745,7 +746,7 @@
     "--semantic-color-border-focus": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--semantic-color-placeholder": {
@@ -762,7 +763,7 @@
         "scss/abstracts/tokens/components/_tables.scss",
         "scss/atoms/_pill.scss",
         "scss/atoms/_stat-counter.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/molecules/_code-snippet.scss"
       ]
     },
@@ -991,7 +992,7 @@
         "scss/abstracts/tokens/components/_lists.scss",
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/atoms/_txt.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/site/_compare-card.scss",
         "scss/site/_ranking.scss"
       ]
@@ -1006,7 +1007,8 @@
       "usages": [
         "scss/abstracts/tokens/components/_navigation.scss",
         "scss/atoms/_stat-counter.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
         "scss/organisms/_site-header.scss",
@@ -1155,7 +1157,7 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/helpers/_backgrounds.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1299,7 +1301,7 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
@@ -1311,7 +1313,7 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1323,7 +1325,7 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
@@ -1402,7 +1404,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
@@ -1425,7 +1427,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
@@ -1436,7 +1438,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1453,7 +1455,7 @@
     "--semantic-font-size-h1": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1462,7 +1464,8 @@
     "--semantic-font-size-h2": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1470,7 +1473,8 @@
     "--semantic-font-size-h3": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1478,7 +1482,8 @@
     "--semantic-font-size-h4": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1487,7 +1492,8 @@
     "--semantic-font-size-h5": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/molecules/_feature-card.scss",
         "scss/site/_home-footer.scss",
         "scss/themes/syx-sketch/_theme.scss"
@@ -1498,7 +1504,7 @@
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/base/_elements.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/molecules/_feature-card.scss",
         "scss/organisms/_site-header.scss",
         "scss/site/_home-cta.scss",
@@ -1517,7 +1523,8 @@
         "scss/abstracts/tokens/primitives/_borders.scss",
         "scss/abstracts/tokens/primitives/_sizing.scss",
         "scss/abstracts/tokens/primitives/_spacing.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/setup-builder.scss",
         "scss/themes/example-01/_theme.scss",
@@ -1821,31 +1828,31 @@
     "--primitive-space-1": {
       "usages": [
         "scss/abstracts/tokens/semantic/_spacing.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--primitive-space-2": {
       "usages": [
         "scss/abstracts/tokens/semantic/_spacing.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--primitive-space-3": {
       "usages": [
         "scss/abstracts/tokens/semantic/_spacing.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--primitive-space-4": {
       "usages": [
         "scss/abstracts/tokens/semantic/_spacing.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--primitive-space-6": {
       "usages": [
         "scss/abstracts/tokens/semantic/_spacing.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--primitive-font-family-space-grotesk-regular": {
@@ -2073,7 +2080,7 @@
     "--component-button-primary-filled-color": {
       "usages": [
         "scss/atoms/_btn.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-button-secondary-color": {
@@ -2089,7 +2096,7 @@
     "--component-button-secondary-filled-color": {
       "usages": [
         "scss/atoms/_btn.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-button-tertiary-color": {
@@ -2105,7 +2112,7 @@
     "--component-button-tertiary-filled-color": {
       "usages": [
         "scss/atoms/_btn.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-button-quaternary-color": {
@@ -2121,7 +2128,7 @@
     "--component-button-quaternary-filled-color": {
       "usages": [
         "scss/atoms/_btn.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-button-size-sm": {
@@ -2325,7 +2332,7 @@
     "--component-check-gap": {
       "usages": [
         "scss/atoms/_check.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-form-field-font-size": {
@@ -2334,7 +2341,7 @@
         "scss/atoms/_form.scss",
         "scss/atoms/_radio.scss",
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-form-field-color": {
@@ -2352,13 +2359,13 @@
         "scss/atoms/_form.scss",
         "scss/atoms/_radio.scss",
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-check-size": {
       "usages": [
         "scss/atoms/_check.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-check-border-width": {
@@ -2630,7 +2637,7 @@
     "--component-form-field-font-family": {
       "usages": [
         "scss/atoms/_form.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-form-field-label-margin-bottom": {
@@ -2642,7 +2649,7 @@
     "--component-form-field-min-height": {
       "usages": [
         "scss/atoms/_form.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-form-field-padding-y": {
@@ -2653,7 +2660,7 @@
     "--component-form-field-padding-x": {
       "usages": [
         "scss/atoms/_form.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-form-field-border-width": {
@@ -3215,7 +3222,7 @@
     "--component-pagination-gap": {
       "usages": [
         "scss/atoms/_pagination.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-pagination-bg-active": {
@@ -3236,7 +3243,7 @@
     "--component-pagination-icon-size": {
       "usages": [
         "scss/atoms/_pagination.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-pagination-icon-filter": {
@@ -3247,7 +3254,7 @@
     "--component-pagination-item-size": {
       "usages": [
         "scss/atoms/_pagination.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-pagination-border-radius": {
@@ -3432,13 +3439,13 @@
     "--component-radio-gap": {
       "usages": [
         "scss/atoms/_radio.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-radio-size": {
       "usages": [
         "scss/atoms/_radio.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-radio-border-width": {
@@ -3469,7 +3476,7 @@
     "--component-radio-checked-size": {
       "usages": [
         "scss/atoms/_radio.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-radio-dot-border-radius": {
@@ -3500,13 +3507,13 @@
     "--component-switch-width": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-switch-height": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-switch-bg-off": {
@@ -3532,19 +3539,19 @@
     "--component-switch-slider-size": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-switch-slider-bg": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-switch-slider-radius": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-switch-slider-shadow": {
@@ -3565,7 +3572,7 @@
     "--component-switch-status-disabled-opacity": {
       "usages": [
         "scss/atoms/_switch.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-table-min-width": {
@@ -3586,13 +3593,13 @@
     "--component-table-th-font-size": {
       "usages": [
         "scss/atoms/_table.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-table-th-line-height": {
       "usages": [
         "scss/atoms/_table.scss",
-        "scss/base/_token-aliases.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--component-table-th-font-family": {
@@ -3772,35 +3779,35 @@
     "--font-size-1": {
       "usages": [
         "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
     "--font-size-2": {
       "usages": [
         "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
     "--font-size-3": {
       "usages": [
         "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
     "--font-size-4": {
       "usages": [
         "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
     "--font-size-5": {
       "usages": [
         "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_token-aliases.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
@@ -3897,14 +3904,154 @@
         "scss/base/helpers/_icons.scss"
       ]
     },
-    "--gap-1": {
+    "--font-family-1": {
       "usages": [
-        "scss/base/helpers/_spacers.scss"
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
-    "--inner-1": {
+    "--font-family-2": {
       "usages": [
-        "scss/base/helpers/_spacers.scss"
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-space-8": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-size-1": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-size-2": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-size-3": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-size-4": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--primitive-size-5": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-breadcrumb-gap": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-breadcrumb-item-padding-x": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-breadcrumb-icon-margin-right": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-breadcrumb-icon-size": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-check-line-height": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-radio-line-height": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-form-group-margin-bottom": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--semantic-size-icon-sm": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-margin-top": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-margin-bottom": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-gap": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-item-margin-top": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-counter-size": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-counter-font-size": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-ordered-counter-line-height": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-lvl1-gap": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-item-margin-top": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-icon-size": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-lvl2-margin-left": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-lvl2-gap": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-lvl3-margin-left": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--component-list-lvl3-gap": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss"
       ]
     },
     "--layout-pad-4": {
@@ -4172,19 +4319,9 @@
         "scss/themes/example-06/_theme.scss"
       ]
     },
-    "--font-family-1": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--font-family-2": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
     "--semantic-color-selection-text": {
       "usages": [
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -4196,7 +4333,7 @@
     },
     "--semantic-color-selection-bg": {
       "usages": [
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -4208,159 +4345,19 @@
     },
     "--semantic-line-height-tight": {
       "usages": [
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/site/_ranking.scss"
       ]
     },
     "--semantic-letter-spacing-tight": {
       "usages": [
-        "scss/base/_token-aliases.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/utilities/_text.scss"
       ]
     },
     "--semantic-letter-spacing-normal": {
       "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-space-8": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-size-1": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-size-2": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-size-3": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-size-4": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--primitive-size-5": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-breadcrumb-gap": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-breadcrumb-item-padding-x": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-breadcrumb-icon-margin-right": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-breadcrumb-icon-size": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-check-line-height": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-radio-line-height": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-form-group-margin-bottom": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--semantic-size-icon-sm": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-margin-top": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-margin-bottom": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-gap": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-item-margin-top": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-counter-size": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-counter-font-size": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-ordered-counter-line-height": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-lvl1-gap": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-item-margin-top": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-icon-size": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-lvl2-margin-left": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-lvl2-gap": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-lvl3-margin-left": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
-      ]
-    },
-    "--component-list-lvl3-gap": {
-      "usages": [
-        "scss/base/_token-aliases.scss"
+        "scss/base/_surface-tokens.scss"
       ]
     },
     "--layout-pad-1": {
@@ -7253,15 +7250,23 @@
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
-    "--semantic-border-focus": {
-      "usages": [],
-      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
-    },
     "--semantic-color-text-on-primary": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
+    "--semantic-border-focus": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
     "--layout-pad-6": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
+    "--gap-1": {
+      "usages": [],
+      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
+    },
+    "--inner-1": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },

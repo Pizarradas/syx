@@ -91,7 +91,7 @@ stands. If it does, delete the line and write the real reason.
 | **CREATIVE** | **The art direction** — which character was chosen and which observable properties carry it (contrast, typographic scale, spacing rhythm, accent strength, simultaneity) · every technique whose cost is not obvious |
 | **UI** | Grid split · density step · elevation level · the token picked when several resolved to a usable value · a mixin used where a shorter declaration would have compiled |
 | **TOKEN** | Tier placement · a new token where an existing one nearly fit, and how near · the name, when it is not mechanical |
-| **THEME** | Scale steps that are not the generated ones · a contrast decision at the AA boundary · a structural override in `$theme-config` |
+| **THEME** | Scale steps that are not the generated ones · a contrast decision at the AA boundary · a structural override via `@if $theme` |
 | **AUDIT** | **Severity and the fix, never the violation.** The rule states the violation. What needs justifying is why this one is an error and that one a warning, and why the recommended fix is the cheapest correct one |
 | **MIGRATE** | Queue order · risk classification · a replacement token chosen over the literal equivalent |
 | **BRAND** | **Every axis the user delegated (`IA`) and every axis left inheriting** — those two are the whole point: an axis the user chose is their call and owes nothing, an axis you chose for them owes an argument they can reject, and an axis that simply did not move is the cheapest decision to make silently and the one nobody downstream can tell apart from an oversight · the register chosen over the one the brief also allowed · an invariant that costs something elsewhere |

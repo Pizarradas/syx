@@ -208,9 +208,9 @@ organisms/
   _site-header.scss   # one file, handles all seven themes internally
 ```
 
-### The 3 Methods
+### The 2 Methods
 
-Inside each mixin, theme variation is handled by three distinct mechanisms depending on the type of difference:
+Inside each mixin, theme variation is handled by two mechanisms depending on the type of difference:
 
 #### Method 1 — CSS Custom Property (`var()`)
 
@@ -229,35 +229,14 @@ background-image: var(--component-header-logo-icon); // generic
 --component-header-logo-icon: var(--icon-logo-coral); // theme override
 ```
 
-#### Method 2 — Sass Map (`theme-cfg()`)
+> **Retired mechanism (2026-09-12):** there used to be a Method 2 — a Sass
+> map in `abstracts/_theme-config.scss` read with `theme-cfg()`. No component
+> ever called it and its keys had drifted out of sync with the real theme
+> names, so a structural difference would have fallen back silently. It was
+> removed; a structural difference is either a token (Method 1) or an
+> `@if $theme` block (Method 2 below).
 
-For **structural/layout differences** that need to be resolved at compile time.
-Values are stored in `abstracts/_theme-config.scss` and read with `theme-cfg($theme, 'key', $fallback)`.
-
-```scss
-// abstracts/_theme-config.scss
-$theme-config: (
-  "example-02": (
-    header-sidenav-side: right,
-    header-logo-size: 2.4rem,
-  ),
-  "coral": (
-    header-sidenav-side: left,
-    header-logo-size: 2rem,
-  ),
-);
-
-// _header.scss — reads the map
-@if theme-cfg($theme, "header-sidenav-side", left) == right {
-  right: 0;
-  transform: translateX(100%); // slides in from right
-} @else {
-  left: 0;
-  transform: translateX(-100%); // slides in from left
-}
-```
-
-#### Method 3 — `@if $theme`
+#### Method 2 — `@if $theme`
 
 For **one-off rules** that only 1–2 themes need. No token or map entry required.
 Direct override inline in the partial.
@@ -279,15 +258,13 @@ Direct override inline in the partial.
 | Question                                                            | Method                      |
 | ------------------------------------------------------------------- | --------------------------- |
 | Do all themes need this, but with different values?                 | **Method 1** — CSS token    |
-| Is it layout/structural and reused in multiple places in the mixin? | **Method 2** — Sass Map     |
-| Is it specific to only 1–2 themes and not worth tokenizing?         | **Method 3** — `@if $theme` |
+| Is it specific to only 1–2 themes and not worth tokenizing?         | **Method 2** — `@if $theme` |
 
 ### Adding a New Theme Variant
 
-1. Add an entry to `$theme-config` in `abstracts/_theme-config.scss`
-2. Define component token overrides in `themes/{name}/_theme.scss`
-3. Pass the theme name to existing mixins: `@include org-header('mytheme')`
-4. No new SCSS partials needed.
+1. Define component token overrides in `themes/{name}/_theme.scss`
+2. Pass the theme name to existing mixins: `@include org-site-header('mytheme')`
+3. No new SCSS partials needed.
 
 ---
 

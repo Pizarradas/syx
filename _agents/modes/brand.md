@@ -5,7 +5,7 @@
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
 > · **Writes:** —
-> · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/primitives/`, `scss/abstracts/tokens/semantic/`, `scss/abstracts/_theme-config.scss` — an identity lands on the top three rungs of the cascade and reaches all seven bundles at once, so every path it touches is human-only. **BRAND is an analysis and recommendation mode**: it decides the identity, writes the files out in full and hands them over. A person puts them in.
+> · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/primitives/`, `scss/abstracts/tokens/semantic/` — an identity lands on the top three rungs of the cascade and reaches all seven bundles at once, so every path it touches is human-only. **BRAND is an analysis and recommendation mode**: it decides the identity, writes the files out in full and hands them over. A person puts them in.
 > · **Reads:** `contracts/rules.json`, `contracts/trust.json`, `tokens.json`, `component-registry.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `get_token` with `theme` and `mode` for what a browser really paints on an axis before deciding to move it — re-reading a theme file cannot resolve an alias chain; `find_token_by_value` before inventing a value the system already has a name for; `list_components` to know what the identity actually has to dress; and, before handing anything over, `validate_snippet` on every block a person will paste and `classify_change` for where each axis actually lands. The last two are what stop an identity being a specification SYX cannot execute.
 
@@ -302,7 +302,7 @@ mode system already gives for UX and UI: **one decides intent, the other impleme
 |---|---|---|
 | Decides | which of the seven axes move, and where to | the ten OKLCH steps, the 12 surface tokens, the dark inversion |
 | Asks the user | yes — the register, then the axes | no — it receives a decision and executes it |
-| Produces | a specification, a contract, a provenance | a file: `_theme.scss`, `$theme-config`, the entry point |
+| Produces | a specification, a contract, a provenance | a file: `_theme.scss`, the entry point |
 | Fails when | it invents a value | it invents a direction |
 | Costs | tier 9, once per identity | tier 5, every time a theme is touched |
 

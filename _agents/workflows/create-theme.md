@@ -94,21 +94,15 @@ call that mixin instead of repeating the `@include font-family()` list.
 
 ---
 
-## Step 4: Add to `$theme-config` (if needed)
+## Step 4: Structural differences (if any)
 
-If the theme has structural differences (e.g., sidebar on right instead of left, different logo size), add an entry to `scss/abstracts/_theme-config.scss`:
+If the theme has structural differences (e.g., sidebar on right instead of
+left, different logo size), express them as component tokens overridden in
+`_theme.scss`; for a difference no token can carry, use an
+`@if $theme == "{your-theme-name}"` block inside the component partial.
 
-```scss
-$theme-config: (
-  // ... existing themes ...
-  "{your-theme-name}": (
-      header-sidenav-side: left,
-      header-logo-size: 2rem,
-    )
-);
-```
-
-Only add keys that differ from the defaults. See existing entries for reference.
+> The `$theme-config` map and `theme-cfg()` were retired on 2026-09-12 —
+> nothing ever read them.
 
 ---
 

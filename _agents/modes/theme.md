@@ -5,7 +5,7 @@
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
 > · **Writes:** —
-> · **Recommends only:** `scss/themes/`, `scss/abstracts/_theme-config.scss`, `scss/abstracts/tokens/semantic/`, `package.json` — every path this mode touches is human-only, so **THEME is an analysis and recommendation mode**: it designs the scale, writes out the file content in full and explains the trade-offs, and a person puts it in. That is what it already was in practice; this only says so.
+> · **Recommends only:** `scss/themes/`, `scss/abstracts/tokens/semantic/`, `package.json` — every path this mode touches is human-only, so **THEME is an analysis and recommendation mode**: it designs the scale, writes out the file content in full and explains the trade-offs, and a person puts it in. That is what it already was in practice; this only says so.
 > · **Reads:** `contracts/rules.json`, `tokens.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `get_token` with `theme` and `mode` gives the value a browser really paints, alias chain included — which is what a contrast check needs and what re-reading `_theme.scss` cannot tell you.
 
@@ -177,21 +177,16 @@ Text also inverts:
 
 ---
 
-## Structural Variations (`$theme-config`)
+## Structural Variations
 
-If the theme has layout differences (sidebar position, logo size, header style), add to `scss/abstracts/_theme-config.scss`:
+If the theme has layout differences (sidebar position, logo size, header
+style), express them as component tokens overridden in `_theme.scss`, or —
+for a difference only this theme has and that no token can carry — as an
+`@if $theme == "{name}"` block inside the component partial.
 
-```scss
-$theme-config: (
-  "{name}": (
-    header-sidenav-side: right,     // default: left
-    header-logo-size: 3rem,         // default: 2rem
-    header-style: "glass",          // custom key for one-off behavior
-  )
-);
-```
-
-Only add keys that actually differ from the defaults.
+> The `$theme-config` map (`abstracts/_theme-config.scss`, `theme-cfg()`)
+> was retired on 2026-09-12: no component ever read it and its keys had
+> drifted from the real theme names, so it could only fail silently.
 
 ---
 
@@ -221,7 +216,7 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 1. **Color brief** — palette intent, hue, tone, light or dark
 2. **Primitive scale** — full 10-step OKLCH scale for brand + accent
 3. **`_theme.scss` content** — sections 1, 2, and optionally 3
-4. **`$theme-config` entry** — only if structural differences exist
+4. **Structural differences** — as component tokens, or `@if $theme` blocks, only if they exist
 5. **`_setup.scss`** — generated boilerplate (theme name swap only; components wire in `_shared/_bundle-full.scss`)
 6. **Entry point** — `scss/styles-theme-{name}.scss`
 7. **`package.json` diff** — build script addition
@@ -254,7 +249,7 @@ for are specified once in `_agents/decision-record.md`.
 [full file content]
 
 ## Structural Config (if needed)
-[$theme-config entry]
+[component token overrides or @if $theme blocks]
 
 ## Files for a person to create
 [list with paths — you write the content, you do not write the files]

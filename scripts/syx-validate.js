@@ -42,7 +42,7 @@ const R01_ALLOWED = [
   'scss/setup.scss',
   'scss/utilities/',
   'scss/pages/',              // page-level demos/showrooms intentionally reference primitives
-  'scss/organisms/_home-tokens.scss', // token showroom intentionally displays primitive values
+  'scss/site/_home-tokens.scss', // token showroom intentionally displays primitive values
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

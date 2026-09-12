@@ -359,11 +359,6 @@ Use CSS custom properties for values that differ between themes (they resolve at
 background: var(--component-header-bg); // each theme sets this differently in _theme.scss
 ```
 
-Use Sass map lookup for structural differences compiled at build-time:
-```scss
-@if theme-cfg($theme, "header-layout", "horizontal") == "vertical" { … }
-```
-
 Use `@if $theme ==` only for one-off rules in 1–2 specific themes:
 ```scss
 @if $theme == "example-03" {

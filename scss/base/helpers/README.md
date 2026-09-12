@@ -18,7 +18,6 @@ Usa las clases de `base/helpers/` para:
 - **Colores de texto** temáticos (`.syx-font-color-primary`, `.syx-font-color-brand-*`)
 - **Tipografía** con escala de fuentes del tema (`.syx-font-size-1` a `.syx-font-size-5`)
 - **Dimensiones** del sistema de dimensiones del tema (`.syx-size-1` a `.syx-size-5`)
-- **Espaciado temático** (`.syx-spacer-gap-t-1`, `.syx-spacer-inner-t-1`)
 - **Iconos de RRSS** (`.syx-icon`, `.syx-icon--facebook-primary`, etc.)
 - **Pesos y familias de fuente** del tema (`.syx-font-weight-light`, `.syx-font-scope-*`)
 
@@ -126,21 +125,9 @@ Tamaños width/height del sistema de dimensiones del tema. Los tokens `--dimensi
 
 ---
 
-### `_spacers.scss` — Espaciado temático (`helper-spacer`)
-
-Márgenes y paddings usando el sistema de gaps e inners del tema. Los tokens `--gap-{n}` e `--inner-{n}` los define cada tema.
-
-```html
-<!-- Gap (spacing exterior / entre secciones) -->
-<section class="syx-spacer-gap-t-1"><!-- margin-top gap-1 del tema --></section>
-<section class="syx-spacer-gap-b-2"><!-- margin-bottom gap-2 --></section>
-
-<!-- Inner (padding interior / dentro de componentes) -->
-<div class="syx-spacer-inner-t-1"><!-- padding-top inner-1 --></div>
-<div class="syx-spacer-inner-x-2"><!-- padding inline inner-2 --></div>
-```
-
-> Para espaciado no-temático (valores numéricos fijos), usa `utilities/_spacing.scss`.
+> **`helper-spacer` retirado (2026-09-12):** las clases `.syx-spacer-*` no
+> tenían ningún uso real en el sitio ni en el sistema. Para espaciado usa
+> `utilities/_spacing.scss` (`.syx-mt-*`, `.syx-pt-*`, …).
 
 ---
 

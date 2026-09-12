@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — capa site y limpieza de la arquitectura SCSS (2026-09-12)
+
+- **`scss/site/` — el sitio deja de vivir dentro del sistema.** Las 12 piezas que solo existen para las páginas de SYX (`home-*` ×7, `evidence`, `score`, `ranking`, `compare-card`, `theme-swatch-card`) salen de atoms/molecules/organisms a una capa propia con un único punto de entrada (`syx-bundle-site($theme)`), marcada como desmontable en cada setup. El registro y el storybook se limpian solos: **26 componentes** (19 átomos · 6 moléculas · 1 organismo), pixel-diff re-verificado 49 stories × 2 pares = 98 comparaciones, 0 divergencias. La capa va en los 7 temas porque el selector de `home.html` intercambia los siete `styles-theme-*.css`.
+- **Los `setup.scss` pasan a `_setup.scss` generados desde `_shared/`.** Siete listas de ~45 `@include` mantenidas a mano quedan en ~15 líneas de cableado; la lista de componentes vive una sola vez en `_shared/_bundle-full.scss` (antes `_bundle-docs`, renombrado porque "full" es lo que es). Añadir un componente al sistema = una línea en un fichero.
+- **Fuentes por tema, declaradas una vez.** Cada `_theme.scss` gana `theme-x-fonts()`; setup y los cinco bundles la llaman. Cero `@include font-family` en bundles, y muere la cara fantasma `Google-Syne--regular` que solo existía en `bundle-docs` de example-01 y que ningún token referenciaba.
+- **`bundle-core` existe de verdad.** Cada tema compila `bundle-core.scss`. Medido (example-01, compressed): **203 KB raw · 36 KB gzip** — cumple la meta de < 50 KB gzip; la vieja cifra "< 120 KB sin comprimir" nunca se midió y se corrige en la cabecera.
+- **`npm run check:setups`** — el guard nuevo de la cadena `check`: compila los 7 entry points con la API de Sass y falla si el conjunto de selectores difiere entre temas (la clase de fallo que `_core.scss` documenta) o si un bundle vuelve a declarar `@font-face` a mano.
+- **`css/themes/` y `css/layout/` destrackeados** (28 ficheros): la política del `.gitignore` — solo los 8 CSS de raíz son entregables — ahora se cumple también en el índice de git.
+
+### Removed — legado con fecha (retirada consumada o fijada en v5.0)
+
+- **`theme-cfg()` y `abstracts/_theme-config.scss`, eliminados.** Ningún componente lo llamó nunca y cinco de sus siete claves no coincidían con los nombres reales de los temas: solo podía fallar en silencio. Una diferencia estructural es un token o un `@if $theme`.
+- **`functionBrandSet()` y `abstracts/functions/`, eliminados.** Cero llamadas; generaba selectores `.syx--theme-*` de un modelo de theming anterior.
+- **`helper-spacer`, eliminado.** Las clases `.syx-spacer-*` no tenían ningún uso real (las dos apariciones en `docs.html` eran píldoras documentando el propio deprecated). Espaciado: `utilities/_spacing.scss`.
+- **`abstracts/_legacy-aliases.scss`, eliminado.** Sus únicos consumidores (`$breakpoint-md` ×8 en los helpers de fuentes) migran a `$token-breakpoint-md`.
+- **`abstracts/variables/` → `abstracts/_paths.scss`.** `$fonts-path`/`$images-path`/`$icon-path` no eran legado sino configuración viva; pierden la etiqueta "LEGACY - DEPRECATED".
+- **`base/_token-aliases.scss` dividido.** Lo canónico que escondía (tokens de superficie + `--reset-*`, "los únicos permitidos en páginas y componentes") pasa a `base/_surface-tokens.scss`; los alias reales quedan en `base/_deprecated-aliases.scss` con hito de retirada concreto: **SYX v5.0** (el viejo "v2.0" quedó atrás hace dos majors). Siguen emitiéndose en el mismo punto de la cascada: cero cambios de valor computado (verificado por diff de custom properties).
+
 ### Added
 
 - **El puente a Figma: `get_figma_spec`, `npm run export:figma` y `scripts/lib/figma.js`.** SYX ya hablaba con herramientas que no son SYX —`export:tokens` emite W3C DTCG desde 4.12.0— pero no con Figma, y el motivo es más concreto que «falta un exportador»: una variable COLOR de Figma guarda `{r,g,b,a}` numéricos, y este sistema está escrito entero en `oklch()`. Un fichero DTCG con `oklch(0.498 0.282 266.24)` se importa como texto o no se importa. **La frontera real no es un formato: es una conversión**, y por eso vive en una función y no en una plantilla.

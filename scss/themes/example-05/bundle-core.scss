@@ -1,0 +1,28 @@
+// SYX — THEME: example-05 | BUNDLE: core
+// ================================================
+// The leanest functional bundle — production-ready minimum.
+// Contents defined once in _shared/_bundle-core.scss.
+// ================================================
+
+// CORE
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-core' as *;
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-example-05();
+
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-example-05-fonts();
+
+// CORE (reset + elements + helpers + grid)
+// ================================================
+@include syx-core(example-05);
+
+// BUNDLE: production minimum
+// ================================================
+@include syx-bundle-core(example-05);

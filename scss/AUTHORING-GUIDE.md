@@ -623,26 +623,25 @@ When a mixin has theme-specific logic, the `$theme` string must flow from `_setu
 
 ```scss
 // themes/example-02/_setup.scss
-@include org-header("example-02"); // ← theme name passed here
+@include syx-bundle-full("example-02"); // ← theme name flows into every mixin
 
-// organisms/_header.scss
-@mixin org-header($theme: null) {
-  .org-header {
+// organisms/_site-header.scss
+@mixin org-site-header($theme: null) {
+  .org-site-header {
     // Method 1 — CSS token (automatic)
     background: var(--component-header-bg);
 
-    // Method 2 — Sass map (for structural differences)
-    @if theme-cfg($theme, "header-sidenav-side", left) == right {
-      right: 0;
-    }
-
-    // Method 3 — direct @if (for 1-2 themes only)
+    // Method 2 — direct @if (for 1-2 themes only)
     @if $theme == "example-02" {
       backdrop-filter: blur(8px);
     }
   }
 }
 ```
+
+> The old Method 2 (a `$theme-config` Sass map read with `theme-cfg()`) was
+> retired on 2026-09-12: nothing ever called it. Structural differences are
+> tokens or `@if $theme` blocks.
 
 > Never hardcode a theme name in a partial without `@if $theme == "…"`.
 
