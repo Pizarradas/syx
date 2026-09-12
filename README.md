@@ -348,9 +348,10 @@ syx/
 │   │   └── maps/
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 21 atomic components
-│   ├── molecules/               # 9 composite components
-│   ├── organisms/               # 8 complex components
+│   ├── atoms/                   # 19 atomic components
+│   ├── molecules/               # 7 composite components
+│   ├── organisms/               # 1 complex component (site-header)
+│   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities
 │   ├── pages/                   # Page-specific styles

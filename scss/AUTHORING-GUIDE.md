@@ -312,12 +312,13 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 
 ### Current Inventory
 
-| Layer     | Count | Examples                                                                                                                                                 |
-| --------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atoms     | 19    | btn, form, check, radio, switch, link, breadcrumb, pagination, icon, icon-lucide, label, pill, list, table, title, txt, code, feature-icon, stat-counter |
-| Molecules | 7     | card, form-field, btn-group, label-group, form-field-set, feature-card, theme-swatch-card                                                                |
-| Organisms | 8     | header, navbar, content-columns, documentation-layout, home-hero, home-features, home-tokens, home-themes                                                |
-| Pages     | 3     | home, docs, why-syx                                                                                                                                      |
+| Layer       | Count | Contents                                                                                                                                                 |
+| ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
+| Molecules   | 7     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group, theme-swatch-card                                                        |
+| Organisms   | 1     | site-header                                                                                                                                              |
+| Site layer  | 11    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card |
+| Pages       | 1     | theme-builder                                                                                                                                            |
 
 ---
 

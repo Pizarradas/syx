@@ -14,6 +14,7 @@
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
 @use '../_shared/bundle-docs' as *;
+@use '../../site/bundle-site' as *; // SITE LAYER — removable
 @use 'theme' as *;
 
 // THEME TOKENS
@@ -51,6 +52,11 @@
 // ================================================
 @include syx-core(example-01);
 
-// BUNDLE: all components (includes home-* organisms)
+// BUNDLE: all system components
 // ================================================
 @include syx-bundle-docs(example-01);
+
+// SITE LAYER — SYX's own pages (home.html, docs.html, why-syx.html).
+// Not part of the system: delete scss/site/ and this include to detach.
+// ================================================
+@include syx-bundle-site(example-01);

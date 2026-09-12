@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-03T14:19:07.472Z",
+    "generatedAt": "2026-09-12T09:01:02.486Z",
     "totalMappedTokens": 1447
   },
   "map": {
@@ -90,9 +90,9 @@
         "scss/base/helpers/_fonts.scss",
         "scss/base/_elements.scss",
         "scss/base/_token-aliases.scss",
-        "scss/molecules/_ranking.scss",
         "scss/molecules/_theme-swatch-card.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -118,14 +118,14 @@
         "scss/base/_token-aliases.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -133,20 +133,20 @@
       "usages": [
         "scss/abstracts/maps/_tokens.scss",
         "scss/abstracts/tokens/components/_pills.scss",
-        "scss/atoms/_evidence.scss",
         "scss/atoms/_feature-icon.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -160,10 +160,10 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_tables.scss",
         "scss/base/helpers/_backgrounds.scss",
-        "scss/molecules/_compare-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_compare-card.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -175,11 +175,11 @@
         "scss/atoms/_feature-icon.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/_token-aliases.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -263,10 +263,10 @@
         "scss/atoms/_feature-icon.scss",
         "scss/atoms/_icon.scss",
         "scss/atoms/_stat-counter.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/organisms/_site-header.scss"
+        "scss/organisms/_site-header.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-color-state-hover-primary": {
@@ -378,10 +378,10 @@
         "scss/abstracts/tokens/components/_headers.scss",
         "scss/abstracts/tokens/components/_lists.scss",
         "scss/abstracts/tokens/components/_tables.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_site-header.scss"
+        "scss/organisms/_site-header.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-space-component-sm": {
@@ -395,13 +395,13 @@
         "scss/atoms/_switch.scss",
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
         "scss/utilities/_accessibility.scss"
       ]
     },
@@ -430,11 +430,11 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_tables.scss",
         "scss/base/_token-aliases.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -451,9 +451,9 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
         "scss/abstracts/tokens/components/_tables.scss",
-        "scss/atoms/_score.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss",
+        "scss/site/_score.scss"
       ]
     },
     "--semantic-border-radius-default": {
@@ -495,13 +495,13 @@
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
         "scss/utilities/_accessibility.scss"
       ]
     },
@@ -538,9 +538,9 @@
         "scss/atoms/_link.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-tokens.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -554,9 +554,9 @@
         "scss/atoms/_pagination.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-tokens.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-tokens.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -580,10 +580,10 @@
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_ranking.scss",
+        "scss/site/_score.scss",
         "scss/utilities/_display.scss"
       ]
     },
@@ -598,10 +598,10 @@
         "scss/atoms/_check.scss",
         "scss/atoms/_radio.scss",
         "scss/base/helpers/_backgrounds.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_display.scss"
       ]
@@ -610,8 +610,8 @@
       "usages": [
         "scss/abstracts/tokens/components/_cards.scss",
         "scss/abstracts/tokens/components/_pills.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-border-radius-none": {
@@ -735,10 +735,10 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss",
-        "scss/molecules/_compare-card.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -770,16 +770,16 @@
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_lists.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-space-inline-md": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss",
         "scss/utilities/_display.scss",
         "scss/utilities/_spacing.scss"
       ]
@@ -787,21 +787,21 @@
     "--semantic-space-stack-xs": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-font-size-caption": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
-        "scss/atoms/_evidence.scss",
+        "scss/site/_evidence.scss",
         "scss/utilities/_text.scss"
       ]
     },
     "--semantic-line-height-caption": {
       "usages": [
         "scss/abstracts/tokens/components/_forms.scss",
-        "scss/atoms/_evidence.scss",
+        "scss/site/_evidence.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -814,14 +814,14 @@
         "scss/atoms/_pagination.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/molecules/_ranking.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -893,7 +893,7 @@
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-shadow-sm": {
@@ -929,15 +929,15 @@
         "scss/abstracts/tokens/components/_headers.scss",
         "scss/atoms/_pagination.scss",
         "scss/atoms/_pill.scss",
-        "scss/atoms/_score.scss",
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_form-field.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_ranking.scss",
+        "scss/site/_score.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -992,8 +992,8 @@
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/atoms/_txt.scss",
         "scss/base/_token-aliases.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_compare-card.scss",
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-filter-primary": {
@@ -1010,8 +1010,8 @@
         "scss/molecules/_code-snippet.scss",
         "scss/molecules/_feature-card.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-hero.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-hero.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1072,11 +1072,11 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/atoms/_pill.scss",
         "scss/molecules/_code-snippet.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -1166,7 +1166,7 @@
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/atoms/_breadcrumb.scss",
-        "scss/molecules/_ranking.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1195,9 +1195,9 @@
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/atoms/_stat-counter.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_site-header.scss"
+        "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-layers.scss"
       ]
     },
     "--semantic-line-height-heading": {
@@ -1205,9 +1205,9 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-tokens.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-tokens.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -1216,10 +1216,10 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/atoms/_code.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_site-header.scss"
+        "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-hero.scss"
       ]
     },
     "--semantic-space-layout-xl": {
@@ -1234,27 +1234,27 @@
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/atoms/_code.scss",
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss",
         "scss/base/_elements.scss",
         "scss/base/_reset.scss",
         "scss/molecules/_code-snippet.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/pages/_theme-builder.scss"
+        "scss/pages/_theme-builder.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_ranking.scss",
+        "scss/site/_score.scss"
       ]
     },
     "--component-hero-columns": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-hero.scss"
+        "scss/site/_home-hero.scss"
       ]
     },
     "--component-hero-column-gap": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-hero.scss"
+        "scss/site/_home-hero.scss"
       ]
     },
     "--semantic-bg-grid": {
@@ -1358,13 +1358,13 @@
     "--component-token-primitive-accent": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/site/_home-tokens.scss"
       ]
     },
     "--component-token-step-color": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/site/_home-tokens.scss"
       ]
     },
     "--primitive-color-yellow-500": {
@@ -1377,13 +1377,13 @@
     "--component-token-theme-accent": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/site/_home-tokens.scss"
       ]
     },
     "--component-token-semantic-accent": {
       "usages": [
         "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_home-tokens.scss"
+        "scss/site/_home-tokens.scss"
       ]
     },
     "--primitive-color-blue-100": {
@@ -1454,7 +1454,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/base/_token-aliases.scss",
-        "scss/molecules/_ranking.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1489,7 +1489,7 @@
         "scss/abstracts/tokens/components/_titles.scss",
         "scss/base/_token-aliases.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/organisms/_home-footer.scss",
+        "scss/site/_home-footer.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -1500,14 +1500,14 @@
         "scss/base/_elements.scss",
         "scss/base/_token-aliases.scss",
         "scss/molecules/_feature-card.scss",
-        "scss/molecules/_ranking.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1964,8 +1964,8 @@
         "scss/atoms/_pagination.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/molecules/_theme-swatch-card.scss",
-        "scss/organisms/_home-layers.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-layers.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -2488,10 +2488,10 @@
     "--semantic-space-layout-sm": {
       "usages": [
         "scss/atoms/_code.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
         "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
         "scss/utilities/_accessibility.scss"
       ]
     },
@@ -2540,68 +2540,6 @@
     "--component-code-inline-border-color": {
       "usages": [
         "scss/atoms/_code.scss"
-      ]
-    },
-    "--component-evidence-padding": {
-      "usages": [
-        "scss/atoms/_evidence.scss"
-      ]
-    },
-    "--semantic-border-radius-sm": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss",
-        "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--component-score-5-bg": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-5-border": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-5-color": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-3-bg": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-3-border": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-3-color": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--semantic-letter-spacing-wide": {
-      "usages": [
-        "scss/atoms/_evidence.scss",
-        "scss/atoms/_pill.scss",
-        "scss/atoms/_stat-counter.scss",
-        "scss/molecules/_code-snippet.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/utilities/_text.scss"
       ]
     },
     "--component-feature-icon-size": {
@@ -3357,6 +3295,20 @@
         "scss/atoms/_pill.scss"
       ]
     },
+    "--semantic-letter-spacing-wide": {
+      "usages": [
+        "scss/atoms/_pill.scss",
+        "scss/atoms/_stat-counter.scss",
+        "scss/molecules/_code-snippet.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
     "--component-pill-line-height": {
       "usages": [
         "scss/atoms/_pill.scss"
@@ -3543,70 +3495,6 @@
     "--component-radio-status-disabled-opacity": {
       "usages": [
         "scss/atoms/_radio.scss"
-      ]
-    },
-    "--component-score-size": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-1-bg": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-1-border": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-1-color": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-2-bg": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-2-border": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-2-color": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-4-bg": {
-      "usages": [
-        "scss/atoms/_score.scss",
-        "scss/molecules/_ranking.scss"
-      ]
-    },
-    "--component-score-4-border": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--component-score-4-color": {
-      "usages": [
-        "scss/atoms/_score.scss"
-      ]
-    },
-    "--semantic-color-success": {
-      "usages": [
-        "scss/atoms/_score.scss",
-        "scss/molecules/_compare-card.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--semantic-shadow-hard-sm": {
-      "usages": [
-        "scss/atoms/_score.scss",
-        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--component-switch-width": {
@@ -4321,7 +4209,7 @@
     "--semantic-line-height-tight": {
       "usages": [
         "scss/base/_token-aliases.scss",
-        "scss/molecules/_ranking.scss"
+        "scss/site/_ranking.scss"
       ]
     },
     "--semantic-letter-spacing-tight": {
@@ -4576,12 +4464,6 @@
         "scss/molecules/_code-snippet.scss"
       ]
     },
-    "--semantic-color-error": {
-      "usages": [
-        "scss/molecules/_compare-card.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
     "--component-feature-card-row-span": {
       "usages": [
         "scss/molecules/_feature-card.scss"
@@ -4635,11 +4517,11 @@
     "--semantic-line-height-body": {
       "usages": [
         "scss/molecules/_feature-card.scss",
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -4726,31 +4608,6 @@
     "--component-label-group-gap": {
       "usages": [
         "scss/molecules/_label-group.scss"
-      ]
-    },
-    "--component-ranking-columns": {
-      "usages": [
-        "scss/molecules/_ranking.scss"
-      ]
-    },
-    "--component-ranking-medal-size": {
-      "usages": [
-        "scss/molecules/_ranking.scss"
-      ]
-    },
-    "--component-ranking-medal-icon-size": {
-      "usages": [
-        "scss/molecules/_ranking.scss"
-      ]
-    },
-    "--semantic-font-weight-regular": {
-      "usages": [
-        "scss/molecules/_ranking.scss"
-      ]
-    },
-    "--component-ranking-max-offset": {
-      "usages": [
-        "scss/molecules/_ranking.scss"
       ]
     },
     "--component-theme-card-border-width": {
@@ -4913,812 +4770,16 @@
         "scss/molecules/_theme-swatch-card.scss"
       ]
     },
-    "--component-cta-border-block-width": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-border-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-shadow-hard-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-section-padding-block": {
-      "usages": [
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
     "--component-section-padding-inline": {
       "usages": [
-        "scss/organisms/_home-cta.scss",
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/organisms/_site-header.scss"
-      ]
-    },
-    "--component-cta-bg": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-decor-top": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-decor-right": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-decor-size": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-decor-bg": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-decor-radius": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-overline-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-headline-font-size": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-sub-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-code-border-radius": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-code-bg": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-code-border-width": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-code-border-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-cta-code-color": {
-      "usages": [
-        "scss/organisms/_home-cta.scss"
-      ]
-    },
-    "--component-section-bg-image": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-index-content": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-index-font": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-index-size": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-index-color": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-index-gap": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-tick-width": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-tick-color": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-tick-height": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-overline-bg": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-overline-border-width": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-overline-padding": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-overline-color": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-align": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--semantic-space-layout-lg": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-hero.scss",
-        "scss/organisms/_home-layers.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss",
-        "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--component-section-title-font-size": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-title-leading": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-title-weight": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-title-tracking": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-header-margin-inline": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss",
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-section-title-max-width": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-grid-gutter": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-divider-width": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss"
-      ]
-    },
-    "--component-section-divider-color": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/organisms/_home-footer.scss"
-      ]
-    },
-    "--semantic-font-size-body-large": {
-      "usages": [
-        "scss/organisms/_home-features.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--component-table-scroll-mask": {
-      "usages": [
-        "scss/organisms/_home-features.scss"
-      ]
-    },
-    "--component-table-scroll-hint": {
-      "usages": [
-        "scss/organisms/_home-features.scss"
-      ]
-    },
-    "--component-footer-border-width": {
-      "usages": [
-        "scss/organisms/_home-footer.scss"
-      ]
-    },
-    "--component-footer-border-color": {
-      "usages": [
-        "scss/organisms/_home-footer.scss"
-      ]
-    },
-    "--component-footer-bg": {
-      "usages": [
-        "scss/organisms/_home-footer.scss"
-      ]
-    },
-    "--component-hero-padding-block-start": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-text-align": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop-top": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop-left": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop-width": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop-height": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop-translate": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-backdrop": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-columns-wide": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-column-gap-wide": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-display": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-display-wide": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-row-span": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-min-height": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-size": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-opacity": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-figure-build-duration": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--semantic-easing-linear": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-headline-font-size": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-headline-weight": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-headline-leading": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-headline-tracking": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-content-inline": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-headline-max-width": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-bg": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-fill": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-color": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-decoration-line": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-decoration-color": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-decoration-thickness": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-accent-decoration-offset": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-sub-font-size": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-sub-max-width": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-justify": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-stats-border-width": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-stats-border-color": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-hero-scroll-hint-align": {
-      "usages": [
-        "scss/organisms/_home-hero.scss"
-      ]
-    },
-    "--component-layer-item-gap": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-border-radius": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-border-width": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-border-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-bg": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-shadow-hover": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-item-accent-width": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-utilities-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-utilities-bg": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-utilities-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-organisms-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-organisms-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-molecules-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-molecules-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-atoms-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-atoms-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-tokens-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-tokens-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-base-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-base-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-reset-accent": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-layer-reset-color": {
-      "usages": [
-        "scss/organisms/_home-layers.scss"
-      ]
-    },
-    "--component-theme-grid-min": {
-      "usages": [
-        "scss/organisms/_home-themes.scss"
-      ]
-    },
-    "--component-section-justify": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-border-radius": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-border-width": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-border-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-hover-lift": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-shadow-hover": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-badge-width": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-layer-stripe-width": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-primitive-badge-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-primitive-badge-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-primitive-badge-border": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-primitive-step-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-theme-badge-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-theme-badge-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-theme-badge-border": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-theme-step-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-semantic-badge-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-semantic-badge-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-semantic-badge-border": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-semantic-step-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-component-accent": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-component-badge-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-component-badge-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-component-badge-border": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-component-step-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-step-radius": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-badge-radius": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-badge-border-width": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-connector-line": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-connector-opacity": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-connector-arrow-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-border-width": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-border-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-border-radius": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-icon-radius": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-icon-bg": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
-      ]
-    },
-    "--component-token-rule-icon-color": {
-      "usages": [
-        "scss/organisms/_home-tokens.scss"
+        "scss/organisms/_site-header.scss",
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
       ]
     },
     "--component-header-control-height": {
@@ -5746,6 +4807,945 @@
     "--primitive-color-brand-base": {
       "usages": [
         "scss/setup-builder.scss"
+      ]
+    },
+    "--semantic-color-success": {
+      "usages": [
+        "scss/site/_compare-card.scss",
+        "scss/site/_score.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--semantic-color-error": {
+      "usages": [
+        "scss/site/_compare-card.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--component-evidence-padding": {
+      "usages": [
+        "scss/site/_evidence.scss"
+      ]
+    },
+    "--semantic-border-radius-sm": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--component-score-5-bg": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-5-border": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-5-color": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-3-bg": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-3-border": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-3-color": {
+      "usages": [
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-cta-border-block-width": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-border-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-shadow-hard-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-section-padding-block": {
+      "usages": [
+        "scss/site/_home-cta.scss",
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-cta-bg": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-decor-top": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-decor-right": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-decor-size": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-decor-bg": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-decor-radius": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-overline-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-headline-font-size": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-sub-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-code-border-radius": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-code-bg": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-code-border-width": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-code-border-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-cta-code-color": {
+      "usages": [
+        "scss/site/_home-cta.scss"
+      ]
+    },
+    "--component-section-bg-image": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-index-content": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-index-font": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-index-size": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-index-color": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-index-gap": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-tick-width": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-tick-color": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-tick-height": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-overline-bg": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-overline-border-width": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-overline-padding": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-overline-color": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-align": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--semantic-space-layout-lg": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-hero.scss",
+        "scss/site/_home-layers.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--component-section-title-font-size": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-title-leading": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-title-weight": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-title-tracking": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-header-margin-inline": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss",
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-section-title-max-width": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-grid-gutter": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-divider-width": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss"
+      ]
+    },
+    "--component-section-divider-color": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/site/_home-footer.scss"
+      ]
+    },
+    "--semantic-font-size-body-large": {
+      "usages": [
+        "scss/site/_home-features.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--component-table-scroll-mask": {
+      "usages": [
+        "scss/site/_home-features.scss"
+      ]
+    },
+    "--component-table-scroll-hint": {
+      "usages": [
+        "scss/site/_home-features.scss"
+      ]
+    },
+    "--component-footer-border-width": {
+      "usages": [
+        "scss/site/_home-footer.scss"
+      ]
+    },
+    "--component-footer-border-color": {
+      "usages": [
+        "scss/site/_home-footer.scss"
+      ]
+    },
+    "--component-footer-bg": {
+      "usages": [
+        "scss/site/_home-footer.scss"
+      ]
+    },
+    "--component-hero-padding-block-start": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-text-align": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop-top": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop-left": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop-width": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop-height": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop-translate": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-backdrop": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-columns-wide": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-column-gap-wide": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-display": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-display-wide": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-row-span": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-min-height": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-size": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-opacity": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-figure-build-duration": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--semantic-easing-linear": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-headline-font-size": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-headline-weight": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-headline-leading": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-headline-tracking": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-content-inline": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-headline-max-width": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-bg": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-fill": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-color": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-decoration-line": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-decoration-color": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-decoration-thickness": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-accent-decoration-offset": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-sub-font-size": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-sub-max-width": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-justify": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-stats-border-width": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-stats-border-color": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-hero-scroll-hint-align": {
+      "usages": [
+        "scss/site/_home-hero.scss"
+      ]
+    },
+    "--component-layer-item-gap": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-border-radius": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-border-width": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-border-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-bg": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-shadow-hover": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-item-accent-width": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-utilities-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-utilities-bg": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-utilities-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-organisms-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-organisms-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-molecules-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-molecules-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-atoms-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-atoms-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-tokens-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-tokens-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-base-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-base-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-reset-accent": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-layer-reset-color": {
+      "usages": [
+        "scss/site/_home-layers.scss"
+      ]
+    },
+    "--component-theme-grid-min": {
+      "usages": [
+        "scss/site/_home-themes.scss"
+      ]
+    },
+    "--component-section-justify": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-border-radius": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-border-width": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-border-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-hover-lift": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-shadow-hover": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-badge-width": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-layer-stripe-width": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-primitive-badge-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-primitive-badge-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-primitive-badge-border": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-primitive-step-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-theme-badge-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-theme-badge-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-theme-badge-border": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-theme-step-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-semantic-badge-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-semantic-badge-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-semantic-badge-border": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-semantic-step-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-component-accent": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-component-badge-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-component-badge-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-component-badge-border": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-component-step-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-step-radius": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-badge-radius": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-badge-border-width": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-connector-line": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-connector-opacity": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-connector-arrow-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-border-width": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-border-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-border-radius": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-icon-radius": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-icon-bg": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-token-rule-icon-color": {
+      "usages": [
+        "scss/site/_home-tokens.scss"
+      ]
+    },
+    "--component-ranking-columns": {
+      "usages": [
+        "scss/site/_ranking.scss"
+      ]
+    },
+    "--component-score-4-bg": {
+      "usages": [
+        "scss/site/_ranking.scss",
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-ranking-medal-size": {
+      "usages": [
+        "scss/site/_ranking.scss"
+      ]
+    },
+    "--component-ranking-medal-icon-size": {
+      "usages": [
+        "scss/site/_ranking.scss"
+      ]
+    },
+    "--semantic-font-weight-regular": {
+      "usages": [
+        "scss/site/_ranking.scss"
+      ]
+    },
+    "--component-ranking-max-offset": {
+      "usages": [
+        "scss/site/_ranking.scss"
+      ]
+    },
+    "--component-score-size": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-1-bg": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-1-border": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-1-color": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-2-bg": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-2-border": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-2-color": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-4-border": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--component-score-4-color": {
+      "usages": [
+        "scss/site/_score.scss"
+      ]
+    },
+    "--semantic-shadow-hard-sm": {
+      "usages": [
+        "scss/site/_score.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-icon-arrow-default": {

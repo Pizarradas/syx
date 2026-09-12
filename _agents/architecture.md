@@ -32,7 +32,7 @@ flowchart TB
 
     subgraph SOURCE["THE SOURCE — scss/"]
         TOK["abstracts/tokens/<br/>primitives → semantic → component"]
-        COMP["atoms · molecules · organisms<br/>utilities · layout · pages"]
+        COMP["atoms · molecules · organisms<br/>utilities · layout · pages<br/>site (SYX pages only, removable)"]
         THEMES["themes/<br/>6 example-* + syx-sketch"]
     end
 

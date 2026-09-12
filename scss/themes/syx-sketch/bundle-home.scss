@@ -13,6 +13,7 @@
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
 @use '../_shared/bundle-docs' as *;
+@use '../../site/bundle-site' as *; // SITE LAYER — removable
 @use 'theme' as *;
 
 // THEME TOKENS
@@ -49,3 +50,8 @@
 // BUNDLE
 // ================================================
 @include syx-bundle-docs(syx-sketch);
+
+// SITE LAYER — páginas propias de SYX (home.html, docs.html, why-syx.html).
+// No es parte del sistema: borra scss/site/ y este include para desacoplarlo.
+// ================================================
+@include syx-bundle-site(syx-sketch);

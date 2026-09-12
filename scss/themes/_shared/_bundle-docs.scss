@@ -53,12 +53,7 @@
 
   // ORGANISMS — all
   // ================================================
-  @include org-home-cta($theme);
-  @include org-home-features($theme);
-  @include org-home-footer($theme);
-  @include org-home-hero($theme);
-  @include org-home-layers($theme);
-  @include org-home-themes($theme);
-  @include org-home-tokens($theme);
+  // The home-* organisms are not system components: they live in
+  // scss/site/ and ship via syx-bundle-site (site layer, removable).
   @include org-site-header($theme);
 }
