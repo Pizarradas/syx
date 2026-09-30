@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — auditoría de septiembre de 2026, fases 1 y 2 (2026-09-30)
+
+- **Accesibilidad.** Nuevo `--semantic-color-border-control` para el borde de campo, checkbox, radio y switch (de 1,43–2,40:1 a ≥ 3:1, WCAG 1.4.11) y tinta de estado `--semantic-color-state-{success,error,warning,info}-text` (el texto de error pasa de 3,56–4,35:1 a ≥ 4,5:1). `warning-text` se citaba con fallback y no existía. Texto terciario y secundario de example-03 y example-05 corregidos.
+- **Modo claro y oscuro.** El oscuro por preferencia del SO pasa a `:root:not([data-theme="light"])`: elegir claro u oscuro pinta lo mismo con cualquier SO. Antes, forzar el claro con el SO en oscuro dejaba entre 38 y 179 tokens en oscuro, y example-01 traía otra paleta (texto púrpura a 4,06:1). `--semantic-color-border-focus` sigue al primario del tema (era rosa fijo en seis temas). `color-scheme` en los dos modos.
+- **Fuentes.** Inter, Playfair Display, DM Mono y Bebas Neue existen (woff2 + woff, SIL OFL 1.1): 35 `url()` daban 404 en cinco temas.
+- **Validador.** R03 y R04 vuelven a ser errores (se contaban como avisos). R08 implementada. `validate-tokens.js` retirado: contradecía a `validate` con 984 falsos positivos.
+- **CSS.** 43 custom properties duplicadas en el mismo bloque, retiradas sin cambiar ningún valor resuelto. El `padding-left` de `blockquote` se aplicaba nunca.
+
+### Added — guardianes
+
+- `check:contraste` con el contrato `contracts/contrast.json`: 12 pares × 7 temas × 4 estados de modo.
+- `check:modo-claro`: la elección de modo no depende del SO.
+- `check:conocimiento`: rutas del córtex, huérfanos, `routing.md` y filtro SYX sobre su código.
+- `lint` vuelve a existir (`.stylelintrc.json`) y abre la cadena `check`.
+- `check:package` trata un `url()` sin destino como error.
+- `contracts/trust.json` protege en `human` la escalera de precedencia, la constitución, `governance/` y `atlas-rules/`.
+
+### Changed
+
+- `CLAUDE.md` y `AGENTS.md` dejan de mandar leer `tokens.json` (≈ 280 KB) y el registro enteros antes de empezar.
+- README: el paquete aún no está en npm; instalación desde GitHub. `publishConfig.access: public` preparado para la primera publicación.
+
 ### Changed — capa site y limpieza de la arquitectura SCSS (2026-09-12)
 
 - **`scss/site/` — el sitio deja de vivir dentro del sistema.** Las 12 piezas que solo existen para las páginas de SYX (`home-*` ×7, `evidence`, `score`, `ranking`, `compare-card`, `theme-swatch-card`) salen de atoms/molecules/organisms a una capa propia con un único punto de entrada (`syx-bundle-site($theme)`), marcada como desmontable en cada setup. El registro y el storybook se limpian solos: **26 componentes** (19 átomos · 6 moléculas · 1 organismo), pixel-diff re-verificado 49 stories × 2 pares = 98 comparaciones, 0 divergencias. La capa va en los 7 temas porque el selector de `home.html` intercambia los siete `styles-theme-*.css`.

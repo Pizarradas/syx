@@ -6,9 +6,9 @@ Las cuatro están probadas contra el repositorio real antes de escribirlas. Dond
 
 | # | Qué | Dónde | Tier | Urgencia |
 |---|---|---|---|---|
-| A | Cerrar el agujero `*.md` sobre la gobernanza | `contracts/trust.json` | `human` | **Alta** — hoy un agente puede reescribir su propia constitución |
-| B | Guardián del córtex | `scripts/check-conocimiento.js` | `human` | Media |
-| C | Exigir bloque `Knowledge` a cada modo | `scripts/check-modos.js` | `human` | Media |
+| A | Cerrar el agujero `*.md` sobre la gobernanza | `contracts/trust.json` | `human` | ✅ Aplicado (auditoría 2026-09) |
+| B | Guardián del córtex | `scripts/check-conocimiento.js` | `human` | ✅ Escrito (auditoría 2026-09) |
+| C | Exigir bloque `Knowledge` a cada modo | `scripts/check-conocimiento.js` (comprobación 1) | `human` | ✅ Cubierto por B |
 | D | No publicar el córtex | `package.json` | `human` | Baja — hoy ya no se publica, conviene que sea explícito |
 
 ---

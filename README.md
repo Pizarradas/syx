@@ -51,8 +51,13 @@ Open `index.html` in your browser to see the full live demo.
 
 ### Option B — Install the package
 
+> **Not on the npm registry yet.** `syx-design-system` has not been published, so
+> `npm install syx-design-system` returns 404. Until the first release, install it
+> straight from GitHub — npm packs the repository with the same `files` list the
+> registry package will use, so everything below works the same:
+
 ```bash
-npm install syx-design-system
+npm install github:Pizarradas/syx
 ```
 
 ```js
@@ -82,7 +87,7 @@ version it has installed — not against whatever is on `main` today.
 | `syx-design-system/scss/...` | SCSS source, to compile your own build |
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
 | `syx-design-system/tokens.json`, `/component-registry.json` | Registries |
-| `npx syx-mcp` | The MCP server, from the installed package |
+| `npx syx-mcp` | The MCP server, from the installed package (from GitHub too) |
 
 ### Option C — Build from SCSS with npm
 
