@@ -114,5 +114,22 @@
       }
     }
   }
+
+  // Modo de alto contraste (Windows y navegadores con forced-colors): el
+  // navegador sustituye los colores de fondo por Canvas, así que un estado
+  // que solo se ve por su fondo desaparece. Se pintan con colores de sistema.
+  @media (forced-colors: active) {
+    .atom-check__input:checked + .atom-check__label::before {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+
+    .atom-check__input:checked + .atom-check__label::after {
+      forced-color-adjust: none;
+      border-right-color: HighlightText;
+      border-bottom-color: HighlightText;
+    }
+  }
   } // end @layer syx.atoms
 }

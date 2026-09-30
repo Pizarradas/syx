@@ -2895,6 +2895,18 @@
     background-color: var(--semantic-color-bg-tertiary);
     border-color: var(--semantic-color-border-subtle);
   }
+  @media (forced-colors: active) {
+    .atom-check__input:checked + .atom-check__label::before {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+    .atom-check__input:checked + .atom-check__label::after {
+      forced-color-adjust: none;
+      border-right-color: HighlightText;
+      border-bottom-color: HighlightText;
+    }
+  }
 }
 @layer syx.atoms {
   .atom-feature-icon {
@@ -2988,7 +3000,7 @@
     border-color: var(--semantic-color-primary);
   }
   .atom-input:focus {
-    outline: none;
+    outline: var(--semantic-focus-ring-width) solid transparent;
     border-color: var(--component-form-field-border-focus);
     box-shadow: var(--component-form-field-shadow-focus);
   }
@@ -3028,7 +3040,7 @@
     border-color: var(--semantic-color-primary);
   }
   .atom-select:focus {
-    outline: none;
+    outline: var(--semantic-focus-ring-width) solid transparent;
     border-color: var(--component-form-field-border-focus);
     box-shadow: var(--component-form-field-shadow-focus);
   }
@@ -3744,6 +3756,16 @@
     background-color: var(--semantic-color-bg-tertiary);
     border-color: var(--semantic-color-border-subtle);
   }
+  @media (forced-colors: active) {
+    .atom-radio__input:checked + .atom-radio__label::before {
+      forced-color-adjust: none;
+      border-color: Highlight;
+    }
+    .atom-radio__input:checked + .atom-radio__label::after {
+      forced-color-adjust: none;
+      background-color: Highlight;
+    }
+  }
 }
 @layer syx.atoms {
   .atom-stat {
@@ -3857,6 +3879,23 @@
     cursor: not-allowed;
     pointer-events: none;
   }
+  @media (forced-colors: active) {
+    .atom-switch__slider {
+      forced-color-adjust: none;
+      background-color: Canvas;
+      border-color: CanvasText;
+    }
+    .atom-switch__slider::before {
+      background-color: CanvasText;
+    }
+    .atom-switch__input:checked + .atom-switch__slider {
+      background-color: Highlight;
+      border-color: Highlight;
+    }
+    .atom-switch__input:checked + .atom-switch__slider::before {
+      background-color: HighlightText;
+    }
+  }
 }
 @layer syx.atoms {
   .atom-table {
@@ -3888,7 +3927,7 @@
     color: var(--component-table-color-th);
     background-color: var(--component-table-bg-th);
   }
-  .atom-table--primary [class*=__td]:hover, .atom-table--primary [class*=__td]:focus {
+  .atom-table--primary [class*=__td]:hover, .atom-table--primary [class*=__td]:focus-visible {
     background-color: var(--component-table-state-hover-bg);
     border-color: var(--component-table-state-hover-border-color);
     box-shadow: var(--component-table-state-hover-shadow);
@@ -3920,7 +3959,7 @@
     color: var(--component-table-sticky-active-color);
     background-color: var(--component-table-sticky-active-bg);
   }
-  .atom-table--is-stick-thead [class*=__td]:first-of-type:hover, .atom-table--is-stick-thead [class*=__td]:first-of-type:focus {
+  .atom-table--is-stick-thead [class*=__td]:first-of-type:hover, .atom-table--is-stick-thead [class*=__td]:first-of-type:focus-visible {
     color: var(--component-table-state-hover-border-color);
     background-color: var(--component-table-state-hover-bg);
   }
@@ -4048,7 +4087,7 @@
       transition: none;
     }
   }
-  .mol-feature-card:hover {
+  .mol-feature-card:hover, .mol-feature-card:focus-within {
     border-color: var(--component-feature-card-border-color-hover);
     box-shadow: var(--component-feature-card-shadow-hover);
     transform: translateY(var(--component-feature-card-hover-lift));

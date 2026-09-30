@@ -48,7 +48,10 @@
       transform var(--semantic-duration-base) var(--semantic-easing-standard)
     );
 
-    &:hover {
+    // :focus-within: si la tarjeta contiene un enlace o un botón, quien navega
+    // con teclado ve el mismo realce que quien pasa el ratón.
+    &:hover,
+    &:focus-within {
       border-color: var(--component-feature-card-border-color-hover);
       box-shadow: var(--component-feature-card-shadow-hover);
       transform: translateY(var(--component-feature-card-hover-lift));

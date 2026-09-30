@@ -73,7 +73,9 @@
       }
 
       &:focus {
-        outline: none;
+        // Transparente y no `none`: el anillo visible es el box-shadow, que el
+        // modo de alto contraste elimina; ahí el navegador pinta este outline.
+        outline: var(--semantic-focus-ring-width) solid transparent;
         border-color: var(--component-form-field-border-focus);
         box-shadow: var(--component-form-field-shadow-focus);
       }
@@ -137,7 +139,9 @@
       }
 
       &:focus {
-        outline: none;
+        // Transparente y no `none`: el anillo visible es el box-shadow, que el
+        // modo de alto contraste elimina; ahí el navegador pinta este outline.
+        outline: var(--semantic-focus-ring-width) solid transparent;
         border-color: var(--component-form-field-border-focus);
         box-shadow: var(--component-form-field-shadow-focus);
       }
