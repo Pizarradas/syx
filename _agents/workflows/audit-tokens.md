@@ -70,13 +70,19 @@ grep -rn -E "^\s+padding: " scss/ --include="*.scss" | grep -v "mixins/"
 **Goal:** Cross-check SCSS-defined tokens against `tokens.json`.
 
 ```bash
-node scripts/validate-tokens.js
+npm run validate        # R05: component token in SCSS but not in tokens.json · R06: phantom entry
+npm run check:huerfanos # references with no definition, tokens that only exist by their fallback
 ```
 
 Review the output:
 
-- **"Missing in tokens.json"** → Add the token to `tokens.json` for documentation completeness.
-- **"Defined in tokens.json but not found in SCSS"** → Token may be obsolete or misspelled.
+- **R05** → Add the token to `tokens.json` (component tier goes through `node scripts/propose.js token`).
+- **R06** → The registry names a token no compiled CSS defines: obsolete or misspelled.
+
+`scripts/validate-tokens.js` used to do this cross-check and was retired in the September 2026
+audit: it did not share `scripts/lib/rules.js`, flagged 354 "R01 violations" that were all in
+paths R01 allows, and reported 630 registered tokens as missing. Two validators with opposite
+verdicts teach people to ignore both.
 
 ---
 

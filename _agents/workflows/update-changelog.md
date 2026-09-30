@@ -119,6 +119,6 @@ Before bumping the version:
 - [ ] `package.json` version updated (`"version": "X.Y.Z"`)
 - [ ] `README.md` version badge updated
 - [ ] All 7 themes compile: `npm run build`
-- [ ] `node scripts/validate-tokens.js` passes with no critical errors
+- [ ] `npm run check` passes (contracts, themes, contrast, tokens, package)
 - [ ] `## [Unreleased]` renamed to `## [X.Y.Z] — {date}`
 - [ ] New empty `## [Unreleased]` section added at top
