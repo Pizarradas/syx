@@ -99,8 +99,9 @@ become a call that returns the one answer, and the column that matters is the la
 **The tier measures interrogating the system, not the cortex.** They are two separate axes and
 adding them together gives a wrong number. The tier counts what it costs to ask SYX (`tokens.json`,
 `component-registry.json`, `contracts/`); the mode's `Knowledge` block counts what it costs to load
-the corpus. CREATIVE is tier 3 and still loads the whole `motion/` domain when there is GSAP: cheap
-in system reads, expensive in corpus. SKETCH is the one disciplined exception — its tier 1 is bought
+the corpus. CREATIVE is tier 3 and, as soon as anything moves, still loads most of the `motion/` domain —
+its knowledge strata, plus the GSAP layer when there is a library: cheap in system reads,
+expensive in corpus. SKETCH is the one disciplined exception — its tier 1 is bought
 by reading nothing, so its `Knowledge` block has no **Always** line at all.
 
 **BRAND is the second exception, in the opposite direction.** It reads three files and still sits at

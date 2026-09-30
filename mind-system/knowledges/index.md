@@ -14,7 +14,8 @@ knowledges/
   syx/       → Sistema SYX específico: tokens, SCSS pipeline, componentes, temas, color
   branding/  → Percepción de marca: prestigio, credibilidad, semiótica visual, autoridad
                Es el suelo de BRAND: los siete ejes de una identidad se deciden aquí
-  motion/    → Lenguaje de animación con GSAP: capacidades, patrones, glosario para prompts
+  motion/    → El movimiento como disciplina: propósito, carácter, teoría, tipografía cinética,
+               sistema, accesibilidad, ejecución (CSS, JS, GSAP, Rive, Cavalry/AE, Blender) y crítica
 ```
 
 ---
@@ -76,30 +77,22 @@ knowledges/
 | `perception-of-prestige-foundations.md` | Psicología cognitiva del prestigio: modelo PRI, processing fluency, heurísticos de Cialdini, semiótica del lujo | CREATIVE, UX (on-demand), BRAND (siempre) |
 | `perception-of-prestige.rules.md` | 18 reglas operativas con checks y output template para auditoría de percepción | CREATIVE (on-demand), AUDIT (on-demand), BRAND (on-demand) |
 
-### `motion/` — Lenguaje de animación con GSAP
+### `motion/` — El movimiento como disciplina
 
-Sistema documental que entiende GSAP como vocabulario narrativo y de prompting. Complementa `ui/motion-principles.md` (principios físicos del movimiento — easing, GPU, reduced-motion, que prevalecen siempre) con la capa específica de la librería.
+Dominio organizado en estratos, en el orden en que se toma una decisión de movimiento: dirección → propósito → carácter → teoría → tipografía → sistema → accesibilidad → ejecución → crítica. La capa de librería GSAP es una parte de la ejecución (`08-ejecucion/gsap/`). `ui/motion-principles.md` sigue siendo el suelo físico de la UI web y prevalece para código de `scss/`. Mapa completo, con cada módulo y quién lo carga: `motion/index.md`.
 
-| Módulo | Contenido | Cargado por |
+| Estrato | Contenido | Cargado por |
 |--------|-----------|-------------|
-| `index.md` | Mapa del dominio motion + relación con otros knowledges | — |
-| `00-indice/mapa-del-sistema.md` | Flujo de consulta del sistema | — |
-| `01-fundamentos/modelo-mental.md` | Las cuatro capas: qué cambia, cuándo, qué activa, función narrativa | CREATIVE (siempre cuando hay GSAP), UI (on-demand) |
-| `01-fundamentos/vocabulario-base.md` | Tween, timeline, stagger, easing, ScrollTrigger — términos atómicos | CREATIVE, UI (on-demand) |
-| `02-capacidades/index.md` | Catálogo: tween, timeline, stagger, easing, ScrollTrigger, Lenis, plugins | CREATIVE, UI (on-demand) |
-| `03-patrones/index.md` | Catálogo de patrones reusables con cuándo usar cada uno | CREATIVE, UI (on-demand) |
-| `03-patrones/character-cascade.md` | Reveal letra por letra | CREATIVE, UI |
-| `03-patrones/parallax.md` | Capas con velocidades distintas + Ken Burns | CREATIVE, UI |
-| `03-patrones/pinned-scrub.md` | Sección fijada con animación atada al scroll | CREATIVE |
-| `03-patrones/horizontal-scroll.md` | Recorrido lateral en sección pinneada | CREATIVE |
-| `03-patrones/mask-reveal.md` | Descubrir contenido tras una máscara | CREATIVE, UI |
-| `03-patrones/magnetic-button.md` | Botón que se atrae al cursor | CREATIVE, UI |
-| `03-patrones/cursor-follower.md` | Cursor personalizado | CREATIVE |
-| `03-patrones/scramble-text.md` | Texto con cifrado/decifrado | CREATIVE |
-| `03-patrones/typewriter.md` | Texto que se tipea con caret | CREATIVE, UI |
-| `03-patrones/draw-svg-path.md` | Trazado animado de paths SVG | CREATIVE |
-| `04-glosario/index.md` | Vocabulario corto para briefing y prompts IA | CREATIVE, SKETCH (on-demand: si el brief usa términos de motion) |
-| `05-plantillas/plantilla-patron.md` | Schema para nuevos patrones | — (referencia para autores) |
+| `index.md` · `00-indice/` | Mapa del dominio, flujo de consulta, fuentes comentadas | — |
+| `01-direccion/` | Protocolo de dirección, Motion Spec, brief | CREATIVE; UI (on-demand: la spec) |
+| `02-proposito/` | Prueba de propósito, patrones de transición, coreografía | UX; UI (patrones) |
+| `03-creativa/` | Concepto, carácter, personalidades, lenguaje de marca, narrativa | CREATIVE; BRAND (personalidad, lenguaje de marca) |
+| `04-teoria/` | Principios, easing, springs, timing | CREATIVE |
+| `05-tipografia/` | Tipografía cinética | CREATIVE |
+| `06-sistema/` | Escala de referencia de duraciones, curvas y springs; mapeo por plataforma | TOKEN, THEME; CREATIVE (on-demand) |
+| `07-accesibilidad/` | Reduced motion, destellos, pausa, riesgo vestibular | UX, CREATIVE, UI, AUDIT |
+| `08-ejecucion/` | `css/` · `js/` · `gsap/` (fundamentos, capacidades, 10 patrones, glosario) · `rive/` · `cavalry-ae/` · `blender/` | CREATIVE; UI y SKETCH (on-demand) |
+| `09-critica/` | Protocolo de visionado, diagnóstico, rúbrica | CREATIVE; AUDIT (on-demand, asesor) |
 
 ### `vendors/` — Bibliotecas de referencia externas
 

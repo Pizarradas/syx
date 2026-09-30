@@ -14,7 +14,7 @@
 > the module is the thing that needs fixing. Paths below are relative to that folder.
 >
 > · **Always:** `syx/theme-system.md` · `syx/token-system.md` (what a theme may and may not overwrite) · `syx/color-oklch.md` (perceptually even scales).
-> · **When relevant:** `ui/color-theory.md` for distribution and meaning · `front/size-models.md` if the theme touches scale primitives.
+> · **When relevant:** `ui/color-theory.md` for distribution and meaning · `front/size-models.md` if the theme touches scale primitives · `motion/06-sistema/escala.md` if it redefines `--semantic-duration-*` or `--semantic-easing-*`.
 > · **On request:** `vendors/awesome-design/index.md` when the brief cites a palette or type reference.
 > · **Tags:** `#theme` `#oklch` `#dark-mode` `#palette` `#semantic-mapping`
 

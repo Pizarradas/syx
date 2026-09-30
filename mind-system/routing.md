@@ -51,11 +51,26 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 | `syx/color-oklch.md` | | | | ○ | ● | | | | ● |
 | `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● |
 | `branding/perception-of-prestige.rules.md` | | | · | | | | · | | · |
-| `motion/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | |
-| `motion/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | |
-| `motion/02-capacidades/index.md` | | | ◐ | | | | | | |
-| `motion/03-patrones/` | | | ◐ | | | · | | | |
-| `motion/04-glosario/index.md` | · | | · | | | | | | |
+| `motion/01-direccion/` | | | ○ | | | | | | |
+| `motion/01-direccion/motion-spec.md` | | | ○ | | | · | | | |
+| `motion/02-proposito/` | | ○ | | | | | | | |
+| `motion/02-proposito/patrones-de-transicion.md` | | ○ | | | | ○ | | | |
+| `motion/03-creativa/` | | | ○ | | | | | | |
+| `motion/03-creativa/personalidad.md` · `lenguaje-de-marca.md` | | | ○ | | | | | | ○ |
+| `motion/04-teoria/` | | | ○ | | | | | | |
+| `motion/05-tipografia/tipografia-cinetica.md` | | | ○ | | | | | | |
+| `motion/06-sistema/` | | | · | | | | | | |
+| `motion/06-sistema/escala.md` | | | · | ○ | ○ | | | | |
+| `motion/07-accesibilidad/accesibilidad.md` | | ○ | ○ | | | ○ | ○ | | |
+| `motion/08-ejecucion/css/` | | | ○ | | | · | | | |
+| `motion/08-ejecucion/js/` | | | ◐ | | | | | | |
+| `motion/08-ejecucion/gsap/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | |
+| `motion/08-ejecucion/gsap/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | |
+| `motion/08-ejecucion/gsap/02-capacidades/index.md` | | | ◐ | | | | | | |
+| `motion/08-ejecucion/gsap/03-patrones/` | | | ◐ | | | · | | | |
+| `motion/08-ejecucion/gsap/04-glosario/index.md` | · | | · | | | | | | |
+| `motion/08-ejecucion/rive/` · `cavalry-ae/` · `blender/` | | | · | | | | | | |
+| `motion/09-critica/critica.md` | | | ○ | | | | · | | |
 | `vendors/awesome-design/` | · | | · | | · | | | | · |
 
 ---
@@ -91,10 +106,22 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | | `color-oklch` | TOKEN · THEME · BRAND |
 | `branding/` | `perception-of-prestige-foundations` | UX · CREATIVE · BRAND |
 | | `perception-of-prestige.rules` | CREATIVE · AUDIT · BRAND |
-| `motion/` | `01-fundamentos/*` | CREATIVE · UI |
-| | `02-capacidades/index` | CREATIVE |
-| | `03-patrones/*` (10 patrones) | CREATIVE · UI |
-| | `04-glosario/index` | SKETCH · CREATIVE |
+| `motion/` | `01-direccion/*` | CREATIVE · UI (`motion-spec`) |
+| | `02-proposito/*` | UX · UI (`patrones-de-transicion`) |
+| | `03-creativa/*` | CREATIVE · BRAND (`personalidad`, `lenguaje-de-marca`) |
+| | `04-teoria/*` | CREATIVE |
+| | `05-tipografia/tipografia-cinetica` | CREATIVE |
+| | `06-sistema/escala` | TOKEN · THEME · CREATIVE |
+| | `06-sistema/mapeo-por-plataforma` | CREATIVE |
+| | `07-accesibilidad/accesibilidad` | UX · CREATIVE · UI · AUDIT |
+| | `08-ejecucion/css/*` | CREATIVE · UI |
+| | `08-ejecucion/js/*` | CREATIVE |
+| | `08-ejecucion/gsap/01-fundamentos/*` | CREATIVE · UI |
+| | `08-ejecucion/gsap/02-capacidades/index` | CREATIVE |
+| | `08-ejecucion/gsap/03-patrones/*` (10 patrones) | CREATIVE · UI |
+| | `08-ejecucion/gsap/04-glosario/index` | SKETCH · CREATIVE |
+| | `08-ejecucion/rive/*` · `cavalry-ae/*` · `blender/*` | CREATIVE |
+| | `09-critica/critica` | CREATIVE · AUDIT |
 | `vendors/` | `awesome-design/*` | SKETCH · CREATIVE · THEME · BRAND |
 
 **Sin modo, a propósito** — son navegación o andamiaje de autor, no corpus:
@@ -103,8 +130,11 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 |---|---|
 | `knowledges/index.md` | Mapa del córtex |
 | `knowledges/*/index.md` | Mapa de cada dominio |
+| `motion/index.md` | Mapa del dominio motion y sus estratos |
 | `motion/00-indice/mapa-del-sistema.md` | Flujo de consulta del dominio motion |
-| `motion/05-plantillas/plantilla-patron.md` | Schema para escribir un patrón nuevo |
+| `motion/00-indice/fuentes.md` | Bibliografía comentada del dominio |
+| `motion/08-ejecucion/gsap/index.md` · `gsap/00-indice/mapa-del-sistema.md` | Mapa de la capa GSAP |
+| `motion/08-ejecucion/gsap/05-plantillas/plantilla-patron.md` | Schema para escribir un patrón nuevo |
 
 Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano y hay que resolverlo: enrutarlo a un modo, o retirarlo.
 
@@ -112,7 +142,7 @@ Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano 
 
 ## Dos notas de precedencia dentro del córtex
 
-**Motion.** `ui/motion-principles.md` es la capa física — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion` — y **prevalece sobre todo el dominio `motion/`**, que es la capa de librería. Una receta de GSAP que rompa un principio físico está mal, no está siendo audaz. CREATIVE carga la primera siempre y la segunda solo cuando hay GSAP, en ese orden y a propósito.
+**Motion.** `ui/motion-principles.md` es el suelo físico de la UI web — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion`, escrito en tokens `--semantic-*` — y **prevalece sobre todo el dominio `motion/` para código de `scss/`**. Una receta de GSAP o de CSS que rompa un principio físico está mal, no está siendo audaz. Dentro del dominio `motion/` manda su propia escalera (accesibilidad > propósito > sistema > dirección creativa > preferencia técnica), y `07-accesibilidad/` va delante de cualquier patrón. CREATIVE carga el suelo siempre, los estratos de conocimiento cuando algo se mueve y la capa GSAP solo cuando hay librería, en ese orden y a propósito.
 
 **Prestigio.** `branding/perception-of-prestige.rules.md` trae 18 reglas con su propio formato de informe. Cuando AUDIT las usa, lo que encuentra es **asesor**: no lleva número R, no aparece en la capa 1 del informe y no convierte por sí solo un PASS en FAIL. Mezclar una recomendación de percepción con una violación de contrato devalúa las dos.
 

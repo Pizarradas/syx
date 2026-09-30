@@ -1,0 +1,586 @@
+{
+  "$description": "Motion System — tokens canónicos (formato DTCG 2025.10). Springs en $extensions['motion.spring'] con equivalencia física (mass=1).",
+  "duration": {
+    "$type": "duration",
+    "instant": {
+      "$value": {
+        "value": 0,
+        "unit": "ms"
+      }
+    },
+    "fast-01": {
+      "$value": {
+        "value": 70,
+        "unit": "ms"
+      }
+    },
+    "fast-02": {
+      "$value": {
+        "value": 110,
+        "unit": "ms"
+      }
+    },
+    "moderate-01": {
+      "$value": {
+        "value": 150,
+        "unit": "ms"
+      }
+    },
+    "moderate-02": {
+      "$value": {
+        "value": 240,
+        "unit": "ms"
+      }
+    },
+    "slow-01": {
+      "$value": {
+        "value": 400,
+        "unit": "ms"
+      }
+    },
+    "slow-02": {
+      "$value": {
+        "value": 700,
+        "unit": "ms"
+      }
+    },
+    "long-01": {
+      "$value": {
+        "value": 1000,
+        "unit": "ms"
+      }
+    },
+    "long-02": {
+      "$value": {
+        "value": 1500,
+        "unit": "ms"
+      }
+    }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "linear": {
+      "$value": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "standard": {
+      "productive": {
+        "$value": [
+          0.2,
+          0,
+          0.38,
+          0.9
+        ]
+      },
+      "expressive": {
+        "$value": [
+          0.4,
+          0.14,
+          0.3,
+          1
+        ]
+      }
+    },
+    "enter": {
+      "productive": {
+        "$value": [
+          0,
+          0,
+          0.38,
+          0.9
+        ]
+      },
+      "expressive": {
+        "$value": [
+          0,
+          0,
+          0.3,
+          1
+        ]
+      }
+    },
+    "exit": {
+      "productive": {
+        "$value": [
+          0.2,
+          0,
+          1,
+          0.9
+        ]
+      },
+      "expressive": {
+        "$value": [
+          0.4,
+          0.14,
+          1,
+          1
+        ]
+      }
+    },
+    "emphasized": {
+      "enter": {
+        "$value": [
+          0.05,
+          0.7,
+          0.1,
+          1
+        ]
+      },
+      "exit": {
+        "$value": [
+          0.3,
+          0,
+          0.8,
+          0.15
+        ]
+      }
+    },
+    "overshoot": {
+      "$value": [
+        0.34,
+        1.56,
+        0.64,
+        1
+      ]
+    }
+  },
+  "spring": {
+    "effects": {
+      "$description": "Color/opacidad cuando se usa spring. Nunca rebota.",
+      "$type": "duration",
+      "$value": {
+        "value": 200,
+        "unit": "ms"
+      },
+      "$extensions": {
+        "motion.spring": {
+          "duration": 200,
+          "bounce": 0,
+          "stiffness": 987.0,
+          "damping": 62.83,
+          "mass": 1,
+          "dampingRatio": 1,
+          "settleMs_0.5pct": 236
+        }
+      }
+    },
+    "spatial": {
+      "fast": {
+        "$description": "Toggles, controles pequeños",
+        "$type": "duration",
+        "$value": {
+          "value": 250,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "motion.spring": {
+            "duration": 250,
+            "bounce": 0,
+            "stiffness": 631.7,
+            "damping": 50.27,
+            "mass": 1,
+            "dampingRatio": 1,
+            "settleMs_0.5pct": 295
+          }
+        }
+      },
+      "default": {
+        "$description": "Sheets, tarjetas, reordenar",
+        "$type": "duration",
+        "$value": {
+          "value": 400,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "motion.spring": {
+            "duration": 400,
+            "bounce": 0.1,
+            "stiffness": 246.7,
+            "damping": 28.27,
+            "mass": 1,
+            "dampingRatio": 0.9,
+            "settleMs_0.5pct": 348
+          }
+        }
+      },
+      "slow": {
+        "$description": "Superficies grandes",
+        "$type": "duration",
+        "$value": {
+          "value": 600,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "motion.spring": {
+            "duration": 600,
+            "bounce": 0.1,
+            "stiffness": 109.7,
+            "damping": 18.85,
+            "mass": 1,
+            "dampingRatio": 0.9,
+            "settleMs_0.5pct": 522
+          }
+        }
+      }
+    },
+    "expressive": {
+      "default": {
+        "$description": "Marca, éxito",
+        "$type": "duration",
+        "$value": {
+          "value": 450,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "motion.spring": {
+            "duration": 450,
+            "bounce": 0.25,
+            "stiffness": 195.0,
+            "damping": 20.94,
+            "mass": 1,
+            "dampingRatio": 0.75,
+            "settleMs_0.5pct": 514
+          }
+        }
+      },
+      "bouncy": {
+        "$description": "Lúdico; nunca en UI de alta frecuencia",
+        "$type": "duration",
+        "$value": {
+          "value": 500,
+          "unit": "ms"
+        },
+        "$extensions": {
+          "motion.spring": {
+            "duration": 500,
+            "bounce": 0.35,
+            "stiffness": 157.9,
+            "damping": 16.34,
+            "mass": 1,
+            "dampingRatio": 0.65,
+            "settleMs_0.5pct": 535
+          }
+        }
+      }
+    }
+  },
+  "stagger": {
+    "$type": "duration",
+    "tight": {
+      "$value": {
+        "value": 20,
+        "unit": "ms"
+      }
+    },
+    "default": {
+      "$value": {
+        "value": 40,
+        "unit": "ms"
+      }
+    },
+    "loose": {
+      "$value": {
+        "value": 80,
+        "unit": "ms"
+      }
+    },
+    "max-total": {
+      "productive": {
+        "$value": {
+          "value": 300,
+          "unit": "ms"
+        }
+      },
+      "expressive": {
+        "$value": {
+          "value": 600,
+          "unit": "ms"
+        }
+      }
+    }
+  },
+  "motion": {
+    "feedback": {
+      "press": {
+        "$type": "transition",
+        "$description": "Press de botón/control",
+        "$value": {
+          "duration": "{duration.fast-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.standard.productive}"
+        }
+      },
+      "hover": {
+        "$type": "transition",
+        "$description": "Hover; el color va con easing.linear",
+        "$value": {
+          "duration": "{duration.fast-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.standard.productive}"
+        },
+        "$extensions": {
+          "motion": {
+            "colorTimingFunction": "{easing.linear}"
+          }
+        }
+      },
+      "success": {
+        "$type": "transition",
+        "$description": "Éxito; hold posterior",
+        "$value": {
+          "duration": "{duration.slow-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.overshoot}"
+        },
+        "$extensions": {
+          "motion": {
+            "spring": "{spring.expressive.default}",
+            "holdAfterMs": 600
+          }
+        }
+      }
+    },
+    "enter": {
+      "small": {
+        "$type": "transition",
+        "$description": "Tooltips, menús, chips",
+        "$value": {
+          "duration": "{duration.moderate-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.enter.productive}"
+        }
+      },
+      "medium": {
+        "$type": "transition",
+        "$description": "Toasts, diálogos, tarjetas",
+        "$value": {
+          "duration": "{duration.moderate-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.enter.productive}"
+        }
+      },
+      "large": {
+        "expressive": {
+          "$type": "transition",
+          "$description": "Entradas protagonistas",
+          "$value": {
+            "duration": "{duration.slow-01}",
+            "delay": {
+              "value": 0,
+              "unit": "ms"
+            },
+            "timingFunction": "{easing.enter.expressive}"
+          }
+        }
+      }
+    },
+    "exit": {
+      "small": {
+        "$type": "transition",
+        "$description": "Salidas pequeñas",
+        "$value": {
+          "duration": "{duration.fast-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.exit.productive}"
+        }
+      },
+      "medium": {
+        "$type": "transition",
+        "$description": "Salidas medianas",
+        "$value": {
+          "duration": "{duration.moderate-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.exit.productive}"
+        }
+      }
+    },
+    "move": {
+      "within": {
+        "$type": "transition",
+        "$description": "Mover entre posiciones visibles",
+        "$value": {
+          "duration": "{duration.moderate-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.standard.productive}"
+        }
+      }
+    },
+    "transition": {
+      "expand": {
+        "$type": "transition",
+        "$description": "Container transform",
+        "$value": {
+          "duration": "{duration.slow-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.standard.expressive}"
+        },
+        "$extensions": {
+          "motion": {
+            "spring": "{spring.spatial.default}"
+          }
+        }
+      },
+      "page": {
+        "$type": "transition",
+        "$description": "Cambio de pantalla; salida con emphasized.exit",
+        "$value": {
+          "duration": "{duration.slow-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.emphasized.enter}"
+        },
+        "$extensions": {
+          "motion": {
+            "exitTimingFunction": "{easing.emphasized.exit}"
+          }
+        }
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$type": "transition",
+        "$description": "Oscurecer fondo",
+        "$value": {
+          "duration": "{duration.slow-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.linear}"
+        }
+      }
+    },
+    "value": {
+      "change": {
+        "$type": "transition",
+        "$description": "Contadores y datos",
+        "$value": {
+          "duration": "{duration.long-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.enter.expressive}"
+        }
+      }
+    },
+    "loop": {
+      "spinner": {
+        "$type": "transition",
+        "$description": "Rotación continua",
+        "$value": {
+          "duration": "{duration.long-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.linear}"
+        },
+        "$extensions": {
+          "motion": {
+            "iterations": "infinite"
+          }
+        }
+      },
+      "shimmer": {
+        "$type": "transition",
+        "$description": "Skeleton shimmer",
+        "$value": {
+          "duration": "{duration.long-02}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.linear}"
+        },
+        "$extensions": {
+          "motion": {
+            "iterations": "infinite"
+          }
+        }
+      }
+    },
+    "reduced": {
+      "crossfade": {
+        "$type": "transition",
+        "$description": "Sustituto por defecto de movimiento espacial en modo reducido",
+        "$value": {
+          "duration": "{duration.moderate-01}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.linear}"
+        },
+        "$extensions": {
+          "motion": {
+            "properties": [
+              "opacity"
+            ]
+          }
+        }
+      },
+      "instant": {
+        "$type": "transition",
+        "$description": "Cambio inmediato",
+        "$value": {
+          "duration": "{duration.instant}",
+          "delay": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "timingFunction": "{easing.linear}"
+        }
+      }
+    }
+  },
+  "multiplier": {
+    "$type": "number",
+    "$description": "Escalado global por plataforma (no crear tokens nuevos)",
+    "tablet": {
+      "$value": 1.3
+    },
+    "wearable": {
+      "$value": 0.7
+    },
+    "desktop": {
+      "$value": 0.8
+    },
+    "reduced-spatial": {
+      "$value": 0
+    }
+  }
+}

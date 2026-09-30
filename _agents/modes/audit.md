@@ -14,8 +14,8 @@
 > the module is the thing that needs fixing. Paths below are relative to that folder.
 >
 > · **Always:** `syx/component-patterns.md` · `syx/scss-pipeline.md` · `syx/token-system.md` — naming, structure and tier checks.
-> · **When relevant:** `front/accessibility-wcag.md` on HTML audits · `front/mobile-first.md` and `front/progressive-enhancement.md` on CSS audits, to catch `max-width` queries and layers that fail open · `front/size-models-checklist.md` when auditing type or spacing tokens · `syx/theme-system.md` when the subject is a `_theme.scss`.
-> · **On request:** `branding/perception-of-prestige.rules.md` for a brand-perception audit — 18 rules with their own report format. What it finds is advisory and never carries an R-number — the same standing as an identity-contract finding, and for the same reason.
+> · **When relevant:** `front/accessibility-wcag.md` on HTML audits · `front/mobile-first.md` and `front/progressive-enhancement.md` on CSS audits, to catch `max-width` queries and layers that fail open · `front/size-models-checklist.md` when auditing type or spacing tokens · `syx/theme-system.md` when the subject is a `_theme.scss` · `motion/07-accesibilidad/accesibilidad.md` when the subject animates (WCAG 2.2.2, 2.3.1).
+> · **On request:** `branding/perception-of-prestige.rules.md` for a brand-perception audit — 18 rules with their own report format. What it finds is advisory and never carries an R-number — the same standing as an identity-contract finding, and for the same reason. · `motion/09-critica/critica.md` for a motion review, with the same advisory standing — a raw `transition:` it happens to find is still R03.
 > · **Supplied, not loaded:** an **identity contract** handed over by BRAND. It is not a cortex module and not on the precedence ladder: it arrives with the request, it is checked, and it never overrides a rule.
 > · **Tags:** `#audit` `#qa` `#contracts` `#r01-r08` `#compliance`
 

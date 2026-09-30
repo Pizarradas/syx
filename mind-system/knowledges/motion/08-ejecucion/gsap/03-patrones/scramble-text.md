@@ -11,7 +11,7 @@ Decode effect, decryption text, hex scramble, terminal text, data scramble.
 
 ## Se suele confundir con
 - **Typewriter**: el typewriter añade un carácter por unidad de tiempo; el scramble cambia todos los caracteres simultáneamente.
-- **GSAP ScrambleText plugin** (de pago): hace algo similar, pero esta versión manual es gratuita y suficiente para los casos típicos.
+- **GSAP ScrambleText plugin** (gratuito desde 3.13, en el paquete `gsap`): hace algo similar; esta versión manual no añade dependencia y es suficiente para los casos típicos.
 
 ## Control GSAP
 ```js

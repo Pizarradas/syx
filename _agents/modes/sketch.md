@@ -14,7 +14,7 @@
 > the module is the thing that needs fixing. Paths below are relative to that folder.
 >
 > · **Always:** — *nothing. Tier 1 buys its speed by reading nothing, and knowledge is a read.* The BEM and 320px rules stated below are that cortex already internalised.
-> · **On request:** `motion/04-glosario/index.md` when the brief uses motion vocabulary (parallax, scrub, magnetic, cascade) and the sketch has to name the effect for whoever builds it · `vendors/awesome-design/index.md` when the brief cites a known aesthetic ("like Stripe", "Notion-ish") · `syx/component-patterns.md` and `front/mobile-first.md` only if someone disputes the naming or the breakpoint direction.
+> · **On request:** `motion/08-ejecucion/gsap/04-glosario/index.md` when the brief uses motion vocabulary (parallax, scrub, magnetic, cascade) and the sketch has to name the effect for whoever builds it · `vendors/awesome-design/index.md` when the brief cites a known aesthetic ("like Stripe", "Notion-ish") · `syx/component-patterns.md` and `front/mobile-first.md` only if someone disputes the naming or the breakpoint direction.
 > · **Tags:** `#sketch` `#prototype` `#rapid` `#no-production`
 
 ---

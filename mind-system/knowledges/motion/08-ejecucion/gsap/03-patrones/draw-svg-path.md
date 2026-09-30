@@ -11,7 +11,7 @@ Stroke draw, line draw, animated path, path tracing, dasharray reveal.
 
 ## Se suele confundir con
 - **Mask reveal**: la máscara descubre toda la geometría a la vez; el draw avanza por la propia trayectoria del path.
-- **GSAP DrawSVG plugin** (de pago): la versión manual con `stroke-dashoffset` cubre 95% de los casos sin coste.
+- **GSAP DrawSVG plugin** (gratuito desde 3.13, en el paquete `gsap`): la versión manual con `stroke-dashoffset` cubre 95% de los casos sin coste.
 
 ## Control GSAP
 

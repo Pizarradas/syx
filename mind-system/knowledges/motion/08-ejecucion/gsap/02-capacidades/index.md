@@ -156,7 +156,7 @@ Beneficio: scroll suave de premium feel. Coste: añade una capa de control que p
 | `Flip` | Animaciones FLIP — el elemento "vuela" entre dos estados de layout |
 | `Draggable` | Arrastrar elementos con física |
 
-Plugins de pago (Club GSAP) — `SplitText`, `MorphSVG`, `DrawSVG`, `MotionPath`, `Inertia`, `ScrollSmoother`. Sus efectos pueden replicarse manualmente en muchos casos (ver `03-patrones/character-cascade.md` para SplitText manual).
+Plugins incluidos en el paquete `gsap` — gratuitos desde GSAP 3.13 (abril de 2025), antes Club GSAP — `SplitText`, `MorphSVG`, `DrawSVG`, `MotionPath`, `Inertia`, `ScrollSmoother`. Sus efectos pueden replicarse manualmente en muchos casos (ver `03-patrones/character-cascade.md` para SplitText manual).
 
 ---
 

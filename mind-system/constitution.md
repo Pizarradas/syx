@@ -42,7 +42,7 @@ Tier 8 — MIGRATE    → resolución de deuda legacy
 
 Regla: usar el tier más bajo que cumpla el objetivo. No escalar innecesariamente.
 
-**El tier mide la interrogación al sistema, no al córtex.** Son dos ejes distintos y conviene no sumarlos: el tier cuenta lo que cuesta preguntarle a SYX (`tokens.json`, `component-registry.json`, `contracts/`), y el bloque `Knowledge` de cada modo cuenta lo que cuesta cargar el conocimiento. CREATIVE es tier 3 y sin embargo carga el dominio `motion/` entero cuando hay GSAP: sigue siendo barato en lecturas del sistema y caro en corpus. SKETCH es la única excepción disciplinada — su tier 1 se compra no leyendo nada, y por eso su bloque `Knowledge` no tiene línea **Always**.
+**El tier mide la interrogación al sistema, no al córtex.** Son dos ejes distintos y conviene no sumarlos: el tier cuenta lo que cuesta preguntarle a SYX (`tokens.json`, `component-registry.json`, `contracts/`), y el bloque `Knowledge` de cada modo cuenta lo que cuesta cargar el conocimiento. CREATIVE es tier 3 y sin embargo, en cuanto algo se mueve, carga buena parte del dominio `motion/` — sus estratos de conocimiento, y además la capa GSAP cuando hay librería —: sigue siendo barato en lecturas del sistema y caro en corpus. SKETCH es la única excepción disciplinada — su tier 1 se compra no leyendo nada, y por eso su bloque `Knowledge` no tiene línea **Always**.
 
 ---
 

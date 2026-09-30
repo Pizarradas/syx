@@ -14,7 +14,7 @@
 > the module is the thing that needs fixing. Paths below are relative to that folder.
 >
 > · **Always:** `syx/token-system.md` — the four tiers and what each one may reference.
-> · **When relevant:** `syx/color-oklch.md` when the tokens are colour · `ui/color-theory.md` when reasoning about distribution or meaning · `front/size-models.md` when creating font-size or spacing primitives, so they come off a declared scale instead of a hunch.
+> · **When relevant:** `syx/color-oklch.md` when the tokens are colour · `ui/color-theory.md` when reasoning about distribution or meaning · `front/size-models.md` when creating font-size or spacing primitives, so they come off a declared scale instead of a hunch · `motion/06-sistema/escala.md` when the tokens are durations or easings — a reference scale to argue from, never a second source of values.
 > · **Self-check:** `front/size-models-checklist.md` before delivering any scale. A scale whose base, ratio and unit are not written down is a set of snowflakes.
 > · **Tags:** `#tokens` `#token-system` `#semantic` `#primitive` `#naming`
 
