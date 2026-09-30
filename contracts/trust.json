@@ -54,7 +54,11 @@
         "package.json",
         "package-lock.json",
         "scripts/",
-        ".github/"
+        ".github/",
+        "mind-system/governance/",
+        "mind-system/atlas-rules/",
+        "mind-system/constitution.md",
+        "mind-system/README.md"
       ]
     }
   },
@@ -63,6 +67,7 @@
     "contracts/trust.json está en `human` a propósito: un agente que pudiera ampliar sus propios permisos no tendría permisos, tendría una sugerencia.",
     "contracts/rules.json también: las reglas con las que se valida un cambio no las mueve quien es validado.",
     "scripts/ está en `human` porque ahí viven los guardianes. Un guardián que el agente puede reescribir no guarda nada.",
-    "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera."
+    "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera.",
+    "El patrón `*.md` alcanza a cualquier markdown en cualquier carpeta, así que la documentación que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`. Si no, hereda `auto` por ser markdown, y el agente acaba pudiendo reescribir el criterio por el que se le juzga."
   ]
 }
