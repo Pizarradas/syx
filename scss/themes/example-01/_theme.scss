@@ -317,7 +317,7 @@
   // ================================================
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
       // Buttons (indigo on dark bg)
       --btn-primary-filled-text: var(--primitive-color-white);
@@ -363,34 +363,14 @@
     --semantic-color-link-active: oklch(0.88 0.115 95.746);
   }
 
-  // Light mode forced — wins over @media when user explicitly chose light
+  // Claro forzado: no hace falta bloque propio. El oscuro por preferencia del
+  // sistema se aplica con :root:not([data-theme="light"]), así que elegir
+  // «claro» deja el :root por defecto intacto. Aquí había un bloque que no
+  // revertía todo lo que el oscuro cambiaba y además traía otra paleta (texto
+  // púrpura a 4,06:1). Lo vigila scripts/check-modo-claro.js.
+  // Solo declara que los controles nativos van en claro.
   :root[data-theme="light"] {
-    --semantic-color-bg-primary: var(--primitive-color-white);
-    --semantic-color-bg-secondary: var(--primitive-color-pink-50);
-    --semantic-color-bg-tertiary: var(--primitive-color-gray-50);
-    --semantic-color-bg-inverse: var(--primitive-color-black);
-    --semantic-color-text-primary: var(--primitive-color-purple-500);
-    --semantic-color-text-secondary: var(--primitive-color-gray-700);
-    --semantic-color-text-tertiary: var(--primitive-color-gray-500);
-    --semantic-color-text-inverse: var(--primitive-color-white);
-    --semantic-color-text-disabled: var(--primitive-color-gray-300);
-    --semantic-border-width: 1px;
-    --semantic-outline-width: var(--theme-focus-ring-width);
-    --semantic-color-border-default: var(--primitive-color-gray-300);
-    --semantic-color-border-subtle: var(--primitive-color-gray-200);
-    --semantic-color-border-strong: var(--primitive-color-gray-400);
-    --semantic-shadow-xs: var(--primitive-shadow-xs);
-    --semantic-shadow-sm: var(--primitive-shadow-sm);
-    --semantic-shadow-md: var(--primitive-shadow-md);
-    --semantic-shadow-lg: var(--primitive-shadow-lg);
-    --semantic-shadow-card: 0 1px 3px oklch(0 0 0 / 0.04), 0 4px 12px oklch(0 0 0 / 0.03);
-
-    @supports (color: oklch(0 0 0)) {
-      --semantic-shadow-xs: var(--primitive-shadow-xs);
-      --semantic-shadow-sm: var(--primitive-shadow-sm);
-      --semantic-shadow-md: var(--primitive-shadow-md);
-      --semantic-shadow-lg: var(--primitive-shadow-lg);
-    }
+    color-scheme: light;
   }
 }
 

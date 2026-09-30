@@ -79,8 +79,10 @@
   --semantic-color-border-default: var(--primitive-color-gray-300);
   --semantic-color-border-subtle: var(--primitive-color-gray-200);
   --semantic-color-border-strong: var(--primitive-color-gray-400);
-  // Alias used by form-field-border-focus:
-  --semantic-color-border-focus: var(--primitive-color-pink-500);
+  // Alias used by form-field-border-focus. Sigue al color primario del tema:
+  // antes era pink-500 fijo, un resto de la plantilla, y seis de los siete
+  // temas enfocaban sus campos en rosa sin haberlo decidido nadie.
+  --semantic-color-border-focus: var(--semantic-color-primary);
 
   // LINK COLORS
   // ================================================

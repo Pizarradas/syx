@@ -120,8 +120,10 @@ Los **semánticos** se pueden sobreescribir directamente en `_theme.scss` **úni
 
 El dark-mode se activa de dos formas:
 
-1. **Automática**: `@media (prefers-color-scheme: dark)` — respeta la preferencia del SO
+1. **Automática**: `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }` — respeta la preferencia del SO salvo que el usuario haya elegido claro
 2. **Manual**: `[data-theme="dark"]` en `<html>` — control explícito desde JS
+
+El `:not([data-theme="light"])` es lo que hace que elegir «claro» funcione sin un bloque que revierta el oscuro a mano: el `:root` por defecto queda intacto. Un tema claro por defecto no necesita `:root[data-theme="light"]`. Lo vigila `npm run check:modo-claro`.
 
 Los tokens de dark-mode están en `scss/abstracts/tokens/semantic/_dark-mode.scss`.
 Solo se reasignan tokens de superficie, texto y borde. Los brand colors y estados (success/error/warning) **no cambian**.

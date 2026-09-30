@@ -298,7 +298,7 @@
   // ================================================
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
       --semantic-color-link-default: var(--primitive-color-orange-500);
       --semantic-color-link-hover: var(--primitive-color-coral-50);
@@ -342,6 +342,8 @@
   }
 
   :root[data-theme="light"] {
+
+    color-scheme: light;
     // Al forzar claro sí hay fondo claro: la tinta vuelve abajo.
     --semantic-brand-text-lightness: 0.45;
     --semantic-color-bg-primary: var(--primitive-color-cream-50);

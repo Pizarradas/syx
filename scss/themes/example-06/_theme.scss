@@ -265,7 +265,7 @@
     // DARK MODE (Theme inherits default, we customize values)
     // ================================================
     @media (prefers-color-scheme: dark) {
-        :root {
+        :root:not([data-theme="light"]) {
             @include dark-mode-tokens();
 
             --semantic-color-bg-primary: var(--primitive-color-space-950);
@@ -314,8 +314,17 @@
         --btn-secondary-filled-text: var(--primitive-color-space-900);
     }
 
-    // LIGHT OVERRIDE
+    // LIGHT — la paleta clara diseñada para este tema. Antes solo se aplicaba
+    // al forzar el claro con [data-theme="light"]; sin elección, el tema pintaba
+    // los grises genéricos de la plantilla. Ahora es el :root por defecto, y el
+    // oscuro (:root:not([data-theme="light"]) dentro de la media query, más
+    // Elegir «claro» solo declara que los controles nativos van en claro.
     :root[data-theme="light"] {
+        color-scheme: light;
+    }
+
+    // específico) la sigue sustituyendo cuando toca.
+    :root {
         --semantic-color-bg-primary: var(--primitive-color-white);
         --semantic-color-bg-secondary: var(--primitive-color-neon-100);
         --semantic-color-bg-tertiary: var(--primitive-color-neon-200);

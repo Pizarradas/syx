@@ -44,6 +44,7 @@
 // (elección explícita del usuario). Los dos modos no pueden desincronizarse
 // porque cualquier token que añada el oscuro tiene que tener su pareja aquí.
 @mixin syx-sketch-light-tokens {
+  color-scheme: light;
   --semantic-color-bg-inverse: var(--primitive-color-gray-900);  // navy
   --semantic-color-text-primary: var(--primitive-color-ink);      // 16.5:1
   --semantic-color-text-secondary: var(--primitive-color-gray-700); // 8.9:1
@@ -239,6 +240,7 @@
 // anidar declaraciones de mixin. Se aplica dos veces: desde la
 // preferencia del sistema y desde [data-theme="dark"].
 @mixin syx-sketch-dark-tokens {
+  color-scheme: dark;
   @include dark-mode-tokens();
 
   --semantic-color-bg-inverse: oklch(1 0 0);
@@ -1190,7 +1192,7 @@
   // ================================================
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       @include syx-sketch-dark-tokens;
     }
   }

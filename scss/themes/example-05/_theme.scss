@@ -321,7 +321,7 @@
   // ================================================
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
       --semantic-color-link-default: var(--primitive-color-gold-500);
       --semantic-color-link-hover: var(--primitive-color-silver-300);
@@ -375,6 +375,8 @@
   }
 
   :root[data-theme="light"] {
+
+    color-scheme: light;
     --semantic-color-bg-primary: var(--primitive-color-dark-900);
     --semantic-color-bg-secondary: var(--primitive-color-dark-800);
     --semantic-color-bg-tertiary: var(--primitive-color-dark-700);

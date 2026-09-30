@@ -202,10 +202,15 @@ Text also inverts:
 --semantic-color-text-inverse:   oklch(0.1 0 0); // near-black for light surfaces
 ```
 
-**Symmetry rule (guarded by `npm run check:themes`):** the explicit
-`:root[data-theme="light"]` block must revert **exactly the same tokens**
-the dark block overrides — a token darkened but not reverted leaks its dark
-value into forced-light mode. `check:themes` fails on any asymmetry.
+**Activation rule (guarded by `npm run check:modo-claro`):** the OS-preference
+dark block is `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }`,
+never a bare `:root`. With that guard, choosing "light" simply leaves the default `:root`
+in place, so a light-first theme needs **no** `:root[data-theme="light"]` block at all — the
+old pattern of reverting the dark tokens by hand never reverted all of them (between 38 and
+179 per theme) and let a second palette creep in. A dark-first theme keeps its
+`[data-theme="light"]` block: there it *is* the light palette. The guard checks that a
+choice paints the same whatever the OS says, and that choosing the mode you already have
+changes nothing.
 
 ---
 

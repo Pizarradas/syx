@@ -10,12 +10,17 @@
 //
 // Uso en _theme.scss de cada tema:
 //   @media (prefers-color-scheme: dark) {
-//     :root { @include dark-mode-tokens(); }
+//     :root:not([data-theme="light"]) { @include dark-mode-tokens(); }
 //   }
 //   [data-theme="dark"] { @include dark-mode-tokens(); }
 // ================================================
 
 @mixin dark-mode-tokens() {
+
+  // Controles nativos (scroll, select, fechas, autofill) en oscuro también.
+  // Sin esto el sistema pintaba superficies oscuras con controles del
+  // navegador en claro.
+  color-scheme: dark;
 
   // BACKGROUND COLORS
   // ================================================

@@ -299,7 +299,7 @@
 
   // DARK MODE
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
       // Theme 02 is inherently dark, we remove inherited pink/purple overrides
       --btn-primary-filled-text: oklch(0.193 0.069 300.442);
@@ -349,6 +349,8 @@
   }
 
   :root[data-theme="light"] {
+
+    color-scheme: light;
     --semantic-color-bg-primary: var(--primitive-color-white);
     --semantic-color-bg-secondary: var(--primitive-color-pink-50);
     --semantic-color-bg-tertiary: var(--primitive-color-gray-50);
