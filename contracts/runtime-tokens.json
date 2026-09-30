@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-30T21:29:40.930Z",
+    "generatedAt": "2026-09-30T22:00:36.554Z",
     "source": "css/styles-theme-example-01.css",
     "stats": {
-      "total": 1368,
-      "official": 1093,
+      "total": 1419,
+      "official": 1144,
       "legacy": 275
     }
   },
@@ -7215,6 +7215,363 @@
     },
     "--component-score-5-border": {
       "value": "var(--primitive-color-blue-600)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-bg": {
+      "value": "var(--semantic-color-bg-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-gap": {
+      "value": "var(--semantic-space-component-xs)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-padding-block": {
+      "value": "var(--semantic-space-component-md)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-padding-inline": {
+      "value": "var(--semantic-space-component-lg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-border-radius": {
+      "value": "var(--semantic-border-radius-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-accent-width": {
+      "value": "var(--semantic-border-width-thick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-title-font-weight": {
+      "value": "var(--semantic-font-weight-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-info-accent": {
+      "value": "var(--semantic-color-state-info)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-info-title-color": {
+      "value": "var(--semantic-color-state-info-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-success-accent": {
+      "value": "var(--semantic-color-state-success)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-success-title-color": {
+      "value": "var(--semantic-color-state-success-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-warning-accent": {
+      "value": "var(--semantic-color-state-warning)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-warning-title-color": {
+      "value": "var(--semantic-color-state-warning-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-error-accent": {
+      "value": "var(--semantic-color-state-error)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-alert-error-title-color": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-bg": {
+      "value": "var(--semantic-color-bg-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-border-width": {
+      "value": "var(--semantic-border-width-thin)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-border-color": {
+      "value": "var(--semantic-color-border-subtle)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-border-radius": {
+      "value": "var(--semantic-border-radius-lg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-shadow": {
+      "value": "var(--semantic-shadow-lg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-padding": {
+      "value": "var(--semantic-space-component-lg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-gap": {
+      "value": "var(--semantic-space-stack-md)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-max-width": {
+      "value": "32rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-title-font-size": {
+      "value": "var(--semantic-font-size-h5)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-title-line-height": {
+      "value": "var(--semantic-line-height-heading)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-backdrop": {
+      "value": "color-mix(in srgb, var(--semantic-color-bg-inverse) 55%, transparent)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-duration": {
+      "value": "var(--semantic-duration-base)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-dialog-easing": {
+      "value": "var(--semantic-easing-out)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-gap": {
+      "value": "var(--semantic-space-component-xs)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-border-width": {
+      "value": "var(--semantic-border-width-thin)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-border-color": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-padding-block": {
+      "value": "var(--semantic-space-component-sm)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-padding-inline": {
+      "value": "var(--semantic-space-component-md)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-color": {
+      "value": "var(--semantic-color-text-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-color-hover": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-color-selected": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-tab-font-weight": {
+      "value": "var(--semantic-font-weight-medium)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-indicator-width": {
+      "value": "var(--semantic-border-width-thick)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-indicator-color": {
+      "value": "var(--semantic-color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-tabs-panel-padding-block": {
+      "value": "var(--semantic-space-component-lg)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-border-width": {
+      "value": "var(--semantic-border-width-thin)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-border-color": {
+      "value": "var(--semantic-color-border-default)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-summary-padding-block": {
+      "value": "var(--semantic-space-component-md)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-summary-color": {
+      "value": "var(--semantic-color-text-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-summary-font-weight": {
+      "value": "var(--semantic-font-weight-medium)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-marker-size": {
+      "value": "0.5em",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-content-padding-block-end": {
+      "value": "var(--semantic-space-component-md)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-content-color": {
+      "value": "var(--semantic-color-text-secondary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-disclosure-duration": {
+      "value": "var(--semantic-duration-fast)",
       "usedInSelectors": [
         ":root"
       ],
