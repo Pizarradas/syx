@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-12T09:58:41.339Z",
-    "totalTokens": 1089
+    "generatedAt": "2026-09-30T21:29:40.930Z",
+    "totalTokens": 1094
   },
   "tokens": {
     "--primitive-border-width-0": {
@@ -142,7 +142,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-color-white": {
       "key": "color-white",
@@ -162,7 +162,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-color-gray-100": {
       "key": "color-gray-100",
@@ -182,7 +182,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-color-gray-300": {
       "key": "color-gray-300",
@@ -192,7 +192,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 8
+      "usageCount": 7
     },
     "--primitive-color-gray-400": {
       "key": "color-gray-400",
@@ -202,7 +202,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 8
+      "usageCount": 7
     },
     "--primitive-color-gray-500": {
       "key": "color-gray-500",
@@ -212,7 +212,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 5
+      "usageCount": 4
     },
     "--primitive-color-gray-600": {
       "key": "color-gray-600",
@@ -232,7 +232,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 6
+      "usageCount": 5
     },
     "--primitive-color-gray-800": {
       "key": "color-gray-800",
@@ -312,7 +312,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 3
+      "usageCount": 2
     },
     "--primitive-color-purple-600": {
       "key": "color-purple-600",
@@ -362,7 +362,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 3
+      "usageCount": 2
     },
     "--primitive-color-pink-100": {
       "key": "color-pink-100",
@@ -462,7 +462,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 3
+      "usageCount": 2
     },
     "--primitive-color-blue-100": {
       "key": "color-blue-100",
@@ -1242,7 +1242,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-shadow-sm": {
       "key": "shadow-sm",
@@ -1252,7 +1252,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-shadow-md": {
       "key": "shadow-md",
@@ -1262,7 +1262,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-shadow-lg": {
       "key": "shadow-lg",
@@ -1272,7 +1272,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 7
+      "usageCount": 6
     },
     "--primitive-shadow-xl": {
       "key": "shadow-xl",
@@ -2631,7 +2631,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 8
+      "usageCount": 7
     },
     "--semantic-color-border-subtle": {
       "key": "color-border-subtle",
@@ -2662,6 +2662,17 @@
       "layer": "semantic",
       "inRuntime": true,
       "usageCount": 2
+    },
+    "--semantic-color-border-control": {
+      "key": "color-border-control",
+      "type": "ALIAS",
+      "value": "--primitive-color-gray-500",
+      "rawValue": "var(--primitive-color-gray-500)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Borde de controles (campo, checkbox, radio, switch). WCAG 1.4.11: ≥ 3:1 contra el fondo en claro y en oscuro.",
+      "inRuntime": true,
+      "usageCount": 1
     },
     "--semantic-color-link-default": {
       "key": "color-link-default",
@@ -2781,7 +2792,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 4
+      "usageCount": 5
     },
     "--semantic-color-state-error": {
       "key": "color-state-error",
@@ -2791,7 +2802,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 4
+      "usageCount": 5
     },
     "--semantic-color-state-warning": {
       "key": "color-state-warning",
@@ -2801,7 +2812,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 3
+      "usageCount": 4
     },
     "--semantic-color-state-info": {
       "key": "color-state-info",
@@ -2810,6 +2821,50 @@
       "rawValue": "var(--primitive-color-blue-500)",
       "status": "active",
       "layer": "semantic",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-state-success-text": {
+      "key": "color-state-success-text",
+      "type": "ALIAS",
+      "value": "--semantic-color-state-success",
+      "rawValue": "var(--semantic-color-state-success)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta del estado success para texto (≥ 4,5:1). Con sintaxis de color relativa: oklch(from state L c h) con --semantic-brand-text-lightness.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-state-error-text": {
+      "key": "color-state-error-text",
+      "type": "ALIAS",
+      "value": "--semantic-color-state-error",
+      "rawValue": "var(--semantic-color-state-error)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta del estado error para texto (≥ 4,5:1). Con sintaxis de color relativa: oklch(from state L c h) con --semantic-brand-text-lightness.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-state-warning-text": {
+      "key": "color-state-warning-text",
+      "type": "ALIAS",
+      "value": "--semantic-color-state-warning",
+      "rawValue": "var(--semantic-color-state-warning)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta del estado warning para texto (≥ 4,5:1). Con sintaxis de color relativa: oklch(from state L c h) con --semantic-brand-text-lightness.",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--semantic-color-state-info-text": {
+      "key": "color-state-info-text",
+      "type": "ALIAS",
+      "value": "--semantic-color-state-info",
+      "rawValue": "var(--semantic-color-state-info)",
+      "status": "active",
+      "layer": "semantic",
+      "note": "Tinta del estado info para texto (≥ 4,5:1). Con sintaxis de color relativa: oklch(from state L c h) con --semantic-brand-text-lightness.",
       "inRuntime": true,
       "usageCount": 0
     },
@@ -4692,8 +4747,8 @@
     "--component-form-field-border": {
       "key": "form-field-border",
       "type": "ALIAS",
-      "value": "--semantic-color-border-default",
-      "rawValue": "var(--semantic-color-border-default)",
+      "value": "--semantic-color-border-control",
+      "rawValue": "var(--semantic-color-border-control)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -4935,8 +4990,8 @@
     "--component-form-field-success-color": {
       "key": "form-field-success-color",
       "type": "ALIAS",
-      "value": "--semantic-color-state-success",
-      "rawValue": "var(--semantic-color-state-success)",
+      "value": "--semantic-color-state-success-text",
+      "rawValue": "var(--semantic-color-state-success-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -4955,8 +5010,8 @@
     "--component-form-field-error-color": {
       "key": "form-field-error-color",
       "type": "ALIAS",
-      "value": "--semantic-color-state-error",
-      "rawValue": "var(--semantic-color-state-error)",
+      "value": "--semantic-color-state-error-text",
+      "rawValue": "var(--semantic-color-state-error-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -4975,8 +5030,8 @@
     "--component-form-field-warning-color": {
       "key": "form-field-warning-color",
       "type": "ALIAS",
-      "value": "--semantic-color-state-warning",
-      "rawValue": "var(--semantic-color-state-warning)",
+      "value": "--semantic-color-state-warning-text",
+      "rawValue": "var(--semantic-color-state-warning-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -5075,8 +5130,8 @@
     "--component-check-border-color": {
       "key": "check-border-color",
       "type": "ALIAS",
-      "value": "--semantic-color-border-default",
-      "rawValue": "var(--semantic-color-border-default)",
+      "value": "--semantic-color-border-control",
+      "rawValue": "var(--semantic-color-border-control)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -5195,8 +5250,8 @@
     "--component-radio-border-color": {
       "key": "radio-border-color",
       "type": "ALIAS",
-      "value": "--semantic-color-border-default",
-      "rawValue": "var(--semantic-color-border-default)",
+      "value": "--semantic-color-border-control",
+      "rawValue": "var(--semantic-color-border-control)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -5315,8 +5370,8 @@
     "--component-switch-border-color": {
       "key": "switch-border-color",
       "type": "ALIAS",
-      "value": "--semantic-color-border-default",
-      "rawValue": "var(--semantic-color-border-default)",
+      "value": "--semantic-color-border-control",
+      "rawValue": "var(--semantic-color-border-control)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,

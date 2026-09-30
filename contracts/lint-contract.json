@@ -1,16 +1,143 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-12T09:58:41.339Z"
+    "generatedAt": "2026-09-30T21:29:40.930Z"
   },
   "stats": {
-    "sourceTokens": 1089,
-    "runtimeTokens": 1363,
-    "officialRuntime": 1088,
+    "sourceTokens": 1094,
+    "runtimeTokens": 1368,
+    "officialRuntime": 1093,
     "legacyRuntime": 275,
     "phantomTokens": 0,
-    "undocumentedTokens": 0
+    "undocumentedTokens": 0,
+    "unusedTokens": 124
   },
   "phantomTokens": [],
+  "unusedRegistryTokens": [
+    "--component-breadcrumb-bg-active",
+    "--component-breadcrumb-color",
+    "--component-breadcrumb-color-active",
+    "--component-breadcrumb-color-hover",
+    "--component-breadcrumb-font-size",
+    "--component-breadcrumb-icon-filter",
+    "--component-button-gap",
+    "--component-button-padding-x",
+    "--component-button-padding-y",
+    "--component-button-primary-bg",
+    "--component-button-primary-border",
+    "--component-button-primary-filled-border",
+    "--component-button-quaternary-bg",
+    "--component-button-quaternary-border",
+    "--component-button-quaternary-filled-border",
+    "--component-button-secondary-bg",
+    "--component-button-secondary-border",
+    "--component-button-secondary-filled-border",
+    "--component-button-shadow-focus",
+    "--component-button-tertiary-bg",
+    "--component-button-tertiary-border",
+    "--component-button-tertiary-filled-border",
+    "--component-check-color-checked",
+    "--component-check-icon-image",
+    "--component-check-icon-size",
+    "--component-docs-badge-atom-bg",
+    "--component-docs-badge-atom-border",
+    "--component-docs-badge-atom-color",
+    "--component-docs-badge-layout-bg",
+    "--component-docs-badge-layout-border",
+    "--component-docs-badge-layout-color",
+    "--component-docs-badge-molecule-bg",
+    "--component-docs-badge-molecule-border",
+    "--component-docs-badge-molecule-color",
+    "--component-docs-badge-organism-bg",
+    "--component-docs-badge-organism-border",
+    "--component-docs-badge-organism-color",
+    "--component-feature-icon-atom-bg",
+    "--component-feature-icon-atom-color",
+    "--component-form-field-font-size-sm",
+    "--component-form-field-gap",
+    "--component-header-bg",
+    "--component-header-bg-scrolled",
+    "--component-header-height",
+    "--component-header-logo-color",
+    "--component-header-logo-color-hover",
+    "--component-header-logo-icon",
+    "--component-header-logo-icon-size",
+    "--component-header-logo-icon-size-md",
+    "--component-header-logo-padding-left",
+    "--component-header-logo-padding-left-md",
+    "--component-header-padding-y",
+    "--component-header-social-gap",
+    "--component-header-social-icon-size",
+    "--component-header-z-index",
+    "--component-hero-content-margin",
+    "--component-hr-style",
+    "--component-label-font-size",
+    "--component-label-line-height",
+    "--component-link-color",
+    "--component-link-color-active",
+    "--component-link-color-hover",
+    "--component-link-color-visited",
+    "--component-link-decoration-color",
+    "--component-pagination-bg-disabled",
+    "--component-pagination-border-color",
+    "--component-pagination-font-size",
+    "--component-pagination-icon-first",
+    "--component-pagination-icon-last",
+    "--component-pagination-icon-next",
+    "--component-pagination-icon-prev",
+    "--component-pill-danger-border-color",
+    "--component-pill-font-size",
+    "--component-pill-success-border-color",
+    "--component-pill-warning-border-color",
+    "--component-radio-color-checked",
+    "--component-section-bg",
+    "--component-section-header-max-width",
+    "--component-section-rule-color",
+    "--component-section-rule-spacing",
+    "--component-section-rule-width",
+    "--component-sidenav-bg",
+    "--component-sidenav-link-arrow-size",
+    "--component-sidenav-link-font-weight",
+    "--component-sidenav-link-padding-x",
+    "--component-sidenav-link-padding-y",
+    "--component-sidenav-shadow",
+    "--component-sidenav-width",
+    "--component-sidenav-z-index",
+    "--component-switch-icon-off",
+    "--component-switch-icon-on",
+    "--component-switch-status-color-off",
+    "--component-switch-status-color-on",
+    "--component-switch-status-icon-filter",
+    "--component-theme-card-bg",
+    "--semantic-border-focus",
+    "--semantic-border-radius-2xl",
+    "--semantic-border-radius-xl",
+    "--semantic-border-width",
+    "--semantic-border-width-thick",
+    "--semantic-color-quinary-text",
+    "--semantic-color-senary",
+    "--semantic-color-septenary",
+    "--semantic-color-state-active",
+    "--semantic-color-state-focus",
+    "--semantic-color-state-info-text",
+    "--semantic-color-text-on-primary",
+    "--semantic-filter-black",
+    "--semantic-filter-secondary",
+    "--semantic-filter-white",
+    "--semantic-outline-width",
+    "--semantic-shadow-card",
+    "--semantic-shadow-inner",
+    "--semantic-shadow-lg",
+    "--semantic-shadow-xl",
+    "--semantic-shadow-xs",
+    "--semantic-space-layout-xs",
+    "--semantic-z-index-base",
+    "--semantic-z-index-drawer",
+    "--semantic-z-index-dropdown",
+    "--semantic-z-index-modal",
+    "--semantic-z-index-overlay",
+    "--semantic-z-index-sticky",
+    "--semantic-z-index-toast"
+  ],
   "undocumentedComponentTokens": [],
   "legacyVars": {
     "--base-measure": {
@@ -504,7 +631,7 @@
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--cont-group-form-field-icon-size": {
-      "value": "var(--semantic-size-icon-sm,var(--primitive-size-1))",
+      "value": "var(--semantic-size-icon-sm, var(--primitive-size-1))",
       "usedInSelectors": [
         ":root"
       ],
@@ -738,7 +865,9 @@
     "--btn-primary-filled-text": {
       "value": "oklch(0.22 0.032 264.665)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -754,7 +883,9 @@
     "--btn-secondary-filled-text": {
       "value": "oklch(0.21 0.032 264.665)",
       "usedInSelectors": [
-        ":root"
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -930,7 +1061,8 @@
     "--btn-primary-bg-hover": {
       "value": "oklch(0.70 0.204 277.117)",
       "usedInSelectors": [
-        ":root"
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -938,191 +1070,196 @@
     "--btn-secondary-bg-hover": {
       "value": "oklch(0.88 0.115 95.746)",
       "usedInSelectors": [
-        ":root"
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--facebook-primary": {
-      "value": "before{background:var(--icon-rrss-facebook) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--facebook-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--github-primary": {
-      "value": "before{background:var(--icon-rrss-github) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--github-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--instagram-primary": {
-      "value": "before{background:var(--icon-rrss-instagram) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--instagram-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--linkedin-primary": {
-      "value": "before{background:var(--icon-rrss-linkedin) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--linkedin-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--pinterest-primary": {
-      "value": "before{background:var(--icon-rrss-pinterest) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--pinterest-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--snapchat-primary": {
-      "value": "before{background:var(--icon-rrss-snapchat) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--snapchat-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--twitter-primary": {
-      "value": "before{background:var(--icon-rrss-twitter) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--twitter-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--whatsapp-primary": {
-      "value": "before{background:var(--icon-rrss-whatsapp) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--whatsapp-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--youtube-primary": {
-      "value": "before{background:var(--icon-rrss-youtube) center center /contain no-repeat transparent",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".syx-icon--youtube-primary:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--primary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--primary:not(.atom-btn--filled)",
+        ".atom-link--primary:after",
+        ".atom-link--primary:hover",
+        ".atom-link--primary:focus-visible",
+        ".atom-link--primary:active"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--secondary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--secondary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--tertiary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--tertiary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--quaternary": {
-      "value": "not(.atom-btn--filled){background-color:transparent",
+      "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn--quaternary:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--filled": {
-      "value": "disabled{background-color:var(--component-button-disabled-bg)",
+      "value": "disabled {",
       "usedInSelectors": [
-        ":root"
+        ".atom-btn.atom-btn--filled:disabled"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--arrow-default": {
-      "value": "before{--component-icon-source:var(--icon-arrow-default)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--arrow-default:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--arrow-double": {
-      "value": "before{--component-icon-source:var(--icon-arrow-double)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--arrow-double:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--content-bars": {
-      "value": "before{--component-icon-source:var(--icon-content-bars)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--content-bars:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--rrss-email": {
-      "value": "before{--component-icon-source:var(--icon-rrss-email)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--rrss-email:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-cancel": {
-      "value": "before{--component-icon-source:var(--icon-user-interface-cancel)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-cancel:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-exclamation": {
-      "value": "before{--component-icon-source:var(--icon-user-interface-exclamation-mark)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-exclamation:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-home": {
-      "value": "before{--component-icon-source:var(--icon-user-interface-home)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-home:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--ui-tick": {
-      "value": "before{--component-icon-source:var(--icon-user-interface-tick)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--ui-tick:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--color-primary": {
-      "value": "before{--component-icon-color:var(--semantic-color-primary-text)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-primary:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate → --semantic-color-primary",
@@ -1130,9 +1267,9 @@
       "replaceWith": "var(--semantic-color-primary)"
     },
     "--color-secondary": {
-      "value": "before{--component-icon-color:var(--semantic-color-secondary-text)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-secondary:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate → --semantic-color-secondary",
@@ -1140,9 +1277,9 @@
       "replaceWith": "var(--semantic-color-secondary)"
     },
     "--color-state-ok": {
-      "value": "before{--component-icon-color:var(--semantic-color-state-success)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-state-ok:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate → --semantic-color-state-success",
@@ -1150,9 +1287,9 @@
       "replaceWith": "var(--semantic-color-state-success)"
     },
     "--color-state-ko": {
-      "value": "before{--component-icon-color:var(--semantic-color-state-error)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-state-ko:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate → --semantic-color-state-error",
@@ -1160,9 +1297,9 @@
       "replaceWith": "var(--semantic-color-state-error)"
     },
     "--color-state-warning": {
-      "value": "before{--component-icon-color:var(--semantic-color-state-warning)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-state-warning:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate → --semantic-color-state-warning",
@@ -1170,17 +1307,17 @@
       "replaceWith": "var(--semantic-color-state-warning)"
     },
     "--color-white": {
-      "value": "before{--component-icon-color:oklch(1 0 0)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-white:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
     },
     "--color-black": {
-      "value": "before{--component-icon-color:oklch(0 0 0)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--color-black:before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
@@ -1674,521 +1811,521 @@
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-home": {
-      "value": "before{--component-icon-source:var(--lc-icon-home)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-home:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-menu": {
-      "value": "before{--component-icon-source:var(--lc-icon-menu)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-menu:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-x": {
-      "value": "before{--component-icon-source:var(--lc-icon-x)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-x:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-layers": {
-      "value": "before{--component-icon-source:var(--lc-icon-layers)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-layers:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-right": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevron-right)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-left": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevron-left)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-left:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-down": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevron-down)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-down:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevron-up": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevron-up)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevron-up:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevrons-right": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevrons-right)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevrons-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevrons-down": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevrons-down)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevrons-down:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-chevrons-left": {
-      "value": "before{--component-icon-source:var(--lc-icon-chevrons-left)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-chevrons-left:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-arrow-right": {
-      "value": "before{--component-icon-source:var(--lc-icon-arrow-right)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-arrow-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-arrow-left": {
-      "value": "before{--component-icon-source:var(--lc-icon-arrow-left)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-arrow-left:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-search": {
-      "value": "before{--component-icon-source:var(--lc-icon-search)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-search:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-plus": {
-      "value": "before{--component-icon-source:var(--lc-icon-plus)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-plus:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-minus": {
-      "value": "before{--component-icon-source:var(--lc-icon-minus)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-minus:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-check": {
-      "value": "before{--component-icon-source:var(--lc-icon-check)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-check:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-trash": {
-      "value": "before{--component-icon-source:var(--lc-icon-trash)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-trash:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-pencil": {
-      "value": "before{--component-icon-source:var(--lc-icon-pencil)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-pencil:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-download": {
-      "value": "before{--component-icon-source:var(--lc-icon-download)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-download:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-copy": {
-      "value": "before{--component-icon-source:var(--lc-icon-copy)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-copy:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-external-link": {
-      "value": "before{--component-icon-source:var(--lc-icon-external-link)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-external-link:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-filter": {
-      "value": "before{--component-icon-source:var(--lc-icon-filter)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-filter:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-rocket": {
-      "value": "before{--component-icon-source:var(--lc-icon-rocket)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-rocket:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-terminal": {
-      "value": "before{--component-icon-source:var(--lc-icon-terminal)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-terminal:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-book-open": {
-      "value": "before{--component-icon-source:var(--lc-icon-book-open)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-book-open:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-github": {
-      "value": "before{--component-icon-source:var(--lc-icon-github)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-github:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-zap": {
-      "value": "before{--component-icon-source:var(--lc-icon-zap)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-zap:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-info": {
-      "value": "before{--component-icon-source:var(--lc-icon-info)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-info:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-warning": {
-      "value": "before{--component-icon-source:var(--lc-icon-warning)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-warning:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-success": {
-      "value": "before{--component-icon-source:var(--lc-icon-success)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-success:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-error": {
-      "value": "before{--component-icon-source:var(--lc-icon-error)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-error:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-shield-check": {
-      "value": "before{--component-icon-source:var(--lc-icon-shield-check)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-shield-check:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-moon": {
-      "value": "before{--component-icon-source:var(--lc-icon-moon)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-moon:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-sun": {
-      "value": "before{--component-icon-source:var(--lc-icon-sun)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-sun:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-palette": {
-      "value": "before{--component-icon-source:var(--lc-icon-palette)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-palette:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-user": {
-      "value": "before{--component-icon-source:var(--lc-icon-user)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-user:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-settings": {
-      "value": "before{--component-icon-source:var(--lc-icon-settings)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-settings:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-mail": {
-      "value": "before{--component-icon-source:var(--lc-icon-mail)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-mail:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-database": {
-      "value": "before{--component-icon-source:var(--lc-icon-database)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-database:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-link": {
-      "value": "before{--component-icon-source:var(--lc-icon-link)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-link:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-component": {
-      "value": "before{--component-icon-source:var(--lc-icon-component)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-component:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-box": {
-      "value": "before{--component-icon-source:var(--lc-icon-component)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-box:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-coins": {
-      "value": "before{--component-icon-source:var(--lc-icon-coins)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-coins:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-atom": {
-      "value": "before{--component-icon-source:var(--lc-icon-atom)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-atom:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-package": {
-      "value": "before{--component-icon-source:var(--lc-icon-package)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-package:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-file-text": {
-      "value": "before{--component-icon-source:var(--lc-icon-file-text)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-file-text:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-git-branch": {
-      "value": "before{--component-icon-source:var(--lc-icon-git-branch)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-git-branch:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-bot": {
-      "value": "before{--component-icon-source:var(--lc-icon-bot)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-bot:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-activity": {
-      "value": "before{--component-icon-source:var(--lc-icon-activity)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-activity:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-check-circle": {
-      "value": "before{--component-icon-source:var(--lc-icon-success)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-check-circle:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-pie-chart": {
-      "value": "before{--component-icon-source:var(--lc-icon-pie-chart)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-pie-chart:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-layout": {
-      "value": "before{--component-icon-source:var(--lc-icon-layout)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-layout:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-code": {
-      "value": "before{--component-icon-source:var(--lc-icon-code)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-code:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-corner-down-right": {
-      "value": "before{--component-icon-source:var(--lc-icon-corner-down-right)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-corner-down-right:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-arrow-up": {
-      "value": "before{--component-icon-source:var(--lc-icon-arrow-up)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-arrow-up:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-users": {
-      "value": "before{--component-icon-source:var(--lc-icon-users)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-users:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-award": {
-      "value": "before{--component-icon-source:var(--lc-icon-award)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-award:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-git-compare": {
-      "value": "before{--component-icon-source:var(--lc-icon-git-compare)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-git-compare:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-briefcase": {
-      "value": "before{--component-icon-source:var(--lc-icon-briefcase)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-briefcase:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--lc-x-circle": {
-      "value": "before{--component-icon-source:var(--lc-icon-x-circle)",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".atom-icon--lc-x-circle:before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
     "--has-select": {
-      "value": "not([class*=\"--is-\"]):before{opacity:1",
+      "value": "not([class*=\"--is-\"]):before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--has-select:not([class*=\"--is-\"]):before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-error": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-error:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-success": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-success:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--is-warning": {
-      "value": "before{opacity:1",
+      "value": "before {",
       "usedInSelectors": [
-        ":root"
+        ".mol-form-field--is-warning:before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -2196,39 +2333,42 @@
     "--_layer-hue": {
       "value": "var(--component-token-primitive-accent)",
       "usedInSelectors": [
-        ":root"
+        ".org-home-tokens__layer--primitive",
+        ".org-home-tokens__layer--theme",
+        ".org-home-tokens__layer--semantic",
+        ".org-home-tokens__layer--component"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--primitive": {
-      "value": "before{background-color:var(--component-token-primitive-accent)",
+      "value": ":before {",
       "usedInSelectors": [
-        ":root"
+        ".org-home-tokens__layer--primitive::before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--theme": {
-      "value": "before{background-color:var(--component-token-theme-accent)",
+      "value": ":before {",
       "usedInSelectors": [
-        ":root"
+        ".org-home-tokens__layer--theme::before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--semantic": {
-      "value": "before{background-color:var(--component-token-semantic-accent)",
+      "value": ":before {",
       "usedInSelectors": [
-        ":root"
+        ".org-home-tokens__layer--semantic::before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
     "--component": {
-      "value": "before{background-color:var(--component-token-component-accent)",
+      "value": ":before {",
       "usedInSelectors": [
-        ":root"
+        ".org-home-tokens__layer--component::before"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."

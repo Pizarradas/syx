@@ -1,4 +1,4 @@
-# SYX Validation Report — 2026-09-12
+# SYX Validation Report — 2026-09-30
 
 **Verdict: ✅ PASSED**
 
@@ -8,8 +8,8 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 1363 |
-| Official (SYX-prefixed) | 1088 |
+| Total custom properties in runtime CSS | 1368 |
+| Official (SYX-prefixed) | 1093 |
 | Legacy (no SYX prefix) | 275 |
 
 ## Source vs Runtime Gaps

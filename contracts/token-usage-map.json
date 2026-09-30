@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-12T09:58:41.339Z",
-    "totalMappedTokens": 1447
+    "generatedAt": "2026-09-30T21:29:40.930Z",
+    "totalMappedTokens": 1448
   },
   "map": {
     "--primitive-fluid-space-xs": {
@@ -46,7 +46,6 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -56,16 +55,16 @@
         "scss/abstracts/maps/_tokens.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
+        "scss/base/_surface-tokens.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/_template/_theme.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -86,13 +85,14 @@
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/atoms/_form.scss",
         "scss/atoms/_list.scss",
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss",
         "scss/base/_deprecated-aliases.scss",
         "scss/base/_elements.scss",
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss",
         "scss/organisms/_site-header.scss",
         "scss/site/_ranking.scss",
         "scss/site/_theme-swatch-card.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -100,7 +100,6 @@
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss",
         "scss/utilities/_accessibility.scss",
         "scss/utilities/_text.scss"
       ]
@@ -173,8 +172,8 @@
         "scss/abstracts/tokens/components/_cards.scss",
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/atoms/_feature-icon.scss",
-        "scss/base/helpers/_backgrounds.scss",
         "scss/base/_surface-tokens.scss",
+        "scss/base/helpers/_backgrounds.scss",
         "scss/organisms/_site-header.scss",
         "scss/pages/_theme-builder.scss",
         "scss/site/_home-themes.scss",
@@ -189,6 +188,7 @@
         "scss/abstracts/maps/_tokens.scss",
         "scss/abstracts/tokens/components/_cards.scss",
         "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/atoms/_icon.scss"
       ]
     },
@@ -197,6 +197,7 @@
         "scss/abstracts/maps/_tokens.scss",
         "scss/abstracts/tokens/components/_cards.scss",
         "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/atoms/_icon.scss"
       ]
     },
@@ -204,6 +205,7 @@
       "usages": [
         "scss/abstracts/maps/_tokens.scss",
         "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/atoms/_icon.scss"
       ]
     },
@@ -308,13 +310,13 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_deprecated-aliases.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
-        "scss/themes/_template/_theme.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -334,9 +336,9 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -358,9 +360,9 @@
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
+        "scss/base/_deprecated-aliases.scss",
         "scss/base/helpers/_backgrounds.scss",
         "scss/base/helpers/_fonts.scss",
-        "scss/base/_deprecated-aliases.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -419,8 +421,8 @@
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_tables.scss",
-        "scss/base/helpers/_fonts.scss",
         "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_fonts.scss",
         "scss/utilities/_accessibility.scss"
       ]
     },
@@ -731,16 +733,9 @@
         "scss/abstracts/tokens/components/_cards.scss"
       ]
     },
-    "--semantic-color-border-default": {
+    "--semantic-color-border-control": {
       "usages": [
-        "scss/abstracts/tokens/components/_forms.scss",
-        "scss/abstracts/tokens/components/_pills.scss",
-        "scss/abstracts/tokens/components/_sections.scss",
-        "scss/organisms/_site-header.scss",
-        "scss/site/_compare-card.scss",
-        "scss/site/_evidence.scss",
-        "scss/site/_score.scss",
-        "scss/themes/syx-sketch/_theme.scss"
+        "scss/abstracts/tokens/components/_forms.scss"
       ]
     },
     "--semantic-color-border-focus": {
@@ -843,6 +838,16 @@
         "scss/atoms/_code.scss",
         "scss/atoms/_radio.scss",
         "scss/base/helpers/_backgrounds.scss"
+      ]
+    },
+    "--semantic-color-state-success-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_forms.scss"
+      ]
+    },
+    "--semantic-color-state-error-text": {
+      "usages": [
+        "scss/abstracts/tokens/components/_forms.scss"
       ]
     },
     "--semantic-color-state-warning-text": {
@@ -1085,7 +1090,6 @@
     "--primitive-color-blue-50": {
       "usages": [
         "scss/abstracts/tokens/components/_pills.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -1156,8 +1160,8 @@
         "scss/abstracts/tokens/components/_pills.scss",
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/base/helpers/_backgrounds.scss",
         "scss/base/_surface-tokens.scss",
+        "scss/base/helpers/_backgrounds.scss",
         "scss/pages/_theme-builder.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1171,6 +1175,17 @@
         "scss/site/_ranking.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
+      ]
+    },
+    "--semantic-color-border-default": {
+      "usages": [
+        "scss/abstracts/tokens/components/_pills.scss",
+        "scss/abstracts/tokens/components/_sections.scss",
+        "scss/organisms/_site-header.scss",
+        "scss/site/_compare-card.scss",
+        "scss/site/_evidence.scss",
+        "scss/site/_score.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--semantic-border-width-none": {
@@ -1303,7 +1318,6 @@
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
       ]
@@ -1326,7 +1340,6 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/base/_surface-tokens.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
@@ -1336,7 +1349,6 @@
         "scss/abstracts/tokens/components/_sections.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -1405,7 +1417,6 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/base/_surface-tokens.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1428,7 +1439,6 @@
         "scss/abstracts/tokens/components/_surfaces.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/base/_surface-tokens.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1527,14 +1537,14 @@
         "scss/base/_surface-tokens.scss",
         "scss/pages/_theme-builder.scss",
         "scss/setup-builder.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-font-size-base": {
@@ -1628,7 +1638,6 @@
     "--primitive-color-purple-500": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
@@ -1645,6 +1654,11 @@
         "scss/base/helpers/_fonts.scss"
       ]
     },
+    "--semantic-color-state-info": {
+      "usages": [
+        "scss/abstracts/tokens/semantic/_colors.scss"
+      ]
+    },
     "--semantic-brand-text-lightness": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss"
@@ -1653,7 +1667,6 @@
     "--primitive-color-pink-50": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss"
       ]
     },
@@ -1662,7 +1675,6 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/pages/_theme-builder.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
@@ -1670,40 +1682,40 @@
     "--primitive-color-success-500": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-color-error-500": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-color-warning-500": {
       "usages": [
         "scss/abstracts/tokens/semantic/_colors.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--semantic-tone-success-bg": {
@@ -1736,14 +1748,14 @@
         "scss/atoms/_breadcrumb.scss",
         "scss/atoms/_btn.scss",
         "scss/organisms/_site-header.scss",
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-shadow-none": {
@@ -1754,7 +1766,6 @@
     "--primitive-shadow-xs": {
       "usages": [
         "scss/abstracts/tokens/semantic/_shadows.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
@@ -1765,7 +1776,6 @@
     "--primitive-shadow-sm": {
       "usages": [
         "scss/abstracts/tokens/semantic/_shadows.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
@@ -1776,7 +1786,6 @@
     "--primitive-shadow-md": {
       "usages": [
         "scss/abstracts/tokens/semantic/_shadows.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
@@ -1787,7 +1796,6 @@
     "--primitive-shadow-lg": {
       "usages": [
         "scss/abstracts/tokens/semantic/_shadows.scss",
-        "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
@@ -1924,8 +1932,8 @@
     "--primitive-font-weight-medium": {
       "usages": [
         "scss/abstracts/tokens/semantic/_typography.scss",
-        "scss/base/helpers/_fonts.scss",
         "scss/base/_elements.scss",
+        "scss/base/helpers/_fonts.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -3712,198 +3720,6 @@
         "scss/atoms/_title.scss"
       ]
     },
-    "--primitive-color-facebook": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--primitive-color-instagram-blue": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--primitive-color-twitter": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--primitive-color-whatsapp-green": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--primitive-color-whatsapp-green-dark": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss"
-      ]
-    },
-    "--primitive-color-instagram-purple": {
-      "usages": [
-        "scss/base/helpers/_backgrounds.scss",
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--dimension-1": {
-      "usages": [
-        "scss/base/helpers/_dimensions.scss"
-      ]
-    },
-    "--dimension-2": {
-      "usages": [
-        "scss/base/helpers/_dimensions.scss"
-      ]
-    },
-    "--dimension-3": {
-      "usages": [
-        "scss/base/helpers/_dimensions.scss"
-      ]
-    },
-    "--dimension-4": {
-      "usages": [
-        "scss/base/helpers/_dimensions.scss"
-      ]
-    },
-    "--dimension-5": {
-      "usages": [
-        "scss/base/helpers/_dimensions.scss"
-      ]
-    },
-    "--font-size-1": {
-      "usages": [
-        "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_deprecated-aliases.scss",
-        "scss/themes/example-02/_theme.scss"
-      ]
-    },
-    "--font-size-2": {
-      "usages": [
-        "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_deprecated-aliases.scss",
-        "scss/themes/example-02/_theme.scss"
-      ]
-    },
-    "--font-size-3": {
-      "usages": [
-        "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_deprecated-aliases.scss",
-        "scss/themes/example-02/_theme.scss"
-      ]
-    },
-    "--font-size-4": {
-      "usages": [
-        "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_deprecated-aliases.scss",
-        "scss/themes/example-02/_theme.scss"
-      ]
-    },
-    "--font-size-5": {
-      "usages": [
-        "scss/base/helpers/_font-sizes.scss",
-        "scss/base/_deprecated-aliases.scss",
-        "scss/themes/example-02/_theme.scss"
-      ]
-    },
-    "--font-weight-1": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss"
-      ]
-    },
-    "--font-weight-2": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss",
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--scope-1": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--scope-2": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--scope-3": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--scope-4": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--scope-5": {
-      "usages": [
-        "scss/base/helpers/_fonts.scss"
-      ]
-    },
-    "--icon-rrss-facebook": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-github": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-instagram": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-linkedin": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-pinterest": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-snapchat": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-twitter": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-whatsapp": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
-    "--icon-rrss-youtube": {
-      "usages": [
-        "scss/base/helpers/_icons.scss"
-      ]
-    },
     "--font-family-1": {
       "usages": [
         "scss/base/_deprecated-aliases.scss"
@@ -3942,6 +3758,41 @@
     "--primitive-size-5": {
       "usages": [
         "scss/base/_deprecated-aliases.scss"
+      ]
+    },
+    "--font-size-1": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_font-sizes.scss",
+        "scss/themes/example-02/_theme.scss"
+      ]
+    },
+    "--font-size-2": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_font-sizes.scss",
+        "scss/themes/example-02/_theme.scss"
+      ]
+    },
+    "--font-size-3": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_font-sizes.scss",
+        "scss/themes/example-02/_theme.scss"
+      ]
+    },
+    "--font-size-4": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_font-sizes.scss",
+        "scss/themes/example-02/_theme.scss"
+      ]
+    },
+    "--font-size-5": {
+      "usages": [
+        "scss/base/_deprecated-aliases.scss",
+        "scss/base/helpers/_font-sizes.scss",
+        "scss/themes/example-02/_theme.scss"
       ]
     },
     "--component-breadcrumb-gap": {
@@ -4360,6 +4211,163 @@
         "scss/base/_surface-tokens.scss"
       ]
     },
+    "--primitive-color-facebook": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--primitive-color-instagram-blue": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--primitive-color-twitter": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--primitive-color-whatsapp-green": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--primitive-color-whatsapp-green-dark": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss"
+      ]
+    },
+    "--primitive-color-instagram-purple": {
+      "usages": [
+        "scss/base/helpers/_backgrounds.scss",
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--dimension-1": {
+      "usages": [
+        "scss/base/helpers/_dimensions.scss"
+      ]
+    },
+    "--dimension-2": {
+      "usages": [
+        "scss/base/helpers/_dimensions.scss"
+      ]
+    },
+    "--dimension-3": {
+      "usages": [
+        "scss/base/helpers/_dimensions.scss"
+      ]
+    },
+    "--dimension-4": {
+      "usages": [
+        "scss/base/helpers/_dimensions.scss"
+      ]
+    },
+    "--dimension-5": {
+      "usages": [
+        "scss/base/helpers/_dimensions.scss"
+      ]
+    },
+    "--font-weight-1": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss"
+      ]
+    },
+    "--font-weight-2": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss",
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--scope-1": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--scope-2": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--scope-3": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--scope-4": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--scope-5": {
+      "usages": [
+        "scss/base/helpers/_fonts.scss"
+      ]
+    },
+    "--icon-rrss-facebook": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-github": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-instagram": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-linkedin": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-pinterest": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-snapchat": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-twitter": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-whatsapp": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
+    "--icon-rrss-youtube": {
+      "usages": [
+        "scss/base/helpers/_icons.scss"
+      ]
+    },
     "--layout-pad-1": {
       "usages": [
         "scss/layout/grids/_grid.scss"
@@ -4637,8 +4645,8 @@
     "--primitive-font-family-inter": {
       "usages": [
         "scss/setup-builder.scss",
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/_template/_theme.scss"
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss"
       ]
     },
     "--primitive-color-brand-base": {
@@ -5747,14 +5755,126 @@
     },
     "--primitive-icon-arrow-default": {
       "usages": [
+        "scss/themes/_template/_theme.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--primitive-icon-logo": {
+      "usages": [
         "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--primitive-font-family-primary": {
+      "usages": [
+        "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--primitive-font-family-bold": {
+      "usages": [
+        "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--primitive-color-accent-500": {
+      "usages": [
+        "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--primitive-color-disabled": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--primitive-filter-primary": {
+      "usages": [
+        "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--primitive-filter-success": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--primitive-filter-error": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss"
+      ]
+    },
+    "--primitive-filter-warning": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--primitive-filter-disabled": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--base-measure": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--theme-w-border": {
+      "usages": [
+        "scss/themes/_template/_theme.scss"
+      ]
+    },
+    "--theme-focus-ring-width": {
+      "usages": [
+        "scss/themes/_template/_theme.scss",
+        "scss/themes/example-01/_theme.scss",
+        "scss/themes/example-02/_theme.scss",
+        "scss/themes/example-03/_theme.scss",
+        "scss/themes/example-04/_theme.scss",
+        "scss/themes/example-05/_theme.scss",
+        "scss/themes/example-06/_theme.scss",
+        "scss/themes/syx-sketch/_theme.scss"
       ]
     },
     "--primitive-icon-arrow-double": {
@@ -5846,82 +5966,10 @@
         "scss/themes/example-03/_theme.scss"
       ]
     },
-    "--primitive-color-disabled": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--theme-focus-ring-width": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
     "--primitive-font-family-mono": {
       "usages": [
         "scss/themes/example-01/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--primitive-filter-success": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-filter-warning": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-filter-disabled": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--base-measure": {
-      "usages": [
-        "scss/themes/example-01/_theme.scss",
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/syx-sketch/_theme.scss",
-        "scss/themes/_template/_theme.scss"
       ]
     },
     "--primitive-icon-logo-example-02": {
@@ -5954,16 +6002,6 @@
         "scss/themes/example-02/_theme.scss"
       ]
     },
-    "--primitive-filter-error": {
-      "usages": [
-        "scss/themes/example-02/_theme.scss",
-        "scss/themes/example-03/_theme.scss",
-        "scss/themes/example-04/_theme.scss",
-        "scss/themes/example-05/_theme.scss",
-        "scss/themes/example-06/_theme.scss",
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
     "--filter-color-white": {
       "usages": [
         "scss/themes/example-02/_theme.scss"
@@ -5980,11 +6018,6 @@
       ]
     },
     "--primitive-color-coral-500": {
-      "usages": [
-        "scss/themes/example-03/_theme.scss"
-      ]
-    },
-    "--primitive-color-coral-50": {
       "usages": [
         "scss/themes/example-03/_theme.scss"
       ]
@@ -6024,6 +6057,11 @@
         "scss/themes/example-03/_theme.scss"
       ]
     },
+    "--primitive-color-coral-50": {
+      "usages": [
+        "scss/themes/example-03/_theme.scss"
+      ]
+    },
     "--primitive-color-cream-100": {
       "usages": [
         "scss/themes/example-03/_theme.scss"
@@ -6045,11 +6083,6 @@
       ]
     },
     "--primitive-color-earth-500": {
-      "usages": [
-        "scss/themes/example-04/_theme.scss"
-      ]
-    },
-    "--primitive-color-forest-50": {
       "usages": [
         "scss/themes/example-04/_theme.scss"
       ]
@@ -6084,6 +6117,11 @@
         "scss/themes/example-04/_theme.scss"
       ]
     },
+    "--primitive-color-forest-50": {
+      "usages": [
+        "scss/themes/example-04/_theme.scss"
+      ]
+    },
     "--primitive-color-sage-100": {
       "usages": [
         "scss/themes/example-04/_theme.scss"
@@ -6111,11 +6149,6 @@
       ]
     },
     "--primitive-color-midnight-500": {
-      "usages": [
-        "scss/themes/example-05/_theme.scss"
-      ]
-    },
-    "--primitive-color-midnight-50": {
       "usages": [
         "scss/themes/example-05/_theme.scss"
       ]
@@ -6190,7 +6223,7 @@
         "scss/themes/example-05/_theme.scss"
       ]
     },
-    "--primitive-color-silver-500": {
+    "--primitive-color-silver-400": {
       "usages": [
         "scss/themes/example-05/_theme.scss"
       ]
@@ -6344,46 +6377,6 @@
     "--semantic-duration-instant": {
       "usages": [
         "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--primitive-icon-logo": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-font-family-primary": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-font-family-bold": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-color-primary-500": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-color-secondary-500": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-color-accent-500": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--primitive-filter-primary": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
-      ]
-    },
-    "--theme-w-border": {
-      "usages": [
-        "scss/themes/_template/_theme.scss"
       ]
     },
     "--semantic-z-index-skip-link": {
@@ -6782,11 +6775,11 @@
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
-    "--semantic-color-state-active": {
+    "--semantic-color-state-info-text": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
-    "--semantic-color-state-info": {
+    "--semantic-color-state-active": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
