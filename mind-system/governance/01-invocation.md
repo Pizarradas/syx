@@ -86,6 +86,14 @@ Atlas decide en los pasos 1–2. El modo SYX ejecuta en el paso 3. El modo nunca
 | Auditar página o layout editorial | `[ATLAS]: ... utilizando [SYX: AUDIT]` |
 | Auditar e iniciar migración | `[ATLAS]: ... utilizando [SYX: AUDIT → MIGRATE]` |
 
+### Identidad
+
+| Escenario | Combinación |
+|---|---|
+| Identidad editorial completa | `[ATLAS]: ... utilizando [SYX: BRAND → THEME]` |
+| Identidad verificada | `[ATLAS]: ... utilizando [SYX: BRAND → THEME + AUDIT]` |
+| Página experimental que hereda la identidad | `[ATLAS]: ... utilizando [SYX: BRAND → CREATIVE]` |
+
 ### Creativo → producción
 
 | Escenario | Combinación |

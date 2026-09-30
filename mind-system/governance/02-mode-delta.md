@@ -104,3 +104,17 @@ Ver protocolo completo en `05-audit.md`.
 |---|---|
 | Variable a variable según `lint-contract.json` | Variable a variable + verificación de alias legacy Atlas (`03-domains.md` tabla de color) |
 | Reemplazo por token Modes autorizado | Si la variable era un alias Atlas (`--semantic-color-brand`) → reemplazar por el equivalente Modes (`--semantic-color-primary`) |
+
+---
+
+## BRAND
+
+| Standalone | Con `[ATLAS]:` |
+|---|---|
+| Decide los siete ejes de una identidad | Los siete ejes, más el reparto de jerarquía N1–N4 que Atlas fija: la escala tipográfica y la de espacio tienen que poder expresar los cuatro niveles de `06.1` |
+| Escala tipográfica libre, argumentada | Escala compatible con `10.0` (jerarquía tipográfica); si la identidad pide otra, se declara como conflicto en `04-conflicts.md`, no se impone |
+| Densidad por carácter de marca | Densidad acotada por `06.2` (densidad y flujo editorial) |
+| Entrega especificación a THEME | Entrega especificación a THEME — no cambia |
+
+Atlas no decide la identidad —color, forma, movimiento siguen siendo de BRAND—, pero sí el marco editorial en el que la identidad tiene que funcionar.
+

@@ -20,6 +20,7 @@ Cada modo tiene un dominio exclusivo. Operar fuera del dominio propio es un erro
 | **UI** | Implementación SCSS de componentes | Operativo | SCSS conforme R01–R04, tokens de componente, registro | `pr` |
 | **AUDIT** | Revisión de conformidad | Evaluativo | Informe R01–R08, veredicto | nada |
 | **MIGRATE** | Resolución de deuda técnica | Operativo | Plan de migración variable a variable | `pr` / recomienda |
+| **BRAND** | Identidad visual completa | Generativo + evaluativo | Los siete ejes de una identidad, su procedencia, invariantes y la especificación que THEME construye | recomienda |
 
 La columna **Escribe** es un resumen de lectura rápida. La fuente es `contracts/trust.json`; el bloque `Trust` del modo es su lectura autorizada.
 
@@ -38,9 +39,12 @@ Tier 5 — THEME      → configuración de paleta
 Tier 6 — UI         → implementación SCSS
 Tier 7 — AUDIT      → verificación de conformidad
 Tier 8 — MIGRATE    → resolución de deuda legacy
+Tier 9 — BRAND      → identidad completa, coherente en los siete ejes
 ```
 
 Regla: usar el tier más bajo que cumpla el objetivo. No escalar innecesariamente.
+
+BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo es el único que tiene que salir coherente en siete ejes a la vez, y el tier ordena el trabajo, no las lecturas.
 
 **El tier mide la interrogación al sistema, no al córtex.** Son dos ejes distintos y conviene no sumarlos: el tier cuenta lo que cuesta preguntarle a SYX (`tokens.json`, `component-registry.json`, `contracts/`), y el bloque `Knowledge` de cada modo cuenta lo que cuesta cargar el conocimiento. CREATIVE es tier 3 y sin embargo, en cuanto algo se mueve, carga buena parte del dominio `motion/` — sus estratos de conocimiento, y además la capa GSAP cuando hay librería —: sigue siendo barato en lecturas del sistema y caro en corpus. SKETCH es la única excepción disciplinada — su tier 1 se compra no leyendo nada, y por eso su bloque `Knowledge` no tiene línea **Always**.
 
@@ -69,6 +73,15 @@ Regla: usar el tier más bajo que cumpla el objetivo. No escalar innecesariament
 - **AUDIT** identifica y reporta. No modifica código, ni siquiera para arreglar lo que acaba de encontrar.
 - **MIGRATE** resuelve una variable cada vez, con análisis de impacto previo.
 - El flujo correcto es siempre AUDIT → lista → MIGRATE ítem por ítem.
+
+### BRAND vs THEME
+- **BRAND** decide la identidad: los siete ejes (color, tipografía, espacio, forma, elevación, movimiento, estado), de dónde sale cada uno y qué invariantes la protegen.
+- **THEME** la construye: escala OKLCH, tokens de superficie, `_theme.scss`. No elige ejes; si una especificación no se puede construir tal cual, devuelve el conflicto a BRAND en vez de decidir otra dirección.
+- El orden es siempre `BRAND → THEME`. `THEME → BRAND` produce una paleta sin identidad a la que responder.
+
+### BRAND vs CREATIVE
+- Con identidad decidida, CREATIVE la **hereda**: su dirección de arte pasa a ser una desviación declarada en el `## Why`, no una invención.
+- Sin BRAND, CREATIVE sigue eligiendo carácter por encargo y dejándolo escrito.
 
 ### CREATIVE vs UI
 - **CREATIVE** produce prototipos exentos de R01–R08.
@@ -112,6 +125,9 @@ SKETCH confirma la idea · UX define HTML y accesibilidad · TOKEN los tokens ·
 
 **Tema nuevo** — `[SYX: TOKEN → THEME + AUDIT]:`
 TOKEN verifica cobertura de semánticos · THEME diseña la escala OKLCH y los 12 tokens de superficie · AUDIT verifica el contrato de tema. Lo instala una persona: `scss/themes/` es `human`.
+
+**Identidad nueva** — `[SYX: BRAND → THEME + AUDIT]:`
+BRAND entrevista y decide los siete ejes · THEME construye la escala y el `_theme.scss` · AUDIT verifica el contrato de tema y el de identidad (este último, asesor). Lo instala una persona.
 
 **Migración** — turno a turno, nunca en pipeline automático:
 AUDIT informa de R07 · MIGRATE ordena por riesgo · MIGRATE ejecuta variable a variable · AUDIT verifica cada tanda. Con riesgo elevado, confirmación explícita por variable.
