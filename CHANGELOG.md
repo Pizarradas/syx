@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Modo claro y oscuro.** El oscuro por preferencia del SO pasa a `:root:not([data-theme="light"])`: elegir claro u oscuro pinta lo mismo con cualquier SO. Antes, forzar el claro con el SO en oscuro dejaba entre 38 y 179 tokens en oscuro, y example-01 traía otra paleta (texto púrpura a 4,06:1). `--semantic-color-border-focus` sigue al primario del tema (era rosa fijo en seis temas). `color-scheme` en los dos modos.
 - **Fuentes.** Inter, Playfair Display, DM Mono y Bebas Neue existen (woff2 + woff, SIL OFL 1.1): 35 `url()` daban 404 en cinco temas.
 - **Validador.** R03 y R04 vuelven a ser errores (se contaban como avisos). R08 implementada. `validate-tokens.js` retirado: contradecía a `validate` con 984 falsos positivos.
-- **CSS.** 43 custom properties duplicadas en el mismo bloque, retiradas sin cambiar ningún valor resuelto. El `padding-left` de `blockquote` se aplicaba nunca.
+- **CSS.** 43 custom properties duplicadas en el mismo bloque, retiradas sin cambiar ningún valor resuelto. El `padding-left` de `blockquote` no se aplicaba nunca.
 
 ### Added — guardianes
 
