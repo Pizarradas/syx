@@ -63,7 +63,7 @@
     "validate:strict": "node scripts/syx-validate.js --strict",
     "export:tokens": "node scripts/export-tokens.js",
     "export:figma": "node scripts/export-figma.js",
-    "check": "npm run lint && npm run validate:report && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:figma && npm run check:mixins && npm run check:modos && npm run check:encoding && npm run check:package && npm run build",
+    "check": "npm run lint && npm run validate:report && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:figma && npm run check:mixins && npm run check:modos && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
@@ -88,7 +88,8 @@
     "prepublishOnly": "npm run check && npm run check:consumible",
     "check:setups": "node scripts/check-setups.js",
     "check:modo-claro": "node scripts/check-modo-claro.js",
-    "check:contraste": "node scripts/check-contraste.js"
+    "check:contraste": "node scripts/check-contraste.js",
+    "check:conocimiento": "node scripts/check-conocimiento.js"
   },
   "keywords": [
     "design-system",

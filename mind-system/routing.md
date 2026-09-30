@@ -56,7 +56,8 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 | `motion/02-proposito/` | | ○ | | | | | | | |
 | `motion/02-proposito/patrones-de-transicion.md` | | ○ | | | | ○ | | | |
 | `motion/03-creativa/` | | | ○ | | | | | | |
-| `motion/03-creativa/personalidad.md` · `lenguaje-de-marca.md` | | | ○ | | | | | | ○ |
+| `motion/03-creativa/personalidad.md` | | | ○ | | | | | | ○ |
+| `motion/03-creativa/lenguaje-de-marca.md` | | | ○ | | | | | | ○ |
 | `motion/04-teoria/` | | | ○ | | | | | | |
 | `motion/05-tipografia/tipografia-cinetica.md` | | | ○ | | | | | | |
 | `motion/06-sistema/` | | | · | | | | | | |
@@ -69,7 +70,9 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 | `motion/08-ejecucion/gsap/02-capacidades/index.md` | | | ◐ | | | | | | |
 | `motion/08-ejecucion/gsap/03-patrones/` | | | ◐ | | | · | | | |
 | `motion/08-ejecucion/gsap/04-glosario/index.md` | · | | · | | | | | | |
-| `motion/08-ejecucion/rive/` · `cavalry-ae/` · `blender/` | | | · | | | | | | |
+| `motion/08-ejecucion/rive/` | | | · | | | | | | |
+| `motion/08-ejecucion/cavalry-ae/` | | | · | | | | | | |
+| `motion/08-ejecucion/blender/` | | | · | | | | | | |
 | `motion/09-critica/critica.md` | | | ○ | | | | · | | |
 | `vendors/awesome-design/` | · | | · | | · | | | | · |
 
