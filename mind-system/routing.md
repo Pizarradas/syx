@@ -51,19 +51,23 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 | `syx/color-oklch.md` | | | | ○ | ● | | | | ● |
 | `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● |
 | `branding/perception-of-prestige.rules.md` | | | · | | | | · | | · |
-| `motion/01-direccion/` | | | ○ | | | | | | |
+| `motion/01-direccion/direccion.md` | | | ○ | | | | | | |
+| `motion/01-direccion/` (brief) | | | · | | | | | | |
 | `motion/01-direccion/motion-spec.md` | | | ○ | | | · | | | |
 | `motion/02-proposito/` | | ○ | | | | | | | |
 | `motion/02-proposito/patrones-de-transicion.md` | | ○ | | | | ○ | | | |
-| `motion/03-creativa/` | | | ○ | | | | | | |
+| `motion/03-creativa/creativa.md` | | | ○ | | | | | | |
+| `motion/03-creativa/` (resto del estrato) | | | · | | | | | | |
 | `motion/03-creativa/personalidad.md` | | | ○ | | | | | | ○ |
 | `motion/03-creativa/lenguaje-de-marca.md` | | | ○ | | | | | | ○ |
-| `motion/04-teoria/` | | | ○ | | | | | | |
+| `motion/04-teoria/teoria.md` | | | ○ | | | | | | |
+| `motion/04-teoria/` (principios, easing, springs, timing) | | | · | | | | | | |
 | `motion/05-tipografia/tipografia-cinetica.md` | | | ○ | | | | | | |
 | `motion/06-sistema/` | | | · | | | | | | |
 | `motion/06-sistema/escala.md` | | | · | ○ | ○ | | | | |
 | `motion/07-accesibilidad/accesibilidad.md` | | ○ | ○ | | | ○ | ○ | | |
-| `motion/08-ejecucion/css/` | | | ○ | | | · | | | |
+| `motion/08-ejecucion/css/css.md` | | | ○ | | | · | | | |
+| `motion/08-ejecucion/css/` (recetas, generador) | | | · | | | · | | | |
 | `motion/08-ejecucion/js/` | | | ◐ | | | | | | |
 | `motion/08-ejecucion/gsap/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | |
 | `motion/08-ejecucion/gsap/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | |
@@ -145,7 +149,7 @@ Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano 
 
 ## Dos notas de precedencia dentro del córtex
 
-**Motion.** `ui/motion-principles.md` es el suelo físico de la UI web — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion`, escrito en tokens `--semantic-*` — y **prevalece sobre todo el dominio `motion/` para código de `scss/`**. Una receta de GSAP o de CSS que rompa un principio físico está mal, no está siendo audaz. Dentro del dominio `motion/` manda su propia escalera (accesibilidad > propósito > sistema > dirección creativa > preferencia técnica), y `07-accesibilidad/` va delante de cualquier patrón. CREATIVE carga el suelo siempre, los estratos de conocimiento cuando algo se mueve y la capa GSAP solo cuando hay librería, en ese orden y a propósito.
+**Motion.** `ui/motion-principles.md` es el suelo físico de la UI web — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion`, escrito en tokens `--semantic-*` — y **prevalece sobre todo el dominio `motion/` para código de `scss/`**. Una receta de GSAP o de CSS que rompa un principio físico está mal, no está siendo audaz. Dentro del dominio `motion/` manda su propia escalera (accesibilidad > propósito > sistema > dirección creativa > preferencia técnica), y `07-accesibilidad/` va delante de cualquier patrón. CREATIVE carga el suelo siempre, el módulo de entrada de cada estrato cuando algo se mueve (y el resto del estrato solo si ese módulo lo pide) y la capa GSAP solo cuando hay librería, en ese orden y a propósito. Así el techo pasa de unos 130 KB de córtex a unos 83 KB, y un encargo que solo toca uno o dos estratos carga bastante menos.
 
 **Prestigio.** `branding/perception-of-prestige.rules.md` trae 18 reglas con su propio formato de informe. Cuando AUDIT las usa, lo que encuentra es **asesor**: no lleva número R, no aparece en la capa 1 del informe y no convierte por sí solo un PASS en FAIL. Mezclar una recomendación de percepción con una violación de contrato devalúa las dos.
 
