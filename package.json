@@ -6,7 +6,8 @@
   "exports": {
     ".": "./index.js",
     "./package.json": "./package.json",
-    "./themes/*.css": "./css/styles-theme-*.css",
+    "./themes/*.css": "./dist/*.full.min.css",
+    "./bundles/*": "./dist/*",
     "./css/*": "./css/*",
     "./scss/*": "./scss/*",
     "./tokens.json": "./tokens.json",
@@ -21,6 +22,7 @@
   "files": [
     "index.js",
     "css/*.css",
+    "dist/",
     "scss/",
     "fonts/",
     "scripts/",
@@ -57,6 +59,7 @@
     "start": "npm run watch",
     "build": "npm run build:css",
     "build:css": "sass scss:css --style=expanded --no-source-map && npm run postcss && npm run build:tokens",
+    "build:dist": "node scripts/build-dist.js",
     "watch": "sass --watch scss:css --style=expanded --no-source-map",
     "postcss": "postcss css/*.css --replace --no-map",
     "lint": "stylelint \"scss/**/*.scss\" --config .stylelintrc.json",
@@ -92,7 +95,8 @@
     "check:setups": "node scripts/check-setups.js",
     "check:modo-claro": "node scripts/check-modo-claro.js",
     "check:contraste": "node scripts/check-contraste.js",
-    "check:conocimiento": "node scripts/check-conocimiento.js"
+    "check:conocimiento": "node scripts/check-conocimiento.js",
+    "prepare": "node scripts/build-dist.js --quiet"
   },
   "keywords": [
     "design-system",

@@ -113,7 +113,7 @@ for (const [nombre, destino] of Object.entries(pkg.bin || {})) {
 // aviso, y el guardián concluía «lo que el paquete promete es lo que el paquete
 // entrega» con 35 url() a fuentes que no existían en cinco temas.
 
-const hojas = manifiesto.files.map((f) => f.path).filter((p) => /^css\/[^/]+\.css$/.test(p));
+const hojas = manifiesto.files.map((f) => f.path).filter((p) => /^(css|dist)\/[^/]+\.css$/.test(p));
 const referencias = new Map(); // ruta relativa al paquete → hojas que la citan
 
 for (const hoja of hojas) {

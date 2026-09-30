@@ -96,7 +96,8 @@ version it has installed — not against whatever is on `main` today.
 | Subpath | What it is |
 | ------- | ---------- |
 | `syx-design-system` | Node API (the queries above, same surface as the MCP server) + `paths` to every artifact |
-| `syx-design-system/themes/<theme>.css` | Compiled CSS for one theme |
+| `syx-design-system/themes/<theme>.css` | One theme, the whole system, minified, without SYX's own site layer (`dist/<theme>.full.min.css`) |
+| `syx-design-system/bundles/<theme>.core.min.css` | The leaner production bundle for one theme. Other bundles (app, blog, marketing) compile from `scss/themes/<theme>/` |
 | `syx-design-system/scss/...` | SCSS source, to compile your own build |
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
 | `syx-design-system/tokens.json`, `/component-registry.json` | Registries |
