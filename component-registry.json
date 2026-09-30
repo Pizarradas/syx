@@ -837,6 +837,49 @@
   ],
   "molecules": [
     {
+      "name": "alert",
+      "layer": "molecule",
+      "file": "scss/molecules/_alert.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_alerts.scss"
+      ],
+      "classes": [
+        "mol-alert"
+      ],
+      "modifiers": [
+        "mol-alert--error",
+        "mol-alert--info",
+        "mol-alert--success",
+        "mol-alert--warning"
+      ],
+      "elements": [
+        "mol-alert__body",
+        "mol-alert__title"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-alert-accent-width",
+        "--component-alert-bg",
+        "--component-alert-border-radius",
+        "--component-alert-color",
+        "--component-alert-error-accent",
+        "--component-alert-error-title-color",
+        "--component-alert-gap",
+        "--component-alert-info-accent",
+        "--component-alert-info-title-color",
+        "--component-alert-padding-block",
+        "--component-alert-padding-inline",
+        "--component-alert-success-accent",
+        "--component-alert-success-title-color",
+        "--component-alert-title-font-weight",
+        "--component-alert-warning-accent",
+        "--component-alert-warning-title-color"
+      ],
+      "description": "[scope: generic] A status message inside the page flow: --info, --success, --warning, --error. The state colours the accent rule and the title (state-*-text, measured at 4.5:1 on its background); the body stays in primary text. Use role=\"status\" for information and role=\"alert\" only for errors that need attention now; the role must be in the DOM before the text arrives.",
+      "usage": "<div class=\"mol-alert mol-alert--warning\" role=\"status\"><p class=\"mol-alert__title\">Your plan expires in 3 days</p><p class=\"mol-alert__body\">Renew it to keep your history.</p></div>"
+    },
+    {
       "name": "btn-group",
       "layer": "molecule",
       "file": "scss/molecules/_btn-group.scss",
@@ -898,6 +941,77 @@
       ],
       "description": "[scope: domain-reusable] A code block with a header that judges it: --ok for the correct way, --ko for the rejected one, --neutral for a plain sample. Built for teaching a rule by showing both sides, so a lone --neutral snippet is usually just atom-code. The label has to state the verdict in words — the colour is not the message.",
       "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\"><code>color: var(--semantic-color-text-primary);</code></pre></div>"
+    },
+    {
+      "name": "dialog",
+      "layer": "molecule",
+      "file": "scss/molecules/_dialog.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_dialogs.scss"
+      ],
+      "classes": [
+        "mol-dialog"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-dialog__body",
+        "mol-dialog__footer",
+        "mol-dialog__inner",
+        "mol-dialog__title"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-dialog-backdrop",
+        "--component-dialog-bg",
+        "--component-dialog-border-color",
+        "--component-dialog-border-radius",
+        "--component-dialog-border-width",
+        "--component-dialog-color",
+        "--component-dialog-duration",
+        "--component-dialog-easing",
+        "--component-dialog-gap",
+        "--component-dialog-max-width",
+        "--component-dialog-padding",
+        "--component-dialog-shadow",
+        "--component-dialog-title-font-size",
+        "--component-dialog-title-line-height"
+      ],
+      "description": "[scope: generic] A modal on the native <dialog>: open it with showModal() so the browser provides the top layer, focus trapping, Escape and an inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=\"alertdialog\" and autofocus the cancel button.",
+      "usage": "<dialog class=\"mol-dialog\" aria-labelledby=\"dlg-title\" open><form method=\"dialog\" class=\"mol-dialog__inner\"><h2 class=\"mol-dialog__title\" id=\"dlg-title\">Delete “Report”?</h2><p class=\"mol-dialog__body\">Files and history will be lost.</p><div class=\"mol-dialog__footer\"><button class=\"atom-btn\" value=\"cancel\" autofocus>Cancel</button><button class=\"atom-btn atom-btn--primary atom-btn--filled\" value=\"ok\">Delete</button></div></form></dialog>"
+    },
+    {
+      "name": "disclosure",
+      "layer": "molecule",
+      "file": "scss/molecules/_disclosure.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_disclosures.scss"
+      ],
+      "classes": [
+        "mol-disclosure"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-disclosure__content",
+        "mol-disclosure__summary"
+      ],
+      "states": [
+        ":focus-visible"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-disclosure-border-color",
+        "--component-disclosure-border-width",
+        "--component-disclosure-content-color",
+        "--component-disclosure-content-padding-block-end",
+        "--component-disclosure-duration",
+        "--component-disclosure-marker-size",
+        "--component-disclosure-summary-color",
+        "--component-disclosure-summary-font-weight",
+        "--component-disclosure-summary-padding-block"
+      ],
+      "description": "[scope: generic] Show and hide on native <details>/<summary>: keyboard and expanded state come from the browser. Several with the same name=\"\" form an exclusive accordion. Never replace <summary> with a <div>.",
+      "usage": "<details class=\"mol-disclosure\" name=\"faq\"><summary class=\"mol-disclosure__summary\">Can I change plans?</summary><div class=\"mol-disclosure__content\">Yes, whenever you want.</div></details>"
     },
     {
       "name": "feature-card",
@@ -1022,6 +1136,44 @@
       ],
       "description": "[scope: system-reusable] Row of labels or pills sharing one gap, wrapping when it must. Use it for a tag list or a set of markers on one line. .cont-set-label is a deprecated alias.",
       "usage": "<div class=\"mol-label-group\"><span class=\"atom-pill atom-pill--neutral\">SCSS</span><span class=\"atom-pill atom-pill--neutral\">Tokens</span></div>"
+    },
+    {
+      "name": "tabs",
+      "layer": "molecule",
+      "file": "scss/molecules/_tabs.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_tabs.scss"
+      ],
+      "classes": [
+        "mol-tabs"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-tabs__list",
+        "mol-tabs__panel",
+        "mol-tabs__tab"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-tabs-border-color",
+        "--component-tabs-border-width",
+        "--component-tabs-gap",
+        "--component-tabs-indicator-color",
+        "--component-tabs-indicator-width",
+        "--component-tabs-panel-padding-block",
+        "--component-tabs-tab-color",
+        "--component-tabs-tab-color-hover",
+        "--component-tabs-tab-color-selected",
+        "--component-tabs-tab-font-weight",
+        "--component-tabs-tab-padding-block",
+        "--component-tabs-tab-padding-inline"
+      ],
+      "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Keyboard (arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free; without it every panel stays in the document.",
+      "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>"
     }
   ],
   "organisms": [

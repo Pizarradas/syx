@@ -42,6 +42,10 @@
   @include mol-form-field($theme);      // Label + input + hint
   @include mol-form-field-set($theme);  // Grouped fields
   @include mol-label-group($theme);     // Label clusters
+  @include mol-alert($theme);           // Status messages
+  @include mol-dialog($theme);          // Modal dialogs
+  @include mol-disclosure($theme);      // Show / hide, accordions
+  @include mol-tabs($theme);            // Tabbed panels
 
   // ORGANISMS
   // ================================================

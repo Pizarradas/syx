@@ -1,0 +1,88 @@
+// MOLECULE: DIALOG
+// ===============================================
+// Sobre el <dialog> nativo. showModal() lo pone en la capa superior,
+// atrapa el foco, cierra con Escape y hace inerte el resto de la
+// página: nada de eso lo reimplementa el sistema.
+//
+// <dialog class="mol-dialog" aria-labelledby="d-t" aria-describedby="d-d">
+//   <form method="dialog" class="mol-dialog__inner">
+//     <h2 class="mol-dialog__title" id="d-t">¿Borrar «Informe»?</h2>
+//     <p class="mol-dialog__body" id="d-d">Se pierden los archivos y el historial.</p>
+//     <div class="mol-dialog__footer">
+//       <button class="atom-btn" value="cancel" autofocus>Cancelar</button>
+//       <button class="atom-btn atom-btn--primary atom-btn--filled" value="ok">Borrar</button>
+//     </div>
+//   </form>
+// </dialog>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · Abrir con dialog.showModal(), nunca con el atributo open.
+// · Confirmación destructiva: role="alertdialog" y autofocus en Cancelar.
+// · Al cerrar, el foco vuelve solo al elemento que lo abrió.
+// (Auditoría 2026-09 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-dialog($theme: null) {
+  @layer syx.molecules {
+    .mol-dialog {
+      width: min(100% - 2 * var(--component-dialog-padding), var(--component-dialog-max-width));
+      max-height: calc(100dvh - 2 * var(--component-dialog-padding));
+      padding: 0;
+      border: var(--component-dialog-border-width) solid var(--component-dialog-border-color);
+      border-radius: var(--component-dialog-border-radius);
+      background-color: var(--component-dialog-bg);
+      color: var(--component-dialog-color);
+      box-shadow: var(--component-dialog-shadow);
+      opacity: 0;
+      translate: 0 0.5rem;
+      @include transition(
+        opacity var(--component-dialog-duration) var(--component-dialog-easing),
+        translate var(--component-dialog-duration) var(--component-dialog-easing),
+        overlay var(--component-dialog-duration) allow-discrete,
+        display var(--component-dialog-duration) allow-discrete
+      );
+
+      &[open] {
+        opacity: 1;
+        translate: 0 0;
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 0.5rem;
+        }
+      }
+
+      &::backdrop {
+        background-color: var(--component-dialog-backdrop);
+      }
+
+      &__inner {
+        display: grid;
+        gap: var(--component-dialog-gap);
+        padding: var(--component-dialog-padding);
+      }
+
+      &__title {
+        margin: 0;
+        font-size: var(--component-dialog-title-font-size);
+        line-height: var(--component-dialog-title-line-height);
+      }
+
+      &__body {
+        margin: 0;
+      }
+
+      &__footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: var(--semantic-space-component-sm);
+      }
+
+      @media (forced-colors: active) {
+        border-color: CanvasText;
+      }
+    }
+  }
+}

@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 517,
-      "omitidas": 281,
+      "variables": 545,
+      "omitidas": 304,
       "fueraDeAlcance": {
         "primitive": 243,
         "icon": 17,
@@ -21,7 +21,7 @@
         "layout": 12,
         "theme": 4
       },
-      "componentes": 26
+      "componentes": 30
     }
   },
   "collections": [
@@ -1587,6 +1587,162 @@
         "dark"
       ],
       "variables": [
+        {
+          "name": "component/alert/accent/width",
+          "type": "FLOAT",
+          "token": "--component-alert-accent-width",
+          "valuesByMode": {
+            "light": 4,
+            "dark": 4
+          }
+        },
+        {
+          "name": "component/alert/bg",
+          "type": "COLOR",
+          "token": "--component-alert-bg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8788,
+              "g": 0.924,
+              "b": 0.8776,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#e0ece0",
+            "dark": "#333333"
+          }
+        },
+        {
+          "name": "component/alert/color",
+          "type": "COLOR",
+          "token": "--component-alert-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141d17",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/alert/error/accent",
+          "type": "COLOR",
+          "token": "--component-alert-error-accent",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d7464a",
+            "dark": "#d7464a"
+          }
+        },
+        {
+          "name": "component/alert/info/accent",
+          "type": "COLOR",
+          "token": "--component-alert-info-accent",
+          "valuesByMode": {
+            "light": {
+              "r": 0.2946,
+              "g": 0.3738,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2946,
+              "g": 0.3738,
+              "b": 1,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#4b5fff",
+            "dark": "#4b5fff"
+          }
+        },
+        {
+          "name": "component/alert/success/accent",
+          "type": "COLOR",
+          "token": "--component-alert-success-accent",
+          "valuesByMode": {
+            "light": {
+              "r": 0.2052,
+              "g": 0.5894,
+              "b": 0.3216,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2052,
+              "g": 0.5894,
+              "b": 0.3216,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#349652",
+            "dark": "#349652"
+          }
+        },
+        {
+          "name": "component/alert/title/font/weight",
+          "type": "FLOAT",
+          "token": "--component-alert-title-font-weight",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
+          }
+        },
+        {
+          "name": "component/alert/warning/accent",
+          "type": "COLOR",
+          "token": "--component-alert-warning-accent",
+          "valuesByMode": {
+            "light": {
+              "r": 0.6336,
+              "g": 0.4805,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6336,
+              "g": 0.4805,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#a27b00",
+            "dark": "#a27b00"
+          }
+        },
         {
           "name": "component/blockquote/bg",
           "type": "COLOR",
@@ -3713,6 +3869,198 @@
           "hexByMode": {
             "light": "#7db890",
             "dark": "#666666"
+          }
+        },
+        {
+          "name": "component/dialog/bg",
+          "type": "COLOR",
+          "token": "--component-dialog-bg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.9411,
+              "g": 0.9709,
+              "b": 0.9405,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#f0f8f0",
+            "dark": "#1b1b1b"
+          }
+        },
+        {
+          "name": "component/dialog/border/color",
+          "type": "COLOR",
+          "token": "--component-dialog-border-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8068,
+              "g": 0.9216,
+              "b": 0.8385,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#ceebd6",
+            "dark": "#333333"
+          }
+        },
+        {
+          "name": "component/dialog/border/width",
+          "type": "FLOAT",
+          "token": "--component-dialog-border-width",
+          "valuesByMode": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "name": "component/dialog/color",
+          "type": "COLOR",
+          "token": "--component-dialog-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141d17",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/dialog/easing",
+          "type": "STRING",
+          "token": "--component-dialog-easing",
+          "valuesByMode": {
+            "light": "cubic-bezier(0.16,1,0.3,1)",
+            "dark": "cubic-bezier(0.16,1,0.3,1)"
+          }
+        },
+        {
+          "name": "component/dialog/max/width",
+          "type": "FLOAT",
+          "token": "--component-dialog-max-width",
+          "valuesByMode": {
+            "light": 512,
+            "dark": 512
+          }
+        },
+        {
+          "name": "component/dialog/title/line/height",
+          "type": "FLOAT",
+          "token": "--component-dialog-title-line-height",
+          "valuesByMode": {
+            "light": 1.2,
+            "dark": 1.2
+          }
+        },
+        {
+          "name": "component/disclosure/border/color",
+          "type": "COLOR",
+          "token": "--component-disclosure-border-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.6816,
+              "g": 0.8122,
+              "b": 0.7212,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#aecfb8",
+            "dark": "#4d4d4d"
+          }
+        },
+        {
+          "name": "component/disclosure/border/width",
+          "type": "FLOAT",
+          "token": "--component-disclosure-border-width",
+          "valuesByMode": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "name": "component/disclosure/content/color",
+          "type": "COLOR",
+          "token": "--component-disclosure-content-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.1764,
+              "g": 0.3536,
+              "b": 0.2395,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#2d5a3d",
+            "dark": "#bebebe"
+          }
+        },
+        {
+          "name": "component/disclosure/summary/color",
+          "type": "COLOR",
+          "token": "--component-disclosure-summary-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141d17",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/disclosure/summary/font/weight",
+          "type": "FLOAT",
+          "token": "--component-disclosure-summary-font-weight",
+          "valuesByMode": {
+            "light": 500,
+            "dark": 500
           }
         },
         {
@@ -7912,6 +8260,148 @@
           "valuesByMode": {
             "light": "\"Google-DM-Mono--medium\",\"Courier New\",monospace",
             "dark": "\"Google-DM-Mono--medium\",\"Courier New\",monospace"
+          }
+        },
+        {
+          "name": "component/tabs/border/color",
+          "type": "COLOR",
+          "token": "--component-tabs-border-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.6816,
+              "g": 0.8122,
+              "b": 0.7212,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#aecfb8",
+            "dark": "#4d4d4d"
+          }
+        },
+        {
+          "name": "component/tabs/border/width",
+          "type": "FLOAT",
+          "token": "--component-tabs-border-width",
+          "valuesByMode": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "name": "component/tabs/indicator/color",
+          "type": "COLOR",
+          "token": "--component-tabs-indicator-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0.6148,
+              "b": 0.2619,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.6148,
+              "b": 0.2619,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#009d43",
+            "dark": "#009d43"
+          }
+        },
+        {
+          "name": "component/tabs/indicator/width",
+          "type": "FLOAT",
+          "token": "--component-tabs-indicator-width",
+          "valuesByMode": {
+            "light": 4,
+            "dark": 4
+          }
+        },
+        {
+          "name": "component/tabs/tab/color",
+          "type": "COLOR",
+          "token": "--component-tabs-tab-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0.1764,
+              "g": 0.3536,
+              "b": 0.2395,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#2d5a3d",
+            "dark": "#bebebe"
+          }
+        },
+        {
+          "name": "component/tabs/tab/color/hover",
+          "type": "COLOR",
+          "token": "--component-tabs-tab-color-hover",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141d17",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/tabs/tab/color/selected",
+          "type": "COLOR",
+          "token": "--component-tabs-tab-color-selected",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141d17",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/tabs/tab/font/weight",
+          "type": "FLOAT",
+          "token": "--component-tabs-tab-font-weight",
+          "valuesByMode": {
+            "light": 500,
+            "dark": 500
           }
         },
         {
@@ -13179,6 +13669,141 @@
       "sinTraducir": []
     },
     {
+      "component": "alert",
+      "layer": "molecule",
+      "figmaName": "mol/alert",
+      "clases": {
+        "base": [
+          "mol-alert"
+        ],
+        "modificadores": [
+          "mol-alert--error",
+          "mol-alert--info",
+          "mol-alert--success",
+          "mol-alert--warning"
+        ],
+        "estados": []
+      },
+      "composedOf": [],
+      "variantes": {
+        "base": 3
+      },
+      "propiedades": [
+        {
+          "token": "--component-alert-accent-width",
+          "variable": "component/alert/accent/width",
+          "propiedad": "width",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 4,
+            "dark": 4
+          }
+        },
+        {
+          "token": "--component-alert-bg",
+          "variable": "component/alert/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.8788,
+              "g": 0.924,
+              "b": 0.8776,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-alert-color",
+          "variable": "component/alert/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        }
+      ],
+      "sinPropiedad": [
+        {
+          "token": "--component-alert-error-accent",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        },
+        {
+          "token": "--component-alert-info-accent",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        },
+        {
+          "token": "--component-alert-success-accent",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        },
+        {
+          "token": "--component-alert-title-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
+        },
+        {
+          "token": "--component-alert-warning-accent",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        }
+      ],
+      "sinTraducir": [
+        {
+          "token": "--component-alert-border-radius",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-error-title-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-info-title-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-padding-block",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-padding-inline",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-success-title-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-alert-warning-title-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        }
+      ]
+    },
+    {
       "component": "btn-group",
       "layer": "molecule",
       "figmaName": "mol/btn-group",
@@ -13491,6 +14116,284 @@
         {
           "token": "--component-code-snippet-shadow",
           "motivo": "sombra: en Figma es un efecto, no una variable"
+        }
+      ]
+    },
+    {
+      "component": "dialog",
+      "layer": "molecule",
+      "figmaName": "mol/dialog",
+      "clases": {
+        "base": [
+          "mol-dialog"
+        ],
+        "modificadores": [],
+        "estados": []
+      },
+      "composedOf": [],
+      "variantes": {
+        "base": 6
+      },
+      "propiedades": [
+        {
+          "token": "--component-dialog-bg",
+          "variable": "component/dialog/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.9411,
+              "g": 0.9709,
+              "b": 0.9405,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-dialog-border-color",
+          "variable": "component/dialog/border/color",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.8068,
+              "g": 0.9216,
+              "b": 0.8385,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-dialog-border-width",
+          "variable": "component/dialog/border/width",
+          "propiedad": "strokeWeight",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "token": "--component-dialog-color",
+          "variable": "component/dialog/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-dialog-max-width",
+          "variable": "component/dialog/max/width",
+          "propiedad": "width",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 512,
+            "dark": 512
+          }
+        },
+        {
+          "token": "--component-dialog-title-line-height",
+          "variable": "component/dialog/title/line/height",
+          "propiedad": "lineHeight",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 1.2,
+            "dark": 1.2
+          }
+        }
+      ],
+      "sinPropiedad": [
+        {
+          "token": "--component-dialog-easing",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        }
+      ],
+      "sinTraducir": [
+        {
+          "token": "--component-dialog-backdrop",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-dialog-border-radius",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-dialog-duration",
+          "motivo": "duración: Figma no guarda tiempo en variables"
+        },
+        {
+          "token": "--component-dialog-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-dialog-padding",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-dialog-shadow",
+          "motivo": "sombra: en Figma es un efecto, no una variable"
+        },
+        {
+          "token": "--component-dialog-title-font-size",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        }
+      ]
+    },
+    {
+      "component": "disclosure",
+      "layer": "molecule",
+      "figmaName": "mol/disclosure",
+      "clases": {
+        "base": [
+          "mol-disclosure"
+        ],
+        "modificadores": [],
+        "estados": [
+          ":focus-visible"
+        ]
+      },
+      "composedOf": [],
+      "variantes": {
+        "base": 4
+      },
+      "propiedades": [
+        {
+          "token": "--component-disclosure-border-color",
+          "variable": "component/disclosure/border/color",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.6816,
+              "g": 0.8122,
+              "b": 0.7212,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-disclosure-border-width",
+          "variable": "component/disclosure/border/width",
+          "propiedad": "strokeWeight",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "token": "--component-disclosure-content-color",
+          "variable": "component/disclosure/content/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.1764,
+              "g": 0.3536,
+              "b": 0.2395,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-disclosure-summary-color",
+          "variable": "component/disclosure/summary/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        }
+      ],
+      "sinPropiedad": [
+        {
+          "token": "--component-disclosure-summary-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
+        }
+      ],
+      "sinTraducir": [
+        {
+          "token": "--component-disclosure-content-padding-block-end",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-disclosure-duration",
+          "motivo": "duración: Figma no guarda tiempo en variables"
+        },
+        {
+          "token": "--component-disclosure-marker-size",
+          "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        },
+        {
+          "token": "--component-disclosure-summary-padding-block",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         }
       ]
     },
@@ -13860,6 +14763,185 @@
       "sinTraducir": []
     },
     {
+      "component": "tabs",
+      "layer": "molecule",
+      "figmaName": "mol/tabs",
+      "clases": {
+        "base": [
+          "mol-tabs"
+        ],
+        "modificadores": [],
+        "estados": [
+          ":focus-visible",
+          ":hover"
+        ]
+      },
+      "composedOf": [],
+      "variantes": {
+        "base": 7
+      },
+      "propiedades": [
+        {
+          "token": "--component-tabs-border-color",
+          "variable": "component/tabs/border/color",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.6816,
+              "g": 0.8122,
+              "b": 0.7212,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-tabs-border-width",
+          "variable": "component/tabs/border/width",
+          "propiedad": "strokeWeight",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "token": "--component-tabs-indicator-color",
+          "variable": "component/tabs/indicator/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0.6148,
+              "b": 0.2619,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.6148,
+              "b": 0.2619,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-tabs-indicator-width",
+          "variable": "component/tabs/indicator/width",
+          "propiedad": "width",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 4,
+            "dark": 4
+          }
+        },
+        {
+          "token": "--component-tabs-tab-color",
+          "variable": "component/tabs/tab/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.1764,
+              "g": 0.3536,
+              "b": 0.2395,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-tabs-tab-color-hover",
+          "variable": "component/tabs/tab/color/hover",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "hover",
+          "valores": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-tabs-tab-color-selected",
+          "variable": "component/tabs/tab/color/selected",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "selected",
+          "valores": {
+            "light": {
+              "r": 0.0779,
+              "g": 0.1144,
+              "b": 0.0904,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          }
+        }
+      ],
+      "sinPropiedad": [
+        {
+          "token": "--component-tabs-tab-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
+        }
+      ],
+      "sinTraducir": [
+        {
+          "token": "--component-tabs-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-tabs-panel-padding-block",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-tabs-tab-padding-block",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-tabs-tab-padding-inline",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        }
+      ]
+    },
+    {
       "component": "site-header",
       "layer": "organism",
       "figmaName": "org/site-header",
@@ -13924,6 +15006,38 @@
     }
   ],
   "omitidos": [
+    {
+      "token": "--component-alert-border-radius",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-error-title-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-gap",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-info-title-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-padding-block",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-padding-inline",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-success-title-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-alert-warning-title-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
     {
       "token": "--component-blockquote-border-radius",
       "motivo": "valor no traducible a una variable de Figma"
@@ -14134,6 +15248,50 @@
     },
     {
       "token": "--component-cta-sub-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-dialog-backdrop",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-dialog-border-radius",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-dialog-duration",
+      "motivo": "duración: Figma no guarda tiempo en variables"
+    },
+    {
+      "token": "--component-dialog-gap",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-dialog-padding",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-dialog-shadow",
+      "motivo": "sombra: en Figma es un efecto, no una variable"
+    },
+    {
+      "token": "--component-dialog-title-font-size",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-disclosure-content-padding-block-end",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-disclosure-duration",
+      "motivo": "duración: Figma no guarda tiempo en variables"
+    },
+    {
+      "token": "--component-disclosure-marker-size",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+    },
+    {
+      "token": "--component-disclosure-summary-padding-block",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -14638,6 +15796,22 @@
     },
     {
       "token": "--component-table-th-line-height",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-tabs-gap",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-tabs-panel-padding-block",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-tabs-tab-padding-block",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-tabs-tab-padding-inline",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {

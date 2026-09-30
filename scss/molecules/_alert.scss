@@ -1,0 +1,70 @@
+// MOLECULE: ALERT
+// ===============================================
+// Un mensaje de estado dentro del flujo de la página.
+//
+// <div class="mol-alert mol-alert--warning" role="status">
+//   <p class="mol-alert__title">Tu plan caduca en 3 días</p>
+//   <p class="mol-alert__body">Renuévalo para no perder el historial.</p>
+// </div>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · role="status" para lo informativo (se anuncia sin interrumpir);
+//   role="alert" solo para errores que exigen atención inmediata.
+//   El rol tiene que estar en el DOM antes de que llegue el texto.
+// · El estado nunca va solo en el color: el título lo dice.
+// (Auditoría 2026-09 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-alert($theme: null) {
+  @layer syx.molecules {
+    .mol-alert {
+      display: grid;
+      gap: var(--component-alert-gap);
+      padding: var(--component-alert-padding-block) var(--component-alert-padding-inline);
+      border-inline-start: var(--component-alert-accent-width) solid var(--component-alert-info-accent);
+      border-radius: var(--component-alert-border-radius);
+      background-color: var(--component-alert-bg);
+      color: var(--component-alert-color);
+
+      &__title {
+        margin: 0;
+        font-weight: var(--component-alert-title-font-weight);
+        color: var(--component-alert-info-title-color);
+      }
+
+      &__body {
+        margin: 0;
+      }
+
+      &--info {
+        border-inline-start-color: var(--component-alert-info-accent);
+
+        .mol-alert__title { color: var(--component-alert-info-title-color); }
+      }
+
+      &--success {
+        border-inline-start-color: var(--component-alert-success-accent);
+
+        .mol-alert__title { color: var(--component-alert-success-title-color); }
+      }
+
+      &--warning {
+        border-inline-start-color: var(--component-alert-warning-accent);
+
+        .mol-alert__title { color: var(--component-alert-warning-title-color); }
+      }
+
+      &--error {
+        border-inline-start-color: var(--component-alert-error-accent);
+
+        .mol-alert__title { color: var(--component-alert-error-title-color); }
+      }
+
+      // Alto contraste: el fondo desaparece; queda un borde completo.
+      @media (forced-colors: active) {
+        border: var(--component-alert-accent-width) solid CanvasText;
+      }
+    }
+  }
+}

@@ -196,7 +196,7 @@ npm run check:figma     # fails if those files are stale
 ```
 
 Each file carries the whole library for one theme: two **variable collections**
-(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 26
+(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 30
 components with the node property each token maps to.
 
 | In SYX | In Figma |

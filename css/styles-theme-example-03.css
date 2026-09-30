@@ -1116,6 +1116,69 @@
 }
 
 :root {
+  --component-alert-bg: var(--semantic-color-bg-secondary);
+  --component-alert-color: var(--semantic-color-text-primary);
+  --component-alert-gap: var(--semantic-space-component-xs);
+  --component-alert-padding-block: var(--semantic-space-component-md);
+  --component-alert-padding-inline: var(--semantic-space-component-lg);
+  --component-alert-border-radius: var(--semantic-border-radius-default);
+  --component-alert-accent-width: var(--semantic-border-width-thick);
+  --component-alert-title-font-weight: var(--semantic-font-weight-bold);
+  --component-alert-info-accent: var(--semantic-color-state-info);
+  --component-alert-info-title-color: var(--semantic-color-state-info-text);
+  --component-alert-success-accent: var(--semantic-color-state-success);
+  --component-alert-success-title-color: var(--semantic-color-state-success-text);
+  --component-alert-warning-accent: var(--semantic-color-state-warning);
+  --component-alert-warning-title-color: var(--semantic-color-state-warning-text);
+  --component-alert-error-accent: var(--semantic-color-state-error);
+  --component-alert-error-title-color: var(--semantic-color-state-error-text);
+}
+
+:root {
+  --component-dialog-bg: var(--semantic-color-bg-primary);
+  --component-dialog-color: var(--semantic-color-text-primary);
+  --component-dialog-border-width: var(--semantic-border-width-thin);
+  --component-dialog-border-color: var(--semantic-color-border-subtle);
+  --component-dialog-border-radius: var(--semantic-border-radius-lg);
+  --component-dialog-shadow: var(--semantic-shadow-lg);
+  --component-dialog-padding: var(--semantic-space-component-lg);
+  --component-dialog-gap: var(--semantic-space-stack-md);
+  --component-dialog-max-width: 32rem;
+  --component-dialog-title-font-size: var(--semantic-font-size-h5);
+  --component-dialog-title-line-height: var(--semantic-line-height-heading);
+  --component-dialog-backdrop: color-mix(in srgb, var(--semantic-color-bg-inverse) 55%, transparent);
+  --component-dialog-duration: var(--semantic-duration-base);
+  --component-dialog-easing: var(--semantic-easing-out);
+}
+
+:root {
+  --component-tabs-gap: var(--semantic-space-component-xs);
+  --component-tabs-border-width: var(--semantic-border-width-thin);
+  --component-tabs-border-color: var(--semantic-color-border-default);
+  --component-tabs-tab-padding-block: var(--semantic-space-component-sm);
+  --component-tabs-tab-padding-inline: var(--semantic-space-component-md);
+  --component-tabs-tab-color: var(--semantic-color-text-secondary);
+  --component-tabs-tab-color-hover: var(--semantic-color-text-primary);
+  --component-tabs-tab-color-selected: var(--semantic-color-text-primary);
+  --component-tabs-tab-font-weight: var(--semantic-font-weight-medium);
+  --component-tabs-indicator-width: var(--semantic-border-width-thick);
+  --component-tabs-indicator-color: var(--semantic-color-primary);
+  --component-tabs-panel-padding-block: var(--semantic-space-component-lg);
+}
+
+:root {
+  --component-disclosure-border-width: var(--semantic-border-width-thin);
+  --component-disclosure-border-color: var(--semantic-color-border-default);
+  --component-disclosure-summary-padding-block: var(--semantic-space-component-md);
+  --component-disclosure-summary-color: var(--semantic-color-text-primary);
+  --component-disclosure-summary-font-weight: var(--semantic-font-weight-medium);
+  --component-disclosure-marker-size: 0.5em;
+  --component-disclosure-content-padding-block-end: var(--semantic-space-component-md);
+  --component-disclosure-content-color: var(--semantic-color-text-secondary);
+  --component-disclosure-duration: var(--semantic-duration-fast);
+}
+
+:root {
   --semantic-color-bg-primary: var(--primitive-color-white);
   --semantic-color-bg-secondary: var(--primitive-color-gray-50);
   --semantic-color-bg-tertiary: var(--primitive-color-gray-100);
@@ -4262,6 +4325,205 @@
     gap: var(--component-label-group-gap, 0.5rem);
     align-items: center;
     flex-wrap: wrap;
+  }
+}
+@layer syx.molecules {
+  .mol-alert {
+    display: grid;
+    gap: var(--component-alert-gap);
+    padding: var(--component-alert-padding-block) var(--component-alert-padding-inline);
+    border-inline-start: var(--component-alert-accent-width) solid var(--component-alert-info-accent);
+    border-radius: var(--component-alert-border-radius);
+    background-color: var(--component-alert-bg);
+    color: var(--component-alert-color);
+  }
+  .mol-alert__title {
+    margin: 0;
+    font-weight: var(--component-alert-title-font-weight);
+    color: var(--component-alert-info-title-color);
+  }
+  .mol-alert__body {
+    margin: 0;
+  }
+  .mol-alert--info {
+    border-inline-start-color: var(--component-alert-info-accent);
+  }
+  .mol-alert--info .mol-alert__title {
+    color: var(--component-alert-info-title-color);
+  }
+  .mol-alert--success {
+    border-inline-start-color: var(--component-alert-success-accent);
+  }
+  .mol-alert--success .mol-alert__title {
+    color: var(--component-alert-success-title-color);
+  }
+  .mol-alert--warning {
+    border-inline-start-color: var(--component-alert-warning-accent);
+  }
+  .mol-alert--warning .mol-alert__title {
+    color: var(--component-alert-warning-title-color);
+  }
+  .mol-alert--error {
+    border-inline-start-color: var(--component-alert-error-accent);
+  }
+  .mol-alert--error .mol-alert__title {
+    color: var(--component-alert-error-title-color);
+  }
+  @media (forced-colors: active) {
+    .mol-alert {
+      border: var(--component-alert-accent-width) solid CanvasText;
+    }
+  }
+}
+@layer syx.molecules {
+  .mol-dialog {
+    width: min(100% - 2 * var(--component-dialog-padding), var(--component-dialog-max-width));
+    max-height: calc(100dvh - 2 * var(--component-dialog-padding));
+    padding: 0;
+    border: var(--component-dialog-border-width) solid var(--component-dialog-border-color);
+    border-radius: var(--component-dialog-border-radius);
+    background-color: var(--component-dialog-bg);
+    color: var(--component-dialog-color);
+    box-shadow: var(--component-dialog-shadow);
+    opacity: 0;
+    translate: 0 0.5rem;
+    transition: opacity var(--component-dialog-duration) var(--component-dialog-easing), translate var(--component-dialog-duration) var(--component-dialog-easing), overlay var(--component-dialog-duration) allow-discrete, display var(--component-dialog-duration) allow-discrete;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mol-dialog {
+      transition: none;
+    }
+  }
+  .mol-dialog[open] {
+    opacity: 1;
+    translate: 0 0;
+  }
+  @starting-style {
+    .mol-dialog[open] {
+      opacity: 0;
+      translate: 0 0.5rem;
+    }
+  }
+  .mol-dialog::backdrop {
+    background-color: var(--component-dialog-backdrop);
+  }
+  .mol-dialog__inner {
+    display: grid;
+    gap: var(--component-dialog-gap);
+    padding: var(--component-dialog-padding);
+  }
+  .mol-dialog__title {
+    margin: 0;
+    font-size: var(--component-dialog-title-font-size);
+    line-height: var(--component-dialog-title-line-height);
+  }
+  .mol-dialog__body {
+    margin: 0;
+  }
+  .mol-dialog__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--semantic-space-component-sm);
+  }
+  @media (forced-colors: active) {
+    .mol-dialog {
+      border-color: CanvasText;
+    }
+  }
+}
+@layer syx.molecules {
+  .mol-disclosure {
+    border-block-end: var(--component-disclosure-border-width) solid var(--component-disclosure-border-color);
+  }
+  .mol-disclosure__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--semantic-space-component-sm);
+    padding-block: var(--component-disclosure-summary-padding-block);
+    color: var(--component-disclosure-summary-color);
+    font-weight: var(--component-disclosure-summary-font-weight);
+    list-style: none;
+    cursor: pointer;
+  }
+  .mol-disclosure__summary::-webkit-details-marker {
+    display: none;
+  }
+  .mol-disclosure__summary::after {
+    content: "";
+    flex-shrink: 0;
+    height: var(--component-disclosure-marker-size);
+    width: var(--component-disclosure-marker-size);
+    border-inline-end: 0.125em solid currentColor;
+    border-block-end: 0.125em solid currentColor;
+    rotate: 45deg;
+    transition: rotate var(--component-disclosure-duration);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mol-disclosure__summary::after {
+      transition: none;
+    }
+  }
+  .mol-disclosure__summary:focus-visible {
+    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+    outline-offset: var(--semantic-focus-ring-offset);
+  }
+  .mol-disclosure[open] > .mol-disclosure__summary::after {
+    rotate: -135deg;
+  }
+  .mol-disclosure__content {
+    padding-block-end: var(--component-disclosure-content-padding-block-end);
+    color: var(--component-disclosure-content-color);
+  }
+}
+@layer syx.molecules {
+  .mol-tabs__list {
+    display: flex;
+    gap: var(--component-tabs-gap);
+    overflow-x: auto;
+    border-block-end: var(--component-tabs-border-width) solid var(--component-tabs-border-color);
+  }
+  .mol-tabs__tab {
+    padding: var(--component-tabs-tab-padding-block) var(--component-tabs-tab-padding-inline);
+    border: 0;
+    border-block-end: var(--component-tabs-indicator-width) solid transparent;
+    margin-block-end: calc(-1 * var(--component-tabs-border-width));
+    background: none;
+    color: var(--component-tabs-tab-color);
+    font: inherit;
+    font-weight: var(--component-tabs-tab-font-weight);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--semantic-duration-fast), border-color var(--semantic-duration-fast);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mol-tabs__tab {
+      transition: none;
+    }
+  }
+  .mol-tabs__tab:hover {
+    color: var(--component-tabs-tab-color-hover);
+  }
+  .mol-tabs__tab[aria-selected=true] {
+    border-block-end-color: var(--component-tabs-indicator-color);
+    color: var(--component-tabs-tab-color-selected);
+  }
+  .mol-tabs__tab:focus-visible {
+    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+    outline-offset: calc(-1 * var(--semantic-focus-ring-width));
+  }
+  @media (forced-colors: active) {
+    .mol-tabs__tab[aria-selected=true] {
+      border-block-end-color: Highlight;
+    }
+  }
+  .mol-tabs__panel {
+    padding-block: var(--component-tabs-panel-padding-block);
+  }
+  .mol-tabs__panel:focus-visible {
+    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
 }
 @layer syx.organisms {

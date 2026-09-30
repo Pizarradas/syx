@@ -1,0 +1,23 @@
+// COMPONENT TOKENS: DIALOGS
+// ================================================
+// mol-dialog · sobre el <dialog> nativo: capa superior, foco
+// atrapado y Escape los pone el navegador, no el sistema.
+// (Auditoría 2026-09 · acción 15)
+// ================================================
+
+:root {
+  --component-dialog-bg: var(--semantic-color-bg-primary);
+  --component-dialog-color: var(--semantic-color-text-primary);
+  --component-dialog-border-width: var(--semantic-border-width-thin);
+  --component-dialog-border-color: var(--semantic-color-border-subtle);
+  --component-dialog-border-radius: var(--semantic-border-radius-lg);
+  --component-dialog-shadow: var(--semantic-shadow-lg);
+  --component-dialog-padding: var(--semantic-space-component-lg);
+  --component-dialog-gap: var(--semantic-space-stack-md);
+  --component-dialog-max-width: 32rem;
+  --component-dialog-title-font-size: var(--semantic-font-size-h5);
+  --component-dialog-title-line-height: var(--semantic-line-height-heading);
+  --component-dialog-backdrop: color-mix(in srgb, var(--semantic-color-bg-inverse) 55%, transparent);
+  --component-dialog-duration: var(--semantic-duration-base);
+  --component-dialog-easing: var(--semantic-easing-out);
+}

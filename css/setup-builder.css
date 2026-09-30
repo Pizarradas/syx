@@ -1116,6 +1116,69 @@
 }
 
 :root {
+  --component-alert-bg: var(--semantic-color-bg-secondary);
+  --component-alert-color: var(--semantic-color-text-primary);
+  --component-alert-gap: var(--semantic-space-component-xs);
+  --component-alert-padding-block: var(--semantic-space-component-md);
+  --component-alert-padding-inline: var(--semantic-space-component-lg);
+  --component-alert-border-radius: var(--semantic-border-radius-default);
+  --component-alert-accent-width: var(--semantic-border-width-thick);
+  --component-alert-title-font-weight: var(--semantic-font-weight-bold);
+  --component-alert-info-accent: var(--semantic-color-state-info);
+  --component-alert-info-title-color: var(--semantic-color-state-info-text);
+  --component-alert-success-accent: var(--semantic-color-state-success);
+  --component-alert-success-title-color: var(--semantic-color-state-success-text);
+  --component-alert-warning-accent: var(--semantic-color-state-warning);
+  --component-alert-warning-title-color: var(--semantic-color-state-warning-text);
+  --component-alert-error-accent: var(--semantic-color-state-error);
+  --component-alert-error-title-color: var(--semantic-color-state-error-text);
+}
+
+:root {
+  --component-dialog-bg: var(--semantic-color-bg-primary);
+  --component-dialog-color: var(--semantic-color-text-primary);
+  --component-dialog-border-width: var(--semantic-border-width-thin);
+  --component-dialog-border-color: var(--semantic-color-border-subtle);
+  --component-dialog-border-radius: var(--semantic-border-radius-lg);
+  --component-dialog-shadow: var(--semantic-shadow-lg);
+  --component-dialog-padding: var(--semantic-space-component-lg);
+  --component-dialog-gap: var(--semantic-space-stack-md);
+  --component-dialog-max-width: 32rem;
+  --component-dialog-title-font-size: var(--semantic-font-size-h5);
+  --component-dialog-title-line-height: var(--semantic-line-height-heading);
+  --component-dialog-backdrop: color-mix(in srgb, var(--semantic-color-bg-inverse) 55%, transparent);
+  --component-dialog-duration: var(--semantic-duration-base);
+  --component-dialog-easing: var(--semantic-easing-out);
+}
+
+:root {
+  --component-tabs-gap: var(--semantic-space-component-xs);
+  --component-tabs-border-width: var(--semantic-border-width-thin);
+  --component-tabs-border-color: var(--semantic-color-border-default);
+  --component-tabs-tab-padding-block: var(--semantic-space-component-sm);
+  --component-tabs-tab-padding-inline: var(--semantic-space-component-md);
+  --component-tabs-tab-color: var(--semantic-color-text-secondary);
+  --component-tabs-tab-color-hover: var(--semantic-color-text-primary);
+  --component-tabs-tab-color-selected: var(--semantic-color-text-primary);
+  --component-tabs-tab-font-weight: var(--semantic-font-weight-medium);
+  --component-tabs-indicator-width: var(--semantic-border-width-thick);
+  --component-tabs-indicator-color: var(--semantic-color-primary);
+  --component-tabs-panel-padding-block: var(--semantic-space-component-lg);
+}
+
+:root {
+  --component-disclosure-border-width: var(--semantic-border-width-thin);
+  --component-disclosure-border-color: var(--semantic-color-border-default);
+  --component-disclosure-summary-padding-block: var(--semantic-space-component-md);
+  --component-disclosure-summary-color: var(--semantic-color-text-primary);
+  --component-disclosure-summary-font-weight: var(--semantic-font-weight-medium);
+  --component-disclosure-marker-size: 0.5em;
+  --component-disclosure-content-padding-block-end: var(--semantic-space-component-md);
+  --component-disclosure-content-color: var(--semantic-color-text-secondary);
+  --component-disclosure-duration: var(--semantic-duration-fast);
+}
+
+:root {
   --semantic-color-bg-primary: var(--primitive-color-white);
   --semantic-color-bg-secondary: var(--primitive-color-gray-50);
   --semantic-color-bg-tertiary: var(--primitive-color-gray-100);

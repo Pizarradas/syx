@@ -5,7 +5,7 @@
 > **On example names:** code samples in this guide use hypothetical components
 > (`mol-card`, `org-header`, `mol-search`, `org-hero`…) to illustrate patterns.
 > They are **not** part of the system — the real inventory is the *Current
-> Inventory* table below (19 atoms · 6 molecules · 1 organism: `site-header`).
+> Inventory* table below (19 atoms · 10 molecules · 1 organism: `site-header`).
 > Check `component-registry.json` (or `list_components`) before using any name.
 
 ---
@@ -329,7 +329,7 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 | Layer       | Count | Contents                                                                                                                                                 |
 | ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
-| Molecules   | 6     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group                                                                           |
+| Molecules   | 10    | alert, btn-group, code-snippet, dialog, disclosure, feature-card, form-field, form-field-set, label-group, tabs                                           |
 | Organisms   | 1     | site-header                                                                                                                                              |
 | Site layer  | 12    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card, theme-swatch-card |
 | Pages       | 1     | theme-builder                                                                                                                                            |

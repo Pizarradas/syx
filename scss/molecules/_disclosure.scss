@@ -1,0 +1,66 @@
+// MOLECULE: DISCLOSURE
+// ===============================================
+// Sobre <details>/<summary>. Varios con el mismo name="" forman un
+// acordeón en el que solo uno queda abierto (lo hace el navegador).
+//
+// <details class="mol-disclosure" name="faq">
+//   <summary class="mol-disclosure__summary">¿Puedo cambiar de plan?</summary>
+//   <div class="mol-disclosure__content">Sí, cuando quieras.</div>
+// </details>
+//
+// Accesibilidad: <summary> ya es un botón con estado expandido para
+// el lector de pantalla y responde a Intro y Espacio. No se le pone
+// role ni se sustituye por un <div>.
+// (Auditoría 2026-09 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-disclosure($theme: null) {
+  @layer syx.molecules {
+    .mol-disclosure {
+      border-block-end: var(--component-disclosure-border-width) solid var(--component-disclosure-border-color);
+
+      &__summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--semantic-space-component-sm);
+        padding-block: var(--component-disclosure-summary-padding-block);
+        color: var(--component-disclosure-summary-color);
+        font-weight: var(--component-disclosure-summary-font-weight);
+        list-style: none;
+        cursor: pointer;
+
+        &::-webkit-details-marker {
+          display: none;
+        }
+
+        // Chevron dibujado con bordes: sigue al color del texto y al
+        // modo de alto contraste sin necesitar un icono.
+        &::after {
+          content: "";
+          flex-shrink: 0;
+          @include size(var(--component-disclosure-marker-size), var(--component-disclosure-marker-size));
+          border-inline-end: 0.125em solid currentColor;
+          border-block-end: 0.125em solid currentColor;
+          rotate: 45deg;
+          @include transition(rotate var(--component-disclosure-duration));
+        }
+
+        &:focus-visible {
+          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+          outline-offset: var(--semantic-focus-ring-offset);
+        }
+      }
+
+      &[open] > .mol-disclosure__summary::after {
+        rotate: -135deg;
+      }
+
+      &__content {
+        padding-block-end: var(--component-disclosure-content-padding-block-end);
+        color: var(--component-disclosure-content-color);
+      }
+    }
+  }
+}

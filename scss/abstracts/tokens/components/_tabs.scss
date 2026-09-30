@@ -1,0 +1,21 @@
+// COMPONENT TOKENS: TABS
+// ================================================
+// mol-tabs · la pestaña activa la marca aria-selected, no una
+// clase: el estado vive donde lo leen los lectores de pantalla.
+// (Auditoría 2026-09 · acción 15)
+// ================================================
+
+:root {
+  --component-tabs-gap: var(--semantic-space-component-xs);
+  --component-tabs-border-width: var(--semantic-border-width-thin);
+  --component-tabs-border-color: var(--semantic-color-border-default);
+  --component-tabs-tab-padding-block: var(--semantic-space-component-sm);
+  --component-tabs-tab-padding-inline: var(--semantic-space-component-md);
+  --component-tabs-tab-color: var(--semantic-color-text-secondary);
+  --component-tabs-tab-color-hover: var(--semantic-color-text-primary);
+  --component-tabs-tab-color-selected: var(--semantic-color-text-primary);
+  --component-tabs-tab-font-weight: var(--semantic-font-weight-medium);
+  --component-tabs-indicator-width: var(--semantic-border-width-thick);
+  --component-tabs-indicator-color: var(--semantic-color-primary);
+  --component-tabs-panel-padding-block: var(--semantic-space-component-lg);
+}

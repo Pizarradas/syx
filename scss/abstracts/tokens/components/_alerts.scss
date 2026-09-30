@@ -1,0 +1,28 @@
+// COMPONENT TOKENS: ALERTS
+// ================================================
+// mol-alert · un mensaje de estado dentro del flujo de la página.
+// El color del estado va en el filete y en el título; el cuerpo
+// se queda en texto principal, que es el que tiene contraste medido
+// sobre bg-secondary. Nunca se colorea el texto largo.
+// (Auditoría 2026-09 · acción 15)
+// ================================================
+
+:root {
+  --component-alert-bg: var(--semantic-color-bg-secondary);
+  --component-alert-color: var(--semantic-color-text-primary);
+  --component-alert-gap: var(--semantic-space-component-xs);
+  --component-alert-padding-block: var(--semantic-space-component-md);
+  --component-alert-padding-inline: var(--semantic-space-component-lg);
+  --component-alert-border-radius: var(--semantic-border-radius-default);
+  --component-alert-accent-width: var(--semantic-border-width-thick);
+  --component-alert-title-font-weight: var(--semantic-font-weight-bold);
+
+  --component-alert-info-accent: var(--semantic-color-state-info);
+  --component-alert-info-title-color: var(--semantic-color-state-info-text);
+  --component-alert-success-accent: var(--semantic-color-state-success);
+  --component-alert-success-title-color: var(--semantic-color-state-success-text);
+  --component-alert-warning-accent: var(--semantic-color-state-warning);
+  --component-alert-warning-title-color: var(--semantic-color-state-warning-text);
+  --component-alert-error-accent: var(--semantic-color-state-error);
+  --component-alert-error-title-color: var(--semantic-color-state-error-text);
+}

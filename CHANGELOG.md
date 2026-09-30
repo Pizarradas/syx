@@ -26,6 +26,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `check:package` trata un `url()` sin destino como error.
 - `contracts/trust.json` protege en `human` la escalera de precedencia, la constitución, `governance/` y `atlas-rules/`.
 
+### Added — los cinco patrones de cualquier producto
+
+- `mol-alert` (`--info`, `--success`, `--warning`, `--error`), `mol-dialog` sobre `<dialog>` nativo, `mol-disclosure` sobre `<details>`/`<summary>` (acordeón exclusivo con `name=""`) y `mol-tabs` con el estado en `aria-selected`. Todos con `:focus-visible` y `forced-colors`; en `bundle-core`, `bundle-app` y `bundle-full`.
+- `js/syx-tabs.js`: el teclado de las pestañas (flechas, Inicio/Fin, tabindex itinerante), sin dependencias. Se publica en el paquete (`syx-design-system/js/syx-tabs.js`).
+- 51 tokens de componente en cuatro ficheros nuevos, todos alias de la capa semántica y registrados en `tokens.json`. `contracts/contrast.json` mide los títulos y el texto de la alerta y la pestaña inactiva (504 medidas, 0 por debajo).
+- El select ya existía como `.atom-select` nativo; no se añade otro.
+
 ### Added — medir los modos
 
 - `_agents/evals/`: 18 tareas de referencia (dos por modo), con enunciado, comprobaciones, preguntas de criterio, una respuesta que aprueba y fixtures para AUDIT. Rúbrica de cinco criterios en su README.

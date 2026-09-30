@@ -1,0 +1,19 @@
+// COMPONENT TOKENS: DISCLOSURES
+// ================================================
+// mol-disclosure · sobre <details>/<summary>: abrir y cerrar,
+// teclado y estado accesible los pone el navegador.
+// Varios seguidos con el mismo name="" son un acordeón exclusivo.
+// (Auditoría 2026-09 · acción 15)
+// ================================================
+
+:root {
+  --component-disclosure-border-width: var(--semantic-border-width-thin);
+  --component-disclosure-border-color: var(--semantic-color-border-default);
+  --component-disclosure-summary-padding-block: var(--semantic-space-component-md);
+  --component-disclosure-summary-color: var(--semantic-color-text-primary);
+  --component-disclosure-summary-font-weight: var(--semantic-font-weight-medium);
+  --component-disclosure-marker-size: 0.5em;
+  --component-disclosure-content-padding-block-end: var(--semantic-space-component-md);
+  --component-disclosure-content-color: var(--semantic-color-text-secondary);
+  --component-disclosure-duration: var(--semantic-duration-fast);
+}

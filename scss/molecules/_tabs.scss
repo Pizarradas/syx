@@ -1,0 +1,78 @@
+// MOLECULE: TABS
+// ===============================================
+// El estado lo llevan los atributos ARIA, no clases: la pestaña
+// activa es la que tiene aria-selected="true", y el panel oculto
+// lleva hidden. El CSS pinta lo que el marcado ya dice.
+//
+// <div class="mol-tabs">
+//   <div class="mol-tabs__list" role="tablist" aria-label="Ajustes">
+//     <button class="mol-tabs__tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Perfil</button>
+//     <button class="mol-tabs__tab" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">Avisos</button>
+//   </div>
+//   <div class="mol-tabs__panel" role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">…</div>
+//   <div class="mol-tabs__panel" role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>…</div>
+// </div>
+//
+// Accesibilidad — lo que el CSS no puede poner: el teclado (flechas
+// entre pestañas, Inicio/Fin, tabindex itinerante). Lo añade
+// js/syx-tabs.js, sin dependencias; sin JavaScript, los paneles
+// siguen en el documento.
+// (Auditoría 2026-09 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-tabs($theme: null) {
+  @layer syx.molecules {
+    .mol-tabs {
+      &__list {
+        display: flex;
+        gap: var(--component-tabs-gap);
+        overflow-x: auto;
+        border-block-end: var(--component-tabs-border-width) solid var(--component-tabs-border-color);
+      }
+
+      &__tab {
+        padding: var(--component-tabs-tab-padding-block) var(--component-tabs-tab-padding-inline);
+        border: 0;
+        border-block-end: var(--component-tabs-indicator-width) solid transparent;
+        margin-block-end: calc(-1 * var(--component-tabs-border-width));
+        background: none;
+        color: var(--component-tabs-tab-color);
+        font: inherit;
+        font-weight: var(--component-tabs-tab-font-weight);
+        white-space: nowrap;
+        cursor: pointer;
+        @include transition(color var(--semantic-duration-fast), border-color var(--semantic-duration-fast));
+
+        &:hover {
+          color: var(--component-tabs-tab-color-hover);
+        }
+
+        &[aria-selected="true"] {
+          border-block-end-color: var(--component-tabs-indicator-color);
+          color: var(--component-tabs-tab-color-selected);
+        }
+
+        &:focus-visible {
+          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+          outline-offset: calc(-1 * var(--semantic-focus-ring-width));
+        }
+
+        @media (forced-colors: active) {
+          &[aria-selected="true"] {
+            border-block-end-color: Highlight;
+          }
+        }
+      }
+
+      &__panel {
+        padding-block: var(--component-tabs-panel-padding-block);
+
+        &:focus-visible {
+          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+          outline-offset: var(--semantic-focus-ring-offset);
+        }
+      }
+    }
+  }
+}
