@@ -7,8 +7,11 @@ Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
 2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
-3. `tokens.json` — full token registry with type, rawValue, and status for all 1089 tokens
-4. `component-registry.json` — inventory of all atoms, molecules, organisms and utilities
+
+`tokens.json` (the full token registry, ≈ 280 KB) and `component-registry.json` (the component
+inventory, ≈ 45 KB) are the sources of truth, but do **not** load them whole: that is some 80 000
+tokens of context before the first decision. Ask the MCP server below, or search the files for
+the one entry the task needs.
 
 **If your client speaks MCP, ask instead of reading.** `npm run mcp` starts a
 dependency-free stdio server (`scripts/mcp-server.js`) that answers the questions

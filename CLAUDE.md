@@ -4,9 +4,15 @@ You are working with **SYX**, a token-driven, native SCSS design system (v4.28.0
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
-2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
-3. `tokens.json` — full token registry (check before using or creating any token)
-4. `component-registry.json` — all existing components (check before creating a new one)
+2. `contracts/rules.json` — the contract rules (4 KB). `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
+
+**Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB)
+are the sources of truth, but reading them whole costs some 80 000 tokens of context before
+the first decision. With the `syx` MCP server, never open them: `get_token`,
+`find_token_by_value`, `list_components` and `get_component` answer the same questions one at a
+time. Without it, search them for the one entry the task needs (`grep '"--semantic-color-'
+tokens.json`) instead of reading them. The rule does not change — check a token before using or
+creating it, check a component before creating one — only the way of checking does.
 
 **Before writing anything, know the tier.** `contracts/trust.json` grades changes:
 docs and derived artifacts are automatic; component tokens, components and utilities
