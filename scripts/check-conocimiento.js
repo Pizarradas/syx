@@ -6,7 +6,7 @@
  * septiembre de 2026 nadie lo vigilaba: un bloque `Knowledge` que apuntaba a un
  * fichero movido fallaba en silencio —el agente no encontraba el módulo, se lo
  * saltaba y respondía igual, pero peor—, y un módulo que ningún modo cargaba
- * era un módulo que nadie iba a abrir. La especificación está en ACOPLE.md §B.
+ * era un módulo que nadie iba a abrir. La especificación está en docs/decisions/ACOPLE.md §B.
  *
  * QUÉ COMPRUEBA
  *   1. Cada modo abre con su bloque `Knowledge`, con línea **Always**. SKETCH es

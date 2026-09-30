@@ -29,7 +29,7 @@
       "name": "The cortex",
       "paths": ["mind-system/"],
       "role": "Why a decision is right: governance (ATLAS composition), atlas-rules (guest editorial domain), knowledges (the corpus), routing (derived wiring), constitution. Informs; never executes, never authorises.",
-      "writable": "auto today via the `*.md` pattern; ACOPLE.md proposes human for governance/, atlas-rules/, constitution.md and README.md — pending decision",
+      "writable": "auto today via the `*.md` pattern; docs/decisions/ACOPLE.md proposes human for governance/, atlas-rules/, constitution.md and README.md — pending decision",
       "shipsToNpm": false,
       "note": "Shipped docs reference these paths; an npm consumer does not have them. Known, intentional, unguarded."
     },
@@ -135,7 +135,7 @@
     { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R08) and validate_snippet (R01-R04)" },
     { "from": "contracts/trust.json", "to": "every write", "rel": "gates", "via": "scripts/lib/confianza.js -> classify_change and propose.js" },
     { "from": "_agents/modes/* Trust blocks", "to": "contracts/trust.json", "rel": "checked-against", "via": "npm run check:modos (also keeps CLAUDE.md, AGENTS.md and _agents/modes/README.md listing the same modes)" },
-    { "from": "_agents/modes/* Knowledge blocks", "to": "mind-system/routing.md", "rel": "is-derived-view", "via": "hand-maintained today; guard B (check-conocimiento.js) specified in ACOPLE.md, not built" },
+    { "from": "_agents/modes/* Knowledge blocks", "to": "mind-system/routing.md", "rel": "is-derived-view", "via": "hand-maintained today; guard B (check-conocimiento.js) specified in docs/decisions/ACOPLE.md, not built" },
     { "from": "mind-system/knowledges/", "to": "modes at reasoning time", "rel": "informs", "via": "routing labels: Always / When relevant / With GSAP / On request / Self-check - none of them authorises anything" },
     { "from": "contracts/resolved-tokens.json + component-registry.json", "to": "MCP server / Node API", "rel": "answers-from", "via": "scripts/lib/consulta.js" }
   ],
@@ -160,7 +160,7 @@
     ],
     "unguarded": [
       "rungs 4-6 (mind-system) - declared only",
-      "mode Knowledge blocks vs routing.md (guard B pending, see ACOPLE.md)",
+      "mode Knowledge blocks vs routing.md (guard B pending, see docs/decisions/ACOPLE.md)",
       "self-containment of the npm package against mind-system/ references"
     ]
   }

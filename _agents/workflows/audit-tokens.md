@@ -130,7 +130,7 @@ npm run build 2>&1 | grep -E "(Error|Warning|Deprecation)"
 
 ## Audit Report Template
 
-After running all audits, document findings in `AUDIT_REPORT.md`:
+After running all audits, document findings in `docs/decisions/AUDIT_REPORT.md`:
 
 ```markdown
 ## Token Audit — {DATE}

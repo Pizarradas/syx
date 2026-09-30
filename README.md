@@ -11,6 +11,19 @@
 
 ---
 
+## Start here
+
+| You want to… | Read | Time |
+|---|---|---|
+| Use SYX in a page or an app | *Quick Start* below, then `THEMING-RULES.md` | 5 min |
+| Build with SYX through an AI agent | `CLAUDE.md` (Claude Code) or `AGENTS.md` (any other agent), and register the MCP server | 5 min |
+| Write or change a component | `scss/GETTING-STARTED.md`, then `scss/AUTHORING-GUIDE.md` | 15 min |
+| Understand why the system is the way it is | `mind-system/README.md` (precedence ladder), `docs/decisions/` | as long as it takes |
+
+Everything else in the root is either the package itself or one of these entry points.
+
+---
+
 ## What is SYX?
 
 SYX is a **component-first design system** that provides:

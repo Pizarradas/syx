@@ -94,7 +94,7 @@ flowchart TB
 Higher rung wins, no exceptions by context. A knowledge module that recommends what R01
 forbids is a module that needs fixing. `[ATLAS]:` operates at rung 5 authority and never
 above. Rungs 4–6 are today **declared only**: no guard checks them (guard B, specified in
-`ACOPLE.md`, would cover the mode↔routing wiring).
+`docs/decisions/ACOPLE.md`, would cover the mode↔routing wiring).
 
 ---
 
@@ -112,7 +112,7 @@ flowchart TB
 Source: `contracts/trust.json` (path lists live there, not here). The direction of the
 boundary is the cascade: the higher a file sits, the more places a change reaches.
 Note for map-readers: the `*.md` pattern matches markdown **at any depth**, which is why
-`ACOPLE.md` proposes naming `governance/`, `atlas-rules/`, `constitution.md` explicitly
+`docs/decisions/ACOPLE.md` proposes naming `governance/`, `atlas-rules/`, `constitution.md` explicitly
 as `human` — documentation that is also law should not inherit `auto` for being markdown.
 
 ---

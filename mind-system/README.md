@@ -103,6 +103,6 @@ Honestidad sobre el estado real, porque la alternativa es creerse cubierto.
 
 Desde la auditoría de septiembre de 2026 están cerrados tres huecos que esta sección listaba: `npm run check:conocimiento` vigila el córtex (rutas de los bloques `Knowledge`, módulos huérfanos, concordancia de `routing.md` y filtro SYX sobre su código); `contracts/trust.json` nombra en `human` la gobernanza, las reglas Atlas, la constitución y este fichero; y R08 corre en `syx-validate.js`. Sigue abierto:
 
-- **Los tokens citados en el córtex no se cruzan con `tokens.json`.** Hace falta antes una convención que distinga el ejemplo ilustrativo del real (`ACOPLE.md` §B); sin ella, el guardián daría falsos positivos constantes.
+- **Los tokens citados en el córtex no se cruzan con `tokens.json`.** Hace falta antes una convención que distinga el ejemplo ilustrativo del real (`docs/decisions/ACOPLE.md` §B); sin ella, el guardián daría falsos positivos constantes.
 - **Los escalones 4–6 siguen siendo declarados.** Un guardián comprueba que el cableado existe, no que un modo aplique bien lo que el córtex le dice. Eso pide evaluar resultados de los modos contra tareas de referencia, y todavía no existe.
-- **Los modos que viajan en el paquete citan un córtex que no viaja.** Es correcto por diseño (el córtex informa, no ejecuta), pero nada impide que un modo pase a depender de él (`ACOPLE.md` §D).
+- **Los modos que viajan en el paquete citan un córtex que no viaja.** Es correcto por diseño (el córtex informa, no ejecuta), pero nada impide que un modo pase a depender de él (`docs/decisions/ACOPLE.md` §D).
