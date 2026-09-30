@@ -32,6 +32,15 @@
   --semantic-color-tertiary-text: var(--semantic-color-tertiary);
   --semantic-color-quaternary-text: var(--semantic-color-quaternary);
   --semantic-color-quinary-text: var(--semantic-color-quinary);
+
+  // Tinta de estado: el color de estado usado como TEXTO (mensajes de error,
+  // avisos). Los rellenos de estado rondan L 0,60, que se queda en 3,6–4,4:1:
+  // no llega a 4,5 ni sobre claro ni sobre oscuro. Por defecto cae al relleno;
+  // con sintaxis de color relativa se deriva como la tinta de marca (más abajo).
+  --semantic-color-state-success-text: var(--semantic-color-state-success);
+  --semantic-color-state-error-text: var(--semantic-color-state-error);
+  --semantic-color-state-warning-text: var(--semantic-color-state-warning);
+  --semantic-color-state-info-text: var(--semantic-color-state-info);
 }
 
 // La tinta se DERIVA del propio color de marca: misma tonalidad y mismo croma,
@@ -55,6 +64,12 @@
     --semantic-color-tertiary-text: oklch(from var(--semantic-color-tertiary) var(--semantic-brand-text-lightness) c h);
     --semantic-color-quaternary-text: oklch(from var(--semantic-color-quaternary) var(--semantic-brand-text-lightness) c h);
     --semantic-color-quinary-text: oklch(from var(--semantic-color-quinary) var(--semantic-brand-text-lightness) c h);
+
+    // Misma derivación para la tinta de estado: mismo tono, luminosidad de texto.
+    --semantic-color-state-success-text: oklch(from var(--semantic-color-state-success) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-error-text: oklch(from var(--semantic-color-state-error) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-warning-text: oklch(from var(--semantic-color-state-warning) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-info-text: oklch(from var(--semantic-color-state-info) var(--semantic-brand-text-lightness) c h);
   }
 }
 
@@ -83,6 +98,12 @@
   // antes era pink-500 fijo, un resto de la plantilla, y seis de los siete
   // temas enfocaban sus campos en rosa sin haberlo decidido nadie.
   --semantic-color-border-focus: var(--semantic-color-primary);
+  // Borde de CONTROL: el que delimita un campo, un checkbox o un radio. WCAG
+  // 1.4.11 le exige 3:1 contra el fondo, porque es lo único que dice dónde se
+  // escribe. border-default es decorativo (1,4–2,4:1 en los temas) y no sirve.
+  // Un gris medio (L 0,60) da ≥ 3,6:1 tanto sobre blancos y cremas como sobre
+  // los fondos oscuros del sistema, así que vale en los dos modos sin reasignar.
+  --semantic-color-border-control: var(--primitive-color-gray-500);
 
   // LINK COLORS
   // ================================================

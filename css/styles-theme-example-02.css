@@ -245,6 +245,10 @@
   --semantic-color-tertiary-text: var(--semantic-color-tertiary);
   --semantic-color-quaternary-text: var(--semantic-color-quaternary);
   --semantic-color-quinary-text: var(--semantic-color-quinary);
+  --semantic-color-state-success-text: var(--semantic-color-state-success);
+  --semantic-color-state-error-text: var(--semantic-color-state-error);
+  --semantic-color-state-warning-text: var(--semantic-color-state-warning);
+  --semantic-color-state-info-text: var(--semantic-color-state-info);
 }
 
 @supports (color: oklch(from red l c h)) {
@@ -255,6 +259,10 @@
     --semantic-color-tertiary-text: oklch(from var(--semantic-color-tertiary) var(--semantic-brand-text-lightness) c h);
     --semantic-color-quaternary-text: oklch(from var(--semantic-color-quaternary) var(--semantic-brand-text-lightness) c h);
     --semantic-color-quinary-text: oklch(from var(--semantic-color-quinary) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-success-text: oklch(from var(--semantic-color-state-success) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-error-text: oklch(from var(--semantic-color-state-error) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-warning-text: oklch(from var(--semantic-color-state-warning) var(--semantic-brand-text-lightness) c h);
+    --semantic-color-state-info-text: oklch(from var(--semantic-color-state-info) var(--semantic-brand-text-lightness) c h);
   }
 }
 :root {
@@ -271,6 +279,7 @@
   --semantic-color-border-subtle: var(--primitive-color-gray-200);
   --semantic-color-border-strong: var(--primitive-color-gray-400);
   --semantic-color-border-focus: var(--semantic-color-primary);
+  --semantic-color-border-control: var(--primitive-color-gray-500);
   --semantic-color-link-default: var(--primitive-color-pink-500);
   --semantic-color-link-hover: var(--primitive-color-purple-500);
   --semantic-color-link-visited: var(--primitive-color-purple-500);
@@ -518,7 +527,7 @@
 :root {
   --component-form-field-color: var(--semantic-color-text-primary);
   --component-form-field-bg: var(--semantic-color-bg-primary);
-  --component-form-field-border: var(--semantic-color-border-default);
+  --component-form-field-border: var(--semantic-color-border-control);
   --component-form-field-border-focus: var(--semantic-color-border-focus);
   --component-form-field-placeholder: var(--semantic-color-placeholder);
   --component-form-field-padding-x: var(--semantic-space-component-sm);
@@ -541,11 +550,11 @@
   --component-form-field-shadow-focus: var(--semantic-shadow-focus);
   --component-form-field-color-disabled: var(--semantic-color-state-disabled);
   --component-form-field-bg-disabled: var(--semantic-color-bg-tertiary);
-  --component-form-field-success-color: var(--semantic-color-state-success);
+  --component-form-field-success-color: var(--semantic-color-state-success-text);
   --component-form-field-success-border: var(--semantic-color-state-success);
-  --component-form-field-error-color: var(--semantic-color-state-error);
+  --component-form-field-error-color: var(--semantic-color-state-error-text);
   --component-form-field-error-border: var(--semantic-color-state-error);
-  --component-form-field-warning-color: var(--semantic-color-state-warning-text, var(--semantic-color-state-warning));
+  --component-form-field-warning-color: var(--semantic-color-state-warning-text);
   --component-form-field-warning-border: var(--semantic-color-state-warning);
   --component-form-group-gap: var(--semantic-space-component-sm);
   --component-form-group-margin-bottom: var(--semantic-space-component-sm);
@@ -555,7 +564,7 @@
   --component-check-icon-size: var(--semantic-space-component-sm);
   --component-check-border-width: var(--semantic-border-width-default);
   --component-check-border-radius: var(--semantic-border-radius-default);
-  --component-check-border-color: var(--semantic-color-border-default);
+  --component-check-border-color: var(--semantic-color-border-control);
   --component-check-border-color-hover: var(--semantic-color-primary);
   --component-check-color-checked: var(--semantic-color-primary);
   --component-check-bg-checked: var(--semantic-color-primary);
@@ -567,7 +576,7 @@
   --component-radio-line-height: var(--semantic-line-height-normal);
   --component-radio-checked-size: var(--semantic-space-component-xs);
   --component-radio-border-width: var(--semantic-border-width-default);
-  --component-radio-border-color: var(--semantic-color-border-default);
+  --component-radio-border-color: var(--semantic-color-border-control);
   --component-radio-border-color-hover: var(--semantic-color-primary);
   --component-radio-color-checked: var(--semantic-color-primary);
   --component-radio-bg-checked: var(--semantic-color-primary);
@@ -579,7 +588,7 @@
   --component-switch-slider-radius: var(--semantic-border-radius-circle);
   --component-switch-bg-off: var(--semantic-color-bg-tertiary);
   --component-switch-bg-on: var(--semantic-color-state-success);
-  --component-switch-border-color: var(--semantic-color-border-default);
+  --component-switch-border-color: var(--semantic-color-border-control);
   --component-switch-status-disabled-opacity: 0.5;
   --component-switch-status-color-on: var(--semantic-color-state-success);
   --component-switch-status-color-off: var(--semantic-color-state-error);

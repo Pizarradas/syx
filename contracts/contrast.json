@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "schema": "syx.contrast/1",
+    "description": "Pares de color que tienen que cumplir WCAG 2.2 AA en todos los temas y en los cuatro estados de modo (sin elección y elegido, con el SO en claro y en oscuro). Lo consume scripts/check-contraste.js.",
+    "minimos": "4.5 para texto (1.4.3). 3 para límites de componentes de interfaz (1.4.11). Texto grande (≥ 24px o ≥ 18,66px en negrita) admitiría 3, pero ningún par de aquí es solo de texto grande."
+  },
+  "pares": [
+    { "id": "texto-principal", "primerPlano": "--semantic-color-text-primary", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "texto-principal-sobre-secundario", "primerPlano": "--semantic-color-text-primary", "fondo": "--semantic-color-bg-secondary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "texto-secundario", "primerPlano": "--semantic-color-text-secondary", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "texto-secundario-sobre-secundario", "primerPlano": "--semantic-color-text-secondary", "fondo": "--semantic-color-bg-secondary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "texto-terciario", "primerPlano": "--semantic-color-text-tertiary", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "tinta-de-error", "primerPlano": "--semantic-color-state-error-text", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "tinta-de-aviso", "primerPlano": "--semantic-color-state-warning-text", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "tinta-de-exito", "primerPlano": "--semantic-color-state-success-text", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "tinta-de-informacion", "primerPlano": "--semantic-color-state-info-text", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" },
+    { "id": "borde-de-control", "primerPlano": "--semantic-color-border-control", "fondo": "--semantic-color-bg-primary", "minimo": 3, "criterio": "1.4.11" },
+    { "id": "borde-de-campo", "primerPlano": "--component-form-field-border", "fondo": "--semantic-color-bg-primary", "minimo": 3, "criterio": "1.4.11" },
+    { "id": "texto-de-error-de-campo", "primerPlano": "--component-form-field-error-color", "fondo": "--semantic-color-bg-primary", "minimo": 4.5, "criterio": "1.4.3" }
+  ]
+}

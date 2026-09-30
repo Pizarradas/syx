@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 519,
-      "omitidas": 274,
+      "variables": 517,
+      "omitidas": 281,
       "fueraDeAlcance": {
         "primitive": 240,
         "icon": 17,
@@ -258,6 +258,29 @@
           "hexByMode": {
             "light": "#ffedec",
             "dark": "#333333"
+          }
+        },
+        {
+          "name": "semantic/color/border/control",
+          "type": "COLOR",
+          "token": "--semantic-color-border-control",
+          "valuesByMode": {
+            "light": {
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#808080",
+            "dark": "#808080"
           }
         },
         {
@@ -1071,9 +1094,9 @@
           "token": "--semantic-color-text-tertiary",
           "valuesByMode": {
             "light": {
-              "r": 0.6196,
-              "g": 0.4781,
-              "b": 0.4466,
+              "r": 0.509,
+              "g": 0.3737,
+              "b": 0.3439,
               "a": 1
             },
             "dark": {
@@ -1084,7 +1107,7 @@
             }
           },
           "hexByMode": {
-            "light": "#9e7a72",
+            "light": "#825f58",
             "dark": "#9e9e9e"
           }
         },
@@ -2856,21 +2879,21 @@
           "token": "--component-check-border-color",
           "valuesByMode": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#e8c4bc",
-            "dark": "#4d4d4d"
+            "light": "#808080",
+            "dark": "#808080"
           }
         },
         {
@@ -4506,21 +4529,21 @@
           "token": "--component-form-field-border",
           "valuesByMode": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#e8c4bc",
-            "dark": "#4d4d4d"
+            "light": "#808080",
+            "dark": "#808080"
           }
         },
         {
@@ -4625,29 +4648,6 @@
           }
         },
         {
-          "name": "component/form/field/error/color",
-          "type": "COLOR",
-          "token": "--component-form-field-error-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8186,
-              "g": 0.3044,
-              "b": 0.3167,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8186,
-              "g": 0.3044,
-              "b": 0.3167,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d14e51",
-            "dark": "#d14e51"
-          }
-        },
-        {
           "name": "component/form/field/font/family",
           "type": "STRING",
           "token": "--component-form-field-font-family",
@@ -4730,29 +4730,6 @@
           }
         },
         {
-          "name": "component/form/field/success/color",
-          "type": "COLOR",
-          "token": "--component-form-field-success-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.6057,
-              "b": 0.2578,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6057,
-              "b": 0.2578,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#009a42",
-            "dark": "#009a42"
-          }
-        },
-        {
           "name": "component/form/field/transition/easing",
           "type": "STRING",
           "token": "--component-form-field-transition-easing",
@@ -4765,29 +4742,6 @@
           "name": "component/form/field/warning/border",
           "type": "COLOR",
           "token": "--component-form-field-warning-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.6783,
-              "g": 0.4559,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.6783,
-              "g": 0.4559,
-              "b": 0,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ad7400",
-            "dark": "#ad7400"
-          }
-        },
-        {
-          "name": "component/form/field/warning/color",
-          "type": "COLOR",
-          "token": "--component-form-field-warning-color",
           "valuesByMode": {
             "light": {
               "r": 0.6783,
@@ -6423,9 +6377,9 @@
           "token": "--component-pill-subtle-color",
           "valuesByMode": {
             "light": {
-              "r": 0.6196,
-              "g": 0.4781,
-              "b": 0.4466,
+              "r": 0.509,
+              "g": 0.3737,
+              "b": 0.3439,
               "a": 1
             },
             "dark": {
@@ -6436,7 +6390,7 @@
             }
           },
           "hexByMode": {
-            "light": "#9e7a72",
+            "light": "#825f58",
             "dark": "#9e9e9e"
           }
         },
@@ -6630,21 +6584,21 @@
           "token": "--component-radio-border-color",
           "valuesByMode": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#e8c4bc",
-            "dark": "#4d4d4d"
+            "light": "#808080",
+            "dark": "#808080"
           }
         },
         {
@@ -6799,9 +6753,9 @@
           "token": "--component-score-1-color",
           "valuesByMode": {
             "light": {
-              "r": 0.6196,
-              "g": 0.4781,
-              "b": 0.4466,
+              "r": 0.509,
+              "g": 0.3737,
+              "b": 0.3439,
               "a": 1
             },
             "dark": {
@@ -6812,7 +6766,7 @@
             }
           },
           "hexByMode": {
-            "light": "#9e7a72",
+            "light": "#825f58",
             "dark": "#9e9e9e"
           }
         },
@@ -7198,9 +7152,9 @@
           "token": "--component-section-index-color",
           "valuesByMode": {
             "light": {
-              "r": 0.6196,
-              "g": 0.4781,
-              "b": 0.4466,
+              "r": 0.509,
+              "g": 0.3737,
+              "b": 0.3439,
               "a": 1
             },
             "dark": {
@@ -7211,7 +7165,7 @@
             }
           },
           "hexByMode": {
-            "light": "#9e7a72",
+            "light": "#825f58",
             "dark": "#9e9e9e"
           }
         },
@@ -7471,21 +7425,21 @@
           "token": "--component-switch-border-color",
           "valuesByMode": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#e8c4bc",
-            "dark": "#4d4d4d"
+            "light": "#808080",
+            "dark": "#808080"
           }
         },
         {
@@ -10316,15 +10270,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           }
@@ -11099,15 +11053,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           }
@@ -12219,9 +12173,9 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 0.6196,
-              "g": 0.4781,
-              "b": 0.4466,
+              "r": 0.509,
+              "g": 0.3737,
+              "b": 0.3439,
               "a": 1
             },
             "dark": {
@@ -12459,15 +12413,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           }
@@ -12726,15 +12680,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 0.9105,
-              "g": 0.7683,
-              "b": 0.7367,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             },
             "dark": {
-              "r": 0.3017,
-              "g": 0.3017,
-              "b": 0.3017,
+              "r": 0.5021,
+              "g": 0.5021,
+              "b": 0.5021,
               "a": 1
             }
           }
@@ -13728,7 +13682,7 @@
         "atom-select"
       ],
       "variantes": {
-        "base": 8
+        "base": 5
       },
       "propiedades": [
         {
@@ -13757,28 +13711,6 @@
           "token": "--component-form-field-error-border",
           "variable": "component/form/field/error/border",
           "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.8186,
-              "g": 0.3044,
-              "b": 0.3167,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8186,
-              "g": 0.3044,
-              "b": 0.3167,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-form-field-error-color",
-          "variable": "component/form/field/error/color",
-          "propiedad": "fills",
           "tipo": "COLOR",
           "variante": null,
           "estado": "default",
@@ -13832,53 +13764,9 @@
           }
         },
         {
-          "token": "--component-form-field-success-color",
-          "variable": "component/form/field/success/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.6057,
-              "b": 0.2578,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6057,
-              "b": 0.2578,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-form-field-warning-border",
           "variable": "component/form/field/warning/border",
           "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.6783,
-              "g": 0.4559,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.6783,
-              "g": 0.4559,
-              "b": 0,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-form-field-warning-color",
-          "variable": "component/form/field/warning/color",
-          "propiedad": "fills",
           "tipo": "COLOR",
           "variante": null,
           "estado": "default",
@@ -13901,6 +13789,10 @@
       "sinPropiedad": [],
       "sinTraducir": [
         {
+          "token": "--component-form-field-error-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-form-field-icon-position-right",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
@@ -13922,6 +13814,14 @@
         },
         {
           "token": "--component-form-field-msg-margin-top",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-form-field-success-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-form-field-warning-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         }
       ]
@@ -14264,6 +14164,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-form-field-error-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-form-field-error-shadow-focus",
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
@@ -14320,8 +14224,16 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
+      "token": "--component-form-field-success-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-form-field-transition-duration",
       "motivo": "duración: Figma no guarda tiempo en variables"
+    },
+    {
+      "token": "--component-form-field-warning-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-form-group-gap",
@@ -14881,6 +14793,22 @@
     },
     {
       "token": "--semantic-color-secondary-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-state-error-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-state-info-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-state-success-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-state-warning-text",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
