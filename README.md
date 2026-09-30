@@ -71,7 +71,13 @@ Open `index.html` in your browser to see the full live demo.
 
 ```bash
 npm install github:Pizarradas/syx
+# or pin a tagged release once one exists
+npm install github:Pizarradas/syx#v4.28.0
 ```
+
+Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
+that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and
+attaches the package and the minified sheets to a GitHub release.
 
 ```js
 // One theme, one line — the compiled CSS ships with the package

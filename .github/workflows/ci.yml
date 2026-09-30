@@ -100,11 +100,10 @@ jobs:
           cache: npm
       - run: npm ci
 
-      # NO rompe la ejecución. El escáner es un informe, no una regla: las
-      # desviaciones que hay hoy son anteriores a que existiera con qué medirlas,
-      # y tumbar cada push por ellas solo enseñaría a ignorar el rojo. Cuando
-      # lleguen a cero, `--fallar-si-alta` convierte esto en un guardián de
-      # verdad; ese día será una decisión, no un descuido.
+      # Este paso NO rompe: es el informe completo, con los avisos bajos a la
+      # vista. El guardián ya existe aparte: `check:vitrina`, dentro de
+      # `npm run check`, falla si aparece cualquier desviación alta o media en
+      # las cuatro páginas del sistema (auditoría 2026-09, acción 19).
       - name: Informe de desviación
         run: |
           {

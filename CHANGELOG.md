@@ -26,6 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `check:package` trata un `url()` sin destino como error.
 - `contracts/trust.json` protege en `human` la escalera de precedencia, la constitución, `governance/` y `atlas-rules/`.
 
+### Added — publicación
+
+- `.github/workflows/release.yml`: una etiqueta `vX.Y.Z` crea la release de GitHub tras comprobar que etiqueta, `package.json` y CHANGELOG coinciden y pasar la cadena entera; adjunta el `.tgz` y las hojas de `dist/`. npm solo si el repositorio define `PUBLICAR_NPM=true` y `NPM_TOKEN`.
+- `scripts/release-notes.js`: las notas salen de la sección del CHANGELOG; sin sección, no hay release.
+
 ### Changed
 
 - `CLAUDE.md` y `AGENTS.md` dejan de mandar leer `tokens.json` (≈ 280 KB) y el registro enteros antes de empezar.

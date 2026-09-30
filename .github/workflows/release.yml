@@ -1,0 +1,93 @@
+# SYX — Publicación de una versión
+# ════════════════════════════════
+# Hasta la 4.28 las versiones solo existían en package.json y en el CHANGELOG:
+# no había etiquetas, ni releases, ni forma de instalar «la 4.27» desde GitHub.
+# Esto lo cierra con una sola acción humana: empujar una etiqueta.
+#
+#   npm version minor --no-git-tag-version   # o patch / major
+#   (escribir la sección «## [x.y.z] — fecha» en CHANGELOG.md)
+#   git commit -am "release: x.y.z" && git tag vx.y.z && git push --follow-tags
+#
+# El flujo comprueba que la etiqueta, package.json y el CHANGELOG dicen la misma
+# versión, pasa la cadena entera, empaqueta y crea la release con el .tgz y las
+# hojas minificadas adjuntas. Las notas salen del CHANGELOG, no se reescriben.
+#
+# npm: NO publica salvo que alguien lo decida en el repositorio, con la
+# variable PUBLICAR_NPM = true y el secreto NPM_TOKEN. Publicar en un registro
+# público es irreversible y es una decisión de quien mantiene el paquete.
+# (Auditoría 2026-09 · acción 22)
+
+name: Publicación
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write     # crear la release
+  id-token: write     # procedencia de npm, si se publica
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    name: Versión ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - name: La etiqueta, package.json y el CHANGELOG dicen lo mismo
+        run: |
+          ETIQUETA="${GITHUB_REF_NAME#v}"
+          PAQUETE="$(node -p "require('./package.json').version")"
+          if [ "$ETIQUETA" != "$PAQUETE" ]; then
+            echo "::error::La etiqueta dice $ETIQUETA y package.json dice $PAQUETE"
+            exit 1
+          fi
+          node scripts/release-notes.js "$PAQUETE" > "$RUNNER_TEMP/notas.md"
+
+      - name: El CSS commiteado es el compilado
+        run: node scripts/check-limpio.js --strict
+
+      - name: npm run check
+        run: npm run check
+
+      - name: Identidad de git para las pruebas
+        run: |
+          git config --global user.email "ci@syx.local"
+          git config --global user.name "SYX CI"
+
+      - name: El paquete se instala y responde
+        run: npm run check:consumible
+
+      - name: Empaquetar
+        run: |
+          npm run build:dist
+          npm pack
+          tar -czf "syx-dist-${GITHUB_REF_NAME}.tar.gz" dist
+
+      - name: Crear la release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "SYX ${GITHUB_REF_NAME}" \
+            --notes-file "$RUNNER_TEMP/notas.md" \
+            --verify-tag \
+            ./*.tgz "syx-dist-${GITHUB_REF_NAME}.tar.gz"
+
+      - name: Publicar en npm (solo si el repositorio lo ha decidido)
+        if: vars.PUBLICAR_NPM == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
