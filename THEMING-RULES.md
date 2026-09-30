@@ -140,6 +140,27 @@ document.documentElement.setAttribute('data-theme', 'light');
 
 ---
 
+## Sobrescribir tokens desde tu aplicación
+
+Los bloques `:root` que declaran tokens se emiten **fuera de cualquier `@layer`**, a propósito: así ninguna regla de componente puede pisar un token por accidente (ver `scss/ARCHITECTURE.md`). La consecuencia para quien consume SYX es concreta: **una declaración dentro de una capa nunca gana a un token de SYX**, aunque venga después. Si tu aplicación organiza su CSS en capas (Tailwind v4, por ejemplo), sobrescribe los tokens fuera de ellas:
+
+```css
+/* capa: prototipo fuera de scss/ — CSS de la aplicación que consume SYX */
+/* ✓ gana: sin capa, cargado después de la hoja de SYX */
+:root {
+  --semantic-color-primary: oklch(0.55 0.2 250);
+}
+
+/* ✗ no gana: cualquier @layer pierde contra los :root sin capa de SYX */
+@layer theme {
+  :root { --semantic-color-primary: oklch(0.55 0.2 250); }
+}
+```
+
+Para respetar el modo oscuro, repite la sobrescritura en las mismas dos entradas que usa el sistema: `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }` y `:root[data-theme="dark"] { … }`. Si lo que cambias es la identidad entera y no un token suelto, no es una sobrescritura: es un tema (ver *Cómo crear un nuevo tema*).
+
+---
+
 ## Estructura V4: Responsabilidades de Capas
 En la versión V4, el sistema estandariza estrictamente el ciclo de vida de los tokens. **Nunca rompas esta cascada de dependencias:**
 
