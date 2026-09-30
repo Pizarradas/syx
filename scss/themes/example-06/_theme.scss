@@ -324,6 +324,7 @@
     }
 
     // específico) la sigue sustituyendo cuando toca.
+    // stylelint-disable-next-line no-duplicate-selectors -- la paleta clara va después del bloque oscuro; el orden es parte del diseño (ver comentario)
     :root {
         --semantic-color-bg-primary: var(--primitive-color-white);
         --semantic-color-bg-secondary: var(--primitive-color-neon-100);

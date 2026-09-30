@@ -70,15 +70,8 @@
       }
     }
 
-    // &--resp — kept nested for backward compatibility
-    &--resp {
-      @include margin(null null var(--component-table-cell-padding-y) null);
-      @include size(100%, null);
-      clear: both;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch; // smooth scroll on iOS
-    }
+    // &--resp: vive una sola vez, como regla independiente más abajo. Antes
+    // estaba también aquí anidada, idéntica, y compilaba el mismo selector dos veces.
   }
 
   // .atom-table--resp — standalone: usable on a wrapper <div> without .atom-table
@@ -91,6 +84,7 @@
     -webkit-overflow-scrolling: touch; // smooth scroll on iOS
   }
 
+  // stylelint-disable-next-line no-duplicate-selectors -- segundo bloque a propósito: los modificadores --is van después de --resp
   .atom-table {
 
     // &--is

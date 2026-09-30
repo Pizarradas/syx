@@ -1563,10 +1563,8 @@
   --cont-group-form-field-icon-size: calc(6 * var(--base-measure));
   --cont-group-form-field-success-icon-pic: var(--icon-user-interface-tick);
   --cont-group-form-field-warning-icon-pic: var(--icon-user-interface-exclamation-mark);
-  --component-section-title-font-size: clamp(1.75rem, 3.5vw, 2.5rem);
   --component-section-title-weight: var(--primitive-font-weight-bold);
   --component-section-title-tracking: -0.02em;
-  --component-section-title-max-width: 26ch;
   --component-section-divider-width: 1px;
   --component-section-bg-image: var(--semantic-bg-grid);
   --component-hero-backdrop-width: 100%;
@@ -1578,14 +1576,12 @@
   --component-hero-headline-weight: var(--primitive-font-weight-bold);
   --component-hero-headline-leading: 1;
   --component-hero-headline-tracking: -0.035em;
-  --component-hero-headline-max-width: 16ch;
   --component-hero-accent-bg: none;
   --component-hero-accent-fill: currentColor;
   --component-hero-accent-decoration-line: underline;
   --component-hero-accent-decoration-thickness: 0.09em;
   --component-hero-accent-decoration-offset: 0.14em;
   --component-hero-sub-font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
-  --component-hero-sub-max-width: 46ch;
   --component-hero-stats-border-width: 0.125rem;
   --component-cta-color: oklch(1 0 0);
   --component-cta-overline-color: var(--primitive-color-green-300);
@@ -1917,7 +1913,6 @@
     --component-button-secondary-border: var(--primitive-color-green-300);
     --component-pill-primary-bg: transparent;
     --component-pill-primary-color: var(--primitive-color-blue-300);
-    --component-pill-primary-border-color: var(--primitive-color-blue-400);
     --component-pill-secondary-bg: transparent;
     --component-pill-secondary-color: var(--primitive-color-green-300);
     --component-pill-secondary-border-color: var(--primitive-color-green-500);
@@ -1938,20 +1933,6 @@
     --component-feature-icon-layer-color: var(--primitive-color-gray-100);
     --component-feature-icon-mixin-bg: var(--primitive-color-gray-800);
     --component-feature-icon-mixin-color: var(--primitive-color-green-200);
-    --component-code-inline-bg: var(--primitive-color-gray-800);
-    --component-code-inline-color: var(--primitive-color-blue-200);
-    --component-pill-warning-bg: transparent;
-    --component-pill-warning-color: var(--semantic-tone-warning-bg);
-    --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
-    --component-pill-danger-bg: transparent;
-    --component-pill-danger-color: var(--semantic-tone-error-bg);
-    --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
-    --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
-    --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
-    --component-pill-dark-bg: var(--primitive-color-gray-200);
-    --component-pill-dark-color: var(--primitive-color-gray-900);
-    --component-pill-dark-border-color: var(--primitive-color-gray-200);
-    --component-code-inline-border-color: var(--primitive-color-gray-700);
     --component-code-bg: oklch(0.16 0.028 258);
     --component-table-base-state-hover-bg: var(--primitive-color-gray-800);
     --component-table-base-th-bg: var(--primitive-color-gray-800);
@@ -2138,7 +2119,6 @@
   --component-button-secondary-border: var(--primitive-color-green-300);
   --component-pill-primary-bg: transparent;
   --component-pill-primary-color: var(--primitive-color-blue-300);
-  --component-pill-primary-border-color: var(--primitive-color-blue-400);
   --component-pill-secondary-bg: transparent;
   --component-pill-secondary-color: var(--primitive-color-green-300);
   --component-pill-secondary-border-color: var(--primitive-color-green-500);
@@ -2159,20 +2139,6 @@
   --component-feature-icon-layer-color: var(--primitive-color-gray-100);
   --component-feature-icon-mixin-bg: var(--primitive-color-gray-800);
   --component-feature-icon-mixin-color: var(--primitive-color-green-200);
-  --component-code-inline-bg: var(--primitive-color-gray-800);
-  --component-code-inline-color: var(--primitive-color-blue-200);
-  --component-pill-warning-bg: transparent;
-  --component-pill-warning-color: var(--semantic-tone-warning-bg);
-  --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
-  --component-pill-danger-bg: transparent;
-  --component-pill-danger-color: var(--semantic-tone-error-bg);
-  --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
-  --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
-  --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
-  --component-pill-dark-bg: var(--primitive-color-gray-200);
-  --component-pill-dark-color: var(--primitive-color-gray-900);
-  --component-pill-dark-border-color: var(--primitive-color-gray-200);
-  --component-code-inline-border-color: var(--primitive-color-gray-700);
   --component-code-bg: oklch(0.16 0.028 258);
   --component-table-base-state-hover-bg: var(--primitive-color-gray-800);
   --component-table-base-th-bg: var(--primitive-color-gray-800);
@@ -2836,13 +2802,13 @@
   }
   blockquote {
     border-left: var(--component-blockquote-border-width) var(--component-blockquote-border-style) var(--component-blockquote-border-color);
-    padding-left: var(--layout-pad-4);
     margin-left: 0;
     margin-right: 0;
     font-style: italic;
     color: var(--component-blockquote-color);
     background: var(--component-blockquote-bg);
     padding: var(--layout-pad-3);
+    padding-left: var(--layout-pad-4);
     border-radius: var(--component-blockquote-border-radius);
   }
   hr {
@@ -4777,14 +4743,6 @@
   }
   .atom-table--primary [class*=__tfoot] {
     background-color: var(--component-table-bg-tfoot);
-  }
-  .atom-table--resp {
-    margin-bottom: var(--component-table-cell-padding-y);
-    width: 100%;
-    clear: both;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
   }
   .atom-table--resp {
     margin-bottom: var(--component-table-cell-padding-y);

@@ -1327,7 +1327,6 @@
   --font-bold: var(--font-weight-2);
   --semantic-color-primary: var(--primitive-color-gold-500);
   --semantic-color-secondary: var(--primitive-color-midnight-500);
-  --semantic-color-bg-secondary: var(--primitive-color-midnight-50);
   --semantic-color-tertiary: var(--primitive-color-silver-300);
   --semantic-color-quaternary: var(--primitive-color-gold-600);
   --semantic-color-quinary: var(--primitive-color-midnight-600);
@@ -1435,11 +1434,6 @@
   --btn-tertiary-filled-text: var(--primitive-color-dark-900);
   --btn-quaternary-text: var(--primitive-color-gold-600);
   --btn-quaternary-filled-text: var(--primitive-color-dark-900);
-  --form-font-family: var(--font-weight-1);
-  --form-font-size: calc(3.5 * var(--base-measure));
-  --form-line-height: calc(5 * var(--base-measure));
-  --form-inner-field: calc(4 * var(--base-measure));
-  --form-height-size: calc(15 * var(--base-measure));
   --breadcrumb-gap: calc(4 * var(--base-measure));
   --breadcrumb-item-highlighted-p-x: calc(4 * var(--base-measure));
   --breadcrumb-item-icon-p-r: calc(-4 * var(--base-measure));
@@ -2021,13 +2015,13 @@
   }
   blockquote {
     border-left: var(--component-blockquote-border-width) var(--component-blockquote-border-style) var(--component-blockquote-border-color);
-    padding-left: var(--layout-pad-4);
     margin-left: 0;
     margin-right: 0;
     font-style: italic;
     color: var(--component-blockquote-color);
     background: var(--component-blockquote-bg);
     padding: var(--layout-pad-3);
+    padding-left: var(--layout-pad-4);
     border-radius: var(--component-blockquote-border-radius);
   }
   hr {
@@ -3962,14 +3956,6 @@
   }
   .atom-table--primary [class*=__tfoot] {
     background-color: var(--component-table-bg-tfoot);
-  }
-  .atom-table--resp {
-    margin-bottom: var(--component-table-cell-padding-y);
-    width: 100%;
-    clear: both;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
   }
   .atom-table--resp {
     margin-bottom: var(--component-table-cell-padding-y);

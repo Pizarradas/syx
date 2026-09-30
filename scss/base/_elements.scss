@@ -104,13 +104,15 @@ blockquote {
     var(--component-blockquote-border-width)
     var(--component-blockquote-border-style)
     var(--component-blockquote-border-color);
-  padding-left: var(--layout-pad-4);
   margin-left: 0;
   margin-right: 0;
   font-style: italic;
   color: var(--component-blockquote-color);
   background: var(--component-blockquote-bg);
   padding: var(--layout-pad-3);
+  // Después del shorthand: antes iba delante y `padding` la anulaba, así que
+  // la sangría del filete nunca llegó a aplicarse.
+  padding-left: var(--layout-pad-4);
   border-radius: var(--component-blockquote-border-radius);
 }
 

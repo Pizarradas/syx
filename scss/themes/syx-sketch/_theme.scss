@@ -299,7 +299,6 @@
   // desaparecen, así que van a navy con trazo de color.
   --component-pill-primary-bg: transparent;
   --component-pill-primary-color: var(--primitive-color-blue-300);
-  --component-pill-primary-border-color: var(--primitive-color-blue-400);
   --component-pill-secondary-bg: transparent;
   --component-pill-secondary-color: var(--primitive-color-green-300);
   --component-pill-secondary-border-color: var(--primitive-color-green-500);
@@ -322,23 +321,9 @@
   --component-feature-icon-mixin-bg: var(--primitive-color-gray-800);
   --component-feature-icon-mixin-color: var(--primitive-color-green-200);
 
-  --component-code-inline-bg: var(--primitive-color-gray-800);
-  --component-code-inline-color: var(--primitive-color-blue-200);
   // Píldoras que quedaban sin adaptar: warning y danger conservaban su
   // tinte claro y en oscuro se leían como pegatinas encendidas.
-  --component-pill-warning-bg: transparent;
-  --component-pill-warning-color: var(--semantic-tone-warning-bg);
-  --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
-  --component-pill-danger-bg: transparent;
-  --component-pill-danger-color: var(--semantic-tone-error-bg);
-  --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
-  --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
-  --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
   // La píldora "dark" se invierte: sobre papel oscuro, la que destaca es la clara.
-  --component-pill-dark-bg: var(--primitive-color-gray-200);
-  --component-pill-dark-color: var(--primitive-color-gray-900);
-  --component-pill-dark-border-color: var(--primitive-color-gray-200);
-  --component-code-inline-border-color: var(--primitive-color-gray-700);
   --component-code-bg: oklch(0.16 0.028 258);
   --component-table-base-state-hover-bg: var(--primitive-color-gray-800);
   --component-table-base-th-bg: var(--primitive-color-gray-800);
@@ -990,10 +975,8 @@
     // Titulares de sección: un punto menos de tamaño y de peso
     // que el original. En un boceto la jerarquía la marca el
     // espacio, no el cuerpo de letra.
-    --component-section-title-font-size: clamp(1.75rem, 3.5vw, 2.5rem);
     --component-section-title-weight: var(--primitive-font-weight-bold);
     --component-section-title-tracking: -0.02em;
-    --component-section-title-max-width: 26ch;
     --component-section-divider-width: 1px;
     // Papel milimetrado de fondo en las secciones que lo piden.
     --component-section-bg-image: var(--semantic-bg-grid);
@@ -1012,7 +995,6 @@
     --component-hero-headline-weight: var(--primitive-font-weight-bold);
     --component-hero-headline-leading: 1;
     --component-hero-headline-tracking: -0.035em;
-    --component-hero-headline-max-width: 16ch;
 
     // La palabra destacada deja de ser un degradado recortado
     // (que en pantallas sin soporte se ve invisible) y pasa a
@@ -1025,7 +1007,6 @@
     --component-hero-accent-decoration-offset: 0.14em;
 
     --component-hero-sub-font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
-    --component-hero-sub-max-width: 46ch;
     --component-hero-stats-border-width: 0.125rem;
 
     // CTA — navy sólido con retícula. `background-image` no acepta

@@ -1954,13 +1954,13 @@
   }
   blockquote {
     border-left: var(--component-blockquote-border-width) var(--component-blockquote-border-style) var(--component-blockquote-border-color);
-    padding-left: var(--layout-pad-4);
     margin-left: 0;
     margin-right: 0;
     font-style: italic;
     color: var(--component-blockquote-color);
     background: var(--component-blockquote-bg);
     padding: var(--layout-pad-3);
+    padding-left: var(--layout-pad-4);
     border-radius: var(--component-blockquote-border-radius);
   }
   hr {
@@ -3895,14 +3895,6 @@
   }
   .atom-table--primary [class*=__tfoot] {
     background-color: var(--component-table-bg-tfoot);
-  }
-  .atom-table--resp {
-    margin-bottom: var(--component-table-cell-padding-y);
-    width: 100%;
-    clear: both;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
   }
   .atom-table--resp {
     margin-bottom: var(--component-table-cell-padding-y);

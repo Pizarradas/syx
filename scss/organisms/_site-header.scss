@@ -36,6 +36,7 @@
     // su columna: 320 px de desfase a 1920 y 460 a 2200. El logo flotaba en la
     // esquina sin relación con el título de la primera sección.
     padding: 0 var(--component-section-padding-inline);
+    // stylelint-disable-next-line declaration-block-no-duplicate-properties -- respaldo sólido para navegadores sin color-mix(); la línea de abajo lo sustituye
     background-color: var(--semantic-color-bg-primary);
     border-bottom: 1px solid var(--semantic-color-border-subtle);
     width: 100%;

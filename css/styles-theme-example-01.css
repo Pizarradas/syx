@@ -1311,7 +1311,6 @@
   --font-bold: var(--font-weight-2);
   --semantic-color-primary: var(--primitive-color-blue-500);
   --semantic-color-secondary: var(--primitive-color-cyan-500);
-  --semantic-color-bg-secondary: var(--primitive-color-blue-50);
   --semantic-color-tertiary: var(--primitive-color-orange-500);
   --semantic-color-quaternary: var(--semantic-color-primary);
   --semantic-color-quinary: var(--primitive-color-error-500);
@@ -1320,7 +1319,6 @@
   --semantic-color-placeholder: var(--semantic-color-primary);
   --semantic-color-link-default: var(--semantic-color-primary);
   --semantic-color-state-disabled: var(--primitive-color-disabled);
-  --semantic-focus-ring-color: var(--semantic-color-primary);
   --semantic-color-state-hover-primary: oklch(0.51 0.177 277.366);
   --semantic-color-state-hover-secondary: oklch(0.51 0.165 70.08);
   --semantic-color-state-hover-tertiary: oklch(0.51 0.177 277.366);
@@ -1966,13 +1964,13 @@
   }
   blockquote {
     border-left: var(--component-blockquote-border-width) var(--component-blockquote-border-style) var(--component-blockquote-border-color);
-    padding-left: var(--layout-pad-4);
     margin-left: 0;
     margin-right: 0;
     font-style: italic;
     color: var(--component-blockquote-color);
     background: var(--component-blockquote-bg);
     padding: var(--layout-pad-3);
+    padding-left: var(--layout-pad-4);
     border-radius: var(--component-blockquote-border-radius);
   }
   hr {
@@ -3909,14 +3907,6 @@
   }
   .atom-table--primary [class*=__tfoot] {
     background-color: var(--component-table-bg-tfoot);
-  }
-  .atom-table--resp {
-    margin-bottom: var(--component-table-cell-padding-y);
-    width: 100%;
-    clear: both;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
   }
   .atom-table--resp {
     margin-bottom: var(--component-table-cell-padding-y);
