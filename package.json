@@ -92,6 +92,7 @@
     "check:figma": "node scripts/export-figma.js --check",
     "check:evals": "node scripts/check-evals.js",
     "eval:modo": "node scripts/eval-modo.js",
+    "test:navegador": "npm --prefix tests/browser ci && node tests/browser/run.mjs --axe",
     "check:modos": "node scripts/check-modos.js",
     "check:encoding": "node scripts/check-encoding.js",
     "fix:encoding": "node scripts/check-encoding.js --fix",

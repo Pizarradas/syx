@@ -2,6 +2,7 @@
   "_meta": {
     "schema": "syx.contrast/1",
     "description": "Pares de color que tienen que cumplir WCAG 2.2 AA en todos los temas y en los cuatro estados de modo (sin elección y elegido, con el SO en claro y en oscuro). Lo consume scripts/check-contraste.js.",
+    "pendientes": "axe (tests/browser, auditoría 2026-09 acción 17) encontró cuatro pares que este contrato no medía y que fallan en seis temas: el enlace (--semantic-color-link-default sobre bg-primary), el texto inverso sobre el primario de relleno (botón relleno y cabecera de tabla), la sintaxis del código sobre --component-code-bg y text-secondary sobre bg-tertiary. Entran aquí cuando los temas se corrijan; mientras, están acotados en tests/browser/axe-excepciones.json.",
     "minimos": "4.5 para texto (1.4.3). 3 para límites de componentes de interfaz (1.4.11). Texto grande (≥ 24px o ≥ 18,66px en negrita) admitiría 3, pero ningún par de aquí es solo de texto grande."
   },
   "pares": [

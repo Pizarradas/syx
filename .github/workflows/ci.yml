@@ -9,6 +9,7 @@
 #   contratos   en cada push · rápido · es el que decide si algo está roto
 #   entrega     solo en PR · lento · empaqueta e instala de verdad
 #   desviación  informativo · nunca rompe · deja el informe a la vista
+#   navegador   PR y main · axe rompe; la regresión visual informa
 #
 # Lo lento va en los PR y no en cada push a propósito: `check:consumible`
 # empaqueta 10 MB y los instala, y `check:propuesta` copia el árbol y compila.
@@ -88,6 +89,64 @@ jobs:
 
       - name: La vía de propuesta acierta y se niega donde debe
         run: npm run check:propuesta
+
+  navegador:
+    name: Navegador · axe y regresión visual
+    runs-on: ubuntu-latest
+    # En los PR y en main. En cada push a cualquier rama sería lento para lo
+    # que aporta: lo que se fusiona pasa siempre por aquí.
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    defaults:
+      run:
+        working-directory: tests/browser
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: tests/browser/package-lock.json
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+
+      # ROMPE. WCAG 2.2 A y AA con axe-core sobre cada componente del registro,
+      # en los siete temas y los dos modos. Lo aceptado a sabiendas está en
+      # axe-excepciones.json, acotado por componente y tema, con su porqué.
+      - name: axe sobre todos los componentes, temas y modos
+        run: node run.mjs --axe
+
+      # NO ROMPE. La referencia es la rama base, fotografiada en esta misma
+      # máquina con este mismo arnés: no hay capturas versionadas que se
+      # desfasen con cada versión de Chromium. Un cambio visual puede ser
+      # justo el que se buscaba; lo decide quien revisa, con las imágenes.
+      - name: Capturas del cambio
+        if: github.event_name == 'pull_request'
+        run: node run.mjs --capturas out/despues
+
+      - name: Capturas de la rama base
+        if: github.event_name == 'pull_request'
+        run: |
+          git worktree add "$RUNNER_TEMP/base" "origin/${{ github.base_ref }}"
+          node run.mjs --capturas out/antes --raiz "$RUNNER_TEMP/base"
+
+      - name: Comparar
+        if: github.event_name == 'pull_request'
+        run: |
+          node comparar.mjs out/antes out/despues diferencias diferencias/informe.md
+          cat diferencias/informe.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'pull_request'
+        with:
+          name: regresion-visual
+          path: |
+            tests/browser/diferencias/
+            tests/browser/out/despues/
+          retention-days: 14
 
   desviacion:
     name: Desviación

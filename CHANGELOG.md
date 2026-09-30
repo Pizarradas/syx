@@ -26,6 +26,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `check:package` trata un `url()` sin destino como error.
 - `contracts/trust.json` protege en `human` la escalera de precedencia, la constitución, `governance/` y `atlas-rules/`.
 
+### Added — SYX en un navegador
+
+- `tests/browser/`: una página por tema y modo con todos los componentes tal como los usa el registro. `run.mjs --axe` pasa axe-core (WCAG 2.2 A y AA) y falla ante cualquier violación no justificada; `run.mjs --capturas` y `comparar.mjs` hacen la regresión visual contra la rama base, fotografiada en la misma máquina, sin capturas versionadas.
+- Job `navegador` en la CI (PR y main): axe rompe; la regresión visual deja el informe en el resumen y las imágenes como artefacto. `npm run test:navegador` en local.
+
+### Known issues — lo que encontró el navegador
+
+- **Color de marca como texto y bajo texto en seis temas (3,3–4,5:1).** El enlace por defecto, el botón relleno, la cabecera de tabla y la sintaxis del código usan el primario de relleno en example-01…06. `check:contraste` no medía esos pares. Están acotados, con su porqué, en `tests/browser/axe-excepciones.json` y anotados en `contracts/contrast.json`; corregirlos es una decisión de marca de cada tema. syx-sketch pasa limpio.
+
 ### Added — los cinco patrones de cualquier producto
 
 - `mol-alert` (`--info`, `--success`, `--warning`, `--error`), `mol-dialog` sobre `<dialog>` nativo, `mol-disclosure` sobre `<details>`/`<summary>` (acordeón exclusivo con `name=""`) y `mol-tabs` con el estado en `aria-selected`. Todos con `:focus-visible` y `forced-colors`; en `bundle-core`, `bundle-app` y `bundle-full`.

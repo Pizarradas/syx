@@ -1,0 +1,17 @@
+{
+  "name": "syx-tests-browser",
+  "private": true,
+  "description": "Pruebas en navegador de SYX: axe sobre cada componente, tema y modo, y capturas para la regresión visual. No forma parte del paquete.",
+  "type": "module",
+  "scripts": {
+    "axe": "node run.mjs --axe",
+    "capturas": "node run.mjs --capturas out",
+    "comparar": "node comparar.mjs"
+  },
+  "devDependencies": {
+    "axe-core": "^4.10.0",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.63.0",
+    "pngjs": "^7.0.0"
+  }
+}

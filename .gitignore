@@ -39,3 +39,7 @@ contracts/dtcg/
 # dist/ lo genera scripts/build-dist.js en `prepare` (npm pack, publish e
 # instalación desde GitHub): hojas por contexto, minificadas, sin la capa site/.
 dist/
+
+# Pruebas en navegador: capturas y diferencias se regeneran en cada ejecución.
+tests/browser/out/
+tests/browser/diferencias/
