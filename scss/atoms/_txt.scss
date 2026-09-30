@@ -8,6 +8,13 @@
 @mixin atom-txt($theme: null) {
   @layer syx.atoms {
   .atom-txt {
+    // La base pinta lo que su nombre promete: texto de cuerpo. Antes no
+    // declaraba nada y se usaba 156 veces en las páginas de SYX, así que
+    // quien la ponía en un <div> o un <span> no recibía nada. Son los mismos
+    // valores que ya da un <p>, así que en un párrafo no cambia nada.
+    color: var(--semantic-color-text-primary);
+    line-height: var(--semantic-line-height-body);
+
     // &--primary
     &--primary {
       @include margin(0 null var(--semantic-space-stack-sm) null);

@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="syx syx--theme-syx-sketch">
+<body class="syx">
 
     <a href="#main-content" class="syx-skip-link">Skip to main content</a>
 
@@ -1533,11 +1533,6 @@
                 if (!THEME_CSS[theme]) return;
                 if (cssLink) cssLink.setAttribute('href', THEME_CSS[theme]);
                 root.setAttribute('data-syx-theme', theme);
-                // La clase del <body> se quedaba en el tema inicial al cambiar,
-                // así que body y hoja de estilos se contradecían.
-                document.body.className = document.body.className
-                  .replace(/\bsyx--theme-[a-z0-9-]+\b/g, '').trim();
-                document.body.classList.add('syx--theme-' + theme);
                 if (selDesk) selDesk.value = theme;
                 if (selMob) selMob.value = theme;
                 try { sessionStorage.setItem('syx-theme', theme); } catch (e) { }

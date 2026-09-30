@@ -38,7 +38,7 @@
 
 </head>
 
-<body class="syx syx--theme-syx-sketch">
+<body class="syx">
 
   <a href="#main-content" class="syx-skip-link">Skip to main content</a>
 
@@ -1061,10 +1061,8 @@
         // 2. Keep data attribute for reference
         root.setAttribute('data-syx-theme', theme);
 
-        // 2b. La clase del <body> se quedaba en el tema inicial al cambiar de
-        //     tema, así que body y hoja de estilos se contradecían.
-        body.className = body.className.replace(/\bsyx--theme-[a-z0-9-]+\b/g, '').trim();
-        body.classList.add('syx--theme-' + theme);
+        // (El tema vive en data-syx-theme de <html>. El <body> llevaba además una
+        //  clase syx--theme-* que ningún CSS declaraba: se retiró.)
 
         // 3. Sync selects
         if (selDesk) selDesk.value = theme;

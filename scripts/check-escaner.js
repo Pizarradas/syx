@@ -62,7 +62,7 @@ const MUESTRA = `<!doctype html>
   <p class="atom-txtx">Hola</p>
   <!-- 11 · la alcanza [class*=__item], aunque no exista como .clase: no debe salir -->
   <ul class="atom-list atom-list--primary"><li class="atom-list__item">Uno</li></ul>
-  <!-- 12 · base sin estilos cuyos modificadores sí existen: aviso suave, no error -->
+  <!-- 12 · .atom-txt ya declara estilos: no debe salir (el detector se prueba aparte) -->
   <p class="atom-txt atom-txt--primary">Cuerpo</p>
   <!-- 10 · lo mismo pero DENTRO de un ejemplo: nada de esto debe salir -->
   <pre><code>&lt;p class="atom-otro-inventado"&gt;
@@ -150,11 +150,24 @@ comprobar('no denuncia una clase que pinta por selector de atributo', () => {
 });
 
 comprobar('una base sin estilos con modificadores reales es aviso, no error', () => {
-  const h = uno('base-sin-estilos', 'atom-txt');
+  // El sistema real ya no tiene ningún caso: `.atom-txt` era el último y ahora
+  // declara su color y su interlineado. Para probar el detector se le da un
+  // CSS con una familia cuya base falta a propósito.
+  const cssFalso = path.join(tmp, 'sistema.css');
+  fs.writeFileSync(cssFalso, fs.readFileSync(syx.cssPath('syx-sketch'), 'utf8') + '\n.atom-demo--x{color:red}\n');
+  const html = path.join(tmp, 'familia.html');
+  fs.writeFileSync(html, '<!doctype html><html><body><p class="atom-demo atom-demo--x">Cuerpo</p></body></html>');
+  const falso = Object.assign(Object.create(syx), { cssPath: () => cssFalso });
+  const r = escanear({ files: [html], syx: falso });
+  const h = r.hallazgos.find((x) => x.tipo === 'base-sin-estilos' && x.que.includes('atom-demo'));
+  if (!h) throw new Error('no encontró la base sin estilos');
   if (h.gravedad !== 'baja') throw new Error(`gravedad ${h.gravedad}: la familia existe, solo falta la base`);
-  if (!h.detalle.includes('atom-txt--primary')) throw new Error('no enseña el modificador que sí existe');
-  if (informe.hallazgos.some((x) => x.tipo === 'clase-fantasma' && x.que.includes('.atom-txt '))) {
+  if (!h.detalle.includes('atom-demo--x')) throw new Error('no enseña el modificador que sí existe');
+  if (r.hallazgos.some((x) => x.tipo === 'clase-fantasma' && x.que.includes('.atom-demo '))) {
     throw new Error('además la cuenta como clase inventada');
+  }
+  if (informe.hallazgos.some((x) => x.que.includes('.atom-txt '))) {
+    throw new Error('.atom-txt ya tiene estilos y sigue saliendo');
   }
 });
 

@@ -123,3 +123,6 @@ console.log('   El escáner no arregla nada a propósito: lo que encuentra entra
 console.log('   scripts/propose.js o por las manos de alguien.\n');
 
 if (flag('--fallar-si-alta') && informe.porGravedad.alta) process.exit(1);
+// --fallar-si-media: también media (p. ej. !important en el consumidor). Lo usa
+// check:vitrina sobre las páginas de SYX, que tienen que predicar con el ejemplo.
+if (flag('--fallar-si-media') && (informe.porGravedad.alta || informe.porGravedad.media)) process.exit(1);

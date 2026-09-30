@@ -312,9 +312,9 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
 
         // Una base sin estilos propios cuyos modificadores SÍ existen no es una
         // clase inventada: es el ancla de una familia que el sistema declara.
-        // `.atom-txt` no emite nada, pero `.atom-txt--primary` sí, y de 18
-        // familias es la única a la que le falta la base. Eso es una pregunta de
-        // diseño para una persona, no 77 errores repetidos.
+        // Eso es una pregunta de diseño para una persona, no decenas de errores
+        // repetidos. (`.atom-txt` fue el caso que la originó; hoy ya declara
+        // su base.)
         const familia = [...clasesSistema].filter((x) => x.startsWith(clase + '--'));
         if (familia.length) {
           añadir({
