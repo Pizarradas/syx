@@ -329,6 +329,27 @@ function buildUsageMap(scssFiles, runtimeData) {
 
 const { revisarTodos } = require('./lib/rules');
 
+// ─── R08: tokens del registro que no usa nadie ───────────────────────────────
+// Se mide sobre el CSS COMPILADO de todos los temas y no sobre el SCSS: el SCSS
+// construye nombres por interpolación (`var(--component-button-#{$v}-bg)`) y
+// un grep ahí daría falsos positivos. Solo tiers semántico y de componente: una
+// rampa de primitivos es una paleta completa a propósito, no deuda.
+function unusedRegistryTokens() {
+  const raw = JSON.parse(fs.readFileSync(TOKENS_JSON, 'utf8'));
+  const cssDir = path.join(ROOT, 'css');
+  const css = fs.readdirSync(cssDir).filter((f) => f.endsWith('.css'))
+    .map((f) => fs.readFileSync(path.join(cssDir, f), 'utf8')).join('\n');
+  const usados = new Set([...css.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]));
+  const sinUso = [];
+  for (const tier of ['semantic', 'component']) {
+    for (const [nombre, def] of Object.entries(raw[tier] || {})) {
+      if (def && def.status === 'deprecated') continue;
+      if (!usados.has(nombre)) sinUso.push(nombre);
+    }
+  }
+  return sinUso.sort();
+}
+
 function runScssChecks(scssFiles) {
   return revisarTodos(scssFiles);
 }
@@ -336,7 +357,7 @@ function runScssChecks(scssFiles) {
 
 // ─── Module 7: Write Contract Files ──────────────────────────────────────────
 
-function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens) {
+function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens, unused = []) {
   if (!fs.existsSync(CONTRACTS_DIR)) fs.mkdirSync(CONTRACTS_DIR, { recursive: true });
 
   const ts = new Date().toISOString();
@@ -379,8 +400,10 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
         legacyRuntime:      runtimeData.stats.legacy,
         phantomTokens:      crossCheckResult.phantoms.length,
         undocumentedTokens: crossCheckResult.undocumented.length,
+        unusedTokens:       unused.length,
       },
       phantomTokens:      crossCheckResult.phantoms,
+      unusedRegistryTokens: unused,
       undocumentedComponentTokens: crossCheckResult.undocumented,
       legacyVars,
       scssViolations: {
@@ -590,22 +613,34 @@ async function main() {
   const legacyVars       = catalogLegacyVars(runtimeData);
   const usageMap         = buildUsageMap(scssFiles, runtimeData);
   const scssViolations   = runScssChecks(scssFiles);
+  const unused           = unusedRegistryTokens();
 
   printReport(runtimeData, crossCheckResult, legacyVars, scssViolations);
 
+  console.log('── TOKEN USAGE (R08) ────────────────────────────────────────\n');
+  if (unused.length) {
+    console.log(`⚠️  R08 — ${unused.length} semantic/component tokens in tokens.json that no compiled CSS uses:`);
+    unused.slice(0, 15).forEach((u) => console.log(`   → ${u}`));
+    if (unused.length > 15) console.log(`   … and ${unused.length - 15} more. Run with --report to see all in lint-contract.json`);
+  } else {
+    console.log('✅ R08 — Every semantic and component token is used');
+  }
+  console.log();
+
   if (WRITE_REPORT) {
-    writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens);
+    writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens, unused);
     writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations);
   }
 
-  // Final verdict
-  const { R01, R02 } = scssViolations;
-  const hasErrors   = R01.length + R02.length > 0;
+  // Final verdict — la severidad sale del contrato: R01–R04 son `error` en
+  // contracts/rules.json. Hasta septiembre de 2026 este bloque contaba R03 y R04
+  // como avisos, así que un `transition:` en crudo no hacía fallar la CI.
+  const { R01, R02, R03, R04 } = scssViolations;
+  const hasErrors   = R01.length + R02.length + R03.length + R04.length > 0;
   const hasWarnings =
     crossCheckResult.phantoms.length +
     crossCheckResult.undocumented.length +
-    scssViolations.R03.length +
-    scssViolations.R04.length > 0;
+    unused.length > 0;
 
   console.log('┌─────────────────────────────────────────────────────────────┐');
   if (hasErrors)        console.log('│  Result: ❌ FAILED — fix errors before release              │');

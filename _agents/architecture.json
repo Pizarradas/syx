@@ -132,7 +132,7 @@
     { "from": "scss/ + css/", "to": "component-registry.json", "rel": "generates", "via": "npm run build:registry (prose fields preserved)" },
     { "from": "contracts/resolved-tokens.json", "to": "contracts/figma/*.figma.json", "rel": "generates", "via": "npm run export:figma (scripts/lib/figma.js does every unit/colour conversion)" },
     { "from": "tokens.json", "to": "contracts/dtcg/", "rel": "generates", "via": "npm run export:tokens (W3C DTCG)" },
-    { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R07) and validate_snippet; R08 declared, not yet implemented" },
+    { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R08) and validate_snippet (R01-R04)" },
     { "from": "contracts/trust.json", "to": "every write", "rel": "gates", "via": "scripts/lib/confianza.js -> classify_change and propose.js" },
     { "from": "_agents/modes/* Trust blocks", "to": "contracts/trust.json", "rel": "checked-against", "via": "npm run check:modos (also keeps CLAUDE.md, AGENTS.md and _agents/modes/README.md listing the same modes)" },
     { "from": "_agents/modes/* Knowledge blocks", "to": "mind-system/routing.md", "rel": "is-derived-view", "via": "hand-maintained today; guard B (check-conocimiento.js) specified in ACOPLE.md, not built" },

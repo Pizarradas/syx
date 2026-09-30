@@ -99,8 +99,10 @@ Quien toque cualquiera de las dos capas comprueba si la otra necesita revisión.
 
 ## Lo que todavía no vigila nadie
 
-Honestidad sobre el estado real, porque la alternativa es creerse cubierto:
+Honestidad sobre el estado real, porque la alternativa es creerse cubierto.
 
-- **El córtex no tiene guardián.** 286 ficheros de conocimiento y ninguna comprobación de que las rutas de `routing.md` existan, de que los tokens que citan sigan vivos, o de que no haya módulos huérfanos que nadie carga. La especificación de `scripts/check-conocimiento.js` está en `ACOPLE.md`, en la raíz; `scripts/` es tier `human`, así que lo escribe una persona.
-- **`governance/` y `atlas-rules/` se clasifican `auto` a nivel de fichero.** El patrón `*.md` de `trust.json` alcanza a cualquier markdown en cualquier carpeta, así que hoy un agente puede reescribir esta misma escalera de precedencia sin pasar por nadie. El parche de tres líneas para `contracts/trust.json` está en `ACOPLE.md`. Hasta que se aplique, esta sección describe una intención, no un candado.
-- **R08 está declarada y no implementada** en `syx-validate.js`, como ya advierte `CLAUDE.md`. AUDIT la nombra; nadie la ejecuta.
+Desde la auditoría de septiembre de 2026 están cerrados tres huecos que esta sección listaba: `npm run check:conocimiento` vigila el córtex (rutas de los bloques `Knowledge`, módulos huérfanos, concordancia de `routing.md` y filtro SYX sobre su código); `contracts/trust.json` nombra en `human` la gobernanza, las reglas Atlas, la constitución y este fichero; y R08 corre en `syx-validate.js`. Sigue abierto:
+
+- **Los tokens citados en el córtex no se cruzan con `tokens.json`.** Hace falta antes una convención que distinga el ejemplo ilustrativo del real (`ACOPLE.md` §B); sin ella, el guardián daría falsos positivos constantes.
+- **Los escalones 4–6 siguen siendo declarados.** Un guardián comprueba que el cableado existe, no que un modo aplique bien lo que el córtex le dice. Eso pide evaluar resultados de los modos contra tareas de referencia, y todavía no existe.
+- **Los modos que viajan en el paquete citan un córtex que no viaja.** Es correcto por diseño (el córtex informa, no ejecuta), pero nada impide que un modo pase a depender de él (`ACOPLE.md` §D).

@@ -4,7 +4,7 @@ You are working with **SYX**, a token-driven, native SCSS design system (v4.28.0
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
-2. `contracts/rules.json` — the contract rules (4 KB). `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
+2. `contracts/rules.json` — the contract rules (4 KB). `syx-validate.js` implements R01–R08
 
 **Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB)
 are the sources of truth, but reading them whole costs some 80 000 tokens of context before
@@ -151,7 +151,7 @@ These rules are never overridden by any mode:
 - **Never hardcode design values** (hex colors, raw px/rem literals). Use tokens.
 - **Check `tokens.json` before using a token.** If it doesn't exist, create it first.
 - **Check `component-registry.json` before creating a component.** Reuse before creating.
-- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R07 compliance. R01–R04 are errors; R05–R07 are warnings (undocumented tokens, phantom entries, unprefixed legacy vars).
+- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R08 compliance. R01–R04 are errors and fail the run; R05, R06 and R08 are warnings (undocumented tokens, phantom entries, registry tokens no compiled CSS uses) and R07 is info (unprefixed legacy vars).
 
 ---
 

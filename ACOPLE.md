@@ -242,4 +242,4 @@ y engancharlo donde tengas encadenados los demás `check:*`.
 
 ## Recordatorio suelto
 
-**R08 sigue declarada y sin implementar** en `syx-validate.js`, como ya advierte `CLAUDE.md`. AUDIT la nombra en su tabla de reglas y en su formato de informe. No es deuda del acople —- venía de antes —- pero ahora hay un documento más que la promete.
+**R08 está implementada desde septiembre de 2026** en `syx-validate.js`: tokens semánticos y de componente del registro que ningún CSS compilado usa, medidos sobre el CSS y no sobre el SCSS porque este construye nombres por interpolación.

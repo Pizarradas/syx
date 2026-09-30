@@ -6,7 +6,7 @@ This file is the canonical entry point for all AI agents and tools (OpenAI Codex
 Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
-2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R07; R08 is declared but not yet implemented
+2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R08
 
 `tokens.json` (the full token registry, ≈ 280 KB) and `component-registry.json` (the component
 inventory, ≈ 45 KB) are the sources of truth, but do **not** load them whole: that is some 80 000

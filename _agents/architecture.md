@@ -199,8 +199,8 @@ flowchart TB
 
 Source: `package.json` scripts. `prepublishOnly` adds `check:consumible`.
 **Known unguarded seams** (as of this map): rungs 4–6 of the ladder; the mode↔routing
-wiring (guard B pending); the npm package's self-containment against `mind-system/`
-references; R08 (declared in `rules.json`, implemented nowhere yet).
+wiring is guarded since September 2026 (`check:conocimiento`); the npm package's
+self-containment against `mind-system/` references is not.
 
 ---
 

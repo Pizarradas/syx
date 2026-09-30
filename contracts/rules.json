@@ -83,7 +83,7 @@
       "id": "R08",
       "severity": "warning",
       "category": "token-usage",
-      "description": "Tokens in the registry should have at least one usage in SCSS files",
+      "description": "Semantic and component tokens in the registry should be used by at least one compiled stylesheet (measured on css/*.css, where Sass interpolation is already resolved; primitive ramps are palettes and are not counted)",
       "rationale": "Tokens that are defined but never used are candidates for removal. Dead tokens add noise to AI context.",
       "allowedIn": [],
       "autofix": false
