@@ -26,6 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `check:package` trata un `url()` sin destino como error.
 - `contracts/trust.json` protege en `human` la escalera de precedencia, la constitución, `governance/` y `atlas-rules/`.
 
+### Added — medir los modos
+
+- `_agents/evals/`: 18 tareas de referencia (dos por modo), con enunciado, comprobaciones, preguntas de criterio, una respuesta que aprueba y fixtures para AUDIT. Rúbrica de cinco criterios en su README.
+- `npm run eval:modo -- <id> respuesta.md` corrige una respuesta: contrato con `validate_snippet`, tokens reales, frontera de confianza y forma de la entrega; devuelve las preguntas de criterio para quien corrige.
+- `check:evals` en la cadena: cada modo tiene dos tareas o más, cada referencia saca 8/8 y cada mutante suspende.
+
 ### Added — publicación
 
 - `.github/workflows/release.yml`: una etiqueta `vX.Y.Z` crea la release de GitHub tras comprobar que etiqueta, `package.json` y CHANGELOG coinciden y pasar la cadena entera; adjunta el `.tgz` y las hojas de `dist/`. npm solo si el repositorio define `PUBLICAR_NPM=true` y `NPM_TOKEN`.

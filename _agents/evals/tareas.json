@@ -1,0 +1,397 @@
+{
+  "schema": "syx.evals/1",
+  "descripcion": "Tareas de referencia por modo. Cada una trae su enunciado, lo que se comprueba solo (contrato, tokens reales, frontera de confianza, forma de la entrega) y las preguntas de criterio que responde una persona o AUDIT. La rúbrica está en _agents/evals/README.md; el corrector es scripts/eval-modo.js; check:evals prueba que cada referencia aprueba y que su mutante suspende.",
+  "tareas": [
+    {
+      "id": "ui-01",
+      "modo": "ui",
+      "titulo": "Un átomo nuevo con variantes",
+      "enunciado": "[SYX: UI]: Crea .atom-status — un indicador inline (punto + texto) con variantes --success, --error, --warning e --info. El punto cambia de color con una transición corta cuando cambia la variante.",
+      "scss": { "ruta": "scss/atoms/_status.scss", "minBloques": 1 },
+      "debe": [
+        { "re": "propose\\.js", "porque": "scss/atoms/ es tier pr: el cambio se entrega como propuesta" },
+        { "re": "@include transition\\(", "porque": "la transición va por el mixin (R03)" },
+        { "re": "state-(success|error|warning|info)-text", "porque": "el texto de estado usa la tinta con contraste 4,5:1, no el color de relleno" }
+      ],
+      "noDebe": [
+        { "re": "#[0-9a-fA-F]{3,8}\\b", "porque": "ningún color a pelo" }
+      ],
+      "secciones": ["## Código", "## Entrega"],
+      "criterio": [
+        "¿Comprobó en el registro que no existía ya un componente equivalente (get_component)?",
+        "¿El indicador no depende solo del color (texto o icono además del punto)?",
+        "¿Respeta el orden de propiedades del modo UI?"
+      ],
+      "referencia": "referencias/ui-01.md",
+      "mutante": { "buscar": "@include transition(background-color var(--semantic-duration-fast));", "poner": "transition: background-color 150ms;" }
+    },
+    {
+      "id": "ui-02",
+      "modo": "ui",
+      "titulo": "Foco visible en un componente existente",
+      "enunciado": "[SYX: UI]: Cuando .atom-pill se usa como enlace no se ve el foco con teclado. Arréglalo.",
+      "scss": { "ruta": "scss/atoms/_pill.scss", "minBloques": 1 },
+      "debe": [
+        { "re": ":focus-visible", "porque": "foco de teclado, sin anillo al hacer clic" },
+        { "re": "--semantic-focus-ring-(width|color)", "porque": "el anillo usa los tokens de foco del sistema" },
+        { "re": "propose\\.js", "porque": "tier pr" }
+      ],
+      "noDebe": [
+        { "re": "outline:\\s*none", "porque": "quitar el contorno es justo el fallo que se arregla" }
+      ],
+      "secciones": ["## Código", "## Entrega"],
+      "criterio": [
+        "¿Se ve el foco en modo de alto contraste (forced-colors)?",
+        "¿Extiende el componente en vez de duplicarlo?"
+      ],
+      "referencia": "referencias/ui-02.md",
+      "mutante": { "buscar": "var(--semantic-focus-ring-color)", "poner": "var(--semantic-focus-ring-colour)" }
+    },
+    {
+      "id": "token-01",
+      "modo": "token",
+      "titulo": "Tokens de componente para un átomo nuevo",
+      "enunciado": "[SYX: TOKEN]: Crea los tokens de componente que necesita .atom-status: separación entre punto y texto, tamaño del punto y color de cada variante.",
+      "scss": { "ruta": "scss/abstracts/tokens/components/_status.scss", "minBloques": 1 },
+      "tokens": { "nuevos": "^--component-status-" },
+      "debe": [
+        { "re": "propose\\.js token", "porque": "la vía de TOKEN deduce el fichero por la familia" },
+        { "re": "tokens\\.json", "porque": "un token de componente sin registrar incumple R05" }
+      ],
+      "noDebe": [
+        { "re": "var\\(--primitive-", "porque": "un token de componente apunta a la capa semántica, no a la primitiva" }
+      ],
+      "secciones": ["## Tokens", "## Registro", "## Entrega"],
+      "criterio": [
+        "¿Cada token nuevo tiene un consumidor real (R08), o es especulativo?",
+        "¿Los nombres siguen la gramática --component-<componente>-<variante>-<propiedad>?"
+      ],
+      "referencia": "referencias/token-01.md",
+      "mutante": { "buscar": "var(--semantic-color-state-error-text)", "poner": "var(--primitive-color-red-600)" }
+    },
+    {
+      "id": "token-02",
+      "modo": "token",
+      "titulo": "Pedir un token que ya existe",
+      "enunciado": "[SYX: TOKEN]: Necesito un token para el texto de los mensajes de error de formulario, que ahora se ve poco.",
+      "scss": null,
+      "debe": [
+        { "re": "--semantic-color-state-error-text", "porque": "ya existe y tiene contraste medido" },
+        { "re": "get_token|find_token_by_value", "porque": "se pregunta al servidor antes de crear" },
+        { "re": "no (hace falta|crear|se crea)|ningún token nuevo", "porque": "la respuesta correcta es no crear uno" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js token", "porque": "no hay token que proponer" }
+      ],
+      "secciones": ["## Respuesta"],
+      "criterio": [
+        "¿Explica por qué el color de relleno --semantic-color-state-error no sirve para texto?"
+      ],
+      "referencia": "referencias/token-02.md",
+      "mutante": { "buscar": "--semantic-color-state-error-text", "poner": "--semantic-color-error-text-strong" }
+    },
+    {
+      "id": "theme-01",
+      "modo": "theme",
+      "titulo": "Un tema nuevo, entregado para pegar",
+      "enunciado": "[SYX: THEME]: Diseña un tema de alto contraste para lectura larga, claro y oscuro.",
+      "scss": null,
+      "debe": [
+        { "re": "scss/themes/", "porque": "dice dónde irán los ficheros" },
+        { "re": "check:contraste", "porque": "el tema se mide contra contracts/contrast.json" },
+        { "re": "check:modo-claro", "porque": "elegir claro u oscuro no puede depender del SO" },
+        { "re": "(una|la) persona|a mano|humano", "porque": "scss/themes/ es human: se entrega, no se escribe" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "la vía de propuesta se niega en scss/themes/; ofrecerla es prometer lo que no existe" }
+      ],
+      "secciones": ["## Decisiones", "## Ficheros", "## Verificación"],
+      "criterio": [
+        "¿Cada decisión de color viene con su razón (legibilidad, jerarquía, marca)?",
+        "¿El oscuro está diseñado, no invertido?"
+      ],
+      "referencia": "referencias/theme-01.md",
+      "mutante": { "buscar": "npm run check:contraste", "poner": "node scripts/propose.js theme" }
+    },
+    {
+      "id": "theme-02",
+      "modo": "theme",
+      "titulo": "Cambiar el primario de un tema existente",
+      "enunciado": "[SYX: THEME]: Pon el primario de example-03 en verde.",
+      "scss": null,
+      "debe": [
+        { "re": "check:contraste", "porque": "el primario se usa como texto y como borde de foco" },
+        { "re": "oscuro|dark", "porque": "el primario cambia en los dos modos" },
+        { "re": "border-focus|foco", "porque": "--semantic-color-border-focus sigue al primario" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "scss/themes/ es human" }
+      ],
+      "secciones": ["## Cambio", "## Verificación"],
+      "criterio": [
+        "¿Revisa el texto sobre primario (text-on-primary) además del primario sobre fondo?"
+      ],
+      "referencia": "referencias/theme-02.md",
+      "mutante": { "buscar": "check:contraste", "poner": "revisión visual" }
+    },
+    {
+      "id": "ux-01",
+      "modo": "ux",
+      "titulo": "Un flujo, sin código",
+      "enunciado": "[SYX: UX]: Diseña el flujo para restablecer la contraseña.",
+      "scss": null,
+      "debe": [
+        { "re": "teclado|foco", "porque": "la accesibilidad es parte del diseño, no un anexo" },
+        { "re": "aria-|anuncia|lector de pantalla", "porque": "los mensajes de estado se anuncian" },
+        { "re": "(atom|mol|org)-[a-z]", "porque": "nombra los componentes SYX que lo resuelven" }
+      ],
+      "noDebe": [
+        { "re": "```scss", "porque": "UX no escribe SCSS" }
+      ],
+      "secciones": ["## Flujo", "## Componentes", "## Accesibilidad"],
+      "criterio": [
+        "¿Evita revelar si un correo existe (enumeración de cuentas)?",
+        "¿Cubre el caso de enlace caducado?"
+      ],
+      "referencia": "referencias/ux-01.md",
+      "mutante": { "buscar": "## Accesibilidad", "poner": "## Notas" }
+    },
+    {
+      "id": "ux-02",
+      "modo": "ux",
+      "titulo": "Una confirmación destructiva",
+      "enunciado": "[SYX: UX]: ¿Cómo debe comportarse la confirmación antes de borrar un proyecto?",
+      "scss": null,
+      "debe": [
+        { "re": "Escape", "porque": "un diálogo se cierra con Escape" },
+        { "re": "foco", "porque": "dónde entra y adónde vuelve el foco" },
+        { "re": "role=\"?alertdialog", "porque": "es un diálogo de alerta" }
+      ],
+      "noDebe": [
+        { "re": "```scss", "porque": "UX no escribe SCSS" }
+      ],
+      "secciones": ["## Comportamiento", "## Accesibilidad"],
+      "criterio": [
+        "¿El botón destructivo no recibe el foco por defecto?",
+        "¿Dice qué se pierde, con el nombre del proyecto?"
+      ],
+      "referencia": "referencias/ux-02.md",
+      "mutante": { "buscar": "Escape", "poner": "Esc." }
+    },
+    {
+      "id": "audit-01",
+      "modo": "audit",
+      "titulo": "Auditar un fragmento con cuatro violaciones",
+      "enunciado": "[SYX: AUDIT]: Revisa _agents/evals/fixtures/audit-01.scss (irá en scss/molecules/_toast.scss).",
+      "scss": null,
+      "fixture": "fixtures/audit-01.scss",
+      "tokens": { "ignorar": "^--primitive-" },
+      "debe": [
+        { "re": "R01", "porque": "--primitive-* en una molécula" },
+        { "re": "R02", "porque": "!important" },
+        { "re": "R03", "porque": "transition: a pelo" },
+        { "re": "R04", "porque": "position: fixed a pelo" }
+      ],
+      "noDebe": [
+        { "re": "\\b(he corregido|he aplicado|he cambiado|corregido en el fichero)\\b", "porque": "AUDIT informa; no edita" }
+      ],
+      "secciones": ["## Violaciones", "## Veredicto"],
+      "criterio": [
+        "¿Cada violación trae línea, severidad y un arreglo concreto con el mixin o token que la sustituye?"
+      ],
+      "referencia": "referencias/audit-01.md",
+      "mutante": { "buscar": "R04", "poner": "R4" }
+    },
+    {
+      "id": "audit-02",
+      "modo": "audit",
+      "titulo": "Auditar un cambio que cruza la frontera de confianza",
+      "enunciado": "[SYX: AUDIT]: Un agente abrió este cambio: _agents/evals/fixtures/audit-02.diff. ¿Se puede fusionar?",
+      "scss": null,
+      "fixture": "fixtures/audit-02.diff",
+      "tokens": { "ignorar": "^--primitive-" },
+      "debe": [
+        { "re": "trust\\.json", "porque": "la frontera la dice el contrato" },
+        { "re": "human|humano", "porque": "scss/themes/ es human" },
+        { "re": "check:contraste", "porque": "un primario más claro puede bajar de 4,5:1" }
+      ],
+      "noDebe": [
+        { "re": "\\b(he corregido|he aplicado|he revertido)\\b", "porque": "AUDIT informa; no edita" }
+      ],
+      "secciones": ["## Violaciones", "## Veredicto"],
+      "criterio": [
+        "¿Separa las dos partes (la del tema no, la del botón vía pr) en vez de rechazar o aprobar todo junto?"
+      ],
+      "referencia": "referencias/audit-02.md",
+      "mutante": { "buscar": "trust.json", "poner": "las normas" }
+    },
+    {
+      "id": "migrate-01",
+      "modo": "migrate",
+      "titulo": "Migrar una variable legacy",
+      "enunciado": "[SYX: MIGRATE]: Migra --card-bg-legacy en scss/molecules/_card.scss.",
+      "scss": { "ruta": "scss/molecules/_card.scss", "minBloques": 1 },
+      "debe": [
+        { "re": "propose\\.js", "porque": "tier pr" },
+        { "re": "usos|impacto|aparece en", "porque": "el análisis de impacto va antes del cambio" },
+        { "re": "--semantic-color-bg-", "porque": "se sustituye por un token del sistema" }
+      ],
+      "noDebe": [
+        { "re": "--card-bg-legacy\\s*:", "porque": "no se redeclara la variable legacy" }
+      ],
+      "secciones": ["## Impacto", "## Cambio", "## Entrega"],
+      "criterio": [
+        "¿Comprueba que el valor resuelto es el mismo en los siete temas antes de sustituir?"
+      ],
+      "referencia": "referencias/migrate-01.md",
+      "mutante": { "buscar": "var(--semantic-color-bg-secondary)", "poner": "var(--semantic-color-bg-seconday)" }
+    },
+    {
+      "id": "migrate-02",
+      "modo": "migrate",
+      "titulo": "Negarse a migrar en bloque",
+      "enunciado": "[SYX: MIGRATE]: Hay doce variables legacy en el hero. Migra todas de una vez.",
+      "scss": null,
+      "debe": [
+        { "re": "una (variable )?por propuesta|de una en una|una a una", "porque": "el modo migra una variable por propuesta" },
+        { "re": "propose\\.js", "porque": "cada una por la vía pr" }
+      ],
+      "noDebe": [
+        { "re": "```scss[\\s\\S]*--[a-z]+-legacy[\\s\\S]*--[a-z]+-legacy[\\s\\S]*```", "porque": "no entrega un cambio con varias migraciones" }
+      ],
+      "secciones": ["## Plan"],
+      "criterio": [
+        "¿Ordena las doce por riesgo o por número de usos, y empieza por la de menos impacto?"
+      ],
+      "referencia": "referencias/migrate-02.md",
+      "mutante": { "buscar": "una por propuesta", "poner": "todas juntas" }
+    },
+    {
+      "id": "sketch-01",
+      "modo": "sketch",
+      "titulo": "Un boceto de landing",
+      "enunciado": "[SYX: SKETCH]: Boceto rápido de una landing para una app de recetas.",
+      "scss": null,
+      "debe": [
+        { "re": "```html", "porque": "un boceto se entrega como fichero autónomo" },
+        { "re": "syx-sketch|atom-|mol-|org-", "porque": "se apoya en el tema y las clases que ya existen" },
+        { "re": "(no|nada) (entra|se escribe|va) (en|al) (el )?repositorio|fuera del repositorio", "porque": "SKETCH no escribe en el repositorio" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "un boceto no se propone al sistema" }
+      ],
+      "secciones": ["## Boceto"],
+      "criterio": [
+        "¿Es rápido de leer (jerarquía clara) antes que completo?"
+      ],
+      "referencia": "referencias/sketch-01.md",
+      "mutante": { "buscar": "```html", "poner": "```text" }
+    },
+    {
+      "id": "sketch-02",
+      "modo": "sketch",
+      "titulo": "Un boceto de panel",
+      "enunciado": "[SYX: SKETCH]: Boceto de un panel de métricas con tres tarjetas y una tabla.",
+      "scss": null,
+      "debe": [
+        { "re": "```html", "porque": "fichero autónomo" },
+        { "re": "atom-table|atom-stat-counter|mol-", "porque": "usa los componentes que ya hay" },
+        { "re": "(no|nada) (entra|se escribe|va) (en|al) (el )?repositorio|fuera del repositorio", "porque": "SKETCH no escribe en el repositorio" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "un boceto no se propone al sistema" }
+      ],
+      "secciones": ["## Boceto"],
+      "criterio": [
+        "¿Marca qué datos son de mentira?"
+      ],
+      "referencia": "referencias/sketch-02.md",
+      "mutante": { "buscar": "fuera del repositorio", "poner": "en scss/pages/" }
+    },
+    {
+      "id": "creative-01",
+      "modo": "creative",
+      "titulo": "Un hero con entrada animada",
+      "enunciado": "[SYX: CREATIVE]: Un hero con una entrada con carácter para una galería de arte.",
+      "scss": null,
+      "debe": [
+        { "re": "prefers-reduced-motion", "porque": "toda animación tiene su alternativa reducida" },
+        { "re": "Motion Spec|motion-spec", "porque": "si pasa a UI, se entrega su especificación" },
+        { "re": "(una|la) persona|a mano|fichero autónomo", "porque": "CREATIVE no hace commits" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "CREATIVE no escribe en el repositorio" }
+      ],
+      "secciones": ["## Idea", "## Construcción", "## Motion Spec"],
+      "criterio": [
+        "¿La animación comunica algo (jerarquía, orden de lectura) o es decoración?",
+        "¿Las duraciones caen en la escala de motion/06-sistema?"
+      ],
+      "referencia": "referencias/creative-01.md",
+      "mutante": { "buscar": "prefers-reduced-motion", "poner": "prefers-color-scheme" }
+    },
+    {
+      "id": "creative-02",
+      "modo": "creative",
+      "titulo": "Una narrativa de scroll con GSAP",
+      "enunciado": "[SYX: CREATIVE]: Una historia contada con scroll para el informe anual, con GSAP.",
+      "scss": null,
+      "debe": [
+        { "re": "matchMedia", "porque": "gsap.matchMedia separa la versión con y sin movimiento" },
+        { "re": "reduced|reducid", "porque": "alternativa con movimiento reducido" },
+        { "re": "motion/08-ejecucion/gsap", "porque": "cita el estrato del córtex que usa" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "CREATIVE no escribe en el repositorio" }
+      ],
+      "secciones": ["## Idea", "## Construcción"],
+      "criterio": [
+        "¿El contenido se entiende entero sin JavaScript?"
+      ],
+      "referencia": "referencias/creative-02.md",
+      "mutante": { "buscar": "matchMedia", "poner": "onScroll" }
+    },
+    {
+      "id": "brand-01",
+      "modo": "brand",
+      "titulo": "Una identidad completa",
+      "enunciado": "[SYX: BRAND]: Identidad visual para una cooperativa agrícola que vende directo al consumidor.",
+      "scss": null,
+      "debe": [
+        { "re": "primitiv", "porque": "la identidad se expresa en primitivas" },
+        { "re": "semántic", "porque": "y en el mapa semántico que las usa" },
+        { "re": "THEME", "porque": "BRAND decide; THEME construye el tema" },
+        { "re": "tipograf", "porque": "una identidad decide todos los ejes a la vez" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "BRAND no escribe" }
+      ],
+      "secciones": ["## Identidad", "## Ejes", "## Traspaso"],
+      "criterio": [
+        "¿Los ejes son coherentes entre sí (color, tipografía, forma, movimiento) y no una suma de gustos?"
+      ],
+      "referencia": "referencias/brand-01.md",
+      "mutante": { "buscar": "## Traspaso", "poner": "## Siguientes pasos" }
+    },
+    {
+      "id": "brand-02",
+      "modo": "brand",
+      "titulo": "Reconocer que no es trabajo de marca",
+      "enunciado": "[SYX: BRAND]: Cambia el color del botón primario de nuestro tema.",
+      "scss": null,
+      "debe": [
+        { "re": "THEME", "porque": "un eje suelto sobre un tema existente es THEME, no BRAND" },
+        { "re": "\\[SYX: THEME\\]", "porque": "dice cómo invocar el modo correcto" }
+      ],
+      "noDebe": [
+        { "re": "propose\\.js", "porque": "BRAND no escribe" }
+      ],
+      "secciones": ["## Respuesta"],
+      "criterio": [
+        "¿Lo redirige sin sermón y con lo que THEME necesita saber?"
+      ],
+      "referencia": "referencias/brand-02.md",
+      "mutante": { "buscar": "[SYX: THEME]", "poner": "el otro modo" }
+    }
+  ]
+}

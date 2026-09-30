@@ -1,0 +1,12 @@
+@use "../abstracts/index" as *;
+
+@layer syx.molecules {
+  .mol-toast {
+    position: fixed;
+    bottom: 1rem;
+    padding: var(--semantic-space-component-md);
+    background-color: var(--primitive-color-gray-900);
+    color: var(--semantic-color-text-inverse) !important;
+    transition: opacity 200ms ease;
+  }
+}

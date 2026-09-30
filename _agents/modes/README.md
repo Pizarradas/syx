@@ -236,3 +236,13 @@ does not have yet, and BRAND has to say which, not improvise around it.
    `mind-system/routing.md`. A knowledge module that no mode loads is a module nobody will open
 7. Run `npm run check:modos`. It fails if the three tables disagree, if the block is missing, or
    if a mode hands itself a permission the contract doesn't give it
+8. Add at least two reference tasks to `_agents/evals/tareas.json`, each with a passing
+   reference answer and a one-change mutant. `npm run check:evals` fails for a mode without them
+
+## Measuring a Mode
+
+`_agents/evals/` holds two reference tasks per mode and a shared rubric (contract, real tokens,
+trust boundary, deliverable shape — measured automatically — plus domain judgement, scored by a
+person or by AUDIT). Give an agent a task's `enunciado`, save its answer, and run
+`npm run eval:modo -- <id> answer.md`. Use it before and after changing a mode: a mode edit that
+drops a task below 8/8 has changed behaviour, whatever it meant to change.
