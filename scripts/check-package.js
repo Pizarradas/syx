@@ -108,8 +108,10 @@ for (const [nombre, destino] of Object.entries(pkg.bin || {})) {
 // ─── 3. El CSS que viaja no apunta a nada que se quede fuera ─────────────────
 // Es la comprobación que más valor da: las url() de las fuentes son relativas y
 // nadie las mira nunca. Se distingue entre «está en el repositorio pero no
-// viaja» (culpa del empaquetado, error) y «no está en el repositorio» (bug
-// anterior, aviso).
+// viaja» (culpa del empaquetado) y «no está en el repositorio» (bug anterior).
+// Las dos son error: hasta la auditoría de septiembre de 2026 la segunda era un
+// aviso, y el guardián concluía «lo que el paquete promete es lo que el paquete
+// entrega» con 35 url() a fuentes que no existían en cinco temas.
 
 const hojas = manifiesto.files.map((f) => f.path).filter((p) => /^css\/[^/]+\.css$/.test(p));
 const referencias = new Map(); // ruta relativa al paquete → hojas que la citan
@@ -149,7 +151,7 @@ if (refsRotasPorEmpaquetado > 3) {
   errores.push(`… y ${refsRotasPorEmpaquetado - 3} referencia(s) más que no viajan`);
 }
 for (const [familia, f] of familiasAusentes) {
-  avisos.push(`${familia} no está en el repositorio · ${f.ficheros} url() sin destino, en ${[...f.hojas].sort().join(', ')}`);
+  errores.push(`${familia} no está en el repositorio · ${f.ficheros} url() sin destino, en ${[...f.hojas].sort().join(', ')}`);
 }
 
 // ─── 4. Nada derivable ni pesado de más ──────────────────────────────────────
