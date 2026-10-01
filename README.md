@@ -40,34 +40,17 @@ SYX is a **component-first design system** that provides:
 
 ## Quick Start
 
-### Option A — Zero install (use the compiled CSS)
+Five minutes, one bundler, one theme. Everything in this section is exercised by
+`npm run check:quickstart` (see *What runs, and when*): it packs this repo, installs
+it in an empty Vite project, copies the two files below **verbatim from this README**,
+builds, and checks in Chromium that the tokens resolve and the tabs switch. If this
+section lies, that check goes red.
 
-Download or clone the repo, then link the CSS directly in your HTML:
+### 1. Install
 
-```html
-<!-- Pick the theme that fits your project -->
-<link rel="stylesheet" href="css/styles-theme-example-01.css" />
-
-<!-- REQUIRED: two classes on <body> -->
-<body class="syx syx--theme-example-01">
-  <!-- Use SYX components -->
-  <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md">
-    Click me
-  </button>
-  <span class="atom-pill atom-pill--primary">New</span>
-</body>
-```
-
-Open `index.html` in your browser to see the full live demo.
-
----
-
-### Option B — Install the package
-
-> **Not on the npm registry yet.** `syx-design-system` has not been published, so
-> `npm install syx-design-system` returns 404. Until the first release, install it
-> straight from GitHub — npm packs the repository with the same `files` list the
-> registry package will use, so everything below works the same:
+> **Not on the npm registry yet.** `npm install syx-design-system` returns 404 until
+> the first release. Install straight from GitHub — npm packs the repository with the
+> same `files` list the registry package will use, and its `prepare` step builds `dist/`:
 
 ```bash
 npm install github:Pizarradas/syx
@@ -75,17 +58,112 @@ npm install github:Pizarradas/syx
 npm install github:Pizarradas/syx#v4.28.0
 ```
 
-Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
-that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and
-attaches the package and the minified sheets to a GitHub release.
+### 2. Import one theme (and the JS, only if you use tabs)
 
+<!-- quickstart:src/main.js -->
 ```js
-// One theme, one line — the compiled CSS ships with the package
+// The whole system for one theme, minified, without SYX's own site layer
 import 'syx-design-system/themes/syx-sketch.css';
+
+// Optional. Only mol-tabs needs JavaScript: click, arrow keys, Home/End.
+import 'syx-design-system/js/syx-tabs.js';
 ```
 
+### 3. Write the markup
+
+<!-- quickstart:index.html -->
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Settings</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <h1 class="atom-title atom-title--h2">Settings</h1>
+
+    <div class="mol-tabs">
+      <div class="mol-tabs__list" role="tablist" aria-label="Settings">
+        <button class="mol-tabs__tab" role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1">Profile</button>
+        <button class="mol-tabs__tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1">Notifications</button>
+      </div>
+      <div class="mol-tabs__panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" tabindex="0">
+        <label class="atom-switch"><input class="atom-switch__input" type="checkbox" role="switch"><span class="atom-switch__slider" aria-hidden="true"></span><span class="atom-switch__label">Public profile</span></label>
+      </div>
+      <div class="mol-tabs__panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" tabindex="0" hidden>
+        <div class="mol-alert mol-alert--info" role="status"><p class="mol-alert__title">No notifications yet</p></div>
+      </div>
+    </div>
+
+    <div class="mol-btn-group">
+      <button class="atom-btn atom-btn--primary atom-btn--filled" type="button">Save</button>
+      <button class="atom-btn atom-btn--secondary" type="button">Cancel</button>
+    </div>
+  </body>
+</html>
+```
+
+No classes are required on `<html>` or `<body>`: the theme is the sheet you imported.
+Every component, its markup, modifiers, tokens and accessibility notes are in
+[`docs.html` → Component reference](docs.html#components), generated from
+`component-registry.json`.
+
+### 4. Light and dark
+
+Without anything else, SYX follows the operating system (`prefers-color-scheme`).
+To let the user choose, set `data-theme` on `<html>`:
+
 ```js
-// …and the design system is queryable from your own code
+document.documentElement.dataset.theme = 'dark';   // or 'light'; remove it to follow the OS again
+```
+
+### JavaScript
+
+The CSS is the system; JavaScript only adds what CSS cannot. Each file is optional,
+dependency-free, and imported by its package path. `package.json` declares `./js/*.js`
+in `sideEffects`, so a bare import survives `vite build`, webpack and Rollup
+(`check:package` fails if a new file isn't covered).
+
+| File | For | Bare import does | For markup rendered later |
+| ---- | --- | ---------------- | ------------------------- |
+| `js/syx-tabs.js` | `mol-tabs` | wires every `[role="tablist"]` present on load | `import { initTabs } from 'syx-design-system/js/syx-tabs.js'; initTabs(container);` |
+
+Frameworks that render after load (React, Vue, Svelte…) should call the init
+function after mounting instead of relying on the bare import. Without a bundler:
+`<script type="module" src="node_modules/syx-design-system/js/syx-tabs.js"></script>`.
+
+### Without a bundler
+
+Link the same sheet the `themes/` export resolves to:
+
+```html
+<link rel="stylesheet" href="node_modules/syx-design-system/dist/syx-sketch.full.min.css" />
+```
+
+`dist/<theme>.core.min.css` is the leaner production bundle (tokens, base, grid and the
+production components). `npm run build:dist` prints the current size of each sheet;
+they are not written here because a number in a README is the first thing to go stale.
+
+### Themes
+
+Swap `syx-sketch` in the import for any of these. Same markup, same classes.
+
+| Theme | Character | Import |
+| ----- | --------- | ------ |
+| `syx-sketch` | Grayscale, SKETCH mode (the docs default) | `syx-design-system/themes/syx-sketch.css` |
+| `example-01` | Indigo / Amber | `syx-design-system/themes/example-01.css` |
+| `example-02` | Purple / Pink | `syx-design-system/themes/example-02.css` |
+| `example-03` | Coral / Orange | `syx-design-system/themes/example-03.css` |
+| `example-04` | Forest / Earth | `syx-design-system/themes/example-04.css` |
+| `example-05` | Midnight / Gold | `syx-design-system/themes/example-05.css` |
+| `example-06` | Cyber (OKLCH) | `syx-design-system/themes/example-06.css` |
+
+`scss/themes/_template/` is the starting point for a theme of your own, not a shipped theme.
+
+### Query the system from your own code
+
+```js
 const syx = require('syx-design-system');
 
 syx.getToken({ token: '--component-button-primary-filled-bg', mode: 'dark' }).value;
@@ -96,6 +174,20 @@ syx.getComponent({ name: 'btn' }).modifiers;
 syx.validateSnippet({ code: '.card { color: var(--semantic-color-primary); }' }).conforme;
 ```
 
+The API and the MCP server answer from the same layer, and some of its result keys
+are Spanish — the repository's working language. They are part of the contract (the
+MCP server returns the same shapes), so they are documented rather than renamed:
+
+| Key | Returned by | Means |
+| --- | ----------- | ----- |
+| `encontrado` | `getToken`, `getComponent`, `getMixin` | whether the name exists |
+| `cadena` | `getToken` | the alias chain, from the token down to the literal |
+| `esExpresion` / `sinValor` | `getToken` | the value is a CSS expression only a browser can reduce / the token has no value in that theme and mode |
+| `exactos` / `parciales` | `findTokenByValue` | tokens holding exactly that value / partial matches |
+| `conforme` | `validateSnippet` | `true` when the snippet breaks no rule |
+| `violaciones` / `tokensInexistentes` / `nota` | `validateSnippet` | the broken rules / tokens that do not exist / a remark |
+| `hallazgos` | `scan` | the drift findings |
+
 The **contracts travel with the package**, so your app validates against the exact
 version it has installed — not against whatever is on `main` today.
 
@@ -104,26 +196,34 @@ version it has installed — not against whatever is on `main` today.
 | `syx-design-system` | Node API (the queries above, same surface as the MCP server) + `paths` to every artifact |
 | `syx-design-system/themes/<theme>.css` | One theme, the whole system, minified, without SYX's own site layer (`dist/<theme>.full.min.css`) |
 | `syx-design-system/bundles/<theme>.core.min.css` | The leaner production bundle for one theme. Other bundles (app, blog, marketing) compile from `scss/themes/<theme>/` |
+| `syx-design-system/js/syx-*.js` | Optional behaviour (table above) |
 | `syx-design-system/scss/...` | SCSS source, to compile your own build |
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
 | `syx-design-system/tokens.json`, `/component-registry.json` | Registries |
 | `npx syx-mcp` | The MCP server, from the installed package (from GitHub too) |
 
-### Option C — Build from SCSS with npm
+Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
+that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and
+attaches the package and the minified sheets to a GitHub release.
+
+### Working on SYX itself
 
 ```bash
 npm install
-npm run build        # compiles all 7 themes
-npm run build:tokens # regenerates contracts/resolved-tokens.json
-npm run export:tokens # exports the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
-npm run export:figma # exports variables + components for Figma (contracts/figma/, see below)
-npm run watch        # watches all themes for changes
+npm run build          # compiles the 7 themes into css/ and regenerates the derived artifacts
+npm run build:dist     # the consumer sheets in dist/ (also runs on `prepare`)
+npm run watch          # watches all themes for changes
+npm run check          # every guard
 ```
 
-### Option D — Dart Sass CLI directly
+`css/styles-theme-<theme>.css` is the *showroom* sheet the SYX pages use: the system
+**plus** the site layer (`scss/site/`). It is versioned so the pages work from a plain
+clone, but an app should use `dist/` — through the `themes/` export — and never `css/`.
+To compile your own bundle from source, see [`scss/GETTING-STARTED.md`](scss/GETTING-STARTED.md).
 
 ```bash
-sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=compressed --no-source-map
+npm run export:tokens  # the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
+npm run export:figma   # variables + components for Figma (contracts/figma/, see below)
 ```
 
 ---
@@ -191,7 +291,7 @@ From a clone instead of the installed package:
 
 No dependencies: plain JSON-RPC over stdio. It reads `contracts/resolved-tokens.json`
 and `component-registry.json`, both generated from source and arbitrated against the
-compiled CSS — so everything it returns exists. The server and the Node API in Option B
+compiled CSS — so everything it returns exists. The server and the Node API in the Quick Start
 answer from the same layer (`scripts/lib/consulta.js`), so an agent and an application
 get the same answer to the same question.
 
@@ -357,15 +457,20 @@ Fourteen guards, and none of them used to run unless somebody remembered to type
 | Job | When | What |
 | --- | ---- | ---- |
 | **Contratos** | every push · Node 18, 20, 22 | `check-limpio` (the committed CSS is the compiled one), then the whole `npm run check` chain |
-| **Entrega** | pull requests | `check:consumible` (packs and installs for real) and `check:propuesta` |
+| **Entrega** | pull requests | `check:consumible` (packs and installs for real), `check:quickstart` (the Quick Start above, built with Vite and opened in Chromium) and `check:propuesta` |
 | **Desviación** | every run, never fails | The drift report, written into the run summary |
 
 The heavy jobs are on PRs on purpose: paying a 10 MB pack on every `git push` is
 the surest way to get the whole thing switched off.
 
+`check:quickstart` needs network (it installs Vite in a throwaway project — Vite is not a
+dependency of this repo) and a Chromium, so it is not part of `npm run check`. To run it
+locally: `npm ci --prefix tests/browser` once, then `npm run check:quickstart`
+(`SYX_CHROMIUM=/path/to/chrome` if Playwright cannot download its own).
+
 `check-limpio` runs **first**, on the freshly cloned tree — `npm run check` ends
 by building, and after that there is no telling what was already there from what
-was just generated. `css/` is versioned deliberately (Option A above), and half
+was just generated. `css/` is versioned deliberately (the showroom sheets the SYX pages link), and half
 the system measures itself against it: the registry uses it as arbiter, the
 scanner decides from it which class exists, the token snapshot comes out of it. A
 committed CSS that doesn't match the SCSS doesn't break the build — it makes every
@@ -394,9 +499,9 @@ syx/
 │   │   └── _paths.scss          # Compile-time config (fonts/images paths)
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 19 atomic components
-│   ├── molecules/               # 6 composite components
-│   ├── organisms/               # 1 complex component (site-header)
+│   ├── atoms/                   # 19 atoms
+│   ├── molecules/               # 10 molecules
+│   ├── organisms/               # 1 organism (site-header)
 │   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities
@@ -435,7 +540,6 @@ syx/
 │   └── knowledges/              # ux · ui · front · syx · branding · motion · vendors
 │
 ├── index.js                     # Package entry point — the Node API
-├── index.html                   # Redirect wrapper
 ├── home.html                    # Landing page (AI First, features, tokens, themes)
 ├── docs.html                    # Complete unified documentation (Foundations, Components, Guidelines)
 ├── why-syx.html                 # Competitive analysis (7 sector committees)
@@ -504,20 +608,22 @@ Utilities always win over components. No `!important` needed.
 
 ## Themes
 
-| Theme       | Primary Color   | Bundles                              |
-| ----------- | --------------- | ------------------------------------ |
-| example-01  | Indigo / Amber  | app, docs, marketing, blog           |
-| example-02  | Purple / Pink   | app, docs, marketing, blog           |
-| example-03  | Coral / Orange  | app, docs, marketing, blog           |
-| example-04  | Forest / Earth  | app, docs, marketing, blog           |
-| example-05  | Midnight / Gold | app, docs, marketing, blog           |
-| example-06  | Cyber (OKLCH)   | app, docs, marketing, blog           |
-| `_template` | Neutral (core)  | base for new themes, not shipped     |
+Seven themes, each with light and dark: `syx-sketch` and `example-01` … `example-06`.
+The table with what each one looks like and how to import it is in the
+[Quick Start](#themes). To make your own, start from `scss/themes/_template/README.md`.
 
 ---
 
-## Status (March 2026)
+## Status
 
-- **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
-- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R10 contract layer active. Mode system (9 modes) fully operational. 1 phantom token closes on `npm run build`.
-- Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.
+Deliberately undated: the dated facts live in `CHANGELOG.md`, and the measured ones
+are regenerated by the guards instead of being copied here.
+
+- **Package**: installable from GitHub; not yet published to the npm registry. The
+  version is the badge at the top, which `check:version` keeps in step with `package.json`.
+- **Components**: the inventory is `component-registry.json`, rendered in
+  [`docs.html` → Component reference](docs.html#components). Any count of components
+  written in these docs is checked against it by `check:recuentos`.
+- **Contracts**: rules R01–R10 run in `npm run check`; the latest report is
+  `contracts/validation-report.md`, regenerated on every run.
+- **Known gaps** are listed, with their measurements, in `why-syx.html` → *Weaknesses*.

@@ -66,10 +66,10 @@ Toolbar global: tema (los 7 de `css/styles-theme-*.css`) × modo
 
 ## Fases
 
-- [x] **1. Spec neutral** — `generate-spec.mjs`. 26 componentes, 8 ejes, 45 flags.
+- [x] **1. Spec neutral** — `generate-spec.mjs`. Uno por componente del registro, con sus ejes y flags.
 - [x] **2. Storybook HTML** — línea base visual (este directorio).
 - [x] **3. Wrappers React y Vue generados** — `frameworks/react/` y
-      `frameworks/vue/`: 26 componentes cada uno, cero escritos a mano.
+      `frameworks/vue/`: uno por componente del registro, cero escritos a mano.
 - [x] **4. `npm run check:portabilidad`** — pixel-diff HTML ↔ React ↔ Vue por
       story (Playground + ejes + flags), Chromium vía Playwright, umbral 0,1 %
       de píxeles con el antialiasing descontado.
@@ -110,7 +110,7 @@ Lo que el proceso ya enseñó sobre el sistema (esta lista es parte del valor):
   elementos internos (`atom-pagination__item--is-active`). El spec los separa
   (`elementModifiers`), porque un modifier de elemento no es un prop del
   componente raíz. Candidato a distinguirse en el propio registro.
-- Los 4 componentes que carecían de `usage` (evidence, score, compare-card,
+- Los componentes que carecían de `usage` (evidence, score, compare-card,
   ranking) resultaron ser piezas exclusivas de `why-syx.html`: hoy viven en
   `scss/site/` (capa site, fuera del registro) y ya no aparecen en el catálogo.
 - Un modifier puede camelizar a una palabra reservada de JS:

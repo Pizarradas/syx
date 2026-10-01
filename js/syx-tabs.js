@@ -11,8 +11,15 @@
  * Activación automática: mover el foco activa la pestaña. Tabindex itinerante:
  * solo la activa entra en el orden de tabulación. Sin dependencias.
  *
- * Uso:  <script type="module" src="syx-design-system/js/syx-tabs.js"></script>
- *       o import { initTabs } from 'syx-design-system/js/syx-tabs.js';
+ * Uso, con empaquetador (Vite, webpack, Rollup):
+ *       import 'syx-design-system/js/syx-tabs.js';      // activa lo que haya al cargar
+ *       import { initTabs } from 'syx-design-system/js/syx-tabs.js';
+ *       initTabs(contenedor);                           // marcado que llega después
+ *     sin empaquetador:
+ *       <script type="module" src="node_modules/syx-design-system/js/syx-tabs.js"></script>
+ *
+ * El import «desnudo» solo sobrevive al build porque package.json declara
+ * ./js/*.js en `sideEffects` (lo vigila check:package).
  *
  * (Auditoría 2026-09 · acción 15)
  */

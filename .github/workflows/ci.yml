@@ -7,7 +7,7 @@
 #
 # CÓMO ESTÁ REPARTIDO
 #   contratos   en cada push · rápido · es el que decide si algo está roto
-#   entrega     solo en PR · lento · empaqueta e instala de verdad
+#   entrega     solo en PR · lento · empaqueta, instala y construye de verdad
 #   desviación  informativo · nunca rompe · deja el informe a la vista
 #   navegador   PR y main · axe rompe; la regresión visual informa
 #   confianza   solo en PR · segundos · rompe si toca rutas `human` sin aprobar
@@ -89,6 +89,20 @@ jobs:
 
       - name: El paquete se instala y responde
         run: npm run check:consumible
+
+      # El Quick Start del README, tal cual: empaqueta, instala en un proyecto
+      # Vite vacío, copia del README los bloques <!-- quickstart:… -->,
+      # `vite build` y Chromium. Es lo único que ve que un import de js/ se
+      # pierde en el tree-shaking de producción (auditoría 2026-10, acción 11).
+      # Playwright sale del arnés de tests/browser; Vite solo del temporal.
+      - name: Playwright para la prueba del Quick Start
+        working-directory: tests/browser
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: El Quick Start del README funciona en producción
+        run: npm run check:quickstart
 
       - name: La vía de propuesta acierta y se niega donde debe
         run: npm run check:propuesta
