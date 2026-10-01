@@ -145,7 +145,7 @@
   --component-switch-bg-off: var(--semantic-color-bg-tertiary);
   --component-switch-bg-on: var(--semantic-color-state-success-strong); // 1.4.11: variante fuerte del verde
   --component-switch-border-color: var(--semantic-color-border-control);
-  --component-switch-status-disabled-opacity: 0.5;
+  --component-switch-status-disabled-opacity: var(--semantic-opacity-disabled);
 
   // SWITCH: STATUS INDICATORS
   // ================================================
@@ -165,18 +165,18 @@
   // CHECK — la marca de verificación
   --component-check-mark-width: 0.3125rem;  // 5px
   --component-check-mark-height: 0.5625rem; // 9px
-  --component-check-mark-thickness: var(--primitive-border-width-2);
+  --component-check-mark-thickness: var(--semantic-border-width-default);
   --component-check-mark-rotation: 45deg;
   --component-check-transition-duration: var(--semantic-duration-fast);
   --component-check-transition-easing: var(--semantic-easing-out);
-  --component-check-status-disabled-opacity: var(--primitive-opacity-50);
+  --component-check-status-disabled-opacity: var(--semantic-opacity-disabled);
 
   // RADIO
   --component-radio-border-radius: var(--semantic-border-radius-circle);
   --component-radio-dot-border-radius: var(--semantic-border-radius-circle);
   --component-radio-transition-duration: var(--semantic-duration-fast);
   --component-radio-transition-easing: var(--semantic-easing-out);
-  --component-radio-status-disabled-opacity: var(--primitive-opacity-50);
+  --component-radio-status-disabled-opacity: var(--semantic-opacity-disabled);
 
   // SWITCH
   --component-switch-border-radius: var(--semantic-border-radius-full);

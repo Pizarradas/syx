@@ -80,56 +80,63 @@
   // gray-500 se quedaba en 3,5:1 sobre el campo blanco; el placeholder es
   // texto y pide 4,5. El terciario del tema (gray-600) da 5,5.
   --semantic-color-placeholder: var(--semantic-color-text-tertiary);
-  --component-button-primary-filled-bg: var(--semantic-color-primary);
-  --component-button-primary-filled-border: var(--semantic-color-primary);
-  --component-button-primary-filled-color: var(--semantic-color-text-inverse);
-  --component-button-primary-filled-color-hover: var(--semantic-color-text-inverse);
   --btn-primary-filled-text: oklch(1 0 0);
   --btn-secondary-filled-text: var(--primitive-color-ink);
   --btn-tertiary-filled-text: oklch(1 0 0);
   --btn-quaternary-filled-text: oklch(1 0 0);
-  --component-button-secondary-filled-color: var(--primitive-color-ink);
-  --component-button-secondary-filled-color-hover: var(--primitive-color-ink);
-  --component-button-secondary-color: var(--primitive-color-green-700);
-  --component-button-secondary-border: var(--primitive-color-green-700);
-  --component-pill-primary-bg: var(--primitive-color-blue-50);
-  --component-pill-primary-color: var(--primitive-color-blue-700);
-  --component-pill-primary-border-color: var(--primitive-color-blue-200);
-  --component-pill-secondary-bg: var(--primitive-color-green-50);
-  --component-pill-secondary-color: var(--primitive-color-green-700);
-  --component-pill-secondary-border-color: var(--primitive-color-green-200);
-  --component-pill-success-bg: var(--primitive-color-green-50);
-  --component-pill-success-color: var(--primitive-color-green-700);
+  // El botón secundario de contorno se dibuja con el verde oscuro: la menta
+  // es solo relleno (2,08:1 sobre blanco). Es la variante fuerte del rol.
+  --semantic-color-secondary-strong: var(--primitive-color-green-700);
+  --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
+  --component-button-secondary-filled-color-hover: var(--semantic-color-on-state-hover-secondary);
+  --component-button-secondary-color: var(--semantic-color-secondary-strong);
+  --component-button-secondary-border: var(--semantic-color-secondary-strong);
+  // Tonos suaves: la paleta de plano del tema, peldaño 50 de fondo, 200 de
+  // borde y 700 de tinta (600 el rojo). Antes se escribían píldora a píldora
+  // en el componente; desde la acción 14 (2026-10) son roles semánticos y la
+  // píldora, el fragmento de código y el icono los leen de aquí.
+  --semantic-color-tone-primary-subtle-bg: var(--primitive-color-blue-50);
+  --semantic-color-tone-primary-subtle-fg: var(--primitive-color-blue-700);
+  --semantic-color-tone-primary-subtle-border: var(--primitive-color-blue-200);
+  --semantic-color-tone-secondary-subtle-bg: var(--primitive-color-green-50);
+  --semantic-color-tone-secondary-subtle-fg: var(--primitive-color-green-700);
+  --semantic-color-tone-secondary-subtle-border: var(--primitive-color-green-200);
+  --semantic-color-tone-success-subtle-bg: var(--primitive-color-green-50);
+  --semantic-color-tone-success-subtle-fg: var(--primitive-color-green-700);
+  --semantic-color-tone-success-subtle-border: var(--primitive-color-green-200);
+  --semantic-color-tone-warning-subtle-bg: var(--primitive-color-yellow-50);
+  --semantic-color-tone-warning-subtle-fg: var(--primitive-color-yellow-700);
+  --semantic-color-tone-warning-subtle-border: var(--primitive-color-yellow-200);
+  --semantic-color-tone-error-subtle-bg: var(--primitive-color-red-50);
+  --semantic-color-tone-error-subtle-fg: var(--primitive-color-red-600);
+  --semantic-color-tone-error-subtle-border: var(--primitive-color-red-200);
   --component-pill-neutral-bg: var(--semantic-color-bg-secondary);
   --component-pill-neutral-color: var(--semantic-color-text-secondary);
   --component-feature-icon-border-color: var(--semantic-color-border-strong);
-  --component-feature-icon-atom-bg: var(--primitive-color-blue-50);
-  --component-feature-icon-atom-color: var(--primitive-color-blue-700);
-  --component-feature-icon-molecule-bg: var(--primitive-color-green-50);
-  --component-feature-icon-molecule-color: var(--primitive-color-green-700);
-  --component-feature-icon-organism-bg: var(--primitive-color-gray-100);
-  --component-feature-icon-organism-color: var(--primitive-color-gray-800);
-  --component-feature-icon-token-bg: var(--primitive-color-blue-100);
-  --component-feature-icon-token-color: var(--primitive-color-blue-800);
-  --component-feature-icon-layer-bg: var(--primitive-color-gray-50);
-  --component-feature-icon-layer-color: var(--primitive-color-ink);
-  --component-feature-icon-mixin-bg: var(--primitive-color-green-100);
-  --component-feature-icon-mixin-color: var(--primitive-color-green-800);
-  --component-code-inline-bg: var(--primitive-color-blue-50);
-  --component-code-inline-color: var(--primitive-color-blue-800);
-  --component-pill-warning-bg: var(--primitive-color-yellow-50);
-  --component-pill-warning-color: var(--primitive-color-yellow-700);
-  --component-pill-warning-border-color: var(--primitive-color-yellow-200);
-  --component-pill-danger-bg: var(--primitive-color-red-50);
-  --component-pill-danger-color: var(--primitive-color-red-600);
-  --component-pill-danger-border-color: var(--primitive-color-red-200);
-  --component-pill-success-border-color: var(--primitive-color-green-200);
-  --component-code-inline-border-color: var(--primitive-color-blue-200);
-  --component-code-bg: var(--primitive-color-gray-900);
-  --component-table-base-state-hover-bg: var(--primitive-color-blue-50);
+  // Colores categóricos (las seis capas del icono de característica), con la
+  // paleta del tema pasada por dos intensidades.
+  --semantic-color-category-1-bg: var(--primitive-color-blue-50);
+  --semantic-color-category-1-fg: var(--primitive-color-blue-700);
+  --semantic-color-category-2-bg: var(--primitive-color-green-50);
+  --semantic-color-category-2-fg: var(--primitive-color-green-700);
+  --semantic-color-category-3-bg: var(--primitive-color-gray-100);
+  --semantic-color-category-3-fg: var(--primitive-color-gray-800);
+  --semantic-color-category-4-bg: var(--primitive-color-blue-100);
+  --semantic-color-category-4-fg: var(--primitive-color-blue-800);
+  --semantic-color-category-5-bg: var(--primitive-color-gray-50);
+  --semantic-color-category-5-fg: var(--primitive-color-ink);
+  --semantic-color-category-6-bg: var(--primitive-color-green-100);
+  --semantic-color-category-6-fg: var(--primitive-color-green-800);
+  // Código en línea: chip azul de plano. El bloque, navy (la superficie de
+  // énfasis, que en claro es la de siempre).
+  --semantic-color-code-inline-bg: var(--primitive-color-blue-50);
+  --semantic-color-code-inline-fg: var(--primitive-color-blue-800);
+  --semantic-color-code-inline-border: var(--primitive-color-blue-200);
+  --semantic-color-code-bg: var(--primitive-color-gray-900);
+  --component-table-base-state-hover-bg: var(--semantic-color-bg-tertiary);
   --component-table-base-th-bg: var(--semantic-color-bg-secondary);
   --component-table-bg-th: var(--semantic-color-bg-inverse);
-  --component-table-state-hover-bg: var(--primitive-color-blue-50);
+  --component-table-state-hover-bg: var(--semantic-color-bg-tertiary);
   // Este tema pinta el hover de la celda con un tinte suave, no con el
   // relleno de hover: el texto sigue siendo el de la página.
   --component-table-state-hover-color: var(--semantic-color-text-primary);
@@ -143,7 +150,6 @@
   // Ámbar de TEXTO, más oscuro que el de relleno: 5,21:1 sobre blanco
   // frente a los 3,2:1 del ámbar de estado.
   --semantic-color-state-warning-text: oklch(0.54 0.15 72);
-  --component-button-disabled-filled-color: var(--semantic-color-text-inverse);
   --semantic-color-bg-primary: oklch(1 0 0);                    // blanco
   --semantic-color-bg-secondary: var(--primitive-color-gray-50); // #F5F7FA
   --semantic-color-bg-tertiary: var(--primitive-color-blue-50);  // #E8EEFF
@@ -154,9 +160,9 @@
   --component-feature-card-border-color: var(--semantic-color-border-default);
   --component-code-snippet-border-color: var(--semantic-color-border-strong);
   --semantic-shadow-hard-color: var(--primitive-color-ink);
-  --component-pill-dark-bg: var(--primitive-color-gray-900);
-  --component-pill-dark-color: oklch(1 0 0);
-  --component-pill-dark-border-color: var(--primitive-color-gray-900);
+  // Superficie de énfasis (la píldora «dark»): navy con blanco encima.
+  --semantic-color-bg-emphasis: var(--primitive-color-gray-900);
+  --semantic-color-on-emphasis: oklch(1 0 0);
 }
 
 // ================================================
@@ -205,54 +211,66 @@
   --semantic-focus-ring-color: var(--primitive-color-blue-300);
   --semantic-color-placeholder: var(--primitive-color-gray-500);
 
-  // Botones: el relleno se aclara y el texto pasa a navy.
-  --component-button-primary-filled-bg: var(--primitive-color-blue-300);
-  --component-button-primary-filled-border: var(--primitive-color-blue-300);
-  --component-button-primary-filled-color: var(--primitive-color-gray-900);
-  --component-button-primary-filled-color-hover: var(--primitive-color-gray-900);
+  // Botones: el relleno se aclara (es el primario, que en oscuro ya es
+  // blue-300) y el texto pasa a navy (el texto inverso del oscuro). Lo dan
+  // los valores por defecto; no hace falta reescribir el componente.
   --btn-primary-filled-text: var(--primitive-color-gray-900);
   --btn-secondary-filled-text: var(--primitive-color-gray-900);
   --btn-tertiary-filled-text: var(--primitive-color-gray-900);
   --btn-quaternary-filled-text: var(--primitive-color-gray-900);
-  --component-button-secondary-filled-color: var(--primitive-color-gray-900);
-  --component-button-secondary-filled-color-hover: var(--primitive-color-gray-900);
-  --component-button-secondary-color: var(--primitive-color-green-300);
-  --component-button-secondary-border: var(--primitive-color-green-300);
+  --semantic-color-secondary-strong: var(--primitive-color-green-300);
+  --component-button-secondary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-secondary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-secondary-color: var(--semantic-color-secondary-strong);
+  --component-button-secondary-border: var(--semantic-color-secondary-strong);
 
   // Superficies con color: en oscuro los tintes claros
   // desaparecen, así que van a navy con trazo de color.
-  --component-pill-primary-bg: transparent;
-  --component-pill-primary-color: var(--primitive-color-blue-300);
-  --component-pill-secondary-bg: transparent;
-  --component-pill-secondary-color: var(--primitive-color-green-300);
-  --component-pill-secondary-border-color: var(--primitive-color-green-500);
-  --component-pill-success-bg: transparent;
-  --component-pill-success-color: var(--primitive-color-green-300);
+  --semantic-color-tone-primary-subtle-bg: transparent;
+  --semantic-color-tone-primary-subtle-fg: var(--primitive-color-blue-300);
+  --semantic-color-tone-primary-subtle-border: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
+  --semantic-color-tone-secondary-subtle-bg: transparent;
+  --semantic-color-tone-secondary-subtle-fg: var(--primitive-color-green-300);
+  --semantic-color-tone-secondary-subtle-border: var(--primitive-color-green-500);
+  --semantic-color-tone-success-subtle-bg: transparent;
+  --semantic-color-tone-success-subtle-fg: var(--primitive-color-green-300);
+  --semantic-color-tone-success-subtle-border: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
+  // Aviso y error conservaban su tinte claro y en oscuro se leían como
+  // pegatinas encendidas: van, como el resto, con trazo del color de estado.
+  --semantic-color-tone-warning-subtle-bg: transparent;
+  --semantic-color-tone-warning-subtle-fg: var(--semantic-color-state-warning);
+  --semantic-color-tone-warning-subtle-border: color-mix(in srgb, var(--semantic-color-state-warning) 45%, transparent);
+  --semantic-color-tone-error-subtle-bg: transparent;
+  --semantic-color-tone-error-subtle-fg: var(--semantic-color-state-error);
+  --semantic-color-tone-error-subtle-border: color-mix(in srgb, var(--semantic-color-state-error) 45%, transparent);
   --component-pill-neutral-bg: transparent;
   --component-pill-neutral-color: var(--semantic-color-text-secondary);
 
   --component-feature-icon-border-color: var(--semantic-color-border-default);
-  --component-feature-icon-atom-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-atom-color: var(--primitive-color-blue-300);
-  --component-feature-icon-molecule-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-molecule-color: var(--primitive-color-green-300);
-  --component-feature-icon-organism-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-organism-color: var(--primitive-color-gray-200);
-  --component-feature-icon-token-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-token-color: var(--primitive-color-blue-200);
-  --component-feature-icon-layer-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-layer-color: var(--primitive-color-gray-100);
-  --component-feature-icon-mixin-bg: var(--primitive-color-gray-800);
-  --component-feature-icon-mixin-color: var(--primitive-color-green-200);
+  --semantic-color-category-1-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-1-fg: var(--primitive-color-blue-300);
+  --semantic-color-category-2-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-2-fg: var(--primitive-color-green-300);
+  --semantic-color-category-3-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-3-fg: var(--primitive-color-gray-200);
+  --semantic-color-category-4-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-4-fg: var(--primitive-color-blue-200);
+  --semantic-color-category-5-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-5-fg: var(--primitive-color-gray-100);
+  --semantic-color-category-6-bg: var(--primitive-color-gray-800);
+  --semantic-color-category-6-fg: var(--primitive-color-green-200);
 
-  // Píldoras que quedaban sin adaptar: warning y danger conservaban su
-  // tinte claro y en oscuro se leían como pegatinas encendidas.
-  // La píldora "dark" se invierte: sobre papel oscuro, la que destaca es la clara.
-  --component-code-bg: oklch(0.16 0.028 258);
-  --component-table-base-state-hover-bg: var(--primitive-color-gray-800);
-  --component-table-base-th-bg: var(--primitive-color-gray-800);
-  --component-table-bg-th: var(--primitive-color-gray-800);
-  --component-table-state-hover-bg: var(--primitive-color-gray-800);
+  // El bloque de código baja de navy a casi negro: sobre el navy de la página
+  // tiene que seguir leyéndose como una pieza aparte.
+  --semantic-color-code-bg: oklch(0.16 0.028 258);
+  // Tablas: el hover y la cabecera van al escalón de las tarjetas. Eran
+  // gray-800 (L 0,300); el bg-tertiary del oscuro es L 0,305, mismo tono y
+  // croma: una diferencia que no se ve, a cambio de no escribir un primitivo
+  // en el componente (R11).
+  --component-table-base-state-hover-bg: var(--semantic-color-bg-tertiary);
+  --component-table-base-th-bg: var(--semantic-color-bg-tertiary);
+  --component-table-bg-th: var(--semantic-color-bg-tertiary);
+  --component-table-state-hover-bg: var(--semantic-color-bg-tertiary);
 
   // La retícula se atenúa: sobre navy, el mismo 9% deslumbra.
   --semantic-bg-grid-color: color-mix(in srgb, var(--primitive-color-blue-300) 12%, transparent);
@@ -271,8 +289,8 @@
   // En oscuro el ámbar de estado ya da 10,46:1 sobre el fondo: el texto usa
   // el mismo y no hace falta un tono aparte.
   --semantic-color-state-warning-text: var(--semantic-tone-warning-bg);
-  // El botón deshabilitado con relleno lleva texto oscuro sobre el gris.
-  --component-button-disabled-filled-color: var(--primitive-color-gray-900);
+  // El botón deshabilitado con relleno lleva texto oscuro sobre el gris: el
+  // texto inverso del oscuro, que es el valor por defecto del componente.
 
   // ================================================
   // ELEVACIÓN EN OSCURO
@@ -299,10 +317,10 @@
   --semantic-color-border-default: var(--primitive-color-gray-600);
   --semantic-color-border-strong: var(--primitive-color-gray-300);
 
-  // Superficies elevadas
-  --component-feature-card-bg: oklch(0.305 0.032 262);
-  --component-feature-card-border-color: var(--primitive-color-gray-600);
-  --component-code-snippet-border-color: var(--primitive-color-gray-600);
+  // Superficies elevadas: la tarjeta, en el escalón de las tarjetas.
+  --component-feature-card-bg: var(--semantic-color-bg-tertiary);
+  --component-feature-card-border-color: var(--semantic-color-border-default);
+  --component-code-snippet-border-color: var(--semantic-color-border-default);
 
   // La sombra dura se aclara: sobre superficies de 0.305, un gris de 0.52
   // apenas se veía. El "papel levantado" debe leerse igual que en claro.
@@ -310,23 +328,13 @@
   // El chip de código en línea estaba a 0.30, el mismo tono que las tarjetas
   // tras subirlas: dentro de una tarjeta desaparecía. Sube un escalón más y
   // se tiñe de azul para que se lea como chip y no como fondo.
-  --component-code-inline-bg: oklch(0.345 0.055 265);
-  --component-code-inline-border-color: oklch(0.42 0.08 265);
-  --component-code-inline-color: var(--primitive-color-blue-200);
-  // Píldoras que quedaban sin adaptar: warning y danger conservaban su
-  // tinte claro y en oscuro se leían como pegatinas encendidas.
-  --component-pill-warning-bg: transparent;
-  --component-pill-warning-color: var(--semantic-tone-warning-bg);
-  --component-pill-warning-border-color: color-mix(in srgb, var(--semantic-tone-warning-bg) 45%, transparent);
-  --component-pill-danger-bg: transparent;
-  --component-pill-danger-color: var(--semantic-tone-error-bg);
-  --component-pill-danger-border-color: color-mix(in srgb, var(--semantic-tone-error-bg) 45%, transparent);
-  --component-pill-success-border-color: color-mix(in srgb, var(--primitive-color-green-300) 45%, transparent);
-  --component-pill-primary-border-color: color-mix(in srgb, var(--primitive-color-blue-300) 50%, transparent);
-  // La píldora "dark" se invierte: sobre papel oscuro, la que destaca es la clara.
-  --component-pill-dark-bg: var(--primitive-color-gray-200);
-  --component-pill-dark-color: var(--primitive-color-gray-900);
-  --component-pill-dark-border-color: var(--primitive-color-gray-200);
+  --semantic-color-code-inline-bg: oklch(0.345 0.055 265);
+  --semantic-color-code-inline-border: oklch(0.42 0.08 265);
+  --semantic-color-code-inline-fg: var(--primitive-color-blue-200);
+  // La superficie de énfasis se invierte: sobre papel oscuro, la píldora
+  // «dark» que destaca es la clara.
+  --semantic-color-bg-emphasis: var(--primitive-color-gray-200);
+  --semantic-color-on-emphasis: var(--primitive-color-gray-900);
 }
 
 @mixin theme-syx-sketch {
@@ -641,7 +649,7 @@
     --btn-secondary-text: var(--primitive-color-green-700);
     --btn-tertiary-text: var(--semantic-color-tertiary);
     --btn-quaternary-text: var(--semantic-color-quaternary);
-    --component-btn-group-gap: calc(3 * var(--base-measure));
+    --component-btn-group-gap: 0.75rem;
 
     // TARJETAS: rectángulo dibujado. Sin sombra en reposo; al
     // pasar por encima, el papel se levanta y el trazo se vuelve
@@ -668,7 +676,6 @@
     --component-feature-icon-shadow: var(--semantic-shadow-hard-sm);
 
     // CÓDIGO: la muestra técnica. Fondo navy, trazo tinta.
-    --component-code-color: var(--primitive-color-gray-100);
     --component-code-border-radius: var(--semantic-border-radius-default);
     --component-code-border-width: 0.0625rem;
     --component-code-border-color: var(--semantic-color-border-strong);
@@ -694,7 +701,7 @@
     --component-table-base-th-border-color: var(--semantic-color-border-strong);
     // atom-table: la cabecera pasa de azul de marca a navy. El azul
     // eléctrico queda reservado para lo que se puede pulsar.
-    --component-table-color-th: oklch(1 0 0);
+    --component-table-color-th: var(--semantic-color-ink-light);
     --component-table-th-font-family: var(--semantic-font-family-heading);
     --component-table-border-width: 1px;
     --component-table-border-color: var(--semantic-color-border-subtle);
@@ -795,11 +802,11 @@
     // Sintaxis del código, elegida contra el navy del bloque, no contra la
     // página. Con los roles de marca por defecto, `val` era el navy del
     // propio fondo: texto invisible.
-    --component-code-syntax-tag: var(--primitive-color-blue-300);
-    --component-code-syntax-attr: var(--primitive-color-green-300);
-    --component-code-syntax-val: var(--primitive-color-blue-100);
-    --component-code-syntax-comment: var(--primitive-color-gray-500);
-    --component-code-syntax-fn: var(--primitive-color-green-200);
+    --semantic-color-code-tag: var(--primitive-color-blue-300);
+    --semantic-color-code-attr: var(--primitive-color-green-300);
+    --semantic-color-code-val: var(--primitive-color-blue-100);
+    --semantic-color-code-comment: var(--primitive-color-gray-500);
+    --semantic-color-code-fn: var(--primitive-color-green-200);
 
     // ================================================
     // RITMO Y ALINEACIÓN — la pasada de diseño

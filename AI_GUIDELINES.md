@@ -44,7 +44,7 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 | -------------------------------- | ---------------------------------------------------------------- |
 | `tokens.json`                    | Token registry (type, rawValue, status) — generated from the SCSS by `npm run build`, never edited by hand |
 | `component-registry.json`        | All components: atoms, molecules, organisms                      |
-| `contracts/rules.json`           | The contract rules, R01–R10: severities, allowed paths, matchers and exceptions. `scripts/lib/rules.js` runs it for `syx-validate.js` and `validate_snippet` |
+| `contracts/rules.json`           | The contract rules, R01–R11: severities, allowed paths, matchers and exceptions. `scripts/lib/rules.js` runs it for `syx-validate.js` and `validate_snippet` |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
 | `contracts/validation-report.md` | Human-readable audit report                                      |
 | `contracts/dtcg/`                | W3C DTCG export — Style Dictionary, Tokens Studio             |
@@ -80,8 +80,9 @@ so a change you have not compiled does not exist for either. Run `npm run build`
 | **R04** | `position: absolute/fixed/sticky`                        | `scss/abstracts/mixins/`                                                                  |
 | **R09** | `@include` of a mixin that no `@mixin` in `scss/` defines | Nowhere                                                                                  |
 | **R10** | An exception that is malformed, unjustified or dead       | Nowhere                                                                                  |
+| **R11** | A `--component-*` token that reads a `--primitive-*`, a legacy variable or a literal colour (it may read `--semantic-*`, `--component-*`, `--theme-*`, `--layout-*` and icons) | Checked only where component tokens are declared: `scss/abstracts/tokens/components/` and `scss/themes/` |
 
-**Exceptions are per line, never per file.** Where a rule allows it (`inlineException: true`: R01, R03, R04), write the reason on the line immediately above the one declaration it excuses:
+**Exceptions are per line, never per file.** Where a rule allows it (`inlineException: true`: R01, R03, R04, R11), write the reason on the line immediately above the one declaration it excuses:
 
 ```scss
 // syx-allow R03: Chrome's autofill hack, not visible motion; reduced-motion would bring the flash back
@@ -90,7 +91,7 @@ transition: background-color 600000s 0s;
 
 An exception that no longer excuses anything is an R10 error, and so is a single-file `allowedIn` entry that excuses nothing. `npm run validate` lists every live exception with its reason; `validate_snippet` returns them under `excepciones`.
 
-> **Current status: ⚠️ PASSED WITH WARNINGS** — R01–R04, R09 and R10 all passing (two inline R03 exceptions). Warnings are R08 (unused registry tokens).
+> **Current status: ⚠️ PASSED WITH WARNINGS** — R01–R04 and R09–R11 all passing (two inline R03 exceptions). Warnings are R08 (unused registry tokens).
 
 ---
 
@@ -247,7 +248,7 @@ what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE �
 | 4 | `[SYX: TOKEN]:` | Token architecture | `pr` / recommends |
 | 5 | `[SYX: THEME]:` | OKLCH scales, `_theme.scss` | recommends |
 | 6 | `[SYX: UI]:` | Component SCSS | `pr` |
-| 7 | `[SYX: AUDIT]:` | R01–R10 conformance | nothing |
+| 7 | `[SYX: AUDIT]:` | R01–R11 conformance | nothing |
 | 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
 | 9 | `[SYX: BRAND]:` | A complete visual identity — asks you axis by axis, or decides them all | recommends |
 

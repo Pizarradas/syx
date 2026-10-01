@@ -160,6 +160,10 @@
     --semantic-color-bg-primary: var(--primitive-color-dark-900);
     --semantic-color-bg-secondary: var(--primitive-color-dark-800);
     --semantic-color-bg-tertiary: var(--primitive-color-dark-700);
+    // El chip de código en línea, un escalón por debajo del terciario: sobre
+    // dark-700 (L 0,42) la tinta roja derivada se quedaba en 3,44:1; sobre
+    // dark-800 da 5,14:1 y el chip sigue destacando del fondo dark-900.
+    --semantic-color-code-inline-bg: var(--semantic-color-bg-secondary);
     --semantic-border-width: 1px;
     --semantic-outline-width: var(--theme-focus-ring-width);
     --semantic-color-border-default: var(--primitive-color-dark-400); // raised from dark-600 — more visible borders

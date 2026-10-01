@@ -13,7 +13,7 @@ same change that alters the shape they describe (tier `auto`, named explicitly i
 ```mermaid
 flowchart TB
     subgraph LAW["THE LAW — contracts/ · human-only"]
-        RULES["rules.json<br/>R01–R10"]
+        RULES["rules.json<br/>R01–R11"]
         TRUST["trust.json<br/>auto / pr / human"]
     end
 
@@ -83,7 +83,7 @@ Sources: `contracts/trust.json`, `contracts/rules.json`, `package.json` scripts,
 ```mermaid
 flowchart TB
     R1["1 · contracts/trust.json<br/>who may write what — ✅ classify_change"]
-    R2["2 · contracts/rules.json<br/>R01–R10 — ✅ npm run validate"]
+    R2["2 · contracts/rules.json<br/>R01–R11 — ✅ npm run validate"]
     R3["3 · modes Trust blocks<br/>each mode's ceiling — ✅ check:modos"]
     R4["4 · mind-system/governance/<br/>ATLAS composition — ⚠️ declared only"]
     R5["5 · mind-system/atlas-rules/<br/>editorial decisions — ⚠️ declared only"]
@@ -190,7 +190,7 @@ to rot.
 
 ```mermaid
 flowchart TB
-    CHECK["npm run check"] --> V["validate — R01–R04, R09, R10 errors,<br/>R05, R06, R08 warnings"]
+    CHECK["npm run check"] --> V["validate — R01–R04, R09–R11 errors,<br/>R05, R06, R08 warnings"]
     CHECK --> T1["check:themes — symmetry across 7 themes"]
     CHECK --> T1b["check:setups — selector symmetry across the 7 entry points,<br/>fonts only via theme-x-fonts()"]
     CHECK --> T2["check:version — version citations"]

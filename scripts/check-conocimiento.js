@@ -18,7 +18,7 @@
  *      cargan, y todas las que cita existen. Es un fichero derivado; si
  *      diverge, alguien editó uno de los dos lados y no el otro.
  *   5. El filtro SYX: todo bloque ```scss/```css del córtex pasa las reglas de
- *      árbol (R01–R04, R09, R10) con scripts/lib/rules.js, juzgado en la capa
+ *      árbol (R01–R04, R09–R11) con scripts/lib/rules.js, juzgado en la capa
  *      que declara (`// capa: …` en su primera línea; sin declaración, como
  *      componente). No se juzgan los marcados como antipatrón (`✗` en la
  *      primera línea, o «nunca», «evitar», «anti-patrón» justo antes) ni los de

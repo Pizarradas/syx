@@ -54,6 +54,10 @@
   --semantic-color-primary-strong: var(--semantic-color-primary);
   // El interruptor encendido se pinta con el verde de éxito: mismo problema.
   --semantic-color-state-success-strong: var(--semantic-color-state-success);
+  // El secundario como TRAZO (borde y texto del botón secundario de contorno):
+  // una menta o un amarillo claros no llegan a 3:1 sobre blanco. Mismo
+  // mecanismo; hoy lo declara a mano syx-sketch (su menta es solo relleno).
+  --semantic-color-secondary-strong: var(--semantic-color-secondary);
 }
 
 // La tinta se DERIVA del propio color de marca: misma tonalidad y mismo croma,
@@ -106,6 +110,7 @@
 
     --semantic-color-primary-strong: oklch(from var(--semantic-color-primary) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
     --semantic-color-state-success-strong: oklch(from var(--semantic-color-state-success) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
+    --semantic-color-secondary-strong: oklch(from var(--semantic-color-secondary) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
   }
 }
 
@@ -249,4 +254,122 @@
   // ================================================
   // El placeholder es texto (4,5:1 sobre el campo): tinta, no relleno.
   --semantic-color-placeholder: var(--semantic-color-primary-text);
+
+  // OPACIDAD DE LO DESHABILITADO
+  // ================================================
+  // Check, radio e interruptor la escribían cada uno a su manera (dos con un
+  // primitivo, uno con un 0.5 suelto). Es un rol: cuánto se apaga lo que no
+  // se puede usar.
+  --semantic-opacity-disabled: var(--primitive-opacity-50);
+
+  // TONOS SUAVES (subtle): fondo, borde y tinta de un tono como ETIQUETA
+  // ================================================
+  // Para lo que señala un tono sin ser un relleno: la píldora, la cabecera del
+  // fragmento de código correcto o incorrecto, el icono de característica.
+  // Hasta octubre de 2026 cada componente los escribía con primitivos
+  // (blue-50 / blue-600 / blue-200) y quedaban fuera del tema: la píldora
+  // primaria era violeta (h ≈ 264–285) en example-06, cuya marca es cian, y no
+  // cambiaba en oscuro. (Auditoría 2026-10 · acción 14)
+  //
+  // Se DERIVAN del rol. Fondo y borde son el color del tono al 12 % y al 35 %
+  // mezclado con el fondo de la página, en oklab (tintes perceptualmente
+  // parejos): siguen al modo oscuro sin reasignarlos, porque el fondo ya
+  // cambia. Opacos a propósito: mezclados con transparente, un color de marca
+  // fuera de la gama sRGB (el violeta de example-06) dejaba franjas amarillas
+  // en el borde antialias. La tinta es la variante de texto del rol, que ya
+  // sube de luminosidad en oscuro. check:contraste mide cada tinta sobre su
+  // fondo en los siete temas y los cuatro estados de modo. Un tema puede
+  // fijarlos a mano, como hace syx-sketch con su paleta de plano.
+  --semantic-color-tone-primary-subtle-bg: color-mix(in oklab, var(--semantic-color-primary) 12%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-primary-subtle-border: color-mix(in oklab, var(--semantic-color-primary) 35%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-primary-subtle-fg: var(--semantic-color-primary-text);
+
+  --semantic-color-tone-secondary-subtle-bg: color-mix(in oklab, var(--semantic-color-secondary) 12%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-secondary-subtle-border: color-mix(in oklab, var(--semantic-color-secondary) 35%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-secondary-subtle-fg: var(--semantic-color-secondary-text);
+
+  --semantic-color-tone-success-subtle-bg: color-mix(in oklab, var(--semantic-color-state-success) 12%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-success-subtle-border: color-mix(in oklab, var(--semantic-color-state-success) 35%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-success-subtle-fg: var(--semantic-color-state-success-text);
+
+  --semantic-color-tone-warning-subtle-bg: color-mix(in oklab, var(--semantic-color-state-warning) 12%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-warning-subtle-border: color-mix(in oklab, var(--semantic-color-state-warning) 35%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-warning-subtle-fg: var(--semantic-color-state-warning-text);
+
+  --semantic-color-tone-error-subtle-bg: color-mix(in oklab, var(--semantic-color-state-error) 12%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-error-subtle-border: color-mix(in oklab, var(--semantic-color-state-error) 35%, var(--semantic-color-bg-primary));
+  --semantic-color-tone-error-subtle-fg: var(--semantic-color-state-error-text);
+
+  // COLORES CATEGÓRICOS
+  // ================================================
+  // Distinguen categorías que no son estados ni marca: las seis capas del
+  // icono de característica (átomo, molécula, organismo, token, capa, mixin).
+  // Por defecto, los tonos suaves, en el mismo orden que antes tenían los
+  // primitivos (azul, violeta, verde, azul, amarillo, rojo → primario,
+  // secundario, éxito, primario, aviso, error). Un tema con su propia paleta
+  // categórica los fija aquí y no en el componente.
+  --semantic-color-category-1-bg: var(--semantic-color-tone-primary-subtle-bg);
+  --semantic-color-category-1-fg: var(--semantic-color-tone-primary-subtle-fg);
+  --semantic-color-category-2-bg: var(--semantic-color-tone-secondary-subtle-bg);
+  --semantic-color-category-2-fg: var(--semantic-color-tone-secondary-subtle-fg);
+  --semantic-color-category-3-bg: var(--semantic-color-tone-success-subtle-bg);
+  --semantic-color-category-3-fg: var(--semantic-color-tone-success-subtle-fg);
+  --semantic-color-category-4-bg: var(--semantic-color-tone-primary-subtle-bg);
+  --semantic-color-category-4-fg: var(--semantic-color-tone-primary-subtle-fg);
+  --semantic-color-category-5-bg: var(--semantic-color-tone-warning-subtle-bg);
+  --semantic-color-category-5-fg: var(--semantic-color-tone-warning-subtle-fg);
+  --semantic-color-category-6-bg: var(--semantic-color-tone-error-subtle-bg);
+  --semantic-color-category-6-fg: var(--semantic-color-tone-error-subtle-fg);
+
+  // SUPERFICIE DE ÉNFASIS
+  // ================================================
+  // Oscura SIEMPRE, en claro y en oscuro: la píldora «dark» y el bloque de
+  // código. No es el rol inverse, que en oscuro es claro y la volvía del
+  // revés. Un tema que quiera invertirla en oscuro lo decide aquí.
+  --semantic-color-bg-emphasis: var(--primitive-color-gray-900);
+  --semantic-color-on-emphasis: var(--primitive-color-white);
+
+  // CÓDIGO
+  // ================================================
+  // El bloque de código es una superficie de énfasis con su propia paleta de
+  // sintaxis, elegida contra ESE fondo (fijo y oscuro) y no contra la página.
+  // La sintaxis se deriva de los roles de marca más abajo, con sintaxis de
+  // color relativa; sin ella se queda con el relleno, el comportamiento de
+  // antes. El código en línea es otra cosa: un chip sobre la página.
+  --semantic-color-code-bg: var(--semantic-color-bg-emphasis);
+  --semantic-color-code-fg: var(--primitive-color-gray-100);
+  // El comentario es texto y también pide 4,5:1. text-disabled cambia con el
+  // modo (gris claro en claro, gris 600 en oscuro: 2,2:1 sobre el código);
+  // el fondo del código no cambia, así que el comentario tampoco.
+  --semantic-color-code-comment: var(--primitive-color-gray-400);
+  --semantic-color-code-tag: var(--semantic-color-primary);
+  --semantic-color-code-attr: var(--semantic-color-secondary);
+  --semantic-color-code-val: var(--semantic-color-tertiary);
+  --semantic-color-code-fn: var(--semantic-color-quaternary);
+  // Luminosidad de la sintaxis derivada. Fija y alta porque el fondo es fijo
+  // y oscuro en todos los temas y modos.
+  --semantic-code-syntax-lightness: 0.82;
+
+  // El chip va sobre la superficie terciaria, que el modo oscuro ya reasigna.
+  // Su tinta es el rojo de siempre como TINTA: con sintaxis relativa se deriva
+  // a la luminosidad de texto del tema (más abajo), como las de marca; el
+  // red-600 fijo daba 2,0:1 sobre el terciario oscuro.
+  --semantic-color-code-inline-bg: var(--semantic-color-bg-tertiary);
+  --semantic-color-code-inline-fg: var(--primitive-color-red-600);
+  --semantic-color-code-inline-border: var(--semantic-color-border-subtle);
+}
+
+// Los rellenos de marca rondan L 0,60: sobre el fondo del código daban
+// 3,9–4,4:1, y un terciario oscuro (example-03) 2,0:1. Se deriva cada rol con
+// su tono y su croma y la luminosidad de arriba: el código sigue teniendo los
+// colores del tema, solo más claros. Donde no hay sintaxis relativa se queda
+// el relleno, que es el comportamiento anterior.
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --semantic-color-code-tag: oklch(from var(--semantic-color-primary) var(--semantic-code-syntax-lightness) c h);
+    --semantic-color-code-attr: oklch(from var(--semantic-color-secondary) var(--semantic-code-syntax-lightness) c h);
+    --semantic-color-code-val: oklch(from var(--semantic-color-tertiary) var(--semantic-code-syntax-lightness) c h);
+    --semantic-color-code-fn: oklch(from var(--semantic-color-quaternary) var(--semantic-code-syntax-lightness) c h);
+    --semantic-color-code-inline-fg: oklch(from var(--primitive-color-red-600) var(--semantic-brand-text-lightness) c h);
+  }
 }

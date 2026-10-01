@@ -33,10 +33,12 @@
     background-color: var(--semantic-color-bg-secondary);
     color: var(--semantic-color-text-secondary);
 
-    // --primary (atoms layer)
+    // --primary (atoms layer). Leía un --semantic-color-primary-subtle que no
+    // declaraba nadie y vivía de su fallback; sus tokens (atom-*) existían y
+    // no los leía nadie. El valor por defecto es el mismo que daba el fallback.
     &--primary {
-      background-color: var(--semantic-color-primary-subtle, color-mix(in srgb, var(--semantic-color-primary) 12%, transparent));
-      color: var(--semantic-color-primary-text);
+      background-color: var(--component-feature-icon-atom-bg);
+      color: var(--component-feature-icon-atom-color);
     }
 
     // --molecule (molecules layer)

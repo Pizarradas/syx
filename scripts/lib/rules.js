@@ -1,5 +1,5 @@
 /**
- * SYX — El motor de las reglas de contrato (R01–R04, R09, R10)
+ * SYX — El motor de las reglas de contrato (R01–R04, R09–R11)
  * ────────────────────────────────────────────────────────────
  * Un solo motor para los tres que preguntan: `syx-validate.js`, que lo pasa
  * sobre el repositorio entero; `validate_snippet` (servidor MCP), que lo pasa
@@ -63,6 +63,34 @@ const sinComentarios = (s) => String(s).replace(/\/\*[\s\S]*?\*\//g, ' ').replac
 const limpio = (s) => sinComentarios(sinCadenas(s));
 
 const escapar = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/**
+ * El primer color escrito a mano de un valor, o null. Cuenta como literal un
+ * hexadecimal, una función de color sin ningún `var()` dentro (`oklch(1 0 0)`,
+ * `rgb(…)`) y las palabras white/black. NO lo son `transparent` ni
+ * `currentColor` (no son un color, son su ausencia o su herencia), ni una
+ * función que deriva de un token (`oklch(from var(--semantic-…) …)`,
+ * `color-mix(… var(--semantic-…) …)`): eso es traducir un rol, no inventarlo.
+ */
+function literalDeColor(valor) {
+  const v = String(valor);
+  const hex = /(^|[\s,(])(#[0-9a-f]{3,8})\b/i.exec(v);
+  if (hex) return hex[2];
+  const re = /\b(oklch|oklab|lch|lab|rgba?|hsla?|hwb|color)\(/gi;
+  let m;
+  while ((m = re.exec(v))) {
+    // El cuerpo de la función, contando paréntesis.
+    let prof = 0, j = m.index + m[0].length - 1;
+    for (; j < v.length; j++) {
+      if (v[j] === '(') prof++;
+      else if (v[j] === ')' && --prof === 0) break;
+    }
+    const llamada = v.slice(m.index, j + 1);
+    if (!/var\(/.test(llamada)) return llamada;
+  }
+  const palabra = /(^|[\s,(])(white|black)\b/i.exec(v);
+  return palabra ? palabra[2] : null;
+}
 
 /** `-webkit-transition` → `transition`. */
 const sinPrefijo = (prop) => prop.replace(/^-(webkit|moz|ms|o)-/i, '');
@@ -145,8 +173,11 @@ function crearMotor({ root = ROOT_POR_DEFECTO } = {}) {
     return mixinsRepo;
   }
 
-  const permitido = (regla, rel) =>
-    regla.allowedIn.some((p) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
+  const enRuta = (lista, rel) => lista.some((p) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
+  const permitido = (regla, rel) => enRuta(regla.allowedIn, rel);
+  // `appliesIn` acota una regla a unas capas (R11 solo mira dónde se DECLARAN
+  // tokens de componente). Sin él, la regla vale en todo scss/.
+  const aplica = (regla, rel) => !regla.appliesIn || enRuta(regla.appliesIn, rel);
 
   /** La propiedad efectiva, contando las propiedades anidadas de Sass. */
   function propiedadEfectiva(decl) {
@@ -198,6 +229,23 @@ function crearMotor({ root = ROOT_POR_DEFECTO } = {}) {
       if ((m.builtins || []).includes(n.completo)) return null;
       if (ctx.mixins.has(n.corto)) return null;
       return `no existe el mixin ${n.completo}`;
+    },
+    // R11: lo que LEE un token de componente. La capa de componente traduce
+    // roles semánticos a piezas concretas; si lee un primitivo, el componente
+    // queda fuera del alcance del tema (la píldora primaria de example-06 era
+    // violeta en un tema cian, y no cambiaba en oscuro). Un color literal es
+    // el mismo atajo con otra cara: un rol escrito a mano.
+    'component-token-source': (m, nodo) => {
+      if (nodo.type !== 'decl' || !nodo.prop.startsWith(m.declares)) return null;
+      const valor = limpio(nodo.value);
+      const leidos = [...valor.matchAll(/var\(\s*(--[A-Za-z0-9_-]+)/g)].map((x) => x[1]);
+      const prohibido = leidos.find((t) => !m.mayRead.some((p) => t.startsWith(p)));
+      if (prohibido) return `${m.declares}* lee ${prohibido}: solo puede leer ${m.mayRead.map((p) => `${p}*`).join(' o ')}`;
+      if (m.colorLiterals === false) {
+        const lit = literalDeColor(valor);
+        if (lit) return `${m.declares}* con un color literal (${lit}): un color es un rol, va en la capa semántica`;
+      }
+      return null;
     },
     // La higiene de las excepciones no mira nodos: la aplica el propio motor.
     'exception-hygiene': () => null,
@@ -265,6 +313,7 @@ function crearMotor({ root = ROOT_POR_DEFECTO } = {}) {
     arbol.walk((nodo) => {
       if (nodo.type !== 'decl' && nodo.type !== 'atrule') return;
       for (const regla of ast) {
+        if (!aplica(regla, rel)) continue;
         const motivo = COMPROBAR[regla.match.kind](regla.match, nodo, ctx);
         if (!motivo) continue;
         if (permitido(regla, rel)) { permitidosUsados.add(`${regla.id}|${rel}`); continue; }

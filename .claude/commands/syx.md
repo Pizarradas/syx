@@ -29,7 +29,7 @@ Activate the SYX mode system for this request: **$ARGUMENTS**
 4. **If `ATLAS` is present**, read `mind-system/governance/01-invocation.md` first and resolve the
    editorial context package — level, zone, density, proportion — before the first mode runs.
    ATLAS decides *what* to build; the modes execute. Its authority stops at editorial decisions:
-   it never overrides R01–R10 or `contracts/trust.json`.
+   it never overrides R01–R11 or `contracts/trust.json`.
 
 5. **Announce the composition in one line before you start**, so the user can see it was parsed the
    way they meant it. For example: `UX → (UI + AUDIT)` — three steps, AUDIT verifies UI's output.

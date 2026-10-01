@@ -12,7 +12,7 @@
       "id": "contracts",
       "name": "The law",
       "paths": ["contracts/rules.json", "contracts/trust.json"],
-      "role": "What may be written (trust tiers) and what code must look like (R01-R10). Nothing outranks them.",
+      "role": "What may be written (trust tiers) and what code must look like (R01-R11). Nothing outranks them.",
       "writable": "human-only, on purpose: the judged do not edit the judge"
     },
     {
@@ -69,7 +69,7 @@
     "source": ["CLAUDE.md", "AGENTS.md", "mind-system/README.md"],
     "rungs": [
       { "rank": 1, "authority": "contracts/trust.json", "decides": "who may write what", "checkedBy": "classify_change" },
-      { "rank": 2, "authority": "contracts/rules.json", "decides": "R01-R10", "checkedBy": "npm run validate" },
+      { "rank": 2, "authority": "contracts/rules.json", "decides": "R01-R11", "checkedBy": "npm run validate" },
       { "rank": 3, "authority": "_agents/modes/*.md Trust block", "decides": "each mode's ceiling", "checkedBy": "npm run check:modos" },
       { "rank": 4, "authority": "mind-system/governance/", "decides": "how ATLAS and the modes compose", "checkedBy": null },
       { "rank": 5, "authority": "mind-system/atlas-rules/", "decides": "editorial decisions (guest domain)", "checkedBy": null },
@@ -132,7 +132,7 @@
     { "from": "scss/ + css/", "to": "component-registry.json", "rel": "generates", "via": "npm run build:registry (prose fields preserved)" },
     { "from": "contracts/resolved-tokens.json", "to": "contracts/figma/*.figma.json", "rel": "generates", "via": "npm run export:figma (scripts/lib/figma.js does every unit/colour conversion)" },
     { "from": "tokens.json", "to": "contracts/dtcg/", "rel": "generates", "via": "npm run export:tokens (W3C DTCG)" },
-    { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R10) and validate_snippet (R01-R04, R09, R10), one AST engine" },
+    { "from": "contracts/rules.json", "to": "scss/", "rel": "validates", "via": "scripts/lib/rules.js -> syx-validate.js (R01-R11) and validate_snippet (R01-R04, R09-R11), one AST engine" },
     { "from": "contracts/trust.json", "to": "every write", "rel": "gates", "via": "scripts/lib/confianza.js -> classify_change and propose.js" },
     { "from": "_agents/modes/* Trust blocks", "to": "contracts/trust.json", "rel": "checked-against", "via": "npm run check:modos (also keeps CLAUDE.md, AGENTS.md and _agents/modes/README.md listing the same modes)" },
     { "from": "_agents/modes/* Knowledge blocks", "to": "mind-system/routing.md", "rel": "is-derived-view", "via": "hand-maintained today; guard B (check-conocimiento.js) specified in docs/decisions/ACOPLE.md, not built" },
@@ -143,7 +143,7 @@
   "guards": {
     "description": "npm run check chains them; prepublishOnly adds check:consumible. Source: package.json scripts.",
     "map": [
-      { "script": "validate", "guards": "R01-R04, R09, R10 errors + R05, R06, R08 warnings over scss and tokens.json (severities from rules.json)" },
+      { "script": "validate", "guards": "R01-R04, R09-R11 errors + R05, R06, R08 warnings over scss and tokens.json (severities from rules.json)" },
       { "script": "check:themes", "guards": "theme symmetry across the seven themes" },
       { "script": "check:setups", "guards": "identical selector sets across the seven compiled entry points; no hand-written @font-face in bundles (fonts live in theme-x-fonts())" },
       { "script": "check:version", "guards": "version citations agree with package.json" },

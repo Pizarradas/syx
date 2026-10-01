@@ -21,6 +21,11 @@
  * (contrast-color() y la sintaxis relativa son posteriores), así que se elige
  * aquí, midiendo, y queda escrito en el tema.
  *
+ * Un fondo translúcido (los tonos suaves: el color al 12 % sobre transparente)
+ * se compone antes sobre la superficie en que se posa: la del campo `sobre`
+ * del par, o --semantic-color-bg-primary si no lo dice. Sin superficie opaca
+ * debajo, el par sale «sin medir».
+ *
  * Uso: node scripts/check-contraste.js [--json]
  * ----------------------------------------------------------------------------
  */
@@ -33,6 +38,8 @@ const { contraste } = require('./lib/contraste.js');
 const ROOT = path.resolve(__dirname, '..');
 const CSS_DIR = path.join(ROOT, 'css');
 const CONTRATO = JSON.parse(fs.readFileSync(path.join(ROOT, 'contracts', 'contrast.json'), 'utf8'));
+// Superficie sobre la que se compone un fondo translúcido si el par no dice otra.
+const SUPERFICIE = '--semantic-color-bg-primary';
 const ESTADOS = [
   ['claro', 'none', 'light'],
   ['oscuro', 'none', 'dark'],
@@ -41,9 +48,9 @@ const ESTADOS = [
 ];
 
 /** La primera alternativa del par que sí llega al mínimo sobre ese fondo, con su razón. */
-function sugerir(vars, par, bg) {
+function sugerir(vars, par, bg, base) {
   for (const alt of par.alternativas || []) {
-    const r = contraste(resolver(vars, vars[alt]), bg);
+    const r = contraste(resolver(vars, vars[alt]), bg, base);
     if (r !== null && r >= par.minimo) return `${par.primerPlano}: var(${alt}) → ${r.toFixed(2)}:1`;
   }
   return null;
@@ -61,10 +68,11 @@ function main() {
       const vars = estado(decls, eleccion, so);
       for (const par of CONTRATO.pares) {
         const fg = resolver(vars, vars[par.primerPlano]), bg = resolver(vars, vars[par.fondo]);
-        const r = contraste(fg, bg);
+        const base = resolver(vars, vars[par.sobre || SUPERFICIE]);
+        const r = contraste(fg, bg, base);
         medidas++;
         if (r === null) sinMedir.push({ tema, estado: nombre, par: par.id, fg, bg });
-        else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio, sugerencia: sugerir(vars, par, bg) });
+        else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio, sugerencia: sugerir(vars, par, bg, base) });
       }
     }
   }

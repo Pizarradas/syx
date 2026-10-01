@@ -5,7 +5,7 @@
  * Implements contracts/rules.json as executable checks.
  * Generates the full /contracts/ layer on every run.
  *
- * Las reglas de árbol (R01–R04, R09, R10) las pasa scripts/lib/rules.js, el
+ * Las reglas de árbol (R01–R04, R09–R11) las pasa scripts/lib/rules.js, el
  * mismo motor que validate_snippet. Las severidades, las rutas permitidas y
  * los prefijos oficiales se leen de contracts/rules.json: aquí no hay ninguna
  * copia de esas decisiones.
@@ -351,7 +351,7 @@ function buildUsageMap(scssFiles, runtimeData) {
   return map;
 }
 
-// ─── Module 6: SCSS Rule Checks (R01–R04, R09, R10) ──────────────────────────
+// ─── Module 6: SCSS Rule Checks (R01–R04, R09–R11) ──────────────────────────
 // Las reglas viven en lib/rules.js desde v4.15.0: el servidor MCP las necesita
 // para validar un fragmento ANTES de que se escriba, y dos copias de las mismas
 // reglas acaban diciendo cosas distintas. Desde octubre de 2026 van sobre el
@@ -448,6 +448,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
         R04_rawPosition:           scssViolations.R04.length,
         R09_unknownMixin:          scssViolations.R09.length,
         R10_exceptionHygiene:      scssViolations.R10.length,
+        R11_componentTokenSource:  scssViolations.R11.length,
         parseErrors:               scssViolations.sintaxis.length,
       },
       // Las excepciones en línea vigentes, con su porqué: no son violaciones,
