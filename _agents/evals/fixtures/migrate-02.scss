@@ -1,0 +1,36 @@
+// scss/organisms/_hero.scss tal como quedó en una rama de 2025: doce
+// variables legacy declaradas para el hero y usadas solo aquí.
+@use "../abstracts/index" as *;
+
+:root {
+  --hero-bg-legacy: var(--semantic-color-bg-secondary);
+  --hero-text-legacy: var(--semantic-color-text-primary);
+  --hero-muted-legacy: var(--semantic-color-text-secondary);
+  --hero-accent-legacy: var(--semantic-color-primary);
+  --hero-gap-legacy: var(--semantic-space-component-md);
+  --hero-pad-legacy: 3rem;
+  --hero-radius-legacy: var(--semantic-border-radius-default);
+  --hero-title-size-legacy: 3.2rem;
+  --hero-lead-size-legacy: var(--semantic-font-size-body-large);
+  --hero-shadow-legacy: 0 8px 24px rgb(0 0 0 / 0.12);
+  --hero-overlay-legacy: rgb(0 0 0 / 0.4);
+  --hero-max-legacy: 72rem;
+}
+
+@layer syx.organisms {
+  .org-hero {
+    max-width: var(--hero-max-legacy);
+    padding: var(--hero-pad-legacy);
+    gap: var(--hero-gap-legacy);
+    background-color: var(--hero-bg-legacy);
+    color: var(--hero-text-legacy);
+    border-radius: var(--hero-radius-legacy);
+    box-shadow: var(--hero-shadow-legacy);
+
+    &__title { font-size: var(--hero-title-size-legacy); }
+    &__lead { font-size: var(--hero-lead-size-legacy); color: var(--hero-muted-legacy); }
+    &__cta { background-color: var(--hero-accent-legacy); }
+    &__media::after { background: var(--hero-overlay-legacy); }
+    &--compact { padding: var(--hero-gap-legacy); }
+  }
+}

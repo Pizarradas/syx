@@ -1,8 +1,8 @@
-## Idea
+## Concept
 
 Las obras entran como si se colgaran: el título cae con peso y se asienta, la imagen se revela de abajo arriba como un lienzo que se desenrolla. Primero el nombre de la exposición, después la obra: el orden del movimiento es el orden de lectura.
 
-## Construcción
+## Build
 
 Un fichero autónomo que una persona coloca donde decida. Duraciones de la escala de `motion/06-sistema/escala.md` (título 400 ms, revelado 600 ms con 120 ms de desfase).
 
@@ -18,6 +18,16 @@ Un fichero autónomo que una persona coloca donde decida. Duraciones de la escal
 
 Con movimiento reducido, todo aparece en su sitio desde el principio; nada queda oculto.
 
-## Motion Spec
+## Technique Log
 
-Si pasa a UI: dos elementos, dos curvas de la escala, 120 ms de desfase, alternativa estática. En SYX se escribe con `@include transition()` y los tokens de duración (`--semantic-duration-base`, `--semantic-duration-slow`), siguiendo `motion/01-direccion/motion-spec.md`.
+- `clip-path: inset()` animado para el revelado: no mueve el layout ni la imagen.
+- `animation-fill-mode: both` para que nada parpadee antes de empezar.
+
+## Promotion Path
+
+Si pasa a UI, con su Motion Spec: dos elementos, dos curvas de la escala, 120 ms de desfase, alternativa estática. En SYX se escribe con `@include transition()` y los tokens de duración (`--semantic-duration-base`, `--semantic-duration-slow`), siguiendo `motion/01-direccion/motion-spec.md`.
+
+## Why
+
+- Dirección de arte sobria y tipográfica: un solo elemento en movimiento a la vez, acento nulo, ritmo lento — una galería vende la obra, no la web — una feria o un festival pediría simultaneidad y contraste alto.
+- `clip-path` en vez de animar `height` — no provoca reflujo en cada fotograma — si hubiera que soportar navegadores sin `clip-path`, bastaría un fundido.

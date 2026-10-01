@@ -1,0 +1,19 @@
+// scss/molecules/_card.scss tal como quedó en una rama de 2025.
+// La variable legacy se declaró aquí para un tema que ya no existe.
+@use "../abstracts/index" as *;
+
+:root {
+  --card-bg-legacy: var(--semantic-color-bg-secondary);
+}
+
+@layer syx.molecules {
+  .mol-card {
+    background-color: var(--card-bg-legacy);
+    padding: var(--semantic-space-component-md);
+    border-radius: var(--semantic-border-radius-default);
+
+    &--flat { background-color: var(--card-bg-legacy); }
+
+    &__media { background-color: var(--card-bg-legacy); }
+  }
+}

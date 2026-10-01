@@ -3,7 +3,7 @@
  * SYX — Corregir una respuesta de un modo contra su tarea de referencia
  * ────────────────────────────────────────────────────────────────────
  * Uso:
- *   node scripts/eval-modo.js <id-de-tarea> <respuesta.md>
+ *   node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--json]
  *   node scripts/eval-modo.js --lista
  *   npm run eval:modo -- ui-01 respuesta.md
  *
@@ -18,16 +18,19 @@ const fs = require('fs');
 const path = require('path');
 const { crearConsulta } = require('./lib/consulta');
 const { evaluar } = require('./lib/evaluar');
+const { cargarBanco } = require('./lib/banco');
 
 const ROOT = path.join(__dirname, '..');
-const { tareas } = require(path.join(ROOT, '_agents/evals/tareas.json'));
+const { tareas, equivalentes } = cargarBanco(ROOT);
 
-const [id, fichero] = process.argv.slice(2);
+const args = process.argv.slice(2);
+const flags = new Set(args.filter((a) => a.startsWith('--')));
+const [id, fichero] = args.filter((a) => !a.startsWith('--'));
 
-if (!id || id === '--lista') {
+if (!id || flags.has('--lista')) {
   for (const t of tareas) console.log(`${t.id.padEnd(12)} ${t.modo.padEnd(9)} ${t.titulo}`);
-  if (!id) console.log('\nUso: node scripts/eval-modo.js <id-de-tarea> <respuesta.md>');
-  process.exit(id ? 0 : 1);
+  if (!flags.has('--lista')) console.log('\nUso: node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--json]');
+  process.exit(flags.has('--lista') ? 0 : 1);
 }
 
 const tarea = tareas.find((t) => t.id === id);
@@ -41,15 +44,20 @@ if (!fichero || !fs.existsSync(fichero)) {
   process.exit(1);
 }
 
-const r = evaluar({ tarea, respuesta: fs.readFileSync(fichero, 'utf8'), syx: crearConsulta({ root: ROOT }) });
+const respuesta = fs.readFileSync(fichero, 'utf8');
+const r = evaluar({ tarea, respuesta, syx: crearConsulta({ root: ROOT }), equivalentes });
 
-console.log(`\n── ${tarea.id} · ${tarea.modo.toUpperCase()} · ${tarea.titulo} ──\n`);
-for (const c of r.criterios) {
-  console.log(`${c.nota === c.max ? '✅' : c.nota ? '⚠️ ' : '❌'} ${c.id} ${c.nombre.padEnd(14)} ${c.nota}/${c.max}`);
-  for (const d of c.detalle) console.log(`      ${d}`);
+if (flags.has('--json')) {
+  console.log(JSON.stringify(r, null, 2));
+} else {
+  console.log(`\n── ${tarea.id} · ${tarea.modo.toUpperCase()} · ${tarea.titulo} ──\n`);
+  for (const c of r.criterios) {
+    console.log(`${c.nota === c.max ? '✅' : c.nota ? '⚠️ ' : '❌'} ${c.id} ${c.nombre.padEnd(14)} ${c.nota}/${c.max}`);
+    for (const d of c.detalle) console.log(`      ${d}`);
+  }
+  console.log(`\n   Automático: ${r.auto}/${r.max}`);
+  console.log('\n   C5 Criterio — para una persona o para AUDIT (0 no · 1 en parte · 2 sí):');
+  for (const q of r.criterio) console.log(`     · ${q}`);
+  console.log('');
 }
-console.log(`\n   Automático: ${r.auto}/${r.max}`);
-console.log('\n   C5 Criterio — para una persona o para AUDIT (0 no · 1 en parte · 2 sí):');
-for (const q of r.criterio) console.log(`     · ${q}`);
-console.log('');
 process.exitCode = r.apruebaAuto ? 0 : 1;
