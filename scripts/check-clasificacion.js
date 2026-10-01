@@ -86,6 +86,7 @@ comprobar('una ruta que sale del repositorio se marca fuera, y nunca es auto ni 
 
 comprobar('las mayúsculas no cambian el nivel (macOS y Windows no las distinguen)', () => niveles([
   ['Contracts/Rules.json', 'human'],
+  ['claude.md', 'human'],
   ['Scripts/propose.js', 'human'],
   ['SCSS/ATOMS/_button.scss', 'pr'],
 ]));
@@ -93,6 +94,48 @@ comprobar('las mayúsculas no cambian el nivel (macOS y Windows no las distingue
 comprobar('la raíz del repositorio no es un fichero que se pueda escribir', () => niveles([
   ['.', 'human'],
   ['./', 'human'],
+]));
+
+// ─── 2. Invariantes del contrato ─────────────────────────────────────────────
+// No son una copia de trust.json: son lo que trust.json no puede dejar de
+// decir. Si una línea de aquí falla, o el contrato se ha relajado por error, o
+// alguien ha decidido relajarlo y tiene que venir a decirlo también aquí.
+
+comprobar('lo que instruye o juzga a un agente es solo humano', () => niveles([
+  ['CLAUDE.md', 'human'],
+  ['AGENTS.md', 'human'],
+  ['AI_GUIDELINES.md', 'human'],
+  ['.claude/commands/syx.md', 'human'],
+  ['.claude/settings.json', 'human'],
+  ['mind-system/routing.md', 'human'],
+  ['_agents/modes/ui.md', 'human'],
+  ['_agents/modes/README.md', 'human'],
+  ['_agents/evals/tareas.json', 'human'],
+  ['_agents/evals/referencias/audit-01.md', 'human'],
+  ['_agents/decision-record.md', 'human'],
+  ['contracts/trust.json', 'human'],
+  ['contracts/rules.json', 'human'],
+  ['scripts/hook-confianza.js', 'human'],
+  ['.github/CODEOWNERS', 'human'],
+]));
+
+comprobar('el resto de _agents/ se propone, y su mapa se escribe directo', () => niveles([
+  ['_agents/workflows/create-component.md', 'pr'],
+  ['_agents/prompts/new-atom.md', 'pr'],
+  ['_agents/architecture.md', 'auto'],
+  ['_agents/architecture.json', 'auto'],
+]));
+
+comprobar('el markdown corriente sigue siendo automático', () => niveles([
+  ['README.md', 'auto'],
+  ['CHANGELOG.md', 'auto'],
+  ['docs/decisions/ACOPLE.md', 'auto'],
+  ['mind-system/knowledges/index.md', 'auto'],
+  ['contracts/propuestas/component-x.md', 'auto'],
+]));
+
+comprobar('el CSS compilado es derivado, no humano por omisión', () => niveles([
+  ['css/styles-theme-syx-sketch.css', 'auto'],
 ]));
 
 // ─── Resultado ───────────────────────────────────────────────────────────────

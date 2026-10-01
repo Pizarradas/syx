@@ -4,7 +4,7 @@ The ecosystem as diagrams-as-code. The same graph, machine-readable, is
 [`_agents/architecture.json`](architecture.json) — one file to parse, one to look at.
 Both **describe and never authorise**: every box cites its source of truth, and when map
 and source disagree, the source wins and the map is what needs fixing. Keep both in the
-same change that alters the shape they describe (tier `auto`).
+same change that alters the shape they describe (tier `auto`, named explicitly in `contracts/trust.json`).
 
 ---
 
@@ -17,7 +17,7 @@ flowchart TB
         TRUST["trust.json<br/>auto / pr / human"]
     end
 
-    subgraph ENGINE["THE ENGINE — _agents/ · auto · ships to npm"]
+    subgraph ENGINE["THE ENGINE — _agents/ · modes+evals human · rest pr · ships to npm"]
         MODES["modes/ — 9 modes<br/>Trust + Knowledge blocks"]
         WF["workflows/ · prompts/<br/>decision-record.md"]
         MAP["architecture.md + .json<br/>this map"]
@@ -103,17 +103,21 @@ above. Rungs 4–6 are today **declared only**: no guard checks them (guard B, s
 ```mermaid
 flowchart TB
     W["A change wants to happen"] --> C{"classify_change<br/>longest pattern wins<br/>confianza.js"}
-    C -->|auto| A["Change and commit.<br/>Docs, _agents/, derived artifacts.<br/>An error shows in the diff."]
+    C -->|auto| A["Change and commit.<br/>Docs, this map, derived artifacts.<br/>An error shows in the diff."]
     C -->|pr| P["node scripts/propose.js<br/>deduces destination file, compiles,<br/>validates, leaves branch + evidence.<br/>A person merges."]
-    C -->|human| H["Analyse and recommend.<br/>Never write.<br/>Primitives, semantic, themes, mixins,<br/>scripts/, the contracts themselves."]
+    C -->|human| H["Analyse and recommend.<br/>Never write.<br/>Primitives, semantic, themes, mixins,<br/>scripts/, the contracts themselves,<br/>agent instructions and evals."]
     C -->|no pattern matches| H
 ```
 
 Source: `contracts/trust.json` (path lists live there, not here). The direction of the
 boundary is the cascade: the higher a file sits, the more places a change reaches.
 Note for map-readers: the `*.md` pattern matches markdown **at any depth**, which is why
-`docs/decisions/ACOPLE.md` proposes naming `governance/`, `atlas-rules/`, `constitution.md` explicitly
-as `human` — documentation that is also law should not inherit `auto` for being markdown.
+documentation that is also law is named explicitly as `human` — `governance/`, `atlas-rules/`,
+`constitution.md`, and every document that instructs or grades an agent: `CLAUDE.md`, `AGENTS.md`,
+`AI_GUIDELINES.md`, `.claude/`, `mind-system/routing.md`, `_agents/modes/`, `_agents/evals/` and
+`_agents/decision-record.md`. Otherwise an agent could rewrite its own instructions and the exam
+that grades it. `_agents/workflows/` and `_agents/prompts/` are `pr`.
+
 
 ---
 

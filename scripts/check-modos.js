@@ -31,6 +31,13 @@
  *      pregunta a él, no a una lista escrita aquí.
  *   7. Los tres índices (CLAUDE.md, AGENTS.md y _agents/modes/README.md) listan
  *      los mismos modos que hay en disco. AGENTS.md listaba seis de ocho.
+ *   8. Los propios modos, y los evals que los miden, son `human` fichero a
+ *      fichero. Las comprobaciones 2 y 3 confían en que el bloque Trust lo
+ *      escribió alguien con permiso; si el modo fuera `auto`, el agente podría
+ *      reescribir su techo y luego pasar esta misma prueba con él. Hasta la
+ *      auditoría de 2026-10 lo era, por el patrón `*.md`. Se mira cada fichero
+ *      en disco y no el patrón, para que una excepción más específica
+ *      (`_agents/modes/x.md` en `auto`) no se cuele por debajo.
  *
  * NO SE COMPRUEBA CONTRA UNA LISTA DE OCHO NOMBRES escrita aquí: la lista se
  * lee del directorio. Una lista a mano envejece el día que se añade un modo, y
@@ -187,6 +194,17 @@ comprobar('el bloque cubre todas las rutas que el modo nombra', () => {
       if (!cubierta) malos.push(`${modo}: nombra ${r} y no lo declara`);
     }
   }
+  if (malos.length) throw new Error(malos.join(' · '));
+});
+
+comprobar('ni los modos ni sus evals los puede reescribir el agente al que gobiernan', () => {
+  const recorrer = (rel) => fs.statSync(path.join(ROOT, rel)).isDirectory()
+    ? fs.readdirSync(path.join(ROOT, rel)).flatMap((f) => recorrer(`${rel}/${f}`))
+    : [rel];
+  const malos = [...recorrer('_agents/modes'), ...recorrer('_agents/evals'), '_agents/decision-record.md']
+    .map((r) => clasificarRuta(r))
+    .filter((c) => c.tier !== 'human')
+    .map((c) => `${c.path} es ${c.tier} (${c.patron})`);
   if (malos.length) throw new Error(malos.join(' · '));
 });
 

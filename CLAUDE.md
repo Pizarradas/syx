@@ -18,8 +18,9 @@ creating it, check a component before creating one — only the way of checking 
 docs and derived artifacts are automatic; component tokens, components and utilities
 go through `node scripts/propose.js` (it deduces the destination file, compiles,
 validates and leaves a branch plus evidence); primitives, semantics, themes, mixins,
-`scripts/` and the contracts themselves are human-only — analyse and recommend, never
-write. Unmatched paths are human-only. Ask `classify_change` rather than guessing, and
+`scripts/`, the contracts themselves and every document that instructs or grades an agent
+(this file, `AGENTS.md`, `AI_GUIDELINES.md`, `.claude/`, `_agents/modes/`, `_agents/evals/`)
+are human-only — analyse and recommend, never write. Unmatched paths are human-only. Ask `classify_change` rather than guessing, and
 never edit a rule or a guard to make your own change pass.
 
 **To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.

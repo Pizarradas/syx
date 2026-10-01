@@ -4,7 +4,7 @@
     "description": "Machine-readable map of the SYX ecosystem: layers, precedence, who generates what, who guards what, and how modes compose. Written for any AI agent, not one in particular. The human-readable twin, with the same graph as Mermaid diagrams, is _agents/architecture.md.",
     "rule": "This file DESCRIBES; it never authorises. Every entry carries a `source`: the file it is derived from. When this map and its source disagree, the source wins and this map is what needs fixing.",
     "antiDrift": "No mutable inventory is duplicated here. Counts, paths and per-item detail stay in the machine-readable file that already owns them (`countSource` / `see` fields point there). This file only encodes what otherwise exists in prose alone.",
-    "maintainedBy": "tier auto (contracts/trust.json: `_agents/`) — update it in the same change that alters the shape it describes"
+    "maintainedBy": "tier auto (contracts/trust.json: `_agents/architecture.json`) — update it in the same change that alters the shape it describes"
   },
 
   "layers": [
@@ -20,7 +20,7 @@
       "name": "The engine",
       "paths": ["_agents/"],
       "role": "What a mode does, in what format, under which permission ceiling. Modes (Trust + Knowledge blocks), workflows, prompts, decision-record, this map.",
-      "writable": "auto",
+      "writable": "mixed: modes/, evals/ and decision-record.md are human-only (the ceiling and the yardstick); workflows/ and prompts/ are pr; this map is auto",
       "guardedBy": "check:modos",
       "shipsToNpm": true
     },
@@ -29,7 +29,7 @@
       "name": "The cortex",
       "paths": ["mind-system/"],
       "role": "Why a decision is right: governance (ATLAS composition), atlas-rules (guest editorial domain), knowledges (the corpus), routing (derived wiring), constitution. Informs; never executes, never authorises.",
-      "writable": "auto today via the `*.md` pattern; docs/decisions/ACOPLE.md proposes human for governance/, atlas-rules/, constitution.md and README.md — pending decision",
+      "writable": "human for governance/, atlas-rules/, constitution.md, README.md and routing.md (named in contracts/trust.json); knowledges/ is auto via the `*.md` pattern",
       "shipsToNpm": false,
       "note": "Shipped docs reference these paths; an npm consumer does not have them. Known, intentional, unguarded."
     },

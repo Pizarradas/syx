@@ -121,7 +121,7 @@ and served by `classify_change` — **ask before writing, don't assume**.
 |---|---|---|
 | Automatic | Docs, changelog, derived artifacts | Change and commit |
 | Via proposal | Component tokens, components, utilities | `node scripts/propose.js token …` — it picks the file, compiles, validates and leaves a branch with the evidence |
-| Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json` | Analyse and recommend. Do not write. |
+| Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json`, and every document that instructs or grades an agent: this file, `CLAUDE.md`, `AI_GUIDELINES.md`, `.claude/`, `mind-system/routing.md`, `_agents/modes/`, `_agents/evals/`, `_agents/decision-record.md` | Analyse and recommend. Do not write. |
 
 Anything unmatched is human-only. The rules you are judged by and the guards that
 judge you are human-only on purpose — do not edit them to make a change pass.
