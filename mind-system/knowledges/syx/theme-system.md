@@ -166,5 +166,5 @@ Antes de declarar un tema completo:
 - [ ] ¿Las variaciones estructurales son tokens `--component-*` (o, como último recurso, `@if $theme ==` en el parcial)?
 - [ ] ¿Las fuentes del tema están declaradas una sola vez, en `@mixin theme-{name}-fonts` dentro de `_theme.scss`?
 - [ ] ¿El contraste `text-primary` / `bg-primary` cumple WCAG AA (≥ 4.5:1)?
-- [ ] ¿El contraste `text-inverse` / `color-primary` cumple WCAG AA (≥ 4.5:1)?
+- [ ] ¿Cada relleno de marca tiene su tinta `--semantic-color-on-*` declarada y `npm run check:contraste` en verde (≥ 4.5:1 en los cuatro estados de modo)?
 - [ ] ¿Todos los bundles compilan sin errores tras el cambio?

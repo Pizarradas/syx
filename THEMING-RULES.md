@@ -31,6 +31,9 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 | `--primitive-color-gray-500/600` (texto)                     | `--semantic-color-text-secondary` |
 | `--primitive-color-gray-300/400` (texto)                     | `--semantic-color-text-tertiary`  |
 | `oklch(1 0 0)` sobre fondos oscuros                                  | `--semantic-color-text-inverse`   |
+| `text-inverse` / blanco sobre un relleno de marca                    | `--semantic-color-on-{rol}`       |
+| `--semantic-color-{rol}` usado como texto (enlace, `.syx-text-*`)    | `--semantic-color-{rol}-text`     |
+| `--semantic-color-primary` como borde o relleno de control (foco, check, pestaña) | `--semantic-color-primary-strong` |
 
 ---
 
@@ -58,6 +61,35 @@ Definidos una sola vez, en `scss/abstracts/tokens/semantic/_colors.scss` (los va
 
 ---
 
+## Color de marca: relleno, tinta, tinta encima y variante fuerte
+
+Un color de marca hace cuatro trabajos distintos y cada uno tiene su token. El **relleno** (`--semantic-color-{primary,secondary,tertiary,quaternary,quinary}`) es la identidad del tema y **no se toca para cuadrar el contraste**: lo que se ajusta es lo que va encima o al lado.
+
+| Trabajo | Token | Mínimo | Cómo se obtiene |
+| --- | --- | --- | --- |
+| Relleno (botón, cabecera de tabla, página activa) | `--semantic-color-{rol}` | — | Lo declara el tema |
+| Texto encima del relleno | `--semantic-color-on-{rol}`, `--semantic-color-on-state-hover-{rol}`, `--semantic-color-on-primary-strong` | 4,5:1 (1.4.3); 3:1 la marca del check | El tema elige `var(--semantic-color-ink-light)` o `var(--semantic-color-ink-dark)` |
+| El color de marca como texto (enlace, placeholder, `.syx-text-primary`) | `--semantic-color-{rol}-text` | 4,5:1 | Derivado: mismo tono y croma, luminosidad `--semantic-brand-text-lightness` |
+| Límite de control (anillo de foco, borde enfocado, check/radio marcados, indicador de pestaña) | `--semantic-color-primary-strong`, `--semantic-color-state-success-strong` (switch) | 3:1 (1.4.11) | Derivado: la luminosidad del relleno sujeta a ±0,12 de la de la tinta |
+
+**Por qué las tintas `on-*` se eligen y no se calculan.** Los rellenos de los temas rondan L 0,60 en OKLCH: ni el blanco ni un gris oscuro llegan a 4,5:1 sobre ellos, solo el negro (o casi). Calcular «la tinta que más contraste da» en CSS exige `contrast-color()` o sintaxis de color relativa con condiciones, y ninguna existe en el soporte mínimo del sistema (Chrome 111, Safari 16.2, Firefox 121). Así que el tema declara la elección y `npm run check:contraste` la valida en los cuatro estados de modo; si un par no llega, el informe dice cuál de las dos tintas sí:
+
+```scss
+// _theme.scss — sección de color semántico
+--semantic-color-on-primary: var(--semantic-color-ink-dark);   // cian claro: tinta oscura
+--semantic-color-on-quinary: var(--semantic-color-ink-light);  // violeta oscuro: tinta clara
+// Opcional: afina las dos tintas (siguen pasando por el mismo contrato)
+--semantic-color-ink-dark: var(--primitive-color-ink);
+```
+
+Lo que no se declara se queda en `--semantic-color-text-inverse`, el comportamiento anterior. Los rellenos de hover son otro color y pueden pedir la otra tinta (en claro, un peldaño más oscuro suele pedir la clara): por eso tienen sus propios `on-state-hover-*`. En oscuro, `dark-mode-tokens()` apunta cada hover a su relleno base y su tinta con él.
+
+**La tinta y la variante fuerte se derivan solas** con sintaxis relativa dentro de `@supports`; donde no la hay, caen al relleno (el comportamiento anterior). Un tema que ya es oscuro en su modo base sube `--semantic-brand-text-lightness` a 0,80 y las dos derivaciones le siguen. Una variante fuerte que cae dentro de la franja sale idéntica al relleno: solo cambian los temas que no llegaban.
+
+Los pares viven en `contracts/contrast.json` (texto sobre cada relleno y su hover, botones rellenos, cabecera de tabla, página activa, selección, enlace, placeholder, sintaxis del código, anillo de foco, controles marcados, switch, pestaña). Un tema nuevo no está terminado hasta que `npm run check:contraste` sale en verde.
+
+---
+
 ## Cómo crear un nuevo tema
 
 1. Copia `scss/themes/_template/` como base.
@@ -77,6 +109,7 @@ Definidos una sola vez, en `scss/abstracts/tokens/semantic/_colors.scss` (los va
 ```
 
 3. Si el tema es **dark**, invierte la escala: `bg-primary` = el más oscuro, `bg-tertiary` = el más claro.
+4. Declara las tintas `--semantic-color-on-*` de tus rellenos de marca (ver la sección anterior) y pasa `npm run check:contraste` hasta que esté en verde.
 
 ---
 
