@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+> **Versión pendiente de decidir.** Lo que hay aquí rompe compatibilidad (variables heredadas retiradas, `bundle-core` sin iconos Lucide ni utilidades, fuentes solo en woff2 con familias renombradas, `--semantic-tone-*-bg` ya no gobierna el estado): por SemVer es una **5.0.0**. Pero varias deprecaciones prometen su retirada «en v5.0» (utilidades físicas `.syx-ml-*`/`.syx-mr-*`…), así que cortar la 5.0 obliga a retirarlas ya o a aplazar la promesa. `release.yml` exige que esta sección esté vacía y la de la versión fechada antes de etiquetar.
+
+### Auditoría de octubre de 2026 — resumen por acción
+
+Detalle en las secciones de abajo y en los mensajes de commit (`Auditoría 2026-10 · acción N`).
+
+- **1–4 · Accesibilidad que se ve.** Un único anillo de foco (`focus-ring()`), visible en todo lo enfocable (enlace primario y paginación no tenían ninguno); stylelint prohíbe tokens de sombra en `outline`. Cajón móvil con `inert` y foco gestionado (`js/syx-site-nav.js`). Registro con `a11y` por componente y `usage` corregidos. Campos de 48 px en todos los anchos, `.atom-btn` md por defecto y `atom-btn--danger`.
+- **2 · Contraste completo sin tocar la marca.** Tinta sobre relleno `--semantic-color-on-*`, tinta de texto `*-text` para enlaces, placeholder y sintaxis, y variante fuerte `--semantic-color-primary-strong` para foco y controles. `contracts/contrast.json` mide ahora todos los pares de marca; `axe-excepciones.json` exige selector, razón mínima medida y caducidad, y solo guarda incompletos revisados.
+- **5 · Reglas sobre el árbol.** R01–R04 con postcss-scss y `contracts/rules.json` como única fuente; R09 (mixin inexistente), R10 (excepciones por línea, nunca por fichero), R11 (un token de componente solo lee roles semánticos).
+- **6 · `trust.json` aplicado.** Rutas normalizadas, instrucciones de agentes y evals en *human*, CODEOWNERS generado, job `check:confianza` en los PR, hook PreToolUse de Claude Code y `propose.js files` para componentes.
+- **7 · Una sola fuente de verdad.** `tokens.json` se genera desde el SCSS (`check:tokens-json`); una definición por token; el córtex no cita tokens que no existen; presupuesto de contexto por modo.
+- **8 · Pruebas que demuestran que los guardianes guardan.** Suite de mutación (25 regresiones, 20 de las cuales pasaban toda la cadena antes), `check:usage`, sin hex ni px a pelo en componentes, y en el navegador foco visible, tabulador, reflow a 320 px y las cuatro páginas del sitio.
+- **9 · Evals ejecutables.** Corrector con reglas con forma y secciones leídas del formato de cada modo, anti-referencias que deben suspender, juez opcional y `scripts/eval-runner.js` para correr un agente de verdad.
+- **10 · Entrega honesta.** `engines >=20.19` y matriz 20.19 · 22 · 24; `release.yml` exige etiqueta en main, sección fechada y `[Unreleased]` vacía, y pasa axe; Pages despliega tras la CI en verde; los contratos ya no llevan marca de tiempo.
+- **11 · Adoptar a la primera.** `sideEffects` conserva `js/`; referencia de componentes generada desde el registro en `docs.html`; recuentos de una sola fuente; Quick Start sobre `dist/` probado de punta a punta (`check:quickstart`).
+- **12 · Bundles que pesan lo que usan.** Componentes compartidos + tokens por tema podados, tokens del sitio fuera del núcleo, un core de verdad y tamaños generados en `dist/sizes.json`.
+- **13 · Fuentes, soporte y RTL.** Solo woff2 con una familia por tipografía y respaldos con métricas (el paquete pasa de 3,7 a 2,1 MB); browserslist = el mínimo publicado con `check:soporte`; propiedades lógicas en todo `scss/` y RTL probado.
+- **14 · Temas sin peso muerto.** Plantilla como contrato mínimo compilada en la CI, fuera las variables heredadas y las declaraciones sin lector, sinónimos deprecados.
+- **15 · Catálogo de producto.** Diez componentes nuevos y dos primitivas de layout: 40 componentes.
+
 ### Changed — capas estrictas y temas sin peso muerto (auditoría 2026-10, acción 14)
 
 - **R11: un `--component-*` solo lee roles.** Regla nueva en `contracts/rules.json` y en el motor (`match.kind: component-token-source`, con `appliesIn` genérico): en `scss/abstracts/tokens/components/` y en las sobrescrituras de los temas, un token de componente lee `--semantic-*`, `--component-*`, `--theme-*`, `--layout-*` o iconos, nunca un `--primitive-*`, una variable heredada ni un color literal. Migrados los 55 casos de la capa de componente y los 82 de syx-sketch.
@@ -96,10 +116,6 @@ Lo que una adopción real (una pantalla de ajustes con Vite) tuvo que escribir a
 
 - `tests/browser/`: una página por tema y modo con todos los componentes tal como los usa el registro. `run.mjs --axe` pasa axe-core (WCAG 2.2 A y AA) y falla ante cualquier violación no justificada; `run.mjs --capturas` y `comparar.mjs` hacen la regresión visual contra la rama base, fotografiada en la misma máquina, sin capturas versionadas.
 - Job `navegador` en la CI (PR y main): axe rompe; la regresión visual deja el informe en el resumen y las imágenes como artefacto. `npm run test:navegador` en local.
-
-### Known issues — lo que encontró el navegador
-
-- **Color de marca como texto y bajo texto en seis temas (3,3–4,5:1).** El enlace por defecto, el botón relleno, la cabecera de tabla y la sintaxis del código usan el primario de relleno en example-01…06. `check:contraste` no medía esos pares. Están acotados, con su porqué, en `tests/browser/axe-excepciones.json` y anotados en `contracts/contrast.json`; corregirlos es una decisión de marca de cada tema. syx-sketch pasa limpio.
 
 ### Added — los cinco patrones de cualquier producto
 
