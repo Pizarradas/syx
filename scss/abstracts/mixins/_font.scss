@@ -9,27 +9,16 @@
 
 // FONT FACE
 // ===============================================
-// https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
+// Solo woff2. El soporte mínimo publicado (Chrome 111 · Safari 16.2 ·
+// Firefox 121, ver browserslist en package.json) lee woff2 desde hace años:
+// EOT era de IE, el SVG de iOS 4 y el TTF/WOFF de navegadores que ya no
+// están en la lista. Ofrecerlos no servía a nadie y pesaba 5 MB en el paquete
+// (Auditoría 2026-10 · acción 13).
 
-// String Replace
-@function str-replace($string, $search, $replace: "") {
-	$index: string.index($string, $search);
-
-	@if $index {
-		@return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
-	}
-
-	@return $string;
-}
-
-// Font family
-@mixin font-family($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+// Font family — un @font-face suelto, para fuentes propias de quien consume
+// SYX. Las fuentes que trae el sistema se declaran con `syx-font()`, abajo.
+@mixin font-family($name, $path, $weight: null, $style: null, $exts: woff2) {
 	$src: null;
-
-	$extmods: (
-		eot: "?",
-		svg: "#" + str-replace($name, " ", "_")
-	);
 
 	$formats: (
 		otf: "opentype",
@@ -37,13 +26,10 @@
 	);
 
 	@each $ext in $exts {
-		$extmod: $ext;
-		@if map.has-key($extmods, $ext) { $extmod: $ext + map.get($extmods, $ext); }
-
 		$format: $ext;
 		@if map.has-key($formats, $ext) { $format: map.get($formats, $ext); }
 
-		$src: list.append($src, url(string.quote($path + "." + $extmod)) format(string.quote($format)), comma);
+		$src: list.append($src, url(string.quote($path + "." + $ext)) format(string.quote($format)), comma);
 	}
 
 	@font-face {
@@ -56,4 +42,139 @@
 
 	@content;
 
+}
+
+// FUENTES DE SYX
+// ===============================================
+// Una familia por tipografía, con un @font-face por peso. Antes cada peso era
+// una familia distinta ("Google-Inter--regular", "Google-Inter--medium"…): el
+// navegador no podía elegir el peso, así que `<strong>` sobre una familia de
+// un solo peso salía en negrita sintética, y un peso mal apuntado (Syne 500
+// sobre el fichero Regular) no se notaba porque nada lo comparaba.
+//
+// Cada peso lleva además su cara de respaldo «<Familia> Fallback»: Arial,
+// Times New Roman o Courier New (o sus clones métricos Liberation, en Linux)
+// reescalados con size-adjust/ascent-override/descent-override para ocupar lo
+// mismo que la fuente web. Con `font-display: swap` el texto se pinta antes
+// con el respaldo; con estas métricas, el cambio no mueve la maqueta.
+//
+// Cómo se calcularon (mismo método que capsize/fontaine), con fontTools sobre
+// los woff2 de fonts/ y los Liberation del sistema:
+//   ancho medio      = Σ(avance de a–z y espacio × frecuencia en inglés) / unitsPerEm
+//   size-adjust      = ancho medio de la fuente / ancho medio del respaldo
+//   ascent-override  = hhea.ascent / unitsPerEm / size-adjust
+//   descent-override = |hhea.descent| / unitsPerEm / size-adjust
+// (lineGap es 0 en todas). Los pesos ≥ 600 se comparan con el respaldo en
+// negrita. Si cambia un woff2, hay que recalcular su fila.
+
+$syx-font-respaldos: (
+	sans: (
+		regular: (local("Arial"), local("ArialMT"), local("Liberation Sans")),
+		bold: (local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"))
+	),
+	serif: (
+		regular: (local("Times New Roman"), local("TimesNewRomanPSMT"), local("Liberation Serif")),
+		bold: (local("Times New Roman Bold"), local("TimesNewRomanPS-BoldMT"), local("Liberation Serif Bold"))
+	),
+	mono: (
+		regular: (local("Courier New"), local("CourierNewPSMT"), local("Liberation Mono")),
+		bold: (local("Courier New Bold"), local("CourierNewPS-BoldMT"), local("Liberation Mono Bold"))
+	)
+);
+
+// peso: (fichero, size-adjust, ascent-override, descent-override)
+$syx-fonts: (
+	"Bebas Neue": (
+		dir: "google-bebas-neue",
+		respaldo: sans,
+		pesos: (
+			400: ("BebasNeue-Regular", 77.31%, 116.41%, 38.8%)
+		)
+	),
+	"DM Mono": (
+		dir: "google-dm-mono",
+		respaldo: mono,
+		pesos: (
+			400: ("DMMono-Regular", 99.98%, 99.22%, 31.01%),
+			500: ("DMMono-Medium", 99.98%, 99.22%, 31.01%)
+		)
+	),
+	"Inter": (
+		dir: "google-inter",
+		respaldo: sans,
+		pesos: (
+			400: ("Inter-Regular", 107.32%, 90.27%, 22.48%),
+			500: ("Inter-Medium", 108.29%, 89.46%, 22.28%)
+		)
+	),
+	"Playfair Display": (
+		dir: "google-playfair-display",
+		respaldo: serif,
+		pesos: (
+			400: ("PlayfairDisplay-Regular", 112.31%, 96.34%, 22.35%),
+			700: ("PlayfairDisplay-Bold", 107.7%, 100.46%, 23.3%)
+		)
+	),
+	"Space Grotesk": (
+		dir: "google-space-grotesk",
+		respaldo: sans,
+		pesos: (
+			300: ("SpaceGrotesk-Light", 110.87%, 88.75%, 26.34%),
+			400: ("SpaceGrotesk-Regular", 110.85%, 88.77%, 26.34%),
+			500: ("SpaceGrotesk-Medium", 110.79%, 88.82%, 26.36%),
+			600: ("SpaceGrotesk-SemiBold", 102.48%, 96.02%, 28.49%),
+			700: ("SpaceGrotesk-Bold", 102.46%, 96.04%, 28.5%)
+		)
+	),
+	"Syne": (
+		dir: "google-syne",
+		respaldo: sans,
+		pesos: (
+			400: ("Syne-Regular", 98.92%, 93.51%, 27.8%),
+			500: ("Syne-Medium", 106.43%, 86.91%, 25.84%),
+			700: ("Syne-Bold", 113.97%, 81.16%, 24.13%)
+		)
+	)
+);
+
+// syx-font — declara los pesos pedidos de una familia de SYX y sus respaldos.
+//   @include syx-font("Space Grotesk", 400 700);
+// En los tokens, la familia se nombra con su respaldo detrás:
+//   "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif
+@mixin syx-font($family, $weights) {
+	@if not map.has-key($syx-fonts, $family) {
+		@error "syx-font: «#{$family}» no está en $syx-fonts (#{map.keys($syx-fonts)}).";
+	}
+
+	$def: map.get($syx-fonts, $family);
+	$respaldo: map.get($syx-font-respaldos, map.get($def, respaldo));
+
+	@each $weight in $weights {
+		@if not map.has-key(map.get($def, pesos), $weight) {
+			@error "syx-font: «#{$family}» no trae el peso #{$weight} (#{map.keys(map.get($def, pesos))}).";
+		}
+
+		$cara: map.get($def, pesos, $weight);
+		$locales: map.get($respaldo, regular);
+		@if $weight >= 600 { $locales: map.get($respaldo, bold); }
+
+		@font-face {
+			font-family: string.quote($family);
+			src: url(string.quote("#{$fonts-path}/#{map.get($def, dir)}/#{list.nth($cara, 1)}.woff2")) format("woff2");
+			font-weight: $weight;
+			font-style: normal;
+			font-display: swap;
+		}
+
+		@font-face {
+			font-family: string.quote("#{$family} Fallback");
+			src: $locales;
+			font-weight: $weight;
+			font-style: normal;
+			size-adjust: list.nth($cara, 2);
+			ascent-override: list.nth($cara, 3);
+			descent-override: list.nth($cara, 4);
+			line-gap-override: 0%;
+		}
+	}
 }

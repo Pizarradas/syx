@@ -8,10 +8,14 @@
 :root {
   // FONT FAMILIES
   // ================================================
-  --primitive-font-family-space-grotesk-regular: "Google-Space-Grotesk--regular", Arial, sans-serif;
-  --primitive-font-family-space-grotesk-bold: "Google-Space-Grotesk--bold", Arial, sans-serif;
-  --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
-  --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
+  // Una familia por tipografía (las declara `syx-font()`). El sufijo de peso
+  // en el nombre del token (-regular, -bold…) es herencia: los dos tokens de
+  // una misma tipografía valen lo mismo, y el peso lo pone `font-weight`
+  // (ver --semantic-font-weight-primary-bold / -heading).
+  --primitive-font-family-space-grotesk-regular: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+  --primitive-font-family-space-grotesk-bold: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+  --primitive-font-family-syne-medium: "Syne", "Syne Fallback", Arial, sans-serif;
+  --primitive-font-family-syne-bold: "Syne", "Syne Fallback", Arial, sans-serif;
   --primitive-font-family-mono: "Courier New", Courier, monospace;
 
 

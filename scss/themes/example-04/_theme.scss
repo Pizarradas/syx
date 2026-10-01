@@ -42,8 +42,8 @@
     --primitive-color-disabled: oklch(0.60 0.009 258.338);
 
     // Typography — DM Mono (monospace, technical-organic)
-    --primitive-font-family-dm-mono-regular: "Google-DM-Mono--regular", "Courier New", monospace;
-    --primitive-font-family-dm-mono-medium: "Google-DM-Mono--medium", "Courier New", monospace;
+    --primitive-font-family-dm-mono-regular: "DM Mono", "DM Mono Fallback", "Courier New", monospace;
+    --primitive-font-family-dm-mono-medium: "DM Mono", "DM Mono Fallback", "Courier New", monospace;
 
     // Icons
     --primitive-icon-arrow-default: url('#{$icon-path},<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8299 11.2897L10.5899 7.0497C10.3864 6.88158 10.012 6.75391 9.87994 6.75391C9.74793 6.75391 9.61723 6.78004 9.49537 6.83081C9.37351 6.88158 9.26291 6.95598 9.16994 7.0497C8.98369 7.23707 8.87915 7.49052 8.87915 7.7547C8.87915 8.01889 8.98369 8.27234 9.16994 8.4597L12.7099 11.9997L9.16994 15.5397C8.98369 15.7271 8.87915 15.9805 8.87915 16.2447C8.87915 16.5089 8.98369 16.7623 9.16994 16.9497C9.26338 17.0424 9.3742 17.1157 9.49604 17.1655C9.61787 17.2152 9.74834 17.2405 9.87994 17.2397C10.0115 17.2405 10.142 17.2152 10.2638 17.1655C10.3857 17.1157 10.4965 17.0424 10.5899 16.9497L14.8299 12.7097C14.9237 12.6167 14.9981 12.5061 15.0488 12.3843C15.0996 12.2624 15.1257 12.1317 15.1257 11.9997C15.1257 11.8677 15.0996 11.737 15.0488 11.6151C14.9981 11.4933 14.9237 11.3827 14.8299 11.2897Z" fill="black"/></svg>');
@@ -140,10 +140,15 @@
 
     --semantic-font-family-primary: var(--font-weight-1);
     --semantic-font-family-primary-bold: var(--font-weight-2);
+    // DM Mono no trae negrita: su «bold» es el Medium.
+    --semantic-font-weight-primary-bold: var(--primitive-font-weight-medium);
     --semantic-font-family-heading: var(--font-weight-2);
 
     // Reset — DM Mono, technical grid style
-    --reset-html-font: normal normal 500 13px/1.8 var(--font-weight-1);
+    // 400: el cuerpo siempre se pintó con DM Mono Regular. Pedía 500, pero la
+    // familia «--regular» solo tenía ese fichero; ahora que DM Mono es una
+    // familia con dos pesos, 500 lo pasaría todo a Medium.
+    --reset-html-font: normal normal 400 13px/1.8 var(--font-weight-1);
     --reset-body-font-size: calc(3.5 * var(--base-measure));
     --reset-body-line-height: calc(6 * var(--base-measure));
     --reset-h-font-family: var(--font-weight-2);
@@ -372,27 +377,6 @@
 // call this mixin instead of repeating the @font-face list.
 // ================================================
 @mixin theme-example-04-fonts {
-  @include font-family("Google-DM-Mono--regular",
-    "#{$fonts-path}/google-dm-mono/DMMono-Regular",
-    400,
-    normal,
-    woff2 woff);
-
-  @include font-family("Google-DM-Mono--medium",
-    "#{$fonts-path}/google-dm-mono/DMMono-Medium",
-    500,
-    normal,
-    woff2 woff);
-
-  @include font-family("Google-Space-Grotesk--regular",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-    400,
-    normal,
-    eot woff2 woff ttf svg);
-
-  @include font-family("Google-Space-Grotesk--bold",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-    700,
-    normal,
-    eot woff2 woff ttf svg);
+  @include syx-font("DM Mono", 400 500);
+  @include syx-font("Space Grotesk", 400 700);
 }

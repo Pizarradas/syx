@@ -38,10 +38,10 @@
     --primitive-color-disabled: oklch(0.60 0.012 247.971);
 
     // Typography — system fonts hierarchy
-    --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
-    --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
+    --primitive-font-family-syne-medium: "Syne", "Syne Fallback", Arial, sans-serif;
+    --primitive-font-family-syne-bold: "Syne", "Syne Fallback", Arial, sans-serif;
     // Inter — body text (loaded locally)
-    --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --primitive-font-family-inter: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     // JetBrains Mono — code blocks
     --primitive-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
@@ -376,51 +376,7 @@
 // call this mixin instead of repeating the @font-face list.
 // ================================================
 @mixin theme-example-01-fonts {
-  @include font-family(
-    "Google-Inter--regular",
-    "#{$fonts-path}/google-inter/Inter-Regular",
-    400,
-    normal,
-    woff2 woff
-  );
-
-  @include font-family(
-    "Google-Inter--medium",
-    "#{$fonts-path}/google-inter/Inter-Medium",
-    500,
-    normal,
-    woff2 woff
-  );
-
-  @include font-family(
-    "Google-Syne--medium",
-    "#{$fonts-path}/google-syne/Syne-Regular",
-    500,
-    normal,
-    eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Syne--bold",
-    "#{$fonts-path}/google-syne/Syne-Bold",
-    800,
-    normal,
-    eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--regular",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-    400,
-    normal,
-    eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--bold",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-    700,
-    normal,
-    eot woff2 woff ttf svg
-  );
+  @include syx-font("Inter", 400 500);
+  @include syx-font("Syne", 400 500 700);
+  @include syx-font("Space Grotesk", 400 700);
 }

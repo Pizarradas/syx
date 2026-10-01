@@ -16,7 +16,7 @@
       display: block;
       font-family: var(--component-form-field-font-family);
       font-size: var(--component-form-field-font-size);
-      font-weight: var(--semantic-font-weight-medium);
+      font-weight: var(--component-form-field-font-weight);
       line-height: var(--component-form-field-line-height);
       color: var(--component-form-field-color);
       margin-bottom: var(--component-form-field-label-margin-bottom);
@@ -54,6 +54,7 @@
       @include border-radius(var(--component-form-field-border-radius));
       background-color: var(--component-form-field-bg);
       font-family: var(--component-form-field-font-family);
+      font-weight: var(--component-form-field-font-weight);
       font-size: var(--component-form-field-font-size);
       line-height: var(--component-form-field-line-height);
       color: var(--component-form-field-color);
@@ -122,6 +123,7 @@
       @include border-radius(var(--component-form-field-border-radius));
       background-color: var(--component-form-field-bg);
       font-family: var(--component-form-field-font-family);
+      font-weight: var(--component-form-field-font-weight);
       font-size: var(--component-form-field-font-size);
       color: var(--component-form-field-color);
       appearance: none;
