@@ -9,7 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-> **Versión pendiente de decidir.** Lo que hay aquí rompe compatibilidad (variables heredadas retiradas, `bundle-core` sin iconos Lucide ni utilidades, fuentes solo en woff2 con familias renombradas, `--semantic-tone-*-bg` ya no gobierna el estado): por SemVer es una **5.0.0**. Pero varias deprecaciones prometen su retirada «en v5.0» (utilidades físicas `.syx-ml-*`/`.syx-mr-*`…), así que cortar la 5.0 obliga a retirarlas ya o a aplazar la promesa. `release.yml` exige que esta sección esté vacía y la de la versión fechada antes de etiquetar.
+## [5.0.0] — 2026-10-01
+
+Versión mayor: rompe compatibilidad. Lo que hay que tocar al actualizar desde 4.x:
+
+- **Variables heredadas sin prefijo** (`--btn-*`, `--form-*`, `--check-*`, `--switch-*`, `--list-*`, `--scope-*`, `--font-size-1…5`…): retiradas. El mapa de cada una a su token oficial está más abajo («Removed») y en THEMING-RULES.md.
+- **Utilidades físicas**: `.syx-ml-*`/`.syx-mr-*`/`.syx-pl-*`/`.syx-pr-*`, `.syx-ml-auto`/`.syx-mr-auto`, `.syx-left-0`/`.syx-right-0` y `.syx-text-left`/`.syx-text-right` se retiran; usa `ms`/`me`/`ps`/`pe`, `start-0`/`end-0` y `text-start`/`text-end` (en LTR pintan lo mismo).
+- **`--semantic-border-focus`** se retira; usa `--semantic-color-border-focus`.
+- **`bundle-core`** ya no lleva iconos Lucide ni utilidades.
+- **Fuentes** solo en woff2, con las familias renombradas.
+- **`--semantic-tone-*-bg`** ya no gobierna el estado de los componentes (detalle en «Changed», más abajo).
+- **`[hidden]`** oculta siempre (`display:none !important` en `syx.reset`); la regla `[hidden="false"]{display:block}` desaparece.
+
+### Removed — lo que estaba fijado para v5.0
+
+- Utilidades físicas deprecadas en la auditoría 2026-10 (acción 13): `.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`, y los lados `l`/`r` físicos de `generate-utility-directional`. Ninguna página del sitio las usaba.
+- `--semantic-border-focus`, último alias de `base/_deprecated-aliases.scss` con retirada fijada en v5.0. El resto de tokens `@deprecated` (con `replacedBy` en `tokens.json`) no tenía fecha y sigue.
 
 ### Changed — css/ se publica minificado con Prepros
 

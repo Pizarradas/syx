@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-4.28.0-7c3aed)
+![Version](https://img.shields.io/badge/version-5.0.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -55,7 +55,7 @@ section lies, that check goes red.
 ```bash
 npm install github:Pizarradas/syx
 # or pin a tagged release once one exists
-npm install github:Pizarradas/syx#v4.28.0
+npm install github:Pizarradas/syx#v5.0.0
 ```
 
 ### 2. Import one theme (and the JS, only if you use tabs)
@@ -526,12 +526,12 @@ fail a build.
 
 ## What runs, and when
 
-Fourteen guards, and none of them used to run unless somebody remembered to type
+Around forty guards (`npm run check` and the browser suites), and none of them used to run unless somebody remembered to type
 `npm run check`. `.github/workflows/ci.yml` splits them by what they cost:
 
 | Job | When | What |
 | --- | ---- | ---- |
-| **Contratos** | every push · Node 18, 20, 22 | `check-limpio` (the committed CSS is the compiled one), then the whole `npm run check` chain |
+| **Contratos** | every push · Node 20.19, 22, 24 | `check-limpio` (the committed CSS is the compiled one), then the whole `npm run check` chain |
 | **Entrega** | pull requests | `check:consumible` (packs and installs for real), `check:quickstart` (the Quick Start above, built with Vite and opened in Chromium) and `check:propuesta` |
 | **Desviación** | every run, never fails | The drift report, written into the run summary |
 
@@ -595,8 +595,7 @@ syx/
 │       ├── example-06/          # Theme 06 (Cyber/OKLCH)
 │       └── syx-sketch/          # Theme 07 (grayscale, SKETCH mode)
 │
-├── css/                         # Compiled output (committed for zero-install use)
-│   └── prod/                    # PurgeCSS-optimized output
+├── css/                         # Compiled output of the scss/ entry points (committed; Prepros or npm run build:css)
 │
 ├── fonts/                       # Self-hosted webfonts
 ├── img/                         # Images and icons
