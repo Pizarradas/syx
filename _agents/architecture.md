@@ -118,6 +118,12 @@ documentation that is also law is named explicitly as `human` — `governance/`,
 `_agents/decision-record.md`. Otherwise an agent could rewrite its own instructions and the exam
 that grades it. `_agents/workflows/` and `_agents/prompts/` are `pr`.
 
+The contract is enforced in three places, not one: the Claude Code hook
+(`.claude/settings.json` → `scripts/hook-confianza.js`) stops a `human` write before it happens;
+`npm run check:confianza` in CI fails a pull request that touches `human` paths without the
+`aprobado-humano` label; and `.github/CODEOWNERS`, generated from `trust.json`, asks the owner's
+review on every `human` and `pr` path — which only binds once branch protection requires it.
+
 
 ---
 

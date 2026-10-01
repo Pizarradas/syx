@@ -275,7 +275,16 @@ npm run propose classify scss/atoms/_btn.scss CHANGELOG.md
 # Propose a component token — nobody says which file it goes in
 npm run propose token -- --name --component-feature-card-glow \
   --value "var(--semantic-shadow-md)" --why "Optional lift for the featured card"
+
+# Propose a component or utility already written in the working tree
+npm run propose files -- scss/atoms/_pill.scss --why "Outline variant for dense tables"
 ```
+
+`files` takes the paths you changed — and only those: any other change in the tree
+is refused — checks every one is tier `pr`, then compiles, validates (and regenerates
+the component registry when a component changed) and leaves the same branch, commit
+and evidence. If validation fails, it undoes what the build generated and leaves your
+change where it was.
 
 The destination is deduced from the token's family (which file already declares
 `--component-feature-card-*`), never from a lookup table that would go stale. Then
@@ -286,8 +295,8 @@ the proof in front of you instead of a claim that it works.
 
 It refuses, with the reason and whose call it is: a primitive or semantic token, a
 literal colour (naming the semantic token that already holds it), a value that skips
-the semantic layer, a token that already exists, an invented family, and a dirty
-working tree. **It never pushes on its own** — it prints the exact command. `--pr`
+the semantic layer, a token that already exists, an invented family, a destination
+(deduced or given with `--file`) that is not tier `pr`, and a dirty working tree. **It never pushes on its own** — it prints the exact command. `--pr`
 publishes and opens the PR, and has to be asked for.
 
 `npm run check:propuesta` exercises all of it in a throwaway copy of the tree.

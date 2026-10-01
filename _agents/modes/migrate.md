@@ -4,7 +4,7 @@
 
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
-> · **Writes:** `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/layout/`, `scss/utilities/`, `scss/pages/` — tier `pr`, one variable per proposal, prepared with `node scripts/propose.js`.
+> · **Writes:** `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/layout/`, `scss/utilities/`, `scss/pages/` — tier `pr`, one variable per proposal, prepared with `node scripts/propose.js files <paths…> --why "…"`.
 > · **Recommends only:** `scss/base/`, `scss/themes/`, `scss/abstracts/`, `contracts/lint-contract.json` — a legacy variable that lives up here is not migrated by an agent. Produce the impact analysis and the exact diff; a person applies it, and updates the contract in the same move.
 > · **Reads:** `contracts/rules.json`, `tokens.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `find_token_by_value` finds the SYX equivalent of a legacy value, `get_token` confirms it resolves the same in every theme, and `scan_for_drift` shows what the migration left behind on a built page.

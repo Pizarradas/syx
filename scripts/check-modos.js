@@ -23,8 +23,11 @@
  *   3. Toda ruta bajo **Recommends only** es `human` de verdad. Sin esto un
  *      modo podría rebajarse solo, prometiendo prudencia donde no hace falta y
  *      escondiendo dónde sí.
- *   4. Un modo que escribe en `pr` nombra `propose.js`: la vía existe o no se
- *      menciona el permiso.
+ *   4. Un modo que escribe en `pr` nombra el subcomando de `propose.js` que de
+ *      verdad lo lleva: `token` para los tokens de componente, `files` para
+ *      el resto. Nombrar solo `propose.js` no basta: hasta la auditoría de
+ *      2026-10 los modos decían que los componentes «van por propose.js», y
+ *      propose.js solo sabía proponer tokens.
  *   5. Las rutas que el cuerpo del modo nombra están cubiertas por alguna de
  *      las tres listas. Así el bloque no se queda corto cuando el modo crece.
  *   6. Las herramientas de «Ask, don't read» existen en el servidor MCP —se le
@@ -168,13 +171,23 @@ comprobar('lo que un modo dice solo recomendar es de verdad humano', () => {
   if (malos.length) throw new Error(malos.join(' · '));
 });
 
-comprobar('el que puede escribir en `pr` dice por dónde', () => {
+// Qué subcomando lleva cada ruta `pr`. Los tokens de componente (y su
+// inventario, tokens.json) tienen el suyo, que deduce el fichero; lo demás se
+// escribe a mano y se entrega con `files`.
+const VIA_TOKEN = (r) => r.startsWith('scss/abstracts/tokens/components/') || r === 'tokens.json';
+
+comprobar('el que puede escribir en `pr` nombra el subcomando que lo lleva', () => {
   const malos = [];
   for (const [modo, b] of bloques) {
-    const pr = rutasDe(b.escribe || '').some((r) => clasificarRuta(r).tier === 'pr');
-    if (pr && !b.texto.includes('propose.js')) malos.push(modo);
+    const pr = rutasDe(b.escribe || '').filter((r) => clasificarRuta(r).tier === 'pr');
+    const pide = new Set(pr.map((r) => (VIA_TOKEN(r) ? 'token' : 'files')));
+    for (const sub of pide) {
+      if (!new RegExp(`propose\\.js ${sub}\\b`).test(b.texto)) {
+        malos.push(`${modo} escribe en ${pr.filter((r) => (VIA_TOKEN(r) ? 'token' : 'files') === sub).join(', ')} sin nombrar \`propose.js ${sub}\``);
+      }
+    }
   }
-  if (malos.length) throw new Error(`${malos.join(', ')} anuncia permiso de propuesta sin nombrar scripts/propose.js`);
+  if (malos.length) throw new Error(malos.join(' · '));
 });
 
 comprobar('el bloque cubre todas las rutas que el modo nombra', () => {
