@@ -260,6 +260,9 @@ async function probar(c) {
       if (con.codigo === 0) {
         r.estado = 'ESCAPA';
         r.detalle = `el guardián pasa con la regresión dentro.\n${ultimas(con.salida, 6)}`;
+      } else if (!motivo && /Executable doesn't exist|browserType\.launch/.test(con.salida)) {
+        r.estado = 'ROTO';
+        r.detalle = 'no hay Chromium: `npx playwright install chromium` en tests/browser, SYX_CHROMIUM=/ruta, o --sin-navegador.';
       } else if (!motivo) {
         r.estado = 'OTRO MOTIVO';
         r.detalle = `falla (código ${con.codigo}) pero su salida no dice ${c.espera}: no la para por lo que debe.\n${ultimas(con.salida)}`;
