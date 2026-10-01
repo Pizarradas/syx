@@ -37,6 +37,13 @@
       display: block;
       max-width: 100%;
 
+      // Un bloque con scroll lleva tabindex="0" para desplazarlo con el
+      // teclado (ver `a11y` en el registro): necesita el anillo común. Lo
+      // midió tests/browser/foco.mjs. (Auditoría 2026-10 · acción 8)
+      &:focus-visible {
+        @include focus-ring();
+      }
+
       // Syntax highlight tokens
       // Usage: <span class="atom-code__tag">div</span>
       &__tag {

@@ -262,7 +262,9 @@
         "atom-code__tag",
         "atom-code__val"
       ],
-      "states": [],
+      "states": [
+        ":focus-visible"
+      ],
       "composedOf": [],
       "tokens": [
         "--component-code-bg",
@@ -283,7 +285,7 @@
         "--component-code-syntax-val"
       ],
       "description": "[scope: domain-reusable] Code shown as content, on its own dark surface that ignores the page theme so a dark brand colour cannot make the syntax invisible. --inline for a fragment inside a sentence. The __tag/__attr/__val/__cls/__cmt elements are the syntax roles; nothing else colours code. Use in technical and documentation products, not as a generic panel.",
-      "usage": "<pre class=\"atom-code\"><code>&lt;<span class=\"atom-code__tag\">button</span> <span class=\"atom-code__attr\">class</span>=<span class=\"atom-code__val\">\"atom-btn\"</span>&gt;</code></pre>",
+      "usage": "<pre class=\"atom-code\" tabindex=\"0\" role=\"group\" aria-label=\"Button markup\"><code>&lt;<span class=\"atom-code__tag\">button</span> <span class=\"atom-code__attr\">class</span>=<span class=\"atom-code__val\">\"atom-btn\"</span>&gt;</code></pre>",
       "a11y": "Static content in <pre><code>. A block that scrolls sideways needs tabindex=\"0\" (and a label) so it can be scrolled from the keyboard. Colour is never the only cue. No JS."
     },
     {
@@ -1163,7 +1165,7 @@
         "--component-code-snippet-shadow"
       ],
       "description": "[scope: domain-reusable] A code block with a header that judges it: --ok for the correct way, --ko for the rejected one, --neutral for a plain sample. Built for teaching a rule by showing both sides, so a lone --neutral snippet is usually just atom-code. The label has to state the verdict in words — the colour is not the message.",
-      "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\"><code>color: var(--semantic-color-text-primary);</code></pre></div>",
+      "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\" tabindex=\"0\" role=\"group\" aria-label=\"Correct example\"><code>color: var(--semantic-color-text-primary);</code></pre></div>",
       "a11y": "The header label states the verdict in words. A body that scrolls sideways needs tabindex=\"0\". No JS."
     },
     {
@@ -1380,6 +1382,7 @@
         "--component-form-field-count-limit-color",
         "--component-form-field-error-border",
         "--component-form-field-error-color",
+        "--component-form-field-error-shadow-focus",
         "--component-form-field-icon-position-right",
         "--component-form-field-icon-size",
         "--component-form-field-label-margin-bottom",
