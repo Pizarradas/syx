@@ -38,12 +38,7 @@ contracts/dtcg/
 
 # dist/ lo genera scripts/build-dist.js en `prepare` (npm pack, publish e
 # instalación desde GitHub): hojas por contexto, minificadas, sin la capa site/.
-# EXCEPTO dist/site/: lo que cargan home, docs, why-syx y theme-builder. Sin él
-# versionado, abrir las páginas desde un clon (o servir la rama tal cual en
-# Pages) las dejaba sin estilos hasta ejecutar `npm run build`.
-# check-limpio --strict comprueba que lo commiteado es lo que sale de compilar.
-dist/*
-!dist/site/
+dist/
 
 # Pruebas en navegador: capturas y diferencias se regeneran en cada ejecución.
 tests/browser/out/
