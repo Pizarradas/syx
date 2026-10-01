@@ -14,6 +14,15 @@
  *      los encabezados traducidos al español: el corrector mide el contenido,
  *      no el idioma de los títulos.
  *   4. Cada mutante (la referencia con un solo fallo sembrado) suspende.
+ *   5. Cada anti-referencia de _agents/evals/anti/ —una respuesta dañina
+ *      escrita para engañar al corrector— suspende en la parte determinista.
+ *      Es la comprobación que justifica las reglas con forma: la primera
+ *      versión del corrector dejaba aprobar ocho de ellas con 8/8.
+ *   6. Cada respuesta de _agents/evals/buenas/ —correcta, pero escrita de otra
+ *      manera que la referencia— aprueba. Sin esto, endurecer el corrector
+ *      contra las anti sale gratis aunque suspenda respuestas buenas.
+ *
+ * Sin red: el juez (scripts/lib/juez.js) no se llama nunca desde aquí.
  *
  * Uso: node scripts/check-evals.js   ·   npm run check:evals
  */
@@ -24,7 +33,7 @@ const fs = require('fs');
 const path = require('path');
 const { crearConsulta } = require('./lib/consulta');
 const { evaluar } = require('./lib/evaluar');
-const { cargarBanco } = require('./lib/banco');
+const { cargarBanco, leerEjemplos } = require('./lib/banco');
 const { seccionesDelModo, whyDelModo, normalizar } = require('./lib/formato-modos');
 
 const ROOT = path.join(__dirname, '..');
@@ -114,10 +123,36 @@ for (const t of tareas) {
   ok++;
 }
 
+// 5 · anti-referencias: todas suspenden
+const anti = leerEjemplos(path.join(EVALS, 'anti'));
+let antiOk = 0;
+if (anti.length < 8) errores.push(`anti/ tiene ${anti.length} respuestas dañinas; mínimo 8`);
+for (const a of anti) {
+  const t = tareas.find((x) => x.id === a.cab.tarea);
+  if (!t) { errores.push(`anti/${a.fichero}: «tarea: ${a.cab.tarea}» no existe`); continue; }
+  if (!a.cab['daño']) { errores.push(`anti/${a.fichero}: falta «daño:», qué tiene de dañina`); continue; }
+  const r = corregir(t, a.texto);
+  if (r.apruebaAuto) { errores.push(`anti/${a.fichero}: aprueba (${r.auto}/${r.max}) siendo dañina — ${a.cab['daño']}`); continue; }
+  antiOk++;
+}
+
+// 6 · respuestas buenas alternativas: todas aprueban
+const buenas = leerEjemplos(path.join(EVALS, 'buenas'));
+let buenasOk = 0;
+for (const b of buenas) {
+  const t = tareas.find((x) => x.id === b.cab.tarea);
+  if (!t) { errores.push(`buenas/${b.fichero}: «tarea: ${b.cab.tarea}» no existe`); continue; }
+  const r = corregir(t, b.texto);
+  if (!r.apruebaAuto) { errores.push(`buenas/${b.fichero}: suspende (${r.auto}/${r.max}) siendo correcta — ${motivo(r)}`); continue; }
+  buenasOk++;
+}
+
 for (const e of errores) console.log(`❌ ${e}`);
 if (!errores.length) {
   console.log(`✅ ${modos.length} modos cubiertos · ${tareas.length} tareas, con sus secciones leídas de cada modo`);
   console.log(`✅ ${ok}/${tareas.length} referencias aprueban (también en español) y sus mutantes suspenden`);
+  console.log(`✅ ${antiOk}/${anti.length} anti-referencias suspenden`);
+  console.log(`✅ ${buenasOk}/${buenas.length} respuestas buenas alternativas aprueban`);
 }
 console.log('');
 process.exitCode = errores.length ? 1 : 0;
