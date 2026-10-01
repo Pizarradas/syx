@@ -171,7 +171,7 @@ From a clone instead of the installed package:
 | `find_token_by_value` | Which token holds this colour/measure (use before hardcoding one) |
 | `list_components` | The component inventory, layer and base classes |
 | `get_component` | Classes, modifiers, elements, states and tokens of one component |
-| `validate_snippet` | Runs R01–R04 over SCSS **before** it is written, flags non-existent tokens, and names the mixin to use instead |
+| `validate_snippet` | Runs R01–R04, R09 and R10 over SCSS **before** it is written, flags non-existent tokens, and names the mixin to use instead |
 | `classify_change` | The trust tier of a change, and where a new token belongs |
 | `scan_for_drift` | Where a consuming app has drifted from the system |
 | `list_mixins` / `get_mixin` | The 44 mixins: signature, defaults, what they emit, how often each is used |
@@ -498,5 +498,5 @@ Utilities always win over components. No `!important` needed.
 ## Status (March 2026)
 
 - **Architecture, tokens, theming, atomic design, mixin library, dark-mode, accessibility, `@layer`**: all production-ready.
-- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R08 contract layer active. Mode system (9 modes) fully operational. 1 phantom token closes on `npm run build`.
+- **AI First** (`contracts/`, `syx-validate.js`, `component-registry.json`, `AI_GUIDELINES.md`, `AGENTS.md`, `CLAUDE.md`, `_agents/`): ⚠️ **PASSED WITH WARNINGS** — R01–R10 contract layer active. Mode system (9 modes) fully operational. 1 phantom token closes on `npm run build`.
 - Public documentation: `home.html`, `docs.html`, `why-syx.html` fully built with AI First section.
