@@ -98,6 +98,8 @@
     .docs-sidebar__link {
       display: flex;
       align-items: center;
+      /* WCAG 2.5.8: 24 px de objetivo. Los subenlaces medían 23,6. */
+      min-height: 1.5rem;
       gap: .5rem;
       padding: .375rem 1rem;
       font-size: .8125rem;
@@ -359,8 +361,41 @@
       vertical-align: top;
     }
 
-    .docs-ref__api td > code {
-      white-space: nowrap;
+    /* La tabla de API es de dos columnas, clave y valor: no necesita el
+       suelo de anchura de .atom-table (44rem), que a 320 px la sacaba de la
+       página. Las listas de clases y tokens se parten donde haga falta.
+       (Auditoría 2026-10 · acción 8) */
+    .docs-ref__api {
+      min-width: 0;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .docs-ref__api td code {
+      overflow-wrap: anywhere;
+    }
+
+    /* A 320 px, clave sobre valor: dos columnas de 9rem y el resto no dejan
+       sitio al resumen de un <details> de tokens. */
+    @media (max-width: 30em) {
+      .docs-ref__api th,
+      .docs-ref__api td {
+        display: block;
+        width: auto;
+      }
+    }
+
+    /* Muestra de color de las utilidades de marca: el color se ve en un
+       cuadrado, no en un texto que no llega a 4,5:1. */
+    .docs-muestra {
+      display: inline-block;
+      inline-size: 1em;
+      block-size: 1em;
+      border-radius: var(--semantic-border-radius-sm);
+    }
+
+    .docs-muestra:not([class*="syx-bg-"]) {
+      background-color: currentColor;
     }
 
     .docs-guide-section {
@@ -761,7 +796,7 @@
             </h3>
 
             <!-- Visual flowchart -->
-            <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50 syx-overflow-auto" role="img"
+            <div class="syx-border syx-p-4 syx-mb-4 syx-bg-gray-50 syx-overflow-auto" role="img" tabindex="0"
               aria-label="Layer decision flowchart">
               <div class="syx-d-flex syx-flex-col syx-gap-2">
 
@@ -813,7 +848,7 @@
 
             <!-- Reference table -->
             <p class="syx-type-overline syx-text-gray syx-mb-2">Quick reference</p>
-            <div class="syx-mb-4" style="overflow-x:auto">
+            <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="Quick reference">
               <table class="atom-table" style="min-width:600px">
                 <thead>
                   <tr>
@@ -911,7 +946,7 @@
             <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
               <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
                 <p class="syx-type-overline syx-text-success syx-mb-2">✅ Correct</p>
-                <pre class="atom-code"><code>&lt;nav aria-label="Main navigation" class="org-navbar"&gt;
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: ✅ Correct"><code>&lt;nav aria-label="Main navigation" class="org-navbar"&gt;
   &lt;ul class="org-navbar__list" role="list"&gt;
     &lt;li&gt;&lt;a href="/" class="atom-link"&gt;Home&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
@@ -919,7 +954,7 @@
               </div>
               <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
                 <p class="syx-type-overline syx-text-error syx-mb-2">❌ Wrong — div soup</p>
-                <pre class="atom-code"><code>&lt;div class="org-navbar"&gt;
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: ❌ Wrong — div soup"><code>&lt;div class="org-navbar"&gt;
   &lt;div class="org-navbar__list"&gt;
     &lt;div&gt;&lt;span class="atom-link"&gt;Home&lt;/span&gt;&lt;/div&gt;
   &lt;/div&gt;
@@ -942,7 +977,7 @@
                   variants; <code>is-open</code>, <code>is-loading</code> are JS-driven state.</li>
               </ul>
             </div>
-            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Correct --&gt;
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 2.2 — BEM in HTML"><code>&lt;!-- ✅ Correct --&gt;
 &lt;button class="atom-btn atom-btn--primary"&gt;          &lt;!-- block + modifier --&gt;
   &lt;span class="atom-btn__icon" aria-hidden="true"&gt;   &lt;!-- element --&gt;
 &lt;/button&gt;
@@ -952,7 +987,7 @@
             <h4 class="atom-title atom-title--h5 syx-mb-2">2.3 — Compose in HTML, not in SCSS</h4>
             <p class="atom-txt syx-text-gray syx-mb-2">Organisms and molecules are composed in HTML. Keep SCSS partials
               free of cross-layer selector references.</p>
-            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Composed in HTML — molecules inside organisms --&gt;
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 2.3 — Compose in HTML, not in SCSS"><code>&lt;!-- ✅ Composed in HTML — molecules inside organisms --&gt;
 &lt;header class="org-header"&gt;
   &lt;div class="org-header__inner layout-grid"&gt;
     &lt;a href="/" class="atom-link org-header__logo"&gt;…&lt;/a&gt;
@@ -976,7 +1011,7 @@
 
             <!-- 2.4 A11y table -->
             <h4 class="atom-title atom-title--h5 syx-mb-2">2.4 — Accessibility (required)</h4>
-            <div class="syx-mb-4" style="overflow-x:auto">
+            <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="2.4 — Accessibility (required)">
               <table class="atom-table" style="min-width:540px">
                 <thead>
                   <tr>
@@ -1018,7 +1053,7 @@
                 </tbody>
               </table>
             </div>
-            <pre class="atom-code syx-mb-4"><code>&lt;!-- ✅ Icon-only button done right --&gt;
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 2.4 — Accessibility (required)"><code>&lt;!-- ✅ Icon-only button done right --&gt;
 &lt;button class="atom-btn atom-btn--ghost atom-btn--circle"
         aria-label="Close menu"&gt;
   &lt;span class="atom-icon atom-icon--lc-x" aria-hidden="true"&gt;&lt;/span&gt;
@@ -1028,7 +1063,7 @@
             <h4 class="atom-title atom-title--h5 syx-mb-2">2.5 — Layout Grid</h4>
             <p class="atom-txt syx-text-gray syx-mb-2">Use <code>.layout-grid</code> for all main content areas. Never
               invent ad-hoc flex containers for page structure.</p>
-            <pre class="atom-code"><code>&lt;!-- ✅ Standard responsive layout --&gt;
+            <pre class="atom-code" tabindex="0" role="group" aria-label="Code: 2.5 — Layout Grid"><code>&lt;!-- ✅ Standard responsive layout --&gt;
 &lt;main class="layout-grid"&gt;
   &lt;div class="layout-grid__col-xs-12 layout-grid__col-md-8"&gt;&lt;!-- main --&gt;&lt;/div&gt;
   &lt;aside class="layout-grid__col-xs-12 layout-grid__col-md-4"&gt;&lt;!-- sidebar --&gt;&lt;/aside&gt;
@@ -1057,7 +1092,7 @@
             <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
               <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
                 <p class="syx-type-overline syx-text-success syx-mb-2">✅ Efficient — max 3 levels</p>
-                <pre class="atom-code"><code>.org-header {
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: ✅ Efficient — max 3 levels"><code>.org-header {
   &__nav {         // level 2
     &--open { … } // level 3
   }
@@ -1066,7 +1101,7 @@
               </div>
               <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:260px">
                 <p class="syx-type-overline syx-text-error syx-mb-2">❌ Expensive — 5 levels</p>
-                <pre class="atom-code"><code>.org-header {
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: ❌ Expensive — 5 levels"><code>.org-header {
   &__nav {
     &__list {
       &__item {
@@ -1080,7 +1115,7 @@
             <p class="atom-txt syx-text-gray syx-mb-2">Every component MUST be wrapped in a <code>@mixin</code> with a
               <code>$theme</code> parameter. This enables selective inclusion and multi-theme support.
             </p>
-            <pre class="atom-code syx-mb-4"><code>// ✅ Correct
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 3.2 — The @mixin wrapper pattern (mandatory)"><code>// ✅ Correct
 @mixin mol-card($theme: null) {
   @layer syx.molecules {
     .mol-card { /* base */ }
@@ -1098,7 +1133,7 @@
             <h4 class="atom-title atom-title--h5 syx-mb-2">3.3 — Null-safe shorthand</h4>
             <p class="atom-txt syx-text-gray syx-mb-2">SYX mixins skip <code>null</code> values. Use this to avoid
               emitting unnecessary properties.</p>
-            <pre class="atom-code syx-mb-4"><code>// ✅ Only emits padding-top and padding-bottom — no left/right
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 3.3 — Null-safe shorthand"><code>// ✅ Only emits padding-top and padding-bottom — no left/right
 @include padding(var(--semantic-space-inset-md) null);
 
 // ❌ Raw CSS always emits all 4 properties (sets left/right to 0)
@@ -1110,7 +1145,7 @@ padding: var(--semantic-space-inset-md) 0;
 
             <!-- 3.4 token map -->
             <h4 class="atom-title atom-title--h5 syx-mb-2">3.4 — Token &rarr; CSS output</h4>
-            <div class="syx-mb-4" style="overflow-x:auto">
+            <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="3.4 — Token → CSS output">
               <table class="atom-table" style="min-width:580px">
                 <thead>
                   <tr>
@@ -1156,7 +1191,7 @@ padding: var(--semantic-space-inset-md) 0;
 
             <!-- 3.5 property order -->
             <h4 class="atom-title atom-title--h5 syx-mb-2">3.5 — Property order inside a rule</h4>
-            <pre class="atom-code"><code>.syx-component {
+            <pre class="atom-code" tabindex="0" role="group" aria-label="Code: 3.5 — Property order inside a rule"><code>.syx-component {
   // 1. Positioning
   @include absolute($top: 0, $left: 0);
 
@@ -1202,7 +1237,7 @@ padding: var(--semantic-space-inset-md) 0;
             </h3>
 
             <!-- Mixin reference table -->
-            <div class="syx-mb-4" style="overflow-x:auto">
+            <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="Mixin Deep-Dive">
               <table class="atom-table" style="min-width:560px">
                 <thead>
                   <tr>
@@ -1305,7 +1340,7 @@ padding: var(--semantic-space-inset-md) 0;
               </table>
             </div>
 
-            <pre class="atom-code syx-mb-3"><code>// ✅ Mobile-first with breakpoints
+            <pre class="atom-code syx-mb-3" tabindex="0" role="group" aria-label="Code: Mixin Deep-Dive"><code>// ✅ Mobile-first with breakpoints
 .org-hero__title {
   font-size: var(--semantic-font-size-xl);      // mobile
 
@@ -1336,7 +1371,7 @@ padding: var(--semantic-space-inset-md) 0;
                 </p>
                 <p class="atom-txt syx-mb-1">Utilities are <em>adjectives</em>. If you're inventing a visual utility,
                   you're in the wrong layer.</p>
-                <pre class="atom-code"><code>❌ &lt;div class="syx-card-featured"&gt; &rarr; this is a molecule, not a utility
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas"><code>❌ &lt;div class="syx-card-featured"&gt; &rarr; this is a molecule, not a utility
 ✅ &lt;div class="mol-card mol-card--featured"&gt;</code></pre>
               </div>
 
@@ -1347,7 +1382,7 @@ padding: var(--semantic-space-inset-md) 0;
                 </p>
                 <p class="atom-txt syx-mb-1">Mixins add value when they include null-safety or extra logic. For simple
                   properties, use raw CSS.</p>
-                <pre class="atom-code"><code>❌ @include color(var(--component-x-color));  &rarr; doesn't exist, adds no value
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas (2)"><code>❌ @include color(var(--component-x-color));  &rarr; doesn't exist, adds no value
 ✅ color: var(--component-x-color);
 ✅ opacity: 0.5;
 ✅ cursor: pointer;
@@ -1361,7 +1396,7 @@ padding: var(--semantic-space-inset-md) 0;
                 </p>
                 <p class="atom-txt syx-mb-1">Never increase specificity to win a style conflict. If a component isn't
                   winning, it's a layer assignment problem.</p>
-                <pre class="atom-code"><code>❌ .org-header .atom-btn--primary { background: red; }  &rarr; forced specificity
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas (3)"><code>❌ .org-header .atom-btn--primary { background: red; }  &rarr; forced specificity
 ✅ Use .syx-* utilities — they always win via @layer syx.utilities</code></pre>
               </div>
 
@@ -1372,7 +1407,7 @@ padding: var(--semantic-space-inset-md) 0;
                 </p>
                 <p class="atom-txt syx-mb-1">If you define a token only in one theme's <code>_theme.scss</code>, the
                   other themes inherit an empty value.</p>
-                <pre class="atom-code"><code>// ❌ Only in themes/example-02/_theme.scss:
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas (4)"><code>// ❌ Only in themes/example-02/_theme.scss:
 --component-header-bg: hsl(0, 0%, 5%);  &rarr; themes 01,03,04,05 get no value
 
 // ✅ Always define the fallback in abstracts/tokens/components/_header.scss:
@@ -1385,7 +1420,7 @@ padding: var(--semantic-space-inset-md) 0;
                   <span class="atom-pill atom-pill--secondary syx-me-1">5</span>
                   $theme parameter flow
                 </p>
-                <pre class="atom-code"><code>// _bundle-full.scss &rarr; passes the theme name to the mixin, once for all themes
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas (5)"><code>// _bundle-full.scss &rarr; passes the theme name to the mixin, once for all themes
 @include org-site-header($theme);
 
 // organisms/_site-header.scss &rarr; two methods based on type of difference
@@ -1403,7 +1438,7 @@ padding: var(--semantic-space-inset-md) 0;
                   <span class="atom-pill atom-pill--secondary syx-me-1">6</span>
                   PurgeCSS: protect dynamic JS classes
                 </p>
-                <pre class="atom-code"><code>// postcss.config.js — safelist
+                <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Tips, Patterns &amp; Gotchas (6)"><code>// postcss.config.js — safelist
 safelist: [/^atom-btn--/, /^is-/];
 
 // Or include class names in an HTML comment (PurgeCSS scans content):
@@ -1419,7 +1454,7 @@ safelist: [/^atom-btn--/, /^is-/];
               Quick decision checklist
             </h3>
             <p class="atom-txt syx-text-gray syx-mb-3">Before writing any new code, ask yourself:</p>
-            <div style="overflow-x:auto">
+            <div style="overflow-x:auto" role="region" tabindex="0" aria-label="Quick decision checklist">
               <table class="atom-table" style="min-width:560px">
                 <thead>
                   <tr>
@@ -1515,7 +1550,7 @@ safelist: [/^atom-btn--/, /^is-/];
           <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
             <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Register it in any MCP client</p>
-              <pre class="atom-code"><code>{
+              <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Register it in any MCP client"><code>{
   "mcpServers": {
     "syx": { "command": "npx", "args": ["-y", "syx-mcp"] }
   }
@@ -1523,7 +1558,7 @@ safelist: [/^atom-btn--/, /^is-/];
             </div>
             <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Or from your own code</p>
-              <pre class="atom-code"><code>const syx = require('syx-design-system');
+              <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Or from your own code"><code>const syx = require('syx-design-system');
 
 syx.getToken({
   token: '--component-button-primary-filled-bg',
@@ -1533,7 +1568,7 @@ syx.getToken({
           </div>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">The ten tools</p>
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="The ten tools">
             <table class="atom-table" style="min-width:620px">
               <thead>
                 <tr>
@@ -1622,7 +1657,7 @@ syx.getToken({
             cascade this system already declares. The tiers live in <code>contracts/trust.json</code>, as data, so
             they can be read without running anything.</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="2 — Write: graded trust">
             <table class="atom-table" style="min-width:640px">
               <thead>
                 <tr>
@@ -1664,7 +1699,7 @@ syx.getToken({
           </div>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">The proposal path</p>
-          <pre class="atom-code syx-mb-3"><code># Where does this change sit?
+          <pre class="atom-code syx-mb-3" tabindex="0" role="group" aria-label="Code: The proposal path"><code># Where does this change sit?
 npm run propose classify scss/atoms/_btn.scss CHANGELOG.md
 
 # Propose a component token — nobody says which file it goes in
@@ -1679,7 +1714,7 @@ npm run propose token -- --name --component-feature-card-glow \
             with the proof in front of you instead of a claim that it works. It never pushes: it prints the command.</p>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">What it refuses, and says why</p>
-          <div class="syx-mb-0" style="overflow-x:auto">
+          <div class="syx-mb-0" style="overflow-x:auto" role="region" tabindex="0" aria-label="What it refuses, and says why">
             <table class="atom-table" style="min-width:560px">
               <thead>
                 <tr>
@@ -1727,11 +1762,11 @@ npm run propose token -- --name --component-feature-card-glow \
             against <strong>the version of SYX that app has installed</strong>, which is the only comparison that means
             anything.</p>
 
-          <pre class="atom-code syx-mb-4"><code>npx syx-scan "src/**/*.html" src/app.css   # from a consuming app
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 3 — Detect: drift in a consuming app"><code>npx syx-scan "src/**/*.html" src/app.css   # from a consuming app
 npm run scan -- docs.html --todo           # from this repo
 npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="3 — Detect: drift in a consuming app">
             <table class="atom-table" style="min-width:640px">
               <thead>
                 <tr>
@@ -1790,7 +1825,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             Node 18, 20 and 22 &mdash; with the heavier ones (packing and installing the package for real, exercising
             the proposal path) reserved for pull requests, so nobody is tempted to switch it off.</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="4 — What runs on its own">
             <table class="atom-table" style="min-width:600px">
               <thead>
                 <tr>
@@ -1882,7 +1917,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             the expensive mistakes become cheap to catch, and the cheap ones stop happening at all. Every figure below
             is measured in this repository, not estimated.</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="5 — What this buys you">
             <table class="atom-table" style="min-width:660px">
               <thead>
                 <tr>
@@ -1991,7 +2026,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
             replacement</em>, which is the half that used to be missing.</p>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">1 &middot; What is it, and which tokens does it consume?</p>
-            <pre class="atom-code syx-mb-4"><code>&rarr; get_component { "name": "feature-card" }
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 1 · What is it, and which tokens does it consume?"><code>&rarr; get_component { "name": "feature-card" }
 
 {
   "encontrado": true,
@@ -2007,7 +2042,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
   …</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">2 &middot; What colour does its border actually become on hover?</p>
-            <pre class="atom-code syx-mb-4"><code>&rarr; get_token { "token": "--component-feature-card-border-color-hover" }
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 2 · What colour does its border actually become on hover?"><code>&rarr; get_token { "token": "--component-feature-card-border-color-hover" }
 
 {
   "encontrado": true,
@@ -2026,7 +2061,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
   …</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">3 &middot; A snippet written from memory</p>
-            <pre class="atom-code syx-mb-4"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  transition: transform 0.2s ease;\n  position: relative;\n}" }
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 3 · A snippet written from memory"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  transition: transform 0.2s ease;\n  position: relative;\n}" }
 
 {
   "conforme": false,
@@ -2051,7 +2086,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
   …</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">4 &middot; So how is that mixin written?</p>
-            <pre class="atom-code syx-mb-4"><code>&rarr; get_mixin { "name": "transition" }
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 4 · So how is that mixin written?"><code>&rarr; get_mixin { "name": "transition" }
 
 {
   "encontrado": true,
@@ -2068,7 +2103,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
   …</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">5 &middot; The same snippet, now using the system</p>
-            <pre class="atom-code syx-mb-4"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  @include transition(transform 0.2s ease);\n  @include relative();\n}" }
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 5 · The same snippet, now using the system"><code>&rarr; validate_snippet { "code": ".mol-feature-card {\n  @include transition(transform 0.2s ease);\n  @include relative();\n}" }
 
 {
   "conforme": true,
@@ -2088,7 +2123,7 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
           <h4 class="atom-title atom-title--h5 syx-mb-2">6.2 &mdash; A proposal, end to end</h4>
           <p class="atom-txt syx-text-gray syx-mb-3">Nobody says which file the token belongs in.</p>
 
-          <pre class="atom-code syx-mb-3"><code>   token        --component-feature-card-glow
+          <pre class="atom-code syx-mb-3" tabindex="0" role="group" aria-label="Code: 6.2 — A proposal, end to end"><code>   token        --component-feature-card-glow
    valor        var(--semantic-shadow-md)
    destino      scss/abstracts/tokens/components/_cards.scss   (junto a --component-feature-card-bg)
    deducido de  familia «feature-card», 2 segmento(s) en común
@@ -2111,7 +2146,7 @@ Switched to a new branch 'syx/token-component-feature-card-glow'
           <p class="atom-txt syx-text-gray syx-mb-3">And the evidence it leaves beside the commit, which is what a
             reviewer opens first:</p>
 
-          <pre class="atom-code syx-mb-4"><code># Propuesta — `--component-feature-card-glow`
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 6.2 — A proposal, end to end (2)"><code># Propuesta — `--component-feature-card-glow`
 **Generada por** `scripts/propose.js` · 2026-08-31T22:15:14.771Z · SYX v4.25.0
 ## Qué
 | | |
@@ -2131,26 +2166,26 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
             through. None of these four wrote a single byte.</p>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">A primitive</p>
-            <pre class="atom-code syx-mb-4"><code>✋ --primitive-color-blue-999 es de la capa «primitive», que vive en scss/abstracts/tokens/primitives/
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: A primitive"><code>✋ --primitive-color-blue-999 es de la capa «primitive», que vive en scss/abstracts/tokens/primitives/
    Nivel: Solo humano. Un cambio aquí se propaga a los siete temas de golpe, o cambia el criterio con el que se juzga a todo lo demás.
 
    Lo que sí puede hacer un agente aquí es preparar el análisis: qué temas
    se verían afectados y con qué valores. Escribirlo, no.</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">A colour written by hand</p>
-            <pre class="atom-code syx-mb-4"><code>   El valor es un color literal, y un token de componente debe apuntar a uno semántico.
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: A colour written by hand"><code>   El valor es un color literal, y un token de componente debe apuntar a uno semántico.
    Ese color ya es --semantic-color-primary, --semantic-color-border-focus, --semantic-color-link-active, --semantic-focus-ring-color, y 6 más.
    Usa var(--semantic-color-primary) si es el papel que le corresponde.</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">A family nobody declares</p>
-            <pre class="atom-code syx-mb-4"><code>   Ningún token existente comparte familia con «--component-site-header-blur»: sería una familia nueva, y eso es decidir un fichero nuevo, no colocar un token.
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: A family nobody declares"><code>   Ningún token existente comparte familia con «--component-site-header-blur»: sería una familia nueva, y eso es decidir un fichero nuevo, no colocar un token.
 
    Familias declaradas que se le parecen: header-bg, header-control, header-height, header-logo, header-padding, header-social, header-z, section-header
 
    Puede que el nombre no siga la familia ya declarada. Si de verdad es nueva, crea el fichero a mano en scss/abstracts/tokens/components/.</code></pre>
 
             <p class="syx-type-overline syx-text-gray syx-mb-2">A value that skips the semantic layer</p>
-            <pre class="atom-code syx-mb-4"><code>   El valor apunta a un primitivo, y un --component-* pasa por --semantic-*.
+            <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: A value that skips the semantic layer"><code>   El valor apunta a un primitivo, y un --component-* pasa por --semantic-*.
    var(--primitive-color-blue-500)
 
    Dar papel a un primitivo es trabajo de la capa semántica, que es solo humana.</code></pre>
@@ -2160,7 +2195,7 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
             fixed in v4.25.0 &mdash; among them a progress bar that had gone months without painting, because it named
             a token that exists in no theme.</p>
 
-          <pre class="atom-code syx-mb-4"><code>── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 6.4 — Auditing a page nobody was watching"><code>── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────
 
    comparado contra    syx-sketch · light · SYX v4.25.0
    ficheros            1
@@ -2211,7 +2246,7 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
               paints cannot diverge.</p>
           </div>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="7 — Out to Figma">
             <table class="atom-table" style="min-width:660px">
               <thead>
                 <tr>
@@ -2237,7 +2272,7 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
           </div>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">Ask, per component &mdash; while drawing</p>
-          <pre class="atom-code syx-mb-4"><code>&rarr; get_figma_spec { "component": "btn", "theme": "syx-sketch", "mode": "dark" }
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: Ask, per component — while drawing"><code>&rarr; get_figma_spec { "component": "btn", "theme": "syx-sketch", "mode": "dark" }
 
 {
   "figmaName": "atom/btn",
@@ -2261,7 +2296,7 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
 }</code></pre>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">Or export the whole library</p>
-          <pre class="atom-code syx-mb-4"><code>npm run export:figma   # &rarr; contracts/figma/&lt;theme&gt;.figma.json   (7 files)
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: Or export the whole library"><code>npm run export:figma   # &rarr; contracts/figma/&lt;theme&gt;.figma.json   (7 files)
 npm run check:figma    # fails if those files are stale
 
    example-01    515 variables · 40 componentes · 274 omitidas
@@ -2275,7 +2310,7 @@ npm run check:figma    # fails if those files are stale
             <code>dark</code> mode, plus the 40 components with the node property every token maps to. Three decisions
             are worth knowing before you import:</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="7 — Out to Figma (2)">
             <table class="atom-table" style="min-width:660px">
               <thead>
                 <tr>
@@ -2352,7 +2387,7 @@ npm run check:figma    # fails if those files are stale
             <strong>Use the lowest tier that does the job.</strong> Start at SKETCH or UX to check the idea is worth
             anything; escalate to TOKEN &rarr; UI &rarr; AUDIT once it is confirmed.</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="1 — The nine modes">
             <table class="atom-table" style="min-width:680px">
               <thead>
                 <tr>
@@ -2458,7 +2493,7 @@ npm run check:figma    # fails if those files are stale
           <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-4">
             <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Portable &mdash; any agent</p>
-              <pre class="atom-code"><code>[SYX: UI]: implement the atom-tag
+              <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Portable — any agent"><code>[SYX: UI]: implement the atom-tag
 component with --primary and --neutral
 
 [SYX: AUDIT]: review
@@ -2466,7 +2501,7 @@ scss/organisms/_site-header.scss</code></pre>
             </div>
             <div class="syx-bg-gray-50 syx-border syx-p-3" style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Claude Code &mdash; the slash command</p>
-              <pre class="atom-code"><code>/syx UI implement the atom-tag component
+              <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Claude Code — the slash command"><code>/syx UI implement the atom-tag component
 
 /syx UX &rarr; TOKEN &rarr; UI + AUDIT
      a search field with autocomplete</code></pre>
@@ -2512,6 +2547,7 @@ scss/organisms/_site-header.scss</code></pre>
           <div class="syx-d-flex syx-gap-3 syx-flex-wrap syx-mb-0">
             <div style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Valid</p>
+              <div class="atom-table__container atom-table--resp" role="region" tabindex="0" aria-label="Valid mode compositions">
               <table class="atom-table">
                 <tbody>
                   <tr>
@@ -2548,9 +2584,11 @@ scss/organisms/_site-header.scss</code></pre>
                   </tr>
                 </tbody>
               </table>
+              </div>
             </div>
             <div style="flex:1;min-width:280px">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Invalid, and why</p>
+              <div class="atom-table__container atom-table--resp" role="region" tabindex="0" aria-label="Invalid mode compositions, and why">
               <table class="atom-table">
                 <tbody>
                   <tr>
@@ -2583,6 +2621,7 @@ scss/organisms/_site-header.scss</code></pre>
                   </tr>
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
         </section>
@@ -2596,7 +2635,7 @@ scss/organisms/_site-header.scss</code></pre>
             <code>_agents/modes/ui.md</code>, unedited. <code>Trust</code> says what the mode may write;
             <code>Knowledge</code> says what it reasons with.</p>
 
-          <pre class="atom-code syx-mb-4"><code>&gt; **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
+          <pre class="atom-code syx-mb-4" tabindex="0" role="group" aria-label="Code: 4 — Every mode opens with two blocks"><code>&gt; **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 &gt;
 &gt; · **Writes:** `scss/atoms/`, `scss/molecules/`, … — tier `pr`: prepare the change
 &gt;   with `node scripts/propose.js`. A person merges.
@@ -2640,7 +2679,7 @@ scss/organisms/_site-header.scss</code></pre>
             <code>Knowledge</code> block, and it is not published to npm.</p>
 
           <p class="syx-type-overline syx-text-gray syx-mb-2">Precedence, highest first</p>
-          <div class="syx-mb-4" style="overflow-x:auto">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="Precedence, highest first">
             <table class="atom-table" style="min-width:620px">
               <thead>
                 <tr>
@@ -2775,11 +2814,12 @@ scss/organisms/_site-header.scss</code></pre>
             <span class="syx-text-inverse syx-bg-primary syx-px-2">.syx-text-inverse</span>
           </div>
           <p class="syx-type-overline syx-text-gray syx-mb-2">Social brand</p>
+          <p class="atom-txt syx-text-gray syx-mb-2">Brand colours for icons and marks, not for running text: on a light page none of them reaches 4.5:1. The swatch shows the colour.</p>
           <div class="syx-d-flex syx-flex-wrap syx-gap-3">
-            <span class="syx-text-facebook syx-font-bold">.syx-text-facebook</span>
-            <span class="syx-text-twitter syx-font-bold">.syx-text-twitter</span>
-            <span class="syx-text-instagram syx-font-bold">.syx-text-instagram</span>
-            <span class="syx-text-whatsapp syx-font-bold">.syx-text-whatsapp</span>
+            <span class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-text-facebook docs-muestra" aria-hidden="true"></span><code>.syx-text-facebook</code></span>
+            <span class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-text-twitter docs-muestra" aria-hidden="true"></span><code>.syx-text-twitter</code></span>
+            <span class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-text-instagram docs-muestra" aria-hidden="true"></span><code>.syx-text-instagram</code></span>
+            <span class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-text-whatsapp docs-muestra" aria-hidden="true"></span><code>.syx-text-whatsapp</code></span>
           </div>
         </section>
 
@@ -2787,6 +2827,7 @@ scss/organisms/_site-header.scss</code></pre>
         <section class="syx-mb-5" id="util-backgrounds">
           <h3 class="atom-title atom-title--h5 syx-mb-3">Backgrounds — .syx-bg-* · .syx-bg-color-*</h3>
           <p class="syx-type-overline syx-text-gray syx-mb-2">Semantic (_text.scss)</p>
+          <p class="atom-txt syx-text-gray syx-mb-2">The state fills (error, success, warning, info) are swatches here: they lighten in dark mode, so no single text colour on them holds 4.5:1 in both. Text on a state colour goes through the component that owns it (atom-pill, mol-alert).</p>
           <div class="syx-d-flex syx-flex-wrap syx-gap-2 syx-mb-3">
             <div class="syx-bg-white syx-border syx-px-3 syx-py-1">bg-white</div>
             <div class="syx-bg-gray-50 syx-border syx-px-3 syx-py-1">bg-gray-50</div>
@@ -2794,20 +2835,20 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="syx-bg-primary syx-px-3 syx-py-1">bg-primary</div>
             <div class="syx-bg-primary-light syx-px-3 syx-py-1">bg-primary-light</div>
             <div class="syx-bg-dark syx-text-white syx-px-3 syx-py-1">bg-dark</div>
-            <div class="syx-bg-error syx-text-white syx-px-3 syx-py-1">bg-error</div>
-            <div class="syx-bg-success syx-text-white syx-px-3 syx-py-1">bg-success</div>
-            <div class="syx-bg-warning syx-px-3 syx-py-1">bg-warning</div>
-            <div class="syx-bg-info syx-text-white syx-px-3 syx-py-1">bg-info</div>
+            <div class="syx-d-flex syx-items-center syx-gap-1 syx-px-3 syx-py-1"><span class="syx-bg-error docs-muestra" aria-hidden="true"></span>bg-error</div>
+            <div class="syx-d-flex syx-items-center syx-gap-1 syx-px-3 syx-py-1"><span class="syx-bg-success docs-muestra" aria-hidden="true"></span>bg-success</div>
+            <div class="syx-d-flex syx-items-center syx-gap-1 syx-px-3 syx-py-1"><span class="syx-bg-warning docs-muestra" aria-hidden="true"></span>bg-warning</div>
+            <div class="syx-d-flex syx-items-center syx-gap-1 syx-px-3 syx-py-1"><span class="syx-bg-info docs-muestra" aria-hidden="true"></span>bg-info</div>
           </div>
           <p class="syx-type-overline syx-text-gray syx-mb-2">Theme-aware helpers (_backgrounds.scss)</p>
           <div class="syx-d-flex syx-flex-wrap syx-gap-2">
             <div class="syx-bg-color-primary syx-px-3 syx-py-1">.syx-bg-color-primary</div>
             <div class="syx-bg-color-secondary syx-px-3 syx-py-1">.syx-bg-color-secondary</div>
             <div class="syx-bg-color-black syx-text-white syx-px-3 syx-py-1">.syx-bg-color-black</div>
-            <div class="syx-bg-color-blue-facebook syx-text-white syx-px-3 syx-py-1">Facebook</div>
-            <div class="syx-bg-color-blue-twitter syx-text-white syx-px-3 syx-py-1">Twitter</div>
-            <div class="syx-bg-color-blue-instagram syx-text-white syx-px-3 syx-py-1">Instagram</div>
-            <div class="syx-bg-color-green-whatsapp syx-text-white syx-px-3 syx-py-1">WhatsApp</div>
+            <div class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-bg-color-blue-facebook docs-muestra" aria-hidden="true"></span><code>.syx-bg-color-blue-facebook</code></div>
+            <div class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-bg-color-blue-twitter docs-muestra" aria-hidden="true"></span><code>.syx-bg-color-blue-twitter</code></div>
+            <div class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-bg-color-blue-instagram docs-muestra" aria-hidden="true"></span><code>.syx-bg-color-blue-instagram</code></div>
+            <div class="syx-d-flex syx-items-center syx-gap-1"><span class="syx-bg-color-green-whatsapp docs-muestra" aria-hidden="true"></span><code>.syx-bg-color-green-whatsapp</code></div>
           </div>
         </section>
 
@@ -3372,7 +3413,7 @@ scss/organisms/_site-header.scss</code></pre>
         <!-- Table -->
         <section class="syx-mb-4" id="atom-table">
           <h3 class="atom-title atom-title--h5 syx-mb-3">Table</h3>
-          <div class="atom-table--resp">
+          <div class="atom-table--resp" role="region" tabindex="0" aria-label="SYX components registry">
             <table class="atom-table atom-table--primary syx-w-full" aria-label="SYX components registry">
               <thead>
                 <tr>
@@ -3425,7 +3466,7 @@ scss/organisms/_site-header.scss</code></pre>
         <section class="syx-mb-4" id="atom-code">
           <h3 class="atom-title atom-title--h5 syx-mb-3">Code — syntax highlight</h3>
           <p class="syx-type-overline syx-text-gray syx-mb-2">.atom-code — block</p>
-          <pre class="atom-code"><span class="atom-code__tag">.atom-btn</span> {
+          <pre class="atom-code" tabindex="0" role="group" aria-label="Code: .atom-code — block"><span class="atom-code__tag">.atom-btn</span> {
   <span class="atom-code__attr">background-color</span>: <span class="atom-code__val">var(--component-btn-primary-bg)</span>;
   <span class="atom-code__attr">color</span>: <span class="atom-code__val">var(--component-btn-primary-color)</span>;
   <span class="atom-code__cmt">/* token-driven — no hardcoded values */</span>
@@ -3636,7 +3677,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-avatar-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-avatar-marcado"><code>&lt;span class=&quot;atom-avatar atom-avatar--lg&quot;&gt;&lt;img class=&quot;atom-avatar__img&quot; src=&quot;img/avatar-demo.svg&quot; alt=&quot;Ana López&quot; width=&quot;56&quot; height=&quot;56&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-avatar&quot; role=&quot;img&quot; aria-label=&quot;Ana López&quot;&gt;AL&lt;/span&gt;&lt;span class=&quot;atom-avatar atom-avatar--sm atom-avatar--square&quot; role=&quot;img&quot; aria-label=&quot;Acme Inc.&quot;&gt;AC&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-avatar-marcado" tabindex="0" role="group" aria-label="avatar markup"><code>&lt;span class=&quot;atom-avatar atom-avatar--lg&quot;&gt;&lt;img class=&quot;atom-avatar__img&quot; src=&quot;img/avatar-demo.svg&quot; alt=&quot;Ana López&quot; width=&quot;56&quot; height=&quot;56&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-avatar&quot; role=&quot;img&quot; aria-label=&quot;Ana López&quot;&gt;AL&lt;/span&gt;&lt;span class=&quot;atom-avatar atom-avatar--sm atom-avatar--square&quot; role=&quot;img&quot; aria-label=&quot;Acme Inc.&quot;&gt;AC&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3661,7 +3702,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-breadcrumb-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-breadcrumb-marcado"><code>&lt;nav aria-label=&quot;Breadcrumb&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-breadcrumb-marcado" tabindex="0" role="group" aria-label="breadcrumb markup"><code>&lt;nav aria-label=&quot;Breadcrumb&quot;&gt;
   &lt;ol class=&quot;atom-breadcrumb&quot;&gt;
     &lt;li class=&quot;atom-breadcrumb__item&quot;&gt;&lt;a class=&quot;atom-breadcrumb__link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
     &lt;li class=&quot;atom-breadcrumb__item&quot; aria-current=&quot;page&quot;&gt;Tokens&lt;/li&gt;
@@ -3691,7 +3732,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-btn-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-btn-marcado"><code>&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Get started&lt;/button&gt; &lt;button class=&quot;atom-btn atom-btn--danger atom-btn--filled&quot; type=&quot;button&quot;&gt;Delete project&lt;/button&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-btn-marcado" tabindex="0" role="group" aria-label="btn markup"><code>&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Get started&lt;/button&gt; &lt;button class=&quot;atom-btn atom-btn--danger atom-btn--filled&quot; type=&quot;button&quot;&gt;Delete project&lt;/button&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3717,7 +3758,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-check-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-check-marcado"><code>&lt;label class=&quot;atom-check&quot;&gt;&lt;input class=&quot;atom-check__input&quot; type=&quot;checkbox&quot; name=&quot;opt&quot;&gt;&lt;span class=&quot;atom-check__label&quot;&gt;Include drafts&lt;/span&gt;&lt;/label&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-check-marcado" tabindex="0" role="group" aria-label="check markup"><code>&lt;label class=&quot;atom-check&quot;&gt;&lt;input class=&quot;atom-check__input&quot; type=&quot;checkbox&quot; name=&quot;opt&quot;&gt;&lt;span class=&quot;atom-check__label&quot;&gt;Include drafts&lt;/span&gt;&lt;/label&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3738,11 +3779,11 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">domain-reusable</span><code>scss/atoms/_code.scss</code></p>
             <p class="atom-txt syx-mb-3">Code shown as content, on its own dark surface that ignores the page theme so a dark brand colour cannot make the syntax invisible. --inline for a fragment inside a sentence. The __tag/__attr/__val/__cls/__cmt elements are the syntax roles; nothing else colours code. Use in technical and documentation products, not as a generic panel.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><pre class="atom-code"><code>&lt;<span class="atom-code__tag">button</span> <span class="atom-code__attr">class</span>=<span class="atom-code__val">"atom-btn"</span>&gt;</code></pre></div>
+            <div class="docs-ref__demo syx-mb-3"><pre class="atom-code" tabindex="0" role="group" aria-label="Button markup"><code>&lt;<span class="atom-code__tag">button</span> <span class="atom-code__attr">class</span>=<span class="atom-code__val">"atom-btn"</span>&gt;</code></pre></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-code-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-code-marcado"><code>&lt;pre class=&quot;atom-code&quot;&gt;&lt;code&gt;&amp;lt;&lt;span class=&quot;atom-code__tag&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;atom-code__attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;atom-code__val&quot;&gt;&quot;atom-btn&quot;&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-code-marcado" tabindex="0" role="group" aria-label="code markup"><code>&lt;pre class=&quot;atom-code&quot; tabindex=&quot;0&quot; role=&quot;group&quot; aria-label=&quot;Button markup&quot;&gt;&lt;code&gt;&amp;lt;&lt;span class=&quot;atom-code__tag&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;atom-code__attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;atom-code__val&quot;&gt;&quot;atom-btn&quot;&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3750,7 +3791,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-code</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-code--inline</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-code__attr</code> <code>atom-code__cls</code> <code>atom-code__cmt</code> <code>atom-code__tag</code> <code>atom-code__val</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">16 component tokens</summary><div class="mol-disclosure__content"><code>--component-code-bg</code> <code>--component-code-border-color</code> <code>--component-code-border-radius</code> <code>--component-code-border-width</code> <code>--component-code-color</code> <code>--component-code-font-size</code> <code>--component-code-inline-border-color</code> <code>--component-code-inline-border-radius</code> <code>--component-code-inline-border-width</code> <code>--component-code-inline-font-size</code> <code>--component-code-line-height</code> <code>--component-code-syntax-attr</code> <code>--component-code-syntax-comment</code> <code>--component-code-syntax-fn</code> <code>--component-code-syntax-tag</code> <code>--component-code-syntax-val</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Static content in &lt;pre&gt;&lt;code&gt;. A block that scrolls sideways needs tabindex=&quot;0&quot; (and a label) so it can be scrolled from the keyboard. Colour is never the only cue. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
@@ -3767,7 +3808,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-feature-icon-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-feature-icon-marcado"><code>&lt;span class=&quot;atom-feature-icon atom-feature-icon--token&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-icon atom-icon--lc-layers&quot;&gt;&lt;/span&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-feature-icon-marcado" tabindex="0" role="group" aria-label="feature-icon markup"><code>&lt;span class=&quot;atom-feature-icon atom-feature-icon--token&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-icon atom-icon--lc-layers&quot;&gt;&lt;/span&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3792,7 +3833,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-form-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;form-email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;form-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-plan&quot;&gt;Plan&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;select class=&quot;atom-select&quot; id=&quot;form-plan&quot;&gt;&lt;option&gt;Free&lt;/option&gt;&lt;option&gt;Pro&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-notes&quot;&gt;Notes&lt;/label&gt;&lt;textarea class=&quot;atom-textarea&quot; id=&quot;form-notes&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado" tabindex="0" role="group" aria-label="form markup"><code>&lt;label class=&quot;atom-label&quot; for=&quot;form-email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;form-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-plan&quot;&gt;Plan&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;select class=&quot;atom-select&quot; id=&quot;form-plan&quot;&gt;&lt;option&gt;Free&lt;/option&gt;&lt;option&gt;Pro&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-notes&quot;&gt;Notes&lt;/label&gt;&lt;textarea class=&quot;atom-textarea&quot; id=&quot;form-notes&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3818,7 +3859,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-icon-lucide-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-icon-lucide-marcado"><code>&lt;span class=&quot;atom-icon atom-icon--lc-home atom-icon--color-primary&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-icon-lucide-marcado" tabindex="0" role="group" aria-label="icon-lucide markup"><code>&lt;span class=&quot;atom-icon atom-icon--lc-home atom-icon--color-primary&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3844,7 +3885,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-icon-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-icon-marcado"><code>&lt;span class=&quot;atom-icon atom-icon--ui-tick atom-icon--color-state-ok atom-icon--md&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-icon-marcado" tabindex="0" role="group" aria-label="icon markup"><code>&lt;span class=&quot;atom-icon atom-icon--ui-tick atom-icon--color-state-ok atom-icon--md&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3869,7 +3910,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-label-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-label-marcado"><code>&lt;span class=&quot;atom-label atom-label--scope-1&quot;&gt;Scope&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-label-marcado" tabindex="0" role="group" aria-label="label markup"><code>&lt;span class=&quot;atom-label atom-label--scope-1&quot;&gt;Scope&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3894,7 +3935,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-link-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-link-marcado"><code>&lt;a class=&quot;atom-link atom-link--primary&quot; href=&quot;/docs&quot;&gt;Read the docs&lt;/a&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-link-marcado" tabindex="0" role="group" aria-label="link markup"><code>&lt;a class=&quot;atom-link atom-link--primary&quot; href=&quot;/docs&quot;&gt;Read the docs&lt;/a&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3919,7 +3960,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-list-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-list-marcado"><code>&lt;ul class=&quot;atom-list atom-list--primary&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-list-marcado" tabindex="0" role="group" aria-label="list markup"><code>&lt;ul class=&quot;atom-list atom-list--primary&quot;&gt;
   &lt;li class=&quot;atom-list__item&quot;&gt;Primitives&lt;/li&gt;
   &lt;li class=&quot;atom-list__item&quot;&gt;Semantics&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
@@ -3947,7 +3988,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-pagination-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-pagination-marcado"><code>&lt;nav aria-label=&quot;Pagination&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-pagination-marcado" tabindex="0" role="group" aria-label="pagination markup"><code>&lt;nav aria-label=&quot;Pagination&quot;&gt;
   &lt;ul class=&quot;atom-pagination&quot;&gt;
     &lt;li class=&quot;atom-pagination__item atom-pagination__item--is-prev&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=1&quot; aria-label=&quot;Previous page&quot;&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;li class=&quot;atom-pagination__item&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=1&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
@@ -3980,7 +4021,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-pill-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-pill-marcado"><code>&lt;span class=&quot;atom-pill atom-pill--success&quot;&gt;Stable&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-pill-marcado" tabindex="0" role="group" aria-label="pill markup"><code>&lt;span class=&quot;atom-pill atom-pill--success&quot;&gt;Stable&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4005,7 +4046,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-progress-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-progress-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;pg-upload&quot;&gt;Uploading report.pdf&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-upload&quot; value=&quot;40&quot; max=&quot;100&quot;&gt;40%&lt;/progress&gt;&lt;label class=&quot;atom-label&quot; for=&quot;pg-sync&quot;&gt;Syncing contacts&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-sync&quot;&gt;Syncing…&lt;/progress&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-progress-marcado" tabindex="0" role="group" aria-label="progress markup"><code>&lt;label class=&quot;atom-label&quot; for=&quot;pg-upload&quot;&gt;Uploading report.pdf&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-upload&quot; value=&quot;40&quot; max=&quot;100&quot;&gt;40%&lt;/progress&gt;&lt;label class=&quot;atom-label&quot; for=&quot;pg-sync&quot;&gt;Syncing contacts&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-sync&quot;&gt;Syncing…&lt;/progress&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4030,7 +4071,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-radio-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-radio-marcado"><code>&lt;label class=&quot;atom-radio&quot;&gt;&lt;input class=&quot;atom-radio__input&quot; type=&quot;radio&quot; name=&quot;theme&quot; value=&quot;dark&quot;&gt;&lt;span class=&quot;atom-radio__label&quot;&gt;Dark&lt;/span&gt;&lt;/label&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-radio-marcado" tabindex="0" role="group" aria-label="radio markup"><code>&lt;label class=&quot;atom-radio&quot;&gt;&lt;input class=&quot;atom-radio__input&quot; type=&quot;radio&quot; name=&quot;theme&quot; value=&quot;dark&quot;&gt;&lt;span class=&quot;atom-radio__label&quot;&gt;Dark&lt;/span&gt;&lt;/label&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4055,7 +4096,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-skeleton-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-skeleton-marcado"><code>&lt;p class=&quot;syx-sr-only&quot; role=&quot;status&quot;&gt;Loading profile…&lt;/p&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-skeleton-marcado" tabindex="0" role="group" aria-label="skeleton markup"><code>&lt;p class=&quot;syx-sr-only&quot; role=&quot;status&quot;&gt;Loading profile…&lt;/p&gt;
 &lt;div class=&quot;layout-cluster layout-cluster--md&quot; aria-busy=&quot;true&quot;&gt;
   &lt;span class=&quot;atom-skeleton atom-skeleton--circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
   &lt;div class=&quot;layout-stack layout-stack--xs syx-flex-1&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-skeleton atom-skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-skeleton atom-skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
@@ -4084,7 +4125,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-spinner-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-spinner-marcado"><code>&lt;span class=&quot;atom-spinner&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Loading results…&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;atom-spinner atom-spinner--lg atom-spinner--with-label&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Saving changes…&lt;/span&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-spinner-marcado" tabindex="0" role="group" aria-label="spinner markup"><code>&lt;span class=&quot;atom-spinner&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Loading results…&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;atom-spinner atom-spinner--lg atom-spinner--with-label&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Saving changes…&lt;/span&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4109,7 +4150,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-stat-counter-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-stat-counter-marcado"><code>&lt;div class=&quot;atom-stat&quot;&gt;&lt;span class=&quot;atom-stat__number&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;atom-stat__label&quot;&gt;Atoms&lt;/span&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-stat-counter-marcado" tabindex="0" role="group" aria-label="stat-counter markup"><code>&lt;div class=&quot;atom-stat&quot;&gt;&lt;span class=&quot;atom-stat__number&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;atom-stat__label&quot;&gt;Atoms&lt;/span&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4134,7 +4175,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-switch-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-switch-marcado"><code>&lt;label class=&quot;atom-switch&quot;&gt;&lt;input class=&quot;atom-switch__input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot;&gt;&lt;span class=&quot;atom-switch__slider&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-switch__label&quot;&gt;Dark mode&lt;/span&gt;&lt;/label&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-switch-marcado" tabindex="0" role="group" aria-label="switch markup"><code>&lt;label class=&quot;atom-switch&quot;&gt;&lt;input class=&quot;atom-switch__input&quot; type=&quot;checkbox&quot; role=&quot;switch&quot;&gt;&lt;span class=&quot;atom-switch__slider&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-switch__label&quot;&gt;Dark mode&lt;/span&gt;&lt;/label&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4159,7 +4200,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-table-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-table-marcado"><code>&lt;div class=&quot;atom-table__container atom-table--resp&quot; role=&quot;region&quot; aria-label=&quot;Semantic tokens&quot; tabindex=&quot;0&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-table-marcado" tabindex="0" role="group" aria-label="table markup"><code>&lt;div class=&quot;atom-table__container atom-table--resp&quot; role=&quot;region&quot; aria-label=&quot;Semantic tokens&quot; tabindex=&quot;0&quot;&gt;
   &lt;table class=&quot;atom-table atom-table--primary&quot;&gt;
     &lt;thead&gt;
       &lt;tr&gt;
@@ -4197,7 +4238,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-title-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-title-marcado"><code>&lt;h2 class=&quot;atom-title atom-title--h3&quot;&gt;Token architecture&lt;/h2&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-title-marcado" tabindex="0" role="group" aria-label="title markup"><code>&lt;h2 class=&quot;atom-title atom-title--h3&quot;&gt;Token architecture&lt;/h2&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4222,7 +4263,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-txt-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-txt-marcado"><code>&lt;p class=&quot;atom-txt atom-txt--primary&quot;&gt;SYX is a token-driven, native SCSS design system.&lt;/p&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-txt-marcado" tabindex="0" role="group" aria-label="txt markup"><code>&lt;p class=&quot;atom-txt atom-txt--primary&quot;&gt;SYX is a token-driven, native SCSS design system.&lt;/p&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4248,7 +4289,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-alert-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-alert-marcado"><code>&lt;div class=&quot;mol-alert mol-alert--warning&quot; role=&quot;status&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-alert-marcado" tabindex="0" role="group" aria-label="alert markup"><code>&lt;div class=&quot;mol-alert mol-alert--warning&quot; role=&quot;status&quot;&gt;
   &lt;p class=&quot;mol-alert__title&quot;&gt;Your plan expires in 3 days&lt;/p&gt;
   &lt;p class=&quot;mol-alert__body&quot;&gt;Renew it to keep your history.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
@@ -4276,7 +4317,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-btn-group-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-btn-group-marcado"><code>&lt;div class=&quot;mol-btn-group&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Cancel&lt;/button&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-btn-group-marcado" tabindex="0" role="group" aria-label="btn-group markup"><code>&lt;div class=&quot;mol-btn-group&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Cancel&lt;/button&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4301,7 +4342,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-card-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-card-marcado"><code>&lt;article class=&quot;mol-card&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-card-marcado" tabindex="0" role="group" aria-label="card markup"><code>&lt;article class=&quot;mol-card&quot;&gt;
   &lt;header class=&quot;mol-card__header&quot;&gt;
     &lt;h3 class=&quot;mol-card__title&quot;&gt;Storage&lt;/h3&gt;
     &lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;80% used&lt;/span&gt;
@@ -4337,13 +4378,13 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">domain-reusable</span><code>scss/molecules/_code-snippet.scss</code></p>
             <p class="atom-txt syx-mb-3">A code block with a header that judges it: --ok for the correct way, --ko for the rejected one, --neutral for a plain sample. Built for teaching a rule by showing both sides, so a lone --neutral snippet is usually just atom-code. The label has to state the verdict in words — the colour is not the message.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-code-snippet mol-code-snippet--ok"><div class="mol-code-snippet__header"><span class="mol-code-snippet__label">Correct</span></div><pre class="mol-code-snippet__body atom-code"><code>color: var(--semantic-color-text-primary);</code></pre></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-code-snippet mol-code-snippet--ok"><div class="mol-code-snippet__header"><span class="mol-code-snippet__label">Correct</span></div><pre class="mol-code-snippet__body atom-code" tabindex="0" role="group" aria-label="Correct example"><code>color: var(--semantic-color-text-primary);</code></pre></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-code-snippet-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-code-snippet-marcado"><code>&lt;div class=&quot;mol-code-snippet mol-code-snippet--ok&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-code-snippet-marcado" tabindex="0" role="group" aria-label="code-snippet markup"><code>&lt;div class=&quot;mol-code-snippet mol-code-snippet--ok&quot;&gt;
   &lt;div class=&quot;mol-code-snippet__header&quot;&gt;&lt;span class=&quot;mol-code-snippet__label&quot;&gt;Correct&lt;/span&gt;&lt;/div&gt;
-  &lt;pre class=&quot;mol-code-snippet__body atom-code&quot;&gt;&lt;code&gt;color: var(--semantic-color-text-primary);&lt;/code&gt;&lt;/pre&gt;
+  &lt;pre class=&quot;mol-code-snippet__body atom-code&quot; tabindex=&quot;0&quot; role=&quot;group&quot; aria-label=&quot;Correct example&quot;&gt;&lt;code&gt;color: var(--semantic-color-text-primary);&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
@@ -4369,7 +4410,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-dialog-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-dialog-marcado"><code>&lt;dialog class=&quot;mol-dialog&quot; role=&quot;alertdialog&quot; aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-dialog-marcado" tabindex="0" role="group" aria-label="dialog markup"><code>&lt;dialog class=&quot;mol-dialog&quot; role=&quot;alertdialog&quot; aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
   &lt;form method=&quot;dialog&quot; class=&quot;mol-dialog__inner&quot;&gt;
     &lt;h2 class=&quot;mol-dialog__title&quot; id=&quot;dlg-title&quot;&gt;Delete “Report”?&lt;/h2&gt;
     &lt;p class=&quot;mol-dialog__body&quot; id=&quot;dlg-desc&quot;&gt;Files and history will be lost.&lt;/p&gt;
@@ -4400,7 +4441,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-disclosure-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-disclosure-marcado"><code>&lt;details class=&quot;mol-disclosure&quot; name=&quot;faq&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-disclosure-marcado" tabindex="0" role="group" aria-label="disclosure markup"><code>&lt;details class=&quot;mol-disclosure&quot; name=&quot;faq&quot;&gt;
   &lt;summary class=&quot;mol-disclosure__summary&quot;&gt;Can I change plans?&lt;/summary&gt;
   &lt;div class=&quot;mol-disclosure__content&quot;&gt;Yes, whenever you want.&lt;/div&gt;
 &lt;/details&gt;</code></pre>
@@ -4428,7 +4469,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-empty-state-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-empty-state-marcado"><code>&lt;div class=&quot;mol-empty-state mol-empty-state--bordered&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-empty-state-marcado" tabindex="0" role="group" aria-label="empty-state markup"><code>&lt;div class=&quot;mol-empty-state mol-empty-state--bordered&quot;&gt;
   &lt;span class=&quot;mol-empty-state__icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-icon atom-icon--lc-search atom-icon--lg&quot;&gt;&lt;/span&gt;&lt;/span&gt;
   &lt;h3 class=&quot;mol-empty-state__title&quot;&gt;No projects match “q4”&lt;/h3&gt;
   &lt;p class=&quot;mol-empty-state__text&quot;&gt;Try another word, or clear the filters to see every project.&lt;/p&gt;
@@ -4458,7 +4499,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-feature-card-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-feature-card-marcado"><code>&lt;article class=&quot;mol-feature-card&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-feature-card-marcado" tabindex="0" role="group" aria-label="feature-card markup"><code>&lt;article class=&quot;mol-feature-card&quot;&gt;
   &lt;span class=&quot;atom-feature-icon atom-feature-icon--token&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
   &lt;h3 class=&quot;mol-feature-card__title&quot;&gt;Token system&lt;/h3&gt;
   &lt;p class=&quot;mol-feature-card__body&quot;&gt;Four tiers, one direction.&lt;/p&gt;
@@ -4488,7 +4529,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-form-field-set-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-set-marcado"><code>&lt;div class=&quot;mol-form-field-set mol-form-field-set--inline&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-set-marcado" tabindex="0" role="group" aria-label="form-field-set markup"><code>&lt;div class=&quot;mol-form-field-set mol-form-field-set--inline&quot;&gt;
   &lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ffs-given&quot;&gt;First name&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ffs-given&quot; type=&quot;text&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
   &lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ffs-family&quot;&gt;Last name&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ffs-family&quot; type=&quot;text&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -4517,7 +4558,7 @@ scss/organisms/_site-header.scss</code></pre>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-form-field-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ff-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ff-email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;ff-email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado" tabindex="0" role="group" aria-label="form-field markup"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ff-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ff-email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;ff-email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;
 &lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-bio&quot;&gt;Short bio&lt;/label&gt;&lt;textarea class=&quot;atom-textarea&quot; id=&quot;ff-bio&quot; rows=&quot;3&quot; maxlength=&quot;160&quot; aria-describedby=&quot;ff-bio-count&quot;&gt;&lt;/textarea&gt;&lt;span class=&quot;mol-form-field__count&quot; id=&quot;ff-bio-count&quot; data-template=&quot;{n} characters left&quot;&gt;Up to 160 characters&lt;/span&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
@@ -4528,9 +4569,9 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-form-field__count</code> <code>mol-form-field__live</code> <code>mol-form-field__msg</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>.is-limit</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-label</code> <code>atom-select</code> <code>atom-textarea</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-count-color</code> <code>--component-form-field-count-font-size</code> <code>--component-form-field-count-limit-color</code> <code>--component-form-field-error-border</code> <code>--component-form-field-error-color</code> <code>--component-form-field-icon-position-right</code> <code>--component-form-field-icon-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-margin-bottom</code> <code>--component-form-field-msg-font-size</code> <code>--component-form-field-msg-line-height</code> <code>--component-form-field-msg-margin-top</code> <code>--component-form-field-success-border</code> <code>--component-form-field-success-color</code> <code>--component-form-field-warning-border</code> <code>--component-form-field-warning-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">18 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-count-color</code> <code>--component-form-field-count-font-size</code> <code>--component-form-field-count-limit-color</code> <code>--component-form-field-error-border</code> <code>--component-form-field-error-color</code> <code>--component-form-field-error-shadow-focus</code> <code>--component-form-field-icon-position-right</code> <code>--component-form-field-icon-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-margin-bottom</code> <code>--component-form-field-msg-font-size</code> <code>--component-form-field-msg-line-height</code> <code>--component-form-field-msg-margin-top</code> <code>--component-form-field-success-border</code> <code>--component-form-field-success-color</code> <code>--component-form-field-warning-border</code> <code>--component-form-field-warning-color</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;label for&gt; on a unique id. On error: aria-invalid=&quot;true&quot; on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Character count: the textarea names __count in aria-describedby (heard on focus) and keeps maxlength; js/syx-char-count.js (no dependencies) adds a role=&quot;status&quot; region that says what is left after a pause, never on every key. Validation itself is the app's.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-char-count.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-char-count.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-char-count.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-char-count.js"><code>import 'syx-design-system/js/syx-char-count.js';
 // markup rendered later:
 import { initCharCount } from 'syx-design-system/js/syx-char-count.js';
 initCharCount(container);</code></pre></td></tr>
@@ -4547,7 +4588,7 @@ initCharCount(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-label-group-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-label-group-marcado"><code>&lt;div class=&quot;mol-label-group&quot;&gt;&lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;SCSS&lt;/span&gt;&lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;Tokens&lt;/span&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-label-group-marcado" tabindex="0" role="group" aria-label="label-group markup"><code>&lt;div class=&quot;mol-label-group&quot;&gt;&lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;SCSS&lt;/span&gt;&lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;Tokens&lt;/span&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4572,7 +4613,7 @@ initCharCount(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-menu-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-menu-marcado"><code>&lt;div class=&quot;mol-menu&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-menu-marcado" tabindex="0" role="group" aria-label="menu markup"><code>&lt;div class=&quot;mol-menu&quot;&gt;
   &lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md mol-menu__trigger&quot; type=&quot;button&quot; id=&quot;menu-actions-btn&quot; aria-haspopup=&quot;menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;menu-actions&quot; popovertarget=&quot;menu-actions&quot;&gt;Actions &lt;span class=&quot;atom-icon atom-icon--lc-chevron-down atom-icon--sm&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;
   &lt;div class=&quot;mol-menu__list&quot; id=&quot;menu-actions&quot; role=&quot;menu&quot; aria-labelledby=&quot;menu-actions-btn&quot; popover=&quot;auto&quot;&gt;
     &lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Rename&lt;/button&gt;&lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Duplicate&lt;/button&gt;&lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; aria-disabled=&quot;true&quot;&gt;Move to folder&lt;/button&gt;
@@ -4590,7 +4631,7 @@ initCharCount(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-menu-bg</code> <code>--component-menu-border-color</code> <code>--component-menu-border-radius</code> <code>--component-menu-border-width</code> <code>--component-menu-color</code> <code>--component-menu-item-bg-hover</code> <code>--component-menu-item-border-radius</code> <code>--component-menu-item-danger-color</code> <code>--component-menu-item-disabled-color</code> <code>--component-menu-item-gap</code> <code>--component-menu-item-min-height</code> <code>--component-menu-item-padding-inline</code> <code>--component-menu-max-height</code> <code>--component-menu-min-width</code> <code>--component-menu-separator-color</code> <code>--component-menu-shadow</code> <code>--component-menu-z-index</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Button: aria-haspopup=&quot;menu&quot;, aria-expanded, aria-controls and popovertarget pointing at the list. List: role=&quot;menu&quot; with aria-labelledby → button; each option role=&quot;menuitem&quot; (a &lt;button&gt;, or an &lt;a&gt; for a link). Keyboard from js/syx-menu.js (no dependencies): ↓/Enter/Space open on the first option, ↑ on the last; ↑↓ move with wrap, Home/End, a letter jumps to the next option starting with it, Escape and Tab close and return focus to the button; activating an option closes the menu. aria-disabled options stay focusable but do nothing. Without JS, popovertarget still opens and closes it and Tab reaches the options.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-menu.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-menu.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-menu.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-menu.js"><code>import 'syx-design-system/js/syx-menu.js';
 // markup rendered later:
 import { initMenus } from 'syx-design-system/js/syx-menu.js';
 initMenus(container);</code></pre></td></tr>
@@ -4607,7 +4648,7 @@ initMenus(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-tabs-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-tabs-marcado"><code>&lt;div class=&quot;mol-tabs&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-tabs-marcado" tabindex="0" role="group" aria-label="tabs markup"><code>&lt;div class=&quot;mol-tabs&quot;&gt;
   &lt;div class=&quot;mol-tabs__list&quot; role=&quot;tablist&quot; aria-label=&quot;Settings&quot;&gt;&lt;button class=&quot;mol-tabs__tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;tab-1&quot; aria-selected=&quot;true&quot; aria-controls=&quot;panel-1&quot;&gt;Profile&lt;/button&gt;&lt;button class=&quot;mol-tabs__tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;tab-2&quot; aria-selected=&quot;false&quot; aria-controls=&quot;panel-2&quot; tabindex=&quot;-1&quot;&gt;Notifications&lt;/button&gt;&lt;/div&gt;
   &lt;div class=&quot;mol-tabs__panel&quot; role=&quot;tabpanel&quot; id=&quot;panel-1&quot; aria-labelledby=&quot;tab-1&quot; tabindex=&quot;0&quot;&gt;Profile settings&lt;/div&gt;
   &lt;div class=&quot;mol-tabs__panel&quot; role=&quot;tabpanel&quot; id=&quot;panel-2&quot; aria-labelledby=&quot;tab-2&quot; tabindex=&quot;0&quot; hidden&gt;Notification settings&lt;/div&gt;
@@ -4622,7 +4663,7 @@ initMenus(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">12 component tokens</summary><div class="mol-disclosure__content"><code>--component-tabs-border-color</code> <code>--component-tabs-border-width</code> <code>--component-tabs-gap</code> <code>--component-tabs-indicator-color</code> <code>--component-tabs-indicator-width</code> <code>--component-tabs-panel-padding-block</code> <code>--component-tabs-tab-color</code> <code>--component-tabs-tab-color-hover</code> <code>--component-tabs-tab-color-selected</code> <code>--component-tabs-tab-font-weight</code> <code>--component-tabs-tab-padding-block</code> <code>--component-tabs-tab-padding-inline</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=&quot;button&quot; on every tab; panels focusable (tabindex=&quot;0&quot;). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tabs.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-tabs.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tabs.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-tabs.js"><code>import 'syx-design-system/js/syx-tabs.js';
 // markup rendered later:
 import { initTabs } from 'syx-design-system/js/syx-tabs.js';
 initTabs(container);</code></pre></td></tr>
@@ -4639,7 +4680,7 @@ initTabs(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-toast-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-toast-marcado"><code>&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; data-syx-toast=&quot;Link copied to the clipboard&quot; data-syx-toast-tone=&quot;success&quot;&gt;Copy link&lt;/button&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-toast-marcado" tabindex="0" role="group" aria-label="toast markup"><code>&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; data-syx-toast=&quot;Link copied to the clipboard&quot; data-syx-toast-tone=&quot;success&quot;&gt;Copy link&lt;/button&gt;
 &lt;div class=&quot;mol-toast&quot; data-dismiss-label=&quot;Dismiss notification&quot;&gt;
   &lt;p class=&quot;mol-toast__live&quot; role=&quot;status&quot;&gt;&lt;/p&gt;
   &lt;div class=&quot;mol-toast__item mol-toast__item--info&quot;&gt;
@@ -4657,7 +4698,7 @@ initTabs(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>.is-leaving</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-toast-accent-width</code> <code>--component-toast-bg</code> <code>--component-toast-border-color</code> <code>--component-toast-border-radius</code> <code>--component-toast-border-width</code> <code>--component-toast-close-bg-hover</code> <code>--component-toast-close-color</code> <code>--component-toast-close-size</code> <code>--component-toast-color</code> <code>--component-toast-duration</code> <code>--component-toast-error-accent</code> <code>--component-toast-gap</code> <code>--component-toast-info-accent</code> <code>--component-toast-max-width</code> <code>--component-toast-offset</code> <code>--component-toast-padding-block</code> <code>--component-toast-padding-inline</code> <code>--component-toast-shadow</code> <code>--component-toast-success-accent</code> <code>--component-toast-warning-accent</code> <code>--component-toast-z-index</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">The container holds a __live element with role=&quot;status&quot; that exists before any text arrives; js/syx-toast.js writes only the message there, so the close button is not read out. Focus never moves to a toast; its close button (aria-label, 32px target) is reachable with Tab, and closing it returns focus to where the user came from. The countdown pauses on hover, on focus and while the tab is hidden (WCAG 2.2.1); duration: 0 disables it. Reduced motion: no slide or fade. Without JS a static toast stays and its button does nothing.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-toast.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-toast.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-toast.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-toast.js"><code>import 'syx-design-system/js/syx-toast.js';
 // markup rendered later:
 import { initToasts, showToast } from 'syx-design-system/js/syx-toast.js';
 initToasts(container);</code></pre></td></tr>
@@ -4674,7 +4715,7 @@ initToasts(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-tooltip-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-tooltip-marcado"><code>&lt;span class=&quot;mol-tooltip&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; aria-describedby=&quot;tip-share&quot;&gt;Share&lt;/button&gt;&lt;span class=&quot;mol-tooltip__bubble&quot; id=&quot;tip-share&quot; role=&quot;tooltip&quot; popover=&quot;hint&quot;&gt;Copies a view-only link to the clipboard&lt;/span&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-tooltip-marcado" tabindex="0" role="group" aria-label="tooltip markup"><code>&lt;span class=&quot;mol-tooltip&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; aria-describedby=&quot;tip-share&quot;&gt;Share&lt;/button&gt;&lt;span class=&quot;mol-tooltip__bubble&quot; id=&quot;tip-share&quot; role=&quot;tooltip&quot; popover=&quot;hint&quot;&gt;Copies a view-only link to the clipboard&lt;/span&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4685,7 +4726,7 @@ initToasts(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">11 component tokens</summary><div class="mol-disclosure__content"><code>--component-tooltip-bg</code> <code>--component-tooltip-border-radius</code> <code>--component-tooltip-color</code> <code>--component-tooltip-duration</code> <code>--component-tooltip-font-size</code> <code>--component-tooltip-line-height</code> <code>--component-tooltip-max-width</code> <code>--component-tooltip-padding-block</code> <code>--component-tooltip-padding-inline</code> <code>--component-tooltip-shadow</code> <code>--component-tooltip-z-index</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">aria-describedby on the control points at the bubble, which carries role=&quot;tooltip&quot;; for an icon-only control the bubble is its name, so use aria-labelledby instead. WCAG 1.4.13: appears on focus and hover, hoverable (the pointer can move onto it), dismissed by Escape without moving focus or pointer, never covers the control. Nothing focusable inside. Never on a disabled control (no focus, no pointer events). JS: js/syx-tooltip.js (no dependencies); without it the bubble never opens, so do not put essential information only there.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tooltip.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-tooltip.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tooltip.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-tooltip.js"><code>import 'syx-design-system/js/syx-tooltip.js';
 // markup rendered later:
 import { initTooltips } from 'syx-design-system/js/syx-tooltip.js';
 initTooltips(container);</code></pre></td></tr>
@@ -4703,7 +4744,7 @@ initTooltips(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-org-app-shell-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-org-app-shell-marcado"><code>&lt;div class=&quot;org-app-shell&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-org-app-shell-marcado" tabindex="0" role="group" aria-label="app-shell markup"><code>&lt;div class=&quot;org-app-shell&quot;&gt;
   &lt;header class=&quot;org-app-shell__header&quot;&gt;
     &lt;span class=&quot;org-app-shell__brand&quot;&gt;Acme Console&lt;/span&gt;
     &lt;div class=&quot;org-app-shell__actions&quot;&gt;&lt;span class=&quot;atom-avatar atom-avatar--sm&quot; role=&quot;img&quot; aria-label=&quot;Signed in as Ana López&quot;&gt;AL&lt;/span&gt;&lt;/div&gt;
@@ -4747,7 +4788,7 @@ initTooltips(container);</code></pre></td></tr>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-org-site-header-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-org-site-header-marcado"><code>&lt;header class=&quot;org-site-header&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-org-site-header-marcado" tabindex="0" role="group" aria-label="site-header markup"><code>&lt;header class=&quot;org-site-header&quot;&gt;
   &lt;a class=&quot;org-site-header__brand&quot; href=&quot;/&quot;&gt;SYX&lt;/a&gt;
   &lt;nav class=&quot;org-site-header__nav&quot; aria-label=&quot;Main navigation&quot;&gt;&lt;a href=&quot;/docs&quot;&gt;Docs&lt;/a&gt;&lt;a href=&quot;/themes&quot;&gt;Themes&lt;/a&gt;&lt;/nav&gt;
   &lt;div class=&quot;org-site-header__actions&quot;&gt;&lt;button class=&quot;org-site-header__burger&quot; type=&quot;button&quot; aria-controls=&quot;site-nav-drawer&quot; aria-expanded=&quot;false&quot; aria-label=&quot;Open navigation&quot;&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
@@ -4765,7 +4806,7 @@ initTooltips(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-btn</code> <code>atom-icon</code> <code>atom-select</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">4 component tokens</summary><div class="mol-disclosure__content"><code>--component-header-control-border-width</code> <code>--component-header-control-height</code> <code>--component-header-control-radius</code> <code>--component-section-padding-inline</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;header&gt; with a labelled desktop &lt;nav&gt; and a separately labelled drawer &lt;nav&gt;. Burger: &lt;button type=&quot;button&quot;&gt; with aria-controls (drawer id), aria-expanded and aria-label. js/syx-site-nav.js: closed drawer is inert (and visibility: hidden in CSS); opening moves focus to its first link and makes the rest of the page inert; Escape or the burger closes it and returns focus to the burger. The overlay is aria-hidden.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-site-nav.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-site-nav.js';
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-site-nav.js</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="Import js/syx-site-nav.js"><code>import 'syx-design-system/js/syx-site-nav.js';
 // markup rendered later:
 import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js';
 initSiteNav(container);</code></pre></td></tr>

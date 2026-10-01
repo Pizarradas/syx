@@ -201,7 +201,7 @@ function jsHtml(scripts) {
     if (s.exporta.length) {
       lineas.push(`// markup rendered later:`, `import { ${s.exporta.join(', ')} } from '${paquete}';`, `${s.exporta[0]}(container);`);
     }
-    return `<code>${esc(s.fichero)}</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>${esc(lineas.join('\n'))}</code></pre>`;
+    return `<code>${esc(s.fichero)}</code><pre class="atom-code syx-mt-2 syx-mb-0" tabindex="0" role="group" aria-label="${esc(`Import ${s.fichero}`)}"><code>${esc(lineas.join('\n'))}</code></pre>`;
   }).join('');
 }
 
@@ -237,7 +237,10 @@ function ficha(c, scripts) {
       `  <div class="docs-ref__markup syx-mb-3">`,
       `    <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>`,
       `    <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="${ancla}-marcado">Copy</button>`,
-      `    <pre class="atom-code syx-mb-0" id="${ancla}-marcado"><code>${esc(formatear(c.usage))}</code></pre>`,
+      // Con scroll a lo ancho en cuanto la ventana se estrecha: tabindex y
+      // nombre para que se pueda desplazar con el teclado (WCAG 2.1.1; axe,
+      // scrollable-region-focusable). (Auditoría 2026-10 · acción 8)
+      `    <pre class="atom-code syx-mb-0" id="${ancla}-marcado" tabindex="0" role="group" aria-label="${esc(c.name)} markup"><code>${esc(formatear(c.usage))}</code></pre>`,
       `  </div>`,
     );
   } else {
