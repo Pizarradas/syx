@@ -54,12 +54,31 @@
   // CODE — colores de sintaxis
   // ================================================
   // Elegidos contra --component-code-bg (siempre oscuro), no contra el
-  // fondo de la página. Por defecto reproducen los roles de marca que
-  // usaba _code.scss; un tema con colores de marca oscuros DEBE
-  // redefinirlos o el código se vuelve ilegible.
+  // fondo de la página. Sin sintaxis relativa reproducen los roles de marca
+  // que usaba _code.scss; con ella (más abajo) se derivan.
   --component-code-syntax-tag: var(--semantic-color-primary);
   --component-code-syntax-attr: var(--semantic-color-secondary);
   --component-code-syntax-val: var(--semantic-color-tertiary);
-  --component-code-syntax-comment: var(--semantic-color-text-disabled);
+  // El comentario es texto y también pide 4,5:1. text-disabled cambia con el
+  // modo (gris claro en claro, gris 600 en oscuro: 2,2:1 sobre el código);
+  // el fondo del código no cambia, así que el comentario tampoco.
+  --component-code-syntax-comment: var(--primitive-color-gray-400);
   --component-code-syntax-fn: var(--semantic-color-quaternary);
+  // Luminosidad de la sintaxis derivada. Fija y alta porque el fondo es fijo
+  // y oscuro en todos los temas y modos.
+  --component-code-syntax-lightness: 0.82;
+}
+
+// Los rellenos de marca rondan L 0,60: sobre el fondo del código daban
+// 3,9–4,4:1, y un terciario oscuro (example-03) 2,0:1. Se deriva cada rol con
+// su tono y su croma y la luminosidad de arriba: el código sigue teniendo los
+// colores del tema, solo más claros. Donde no hay sintaxis relativa se queda
+// el relleno, que es el comportamiento anterior.
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --component-code-syntax-tag: oklch(from var(--semantic-color-primary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-attr: oklch(from var(--semantic-color-secondary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-val: oklch(from var(--semantic-color-tertiary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-fn: oklch(from var(--semantic-color-quaternary) var(--component-code-syntax-lightness) c h);
+  }
 }

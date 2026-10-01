@@ -9,12 +9,15 @@
   // ================================================
   // TEXT COLORS
   // ================================================
+  // Color de marca como TEXTO: la tinta, no el relleno. El relleno ronda
+  // L 0,60 y sobre el fondo de la página se queda en 2–4:1 (.syx-text-secondary
+  // daba 2,07:1 en docs.html).
   .syx-text-primary {
-    color: var(--semantic-color-primary);
+    color: var(--semantic-color-primary-text);
   }
 
   .syx-text-secondary {
-    color: var(--semantic-color-secondary);
+    color: var(--semantic-color-secondary-text);
   }
 
   .syx-prim-text-white {
@@ -64,16 +67,17 @@
     color: var(--semantic-color-text-inverse);
   }
 
+  // Ídem con los estados: su tinta.
   .syx-text-error {
-    color: var(--semantic-color-error);
+    color: var(--semantic-color-state-error-text);
   }
 
   .syx-text-success {
-    color: var(--semantic-color-success);
+    color: var(--semantic-color-state-success-text);
   }
 
   .syx-text-warning {
-    color: var(--semantic-color-warning);
+    color: var(--semantic-color-state-warning-text);
   }
 
   // Brand social colors (migradas de helper-font-color-*)
