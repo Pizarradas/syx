@@ -339,6 +339,19 @@ scss/setup-builder.scss        →  css/setup-builder.css          (theme-builde
 themes/{name}/bundle-*.scss    →  css/themes/{name}/bundle-*.css (byproducts)
 ```
 
+### dist/ — what consumers and the SYX pages load
+
+`scripts/build-dist.js` compiles the bundles minified and splits each one in two:
+the CSS inside `@layer` (components, utilities), which is **identical in all
+seven themes** — the build fails if a mixin forks it with a compile-time
+`@if $theme` —, and the unlayered `:root` blocks and `@font-face`, which are the
+theme. Tokens declared identically in every theme go to the shared sheet inside
+`@layer syx.tokens`; the theme sheet keeps what the theme changes. Custom
+properties no rule can reach through `var()` are pruned, except the public API
+(every `--semantic-*`). The SYX pages load `dist/site/site.min.css` + one
+`dist/site/site.<theme>.tokens.min.css`; the theme switcher swaps only the latter.
+The sizes are generated (`dist/sizes.json`), never written by hand.
+
 **Only the eight root files of `css/` are deliverables** (the seven
 `styles-theme-*.css` plus `setup-builder.css`); `package.json` publishes
 `css/*.css` and nothing deeper. Everything else under `css/` (per-folder
