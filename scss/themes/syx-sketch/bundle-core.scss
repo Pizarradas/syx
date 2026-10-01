@@ -19,9 +19,9 @@
 // ================================================
 @include theme-syx-sketch-fonts();
 
-// CORE (reset + elements + helpers + grid)
+// CORE (reset + elements + grid; the .syx-* helpers ship apart)
 // ================================================
-@include syx-core(syx-sketch);
+@include syx-core(syx-sketch, $helpers: false);
 
 // BUNDLE: production minimum
 // ================================================
