@@ -200,7 +200,7 @@
       "severity": "error",
       "category": "token-layer",
       "description": "A --component-* token reads only the layers a theme controls: --semantic-*, other --component-*, the theme's shape and structure parameters (--theme-*, --layout-*) and the icon asset aliases (--icon-*, --lc-icon-*). Never a --primitive-* or an unprefixed (legacy) variable, and never a literal colour (hex, a colour function with no var() inside, white/black). Checked where component tokens are declared: the component token layer (scss/abstracts/tokens/components/) and the component overrides in themes (scss/themes/). transparent, currentColor and colours derived from a token (oklch(from var(--semantic-…) …), color-mix(… var(--semantic-…) …)) are allowed. The site layer (scss/site/tokens/) is outside the system and keeps its own rule (R01 allows primitives there).",
-      "resumen": "Un --component-* lee --semantic-* o --component-*: ni --primitive-* ni colores literales",
+      "resumen": "Un --component-* lee roles (--semantic-*, --component-*, --theme-*, --layout-*, iconos): ni --primitive-* ni heredadas ni colores literales",
       "rationale": "R01 exempted scss/abstracts/ as a whole, so 55 component tokens read primitives and 82 more theme overrides did the same: the component escaped the theme. The primary pill was violet (h≈264–285) in example-06, whose brand is cyan, and did not change in dark mode. scripts/propose.js already refused this in new proposals; nothing refused it in existing code. A literal colour is the same shortcut: a role written by hand.",
       "appliesIn": [
         "scss/abstracts/tokens/components/",
