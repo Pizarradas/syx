@@ -1,0 +1,88 @@
+/**
+ * Regresiones de autoría en el SCSS de los componentes: lo que el motor de
+ * reglas (R01–R04, R09, R10, vía `validate`) y stylelint deben parar.
+ *
+ * Las inyecciones se escriben como las escribiría alguien con prisa, no como
+ * las espera el guardián: sin espacio tras los dos puntos, en una sola línea,
+ * dentro de una regla anidada. Las evasiones de formato son justo las que se
+ * colaban antes de que las reglas se comprobaran sobre el AST.
+ */
+
+'use strict';
+
+const VALIDATE = ['node', 'scripts/syx-validate.js'];
+const LINT = ['node', 'node_modules/stylelint/bin/stylelint.mjs', 'scss/**/*.scss', '--config', '.stylelintrc.json'];
+
+module.exports = [
+  {
+    id: 'r03-transicion-compacta',
+    regresion: '`transition:opacity .2s` sin espacio, en una línea, en un átomo',
+    guardian: 'validate (R03)',
+    seEscapaba: true,
+    comando: VALIDATE,
+    espera: /R03/,
+    mutar: (t) => t.reemplazar('scss/atoms/_link.scss', '  .atom-link {\n', '  .atom-link {\n    &__aviso{transition:opacity .2s}\n'),
+  },
+  {
+    id: 'r04-absolute-molecula',
+    regresion: '`position:absolute` en una molécula',
+    guardian: 'validate (R04)',
+    comando: VALIDATE,
+    espera: /R04/,
+    mutar: (t) => t.reemplazar('scss/molecules/_card.scss', '    .mol-card {\n', '    .mol-card {\n      &__sello { position:absolute; inset-block-start: 0; }\n'),
+  },
+  {
+    id: 'r01-primitivo-atomo',
+    regresion: '`var(--primitive-…)` en un átomo',
+    guardian: 'validate (R01)',
+    comando: VALIDATE,
+    espera: /R01/,
+    mutar: (t) => t.reemplazar('scss/atoms/_link.scss', '  .atom-link {\n', '  .atom-link {\n    color: var(--primitive-color-blue-500);\n'),
+  },
+  {
+    id: 'r01-primitivo-pill',
+    regresion: '`var(--primitive-…)` en _pill.scss (antes exceptuado entero)',
+    guardian: 'validate (R01)',
+    seEscapaba: true,
+    comando: VALIDATE,
+    espera: /R01/,
+    mutar: (t) => t.reemplazar('scss/atoms/_pill.scss', '.atom-pill {', '.atom-pill { outline-color: var(--primitive-color-gray-300);'),
+  },
+  {
+    id: 'r09-mixin-inexistente',
+    regresion: '`@include` de un mixin que no existe',
+    guardian: 'validate (R09)',
+    seEscapaba: true,
+    comando: VALIDATE,
+    espera: /R09/,
+    mutar: (t) => t.reemplazar('scss/atoms/_link.scss', '  .atom-link {\n', '  .atom-link {\n    @include focus-anillo();\n'),
+  },
+  {
+    id: 'r10-excepcion-muerta',
+    regresion: 'una excepción `// syx-allow` que ya no excusa nada',
+    guardian: 'validate (R10)',
+    seEscapaba: true,
+    comando: VALIDATE,
+    espera: /R10/,
+    mutar: (t) => t.reemplazar('scss/molecules/_card.scss', '    .mol-card {\n',
+      '    .mol-card {\n      // syx-allow R04: la tarjeta necesitaba un sello posicionado encima\n      isolation: isolate;\n'),
+  },
+  {
+    id: 'lint-hex-atomo',
+    regresion: 'un color hex literal en un átomo',
+    guardian: 'lint (color-no-hex)',
+    seEscapaba: true,
+    comando: LINT,
+    espera: /color-no-hex/,
+    mutar: (t) => t.reemplazar('scss/atoms/_link.scss', '  .atom-link {\n', '  .atom-link {\n    &--marca { color: #6d28d9; }\n'),
+  },
+  {
+    id: 'lint-px-atomo',
+    regresion: 'una medida en px literal en un átomo',
+    guardian: 'lint (unit-disallowed-list)',
+    seEscapaba: true,
+    comando: LINT,
+    espera: /unit-disallowed-list/,
+    mutar: (t) => t.reemplazar('scss/atoms/_link.scss', '  .atom-link {\n', '  .atom-link {\n    &--marca { padding-inline: 12px; }\n'),
+  },
+];
