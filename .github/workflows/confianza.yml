@@ -1,0 +1,49 @@
+# SYX — Confianza al etiquetar
+# ═════════════════════════════
+# El job «Confianza» de ci.yml exige la etiqueta `aprobado-humano` cuando una
+# PR toca rutas `human`. Pero la etiqueta se pone DESPUÉS de que haya corrido,
+# y ci.yml no escucha `labeled`: si lo hiciera, cada etiqueta relanzaría el
+# contrato en tres versiones de Node, la entrega y el navegador, y —peor— la
+# concurrencia cancelaría la ejecución que sí importa.
+#
+# Aquí se vuelve a evaluar SOLO la confianza, con un job del mismo nombre: la
+# protección de rama ve el último resultado de «Confianza» para ese commit, sea
+# de un workflow o del otro.
+
+name: SYX · Confianza
+
+on:
+  pull_request:
+    types: [labeled, unlabeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  confianza:
+    name: Confianza
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # El guardián y el contrato, tal como están en la BASE: una PR no
+      # reescribe a su propio juez. Solo si la base aún no tiene el guardián
+      # (la PR que lo introduce) se usa el de la PR. Sin `npm ci`: no tiene
+      # dependencias.
+      - name: Rutas human y pr del cambio
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/base" "origin/$GITHUB_BASE_REF"
+          if [ -f "$RUNNER_TEMP/base/scripts/check-confianza.js" ]; then
+            node "$RUNNER_TEMP/base/scripts/check-confianza.js" --repo "$GITHUB_WORKSPACE"
+          else
+            echo "La base no tiene aún scripts/check-confianza.js: se usa el de la PR."
+            node scripts/check-confianza.js
+          fi

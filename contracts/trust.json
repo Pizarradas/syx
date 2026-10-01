@@ -13,7 +13,9 @@
       "porque": "Son ficheros derivados o descriptivos: un error se ve leyendo el diff y no se propaga a nada compilado.",
       "paths": [
         "*.md",
-        "_agents/",
+        "_agents/architecture.md",
+        "_agents/architecture.json",
+        "css/",
         "contracts/validation-report.md",
         "contracts/resolved-tokens.json",
         "component-registry.json",
@@ -33,7 +35,8 @@
         "scss/utilities/",
         "scss/pages/",
         "scss/layout/",
-        "tokens.json"
+        "tokens.json",
+        "_agents/"
       ]
     },
 
@@ -55,6 +58,14 @@
         "package-lock.json",
         "scripts/",
         ".github/",
+        ".claude/",
+        "CLAUDE.md",
+        "AGENTS.md",
+        "AI_GUIDELINES.md",
+        "_agents/modes/",
+        "_agents/evals/",
+        "_agents/decision-record.md",
+        "mind-system/routing.md",
         "mind-system/governance/",
         "mind-system/atlas-rules/",
         "mind-system/constitution.md",
@@ -67,6 +78,10 @@
     "contracts/trust.json está en `human` a propósito: un agente que pudiera ampliar sus propios permisos no tendría permisos, tendría una sugerencia.",
     "contracts/rules.json también: las reglas con las que se valida un cambio no las mueve quien es validado.",
     "scripts/ está en `human` porque ahí viven los guardianes. Un guardián que el agente puede reescribir no guarda nada.",
+    "Los documentos de entrada y de instrucciones de agentes —CLAUDE.md, AGENTS.md, AI_GUIDELINES.md, .claude/, mind-system/routing.md, los modos de _agents/modes/, la rúbrica de decisiones (_agents/decision-record.md) y los evals de _agents/evals/— son `human`: son las instrucciones que obedece el agente y la vara con la que se le mide. Hasta la auditoría de 2026-10 salían `auto` por ser markdown, y un agente podía reescribir a la vez lo que se le manda y el examen que lo comprueba.",
+    "El resto de _agents/ (workflows/ y prompts/) está en `pr`: son procedimientos que un agente sigue dentro del techo que fijan los modos, no el techo. Cambian conducta, así que los revisa una persona, pero no deciden permisos ni juzgan a nadie. El mapa (_agents/architecture.md y .json) sigue `auto`: describe y no autoriza, y él mismo lo dice.",
+    ".claude/ entero es `human` porque ahí vive .claude/settings.json, que registra el hook que hace cumplir este contrato en Claude Code. Un hook que el agente puede desactivar no es un hook.",
+    "css/ es `auto` porque es derivado: se compila de scss/ y la CI comprueba con check-limpio --strict que lo commiteado es exactamente lo compilado. Antes caía al `default` y toda propuesta de componente, que lo recompila, habría salido `human`.",
     "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera.",
     "El patrón `*.md` alcanza a cualquier markdown en cualquier carpeta, así que la documentación que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`. Si no, hereda `auto` por ser markdown, y el agente acaba pudiendo reescribir el criterio por el que se le juzga."
   ]

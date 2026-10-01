@@ -72,7 +72,7 @@
     "check:reglas": "node scripts/check-reglas.js",
     "export:tokens": "node scripts/export-tokens.js",
     "export:figma": "node scripts/export-figma.js",
-    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:vitrina && npm run check:figma && npm run check:mixins && npm run check:modos && npm run check:evals && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run build",
+    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:vitrina && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
@@ -105,7 +105,11 @@
     "check:contraste": "node scripts/check-contraste.js",
     "check:conocimiento": "node scripts/check-conocimiento.js",
     "prepare": "node scripts/build-dist.js --quiet",
-    "check:vitrina": "node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html --fallar-si-media"
+    "check:vitrina": "node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html --fallar-si-media",
+    "check:clasificacion": "node scripts/check-clasificacion.js",
+    "build:codeowners": "node scripts/build-codeowners.js",
+    "check:codeowners": "node scripts/build-codeowners.js --check",
+    "check:confianza": "node scripts/check-confianza.js"
   },
   "keywords": [
     "design-system",

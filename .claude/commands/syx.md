@@ -45,6 +45,8 @@ Activate the SYX mode system for this request: **$ARGUMENTS**
 - **A pipeline step with no work does not stop the pipeline.** Hand off explicitly — "these tokens
   already exist, use them" — and continue. Aborting is the user's call.
 - **No mode commits to a shared branch.** What a mode may write, it writes through
-  `node scripts/propose.js`.
+  `node scripts/propose.js` — `token` for a new component token, `files <paths…> --why "…"` for
+  a component or utility already written. A human-only path is blocked at the edit by the hook in
+  `.claude/settings.json`; do not route around it.
 - **If no mode is named**, do not guess one. List the nine with their tiers and ask which lens the
   task wants — picking a tier for the user is picking how much their turn costs.

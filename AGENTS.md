@@ -120,12 +120,15 @@ and served by `classify_change` — **ask before writing, don't assume**.
 | Tier | What | You |
 |---|---|---|
 | Automatic | Docs, changelog, derived artifacts | Change and commit |
-| Via proposal | Component tokens, components, utilities | `node scripts/propose.js token …` — it picks the file, compiles, validates and leaves a branch with the evidence |
-| Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json` | Analyse and recommend. Do not write. |
+| Via proposal | Component tokens, components, utilities, `_agents/workflows/`, `_agents/prompts/` | A new component token: `node scripts/propose.js token …` — it picks the file. Anything else you have written in `pr` paths: `node scripts/propose.js files <paths…> --why "…"`. Both compile, validate and leave a branch with the evidence, and refuse any path that is not `pr` |
+| Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json`, and every document that instructs or grades an agent: this file, `CLAUDE.md`, `AI_GUIDELINES.md`, `.claude/`, `mind-system/routing.md`, `_agents/modes/`, `_agents/evals/`, `_agents/decision-record.md` | Analyse and recommend. Do not write. |
 
 Anything unmatched is human-only. The rules you are judged by and the guards that
 judge you are human-only on purpose — do not edit them to make a change pass.
 `propose.js` never pushes; it prints the command and leaves that to a person.
+In Claude Code, `.claude/settings.json` registers a hook that blocks edits to human-only
+paths; in CI, the `Confianza` job fails a PR that touches them without the `aprobado-humano`
+label, and `.github/CODEOWNERS` (generated from `trust.json`) asks for the owner's review.
 
 ---
 

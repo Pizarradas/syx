@@ -140,7 +140,8 @@ Modes are intentionally siloed:
   UI, one rung up. Merging them would route *change the accent in example-04* through a seven-axis
   interview, which is the cheap-job-made-expensive failure the tier table exists to prevent.
 - **No mode commits to a shared branch.** What a mode may write, it writes through
-  `node scripts/propose.js`: branch, commit and evidence, for a person to merge.
+  `node scripts/propose.js` (`token` for a new component token, `files <paths…> --why "…"` for
+  the rest): branch, commit and evidence, for a person to merge.
 
 This boundary is deliberate. A UX pass and a UI pass on the same problem produce better results than a combined response that tries to do both at once.
 
@@ -155,7 +156,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
    → Defines token names and semantic mappings
 
 3. [SYX: UI]: Implement the mol-search-autocomplete component
-   → Writes SCSS, proposes the token file (`node scripts/propose.js token`), validates R01–R04, R09, R10
+   → Writes SCSS, proposes new tokens (`node scripts/propose.js token`) and the component (`node scripts/propose.js files`), validates R01–R04, R09, R10
 
 4. [SYX: AUDIT]: Review the new mol-search-autocomplete
    → Confirms compliance, flags anything missed
