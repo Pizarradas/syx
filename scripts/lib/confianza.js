@@ -73,8 +73,12 @@ function normalizarRuta(p, raiz = ROOT) {
  * cualquier regla general que lo abarque. Sin esto el orden de las claves del
  * JSON decidiría permisos, que es una forma silenciosa de equivocarse.
  */
-function clasificarRuta(ruta, { raiz } = {}) {
-  const c = cargar();
+function clasificarRuta(ruta, { raiz, contrato: otro } = {}) {
+  // `contrato` permite clasificar con OTRO trust.json que el del disco. Lo usa
+  // el guardián de la CI para juzgar una PR con el contrato de la rama base:
+  // con el de la propia PR, una que bajara `scripts/` a `auto` se aprobaría a
+  // sí misma.
+  const c = otro || cargar();
   const { rel: r, fuera } = normalizarRuta(ruta, raiz);
 
   if (fuera) {
@@ -135,7 +139,7 @@ function clasificarCambios(rutas, opciones = {}) {
   );
   return {
     tier,
-    label: cargar().tiers[tier].label,
+    label: (opciones.contrato || cargar()).tiers[tier].label,
     manda: detalle.filter((d) => d.tier === tier).map((d) => d.path),
     detalle,
   };

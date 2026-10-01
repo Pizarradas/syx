@@ -105,7 +105,8 @@
     "check:vitrina": "node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html --fallar-si-media",
     "check:clasificacion": "node scripts/check-clasificacion.js",
     "build:codeowners": "node scripts/build-codeowners.js",
-    "check:codeowners": "node scripts/build-codeowners.js --check"
+    "check:codeowners": "node scripts/build-codeowners.js --check",
+    "check:confianza": "node scripts/check-confianza.js"
   },
   "keywords": [
     "design-system",
