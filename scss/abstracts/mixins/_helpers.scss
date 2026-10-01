@@ -89,35 +89,19 @@
 }
 
 // MIXIN: aspect-ratio($width, $height)
-// Native aspect-ratio with a padding-top fallback for older browsers.
+// Native aspect-ratio. Todo el soporte mínimo (Chrome 111 · Safari 16.2 ·
+// Firefox 121) lo tiene: el respaldo con padding-top era peso muerto.
 // @example
 //   .video-embed { @include aspect-ratio(16, 9); }
 @mixin aspect-ratio($width, $height) {
   aspect-ratio: #{$width} / #{$height};
-
-  // Fallback for browsers without aspect-ratio support
-  @supports not (aspect-ratio: 1) {
-    &::before {
-      content: '';
-      display: block;
-      padding-top: percentage(calc($height / $width));
-    }
-  }
 }
 
 // MIXIN: clearfix()
 // Modern clearfix using display: flow-root (no pseudo-element needed).
-// Falls back to the classic ::after method for older browsers.
+// flow-root está en todo el soporte mínimo; el ::after clásico ya no hace falta.
 @mixin clearfix {
   display: flow-root;
-
-  @supports not (display: flow-root) {
-    &::after {
-      content: '';
-      display: table;
-      clear: both;
-    }
-  }
 }
 
 // MIXIN: ellipsis($lines)
