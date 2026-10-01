@@ -34,12 +34,16 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 | `text-inverse` / blanco sobre un relleno de marca                    | `--semantic-color-on-{rol}`       |
 | `--semantic-color-{rol}` usado como texto (enlace, `.syx-text-*`)    | `--semantic-color-{rol}-text`     |
 | `--semantic-color-primary` como borde o relleno de control (foco, check, pestaña) | `--semantic-color-primary-strong` |
+| `--primitive-color-blue-50/200/600` (fondo, borde y texto de una etiqueta de tono: píldora, cabecera de fragmento) | `--semantic-color-tone-{primary,secondary,success,warning,error}-subtle-{bg,border,fg}` |
+| Una paleta fija para distinguir categorías (las capas del icono de característica) | `--semantic-color-category-{1…6}-{bg,fg}` |
+| `--primitive-color-gray-900` como superficie oscura en los dos modos | `--semantic-color-bg-emphasis` / `--semantic-color-on-emphasis` |
+| Colores del bloque de código y de la sintaxis | `--semantic-color-code-*` |
 
 ---
 
 ## Tokens de superficie disponibles
 
-Definidos una sola vez, en `scss/abstracts/tokens/semantic/_colors.scss` (los valores por defecto) y en `_dark-mode.scss` (su reasignación en oscuro). Cada `_theme.scss` los sobreescribe para crear la identidad del tema. Los alias de compatibilidad para código legado viven en `scss/base/_deprecated-aliases.scss`, con retirada fijada en SYX v5.0.
+Definidos una sola vez, en `scss/abstracts/tokens/semantic/_colors.scss` (los valores por defecto) y en `_dark-mode.scss` (su reasignación en oscuro). Un tema los sobrescribe solo si quiere otra cosa. Las variables heredadas sin prefijo se retiraron en la acción 14 de la auditoría de 2026-10; el mapa de cada una a su token oficial está en `contracts/legacy-map.json`.
 
 ```css
 /* Backgrounds */
@@ -90,26 +94,67 @@ Los pares viven en `contracts/contrast.json` (texto sobre cada relleno y su hove
 
 ---
 
-## Cómo crear un nuevo tema
+## El contrato de un tema
 
-1. Copia `scss/themes/_template/` como base.
-2. En `_theme.scss`, sobreescribe **todos** los tokens de superficie:
+Un tema es una lista de declaraciones. Este contrato dice cuáles debe tener, cuáles puede tener y cuáles no, y cada punto lo vigila un guardián de `npm run check`. La plantilla (`scss/themes/_template/`) es el contrato **mínimo**: `npm run check:plantilla` la compila como un tema más y le pasa todo lo de aquí. (Auditoría 2026-10 · acción 14)
 
-```scss
-// OBLIGATORIO en cada _theme.scss
---semantic-color-bg-primary: #TU_COLOR;
---semantic-color-bg-secondary: #TU_COLOR;
---semantic-color-bg-tertiary: #TU_COLOR;
---semantic-color-border-default: #TU_COLOR;
---semantic-color-border-subtle: #TU_COLOR;
---semantic-color-text-primary: #TU_COLOR;
---semantic-color-text-secondary: #TU_COLOR;
---semantic-color-text-tertiary: #TU_COLOR;
---semantic-color-text-inverse: #TU_COLOR;
-```
+### Lo que un tema DEBE declarar
 
-3. Si el tema es **dark**, invierte la escala: `bg-primary` = el más oscuro, `bg-tertiary` = el más claro.
-4. Declara las tintas `--semantic-color-on-*` de tus rellenos de marca (ver la sección anterior) y pasa `npm run check:contraste` hasta que esté en verde.
+| Qué | Tokens | Lo vigila |
+| --- | --- | --- |
+| Su marca, como primitivos **propios** | `--primitive-color-brand-*` (o el nombre que la describa), `--primitive-space-base` | — |
+| Los rellenos de marca y sus hover | `--semantic-color-{primary,secondary,tertiary…}`, `--semantic-color-state-hover-*` | — |
+| La tinta encima de cada relleno | `--semantic-color-on-*`, `--semantic-color-on-state-hover-*` | `check:contraste` |
+| Lo que todos los temas declaran y el sistema lee | iconos `--icon-*` | `check:plantilla` |
+| Modo oscuro con **sus dos entradas**, las dos con `dark-mode-tokens()` | `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {…} }` y `:root[data-theme="dark"] {…}` | `check:themes --strict`, `check:modo-claro` |
+| Sus fuentes, una vez | `theme-x-fonts()` con `syx-font()` | `check:setups` |
+
+Superficies, textos, bordes, sombras, escala tipográfica, la tinta de marca como texto (`--semantic-color-*-text`) y la variante fuerte de los controles los pone el sistema, en claro y en oscuro. Un tema los declara solo cuando quiere otra cosa.
+
+### Lo que un tema PUEDE declarar
+
+- **Cualquier rol semántico** (`--semantic-*`): superficies, textos, estados (`--semantic-color-state-*`), tonos suaves, colores categóricos, superficie de énfasis, paleta de código, tintas… con un primitivo o con un literal. Es el sitio donde el tema traduce su paleta a papeles.
+- **Primitivos**: los suyos, o los del sistema reescritos (ver la recomendación del inventario: mejor los suyos).
+- **Tokens de componente** (`--component-*`), siempre que **lean roles** (R11): un `--semantic-*`, otro `--component-*`, `--theme-*`, `--layout-*`, un icono o una longitud literal. No hay lista cerrada de los que se pueden sobrescribir: R11 garantiza que lo que se sobrescriba siga al tema y al modo.
+- La forma y la estructura: `--theme-radius`, `--theme-focus-ring-width`, `--layout-*`, `--reset-*`.
+
+### Lo que un tema NO puede declarar
+
+| No | Por qué | Lo vigila |
+| --- | --- | --- |
+| Una declaración que no lee nadie | No hace nada y nadie se entera: example-06 «arreglaba» un contraste con `--btn-primary-filled-text`, que ningún botón leía. Solo se admiten los `--semantic-*` del sistema, que son API pública para las aplicaciones | `check:consumidores` |
+| Un `--component-*` que lea un `--primitive-*`, una variable heredada o un color literal | El componente dejaría de seguir al tema y al modo (la píldora violeta en el tema cian) | R11 (`check:reglas`, `validate`) |
+| Un token deprecado | Desde 2026-10 los alias deprecados SIGUEN al canónico: declarar el alias no cambia nada. Se declara el canónico (`replacedBy` en `tokens.json`) | `check:tokens-json` |
+| Variables sin prefijo oficial | Las heredadas se retiraron; `contracts/legacy-map.json` dice a qué token oficial va cada una | R07 (`validate`) |
+| Un oscuro con una sola entrada | El botón de modo no tendría efecto con el SO en claro, o el tema no seguiría al SO | `check:themes --strict` |
+
+### Inventario medido de los temas (octubre de 2026)
+
+Declaraciones en cada `_theme.scss`, antes y después de la acción 14 (todas las declaraciones, contando las de claro y oscuro):
+
+| Tema | Antes | Después | Primitivos (reescritos del sistema · propios) | Semánticos | Componente | Primitivos cuyo nombre no es su tono |
+| --- | --- | --- | --- | --- | --- | --- |
+| example-01 | 233 | 132 | 21 (9 · 12) | 55 | 11 | 4: `blue-500/400` índigo (h 277), `cyan-500` ámbar (h 70), `orange-500` índigo (h 277) |
+| example-02 | 256 | 145 | 22 (12 · 10) | 71 | 7 | 3: `purple-500` rosa (h 7), `blue-500` violeta (h 293), `yellow-500` ámbar (h 70) |
+| example-03 | 267 | 161 | 25 (6 · 19) | 81 | 10 | 0 |
+| example-04 | 269 | 162 | 25 (4 · 21) | 82 | 10 | 0 |
+| example-05 | 286 | 174 | 31 (4 · 27) | 88 | 10 | 0 |
+| example-06 | 240 | 149 | 30 (4 · 26) | 64 | 10 | 0 |
+| syx-sketch | 493 | 377 | 48 (36 · 12) | 189 | 94 | 0 |
+
+Lo que se fue eran alias heredados y declaraciones sin lector. Los tokens de componente de los temas de ejemplo son los de la lista (`--component-list-*`, que antes escribían con nombres heredados). Los de syx-sketch bajan de 170 a 94 y ahora todos leen roles: los colores de sus píldoras, iconos, código y tabla pasaron a la capa semántica.
+
+### Recomendación (decisión pendiente)
+
+1. **Primitivos que no mienten.** example-01 y example-02 reescriben primitivos del sistema con otro tono (`purple-500` rosa, `orange-500` índigo, `cyan-500` ámbar). Desde R11 ningún componente lee primitivos, pero sí la capa del sitio (`scss/site/tokens/`, que R01 permite) y cualquier aplicación que use la paleta: recibe un «violeta» rosa. Mejor la convención de la plantilla: primitivos propios con el nombre de su papel en la marca (`--primitive-color-brand-*`) y los del sistema intactos.
+2. **syx-sketch** sigue siendo el tema que más reescribe (94 tokens de componente: tarjetas, tabla, botones, código). Todos leen roles, así que siguen al modo; si su lenguaje (trazo, sombra dura) se quiere ofrecer a otros temas, el paso siguiente es subir esos ajustes a roles semánticos de forma (`--semantic-shadow-hard*` ya existe) en vez de repetirlos componente a componente.
+3. **¿Lista cerrada de componentes sobrescribibles?** Hoy no la hay; R11 y `check:consumidores` cubren lo que una lista protegería (que la sobrescritura tenga efecto y siga al tema). Si se quisiera, iría en `contracts/` y la leería `check:consumidores`.
+
+### Pasos para un tema nuevo
+
+1. Copia `scss/themes/_template/` y cambia `template` por el nombre (ver su README).
+2. Cambia los valores marcados con ✎: marca, textos, forma, tipografía.
+3. Crea `scss/styles-theme-<tema>.scss`, compila (`npm run build`) y pasa `npm run check` hasta que esté en verde: `check:contraste` te dirá qué tinta `on-*` declarar sobre cada relleno, y `check:consumidores` qué declaraciones no lee nadie.
 
 ---
 
@@ -141,11 +186,12 @@ Los pares viven en `contracts/contrast.json` (texto sobre cada relleno y su hove
 
 Los primitivos **sí se pueden usar** en:
 
-- `scss/themes/*/\_theme.scss` — para definir los semánticos
-- `scss/base/\_reset.scss` — para el reset global
-- Colores de marca específicos de un componente que **no deben cambiar con el tema** (ej: badges de categoría con colores fijos)
+- `scss/themes/*/_theme.scss`, en la capa semántica — para darles papel (nunca en un `--component-*`: R11)
+- `scss/abstracts/tokens/semantic/` y `scss/abstracts/tokens/primitives/` — donde se definen
+- `scss/base/`, `scss/utilities/` y `scss/setup-builder.scss` — reset, helpers y el editor de temas
+- `scss/site/tokens/` — la capa del sitio de SYX, que no es del sistema
 
-Los **semánticos** se pueden sobreescribir directamente en `_theme.scss` **únicamente** en la Sección 3 (Neutral Brand), que define la identidad visual base para el bundle core (`_template`). En temas con marca propia, sobreescribir siempre desde primitivos.
+Un color que no debe cambiar con el tema tampoco va como primitivo en un componente: tiene un rol semántico con su valor por defecto (la superficie de énfasis, la paleta de código, los colores categóricos), y un tema que quiera otra cosa lo cambia ahí.
 
 ---
 

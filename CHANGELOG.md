@@ -9,6 +9,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — capas estrictas y temas sin peso muerto (auditoría 2026-10, acción 14)
+
+- **R11: un `--component-*` solo lee roles.** Regla nueva en `contracts/rules.json` y en el motor (`match.kind: component-token-source`, con `appliesIn` genérico): en `scss/abstracts/tokens/components/` y en las sobrescrituras de los temas, un token de componente lee `--semantic-*`, `--component-*`, `--theme-*`, `--layout-*` o iconos, nunca un `--primitive-*`, una variable heredada ni un color literal. Migrados los 55 casos de la capa de componente y los 82 de syx-sketch.
+- **La píldora primaria sigue a la marca.** Píldoras, iconos de característica, cabeceras del fragmento de código, cita, `hr`, tabla base y código en línea leían primitivos: la píldora primaria era violeta (h ≈ 264–285) en example-06, cuya marca es cian, y en oscuro seguían siendo tintes claros. Ahora leen roles que siguen al tema y al modo. Cambio visual en los seis temas de ejemplo (píldoras y fondos de etiqueta del color de su marca; en oscuro, tintes oscuros y tinta clara); syx-sketch se ve igual salvo las cabeceras del fragmento de código en oscuro (dejan de ser pegatinas claras) y el hover/cabecera de tabla en oscuro (L 0,300 → 0,305).
+- **Estados con un solo nombre.** `--semantic-color-state-*` se declara y los nombres de antes (`--semantic-tone-*-bg`, `--semantic-color-success|error|warning|info`) son alias que lo siguen. Ningún valor resuelto cambia. **BREAKING para temas externos:** declarar `--semantic-tone-*-bg` ya no cambia el estado; se declara `--semantic-color-state-*`.
+- **La lista lee sus tokens.** `atom-list` leía los alias heredados `--list-*` y `--filter-primary`; ahora lee `--component-list-*` (con `--component-list-lvl1-icon`, `-lvl2-icon`, `-icon-filter` e `-icon-offset-y` nuevos) y cada tema conserva su ritmo como sobrescritura de componente. Los helpers `.syx-font-size-*`, `.syx-size-*`, `.syx-font-weight-*` y `.syx-font-scope-*` leen la escala semántica y los primitivos; `.syx-font-scope-*` es ahora `calc(k × --primitive-space-base)` con k = 2, 2,5, 3, 4, 5 (lo que declaraban seis de los siete temas; en example-02 los tamaños 2–5 cambian) y `.syx-font-weight-1` lee `--semantic-font-family-primary` (en example-01 pasa de Syne a Inter). Ninguna página del sitio usa esas cuatro utilidades.
+- **Filtro del primario.** Los temas declaran `--semantic-filter-primary`; la miga de pan y el campo de formulario, que leían el filtro morado por defecto, tiñen ahora con el de su tema.
+- **z-index de la cabecera del sitio sobre la escala semántica:** velo `--semantic-z-index-overlay`, cajón `drawer` y cabecera `drawer + 1` en vez de 199/200/201 literales. El orden relativo no cambia.
+- **La plantilla de temas es el contrato mínimo** (38 declaraciones, todas con lector; antes 72, 17 sin lector y sin modo oscuro): marca → roles, tintas `on-*`, textos, forma, `syx-font()`, iconos de Lucide y modo oscuro con sus dos entradas.
+- `check:themes` falla si un tema no tiene modo oscuro (antes «se omite») y la cadena lo ejecuta con `--strict`. `check:setups` admite `--temas`.
+- `check:contraste` entiende `color-mix()` (srgb, srgb-linear, oklab, oklch) y fondos translúcidos (se componen sobre `sobre` o `--semantic-color-bg-primary`); `contracts/contrast.json` pasa de 91 a 109 pares (píldoras, fragmentos, código, cita, tabla base, iconos). Cazó el rojo del código en línea a 2:1 sobre el terciario oscuro: ahora es tinta derivada.
+- R07 cuenta declaraciones reales (postcss): antes tomaba por variable cualquier `--algo:` del CSS, modificadores BEM con pseudoclase incluidos. Clasifica con `contracts/legacy-map.json`.
+
+### Added — roles semánticos y guardianes (acción 14)
+
+- **Roles:** tonos suaves `--semantic-color-tone-{primary,secondary,success,warning,error}-subtle-{bg,border,fg}` (derivados con `color-mix` en oklab y la tinta del rol), colores categóricos `--semantic-color-category-{1…6}-{bg,fg}`, superficie de énfasis `--semantic-color-bg-emphasis`/`--semantic-color-on-emphasis`, paleta de código `--semantic-color-code-*` (con `--semantic-code-syntax-lightness`), `--semantic-color-secondary-strong` y `--semantic-opacity-disabled`.
+- `check:consumidores`: toda declaración de `scss/themes/**` tiene lector (transitivo, sobre el CSS compilado y las páginas); la única excepción son los `--semantic-*` del árbol común, que son API pública.
+- `check:plantilla`: instancia la plantilla en una copia del árbol, la compila y le pasa `check:themes --strict`, `check:modo-claro`, `check:contraste`, `check:setups` (con la capa del sitio), que cada declaración tenga lector y que no le falte nada de lo que declaran todos los temas.
+- `check:encoding` detecta el 0xC3 que un arreglo anterior dejó convertido en «i con tilde» (14 líneas, con el guardián en verde) y mira también `docs/`, `_agents/`, `mind-system/` y la raíz.
+- `// @deprecated --sustituto: porqué` en la línea de encima de una declaración: `build-tokens-json` lo lleva a `tokens.json` (status y `replacedBy`) y falla si el sistema lee o un tema declara un deprecado. `propose.js` niega un valor que lea uno.
+- `contracts/legacy-map.json`: cada variable heredada, a qué token oficial se migró o por qué se eliminó.
+
+### Deprecated — sinónimos (acción 14)
+
+- `--semantic-tone-{success,error,warning,info}-bg` y `--semantic-color-{success,error,warning,info}` → `--semantic-color-state-*`.
+- `--semantic-color-state-focus` → `--semantic-focus-ring-color` · `--semantic-border-focus` → `--semantic-color-border-focus` · `--semantic-color-text-on-primary` → `--semantic-color-on-primary` · `--semantic-font-size-body-sm` → `--semantic-font-size-body-small`.
+- No se deprecan los pares que valen lo mismo por defecto pero son papeles distintos (`line-height-body`/`relaxed`, `space-inline-*`/`space-stack-*`, `font-size-caption`/`overline`…) ni `space-layout-*`/`space-component-*`, que difieren en algún tema.
+
+### Removed — variables heredadas y declaraciones sin lector (acción 14) — BREAKING
+
+- **Los alias de `scss/base/_deprecated-aliases.scss`** (retirada fijada para el 2026-09-12): `--base-measure`, `--font-weight-1/2`, `--font-family-1/2`, `--font-bold`, `--font-size-1…5`, `--dimension-1…5`, `--scope-1…5`, `--gap-1`, `--inner-1`, `--txt-m-b`, `--btn-*`, `--breadcrumb-*`, `--pagination-*`, `--check-*`, `--radio-*`, `--switch-*`, `--form-*`, `--cont-group-form-field-*`, `--list-*`, `--table-th-*`, `--theme-focus`, `--theme-w-border`. Siete familias no las leía nada. El mapa a su token oficial está en `contracts/legacy-map.json`. Quedan en ese fichero `--layout-*`, `--theme-radius` y el alias deprecado `--semantic-border-focus`.
+- **De los temas, 85–93 declaraciones por tema que no leía nadie** (alias heredados, `--filter-*`, primitivos de rampa sin uso, `--semantic-border-width`, `--semantic-outline-width`…), entre ellas el `--btn-primary-filled-text` con que example-06 intentaba arreglar un contraste sin efecto (lo resolvía ya `--semantic-color-on-primary`). Declaraciones por tema: example-01 233 → 132, syx-sketch 493 → 377.
+- `--filter-color-black` y `--filter-color-white` (`themes/_base/_universal.scss`): sin lector; usa `--semantic-filter-white`/`-black`.
+- `--component-code-syntax-lightness` → `--semantic-code-syntax-lightness` (la derivación de la sintaxis sube a la capa semántica).
+
 ### Added — el catálogo para pantallas de producto (auditoría 2026-10, acción 15)
 
 Lo que una adopción real (una pantalla de ajustes con Vite) tuvo que escribir a mano o echó de menos. Diez componentes nuevos y dos primitivas de layout: 40 componentes (23 átomos, 15 moléculas, 2 organismos).
