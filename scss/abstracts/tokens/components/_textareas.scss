@@ -1,0 +1,18 @@
+// COMPONENT TOKENS: TEXTAREAS
+// ================================================
+// .atom-textarea y el contador opcional de mol-form-field
+// (__count). El resto de la caja —borde, fondo, foco, estados— lo
+// comparte con .atom-input a través de los tokens --component-form-field-*.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  // Dos alturas táctiles: una línea de texto cabe en un input; si se
+  // pide un textarea es porque se esperan varias.
+  --component-form-textarea-min-height: calc(2 * var(--component-form-field-min-height));
+  --component-form-textarea-line-height: var(--semantic-line-height-body);
+
+  --component-form-field-count-font-size: var(--semantic-font-size-body-small);
+  --component-form-field-count-color: var(--semantic-color-text-secondary);
+  --component-form-field-count-limit-color: var(--semantic-color-state-warning-text);
+}

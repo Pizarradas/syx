@@ -334,13 +334,15 @@
       "layer": "atom",
       "file": "scss/atoms/_form.scss",
       "tokenFiles": [
-        "scss/abstracts/tokens/components/_forms.scss"
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_textareas.scss"
       ],
       "classes": [
         "atom-input",
         "atom-input-wrapper",
         "atom-label",
-        "atom-select"
+        "atom-select",
+        "atom-textarea"
       ],
       "modifiers": [],
       "elements": [],
@@ -371,11 +373,13 @@
         "--component-form-field-padding-y",
         "--component-form-field-placeholder",
         "--component-form-field-transition-duration",
-        "--component-form-field-transition-easing"
+        "--component-form-field-transition-easing",
+        "--component-form-textarea-line-height",
+        "--component-form-textarea-min-height"
       ],
-      "description": "[scope: system-reusable] The four canonical form primitives: .atom-label, .atom-input, .atom-select and .atom-input-wrapper. They are the raw controls only — validation state, message and icon live in mol-form-field, so use these bare only in a layout that handles its own error reporting.",
-      "usage": "<label class=\"atom-label\" for=\"form-email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"form-email\" type=\"email\" autocomplete=\"email\"></span><label class=\"atom-label\" for=\"form-plan\">Plan</label><span class=\"atom-input-wrapper\"><select class=\"atom-select\" id=\"form-plan\"><option>Free</option><option>Pro</option></select></span>",
-      "a11y": "Every control has a <label for> pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native <select>: keyboard and option list come from the browser. Controls are 48px tall at every width. Focus: system ring. No JS."
+      "description": "[scope: system-reusable] The five canonical form primitives: .atom-label, .atom-input, .atom-textarea, .atom-select and .atom-input-wrapper. .atom-textarea shares the input's box, border, focus and states but not its fixed height: rows sets it, with a floor of two touch heights and vertical-only resize (textarea.atom-input still works). They are the raw controls only — validation state, message and character count live in mol-form-field, so use these bare only in a layout that handles its own error reporting.",
+      "usage": "<label class=\"atom-label\" for=\"form-email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"form-email\" type=\"email\" autocomplete=\"email\"></span><label class=\"atom-label\" for=\"form-plan\">Plan</label><span class=\"atom-input-wrapper\"><select class=\"atom-select\" id=\"form-plan\"><option>Free</option><option>Pro</option></select></span><label class=\"atom-label\" for=\"form-notes\">Notes</label><textarea class=\"atom-textarea\" id=\"form-notes\" rows=\"3\"></textarea>",
+      "a11y": "Every control has a <label for> pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native <select>: keyboard and option list come from the browser. Inputs and selects are 48px tall at every width; a textarea is never shorter than two of those. Focus: system ring. No JS."
     },
     {
       "name": "icon-lucide",
@@ -1252,7 +1256,8 @@
       "layer": "molecule",
       "file": "scss/molecules/_form-field.scss",
       "tokenFiles": [
-        "scss/abstracts/tokens/components/_forms.scss"
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_textareas.scss"
       ],
       "classes": [
         "mol-form-field"
@@ -1264,16 +1269,24 @@
         "mol-form-field--is-warning"
       ],
       "elements": [
+        "mol-form-field__count",
+        "mol-form-field__live",
         "mol-form-field__msg"
       ],
-      "states": [],
+      "states": [
+        ".is-limit"
+      ],
       "composedOf": [
         "atom-input",
         "atom-label",
-        "atom-select"
+        "atom-select",
+        "atom-textarea"
       ],
       "tokens": [
         "--component-form-field-color",
+        "--component-form-field-count-color",
+        "--component-form-field-count-font-size",
+        "--component-form-field-count-limit-color",
         "--component-form-field-error-border",
         "--component-form-field-error-color",
         "--component-form-field-icon-position-right",
@@ -1288,9 +1301,9 @@
         "--component-form-field-warning-border",
         "--component-form-field-warning-color"
       ],
-      "description": "[scope: system-reusable] The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce.",
-      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"ff-email\">Email</label><input class=\"atom-input\" id=\"ff-email\" type=\"email\" autocomplete=\"email\" aria-invalid=\"true\" aria-describedby=\"ff-email-msg\"><span class=\"mol-form-field__msg\" id=\"ff-email-msg\">Enter a valid address.</span></div>",
-      "a11y": "<label for> on a unique id. On error: aria-invalid=\"true\" on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Validation itself is the app's. No JS."
+      "description": "[scope: system-reusable] The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce. A textarea with maxlength can carry an optional __count: js/syx-char-count.js writes what is left (data-template, in the page's language), adds is-limit at the limit and announces it once typing pauses; without JS the markup text stays.",
+      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"ff-email\">Email</label><input class=\"atom-input\" id=\"ff-email\" type=\"email\" autocomplete=\"email\" aria-invalid=\"true\" aria-describedby=\"ff-email-msg\"><span class=\"mol-form-field__msg\" id=\"ff-email-msg\">Enter a valid address.</span></div><div class=\"mol-form-field\"><label class=\"atom-label\" for=\"ff-bio\">Short bio</label><textarea class=\"atom-textarea\" id=\"ff-bio\" rows=\"3\" maxlength=\"160\" aria-describedby=\"ff-bio-count\"></textarea><span class=\"mol-form-field__count\" id=\"ff-bio-count\" data-template=\"{n} characters left\">Up to 160 characters</span></div>",
+      "a11y": "<label for> on a unique id. On error: aria-invalid=\"true\" on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Character count: the textarea names __count in aria-describedby (heard on focus) and keeps maxlength; js/syx-char-count.js (no dependencies) adds a role=\"status\" region that says what is left after a pause, never on every key. Validation itself is the app's."
     },
     {
       "name": "label-group",
