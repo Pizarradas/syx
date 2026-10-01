@@ -3,13 +3,19 @@
  * SYX — Corregir una respuesta de un modo contra su tarea de referencia
  * ────────────────────────────────────────────────────────────────────
  * Uso:
- *   node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--json]
+ *   node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--sin-juez] [--json]
  *   node scripts/eval-modo.js --lista
  *   npm run eval:modo -- ui-01 respuesta.md
  *
  * La respuesta es lo que el agente devolvió, tal cual, en Markdown. Sale la
- * nota de los criterios C1–C4 y las preguntas de C5 para quien corrige.
- * Termina con 1 si algún criterio automático no llega a 2.
+ * nota de los criterios C1–C4 y las preguntas de C5. Si hay juez disponible
+ * (ANTHROPIC_API_KEY o la CLI `claude`; ver scripts/lib/juez.js), puntúa C3 y
+ * C5 con la rúbrica de _agents/evals/juez.md; si no, se avisa y C5 queda para
+ * una persona. Para correr agentes de verdad contra todas las tareas, está
+ * scripts/eval-runner.js.
+ *
+ * Termina con 1 si la respuesta no aprueba: con juez, la nota final; sin él,
+ * la determinista.
  */
 
 'use strict';
@@ -19,6 +25,7 @@ const path = require('path');
 const { crearConsulta } = require('./lib/consulta');
 const { evaluar } = require('./lib/evaluar');
 const { cargarBanco } = require('./lib/banco');
+const { juzgar, combinar } = require('./lib/juez');
 
 const ROOT = path.join(__dirname, '..');
 const { tareas, equivalentes } = cargarBanco(ROOT);
@@ -29,7 +36,7 @@ const [id, fichero] = args.filter((a) => !a.startsWith('--'));
 
 if (!id || flags.has('--lista')) {
   for (const t of tareas) console.log(`${t.id.padEnd(12)} ${t.modo.padEnd(9)} ${t.titulo}`);
-  if (!flags.has('--lista')) console.log('\nUso: node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--json]');
+  if (!flags.has('--lista')) console.log('\nUso: node scripts/eval-modo.js <id-de-tarea> <respuesta.md> [--sin-juez] [--json]');
   process.exit(flags.has('--lista') ? 0 : 1);
 }
 
@@ -44,20 +51,33 @@ if (!fichero || !fs.existsSync(fichero)) {
   process.exit(1);
 }
 
-const respuesta = fs.readFileSync(fichero, 'utf8');
-const r = evaluar({ tarea, respuesta, syx: crearConsulta({ root: ROOT }), equivalentes });
+(async () => {
+  const respuesta = fs.readFileSync(fichero, 'utf8');
+  const det = evaluar({ tarea, respuesta, syx: crearConsulta({ root: ROOT }), equivalentes });
+  const juez = flags.has('--sin-juez') ? { via: null, aviso: 'juez saltado: --sin-juez' } : await juzgar({ tarea, respuesta, root: ROOT });
+  const r = combinar(det, juez);
 
-if (flags.has('--json')) {
-  console.log(JSON.stringify(r, null, 2));
-} else {
-  console.log(`\n── ${tarea.id} · ${tarea.modo.toUpperCase()} · ${tarea.titulo} ──\n`);
-  for (const c of r.criterios) {
-    console.log(`${c.nota === c.max ? '✅' : c.nota ? '⚠️ ' : '❌'} ${c.id} ${c.nombre.padEnd(14)} ${c.nota}/${c.max}`);
-    for (const d of c.detalle) console.log(`      ${d}`);
+  if (flags.has('--json')) {
+    console.log(JSON.stringify(r, null, 2));
+  } else {
+    console.log(`\n── ${tarea.id} · ${tarea.modo.toUpperCase()} · ${tarea.titulo} ──\n`);
+    for (const c of r.criterios) {
+      console.log(`${c.nota === c.max ? '✅' : c.nota ? '⚠️ ' : '❌'} ${c.id} ${c.nombre.padEnd(14)} ${c.nota}/${c.max}`);
+      for (const d of c.detalle) console.log(`      ${d}`);
+    }
+    console.log(`\n   Automático: ${r.auto}/${r.max}`);
+    if (juez.via) {
+      console.log(`\n   Juez (${juez.via}, ${juez.modelo}) · C3 ${juez.c3.nota}/2${juez.c3.fallos.length ? '' : ' sin fallos'}`);
+      for (const f of juez.c3.fallos) console.log(`      ${f}`);
+      console.log('   C5 Criterio:');
+      for (const q of juez.c5) console.log(`     ${q.nota >= 1 ? '✅' : '❌'} ${q.nota}/2 ${q.pregunta}\n          ${q.porque}`);
+      console.log(`\n   Con juez: ${r.conJuez}/${r.max} · ${r.aprueba ? 'APRUEBA' : 'SUSPENDE'}`);
+    } else {
+      console.log(`\n   ⚠️  ${juez.aviso}`);
+      console.log('\n   C5 Criterio — para una persona o para AUDIT (0 no · 1 en parte · 2 sí):');
+      for (const q of r.criterio) console.log(`     · ${q}`);
+    }
+    console.log('');
   }
-  console.log(`\n   Automático: ${r.auto}/${r.max}`);
-  console.log('\n   C5 Criterio — para una persona o para AUDIT (0 no · 1 en parte · 2 sí):');
-  for (const q of r.criterio) console.log(`     · ${q}`);
-  console.log('');
-}
-process.exitCode = r.apruebaAuto ? 0 : 1;
+  process.exitCode = (r.aprueba === null ? r.apruebaAuto : r.aprueba) ? 0 : 1;
+})();
