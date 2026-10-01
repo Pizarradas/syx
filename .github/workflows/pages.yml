@@ -54,6 +54,15 @@ jobs:
         with:
           node-version: '20'
 
+      # Las páginas cargan dist/site/site.min.css y dist/site/site.<tema>.tokens.min.css
+      # (auditoría 2026-10, acción 12). dist/ no se versiona: `npm ci` corre
+      # `prepare`, que es scripts/build-dist.js, y lo genera desde el SCSS de
+      # este mismo commit. Sin este paso el sitio se publicaría sin estilos.
+      - name: Dependencias y hojas del sitio (dist/)
+        run: |
+          npm ci --no-fund --no-audit
+          test -s dist/site/site.min.css
+
       - name: Dependencias de los tres Storybooks
         run: |
           npm ci --prefix storybook --no-fund --no-audit
@@ -79,7 +88,7 @@ jobs:
         run: |
           mkdir -p _site/storybook
           cp *.html robots.txt site.webmanifest browserconfig.xml _site/
-          cp -r css js fonts img assets _site/
+          cp -r css dist js fonts img assets _site/
           # La raíz de Pages con branch-mode la resolvía Jekyll renderizando el
           # README; con Actions no hay Jekyll, así que la portada es home.html.
           printf '<!doctype html><meta http-equiv="refresh" content="0; url=home.html">' > _site/index.html

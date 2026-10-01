@@ -261,9 +261,16 @@ npm run watch          # watches all themes for changes
 npm run check          # every guard
 ```
 
-`css/styles-theme-<theme>.css` is the *showroom* sheet the SYX pages use: the system
-**plus** the site layer (`scss/site/`). It is versioned so the pages work from a plain
-clone, but an app should use `dist/` — through the `themes/` export — and never `css/`.
+`css/styles-theme-<theme>.css` is the *showroom* sheet: the system **plus** the site
+layer (`scss/site/`), unminified. It is versioned because half the guards measure against
+it, but the SYX pages no longer load it: they load `dist/site/site.min.css` (system + site
+layer, shared) and `dist/site/site.<theme>.tokens.min.css` (the theme, pruned against the
+pages' own rules and markup), and the theme switcher swaps only the second one.
+`theme-builder.html` loads `dist/site/site.builder.min.css`, minified but **not** pruned: the
+editor rewrites primitives and semantics from JavaScript. `dist/` is not versioned —
+`npm install` builds it, and the Pages workflow runs `npm ci` before publishing. `dist/site/`
+does not travel in the package. An app should use `dist/` — through the
+exports — and never `css/`.
 To compile your own bundle from source, see [`scss/GETTING-STARTED.md`](scss/GETTING-STARTED.md).
 
 ```bash
