@@ -382,9 +382,9 @@ syx/
 │   │   └── _paths.scss          # Compile-time config (fonts/images paths)
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 19 atomic components
-│   ├── molecules/               # 6 composite components
-│   ├── organisms/               # 1 complex component (site-header)
+│   ├── atoms/                   # 19 atoms
+│   ├── molecules/               # 10 molecules
+│   ├── organisms/               # 1 organism (site-header)
 │   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities

@@ -179,8 +179,8 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 
 ```
 scss/abstracts/tokens/    — 4-tier token system (primitives → semantic → component)
-scss/atoms/               — 19 single-purpose components
-scss/molecules/           — 6 composite components
+scss/atoms/               — 19 atoms, single-purpose
+scss/molecules/           — 10 molecules, composites
 scss/organisms/           — 1 complex section (site-header)
 scss/site/                — SITE LAYER: 12 pieces used only by SYX's own pages
                             (home-*, evidence, score, ranking, compare-card,
