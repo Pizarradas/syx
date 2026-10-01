@@ -1,43 +1,21 @@
 // ================================================
-// SURFACE + RESET TOKENS — CANONICAL LAYER
+// RESET TOKENS
 // ================================================
-// This is NOT a compatibility file. These are the surface tokens
-// that page-level and component SCSS are allowed to consume, and
-// the --reset-* tokens the global reset reads.
+// Los --reset-* que lee base/_reset.scss. Cada _theme.scss puede
+// sobrescribirlos para ajustar la tipografía y el fondo base.
 //
-// RULE: pages and components use ONLY these surface tokens —
-// never --primitive-color-* directly. Each _theme.scss overrides
-// them to create its identity.
-//
-// The values are fallbacks expressed through primitives (never hex)
-// so they stay consistent with the token system; the definitions in
-// abstracts/tokens/semantic/ are the primary source and each theme
-// wins over both at :root level.
-//
-// Previously buried inside _token-aliases.scss ("compatibility
-// aliases") — split out because the canonical contract of the
-// system should not live in a file named after what is deprecated.
+// Antes este fichero se llamaba _surface-tokens.scss y además
+// redeclaraba once tokens --semantic-color-* (fondos, textos,
+// bordes y text-on-primary). Como se emitía DESPUÉS de la capa
+// semántica, su valor tapaba al de abstracts/tokens/semantic/
+// _colors.scss, que quedaba como código muerto con otros colores.
+// Desde octubre de 2026 esos tokens viven solo en la capa
+// semántica (con los valores que ganaban aquí), y este fichero
+// solo declara lo suyo. Una segunda declaración de cualquier token
+// la detecta `npm run check:tokens-json`.
 // ================================================
 
 :root {
-  // ------------------------------------------------
-  // SURFACE TOKENS — FALLBACK UNIVERSAL
-  // ------------------------------------------------
-  // Backgrounds
-  --semantic-color-bg-primary: var(--primitive-color-white);
-  --semantic-color-bg-secondary: var(--primitive-color-gray-50);
-  --semantic-color-bg-tertiary: var(--primitive-color-gray-100);
-  // Borders
-  --semantic-color-border-default: var(--primitive-color-gray-300);
-  --semantic-color-border-subtle: var(--primitive-color-gray-200);
-  --semantic-color-border-strong: var(--primitive-color-gray-400);
-  // Text
-  --semantic-color-text-primary: var(--primitive-color-gray-900);
-  --semantic-color-text-secondary: var(--primitive-color-gray-600);
-  --semantic-color-text-tertiary: var(--primitive-color-gray-400);
-  --semantic-color-text-inverse: var(--primitive-color-white);
-  --semantic-color-text-on-primary: var(--primitive-color-white);
-
   // ------------------------------------------------
   // RESET TOKENS — consumed by base/_reset.scss
   // ------------------------------------------------

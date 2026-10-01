@@ -36,7 +36,7 @@ PRIMITIVO  →  SEMÁNTICO  →  COMPONENTE  →  PÁGINA
 
 ## Tokens de superficie disponibles
 
-Definidos en `scss/abstracts/tokens/semantic/_colors.scss` como valores de referencia, con sus fallbacks canónicos en `scss/base/_surface-tokens.scss`. Cada `_theme.scss` los sobreescribe para crear la identidad del tema. Los alias de compatibilidad para código legado viven en `scss/base/_deprecated-aliases.scss`, con retirada fijada en SYX v5.0.
+Definidos una sola vez, en `scss/abstracts/tokens/semantic/_colors.scss` (los valores por defecto) y en `_dark-mode.scss` (su reasignación en oscuro). Cada `_theme.scss` los sobreescribe para crear la identidad del tema. Los alias de compatibilidad para código legado viven en `scss/base/_deprecated-aliases.scss`, con retirada fijada en SYX v5.0.
 
 ```css
 /* Backgrounds */
