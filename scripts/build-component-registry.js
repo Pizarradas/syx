@@ -22,8 +22,11 @@
  * · tokens                     los `var(--component-*)` que consume el parcial
  * · tokenFiles                 búsqueda inversa: qué fichero declara cada token
  * · composedOf                 clases base de otros componentes usadas dentro
- * · description, usage         NO se generan: son prosa escrita a mano y se
- *                              conservan tal cual del registro anterior
+ * · description, usage, a11y   NO se generan: son prosa escrita a mano y se
+ *                              conservan tal cual del registro anterior.
+ *                              `a11y` (Auditoría 2026-10 · acción 3) dice lo
+ *                              que el CSS no puede poner: rol y ARIA que exige
+ *                              el marcado, el teclado y si hace falta JS
  *
  * Uso:
  *   node scripts/build-component-registry.js           regenera
@@ -183,7 +186,7 @@ function build() {
       generator: 'scripts/build-component-registry.js',
       description: 'SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.',
       tokenPrefix: '--component-',
-      note: 'Todo se genera salvo `description` y `usage`, que son prosa escrita a mano y se conservan entre regeneraciones. `tokenFiles` sustituye al antiguo `tokenFile`: un componente puede leer tokens declarados en varios ficheros, y el anterior apuntaba a rutas que no existían.',
+      note: 'Todo se genera salvo `description`, `usage` y `a11y`, que son prosa escrita a mano y se conservan entre regeneraciones. `tokenFiles` sustituye al antiguo `tokenFile`: un componente puede leer tokens declarados en varios ficheros, y el anterior apuntaba a rutas que no existían.',
       layers: {
         'syx.atoms': 'Componentes de un solo propósito. Prefijo: atom-',
         'syx.molecules': 'Composiciones de 2 o más átomos. Prefijo: mol-',
@@ -257,6 +260,7 @@ function build() {
     };
     if (prosa.description) entrada.description = prosa.description;
     if (prosa.usage) entrada.usage = prosa.usage;
+    if (prosa.a11y) entrada.a11y = prosa.a11y;
 
     salida[c.grupo].push(entrada);
 
@@ -292,7 +296,7 @@ function leerProsaPrevia() {
   if (!previo) return out;
   for (const g of GRUPOS) {
     for (const c of previo[g.key] || []) {
-      if (c.description || c.usage) out[c.name] = { description: c.description, usage: c.usage };
+      if (c.description || c.usage || c.a11y) out[c.name] = { description: c.description, usage: c.usage, a11y: c.a11y };
     }
   }
   return out;
@@ -327,7 +331,7 @@ function diferencias(previo, nuevo) {
   for (const [nombre, x] of a) {
     const y = b.get(nombre);
     if (!y) continue;
-    for (const campo of ['classes', 'modifiers', 'elements', 'states', 'tokens', 'tokenFiles', 'composedOf', 'file', 'layer', 'description', 'usage']) {
+    for (const campo of ['classes', 'modifiers', 'elements', 'states', 'tokens', 'tokenFiles', 'composedOf', 'file', 'layer', 'description', 'usage', 'a11y']) {
       const va = JSON.stringify(x[campo]);
       const vb = JSON.stringify(y[campo]);
       if (va === vb) continue;

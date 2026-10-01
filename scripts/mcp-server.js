@@ -94,7 +94,7 @@ const HERRAMIENTAS = [
 
   {
     name: 'get_component',
-    description: 'Todo lo de un componente: clases, modificadores, elementos, estados, de qué se compone y qué tokens consume. Todos verificados contra el CSS compilado.',
+    description: 'Todo lo de un componente: clases, modificadores, elementos, estados, de qué se compone y qué tokens consume (todo verificado contra el CSS compilado), más la prosa escrita a mano: description, usage (marcado de ejemplo) y a11y (rol y ARIA que exige el marcado, teclado y JS necesario — léelo antes de escribir el HTML).',
     inputSchema: {
       type: 'object',
       properties: { name: { type: 'string', description: 'p. ej. btn, feature-card, site-header' } },

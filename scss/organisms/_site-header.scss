@@ -7,7 +7,9 @@
 // ===============================================
 // Mobile-first sticky site header with hamburger nav overlay.
 // Composes: atom-icon, atom-btn
-// JS: toggles [data-nav-open] on <body> to open/close mobile nav.
+// JS: js/syx-site-nav.js — pone [data-nav-open] en <body>, `inert` en el
+//     cajón cerrado (y en el resto de la página con él abierto), lleva el
+//     foco al cajón y lo devuelve a la hamburguesa con Escape.
 // ===============================================
 @mixin org-site-header($theme: null) {
   @layer syx.organisms {
@@ -264,7 +266,16 @@
     flex-direction: column;
     gap: var(--semantic-space-component-sm);
     transform: translateY(-110%);
-    @include transition(transform 0.35s cubic-bezier(0.4, 0, 0.2, 1));
+    // Cerrado, además de apartado, está OCULTO: con solo el translateY, a
+    // 375 px diez enlaces y un select recibían el foco fuera de pantalla.
+    // `visibility` espera a que termine el deslizamiento para ocultarlo al
+    // cerrar, y se aplica al instante al abrir (retraso 0 en el estado
+    // abierto). El JS (js/syx-site-nav.js) añade `inert` y mueve el foco.
+    visibility: hidden;
+    @include transition(
+      transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0.35s
+    );
     box-shadow: 0 16px 32px color-mix(in srgb, black 12%, transparent);
 
     @include breakpoint(xl) {
@@ -273,6 +284,11 @@
 
     body[data-nav-open] & {
       transform: translateY(0);
+      visibility: visible;
+      @include transition(
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s
+      );
     }
 
     // Nav links inside drawer
