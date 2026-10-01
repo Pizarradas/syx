@@ -188,13 +188,13 @@
 
       &--color-white {
         &:before {
-          --component-icon-color: oklch(1 0 0);
+          --component-icon-color: var(--semantic-color-ink-light);
         }
       }
 
       &--color-black {
         &:before {
-          --component-icon-color: oklch(0 0 0);
+          --component-icon-color: var(--semantic-color-ink-dark);
         }
       }
     }

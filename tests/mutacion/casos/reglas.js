@@ -11,6 +11,13 @@
 'use strict';
 
 const VALIDATE = ['node', 'scripts/syx-validate.js'];
+const COMPILADO = ['node', 'scripts/check-compilado.js', '--entrada', 'scss/styles-theme-syx-sketch.scss'];
+// _pill.scss tiene finales CRLF: el ancla no incluye el salto de línea.
+const PILL = ['scss/atoms/_pill.scss', '    .atom-pill {'];
+const TEMA = ['scss/themes/syx-sketch/_theme.scss', '  --component-button-secondary-color: var(--semantic-color-secondary-strong);\n'];
+/** Inyecta `codigo` justo después de la línea ancla. */
+const tras = ([fichero, ancla], codigo) => (t) => t.reemplazar(fichero, ancla, ancla + (ancla.endsWith('\n') ? '' : '\n') + codigo);
+
 const LINT = ['node', 'node_modules/stylelint/bin/stylelint.mjs', 'scss/**/*.scss', '--config', '.stylelintrc.json'];
 
 module.exports = [
@@ -111,5 +118,81 @@ module.exports = [
     comando: ['node', 'scripts/check-plantilla.js'],
     espera: /no oscurece/,
     mutar: (t) => t.reemplazar('scss/themes/_template/_theme.scss', '      @include dark-mode-tokens();\n', ''),
+  },
+  // ─── Sass evaluado: lo que el fuente disfraza y el CSS emitido no ─────────
+  // Auditoría 2026-10 II: los ocho pasaban toda la cadena. check:compilado
+  // aplica las reglas a lo que Sass emite y decide el permiso por el origen
+  // de cada declaración (mapa de fuentes).
+  {
+    id: 'compilado-r01-interpolado',
+    regresion: "`var(--#{'primitive'}-…)`: el primitivo se arma con interpolación",
+    guardian: 'check:compilado (R01)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R01 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, "    color: var(--#{'primitive'}-color-red-500);\n"),
+  },
+  {
+    id: 'compilado-r01-each',
+    regresion: 'un mapa recorrido con `@each` que emite primitivos',
+    guardian: 'check:compilado (R01)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R01 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, "    $mapa-x: (a: 'primitive-color-red-500');\n    @each $k, $v in $mapa-x { border-color: var(--#{$v}); }\n"),
+  },
+  {
+    id: 'compilado-r03-interpolado',
+    regresion: "`#{'transition'}: …`: la propiedad interpolada",
+    guardian: 'check:compilado (R03)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R03 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, "    #{'transition'}: opacity 1s;\n"),
+  },
+  {
+    id: 'compilado-r04-variable',
+    regresion: '`position: $p` con `$p: sticky`',
+    guardian: 'check:compilado (R04)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R04 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, '    $p-x: sticky;\n    position: $p-x;\n'),
+  },
+  {
+    id: 'compilado-r02-interpolado',
+    regresion: "`#{'!important'}` interpolado (stylelint tampoco lo ve)",
+    guardian: 'check:compilado (R02)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R02 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, "    outline-color: red #{'!important'};\n"),
+  },
+  {
+    id: 'compilado-r11-nombre',
+    regresion: 'un `--component-*` con un color con nombre (`rebeccapurple`) en un átomo',
+    guardian: 'check:compilado (R11)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R11 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, '    --component-pill-x: rebeccapurple;\n'),
+  },
+  {
+    id: 'compilado-r11-relativo',
+    regresion: '`oklch(from var(--semantic-…) 0.55 0.25 300)`: lee un token pero fija los tres canales',
+    guardian: 'check:compilado (R11)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R11 scss\/atoms\/_pill\.scss/,
+    mutar: tras(PILL, '    --component-pill-x: oklch(from var(--semantic-color-primary) 0.55 0.25 300);\n'),
+  },
+  {
+    id: 'compilado-r11-tema',
+    regresion: "`var(#{'--primitive-…'})` en un override de componente del tema",
+    guardian: 'check:compilado (R11)',
+    seEscapaba: true,
+    comando: COMPILADO,
+    espera: /R11 scss\/themes\/syx-sketch\/_theme\.scss/,
+    mutar: tras(TEMA, "  --component-pill-x: var(#{'--primitive-color-red-500'});\n"),
   },
 ];

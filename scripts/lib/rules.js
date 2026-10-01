@@ -87,9 +87,51 @@ function literalDeColor(valor) {
     }
     const llamada = v.slice(m.index, j + 1);
     if (!/var\(/.test(llamada)) return llamada;
+    if (canalesFijos(llamada)) return llamada;
   }
-  const palabra = /(^|[\s,(])(white|black)\b/i.exec(v);
+  const palabra = new RegExp(`(^|[\\s,(])(${COLORES_CON_NOMBRE.join('|')})(?![\\w-])`, 'i').exec(v);
   return palabra ? palabra[2] : null;
+}
+
+/**
+ * Los colores con nombre de CSS (salvo transparent y currentColor, que no son
+ * un color). `rebeccapurple` o `crimson` son un color escrito a mano igual que
+ * un hexadecimal: en la auditoría de octubre II pasaban R11.
+ */
+const COLORES_CON_NOMBRE = ('aliceblue antiquewhite aqua aquamarine azure beige bisque black blanchedalmond blue blueviolet brown '
+  + 'burlywood cadetblue chartreuse chocolate coral cornflowerblue cornsilk crimson cyan darkblue darkcyan darkgoldenrod '
+  + 'darkgray darkgreen darkgrey darkkhaki darkmagenta darkolivegreen darkorange darkorchid darkred darksalmon darkseagreen '
+  + 'darkslateblue darkslategray darkslategrey darkturquoise darkviolet deeppink deepskyblue dimgray dimgrey dodgerblue '
+  + 'firebrick floralwhite forestgreen fuchsia gainsboro ghostwhite gold goldenrod gray green greenyellow grey honeydew '
+  + 'hotpink indianred indigo ivory khaki lavender lavenderblush lawngreen lemonchiffon lightblue lightcoral lightcyan '
+  + 'lightgoldenrodyellow lightgray lightgreen lightgrey lightpink lightsalmon lightseagreen lightskyblue lightslategray '
+  + 'lightslategrey lightsteelblue lightyellow lime limegreen linen magenta maroon mediumaquamarine mediumblue '
+  + 'mediumorchid mediumpurple mediumseagreen mediumslateblue mediumspringgreen mediumturquoise mediumvioletred '
+  + 'midnightblue mintcream mistyrose moccasin navajowhite navy oldlace olive olivedrab orange orangered orchid '
+  + 'palegoldenrod palegreen paleturquoise palevioletred papayawhip peachpuff peru pink plum powderblue purple '
+  + 'rebeccapurple red rosybrown royalblue saddlebrown salmon sandybrown seagreen seashell sienna silver skyblue '
+  + 'slateblue slategray slategrey snow springgreen steelblue tan teal thistle tomato turquoise violet wheat white '
+  + 'whitesmoke yellow yellowgreen').split(' ');
+
+/**
+ * ¿Un color relativo que fija los tres canales a mano? `oklch(from
+ * var(--semantic-x) 0.55 0.25 300)` lee un token pero no usa NADA de él: es
+ * un color literal con otra cara (auditoría de octubre II). Derivar es usar
+ * algún canal del origen (`l`, `c`, `h`, `calc(l * 0.9)`…).
+ */
+function canalesFijos(llamada) {
+  const m = /^\w+\(\s*from\s+/i.exec(llamada);
+  if (!m) return false;
+  // Saltar el color de origen (puede llevar paréntesis anidados).
+  let i = m[0].length, prof = 0;
+  for (; i < llamada.length - 1; i++) {
+    const ch = llamada[i];
+    if (ch === '(') prof++;
+    else if (ch === ')') prof--;
+    else if (/\s/.test(ch) && prof === 0) break;
+  }
+  const canales = llamada.slice(i, -1).split('/')[0].trim().split(/\s+/).filter(Boolean).slice(0, 3);
+  return canales.length === 3 && canales.every((c) => /^-?(\d+\.?\d*|\.\d+)(%|deg|rad|turn|grad)?$|^none$/i.test(c));
 }
 
 /** `-webkit-transition` → `transition`. */
@@ -392,7 +434,16 @@ function crearMotor({ root = ROOT_POR_DEFECTO } = {}) {
   const DESCRIPCIONES = Object.fromEntries(ast.map((r) => [r.id, r.resumen || r.description]));
   const severidad = (id) => (porId[id] ? porId[id].severity : contrato.motor.parseErrorSeverity || 'error');
 
-  return { contrato: contrato.completo, reglas: ast, DESCRIPCIONES, severidad, revisar, revisarDetalle, revisarTodos, mixinsConocidos };
+  // Para quien aplica las reglas a otra cosa que el fuente (check-compilado,
+  // sobre el CSS emitido): el comparador de una regla sobre un nodo suelto, y
+  // los permisos del contrato por ruta de origen.
+  const comprobarNodo = (regla, nodo) => COMPROBAR[regla.match.kind](regla.match, nodo, { mixins: new Set() });
+
+  return {
+    contrato: contrato.completo, reglas: ast, porId, exc, DESCRIPCIONES, severidad,
+    revisar, revisarDetalle, revisarTodos, mixinsConocidos,
+    comprobarNodo, aplicaA: aplica, permitidoEn: permitido,
+  };
 }
 
 // ─── Los tokens que un fragmento usa y que no existen ──────────────────────

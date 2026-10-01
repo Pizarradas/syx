@@ -123,7 +123,7 @@ Superficies, textos, bordes, sombras, escala tipográfica, la tinta de marca com
 | No | Por qué | Lo vigila |
 | --- | --- | --- |
 | Una declaración que no lee nadie | No hace nada y nadie se entera: example-06 «arreglaba» un contraste con `--btn-primary-filled-text`, que ningún botón leía. Solo se admiten los `--semantic-*` del sistema, que son API pública para las aplicaciones | `check:consumidores` |
-| Un `--component-*` que lea un `--primitive-*`, una variable heredada o un color literal | El componente dejaría de seguir al tema y al modo (la píldora violeta en el tema cian) | R11 (`check:reglas`, `validate`) |
+| Un `--component-*` que lea un `--primitive-*`, una variable heredada o un color literal | El componente dejaría de seguir al tema y al modo (la píldora violeta en el tema cian) | R11 (`check:reglas` y `validate` en el fuente; `check:compilado` en el CSS emitido, también en átomos, moléculas y organismos) |
 | Un token deprecado | Desde 2026-10 los alias deprecados SIGUEN al canónico: declarar el alias no cambia nada. Se declara el canónico (`replacedBy` en `tokens.json`) | `check:tokens-json` |
 | Variables sin prefijo oficial | Las heredadas se retiraron; `contracts/legacy-map.json` dice a qué token oficial va cada una | R07 (`validate`) |
 | Un oscuro con una sola entrada | El botón de modo no tendría efecto con el SO en claro, o el tema no seguiría al SO | `check:themes --strict` |
