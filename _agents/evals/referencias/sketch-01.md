@@ -1,6 +1,6 @@
-Esto es un boceto: nada entra en el repositorio. Es un fichero autónomo para abrir en el navegador; si la idea sobrevive, pasa a UX y a UI.
+## Sketch
 
-## Boceto
+Esto es un boceto: nada entra en el repositorio. Es un fichero autónomo para abrir en el navegador; si la idea sobrevive, pasa a UX y a UI.
 
 ```html
 <!doctype html>
@@ -12,6 +12,7 @@ Esto es un boceto: nada entra en el repositorio. Es un fichero autónomo para ab
   <link rel="stylesheet" href="css/styles-theme-syx-sketch.css">
 </head>
 <body class="syx">
+  <!-- ⚡ SYX SKETCH — not production code -->
   <header><h1 class="atom-title">Cocina lo que tienes</h1>
     <p class="atom-txt">Dile a la app qué hay en tu nevera.</p>
     <a class="atom-btn atom-btn--primary" href="#">Empezar</a></header>
@@ -19,4 +20,12 @@ Esto es un boceto: nada entra en el repositorio. Es un fichero autónomo para ab
     <ol class="atom-list"><li>Ingredientes</li><li>Receta</li><li>A cocinar</li></ol></section>
 </body>
 </html>
+```
+
+## Handoff
+
+```html
+<!-- Handoff to [SYX: UX]: flujo de «Empezar» (¿registro o prueba directa?) -->
+<!-- Components to implement: ninguno nuevo; atom-title, atom-txt, atom-btn--primary, atom-list -->
+<!-- States to handle: lista vacía de ingredientes -->
 ```

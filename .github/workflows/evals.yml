@@ -1,0 +1,89 @@
+# SYX — Evaluación de los modos con un agente de verdad
+# ═════════════════════════════════════════════════════
+# `npm run check` prueba el banco de tareas (referencias, mutantes,
+# anti-referencias) y el runner con un agente simulado, sin red. Lo que no
+# puede probar es lo único que importa al final: si un agente que lee los modos
+# los cumple. Esto lanza Claude Code headless contra las tareas con
+# scripts/eval-runner.js, las corrige (con juez, porque hay clave) y deja la
+# transcripción entera como artefacto.
+#
+# Es manual a propósito: cuesta dinero en cada ejecución y su resultado varía
+# entre corridas, así que no puede ser un guardián que rompa un push. Se lanza
+# antes y después de cambiar un modo, o para comparar dos modelos.
+#
+# Necesita el secreto ANTHROPIC_API_KEY en el repositorio.
+
+name: Evaluación de los modos
+
+on:
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: 'Modos separados por comas (vacío = todos)'
+        required: false
+        default: ''
+      id:
+        description: 'Ids de tarea separados por comas (vacío = todas)'
+        required: false
+        default: ''
+      modelo:
+        description: 'Modelo del agente (vacío = el de la CLI)'
+        required: false
+        default: ''
+      paralelo:
+        description: 'Tareas a la vez'
+        required: false
+        default: '3'
+
+permissions:
+  contents: read
+
+jobs:
+  evaluar:
+    name: Evaluar los modos
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # El agente compila y valida en su copia: necesita el CSS al día.
+      - run: npm run build
+
+      - name: Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Correr las tareas
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SYX_AGENT_MODEL: ${{ inputs.modelo }}
+          MODO: ${{ inputs.modo }}
+          ID: ${{ inputs.id }}
+          PARALELO: ${{ inputs.paralelo }}
+        run: |
+          if [ -z "$ANTHROPIC_API_KEY" ]; then
+            echo "::error::Falta el secreto ANTHROPIC_API_KEY"
+            exit 1
+          fi
+          args=(--paralelo "${PARALELO:-3}" --salida _agents/evals/runs/ci)
+          [ -n "$MODO" ] && args+=(--modo "$MODO")
+          [ -n "$ID" ] && args+=(--id "$ID")
+          node scripts/eval-runner.js "${args[@]}"
+
+      - name: Resumen en la página de la ejecución
+        if: always()
+        run: |
+          [ -f _agents/evals/runs/ci/RESUMEN.md ] && cat _agents/evals/runs/ci/RESUMEN.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evaluacion-modos
+          path: _agents/evals/runs/ci/
+          retention-days: 30

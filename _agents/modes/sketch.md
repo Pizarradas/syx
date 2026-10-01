@@ -214,6 +214,21 @@ Always close with a short handoff block:
 
 ---
 
+## Response Format
+
+```
+## Sketch
+[one of the three formats above: the HTML file, the Mermaid diagram or the ASCII layout —
+ and one line saying where it lives: a standalone file, outside the repository]
+
+## Handoff
+[the handoff note — as the closing comment of the file, or restated here]
+```
+
+No `## Why`: see the last bullet below.
+
+---
+
 ## What This Mode Does NOT Do
 
 - Generate SCSS files

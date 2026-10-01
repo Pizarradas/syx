@@ -242,8 +242,24 @@ does not have yet, and BRAND has to say which, not improvise around it.
 
 ## Measuring a Mode
 
-`_agents/evals/` holds two reference tasks per mode and a shared rubric (contract, real tokens,
-trust boundary, deliverable shape — measured automatically — plus domain judgement, scored by a
-person or by AUDIT). Give an agent a task's `enunciado`, save its answer, and run
-`npm run eval:modo -- <id> answer.md`. Use it before and after changing a mode: a mode edit that
-drops a task below 8/8 has changed behaviour, whatever it meant to change.
+`_agents/evals/` holds two reference tasks per mode and a shared rubric: contract, real tokens,
+trust boundary and deliverable shape are measured automatically; domain judgement is scored by an
+optional LLM judge (when `ANTHROPIC_API_KEY` or the `claude` CLI is available) or by a person.
+
+The deliverable shape is read **from this directory**: each task names the sections of its mode's
+Response Format it requires, and the `## Why` obligation comes from `../decision-record.md`. Rename a
+section here and `npm run check:evals` names the tasks that still ask for the old one. Headings are
+accepted in English or in their declared Spanish equivalents.
+
+Two ways to use it:
+
+- `npm run eval:modo -- <id> answer.md` grades one pasted answer.
+- `npm run eval:runner -- --modo ui` runs a headless agent (`claude -p`, or any command in
+  `SYX_AGENT_CMD`) against the tasks in a throwaway copy of the repo, with the mode activated by the
+  task's own `[SYX: UI]:` prefix, and writes transcripts plus a `RESUMEN.md` table to
+  `_agents/evals/runs/`. The manual workflow *Evaluación de los modos* does the same in CI.
+
+Run it before and after changing a mode: a mode edit that drops a task below 8/8 has changed
+behaviour, whatever it meant to change. `npm run check` keeps the bench honest without network:
+every reference passes, every mutant and every harmful answer in `anti/` fails, every alternative
+correct answer in `buenas/` passes, and the runner works end to end with a simulated agent.
