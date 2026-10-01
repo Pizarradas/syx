@@ -43,7 +43,15 @@ jobs:
   build:
     name: Construir sitio + catálogos
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    # Solo un push a main de ESTE repositorio que la CI aprobó. Sin el filtro de
+    # evento y origen, una PR desde un fork con una rama llamada «main» que
+    # pasara la CI desplegaría su head_sha con pages: write (auditoría
+    # 2026-10 II). check-pages lo vigila.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     steps:
       - uses: actions/checkout@v4
         with:
@@ -85,7 +93,9 @@ jobs:
         run: |
           mkdir -p _site/storybook
           cp *.html robots.txt site.webmanifest browserconfig.xml _site/
-          cp -r css dist js fonts img assets _site/
+          # Solo lo versionado: dist/ es del paquete npm y no existe en un clon
+          # (check-pages comprueba que cada ruta de esta copia está en git).
+          cp -r css js fonts img assets _site/
           # La raíz de Pages con branch-mode la resolvía Jekyll renderizando el
           # README; con Actions no hay Jekyll, así que la portada es home.html.
           printf '<!doctype html><meta http-equiv="refresh" content="0; url=home.html">' > _site/index.html
