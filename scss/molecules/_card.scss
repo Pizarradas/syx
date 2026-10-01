@@ -1,0 +1,152 @@
+// MOLECULE: CARD
+// ===============================================
+// Una superficie que agrupa lo que va junto: cabecera (título y, si
+// acaso, una píldora o una acción), cuerpo y pie con acciones. Todas
+// las partes son opcionales; el espacio entre ellas lo pone la tarjeta.
+//
+// <article class="mol-card">
+//   <header class="mol-card__header"><h3 class="mol-card__title">Almacenamiento</h3></header>
+//   <div class="mol-card__body"><p>Has usado 8 de 10 GB.</p></div>
+//   <footer class="mol-card__footer"><button class="atom-btn" type="button">Gestionar</button></footer>
+// </article>
+//
+// Tarjeta entera enlazada: el enlace va en el título (__link) y su
+// ::after cubre la tarjeta, así que el lector oye solo el título como
+// nombre del enlace, no todo el contenido. El anillo de foco se pinta
+// en ese ::after: rodea la tarjeta, no solo el título. Otro control
+// dentro de la tarjeta queda por encima del área del enlace.
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · <article> si la tarjeta tiene sentido sola (un elemento de una
+//   lista); <div> si no. El nivel del título lo decide la página.
+// · Nunca un <a> que envuelva toda la tarjeta: el nombre del enlace
+//   sería todo su texto.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-card($theme: null) {
+  @layer syx.molecules {
+    .mol-card {
+      @include relative();
+      display: flex;
+      flex-direction: column;
+      gap: var(--component-card-gap);
+      padding: var(--component-card-padding);
+      color: var(--component-card-color);
+      background-color: var(--component-card-bg);
+      border: var(--component-card-border-width) solid var(--component-card-border-color);
+      border-radius: var(--component-card-border-radius);
+      box-shadow: var(--component-card-shadow);
+      @include transition(
+        border-color var(--semantic-duration-fast) var(--semantic-easing-out),
+        box-shadow var(--semantic-duration-fast) var(--semantic-easing-out)
+      );
+
+      &--elevated {
+        border-color: transparent;
+        box-shadow: var(--component-card-elevated-shadow);
+      }
+
+      &--flat {
+        background-color: var(--component-card-flat-bg);
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      // La tarjeta enlazada reacciona entera al pasar por encima.
+      &:has(.mol-card__link):hover {
+        border-color: var(--component-card-border-color-hover);
+      }
+
+      &--elevated:has(.mol-card__link):hover {
+        border-color: transparent;
+        box-shadow: var(--component-card-elevated-shadow-hover);
+      }
+
+      &__media {
+        margin-block-start: calc(-1 * var(--component-card-padding));
+        margin-inline: calc(-1 * var(--component-card-padding));
+        overflow: hidden;
+        border-start-start-radius: inherit;
+        border-start-end-radius: inherit;
+
+        > img {
+          display: block;
+          inline-size: 100%;
+          block-size: auto;
+        }
+      }
+
+      &__header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--semantic-space-inline-xs);
+      }
+
+      &__title {
+        margin: 0;
+        font-size: var(--component-card-title-font-size);
+        font-weight: var(--component-card-title-font-weight);
+        line-height: var(--component-card-title-line-height);
+      }
+
+      &__body {
+        flex-grow: 1;
+        color: var(--component-card-body-color);
+
+        > :first-child { margin-block-start: 0; }
+        > :last-child { margin-block-end: 0; }
+      }
+
+      &__footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--semantic-space-inline-xs);
+        padding-block-start: var(--component-card-gap);
+        border-block-start: var(--component-card-border-width) solid var(--component-card-footer-border-color);
+      }
+
+      &__link {
+        color: inherit;
+        text-decoration: none;
+
+        &::after {
+          content: "";
+          @include absolute();
+          inset: 0;
+          z-index: 0;
+          border-radius: inherit;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        &:focus-visible {
+          outline: none;
+
+          &::after {
+            @include focus-ring();
+          }
+        }
+      }
+
+      // Lo demás que se pueda pulsar dentro de una tarjeta enlazada queda
+      // por encima del ::after del enlace, o nunca recibiría el clic.
+      &:has(.mol-card__link) :is(a, button, input, select, textarea, summary):not(.mol-card__link) {
+        @include relative();
+        z-index: 1;
+      }
+
+      // Colores forzados borran la sombra y un borde transparente se
+      // repinta: todas las variantes vuelven a tener un marco visible.
+      @media (forced-colors: active) {
+        border-color: CanvasText;
+      }
+    }
+  }
+}

@@ -1073,6 +1073,56 @@
       "a11y": "Every button inside has an explicit type. As a plain row it needs no role; if it behaves as one control, it becomes role=\"toolbar\" with an aria-label and arrow-key navigation in script. No JS otherwise."
     },
     {
+      "name": "card",
+      "layer": "molecule",
+      "file": "scss/molecules/_card.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_card.scss"
+      ],
+      "classes": [
+        "mol-card"
+      ],
+      "modifiers": [
+        "mol-card--elevated",
+        "mol-card--flat"
+      ],
+      "elements": [
+        "mol-card__body",
+        "mol-card__footer",
+        "mol-card__header",
+        "mol-card__link",
+        "mol-card__media",
+        "mol-card__title"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-card-bg",
+        "--component-card-body-color",
+        "--component-card-border-color",
+        "--component-card-border-color-hover",
+        "--component-card-border-radius",
+        "--component-card-border-width",
+        "--component-card-color",
+        "--component-card-elevated-shadow",
+        "--component-card-elevated-shadow-hover",
+        "--component-card-flat-bg",
+        "--component-card-footer-border-color",
+        "--component-card-gap",
+        "--component-card-padding",
+        "--component-card-shadow",
+        "--component-card-title-font-size",
+        "--component-card-title-font-weight",
+        "--component-card-title-line-height"
+      ],
+      "description": "[scope: generic] The general-purpose surface for product screens: optional __media, __header (with __title and maybe a pill or an action), __body and __footer, spaced by the card itself. Bordered by default; --elevated swaps the border for a shadow and --flat drops both on bg-secondary. For a whole-card link, put .mol-card__link on the title's <a>: its ::after covers the card, the focus ring surrounds the card, and any other control inside stays clickable above it. Body text is text-secondary, measured on both backgrounds.",
+      "usage": "<article class=\"mol-card\"><header class=\"mol-card__header\"><h3 class=\"mol-card__title\">Storage</h3><span class=\"atom-pill atom-pill--neutral\">80% used</span></header><div class=\"mol-card__body\"><p>You have used 8 of 10 GB. Old exports are deleted after 30 days.</p></div><footer class=\"mol-card__footer\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-sm\" type=\"button\">Manage storage</button></footer></article><article class=\"mol-card mol-card--elevated\"><h3 class=\"mol-card__title\"><a class=\"mol-card__link\" href=\"#billing\">Billing</a></h3><div class=\"mol-card__body\"><p>Invoices, payment method and tax details.</p></div></article>",
+      "a11y": "<article> when the card makes sense on its own (an item in a list), <div> otherwise; the page decides the heading level of __title. Whole-card link: the <a class=\"mol-card__link\"> goes in the title so its name is the title, never an <a> wrapping the whole card (its name would be all the text). The ring is drawn on the link's ::after, around the card. Other controls inside are raised above the link area. Forced colours: every variant gets a visible frame. No JS."
+    },
+    {
       "name": "code-snippet",
       "layer": "molecule",
       "file": "scss/molecules/_code-snippet.scss",

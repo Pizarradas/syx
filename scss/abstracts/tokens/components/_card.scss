@@ -1,0 +1,32 @@
+// COMPONENT TOKENS: CARD (genérica)
+// ================================================
+// mol-card · la superficie de propósito general: cabecera, cuerpo y
+// pie. Las tarjetas de la vitrina (feature-card, theme-card) siguen en
+// _cards.scss; esta es la que pide una pantalla de producto, y la que
+// la adopción de octubre de 2026 tuvo que escribir a mano.
+// Tres superficies: con borde (por defecto), --elevated (sombra, sin
+// borde) y --flat (sin borde ni sombra, sobre bg-secondary). El texto
+// del cuerpo es text-secondary, medido sobre los dos fondos.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-card-bg: var(--semantic-color-bg-primary);
+  --component-card-color: var(--semantic-color-text-primary);
+  --component-card-body-color: var(--semantic-color-text-secondary);
+  --component-card-border-width: var(--semantic-border-width-thin);
+  --component-card-border-color: var(--semantic-color-border-subtle);
+  --component-card-border-color-hover: var(--semantic-color-border-strong);
+  --component-card-border-radius: var(--semantic-border-radius-lg);
+  --component-card-shadow: var(--semantic-shadow-none);
+  --component-card-padding: var(--semantic-space-component-lg);
+  --component-card-gap: var(--semantic-space-stack-sm);
+  --component-card-title-font-size: var(--semantic-font-size-h5);
+  --component-card-title-font-weight: var(--semantic-font-weight-heading);
+  --component-card-title-line-height: var(--semantic-line-height-heading);
+  --component-card-footer-border-color: var(--semantic-color-border-subtle);
+
+  --component-card-elevated-shadow: var(--semantic-shadow-md);
+  --component-card-elevated-shadow-hover: var(--semantic-shadow-lg);
+  --component-card-flat-bg: var(--semantic-color-bg-secondary);
+}
