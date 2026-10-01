@@ -38,6 +38,11 @@ for (const f of ['home.html', 'docs.html', 'why-syx.html']) {
 }
 citas.push(['home.html — píldora del hero', () => first('home.html', /SYX v([0-9.]+) ·/)]);
 citas.push(['docs.html — galería', () => first('docs.html', /Component Gallery v([0-9.]+)/)]);
+// La cifra grande de la home («v5 · Current version») cita solo la mayor, y la
+// píldora de ejemplo de mol-label-group en docs, la versión entera. Las dos se
+// quedaron en v4 al cortar la 5.0.0 porque nadie las comprobaba.
+citas.push(['home.html — cifra «Current version»', () => first('home.html', /atom-stat__number">v([0-9.]+)<\/span>\s*<span class="atom-stat__label">Current&nbsp;version/)]);
+citas.push(['docs.html — píldora de mol-label-group', () => first('docs.html', /atom-pill--success">v([0-9.]+)<\/span>/)]);
 
 console.log('\n── COHERENCIA DE VERSIÓN ───────────────────────────────────────\n');
 console.log(`   package.json declara ${expected}\n`);
@@ -62,5 +67,5 @@ if (malas) {
   console.log(`   ${malas} cita(s) fuera de sitio.\n`);
   if (strict) process.exit(1);
 } else {
-  console.log('   Las diez citas coinciden.\n');
+  console.log(`   Las ${citas.length} citas coinciden.\n`);
 }
