@@ -46,6 +46,15 @@
         box-shadow: inset 100vw 0 0 0 var(--component-link-primary-bg-hover);
       }
 
+      // El desplazamiento de box-shadow es físico: el relleno barre de
+      // izquierda a derecha. En RTL barre desde la derecha, que es donde
+      // empieza el texto. (Auditoría 2026-10 · acción 13)
+      @supports selector(:dir(rtl)) {
+        &:dir(rtl):hover {
+          box-shadow: inset -100vw 0 0 0 var(--component-link-primary-bg-hover);
+        }
+      }
+
       // &:active
       &:active {
         color: var(--component-link-primary-color);

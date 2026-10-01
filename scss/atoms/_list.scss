@@ -23,6 +23,11 @@
             @include margin(var(--list-item-m-t) null null null);
           }
 
+          // Los temas usan chevrons (› y ») que señalan al texto: en RTL el
+          // texto queda a la izquierda y el icono se espeja para seguir
+          // señalándolo. (Auditoría 2026-10 · acción 13)
+          @include mirror-rtl('::before');
+
           // Icon pseudo-element — external SVG, colorized via filter
           &:before {
             content: "";
@@ -49,7 +54,7 @@
           [class*="__item"] {
             &:before {
               background-image: var(--list-lvl2-icon-pic);
-              top: var(--list-icon-y-lvl2, 0.2em);
+              inset-block-start: var(--list-icon-y-lvl2, 0.2em);
             }
           }
         }
