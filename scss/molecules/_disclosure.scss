@@ -46,8 +46,10 @@
           content: "";
           flex-shrink: 0;
           @include size(var(--component-disclosure-marker-size), var(--component-disclosure-marker-size));
+          // stylelint-disable property-disallowed-list -- chevron ⌄ dibujado con bordes y girado; vertical, no se espeja
           border-right: 0.125em solid currentColor;
           border-bottom: 0.125em solid currentColor;
+          // stylelint-enable property-disallowed-list
           rotate: 45deg;
           @include transition(rotate var(--component-disclosure-duration));
         }

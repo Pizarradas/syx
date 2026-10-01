@@ -46,8 +46,10 @@ $spacers: (
     .syx-mt-#{$name} { margin-block-start: $value; }
     .syx-mb-#{$name} { margin-block-end: $value; }
   }
+  // stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
   .syx-ml-#{$name} { margin-left: $value; }   // DEPRECADA — física
   .syx-mr-#{$name} { margin-right: $value; }  // DEPRECADA — física
+  // stylelint-enable property-disallowed-list
   .syx-ms-#{$name} { margin-inline-start: $value; }
   .syx-me-#{$name} { margin-inline-end: $value; }
   .syx-mx-#{$name} { margin-inline: $value; }
@@ -56,8 +58,10 @@ $spacers: (
   .syx-p-#{$name}  { padding: $value; }
   .syx-pt-#{$name} { padding-block-start: $value; }
   .syx-pb-#{$name} { padding-block-end: $value; }
+  // stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
   .syx-pl-#{$name} { padding-left: $value; }  // DEPRECADA — física
   .syx-pr-#{$name} { padding-right: $value; } // DEPRECADA — física
+  // stylelint-enable property-disallowed-list
   .syx-ps-#{$name} { padding-inline-start: $value; }
   .syx-pe-#{$name} { padding-inline-end: $value; }
   .syx-px-#{$name} { padding-inline: $value; }
@@ -76,8 +80,10 @@ $spacers: (
 
 // Auto margin (centering / empujar al final)
 .syx-mx-auto { margin-inline: auto; }
+// stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
 .syx-ml-auto { margin-left: auto; }  // DEPRECADA — física; usa .syx-ms-auto
 .syx-mr-auto { margin-right: auto; } // DEPRECADA — física; usa .syx-me-auto
+// stylelint-enable property-disallowed-list
 .syx-ms-auto { margin-inline-start: auto; }
 .syx-me-auto { margin-inline-end: auto; }
 

@@ -32,6 +32,7 @@
       // centrado. transform es físico, así que el desplazamiento también
       // debe serlo; con inset-inline-start, en RTL quedaría right: 50% y el
       // translate lo sacaría del centro. (Auditoría 2026-10 · acción 13)
+      // stylelint-disable-next-line property-disallowed-list -- centrado con translateX, que es físico
       left: var(--component-hero-backdrop-left);
       @include size(
         var(--component-hero-backdrop-width),

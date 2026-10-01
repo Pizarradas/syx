@@ -108,10 +108,12 @@
   // Usa .syx-text-start / .syx-text-end, que siguen a la dirección del texto.
   // Se retiran en SYX v5.0. (Auditoría 2026-10 · acción 13)
   .syx-text-left {
+    // stylelint-disable-next-line declaration-property-value-allowed-list -- utilidad deprecada, física a propósito
     text-align: left;
   }
 
   .syx-text-right {
+    // stylelint-disable-next-line declaration-property-value-allowed-list -- utilidad deprecada, física a propósito
     text-align: right;
   }
 

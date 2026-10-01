@@ -162,8 +162,10 @@
 // es físico) lo sacaría del centro. (Auditoría 2026-10 · acción 13)
 @mixin absolute-center {
   position: absolute;
+  // stylelint-disable property-disallowed-list -- centrado con translate, que es físico
   top: 50%;
   left: 50%;
+  // stylelint-enable property-disallowed-list
   transform: translate(-50%, -50%);
 }
 

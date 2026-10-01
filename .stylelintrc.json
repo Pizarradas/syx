@@ -89,6 +89,47 @@
       {
         "message": "Un token de sombra (*-shadow-*) no es un color: invalida el outline al calcularse y el foco desaparece. Usa @include focus-ring() o --semantic-focus-ring-color (Auditoría 2026-10 · acción 1)."
       }
+    ],
+    "property-disallowed-list": [
+      [
+        "/^(margin|padding|scroll-margin|scroll-padding)-(top|right|bottom|left)$/",
+        "/^border-(top|right|bottom|left)(-(width|style|color))?$/",
+        "/^(top|right|bottom|left)$/",
+        "/^border-(top|bottom)-(left|right)-radius$/"
+      ],
+      {
+        "message": "Propiedad física de lado: usa la lógica (margin-block-start, padding-inline-end, inset-inline-start, border-start-end-radius…) o los mixins margin()/padding()/position(), que ya la emiten. Si de verdad es física (un dibujo girado, un centrado con translate), exceptúala en la línea con `// stylelint-disable-next-line property-disallowed-list -- porqué` (Auditoría 2026-10 · acción 13)."
+      }
+    ],
+    "declaration-property-value-allowed-list": [
+      {
+        "text-align": [
+          "start",
+          "end",
+          "center",
+          "justify",
+          "match-parent",
+          "inherit",
+          "initial",
+          "unset",
+          "revert",
+          "/^var\\(/"
+        ],
+        "/^(float|clear)$/": [
+          "none",
+          "both",
+          "inline-start",
+          "inline-end",
+          "inherit",
+          "initial",
+          "unset",
+          "revert",
+          "/^var\\(/"
+        ]
+      },
+      {
+        "message": "text-align/float/clear con left o right es físico: usa start/end (inline-start/inline-end en float y clear), que siguen a la dirección del texto (Auditoría 2026-10 · acción 13)."
+      }
     ]
   }
 }
