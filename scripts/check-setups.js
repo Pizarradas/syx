@@ -15,14 +15,21 @@
  * (@include font-family o syx-font fuera de _theme.scss): la lista vive en
  * theme-x-fonts(), una vez por tema.
  *
- * Uso: node scripts/check-setups.js   (npm run check:setups)
+ * Uso: node scripts/check-setups.js [--temas a,b,…]   (npm run check:setups)
+ *
+ * --temas compara solo esos (el primero es la referencia). Lo usa
+ * check:plantilla para enfrentar la plantilla, instanciada como un tema más
+ * en una copia del árbol, con un tema real.
  */
 const fs = require('fs');
 const path = require('path');
 const sass = require('sass');
 
 const ROOT = path.resolve(__dirname, '..');
-const THEMES = ['example-01', 'example-02', 'example-03', 'example-04', 'example-05', 'example-06', 'syx-sketch'];
+const iTemas = process.argv.indexOf('--temas');
+const THEMES = iTemas !== -1
+  ? process.argv[iTemas + 1].split(',').map((t) => t.trim()).filter(Boolean)
+  : ['example-01', 'example-02', 'example-03', 'example-04', 'example-05', 'example-06', 'syx-sketch'];
 
 function selectorSet(css) {
   const set = new Set();
