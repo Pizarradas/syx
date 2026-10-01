@@ -11,7 +11,7 @@
 @mixin theme-template {
   :root {
     // ================================================
-    // SECCIí“N 1: PRIMITIVOS
+    // SECCIÓN 1: PRIMITIVOS
     // ================================================
     // Sobrescriben valores base de abstracts/tokens/primitives/
 
@@ -45,7 +45,7 @@
     --primitive-filter-disabled: grayscale(1);
 
     // ================================================
-    // SECCIí“N 2: VARIABLES DEL TEMA
+    // SECCIÓN 2: VARIABLES DEL TEMA
     // ================================================
     // Variables específicas que usan primitivos
 
@@ -126,7 +126,7 @@
     --form-height-size: calc(6 * var(--base-measure));
 
     // ================================================
-    // SECCIí“N 3: NEUTRAL BRAND — Botones y formularios
+    // SECCIÓN 3: NEUTRAL BRAND — Botones y formularios
     // ================================================
     // Sobreescribe los semantic tokens del sistema base
     // para que el bundle core tenga un aspecto presentable
@@ -164,7 +164,7 @@
     // SOMBRA FOCUS — discreta, sin color de marca
     --semantic-shadow-focus: 0 0 0 3px oklch(0.593 0.159 252.507 / 0.25);
 
-    // TIPOGRAFíA — system-ui, sin Google Fonts
+    // TIPOGRAFÍA — system-ui, sin Google Fonts
     --semantic-font-family-primary: system-ui, -apple-system, Arial, sans-serif;
     --semantic-font-family-primary-bold: system-ui, -apple-system, Arial, sans-serif;
 

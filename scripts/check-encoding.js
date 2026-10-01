@@ -30,6 +30,21 @@
  * dejaba 30 líneas de marco, porque su expresión regular se comía un carácter
  * de más.
  *
+ * LA SEGUNDA PASADA, QUE ESTO NO VEÍA
+ * Hay un destrozo peor que el primero: el que dejó un arreglo a medias. La
+ * «A con tilde de nasal» que abre las secuencias de dos bytes (el byte 0xC3:
+ * á, é, Ó, Í y compañía) acabó cambiada por una «i con tilde» de verdad, y
+ * detrás quedó el segundo byte tal cual. Ya no empieza por un byte inicial de UTF-8,
+ * así que el recorrido de abajo no la reconocía: en octubre de 2026 había 14
+ * líneas así —13 cabeceras «SECCIÓN» en los temas y una «TIPOGRAFÍA» en la
+ * plantilla— con este guardián en verde. Se reconoce por dos señales que el
+ * español bien escrito no da nunca: una «i con tilde» seguida de un carácter
+ * de control C1 (invisible), o metida entre mayúsculas y seguida de un
+ * carácter cuyo byte cp1252 está en 0x80–0x9F, el tramo que en UTF-8 son las
+ * mayúsculas acentuadas. Se repara igual que el resto: se recupera el 0xC3
+ * que se perdió, se le añade el byte siguiente y se decodifica.
+ * (Auditoría 2026-10 · acción 14)
+ *
  * Uso: node scripts/check-encoding.js [--fix]   ·   npm run check:encoding
  */
 
@@ -39,7 +54,10 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const CARPETAS = ['scss', 'scripts', 'contracts'];
+// Lo que se sirve o se lee para decidir: el código, los contratos, la capa de
+// agentes y la documentación. La raíz se mira sin bajar (ahí están css/ y
+// dist/, que son derivados, y node_modules).
+const CARPETAS = ['scss', 'scripts', 'contracts', 'docs', '_agents', 'mind-system'];
 const EXT = /\.(scss|js|json|md)$/;
 
 // Los 27 huecos que cp1252 rellena en 0x80–0x9F y que latin1 deja vacíos.
@@ -72,12 +90,35 @@ const largoUtf8 = (b) => (b >= 0xf0 ? 4 : b >= 0xe0 ? 3 : b >= 0xc2 ? 2 : 0);
  * tocar. Leer el byte inicial y consumir exactamente lo que anuncia no tiene
  * ese problema.
  */
+// La «i con tilde» que ocupa el lugar del 0xC3 perdido (ver cabecera). Se
+// escribe por su código para que el guardián no se denuncie a sí mismo.
+const I_TILDE = 'í';
+const MAYUSCULA = /[A-ZÁÉÍÓÚÑÜ]/;
+const esC1 = (ch) => { const c = ch.codePointAt(0); return c >= 0x80 && c <= 0x9f; };
+
+/** Si `chars[i]` es un 0xC3 que un arreglo anterior convirtió en «i con tilde», el carácter original. */
+function c3Perdido(chars, i) {
+  if (chars[i] !== I_TILDE || i + 1 >= chars.length) return null;
+  const sig = chars[i + 1];
+  const b = aByte(sig);
+  if (b === null || b < 0x80 || b > 0x9f) return null;
+  // Un control C1 detrás no lo escribe nadie; entre mayúsculas, tampoco una
+  // minúscula acentuada. Fuera de esos dos casos, un «aquí» seguido de comillas
+  // tipográficas es español correcto y no se toca.
+  if (!esC1(sig) && !(i > 0 && MAYUSCULA.test(chars[i - 1]))) return null;
+  const d = Buffer.from([0xc3, b]).toString('utf8');
+  return [...d].length === 1 && !d.includes('�') ? d : null;
+}
+
 function reparar(texto) {
   let fuera = '';
   let cambios = 0;
   const chars = [...texto];
 
   for (let i = 0; i < chars.length; i++) {
+    const perdido = c3Perdido(chars, i);
+    if (perdido) { fuera += perdido; cambios++; i += 1; continue; }
+
     const b0 = aByte(chars[i]);
     const largo = b0 === null ? 0 : largoUtf8(b0);
     if (!largo || i + largo > chars.length) { fuera += chars[i]; continue; }
@@ -109,13 +150,13 @@ function reparar(texto) {
 const arreglar = process.argv.includes('--fix');
 const afectados = [];
 
-function andar(dir) {
+function andar(dir, { soloFicheros = false } = {}) {
   let entradas = [];
   try { entradas = fs.readdirSync(dir, { withFileTypes: true }); } catch (e) { return; }
   for (const e of entradas) {
     if (e.name === 'node_modules' || e.name === 'dtcg' || e.name.startsWith('.')) continue;
     const p = path.join(dir, e.name);
-    if (e.isDirectory()) { andar(p); continue; }
+    if (e.isDirectory()) { if (!soloFicheros) andar(p); continue; }
     if (!EXT.test(e.name)) continue;
     const antes = fs.readFileSync(p, 'utf8');
     const { texto, cambios } = reparar(antes);
@@ -129,6 +170,7 @@ function andar(dir) {
 
 console.log('\n── CODIFICACIÓN ────────────────────────────────────────────────\n');
 for (const c of CARPETAS) andar(path.join(ROOT, c));
+andar(ROOT, { soloFicheros: true });
 
 const total = afectados.reduce((a, x) => a + x.cambios, 0);
 
