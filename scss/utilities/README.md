@@ -136,7 +136,9 @@ También: `.syx-col-gap-{1–5}` y `.syx-row-gap-{1–5}` (misma escala, igual d
 
 `.syx-relative` · `.syx-absolute` · `.syx-sticky` · `.syx-fixed` · `.syx-static`
 
-Insets: `.syx-inset-0` · `.syx-top-0` · `.syx-right-0` · `.syx-bottom-0` · `.syx-left-0`
+Insets: `.syx-inset-0` · `.syx-top-0` · `.syx-bottom-0` · `.syx-start-0` · `.syx-end-0`
+
+Deprecadas (físicas, se retiran en SYX v5.0): `.syx-left-0` → `.syx-start-0` · `.syx-right-0` → `.syx-end-0`
 
 #### Vertical align
 
@@ -161,13 +163,23 @@ Escalas del 0 al 5 mapeadas a `--semantic-space-inline-*` y `--semantic-space-la
 | `-4`   | `--semantic-space-inline-lg` |
 | `-5`   | `--semantic-space-layout-xl` |
 
-**Margin**: `.syx-m-{0–5}` · `.syx-mt-*` · `.syx-mb-*` · `.syx-ml-*` · `.syx-mr-*` · `.syx-mx-*` · `.syx-my-*`
+Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…): `t`/`b` son el eje de bloque, `x`/`y` los dos ejes, y los lados de la línea van con `s` (start: izquierda en LTR, derecha en RTL) y `e` (end).
 
-**Padding**: `.syx-p-{0–5}` · `.syx-pt-*` · `.syx-pb-*` · `.syx-pl-*` · `.syx-pr-*` · `.syx-px-*` · `.syx-py-*`
+**Margin**: `.syx-m-{0–5}` · `.syx-mt-*` · `.syx-mb-*` · `.syx-ms-*` · `.syx-me-*` · `.syx-mx-*` · `.syx-my-*`
 
-**Logical (RTL)**: `.syx-pis-{0–5}` · `.syx-pie-{0–5}`
+**Padding**: `.syx-p-{0–5}` · `.syx-pt-*` · `.syx-pb-*` · `.syx-ps-*` · `.syx-pe-*` · `.syx-px-*` · `.syx-py-*` (`.syx-pis-*`/`.syx-pie-*` son alias de `ps`/`pe`)
 
-**Shorthands**: `.syx-pad-section` (padding de sección) · `.syx-mx-auto` · `.syx-ml-auto` · `.syx-mr-auto`
+**Shorthands**: `.syx-pad-section` (padding de sección) · `.syx-mx-auto` · `.syx-ms-auto` · `.syx-me-auto`
+
+**Deprecadas** (Auditoría 2026-10 · acción 13; se retiran en SYX v5.0). Siguen siendo izquierda/derecha **físicas** —quien las usa no ve ningún cambio, tampoco en RTL—, pero no siguen a la dirección del texto:
+
+| Deprecada | Usa |
+| --- | --- |
+| `.syx-ml-*` · `.syx-mr-*` | `.syx-ms-*` · `.syx-me-*` |
+| `.syx-pl-*` · `.syx-pr-*` | `.syx-ps-*` · `.syx-pe-*` |
+| `.syx-ml-auto` · `.syx-mr-auto` | `.syx-ms-auto` · `.syx-me-auto` |
+| `.syx-left-0` · `.syx-right-0` | `.syx-start-0` · `.syx-end-0` |
+| `.syx-text-left` · `.syx-text-right` | `.syx-text-start` · `.syx-text-end` |
 
 ---
 
@@ -181,7 +193,7 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 
 #### Alineación
 
-`.syx-text-center` · `.syx-text-left` · `.syx-text-right` · `.syx-text-justify` · `.syx-text-start` · `.syx-text-end`
+`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — deprecadas: `.syx-text-left` · `.syx-text-right` (físicas; ver la tabla de `_spacing.scss`)
 
 #### Decoración
 

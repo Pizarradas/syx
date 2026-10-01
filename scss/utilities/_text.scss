@@ -104,6 +104,9 @@
     text-align: center;
   }
 
+  // DEPRECADAS — físicas a propósito: izquierda es izquierda también en RTL.
+  // Usa .syx-text-start / .syx-text-end, que siguen a la dirección del texto.
+  // Se retiran en SYX v5.0. (Auditoría 2026-10 · acción 13)
   .syx-text-left {
     text-align: left;
   }
@@ -389,11 +392,11 @@
   // propósito; moverlos cambia qué utilidad gana cuando se combinan.
   // ================================================
   .syx-mb-0 {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 
   .syx-mt-0 {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   .syx-m-0 {
