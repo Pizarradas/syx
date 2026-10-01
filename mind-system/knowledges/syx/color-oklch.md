@@ -43,16 +43,16 @@ oklch(0.55 0.22 260)
 
 ```scss
 // Escala teal (H=190), tema light
---primitive-color-brand-50:  oklch(0.97 0.03 190);  // near-white tinted
---primitive-color-brand-100: oklch(0.92 0.06 190);
---primitive-color-brand-200: oklch(0.82 0.10 190);
---primitive-color-brand-300: oklch(0.68 0.14 190);
---primitive-color-brand-400: oklch(0.56 0.17 190);
---primitive-color-brand-500: oklch(0.48 0.18 190);  // ← color principal de marca
---primitive-color-brand-600: oklch(0.38 0.15 190);
---primitive-color-brand-700: oklch(0.28 0.11 190);
---primitive-color-brand-800: oklch(0.20 0.07 190);
---primitive-color-brand-900: oklch(0.14 0.04 190);  // near-black tinted
+--primitive-color-{marca}-50:  oklch(0.97 0.03 190);  // near-white tinted
+--primitive-color-{marca}-100: oklch(0.92 0.06 190);
+--primitive-color-{marca}-200: oklch(0.82 0.10 190);
+--primitive-color-{marca}-300: oklch(0.68 0.14 190);
+--primitive-color-{marca}-400: oklch(0.56 0.17 190);
+--primitive-color-{marca}-500: oklch(0.48 0.18 190);  // ← color principal de marca
+--primitive-color-{marca}-600: oklch(0.38 0.15 190);
+--primitive-color-{marca}-700: oklch(0.28 0.11 190);
+--primitive-color-{marca}-800: oklch(0.20 0.07 190);
+--primitive-color-{marca}-900: oklch(0.14 0.04 190);  // near-black tinted
 ```
 
 **Guía de construcción:**
@@ -84,7 +84,7 @@ La escasez del 10% es lo que hace que el color de acción señale. Si el primari
 --semantic-color-blue-500: oklch(0.55 0.22 260);
 
 // ✓ Nombre de función — estable entre temas
---semantic-color-primary: var(--primitive-color-brand-500);
+--semantic-color-primary: var(--primitive-color-{marca}-500);
 ```
 
 El token `--semantic-color-primary` puede ser teal en un tema, coral en otro, azul en un tercero. El nombre describe qué hace, no qué color es.
@@ -98,14 +98,14 @@ OKLCH facilita el dark mode: para invertir la jerarquía de superficie, incremen
 ```scss
 // capa: scss/themes/{nombre}/_theme.scss — aquí var(--primitive-*) es correcto (R01)
 // Light: bg-primary = más claro
---semantic-color-bg-primary:   var(--primitive-color-brand-50);  // L=0.97
---semantic-color-bg-secondary: var(--primitive-color-brand-100); // L=0.92
---semantic-color-bg-tertiary:  var(--primitive-color-brand-200); // L=0.82
+--semantic-color-bg-primary:   var(--primitive-color-{marca}-50);  // L=0.97
+--semantic-color-bg-secondary: var(--primitive-color-{marca}-100); // L=0.92
+--semantic-color-bg-tertiary:  var(--primitive-color-{marca}-200); // L=0.82
 
 // Dark: bg-primary = más oscuro; los niveles superiores SON MÁS CLAROS
---semantic-color-bg-primary:   var(--primitive-color-brand-950); // L=0.10
---semantic-color-bg-secondary: var(--primitive-color-brand-900); // L=0.14
---semantic-color-bg-tertiary:  var(--primitive-color-brand-800); // L=0.20
+--semantic-color-bg-primary:   var(--primitive-color-{marca}-950); // L=0.10
+--semantic-color-bg-secondary: var(--primitive-color-{marca}-900); // L=0.14
+--semantic-color-bg-tertiary:  var(--primitive-color-{marca}-800); // L=0.20
 ```
 
 Cada paso de 0.04–0.06 L produce la misma percepción de "un nivel más cerca del usuario" en dark y light mode.

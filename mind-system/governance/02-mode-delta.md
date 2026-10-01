@@ -103,7 +103,7 @@ Ver protocolo completo en `05-audit.md`.
 | Standalone | Con `[ATLAS]:` |
 |---|---|
 | Variable a variable según `lint-contract.json` | Variable a variable + verificación de alias legacy Atlas (`03-domains.md` tabla de color) |
-| Reemplazo por token Modes autorizado | Si la variable era un alias Atlas (`--semantic-color-brand`) → reemplazar por el equivalente Modes (`--semantic-color-primary`) |
+| Reemplazo por token Modes autorizado | Si la variable era un alias Atlas (❌ `--semantic-color-brand`) → ✅ reemplazar por el equivalente Modes (`--semantic-color-primary`) |
 
 ---
 

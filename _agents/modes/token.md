@@ -28,9 +28,9 @@ The layer is split down the middle by trust, and the split is the whole job: a *
 
 1. **Correct tier placement.** Every token belongs to exactly one tier. Never mix tiers.
 2. **No primitive leakage.** Components never see `--primitive-*` directly.
-3. **Semantic clarity.** Token names describe *intent*, not *value*. `--semantic-color-primary` not `--semantic-color-blue`.
+3. **Semantic clarity.** Token names describe *intent*, not *value*. `--semantic-color-primary`, ❌ not `--semantic-color-blue`.
 4. **Minimal surface area.** Create only tokens that will actually vary across themes or states. No speculative tokens.
-5. **Registry completeness.** Every new token must be registered in `tokens.json` (R05).
+5. **Registry completeness.** Every new token lands in `tokens.json` (R05) — not by hand: `npm run build` regenerates it from the SCSS and `npm run check:tokens-json` fails if it drifts.
 
 ---
 
@@ -39,20 +39,20 @@ The layer is split down the middle by trust, and the split is the whole job: a *
 ```
 Tier 1 — Primitives      scss/abstracts/tokens/primitives/
   Raw design values. No semantic meaning.
-  --primitive-color-blue-500: oklch(0.55 0.22 260);
-  --primitive-space-base: 0.25rem;
-  ↓ only assigned in themes/_theme.scss
+  --primitive-color-blue-500: oklch(0.60 0.275 270.486);
+  --primitive-space-base: 0.5rem;
+  ↓ a theme's own palette is assigned in its _theme.scss
 
 Tier 2 — Semantic        scss/abstracts/tokens/semantic/
   Contextual roles. Theme-agnostic names.
-  --semantic-color-primary: var(--primitive-color-brand-500);
-  --semantic-space-component-md: calc(var(--primitive-space-base) * 4);
+  --semantic-color-primary: var(--primitive-color-purple-500);
+  --semantic-space-component-md: var(--primitive-fluid-space-md);
   ↓ referenced by component tokens and occasionally by utilities
 
 Tier 3 — Component       scss/abstracts/tokens/components/
   Per-component contracts. One file per component.
-  --component-btn-primary-bg: var(--semantic-color-primary);
-  --component-btn-primary-color: var(--semantic-color-text-inverse);
+  --component-button-primary-filled-bg: var(--semantic-color-primary);
+  --component-button-primary-filled-color: var(--semantic-color-text-on-primary);
   ↓ only referenced by the matching component SCSS file
 
 Tier 4 — Page/Override   scss/pages/ or inline in themes
@@ -90,16 +90,16 @@ Any variable that doesn't use one of these prefixes is a **legacy variable** (R0
 --{tier}-{category}-{property}-{variant?}-{state?}
 
 Examples:
---primitive-color-brand-500
+--primitive-color-purple-500
 --primitive-space-base
 --semantic-color-bg-primary
 --semantic-color-text-secondary
 --semantic-border-radius-default
 --semantic-space-component-lg
---component-btn-primary-bg
---component-btn-primary-bg-hover
---component-form-border-focus
---component-card-padding-x-compact
+--component-button-primary-filled-bg
+--component-button-primary-filled-bg-hover
+--component-form-field-border-focus
+--component-button-disabled-color
 ```
 
 **Rules:**
@@ -163,7 +163,7 @@ Every theme must define all tokens in these categories. If any are missing, flag
 ```
 --semantic-font-size-overline / -body-small / -body / -body-large
 --semantic-font-weight-regular / -medium / -bold / -black
---semantic-font-family-base / -mono
+--semantic-font-family-primary / -primary-bold / -heading / -mono
 --semantic-line-height-tight / -snug / -normal / -relaxed / -body / -heading / -caption
 ```
 
@@ -181,20 +181,27 @@ Every theme must define all tokens in these categories. If any are missing, flag
 
 ---
 
-## `tokens.json` Entry Format
+## `tokens.json` is generated
 
-Every token you create must be added to `tokens.json`:
+You never write `tokens.json`. `npm run build` regenerates it from
+`scss/abstracts/tokens/` (`scripts/build-tokens-json.js`), and
+`npm run check:tokens-json` fails if it was edited by hand or fell behind. A token
+is registered by declaring it in its SCSS file; its entry appears on its own:
 
 ```json
-"--component-{name}-{property}": {
-  "type": "color | spacing | font-size | font-weight | border-radius | border-width | shadow | opacity | duration | easing | size",
+"--component-button-primary-filled-bg": {
+  "key": "button-primary-filled-bg",
+  "type": "ALIAS",
+  "value": "--semantic-color-primary",
   "rawValue": "var(--semantic-color-primary)",
   "status": "active",
-  "usedIn": ["scss/atoms/_{name}.scss"]
+  "layer": "component"
 }
 ```
 
-**Status values:** `active` | `deprecated` | `phantom`
+`type` is ALIAS · COLOR · FLOAT · STRING. `status` is `active` or `deprecated` — with
+`note`, `aliasOf` and `replacedBy`, the only fields the generator keeps from the
+previous file, because the SCSS doesn't say them.
 
 ---
 
@@ -209,9 +216,6 @@ for are specified once in `_agents/decision-record.md`.
 
 ## Token Definitions
 [token file content]
-
-## tokens.json Entries
-[JSON entries to add]
 
 ## Registration
 [@forward line if new file — a new file is a human decision; write the line, don't add it]
@@ -236,24 +240,25 @@ for are specified once in `_agents/decision-record.md`.
 **Tier Placement:** Tier 3 — Component. New file: `scss/abstracts/tokens/components/_tooltip.scss`
 
 **Token Definitions:**
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // component: tooltip
 // ===============================================
 :root {
-  --component-tooltip-bg:           var(--semantic-color-bg-inverse, oklch(0.15 0 0));
+  --component-tooltip-bg:           var(--semantic-color-bg-inverse);
   --component-tooltip-color:        var(--semantic-color-text-inverse);
   --component-tooltip-border-radius: var(--semantic-border-radius-sm);
   --component-tooltip-padding-y:    var(--semantic-space-component-xs);
   --component-tooltip-padding-x:    var(--semantic-space-component-sm);
   --component-tooltip-font-size:    var(--semantic-font-size-body-small);
   --component-tooltip-max-width:    18rem;
-  --component-tooltip-shadow:       var(--semantic-shadow-md, none);
-  --component-tooltip-z-index:      var(--semantic-z-index-tooltip, 1000);
+  --component-tooltip-shadow:       var(--semantic-shadow-md);
+  --component-tooltip-z-index:      var(--semantic-z-index-overlay);
 }
 ```
 
-**tokens.json entries** (8 entries, one per token above)
+**tokens.json:** nothing to write — `npm run build` adds the nine entries.
 
-**Registration:** Add `@forward "components/tooltip";` to `scss/abstracts/tokens/index.scss`
+**Registration:** `@forward 'tooltip';` in `scss/abstracts/tokens/components/index.scss` — a new file is a human decision: write the line, don't add it.
 
 **Notes:** `--semantic-color-bg-inverse` and `--semantic-shadow-md` exist today, but verify with `get_token` before using them — this note is the pattern for any token you assume. If one is missing, that is a **semantic** addition: describe it, justify it and hand it over. Do not add it yourself, and do not work around it with a fallback that hides the gap.

@@ -50,7 +50,7 @@ Los componentes soportan tres densidades mediante modificadores CSS:
 **Implementación mediante token override:**
 ```scss
 .atom-btn--compact {
-  --component-btn-padding-y: calc(var(--component-btn-padding-y-base) * 0.75);
+  --component-button-padding-y: calc(var(--semantic-space-component-sm) * 0.75);
 }
 ```
 
@@ -109,11 +109,11 @@ Un botón con `padding: 12px` en todos los lados parece "apretado" horizontalmen
 
 ```scss
 // ✓ Óptico
-@include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
-// padding-y: 0.75rem, padding-x: 1.25rem (≈ 1.67×)
+@include padding(var(--component-button-padding-y) var(--component-button-padding-x));
+// padding-y: space-component-sm, padding-x: space-component-lg (≈ 2×)
 
 // ✗ Matemáticamente simétrico pero visualmente desequilibrado
-@include padding(var(--component-btn-padding-y));
+@include padding(var(--component-button-padding-y));
 ```
 
 ---
@@ -125,7 +125,7 @@ Un `outline-width: 2px` sobre fondo oscuro parece más delgado que sobre fondo c
 ```scss
 @include darkmode {
   outline-width: 2.5px;
-  // O usar: var(--semantic-focus-ring-width-inverse)
+  // O, mejor, subir --semantic-focus-ring-width en el bloque oscuro del tema
 }
 ```
 

@@ -193,12 +193,12 @@ Icons align to the **optical center** of the text cap-height, not the mathematic
 Horizontal padding should be 1.5–2× the vertical padding for buttons to feel visually balanced:
 ```scss
 // Correct — wider horizontally
-@include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
+@include padding(var(--component-button-padding-y) var(--component-button-padding-x));
 // Where padding-x = 1.5–2× padding-y
 ```
 
 **Visual weight of outlines:**
-An `outline-width: 2px` on a dark background looks thinner than on a light background. On dark surfaces, use `outline-width: 2.5px` or `var(--semantic-focus-ring-width-inverse)`.
+An `outline-width: 2px` on a dark background looks thinner than on a light background. On dark surfaces, use `outline-width: 2.5px`, or raise `--semantic-focus-ring-width` in the theme's dark block.
 
 ---
 
@@ -240,7 +240,7 @@ Components must support three density contexts without layout breakage. Implemen
 Implement using token overrides on the component root, not by hardcoding values:
 ```scss
 .atom-btn--compact {
-  --component-btn-padding-y: calc(var(--component-btn-padding-y) * 0.75);
+  --component-button-padding-y: calc(var(--semantic-space-component-sm) * 0.75);
 }
 ```
 
@@ -481,6 +481,7 @@ node scripts/syx-validate.js
 **Contract Check:** R01 ✅ R02 ✅ R03 ✅ R04 ✅
 
 **Token File** — `scss/abstracts/tokens/components/_skeleton.scss`:
+<!-- syx: ejemplo-nuevo -->
 ```scss
 :root {
   --component-skeleton-bg:            var(--semantic-color-bg-secondary);

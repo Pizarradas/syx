@@ -180,6 +180,7 @@ Lo que hoy compila SYX es una escala corta: cuatro duraciones y cuatro curvas, t
 
 **Huecos, por prioridad.** Son recomendaciones para TOKEN; los tokens semánticos los añade una persona (`contracts/trust.json`), y el principio de TOKEN es no crear tokens especulativos:
 
+<!-- syx: ejemplo-nuevo -->
 1. **`--semantic-easing-in`** (curva de salida, p. ej. `cubic-bezier(0.4, 0, 1, 1)`). Es el único hueco que ya citan una regla operativa (tabla §5 de `_agents/modes/ui.md`) y el suelo `ui/motion-principles.md`. Todas las salidas del sistema usan hoy una curva que no es de salida.
 2. **Una duración larga** (≈ 700 ms) **cuando un segundo componente la pida.** Hasta entonces, token de componente.
 3. **Overshoot y springs:** no hacen falta como semánticos. Si una marca los adopta, entran como redefinición de tema (BRAND → THEME), no como tier nuevo.

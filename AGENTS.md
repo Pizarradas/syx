@@ -145,7 +145,7 @@ judge you are human-only on purpose — do not edit them to make a change pass.
 ```
 --primitive-color-blue-500          ← raw value, only in themes/_theme.scss
   └── --semantic-color-primary      ← contextual alias, in themes/_theme.scss
-        └── --component-btn-primary-bg  ← component-specific, in tokens/components/
+        └── --component-button-primary-filled-bg  ← component-specific, in tokens/components/
 ```
 
 Component SCSS rules reference only `--component-*` or `--semantic-*`. Never `--primitive-*`.

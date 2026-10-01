@@ -23,6 +23,10 @@
  *      marcados como antipatrón (`✗` en la primera línea, o «nunca», «evitar»,
  *      «anti-patrón» justo antes) ni los de prototipo (`capa: prototipo …`),
  *      que se cuentan aparte para que no se cuelen en silencio.
+ *   6. Ningún token fantasma: todo `--semantic-*`, `--component-*` y
+ *      `--primitive-*` citado en el córtex, la gobernanza, CLAUDE.md,
+ *      AGENTS.md, AI_GUIDELINES.md y los modos existe (convención de ejemplos
+ *      malos y nuevos más abajo, en la propia comprobación).
  *
  * Uso: node scripts/check-conocimiento.js   ·   npm run check:conocimiento
  */
@@ -141,6 +145,160 @@ comprobar('el código del córtex pasa el filtro SYX', () => {
   }
   if (malos.length) throw new Error(malos.join(' · '));
   return `${revisados} bloques revisados · ${antipatron} marcados como antipatrón · ${prototipo} de prototipo`;
+});
+
+// ─── 6 · Tokens fantasma ────────────────────────────────────────────────────
+// Un nombre de token citado en el córtex o en un documento de entrada es una
+// instrucción: el agente que lo lee lo copia. Si no existe, el código que sale
+// compila, pero la propiedad se queda sin valor. En octubre de 2026 había 69
+// nombres así, incluido `--component-btn-primary-bg` en token-system.md, que
+// cargan siempre UI, TOKEN y MIGRATE.
+//
+// QUÉ CUENTA COMO EXISTENTE: lo que registra tokens.json, lo que el snapshot
+// resuelto tiene en algún tema o modo (incluye la paleta privada de cada
+// tema) y lo que se declara en cualquier parte de scss/ (incluye las
+// sobrescrituras con ámbito, como --component-icon-source).
+// Un nombre seguido de `*`, `{`, `<` o `[` es un PATRÓN
+// (`--component-button-{variante}-bg`): basta con que exista algún token con
+// ese prefijo; `--semantic-space-inset-*` no lo tiene y falla.
+//
+// QUÉ NO SE JUZGA (la convención, la misma que la del filtro SYX de arriba):
+//   · en una línea, lo que va detrás de ❌ o ✗ (hasta un ✓/✅): en
+//     «| `--real` | ❌ `--legado` |» se juzga el primero y no el segundo;
+//   · dentro de un bloque de código, desde un comentario con ✗/❌ hasta la
+//     siguiente línea con ✓/✅ o en blanco;
+//   · un bloque de código antipatrón (✗ en su primera línea, o «nunca»,
+//     «evitar», «anti-patrón» justo antes) o de prototipo (`capa: prototipo`);
+//   · el bloque —de código, o párrafo/tabla hasta la línea en blanco— que
+//     sigue a `<!-- syx: ejemplo-incorrecto -->`: un error a propósito.
+//   · `<!-- syx: ejemplo-nuevo -->` es otra cosa: el bloque siguiente CREA
+//     tokens (el ejemplo «necesito tokens para un tooltip»). Los nombres que
+//     declara (`--x:`) cuentan como existentes en el resto de ESE documento,
+//     pero lo que referencian con var() se sigue juzgando: un token nuevo que
+//     apunta a un semántico inexistente sigue siendo un error. En un párrafo
+//     marcado, todo nombre citado cuenta como propuesto.
+// vendors/ es material de terceros y no se corrige aquí.
+function tokensConocidos() {
+  const { leerDeclaraciones } = require('./lib/scss-tokens.js');
+  const s = new Set();
+  const tj = JSON.parse(fs.readFileSync(path.join(ROOT, 'tokens.json'), 'utf8'));
+  for (const [k, v] of Object.entries(tj)) if (k !== '_meta') for (const n of Object.keys(v)) s.add(n);
+  const snapF = path.join(ROOT, 'contracts', 'resolved-tokens.json');
+  if (fs.existsSync(snapF)) {
+    const snap = JSON.parse(fs.readFileSync(snapF, 'utf8'));
+    for (const n of Object.keys(snap.base || {})) s.add(n);
+    for (const t of Object.values(snap.themes || {})) for (const n of [...Object.keys(t.light || {}), ...Object.keys(t.dark || {})]) s.add(n);
+  }
+  for (const f of walk(path.join(ROOT, 'scss')).filter((p) => p.endsWith('.scss'))) {
+    for (const d of leerDeclaraciones(fs.readFileSync(f, 'utf8'))) s.add(d.name);
+  }
+  return s;
+}
+
+const MARCA = /<!--\s*syx:\s*ejemplo-(incorrecto|nuevo)\s*-->/;
+const NEGATIVO = /[❌✗]/;
+const POSITIVO = /[✓✅]/;
+const TOKEN = /--(?:semantic|component|primitive)-[A-Za-z0-9-]*/g;
+
+/**
+ * Las citas de token juzgables de un markdown y los nombres que el propio
+ * documento crea en un ejemplo marcado: { citas: [{ nombre, patron, linea }], nuevos }.
+ */
+function citasJuzgables(texto) {
+  const lineas = texto.split(/\r?\n/);
+  const citas = [];
+  const nuevos = new Set();
+  // `modo`: 'normal' · 'nuevo-bloque' (no cita lo declarado y lo anota) ·
+  // 'nuevo-todo' (todo lo citado se anota como propuesto).
+  const citar = (l, i, modo = 'normal') => {
+    // Dentro de la línea, lo que va tras ❌/✗ es el ejemplo malo y lo que va
+    // tras ✓/✅ vuelve a contar: «| `--bueno` | ❌ `--legado` |» juzga solo
+    // el primero.
+    const tramos = l.split(/([❌✗✓✅])/u);
+    let malo = false;
+    let pos = 0;
+    const juzgable = [];
+    for (const t of tramos) {
+      if (t.length === 1 && NEGATIVO.test(t)) malo = true;
+      else if (t.length === 1 && POSITIVO.test(t)) malo = false;
+      else if (!malo) juzgable.push([pos, pos + t.length]);
+      pos += t.length;
+    }
+    for (const m of l.matchAll(TOKEN)) {
+      if (!juzgable.some(([a, b]) => m.index >= a && m.index < b)) continue;
+      const sig = l[m.index + m[0].length] || '';
+      const patron = /[*{<[]/.test(sig) || m[0].endsWith('-');
+      const nombre = patron ? m[0].replace(/-+$/, '-') : m[0];
+      if (modo === 'nuevo-todo' || (modo === 'nuevo-bloque' && /^\s*:/.test(l.slice(m.index + m[0].length)))) {
+        nuevos.add(nombre);
+        continue;
+      }
+      citas.push({ nombre, patron, linea: i + 1 });
+    }
+  };
+  let marca = null; // 'incorrecto' | 'nuevo': la marca HTML vale para el bloque siguiente
+  for (let i = 0; i < lineas.length; i++) {
+    const l = lineas[i];
+    const mm = MARCA.exec(l);
+    if (mm) { marca = mm[1]; continue; }
+    const valla = /^\s*(```|~~~)/.exec(l);
+    if (valla) {
+      let j = i + 1; const cuerpo = [];
+      while (j < lineas.length && !lineas[j].trimStart().startsWith(valla[1])) cuerpo.push([lineas[j], j++]);
+      const primera = (cuerpo[0] || [''])[0];
+      const antes = lineas.slice(Math.max(0, i - 2), i).join(' ');
+      const saltar = marca === 'incorrecto' || NEGATIVO.test(primera) || /capa:\s*prototipo/.test(primera) ||
+        /\b(nunca|evitar|anti-?patr[oó]n)\b/i.test(antes);
+      if (!saltar) {
+        const modo = marca === 'nuevo' ? 'nuevo-bloque' : 'normal';
+        let negativo = false;
+        for (const [c, k] of cuerpo) {
+          // Un comentario con ✗/❌ abre un tramo malo que llega hasta la
+          // siguiente línea con ✓/✅ o en blanco.
+          if (!c.trim() || POSITIVO.test(c)) negativo = false;
+          if (NEGATIVO.test(c)) { citar(c, k, modo); negativo = !POSITIVO.test(c); continue; }
+          if (!negativo) citar(c, k, modo);
+        }
+      }
+      marca = null;
+      i = j;
+      continue;
+    }
+    if (!l.trim()) { marca = null; continue; }
+    if (marca === 'incorrecto') continue;
+    citar(l, i, marca === 'nuevo' ? 'nuevo-todo' : 'normal');
+  }
+  return { citas, nuevos };
+}
+
+comprobar('ningún token citado es un fantasma', () => {
+  const conocidos = tokensConocidos();
+  const lista = [...conocidos];
+  const existe = (c) => (c.patron ? lista.some((k) => k.startsWith(c.nombre)) : conocidos.has(c.nombre));
+  const fuentes = [
+    ...walk(K).filter((p) => !rel(p).startsWith('vendors/')),
+    ...walk(path.join(ROOT, 'mind-system', 'governance')),
+    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md'].map((f) => path.join(ROOT, f)),
+    ...walk(MODOS_DIR),
+  ].filter((p) => p.endsWith('.md') && fs.existsSync(p));
+  const fantasmas = new Map(); // nombre → [dónde]
+  let citas = 0;
+  const distintos = new Set();
+  for (const f of fuentes) {
+    const { citas: cs, nuevos } = citasJuzgables(fs.readFileSync(f, 'utf8'));
+    for (const c of cs) {
+      citas++;
+      distintos.add(c.nombre);
+      if (existe(c) || nuevos.has(c.nombre)) continue;
+      if (!fantasmas.has(c.nombre)) fantasmas.set(c.nombre, []);
+      fantasmas.get(c.nombre).push(`${path.relative(ROOT, f).split(path.sep).join('/')}:${c.linea}`);
+    }
+  }
+  if (fantasmas.size) {
+    throw new Error([...fantasmas].map(([n, d]) => `${n} (${d.slice(0, 3).join(', ')}${d.length > 3 ? `, +${d.length - 3}` : ''})`).join(' · ') +
+      ' · Usa el nombre real (get_token / tokens.json), reescribe el ejemplo, o márcalo con ❌, <!-- syx: ejemplo-incorrecto --> si el error es a propósito, o <!-- syx: ejemplo-nuevo --> si el ejemplo crea el token');
+  }
+  return `${citas} citas de ${distintos.size} nombres en ${fuentes.length} documentos, todas existen`;
 });
 
 console.log('\n── CÓRTEX ' + '─'.repeat(54) + '\n');

@@ -10,7 +10,7 @@
 
 1.  **NEVER use raw values.**
     - ❌ `padding: 1rem;`
-    - ✅ `@include padding(var(--semantic-space-inset-md));`
+    - ✅ `@include padding(var(--semantic-space-component-md));`
 2.  **NEVER use raw CSS properties where a mixin exists.**
     - ❌ `position: absolute;` → ✅ `@include absolute();`
     - ❌ `display: flex; align-items: center;` → ✅ `@include flex-center();`
@@ -166,10 +166,11 @@ When asked to "create a new component X":
 
 **Step 1: Define Tokens** (`scss/abstracts/tokens/components/_x.scss`)
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 :root {
   --component-x-bg: var(--semantic-color-bg-primary);
-  --component-x-padding: var(--semantic-space-inset-md);
+  --component-x-padding: var(--semantic-space-component-md);
 }
 ```
 

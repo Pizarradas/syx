@@ -111,7 +111,7 @@ For every violation found, output one row:
 ```
 | File | Line | Rule | Severity | Violation | Fix |
 |---|---|---|---|---|---|
-| scss/atoms/_btn.scss | 42 | R01 | error | Uses --primitive-color-brand-500 | Replace with var(--component-btn-primary-bg) |
+| scss/atoms/_btn.scss | 42 | R01 | error | Uses ❌ --primitive-color-purple-500 | ✅ Replace with var(--component-button-primary-filled-bg) |
 ```
 
 Then group by severity:
@@ -279,7 +279,7 @@ node scripts/syx-validate.js
 
 | File | Line | Rule | Severity | Violation | Fix |
 |---|---|---|---|---|---|
-| `_code-snippet.scss` | 7 | R07 | info | `--code-bg` has no SYX prefix | Rename to `--component-code-snippet-bg` or mark as `keep` in `lint-contract.json` |
+| `_code-snippet.scss` | 7 | R07 | info | `--code-bg` has no SYX prefix | Rename to `--component-code-snippet-header-bg` or mark as `keep` in `lint-contract.json` |
 
 **Verdict: FAIL** — 2 errors, 0 warnings, 1 info item.
 

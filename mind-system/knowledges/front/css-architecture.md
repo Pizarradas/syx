@@ -109,13 +109,13 @@ Las CSS Custom Properties (tokens) se heredan y se pueden sobreescribir en cualq
 
 ```scss
 :root {
-  --component-btn-bg: var(--semantic-color-primary);
+  --component-button-primary-filled-bg: var(--semantic-color-primary);
 }
 
 // Override en contexto específico
 .org-hero {
-  --component-btn-bg: var(--semantic-color-bg-inverse);
-  // Todos los .atom-btn dentro de .org-hero usan el valor overrideado
+  --component-button-primary-filled-bg: var(--semantic-color-bg-inverse);
+  // Todos los botones primarios rellenos dentro de .org-hero usan el valor overrideado
 }
 ```
 
