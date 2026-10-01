@@ -1172,7 +1172,7 @@
         "--component-tabs-tab-padding-block",
         "--component-tabs-tab-padding-inline"
       ],
-      "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Keyboard (arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free; without it every panel stays in the document.",
+      "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Behaviour (click, arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free: import 'syx-design-system/js/syx-tabs.js' wires every tablist present on load, and initTabs(root) from the same module wires markup rendered later. Without it the selected panel shows and the tabs never switch.",
       "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>"
     }
   ],

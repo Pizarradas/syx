@@ -171,6 +171,29 @@ for (const necesario of ['contracts/resolved-tokens.json', 'component-registry.j
   if (!viaja(necesario)) errores.push(`falta ${necesario}: la API instalada no podría responder`);
 }
 
+// ─── 6. El JS que viaja sobrevive al tree-shaking ────────────────────────────
+// `import 'syx-design-system/js/syx-tabs.js'` no importa nada: solo ejecuta.
+// Si `sideEffects` no lo declara, Vite, Rollup y webpack lo dan por inútil en
+// producción y lo borran sin avisar; en `vite dev` funciona, en `vite build`
+// las pestañas se quedan muertas. Pasó (auditoría 2026-10, acción 11): el
+// campo solo nombraba *.css y *.scss. Se interpreta como lo hacen los
+// empaquetadores: sin barra, el patrón se compara con el nombre del fichero;
+// con barra, con la ruta desde la raíz del paquete.
+
+const globARegex = (g) => new RegExp('^' + g.replace(/[.+^${}()|[\]\\]/g, '\\$&')
+  .replace(/\*\*\/?/g, '\u0000').replace(/\*/g, '[^/]*').replace(/\u0000/g, '.*') + '$');
+const conEfectos = (rel) => {
+  if (pkg.sideEffects === undefined || pkg.sideEffects === true) return true;
+  if (!Array.isArray(pkg.sideEffects)) return false;
+  return pkg.sideEffects.some((p) => (p.includes('/')
+    ? globARegex(p.replace(/^\.\//, '')).test(rel)
+    : globARegex(p).test(path.posix.basename(rel))));
+};
+const jsSinEfectos = [...dentro].filter((f) => /^js\/[^/]+\.js$/.test(f) && !conEfectos(f));
+if (jsSinEfectos.length) {
+  errores.push(`sideEffects no declara ${jsSinEfectos.join(', ')}: un empaquetador borraría su import en producción`);
+}
+
 // ─── Informe ─────────────────────────────────────────────────────────────────
 
 console.log('\n── PAQUETE PUBLICABLE ──────────────────────────────────────────\n');
