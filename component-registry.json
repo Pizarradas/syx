@@ -14,6 +14,43 @@
   },
   "atoms": [
     {
+      "name": "avatar",
+      "layer": "atom",
+      "file": "scss/atoms/_avatar.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_avatars.scss"
+      ],
+      "classes": [
+        "atom-avatar"
+      ],
+      "modifiers": [
+        "atom-avatar--lg",
+        "atom-avatar--sm",
+        "atom-avatar--square"
+      ],
+      "elements": [
+        "atom-avatar__img"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-avatar-bg",
+        "--component-avatar-border-radius",
+        "--component-avatar-border-radius-square",
+        "--component-avatar-color",
+        "--component-avatar-font-size-lg",
+        "--component-avatar-font-size-md",
+        "--component-avatar-font-size-sm",
+        "--component-avatar-font-weight",
+        "--component-avatar-size-lg",
+        "--component-avatar-size-md",
+        "--component-avatar-size-sm"
+      ],
+      "description": "[scope: generic] A person's photo or, without one, their initials, at a fixed size: --sm (32px), md by default (40px), --lg (56px); --square for accounts and organisations. The photo is an <img class=\"atom-avatar__img\"> cropped with object-fit: cover. Initials sit on bg-tertiary in secondary text, measured at 4.5:1 in contracts/contrast.json.",
+      "usage": "<span class=\"atom-avatar atom-avatar--lg\"><img class=\"atom-avatar__img\" src=\"img/avatar-demo.svg\" alt=\"Ana López\" width=\"56\" height=\"56\"></span><span class=\"atom-avatar\" role=\"img\" aria-label=\"Ana López\">AL</span><span class=\"atom-avatar atom-avatar--sm atom-avatar--square\" role=\"img\" aria-label=\"Acme Inc.\">AC</span>",
+      "a11y": "Photo: alt with the person's name, or alt=\"\" when the name is written right next to it. Initials alone do not say who it is: role=\"img\" with aria-label=\"Full name\"; next to the visible name, aria-hidden=\"true\" instead. Not focusable — if it links to a profile, the link carries the name. In forced colours a border keeps the shape. No JS."
+    },
+    {
       "name": "breadcrumb",
       "layer": "atom",
       "file": "scss/atoms/_breadcrumb.scss",
