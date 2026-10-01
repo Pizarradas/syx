@@ -2,6 +2,7 @@
 // ================================================
 // Private helpers for null-skipping shorthand properties.
 // Used by: _margin.scss, _padding.scss
+// Salida lógica (margin-block-start, padding-inline-end…): ver syx-directional.
 // Philosophy: Bourbon-compatible API — pass `null` to skip a side.
 // ================================================
 @use 'sass:list';
@@ -39,6 +40,12 @@
 }
 
 // PRIVATE: Builds directional properties from CSS shorthand, skipping null sides.
+// Emite propiedades LÓGICAS: el orden top/right/bottom/left de la firma (el
+// de la shorthand de CSS, que es el que conoce todo el mundo) se traduce a
+// block-start/inline-end/block-end/inline-start. En LTR y escritura
+// horizontal pinta exactamente igual; en RTL el lado «izquierdo» pasa a ser
+// el inicial, que es lo que casi siempre quería decir quien escribió `left`.
+// (Auditoría 2026-10 · acción 13)
 // @param {string} $property  — e.g. 'margin', 'padding'
 // @param {string} $suffix    — e.g. null, 'width'
 // @param {list}   $values    — shorthand list, nulls skip that side
@@ -46,11 +53,11 @@
   $suffix-str: '';
   @if $suffix { $suffix-str: '-#{$suffix}'; }
 
-  $top:    $property + '-top'    + $suffix-str;
-  $bottom: $property + '-bottom' + $suffix-str;
-  $left:   $property + '-left'   + $suffix-str;
-  $right:  $property + '-right'  + $suffix-str;
-  $all:    $property             + $suffix-str;
+  $top:    $property + '-block-start'  + $suffix-str;
+  $bottom: $property + '-block-end'    + $suffix-str;
+  $left:   $property + '-inline-start' + $suffix-str;
+  $right:  $property + '-inline-end'   + $suffix-str;
+  $all:    $property                   + $suffix-str;
 
   $values: _syx-compact($values);
 
@@ -74,8 +81,16 @@
       @if list.nth($values, 3) { #{$bottom}: list.nth($values, 3); }
       @if list.nth($values, 4) { #{$left}: list.nth($values, 4); }
     }
+  } @else if list.length($values) == 4 {
+    // Cuatro valores tras compactar = izquierda y derecha distintas. La
+    // shorthand física los clavaría a su lado; por ejes, el inline sigue a
+    // la dirección del texto. (margin-inline: inicio fin = izquierda derecha
+    // en LTR.)
+    #{$property}-block#{$suffix-str}: list.nth($values, 1) list.nth($values, 3);
+    #{$property}-inline#{$suffix-str}: list.nth($values, 4) list.nth($values, 2);
   } @else {
-    // No nulls — emit compact shorthand
+    // Uno, dos o tres valores: simétricos en el eje inline, la shorthand
+    // pinta igual en LTR y en RTL.
     #{$all}: $values;
   }
 }

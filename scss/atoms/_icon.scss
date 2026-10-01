@@ -70,10 +70,13 @@
       // ===============================================
 
       // --arrow-default
+      // Las dos flechas apuntan hacia delante (derecha en LTR): en RTL se
+      // espejan. (Auditoría 2026-10 · acción 13)
       &--arrow-default {
         &:before {
           --component-icon-source: var(--icon-arrow-default);
         }
+        @include mirror-rtl('::before');
       }
 
       // --arrow-double
@@ -81,6 +84,7 @@
         &:before {
           --component-icon-source: var(--icon-arrow-double);
         }
+        @include mirror-rtl('::before');
       }
 
       // --content-bars

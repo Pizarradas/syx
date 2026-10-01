@@ -104,19 +104,22 @@ $lucide-path: "../img/icons/lucide" !default;
   .atom-icon {
 
     // ── NAVIGATION & LAYOUT ───────────────────────────────────────
+    // Las flechas y chevrons horizontales se espejan en RTL (mirror-rtl):
+    // en SYX señalan «siguiente/atrás», no un lado de la pantalla. Arriba y
+    // abajo no cambian. (Auditoría 2026-10 · acción 13)
     &--lc-home           { &:before { --component-icon-source: var(--lc-icon-home); } }
     &--lc-menu           { &:before { --component-icon-source: var(--lc-icon-menu); } }
     &--lc-x              { &:before { --component-icon-source: var(--lc-icon-x); } }
     &--lc-layers         { &:before { --component-icon-source: var(--lc-icon-layers); } }
-    &--lc-chevron-right  { &:before { --component-icon-source: var(--lc-icon-chevron-right); } }
-    &--lc-chevron-left   { &:before { --component-icon-source: var(--lc-icon-chevron-left); } }
+    &--lc-chevron-right  { &:before { --component-icon-source: var(--lc-icon-chevron-right); } @include mirror-rtl('::before'); }
+    &--lc-chevron-left   { &:before { --component-icon-source: var(--lc-icon-chevron-left); } @include mirror-rtl('::before'); }
     &--lc-chevron-down   { &:before { --component-icon-source: var(--lc-icon-chevron-down); } }
     &--lc-chevron-up     { &:before { --component-icon-source: var(--lc-icon-chevron-up); } }
-    &--lc-chevrons-right { &:before { --component-icon-source: var(--lc-icon-chevrons-right); } }
+    &--lc-chevrons-right { &:before { --component-icon-source: var(--lc-icon-chevrons-right); } @include mirror-rtl('::before'); }
     &--lc-chevrons-down  { &:before { --component-icon-source: var(--lc-icon-chevrons-down); } }
-    &--lc-chevrons-left  { &:before { --component-icon-source: var(--lc-icon-chevrons-left); } }
-    &--lc-arrow-right    { &:before { --component-icon-source: var(--lc-icon-arrow-right); } }
-    &--lc-arrow-left     { &:before { --component-icon-source: var(--lc-icon-arrow-left); } }
+    &--lc-chevrons-left  { &:before { --component-icon-source: var(--lc-icon-chevrons-left); } @include mirror-rtl('::before'); }
+    &--lc-arrow-right    { &:before { --component-icon-source: var(--lc-icon-arrow-right); } @include mirror-rtl('::before'); }
+    &--lc-arrow-left     { &:before { --component-icon-source: var(--lc-icon-arrow-left); } @include mirror-rtl('::before'); }
 
     // ── ACTIONS ──────────────────────────────────────────────────
     &--lc-search         { &:before { --component-icon-source: var(--lc-icon-search); } }

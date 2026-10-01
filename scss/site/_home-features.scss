@@ -31,9 +31,9 @@
         font-size: var(--component-section-index-size);
         letter-spacing: var(--semantic-letter-spacing-wide);
         color: var(--component-section-index-color);
-        padding-bottom: var(--component-section-index-gap);
-        margin-bottom: var(--component-section-index-gap);
-        border-bottom: var(--component-section-tick-width) solid var(--component-section-tick-color);
+        padding-block-end: var(--component-section-index-gap);
+        margin-block-end: var(--component-section-index-gap);
+        border-block-end: var(--component-section-tick-width) solid var(--component-section-tick-color);
       }
 
       // Tope de la cota, al extremo derecho de la regla.
@@ -55,11 +55,11 @@
       }
 
       text-align: var(--component-section-align);
-      margin-bottom: var(--semantic-space-layout-lg);
+      margin-block-end: var(--semantic-space-layout-lg);
 
       .org-home-features__overline {
         display: block;
-        margin-bottom: var(--semantic-space-component-sm);
+        margin-block-end: var(--semantic-space-component-sm);
       }
 
       .org-home-features__title {
@@ -126,13 +126,13 @@
 
     &__modes {
       margin: var(--semantic-space-layout-lg) auto 0;
-      border-top: var(--component-section-divider-width) solid var(--component-section-divider-color);
-      padding-top: var(--semantic-space-layout-md);
+      border-block-start: var(--component-section-divider-width) solid var(--component-section-divider-color);
+      padding-block-start: var(--semantic-space-layout-md);
     }
 
     &__modes-header {
       text-align: var(--component-section-align);
-      margin-bottom: var(--semantic-space-component-lg);
+      margin-block-end: var(--semantic-space-component-lg);
     }
 
     &__modes-title {
@@ -140,7 +140,7 @@
       font-size: var(--semantic-font-size-body-large);
       font-weight: var(--semantic-font-weight-bold);
       color: var(--semantic-color-text-primary);
-      margin-bottom: var(--semantic-space-component-sm);
+      margin-block-end: var(--semantic-space-component-sm);
     }
 
     &__modes-sub {

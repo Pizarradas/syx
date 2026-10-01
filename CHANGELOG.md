@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — propiedades lógicas y RTL (auditoría de octubre de 2026 · acción 13)
+
+- **Los lados son lógicos.** Los mixins `margin()`, `padding()`, `position()`/`absolute()`/`fixed()`/`sticky()`/`relative()`, `border()`, `border-radius()`, `triangle()` y `cover` emiten `margin-block-start`, `padding-inline-end`, `inset-inline-start`, `border-start-end-radius`… con la misma firma (top/right/bottom/left → block-start/inline-end/block-end/inline-start). Componentes, base, layout, utilidades, `site/` y `pages/` igual; `body` pasa de `text-align: left` a `start`. En el CSS compilado de un tema: de 335 declaraciones físicas de lado frente a 76 lógicas (82 % físicas) a 39 frente a 376 (9 %): 30 son las utilidades deprecadas y 9 las excepciones justificadas. Reglas con `:dir(rtl)`: de 0 a 13. En LTR no cambia ni un píxel (420 capturas de componentes y 8 de las vitrinas, contra `audit/octubre`).
+- **RTL.** Con `dir="rtl"` los componentes se espejan: el pomo de `atom-switch` anima `inset-inline-start` en vez de un `translateX`; los chevrons de paginación, las viñetas de `atom-list` y `atom-icon--lc-arrow-*`, `--lc-chevron(s)-left/right` y `--arrow-*` se espejan con el mixin nuevo `mirror-rtl()` (`:dir(rtl)` + `scale: -1 1`, tras `@supports selector(:dir(rtl))`); el relleno de hover de `atom-link` barre desde el inicio; `code`, `kbd`, `samp` y `pre` se quedan en LTR.
+- **Corregido:** el chevron de `mol-disclosure` se dibujaba con bordes lógicos y en RTL salía como `‹` en vez de `⌄`.
+- **Excepciones físicas, con su porqué en la línea:** el ✓ de `atom-check` y el ⌄ de `mol-disclosure` (dibujos con bordes girados), `absolute-center` y el telón de `org-home-hero` (centrados con `translate`, que es físico). Las sombras desplazadas (botón, diálogo) siguen cayendo abajo a la derecha.
+- **Guardián:** `npm run lint` rechaza en `scss/` las propiedades físicas de lado (`property-disallowed-list`) y `text-align`/`float`/`clear` con `left`/`right` (`declaration-property-value-allowed-list`); una excepción va en la línea con `stylelint-disable-next-line … -- porqué`. Sin dependencias nuevas.
+- **Pruebas:** `tests/browser/run.mjs --rtl` monta la página de pruebas con `dir="rtl"` para axe y capturas. axe: 0 violaciones en LTR y en RTL.
+
+### Deprecated — utilidades físicas (se retiran en SYX v5.0)
+
+- `.syx-ml-*`, `.syx-mr-*` → `.syx-ms-*`, `.syx-me-*` (nuevas).
+- `.syx-pl-*`, `.syx-pr-*` → `.syx-ps-*`, `.syx-pe-*` (nuevas; `.syx-pis-*`/`.syx-pie-*` quedan como alias).
+- `.syx-ml-auto`, `.syx-mr-auto` → `.syx-ms-auto`, `.syx-me-auto` (nuevas).
+- `.syx-left-0`, `.syx-right-0` → `.syx-start-0`, `.syx-end-0` (nuevas).
+- `.syx-text-left`, `.syx-text-right` → `.syx-text-start`, `.syx-text-end`.
+- Siguen siendo izquierda/derecha **físicas** a propósito: quien las usa no ve ningún cambio, tampoco en RTL. `.syx-mt/mb/mx/my-*`, `.syx-pt/pb/px/py-*`, `.syx-top-0` y `.syx-bottom-0` no se deprecan: son ejes y pasan a lógicas sin cambiar de nombre. `docs.html` ya usa `.syx-ms-*`/`.syx-me-*`.
+
 ### Fixed — auditoría de septiembre de 2026, fases 1 y 2 (2026-09-30)
 
 - **Accesibilidad.** Nuevo `--semantic-color-border-control` para el borde de campo, checkbox, radio y switch (de 1,43–2,40:1 a ≥ 3:1, WCAG 1.4.11) y tinta de estado `--semantic-color-state-{success,error,warning,info}-text` (el texto de error pasa de 3,56–4,35:1 a ≥ 4,5:1). `warning-text` se citaba con fallback y no existía. Texto terciario y secundario de example-03 y example-05 corregidos.

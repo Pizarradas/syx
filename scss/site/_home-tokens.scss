@@ -31,9 +31,9 @@
         font-size: var(--component-section-index-size);
         letter-spacing: var(--semantic-letter-spacing-wide);
         color: var(--component-section-index-color);
-        padding-bottom: var(--component-section-index-gap);
-        margin-bottom: var(--component-section-index-gap);
-        border-bottom: var(--component-section-tick-width) solid var(--component-section-tick-color);
+        padding-block-end: var(--component-section-index-gap);
+        margin-block-end: var(--component-section-index-gap);
+        border-block-end: var(--component-section-tick-width) solid var(--component-section-tick-color);
       }
 
       // Tope de la cota, al extremo derecho de la regla.
@@ -69,7 +69,7 @@
       &__overline {
         display: flex;
         justify-content: var(--component-section-justify);
-        margin-bottom: 0.75rem;
+        margin-block-end: 0.75rem;
       }
 
       &__title {
@@ -128,12 +128,17 @@
           gap: 0.5rem 1.5rem;
         }
 
-        // Left stripe accent per layer
+        // Start stripe accent per layer (izquierda en LTR)
         &::before {
           content: '';
           @include absolute($top: 0, $bottom: 0, $left: 0);
           width: var(--component-token-layer-stripe-width);
-          border-radius: var(--component-token-layer-border-radius) 0 0 var(--component-token-layer-border-radius);
+          // Redondeo en el lado inicial (izquierdo en LTR), por esquinas
+          // lógicas para que siga a la franja en RTL.
+          border-start-start-radius: var(--component-token-layer-border-radius);
+          border-start-end-radius: 0;
+          border-end-end-radius: 0;
+          border-end-start-radius: var(--component-token-layer-border-radius);
         }
 
         // ── Layer color variants ────────────────────────
@@ -252,13 +257,13 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         width: fit-content;
-        margin-bottom: 0.25rem;
+        margin-block-end: 0.25rem;
 
         @include breakpoint(phablet) {
           grid-column: 1;
           grid-row: 1 / 3;
           align-self: center;
-          margin-bottom: 0;
+          margin-block-end: 0;
           flex-direction: column;
           text-align: var(--component-section-align);
           padding: 0.5rem 0.875rem;
@@ -305,12 +310,12 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-        margin-top: 0.75rem;
+        margin-block-start: 0.75rem;
 
         @include breakpoint(phablet) {
           grid-column: 2;
           grid-row: 3;
-          margin-top: 0.5rem;
+          margin-block-start: 0.5rem;
         }
 
         .atom-code {

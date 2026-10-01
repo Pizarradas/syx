@@ -157,10 +157,15 @@
 
 // MIXIN: absolute-center
 // Perfectly centers an element within its relative parent.
+// Físico a propósito: top/left 50% + translate(-50%, -50%) centra igual en LTR
+// y RTL. Con inset-inline-start, en RTL sería right: 50% y el translate (que
+// es físico) lo sacaría del centro. (Auditoría 2026-10 · acción 13)
 @mixin absolute-center {
   position: absolute;
+  // stylelint-disable property-disallowed-list -- centrado con translate, que es físico
   top: 50%;
   left: 50%;
+  // stylelint-enable property-disallowed-list
   transform: translate(-50%, -50%);
 }
 
@@ -175,10 +180,29 @@
 // Absolute overlay filling the entire parent.
 @mixin cover {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset-block-start: 0;
+  inset-inline-start: 0;
   width: 100%;
   height: 100%;
+}
+
+// MIXIN: mirror-rtl($pseudo)
+// Espeja en horizontal un icono direccional (flecha, chevron de «anterior» o
+// «siguiente») cuando el texto va de derecha a izquierda: en árabe o hebreo
+// «siguiente» apunta a la izquierda. Se incluye en el ELEMENTO, no en su
+// pseudo-elemento, porque :dir() va antes que ::before. Usa la propiedad
+// `scale`, que se compone con `rotate`/`transform` sin pisarlos.
+// Va tras @supports selector(:dir(rtl)): el mínimo de SYX (Chrome 111,
+// Safari 16.2) aún no conoce :dir(); sin él el icono queda sin espejar, que
+// es lo que pasaba antes. (Auditoría 2026-10 · acción 13)
+//   .x { @include mirror-rtl; }            // espeja .x
+//   .x { @include mirror-rtl('::before'); } // espeja .x::before
+@mixin mirror-rtl($pseudo: null) {
+  @supports selector(:dir(rtl)) {
+    &:dir(rtl)#{$pseudo} {
+      scale: -1 1;
+    }
+  }
 }
 
 // MIXIN: gap($dim)

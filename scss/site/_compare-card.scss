@@ -32,27 +32,27 @@
       background: var(--semantic-color-bg-primary);
 
       &__name {
-        padding-bottom: var(--semantic-space-stack-sm);
-        margin-bottom: var(--semantic-space-stack-md);
-        border-bottom: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+        padding-block-end: var(--semantic-space-stack-sm);
+        margin-block-end: var(--semantic-space-stack-md);
+        border-block-end: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
       }
 
       &__block {
-        margin-bottom: var(--semantic-space-stack-md);
+        margin-block-end: var(--semantic-space-stack-md);
 
         &:last-child {
-          margin-bottom: 0;
+          margin-block-end: 0;
         }
 
         // El acento va en el borde, no en el texto.
         &--pro,
         &--con {
-          padding-left: var(--semantic-space-inline-md);
-          border-left: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
+          padding-inline-start: var(--semantic-space-inline-md);
+          border-inline-start: var(--semantic-border-width-default) solid var(--semantic-color-border-default);
         }
 
         &--pro {
-          border-left-color: var(--semantic-color-success);
+          border-inline-start-color: var(--semantic-color-success);
 
           > .mol-compare-card__label {
             color: var(--semantic-color-success);
@@ -60,7 +60,7 @@
         }
 
         &--con {
-          border-left-color: var(--semantic-color-error);
+          border-inline-start-color: var(--semantic-color-error);
 
           > .mol-compare-card__label {
             color: var(--semantic-color-error);
@@ -70,7 +70,7 @@
 
       &__label {
         display: block;
-        margin-bottom: var(--semantic-space-stack-xs);
+        margin-block-end: var(--semantic-space-stack-xs);
       }
 
       // Qué es y para quién son dos preguntas distintas, así que se separan.
@@ -79,9 +79,9 @@
       // distinto, y el hueco sobrante cae en medio, donde parece aire y no un
       // error de maquetación.
       &__fit {
-        margin-top: auto;
-        padding-top: var(--semantic-space-stack-md);
-        border-top: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+        margin-block-start: auto;
+        padding-block-start: var(--semantic-space-stack-md);
+        border-block-start: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
       }
     }
   } // end @layer syx.molecules

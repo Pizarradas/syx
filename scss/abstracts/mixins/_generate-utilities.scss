@@ -29,7 +29,10 @@
 // MIXIN: GENERATE DIRECTIONAL UTILITY
 // ================================================
 // Usage: @include generate-utility-directional('m', margin, $tokens-spacing);
-// Output: .u-mt-sm { margin-top... }, .u-mx-sm { margin-left... margin-right... }
+// Output: .u-mt-sm { margin-block-start... }, .u-mx-sm { margin-inline... }
+// Lados lógicos: t/b → block-start/end, s/e → inline-start/end, x/y →
+// inline/block. l/r se conservan físicos (izquierda/derecha de verdad) como
+// alias deprecados, igual que .syx-ml-*/.syx-mr-*. (Auditoría 2026-10 · acción 13)
 // ================================================
 @mixin generate-utility-directional($prefix, $property, $map) {
   @each $key, $value in $map {
@@ -39,31 +42,37 @@
         #{$property}: $value;
       }
 
-      // Top
+      // Top (block-start)
       .u-#{$prefix}t-#{$key} {
-        #{$property}-top: $value;
+        #{$property}-block-start: $value;
       }
-      // Bottom
+      // Bottom (block-end)
       .u-#{$prefix}b-#{$key} {
-        #{$property}-bottom: $value;
+        #{$property}-block-end: $value;
       }
-      // Left
+      // Start (inline-start: izquierda en LTR, derecha en RTL)
+      .u-#{$prefix}s-#{$key} {
+        #{$property}-inline-start: $value;
+      }
+      // End (inline-end)
+      .u-#{$prefix}e-#{$key} {
+        #{$property}-inline-end: $value;
+      }
+      // Left — DEPRECADO: físico a propósito; usa s
       .u-#{$prefix}l-#{$key} {
         #{$property}-left: $value;
       }
-      // Right
+      // Right — DEPRECADO: físico a propósito; usa e
       .u-#{$prefix}r-#{$key} {
         #{$property}-right: $value;
       }
       // X-Axis
       .u-#{$prefix}x-#{$key} {
-        #{$property}-left: $value;
-        #{$property}-right: $value;
+        #{$property}-inline: $value;
       }
       // Y-Axis
       .u-#{$prefix}y-#{$key} {
-        #{$property}-top: $value;
-        #{$property}-bottom: $value;
+        #{$property}-block: $value;
       }
     }
   }

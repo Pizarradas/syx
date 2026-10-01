@@ -46,9 +46,12 @@
         }
       }
 
-      // Nav icon: prev (chevron-left)
+      // Nav icon: prev (chevron-left; en RTL se espeja y apunta a la derecha,
+      // que es «atrás» cuando se lee de derecha a izquierda)
       &--is-prev {
         .atom-pagination__trigger {
+          @include mirror-rtl('::before');
+
           &::before {
             content: "";
             display: block;
@@ -63,9 +66,11 @@
         }
       }
 
-      // Nav icon: next (chevron-right)
+      // Nav icon: next (chevron-right; espejado en RTL)
       &--is-next {
         .atom-pagination__trigger {
+          @include mirror-rtl('::before');
+
           &::before {
             content: "";
             display: block;

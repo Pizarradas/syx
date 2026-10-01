@@ -3,12 +3,20 @@
 // Null-safe shorthand for position + offsets.
 // Null values are skipped — no empty CSS properties emitted.
 //
+// Los desplazamientos salen como propiedades LÓGICAS: $top → inset-block-start,
+// $right → inset-inline-end, $bottom → inset-block-end, $left →
+// inset-inline-start. En LTR pinta igual que top/right/bottom/left; en RTL lo
+// anclado a la izquierda pasa a la derecha, con el texto. Si además desplazas
+// con transform (translateX), recuerda que transform es físico: espéjalo en
+// :dir(rtl) o usa `translate` con una variable que cambie de signo.
+// (Auditoría 2026-10 · acción 13)
+//
 // @example
 //   @include position(absolute, $top: 0, $right: 0);
-//   // → position: absolute; top: 0; right: 0;
+//   // → position: absolute; inset-block-start: 0; inset-inline-end: 0;
 //
 //   @include position(fixed, $bottom: 1rem, $left: 50%);
-//   // → position: fixed; bottom: 1rem; left: 50%;
+//   // → position: fixed; inset-block-end: 1rem; inset-inline-start: 50%;
 //
 // Convenience aliases:
 //   @include absolute($top: 0, $left: 0);
@@ -19,10 +27,10 @@
 
 @mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
   position: $position;
-  @if $top    != null { top: $top; }
-  @if $right  != null { right: $right; }
-  @if $bottom != null { bottom: $bottom; }
-  @if $left   != null { left: $left; }
+  @if $top    != null { inset-block-start: $top; }
+  @if $right  != null { inset-inline-end: $right; }
+  @if $bottom != null { inset-block-end: $bottom; }
+  @if $left   != null { inset-inline-start: $left; }
 }
 
 // Convenience aliases

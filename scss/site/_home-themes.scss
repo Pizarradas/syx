@@ -32,9 +32,9 @@
         font-size: var(--component-section-index-size);
         letter-spacing: var(--semantic-letter-spacing-wide);
         color: var(--component-section-index-color);
-        padding-bottom: var(--component-section-index-gap);
-        margin-bottom: var(--component-section-index-gap);
-        border-bottom: var(--component-section-tick-width) solid var(--component-section-tick-color);
+        padding-block-end: var(--component-section-index-gap);
+        margin-block-end: var(--component-section-index-gap);
+        border-block-end: var(--component-section-tick-width) solid var(--component-section-tick-color);
       }
 
       // Tope de la cota, al extremo derecho de la regla.
@@ -56,11 +56,11 @@
       }
 
       text-align: var(--component-section-align);
-      margin-bottom: var(--semantic-space-layout-lg);
+      margin-block-end: var(--semantic-space-layout-lg);
 
       .org-home-themes__overline {
         display: block;
-        margin-bottom: var(--semantic-space-component-sm);
+        margin-block-end: var(--semantic-space-component-sm);
       }
 
       .org-home-themes__title {

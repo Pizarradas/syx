@@ -11,6 +11,11 @@
  *                    que no estén justificadas en axe-excepciones.json
  *   --capturas DIR   guarda una captura por componente, tema y modo en DIR,
  *                    para que comparar.mjs la enfrente con otra rama
+ *   --rtl            monta la página con dir="rtl" (árabe, hebreo…): axe y
+ *                    capturas en el sentido de derecha a izquierda. Las
+ *                    capturas de --rtl contra las de una ejecución sin él
+ *                    deben verse espejadas; contra --rtl de la rama base,
+ *                    iguales. (Auditoría 2026-10 · acción 13)
  *
  * La página se construye desde component-registry.json: un componente nuevo
  * entra en las pruebas el día que entra en el registro, sin tocar este fichero.
@@ -19,6 +24,7 @@
  *   cd tests/browser && npm ci && npx playwright install chromium
  *   node run.mjs --axe
  *   node run.mjs --capturas out [--temas syx-sketch,example-01] [--raiz ../otro-arbol]
+ *   node run.mjs --axe --rtl
  *
  * (Auditoría 2026-09 · acción 17)
  */
@@ -45,6 +51,10 @@ const temas = (arg('--temas') || fs.readdirSync(path.join(ROOT, 'css'))
   .map((f) => f.replace(/^styles-theme-|\.css$/g, ''))
   .join(',')).split(',').filter(Boolean).sort();
 const MODOS = ['light', 'dark'];
+// Dirección del texto de la página. SYX escribe sus lados con propiedades
+// lógicas (margin-inline-start, inset-inline-end…): en RTL los componentes
+// se espejan solos, y esta opción es la forma de comprobarlo.
+const DIR = args.includes('--rtl') ? 'rtl' : 'ltr';
 
 // ─── La página de pruebas ────────────────────────────────────────────────────
 
@@ -54,11 +64,11 @@ function pagina(tema, modo) {
       ${c.usage}
     </section>`).join('\n');
   return `<!doctype html>
-<html lang="es" data-theme="${modo}">
+<html lang="es" dir="${DIR}" data-theme="${modo}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SYX · ${tema} · ${modo}</title>
+  <title>SYX · ${tema} · ${modo} · ${DIR}</title>
   <link rel="stylesheet" href="/css/styles-theme-${tema}.css">
   <style>
     /* Solo el andamio de la página de pruebas: separa las secciones para
@@ -142,7 +152,7 @@ async function axe(page) {
 const conAxe = args.includes('--axe');
 const dirCapturas = arg('--capturas');
 if (!conAxe && !dirCapturas) {
-  console.error('Uso: node run.mjs --axe | --capturas DIR [--temas a,b]');
+  console.error('Uso: node run.mjs --axe | --capturas DIR [--temas a,b] [--rtl]');
   process.exit(2);
 }
 if (!fs.existsSync(path.join(ROOT, 'css', `styles-theme-${temas[0]}.css`))) {
@@ -161,7 +171,7 @@ const page = await ctx.newPage();
 let violaciones = [];
 let exceptuadas = 0;
 let capturas = 0;
-console.log(`\n── SYX EN EL NAVEGADOR · ${componentes.length} componentes × ${temas.length} temas × ${MODOS.length} modos ──\n`);
+console.log(`\n── SYX EN EL NAVEGADOR · ${componentes.length} componentes × ${temas.length} temas × ${MODOS.length} modos · ${DIR.toUpperCase()} ──\n`);
 
 for (const tema of temas) {
   for (const modo of MODOS) {

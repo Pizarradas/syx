@@ -1,10 +1,18 @@
 // ABSTRACTS
 // ================================================
+@use 'sass:list';
 @use '../paths' as *;
 @use '../maps/maps' as *;
 // ================================================
 
 // MIXIN BORDER: shorthand
+// ================================================
+// Los nombres de lado de $direction (top, left, no-right, horizontal…) se
+// conservan para no romper a nadie, pero salen como propiedades LÓGICAS:
+// top → border-block-start, right → border-inline-end, bottom →
+// border-block-end, left → border-inline-start; vertical/horizontal →
+// border-block/border-inline. En LTR pinta igual; en RTL el borde
+// «izquierdo» acompaña al inicio del texto. (Auditoría 2026-10 · acción 13)
 // ================================================
 @mixin border($direction, $size: 1px, $style: solid, $color: #222) {
   @if ($direction == 'all')
@@ -15,59 +23,88 @@
     border: $size $style $color;
 
     @if $direction == 'no-top' {
-      border-top: 0;
+      border-block-start: 0;
     }
     @if $direction == 'no-bottom' {
-      border-bottom: 0;
+      border-block-end: 0;
     }
     @if $direction == 'no-left' {
-      border-left: 0;
+      border-inline-start: 0;
     }
     @if $direction == 'no-right' {
-      border-right: 0;
+      border-inline-end: 0;
     }
   } @else if ($direction == 'top')
       or ($direction == 'vertical')
       or ($direction == 'top-left')
       or ($direction == 'top-right') {
-    border-top: $size $style $color;
-
     @if $direction == 'vertical' {
-      border-bottom: $size $style $color;
+      border-block: $size $style $color;
+    } @else {
+      border-block-start: $size $style $color;
     }
     @if $direction == 'top-left' {
-      border-left: $size $style $color;
+      border-inline-start: $size $style $color;
     }
     @if $direction == 'top-right' {
-      border-right: $size $style $color;
+      border-inline-end: $size $style $color;
     }
   } @else if ($direction == 'bottom')
       or ($direction == 'bottom-left')
       or ($direction == 'bottom-right') {
-    border-bottom: $size $style $color;
+    border-block-end: $size $style $color;
 
     @if $direction == 'bottom-left' {
-      border-left: $size $style $color;
+      border-inline-start: $size $style $color;
     }
     @if $direction == 'bottom-right' {
-      border-right: $size $style $color;
+      border-inline-end: $size $style $color;
     }
   } @else if ($direction == 'left')
       or ($direction == 'horizontal') {
-    border-left: $size $style $color;
-
     @if $direction == 'horizontal' {
-      border-right: $size $style $color;
+      border-inline: $size $style $color;
+    } @else {
+      border-inline-start: $size $style $color;
     }
   } @else if ($direction == 'right') {
-    border-right: $size $style $color;
+    border-inline-end: $size $style $color;
   } @else {
     @warn 'This property does not exist in this property map.';
   }
 }
 
-// MIXIN BORDER: radius 
+// MIXIN BORDER: radius
+// ================================================
+// Mismo orden que la shorthand (sup-izq, sup-der, inf-der, inf-izq). Si las
+// esquinas son simétricas respecto al eje vertical (sup-der = inf-izq tras
+// expandir), la shorthand pinta igual en LTR y RTL y se emite tal cual; si
+// no, salen las cuatro esquinas lógicas (border-start-start-radius…), que en
+// LTR coinciden con las físicas. (Auditoría 2026-10 · acción 13)
 // ================================================
 @mixin border-radius($top-left:10px, $top-right:null, $bottom-right:null, $bottom-left:null){
-  border-radius: $top-left $top-right $bottom-right $bottom-left;
+  $v: ();
+  @each $x in ($top-left, $top-right, $bottom-right, $bottom-left) {
+    @if $x != null {
+      @if list.separator($x) == 'slash' { $v: null; }
+      @if $v != null { $v: list.join($v, $x); }
+    }
+  }
+  @if $v == null or list.length($v) < 3 {
+    border-radius: $top-left $top-right $bottom-right $bottom-left;
+  } @else {
+    $tl: list.nth($v, 1);
+    $tr: list.nth($v, 2);
+    $br: list.nth($v, 3);
+    $bl: $tr;
+    @if list.length($v) >= 4 { $bl: list.nth($v, 4); }
+    @if $tr == $bl {
+      border-radius: $v;
+    } @else {
+      border-start-start-radius: $tl;
+      border-start-end-radius: $tr;
+      border-end-end-radius: $br;
+      border-end-start-radius: $bl;
+    }
+  }
 }

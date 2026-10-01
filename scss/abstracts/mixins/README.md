@@ -22,14 +22,14 @@ All mixins are available via the abstracts index:
 
 ### `position($position, $top, $right, $bottom, $left)`
 
-Null-safe shorthand for `position` + offsets.
+Null-safe shorthand for `position` + offsets. Los desplazamientos salen como **propiedades lógicas** (`$top` → `inset-block-start`, `$right` → `inset-inline-end`, `$bottom` → `inset-block-end`, `$left` → `inset-inline-start`): igual en LTR, espejado en RTL. Para centrar con `translate`, usa `absolute-center`, que es físico a propósito.
 
 ```scss
 @include position(absolute, $top: 0, $right: 0);
-// → position: absolute; top: 0; right: 0;
+// → position: absolute; inset-block-start: 0; inset-inline-end: 0;
 
 @include position(fixed, $bottom: 1rem, $left: 50%);
-// → position: fixed; bottom: 1rem; left: 50%;
+// → position: fixed; inset-block-end: 1rem; inset-inline-start: 50%;
 
 @include position(relative);
 // → position: relative;
@@ -43,10 +43,10 @@ Shorthand for `position(absolute, …)`.
 
 ```scss
 @include absolute($top: 0, $left: 0);
-// → position: absolute; top: 0; left: 0;
+// → position: absolute; inset-block-start: 0; inset-inline-start: 0;
 
 @include absolute($top: 50%, $left: 5px);
-// → position: absolute; top: 50%; left: 5px;
+// → position: absolute; inset-block-start: 50%; inset-inline-start: 5px;
 
 @include absolute();
 // → position: absolute;
@@ -60,7 +60,7 @@ Shorthand for `position(fixed, …)`.
 
 ```scss
 @include fixed($bottom: 0, $left: 0, $right: 0);
-// → position: fixed; bottom: 0; left: 0; right: 0;
+// → position: fixed; inset-block-end: 0; inset-inline-start: 0; inset-inline-end: 0;
 ```
 
 ---
@@ -82,7 +82,7 @@ Shorthand for `position(sticky, …)`.
 
 ```scss
 @include sticky($top: 0);
-// → position: sticky; top: 0;
+// → position: sticky; inset-block-start: 0;
 ```
 
 ---
@@ -98,13 +98,13 @@ Null-skipping shorthand for `margin`. Pass a space-separated list; `null` skips 
 // → margin: 1rem;
 
 @include margin(null auto);
-// → margin-left: auto; margin-right: auto;
+// → margin-inline-end: auto; margin-inline-start: auto;
 
 @include margin(1rem null 2rem null);
-// → margin-top: 1rem; margin-bottom: 2rem;
+// → margin-block-start: 1rem; margin-block-end: 2rem;
 
 @include margin(1rem 2rem 3rem 4rem);
-// → margin-top: 1rem; margin-right: 2rem; margin-bottom: 3rem; margin-left: 4rem;
+// → margin-block: 1rem 3rem; margin-inline: 4rem 2rem;  (inicio fin = izquierda derecha en LTR)
 ```
 
 ---
@@ -115,10 +115,10 @@ Null-skipping shorthand for `padding`. Same API as `margin`.
 
 ```scss
 @include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
-// → padding-top: …; padding-right: …; padding-bottom: …; padding-left: …;
+// → padding: … …;
 
 @include padding(null var(--layout-pad-4));
-// → padding-left: …; padding-right: …;
+// → padding-inline-end: …; padding-inline-start: …;
 ```
 
 ---
@@ -146,14 +146,14 @@ Sets `width` and `height`. If only `$width` is given, applies to both.
 
 ### `border($sides, $width, $style, $color)`
 
-Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `left`.
+Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `left` (también `no-*`, `vertical`, `horizontal`, `top-left`…). Sale lógico: `top` → `border-block-start`, `left` → `border-inline-start`, `horizontal` → `border-inline`.
 
 ```scss
 @include border(all, 1px, solid, var(--component-form-field-border));
 // → border: 1px solid …;
 
 @include border(bottom, 2px, solid, var(--semantic-color-primary));
-// → border-bottom: 2px solid …;
+// → border-block-end: 2px solid …;
 ```
 
 ---
@@ -165,7 +165,11 @@ Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `
 // → border-radius: …;
 
 @include border-radius(4px 8px);
-// → border-radius: 4px 8px;
+// → border-radius: 4px 8px;   (simétrica: igual en LTR y RTL)
+
+@include border-radius(4px 0 0 4px);
+// → border-start-start-radius: 4px; border-start-end-radius: 0;
+//   border-end-end-radius: 0; border-end-start-radius: 4px;
 ```
 
 ---
@@ -392,6 +396,21 @@ Multi-line text clamp with ellipsis.
 
 ---
 
+## Direction (RTL)
+
+### `mirror-rtl($pseudo)`
+
+Espeja en horizontal (`scale: -1 1`) un icono direccional —flecha o chevron de «siguiente/anterior»— cuando el texto va de derecha a izquierda. Se incluye en el elemento; `$pseudo` apunta a su pseudo-elemento. Va tras `@supports selector(:dir(rtl))`, así que en navegadores sin `:dir()` el icono simplemente no se espeja.
+
+```scss
+.atom-pagination__trigger {
+  @include mirror-rtl('::before');
+}
+// → @supports selector(:dir(rtl)) { .atom-pagination__trigger:dir(rtl)::before { scale: -1 1; } }
+```
+
+---
+
 ## Layout
 
 ### `aspect-ratio($width, $height)`
@@ -488,12 +507,13 @@ $spacing-map: (
 
 ### `generate-utility-directional($map, $prefix, $property)`
 
-Generates directional utility classes (top/right/bottom/left/x/y).
+Generates directional utility classes (t/b/s/e/x/y, lógicas; l/r quedan físicas y deprecadas).
 
 ```scss
 @include generate-utility-directional($spacing-map, "syx-m", margin);
-// → .syx-mt-sm { margin-top: 0.5rem; }
-//   .syx-mx-md { margin-left: 1rem; margin-right: 1rem; }
+// → .syx-mt-sm { margin-block-start: 0.5rem; }
+//   .syx-ms-sm { margin-inline-start: 0.5rem; }
+//   .syx-mx-md { margin-inline: 1rem; }
 //   … etc
 ```
 
@@ -518,7 +538,7 @@ Legacy visually-hidden (prefer `sr-only()` for new code).
 
 ### `triangle($size, $color, $direction)`
 
-CSS triangle using borders.
+CSS triangle using borders. Bordes lógicos: `right` apunta al final de la línea y en RTL se espeja; `up`/`down` no cambian.
 
 ```scss
 @include triangle(8px, var(--semantic-color-primary), down);

@@ -14,7 +14,7 @@
   .org-home-footer {
     padding-block: var(--component-section-padding-block);
     padding-inline: var(--component-section-padding-inline);
-    border-top: var(--component-footer-border-width) solid var(--component-footer-border-color);
+    border-block-start: var(--component-footer-border-width) solid var(--component-footer-border-color);
     background-color: var(--component-footer-bg);
 
     // &__inner — flex row
@@ -33,7 +33,7 @@
       @include breakpoint(tablet) {
         flex-direction: row;
         justify-content: space-between;
-        text-align: left;
+        text-align: start;
       }
     }
 
@@ -100,8 +100,8 @@
       text-align: center;
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);
-      padding-top: var(--semantic-space-component-md);
-      border-top: var(--component-section-divider-width) solid var(--component-section-divider-color);
+      padding-block-start: var(--semantic-space-component-md);
+      border-block-start: var(--component-section-divider-width) solid var(--component-section-divider-color);
     }
   }
 

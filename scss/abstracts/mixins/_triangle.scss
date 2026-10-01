@@ -18,24 +18,24 @@
   $triangle--height: $triangle--height;
   @if list.length($triangle--size) <= 1 { $triangle--height: $triangle--height / 2; }
 
+  // Bordes lógicos: `right` apunta hacia el final de la línea y `left` hacia
+  // el inicio, así que en RTL el triángulo se espeja con el texto (una flecha
+  // de «siguiente» sigue señalando hacia delante). up/down no cambian.
+  // (Auditoría 2026-10 · acción 13)
   @if $triangle--direction == up {
-      border-bottom: $triangle--height solid $triangle--color;
-      border-left: $triangle--width solid transparent;
-      border-right: $triangle--width solid transparent;
+      border-block-end: $triangle--height solid $triangle--color;
+      border-inline: $triangle--width solid transparent;
 
   } @else if $triangle--direction == right {
-      border-left: $triangle--height solid $triangle--color;
-      border-bottom: $triangle--width solid transparent;
-      border-top: $triangle--width solid transparent;
+      border-inline-start: $triangle--height solid $triangle--color;
+      border-block: $triangle--width solid transparent;
 
   } @else if $triangle--direction == down {
-      border-top: $triangle--height solid $triangle--color;
-      border-left: $triangle--width solid transparent;
-      border-right: $triangle--width solid transparent;
+      border-block-start: $triangle--height solid $triangle--color;
+      border-inline: $triangle--width solid transparent;
 
   } @else if $triangle--direction == left {
-      border-right: $triangle--height solid $triangle--color;
-      border-bottom: $triangle--width solid transparent;
-      border-top: $triangle--width solid transparent;
+      border-inline-end: $triangle--height solid $triangle--color;
+      border-block: $triangle--width solid transparent;
   }
 }

@@ -23,26 +23,51 @@ $spacers: (
 // («MARGIN ZERO SHORTHANDS»), que se compila después y por eso es la copia
 // que manda —`syx-m-0 syx-mt-4` deja el margen superior en 0—. Generarlos
 // también aquí los duplicaba sin cambiar nada.
+//
+// LÓGICAS (Auditoría 2026-10 · acción 13): t/b/x/y son ejes de bloque e
+// inline —arriba es arriba en cualquier escritura horizontal, y x/y son
+// simétricas—, así que salen como propiedades lógicas sin cambiar de nombre.
+// Los lados de la línea van con s (start) y e (end): .syx-ms-* es el margen
+// inicial, a la izquierda en LTR y a la derecha en RTL.
+//
+// DEPRECADAS: .syx-ml-*, .syx-mr-*, .syx-pl-*, .syx-pr-* siguen siendo
+// izquierda y derecha FÍSICAS, a propósito: quien las usa hoy no ve ningún
+// cambio, ni en RTL. Se retiran en SYX v5.0; migra a ms/me/ps/pe.
+// .syx-pis-*/.syx-pie-* (las lógicas que ya había) se quedan como alias de
+// .syx-ps-*/.syx-pe-*.
+//
+// El ORDEN dentro del bucle es el de siempre y no se toca: lógicas y
+// físicas comparten cascada (margin-inline-start y margin-left son la misma
+// propiedad en LTR), así que en `syx-ml-1 syx-mx-3` gana la que va después,
+// como antes. Las nuevas s/e van junto a sus equivalentes l/r.
 @each $name, $value in $spacers {
   @if $name != 0 {
     .syx-m-#{$name}  { margin: $value; }
-    .syx-mt-#{$name} { margin-top: $value; }
-    .syx-mb-#{$name} { margin-bottom: $value; }
+    .syx-mt-#{$name} { margin-block-start: $value; }
+    .syx-mb-#{$name} { margin-block-end: $value; }
   }
-  .syx-ml-#{$name} { margin-left: $value; }
-  .syx-mr-#{$name} { margin-right: $value; }
-  .syx-mx-#{$name} { margin-left: $value; margin-right: $value; }
-  .syx-my-#{$name} { margin-top: $value; margin-bottom: $value; }
+  // stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
+  .syx-ml-#{$name} { margin-left: $value; }   // DEPRECADA — física
+  .syx-mr-#{$name} { margin-right: $value; }  // DEPRECADA — física
+  // stylelint-enable property-disallowed-list
+  .syx-ms-#{$name} { margin-inline-start: $value; }
+  .syx-me-#{$name} { margin-inline-end: $value; }
+  .syx-mx-#{$name} { margin-inline: $value; }
+  .syx-my-#{$name} { margin-block: $value; }
 
   .syx-p-#{$name}  { padding: $value; }
-  .syx-pt-#{$name} { padding-top: $value; }
-  .syx-pb-#{$name} { padding-bottom: $value; }
-  .syx-pl-#{$name} { padding-left: $value; }
-  .syx-pr-#{$name} { padding-right: $value; }
-  .syx-px-#{$name} { padding-left: $value; padding-right: $value; }
-  .syx-py-#{$name} { padding-top: $value; padding-bottom: $value; }
+  .syx-pt-#{$name} { padding-block-start: $value; }
+  .syx-pb-#{$name} { padding-block-end: $value; }
+  // stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
+  .syx-pl-#{$name} { padding-left: $value; }  // DEPRECADA — física
+  .syx-pr-#{$name} { padding-right: $value; } // DEPRECADA — física
+  // stylelint-enable property-disallowed-list
+  .syx-ps-#{$name} { padding-inline-start: $value; }
+  .syx-pe-#{$name} { padding-inline-end: $value; }
+  .syx-px-#{$name} { padding-inline: $value; }
+  .syx-py-#{$name} { padding-block: $value; }
 
-  // Logical Properties (for RTL support)
+  // Alias de .syx-ps-*/.syx-pe-* (nombre anterior, se conserva)
   .syx-pis-#{$name} { padding-inline-start: $value; }
   .syx-pie-#{$name} { padding-inline-end: $value; }
 }
@@ -53,9 +78,13 @@ $spacers: (
 // Section padding shorthand
 .syx-pad-section { padding: var(--semantic-space-layout-xxl) 0; }
 
-// Auto margin (centering)
-.syx-mx-auto { margin-left: auto; margin-right: auto; }
-.syx-ml-auto { margin-left: auto; }
-.syx-mr-auto { margin-right: auto; }
+// Auto margin (centering / empujar al final)
+.syx-mx-auto { margin-inline: auto; }
+// stylelint-disable property-disallowed-list -- utilidades deprecadas, físicas a propósito
+.syx-ml-auto { margin-left: auto; }  // DEPRECADA — física; usa .syx-ms-auto
+.syx-mr-auto { margin-right: auto; } // DEPRECADA — física; usa .syx-me-auto
+// stylelint-enable property-disallowed-list
+.syx-ms-auto { margin-inline-start: auto; }
+.syx-me-auto { margin-inline-end: auto; }
 
 } // end @layer syx.utilities

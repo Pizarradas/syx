@@ -61,8 +61,14 @@
         margin: auto;
         width: var(--component-check-mark-width);
         height: var(--component-check-mark-height);
+        // Físico a propósito: el ✓ se dibuja con los bordes derecho e
+        // inferior de una caja girada 45°. Con bordes lógicos, en RTL saldría
+        // espejado (trazo largo hacia la izquierda), y una marca de
+        // verificación no se espeja. (Auditoría 2026-10 · acción 13)
+        // stylelint-disable property-disallowed-list -- dibujo del ✓ girado 45°, no se espeja
         border-right: var(--component-check-mark-thickness) solid transparent;
         border-bottom: var(--component-check-mark-thickness) solid transparent;
+        // stylelint-enable property-disallowed-list
         transform: rotate(var(--component-check-mark-rotation)) scale(0)
           translateY(-1px);
         transform-origin: center;
@@ -89,8 +95,11 @@
       }
 
       &::after {
+        // Físico a propósito: ver el dibujo del ✓ arriba.
+        // stylelint-disable property-disallowed-list -- dibujo del ✓ girado 45°, no se espeja
         border-right-color: var(--component-check-mark-color);
         border-bottom-color: var(--component-check-mark-color);
+        // stylelint-enable property-disallowed-list
         transform: rotate(var(--component-check-mark-rotation)) scale(1)
           translateY(-1px);
       }
@@ -125,8 +134,11 @@
 
     .atom-check__input:checked + .atom-check__label::after {
       forced-color-adjust: none;
+      // Físico a propósito: ver el dibujo del ✓ arriba.
+      // stylelint-disable property-disallowed-list -- dibujo del ✓ girado 45°, no se espeja
       border-right-color: HighlightText;
       border-bottom-color: HighlightText;
+      // stylelint-enable property-disallowed-list
     }
   }
   } // end @layer syx.atoms
