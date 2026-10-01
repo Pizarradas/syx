@@ -79,11 +79,8 @@
 .syx-obj-top    { object-position: top; }
 .syx-obj-bottom { object-position: bottom; }
 
-// ================================================
-// BACKGROUND SIZE
-// ================================================
-.syx-bg-cover   { background-size: cover; }
-.syx-bg-contain { background-size: contain; }
-.syx-bg-auto    { background-size: auto; }
+// BACKGROUND SIZE: .syx-bg-cover/-contain/-auto viven en
+// base/helpers/_backgrounds.scss, para que también los tengan los bundles
+// que no cargan utilidades. Aquí estaban duplicados.
 
 } // end @layer syx.utilities

@@ -171,6 +171,8 @@
 
   // ================================================
   // WIDTHS (text measure)
+  // .syx-w-full y .syx-h-full viven aquí y no en _display.scss: esta copia
+  // es la posterior, la que gana a .syx-w-auto/.syx-h-auto si coinciden.
   // ================================================
   .syx-w-full {
     width: 100%;
@@ -376,6 +378,8 @@
 
   // ================================================
   // MARGIN ZERO SHORTHANDS
+  // Únicos: _spacing.scss no genera el 0 de m/mt/mb. Van al final a
+  // propósito; moverlos cambia qué utilidad gana cuando se combinan.
   // ================================================
   .syx-mb-0 {
     margin-bottom: 0;

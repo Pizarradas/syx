@@ -19,10 +19,16 @@ $spacers: (
 );
 
 // Generate Margin and Padding Utilities
+// .syx-m-0, .syx-mt-0 y .syx-mb-0 no salen de aquí: los declara _text.scss
+// («MARGIN ZERO SHORTHANDS»), que se compila después y por eso es la copia
+// que manda —`syx-m-0 syx-mt-4` deja el margen superior en 0—. Generarlos
+// también aquí los duplicaba sin cambiar nada.
 @each $name, $value in $spacers {
-  .syx-m-#{$name}  { margin: $value; }
-  .syx-mt-#{$name} { margin-top: $value; }
-  .syx-mb-#{$name} { margin-bottom: $value; }
+  @if $name != 0 {
+    .syx-m-#{$name}  { margin: $value; }
+    .syx-mt-#{$name} { margin-top: $value; }
+    .syx-mb-#{$name} { margin-bottom: $value; }
+  }
   .syx-ml-#{$name} { margin-left: $value; }
   .syx-mr-#{$name} { margin-right: $value; }
   .syx-mx-#{$name} { margin-left: $value; margin-right: $value; }

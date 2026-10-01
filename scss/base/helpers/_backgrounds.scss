@@ -13,11 +13,10 @@
   @layer syx.utilities {
     // .syx-bg
     .syx-bg {
-      // &-auto
-      &-auto {
-        background-size: auto;
-      }
-
+      // Tamaño de fondo. Vivían también en utilities/_media.scss, que se
+      // compilaba después y por eso mandaba: en ese orden (cover, contain,
+      // auto), `auto` gana a los otros dos si coinciden. Se queda aquí, donde
+      // lo ven también los bundle-*.scss sin utilidades, y con ese orden.
       // &-cover
       &-cover {
         background-size: cover;
@@ -26,6 +25,11 @@
       // &-contain
       &-contain {
         background-size: contain;
+      }
+
+      // &-auto
+      &-auto {
+        background-size: auto;
       }
 
       // Alias cortos de superficie. docs.html los usa 30 veces y no
