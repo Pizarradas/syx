@@ -2,13 +2,16 @@
 // ================================================
 // Null-skipping shorthand for margin.
 // Philosophy: pass `null` to skip any side (Bourbon-compatible API).
+// Los lados se escriben en orden top/right/bottom/left, pero salen como
+// propiedades lógicas (block-start/inline-end/block-end/inline-start): en
+// RTL el «left» de la firma es el lado inicial. (Auditoría 2026-10 · acción 13)
 //
 // @example
 //   @include margin(null auto);
-//   // → margin-left: auto; margin-right: auto;
+//   // → margin-inline-end: auto; margin-inline-start: auto;
 //
 //   @include margin(1rem null 2rem null);
-//   // → margin-top: 1rem; margin-bottom: 2rem;
+//   // → margin-block-start: 1rem; margin-block-end: 2rem;
 //
 //   @include margin(1rem);
 //   // → margin: 1rem;
