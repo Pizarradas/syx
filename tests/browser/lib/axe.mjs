@@ -15,10 +15,14 @@
  * excepción deja de cubrirlo y la prueba falla.
  *
  * Una excepción lleva: regla, componente (o la página, p. ej. "docs.html"),
- * selector (un trozo del selector de axe), temas ("tema/modo"), caduca
- * (AAAA-MM-DD), porque y, para contraste, ratioMinima. La que no trae todo,
- * la que caducó y la que no excusa nada en una ejecución completa paran la
- * ejecución. (Auditoría 2026-10 · acción 8)
+ * selector (un trozo del selector de axe) o `dentro` (un selector CSS del
+ * ámbito: el nodo tiene que estar dentro de él, p. ej. "#hero"), temas
+ * ("tema/modo"), caduca (AAAA-MM-DD), porque y, para contraste, ratioMinima.
+ * `dentro` existe para las páginas: home.html tiene cientos de textos sobre
+ * degradados, y una entrada por nodo sería una lista que nadie revisa; una por
+ * sección, con la peor medida de la sección como suelo, sí se revisa. La que
+ * no trae todo, la que caducó y la que no excusa nada en una ejecución
+ * completa paran la ejecución. (Auditoría 2026-10 · acción 8)
  */
 
 import fs from 'node:fs';
@@ -35,15 +39,16 @@ export function cargarExcepciones() {
   const lista = JSON.parse(fs.readFileSync(FICHERO_EXCEPCIONES, 'utf8')).excepciones;
   const hoy = new Date().toISOString().slice(0, 10);
   for (const e of lista) {
-    const falta = ['regla', 'componente', 'selector', 'temas', 'caduca', 'porque']
+    const falta = ['regla', 'componente', 'temas', 'caduca', 'porque']
       .concat(e.regla === 'color-contrast' ? ['ratioMinima'] : [])
+      .concat(e.selector || e.dentro ? [] : ['selector (o dentro)'])
       .filter((k) => !e[k]);
     if (falta.length) throw new Error(`axe-excepciones.json: a una excepción le falta ${falta.join(', ')}.`);
     if (e.tipo && !['violacion', 'incompleto'].includes(e.tipo)) throw new Error(`axe-excepciones.json: tipo «${e.tipo}» desconocido (violacion | incompleto).`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(e.caduca)) throw new Error(`axe-excepciones.json: caduca debe ser AAAA-MM-DD («${e.caduca}»).`);
-    if (e.caduca < hoy) throw new Error(`axe-excepciones.json: la excepción de ${e.componente} (${e.selector}) caducó el ${e.caduca}.`);
-    if (/^REVISAR/.test(e.porque)) throw new Error(`axe-excepciones.json: la excepción de ${e.componente} (${e.selector}) está sin revisar: su porqué aún dice REVISAR.`);
-    if (String(e.porque).length < 40) throw new Error(`axe-excepciones.json: el porqué de ${e.componente} (${e.selector}) es demasiado corto para ser una revisión.`);
+    if (e.caduca < hoy) throw new Error(`axe-excepciones.json: la excepción de ${e.componente} (${e.selector || e.dentro}) caducó el ${e.caduca}.`);
+    if (/^REVISAR/.test(e.porque)) throw new Error(`axe-excepciones.json: la excepción de ${e.componente} (${e.selector || e.dentro}) está sin revisar: su porqué aún dice REVISAR.`);
+    if (String(e.porque).length < 40) throw new Error(`axe-excepciones.json: el porqué de ${e.componente} (${e.selector || e.dentro}) es demasiado corto para ser una revisión.`);
   }
   return lista;
 }
@@ -52,9 +57,16 @@ export function cargarExcepciones() {
  * axe sobre la página. `donde(el)` dice a qué componente o página pertenece
  * un nodo. Devuelve los nodos de violations e incomplete, aplanados.
  */
-export async function pasarAxe(page, { pagina = null } = {}) {
+export async function pasarAxe(page, { pagina = null, dentros = [] } = {}) {
   await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });
-  return page.evaluate(async ([etiquetas, pagina]) => {
+  return page.evaluate(async ([etiquetas, pagina, dentros]) => {
+    // El ámbito de un nodo: la sección con id más cercana (o el componente de
+    // la página de pruebas). Es lo que agrupa las propuestas de excepción.
+    const ambito = (el) => {
+      const a = el && el.closest('section[id], header[id], aside[id], main[id], footer[id], nav[id], [data-componente]');
+      if (!a) return 'body';
+      return a.dataset.componente ? `[data-componente="${a.dataset.componente}"]` : `#${a.id}`;
+    };
     const r = await window.axe.run(document, {
       runOnly: { type: 'tag', values: etiquetas },
       resultTypes: ['violations', 'incomplete'],
@@ -68,11 +80,13 @@ export async function pasarAxe(page, { pagina = null } = {}) {
         componente: pagina || (sec ? sec.dataset.componente : '(página)'),
         objetivo: n.target.join(' '),
         resumen: n.failureSummary || check.message || v.help,
+        ambito: ambito(el),
+        dentro: el ? dentros.filter((d) => el.closest(d)) : [],
         esperado: check.data && check.data.expectedContrastRatio ? parseFloat(check.data.expectedContrastRatio) : null,
       };
     }));
     return [...plano(r.violations, 'violacion'), ...plano(r.incomplete, 'incompleto')];
-  }, [ETIQUETAS, pagina]);
+  }, [ETIQUETAS, pagina, dentros]);
 }
 
 /** Mide en píxeles los incompletos de contraste (in situ: añade `medida`). */
@@ -92,7 +106,8 @@ export function excepcionPara(v, excepciones, tema, modo) {
     (e.tipo || 'violacion') === v.tipo &&
     e.regla === v.regla &&
     e.componente === v.componente &&
-    v.objetivo.includes(e.selector) &&
+    (!e.selector || v.objetivo.includes(e.selector)) &&
+    (!e.dentro || (v.dentro || []).includes(e.dentro)) &&
     e.temas.includes(`${tema}/${modo}`) &&
     // La razón medida es un suelo: si empeora, deja de estar cubierta. Y un
     // incompleto de contraste además tiene que llegar al mínimo de WCAG: una
@@ -106,20 +121,34 @@ export function excepcionPara(v, excepciones, tema, modo) {
  * contraste que SÍ cumplen medidos en píxeles: agrupados por selector, con la
  * peor medida como suelo. Los que no cumplen no se proponen: se arreglan.
  */
-export function proponer(sinCubrir, caduca) {
+export function proponer(sinCubrir, caduca, { porAmbito = false } = {}) {
   const grupos = new Map();
+  const causa = (v) => String(v.resumen).replace(/^[\s\S]*?(due to |because |contains )/, '$1').replace(/\.$/, '').trim();
   for (const v of sinCubrir) {
     if (v.tipo !== 'incompleto') continue;
     const mide = v.regla === 'color-contrast';
     if (mide && (!v.medida || v.medida.error || v.medida.ratio < v.medida.requerido)) continue;
-    const k = `${v.regla}|${v.componente}|${v.objetivo}`;
-    if (!grupos.has(k)) grupos.set(k, { tipo: 'incompleto', regla: v.regla, componente: v.componente, selector: v.objetivo, temas: new Set(), ratioMinima: mide ? Infinity : undefined, caduca, porque: mide ? '' : 'REVISAR: escribe aquí qué se comprobó y por qué cumple.', motivo: String(v.resumen).replace(/^Fix (any|all) of the following:\s*/, '') });
+    const donde = porAmbito && mide ? { dentro: v.ambito } : { selector: v.objetivo };
+    const k = `${v.regla}|${v.componente}|${donde.dentro || donde.selector}`;
+    if (!grupos.has(k)) grupos.set(k, { tipo: 'incompleto', regla: v.regla, componente: v.componente, ...donde, temas: new Set(), ratioMinima: mide ? Infinity : undefined, requerido: 0, causas: new Set(), nodos: new Set(), caduca, porque: mide ? '' : 'REVISAR: escribe aquí qué se comprobó y por qué cumple.' });
     const g = grupos.get(k);
     g.temas.add(`${v.tema}/${v.modo}`);
+    g.causas.add(causa(v));
+    g.nodos.add(v.objetivo);
     if (mide) {
-      g.ratioMinima = Math.min(g.ratioMinima, Math.floor(v.medida.ratio * 100) / 100);
-      g.porque = `axe no resuelve el fondo (${String(v.resumen).replace(/^[\s\S]*?(due to |because )/, '').replace(/\.$/, '').trim()}); medido en píxeles, el texto contra el fondo real que tiene detrás da ≥ ${g.ratioMinima}:1 (mínimo ${v.medida.requerido}:1).`;
+      // El suelo deja 0,15 de holgura bajo lo medido (nunca por debajo del
+      // mínimo de WCAG): la misma página rasterizada en otra máquina mueve
+      // algún píxel de sitio, y un suelo al céntimo fallaría por eso y no por
+      // una regresión.
+      g.ratioMinima = Math.min(g.ratioMinima, Math.max(v.medida.requerido, Math.floor((v.medida.ratio - 0.15) * 100) / 100));
+      g.requerido = Math.max(g.requerido, v.medida.requerido);
+      g.peor = Math.min(g.peor ?? Infinity, v.medida.ratio);
     }
   }
-  return [...grupos.values()].map((g) => ({ ...g, temas: [...g.temas].sort() }));
+  return [...grupos.values()].map(({ causas, nodos, requerido, peor, ...g }) => {
+    if (g.regla === 'color-contrast') {
+      g.porque = `axe no resuelve el fondo de ${nodos.size} texto(s) (${[...causas].join('; ')}). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (${requerido === 3 ? '3:1, texto grande' : '4,5:1; 3:1 si es texto grande'}) y el peor da ${String(peor).replace('.', ',')}:1.`;
+    }
+    return { ...g, temas: [...g.temas].sort() };
+  });
 }

@@ -87,7 +87,7 @@ for (const tema of temas) {
     await abrirComponentes(page, base, tema, modo);
 
     if (conAxe) {
-      const nodos = (await pasarAxe(page)).map((v) => ({ ...v, tema, modo }));
+      const nodos = (await pasarAxe(page, { dentros: excepciones.filter((e) => e.dentro).map((e) => e.dentro) })).map((v) => ({ ...v, tema, modo }));
       await medirIncompletos(page, nodos);
       const reales = nodos.filter((v) => {
         const e = excepcionPara(v, excepciones, tema, modo);
@@ -140,7 +140,7 @@ if (conAxe) {
       if (v.medida) console.log(`   medido en píxeles: ${v.medida.error || `${v.medida.ratio}:1 (${v.medida.fg} sobre ${v.medida.bg}, mínimo ${v.medida.requerido}:1)`}`);
     }
   }
-  for (const e of muertas) console.log(`\n❌ axe-excepciones.json: la excepción ${e.regla} de ${e.componente} (${e.selector}) ya no cubre nada: bórrala.`);
+  for (const e of muertas) console.log(`\n❌ axe-excepciones.json: la excepción ${e.regla} de ${e.componente} (${e.selector || e.dentro}) ya no cubre nada: bórrala.`);
   if (bandera('--proponer')) {
     const caduca = new Date(Date.now() + 182 * 864e5).toISOString().slice(0, 10);
     console.log('\n── Propuestas para axe-excepciones.json (revísalas antes de pegarlas) ──\n');

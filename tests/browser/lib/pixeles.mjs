@@ -59,7 +59,20 @@ const dosFotogramas = (page) => page.evaluate(() => new Promise((ok) => requestA
 export async function contrasteDeTexto(page, selector, { requerido: req } = {}) {
   const el = await page.$(selector);
   if (!el) return { error: 'el selector no encuentra el elemento' };
-  await el.evaluate((e) => e.scrollIntoView({ block: 'center', inline: 'center' }));
+  // Desplazado hasta que nada lo tape: centrado, una cabecera fija o el pie
+  // pegajoso de una barra lateral pueden caer justo encima, y entonces quitar
+  // el texto no cambiaría ningún píxel. Se prueba centrado, arriba y abajo.
+  for (const block of ['center', 'start', 'end']) {
+    const libre = await el.evaluate((e, block) => {
+      e.scrollIntoView({ block, inline: 'center' });
+      const r = e.getBoundingClientRect();
+      const x = Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2));
+      const y = Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2));
+      const arriba = document.elementFromPoint(x, y);
+      return !!arriba && (arriba === e || e.contains(arriba));
+    }, block);
+    if (libre) break;
+  }
   await dosFotogramas(page);
   const info = await el.evaluate((e) => {
     const cs = getComputedStyle(e);
