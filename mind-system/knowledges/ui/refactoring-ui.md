@@ -23,9 +23,9 @@ Refactoring UI es la referencia práctica más directamente aplicable al desarro
 El error más común en implementación es añadir espaciado insuficiente. El punto de partida debe ser generoso — es más fácil reducir que añadir.
 
 **En SYX:**
-- El token `--semantic-space-inset-md` (16px) es el espaciado mínimo para contenedores de contenido
-- Entre secciones: `--semantic-space-stack-xl` (32px) o mayor
-- Entre elementos relacionados dentro de una sección: `--semantic-space-stack-sm` (12px) o `--semantic-space-stack-md` (16px)
+- El token `--semantic-space-component-md` (fluido, 16–24 px) es el relleno mínimo para contenedores de contenido
+- Entre secciones: `--semantic-space-layout-md` o mayor
+- Entre elementos relacionados dentro de una sección: `--semantic-space-stack-sm` o `--semantic-space-stack-md` (su valor lo fija cada tema)
 
 ---
 

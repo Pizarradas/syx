@@ -76,7 +76,7 @@ npm run check:huerfanos # references with no definition, tokens that only exist 
 
 Review the output:
 
-- **R05** → Add the token to `tokens.json` (component tier goes through `node scripts/propose.js token`).
+- **R05** → `tokens.json` is generated: run `npm run build` (or `npm run build:tokens-json`). If R05 persists, the token is declared outside `scss/abstracts/tokens/` — move it there (component tier through `node scripts/propose.js token`).
 - **R06** → The registry names a token no compiled CSS defines: obsolete or misspelled.
 
 `scripts/validate-tokens.js` used to do this cross-check and was retired in the September 2026

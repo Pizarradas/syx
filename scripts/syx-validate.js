@@ -165,6 +165,24 @@ function extractRuntimeTokens() {
 
 // ─── Module 3: Cross-Check Source vs Runtime ─────────────────────────────────
 
+// Tokens oficiales que solo declara la carpeta de algún tema (no el árbol
+// común). Los que declaran TODOS los temas sí están en tokens.json (contrato de
+// tema) y no llegan a preguntarse aquí.
+function tokensPrivadosDeTema() {
+  const { leerDeclaraciones } = require('./lib/scss-tokens');
+  const dir = path.join(ROOT, 'scss', 'themes');
+  const out = new Set();
+  for (const t of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (!t.isDirectory() || t.name.startsWith('_')) continue;
+    for (const f of fs.readdirSync(path.join(dir, t.name)).filter(x => x.endsWith('.scss'))) {
+      for (const d of leerDeclaraciones(fs.readFileSync(path.join(dir, t.name, f), 'utf8'))) {
+        if (isOfficial(d.name)) out.add(d.name);
+      }
+    }
+  }
+  return out;
+}
+
 function crossCheck(sourceTokens, runtimeData) {
   const runtimeKeys = new Set(Object.keys(runtimeData.tokens));
   const sourceKeys  = new Set(Object.keys(sourceTokens));
@@ -179,10 +197,19 @@ function crossCheck(sourceTokens, runtimeData) {
     return true;
   });
   // R05: any official-prefix token in CSS not in tokens.json (previously only --component-*)
-  const undocumented = [...runtimeKeys]
-    .filter(k => !sourceKeys.has(k) && isOfficial(k));
+  //
+  // Desde octubre de 2026 tokens.json se genera desde el SCSS y deja fuera, a
+  // propósito, los tokens PRIVADOS de un tema: los que declara su
+  // scss/themes/<tema>/ y no todos los temas (su paleta propia). El CSS de
+  // referencia es un tema concreto, así que los suyos aparecen aquí; se
+  // cuentan aparte para que no se confundan con un token común sin registrar,
+  // que es lo que R05 vigila.
+  const privados = tokensPrivadosDeTema();
+  const fuera = [...runtimeKeys].filter(k => !sourceKeys.has(k) && isOfficial(k));
+  const undocumented = fuera.filter(k => !privados.has(k));
+  const themePrivate = fuera.filter(k => privados.has(k));
 
-  return { phantoms, undocumented };
+  return { phantoms, undocumented, themePrivate };
 }
 
 // ─── Module 4: Catalog Legacy Vars ───────────────────────────────────────────
@@ -456,6 +483,9 @@ function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
     }
   } else {
     console.log('✅ R05 — All --component-* tokens in CSS are documented');
+  }
+  if (crossCheck.themePrivate && crossCheck.themePrivate.length) {
+    console.log(`ℹ️  R05 — ${crossCheck.themePrivate.length} token(s) privados del tema de referencia, fuera de tokens.json por diseño (ver tokens.json _meta.themeContract)`);
   }
 
   // Legacy vars

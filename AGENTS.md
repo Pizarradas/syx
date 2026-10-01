@@ -106,7 +106,7 @@ These rules are **never overridden** by any mode or user instruction:
 3. **Never write raw `transition:` or `position:` in component files.** Use `@include transition()`, `@include absolute()`, etc.
 4. **Never hardcode design values.** No hex colors, no raw `px`/`rem` literals. Use tokens.
 5. **Never skip the token layer.** Primitive → Semantic → Component. Always.
-6. **Always check `tokens.json` before using a token.** If it doesn't exist, create it first following `_agents/workflows/create-component.md` Step 1.
+6. **Always ask before using a token** — `get_token` (or a grep of `tokens.json`, which `npm run build` generates from the SCSS: never edit it by hand). If it is missing: a component token is proposed with `node scripts/propose.js token` (see `_agents/workflows/create-component.md` Step 1); a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person.
 7. **Always check `component-registry.json` before creating a new component.** Reuse before creating.
 8. **Validate after any code change.** Run `node scripts/syx-validate.js` (or describe the check if you cannot execute).
 
@@ -145,7 +145,7 @@ judge you are human-only on purpose — do not edit them to make a change pass.
 ```
 --primitive-color-blue-500          ← raw value, only in themes/_theme.scss
   └── --semantic-color-primary      ← contextual alias, in themes/_theme.scss
-        └── --component-btn-primary-bg  ← component-specific, in tokens/components/
+        └── --component-button-primary-filled-bg  ← component-specific, in tokens/components/
 ```
 
 Component SCSS rules reference only `--component-*` or `--semantic-*`. Never `--primitive-*`.

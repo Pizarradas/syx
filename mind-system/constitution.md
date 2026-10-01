@@ -59,7 +59,7 @@ BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo
 - Si UI descubre un problema de accesibilidad durante la implementación → escala a UX para rediseño, no lo tapa en SCSS.
 
 ### TOKEN vs UI
-- **TOKEN** crea el sistema de tokens. Solo trabaja en `scss/abstracts/tokens/` y `tokens.json`.
+- **TOKEN** crea el sistema de tokens. Solo trabaja en `scss/abstracts/tokens/`; `tokens.json` se genera desde ahí con `npm run build`.
 - **UI** consume los tokens definidos por TOKEN. No crea tokens en ficheros de componente.
 - Si UI necesita un token que no existe → TOKEN primero, luego vuelta a UI.
 

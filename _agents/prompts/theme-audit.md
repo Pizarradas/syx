@@ -30,7 +30,7 @@ Every _theme.scss MUST define ALL of these:
 - --semantic-color-text-tertiary
 - --semantic-color-text-inverse
 - --semantic-color-primary
-- --semantic-color-primary-hover
+- --semantic-color-state-hover-primary
 
 Report any that are missing.
 

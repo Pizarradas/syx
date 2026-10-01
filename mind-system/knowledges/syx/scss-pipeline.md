@@ -67,7 +67,7 @@ Todo componente SYX sigue un template estricto: un mixin con parámetro `$theme`
 
       &:disabled,
       &[aria-disabled="true"] {
-        opacity: var(--semantic-opacity-disabled);
+        opacity: var(--component-{name}-disabled-opacity);
         cursor: not-allowed;
         pointer-events: none;
       }

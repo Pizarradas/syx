@@ -35,10 +35,10 @@ Open `scss/themes/{name}/_theme.scss`. This file ONLY overrides primitive tokens
 
 Everything goes inside `@mixin theme-{name} { :root { … } }` (the
 `_setup.scss` calls `@include theme-{name}()`); the font list goes in a
-second mixin, `@mixin theme-{name}-fonts`. Note there is no
-`--primitive-color-brand-*` family in the system — real themes **rebind**
-existing primitives (`--primitive-color-blue-500`, etc., `// rebind:`);
-`brand`/`accent` below are didactic names.
+second mixin, `@mixin theme-{name}-fonts`. Note there is no `brand`
+family in the system — real themes **rebind** existing primitives
+(`--primitive-color-blue-500`, etc., `// rebind:`); `{brand}`/`{accent}`
+below are placeholders for the families the theme rebinds.
 
 **Section 1 — Color Primitives (mandatory):**
 
@@ -46,10 +46,10 @@ existing primitives (`--primitive-color-blue-500`, etc., `// rebind:`);
 @mixin theme-{name} {
   :root {
     // Override the raw palette — these feed into semantics
-    --primitive-color-brand-50: oklch(…);
-    --primitive-color-brand-100: oklch(…);
+    --primitive-color-{brand}-50: oklch(…);
+    --primitive-color-{brand}-100: oklch(…);
     // ...up to brand-900 (scales end at 900)
-    --primitive-color-accent-50: oklch(…);
+    --primitive-color-{accent}-50: oklch(…);
     // ...
   }
 }
@@ -60,24 +60,24 @@ same `:root`, inside the same `theme-{name}` mixin):**
 
 ```scss
 // Backgrounds
---semantic-color-bg-primary: var(--primitive-color-brand-50);
---semantic-color-bg-secondary: var(--primitive-color-brand-100);
---semantic-color-bg-tertiary: var(--primitive-color-brand-200);
+--semantic-color-bg-primary: var(--primitive-color-{brand}-50);
+--semantic-color-bg-secondary: var(--primitive-color-{brand}-100);
+--semantic-color-bg-tertiary: var(--primitive-color-{brand}-200);
 
 // Borders
---semantic-color-border-subtle: var(--primitive-color-brand-100);
---semantic-color-border-default: var(--primitive-color-brand-200);
---semantic-color-border-strong: var(--primitive-color-brand-400);
+--semantic-color-border-subtle: var(--primitive-color-{brand}-100);
+--semantic-color-border-default: var(--primitive-color-{brand}-200);
+--semantic-color-border-strong: var(--primitive-color-{brand}-400);
 
 // Text
---semantic-color-text-primary: var(--primitive-color-brand-900);
---semantic-color-text-secondary: var(--primitive-color-brand-600);
---semantic-color-text-tertiary: var(--primitive-color-brand-400);
+--semantic-color-text-primary: var(--primitive-color-{brand}-900);
+--semantic-color-text-secondary: var(--primitive-color-{brand}-600);
+--semantic-color-text-tertiary: var(--primitive-color-{brand}-400);
 --semantic-color-text-inverse: oklch(1 0 0); // white, for dark backgrounds
 
 // Interactive
---semantic-color-primary: var(--primitive-color-accent-500);
---semantic-color-primary-hover: var(--primitive-color-accent-600);
+--semantic-color-primary: var(--primitive-color-{accent}-500);
+--semantic-color-state-hover-primary: var(--primitive-color-{accent}-600);
 ```
 
 **Dark Mode Rule:** If the theme is dark, invert the scale:
@@ -180,7 +180,7 @@ Open the compiled CSS and search for `var(--semantic-color-bg-primary)` to ensur
 - [ ] `--semantic-color-text-tertiary`
 - [ ] `--semantic-color-text-inverse`
 - [ ] `--semantic-color-primary`
-- [ ] `--semantic-color-primary-hover`
+- [ ] `--semantic-color-state-hover-primary`
 
 ---
 

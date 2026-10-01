@@ -31,25 +31,25 @@ Antes de la alineación de sistemas, `atlas-rules/` usaba nombres de token propi
 
 | Concepto | Token Modes (autoridad) | Alias legacy Atlas | Estado |
 |---|---|---|---|
-| Color de acción primaria | `--semantic-color-primary` | `--semantic-color-brand` | Eliminado |
-| Hover del color primario | `--semantic-color-primary-hover` | `--semantic-color-brand-hover` | Eliminado |
-| Fondo oscuro (cabecera/footer) | `--semantic-color-bg-inverse` | `--semantic-color-brand-dark` | Eliminado |
-| Fondo de página | `--semantic-color-bg-primary` | `--semantic-color-bg` | Eliminado |
-| Fondo de tarjeta/superficie | `--semantic-color-bg-secondary` | `--semantic-color-surface` | Eliminado |
-| Hover de superficie | `--semantic-color-bg-tertiary` | `--semantic-color-surface-hover` | Eliminado |
+| Color de acción primaria | `--semantic-color-primary` | ❌ `--semantic-color-brand` | Eliminado |
+| Hover del color primario | `--semantic-color-state-hover-primary` | ❌ `--semantic-color-brand-hover` | Eliminado |
+| Fondo oscuro (cabecera/footer) | `--semantic-color-bg-inverse` | ❌ `--semantic-color-brand-dark` | Eliminado |
+| Fondo de página | `--semantic-color-bg-primary` | ❌ `--semantic-color-bg` | Eliminado |
+| Fondo de tarjeta/superficie | `--semantic-color-bg-secondary` | ❌ `--semantic-color-surface` | Eliminado |
+| Hover de superficie | `--semantic-color-bg-tertiary` | ❌ `--semantic-color-surface-hover` | Eliminado |
 | Texto principal | `--semantic-color-text-primary` | — | ✅ Sin alias |
 | Texto secundario | `--semantic-color-text-secondary` | — | ✅ Sin alias |
-| Texto muted | `--semantic-color-text-tertiary` | `--semantic-color-text-muted` | Eliminado |
-| Borde suave | `--semantic-color-border-subtle` | `--semantic-color-border` | Eliminado |
+| Texto muted | `--semantic-color-text-tertiary` | ❌ `--semantic-color-text-muted` | Eliminado |
+| Borde suave | `--semantic-color-border-subtle` | ❌ `--semantic-color-border` | Eliminado |
 | Borde fuerte | `--semantic-color-border-strong` | — | ✅ Sin alias |
 
 ### Spacing
 
 | Concepto | Token Modes (autoridad) | Alias legacy Atlas | Estado |
 |---|---|---|---|
-| Padding interno (inset) | `--semantic-space-inset-xs/sm/md/lg/xl` | `--semantic-space-xs/sm/md/lg/xl` | Eliminado |
-| Separación vertical (stack) | `--semantic-space-stack-xs…xl` | `--semantic-space-xl/2xl/3xl` | Eliminado |
-| Separación horizontal (inline) | `--semantic-space-inline-xs…xl` | Sin equivalente legacy | ✅ Solo en Modes |
+| Padding interno | `--semantic-space-component-xs/sm/md/lg/xl` | ❌ `--semantic-space-xs/sm/md/lg/xl` | Eliminado |
+| Separación vertical (stack) | `--semantic-space-stack-xs…xl` | ❌ `--semantic-space-xl/2xl/3xl` | Eliminado |
+| Separación horizontal (inline) | `--semantic-space-inline-xs…lg` | Sin equivalente legacy | ✅ Solo en Modes |
 
 **Regla**: en implementación SCSS, usar siempre el token Modes. En MIGRATE, si la variable legacy era un alias Atlas, la tabla anterior es la referencia de reemplazo.
 

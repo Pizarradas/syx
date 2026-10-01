@@ -13,8 +13,8 @@
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
 > the module is the thing that needs fixing. Paths below are relative to that folder.
 >
-> · **Always:** `ux/laws-of-ux.md` · `ux/nielsen-heuristics.md` · `front/html-semantics.md` · `front/mobile-first.md` · `front/accessibility-wcag.md` · `front/progressive-enhancement.md` — the floor every UX answer stands on.
-> · **When relevant:** `ux/dont-make-me-think.md` for complex flows or navigation · `ux/microinteractions.md` when designing interactive states · `ux/strategic-writing-for-ux.md` when the answer includes copy, labels or error text · `front/javascript-patterns.md` when the component needs JS (dropdown, modal, accordion, tabs) · `motion/02-proposito/` when the answer defines how states, screens or lists transition — purpose test, pattern, choreography, interruption · `motion/07-accesibilidad/accesibilidad.md` alongside it.
+> · **Always:** `ux/laws-of-ux.md` · `ux/nielsen-heuristics.md` · `front/html-semantics.md` · `front/mobile-first.md` · `front/accessibility-wcag.md` — the floor every UX answer stands on.
+> · **When relevant:** `front/progressive-enhancement.md` when the answer depends on JS, a recent CSS feature or the network (what still works without it) · `ux/dont-make-me-think.md` for complex flows or navigation · `ux/microinteractions.md` when designing interactive states · `ux/strategic-writing-for-ux.md` when the answer includes copy, labels or error text · `front/javascript-patterns.md` when the component needs JS (dropdown, modal, accordion, tabs) · `motion/02-proposito/` when the answer defines how states, screens or lists transition — purpose test, pattern, choreography, interruption · `motion/07-accesibilidad/accesibilidad.md` alongside it.
 > · **On request:** `branding/perception-of-prestige-foundations.md` when the brief turns on trust, authority or credibility.
 > · **Tags:** `#ux` `#accessibility` `#html` `#states` `#mobile-first`
 

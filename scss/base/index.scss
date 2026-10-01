@@ -3,7 +3,7 @@
 @use '../abstracts/index' as *;
 
 // NOTE: _root.scss removed — deprecated, content migrated to themes/_base/universal.scss
-@forward 'surface-tokens';     // CANONICAL: surface + reset tokens (the only ones pages may use)
+@forward 'reset-tokens';       // --reset-* que lee base/_reset (los de superficie viven en abstracts/tokens/semantic)
 @forward 'deprecated-aliases'; // Legacy aliases — retirada: v5.0 (ver cabecera)
 @forward 'reset';
 @forward 'elements';

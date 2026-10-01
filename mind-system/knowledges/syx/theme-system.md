@@ -53,19 +53,19 @@ segundo mixin `@mixin theme-{name}-fonts { @include font-family(…); }` que
 llaman el setup y todos los bundles — la lista de `@font-face` se declara
 una sola vez por tema.
 
-**Nota de nombres:** no existe una familia `--primitive-color-brand-*` ni
-el escalón `-950`. Los temas reales **rebindean** familias primitivas
+**Nota de nombres:** no existe una familia `brand` ni el escalón
+`-950`. Los temas reales **rebindean** familias primitivas
 existentes (`--primitive-color-blue-500`, `--primitive-color-cyan-500`,
 `--primitive-color-gray-*`… con comentario `// rebind:`); las escalas van
-de `-50` a `-900`. Los nombres `brand-*`/`accent-*` de los ejemplos
-siguientes son didácticos.
+de `-50` a `-900`. En los ejemplos siguientes `{marca}` y `{acento}`
+son huecos: van las familias que el tema rebindea.
 
 **Sección 1 — Color Primitivos** (solo `oklch()` aquí):
 ```scss
 :root {
-  --primitive-color-brand-50:  oklch(…);
+  --primitive-color-{marca}-50:  oklch(…);
   // … 50 a 900
-  --primitive-color-accent-50: oklch(…);
+  --primitive-color-{acento}-50: oklch(…);
   // … 50 a 900
 }
 ```
@@ -75,18 +75,18 @@ siguientes son didácticos.
 // capa: scss/themes/{nombre}/_theme.scss — aquí var(--primitive-*) es correcto (R01)
 :root {
   // Los 12 tokens de superficie obligatorios:
-  --semantic-color-bg-primary:   var(--primitive-color-brand-50);
-  --semantic-color-bg-secondary: var(--primitive-color-brand-100);
-  --semantic-color-bg-tertiary:  var(--primitive-color-brand-200);
-  --semantic-color-border-subtle:  var(--primitive-color-brand-100);
-  --semantic-color-border-default: var(--primitive-color-brand-200);
-  --semantic-color-border-strong:  var(--primitive-color-brand-400);
-  --semantic-color-text-primary:   var(--primitive-color-brand-900);
-  --semantic-color-text-secondary: var(--primitive-color-brand-600);
-  --semantic-color-text-tertiary:  var(--primitive-color-brand-400);
+  --semantic-color-bg-primary:   var(--primitive-color-{marca}-50);
+  --semantic-color-bg-secondary: var(--primitive-color-{marca}-100);
+  --semantic-color-bg-tertiary:  var(--primitive-color-{marca}-200);
+  --semantic-color-border-subtle:  var(--primitive-color-{marca}-100);
+  --semantic-color-border-default: var(--primitive-color-{marca}-200);
+  --semantic-color-border-strong:  var(--primitive-color-{marca}-400);
+  --semantic-color-text-primary:   var(--primitive-color-{marca}-900);
+  --semantic-color-text-secondary: var(--primitive-color-{marca}-600);
+  --semantic-color-text-tertiary:  var(--primitive-color-{marca}-400);
   --semantic-color-text-inverse:   oklch(1 0 0);
-  --semantic-color-primary:        var(--primitive-color-accent-500);
-  --semantic-color-primary-hover:  var(--primitive-color-accent-600);
+  --semantic-color-primary:        var(--primitive-color-{acento}-500);
+  --semantic-color-state-hover-primary:  var(--primitive-color-{acento}-600);
 }
 ```
 
@@ -94,7 +94,7 @@ siguientes son didácticos.
 ```scss
 :root {
   // Solo añadir si un componente necesita un valor no-default EN ESTE TEMA
-  --component-btn-primary-radius: var(--semantic-border-radius-full);
+  --component-button-border-radius: var(--semantic-border-radius-full);
 }
 ```
 
@@ -105,19 +105,19 @@ siguientes son didácticos.
 ```scss
 // capa: scss/themes/{nombre}/_theme.scss
 // LIGHT: bg-primary = más claro, bg-tertiary = menos claro
---semantic-color-bg-primary:   var(--primitive-color-brand-50);   // 0.97 L
---semantic-color-bg-secondary: var(--primitive-color-brand-100);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-200);  // 0.82 L
+--semantic-color-bg-primary:   var(--primitive-color-{marca}-50);   // 0.97 L
+--semantic-color-bg-secondary: var(--primitive-color-{marca}-100);
+--semantic-color-bg-tertiary:  var(--primitive-color-{marca}-200);  // 0.82 L
 
 // DARK: bg-primary = más oscuro, bg-tertiary = menos oscuro
---semantic-color-bg-primary:   var(--primitive-color-brand-900);  // 0.22 L
---semantic-color-bg-secondary: var(--primitive-color-brand-800);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-700);  // 0.42 L
+--semantic-color-bg-primary:   var(--primitive-color-{marca}-900);  // 0.22 L
+--semantic-color-bg-secondary: var(--primitive-color-{marca}-800);
+--semantic-color-bg-tertiary:  var(--primitive-color-{marca}-700);  // 0.42 L
 
 // DARK: texto inverso
---semantic-color-text-primary:   var(--primitive-color-brand-50);
---semantic-color-text-secondary: var(--primitive-color-brand-200);
---semantic-color-text-tertiary:  var(--primitive-color-brand-400);
+--semantic-color-text-primary:   var(--primitive-color-{marca}-50);
+--semantic-color-text-secondary: var(--primitive-color-{marca}-200);
+--semantic-color-text-tertiary:  var(--primitive-color-{marca}-400);
 --semantic-color-text-inverse:   oklch(0.1 0 0);
 ```
 
@@ -153,7 +153,7 @@ Antes de declarar un tema completo:
 - [ ] `--semantic-color-text-tertiary`
 - [ ] `--semantic-color-text-inverse`
 - [ ] `--semantic-color-primary`
-- [ ] `--semantic-color-primary-hover`
+- [ ] `--semantic-color-state-hover-primary`
 
 ---
 

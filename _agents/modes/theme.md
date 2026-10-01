@@ -73,10 +73,11 @@ Everything lives inside `@mixin theme-{name} { :root { … } }` — the
 theme's complete `@font-face` list (the setup and every bundle call it;
 fonts are declared once per theme, here and nowhere else).
 
-**Naming note:** there is no `--primitive-color-brand-*`/`accent-*` family
+**Naming note:** there is no `brand`/`accent` family
 in the compiled system — real themes **rebind** existing primitive families
 (`--primitive-color-blue-500`, `--primitive-color-cyan-500`, … with a
-`// rebind:` comment). The `brand`/`accent` names below are didactic.
+`// rebind:` comment). In the examples below `{brand}` and `{accent}` are
+placeholders for the families the theme rebinds.
 
 ```scss
 // themes/{name}/_theme.scss
@@ -88,19 +89,19 @@ in the compiled system — real themes **rebind** existing primitive families
 // -----------------------------------------------
 :root {
   // Brand scale (50–900)
-  --primitive-color-brand-50:  oklch(…);
-  --primitive-color-brand-100: oklch(…);
-  --primitive-color-brand-200: oklch(…);
-  --primitive-color-brand-300: oklch(…);
-  --primitive-color-brand-400: oklch(…);
-  --primitive-color-brand-500: oklch(…);  ← main brand color
-  --primitive-color-brand-600: oklch(…);
-  --primitive-color-brand-700: oklch(…);
-  --primitive-color-brand-800: oklch(…);
-  --primitive-color-brand-900: oklch(…);
+  --primitive-color-{brand}-50:  oklch(…);
+  --primitive-color-{brand}-100: oklch(…);
+  --primitive-color-{brand}-200: oklch(…);
+  --primitive-color-{brand}-300: oklch(…);
+  --primitive-color-{brand}-400: oklch(…);
+  --primitive-color-{brand}-500: oklch(…);  ← main brand color
+  --primitive-color-{brand}-600: oklch(…);
+  --primitive-color-{brand}-700: oklch(…);
+  --primitive-color-{brand}-800: oklch(…);
+  --primitive-color-{brand}-900: oklch(…);
 
   // Accent scale (for interactive/CTA elements)
-  --primitive-color-accent-50:  oklch(…);
+  --primitive-color-{accent}-50:  oklch(…);
   // ...through accent-900
 }
 
@@ -109,31 +110,31 @@ in the compiled system — real themes **rebind** existing primitive families
 // -----------------------------------------------
 :root {
   // Backgrounds
-  --semantic-color-bg-primary:   var(--primitive-color-brand-50);
-  --semantic-color-bg-secondary: var(--primitive-color-brand-100);
-  --semantic-color-bg-tertiary:  var(--primitive-color-brand-200);
+  --semantic-color-bg-primary:   var(--primitive-color-{brand}-50);
+  --semantic-color-bg-secondary: var(--primitive-color-{brand}-100);
+  --semantic-color-bg-tertiary:  var(--primitive-color-{brand}-200);
 
   // Borders
-  --semantic-color-border-subtle:  var(--primitive-color-brand-100);
-  --semantic-color-border-default: var(--primitive-color-brand-200);
-  --semantic-color-border-strong:  var(--primitive-color-brand-400);
+  --semantic-color-border-subtle:  var(--primitive-color-{brand}-100);
+  --semantic-color-border-default: var(--primitive-color-{brand}-200);
+  --semantic-color-border-strong:  var(--primitive-color-{brand}-400);
 
   // Text
-  --semantic-color-text-primary:   var(--primitive-color-brand-900);
-  --semantic-color-text-secondary: var(--primitive-color-brand-600);
-  --semantic-color-text-tertiary:  var(--primitive-color-brand-400);
+  --semantic-color-text-primary:   var(--primitive-color-{brand}-900);
+  --semantic-color-text-secondary: var(--primitive-color-{brand}-600);
+  --semantic-color-text-tertiary:  var(--primitive-color-{brand}-400);
   --semantic-color-text-inverse:   oklch(1 0 0);
 
   // Interactive
-  --semantic-color-primary:       var(--primitive-color-accent-500);
-  --semantic-color-primary-hover: var(--primitive-color-accent-600);
+  --semantic-color-primary:       var(--primitive-color-{accent}-500);
+  --semantic-color-state-hover-primary: var(--primitive-color-{accent}-600);
 }
 
 // SECTION 3 — Component Overrides (optional)
 // Only add if a specific component needs a non-default value in THIS theme.
 // -----------------------------------------------
 // :root {
-//   --component-btn-primary-radius: var(--semantic-border-radius-full); // pill buttons only in this theme
+//   --component-button-border-radius: var(--semantic-border-radius-full); // pill buttons only in this theme
 // }
 
 } // end @mixin theme-{name}
@@ -156,12 +157,12 @@ in the compiled system — real themes **rebind** existing primitive families
 OKLCH produces perceptually uniform scales — equal steps in lightness produce visually equal contrast:
 ```scss
 // Good: OKLCH scale, each step is perceptually equidistant
---primitive-color-brand-100: oklch(0.95 0.04 260);
---primitive-color-brand-500: oklch(0.55 0.22 260);
---primitive-color-brand-900: oklch(0.20 0.10 260);
+--primitive-color-{brand}-100: oklch(0.95 0.04 260);
+--primitive-color-{brand}-500: oklch(0.55 0.22 260);
+--primitive-color-{brand}-900: oklch(0.20 0.10 260);
 
 // Bad: hex values — unpredictable perceptual contrast
---primitive-color-brand-500: #4f46e5;
+--primitive-color-{brand}-500: #4f46e5;
 ```
 
 ### Scale generation guideline
@@ -184,21 +185,21 @@ If `is-dark: true`, invert the surface scale:
 
 ```scss
 // LIGHT theme: bg gets lighter as number decreases
---semantic-color-bg-primary:   var(--primitive-color-brand-50);   // lightest
---semantic-color-bg-tertiary:  var(--primitive-color-brand-200);  // slightly darker
+--semantic-color-bg-primary:   var(--primitive-color-{brand}-50);   // lightest
+--semantic-color-bg-tertiary:  var(--primitive-color-{brand}-200);  // slightly darker
 
 // DARK theme: bg gets darker as number decreases (inverted; scales end at -900)
---semantic-color-bg-primary:   var(--primitive-color-brand-900);  // darkest
---semantic-color-bg-secondary: var(--primitive-color-brand-800);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-700);  // least dark
+--semantic-color-bg-primary:   var(--primitive-color-{brand}-900);  // darkest
+--semantic-color-bg-secondary: var(--primitive-color-{brand}-800);
+--semantic-color-bg-tertiary:  var(--primitive-color-{brand}-700);  // least dark
 ```
 
 Text also inverts:
 ```scss
 // DARK: text-primary is near-white, text-tertiary is dimmer
---semantic-color-text-primary:   var(--primitive-color-brand-50);
---semantic-color-text-secondary: var(--primitive-color-brand-200);
---semantic-color-text-tertiary:  var(--primitive-color-brand-400);
+--semantic-color-text-primary:   var(--primitive-color-{brand}-50);
+--semantic-color-text-secondary: var(--primitive-color-{brand}-200);
+--semantic-color-text-tertiary:  var(--primitive-color-{brand}-400);
 --semantic-color-text-inverse:   oklch(0.1 0 0); // near-black for light surfaces
 ```
 
@@ -242,7 +243,7 @@ Before declaring a theme complete, verify all 12 surface tokens are defined:
 - [ ] `--semantic-color-text-tertiary`
 - [ ] `--semantic-color-text-inverse`
 - [ ] `--semantic-color-primary`
-- [ ] `--semantic-color-primary-hover`
+- [ ] `--semantic-color-state-hover-primary`
 
 ---
 
@@ -309,24 +310,24 @@ npm run build   (run it after the files are in, before anything is merged)
 
 **Primitive Scale (brand — teal):**
 ```scss
---primitive-color-brand-50:  oklch(0.97 0.03 190);
---primitive-color-brand-100: oklch(0.92 0.06 190);
---primitive-color-brand-200: oklch(0.82 0.10 190);
---primitive-color-brand-300: oklch(0.68 0.14 190);
---primitive-color-brand-400: oklch(0.56 0.17 190);
---primitive-color-brand-500: oklch(0.48 0.18 190);
---primitive-color-brand-600: oklch(0.38 0.15 190);
---primitive-color-brand-700: oklch(0.28 0.11 190);
---primitive-color-brand-800: oklch(0.20 0.07 190);
---primitive-color-brand-900: oklch(0.14 0.04 190);
---primitive-color-brand-950: oklch(0.10 0.02 190);
+--primitive-color-{brand}-50:  oklch(0.97 0.03 190);
+--primitive-color-{brand}-100: oklch(0.92 0.06 190);
+--primitive-color-{brand}-200: oklch(0.82 0.10 190);
+--primitive-color-{brand}-300: oklch(0.68 0.14 190);
+--primitive-color-{brand}-400: oklch(0.56 0.17 190);
+--primitive-color-{brand}-500: oklch(0.48 0.18 190);
+--primitive-color-{brand}-600: oklch(0.38 0.15 190);
+--primitive-color-{brand}-700: oklch(0.28 0.11 190);
+--primitive-color-{brand}-800: oklch(0.20 0.07 190);
+--primitive-color-{brand}-900: oklch(0.14 0.04 190);
+--primitive-color-{brand}-950: oklch(0.10 0.02 190);
 ```
 
 **Semantic surface mapping (dark — inverted):**
 ```scss
---semantic-color-bg-primary:   var(--primitive-color-brand-950);
---semantic-color-bg-secondary: var(--primitive-color-brand-900);
---semantic-color-bg-tertiary:  var(--primitive-color-brand-800);
---semantic-color-text-primary: var(--primitive-color-brand-50);
+--semantic-color-bg-primary:   var(--primitive-color-{brand}-950);
+--semantic-color-bg-secondary: var(--primitive-color-{brand}-900);
+--semantic-color-bg-tertiary:  var(--primitive-color-{brand}-800);
+--semantic-color-text-primary: var(--primitive-color-{brand}-50);
 // ... etc
 ```

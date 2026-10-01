@@ -10,7 +10,7 @@
 
 1.  **NEVER use raw values.**
     - ❌ `padding: 1rem;`
-    - ✅ `@include padding(var(--semantic-space-inset-md));`
+    - ✅ `@include padding(var(--semantic-space-component-md));`
 2.  **NEVER use raw CSS properties where a mixin exists.**
     - ❌ `position: absolute;` → ✅ `@include absolute();`
     - ❌ `display: flex; align-items: center;` → ✅ `@include flex-center();`
@@ -42,7 +42,7 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 
 | File                             | Purpose                                                          |
 | -------------------------------- | ---------------------------------------------------------------- |
-| `tokens.json`                    | Full token registry with type, rawValue, status                  |
+| `tokens.json`                    | Token registry (type, rawValue, status) — generated from the SCSS by `npm run build`, never edited by hand |
 | `component-registry.json`        | All components: atoms, molecules, organisms                      |
 | `contracts/rules.json`           | The contract rules, R01–R10: severities, allowed paths, matchers and exceptions. `scripts/lib/rules.js` runs it for `syx-validate.js` and `validate_snippet` |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
@@ -182,10 +182,11 @@ When asked to "create a new component X":
 
 **Step 1: Define Tokens** (`scss/abstracts/tokens/components/_x.scss`)
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 :root {
   --component-x-bg: var(--semantic-color-bg-primary);
-  --component-x-padding: var(--semantic-space-inset-md);
+  --component-x-padding: var(--semantic-space-component-md);
 }
 ```
 
@@ -306,7 +307,7 @@ Before outputting code, ask yourself:
 2.  Am I using a **token** variable instead of a raw value?
 3.  Is this class named with the correct **BEM prefix** (`atom-`, `mol-`, `org-`)?
 4.  Am I using the **Grid System** correctly?
-5.  Does the token I need exist? Check `tokens.json` — if not, add it before using it.
+5.  Does the token I need exist? Ask `get_token` (or grep `tokens.json` — generated, never edited by hand). If not: a component token goes through `node scripts/propose.js token`; a semantic one is recommended to a person (`contracts/trust.json`: that layer is human-only).
 6.  Are my changes validated? Run `node scripts/syx-validate.js`.
 
 ---

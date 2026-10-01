@@ -128,7 +128,7 @@ De ahí las cuatro reglas que un ejemplo no puede romper cuando se presenta como
 Y dos que no llevan número pero se auditan igual:
 
 - **Mobile-first estricto.** Solo `min-width`, siempre vía `@include breakpoint()`. Un `max-width` en un ejemplo solo es admisible si está marcado como lo que no hay que hacer.
-- **Nombres reales.** Un token citado en un ejemplo tiene que existir en `tokens.json`. La escala tipográfica es `--primitive-font-size-*` y `--semantic-font-size-h1…h6`, no `--primitive-type-*`.
+- **Nombres reales.** Un token citado en un ejemplo tiene que existir en `tokens.json`. La escala tipográfica es `--primitive-font-size-*` y `--semantic-font-size-h1…h6`. ❌ `--primitive-type-*` no existe.
 
 **Un ejemplo que incumple algo de esto solo es válido si se declara como antipatrón** — con `// ✗`, o diciéndolo en la línea anterior. Un bloque sin marca se lee como recomendación, y una recomendación que viola el contrato es peor que no tener el módulo: enseña a un agente a escribir código que el validador va a rechazar después.
 
