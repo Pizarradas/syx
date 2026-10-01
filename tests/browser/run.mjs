@@ -16,6 +16,12 @@
  *                    capturas de --rtl contra las de una ejecución sin él
  *                    deben verse espejadas; contra --rtl de la rama base,
  *                    iguales. (Auditoría 2026-10 · acción 13)
+ *   --hojas LISTA    pinta con otras hojas en vez de css/styles-theme-{tema}.css:
+ *                    rutas separadas por comas, relativas a la raíz, con
+ *                    {tema} sustituido. Sirve para fotografiar dist/ y probar
+ *                    que podar y separar tokens no cambia un píxel:
+ *                      --hojas dist/{tema}.full.min.css
+ *                      --hojas dist/syx.components.min.css,dist/{tema}.tokens.min.css
  *
  * La página se construye desde component-registry.json: un componente nuevo
  * entra en las pruebas el día que entra en el registro, sin tocar este fichero.
@@ -25,6 +31,7 @@
  *   node run.mjs --axe
  *   node run.mjs --capturas out [--temas syx-sketch,example-01] [--raiz ../otro-arbol]
  *   node run.mjs --axe --rtl
+ *   node run.mjs --capturas out-dist --hojas dist/{tema}.full.min.css
  *
  * (Auditoría 2026-09 · acción 17)
  */
@@ -55,6 +62,8 @@ const MODOS = ['light', 'dark'];
 // lógicas (margin-inline-start, inset-inline-end…): en RTL los componentes
 // se espejan solos, y esta opción es la forma de comprobarlo.
 const DIR = args.includes('--rtl') ? 'rtl' : 'ltr';
+const HOJAS = (arg('--hojas') || 'css/styles-theme-{tema}.css').split(',').map((h) => h.trim()).filter(Boolean);
+const hojasDe = (tema) => HOJAS.map((h) => h.replaceAll('{tema}', tema));
 
 // ─── La página de pruebas ────────────────────────────────────────────────────
 
@@ -73,7 +82,7 @@ function pagina(tema, modo) {
        la raíz del repositorio, como en docs.html; esta página vive en
        /__prueba/tema/modo y sin <base> darían 404. -->
   <base href="/">
-  <link rel="stylesheet" href="/css/styles-theme-${tema}.css">
+${hojasDe(tema).map((h) => `  <link rel="stylesheet" href="/${h}">`).join('\n')}
   <style>
     /* Solo el andamio de la página de pruebas: separa las secciones para
        que cada captura recorte un componente y nada más. */
@@ -173,8 +182,9 @@ if (!conAxe && !dirCapturas) {
   console.error('Uso: node run.mjs --axe | --capturas DIR [--temas a,b] [--rtl]');
   process.exit(2);
 }
-if (!fs.existsSync(path.join(ROOT, 'css', `styles-theme-${temas[0]}.css`))) {
-  console.error('❌ No hay CSS compilado: npm run build en la raíz.');
+const faltan = temas.flatMap(hojasDe).filter((h) => !fs.existsSync(path.join(ROOT, h)));
+if (faltan.length) {
+  console.error(`❌ No hay CSS compilado (${faltan[0]}): npm run build en la raíz.`);
   process.exit(2);
 }
 
@@ -209,8 +219,17 @@ for (const tema of temas) {
       const dir = path.resolve(process.cwd(), dirCapturas, tema, modo);
       fs.mkdirSync(dir, { recursive: true });
       for (const c of componentes) {
-        const sec = page.locator(`[data-componente="${c.name}"]`);
-        await sec.screenshot({ path: path.join(dir, `${c.name}.png`), animations: 'disabled', caret: 'hide' });
+        // Recorte de la página entera, no captura del elemento: la del
+        // elemento desplaza la página hasta él, y un componente con
+        // `position: sticky` (org-site-header) salía con medio píxel de
+        // diferencia según desde dónde se hubiera desplazado. Con la página
+        // entera no hay desplazamiento y dos ejecuciones dan los mismos bytes.
+        const caja = await page.locator(`[data-componente="${c.name}"]`).boundingBox();
+        const y0 = await page.evaluate(() => window.scrollY);
+        await page.screenshot({
+          path: path.join(dir, `${c.name}.png`), fullPage: true, animations: 'disabled', caret: 'hide',
+          clip: { x: caja.x, y: caja.y + y0, width: caja.width, height: caja.height },
+        });
         capturas++;
       }
     }

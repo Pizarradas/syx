@@ -34,7 +34,7 @@
       "id": "R01",
       "severity": "error",
       "category": "token-layer",
-      "description": "No --primitive-* tokens outside the layers that define or translate them (atoms/, molecules/, organisms/, layout/, pages/, site/ and any other path not in allowedIn)",
+      "description": "No --primitive-* tokens outside the layers that define or translate them (atoms/, molecules/, organisms/, layout/, pages/, the site components in site/ and any other path not in allowedIn). scss/site/tokens/ is the site's own translation layer, like setup-builder.scss for the theme editor: it paints categories (atoms, molecules, primitives…) with ramp colours that have no semantic role.",
       "resumen": "Un componente no usa --primitive-* directamente: pasa por --semantic-*",
       "rationale": "Primitive tokens are raw values. Components must always go through --semantic-* or --component-* to enable theming.",
       "allowedIn": [
@@ -42,7 +42,8 @@
         "scss/themes/",
         "scss/base/",
         "scss/setup-builder.scss",
-        "scss/utilities/"
+        "scss/utilities/",
+        "scss/site/tokens/"
       ],
       "match": {
         "kind": "custom-property-reference",

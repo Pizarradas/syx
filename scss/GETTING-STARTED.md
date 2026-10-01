@@ -29,10 +29,12 @@ npm run watch              # watch the whole scss/ tree for changes
 For the sheets an app consumes, build `dist/`:
 
 ```bash
-npm run build:dist         # dist/<theme>.core.min.css and dist/<theme>.full.min.css, all 7 themes
+npm run build:dist         # all-in-one core/full per theme, plus the shared components
+                           # sheet and one small token sheet per theme (see the README)
 ```
 
-It prints the size of every sheet as it writes them. They are not copied here:
+It prints the size of every sheet as it writes them, and writes them to
+`dist/sizes.json`. They are not copied here:
 a measured number in a guide is right for one release and wrong for every later one.
 
 ### With Dart Sass CLI
@@ -205,9 +207,11 @@ no site layer):
 sass scss/themes/example-01/bundle-core.scss build/core.css --style=compressed --no-source-map
 ```
 
-That is the bare bundle, without the `.syx-*` utilities; `npm run build:dist` adds
-them and runs autoprefixer, and is what the package ships as
-`syx-design-system/bundles/<theme>.core.min.css`. Its size is printed by the build.
+That is the bare bundle: base components, forms and minimal layout, without the
+`.syx-*` helpers and utilities and without the Lucide icon set. `npm run build:dist`
+runs autoprefixer, prunes the tokens nothing reads (keeping every `--semantic-*`) and
+ships it as `syx-design-system/bundles/<theme>.core.min.css`; the utilities, if you
+want them, are `syx-design-system/utilities.css`. Its size is printed by the build.
 
 ```html
 <link rel="stylesheet" href="build/core.css" />

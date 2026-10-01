@@ -1,34 +1,30 @@
 // SYX BUNDLE: CORE
 // ================================================
-// The leanest functional bundle — production-ready minimum.
-// Excludes ALL showroom/documentation-specific components.
+// The leanest functional bundle — production-ready minimum:
+// base components, forms and minimal layout.
 //
 // What's IN:
-//   ✓ Full token system (CSS custom properties via theme setup)
-//   ✓ Reset + base element styles
-//   ✓ Fluid typography + spacing scale
-//   ✓ Essential atoms: btn, form, check, radio, switch,
-//      link, breadcrumb, icon, icon-lucide, label, pill, list, table,
-//      title, txt, pagination, avatar, progress, spinner, skeleton
-//   ✓ Essential molecules: form-field, btn-group,
-//      label-group, form-field-set, alert, dialog, disclosure, tabs,
+//   ✓ Reset + base element styles + grid, stack, cluster (syx-core, $helpers: false)
+//   ✓ Base atoms: btn, form, check, radio, switch, link,
+//      breadcrumb, icon, label, pill, list, table, title, txt,
+//      pagination, avatar, progress, spinner, skeleton
+//   ✓ Molecules: form-field, btn-group, label-group,
+//      form-field-set, alert, dialog, disclosure, tabs,
 //      card, empty-state, menu, toast, tooltip
-//   ✓ Core organisms: app-shell, site-header
-//   ✓ Layout: grid, stack, cluster (from _core.scss)
-//   ✓ Display/flex/spacing utilities
-//   ✓ Dark mode
+//   ✓ Organisms: app-shell, site-header
+//   ✓ Dark mode (it lives in the theme tokens)
 //
-// What's OUT (documentation/showroom only):
-//   ✕ atom-code      — code syntax block (doc component)
-//   ✕ pages/*
+// What's OUT (full has them):
+//   ✕ atom-icon-lucide — the whole Lucide set as data-URI tokens,
+//                        ~29 KB raw on its own: more than any
+//                        component. Opt in with the full bundle.
+//   ✕ .syx-* helpers and utilities — dist/syx.utilities.min.css
+//   ✕ atom-code, atom-stat, atom-feature-icon, mol-code-snippet,
+//     mol-feature-card — documentation/showroom components
 //   ✕ scss/site/*    — SYX's own pages (home-*, evidence, score, …)
 //
-// Bundle size, MEASURED (2026-10-01, example-01, sass compressed):
-//   255 KB raw · 43 KB gzip (225 KB · 39 KB before the product
-//   components of audit 2026-10, action 15).
-// Goal: < 50 KB gzip — met. The old "< 120 KB uncompressed" goal
-// was never measured and is not realistic while every bundle
-// carries the full token system; gzip is the delivery metric.
+// Sizes: generated, never written by hand. `npm run build:dist`
+// prints them and writes dist/sizes.json (raw, gzip, brotli).
 // Compiled by every theme: themes/{name}/bundle-core.scss.
 // ================================================
 
@@ -51,7 +47,6 @@
   @include atom-check($theme);
   @include atom-form($theme);
   @include atom-icon($theme);
-  @include atom-icon-lucide($theme);
   @include atom-label($theme);
   @include atom-link($theme);
   @include atom-list($theme);
@@ -66,7 +61,7 @@
   @include atom-progress($theme);
   @include atom-spinner($theme);
   @include atom-skeleton($theme);
-  // NOT included: atom-code
+  // NOT included: atom-code, atom-icon-lucide (see header)
 
   // MOLECULES — all are production-relevant
   // ================================================

@@ -147,9 +147,51 @@ Link the same sheet the `themes/` export resolves to:
 <link rel="stylesheet" href="node_modules/syx-design-system/dist/syx-sketch.full.min.css" />
 ```
 
-`dist/<theme>.core.min.css` is the leaner production bundle (tokens, base, grid and the
-production components). `npm run build:dist` prints the current size of each sheet;
-they are not written here because a number in a README is the first thing to go stale.
+`dist/<theme>.core.min.css` is the leaner production bundle: base components, forms and
+minimal layout (reset, elements, grid, the form atoms and molecules, alerts, dialogs,
+disclosures, tabs and the site header). It leaves out the full Lucide icon set, the
+`.syx-*` helpers and utilities and the documentation components (code, stat,
+feature-icon, code-snippet, feature-card). `npm run build:dist` prints the current size
+of each sheet and writes them to `dist/sizes.json` (raw, gzip, brotli); they are not
+written here because a number in a README is the first thing to go stale.
+
+### Components and theme tokens, separately
+
+Every all-in-one sheet is two independent pieces glued together, and you can load them
+apart. The components are **the same CSS for all seven themes**; a theme is only its
+token sheet. Switching theme means swapping one small file:
+
+```html
+<!-- once, shared by every theme -->
+<link rel="stylesheet" href="node_modules/syx-design-system/dist/syx.components.min.css" />
+<!-- the theme: swap this href to change theme -->
+<link rel="stylesheet" id="theme" href="node_modules/syx-design-system/dist/example-03.tokens.min.css" />
+```
+
+```js
+import 'syx-design-system/components.css';        // or components/core.css (+ utilities.css)
+import 'syx-design-system/tokens/example-03.css';
+```
+
+| Sheet | What it holds |
+| ----- | ------------- |
+| `syx.components.min.css` | Every component and the `.syx-*` utilities, with no theme tokens. Defaults that are the same in every theme travel here, inside `@layer syx.tokens`, so any theme's `:root` wins over them whatever the load order |
+| `syx.components.core.min.css` | The core above, same idea |
+| `syx.utilities.min.css` | The `.syx-*` helpers and utilities, to add to the core |
+| `<theme>.tokens.min.css` | The theme: what it changes, light and dark, plus its `@font-face`. Works with either components sheet |
+| `<theme>.tokens.all.min.css` | Every token the theme declares, unpruned |
+
+Order does not matter: every sheet starts with the same `@layer` order statement.
+
+**Pruned tokens.** The sheets in `dist/` only carry the custom properties their rules
+can reach through `var()` (transitively), **plus the public token API: every
+`--semantic-*`, always** — those are the ones to use in your own CSS, and they resolve
+in every theme and mode. Unused `--component-*`, `--primitive-*` and legacy aliases are
+dropped. If your CSS reads a primitive directly (`var(--primitive-color-blue-500)`) or
+needs the whole set for tooling, load `<theme>.tokens.all.min.css` instead of
+`<theme>.tokens.min.css`. Pruning is checked in a browser: the components rendered with
+the pruned sheets and with the full showroom sheet are pixel-identical in light and dark
+(`tests/browser/run.mjs --hojas`, `tests/browser/paginas.mjs`).
 
 ### Themes
 
@@ -202,6 +244,8 @@ version it has installed — not against whatever is on `main` today.
 | `syx-design-system` | Node API (the queries above, same surface as the MCP server) + `paths` to every artifact |
 | `syx-design-system/themes/<theme>.css` | One theme, the whole system, minified, without SYX's own site layer (`dist/<theme>.full.min.css`) |
 | `syx-design-system/bundles/<theme>.core.min.css` | The leaner production bundle for one theme. Other bundles (app, blog, marketing) compile from `scss/themes/<theme>/` |
+| `syx-design-system/components.css`, `/components/core.css`, `/utilities.css` | The shared component sheets, without theme tokens (`dist/syx.components*.min.css`, `dist/syx.utilities.min.css`) |
+| `syx-design-system/tokens/<theme>.css`, `/tokens/<theme>.all.css` | One theme's tokens, pruned / complete (`dist/<theme>.tokens*.min.css`) |
 | `syx-design-system/js/syx-*.js` | Optional behaviour (table above) |
 | `syx-design-system/scss/...` | SCSS source, to compile your own build |
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
@@ -216,15 +260,22 @@ attaches the package and the minified sheets to a GitHub release.
 
 ```bash
 npm install
-npm run build          # compiles the 7 themes into css/ and regenerates the derived artifacts
-npm run build:dist     # the consumer sheets in dist/ (also runs on `prepare`)
+npm run build          # compiles the 7 themes into css/, dist/ and the derived artifacts
+npm run build:dist     # only dist/ (also runs on `prepare`)
 npm run watch          # watches all themes for changes
 npm run check          # every guard
 ```
 
-`css/styles-theme-<theme>.css` is the *showroom* sheet the SYX pages use: the system
-**plus** the site layer (`scss/site/`). It is versioned so the pages work from a plain
-clone, but an app should use `dist/` — through the `themes/` export — and never `css/`.
+`css/styles-theme-<theme>.css` is the *showroom* sheet: the system **plus** the site
+layer (`scss/site/`), unminified. It is versioned because half the guards measure against
+it, but the SYX pages no longer load it: they load `dist/site/site.min.css` (system + site
+layer, shared) and `dist/site/site.<theme>.tokens.min.css` (the theme, pruned against the
+pages' own rules and markup), and the theme switcher swaps only the second one.
+`theme-builder.html` loads `dist/site/site.builder.min.css`, minified but **not** pruned: the
+editor rewrites primitives and semantics from JavaScript. `dist/` is not versioned —
+`npm install` builds it, and the Pages workflow runs `npm ci` before publishing. `dist/site/`
+does not travel in the package. An app should use `dist/` — through the
+exports — and never `css/`.
 To compile your own bundle from source, see [`scss/GETTING-STARTED.md`](scss/GETTING-STARTED.md).
 
 ```bash

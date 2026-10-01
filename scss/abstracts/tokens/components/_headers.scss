@@ -54,4 +54,17 @@
   // ================================================
   --component-header-social-gap: var(--semantic-space-inline-xs); // 8px
   --component-header-social-icon-size: var(--semantic-space-component-xl); // 48px
+
+  // COLUMNA DE CONTENIDO
+  // ================================================
+  // Padding lateral de las secciones de página y de la cabecera, que lo lee
+  // para alinear el logo con el contenido. El valor por defecto reproduce el
+  // comportamiento histórico (padding fijo, contenido a todo lo ancho). Un
+  // tema puede convertirlo en columna centrada con `max()`:
+  //   max(<gutter mínimo>, calc((100% - <ancho de columna>) / 2))
+  // Así el contenido nunca toca el borde en móvil y queda centrado en
+  // pantalla grande, sin necesidad de un div contenedor en el HTML.
+  // (Vivía en _sections.scss con los tokens de la home; esos se fueron a la
+  // capa del sitio, scss/site/tokens/, y este se queda porque es del sistema.)
+  --component-section-padding-inline: var(--semantic-space-layout-md);
 }

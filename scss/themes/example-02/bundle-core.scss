@@ -19,9 +19,9 @@
 // ================================================
 @include theme-example-02-fonts();
 
-// CORE (reset + elements + helpers + grid)
+// CORE (reset + elements + grid; the .syx-* helpers ship apart)
 // ================================================
-@include syx-core(example-02);
+@include syx-core(example-02, $helpers: false);
 
 // BUNDLE: production minimum
 // ================================================

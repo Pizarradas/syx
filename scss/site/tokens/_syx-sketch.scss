@@ -1,0 +1,390 @@
+// SITE TOKENS: TEMA syx-sketch («BLUEPRINT»)
+// ================================================
+// Cómo se ven las páginas de SYX con el tema syx-sketch: cabeceras
+// de sección a la izquierda con numeración de plano, hero con
+// retícula y alzado de la pila de capas, CTA navy, puntuación y
+// badges en la rampa azul del tema.
+//
+// Vivía dentro de scss/themes/syx-sketch/_theme.scss, repartido
+// por su :root y sus mixins de claro y oscuro, y por eso viajaba
+// en todos los bundles de syx-sketch, core incluido. Se movió
+// tal cual: mismos valores, mismos comentarios, y la misma forma
+// de modo que el tema —un mixin de claro y otro de oscuro, cada
+// uno aplicado en sus dos selectores—, así que la simetría
+// claro/oscuro sigue siendo comprobable (check:themes la mira
+// también aquí).
+//
+// Primitivos permitidos en esta carpeta: ver _defaults.scss.
+// ================================================
+
+// MODO CLARO
+// ================================================
+@mixin site-tokens-syx-sketch-light {
+  --component-token-component-accent: var(--primitive-color-blue-500);
+  --component-token-primitive-accent: var(--primitive-color-gray-400);
+  --component-score-1-bg: var(--semantic-color-bg-primary);
+  --component-score-1-color: var(--semantic-color-text-tertiary);
+  --component-score-1-border: var(--semantic-color-border-default);
+  --component-score-2-bg: var(--primitive-color-blue-100);
+  --component-score-2-color: var(--semantic-color-text-primary);
+  --component-score-2-border: var(--primitive-color-blue-200);
+  --component-score-3-bg: var(--primitive-color-blue-200);
+  --component-score-3-color: var(--semantic-color-text-primary);
+  --component-score-3-border: var(--primitive-color-blue-300);
+  // El paso 4 NO puede ser blue-500, aunque el contraste invitara a ello.
+  //
+  // blue-400 es la zona muerta de la rampa —3,79:1 con blanco y 4,35:1 con
+  // tinta, no pasa AA con ningún texto—, así que el 4 se llevó a blue-500. Pero
+  // blue-500 es el color más saturado del tema, y eso rompía la rampa por otro
+  // lado: el 4 tiraba más del ojo que el 5, y el máximo se leía como si no lo
+  // fuera. La escala descendía en luminosidad pero la SATURACIÓN hacía cumbre
+  // en el peldaño equivocado.
+  //
+  // Este azul rebajado la arregla sin tocar el contraste: 5,60:1 con blanco
+  // —medido, no supuesto— y croma 0,120, por debajo del 0,220 del paso 5. Ahora
+  // la rampa sube en saturación y baja en luminosidad de principio a fin, y el
+  // 5 es a la vez el más oscuro y el más saturado.
+  --component-score-4-bg: oklch(0.520 0.120 266);
+  --component-score-4-color: oklch(1 0 0);
+  --component-score-4-border: oklch(0.520 0.120 266);
+  --component-score-5-bg: var(--primitive-color-blue-700);
+  --component-score-5-color: oklch(1 0 0);
+  --component-score-5-border: var(--primitive-color-blue-700);
+  --component-section-divider-color: var(--semantic-color-border-default);
+  --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, transparent 0%, var(--semantic-color-bg-primary) 78% ), var(--semantic-bg-grid);
+  --component-hero-accent-color: var(--semantic-color-primary);
+  --component-hero-accent-decoration-color: var(--primitive-color-green-400);
+  --component-hero-stats-border-color: var(--semantic-color-border-strong);
+  // Alzado axonométrico de la pila de @layer: siete placas con canto, las dos
+  // de abajo rayadas y la de arriba en el azul del tema. Va una versión por
+  // modo porque una imagen trae su propio color, al contrario que una máscara.
+  --component-hero-figure: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20383%20465'%3E%3Cdefs%3E%3Cpattern%20id='h'%20width='8'%20height='8'%20patternUnits='userSpaceOnUse'%20patternTransform='rotate%2845%29'%3E%3Cline%20x1='0'%20y1='0'%20x2='0'%20y2='8'%20stroke='%23c2cdf0'%20stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Cpolygon%20points='62.0,325.0%20191.9,400.0%20191.9,407.0%2062.0,332.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,400.0%20321.8,325.0%20321.8,332.0%20191.9,407.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='url%28%23h%29'%20stroke='none'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='250.0'%20x2='40'%20y2='250.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,289.0%20191.9,364.0%20191.9,371.0%2062.0,296.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,364.0%20321.8,289.0%20321.8,296.0%20191.9,371.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='url%28%23h%29'%20stroke='none'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='214.0'%20x2='40'%20y2='214.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,253.0%20191.9,328.0%20191.9,335.0%2062.0,260.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,328.0%20321.8,253.0%20321.8,260.0%20191.9,335.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,178.0%20321.8,253.0%20191.9,328.0%2062.0,253.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,178.0%20321.8,253.0%20191.9,328.0%2062.0,253.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='178.0'%20x2='40'%20y2='178.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,217.0%20191.9,292.0%20191.9,299.0%2062.0,224.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,292.0%20321.8,217.0%20321.8,224.0%20191.9,299.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,142.0%20321.8,217.0%20191.9,292.0%2062.0,217.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,142.0%20321.8,217.0%20191.9,292.0%2062.0,217.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='142.0'%20x2='40'%20y2='142.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,181.0%20191.9,256.0%20191.9,263.0%2062.0,188.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,256.0%20321.8,181.0%20321.8,188.0%20191.9,263.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,106.0%20321.8,181.0%20191.9,256.0%2062.0,181.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,106.0%20321.8,181.0%20191.9,256.0%2062.0,181.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='106.0'%20x2='40'%20y2='106.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,145.0%20191.9,220.0%20191.9,227.0%2062.0,152.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,220.0%20321.8,145.0%20321.8,152.0%20191.9,227.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%230f1b2d'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,70.0%20321.8,145.0%20191.9,220.0%2062.0,145.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,70.0%20321.8,145.0%20191.9,220.0%2062.0,145.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='70.0'%20x2='40'%20y2='70.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,109.0%20191.9,184.0%20191.9,191.0%2062.0,116.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%231e3aff'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,184.0%20321.8,109.0%20321.8,116.0%20191.9,191.0'%20fill='%23ffffff'%20fill-opacity='0.94'%20stroke='%231e3aff'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,34.0%20321.8,109.0%20191.9,184.0%2062.0,109.0'%20fill='%23ffffff'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,34.0%20321.8,109.0%20191.9,184.0%2062.0,109.0'%20fill='none'%20stroke='%231e3aff'%20stroke-width='2.2'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='34.0'%20x2='40'%20y2='34.0'%20stroke='%23b9c6ee'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cline%20x1='40'%20y1='34.0'%20x2='40'%20y2='407.0'%20stroke='%230f1b2d'%20stroke-width='1.2'/%3E%3Cpolyline%20points='36,44.0%2040,34.0%2044,44.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.2'/%3E%3Cpolyline%20points='36,397.0%2040,407.0%2044,397.0'%20fill='none'%20stroke='%230f1b2d'%20stroke-width='1.2'/%3E%3Ctext%20x='26'%20y='220.5'%20fill='%230f1b2d'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='10.5'%20text-anchor='middle'%20letter-spacing='2'%20transform='rotate%28-90%2026%20220.5%29'%3E7%20LAYERS%3C/text%3E%3Cline%20x1='62.0'%20y1='433.0'%20x2='321.8'%20y2='433.0'%20stroke='%23b9c6ee'%20stroke-width='1.1'/%3E%3Cline%20x1='62.0'%20y1='428.0'%20x2='62.0'%20y2='438.0'%20stroke='%23b9c6ee'%20stroke-width='1.1'/%3E%3Cline%20x1='321.8'%20y1='428.0'%20x2='321.8'%20y2='438.0'%20stroke='%23b9c6ee'%20stroke-width='1.1'/%3E%3Cline%20x1='10'%20y1='10'%20x2='23'%20y2='10'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='10'%20x2='10'%20y2='23'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='10'%20x2='360'%20y2='10'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='10'%20x2='373'%20y2='23'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='455'%20x2='23'%20y2='455'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='455'%20x2='10'%20y2='442'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='455'%20x2='360'%20y2='455'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='455'%20x2='373'%20y2='442'%20stroke='%23b9c6ee'%20stroke-width='1.2'/%3E%3C/svg%3E");
+  --component-cta-code-color: var(--primitive-color-blue-200);
+  --component-layer-utilities-bg: var(--primitive-color-blue-50);
+  --component-layer-utilities-color: var(--primitive-color-blue-600);
+  --component-layer-organisms-color: var(--primitive-color-green-700);
+  --component-layer-molecules-color: var(--primitive-color-blue-700);
+  --component-layer-atoms-color: var(--primitive-color-blue-600);
+  --component-layer-tokens-color: var(--primitive-color-green-700);
+  --component-layer-base-color: var(--primitive-color-gray-600);
+  --component-layer-reset-color: var(--primitive-color-gray-600);
+  --component-docs-badge-layout-bg: var(--primitive-color-gray-100);
+  --component-docs-badge-layout-color: var(--primitive-color-ink);
+  --component-docs-badge-layout-border: var(--primitive-color-gray-300);
+  --component-docs-badge-atom-bg: var(--primitive-color-blue-50);
+  --component-docs-badge-atom-color: var(--primitive-color-blue-800);
+  --component-docs-badge-atom-border: var(--primitive-color-blue-200);
+  --component-docs-badge-molecule-bg: var(--primitive-color-blue-200);
+  --component-docs-badge-molecule-color: var(--primitive-color-blue-900);
+  --component-docs-badge-molecule-border: var(--primitive-color-blue-300);
+  --component-docs-badge-organism-bg: var(--primitive-color-blue-600);
+  --component-docs-badge-organism-color: oklch(1 0 0);
+  --component-docs-badge-organism-border: var(--primitive-color-blue-600);
+  --component-token-primitive-badge-bg: var(--primitive-color-gray-50);
+  --component-token-primitive-badge-color: var(--primitive-color-gray-700);
+  --component-token-primitive-badge-border: var(--primitive-color-gray-300);
+  --component-token-theme-badge-bg: var(--primitive-color-blue-50);
+  --component-token-theme-badge-color: var(--primitive-color-blue-700);
+  --component-token-theme-badge-border: var(--primitive-color-blue-200);
+  --component-token-semantic-badge-bg: var(--primitive-color-green-50);
+  --component-token-semantic-badge-color: var(--primitive-color-green-700);
+  --component-token-semantic-badge-border: var(--primitive-color-green-200);
+  --component-token-component-badge-bg: var(--primitive-color-blue-100);
+  --component-token-component-badge-color: var(--primitive-color-blue-800);
+  --component-token-component-badge-border: var(--primitive-color-blue-300);
+  --component-token-component-step-color: oklch(1 0 0);
+  --component-token-rule-bg: var(--primitive-color-blue-50);
+  --component-token-rule-border-color: var(--semantic-color-border-strong);
+  --component-token-rule-icon-bg: var(--semantic-color-primary);
+  --component-token-rule-icon-color: oklch(1 0 0);
+  --component-theme-card-bg: var(--semantic-color-bg-primary);
+  --component-theme-card-border-color: var(--semantic-color-border-default);
+  --component-layer-item-bg: var(--semantic-color-bg-primary);
+  --component-layer-item-border-color: var(--semantic-color-border-default);
+  --component-token-layer-bg: var(--semantic-color-bg-primary);
+  --component-token-layer-border-color: var(--semantic-color-border-default);
+  --component-cta-bg: var(--semantic-bg-grid), linear-gradient( var(--primitive-color-gray-900), var(--primitive-color-gray-900) );
+  --component-footer-bg: var(--semantic-color-bg-secondary);
+  --component-footer-border-color: var(--semantic-color-border-strong);
+  --component-cta-border-block-width: 0;
+  --component-cta-border-color: var(--semantic-color-border-strong);
+}
+
+// MODO OSCURO
+// ================================================
+@mixin site-tokens-syx-sketch-dark {
+  --component-token-component-accent: var(--primitive-color-blue-300);
+  --component-token-primitive-accent: var(--primitive-color-gray-500);
+  // Escala de puntuación: rampa invertida para fondo oscuro.
+  --component-score-1-bg: var(--primitive-color-gray-800);
+  --component-score-1-color: var(--primitive-color-gray-400);
+  --component-score-1-border: var(--primitive-color-gray-700);
+  --component-score-2-bg: var(--primitive-color-blue-900);
+  --component-score-2-color: var(--primitive-color-blue-200);
+  --component-score-2-border: var(--primitive-color-blue-800);
+  --component-score-3-bg: var(--primitive-color-blue-800);
+  --component-score-3-color: var(--primitive-color-blue-100);
+  --component-score-3-border: var(--primitive-color-blue-700);
+  // Misma zona muerta: blue-400 daba 4,56:1 con gray-900, justo en el filo.
+  // En oscuro la rampa ACLARA, así que 4 y 5 suben un peldaño: 7,38 y 10,54.
+  --component-score-4-bg: var(--primitive-color-blue-300);
+  --component-score-4-color: var(--primitive-color-gray-900);
+  --component-score-4-border: var(--primitive-color-blue-300);
+  --component-score-5-bg: var(--primitive-color-blue-200);
+  --component-score-5-color: var(--primitive-color-gray-900);
+  --component-score-5-border: var(--primitive-color-blue-200);
+
+  // Secciones en oscuro
+  --component-section-divider-color: var(--primitive-color-gray-700);
+  --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, transparent 0%, var(--primitive-color-gray-900) 78% ), var(--semantic-bg-grid);
+  --component-hero-accent-color: var(--primitive-color-blue-300);
+  --component-hero-accent-decoration-color: var(--primitive-color-green-400);
+  --component-hero-stats-border-color: var(--primitive-color-gray-600);
+  // Versión oscura de la figura del hero: mismos trazos, tinta clara y las
+  // placas sobre la superficie oscura del tema.
+  --component-hero-figure: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20383%20465'%3E%3Cdefs%3E%3Cpattern%20id='h'%20width='8'%20height='8'%20patternUnits='userSpaceOnUse'%20patternTransform='rotate%2845%29'%3E%3Cline%20x1='0'%20y1='0'%20x2='0'%20y2='8'%20stroke='%233d4c69'%20stroke-width='0.9'/%3E%3C/pattern%3E%3C/defs%3E%3Cpolygon%20points='62.0,325.0%20191.9,400.0%20191.9,407.0%2062.0,332.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,400.0%20321.8,325.0%20321.8,332.0%20191.9,407.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='url%28%23h%29'%20stroke='none'/%3E%3Cpolygon%20points='191.9,250.0%20321.8,325.0%20191.9,400.0%2062.0,325.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='250.0'%20x2='40'%20y2='250.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,289.0%20191.9,364.0%20191.9,371.0%2062.0,296.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,364.0%20321.8,289.0%20321.8,296.0%20191.9,371.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='url%28%23h%29'%20stroke='none'/%3E%3Cpolygon%20points='191.9,214.0%20321.8,289.0%20191.9,364.0%2062.0,289.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='214.0'%20x2='40'%20y2='214.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,253.0%20191.9,328.0%20191.9,335.0%2062.0,260.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,328.0%20321.8,253.0%20321.8,260.0%20191.9,335.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,178.0%20321.8,253.0%20191.9,328.0%2062.0,253.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,178.0%20321.8,253.0%20191.9,328.0%2062.0,253.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='178.0'%20x2='40'%20y2='178.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,217.0%20191.9,292.0%20191.9,299.0%2062.0,224.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,292.0%20321.8,217.0%20321.8,224.0%20191.9,299.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,142.0%20321.8,217.0%20191.9,292.0%2062.0,217.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,142.0%20321.8,217.0%20191.9,292.0%2062.0,217.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='142.0'%20x2='40'%20y2='142.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,181.0%20191.9,256.0%20191.9,263.0%2062.0,188.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,256.0%20321.8,181.0%20321.8,188.0%20191.9,263.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,106.0%20321.8,181.0%20191.9,256.0%2062.0,181.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,106.0%20321.8,181.0%20191.9,256.0%2062.0,181.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='106.0'%20x2='40'%20y2='106.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,145.0%20191.9,220.0%20191.9,227.0%2062.0,152.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,220.0%20321.8,145.0%20321.8,152.0%20191.9,227.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%23c3ccdb'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,70.0%20321.8,145.0%20191.9,220.0%2062.0,145.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,70.0%20321.8,145.0%20191.9,220.0%2062.0,145.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.15'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='70.0'%20x2='40'%20y2='70.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cpolygon%20points='62.0,109.0%20191.9,184.0%20191.9,191.0%2062.0,116.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%2385a7ff'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,184.0%20321.8,109.0%20321.8,116.0%20191.9,191.0'%20fill='%2316233c'%20fill-opacity='0.94'%20stroke='%2385a7ff'%20stroke-width='0.9'/%3E%3Cpolygon%20points='191.9,34.0%20321.8,109.0%20191.9,184.0%2062.0,109.0'%20fill='%2316233c'%20fill-opacity='0.80'%20stroke='none'/%3E%3Cpolygon%20points='191.9,34.0%20321.8,109.0%20191.9,184.0%2062.0,109.0'%20fill='none'%20stroke='%2385a7ff'%20stroke-width='2.2'%20stroke-linejoin='round'/%3E%3Cline%20x1='183.9'%20y1='34.0'%20x2='40'%20y2='34.0'%20stroke='%2341506e'%20stroke-width='1'%20stroke-dasharray='3%204'/%3E%3Cline%20x1='40'%20y1='34.0'%20x2='40'%20y2='407.0'%20stroke='%23c3ccdb'%20stroke-width='1.2'/%3E%3Cpolyline%20points='36,44.0%2040,34.0%2044,44.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.2'/%3E%3Cpolyline%20points='36,397.0%2040,407.0%2044,397.0'%20fill='none'%20stroke='%23c3ccdb'%20stroke-width='1.2'/%3E%3Ctext%20x='26'%20y='220.5'%20fill='%23c3ccdb'%20font-family='ui-monospace,SFMono-Regular,Menlo,monospace'%20font-size='10.5'%20text-anchor='middle'%20letter-spacing='2'%20transform='rotate%28-90%2026%20220.5%29'%3E7%20LAYERS%3C/text%3E%3Cline%20x1='62.0'%20y1='433.0'%20x2='321.8'%20y2='433.0'%20stroke='%2341506e'%20stroke-width='1.1'/%3E%3Cline%20x1='62.0'%20y1='428.0'%20x2='62.0'%20y2='438.0'%20stroke='%2341506e'%20stroke-width='1.1'/%3E%3Cline%20x1='321.8'%20y1='428.0'%20x2='321.8'%20y2='438.0'%20stroke='%2341506e'%20stroke-width='1.1'/%3E%3Cline%20x1='10'%20y1='10'%20x2='23'%20y2='10'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='10'%20x2='10'%20y2='23'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='10'%20x2='360'%20y2='10'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='10'%20x2='373'%20y2='23'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='455'%20x2='23'%20y2='455'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='10'%20y1='455'%20x2='10'%20y2='442'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='455'%20x2='360'%20y2='455'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3Cline%20x1='373'%20y1='455'%20x2='373'%20y2='442'%20stroke='%2341506e'%20stroke-width='1.2'/%3E%3C/svg%3E");
+  --component-cta-code-color: var(--primitive-color-blue-200);
+  --component-layer-utilities-bg: var(--primitive-color-gray-800);
+  --component-layer-utilities-color: var(--primitive-color-blue-300);
+  --component-layer-organisms-color: var(--primitive-color-green-300);
+  --component-layer-molecules-color: var(--primitive-color-blue-200);
+  --component-layer-atoms-color: var(--primitive-color-blue-300);
+  --component-layer-tokens-color: var(--primitive-color-green-300);
+  --component-layer-base-color: var(--primitive-color-gray-300);
+  --component-layer-reset-color: var(--primitive-color-gray-400);
+  // En oscuro los tintes claros se invierten: fondo de página con trazo
+  // de color, igual que las píldoras.
+  --component-docs-badge-layout-bg: var(--primitive-color-gray-800);
+  --component-docs-badge-layout-color: var(--primitive-color-gray-200);
+  --component-docs-badge-layout-border: var(--primitive-color-gray-600);
+  --component-docs-badge-atom-bg: var(--primitive-color-gray-800);
+  --component-docs-badge-atom-color: var(--primitive-color-blue-300);
+  --component-docs-badge-atom-border: var(--primitive-color-blue-700);
+  --component-docs-badge-molecule-bg: var(--primitive-color-blue-800);
+  --component-docs-badge-molecule-color: var(--primitive-color-blue-100);
+  --component-docs-badge-molecule-border: var(--primitive-color-blue-600);
+  --component-docs-badge-organism-bg: var(--primitive-color-blue-300);
+  --component-docs-badge-organism-color: var(--primitive-color-gray-900);
+  --component-docs-badge-organism-border: var(--primitive-color-blue-300);
+
+  --component-token-primitive-badge-bg: var(--primitive-color-gray-900);
+  --component-token-primitive-badge-color: var(--primitive-color-gray-200);
+  --component-token-primitive-badge-border: var(--primitive-color-gray-600);
+  --component-token-theme-badge-bg: var(--primitive-color-gray-900);
+  --component-token-theme-badge-color: var(--primitive-color-blue-300);
+  --component-token-theme-badge-border: var(--primitive-color-blue-800);
+  --component-token-semantic-badge-bg: var(--primitive-color-gray-900);
+  --component-token-semantic-badge-color: var(--primitive-color-green-300);
+  --component-token-semantic-badge-border: var(--primitive-color-green-800);
+  --component-token-component-badge-bg: var(--primitive-color-gray-900);
+  --component-token-component-badge-color: var(--primitive-color-blue-200);
+  --component-token-component-badge-border: var(--primitive-color-blue-700);
+  --component-token-component-step-color: var(--primitive-color-gray-900);
+  --component-token-rule-bg: var(--primitive-color-gray-800);
+  --component-token-rule-border-color: var(--primitive-color-gray-600);
+  --component-token-rule-icon-bg: var(--primitive-color-blue-300);
+  --component-token-rule-icon-color: var(--primitive-color-gray-900);
+  --component-theme-card-bg: oklch(0.305 0.032 262);
+  --component-theme-card-border-color: var(--primitive-color-gray-600);
+  --component-layer-item-bg: oklch(0.305 0.032 262);
+  --component-layer-item-border-color: var(--primitive-color-gray-600);
+  --component-token-layer-bg: oklch(0.305 0.032 262);
+  --component-token-layer-border-color: var(--primitive-color-gray-600);
+
+  // La franja del CTA: en claro es la isla oscura sobre papel blanco. En
+  // oscuro tiene que seguir siendo un corte, así que sube al escalón más
+  // alto en vez de fundirse con la página.
+  --component-cta-bg: var(--semantic-bg-grid), linear-gradient(oklch(0.355 0.042 263), oklch(0.355 0.042 263));
+
+  // Footer: un escalón por encima de la página, igual que en claro.
+  --component-footer-bg: oklch(0.265 0.036 259);
+  --component-footer-border-color: var(--primitive-color-gray-500);
+  --component-cta-border-block-width: 2px;
+  --component-cta-border-color: var(--primitive-color-gray-500);
+}
+
+@mixin site-tokens-syx-sketch {
+  :root {
+    --component-theme-card-border-width: 0.0625rem;
+    --component-theme-card-border-radius: var(--semantic-border-radius-default);
+    --component-theme-card-shadow: none;
+    --component-theme-card-border-color-active: var(--semantic-color-border-strong);
+    --component-theme-card-shadow-hover: var(--semantic-shadow-hard);
+    --component-theme-card-hover-lift: 0px;
+    --component-theme-card-swatch-border-radius: 0;
+    --component-theme-card-dot-border-radius: var(--semantic-border-radius-sm);
+    --component-theme-card-dot-border-color: var(--semantic-color-border-strong);
+
+    // ================================================
+    // SECCIONES DE LA HOME
+    // ================================================
+
+    // Titulares de sección: un punto menos de tamaño y de peso
+    // que el original. En un boceto la jerarquía la marca el
+    // espacio, no el cuerpo de letra.
+    --component-section-title-weight: var(--primitive-font-weight-bold);
+    --component-section-title-tracking: -0.02em;
+    --component-section-divider-width: 1px;
+    // Papel milimetrado de fondo en las secciones que lo piden.
+    --component-section-bg-image: var(--semantic-bg-grid);
+
+    // HERO — la retícula sustituye al degradado radial.
+    // Se compone en dos capas: encima, un óvalo que se funde con
+    // el papel; debajo, la retícula. Así la cuadrícula se ve en
+    // el centro y desaparece hacia los bordes, sin corte duro.
+    --component-hero-backdrop-width: 100%;
+    --component-hero-backdrop-height: min(640px, 72vh);
+    --component-hero-backdrop-top: 0;
+    --component-hero-backdrop-left: 0;
+    --component-hero-backdrop-translate: none;
+
+    --component-hero-headline-font-size: clamp(2.75rem, 6.5vw, 4.5rem);
+    --component-hero-headline-weight: var(--primitive-font-weight-bold);
+    --component-hero-headline-leading: 1;
+    --component-hero-headline-tracking: -0.035em;
+
+    // La palabra destacada deja de ser un degradado recortado
+    // (que en pantallas sin soporte se ve invisible) y pasa a
+    // azul plano con un subrayado en menta: el gesto de marcador
+    // sobre el papel.
+    --component-hero-accent-bg: none;
+    --component-hero-accent-fill: currentColor;
+    --component-hero-accent-decoration-line: underline;
+    --component-hero-accent-decoration-thickness: 0.09em;
+    --component-hero-accent-decoration-offset: 0.14em;
+
+    --component-hero-sub-font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+    --component-hero-stats-border-width: 0.125rem;
+
+    // CTA — navy sólido con retícula. `background-image` no acepta
+    // un color suelto, así que el plano va como linear-gradient de
+    // una sola parada.
+    --component-cta-color: oklch(1 0 0);
+    --component-cta-overline-color: var(--primitive-color-green-300);
+    --component-cta-sub-color: var(--primitive-color-gray-300);
+    --component-cta-headline-font-size: clamp(1.75rem, 3.8vw, 2.75rem);
+    // Fuera el círculo decorativo: no hay formas gratuitas.
+    --component-cta-decor-bg: transparent;
+    --component-cta-code-bg: color-mix(in srgb, oklch(0 0 0) 35%, transparent);
+    --component-cta-code-border-color: var(--primitive-color-gray-600);
+    --component-cta-code-border-radius: var(--semantic-border-radius-default);
+    --component-cta-shadow-hard-color: var(--primitive-color-gray-600);
+
+    // LAYERS — la pila de @layer en azul/menta/gris.
+    // Los `-accent` son la franja lateral (solo forma) y los
+    // `-color` son texto: por eso van dos pasos más oscuros.
+    --component-layer-item-border-width: 1px;
+    --component-layer-item-border-radius: var(--semantic-border-radius-default);
+    --component-layer-item-accent-width: 0.25rem;
+    --component-layer-item-gap: 0.5rem;
+    --component-layer-item-shadow-hover: -0.25rem 0 0 0 var(--semantic-color-primary), var(--semantic-shadow-hard-sm);
+    --component-layer-utilities-accent: var(--primitive-color-blue-500);
+    --component-layer-organisms-accent: var(--primitive-color-green-500);
+    --component-layer-molecules-accent: var(--primitive-color-blue-300);
+    --component-layer-atoms-accent: var(--primitive-color-blue-400);
+    --component-layer-tokens-accent: var(--primitive-color-green-400);
+    --component-layer-base-accent: var(--primitive-color-gray-400);
+    --component-layer-reset-accent: var(--primitive-color-gray-300);
+
+    // FOOTER — cerrado con trazo grueso, como el pie de un plano.
+    --component-footer-border-width: 0.125rem;
+
+    // Hero alineado a la izquierda. Un boceto no se centra: se apoya en el
+    // margen, como el texto de un plano. Además deja el titular y el
+    // subtítulo en la misma vertical, que es lo que hace legible el salto
+    // de tamaño entre ambos.
+    --component-hero-text-align: start;
+    --component-hero-justify: flex-start;
+    --component-hero-content-inline: 0 auto;
+    --component-hero-headline-max-width: 15ch;
+    // El hero ya arranca con la retícula y la píldora: no necesita 12rem de
+    // vacío por encima. Se queda en el mismo aire que el resto de secciones.
+    --component-hero-padding-block-start: var(--semantic-space-layout-xl);
+    --component-hero-scroll-hint-align: flex-start;
+    // La mitad derecha del hero dejaba de ser un hueco: lleva el alzado
+    // acotado de la pila de 7 capas, dibujado a trazo. Solo a partir de
+    // pantalla grande; por debajo, el hero sigue a una columna.
+    // Opacidad 1, no 0,55: el 55 % servía cuando la figura era una máscara de
+    // un solo color y había que bajarle el peso. El dibujo ya trae su propia
+    // jerarquía —traza fina y azul pálido para lo secundario—, así que
+    // atenuarlo encima solo lo dejaba lavado.
+    --component-hero-figure-opacity: 1;
+    --component-hero-figure-min-height: 30rem;
+    --component-hero-columns-wide: minmax(0, 1fr) minmax(0, 0.72fr);
+    --component-hero-column-gap-wide: var(--semantic-space-layout-lg);
+    --component-hero-figure-display-wide: block;
+
+    --component-hero-sub-max-width: 52ch;
+    --component-section-padding-block: var(--semantic-space-layout-xl);
+    --component-section-align: start;
+    --component-section-justify: flex-start;
+    --component-section-header-margin-inline: 0 auto;
+    --component-section-title-font-size: clamp(1.5rem, 2.6vw, 2rem);
+    --component-section-title-max-width: 22ch;
+    --component-section-rule-width: 1px;
+    --component-section-rule-color: var(--semantic-color-border-strong);
+    --component-section-rule-spacing: calc(4 * var(--base-measure));
+    // Numeración de plano encendida: "01 —" sobre una regla que cruza la
+    // columna y termina en un tope vertical. Es el gesto que convierte una
+    // sucesión de secciones en las láminas de un plano.
+    --component-section-index-content: "SEC " counter(syx-section, decimal-leading-zero);
+    --component-section-tick-width: 1px;
+    --component-section-tick-color: var(--semantic-color-border-default);
+    --component-section-index-color: var(--semantic-color-text-tertiary);
+    --component-section-tick-height: 0.5rem;
+    --component-section-overline-bg: transparent;
+    --component-section-overline-border-width: 0;
+    --component-section-overline-padding: 0;
+    --component-section-overline-color: var(--semantic-color-primary);
+
+    // DIAGRAMA DE TOKENS — la misma paleta que el resto.
+    // El naranja y el morado originales no existen en este tema:
+    // las 4 capas se distinguen por posición en la escala azul→menta,
+    // no por colores sin relación entre sí.
+    --component-token-layer-border-width: 1px;
+    --component-token-layer-border-radius: var(--semantic-border-radius-default);
+    --component-token-layer-shadow-hover: var(--semantic-shadow-hard);
+    --component-token-layer-hover-lift: 0px;
+    --component-token-layer-stripe-width: 0.25rem;
+
+    // Badges y numeración: rectangulares, como el resto del tema.
+    --component-token-step-radius: var(--semantic-border-radius-sm);
+    --component-token-badge-radius: var(--semantic-border-radius-sm);
+    --component-token-badge-border-width: 1px;
+
+    --component-token-primitive-step-color: var(--primitive-color-ink);
+
+    --component-token-theme-accent: var(--primitive-color-blue-300);
+    --component-token-theme-step-color: var(--primitive-color-ink);
+
+    --component-token-semantic-accent: var(--primitive-color-green-400);
+    --component-token-semantic-step-color: var(--primitive-color-ink);
+
+    // El conector deja de ser un degradado y pasa a línea de cota.
+    --component-token-connector-line: linear-gradient( var(--semantic-color-border-strong), var(--semantic-color-border-strong) );
+    --component-token-connector-opacity: 0.5;
+    --component-token-connector-arrow-color: var(--semantic-color-primary);
+
+    --component-token-rule-border-width: 0.125rem;
+    --component-token-rule-border-radius: var(--semantic-border-radius-default);
+    --component-token-rule-icon-radius: var(--semantic-border-radius-default);
+    // Valores del modo claro (ver el mixin arriba).
+    @include site-tokens-syx-sketch-light;
+  }
+
+  // Los mismos cuatro estados que el tema: preferencia del SO en oscuro,
+  // oscuro elegido y claro elegido.
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      @include site-tokens-syx-sketch-dark;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    @include site-tokens-syx-sketch-dark;
+  }
+
+  :root[data-theme="light"] {
+    @include site-tokens-syx-sketch-light;
+  }
+}

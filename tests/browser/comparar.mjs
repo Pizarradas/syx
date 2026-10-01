@@ -14,7 +14,12 @@
  * Informa y no falla: un cambio visual puede ser justo lo que se buscaba. Lo
  * decide quien revisa, con las imágenes delante.
  *
- * Uso: node comparar.mjs <antes> <después> <diferencias> [informe.md]
+ * Uso: node comparar.mjs <antes> <después> <diferencias> [informe.md] [--exacto]
+ *
+ * --exacto: umbral 0 en vez de 0,1 (cualquier píxel distinto cuenta) y sale
+ * con código 1 si algo cambia. Es para los cambios que prometen NO cambiar
+ * nada —como podar tokens en dist/ (auditoría 2026-10, acción 12)—, donde
+ * «casi igual» no basta.
  * (Auditoría 2026-09 · acción 17)
  */
 
@@ -23,7 +28,8 @@ import path from 'node:path';
 import { PNG } from 'pngjs';
 import pixelmatch from 'pixelmatch';
 
-const [antes, despues, dirDif, informe = path.join(dirDif, 'informe.md')] = process.argv.slice(2);
+const exacto = process.argv.includes('--exacto');
+const [antes, despues, dirDif, informe = path.join(dirDif, 'informe.md')] = process.argv.slice(2).filter((a) => a !== '--exacto');
 if (!antes || !despues || !dirDif) {
   console.error('Uso: node comparar.mjs <antes> <después> <diferencias> [informe.md]');
   process.exit(2);
@@ -46,7 +52,7 @@ for (const f of [...b].filter((x) => a.has(x)).sort()) {
     continue;
   }
   const dif = new PNG({ width: i1.width, height: i1.height });
-  const px = pixelmatch(i1.data, i2.data, dif.data, i1.width, i1.height, { threshold: 0.1 });
+  const px = pixelmatch(i1.data, i2.data, dif.data, i1.width, i1.height, { threshold: exacto ? 0 : 0.1, includeAA: exacto });
   if (px > 0) {
     const out = path.join(dirDif, f);
     fs.mkdirSync(path.dirname(out), { recursive: true });
@@ -71,3 +77,4 @@ if (!cambios.length && !nuevos.length && !quitados.length) {
 fs.mkdirSync(path.dirname(informe), { recursive: true });
 fs.writeFileSync(informe, L.join('\n') + '\n');
 console.log(L.join('\n'));
+if (exacto && (cambios.length || nuevos.length || quitados.length)) process.exitCode = 1;

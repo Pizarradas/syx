@@ -1,0 +1,19 @@
+// SITE TOKENS
+// ================================================
+// Los tokens de la capa del sitio: valores por defecto y, por tema,
+// los ajustes que ese tema hace a las páginas de SYX. Solo los emite
+// syx-bundle-site(); ningún bundle del sistema los lleva.
+// ================================================
+
+@use 'defaults' as *;
+@use 'syx-sketch' as *;
+
+@mixin site-tokens($theme: null) {
+  @include site-tokens-defaults;
+
+  // Un tema que quiera vestir las páginas de SYX a su manera añade aquí
+  // su fichero; los demás se quedan con los valores por defecto.
+  @if $theme == syx-sketch {
+    @include site-tokens-syx-sketch;
+  }
+}

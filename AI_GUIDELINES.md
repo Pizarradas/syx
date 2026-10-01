@@ -74,7 +74,7 @@ so a change you have not compiled does not exist for either. Run `npm run build`
 
 | Rule    | Check                                                    | Allowed in (`allowedIn`)                                                                  |
 | ------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| **R01** | `var(--primitive-*)` in values or `@include` parameters  | `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` — **not** `scss/pages/`, `scss/site/`, `scss/layout/` or components |
+| **R01** | `var(--primitive-*)` in values or `@include` parameters  | `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss`, `scss/site/tokens/` (the site's own palette) — **not** `scss/pages/`, the components in `scss/site/`, `scss/layout/` or system components |
 | **R02** | `!important` (any spacing or case)                       | Nowhere                                                                                   |
 | **R03** | `transition` or `transition-*`, any vendor prefix        | `scss/abstracts/mixins/`                                                                  |
 | **R04** | `position: absolute/fixed/sticky`                        | `scss/abstracts/mixins/`                                                                  |

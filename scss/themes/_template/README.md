@@ -84,7 +84,7 @@ For SYX components without showroom overhead, every theme compiles
 
 ```bash
 sass scss/themes/your-theme-name/bundle-core.scss dist/core.css --style=compressed
-# measured on example-01: 203 KB raw · 36 KB gzip (goal: < 50 KB gzip)
+# sizes: `npm run build:dist` prints them and writes dist/sizes.json
 ```
 
 ## Theme Structure

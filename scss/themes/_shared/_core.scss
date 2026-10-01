@@ -25,23 +25,22 @@
 @use '../../layout/stack' as *;
 @use '../../layout/cluster' as *;
 
-@mixin syx-core($theme: null) {
+// $helpers: las clases .syx-* de helpers (iconos, tamaños de fuente,
+// dimensiones, familias, fondos con los colores de marca de redes
+// sociales). Son utilidades, no base: bundle-core las deja fuera
+// (`$helpers: false`) y dist/ las publica aparte en
+// syx.utilities.min.css junto a las de utilities/. El resto de bundles
+// las conserva, así que su salida no cambia.
+@mixin syx-core($theme: null, $helpers: true) {
 
   // RESET + ELEMENTOS BASE
   // ================================================
   @include resets-global($theme);
   @include elements-base($theme);
 
-  // HELPERS: independientes del tema
-  // ================================================
-  @include helper-icons();
-
-  // HELPERS: dependientes del tema
-  // ================================================
-  @include helper-font-sizes($theme);
-  @include helper-dimensions($theme);
-  @include helper-fonts($theme);
-  @include helper-backgrounds($theme);
+  @if $helpers {
+    @include syx-helpers($theme);
+  }
 
   // LAYOUT: grid y primitivas (stack, cluster)
   // ================================================
@@ -50,4 +49,20 @@
   @include layout-grid($theme);
   @include layout-stack($theme);
   @include layout-cluster($theme);
+}
+
+// HELPERS (.syx-*) — también por separado, para quien compile las
+// utilidades sin el resto (scripts/build-dist.js, syx.utilities.min.css).
+@mixin syx-helpers($theme: null) {
+  // HELPERS: independientes del tema
+  // ================================================
+  @include helper-icons();
+
+  // HELPERS: los que reciben el tema (hoy ninguno cambia con él: lo que
+  // varía entre temas sale de tokens)
+  // ================================================
+  @include helper-font-sizes($theme);
+  @include helper-dimensions($theme);
+  @include helper-fonts($theme);
+  @include helper-backgrounds($theme);
 }

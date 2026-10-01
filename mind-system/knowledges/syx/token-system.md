@@ -191,7 +191,7 @@ Los tokens no deben asumir viewport, estado de JS, o contexto de renderización.
 --component-dialog-color:            var(--semantic-color-text-primary);
 ```
 
-La rampa fluida es la excepción documentada: **no existe un tier semántico fluido**, así que un `clamp()` que necesita interpolar entre dos extremos lo escribe el token de componente en literales, como hace `scss/abstracts/tokens/components/_sections.scss`. Es la única forma en la que un valor crudo es legítimo, y lo es porque vive en la capa de tokens, no en la de componente. Dentro de `scss/atoms|molecules|organisms/` no hay excepción: solo `var(--component-*)` y `var(--semantic-*)`.
+La rampa fluida es la excepción documentada: **no existe un tier semántico fluido**, así que un `clamp()` que necesita interpolar entre dos extremos lo escribe el token de componente en literales, como hacen los tokens de las secciones del sitio en `scss/site/tokens/_defaults.scss`. Es la única forma en la que un valor crudo es legítimo, y lo es porque vive en la capa de tokens, no en la de componente. Dentro de `scss/atoms|molecules|organisms/` no hay excepción: solo `var(--component-*)` y `var(--semantic-*)`.
 
 ```scss
 // ✗ Fallback roto sin JS
