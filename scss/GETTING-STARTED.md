@@ -259,11 +259,11 @@ sass scss/styles-theme-my-brand.scss css/styles-theme-my-brand.css
 // 1. Add primitive (scss/abstracts/tokens/primitives/_colors.scss)
 --primitive-color-teal-500: hsl(175, 100%, 40%);
 
-// 2. Add semantic tone (scss/abstracts/tokens/semantic/_colors.scss)
---semantic-tone-info-bg: var(--primitive-color-teal-500);
+// 2. Point the semantic state at it (scss/abstracts/tokens/semantic/_colors.scss)
+--semantic-color-state-info: var(--primitive-color-teal-500);
 
 // 3. Use in component token (scss/abstracts/tokens/components/_alert.scss)
---component-alert-info-bg: var(--semantic-tone-info-bg);
+--component-alert-info-bg: var(--semantic-color-state-info);
 
 // 4. Use in component SCSS
 .syx-alert--info {

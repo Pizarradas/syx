@@ -178,6 +178,7 @@
   // muerta que el primario: tiene su propia tinta, por defecto la del primario.
   --semantic-color-on-primary-strong: var(--semantic-color-on-primary);
   // Nombre anterior de --semantic-color-on-primary. Se conserva como alias.
+  // @deprecated --semantic-color-on-primary: nombre anterior de la tinta sobre el primario
   --semantic-color-text-on-primary: var(--semantic-color-on-primary);
 
   // BORDER COLORS
@@ -223,25 +224,39 @@
 
   // STATE COLORS - FEEDBACK
   // ================================================
-  --semantic-tone-success-bg: var(--primitive-color-success-500);
-  --semantic-tone-error-bg: var(--primitive-color-error-500);
-  --semantic-tone-warning-bg: var(--primitive-color-warning-500);
-  --semantic-tone-info-bg: var(--primitive-color-blue-500);
+  // Un solo nombre por estado: --semantic-color-state-*. Es el que leen los
+  // campos, el interruptor, las alertas y los tonos suaves, y el que declara
+  // un tema. Hasta octubre de 2026 cada estado tenía TRES nombres con el mismo
+  // valor en los siete temas (state-error, color-error y tone-error-bg) y el
+  // de verdad era el tercero; los otros dos lo leían. Ahora la dirección es la
+  // contraria: el canónico se declara y los dos de antes son alias
+  // deprecados que lo siguen, para no romper a quien los lea.
+  // (Auditoría 2026-10 · acción 14)
+  --semantic-color-state-success: var(--primitive-color-success-500);
+  --semantic-color-state-error: var(--primitive-color-error-500);
+  --semantic-color-state-warning: var(--primitive-color-warning-500);
+  --semantic-color-state-info: var(--primitive-color-blue-500);
 
-  // SHORT ALIASES — ergonomic references for utilities and components
-  // Equivalent to tone-* tokens. Use either form; both are correct.
-  --semantic-color-success: var(--semantic-tone-success-bg);
-  --semantic-color-error: var(--semantic-tone-error-bg);
-  --semantic-color-warning: var(--semantic-tone-warning-bg);
-  --semantic-color-info: var(--semantic-tone-info-bg);
+  // @deprecated --semantic-color-state-success: nombre de antes del estado de éxito
+  --semantic-tone-success-bg: var(--semantic-color-state-success);
+  // @deprecated --semantic-color-state-error: nombre de antes del estado de error
+  --semantic-tone-error-bg: var(--semantic-color-state-error);
+  // @deprecated --semantic-color-state-warning: nombre de antes del estado de aviso
+  --semantic-tone-warning-bg: var(--semantic-color-state-warning);
+  // @deprecated --semantic-color-state-info: nombre de antes del estado de información
+  --semantic-tone-info-bg: var(--semantic-color-state-info);
 
-  // FEEDBACK STATE ALIASES — used by form fields, switch, and alert components
-  // These point to tone-* tokens and are the "component-facing" contract.
+  // @deprecated --semantic-color-state-success: alias corto del estado de éxito
+  --semantic-color-success: var(--semantic-color-state-success);
+  // @deprecated --semantic-color-state-error: alias corto del estado de error
+  --semantic-color-error: var(--semantic-color-state-error);
+  // @deprecated --semantic-color-state-warning: alias corto del estado de aviso
+  --semantic-color-warning: var(--semantic-color-state-warning);
+  // @deprecated --semantic-color-state-info: alias corto del estado de información
+  --semantic-color-info: var(--semantic-color-state-info);
+
+  // @deprecated --semantic-focus-ring-color: el anillo de foco, con otro nombre
   --semantic-color-state-focus: var(--semantic-focus-ring-color);
-  --semantic-color-state-success: var(--semantic-tone-success-bg);
-  --semantic-color-state-error: var(--semantic-tone-error-bg);
-  --semantic-color-state-warning: var(--semantic-tone-warning-bg);
-  --semantic-color-state-info: var(--semantic-tone-info-bg);
 
   // SELECTION COLORS
   // ================================================

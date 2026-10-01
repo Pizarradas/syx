@@ -198,6 +198,6 @@ Para respetar el modo oscuro, repite la sobrescritura en las mismas dos entradas
 En la versión V4, el sistema estandariza estrictamente el ciclo de vida de los tokens. **Nunca rompas esta cascada de dependencias:**
 
 1. **Tokens Primitivos (Primitives):** Paletas crudas (ej. `purple-500`, `space-base`).
-2. **Arquitectura y Tema (Theme Config):** Variables estructurales cross-componentes que definen el aspecto y tacto *general* del sistema, tales como focus rings, bordes base o radios (ej. `--theme-focus-ring-width`, `--semantic-border-width`).
-3. **Tonos Semánticos (Tones):** Responsables exclusivamente de feedback universal, renombrados como `--semantic-tone-*` para evitar colisión con estados de interacción (ej. `--semantic-tone-success-bg`).
+2. **Arquitectura y Tema (Theme Config):** Variables estructurales cross-componentes que definen el aspecto y tacto *general* del sistema, tales como focus rings, bordes base o radios (ej. `--theme-focus-ring-width`, `--theme-radius`).
+3. **Estados Semánticos (States):** Responsables exclusivamente de feedback universal, con un solo nombre por estado: `--semantic-color-state-*` (ej. `--semantic-color-state-success`). Los nombres de antes (`--semantic-tone-*-bg`, `--semantic-color-success`…) son alias deprecados que lo siguen.
 4. **Aliases de Componente (Components):** Propiedades explícitas dedicadas que consumen de los niveles superiores. Un botón nunca define `--semantic-color-primary`, consume su prop propia, e.g. `--component-button-primary-filled-color`, que lee `--semantic-color-on-primary` y con él reacciona al tema y al modo oscuro. Un token de componente solo lee roles semánticos u otros tokens de componente (R11).

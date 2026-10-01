@@ -41,8 +41,16 @@
  *
  * QUÉ SE DERIVA Y QUÉ SE CONSERVA
  *   Derivado:   key, type, value, rawValue, layer, y el orden.
+ *   Derivado de la FUENTE desde octubre de 2026: status deprecated y
+ *               replacedBy, de un comentario en la línea de encima de la
+ *               declaración:
+ *                 // @deprecated --semantic-color-state-error: por qué
+ *                 --semantic-color-error: var(--semantic-color-state-error);
+ *               Antes se conservaban del tokens.json anterior, que nadie
+ *               edita: una deprecación no tenía dónde escribirse. Ahora el
+ *               SCSS manda, y quitar el comentario quita la deprecación.
  *   Conservado del tokens.json anterior, por nombre (no está en el SCSS):
- *               note, status (deprecated/reserved), aliasOf, replacedBy.
+ *               note, status reserved, aliasOf.
  *   Un token que desaparece del SCSS desaparece de aquí: lo deprecado se
  *   documenta mientras existe, no después.
  *
@@ -69,7 +77,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { leerDeclaraciones } = require('./lib/scss-tokens');
+const { leerDeclaraciones, sinComentarios: sinComentariosScss } = require('./lib/scss-tokens');
 
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'tokens.json');
@@ -134,12 +142,20 @@ function clase(contexto) {
 
 // ─── 2 · Recoger ────────────────────────────────────────────────────────────
 
+// `// @deprecated --sustituto: por qué` en la línea justo encima.
+const DEPRECADO = /^\s*\/\/\s*@deprecated\s+(--[\w-]+)\s*(?::\s*(.*\S))?\s*$/;
+
 function recoger() {
   const decl = new Map(); // nombre → { valor, fichero, linea }
   const dobles = [];
+  const deprecados = new Map(); // nombre → { replacedBy, porque, donde }
   for (const f of fuentesComunes()) {
-    for (const d of leerDeclaraciones(fs.readFileSync(f, 'utf8'))) {
+    const texto = fs.readFileSync(f, 'utf8');
+    const lineas = texto.replace(/\r\n?/g, '\n').split('\n');
+    for (const d of leerDeclaraciones(texto)) {
       if (!OFICIAL.test(d.name)) continue;
+      const dep = DEPRECADO.exec(lineas[d.line - 2] || '');
+      if (dep) deprecados.set(d.name, { replacedBy: dep[1], porque: dep[2] || null, donde: `${relRoot(f)}:${d.line}` });
       const c = clase(d.contexto);
       if (c === 'variante') continue;
       const previo = decl.get(d.name);
@@ -183,7 +199,7 @@ function recoger() {
       });
     }
   }
-  return { decl, dobles, contrato, temas: lista };
+  return { decl, dobles, contrato, temas: lista, deprecados };
 }
 
 // ─── 3 · Tipar ──────────────────────────────────────────────────────────────
@@ -220,10 +236,10 @@ function tipar(raw, numericos) {
 
 // ─── 4 · Construir ──────────────────────────────────────────────────────────
 
-const CONSERVADOS = ['status', 'aliasOf', 'replacedBy', 'note'];
+const CONSERVADOS = ['status', 'aliasOf', 'note'];
 
 function construir(previo) {
-  const { decl, dobles, contrato, temas: lista } = recoger();
+  const { decl, dobles, contrato, temas: lista, deprecados } = recoger();
   const anteriores = new Map();
   for (const [s, v] of Object.entries(previo || {})) {
     if (s === '_meta' || !v || typeof v !== 'object') continue;
@@ -267,6 +283,14 @@ function construir(previo) {
     const e = { key: t.nombre.slice(capa.length + 3), type, value, rawValue: t.raw, status: 'active' };
     const ant = anteriores.get(t.nombre);
     if (ant) for (const c of CONSERVADOS) if (ant[c] !== undefined) e[c] = ant[c];
+    // La deprecación sale del SCSS, no del fichero anterior (ver cabecera).
+    if (e.status === 'deprecated') e.status = 'active';
+    const dep = deprecados.get(t.nombre);
+    if (dep) {
+      e.status = 'deprecated';
+      e.replacedBy = dep.replacedBy;
+      e.note = `Deprecado: usa ${dep.replacedBy}${dep.porque ? ` (${dep.porque})` : ''}.`;
+    }
     if (t.deTema) {
       // La nota de origen se añade a la que hubiera, una sola vez (al
       // regenerar, la nota conservada ya la trae).
@@ -281,7 +305,7 @@ function construir(previo) {
   }
 
   const desaparecidos = [...anteriores.keys()].filter((k) => !todos.some((t) => t.nombre === k));
-  return { out, dobles, desaparecidos, contrato };
+  return { out, dobles, desaparecidos, contrato, deprecados, nombres: new Set(todos.map((t) => t.nombre)) };
 }
 
 // ─── 5 · Escribir o comprobar ───────────────────────────────────────────────
@@ -289,7 +313,7 @@ function construir(previo) {
 function main() {
   const check = process.argv.includes('--check');
   const previo = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, 'utf8')) : null;
-  const { out, dobles, desaparecidos, contrato } = construir(previo);
+  const { out, dobles, desaparecidos, contrato, deprecados, nombres } = construir(previo);
   const texto = JSON.stringify(out, null, 2) + '\n';
   const cuenta = Object.entries(out).filter(([k]) => k !== '_meta')
     .map(([k, v]) => `${k} ${Object.keys(v).length}`).join(' · ');
@@ -301,6 +325,41 @@ function main() {
     console.log('   declaración es código muerto: el valor escrito no es el que se ve.\n');
     for (const d of dobles) console.log(`   ${d.token}\n     ${d.a}  (tapada por)  ${d.b}`);
     console.log('\n   Deja una sola: la que hoy gana, en la capa que le corresponde.\n');
+    process.exit(1);
+  }
+
+  // Una deprecación tiene que apuntar a algo que exista y no esté deprecado, y
+  // el propio sistema no puede seguir usando lo que deprecó: ni leerlo en un
+  // componente ni declararlo en un tema (desde octubre de 2026 los alias
+  // deprecados SIGUEN al canónico; un tema que declara el alias ya no cambia
+  // nada).
+  const malDeprecados = [];
+  for (const [n, d] of deprecados) {
+    if (!nombres.has(d.replacedBy)) malDeprecados.push(`${n} → ${d.replacedBy}: el sustituto no existe (${d.donde})`);
+    else if (deprecados.has(d.replacedBy)) malDeprecados.push(`${n} → ${d.replacedBy}: el sustituto también está deprecado (${d.donde})`);
+  }
+  if (deprecados.size) {
+    const leer = new RegExp(`var\\(\\s*(${[...deprecados.keys()].join('|')})\\s*[,)]`);
+    const declarar = new RegExp(`^\\s*(${[...deprecados.keys()].join('|')})\\s*:`);
+    const andar = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+      const p = path.join(dir, e.name);
+      return e.isDirectory() ? andar(p) : e.name.endsWith('.scss') ? [p] : [];
+    });
+    for (const f of andar(SCSS)) {
+      const rel = relRoot(f);
+      const enTema = rel.startsWith('scss/themes/') && !rel.startsWith('scss/themes/_base/');
+      sinComentariosScss(fs.readFileSync(f, 'utf8')).split('\n').forEach((l, i) => {
+        const r = leer.exec(l);
+        if (r) malDeprecados.push(`${rel}:${i + 1} lee ${r[1]} (deprecado): usa ${deprecados.get(r[1]).replacedBy}`);
+        const dcl = enTema && declarar.exec(l);
+        if (dcl) malDeprecados.push(`${rel}:${i + 1} declara ${dcl[1]} (deprecado): declara ${deprecados.get(dcl[1]).replacedBy}`);
+      });
+    }
+  }
+  if (malDeprecados.length) {
+    console.log(`❌ ${malDeprecados.length} problema(s) con los tokens deprecados:\n`);
+    for (const m of malDeprecados) console.log(`   ${m}`);
+    console.log('');
     process.exit(1);
   }
 
@@ -331,6 +390,7 @@ function main() {
   fs.writeFileSync(OUT, texto);
   console.log(`   ${cuenta}`);
   console.log(`   contrato de tema (lo declaran todos los temas)  ${contrato.size}`);
+  console.log(`   deprecados (// @deprecated en el SCSS)          ${deprecados.size}`);
   if (desaparecidos.length) {
     console.log(`\n   ${desaparecidos.length} entrada(s) del tokens.json anterior ya no existen en el SCSS y salen:`);
     for (const d of desaparecidos) console.log(`     · ${d}`);

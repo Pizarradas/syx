@@ -127,6 +127,11 @@ comprobar('niega un valor con tokens que no existen', () => {
     'no existen', 'no lo señala');
 });
 
+comprobar('niega un valor que lee un token deprecado y dice cuál usar', () => {
+  negar(['token', '--name', '--component-feature-card-glow', '--value', 'var(--semantic-color-error)'],
+    '--semantic-color-state-error', 'no dice el sustituto');
+});
+
 comprobar('niega un token que ya existe', () => {
   negar(['token', '--name', '--component-feature-card-bg', '--value', 'var(--semantic-color-primary)'],
     'ya existe', 'no lo señala');

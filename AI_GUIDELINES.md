@@ -132,7 +132,7 @@ An exception that no longer excuses anything is an R10 error, and so is a single
 
 | Token                            | Purpose                |
 | -------------------------------- | ---------------------- |
-| `--semantic-color-state-focus`   | focus ring color       |
+| `--semantic-focus-ring-color`    | focus ring color       |
 | `--semantic-color-state-success` | success state          |
 | `--semantic-color-state-error`   | error state            |
 | `--semantic-color-state-warning` | warning state          |

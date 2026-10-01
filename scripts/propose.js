@@ -159,13 +159,17 @@ function token() {
       `   Dar papel a un primitivo es trabajo de la capa semántica, que es solo humana.`
     );
   }
-  const conocidos = new Set(
-    Object.values(require(path.join(ROOT, 'tokens.json')))
-      .filter((x) => x && typeof x === 'object')
-      .flatMap((x) => Object.keys(x))
-  );
+  const registro = Object.values(require(path.join(ROOT, 'tokens.json'))).filter((x) => x && typeof x === 'object');
+  const conocidos = new Set(registro.flatMap((x) => Object.keys(x)));
   const fuera = tokensInexistentes(valor, conocidos).filter((t) => !t.conFallback);
   if (fuera.length) fin(`   El valor usa tokens que no existen: ${fuera.map((t) => t.token).join(', ')}`);
+  // Un token deprecado existe, pero un token NUEVO no debería nacer leyéndolo:
+  // el día que se retire, se rompe. Se dice cuál usar. (Auditoría 2026-10 · acción 14)
+  const deprecados = new Map(registro.flatMap((x) => Object.entries(x)).filter(([, e]) => e && e.status === 'deprecated'));
+  const viejos = [...new Set([...valor.matchAll(/var\(\s*(--[\w-]+)/g)].map((m) => m[1]))].filter((t) => deprecados.has(t));
+  if (viejos.length) {
+    fin(`   El valor usa tokens deprecados: ${viejos.map((t) => `${t}${deprecados.get(t).replacedBy ? ` → usa ${deprecados.get(t).replacedBy}` : ''}`).join(', ')}`);
+  }
 
   // Un color a pelo casi nunca es un color nuevo: suele ser un token que ya
   // está y que no se ha buscado. Se dice cuál en vez de solo decir que no.

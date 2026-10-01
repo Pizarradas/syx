@@ -90,15 +90,15 @@ Every `styles-theme-*.css` deliverable is produced by the same sequence
 ## Token Architecture (4 Layers)
 
 ```
-Primitives             Theme / Architecture     Semantic Tones           Component Aliases
+Primitives             Theme / Architecture     Semantic States          Component Aliases
 ──────────             ────────────────────    ──────────────           ─────────────────
 Raw values.            Structural config.       Contextual feedback.     Strict Overrides.
 No meaning.            General UI feel.         Meaningful state.        Component-specific.
 
---primitive-color-     --theme-focus-ring-      --semantic-tone-         --component-btn-
-  blue-500: …            width: 0.2rem            info-bg: var(            primary-bg:
+--primitive-color-     --theme-focus-ring-      --semantic-color-        --component-alert-
+  blue-500: …            width: 0.2rem            state-info: var(         info-accent:
                                                     --primitive-color-       var(--semantic-
-                                                    blue-500)                tone-info-bg)
+                                                    blue-500)                color-state-info)
 ```
 
 ### Naming Convention

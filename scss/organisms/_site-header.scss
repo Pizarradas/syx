@@ -16,9 +16,6 @@
 
   // ── Variables ──────────────────────────────
   $header-h:    3.75rem;
-  $mob-nav-z:   200;
-  $overlay-z:   199;
-  $header-z:    201;
   // Ancho máximo del selector de tema en la franja xl→wide. Medido en
   // Chromium: a ancho natural (194px) deja la cabecera a 17px de rozar;
   // acotado a 9rem la holgura sube a 41px y la opción larga aún se lee
@@ -28,7 +25,7 @@
   // ── Sticky wrapper ──────────────────────────
   .org-site-header {
     @include sticky($top: 0);
-    z-index: $header-z;
+    z-index: var(--component-header-z-index);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -243,7 +240,7 @@
   .org-site-nav-overlay {
     @include fixed();
     inset: 0;
-    z-index: $overlay-z;
+    z-index: var(--component-header-overlay-z-index);
     background-color: color-mix(in srgb, black 50%, transparent);
     opacity: 0;
     pointer-events: none;
@@ -258,7 +255,7 @@
   // ── Mobile nav drawer ─────────────────────
   .org-site-nav-drawer {
     @include fixed($top: $header-h, $left: 0, $right: 0);
-    z-index: $mob-nav-z;
+    z-index: var(--component-sidenav-z-index);
     background-color: var(--semantic-color-bg-primary);
     border-block-end: 1px solid var(--semantic-color-border-subtle);
     padding: var(--semantic-space-layout-sm) var(--semantic-space-layout-md);

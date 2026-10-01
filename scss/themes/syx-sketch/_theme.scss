@@ -136,12 +136,9 @@
   // relleno de hover: el texto sigue siendo el de la página.
   --component-table-state-hover-color: var(--semantic-color-text-primary);
   --semantic-bg-grid-color: color-mix(in srgb, var(--primitive-color-blue-500) 9%, transparent);
-  --semantic-tone-error-bg: var(--primitive-color-error-500);
-  --semantic-tone-success-bg: var(--primitive-color-success-500);
-  --semantic-tone-warning-bg: var(--primitive-color-warning-500);
-  --semantic-color-state-error: var(--semantic-tone-error-bg);
-  --semantic-color-state-success: var(--semantic-tone-success-bg);
-  --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  --semantic-color-state-error: var(--primitive-color-error-500);
+  --semantic-color-state-success: var(--primitive-color-success-500);
+  --semantic-color-state-warning: var(--primitive-color-warning-500);
   // Ámbar de TEXTO, más oscuro que el de relleno: 5,21:1 sobre blanco
   // frente a los 3,2:1 del ámbar de estado.
   --semantic-color-state-warning-text: oklch(0.54 0.15 72);
@@ -269,15 +266,12 @@
   // es el fondo y encima va texto. Pero utilidades como .syx-text-error los
   // usan como COLOR DE TEXTO, y sobre navy el rojo se queda en 2,83:1.
   // Aquí suben de luminosidad solo para el modo oscuro.
-  --semantic-tone-error-bg: oklch(0.72 0.17 25);       // 6,47:1 sobre navy
-  --semantic-tone-success-bg: oklch(0.78 0.13 168);    // 9,13:1
-  --semantic-tone-warning-bg: oklch(0.84 0.13 80);     // 10,46:1
-  --semantic-color-state-error: var(--semantic-tone-error-bg);
-  --semantic-color-state-success: var(--semantic-tone-success-bg);
-  --semantic-color-state-warning: var(--semantic-tone-warning-bg);
+  --semantic-color-state-error: oklch(0.72 0.17 25);       // 6,47:1 sobre navy
+  --semantic-color-state-success: oklch(0.78 0.13 168);    // 9,13:1
+  --semantic-color-state-warning: oklch(0.84 0.13 80);     // 10,46:1
   // En oscuro el ámbar de estado ya da 10,46:1 sobre el fondo: el texto usa
   // el mismo y no hace falta un tono aparte.
-  --semantic-color-state-warning-text: var(--semantic-tone-warning-bg);
+  --semantic-color-state-warning-text: var(--semantic-color-state-warning);
   // El botón deshabilitado con relleno lleva texto oscuro sobre el gris: el
   // texto inverso del oscuro, que es el valor por defecto del componente.
 
@@ -450,7 +444,6 @@
     --semantic-color-state-hover-quaternary: var(--primitive-color-blue-800);
     --semantic-color-state-active: var(--primitive-color-blue-700);
     --semantic-color-state-disabled: var(--primitive-color-disabled);
-    --semantic-color-state-focus: var(--semantic-color-primary);
 
     --semantic-color-selection-text: oklch(1 0 0);
     --semantic-color-selection-bg: var(--semantic-color-primary);
