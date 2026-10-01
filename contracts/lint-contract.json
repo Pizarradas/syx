@@ -3,13 +3,13 @@
     "generator": "scripts/syx-validate.js"
   },
   "stats": {
-    "sourceTokens": 1177,
-    "runtimeTokens": 1462,
-    "officialRuntime": 1185,
-    "legacyRuntime": 277,
+    "sourceTokens": 1089,
+    "runtimeTokens": 1610,
+    "officialRuntime": 1329,
+    "legacyRuntime": 281,
     "phantomTokens": 0,
     "undocumentedTokens": 0,
-    "unusedTokens": 121
+    "unusedTokens": 99
   },
   "phantomTokens": [],
   "unusedRegistryTokens": [
@@ -38,18 +38,6 @@
     "--component-check-color-checked",
     "--component-check-icon-image",
     "--component-check-icon-size",
-    "--component-docs-badge-atom-bg",
-    "--component-docs-badge-atom-border",
-    "--component-docs-badge-atom-color",
-    "--component-docs-badge-layout-bg",
-    "--component-docs-badge-layout-border",
-    "--component-docs-badge-layout-color",
-    "--component-docs-badge-molecule-bg",
-    "--component-docs-badge-molecule-border",
-    "--component-docs-badge-molecule-color",
-    "--component-docs-badge-organism-bg",
-    "--component-docs-badge-organism-border",
-    "--component-docs-badge-organism-color",
     "--component-feature-icon-atom-bg",
     "--component-feature-icon-atom-color",
     "--component-form-field-font-size-sm",
@@ -68,7 +56,6 @@
     "--component-header-social-gap",
     "--component-header-social-icon-size",
     "--component-header-z-index",
-    "--component-hero-content-margin",
     "--component-hr-style",
     "--component-label-font-size",
     "--component-label-line-height",
@@ -91,11 +78,6 @@
     "--component-pill-success-border-color",
     "--component-pill-warning-border-color",
     "--component-radio-color-checked",
-    "--component-section-bg",
-    "--component-section-header-max-width",
-    "--component-section-rule-color",
-    "--component-section-rule-spacing",
-    "--component-section-rule-width",
     "--component-sidenav-bg",
     "--component-sidenav-link-arrow-size",
     "--component-sidenav-link-font-weight",
@@ -109,7 +91,6 @@
     "--component-switch-status-color-off",
     "--component-switch-status-color-on",
     "--component-switch-status-icon-filter",
-    "--component-theme-card-bg",
     "--semantic-border-focus",
     "--semantic-border-radius-2xl",
     "--semantic-border-radius-xl",
@@ -129,11 +110,8 @@
     "--semantic-space-layout-xs",
     "--semantic-z-index-base",
     "--semantic-z-index-drawer",
-    "--semantic-z-index-dropdown",
     "--semantic-z-index-modal",
-    "--semantic-z-index-overlay",
-    "--semantic-z-index-sticky",
-    "--semantic-z-index-toast"
+    "--semantic-z-index-overlay"
   ],
   "undocumentedComponentTokens": [],
   "legacyVars": {
@@ -1151,6 +1129,7 @@
         ".atom-btn--primary:not(.atom-btn--filled)",
         ".atom-link--primary:after",
         ".atom-link--primary:hover",
+        ".atom-link--primary:dir(rtl):hover",
         ".atom-link--primary:active"
       ],
       "status": "kill",
@@ -1199,7 +1178,8 @@
     "--arrow-default": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--arrow-default:before"
+        ".atom-icon--arrow-default:before",
+        ".atom-icon--arrow-default:dir(rtl)::before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
@@ -1207,7 +1187,8 @@
     "--arrow-double": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--arrow-double:before"
+        ".atom-icon--arrow-double:before",
+        ".atom-icon--arrow-double:dir(rtl)::before"
       ],
       "status": "migrate",
       "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
@@ -1849,7 +1830,8 @@
     "--lc-chevron-right": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-chevron-right:before"
+        ".atom-icon--lc-chevron-right:before",
+        ".atom-icon--lc-chevron-right:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -1857,7 +1839,8 @@
     "--lc-chevron-left": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-chevron-left:before"
+        ".atom-icon--lc-chevron-left:before",
+        ".atom-icon--lc-chevron-left:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -1881,7 +1864,8 @@
     "--lc-chevrons-right": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-chevrons-right:before"
+        ".atom-icon--lc-chevrons-right:before",
+        ".atom-icon--lc-chevrons-right:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -1897,7 +1881,8 @@
     "--lc-chevrons-left": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-chevrons-left:before"
+        ".atom-icon--lc-chevrons-left:before",
+        ".atom-icon--lc-chevrons-left:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -1905,7 +1890,8 @@
     "--lc-arrow-right": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-arrow-right:before"
+        ".atom-icon--lc-arrow-right:before",
+        ".atom-icon--lc-arrow-right:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -1913,7 +1899,8 @@
     "--lc-arrow-left": {
       "value": "before {",
       "usedInSelectors": [
-        ".atom-icon--lc-arrow-left:before"
+        ".atom-icon--lc-arrow-left:before",
+        ".atom-icon--lc-arrow-left:dir(rtl)::before"
       ],
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
@@ -2310,6 +2297,30 @@
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
     },
+    "--sm": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".atom-spinner--sm::before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--lg": {
+      "value": ":before {",
+      "usedInSelectors": [
+        ".atom-spinner--lg::before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--text": {
+      "value": "last-child:not(:only-child) {",
+      "usedInSelectors": [
+        ".atom-skeleton--text:last-child:not(:only-child)"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
     "--has-select": {
       "value": "not([class*=\"--is-\"]):before {",
       "usedInSelectors": [
@@ -2338,6 +2349,14 @@
       "value": "before {",
       "usedInSelectors": [
         ".mol-form-field--is-warning:before"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--elevated": {
+      "value": "has(.mol-card__link):hover {",
+      "usedInSelectors": [
+        ".mol-card--elevated:has(.mol-card__link):hover"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -2399,7 +2418,7 @@
     {
       "rule": "R03",
       "file": "scss/base/_reset.scss",
-      "line": 321,
+      "line": 337,
       "why": "no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello"
     },
     {

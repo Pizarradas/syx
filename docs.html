@@ -618,6 +618,7 @@
           Component reference
         </a>
         <div class="docs-sidebar__sub">
+          <a href="#ref-atom-avatar" class="docs-sidebar__link" data-nav-section="ref-atom-avatar">Avatar</a>
           <a href="#ref-atom-breadcrumb" class="docs-sidebar__link" data-nav-section="ref-atom-breadcrumb">Breadcrumb</a>
           <a href="#ref-atom-btn" class="docs-sidebar__link" data-nav-section="ref-atom-btn">Btn</a>
           <a href="#ref-atom-check" class="docs-sidebar__link" data-nav-section="ref-atom-check">Check</a>
@@ -631,7 +632,10 @@
           <a href="#ref-atom-list" class="docs-sidebar__link" data-nav-section="ref-atom-list">List</a>
           <a href="#ref-atom-pagination" class="docs-sidebar__link" data-nav-section="ref-atom-pagination">Pagination</a>
           <a href="#ref-atom-pill" class="docs-sidebar__link" data-nav-section="ref-atom-pill">Pill</a>
+          <a href="#ref-atom-progress" class="docs-sidebar__link" data-nav-section="ref-atom-progress">Progress</a>
           <a href="#ref-atom-radio" class="docs-sidebar__link" data-nav-section="ref-atom-radio">Radio</a>
+          <a href="#ref-atom-skeleton" class="docs-sidebar__link" data-nav-section="ref-atom-skeleton">Skeleton</a>
+          <a href="#ref-atom-spinner" class="docs-sidebar__link" data-nav-section="ref-atom-spinner">Spinner</a>
           <a href="#ref-atom-stat-counter" class="docs-sidebar__link" data-nav-section="ref-atom-stat-counter">Stat counter</a>
           <a href="#ref-atom-switch" class="docs-sidebar__link" data-nav-section="ref-atom-switch">Switch</a>
           <a href="#ref-atom-table" class="docs-sidebar__link" data-nav-section="ref-atom-table">Table</a>
@@ -639,14 +643,20 @@
           <a href="#ref-atom-txt" class="docs-sidebar__link" data-nav-section="ref-atom-txt">Txt</a>
           <a href="#ref-mol-alert" class="docs-sidebar__link" data-nav-section="ref-mol-alert">Alert</a>
           <a href="#ref-mol-btn-group" class="docs-sidebar__link" data-nav-section="ref-mol-btn-group">Btn group</a>
+          <a href="#ref-mol-card" class="docs-sidebar__link" data-nav-section="ref-mol-card">Card</a>
           <a href="#ref-mol-code-snippet" class="docs-sidebar__link" data-nav-section="ref-mol-code-snippet">Code snippet</a>
           <a href="#ref-mol-dialog" class="docs-sidebar__link" data-nav-section="ref-mol-dialog">Dialog</a>
           <a href="#ref-mol-disclosure" class="docs-sidebar__link" data-nav-section="ref-mol-disclosure">Disclosure</a>
+          <a href="#ref-mol-empty-state" class="docs-sidebar__link" data-nav-section="ref-mol-empty-state">Empty state</a>
           <a href="#ref-mol-feature-card" class="docs-sidebar__link" data-nav-section="ref-mol-feature-card">Feature card</a>
           <a href="#ref-mol-form-field-set" class="docs-sidebar__link" data-nav-section="ref-mol-form-field-set">Form field set</a>
           <a href="#ref-mol-form-field" class="docs-sidebar__link" data-nav-section="ref-mol-form-field">Form field</a>
           <a href="#ref-mol-label-group" class="docs-sidebar__link" data-nav-section="ref-mol-label-group">Label group</a>
+          <a href="#ref-mol-menu" class="docs-sidebar__link" data-nav-section="ref-mol-menu">Menu</a>
           <a href="#ref-mol-tabs" class="docs-sidebar__link" data-nav-section="ref-mol-tabs">Tabs</a>
+          <a href="#ref-mol-toast" class="docs-sidebar__link" data-nav-section="ref-mol-toast">Toast</a>
+          <a href="#ref-mol-tooltip" class="docs-sidebar__link" data-nav-section="ref-mol-tooltip">Tooltip</a>
+          <a href="#ref-org-app-shell" class="docs-sidebar__link" data-nav-section="ref-org-app-shell">App shell</a>
           <a href="#ref-org-site-header" class="docs-sidebar__link" data-nav-section="ref-org-site-header">Site header</a>
         </div>
       </div>
@@ -2254,15 +2264,15 @@ Nadie lo ha dicho: se dedujo de la familia `feature-card`, que ya vive en ese fi
           <pre class="atom-code syx-mb-4"><code>npm run export:figma   # &rarr; contracts/figma/&lt;theme&gt;.figma.json   (7 files)
 npm run check:figma    # fails if those files are stale
 
-   example-01    515 variables · 30 componentes · 274 omitidas
+   example-01    515 variables · 40 componentes · 274 omitidas
    …
-   syx-sketch    543 variables · 30 componentes · 247 omitidas
+   syx-sketch    543 variables · 40 componentes · 247 omitidas
 
    3635 variables · 1879 omitidas con motivo</code></pre>
 
           <p class="atom-txt syx-text-gray syx-mb-3">Two variable collections per theme &mdash;
             <code>SYX · Semantic</code> and <code>SYX · Component</code> &mdash; each with a <code>light</code> and a
-            <code>dark</code> mode, plus the 30 components with the node property every token maps to. Three decisions
+            <code>dark</code> mode, plus the 40 components with the node property every token maps to. Three decisions
             are worth knowing before you import:</p>
 
           <div class="syx-mb-4" style="overflow-x:auto">
@@ -3615,8 +3625,33 @@ scss/organisms/_site-header.scss</code></pre>
             <span class="docs-section-divider__layer">component-registry.json</span>
           </div>
           <h2 class="atom-title atom-title--h2 syx-mb-1" id="components-heading">Component reference</h2>
-          <p class="atom-txt syx-text-gray syx-mb-4">Every component in <code>component-registry.json</code> &mdash; 30 components: 19 atoms, 10 molecules, 1 organism. Generated by <code>scripts/build-docs-componentes.js</code>; the markup is the registry&rsquo;s <code>usage</code>, rendered live with the theme picked above. Install and theme: README &rarr; Quick Start.</p>
-          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-atoms">Atoms <span class="syx-text-gray">&middot; 19</span></h3>
+          <p class="atom-txt syx-text-gray syx-mb-4">Every component in <code>component-registry.json</code> &mdash; 40 components: 23 atoms, 15 molecules, 2 organisms. Generated by <code>scripts/build-docs-componentes.js</code>; the markup is the registry&rsquo;s <code>usage</code>, rendered live with the theme picked above. Install and theme: README &rarr; Quick Start.</p>
+          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-atoms">Atoms <span class="syx-text-gray">&middot; 23</span></h3>
+          <section class="docs-ref syx-mb-5" id="ref-atom-avatar" aria-labelledby="ref-atom-avatar-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-avatar-titulo">Avatar <code>.atom-avatar</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/atoms/_avatar.scss</code></p>
+            <p class="atom-txt syx-mb-3">A person's photo or, without one, their initials, at a fixed size: --sm (32px), md by default (40px), --lg (56px); --square for accounts and organisations. The photo is an &lt;img class=&quot;atom-avatar__img&quot;&gt; cropped with object-fit: cover. Initials sit on bg-tertiary in secondary text, measured at 4.5:1 in contracts/contrast.json.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><span class="atom-avatar atom-avatar--lg"><img class="atom-avatar__img" src="img/avatar-demo.svg" alt="Ana López" width="56" height="56"></span><span class="atom-avatar" role="img" aria-label="Ana López">AL</span><span class="atom-avatar atom-avatar--sm atom-avatar--square" role="img" aria-label="Acme Inc.">AC</span></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-avatar-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-atom-avatar-marcado"><code>&lt;span class=&quot;atom-avatar atom-avatar--lg&quot;&gt;&lt;img class=&quot;atom-avatar__img&quot; src=&quot;img/avatar-demo.svg&quot; alt=&quot;Ana López&quot; width=&quot;56&quot; height=&quot;56&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-avatar&quot; role=&quot;img&quot; aria-label=&quot;Ana López&quot;&gt;AL&lt;/span&gt;&lt;span class=&quot;atom-avatar atom-avatar--sm atom-avatar--square&quot; role=&quot;img&quot; aria-label=&quot;Acme Inc.&quot;&gt;AC&lt;/span&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-avatar</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-avatar--lg</code> <code>atom-avatar--sm</code> <code>atom-avatar--square</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-avatar__img</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">11 component tokens</summary><div class="mol-disclosure__content"><code>--component-avatar-bg</code> <code>--component-avatar-border-radius</code> <code>--component-avatar-border-radius-square</code> <code>--component-avatar-color</code> <code>--component-avatar-font-size-lg</code> <code>--component-avatar-font-size-md</code> <code>--component-avatar-font-size-sm</code> <code>--component-avatar-font-weight</code> <code>--component-avatar-size-lg</code> <code>--component-avatar-size-md</code> <code>--component-avatar-size-sm</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Photo: alt with the person's name, or alt=&quot;&quot; when the name is written right next to it. Initials alone do not say who it is: role=&quot;img&quot; with aria-label=&quot;Full name&quot;; next to the visible name, aria-hidden=&quot;true&quot; instead. Not focusable — if it links to a profile, the link carries the name. In forced colours a border keeps the shape. No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
           <section class="docs-ref syx-mb-5" id="ref-atom-breadcrumb" aria-labelledby="ref-atom-breadcrumb-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-breadcrumb-titulo">Breadcrumb <code>.atom-breadcrumb</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_breadcrumb.scss</code></p>
@@ -3751,24 +3786,24 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-atom-form" aria-labelledby="ref-atom-form-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-form-titulo">Form <code>.atom-input</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_form.scss</code></p>
-            <p class="atom-txt syx-mb-3">The four canonical form primitives: .atom-label, .atom-input, .atom-select and .atom-input-wrapper. They are the raw controls only — validation state, message and icon live in mol-form-field, so use these bare only in a layout that handles its own error reporting.</p>
+            <p class="atom-txt syx-mb-3">The five canonical form primitives: .atom-label, .atom-input, .atom-textarea, .atom-select and .atom-input-wrapper. .atom-textarea shares the input's box, border, focus and states but not its fixed height: rows sets it, with a floor of two touch heights and vertical-only resize (textarea.atom-input still works). They are the raw controls only — validation state, message and character count live in mol-form-field, so use these bare only in a layout that handles its own error reporting.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><label class="atom-label" for="ref-atom-form-form-email">Email</label><span class="atom-input-wrapper"><input class="atom-input" id="ref-atom-form-form-email" type="email" autocomplete="email"></span><label class="atom-label" for="ref-atom-form-form-plan">Plan</label><span class="atom-input-wrapper"><select class="atom-select" id="ref-atom-form-form-plan"><option>Free</option><option>Pro</option></select></span></div>
+            <div class="docs-ref__demo syx-mb-3"><label class="atom-label" for="ref-atom-form-form-email">Email</label><span class="atom-input-wrapper"><input class="atom-input" id="ref-atom-form-form-email" type="email" autocomplete="email"></span><label class="atom-label" for="ref-atom-form-form-plan">Plan</label><span class="atom-input-wrapper"><select class="atom-select" id="ref-atom-form-form-plan"><option>Free</option><option>Pro</option></select></span><label class="atom-label" for="ref-atom-form-form-notes">Notes</label><textarea class="atom-textarea" id="ref-atom-form-form-notes" rows="3"></textarea></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-form-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;form-email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;form-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-plan&quot;&gt;Plan&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;select class=&quot;atom-select&quot; id=&quot;form-plan&quot;&gt;&lt;option&gt;Free&lt;/option&gt;&lt;option&gt;Pro&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;form-email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;form-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-plan&quot;&gt;Plan&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;select class=&quot;atom-select&quot; id=&quot;form-plan&quot;&gt;&lt;option&gt;Free&lt;/option&gt;&lt;option&gt;Pro&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-notes&quot;&gt;Notes&lt;/label&gt;&lt;textarea class=&quot;atom-textarea&quot; id=&quot;form-notes&quot; rows=&quot;3&quot;&gt;&lt;/textarea&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
                 <tbody>
-                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-input-wrapper</code> <code>atom-label</code> <code>atom-select</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-input-wrapper</code> <code>atom-label</code> <code>atom-select</code> <code>atom-textarea</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-label</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-bg</code> <code>--component-form-field-bg-disabled</code> <code>--component-form-field-border</code> <code>--component-form-field-border-focus</code> <code>--component-form-field-border-radius</code> <code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-color-disabled</code> <code>--component-form-field-font-family</code> <code>--component-form-field-font-size</code> <code>--component-form-field-font-weight</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-line-height</code> <code>--component-form-field-min-height</code> <code>--component-form-field-padding-x</code> <code>--component-form-field-padding-y</code> <code>--component-form-field-placeholder</code> <code>--component-form-field-transition-duration</code> <code>--component-form-field-transition-easing</code></div></details></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Every control has a &lt;label for&gt; pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native &lt;select&gt;: keyboard and option list come from the browser. Controls are 48px tall at every width. Focus: system ring. No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-bg</code> <code>--component-form-field-bg-disabled</code> <code>--component-form-field-border</code> <code>--component-form-field-border-focus</code> <code>--component-form-field-border-radius</code> <code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-color-disabled</code> <code>--component-form-field-font-family</code> <code>--component-form-field-font-size</code> <code>--component-form-field-font-weight</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-line-height</code> <code>--component-form-field-min-height</code> <code>--component-form-field-padding-x</code> <code>--component-form-field-padding-y</code> <code>--component-form-field-placeholder</code> <code>--component-form-field-transition-duration</code> <code>--component-form-field-transition-easing</code> <code>--component-form-textarea-line-height</code> <code>--component-form-textarea-min-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Every control has a &lt;label for&gt; pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native &lt;select&gt;: keyboard and option list come from the browser. Inputs and selects are 48px tall at every width; a textarea is never shorter than two of those. Focus: system ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3961,6 +3996,31 @@ scss/organisms/_site-header.scss</code></pre>
               </table>
             </div>
           </section>
+          <section class="docs-ref syx-mb-5" id="ref-atom-progress" aria-labelledby="ref-atom-progress-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-progress-titulo">Progress <code>.atom-progress</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/atoms/_progress.scss</code></p>
+            <p class="atom-txt syx-mb-3">A progress bar on the native &lt;progress&gt;: with value it is determinate, without value it is indeterminate (:indeterminate) and a segment sweeps the track. The fill is primary-strong, measured at 3:1 against the page and the track (WCAG 1.4.11). Under reduced motion the indeterminate bar stops moving and shows static stripes. For an unknown wait with no bar, use atom-spinner.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><label class="atom-label" for="ref-atom-progress-pg-upload">Uploading report.pdf</label><progress class="atom-progress" id="ref-atom-progress-pg-upload" value="40" max="100">40%</progress><label class="atom-label" for="ref-atom-progress-pg-sync">Syncing contacts</label><progress class="atom-progress" id="ref-atom-progress-pg-sync">Syncing…</progress></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-progress-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-atom-progress-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;pg-upload&quot;&gt;Uploading report.pdf&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-upload&quot; value=&quot;40&quot; max=&quot;100&quot;&gt;40%&lt;/progress&gt;&lt;label class=&quot;atom-label&quot; for=&quot;pg-sync&quot;&gt;Syncing contacts&lt;/label&gt;&lt;progress class=&quot;atom-progress&quot; id=&quot;pg-sync&quot;&gt;Syncing…&lt;/progress&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-progress</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">7 component tokens</summary><div class="mol-disclosure__content"><code>--component-progress-border-radius</code> <code>--component-progress-duration</code> <code>--component-progress-fill</code> <code>--component-progress-height</code> <code>--component-progress-indeterminate-duration</code> <code>--component-progress-stripe-width</code> <code>--component-progress-track</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;progress&gt;: role progressbar, value and max come from the browser; remove value for indeterminate. It needs a name — &lt;label for&gt; on a unique id, or aria-label. The text inside &lt;progress&gt; is the fallback, not the name. Not focusable. Reduced motion: static stripes instead of the sweep. Forced colours: framed track, Highlight fill. No JS — the app updates value.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
           <section class="docs-ref syx-mb-5" id="ref-atom-radio" aria-labelledby="ref-atom-radio-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-radio-titulo">Radio <code>.atom-radio</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_radio.scss</code></p>
@@ -3981,6 +4041,60 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:checked</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-easing</code> <code>--component-radio-bg</code> <code>--component-radio-bg-checked</code> <code>--component-radio-border-color</code> <code>--component-radio-border-color-hover</code> <code>--component-radio-border-radius</code> <code>--component-radio-border-width</code> <code>--component-radio-checked-size</code> <code>--component-radio-dot-border-radius</code> <code>--component-radio-dot-color</code> <code>--component-radio-gap</code> <code>--component-radio-size</code> <code>--component-radio-status-disabled-opacity</code> <code>--component-radio-transition-duration</code> <code>--component-radio-transition-easing</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Real &lt;input type=&quot;radio&quot;&gt; inside the &lt;label&gt;, one name per group, the group in &lt;fieldset&gt;&lt;legend&gt;. Arrow keys move the choice (browser). No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="docs-ref syx-mb-5" id="ref-atom-skeleton" aria-labelledby="ref-atom-skeleton-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-skeleton-titulo">Skeleton <code>.atom-skeleton</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/atoms/_skeleton.scss</code></p>
+            <p class="atom-txt syx-mb-3">A placeholder with the shape of the content that is on its way: --text (a line; the last of several stops at 60%), --circle (avatar size) and --block. A shimmer sweeps it; under reduced motion it stays flat. It is decoration: hide it from assistive technology and say what is loading in text.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><p class="syx-sr-only" role="status">Loading profile…</p><div class="layout-cluster layout-cluster--md" aria-busy="true"><span class="atom-skeleton atom-skeleton--circle" aria-hidden="true"></span><div class="layout-stack layout-stack--xs syx-flex-1" aria-hidden="true"><span class="atom-skeleton atom-skeleton--text"></span><span class="atom-skeleton atom-skeleton--text"></span></div></div></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-skeleton-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-atom-skeleton-marcado"><code>&lt;p class=&quot;syx-sr-only&quot; role=&quot;status&quot;&gt;Loading profile…&lt;/p&gt;
+&lt;div class=&quot;layout-cluster layout-cluster--md&quot; aria-busy=&quot;true&quot;&gt;
+  &lt;span class=&quot;atom-skeleton atom-skeleton--circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+  &lt;div class=&quot;layout-stack layout-stack--xs syx-flex-1&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-skeleton atom-skeleton--text&quot;&gt;&lt;/span&gt;&lt;span class=&quot;atom-skeleton atom-skeleton--text&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-skeleton</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-skeleton--block</code> <code>atom-skeleton--circle</code> <code>atom-skeleton--text</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">7 component tokens</summary><div class="mol-disclosure__content"><code>--component-skeleton-bg</code> <code>--component-skeleton-block-height</code> <code>--component-skeleton-border-radius</code> <code>--component-skeleton-circle-size</code> <code>--component-skeleton-duration</code> <code>--component-skeleton-highlight</code> <code>--component-skeleton-text-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">aria-hidden=&quot;true&quot; on every skeleton and aria-busy=&quot;true&quot; on the container that will be filled; remove aria-busy when the content lands. Say what is loading with text in a role=&quot;status&quot; outside the busy container (a busy region may hold its own announcements back). Never focusable. Reduced motion: no shimmer. Forced colours: a border keeps the shape. No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="docs-ref syx-mb-5" id="ref-atom-spinner" aria-labelledby="ref-atom-spinner-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-spinner-titulo">Spinner <code>.atom-spinner</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/atoms/_spinner.scss</code></p>
+            <p class="atom-txt syx-mb-3">A busy indicator for a wait of unknown length: a ring drawn on ::before, so the text does not spin. The text lives in __label, visually hidden by default and shown with --with-label. --sm, md by default, --lg. Under reduced motion it spins three times slower instead of stopping, because a still ring says nothing. If the wait has a known end, use atom-progress.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><span class="atom-spinner" role="status"><span class="atom-spinner__label">Loading results…</span></span><span class="atom-spinner atom-spinner--lg atom-spinner--with-label" role="status"><span class="atom-spinner__label">Saving changes…</span></span></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-spinner-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-atom-spinner-marcado"><code>&lt;span class=&quot;atom-spinner&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Loading results…&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;atom-spinner atom-spinner--lg atom-spinner--with-label&quot; role=&quot;status&quot;&gt;&lt;span class=&quot;atom-spinner__label&quot;&gt;Saving changes…&lt;/span&gt;&lt;/span&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-spinner</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-spinner--lg</code> <code>atom-spinner--sm</code> <code>atom-spinner--with-label</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-spinner__label</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">10 component tokens</summary><div class="mol-disclosure__content"><code>--component-spinner-color</code> <code>--component-spinner-duration</code> <code>--component-spinner-duration-reduced</code> <code>--component-spinner-gap</code> <code>--component-spinner-label-color</code> <code>--component-spinner-size-lg</code> <code>--component-spinner-size-md</code> <code>--component-spinner-size-sm</code> <code>--component-spinner-thickness</code> <code>--component-spinner-track</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Always a text in __label: the ring alone says nothing to a screen reader. role=&quot;status&quot; announces it politely without moving focus; a live region inserted with its text already inside may not be read, so insert it empty and set the text after, or announce from a status region that already exists. Not focusable. Reduced motion: slower, not stopped. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4124,7 +4238,7 @@ scss/organisms/_site-header.scss</code></pre>
               </table>
             </div>
           </section>
-          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-molecules">Molecules <span class="syx-text-gray">&middot; 10</span></h3>
+          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-molecules">Molecules <span class="syx-text-gray">&middot; 15</span></h3>
           <section class="docs-ref syx-mb-5" id="ref-mol-alert" aria-labelledby="ref-mol-alert-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-alert-titulo">Alert <code>.mol-alert</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_alert.scss</code></p>
@@ -4173,6 +4287,46 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">1 component tokens</summary><div class="mol-disclosure__content"><code>--component-btn-group-gap</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Every button inside has an explicit type. As a plain row it needs no role; if it behaves as one control, it becomes role=&quot;toolbar&quot; with an aria-label and arrow-key navigation in script. No JS otherwise.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="docs-ref syx-mb-5" id="ref-mol-card" aria-labelledby="ref-mol-card-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-card-titulo">Card <code>.mol-card</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_card.scss</code></p>
+            <p class="atom-txt syx-mb-3">The general-purpose surface for product screens: optional __media, __header (with __title and maybe a pill or an action), __body and __footer, spaced by the card itself. Bordered by default; --elevated swaps the border for a shadow and --flat drops both on bg-secondary. For a whole-card link, put .mol-card__link on the title's &lt;a&gt;: its ::after covers the card, the focus ring surrounds the card, and any other control inside stays clickable above it. Body text is text-secondary, measured on both backgrounds.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><article class="mol-card"><header class="mol-card__header"><h3 class="mol-card__title">Storage</h3><span class="atom-pill atom-pill--neutral">80% used</span></header><div class="mol-card__body"><p>You have used 8 of 10 GB. Old exports are deleted after 30 days.</p></div><footer class="mol-card__footer"><button class="atom-btn atom-btn--secondary atom-btn--size-sm" type="button">Manage storage</button></footer></article><article class="mol-card mol-card--elevated"><h3 class="mol-card__title"><a class="mol-card__link" href="#billing">Billing</a></h3><div class="mol-card__body"><p>Invoices, payment method and tax details.</p></div></article></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-card-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-mol-card-marcado"><code>&lt;article class=&quot;mol-card&quot;&gt;
+  &lt;header class=&quot;mol-card__header&quot;&gt;
+    &lt;h3 class=&quot;mol-card__title&quot;&gt;Storage&lt;/h3&gt;
+    &lt;span class=&quot;atom-pill atom-pill--neutral&quot;&gt;80% used&lt;/span&gt;
+  &lt;/header&gt;
+  &lt;div class=&quot;mol-card__body&quot;&gt;
+    &lt;p&gt;You have used 8 of 10 GB. Old exports are deleted after 30 days.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;footer class=&quot;mol-card__footer&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-sm&quot; type=&quot;button&quot;&gt;Manage storage&lt;/button&gt;&lt;/footer&gt;
+&lt;/article&gt;
+&lt;article class=&quot;mol-card mol-card--elevated&quot;&gt;
+  &lt;h3 class=&quot;mol-card__title&quot;&gt;&lt;a class=&quot;mol-card__link&quot; href=&quot;#billing&quot;&gt;Billing&lt;/a&gt;&lt;/h3&gt;
+  &lt;div class=&quot;mol-card__body&quot;&gt;
+    &lt;p&gt;Invoices, payment method and tax details.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-card</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>mol-card--elevated</code> <code>mol-card--flat</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-card__body</code> <code>mol-card__footer</code> <code>mol-card__header</code> <code>mol-card__link</code> <code>mol-card__media</code> <code>mol-card__title</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-card-bg</code> <code>--component-card-body-color</code> <code>--component-card-border-color</code> <code>--component-card-border-color-hover</code> <code>--component-card-border-radius</code> <code>--component-card-border-width</code> <code>--component-card-color</code> <code>--component-card-elevated-shadow</code> <code>--component-card-elevated-shadow-hover</code> <code>--component-card-flat-bg</code> <code>--component-card-footer-border-color</code> <code>--component-card-gap</code> <code>--component-card-padding</code> <code>--component-card-shadow</code> <code>--component-card-title-font-size</code> <code>--component-card-title-font-weight</code> <code>--component-card-title-line-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;article&gt; when the card makes sense on its own (an item in a list), &lt;div&gt; otherwise; the page decides the heading level of __title. Whole-card link: the &lt;a class=&quot;mol-card__link&quot;&gt; goes in the title so its name is the title, never an &lt;a&gt; wrapping the whole card (its name would be all the text). The ring is drawn on the link's ::after, around the card. Other controls inside are raised above the link area. Forced colours: every variant gets a visible frame. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4265,6 +4419,36 @@ scss/organisms/_site-header.scss</code></pre>
               </table>
             </div>
           </section>
+          <section class="docs-ref syx-mb-5" id="ref-mol-empty-state" aria-labelledby="ref-mol-empty-state-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-empty-state-titulo">Empty state <code>.mol-empty-state</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_empty-state.scss</code></p>
+            <p class="atom-txt syx-mb-3">What shows where there is nothing yet — an empty list, a search with no results: a decorative __icon, a __title that says what is going on, a __text that says why or what to do, and __actions with the way out. Centred, because it takes the place of the missing content. --bordered frames it with a dashed border for a zone that waits for content (a drop target, an empty column). Title and text are measured at 4.5:1.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-empty-state mol-empty-state--bordered"><span class="mol-empty-state__icon" aria-hidden="true"><span class="atom-icon atom-icon--lc-search atom-icon--lg"></span></span><h3 class="mol-empty-state__title">No projects match “q4”</h3><p class="mol-empty-state__text">Try another word, or clear the filters to see every project.</p><div class="mol-empty-state__actions"><button class="atom-btn atom-btn--secondary atom-btn--size-md" type="button">Clear filters</button><button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md" type="button">New project</button></div></div></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-empty-state-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-mol-empty-state-marcado"><code>&lt;div class=&quot;mol-empty-state mol-empty-state--bordered&quot;&gt;
+  &lt;span class=&quot;mol-empty-state__icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;span class=&quot;atom-icon atom-icon--lc-search atom-icon--lg&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+  &lt;h3 class=&quot;mol-empty-state__title&quot;&gt;No projects match “q4”&lt;/h3&gt;
+  &lt;p class=&quot;mol-empty-state__text&quot;&gt;Try another word, or clear the filters to see every project.&lt;/p&gt;
+  &lt;div class=&quot;mol-empty-state__actions&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Clear filters&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md&quot; type=&quot;button&quot;&gt;New project&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-empty-state</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>mol-empty-state--bordered</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-empty-state__actions</code> <code>mol-empty-state__icon</code> <code>mol-empty-state__text</code> <code>mol-empty-state__title</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-empty-state-border-color</code> <code>--component-empty-state-border-radius</code> <code>--component-empty-state-border-width</code> <code>--component-empty-state-gap</code> <code>--component-empty-state-icon-bg</code> <code>--component-empty-state-icon-color</code> <code>--component-empty-state-icon-size</code> <code>--component-empty-state-padding-block</code> <code>--component-empty-state-padding-inline</code> <code>--component-empty-state-text-color</code> <code>--component-empty-state-text-max-width</code> <code>--component-empty-state-title-color</code> <code>--component-empty-state-title-font-size</code> <code>--component-empty-state-title-font-weight</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">The icon is decorative (aria-hidden=&quot;true&quot;); the title says what happened, at the heading level the page needs. If the empty state appears after an action (filter, search), announce it: put it inside a role=&quot;status&quot; container that already existed, or move focus to the title (tabindex=&quot;-1&quot;) when it replaces what had focus. Not focusable itself; its buttons are. No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
           <section class="docs-ref syx-mb-5" id="ref-mol-feature-card" aria-labelledby="ref-mol-feature-card-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-feature-card-titulo">Feature card <code>.mol-feature-card</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/molecules/_feature-card.scss</code></p>
@@ -4327,25 +4511,29 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-mol-form-field" aria-labelledby="ref-mol-form-field-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-form-field-titulo">Form field <code>.mol-form-field</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/molecules/_form-field.scss</code></p>
-            <p class="atom-txt syx-mb-3">The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce.</p>
+            <p class="atom-txt syx-mb-3">The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce. A textarea with maxlength can carry an optional __count: js/syx-char-count.js writes what is left (data-template, in the page's language), adds is-limit at the limit and announces it once typing pauses; without JS the markup text stays.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ref-mol-form-field-ff-email">Email</label><input class="atom-input" id="ref-mol-form-field-ff-email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="ref-mol-form-field-ff-email-msg"><span class="mol-form-field__msg" id="ref-mol-form-field-ff-email-msg">Enter a valid address.</span></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ref-mol-form-field-ff-email">Email</label><input class="atom-input" id="ref-mol-form-field-ff-email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="ref-mol-form-field-ff-email-msg"><span class="mol-form-field__msg" id="ref-mol-form-field-ff-email-msg">Enter a valid address.</span></div><div class="mol-form-field"><label class="atom-label" for="ref-mol-form-field-ff-bio">Short bio</label><textarea class="atom-textarea" id="ref-mol-form-field-ff-bio" rows="3" maxlength="160" aria-describedby="ref-mol-form-field-ff-bio-count"></textarea><span class="mol-form-field__count" id="ref-mol-form-field-ff-bio-count" data-template="{n} characters left">Up to 160 characters</span></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-form-field-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ff-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ff-email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;ff-email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ff-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ff-email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;ff-email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-bio&quot;&gt;Short bio&lt;/label&gt;&lt;textarea class=&quot;atom-textarea&quot; id=&quot;ff-bio&quot; rows=&quot;3&quot; maxlength=&quot;160&quot; aria-describedby=&quot;ff-bio-count&quot;&gt;&lt;/textarea&gt;&lt;span class=&quot;mol-form-field__count&quot; id=&quot;ff-bio-count&quot; data-template=&quot;{n} characters left&quot;&gt;Up to 160 characters&lt;/span&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
                 <tbody>
                   <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-form-field</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>mol-form-field--has-select</code> <code>mol-form-field--is-error</code> <code>mol-form-field--is-success</code> <code>mol-form-field--is-warning</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-form-field__msg</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-label</code> <code>atom-select</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-error-border</code> <code>--component-form-field-error-color</code> <code>--component-form-field-icon-position-right</code> <code>--component-form-field-icon-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-margin-bottom</code> <code>--component-form-field-msg-font-size</code> <code>--component-form-field-msg-line-height</code> <code>--component-form-field-msg-margin-top</code> <code>--component-form-field-success-border</code> <code>--component-form-field-success-color</code> <code>--component-form-field-warning-border</code> <code>--component-form-field-warning-color</code></div></details></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;label for&gt; on a unique id. On error: aria-invalid=&quot;true&quot; on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Validation itself is the app's. No JS.</td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-form-field__count</code> <code>mol-form-field__live</code> <code>mol-form-field__msg</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>.is-limit</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-label</code> <code>atom-select</code> <code>atom-textarea</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-count-color</code> <code>--component-form-field-count-font-size</code> <code>--component-form-field-count-limit-color</code> <code>--component-form-field-error-border</code> <code>--component-form-field-error-color</code> <code>--component-form-field-icon-position-right</code> <code>--component-form-field-icon-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-margin-bottom</code> <code>--component-form-field-msg-font-size</code> <code>--component-form-field-msg-line-height</code> <code>--component-form-field-msg-margin-top</code> <code>--component-form-field-success-border</code> <code>--component-form-field-success-color</code> <code>--component-form-field-warning-border</code> <code>--component-form-field-warning-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;label for&gt; on a unique id. On error: aria-invalid=&quot;true&quot; on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Character count: the textarea names __count in aria-describedby (heard on focus) and keeps maxlength; js/syx-char-count.js (no dependencies) adds a role=&quot;status&quot; region that says what is left after a pause, never on every key. Validation itself is the app's.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-char-count.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-char-count.js';
+// markup rendered later:
+import { initCharCount } from 'syx-design-system/js/syx-char-count.js';
+initCharCount(container);</code></pre></td></tr>
                 </tbody>
               </table>
             </div>
@@ -4371,6 +4559,41 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">1 component tokens</summary><div class="mol-disclosure__content"><code>--component-label-group-gap</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Container only. If the labels are a list, use &lt;ul role=&quot;list&quot;&gt;. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="docs-ref syx-mb-5" id="ref-mol-menu" aria-labelledby="ref-mol-menu-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-menu-titulo">Menu <code>.mol-menu</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_menu.scss</code></p>
+            <p class="atom-txt syx-mb-3">A button that opens a list of actions (&quot;More&quot;, &quot;Actions&quot;, a table row's menu). The __list is popover=&quot;auto&quot;: top layer, light dismiss and Escape come from the browser, and popovertarget opens it even without script. js/syx-menu.js adds the WAI-ARIA menu button keyboard, keeps aria-expanded true to the real state and places the list under the button (above if it does not fit), aligned to its start. __item--danger for destructive actions, aria-disabled=&quot;true&quot; for an action that exists but cannot run now, __separator between groups. To navigate to other pages this is not a menu: use a list of links or mol-disclosure.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-menu"><button class="atom-btn atom-btn--secondary atom-btn--size-md mol-menu__trigger" type="button" id="ref-mol-menu-menu-actions-btn" aria-haspopup="menu" aria-expanded="false" aria-controls="ref-mol-menu-menu-actions" popovertarget="ref-mol-menu-menu-actions">Actions <span class="atom-icon atom-icon--lc-chevron-down atom-icon--sm" aria-hidden="true"></span></button><div class="mol-menu__list" id="ref-mol-menu-menu-actions" role="menu" aria-labelledby="ref-mol-menu-menu-actions-btn" popover="auto"><button class="mol-menu__item" type="button" role="menuitem">Rename</button><button class="mol-menu__item" type="button" role="menuitem">Duplicate</button><button class="mol-menu__item" type="button" role="menuitem" aria-disabled="true">Move to folder</button><div class="mol-menu__separator" role="separator"></div><button class="mol-menu__item mol-menu__item--danger" type="button" role="menuitem">Delete</button></div></div></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-menu-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-mol-menu-marcado"><code>&lt;div class=&quot;mol-menu&quot;&gt;
+  &lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md mol-menu__trigger&quot; type=&quot;button&quot; id=&quot;menu-actions-btn&quot; aria-haspopup=&quot;menu&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;menu-actions&quot; popovertarget=&quot;menu-actions&quot;&gt;Actions &lt;span class=&quot;atom-icon atom-icon--lc-chevron-down atom-icon--sm&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;div class=&quot;mol-menu__list&quot; id=&quot;menu-actions&quot; role=&quot;menu&quot; aria-labelledby=&quot;menu-actions-btn&quot; popover=&quot;auto&quot;&gt;
+    &lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Rename&lt;/button&gt;&lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Duplicate&lt;/button&gt;&lt;button class=&quot;mol-menu__item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; aria-disabled=&quot;true&quot;&gt;Move to folder&lt;/button&gt;
+    &lt;div class=&quot;mol-menu__separator&quot; role=&quot;separator&quot;&gt;&lt;/div&gt;
+    &lt;button class=&quot;mol-menu__item mol-menu__item--danger&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-menu</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>mol-menu__item--danger</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-menu__item</code> <code>mol-menu__list</code> <code>mol-menu__separator</code> <code>mol-menu__trigger</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-menu-bg</code> <code>--component-menu-border-color</code> <code>--component-menu-border-radius</code> <code>--component-menu-border-width</code> <code>--component-menu-color</code> <code>--component-menu-item-bg-hover</code> <code>--component-menu-item-border-radius</code> <code>--component-menu-item-danger-color</code> <code>--component-menu-item-disabled-color</code> <code>--component-menu-item-gap</code> <code>--component-menu-item-min-height</code> <code>--component-menu-item-padding-inline</code> <code>--component-menu-max-height</code> <code>--component-menu-min-width</code> <code>--component-menu-separator-color</code> <code>--component-menu-shadow</code> <code>--component-menu-z-index</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Button: aria-haspopup=&quot;menu&quot;, aria-expanded, aria-controls and popovertarget pointing at the list. List: role=&quot;menu&quot; with aria-labelledby → button; each option role=&quot;menuitem&quot; (a &lt;button&gt;, or an &lt;a&gt; for a link). Keyboard from js/syx-menu.js (no dependencies): ↓/Enter/Space open on the first option, ↑ on the last; ↑↓ move with wrap, Home/End, a letter jumps to the next option starting with it, Escape and Tab close and return focus to the button; activating an option closes the menu. aria-disabled options stay focusable but do nothing. Without JS, popovertarget still opens and closes it and Tab reaches the options.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-menu.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-menu.js';
+// markup rendered later:
+import { initMenus } from 'syx-design-system/js/syx-menu.js';
+initMenus(container);</code></pre></td></tr>
                 </tbody>
               </table>
             </div>
@@ -4407,7 +4630,114 @@ initTabs(container);</code></pre></td></tr>
               </table>
             </div>
           </section>
-          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-organisms">Organisms <span class="syx-text-gray">&middot; 1</span></h3>
+          <section class="docs-ref syx-mb-5" id="ref-mol-toast" aria-labelledby="ref-mol-toast-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-toast-titulo">Toast <code>.mol-toast</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_toast.scss</code></p>
+            <p class="atom-txt syx-mb-3">Ephemeral notifications in a corner that confirm what just happened (&quot;Saved&quot;, &quot;Link copied&quot;) without interrupting or taking focus. The .mol-toast container is fixed and stacks __item elements (--info, --success, --warning, --error colour only the accent rule; text stays primary). js/syx-toast.js: showToast('Saved', { tone, duration }) creates one, announces only its text through the container's __live region (role=&quot;status&quot;), removes it after 6 s by default and pauses the countdown while the pointer or focus is on it or the tab is hidden; duration: 0 keeps it until dismissed. A button with data-syx-toast=&quot;Text&quot; shows one without writing JS. Never the only place for something that must be read or done: an error that needs attention is mol-alert with role=&quot;alert&quot;.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><button class="atom-btn atom-btn--secondary atom-btn--size-md" type="button" data-syx-toast="Link copied to the clipboard" data-syx-toast-tone="success">Copy link</button><div class="mol-toast" data-dismiss-label="Dismiss notification"><p class="mol-toast__live" role="status"></p><div class="mol-toast__item mol-toast__item--info"><p class="mol-toast__text">3 files moved to Archive</p><button class="mol-toast__close" type="button" aria-label="Dismiss notification"><span class="atom-icon atom-icon--lc-x atom-icon--sm" aria-hidden="true"></span></button></div></div></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-toast-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-mol-toast-marcado"><code>&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; data-syx-toast=&quot;Link copied to the clipboard&quot; data-syx-toast-tone=&quot;success&quot;&gt;Copy link&lt;/button&gt;
+&lt;div class=&quot;mol-toast&quot; data-dismiss-label=&quot;Dismiss notification&quot;&gt;
+  &lt;p class=&quot;mol-toast__live&quot; role=&quot;status&quot;&gt;&lt;/p&gt;
+  &lt;div class=&quot;mol-toast__item mol-toast__item--info&quot;&gt;
+    &lt;p class=&quot;mol-toast__text&quot;&gt;3 files moved to Archive&lt;/p&gt;
+    &lt;button class=&quot;mol-toast__close&quot; type=&quot;button&quot; aria-label=&quot;Dismiss notification&quot;&gt;&lt;span class=&quot;atom-icon atom-icon--lc-x atom-icon--sm&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-toast</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>mol-toast__item--error</code> <code>mol-toast__item--info</code> <code>mol-toast__item--success</code> <code>mol-toast__item--warning</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-toast__close</code> <code>mol-toast__item</code> <code>mol-toast__live</code> <code>mol-toast__text</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>.is-leaving</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-toast-accent-width</code> <code>--component-toast-bg</code> <code>--component-toast-border-color</code> <code>--component-toast-border-radius</code> <code>--component-toast-border-width</code> <code>--component-toast-close-bg-hover</code> <code>--component-toast-close-color</code> <code>--component-toast-close-size</code> <code>--component-toast-color</code> <code>--component-toast-duration</code> <code>--component-toast-error-accent</code> <code>--component-toast-gap</code> <code>--component-toast-info-accent</code> <code>--component-toast-max-width</code> <code>--component-toast-offset</code> <code>--component-toast-padding-block</code> <code>--component-toast-padding-inline</code> <code>--component-toast-shadow</code> <code>--component-toast-success-accent</code> <code>--component-toast-warning-accent</code> <code>--component-toast-z-index</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">The container holds a __live element with role=&quot;status&quot; that exists before any text arrives; js/syx-toast.js writes only the message there, so the close button is not read out. Focus never moves to a toast; its close button (aria-label, 32px target) is reachable with Tab, and closing it returns focus to where the user came from. The countdown pauses on hover, on focus and while the tab is hidden (WCAG 2.2.1); duration: 0 disables it. Reduced motion: no slide or fade. Without JS a static toast stays and its button does nothing.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-toast.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-toast.js';
+// markup rendered later:
+import { initToasts, showToast } from 'syx-design-system/js/syx-toast.js';
+initToasts(container);</code></pre></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="docs-ref syx-mb-5" id="ref-mol-tooltip" aria-labelledby="ref-mol-tooltip-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-tooltip-titulo">Tooltip <code>.mol-tooltip</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_tooltip.scss</code></p>
+            <p class="atom-txt syx-mb-3">A short sentence that describes a control, on the Popover API: the __bubble is popover=&quot;hint&quot; (browsers that do not know hint treat it as manual), so it sits in the top layer above any overflow or z-index. js/syx-tooltip.js opens it on keyboard focus and on hover, keeps it while the pointer is over the control or the bubble, closes it on Escape, blur or leaving, and places it above the control — below if it does not fit — never over it. Position comes from script because CSS anchor positioning is not in the support floor. Colours are text-primary and bg-primary swapped, so contrast holds wherever primary text does. Plain text only.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><span class="mol-tooltip"><button class="atom-btn atom-btn--secondary atom-btn--size-md" type="button" aria-describedby="ref-mol-tooltip-tip-share">Share</button><span class="mol-tooltip__bubble" id="ref-mol-tooltip-tip-share" role="tooltip" popover="hint">Copies a view-only link to the clipboard</span></span></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-tooltip-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-mol-tooltip-marcado"><code>&lt;span class=&quot;mol-tooltip&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot; aria-describedby=&quot;tip-share&quot;&gt;Share&lt;/button&gt;&lt;span class=&quot;mol-tooltip__bubble&quot; id=&quot;tip-share&quot; role=&quot;tooltip&quot; popover=&quot;hint&quot;&gt;Copies a view-only link to the clipboard&lt;/span&gt;&lt;/span&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>mol-tooltip</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-tooltip__bubble</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">11 component tokens</summary><div class="mol-disclosure__content"><code>--component-tooltip-bg</code> <code>--component-tooltip-border-radius</code> <code>--component-tooltip-color</code> <code>--component-tooltip-duration</code> <code>--component-tooltip-font-size</code> <code>--component-tooltip-line-height</code> <code>--component-tooltip-max-width</code> <code>--component-tooltip-padding-block</code> <code>--component-tooltip-padding-inline</code> <code>--component-tooltip-shadow</code> <code>--component-tooltip-z-index</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">aria-describedby on the control points at the bubble, which carries role=&quot;tooltip&quot;; for an icon-only control the bubble is its name, so use aria-labelledby instead. WCAG 1.4.13: appears on focus and hover, hoverable (the pointer can move onto it), dismissed by Escape without moving focus or pointer, never covers the control. Nothing focusable inside. Never on a disabled control (no focus, no pointer events). JS: js/syx-tooltip.js (no dependencies); without it the bubble never opens, so do not put essential information only there.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tooltip.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-tooltip.js';
+// markup rendered later:
+import { initTooltips } from 'syx-design-system/js/syx-tooltip.js';
+initTooltips(container);</code></pre></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <h3 class="atom-title atom-title--h3 syx-mb-3" id="components-organisms">Organisms <span class="syx-text-gray">&middot; 2</span></h3>
+          <section class="docs-ref syx-mb-5" id="ref-org-app-shell" aria-labelledby="ref-org-app-shell-titulo">
+            <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-org-app-shell-titulo">App shell <code>.org-app-shell</code></h4>
+            <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">organism</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/organisms/_app-shell.scss</code></p>
+            <p class="atom-txt syx-mb-3">The frame of an application screen (settings, a dashboard, a console): __header on top, a __sidebar with the section navigation and __main, laid out with named grid areas. Below 50em everything stacks and the sidebar's __nav becomes a horizontally scrolling row — no drawer, no JS; from 50em the sidebar is a column beside the content. --full fills the viewport and keeps the header and the sidebar in place while the content scrolls. The current section is painted from aria-current=&quot;page&quot; (colour, background and an inline-start rule that survives forced colours). Inside __main, layout-stack and layout-cluster arrange sections and actions.</p>
+            <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
+            <div class="docs-ref__demo syx-mb-3"><div class="org-app-shell"><header class="org-app-shell__header"><span class="org-app-shell__brand">Acme Console</span><div class="org-app-shell__actions"><span class="atom-avatar atom-avatar--sm" role="img" aria-label="Signed in as Ana López">AL</span></div></header><nav class="org-app-shell__sidebar" aria-label="Sections"><ul class="org-app-shell__nav"><li><a class="org-app-shell__link" href="#overview">Overview</a></li><li><a class="org-app-shell__link" href="#settings" aria-current="page">Settings</a></li><li><a class="org-app-shell__link" href="#billing">Billing</a></li></ul></nav><main class="org-app-shell__main"><div class="layout-stack"><h2 class="atom-title atom-title--h4">Settings</h2><p class="atom-txt">Workspace name, members and notifications.</p><div class="layout-cluster layout-cluster--end"><button class="atom-btn atom-btn--secondary atom-btn--size-md" type="button">Cancel</button><button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md" type="button">Save</button></div></div></main></div></div>
+            <div class="docs-ref__markup syx-mb-3">
+              <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
+              <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-org-app-shell-marcado">Copy</button>
+              <pre class="atom-code syx-mb-0" id="ref-org-app-shell-marcado"><code>&lt;div class=&quot;org-app-shell&quot;&gt;
+  &lt;header class=&quot;org-app-shell__header&quot;&gt;
+    &lt;span class=&quot;org-app-shell__brand&quot;&gt;Acme Console&lt;/span&gt;
+    &lt;div class=&quot;org-app-shell__actions&quot;&gt;&lt;span class=&quot;atom-avatar atom-avatar--sm&quot; role=&quot;img&quot; aria-label=&quot;Signed in as Ana López&quot;&gt;AL&lt;/span&gt;&lt;/div&gt;
+  &lt;/header&gt;
+  &lt;nav class=&quot;org-app-shell__sidebar&quot; aria-label=&quot;Sections&quot;&gt;
+    &lt;ul class=&quot;org-app-shell__nav&quot;&gt;
+      &lt;li&gt;&lt;a class=&quot;org-app-shell__link&quot; href=&quot;#overview&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;org-app-shell__link&quot; href=&quot;#settings&quot; aria-current=&quot;page&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;org-app-shell__link&quot; href=&quot;#billing&quot;&gt;Billing&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;main class=&quot;org-app-shell__main&quot;&gt;
+    &lt;div class=&quot;layout-stack&quot;&gt;
+      &lt;h2 class=&quot;atom-title atom-title--h4&quot;&gt;Settings&lt;/h2&gt;
+      &lt;p class=&quot;atom-txt&quot;&gt;Workspace name, members and notifications.&lt;/p&gt;
+      &lt;div class=&quot;layout-cluster layout-cluster--end&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Cancel&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="atom-table__container syx-mb-0">
+              <table class="atom-table docs-ref__api">
+                <tbody>
+                  <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>org-app-shell</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>org-app-shell--full</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>org-app-shell__actions</code> <code>org-app-shell__brand</code> <code>org-app-shell__header</code> <code>org-app-shell__link</code> <code>org-app-shell__main</code> <code>org-app-shell__nav</code> <code>org-app-shell__sidebar</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">23 component tokens</summary><div class="mol-disclosure__content"><code>--component-app-shell-bg</code> <code>--component-app-shell-border-color</code> <code>--component-app-shell-border-width</code> <code>--component-app-shell-brand-font-weight</code> <code>--component-app-shell-color</code> <code>--component-app-shell-header-bg</code> <code>--component-app-shell-header-height</code> <code>--component-app-shell-header-padding-inline</code> <code>--component-app-shell-link-bg-current</code> <code>--component-app-shell-link-bg-hover</code> <code>--component-app-shell-link-border-radius</code> <code>--component-app-shell-link-color</code> <code>--component-app-shell-link-color-current</code> <code>--component-app-shell-link-color-hover</code> <code>--component-app-shell-link-indicator-color</code> <code>--component-app-shell-link-indicator-width</code> <code>--component-app-shell-link-min-height</code> <code>--component-app-shell-link-padding-inline</code> <code>--component-app-shell-main-padding</code> <code>--component-app-shell-sidebar-bg</code> <code>--component-app-shell-sidebar-padding</code> <code>--component-app-shell-sidebar-width</code> <code>--component-app-shell-z-index</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Three landmarks a screen-reader user jumps between: &lt;header&gt;, &lt;nav aria-label&gt; and &lt;main&gt; — one &lt;main&gt; per page (the docs demo nests it inside the docs page's own, which a real app never does). The current section carries aria-current=&quot;page&quot;; the CSS paints it from that attribute. Sidebar links are 44px tall; the scrolling row on small screens is padded so the focus ring is never clipped. No JS.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
           <section class="docs-ref syx-mb-5" id="ref-org-site-header" aria-labelledby="ref-org-site-header-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-org-site-header-titulo">Site header <code>.org-site-header</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">organism</span><span class="atom-pill atom-pill--subtle">domain-reusable</span><code>scss/organisms/_site-header.scss</code></p>
@@ -4444,6 +4774,262 @@ initSiteNav(container);</code></pre></td></tr>
             </div>
           </section>
         </section>
+        <script type="module">
+        /* js/syx-char-count.js — copia literal; la fuente es ese fichero */
+        /**
+         * SYX — Contador de caracteres para .mol-form-field__count
+         * ────────────────────────────────────────────────────────
+         * Un textarea con maxlength corta en seco al llegar al límite, y quien no ve
+         * la pantalla no sabe por qué deja de escribirse. Este script escribe cuánto
+         * queda en el contador visible y lo anuncia a los lectores de pantalla, pero
+         * solo cuando se deja de escribir (un anuncio por tecla taparía lo que se
+         * está dictando). Sin dependencias.
+         *
+         * Marcado que espera — el campo nombra al contador en aria-describedby, así
+         * que al enfocar se oye también cuánto queda:
+         *
+         *   <textarea class="atom-textarea" id="bio" maxlength="160" aria-describedby="bio-count"></textarea>
+         *   <span class="mol-form-field__count" id="bio-count" data-template="{n} characters left">Up to 160 characters</span>
+         *
+         * Sin JavaScript queda el texto del marcado, que sigue siendo verdad.
+         * `data-template` lleva el texto en el idioma de la página ({n} = lo que
+         * queda); al llegar a 0 el contador recibe `is-limit`.
+         *
+         * Uso, con empaquetador (Vite, webpack, Rollup):
+         *       import 'syx-design-system/js/syx-char-count.js';
+         *       import { initCharCount } from 'syx-design-system/js/syx-char-count.js';
+         *       initCharCount(contenedor);                     // marcado que llega después
+         *
+         * (Auditoría 2026-10 · acción 15)
+         */
+
+        const PAUSA = 800; // ms sin teclear antes de anunciar
+
+        export function initCharCount(root = document) {
+          for (const contador of root.querySelectorAll('.mol-form-field__count[id]')) {
+            if (contador.dataset.syxCount) continue;
+            // Por id en todo el documento: el campo y su contador pueden no
+            // compartir contenedor (un componente que pinta el contador aparte).
+            const campo = [...document.querySelectorAll('[aria-describedby]')].find((c) =>
+              c.getAttribute('aria-describedby').split(/\s+/).includes(contador.id));
+            if (!campo || !(campo.maxLength > 0)) continue;
+            contador.dataset.syxCount = 'on';
+
+            // La región viva existe antes de recibir texto: si nace con él, algunos
+            // lectores no la anuncian.
+            const vivo = document.createElement('span');
+            vivo.className = 'mol-form-field__live';
+            vivo.setAttribute('role', 'status');
+            contador.after(vivo);
+
+            const plantilla = contador.dataset.template || '{n} characters left';
+            const texto = () => plantilla.replace('{n}', String(Math.max(0, campo.maxLength - campo.value.length)));
+            let espera;
+
+            const pintar = () => {
+              contador.textContent = texto();
+              contador.classList.toggle('is-limit', campo.value.length >= campo.maxLength);
+            };
+
+            campo.addEventListener('input', () => {
+              pintar();
+              clearTimeout(espera);
+              espera = setTimeout(() => { vivo.textContent = texto(); }, PAUSA);
+            });
+            pintar();
+          }
+        }
+
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initCharCount());
+          else initCharCount();
+        }
+        </script>
+        <script type="module">
+        /* js/syx-menu.js — copia literal; la fuente es ese fichero */
+        /**
+         * SYX — Teclado y colocación de .mol-menu
+         * ───────────────────────────────────────
+         * La lista es un popover="auto": el navegador ya la abre y la cierra con el
+         * botón (popovertarget), la cierra al pulsar fuera y con Escape, y la pone en
+         * la capa superior. Esto añade lo que un menú promete y el popover no trae,
+         * el patrón de botón de menú de WAI-ARIA (APG, «Menu Button»):
+         *
+         *   en el botón   ↓ Intro Espacio   abre y enfoca la primera opción
+         *                 ↑                 abre y enfoca la última
+         *   en la lista   ↓ ↑               siguiente / anterior (vuelve al principio)
+         *                 Inicio Fin        primera / última
+         *                 una letra         la siguiente opción que empieza por ella
+         *                 Escape Tab        cierra y devuelve el foco al botón
+         *                 Intro Espacio     activa la opción; el menú se cierra
+         *
+         * Además: aria-expanded sigue al estado real, las opciones salen del orden de
+         * tabulación (tabindex="-1": se recorren con flechas) y la lista se coloca
+         * bajo el botón, alineada a su inicio —encima si debajo no cabe—. CSS anchor
+         * positioning lo haría sin script, pero no está en el soporte mínimo (Chrome
+         * 111 · Safari 16.2 · Firefox 121). Sin Popover API (Safari < 17) la lista se
+         * oculta con `hidden`, y el clic fuera y Escape los pone este script.
+         *
+         * La colocación repite la de syx-tooltip.js a propósito: cada fichero se
+         * importa solo y sin dependencias, y docs.html los incrusta tal cual.
+         *
+         * Marcado que espera — ver scss/molecules/_menu.scss:
+         *
+         *   <button class="mol-menu__trigger" aria-haspopup="menu" aria-expanded="false"
+         *           aria-controls="m-list" popovertarget="m-list">…</button>
+         *   <div class="mol-menu__list" id="m-list" role="menu" popover="auto">
+         *     <button class="mol-menu__item" type="button" role="menuitem">…</button>
+         *   </div>
+         *
+         * Uso, con empaquetador (Vite, webpack, Rollup):
+         *       import 'syx-design-system/js/syx-menu.js';
+         *       import { initMenus } from 'syx-design-system/js/syx-menu.js';
+         *       initMenus(contenedor);                         // marcado que llega después
+         *
+         * (Auditoría 2026-10 · acción 15)
+         */
+
+        const POPOVER = typeof HTMLElement !== 'undefined' && 'popover' in HTMLElement.prototype;
+        const SEPARACION = 4; // px entre botón y lista
+        const MARGEN = 8; // px mínimos hasta el borde de la ventana
+        const TECLEO = 500; // ms que dura la búsqueda por letras
+
+        function colocar(boton, lista) {
+          const r = boton.getBoundingClientRect();
+          const ancho = lista.offsetWidth;
+          const alto = lista.offsetHeight;
+          const vw = document.documentElement.clientWidth;
+          const vh = document.documentElement.clientHeight;
+          const rtl = getComputedStyle(boton).direction === 'rtl';
+          let arriba = r.bottom + SEPARACION;
+          if (arriba + alto > vh - MARGEN && r.top - SEPARACION - alto >= MARGEN) arriba = r.top - SEPARACION - alto;
+          const inicio = rtl ? r.right - ancho : r.left;
+          const izquierda = Math.min(Math.max(inicio, MARGEN), Math.max(MARGEN, vw - ancho - MARGEN));
+          lista.style.top = `${Math.round(arriba)}px`;
+          lista.style.left = `${Math.round(izquierda)}px`;
+        }
+
+        export function initMenus(root = document) {
+          for (const boton of root.querySelectorAll('.mol-menu__trigger[aria-controls]')) {
+            const lista = document.getElementById(boton.getAttribute('aria-controls'));
+            if (!lista || lista.syxMenu) continue;
+            lista.syxMenu = true;
+
+            const opciones = () => [...lista.querySelectorAll('[role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]')]
+              .filter((o) => !o.hidden && !o.closest('[hidden]'));
+            const abierto = () => (POPOVER ? lista.matches(':popover-open') : !lista.hidden);
+
+            for (const o of opciones()) o.tabIndex = -1;
+            boton.setAttribute('aria-expanded', 'false');
+            if (POPOVER && !boton.hasAttribute('popovertarget')) boton.setAttribute('popovertarget', lista.id);
+            if (!POPOVER) { lista.hidden = true; lista.style.position = 'fixed'; }
+
+            // Qué opción enfocar cuando el navegador termine de abrir la lista.
+            let alAbrir = 'primera';
+
+            const enfocar = (destino) => {
+              const todas = opciones();
+              const o = destino === 'ultima' ? todas[todas.length - 1] : typeof destino === 'number' ? todas[destino] : todas[0];
+              if (o) o.focus();
+            };
+
+            const alAbrirse = () => {
+              boton.setAttribute('aria-expanded', 'true');
+              colocar(boton, lista);
+              if (!lista.contains(document.activeElement)) enfocar(alAbrir);
+              alAbrir = 'primera';
+            };
+            const alCerrarse = () => {
+              boton.setAttribute('aria-expanded', 'false');
+              // Solo si el foco se ha quedado sin sitio (estaba dentro de la lista):
+              // un clic fuera que enfoca otra cosa no debe devolverlo al botón.
+              const a = document.activeElement;
+              if (!a || a === document.body || lista.contains(a)) boton.focus();
+            };
+
+            const abrir = (destino) => {
+              alAbrir = destino;
+              if (abierto()) { enfocar(destino); return; }
+              if (POPOVER) lista.showPopover();
+              else { lista.hidden = false; alAbrirse(); }
+            };
+            const cerrar = () => {
+              if (!abierto()) return;
+              // El foco vuelve al botón ANTES de ocultar: si se queda en una opción
+              // oculta, el navegador lo manda a <body> y el lector pierde el sitio.
+              boton.focus();
+              if (POPOVER) lista.hidePopover();
+              else { lista.hidden = true; alCerrarse(); }
+            };
+
+            if (POPOVER) {
+              lista.addEventListener('toggle', (e) => (e.newState === 'open' ? alAbrirse() : alCerrarse()));
+            } else {
+              boton.addEventListener('click', () => (abierto() ? cerrar() : abrir('primera')));
+              document.addEventListener('pointerdown', (e) => {
+                if (abierto() && !lista.contains(e.target) && !boton.contains(e.target)) {
+                  lista.hidden = true;
+                  boton.setAttribute('aria-expanded', 'false');
+                }
+              });
+            }
+
+            boton.addEventListener('keydown', (e) => {
+              if (e.key === 'ArrowDown') { e.preventDefault(); abrir('primera'); }
+              else if (e.key === 'ArrowUp') { e.preventDefault(); abrir('ultima'); }
+            });
+
+            let buscado = '';
+            let reloj;
+            lista.addEventListener('keydown', (e) => {
+              const todas = opciones();
+              const i = todas.indexOf(document.activeElement);
+              const mover = {
+                ArrowDown: (i + 1) % todas.length,
+                ArrowUp: (i - 1 + todas.length) % todas.length,
+                Home: 0,
+                End: todas.length - 1,
+              }[e.key];
+              if (mover !== undefined) { e.preventDefault(); enfocar(mover); return; }
+              if (e.key === 'Escape' || e.key === 'Tab') { e.preventDefault(); cerrar(); return; }
+              // Espacio activa también una opción que sea un enlace (<a role="menuitem">),
+              // que de por sí solo responde a Intro.
+              if (e.key === ' ' && i > -1 && todas[i].tagName === 'A') { e.preventDefault(); todas[i].click(); return; }
+              // Búsqueda por letras: lo tecleado en medio segundo, desde la opción
+              // siguiente a la actual.
+              if (e.key.length === 1 && e.key !== ' ' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                buscado += e.key.toLocaleLowerCase();
+                clearTimeout(reloj);
+                reloj = setTimeout(() => { buscado = ''; }, TECLEO);
+                const orden = [...todas.slice(i + 1), ...todas.slice(0, i + 1)];
+                const hallada = orden.find((o) => o.textContent.trim().toLocaleLowerCase().startsWith(buscado));
+                if (hallada) hallada.focus();
+              }
+            });
+
+            // Una opción con aria-disabled no actúa: se para el clic en captura,
+            // antes de que llegue al manejador que la app puso en la opción.
+            lista.addEventListener('click', (e) => {
+              const o = e.target.closest('[role^="menuitem"]');
+              if (o && o.getAttribute('aria-disabled') === 'true') { e.preventDefault(); e.stopPropagation(); }
+            }, true);
+            // Activar una opción cierra el menú, después del manejador de la app.
+            lista.addEventListener('click', (e) => {
+              const o = e.target.closest('[role^="menuitem"]');
+              if (o && lista.contains(o)) cerrar();
+            });
+
+            const recolocar = () => { if (abierto()) colocar(boton, lista); };
+            addEventListener('scroll', recolocar, { capture: true, passive: true });
+            addEventListener('resize', recolocar, { passive: true });
+          }
+        }
+
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initMenus());
+          else initMenus();
+        }
+        </script>
         <script type="module">
         /* js/syx-site-nav.js — copia literal; la fuente es ese fichero */
         /**
@@ -4629,6 +5215,348 @@ initSiteNav(container);</code></pre></td></tr>
         if (typeof document !== 'undefined') {
           if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initTabs());
           else initTabs();
+        }
+        </script>
+        <script type="module">
+        /* js/syx-toast.js — copia literal; la fuente es ese fichero */
+        /**
+         * SYX — Avisos efímeros (.mol-toast)
+         * ──────────────────────────────────
+         * Lo mínimo para mostrar un aviso que no interrumpe:
+         *
+         *   showToast('Ajustes guardados', { tone: 'success' });
+         *
+         * y lo que eso exige para que sea accesible:
+         *
+         *   anuncia     escribe el texto en la región viva del contenedor
+         *               (.mol-toast__live, role="status"), que existe ANTES del
+         *               texto: una región que nace con el texto dentro no se lee
+         *   no roba     nunca mueve el foco; el aviso tiene un botón de cerrar al
+         *               que se llega con Tab, y al cerrarlo el foco vuelve a donde
+         *               estaba antes de entrar en los avisos
+         *   da tiempo   la cuenta atrás se pausa con el puntero o el foco encima, y
+         *               con la pestaña oculta (WCAG 2.2.1); duration: 0 lo deja
+         *               hasta que se cierre a mano
+         *   no se mueve con movimiento reducido el CSS no tiene transición y el
+         *               aviso se quita en el acto
+         *
+         * Sin escribir JS: <button type="button" data-syx-toast="Enlace copiado"
+         * data-syx-toast-tone="success">Copiar</button> muestra ese aviso al pulsarlo.
+         *
+         * Si no hay contenedor en la página, se crea uno al final de <body>.
+         * Avisos escritos en el HTML (__item con data-duration) también se cierran
+         * solos y su botón funciona: initToasts() los conecta.
+         *
+         * Uso, con empaquetador (Vite, webpack, Rollup):
+         *       import { showToast } from 'syx-design-system/js/syx-toast.js';
+         *       showToast('Enlace copiado');
+         *       showToast('No se pudo guardar', { tone: 'error', duration: 0 });
+         *       const aviso = showToast('Subiendo…', { duration: 0 }); aviso.close();
+         *     opciones: tone ('info' | 'success' | 'warning' | 'error'), duration (ms,
+         *     6000 por defecto; 0 = sin cierre automático), region (el contenedor),
+         *     dismissLabel (nombre del botón de cerrar, por defecto el
+         *     data-dismiss-label del contenedor o 'Dismiss notification').
+         *
+         * (Auditoría 2026-10 · acción 15)
+         */
+
+        const DURACION = 6000;
+        const TONOS = ['info', 'success', 'warning', 'error'];
+
+        function region(dada) {
+          if (dada) return typeof dada === 'string' ? document.querySelector(dada) : dada;
+          let r = document.querySelector('.mol-toast');
+          if (!r) {
+            r = document.createElement('div');
+            r.className = 'mol-toast';
+            document.body.append(r);
+          }
+          preparar(r);
+          return r;
+        }
+
+        // La región viva y la memoria de dónde estaba el foco: una vez por contenedor.
+        function preparar(r) {
+          if (r.syxToast) return r.syxToast;
+          let vivo = r.querySelector('.mol-toast__live');
+          if (!vivo) {
+            vivo = document.createElement('p');
+            vivo.className = 'mol-toast__live';
+            vivo.setAttribute('role', 'status');
+            r.prepend(vivo);
+          }
+          const estado = { vivo, volverA: null };
+          // Quien entra con Tab en los avisos viene de algún sitio: ahí vuelve el
+          // foco cuando el aviso en el que estaba desaparece.
+          r.addEventListener('focusin', (e) => {
+            if (e.relatedTarget && !r.contains(e.relatedTarget)) estado.volverA = e.relatedTarget;
+          });
+          r.syxToast = estado;
+          return estado;
+        }
+
+        function anunciar(r, texto) {
+          const { vivo } = preparar(r);
+          // Vaciar y escribir en otro turno: así se anuncia aunque el texto sea el
+          // mismo que el del aviso anterior, y la región ya existe cuando llega.
+          vivo.textContent = '';
+          setTimeout(() => { vivo.textContent = texto; }, 100);
+        }
+
+        function conectar(aviso, duracion) {
+          if (aviso.syxToast) return aviso.syxToast;
+          const r = aviso.closest('.mol-toast');
+          const estado = r ? preparar(r) : { volverA: null };
+          let restante = duracion;
+          let inicio = 0;
+          let reloj = null;
+          const motivos = new Set(); // puntero, foco, pestaña oculta
+
+          const cerrar = () => {
+            if (!aviso.isConnected || aviso.classList.contains('is-leaving')) return;
+            clearTimeout(reloj);
+            document.removeEventListener('visibilitychange', alCambiarPestana);
+            // Si el foco estaba en el aviso, se devuelve antes de quitarlo.
+            if (aviso.contains(document.activeElement)) {
+              const otro = [...(r ? r.querySelectorAll('.mol-toast__close') : [])].find((b) => !aviso.contains(b));
+              const destino = estado.volverA && estado.volverA.isConnected ? estado.volverA : otro;
+              if (destino) destino.focus();
+              else document.activeElement.blur();
+            }
+            aviso.classList.add('is-leaving');
+            const ms = Math.max(...getComputedStyle(aviso).transitionDuration.split(',').map((d) => parseFloat(d) * (d.includes('ms') ? 1 : 1000)));
+            if (ms > 0) setTimeout(() => aviso.remove(), ms);
+            else aviso.remove();
+          };
+
+          const correr = () => {
+            if (!(restante > 0) || motivos.size) return;
+            inicio = Date.now();
+            reloj = setTimeout(cerrar, restante);
+          };
+          const pausar = (motivo) => {
+            if (!motivos.size && reloj) { clearTimeout(reloj); reloj = null; restante -= Date.now() - inicio; }
+            motivos.add(motivo);
+          };
+          const seguir = (motivo) => { motivos.delete(motivo); correr(); };
+          function alCambiarPestana() { if (document.hidden) pausar('pestaña'); else seguir('pestaña'); }
+
+          aviso.addEventListener('pointerenter', () => pausar('puntero'));
+          aviso.addEventListener('pointerleave', () => seguir('puntero'));
+          aviso.addEventListener('focusin', () => pausar('foco'));
+          aviso.addEventListener('focusout', (e) => { if (!aviso.contains(e.relatedTarget)) seguir('foco'); });
+          document.addEventListener('visibilitychange', alCambiarPestana);
+          const boton = aviso.querySelector('.mol-toast__close');
+          if (boton) boton.addEventListener('click', cerrar);
+
+          const api = { element: aviso, close: cerrar };
+          aviso.syxToast = api;
+          if (document.hidden) motivos.add('pestaña');
+          correr();
+          return api;
+        }
+
+        let delegado = false;
+
+        export function initToasts(root = document) {
+          // Disparadores declarativos: <button data-syx-toast="Enlace copiado"
+          // data-syx-toast-tone="success">. Delegado en el documento, así sirve
+          // también para botones que lleguen después.
+          if (!delegado) {
+            delegado = true;
+            document.addEventListener('click', (e) => {
+              const b = e.target.closest('[data-syx-toast]');
+              if (b) showToast(b.dataset.syxToast, { tone: b.dataset.syxToastTone });
+            });
+          }
+          for (const r of root.querySelectorAll('.mol-toast')) preparar(r);
+          for (const aviso of root.querySelectorAll('.mol-toast__item')) {
+            conectar(aviso, aviso.dataset.duration === undefined ? 0 : Number(aviso.dataset.duration));
+          }
+        }
+
+        export function showToast(mensaje, { tone = 'info', duration = DURACION, region: dada, dismissLabel } = {}) {
+          const r = region(dada);
+          const aviso = document.createElement('div');
+          aviso.className = `mol-toast__item mol-toast__item--${TONOS.includes(tone) ? tone : 'info'}`;
+          const texto = document.createElement('p');
+          texto.className = 'mol-toast__text';
+          texto.textContent = mensaje;
+          const boton = document.createElement('button');
+          boton.type = 'button';
+          boton.className = 'mol-toast__close';
+          boton.setAttribute('aria-label', dismissLabel || r.dataset.dismissLabel || 'Dismiss notification');
+          // La aspa se dibuja aquí y no con atom-icon: el aviso no puede depender de
+          // que la aplicación haya incluido los iconos en su hoja.
+          boton.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+          aviso.append(texto, boton);
+          r.append(aviso);
+          anunciar(r, mensaje);
+          return conectar(aviso, duration);
+        }
+
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initToasts());
+          else initToasts();
+        }
+        </script>
+        <script type="module">
+        /* js/syx-tooltip.js — copia literal; la fuente es ese fichero */
+        /**
+         * SYX — Comportamiento de .mol-tooltip
+         * ────────────────────────────────────
+         * La burbuja es un popover (popover="hint"): el navegador la pone en la capa
+         * superior, por encima de cualquier overflow o z-index. Esto pone lo que el
+         * popover no trae, que es lo que pide WCAG 1.4.13 (contenido al pasar el
+         * puntero o enfocar):
+         *
+         *   aparece    con el foco del disparador (en el acto) y con el puntero
+         *              (tras una pausa breve, para no encender burbujas al cruzar)
+         *   se queda   mientras el puntero esté sobre el disparador O sobre la
+         *              burbuja: se puede ir hasta ella sin que se cierre
+         *   se va      al salir el puntero de los dos, al perder el foco, o con
+         *              Escape, que no mueve ni el foco ni el puntero
+         *   no tapa    se coloca encima del disparador con una separación; si no
+         *              cabe, debajo; y se recorta a los bordes de la ventana
+         *
+         * Posición: CSS anchor positioning lo haría sin script, pero no está en el
+         * soporte mínimo (Chrome 111 · Safari 16.2 · Firefox 121); se mide el
+         * disparador y se escriben `top` y `left`. Son coordenadas de la ventana
+         * (getBoundingClientRect), físicas por naturaleza: valen igual en RTL.
+         * Sin Popover API (Safari < 17) la burbuja se oculta con `hidden` y se
+         * coloca igual, con position: fixed.
+         *
+         * Marcado que espera — el disparador nombra la burbuja en aria-describedby
+         * (o en aria-labelledby, si la burbuja es su único nombre):
+         *
+         *   <span class="mol-tooltip">
+         *     <button class="atom-btn" type="button" aria-describedby="tip-1">Share</button>
+         *     <span class="mol-tooltip__bubble" id="tip-1" role="tooltip" popover="hint">Copies the link</span>
+         *   </span>
+         *
+         * Uso, con empaquetador (Vite, webpack, Rollup):
+         *       import 'syx-design-system/js/syx-tooltip.js';
+         *       import { initTooltips } from 'syx-design-system/js/syx-tooltip.js';
+         *       initTooltips(contenedor);                      // marcado que llega después
+         *
+         * (Auditoría 2026-10 · acción 15)
+         */
+
+        const POPOVER = typeof HTMLElement !== 'undefined' && 'popover' in HTMLElement.prototype;
+        const SEPARACION = 8; // px entre disparador y burbuja
+        const MARGEN = 8; // px mínimos hasta el borde de la ventana
+        const ENTRADA = 120; // ms de pausa antes de abrir con el puntero
+        const SALIDA = 120; // ms de gracia para llegar del disparador a la burbuja
+
+        const abiertas = new Set();
+
+        const estaAbierta = (b) => (POPOVER ? b.matches(':popover-open') : !b.hidden);
+
+        function colocar(disparador, burbuja) {
+          const r = disparador.getBoundingClientRect();
+          const ancho = burbuja.offsetWidth;
+          const alto = burbuja.offsetHeight;
+          const vw = document.documentElement.clientWidth;
+          const vh = document.documentElement.clientHeight;
+          let arriba = r.top - alto - SEPARACION;
+          let lado = 'top';
+          if (arriba < MARGEN && r.bottom + SEPARACION + alto <= vh - MARGEN) {
+            arriba = r.bottom + SEPARACION;
+            lado = 'bottom';
+          }
+          const izquierda = Math.min(Math.max(r.left + r.width / 2 - ancho / 2, MARGEN), Math.max(MARGEN, vw - ancho - MARGEN));
+          burbuja.style.top = `${Math.round(arriba)}px`;
+          burbuja.style.left = `${Math.round(izquierda)}px`;
+          burbuja.dataset.side = lado;
+        }
+
+        function abrir(disparador, burbuja) {
+          for (const otra of abiertas) if (otra.burbuja !== burbuja) cerrar(otra.burbuja);
+          if (!estaAbierta(burbuja)) {
+            if (POPOVER) burbuja.showPopover();
+            else { burbuja.style.position = 'fixed'; burbuja.hidden = false; }
+          }
+          colocar(disparador, burbuja);
+          abiertas.add(burbuja.syxTooltip);
+        }
+
+        function cerrar(burbuja) {
+          if (estaAbierta(burbuja)) {
+            if (POPOVER) burbuja.hidePopover();
+            else burbuja.hidden = true;
+          }
+          abiertas.delete(burbuja.syxTooltip);
+        }
+
+        // Un solo juego de escuchas globales para todas las burbujas.
+        let global = false;
+        function escuchasGlobales() {
+          if (global) return;
+          global = true;
+          // Escape en captura: cierra la burbuja ANTES de que el mismo Escape cierre
+          // el diálogo o el menú en el que está el disparador. Con una burbuja
+          // abierta, la primera pulsación es para ella.
+          addEventListener('keydown', (e) => {
+            if (e.key !== 'Escape' || !abiertas.size) return;
+            for (const t of [...abiertas]) cerrar(t.burbuja);
+            e.preventDefault();
+            e.stopPropagation();
+          }, true);
+          const recolocar = () => { for (const t of abiertas) colocar(t.disparador, t.burbuja); };
+          addEventListener('scroll', recolocar, { capture: true, passive: true });
+          addEventListener('resize', recolocar, { passive: true });
+        }
+
+        export function initTooltips(root = document) {
+          for (const burbuja of root.querySelectorAll('.mol-tooltip__bubble[id]')) {
+            if (burbuja.syxTooltip) continue;
+            const id = CSS.escape(burbuja.id);
+            const disparador = document.querySelector(`[aria-describedby~="${id}"], [aria-labelledby~="${id}"]`);
+            if (!disparador) continue;
+            const t = { disparador, burbuja };
+            burbuja.syxTooltip = t;
+            if (!POPOVER) burbuja.hidden = true;
+            escuchasGlobales();
+
+            let reloj;
+            let puntero = false; // el puntero está sobre el disparador o la burbuja
+            const programar = (fn, ms) => { clearTimeout(reloj); reloj = setTimeout(fn, ms); };
+            const quizaCerrar = () => {
+              if (puntero || disparador.matches(':focus-visible')) return;
+              cerrar(burbuja);
+            };
+
+            for (const el of [disparador, burbuja]) {
+              el.addEventListener('pointerenter', () => {
+                puntero = true;
+                if (estaAbierta(burbuja)) clearTimeout(reloj);
+                else programar(() => abrir(disparador, burbuja), ENTRADA);
+              });
+              el.addEventListener('pointerleave', () => {
+                puntero = false;
+                programar(quizaCerrar, SALIDA);
+              });
+            }
+            // Solo el foco de teclado (:focus-visible): el clic también enfoca un
+            // botón, y la burbuja volvería a abrirse justo al usarlo.
+            disparador.addEventListener('focus', () => {
+              if (!disparador.matches(':focus-visible')) return;
+              clearTimeout(reloj);
+              abrir(disparador, burbuja);
+            });
+            disparador.addEventListener('blur', () => { if (!puntero) cerrar(burbuja); });
+            // El navegador también cierra un popover="hint" por su cuenta (clic
+            // fuera, otra burbuja): sin esto, Escape se quedaría esperando a una
+            // burbuja que ya no está y se tragaría la pulsación.
+            burbuja.addEventListener('toggle', (e) => { if (e.newState === 'closed') abiertas.delete(t); });
+            // Pulsar el control es usarlo: la descripción ya no hace falta.
+            disparador.addEventListener('pointerdown', () => { clearTimeout(reloj); cerrar(burbuja); });
+          }
+        }
+
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initTooltips());
+          else initTooltips();
         }
         </script>
         <script>
