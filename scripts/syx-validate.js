@@ -94,51 +94,22 @@ function extractRuntimeTokens() {
     return { tokens: {}, stats: { total: 0, official: 0, legacy: 0 } };
   }
 
-  const css    = fs.readFileSync(CSS_REF, 'utf8');
+  // Declaraciones de verdad, leídas con postcss. Hasta octubre de 2026 esto
+  // era una expresión regular línea a línea que tomaba por declaración
+  // cualquier `--algo:` del fichero, y los modificadores BEM seguidos de una
+  // pseudoclase (`.atom-btn--primary:hover`) contaban como variables: R07
+  // decía 281 heredadas en example-01 y unas 120 eran selectores.
   const tokens = {};
-
-  // Find all CSS custom property declarations globally.
-  // Pattern: `--prop-name: value;`  (must start after whitespace or { )
-  // We use a global regex across the whole file.
-  const propRe = /(?:^|[{;,\s])(--[\w-]+)\s*:\s*([^;}\n]+)/gm;
-
-  // Build a simple selector context map: scan for blocks that define
-  // custom properties right after a selector line (the line above a { block).
-  // We do this in a single forward pass.
-  const lines = css.split('\n');
-  let currentSel = ':root';
-
-  for (const line of lines) {
-    const trimmed = line.trim();
-
-    // Detect selector-style lines (no colon for property, ends with { or is just {)
-    if (/^[^{]+\{$/.test(trimmed)) {
-      // Extract the selector part before {
-      currentSel = trimmed.replace(/\s*\{$/, '').trim() || ':root';
-    } else if (trimmed === '{') {
-      // anonymous open — keep currentSel
-    } else if (trimmed === '}' || trimmed === '};') {
-      currentSel = ':root'; // reset after block
-    }
-
-    // Match custom property declarations on this line
-    const declRe = /(--[\w-]+)\s*:\s*([^;}\n]+)/g;
-    let match;
-    while ((match = declRe.exec(trimmed)) !== null) {
-      const prop     = match[1];
-      const rawValue = match[2].trim();
-
-      if (!tokens[prop]) {
-        tokens[prop] = {
-          value:           rawValue,
-          usedInSelectors: []
-        };
-      }
-      if (!tokens[prop].usedInSelectors.includes(currentSel)) {
-        tokens[prop].usedInSelectors.push(currentSel);
-      }
-    }
-  }
+  const contexto = (nodo) => {
+    for (let p = nodo.parent; p; p = p.parent) if (p.type === 'rule') return p.selector;
+    return ':root';
+  };
+  require('postcss').parse(fs.readFileSync(CSS_REF, 'utf8')).walkDecls((d) => {
+    if (!d.prop.startsWith('--')) return;
+    const sel = contexto(d);
+    if (!tokens[d.prop]) tokens[d.prop] = { value: d.value.trim(), usedInSelectors: [] };
+    if (!tokens[d.prop].usedInSelectors.includes(sel)) tokens[d.prop].usedInSelectors.push(sel);
+  });
 
   // Classify each token by prefix
   for (const prop of Object.keys(tokens)) {
@@ -236,88 +207,43 @@ function crossCheck(sourceTokens, runtimeData) {
 // ─── Module 4: Catalog Legacy Vars ───────────────────────────────────────────
 
 function catalogLegacyVars(runtimeData) {
-  // Patterns for automatic classification
-  // keep  → external dependency or intentional local variable
-  // migrate → has a clear SYX replacement
-  // kill  → orphaned, no replacement needed
-
-  const KEEP_PATTERNS = [
-    /^--lc-/,           // Lucide icon CSS vars
-    /^--icon-/,         // explicit icon namespace
-    /^--form-/,         // form aliases (defined in _token-aliases.scss intentionally)
-    /^--layout-/,       // layout tokens (already treated as official but may appear as legacy)
-    /^--swiper-/,       // 3rd-party slider
-    /^--highlight-/,    // syntax highlighting
-  ];
-
-  // Migration map: legacy var → recommended SYX replacement
-  const MIGRATION_MAP = {
-    '--base-measure':              { replacedBy: '--primitive-space-base',           replaceWith: 'var(--primitive-space-base)' },
-    '--color-blue':                { replacedBy: '--primitive-color-blue-500',        replaceWith: 'var(--primitive-color-blue-500)' },
-    '--color-green':               { replacedBy: '--primitive-color-green-500',       replaceWith: 'var(--primitive-color-green-500)' },
-    '--color-pink':                { replacedBy: '--primitive-color-pink-500',        replaceWith: 'var(--primitive-color-pink-500)' },
-    '--color-pink-lt-1':           { replacedBy: '--primitive-color-pink-100',        replaceWith: 'var(--primitive-color-pink-100)' },
-    '--color-purple':              { replacedBy: '--primitive-color-purple-500',      replaceWith: 'var(--primitive-color-purple-500)' },
-    '--color-yellow':              { replacedBy: '--primitive-color-yellow-500',      replaceWith: 'var(--primitive-color-yellow-500)' },
-    '--color-primary':             { replacedBy: '--semantic-color-primary',          replaceWith: 'var(--semantic-color-primary)' },
-    '--color-secondary':           { replacedBy: '--semantic-color-secondary',        replaceWith: 'var(--semantic-color-secondary)' },
-    '--color-secondary-lt-1':      { replacedBy: '--primitive-color-pink-100',        replaceWith: 'var(--primitive-color-pink-100)' },
-    '--color-tertiary':            { replacedBy: '--semantic-color-tertiary',         replaceWith: 'var(--semantic-color-tertiary)' },
-    '--color-quaternary':          { replacedBy: '--semantic-color-quaternary',       replaceWith: 'var(--semantic-color-quaternary)' },
-    '--color-quinary':             { replacedBy: '--semantic-color-quinary',          replaceWith: 'var(--semantic-color-quinary)' },
-    '--color-action-link':         { replacedBy: '--semantic-color-link-default',     replaceWith: 'var(--semantic-color-link-default)' },
-    '--color-action-selection':    { replacedBy: '--semantic-color-selection-bg',     replaceWith: 'var(--semantic-color-selection-bg)' },
-    '--background-action-selection':{ replacedBy: '--semantic-color-selection-bg',    replaceWith: 'var(--semantic-color-selection-bg)' },
-    '--color-state-focus':         { replacedBy: '--semantic-color-state-focus',      replaceWith: 'var(--semantic-color-state-focus)' },
-    '--color-state-hover-primary': { replacedBy: '--semantic-color-state-hover-primary', replaceWith: 'var(--semantic-color-state-hover-primary)' },
-    '--color-state-ok':            { replacedBy: '--semantic-color-state-success',    replaceWith: 'var(--semantic-color-state-success)' },
-    '--color-state-ko':            { replacedBy: '--semantic-color-state-error',      replaceWith: 'var(--semantic-color-state-error)' },
-    '--color-state-warning':       { replacedBy: '--semantic-color-state-warning',    replaceWith: 'var(--semantic-color-state-warning)' },
-    '--color-state-disabled':      { replacedBy: '--semantic-color-state-disabled',   replaceWith: 'var(--semantic-color-state-disabled)' },
-    '--font-family-1':             { replacedBy: '--semantic-font-family-body',       replaceWith: 'var(--semantic-font-family-body)' },
-    '--font-family-2':             { replacedBy: '--semantic-font-family-heading',    replaceWith: 'var(--semantic-font-family-heading)' },
-    '--font-weight-1':             { replacedBy: '--primitive-font-weight-regular',   replaceWith: 'var(--primitive-font-weight-regular)' },
-    '--font-weight-2':             { replacedBy: '--primitive-font-weight-bold',      replaceWith: 'var(--primitive-font-weight-bold)' },
+  // La clasificación sale de contracts/legacy-map.json, no de este fichero:
+  //   keep    → `conservadas`, con su porqué (Lucide, variables locales `--_`)
+  //   migrate → en el mapa como «migrada»: tiene lectores y un token oficial
+  //   kill    → en el mapa como «eliminada»: no la lee nadie
+  //   unknown → sin catalogar: alguien la ha añadido y hay que decidir
+  // Hasta octubre de 2026 el mapa vivía aquí, a mano, y estaba mal: mandaba
+  // --font-weight-1 a un PESO cuando guardaba una familia.
+  const mapa = JSON.parse(fs.readFileSync(path.join(CONTRACTS_DIR, 'legacy-map.json'), 'utf8'));
+  const casa = (patron, nombre) => (patron.endsWith('*') ? nombre.startsWith(patron.slice(0, -1)) : nombre === patron);
+  const entrada = (nombre) => {
+    if (mapa.mapa[nombre]) return mapa.mapa[nombre];
+    // La familia más específica (el prefijo más largo) gana.
+    const familias = Object.keys(mapa.mapa).filter((k) => k.endsWith('*') && casa(k, nombre)).sort((a, b) => b.length - a.length);
+    return familias.length ? mapa.mapa[familias[0]] : null;
   };
+  const ESTADO = { migrada: 'migrate', eliminada: 'kill' };
 
   const legacy = {};
-
   for (const [prop, data] of Object.entries(runtimeData.tokens)) {
     if (data.category !== 'legacy') continue;
-
-    let status         = 'kill';   // default: candidate for removal
-    let recommendation = 'Remove — no known SYX equivalent. Verify no active usage.';
-    let replacedBy     = null;
-    let replaceWith    = null;
-
-    // 1. Check keep patterns
-    if (KEEP_PATTERNS.some(re => re.test(prop))) {
-      status         = 'keep';
-      recommendation = 'Keep — external dependency or intentional local contract.';
+    const conservada = mapa.conservadas.find((c) => casa(c.patron, prop));
+    const e = conservada ? null : entrada(prop);
+    let status = 'unknown';
+    let recommendation = 'Sin catalogar: añádela a contracts/legacy-map.json (migrada, eliminada o conservada con su porqué).';
+    if (conservada) { status = 'keep'; recommendation = `Keep — ${conservada.porque}`; }
+    else if (e) {
+      status = ESTADO[e.estado] || 'unknown';
+      recommendation = e.estado === 'migrada' ? `Migrate → ${e.por}` : `Remove — sin lector${e.por ? `; el token que de verdad se lee es ${e.por}` : ''}`;
     }
-    // 2. Check migration map
-    else if (MIGRATION_MAP[prop]) {
-      status         = 'migrate';
-      replacedBy     = MIGRATION_MAP[prop].replacedBy;
-      replaceWith    = MIGRATION_MAP[prop].replaceWith;
-      recommendation = `Migrate → ${replacedBy}`;
-    }
-    // 3. Heuristic: old DS color/font/gap patterns not in migration map
-    else if (/^--(color|background|font|gap|dimension|inner|arrow)-/.test(prop)) {
-      status         = 'migrate';
-      recommendation = 'Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement.';
-    }
-
     legacy[prop] = {
       value:           data.value,
       usedInSelectors: data.usedInSelectors,
       status,
       recommendation,
-      ...(replacedBy  && { replacedBy }),
-      ...(replaceWith && { replaceWith })
+      ...(e && e.por && { replacedBy: e.por }),
     };
   }
-
   return legacy;
 }
 
@@ -518,12 +444,15 @@ function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
   // Legacy vars
   console.log('\n── LEGACY VARS (R07) ────────────────────────────────────────\n');
   const legacyCount = Object.keys(legacyVars).length;
-  if (legacyCount > 0) {
-    console.log(`ℹ️  R07 — ${legacyCount} legacy vars found (no official SYX prefix):`);
-    Object.keys(legacyVars).slice(0, 15).forEach(v => console.log(`   → ${v}`));
-    if (legacyCount > 15) console.log(`   … and ${legacyCount - 15} more. See contracts/lint-contract.json`);
+  const porEstado = (st) => Object.entries(legacyVars).filter(([, v]) => v.status === st);
+  const pendientes = Object.entries(legacyVars).filter(([, v]) => v.status !== 'keep');
+  if (!pendientes.length) {
+    const keep = porEstado('keep');
+    console.log(`✅ R07 — 0 legacy vars to migrate or remove${keep.length ? ` · ${keep.length} kept on purpose (contracts/legacy-map.json says why)` : ''}`);
   } else {
-    console.log('✅ R07 — No legacy vars found');
+    console.log(`ℹ️  R07 — ${pendientes.length} legacy vars to migrate or remove (of ${legacyCount} without an official prefix):`);
+    pendientes.slice(0, 15).forEach(([v, d]) => console.log(`   → ${v}  [${d.status}] ${d.recommendation}`));
+    if (pendientes.length > 15) console.log(`   … and ${pendientes.length - 15} more. See contracts/lint-contract.json`);
   }
 
   // SCSS violations
@@ -603,11 +532,13 @@ function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViol
     const keep    = Object.entries(legacyVars).filter(([,v]) => v.status === 'keep');
     const migrate = Object.entries(legacyVars).filter(([,v]) => v.status === 'migrate');
     const kill    = Object.entries(legacyVars).filter(([,v]) => v.status === 'kill');
+    const unknown = Object.entries(legacyVars).filter(([,v]) => v.status === 'unknown');
 
     md += `| Lifecycle | Count | Action |\n|---|---|---|\n`;
     md += `| 🔒 keep    | ${keep.length}   | External dependency or intentional contract. No action. |\n`;
     md += `| 🔄 migrate | ${migrate.length} | Has a SYX equivalent. Replace \`var(old)\` → \`var(new)\`. |\n`;
-    md += `| 🗑️ kill    | ${kill.length}   | No SYX equivalent. Remove from codebase. |\n\n`;
+    md += `| 🗑️ kill    | ${kill.length}   | No reader. Remove from codebase. |\n`;
+    md += `| ❓ unknown | ${unknown.length} | Not in contracts/legacy-map.json yet: decide and catalogue it. |\n\n`;
 
     if (migrate.length > 0) {
       md += `### Top migration candidates\n\n`;

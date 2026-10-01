@@ -4,34 +4,35 @@
 // ===============================================
 
 // THEME-AWARE MIXIN HELPER: dimensions
-// Generates .syx-size-* classes using theme-specific --dimension-* tokens.
+// Generates .syx-size-* classes from the primitive size scale. Leían los
+// alias heredados --dimension-1…5, que eran esos mismos primitivos.
 // ===============================================
 @mixin helper-dimensions($theme: null) {
   @layer syx.utilities {
     .syx-size {
       // &-1
       &-1 {
-        @include size(var(--dimension-1));
+        @include size(var(--primitive-size-1));
       }
 
       // &-2
       &-2 {
-        @include size(var(--dimension-2));
+        @include size(var(--primitive-size-2));
       }
 
       // &-3
       &-3 {
-        @include size(var(--dimension-3));
+        @include size(var(--primitive-size-3));
       }
 
       // &-4
       &-4 {
-        @include size(var(--dimension-4));
+        @include size(var(--primitive-size-4));
       }
 
       // &-5
       &-5 {
-        @include size(var(--dimension-5));
+        @include size(var(--primitive-size-5));
       }
     }
   }

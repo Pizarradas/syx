@@ -5,50 +5,53 @@
 
 // THEME-AWARE MIXIN HELPER: font-sizes
 // Generates .syx-font-size-* classes with responsive scaling.
-// Token values (--font-size-*) are defined per theme.
+// Leen la escala tipográfica semántica (cuerpo, h5…h2). Hasta la acción 14
+// de la auditoría de 2026-10 leían los alias heredados --font-size-1…5, que
+// apuntaban a esos mismos semánticos (y example-02 reescribía como múltiplos
+// de su unidad de espacio).
 // ===============================================
 @mixin helper-font-sizes($theme: null) {
   @layer syx.utilities {
     .syx-font-size {
       // &-1 — smallest: relaxed line-height for readability
       &-1 {
-        font-size: var(--font-size-1);
+        font-size: var(--semantic-font-size-body);
         line-height: var(--primitive-line-height-normal); // 1.5
       }
 
       // &-2
       &-2 {
-        font-size: var(--font-size-2);
+        font-size: var(--semantic-font-size-h5);
         line-height: var(--primitive-line-height-normal); // 1.5
         @include min-screen($token-breakpoint-md) {
-          font-size: calc(10% + var(--font-size-2));
+          font-size: calc(10% + var(--semantic-font-size-h5));
         }
       }
 
       // &-3
       &-3 {
-        font-size: var(--font-size-3);
+        font-size: var(--semantic-font-size-h4);
         line-height: var(--primitive-line-height-snug); // 1.2
         @include min-screen($token-breakpoint-md) {
-          font-size: calc(20% + var(--font-size-3));
+          font-size: calc(20% + var(--semantic-font-size-h4));
         }
       }
 
       // &-4
       &-4 {
-        font-size: var(--font-size-4);
+        font-size: var(--semantic-font-size-h3);
         line-height: var(--primitive-line-height-snug); // 1.2
         @include min-screen($token-breakpoint-md) {
-          font-size: calc(30% + var(--font-size-4));
+          font-size: calc(30% + var(--semantic-font-size-h3));
         }
       }
 
       // &-5 — largest: tight line-height for display/heading use
       &-5 {
-        font-size: var(--font-size-5);
+        font-size: var(--semantic-font-size-h2);
         line-height: var(--primitive-line-height-tight); // 1
         @include min-screen($token-breakpoint-md) {
-          font-size: calc(50% + var(--font-size-5));
+          font-size: calc(50% + var(--semantic-font-size-h2));
         }
       }
     }

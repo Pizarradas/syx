@@ -17,10 +17,10 @@
         // Base item — icon rendered via ::before (matches atom-icon pattern)
         [class*="__item"] {
           @include position(relative);
-          @include padding(null null null var(--list-lvl1-gap));
+          @include padding(null null null var(--component-list-lvl1-gap));
 
           &:not(:first-child) {
-            @include margin(var(--list-item-m-t) null null null);
+            @include margin(var(--component-list-item-margin-top) null null null);
           }
 
           // Los temas usan chevrons (› y ») que señalan al texto: en RTL el
@@ -31,38 +31,38 @@
           // Icon pseudo-element — external SVG, colorized via filter
           &:before {
             content: "";
-            @include position(absolute, var(--list-icon-y, 0.2em), null, null, 0);
-            @include size(var(--list-icon-size));
-            background-image: var(--list-lvl1-icon-pic);
+            @include position(absolute, var(--component-list-icon-offset-y), null, null, 0);
+            @include size(var(--component-list-icon-size));
+            background-image: var(--component-list-lvl1-icon);
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
-            filter: var(--filter-primary);
+            filter: var(--component-list-icon-filter);
           }
         }
 
         // Nivel 1 items: use lvl1 icon token (already set on base ::before)
         [class*="__item"]:not([class*="__lvl2"]) {
-          &:before { background-image: var(--list-lvl1-icon-pic); }
+          &:before { background-image: var(--component-list-lvl1-icon); }
         }
 
         // Nivel 2
         [class*="__lvl2"] {
-          @include margin(var(--list-lvl2-m-l) null null null);
-          @include padding(null null null var(--list-lvl2-gap));
+          @include margin(var(--component-list-lvl2-margin-left) null null null);
+          @include padding(null null null var(--component-list-lvl2-gap));
 
           [class*="__item"] {
             &:before {
-              background-image: var(--list-lvl2-icon-pic);
-              inset-block-start: var(--list-icon-y-lvl2, 0.2em);
+              background-image: var(--component-list-lvl2-icon);
+              inset-block-start: var(--component-list-lvl2-icon-offset-y);
             }
           }
         }
 
         // Nivel 3
         [class*="__lvl3"] {
-          @include margin(var(--list-lvl3-m-l) null null null);
-          @include padding(null null null var(--list-lvl3-gap));
+          @include margin(var(--component-list-lvl3-margin-left) null null null);
+          @include padding(null null null var(--component-list-lvl3-gap));
         }
       }
 
@@ -70,7 +70,7 @@
       // &--ordered
       &--ordered {
         @include margin(
-          var(--list-ordered-m-t) null var(--list-ordered-m-b) null
+          var(--component-list-ordered-margin-top) null var(--component-list-ordered-margin-bottom) null
         );
         @include padding(null null null 0);
         list-style: none;
@@ -79,11 +79,11 @@
         // [class*="__item"]
         [class*="__item"] {
           @include position(relative);
-          @include padding(null null null var(--list-ordered-gap));
+          @include padding(null null null var(--component-list-ordered-gap));
 
           // &:not()
           &:not(:first-child) {
-            @include margin(var(--list-ordered-item-m-t) null null null);
+            @include margin(var(--component-list-ordered-item-margin-top) null null null);
           }
         }
 
@@ -93,11 +93,11 @@
           &:before {
             content: counter(list-number);
             @include position(absolute, -0.25rem, null, null, 0);
-            @include size(var(--list-ordered-counter-size));
+            @include size(var(--component-list-ordered-counter-size));
             @include border-radius(var(--semantic-border-radius-circle));
             counter-increment: list-number;
-            font-size: var(--list-ordered-counter-font-size);
-            line-height: var(--list-ordered-counter-line-height);
+            font-size: var(--component-list-ordered-counter-font-size);
+            line-height: var(--component-list-ordered-counter-line-height);
             color: var(--semantic-color-on-primary);
             text-align: center;
             background-color: var(--semantic-color-primary);

@@ -25,8 +25,6 @@
 
         --primitive-color-violet-500: oklch(0.65 0.25 300);
         --primitive-color-violet-600: oklch(0.55 0.20 300);
-        --primitive-color-violet-400: oklch(0.75 0.25 300);
-        --primitive-color-violet-50: oklch(0.97 0.06 300);
 
         --primitive-color-space-950: oklch(0.12 0.02 260);
         --primitive-color-space-900: oklch(0.18 0.03 260);
@@ -36,7 +34,6 @@
 
         --primitive-color-neon-100: oklch(0.95 0.05 190);
         --primitive-color-neon-200: oklch(0.90 0.08 190);
-        --primitive-color-neon-300: oklch(0.85 0.12 190);
 
         // Colors - State
         --primitive-color-success-500: oklch(0.70 0.15 150);
@@ -61,17 +58,10 @@
 
         // Filters
         --primitive-filter-cyan: brightness(0) saturate(100%) invert(60%) sepia(30%) saturate(1500%) hue-rotate(140deg) brightness(100%) contrast(105%);
-        --primitive-filter-violet: brightness(0) saturate(100%) invert(40%) sepia(60%) saturate(2000%) hue-rotate(250deg) brightness(100%) contrast(110%);
-        --primitive-filter-success: brightness(0) saturate(100%) invert(60%) sepia(60%) saturate(600%) hue-rotate(100deg) brightness(95%) contrast(105%);
-        --primitive-filter-error: brightness(0) saturate(100%) invert(45%) sepia(80%) saturate(1500%) hue-rotate(340deg) brightness(100%) contrast(110%);
-        --primitive-filter-warning: invert(35%) sepia(55%) saturate(1731%) hue-rotate(33deg) brightness(92%);
-        --primitive-filter-disabled: grayscale(1);
 
         // ================================================
         // SECCIÓN 2: VARIABLES DEL TEMA
         // ================================================
-
-        --base-measure: var(--primitive-space-base);
 
         // Icons
         --icon-arrow-default: var(--primitive-icon-arrow-default);
@@ -82,13 +72,6 @@
         --icon-user-interface-exclamation-mark: var(--primitive-icon-ui-exclamation);
         --icon-user-interface-home: var(--primitive-icon-ui-home);
         --icon-user-interface-tick: var(--primitive-icon-ui-tick);
-
-        // Fonts — Tech Grotesk / Inter
-        --font-weight-1: var(--primitive-font-family-inter-regular);
-        --font-weight-2: var(--primitive-font-family-grotesk-normal);
-        --font-bold: var(--primitive-font-family-grotesk-bold);
-
-        // Colors - Brand
 
         // Colors - Semantic
         --semantic-color-primary: var(--primitive-color-cyan-500);
@@ -128,149 +111,64 @@
         --reset-selection-bg: var(--semantic-color-selection-bg);
 
         // Filters
-        --filter-primary: var(--primitive-filter-cyan);
-        --filter-secondary: var(--primitive-filter-violet);
-        --filter-state-ko: var(--primitive-filter-error);
-        --filter-state-ok: var(--primitive-filter-success);
-        --filter-state-warning: var(--primitive-filter-warning);
-        --filter-state-disabled: var(--primitive-filter-disabled);
+        --semantic-filter-primary: var(--primitive-filter-cyan);
 
-        --semantic-font-family-primary: var(--font-weight-1);
-        --semantic-font-family-primary-bold: var(--font-bold);
-        --semantic-font-family-heading: var(--font-weight-2);
+        --semantic-font-family-primary: var(--primitive-font-family-inter-regular);
+        --semantic-font-family-primary-bold: var(--primitive-font-family-grotesk-bold);
+        --semantic-font-family-heading: var(--primitive-font-family-grotesk-normal);
 
         // Reset — Tech Space typography
-        --reset-html-font: normal normal 400 16px/1.5 var(--font-weight-1);
-        --reset-body-font-size: calc(4 * var(--base-measure));
-        --reset-body-line-height: calc(6.5 * var(--base-measure));
-        --reset-h-font-family: var(--font-weight-2);
-        --reset-h1-size: calc(22 * var(--base-measure));
-        --reset-h1-line-height: calc(20 * var(--base-measure));
+        --reset-html-font: normal normal 400 16px/1.5 var(--primitive-font-family-inter-regular);
+        --reset-body-font-size: calc(4 * var(--primitive-space-base));
+        --reset-body-line-height: calc(6.5 * var(--primitive-space-base));
+        --reset-h-font-family: var(--primitive-font-family-grotesk-normal);
+        --reset-h1-size: calc(22 * var(--primitive-space-base));
+        --reset-h1-line-height: calc(20 * var(--primitive-space-base));
         --reset-h1-letter-spacing: -0.03em;
-        --reset-h2-size: calc(16 * var(--base-measure));
-        --reset-h2-line-height: calc(15 * var(--base-measure));
+        --reset-h2-size: calc(16 * var(--primitive-space-base));
+        --reset-h2-line-height: calc(15 * var(--primitive-space-base));
         --reset-h2-letter-spacing: -0.02em;
-        --reset-h3-size: calc(11 * var(--base-measure));
-        --reset-h3-line-height: calc(10 * var(--base-measure));
+        --reset-h3-size: calc(11 * var(--primitive-space-base));
+        --reset-h3-line-height: calc(10 * var(--primitive-space-base));
         --reset-h3-letter-spacing: -0.01em;
-        --reset-h4-size: calc(8 * var(--base-measure));
-        --reset-h4-line-height: calc(8 * var(--base-measure));
+        --reset-h4-size: calc(8 * var(--primitive-space-base));
+        --reset-h4-line-height: calc(8 * var(--primitive-space-base));
         --reset-h4-letter-spacing: 0em;
-        --reset-h5-size: calc(6 * var(--base-measure));
-        --reset-h5-line-height: calc(6 * var(--base-measure));
+        --reset-h5-size: calc(6 * var(--primitive-space-base));
+        --reset-h5-line-height: calc(6 * var(--primitive-space-base));
         --reset-h5-letter-spacing: 0.02em;
-        --reset-h6-size: calc(4.5 * var(--base-measure));
-        --reset-h6-line-height: calc(5 * var(--base-measure));
+        --reset-h6-size: calc(4.5 * var(--primitive-space-base));
+        --reset-h6-line-height: calc(5 * var(--primitive-space-base));
         --reset-h6-letter-spacing: 0.05em;
 
         // Layout
-        --layout-max-width: calc(480 * var(--base-measure));
-        --layout-pad-1: calc(3 * var(--base-measure));
-        --layout-gap-1: calc(2 * var(--base-measure));
-        --layout-pad-2: calc(4 * var(--base-measure));
-        --layout-gap-2: calc(4 * var(--base-measure));
-        --layout-pad-3: calc(6 * var(--base-measure));
-        --layout-gap-3: calc(6 * var(--base-measure));
-        --layout-pad-4: calc(8 * var(--base-measure));
-        --layout-gap-4: calc(8 * var(--base-measure));
-        --layout-pad-5: calc(10 * var(--base-measure));
-        --layout-gap-5: calc(10 * var(--base-measure));
-        --gap-1: calc(2 * var(--base-measure));
-        --inner-1: calc(var(--base-measure));
-        --scope-1: calc(2 * var(--base-measure));
-        --scope-2: calc(2.5 * var(--base-measure));
-        --scope-3: calc(3 * var(--base-measure));
-        --scope-4: calc(4 * var(--base-measure));
-        --scope-5: calc(5 * var(--base-measure));
+        --layout-max-width: calc(480 * var(--primitive-space-base));
+        --layout-pad-1: calc(3 * var(--primitive-space-base));
+        --layout-gap-1: calc(2 * var(--primitive-space-base));
+        --layout-pad-2: calc(4 * var(--primitive-space-base));
+        --layout-gap-2: calc(4 * var(--primitive-space-base));
+        --layout-pad-3: calc(6 * var(--primitive-space-base));
+        --layout-gap-3: calc(6 * var(--primitive-space-base));
+        --layout-pad-4: calc(8 * var(--primitive-space-base));
+        --layout-gap-4: calc(8 * var(--primitive-space-base));
+        --layout-pad-5: calc(10 * var(--primitive-space-base));
+        --layout-gap-5: calc(10 * var(--primitive-space-base));
 
         // Theme — Sharp tech
-        --theme-focus: 0 0 0 0.15rem var(--semantic-focus-ring-color);
-        --theme-w-border: calc(0.5 * var(--base-measure));
         --theme-focus-ring-width: 2px;
         --theme-radius: 0.2rem; // slightly rounded mechanical
 
-        // Breadcrumb
-        --breadcrumb-gap: calc(4 * var(--base-measure));
-        --breadcrumb-item-highlighted-p-x: calc(4 * var(--base-measure));
-        --breadcrumb-item-icon-p-r: calc(-4 * var(--base-measure));
-        --breadcrumb-item-icon-size: calc(4 * var(--base-measure));
-        --breadcrumb-item-icon-pic: var(--icon-arrow-default);
-
-        // Check
-        --check-gap: calc(10 * var(--base-measure));
-        --check-line-height: calc(8 * var(--base-measure));
-        --check-uncheck-size: calc(8 * var(--base-measure));
-        --check-checked-icon-size: calc(8 * var(--base-measure));
-        --check-checked-icon-pic: var(--icon-user-interface-tick);
-
-        // Form
-        --form-font-family: var(--font-weight-1);
-        --form-font-size: calc(4 * var(--base-measure));
-        --form-line-height: calc(3 * var(--base-measure));
-        --form-inner-field: calc(4 * var(--base-measure));
-        --form-height-size: calc(18 * var(--base-measure));
-
         // List
-        --list-ordered-m-t: calc(0 * var(--base-measure));
-        --list-ordered-m-b: calc(0 * var(--base-measure));
-        --list-ordered-gap: calc(8 * var(--base-measure));
-        --list-ordered-item-m-t: calc(2 * var(--base-measure));
-        --list-ordered-counter-size: calc(6 * var(--base-measure));
-        --list-ordered-counter-font-size: calc(3 * var(--base-measure));
-        --list-ordered-counter-line-height: calc(6 * var(--base-measure));
-        --list-lvl1-gap: calc(6 * var(--base-measure));
-        --list-item-m-t: calc(4 * var(--base-measure));
-        --list-icon-size: calc(4 * var(--base-measure));
-        --list-lvl1-icon-pic: var(--lc-icon-chevron-right);
-        --list-lvl2-m-l: calc(6 * var(--base-measure));
-        --list-lvl2-gap: calc(6 * var(--base-measure));
-        --list-lvl2-icon-pic: var(--lc-icon-chevrons-right);
-        --list-lvl3-m-l: calc(6 * var(--base-measure));
-        --list-lvl3-gap: calc(6 * var(--base-measure));
-
-        // Pagination
-        --pagination-gap: calc(4 * var(--base-measure));
-        --pagination-item-size: calc(12 * var(--base-measure));
-        --pagination-icon-size: calc(8 * var(--base-measure));
-        --pagination-back-icon-pic: var(--icon-arrow-double);
-        --pagination-prev-icon-pic: var(--icon-arrow-default);
-        --pagination-next-icon-pic: var(--icon-arrow-default);
-        --pagination-forward-icon-pic: var(--icon-arrow-double);
-
-        // Radio
-        --radio-gap: calc(10 * var(--base-measure));
-        --radio-line-height: calc(9 * var(--base-measure));
-        --radio-uncheck-size: calc(8 * var(--base-measure));
-        --radio-checked-size: calc(4 * var(--base-measure));
-
-        // Switch
-        --switch-w-size: calc(18 * var(--base-measure));
-        --switch-h-size: calc(10 * var(--base-measure));
-        --switch-slider-w-size: calc(8 * var(--base-measure));
-        --switch-slider-h-size: calc(8 * var(--base-measure));
-        --switch-slider-background-color: var(--primitive-color-cyan-500);
-        --switch-slider-radius: 0.2rem;
-        --switch-status-w-size: calc(9 * var(--base-measure));
-        --switch-status-h-size: calc(0 * var(--base-measure));
-        --switch-status-icon-size: calc(7 * var(--base-measure));
-        --switch-status-icon-ok-pic: var(--icon-user-interface-tick);
-        --switch-status-icon-ko-pic: var(--icon-user-interface-cancel);
-        --switch-status-icon-filter: invert(1);
-        --switch-status-disabled: 0.5;
-
-        // Table
-        --table-th-font-size: calc(4 * var(--base-measure));
-        --table-th-line-height: calc(5 * var(--base-measure));
-
-        // Text
-        --txt-m-b: calc(2 * var(--base-measure));
-
-        // Container: group: form-field
-        --cont-group-form-field-m-b: calc(6 * var(--base-measure));
-        --cont-group-form-field-icon-p-r: calc(3 * var(--base-measure));
-        --cont-group-form-field-icon-size: calc(6 * var(--base-measure));
-        --cont-group-form-field-success-icon-pic: var(--icon-user-interface-tick);
-        --cont-group-form-field-warning-icon-pic: var(--icon-user-interface-exclamation-mark);
+        --component-list-ordered-gap: calc(8 * var(--semantic-space-stack-xs));
+        --component-list-ordered-item-margin-top: var(--semantic-space-stack-sm);
+        --component-list-ordered-counter-size: var(--semantic-space-stack-xl);
+        --component-list-ordered-counter-font-size: var(--semantic-space-stack-md);
+        --component-list-ordered-counter-line-height: var(--semantic-space-stack-xl);
+        --component-list-lvl1-gap: var(--semantic-space-stack-xl);
+        --component-list-item-margin-top: var(--semantic-space-stack-lg);
+        --component-list-icon-size: var(--semantic-space-stack-lg);
+        --component-list-lvl2-margin-left: var(--semantic-space-stack-xl);
+        --component-list-lvl3-margin-left: var(--semantic-space-stack-xl);
     }
 
     // ================================================
@@ -288,14 +186,9 @@
             --semantic-color-link-hover: var(--primitive-color-violet-500);
 
             --semantic-focus-ring-color: var(--primitive-color-cyan-500);
-            --btn-primary-bg-hover: var(--primitive-color-cyan-600);
-            --btn-secondary-bg-hover: var(--primitive-color-violet-600);
 
             --semantic-color-selection-bg: var(--primitive-color-cyan-500);
             --semantic-color-selection-text: var(--primitive-color-space-950);
-
-            --btn-primary-filled-text: var(--primitive-color-space-950);
-            --btn-secondary-filled-text: var(--primitive-color-space-900);
         }
     }
 
@@ -316,14 +209,9 @@
         --semantic-color-link-hover: var(--primitive-color-violet-500);
 
         --semantic-focus-ring-color: var(--primitive-color-cyan-500);
-        --btn-primary-bg-hover: var(--primitive-color-cyan-600);
-        --btn-secondary-bg-hover: var(--primitive-color-violet-600);
 
         --semantic-color-selection-bg: var(--primitive-color-cyan-500);
         --semantic-color-selection-text: var(--primitive-color-space-950);
-
-        --btn-primary-filled-text: var(--primitive-color-space-950);
-        --btn-secondary-filled-text: var(--primitive-color-space-900);
     }
 
     // LIGHT — la paleta clara diseñada para este tema. Antes solo se aplicaba
@@ -347,9 +235,6 @@
         --semantic-color-text-secondary: var(--primitive-color-space-800);
         --semantic-color-text-tertiary: var(--primitive-color-space-600);
         --semantic-color-text-inverse: var(--primitive-color-white);
-
-        --semantic-border-width: 1px;
-        --semantic-outline-width: var(--theme-focus-ring-width);
         --semantic-color-border-default: var(--primitive-color-space-600);
         --semantic-color-border-subtle: var(--primitive-color-space-700);
 
@@ -360,8 +245,6 @@
         --semantic-focus-ring-color: var(--primitive-color-cyan-700);
 
         // Light mode text should be readable on neon cyan
-        --btn-primary-filled-text: var(--primitive-color-space-950);
-        --btn-secondary-filled-text: oklch(0.97 0.04 190); // light cyan text on dark violet
 
         --semantic-shadow-card: 0 4px 12px oklch(0.75 0.15 190 / 0.15), 0 1px 3px oklch(0.75 0.15 190 / 0.1);
 
