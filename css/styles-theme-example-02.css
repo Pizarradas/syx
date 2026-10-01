@@ -1821,11 +1821,8 @@
   progress {
     vertical-align: baseline;
   }
-  [hidden] {
-    display: none;
-  }
-  [hidden=false] {
-    display: block;
+  [hidden]:not([hidden=until-found]) {
+    display: none !important;
   }
 }
 @layer syx.base {

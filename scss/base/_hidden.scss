@@ -1,0 +1,24 @@
+// [hidden] — ocultar es más fuerte que cualquier display de componente
+// ===============================================
+// La regla de siempre, `[hidden]{display:none}`, vivía en @layer syx.reset y
+// perdía frente al `display:flex/grid` de cualquier átomo, molécula u
+// organismo: 31 de 42 componentes ignoraban el atributo (auditoría 2026-10 II,
+// un `<div class="mol-alert" hidden>` salía visible).
+//
+// Con capas, una declaración !important de una capa ANTERIOR gana a las de
+// las posteriores: es el mecanismo de @layer para «esto manda siempre», no
+// un parche de especificidad. Por eso vive en syx.reset (que está en todos
+// los bundles, también en core, que no lleva utilidades) y es el único
+// !important del sistema: R02 lo permite en este fichero y en ningún otro
+// (contracts/rules.json → R02.allowedIn).
+//
+// `hidden="until-found"` queda fuera: el navegador lo oculta con
+// content-visibility para que la búsqueda en la página lo encuentre, y un
+// display:none lo rompería.
+
+@mixin reset-hidden {
+  [hidden]:not([hidden="until-found"]) {
+    // stylelint-disable-next-line declaration-no-important -- el único !important del sistema: ver la cabecera y R02.allowedIn
+    display: none !important;
+  }
+}

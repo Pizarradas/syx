@@ -66,8 +66,10 @@
       "category": "cascade",
       "description": "No !important declarations",
       "resumen": "Sin !important — la cascada se gobierna con @layer",
-      "rationale": "SYX uses @layer for cascade management. !important is never needed and indicates a layer assignment error.",
-      "allowedIn": [],
+      "rationale": "SYX uses @layer for cascade management. !important is never needed in components and indicates a layer assignment error. The one exception is [hidden] in scss/base/_hidden.scss: an !important in the earliest layer (syx.reset) is the @layer mechanism for 'this always wins', so the attribute hides any component.",
+      "allowedIn": [
+        "scss/base/_hidden.scss"
+      ],
       "match": {
         "kind": "important",
         "in": [

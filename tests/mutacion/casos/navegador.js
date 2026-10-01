@@ -19,4 +19,16 @@ module.exports = [
       /(&:focus-visible \{\s*\/\/ &:not\(:disabled\)\s*&:not\(:disabled\) \{\s*)@include focus-ring\(\);/,
       '$1outline: none;'),
   },
+  {
+    id: 'hidden-sin-important',
+    regresion: '`[hidden]` vuelve a perder frente al display de los componentes (sin el !important de la capa reset)',
+    guardian: 'oculto.mjs (navegador)',
+    seEscapaba: true,
+    necesita: ['navegador', 'css:syx-sketch'],
+    comando: ['node', 'tests/browser/oculto.mjs'],
+    espera: /❌ css\/styles-theme-syx-sketch\.css/,
+    mutar: (t) => t.reemplazar('scss/base/_hidden.scss',
+      /\s*\/\/ stylelint-disable-next-line[^\n]*\n(\s*)display: none !important;/,
+      '\n$1display: none;'),
+  },
 ];

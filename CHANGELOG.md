@@ -11,6 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Versión pendiente de decidir.** Lo que hay aquí rompe compatibilidad (variables heredadas retiradas, `bundle-core` sin iconos Lucide ni utilidades, fuentes solo en woff2 con familias renombradas, `--semantic-tone-*-bg` ya no gobierna el estado): por SemVer es una **5.0.0**. Pero varias deprecaciones prometen su retirada «en v5.0» (utilidades físicas `.syx-ml-*`/`.syx-mr-*`…), así que cortar la 5.0 obliga a retirarlas ya o a aplazar la promesa. `release.yml` exige que esta sección esté vacía y la de la versión fechada antes de etiquetar.
 
+### Fixed — auditoría 2026-10 II, acciones P0
+
+- **`hidden` oculta cualquier componente.** `[hidden]{display:none}` vivía en `@layer syx.reset` y perdía frente al `display` de las capas de componentes: 31 de 42 clases lo ignoraban. Ahora es `[hidden]:not([hidden="until-found"]){display:none !important}` en `base/_hidden.scss`, el único `!important` del sistema: en capas, el `!important` de una capa anterior gana a las posteriores, y `syx.reset` está en todos los bundles (también en core). R02 lo permite en ese fichero y en ningún otro. Se retira `[hidden="false"]{display:block}`, que no era un uso válido del atributo. Prueba nueva: `tests/browser/oculto.mjs`, en la CI.
+- **Pages se publica desde un clon limpio.** `pages.yml` copiaba `dist/`, que no se versiona, y el despliegue fallaba; además una PR desde un fork con una rama «main» podía disparar el despliegue. Ahora copia solo lo versionado, exige un push del propio repositorio, y `check:pages` lo vigila.
+
 ### Changed — el CSS lo gobierna el SCSS, y Prepros compila lo mismo que npm
 
 - Las páginas (home, docs, why-syx, theme-builder) vuelven a enlazar `css/styles-theme-<tema>.css` y `css/setup-builder.css`, compilados desde los puntos de entrada de `scss/`. Durante la acción 12 enlazaron `dist/site/`, que fabrica un script de Node y git no versiona: en un clon, o compilando con Prepros, salían sin estilos. `dist/` queda solo para el paquete npm.

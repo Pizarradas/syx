@@ -242,9 +242,10 @@ comprobar('contrato: un permiso de fichero muerto es error (R10)', () => {
   // Sin ningún fichero, scss/setup-builder.scss no excusa nada.
   const r = motor.revisarTodos([]);
   if (!r.violaciones.R10.some((x) => /setup-builder\.scss/.test(x.content))) throw new Error('no detecta el permiso muerto');
-  // Y con el fichero real, que sí usa primitivos, no hay nada que decir.
-  const rel = 'scss/setup-builder.scss';
-  const r2 = motor.revisarTodos([{ rel, content: fs.readFileSync(path.join(ROOT, rel), 'utf8') }]);
+  // Y con los ficheros reales, que sí usan su permiso, no hay nada que decir:
+  // setup-builder usa primitivos (R01) y base/_hidden su único !important (R02).
+  const reales = ['scss/setup-builder.scss', 'scss/base/_hidden.scss'];
+  const r2 = motor.revisarTodos(reales.map((rel) => ({ rel, content: fs.readFileSync(path.join(ROOT, rel), 'utf8') })));
   if (r2.violaciones.R10.length) throw new Error(JSON.stringify(r2.violaciones.R10));
 });
 

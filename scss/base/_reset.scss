@@ -1,6 +1,7 @@
 // CORE
 // ===============================================
 @use "../abstracts/index" as *;
+@use "hidden" as *;
 // ===============================================
 
 // CSS @layer declaration — establishes specificity order
@@ -409,12 +410,7 @@
       vertical-align: baseline;
     }
 
-    [hidden] {
-      display: none;
-    }
-
-    [hidden="false"] {
-      display: block;
-    }
+    // [hidden] vive en base/_hidden.scss: es el único !important del sistema.
+    @include reset-hidden;
   } // end @layer syx.reset
 }

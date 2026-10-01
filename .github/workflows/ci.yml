@@ -186,6 +186,12 @@ jobs:
       - name: Teclado y regiones vivas
         run: node interaccion.mjs
 
+      # ROMPE. El atributo hidden oculta cualquier clase y modificador del
+      # sistema y el usage de cada componente, también con el core (que no
+      # lleva utilidades). Auditoría 2026-10 II: 31 de 42 lo ignoraban.
+      - name: hidden oculta cualquier componente
+        run: node oculto.mjs
+
       # ROMPE. Lo que axe no ve: el foco de cada enfocable se distingue en
       # píxeles (2.4.7/2.4.11/2.4.13), Tab recorre sin trampas y un diálogo
       # modal atrapa.
