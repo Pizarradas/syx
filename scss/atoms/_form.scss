@@ -40,6 +40,9 @@
       display: block;
       width: 100%;
       height: var(--component-form-field-min-height);
+      // Suelo explícito con el mismo token: si un contexto cambia `height`
+      // sin pensar en el tacto, el campo no baja de la altura del sistema.
+      min-block-size: var(--component-form-field-min-height);
       box-sizing: border-box;
       @include padding(
         var(--component-form-field-padding-y)
@@ -106,6 +109,7 @@
       width: 100%;
       // Fixed height (not min-height) required for the line-height centering trick
       height: var(--component-form-field-min-height);
+      min-block-size: var(--component-form-field-min-height);
       box-sizing: border-box;
       // No vertical padding — text is centred by setting line-height = inner height
       padding-top: 0;

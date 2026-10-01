@@ -16,7 +16,15 @@
   // ================================================
   --component-form-field-padding-x: var(--semantic-space-component-sm);
   --component-form-field-padding-y: var(--semantic-space-component-sm);
-  --component-form-field-min-height: calc(6 * var(--semantic-space-component-xs)); // 48px — shared baseline for inputs, selects, and similar controls
+  // 48px — altura común de input, select y botón md. Antes era
+  // calc(6 * --semantic-space-component-xs), y ese xs es FLUIDO (4–8 px):
+  // el «48px» del comentario solo se cumplía a partir de ~1700 px; a 390 px
+  // los campos medían 24,3 px y a 1280, 44,5. Ahora es fijo en todos los
+  // anchos, y nunca baja de 44 px (el suelo táctil de _agents/modes/ux.md)
+  // aunque un tema encoja la raíz a 14 px. En rem y no sobre
+  // --primitive-space-base: example-04 pone esa base a 0.18rem y todo lo que
+  // cuelga de ella se queda en un tercio. (Auditoría 2026-10 · acción 4)
+  --component-form-field-min-height: max(3rem, 44px);
   --component-form-field-gap: var(--semantic-space-component-sm);
   --component-form-field-margin-bottom: var(--semantic-space-stack-md);
 
@@ -120,9 +128,11 @@
 
   // SWITCH: SIZING
   // ================================================
-  --component-switch-width: calc(6 * var(--semantic-space-component-xs)); // 48px
-  --component-switch-height: calc(3.5 * var(--semantic-space-component-xs)); // 28px
-  --component-switch-slider-size: calc(2.5 * var(--semantic-space-component-xs)); // 20px
+  // Fijos, por la misma razón que --component-form-field-min-height: sobre
+  // el xs fluido el interruptor medía 24×14 px a 390 de ancho.
+  --component-switch-width: 3rem; // 48px
+  --component-switch-height: 1.75rem; // 28px
+  --component-switch-slider-size: 1.25rem; // 20px
   --component-switch-slider-bg: var(--semantic-color-bg-primary);
   --component-switch-slider-radius: var(--semantic-border-radius-circle);
 

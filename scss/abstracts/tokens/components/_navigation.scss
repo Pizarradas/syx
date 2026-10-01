@@ -24,7 +24,9 @@
   // PAGINATION
   // ================================================
   --component-pagination-gap: var(--semantic-space-inline-sm);
-  --component-pagination-item-size: calc(5 * var(--semantic-space-component-xs)); // 40px
+  // Fijo: sobre el xs fluido medía 20 px a 390 de ancho, por debajo de los
+  // 24 × 24 que pide WCAG 2.5.8. (Auditoría 2026-10 · acción 4)
+  --component-pagination-item-size: 2.5rem; // 40px
   --component-pagination-icon-size: var(--semantic-space-component-md); // 24px
 
   // PAGINATION: VISUALS

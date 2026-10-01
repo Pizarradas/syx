@@ -49,6 +49,7 @@
       ],
       "modifiers": [
         "atom-btn--circle",
+        "atom-btn--danger",
         "atom-btn--filled",
         "atom-btn--has-icon",
         "atom-btn--primary",
@@ -76,6 +77,17 @@
         "--component-button-border-radius-circle",
         "--component-button-border-style",
         "--component-button-border-width",
+        "--component-button-danger-bg-hover",
+        "--component-button-danger-border",
+        "--component-button-danger-border-hover",
+        "--component-button-danger-color",
+        "--component-button-danger-color-hover",
+        "--component-button-danger-filled-bg",
+        "--component-button-danger-filled-bg-hover",
+        "--component-button-danger-filled-border",
+        "--component-button-danger-filled-border-hover",
+        "--component-button-danger-filled-color",
+        "--component-button-danger-filled-color-hover",
         "--component-button-disabled-bg",
         "--component-button-disabled-border",
         "--component-button-disabled-color",
@@ -85,7 +97,11 @@
         "--component-button-font-size-lg",
         "--component-button-font-size-md",
         "--component-button-font-size-sm",
+        "--component-button-height-lg",
+        "--component-button-height-md",
+        "--component-button-height-sm",
         "--component-button-line-height",
+        "--component-button-padding-block",
         "--component-button-primary-bg-hover",
         "--component-button-primary-border-hover",
         "--component-button-primary-color",
@@ -135,8 +151,8 @@
         "--component-icon-size-md",
         "--component-icon-size-sm"
       ],
-      "description": "[scope: system-reusable] The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --filled makes the variant solid. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.",
-      "usage": "<button class=\"atom-btn atom-btn--primary atom-btn--size-md\" type=\"button\">Get started</button>",
+      "description": "[scope: system-reusable] The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --danger marks a destructive action (delete, revoke) in the error state colour, never the brand; --filled makes any variant solid. Without a --size-* modifier a button is md, the same 48px height as a form field; --size-sm/--size-lg are 40/56px. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.",
+      "usage": "<button class=\"atom-btn atom-btn--primary atom-btn--size-md\" type=\"button\">Get started</button> <button class=\"atom-btn atom-btn--danger atom-btn--filled\" type=\"button\">Delete project</button>",
       "a11y": "Native <button> with an explicit type (\"button\", or \"submit\" inside a form); an <a href> only when it navigates. Enter/Space come from the element. Icon-only (--circle) needs aria-label. Disable with the disabled attribute, not a class. Focus: system ring. No JS."
     },
     {
@@ -995,7 +1011,7 @@
         "--component-dialog-title-line-height"
       ],
       "description": "[scope: generic] A modal on the native <dialog>. The usage is the closed markup: open it from script with dialog.showModal() — never with the open attribute, which gives no top layer, no focus trap, no Escape and no inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=\"alertdialog\", point aria-describedby at the body and autofocus the cancel button.",
-      "usage": "<dialog class=\"mol-dialog\" role=\"alertdialog\" aria-labelledby=\"dlg-title\" aria-describedby=\"dlg-desc\"><form method=\"dialog\" class=\"mol-dialog__inner\"><h2 class=\"mol-dialog__title\" id=\"dlg-title\">Delete “Report”?</h2><p class=\"mol-dialog__body\" id=\"dlg-desc\">Files and history will be lost.</p><div class=\"mol-dialog__footer\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" value=\"cancel\" autofocus>Cancel</button><button class=\"atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md\" value=\"ok\">Delete</button></div></form></dialog>",
+      "usage": "<dialog class=\"mol-dialog\" role=\"alertdialog\" aria-labelledby=\"dlg-title\" aria-describedby=\"dlg-desc\"><form method=\"dialog\" class=\"mol-dialog__inner\"><h2 class=\"mol-dialog__title\" id=\"dlg-title\">Delete “Report”?</h2><p class=\"mol-dialog__body\" id=\"dlg-desc\">Files and history will be lost.</p><div class=\"mol-dialog__footer\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" value=\"cancel\" autofocus>Cancel</button><button class=\"atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md\" value=\"ok\">Delete</button></div></form></dialog>",
       "a11y": "Native <dialog> opened with showModal() — the browser gives top layer, focus trap, Escape and an inert page; the open attribute gives none of it. aria-labelledby → title, aria-describedby → body. Destructive confirmation: role=\"alertdialog\" and autofocus on Cancel. <form method=\"dialog\"> buttons close it and return their value; focus goes back to the opener. JS: the showModal() call."
     },
     {
