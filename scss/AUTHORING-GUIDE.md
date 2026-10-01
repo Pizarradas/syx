@@ -403,13 +403,17 @@ All 5 position types have a mixin. They all share the same null-safe parameter s
 
 **Tip:** Use `@include relative()` instead of `position: relative` even when no coords are needed — it's consistent and future-proof (you can add coords later without changing the pattern).
 
+The offsets are written top/right/bottom/left but **emitted as logical properties** (`inset-block-start`, `inset-inline-end`, `inset-block-end`, `inset-inline-start`): identical in LTR, mirrored in RTL. See §5.10.
+
 **Centering with absolute:**
 
 ```scss
-// Classic absolute center
-@include absolute($top: 50%, $left: 50%);
-transform: translate(-50%, -50%);
+// Classic absolute center — use the mixin, not absolute($left: 50%)
+@include absolute-center;
+// → top: 50%; left: 50%; transform: translate(-50%, -50%);
 ```
+
+`transform` is physical, so a centre built from `$left: 50%` + `translate(-50%)` would drift off-centre in RTL (`inset-inline-start: 50%` becomes `right: 50%`). `absolute-center` keeps both physical on purpose.
 
 ### 4.2 Spacing Mixins
 
@@ -426,11 +430,15 @@ transform: translate(-50%, -50%);
 
 // 4-value: top | right | bottom | left (null = skip that side)
 @include padding(var(--y) null var(--y) null);
-// → padding-top: …; padding-bottom: …;   ← no horizontal properties emitted
+// → padding-block-start: …; padding-block-end: …;   ← no inline properties emitted
+
+// 4 distinct values: split by axis so the inline sides follow the text
+@include padding(1px 2px 3px 4px);
+// → padding-block: 1px 3px; padding-inline: 4px 2px;
 
 // Margin auto centering
 @include margin(null auto);
-// → margin-right: auto; margin-left: auto;
+// → margin-inline-end: auto; margin-inline-start: auto;
 ```
 
 ### 4.3 Flexbox Mixins
@@ -542,7 +550,7 @@ Always apply `@include focus-ring()` inside `:focus-visible`, never `:focus`:
 ### 4.8 Border Mixin
 
 ```scss
-// Single side
+// Single side (→ border-block-start; `left` → border-inline-start)
 @include border(top, 1px, solid, var(--semantic-color-border-subtle));
 
 // All sides
@@ -559,7 +567,8 @@ Always apply `@include focus-ring()` inside `:focus-visible`, never `:focus`:
 // Individual corners
 @include border-radius(
   var(--radius-md) var(--radius-md) 0 0
-); // top corners only
+); // top corners only (symmetric → plain shorthand)
+// Asymmetric corners (e.g. `r 0 0 r`) come out as border-start-start-radius…
 ```
 
 ---
@@ -732,6 +741,25 @@ Or use the full class name in a comment inside the HTML template (PurgeCSS scans
 ```html
 <!-- is-open is-active is-loading atom-btn--danger -->
 ```
+
+---
+
+### 5.10 Propiedades lógicas y RTL
+
+SYX escribe los lados con **propiedades lógicas**: `margin-inline-start` en vez de `margin-left`, `inset-block-start` en vez de `top`, `text-align: start` en vez de `left`. En una página LTR pinta exactamente igual; con `dir="rtl"` (árabe, hebreo) los componentes se espejan solos. (Auditoría 2026-10 · acción 13)
+
+- **Mixins.** `margin()`, `padding()`, `position()`/`absolute()`/`fixed()`/`sticky()`/`relative()`, `border()`, `border-radius()`, `triangle()` y `cover` emiten ya propiedades lógicas. Su firma no cambia: top/right/bottom/left se traduce a block-start/inline-end/block-end/inline-start.
+- **A mano.** Escribe `margin-block-end`, `padding-inline-start`, `border-inline-start`, `inset-inline-end`, `border-start-end-radius`, `text-align: start`. `npm run lint` rechaza las físicas de lado en `scss/` (`property-disallowed-list` y `declaration-property-value-allowed-list` en `.stylelintrc.json`).
+- **Excepciones.** Solo lo que de verdad es físico: un dibujo hecho con bordes y girado (el ✓ de `atom-check`, el ⌄ de `mol-disclosure`), un centrado con `translate` (`absolute-center`), una sombra que cae hacia un lado. Se exceptúa en la línea, con el porqué:
+  ```scss
+  // stylelint-disable-next-line property-disallowed-list -- centrado con translateX, que es físico
+  left: 50%;
+  ```
+- **`transform` es físico.** Si mueves algo con `translateX`, en RTL va al revés. Mejor anima el desplazamiento lógico (el pomo de `atom-switch` anima `inset-inline-start`) o espeja con `:dir(rtl)`.
+- **Iconos direccionales.** `@include mirror-rtl('::before')` espeja con `scale: -1 1` una flecha o un chevron de «siguiente/anterior» en RTL (paginación, viñetas de `atom-list`, `atom-icon--lc-arrow-*`/`--lc-chevron(s)-left/right`, `atom-icon--arrow-*`). Va tras `@supports selector(:dir(rtl))`: en navegadores del mínimo sin `:dir()` el icono queda sin espejar. Arriba/abajo no se espejan.
+- **Código.** `code`, `kbd`, `samp` y `pre` llevan `direction: ltr` + `unicode-bidi: isolate`: el código se lee de izquierda a derecha también en una página RTL.
+- **Utilidades.** Usa `.syx-ms-*`/`.syx-me-*`/`.syx-ps-*`/`.syx-pe-*`, `.syx-ms-auto`/`.syx-me-auto`, `.syx-start-0`/`.syx-end-0` y `.syx-text-start`/`.syx-text-end`. Las físicas (`.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`) están **deprecadas**: siguen siendo izquierda/derecha físicas y se retiran en SYX v5.0.
+- **Probarlo.** `node tests/browser/run.mjs --axe --rtl` y `--capturas DIR --rtl` montan la página de pruebas con `dir="rtl"`.
 
 ---
 
