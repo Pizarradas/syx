@@ -41,6 +41,11 @@
       -ms-text-size-adjust: 100%;
       -ms-overflow-style: scrollbar;
       font: var(--reset-html-font);
+      // Síntesis: la cursiva sí (SYX no trae ficheros italic, y `em`/`cite`
+      // necesitan inclinarse); la negrita solo como último recurso, que desde
+      // que cada familia trae sus pesos reales queda para las que no tienen
+      // negrita (Inter, DM Mono, Bebas Neue); versalitas falsas, nunca.
+      font-synthesis: weight style;
     }
 
     // -----------------------------------------------
