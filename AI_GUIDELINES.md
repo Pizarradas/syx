@@ -23,9 +23,12 @@
     - Atoms MUST start with `.atom-`
     - Molecules MUST start with `.mol-`
     - Organisms MUST start with `.org-`
-6.  **NEVER declare `transition:` or `position:` directly.**
+6.  **NEVER declare `transition` (or any `transition-*`) or `position: absolute|fixed|sticky` directly.**
     - ❌ `transition: opacity 0.2s ease;` → ✅ `@include transition(opacity 0.2s ease);`
+    - ❌ `transition-property: opacity;` is the same violation, longhand.
     - ❌ `position: sticky; top: 0;` → ✅ `@include sticky($top: 0);`
+    - Formatting does not change the verdict: the rules run on the parsed SCSS, so one-liners, missing spaces and `! important` are caught; comments and strings are ignored.
+    - Every `@include` must name a mixin that exists (R09). Ask `list_mixins` / `get_mixin`; do not guess.
 7.  **NEVER hand-convert a value for Figma.**
     - ❌ working out that `oklch(0.498 0.282 266.24)` is roughly `#1e3aff`
     - ✅ `get_figma_spec` / `scripts/lib/figma.js` — one conversion, or the library drifts from its own system.
@@ -41,7 +44,7 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 | -------------------------------- | ---------------------------------------------------------------- |
 | `tokens.json`                    | Full token registry with type, rawValue, status                  |
 | `component-registry.json`        | All components: atoms, molecules, organisms                      |
-| `contracts/rules.json`           | The contract rules, R01–R08, all implemented in `syx-validate.js` |
+| `contracts/rules.json`           | The contract rules, R01–R10: severities, allowed paths, matchers and exceptions. `scripts/lib/rules.js` runs it for `syx-validate.js` and `validate_snippet` |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
 | `contracts/validation-report.md` | Human-readable audit report                                      |
 | `contracts/dtcg/`                | W3C DTCG export — Style Dictionary, Tokens Studio             |
@@ -67,14 +70,27 @@ so a change you have not compiled does not exist for either. Run `npm run build`
 
 ### Current contract rules
 
-| Rule    | Check                                 | Allowed exceptions                                                                            |
-| ------- | ------------------------------------- | --------------------------------------------------------------------------------------------- |
-| **R01** | `--primitive-*` in component files    | `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/pages/`             |
-| **R02** | `!important` anywhere                 | None                                                                                          |
-| **R03** | raw `transition:` in non-mixin files  | `scss/utilities/_accessibility.scss`, `scss/base/_reset.scss`                                 |
-| **R04** | raw `position: absolute/fixed/sticky` | `scss/utilities/_accessibility.scss`, `scss/utilities/_display.scss`, `scss/base/_reset.scss` |
+`contracts/rules.json` is the source of truth; this table is a summary. All of these are `error`.
 
-> **Current status: ⚠️ PASSED WITH WARNINGS** — R01/R02/R03/R04 all passing. 1 phantom token pending `npm run build`.
+| Rule    | Check                                                    | Allowed in (`allowedIn`)                                                                  |
+| ------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **R01** | `var(--primitive-*)` in values or `@include` parameters  | `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` — **not** `scss/pages/`, `scss/site/`, `scss/layout/` or components |
+| **R02** | `!important` (any spacing or case)                       | Nowhere                                                                                   |
+| **R03** | `transition` or `transition-*`, any vendor prefix        | `scss/abstracts/mixins/`                                                                  |
+| **R04** | `position: absolute/fixed/sticky`                        | `scss/abstracts/mixins/`                                                                  |
+| **R09** | `@include` of a mixin that no `@mixin` in `scss/` defines | Nowhere                                                                                  |
+| **R10** | An exception that is malformed, unjustified or dead       | Nowhere                                                                                  |
+
+**Exceptions are per line, never per file.** Where a rule allows it (`inlineException: true`: R01, R03, R04), write the reason on the line immediately above the one declaration it excuses:
+
+```scss
+// syx-allow R03: Chrome's autofill hack, not visible motion; reduced-motion would bring the flash back
+transition: background-color 600000s 0s;
+```
+
+An exception that no longer excuses anything is an R10 error, and so is a single-file `allowedIn` entry that excuses nothing. `npm run validate` lists every live exception with its reason; `validate_snippet` returns them under `excepciones`.
+
+> **Current status: ⚠️ PASSED WITH WARNINGS** — R01–R04, R09 and R10 all passing (two inline R03 exceptions). Warnings are R08 (unused registry tokens).
 
 ---
 
@@ -230,7 +246,7 @@ what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE �
 | 4 | `[SYX: TOKEN]:` | Token architecture | `pr` / recommends |
 | 5 | `[SYX: THEME]:` | OKLCH scales, `_theme.scss` | recommends |
 | 6 | `[SYX: UI]:` | Component SCSS | `pr` |
-| 7 | `[SYX: AUDIT]:` | R01–R08 conformance | nothing |
+| 7 | `[SYX: AUDIT]:` | R01–R10 conformance | nothing |
 | 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
 | 9 | `[SYX: BRAND]:` | A complete visual identity — asks you axis by axis, or decides them all | recommends |
 

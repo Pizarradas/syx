@@ -22,7 +22,7 @@ Cada criterio vale 0, 1 o 2.
 
 | | Criterio | Cómo se mide | 2 | 1 | 0 |
 |---|---|---|---|---|---|
-| C1 | **Contrato** | Cada bloque ` ```scss ` pasa `validate_snippet` en la ruta de la tarea | Conforme | — | Alguna violación R01–R04, o falta el código |
+| C1 | **Contrato** | Cada bloque ` ```scss ` pasa `validate_snippet` en la ruta de la tarea | Conforme | — | Alguna violación de las reglas de árbol (R01–R04, R09, R10), un bloque que no parsea, o falta el código |
 | C2 | **Tokens reales** | Cada `--semantic-*` / `--component-*` nombrado existe, salvo los nuevos que la tarea permite | Todos existen | — | Alguno inventado |
 | C3 | **Frontera** | Lo que la tarea exige (`debe`) y prohíbe (`noDebe`): tier de confianza, vía de propuesta, herramientas | Todo | Un fallo | Dos o más |
 | C4 | **Entrega** | Las secciones que la tarea pide | Todas | Falta una | Faltan dos o más |

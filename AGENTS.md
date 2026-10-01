@@ -6,7 +6,7 @@ This file is the canonical entry point for all AI agents and tools (OpenAI Codex
 Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
-2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R08
+2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R10
 
 `tokens.json` (the full token registry, ≈ 280 KB) and `component-registry.json` (the component
 inventory, ≈ 45 KB) are the sources of truth, but do **not** load them whole: that is some 80 000
@@ -22,7 +22,7 @@ that otherwise force you to load the files above:
 | Resolving the cascade by hand to know a colour | `get_token` — real value in a given theme + mode, with its alias chain |
 | Hardcoding a value you found in the CSS | `find_token_by_value` — which token holds it |
 | Grepping the SCSS for a component's modifiers | `get_component` / `list_components` — verified against the compiled CSS |
-| Writing SCSS and validating afterwards | `validate_snippet` — R01–R04 **before** writing, plus non-existent tokens |
+| Writing SCSS and validating afterwards | `validate_snippet` — R01–R04, R09, R10 **before** writing, plus non-existent tokens |
 | Guessing whether you may touch a file, or where a new token goes | `classify_change` — the trust tier, and the destination file deduced from the token's family |
 | Eyeballing whether an app still matches the system | `scan_for_drift` — expired fallbacks, phantom classes, hand-written values that are already tokens |
 | Reading 526 lines of mixin README to find the right `@include` | `list_mixins` / `get_mixin` — signature, defaults, what it emits, who aliases it |
@@ -51,7 +51,7 @@ mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCA
 | # | Authority | Decides | Checked? |
 |---|---|---|---|
 | 1 | `contracts/trust.json` | Who may write what | ✅ `classify_change` |
-| 2 | `contracts/rules.json` | R01–R08 | ✅ `npm run validate` |
+| 2 | `contracts/rules.json` | R01–R10 | ✅ `npm run validate` |
 | 3 | `_agents/modes/*.md` → `Trust` block | Each mode's ceiling | ✅ `npm run check:modos` |
 | 4 | `mind-system/governance/` | How ATLAS and the modes compose | ⚠️ declared only |
 | 5 | `mind-system/atlas-rules/` | Editorial decisions (guest domain) | ⚠️ declared only |
@@ -75,7 +75,7 @@ When the user's message begins with a `[SYX: MODE]:` prefix, **read the correspo
 | `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, code generation, contract compliance — SCSS via `propose.js`, `component-registry.json` direct |
 | `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
-| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
+| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R10), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
 | `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — interviews you axis by axis, or decides the lot on request; hands over the seven axes, their provenance, its invariants and the spec THEME builds the theme from |
 
@@ -194,5 +194,5 @@ index.js                — package entry point: the same queries as an npm depe
 scripts/
   syx-validate.js       — runs R01–R07 contract checks
   mcp-server.js         — MCP server (stdio): tokens, components and validation on demand
-  lib/                  — shared engine: css-tokens.js, rules.js (R01–R04), consulta.js (the queries)
+  lib/                  — shared engine: css-tokens.js, rules.js (the AST rule engine: R01–R04, R09, R10), consulta.js (the queries)
 ```

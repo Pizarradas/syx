@@ -4,7 +4,7 @@ You are working with **SYX**, a token-driven, native SCSS design system (v4.28.0
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
-2. `contracts/rules.json` — the contract rules (4 KB). `syx-validate.js` implements R01–R08
+2. `contracts/rules.json` — the contract rules (9 KB). `syx-validate.js` implements R01–R10
 
 **Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB)
 are the sources of truth, but reading them whole costs some 80 000 tokens of context before
@@ -32,7 +32,7 @@ never edit a rule or a guard to make your own change pass.
 hardcoding anything, `get_component` for a component's verified classes and modifiers,
 `get_mixin` before writing a property a rule will reject — R03 and R04 say what you may not write, and `get_mixin` says what to write instead —
 `get_figma_spec` before creating anything in Figma — `get_component` returns token *names*, and a Figma node needs numbers —
-and `validate_snippet` to pass R01–R04 over SCSS **before** writing it (it now names the replacement mixin itself). It runs the same
+and `validate_snippet` to pass R01–R04, R09 and R10 over SCSS **before** writing it (it now names the replacement mixin itself). It runs the same
 rules as `npm run validate`, from `scripts/lib/rules.js`. The server exposes eleven tools
 in total — `list_themes` and `list_mixins` round out the nine above; the full table is in
 `README.md`. In an app that installs SYX instead of cloning it,
@@ -55,7 +55,7 @@ mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCA
 | # | Authority | Decides | Checked? |
 |---|---|---|---|
 | 1 | `contracts/trust.json` | Who may write what | ✅ `classify_change` |
-| 2 | `contracts/rules.json` | R01–R08 | ✅ `npm run validate` |
+| 2 | `contracts/rules.json` | R01–R10 | ✅ `npm run validate` |
 | 3 | `_agents/modes/*.md` → `Trust` block | Each mode's ceiling | ✅ `npm run check:modos` |
 | 4 | `mind-system/governance/` | How ATLAS and the modes compose | ⚠️ declared only |
 | 5 | `mind-system/atlas-rules/` | Editorial decisions (guest domain) | ⚠️ declared only |
@@ -127,7 +127,7 @@ ordering is worth.
 | `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, code generation, contract compliance — SCSS via `propose.js`, `component-registry.json` direct |
 | `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
 | `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
-| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R08), violation detection, codebase health |
+| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R10), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
 | `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — interviews you axis by axis, or decides the lot on request; hands over the seven axes, their provenance, its invariants and the spec THEME builds the theme from |
 
@@ -147,11 +147,11 @@ These rules are never overridden by any mode:
 
 - **Never use `--primitive-*` tokens in component files.** Always map through `--semantic-*`.
 - **Never use `!important`.** SYX uses `@layer` for cascade management.
-- **Never write raw `transition:` or `position:` in component files.** Use mixins.
+- **Never write raw `transition`/`transition-*` or `position: absolute|fixed|sticky` outside the mixins.** Use mixins. The rules run on the parsed SCSS: formatting does not dodge them. A justified exception goes on the line above, `// syx-allow R03: <why>`, and excuses that one declaration only.
 - **Never hardcode design values** (hex colors, raw px/rem literals). Use tokens.
 - **Check `tokens.json` before using a token.** If it doesn't exist, create it first.
 - **Check `component-registry.json` before creating a component.** Reuse before creating.
-- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R08 compliance. R01–R04 are errors and fail the run; R05, R06 and R08 are warnings (undocumented tokens, phantom entries, registry tokens no compiled CSS uses) and R07 is info (unprefixed legacy vars).
+- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R10 compliance. Severities come from `contracts/rules.json`: R01–R04, R09 (unknown mixin) and R10 (dead or unjustified exception) are errors and fail the run; R05, R06 and R08 are warnings (undocumented tokens, phantom entries, registry tokens no compiled CSS uses) and R07 is info (unprefixed legacy vars).
 
 ---
 
@@ -191,5 +191,5 @@ mind-system/              — THE CORTEX: README (precedence), constitution, rou
 scripts/syx-validate.js   — contract validator (run after any change)
 index.js                  — package entry point: the same queries as an npm dependency
 scripts/mcp-server.js     — MCP server (stdio) — ask the system instead of reading it
-scripts/lib/              — shared engine: css-tokens.js, rules.js (R01–R04), consulta.js
+scripts/lib/              — shared engine: css-tokens.js, rules.js (AST rule engine: R01–R04, R09, R10), consulta.js
 ```

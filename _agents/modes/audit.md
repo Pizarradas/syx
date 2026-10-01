@@ -7,7 +7,7 @@
 > · **Writes:** — *this mode reports. It never edits, not even to fix what it just found.*
 > · **Recommends only:** —
 > · **Reads:** `contracts/rules.json`, `contracts/lint-contract.json`, `tokens.json`, `component-registry.json`, `scss/`, `mind-system/knowledges/`
-> · **Ask, don't read:** `validate_snippet` runs R01–R04 over a fragment, `scan_for_drift` audits a built page, and `npm run validate` settles the whole tree. Read the rules to explain a verdict, not to reach one.
+> · **Ask, don't read:** `validate_snippet` runs R01–R04, R09 and R10 over a fragment, `scan_for_drift` audits a built page, and `npm run validate` settles the whole tree. Read the rules to explain a verdict, not to reach one.
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
@@ -33,34 +33,32 @@ You are a **QA reviewer** for SYX. Your job is to inspect code and report violat
 
 ---
 
-## The Full Rule Set (R01–R08)
+## The Full Rule Set (R01–R10)
 
-`validate_snippet` applies R01–R04 to a fragment and `npm run validate` settles the whole tree; both run the same code, `scripts/lib/rules.js`. Read `contracts/rules.json` to *explain* a verdict, not to reach one. Quick reference:
+`validate_snippet` applies the AST rules (R01–R04, R09, R10) to a fragment and `npm run validate` settles the whole tree; both run the same engine, `scripts/lib/rules.js`, on the parsed SCSS — reformatting code does not change a verdict, and comments and strings are never inspected. Severities and allowed paths are read from `contracts/rules.json`. Read it to *explain* a verdict, not to reach one. Quick reference:
 
 | Rule | Severity | Check |
 |---|---|---|
-| **R01** | error | `--primitive-*` used in `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/pages/` |
-| **R02** | error | `!important` anywhere in the codebase |
-| **R03** | error | Raw `transition:` in component files (use `@include transition()`) |
-| **R04** | error | Raw `position: absolute/fixed/sticky` in component files (use mixins) |
+| **R01** | error | `var(--primitive-*)` anywhere outside `allowedIn` — components, `scss/layout/`, `scss/pages/`, `scss/site/` |
+| **R02** | error | `!important` anywhere in the codebase (any spacing or case) |
+| **R03** | error | Raw `transition` or `transition-*` outside the mixins (use `@include transition()`) |
+| **R04** | error | Raw `position: absolute/fixed/sticky` outside the mixins (use the positioning mixins) |
 | **R05** | warning | Component token defined in SCSS but absent from `tokens.json` |
 | **R06** | warning | Token documented in `tokens.json` but absent from compiled CSS (phantom) |
 | **R07** | info | CSS custom property without an official SYX prefix (legacy variable) |
 | **R08** | warning | Token defined in registry but never used in any SCSS file |
+| **R09** | error | `@include` of a mixin that no `@mixin` under `scss/` defines |
+| **R10** | error | An exception that is malformed, unjustified, covers a block, or no longer excuses anything |
 
 **Allowed exceptions per rule (from `contracts/rules.json` — read it, don't trust this summary blindly):**
-- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` (plus the per-file exemptions in `scripts/lib/rules.js`)
+- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` — everything else, `scss/site/` and `scss/pages/` included, is in scope
 - R03: allowed in `scss/abstracts/mixins/` only
-- R04: allowed in `scss/abstracts/mixins/`, `scss/base/_reset.scss`
-
-**Known gap:** R01's scope names `atoms/, molecules/, organisms/, pages/` and
-does **not** cover `scss/site/` (the site layer). Its 12 pieces follow the same
-token discipline by convention, but R01 does not enforce it there — flag site
-violations as findings anyway, marked "outside R01 scope".
+- R04: allowed in `scss/abstracts/mixins/` only
+- No file is exempt as a whole. A justified exception is per declaration, on the line above it: `// syx-allow R03: <why>` (R01, R03 and R04 accept them). `npm run validate` lists every live one with its reason; report them, and challenge any whose reason no longer holds — a dead one is already an R10 error.
 
 ---
 
-## Additional Checks (beyond R01–R08)
+## Additional Checks (beyond R01–R10)
 
 These are not in `contracts/rules.json` but are part of a thorough audit:
 
@@ -118,7 +116,7 @@ Then group by severity:
 
 ```
 ## Errors (must fix before release)
-[table of R01–R04 violations]
+[table of R01–R04, R09, R10 violations]
 
 ## Warnings (should fix)
 [table of R05, R06, R08 violations]
@@ -139,7 +137,7 @@ node scripts/syx-validate.js --report
 
 ### Where the Why goes in an audit
 
-R01–R08 severities belong to `contracts/rules.json`, not to this mode. R01 is an error because the contract says so, and restating that is not a justification — it is the rule wearing a rationale.
+R01–R10 severities belong to `contracts/rules.json`, not to this mode. R01 is an error because the contract says so, and restating that is not a justification — it is the rule wearing a rationale.
 
 What this mode actually decides is everything under **Additional Checks**: whether a naming inconsistency is a warning or a note, and which fix is the cheapest correct one. Each of those rows owes a line in the three-field form of `_agents/decision-record.md` — the severity, because, and what would change it. A verdict of FAIL owes one too: which single finding carries it.
 
@@ -198,7 +196,7 @@ writes invariants instead of adjectives is precisely that you can.
 
 Three rules govern it. The first two are the same ones that already govern the prestige module:
 
-1. **An identity finding never carries an R-number.** R01–R08 are the system's contract, checked by
+1. **An identity finding never carries an R-number.** R01–R10 are the system's contract, checked by
    a validator. An identity contract belongs to one project and is not on the precedence ladder.
 2. **It never turns a contract PASS into a FAIL.** Mixing a brand deviation with a violation of R01
    devalues both: the first stops looking like a preference and the second stops looking like a law.
@@ -206,7 +204,7 @@ Three rules govern it. The first two are the same ones that already govern the p
 
 ```
 ## Verdict
-Contract: PASS / FAIL / PASS WITH WARNINGS      ← R01–R08, the validator settles it
+Contract: PASS / FAIL / PASS WITH WARNINGS      ← R01–R10, the validator settles it
 Identity: ADHERES / DEVIATES (n)                 ← the invariants, advisory
 ```
 
@@ -255,7 +253,7 @@ findings, so nobody reads a preference where they expected a law.
 If the audit is clean, say so clearly:
 ```
 ## Verdict: PASS
-No violations found. All R01–R08 rules pass. Structure and naming are compliant.
+No violations found. All R01–R10 rules pass. Structure and naming are compliant.
 
 node scripts/syx-validate.js
 ```
