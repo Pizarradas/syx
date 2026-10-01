@@ -19,6 +19,8 @@
  *      del repositorio, mayúsculas.
  *   2. Invariantes del contrato: lo que juzga o instruye a un agente es
  *      `human`. Si alguien lo baja en trust.json, esto lo dice con nombre.
+ *   3. El hook de Claude Code (scripts/hook-confianza.js): bloquea `human`,
+ *      avisa en `pr`, calla en `auto`, y .claude/settings.json lo registra.
  *
  * Es rápido y no toca git: va en la cadena `npm run check`.
  *
@@ -27,7 +29,9 @@
 
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 const { clasificarRuta, normalizarRuta } = require('./lib/confianza');
 
 const ROOT = path.join(__dirname, '..');
@@ -137,6 +141,60 @@ comprobar('el markdown corriente sigue siendo automático', () => niveles([
 comprobar('el CSS compilado es derivado, no humano por omisión', () => niveles([
   ['css/styles-theme-syx-sketch.css', 'auto'],
 ]));
+
+// ─── 3. El hook de Claude Code ───────────────────────────────────────────────
+
+const HOOK = path.join(__dirname, 'hook-confianza.js');
+/** Ejecuta el hook como lo haría Claude Code: el JSON de la llamada por stdin. */
+function hook(entrada, env = {}) {
+  const r = spawnSync(process.execPath, [HOOK], {
+    input: typeof entrada === 'string' ? entrada : JSON.stringify(entrada),
+    encoding: 'utf8',
+    env: { ...process.env, SYX_HOOK_HUMANO: '', ...env },
+  });
+  return { code: r.status, out: r.stdout, err: r.stderr };
+}
+const llamada = (herramienta, ruta) => ({
+  hook_event_name: 'PreToolUse', tool_name: herramienta, cwd: ROOT, tool_input: { file_path: ruta },
+});
+
+comprobar('el hook bloquea una escritura en una ruta solo humana, y dice por qué', () => {
+  for (const [h, r] of [['Edit', path.join(ROOT, 'scripts', 'propose.js')], ['Write', 'CLAUDE.md'], ['MultiEdit', 'scss/atoms/../themes/x/_theme.scss']]) {
+    const x = hook(llamada(h, r));
+    if (x.code !== 2) throw new Error(`${h} ${r}: salió ${x.code}, esperaba 2 (bloqueo)`);
+    if (!x.err.includes('Solo humano')) throw new Error(`${h} ${r}: el motivo no nombra el nivel: ${x.err}`);
+  }
+});
+
+comprobar('el hook avisa en pr sin bloquear, y nombra propose.js', () => {
+  const x = hook(llamada('Edit', path.join(ROOT, 'scss', 'atoms', '_pill.scss')));
+  if (x.code !== 0) throw new Error(`salió ${x.code}: bloquea lo que solo debía avisar`);
+  const j = JSON.parse(x.out);
+  if (j.hookSpecificOutput?.permissionDecision) throw new Error('toma una decisión de permiso en vez de solo avisar');
+  if (!/propose\.js files/.test(j.hookSpecificOutput?.additionalContext || '')) throw new Error('el aviso no le llega a Claude o no nombra propose.js files');
+});
+
+comprobar('el hook calla en auto y fuera del repositorio', () => {
+  for (const r of [path.join(ROOT, 'docs', 'nota.md'), '/tmp/fuera-de-syx.md']) {
+    const x = hook(llamada('Write', r));
+    if (x.code !== 0 || x.out.trim()) throw new Error(`${r}: salió ${x.code} con «${x.out.trim()}»`);
+  }
+});
+
+comprobar('el hook bloquea si no puede leer la llamada', () => {
+  const x = hook('esto no es JSON');
+  if (x.code !== 2) throw new Error(`salió ${x.code}: dejaría pasar una llamada que no entiende`);
+});
+
+comprobar('.claude/settings.json registra el hook para las herramientas de edición', () => {
+  const s = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude', 'settings.json'), 'utf8'));
+  const entradas = s.hooks?.PreToolUse || [];
+  const e = entradas.find((x) => (x.hooks || []).some((h) => /scripts\/hook-confianza\.js/.test(h.command || '')));
+  if (!e) throw new Error('ningún PreToolUse ejecuta scripts/hook-confianza.js');
+  const cubre = new Set(String(e.matcher).split(/[|,\s]+/));
+  const faltan = ['Edit', 'Write', 'MultiEdit'].filter((t) => !cubre.has(t));
+  if (faltan.length) throw new Error(`el matcher «${e.matcher}» no cubre ${faltan.join(', ')}`);
+});
 
 // ─── Resultado ───────────────────────────────────────────────────────────────
 
