@@ -15,7 +15,7 @@
  *          dist/site que cargan las páginas y su tema por defecto. Las
  *          excepciones van en axe-excepciones.json con `componente` = la
  *          página ("docs.html") y `temas` = "<ancho>/<modo>" ("375/light";
- *          con el cajón abierto, "cajón-375/light").
+ *          con el cajón abierto, "cajon-375/light").
  *   CAJÓN  el de org-site-header, a 375 px, con el teclado: cerrado no se
  *          enfoca nada de dentro; la hamburguesa lo abre y lleva el foco
  *          dentro, y ese foco se ve; Tab no sale de él; Escape lo cierra y
@@ -139,7 +139,7 @@ async function cajon(pagina, modo) {
     }
 
     // axe con el cajón abierto (contraste del cajón, nombres de sus controles).
-    const r = await axeEn(page, pagina, 'cajón-375', modo);
+    const r = await axeEn(page, pagina, 'cajon-375', modo);
     if (r.reales) falla(`axe con el cajón abierto: ${r.reales} sin revisar (abajo)`);
 
     // Escape cierra y devuelve el foco a la hamburguesa.

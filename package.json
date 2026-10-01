@@ -108,7 +108,7 @@
     "eval:modo": "node scripts/eval-modo.js",
     "eval:runner": "node scripts/eval-runner.js",
     "check:runner": "node scripts/check-runner.js",
-    "test:navegador": "npm --prefix tests/browser ci && node tests/browser/run.mjs --axe && node tests/browser/interaccion.mjs",
+    "test:navegador": "npm --prefix tests/browser ci && node tests/browser/run.mjs --axe && node tests/browser/interaccion.mjs && node tests/browser/foco.mjs && node tests/browser/reflow.mjs && node tests/browser/sitio.mjs",
     "check:modos": "node scripts/check-modos.js",
     "check:encoding": "node scripts/check-encoding.js",
     "fix:encoding": "node scripts/check-encoding.js --fix",

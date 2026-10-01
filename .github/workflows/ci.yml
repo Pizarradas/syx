@@ -9,8 +9,11 @@
 #   contratos   en cada push · rápido · es el que decide si algo está roto
 #   entrega     solo en PR · lento · empaqueta, instala y construye de verdad
 #   desviación  informativo · nunca rompe · deja el informe a la vista
-#   navegador   PR y main · axe rompe; la regresión visual informa
+#   navegador   PR y main · axe, foco, reflow y páginas rompen; la regresión
+#               visual informa
 #   confianza   solo en PR · segundos · rompe si toca rutas `human` sin aprobar
+#   mutación    solo en PR · minutos · rompe si un guardián deja pasar la
+#               regresión que dice parar
 #
 # Lo lento va en los PR y no en cada push a propósito: `check:consumible`
 # empaqueta 10 MB y los instala, y `check:propuesta` copia el árbol y compila.
@@ -143,7 +146,7 @@ jobs:
           fi
 
   navegador:
-    name: Navegador · axe y regresión visual
+    name: Navegador · axe, foco, reflow, páginas y regresión visual
     runs-on: ubuntu-latest
     # En los PR y en main. En cada push a cualquier rama sería lento para lo
     # que aporta: lo que se fusiona pasa siempre por aquí.
@@ -162,12 +165,19 @@ jobs:
           cache: npm
           cache-dependency-path: tests/browser/package-lock.json
 
+      # La raíz también: su `prepare` genera dist/, que es el CSS que cargan
+      # las páginas del sitio (sitio.mjs y reflow.mjs las prueban con él).
+      - name: Dependencias de la raíz (y dist/)
+        working-directory: .
+        run: npm ci
       - run: npm ci
       - run: npx playwright install --with-deps chromium
 
       # ROMPE. WCAG 2.2 A y AA con axe-core sobre cada componente del registro,
-      # en los siete temas y los dos modos. Lo aceptado a sabiendas está en
-      # axe-excepciones.json, acotado por componente y tema, con su porqué.
+      # en los siete temas y los dos modos. Los incompletos (lo que axe no
+      # sabe decidir) también rompen salvo revisados; los de contraste se
+      # miden en píxeles. Lo aceptado a sabiendas está en
+      # axe-excepciones.json, acotado y con caducidad.
       - name: axe sobre todos los componentes, temas y modos
         run: node run.mjs --axe
 
@@ -175,6 +185,22 @@ jobs:
       # menú (APG), tooltip (WCAG 1.4.13), toast y contador de caracteres.
       - name: Teclado y regiones vivas
         run: node interaccion.mjs
+
+      # ROMPE. Lo que axe no ve: el foco de cada enfocable se distingue en
+      # píxeles (2.4.7/2.4.11/2.4.13), Tab recorre sin trampas y un diálogo
+      # modal atrapa.
+      - name: Foco visible, orden de Tab y trampas
+        run: node foco.mjs
+
+      # ROMPE. A 320 px nada se desplaza en horizontal (1.4.10) y los
+      # objetivos miden 24 × 24 (2.5.8), en componentes y páginas.
+      - name: Reflow a 320 px y tamaño de objetivo
+        run: node reflow.mjs
+
+      # ROMPE. Las cuatro páginas del sitio en axe a 375 y 1280 px, claro y
+      # oscuro, y el cajón móvil con el teclado.
+      - name: Las páginas del sitio y el cajón móvil
+        run: node sitio.mjs
 
       # NO ROMPE. La referencia es la rama base, fotografiada en esta misma
       # máquina con este mismo arnés: no hay capturas versionadas que se
@@ -204,6 +230,34 @@ jobs:
             tests/browser/diferencias/
             tests/browser/out/despues/
           retention-days: 14
+
+  # Los guardianes, probados con regresiones de verdad: cada caso copia el
+  # árbol, inyecta UNA regresión realista (un primitivo en un átomo, el
+  # primario casi blanco, scripts/ a auto en trust.json, un componente sin
+  # foco…) y exige que su guardián la pare y diga por qué. Tarda minutos —
+  # copia el árbol una vez por caso y recompila temas—, así que va en los PR.
+  mutacion:
+    name: Mutación · los guardianes guardan
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      # Playwright y Chromium para el caso de foco.
+      - name: Arnés de navegador
+        working-directory: tests/browser
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Regresión · guardián · resultado
+        run: |
+          node scripts/check-mutacion.js | tee mutacion.txt
+          { echo '## Mutación'; echo; echo '```'; cat mutacion.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+        shell: bash
 
   desviacion:
     name: Desviación
