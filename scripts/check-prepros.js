@@ -10,11 +10,13 @@
  * sale de ningún punto de entrada SCSS sino de un script de Node. Comprueba:
  *
  *   1. Cada punto de entrada (scss/*.scss que no es parcial) está en
- *      prepros.config con autoprefixer y minify-css desactivados, y el tipo
- *      .scss los tiene desactivados por defecto: Prepros produce dart-sass
- *      expandido, igual que build:css.
- *   2. build:css no pasa por postcss/autoprefixer: el CSS canónico es lo que
- *      escribe Sass. Los prefijos que hacen falta van en el SCSS.
+ *      prepros.config, sin autoprefixer (lo que haga el fichero, o su tipo
+ *      por defecto), y todos se minifican o ninguno. Minificar lo decide
+ *      quien mantiene SYX (desde octubre de 2026, sí); el minificador de
+ *      Prepros solo cambia formato, y check-limpio compara normalizado.
+ *   2. build:css es scripts/build-css.js: Sass sin postcss, que no reescribe
+ *      una hoja que ya significa lo mismo (no ensucia el árbol de quien
+ *      compila con Prepros).
  *   3. Cada hoja que enlaza una página raíz (*.html) existe, está en css/ y
  *      sale de un punto de entrada de scss/. También las del selector de tema.
  *   4. El comparador normalizado de check-limpio ve igual un cambio de formato
@@ -37,26 +39,35 @@ const entradas = fs.readdirSync(path.join(ROOT, 'scss'))
   .filter((f) => f.endsWith('.scss') && !f.startsWith('_'))
   .map((f) => `scss/${f}`).sort();
 
-comprobar('prepros.config compila cada punto de entrada sin minificar ni prefijar', () => {
+comprobar('prepros.config compila cada punto de entrada, sin prefijar y todos igual', () => {
   const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, 'prepros.config'), 'utf8')).config;
   const malos = [];
-  for (const t of cfg.fileTypes.sass.tasks) {
-    if (['minify-css', 'autoprefixer'].includes(t.task) && t.enable) malos.push(`tipo .scss: ${t.task} activado por defecto`);
-  }
+  const porTipo = Object.fromEntries(cfg.fileTypes.sass.tasks.map((t) => [t.task, !!t.enable]));
   const porFichero = new Map((cfg.files || []).map((f) => [f.file, f.config?.tasks || {}]));
+  // Lo que Prepros hace de verdad con un fichero: su ajuste, o el del tipo.
+  const efectivo = (e, k) => {
+    const t = porFichero.get(e) || {};
+    return t[k] && typeof t[k].enable === 'boolean' ? t[k].enable : !!porTipo[k];
+  };
+  const minifica = new Set();
   for (const e of entradas) {
-    const t = porFichero.get(e);
-    if (!t) { malos.push(`${e} no está en prepros.config`); continue; }
-    for (const k of ['minify-css', 'autoprefixer']) if (!t[k] || t[k].enable !== false) malos.push(`${e}: ${k} no está desactivado`);
+    if (!porFichero.has(e)) malos.push(`${e} no está en prepros.config`);
+    // Sin autoprefixer: npm no lo pasa, y los prefijos que hacen falta van en
+    // el SCSS. Con él, Prepros y npm producirían hojas distintas.
+    if (efectivo(e, 'autoprefixer')) malos.push(`${e}: autoprefixer activado`);
+    minifica.add(efectivo(e, 'minify-css'));
   }
+  // Minificar o no es decisión de quien mantiene SYX; mezclar, no.
+  if (minifica.size > 1) malos.push('unos puntos de entrada se minifican y otros no');
   for (const f of porFichero.keys()) if (!fs.existsSync(path.join(ROOT, f))) malos.push(`prepros.config cita ${f}, que no existe`);
   if (malos.length) throw new Error(malos.join(' · '));
-  return `${entradas.length} puntos de entrada · expandido, sin autoprefixer`;
+  return `${entradas.length} puntos de entrada · sin autoprefixer · ${[...minifica][0] ? 'minificados' : 'expandidos'}`;
 });
 
-comprobar('build:css es solo Sass', () => {
+comprobar('build:css compila con Sass y no pisa lo que ya significa lo mismo', () => {
   const b = require(path.join(ROOT, 'package.json')).scripts['build:css'];
   if (/postcss|autoprefixer/.test(b)) throw new Error(`build:css pasa por postcss: «${b}». Prepros no lo hace y el CSS saldría distinto`);
+  if (!/scripts\/build-css\.js/.test(b)) throw new Error(`build:css no usa scripts/build-css.js: «${b}»`);
   return b.split('&&')[0].trim();
 });
 
@@ -88,7 +99,22 @@ comprobar('el comparador normalizado distingue formato de contenido', () => {
   const valor = ':root{--a:.6rem;--b:rgba(0,0,0,.1)}.c>.d,.e{color:#fff}';
   if (normalizar(a) !== normalizar(formato)) throw new Error('un cambio solo de formato se ve distinto');
   if (normalizar(a) === normalizar(valor)) throw new Error('un valor distinto se ve igual');
-  return 'formato igual · valor distinto';
+  // Lo que hace el minificador de Prepros es formato; lo de dentro de una
+  // cadena o de url(), no (auditoría 2026-10 II).
+  const iguales = [
+    ['a::before,b{x:oklch(0 0 0 / 0.5)}', 'b,a:before{x:oklch(0 0 0/.5)}'],
+    ['li:nth-child(1){x:1}@keyframes k{from{x:0}to{x:1}}', 'li:first-child{x:1}@keyframes k{0%{x:0}100%{x:1}}'],
+    [':is(a, b) [type="radio"]{x:1}', ':is(a,b) [type=radio]{x:1}'],
+  ];
+  const distintos = [
+    ['a{content:"a  b"}', 'a{content:"a b"}'],
+    ['a{background:url(img/0.5x.png)}', 'a{background:url(img/.5x.png)}'],
+    ['[title="a , b"]{x:1}', '[title="a,b"]{x:1}'],
+    ['a{font-family:"My  Font"}', 'a{font-family:"My Font"}'],
+  ];
+  for (const [x, y] of iguales) if (normalizar(x) !== normalizar(y)) throw new Error(`se ven distintos y son lo mismo: ${x} · ${y}`);
+  for (const [x, y] of distintos) if (normalizar(x) === normalizar(y)) throw new Error(`se ven iguales y son distintos: ${x} · ${y}`);
+  return `formato igual · valor distinto · ${iguales.length} equivalencias del minificador · ${distintos.length} cadenas y url() intactas`;
 });
 
 console.log('\n── PREPROS, NPM Y LAS PÁGINAS ──────────────────────────────────\n');

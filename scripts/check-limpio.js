@@ -29,13 +29,14 @@
  * continua, donde el árbol SIEMPRE está limpio— no poder medir es un fallo.
  *
  * EL FORMATO NO CUENTA (octubre de 2026)
- * Las hojas de css/ se compilan con `npm run build:css` o con Prepros, y las
- * dos son solo dart-sass expandido sobre los puntos de entrada de scss/ (sin
- * autoprefixer: los prefijos que hacen falta se escriben en el SCSS). Pero el
- * dart-sass de Prepros puede ser otra versión y formatear distinto. Por eso un
- * .css que cambia se compara NORMALIZADO (scripts/lib/css-normal.js): si solo
- * cambian espacios, saltos o comentarios, está limpio; una regla, un selector
- * o un valor distinto, no.
+ * Las hojas de css/ se compilan con Prepros (minificadas, que es como las
+ * publica quien mantiene SYX) o con `npm run build:css`, siempre dart-sass
+ * sobre los puntos de entrada de scss/ y sin autoprefixer (los prefijos que
+ * hacen falta se escriben en el SCSS). build:css no reescribe una hoja que ya
+ * significa lo mismo, y aquí un .css que cambia se compara NORMALIZADO
+ * (scripts/lib/css-normal.js): espacios, comentarios, el orden de una lista de
+ * selectores o `::before` frente a `:before` no cuentan; una regla, un
+ * selector, un valor o el contenido de una cadena distintos, sí.
  *
  * Uso: node scripts/check-limpio.js [--strict]
  */

@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Versión pendiente de decidir.** Lo que hay aquí rompe compatibilidad (variables heredadas retiradas, `bundle-core` sin iconos Lucide ni utilidades, fuentes solo en woff2 con familias renombradas, `--semantic-tone-*-bg` ya no gobierna el estado): por SemVer es una **5.0.0**. Pero varias deprecaciones prometen su retirada «en v5.0» (utilidades físicas `.syx-ml-*`/`.syx-mr-*`…), así que cortar la 5.0 obliga a retirarlas ya o a aplazar la promesa. `release.yml` exige que esta sección esté vacía y la de la versión fechada antes de etiquetar.
 
+### Changed — css/ se publica minificado con Prepros
+
+- Quien mantiene SYX compila con Prepros minificando (sin autoprefixer). `check:prepros` lo acepta: exige que ningún punto de entrada pase por autoprefixer y que todos se minifiquen o ninguno; ya no cita `scss/styles-core.scss`, que no existe.
+- `npm run build:css` es `scripts/build-css.js`: compila solo los 8 puntos de entrada (antes `sass scss:css` compilaba 61 ficheros, 13 MB, incluidos los `index.scss` anidados) y no reescribe una hoja que ya significa lo mismo, así que `npm run check` no ensucia el árbol de quien compila con Prepros.
+- `css-normal.js` reescrito sobre `postcss-value-parser`: entiende lo que hace el minificador de Prepros (orden de las listas de selectores, `::before` = `:before`, `*` implícito, `:nth-child(1)` = `:first-child`, `from` = `0%`, sin espacios en `/`) y deja de igualar contenidos distintos dentro de cadenas y `url()`, como señaló la auditoría.
+
 ### Fixed — auditoría 2026-10 II, acciones P0
 
 - **`hidden` oculta cualquier componente.** `[hidden]{display:none}` vivía en `@layer syx.reset` y perdía frente al `display` de las capas de componentes: 31 de 42 clases lo ignoraban. Ahora es `[hidden]:not([hidden="until-found"]){display:none !important}` en `base/_hidden.scss`, el único `!important` del sistema: en capas, el `!important` de una capa anterior gana a las posteriores, y `syx.reset` está en todos los bundles (también en core). R02 lo permite en ese fichero y en ningún otro. Se retira `[hidden="false"]{display:block}`, que no era un uso válido del atributo. Prueba nueva: `tests/browser/oculto.mjs`, en la CI.

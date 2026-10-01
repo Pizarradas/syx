@@ -67,7 +67,7 @@
   "scripts": {
     "start": "npm run watch",
     "build": "npm run build:css && npm run build:docs-componentes && npm run build:dist",
-    "build:css": "sass scss:css --style=expanded --no-source-map && npm run build:tokens && npm run build:tokens-json",
+    "build:css": "node scripts/build-css.js && npm run build:tokens && npm run build:tokens-json",
     "build:dist": "node scripts/build-dist.js",
     "watch": "sass --watch scss:css --style=expanded --no-source-map",
     "postcss": "postcss css/*.css --replace --no-map",
