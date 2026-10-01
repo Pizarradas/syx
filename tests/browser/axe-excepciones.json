@@ -50,9 +50,9 @@
         "syx-sketch/dark",
         "syx-sketch/light"
       ],
-      "ratioMinima": 9.24,
+      "ratioMinima": 9.09,
       "caduca": "2027-04-01",
-      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña activa contra el fondo real que tiene detrás da ≥ 9,24:1 en los siete temas y los dos modos (mínimo 4,5:1)."
+      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña activa contra el fondo real que tiene detrás da 9,24:1 en los siete temas y los dos modos (mínimo 4,5:1). El suelo deja 0,15 de holgura para el rasterizado de otra máquina."
     },
     {
       "tipo": "incompleto",
@@ -75,9 +75,384 @@
         "syx-sketch/dark",
         "syx-sketch/light"
       ],
-      "ratioMinima": 6.77,
+      "ratioMinima": 6.62,
       "caduca": "2027-04-01",
-      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña inactiva contra el fondo real que tiene detrás da ≥ 6,77:1 en los siete temas y los dos modos (mínimo 4,5:1)."
+      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña inactiva contra el fondo real que tiene detrás da 6,77:1 en los siete temas y los dos modos (mínimo 4,5:1). El suelo deja 0,15 de holgura para el rasterizado de otra máquina."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#hero",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 5.36,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 24 texto(s) (due to a pseudo element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 5,52:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#features",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 5.59,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 3 texto(s) (due to a background gradient). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 5,74:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#tokens",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 4.55,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 21 texto(s) (due to a background gradient; due to a pseudo element; contains only non-text characters). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 4,7:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#themes",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 4.96,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 4 texto(s) (due to a background gradient). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 5,11:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#ai-first",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 5.73,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 73 texto(s) (due to a background gradient; contains only non-text characters). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 5,88:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "home.html",
+      "dentro": "#cta",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 4.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 5 texto(s) (due to a pseudo element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 4,53:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "aria-valid-attr-value",
+      "componente": "docs.html",
+      "selector": "#ref-mol-menu-menu-actions-btn",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "caduca": "2027-04-01",
+      "porque": "Lo mismo que en la ficha de mol-menu de run.mjs: axe marca para revisión todo aria-controls de un botón con aria-haspopup (controlsWithinPopup) sin comprobar el id. Revisado: #ref-mol-menu-menu-actions es el role=\"menu\" de la misma demo, el que abre su popovertarget."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#guide-layers",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 4.76,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 14 texto(s) (contains only non-text characters; because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 4,91:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#guide-html",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 7 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#guide-scss",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 14.32,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 6 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 14,47:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#guide-mixins",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 14 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#guide-checklist",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 10 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-ask",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 14.32,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 21 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 14,47:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-write",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 10 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-detect",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 6 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-guards",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 14 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-value",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 16 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#agentic-figma",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 5 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#modes-eight",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 17 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#modes-compose",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 6.88,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 16 texto(s) (contains only non-text characters; because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 7,03:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#modes-cortex",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 12 texto(s) (because it's partially obscured by another element; contains only non-text characters). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#ref-mol-tabs",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 8.73,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 2 texto(s) (due to a background gradient). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 8,88:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "docs.html",
+      "dentro": "#atom-table",
+      "temas": [
+        "375/dark"
+      ],
+      "ratioMinima": 10.25,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 3 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 10,4:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "why-syx.html",
+      "dentro": "#method",
+      "temas": [
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 14.32,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 6 texto(s) (because it's partially obscured by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 14,47:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "why-syx.html",
+      "dentro": "#measured",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 9.5,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 2 texto(s) (contains only non-text characters). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 9,65:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "theme-builder.html",
+      "dentro": "body",
+      "temas": [
+        "1280/dark",
+        "1280/light",
+        "375/dark",
+        "375/light"
+      ],
+      "ratioMinima": 11.71,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 1 texto(s) (due to a background image). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 11,86:1."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "theme-builder.html",
+      "dentro": "#preview",
+      "temas": [
+        "1280/dark",
+        "1280/light"
+      ],
+      "ratioMinima": 6.35,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo de 21 texto(s) (because it's partially obscured by another element; because it is overlapped by another element). Medidos en píxeles, cada texto contra el fondo real que tiene detrás: todos llegan a su mínimo de WCAG (4,5:1; 3:1 si es texto grande) y el peor da 6,5:1."
     }
   ]
 }
