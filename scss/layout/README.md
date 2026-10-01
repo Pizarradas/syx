@@ -1,10 +1,16 @@
 # layout/
 
-Sistema de **grid de columnas** de SYX. Genera el contenedor y la rejilla de columnas con padding, gaps y breakpoints del tema.
+Las piezas de maquetación de SYX: la **rejilla de columnas** y dos **primitivas** para lo que una pantalla de producto repite sin parar —una columna con espacio regular y una fila que envuelve—.
 
-**Clase raíz**: `layout-grid`
-**Layer**: `@layer syx.base` (parte de la arquitectura de componentes de layout)
-**Archivo único**: `grids/_grid.scss`
+| Clase | Fichero | Para |
+| ----- | ------- | ---- |
+| `layout-grid` | `grids/_grid.scss` | La página o una sección: 12 columnas con los gutters del tema |
+| `layout-stack` | `_stack.scss` | Bloques uno debajo de otro con el mismo espacio (`--xs` … `--xl`) |
+| `layout-cluster` | `_cluster.scss` | Elementos en fila que bajan de línea si no caben (`--xs` … `--lg`, `--between`, `--end`) |
+
+**Layer**: `@layer syx.base` — cualquier utilidad `.syx-*` las sobrescribe sin `!important`.
+**Se incluyen** desde `themes/_shared/_core.scss`, así que están en todos los bundles.
+El armazón de una aplicación (cabecera, barra lateral y contenido) es un componente con color propio: `org-app-shell`, en `organisms/`.
 
 ---
 
@@ -100,6 +106,32 @@ Para grids dentro de grids, el grid hijo hereda el padding del contenedor padre.
 
 ---
 
+## Stack y cluster
+
+```html
+<!-- Una pantalla de ajustes: secciones apiladas, acciones que envuelven -->
+<div class="layout-stack layout-stack--lg">
+  <section>…</section>
+  <section>…</section>
+  <div class="layout-cluster layout-cluster--end">
+    <button class="atom-btn atom-btn--secondary" type="button">Cancel</button>
+    <button class="atom-btn atom-btn--primary atom-btn--filled" type="button">Save</button>
+  </div>
+</div>
+```
+
+| Modificador | Stack (`--semantic-space-stack-*`) | Cluster (`--semantic-space-inline-*`) |
+| ----------- | ---------------------------------- | ------------------------------------- |
+| por defecto | `md` (24 px) | `xs` (8 px) |
+| `--xs` … `--lg` | 8 · 16 · 24 · 32 px | 8 · 16 · 24 · 32 px |
+| `--xl` | 48 px | — |
+| `--between` | — | reparte a los extremos |
+| `--end` | — | alinea al final de la línea (lógico: en RTL es la izquierda) |
+
+No duplican las utilidades: `layout-stack` es `syx-d-flex syx-flex-col` con la escala de pila por defecto, y `layout-cluster` es `syx-d-flex syx-flex-wrap syx-items-center` con la escala en línea. Usa la primitiva cuando el patrón sea ese (se lee mejor y el espaciado sale de la escala correcta) y las utilidades para un ajuste puntual. Usan `gap`, nunca márgenes: un hijo con `hidden` no deja hueco.
+
+---
+
 ## Combinación con utilidades
 
 Las utilidades `.syx-*` se pueden añadir directamente a columnas del grid:
@@ -130,6 +162,7 @@ Las utilidades `.syx-*` se pueden añadir directamente a columnas del grid:
 
 Si necesitas un sistema de layout diferente (masonry, CSS subgrid, etc.):
 
-1. Crear `grids/_mi-layout.scss`
-2. Añadir `@forward 'grids/mi-layout'` en `layout/index.scss`
-3. Documentar en este README
+1. Crear `grids/_mi-layout.scss` (una rejilla) o `_mi-primitiva.scss` (una primitiva)
+2. Añadir su `@forward` en `layout/index.scss`
+3. Incluir su mixin en `themes/_shared/_core.scss`
+4. Documentar en este README

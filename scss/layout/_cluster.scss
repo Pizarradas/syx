@@ -1,0 +1,41 @@
+// LAYOUT: CLUSTER
+// ===============================================
+// Una fila que envuelve: los elementos van uno detrás de otro y, si no
+// caben, bajan a la línea siguiente con el mismo espacio en las dos
+// direcciones. Para grupos de longitud variable —etiquetas, botones de
+// una barra de herramientas, metadatos de una tarjeta— que no deben
+// desbordar en móvil.
+//
+// <div class="layout-cluster">
+//   <span class="atom-pill">Draft</span>
+//   <span class="atom-pill">Design</span>
+// </div>
+//
+// `layout-cluster--between` reparte a los extremos (título a un lado,
+// acciones al otro) y `--end` alinea al final de la línea, que en un
+// documento de derecha a izquierda es la izquierda: todo va en
+// propiedades lógicas.
+// Equivale a `syx-d-flex syx-flex-wrap syx-items-center syx-gap-*` con la
+// escala en línea (`--semantic-space-inline-*`) como valor por defecto.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin layout-cluster($theme: null) {
+  @layer syx.base {
+    .layout-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--semantic-space-inline-xs);
+
+      &--xs { gap: var(--semantic-space-inline-xs); }
+      &--sm { gap: var(--semantic-space-inline-sm); }
+      &--md { gap: var(--semantic-space-inline-md); }
+      &--lg { gap: var(--semantic-space-inline-lg); }
+
+      &--between { justify-content: space-between; }
+      &--end { justify-content: flex-end; }
+    }
+  }
+}

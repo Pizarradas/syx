@@ -1,0 +1,46 @@
+// LAYOUT: STACK
+// ===============================================
+// Una columna de bloques con el mismo espacio entre cada uno. Es lo que
+// una pantalla de producto repite más (campos de un formulario, tarjetas
+// de un panel, párrafos de un aviso) y lo que la adopción de octubre de
+// 2026 escribió a mano: `display: flex; flex-direction: column; gap: …`
+// con un valor distinto en cada sitio.
+//
+// <div class="layout-stack layout-stack--lg">
+//   <section>…</section>
+//   <section>…</section>
+// </div>
+//
+// Con utilidades ya se podía (`syx-d-flex syx-flex-col syx-gap-3`); el
+// stack no las duplica, les pone nombre y un espaciado por defecto que
+// sale de la escala de pila (`--semantic-space-stack-*`), no de la de
+// maquetación que usan las `syx-gap-*`. Como vive en syx.base, cualquier
+// utilidad `.syx-*` lo sigue pudiendo sobrescribir.
+//
+// `gap` y no márgenes: no colapsa, no depende del primer o último hijo y
+// no deja hueco sobrante si un hijo está oculto (`hidden`).
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin layout-stack($theme: null) {
+  @layer syx.base {
+    .layout-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--semantic-space-stack-md);
+
+      // Un hijo con contenido largo (una tabla, un <pre>) no debe ensanchar
+      // la columna: sin esto, el ancho mínimo de un flex item es su contenido.
+      > * {
+        min-inline-size: 0;
+      }
+
+      &--xs { gap: var(--semantic-space-stack-xs); }
+      &--sm { gap: var(--semantic-space-stack-sm); }
+      &--md { gap: var(--semantic-space-stack-md); }
+      &--lg { gap: var(--semantic-space-stack-lg); }
+      &--xl { gap: var(--semantic-space-stack-xl); }
+    }
+  }
+}

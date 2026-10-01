@@ -1,7 +1,7 @@
 // SYX BUNDLE: CORE
 // ================================================
 // Shared foundation included in EVERY bundle.
-// Contains: reset, base elements, helpers, grid.
+// Contains: reset, base elements, helpers, grid, stack, cluster.
 // Never includes atoms, molecules or organisms.
 // ================================================
 // Usage: @use '../_shared/core' as *; @include syx-core($theme);
@@ -22,6 +22,8 @@
 @use '../../abstracts/index' as *;
 @use '../../base/index' as *;
 @use '../../layout/grids/grid' as *;
+@use '../../layout/stack' as *;
+@use '../../layout/cluster' as *;
 
 @mixin syx-core($theme: null) {
 
@@ -41,7 +43,11 @@
   @include helper-fonts($theme);
   @include helper-backgrounds($theme);
 
-  // LAYOUT: grid
+  // LAYOUT: grid y primitivas (stack, cluster)
   // ================================================
+  // Las primitivas van aquí y no en un bundle: son tan de base como la
+  // rejilla, y una pantalla de producto las necesita en cualquier contexto.
   @include layout-grid($theme);
+  @include layout-stack($theme);
+  @include layout-cluster($theme);
 }
