@@ -19,6 +19,9 @@
  *   2. Que acierta el destino SIN que nadie se lo diga, que es el criterio del
  *      paso 2.1.
  *   3. Que lo que deja detrás está verde y es revisable.
+ *   4. Que `files`, la vía para componentes y utilidades, se niega fuera de
+ *      `pr` sin tocar el trabajo del agente, y que dentro de `pr` deja la
+ *      misma rama con evidencia que `token`.
  *
  * Uso: node scripts/check-propuesta.js   ·   npm run check:propuesta
  */
@@ -134,6 +137,21 @@ comprobar('ante una familia inventada, ofrece las que sí existen', () => {
     'header-bg', 'no sugiere la familia real');
 });
 
+comprobar('niega un --file que apunta a una ruta solo humana, y no commitea', () => {
+  // El hallazgo de la auditoría de 2026-10: imprimía «Solo humano» y hacía el
+  // commit igualmente, con «familia undefined (vecino: null)» en el mensaje.
+  negar(['token', '--name', '--component-feature-card-glow', '--value', 'var(--semantic-shadow-md)',
+    '--file', 'scss/themes/syx-sketch/_theme.scss'], 'Solo humano', 'no nombra el nivel del destino');
+  const rama = enCopia('rev-parse', '--abbrev-ref', 'HEAD');
+  if (rama !== 'principal') throw new Error(`creó la rama ${rama}`);
+});
+
+comprobar('niega un --file disfrazado con `..` que acaba en un tema', () => {
+  negar(['token', '--name', '--component-feature-card-glow', '--value', 'var(--semantic-shadow-md)',
+    '--file', 'scss/abstracts/tokens/components/../../../themes/syx-sketch/_theme.scss'], 'scss/themes/syx-sketch/_theme.scss',
+  'no resuelve la ruta antes de clasificarla');
+});
+
 comprobar('se niega a proponer sobre un árbol sucio', () => {
   fs.appendFileSync(path.join(tmp, 'CHANGELOG.md'), '\n<!-- trabajo a medias -->\n');
   const r = proponer('token', '--name', '--component-feature-card-glow', '--value', 'var(--semantic-shadow-md)');
@@ -221,6 +239,86 @@ comprobar('no se ha hecho push a ningún sitio', () => {
   if (remotos) throw new Error(`la copia tiene remotos configurados: ${remotos}`);
   const salida = enCopia('log', '-1', '--format=%s');
   if (!salida.includes('--component-feature-card-glow')) throw new Error('el commit no es el esperado');
+});
+
+// ─── 4. La vía `files` ───────────────────────────────────────────────────────
+// Va después de la propuesta de token a propósito: parte de la rama que dejó,
+// que es también un árbol limpio y verde.
+
+/** Una negativa de `files`: el cambio del agente sigue ahí, y nada más. */
+function negarFiles(args, esperado, que, propios) {
+  const antes = enCopia('rev-parse', 'HEAD');
+  const r = proponer('files', ...args);
+  try {
+    if (r.code === 0) throw new Error(`lo aceptó:\n     ${r.salida.trim().split('\n').slice(-4).join('\n     ')}`);
+    contiene(r.salida, esperado, que);
+    if (enCopia('rev-parse', 'HEAD') !== antes) throw new Error('se negó, pero commiteó');
+    const rastro = execFileSync('git', ['status', '--porcelain'], { cwd: tmp, encoding: 'utf8' })
+      .split('\n').filter(Boolean).map((l) => l.slice(3));
+    const extra = rastro.filter((x) => !propios.includes(x));
+    if (extra.length) throw new Error(`se negó, pero dejó más cambios que los del agente: ${extra.join(', ')}`);
+    const faltan = propios.filter((x) => !rastro.includes(x));
+    if (faltan.length) throw new Error(`se negó y se llevó por delante el trabajo del agente: ${faltan.join(', ')}`);
+  } finally {
+    execFileSync('bash', ['-c', `cd "${tmp}" && git checkout -- . && git clean -qfd`]);
+  }
+}
+
+const TEMA = 'scss/themes/syx-sketch/_theme.scss';
+const PILL = 'scss/atoms/_pill.scss';
+
+comprobar('files niega una ruta solo humana y deja el cambio del agente intacto', () => {
+  fs.appendFileSync(path.join(tmp, TEMA), '\n// cambio de prueba\n');
+  negarFiles([TEMA, '--why', 'Prueba'], 'Solo humano', 'no nombra el nivel', [TEMA]);
+});
+
+comprobar('files niega si una sola de las rutas es humana, aunque las demás sean pr', () => {
+  fs.appendFileSync(path.join(tmp, TEMA), '\n// cambio de prueba\n');
+  fs.appendFileSync(path.join(tmp, PILL), '\n// cambio de prueba\n');
+  negarFiles([PILL, TEMA, '--why', 'Prueba'], TEMA, 'no señala la ruta humana', [PILL, TEMA]);
+});
+
+comprobar('files niega si hay cambios fuera de las rutas declaradas', () => {
+  fs.appendFileSync(path.join(tmp, PILL), '\n// cambio de prueba\n');
+  fs.appendFileSync(path.join(tmp, 'scss/atoms/_btn.scss'), '\n// trabajo a medias\n');
+  negarFiles([PILL, '--why', 'Prueba'], 'scss/atoms/_btn.scss', 'no señala lo ajeno', [PILL, 'scss/atoms/_btn.scss']);
+});
+
+let ramaFiles = null;
+let antesDeFiles = null;
+
+comprobar('files propone un componente en rutas pr: compila, valida, rama y commit', () => {
+  const scss = fs.readFileSync(path.join(tmp, PILL), 'utf8');
+  // El fichero puede tener finales de línea CRLF: se respeta el que tenga.
+  const fl = scss.includes('\r\n') ? '\r\n' : '\n';
+  const ancla = '      // --secondary' + fl;
+  if (!scss.includes(ancla)) throw new Error('la prueba no encuentra dónde insertar en _pill.scss');
+  fs.writeFileSync(path.join(tmp, PILL), scss.replace(ancla,
+    ['      // --prueba', '      &--prueba {', '        color: var(--component-pill-primary-color);', '      }', '', ''].join(fl) + ancla));
+  antesDeFiles = enCopia('rev-parse', 'HEAD');
+  const r = proponer('files', PILL, '--why', 'Variante de prueba para la píldora');
+  if (r.code !== 0) throw new Error(`no la aceptó:\n     ${r.salida.trim().split('\n').slice(-10).join('\n     ')}`);
+  ramaFiles = 'syx/propuesta-variante-de-prueba-para-la-pildora';
+  const actual = enCopia('rev-parse', '--abbrev-ref', 'HEAD');
+  if (actual !== ramaFiles) throw new Error(`la rama activa es ${actual}`);
+  if (enCopia('rev-list', '--count', `${antesDeFiles}..HEAD`) !== '1') throw new Error('no es un solo commit');
+  if (enCopia('status', '--porcelain')) throw new Error('dejó el árbol sucio');
+});
+
+comprobar('el commit de files lleva el cambio, lo compilado y la evidencia', () => {
+  const tocados = enCopia('diff', '--name-only', `${antesDeFiles}..HEAD`).split('\n');
+  for (const f of [PILL, 'css/styles-theme-syx-sketch.css', 'component-registry.json']) {
+    if (!tocados.includes(f)) throw new Error(`el commit no incluye ${f}: ${tocados.join(', ')}`);
+  }
+  const ev = tocados.find((f) => f.startsWith('contracts/propuestas/'));
+  if (!ev) throw new Error('sin evidencia en contracts/propuestas/');
+  const t = fs.readFileSync(path.join(tmp, ev), 'utf8');
+  for (const trozo of [PILL, 'Vía propuesta', 'Variante de prueba']) contiene(t, trozo, `la evidencia no menciona ${trozo}`);
+  if (!/PASSED|✅/.test(t)) throw new Error('la evidencia no incluye un veredicto del validador');
+  const css = fs.readFileSync(path.join(tmp, 'css/styles-theme-syx-sketch.css'), 'utf8');
+  if (!css.includes('atom-pill--prueba')) throw new Error('la variante no llegó al CSS compilado');
+  const msg = enCopia('log', '-1', '--format=%B');
+  if (/undefined|null/.test(msg)) throw new Error(`el mensaje tiene huecos sin rellenar:\n${msg}`);
 });
 
 (async () => {

@@ -26,6 +26,12 @@
  *   node scripts/propose.js classify [rutas…]
  *   node scripts/propose.js token --name --component-card-glow --value "var(--semantic-shadow-md)" --why "…"
  *       [--dry-run] [--pr] [--file <ruta>]
+ *   node scripts/propose.js files scss/atoms/_badge.scss [más rutas…] --why "…"
+ *       [--dry-run] [--pr] [--branch <rama>]
+ *
+ * SOLO ESCRIBE EN RUTAS `pr`. Tanto el destino de un token —deducido o dado
+ * con `--file`— como cada ruta de `files` se clasifican ya normalizados, y si
+ * alguno no es `pr` se niega antes de escribir nada.
  */
 
 'use strict';
@@ -182,17 +188,38 @@ function token() {
   }
 
   // 4. Dónde va — sin que nadie lo diga.
-  const destino = arg('--file') ? { resuelto: true, fichero: arg('--file'), vecino: null } : destinoDeToken(nombre);
+  const aMano = arg('--file');
+  const destino = aMano ? { resuelto: true, fichero: aMano, vecino: null, aMano: true } : destinoDeToken(nombre);
   if (!destino.resuelto) {
     fin(`   ${destino.motivo}\n` +
         (destino.familiasParecidas?.length ? `\n   Familias declaradas que se le parecen: ${destino.familiasParecidas.join(', ')}\n` : '') +
         (destino.sugerencia ? `\n   ${destino.sugerencia}` : ''));
   }
+
+  // 4b. El destino tiene que ser `pr`, venga de donde venga. Antes solo se
+  // imprimía el nivel: con `--file scss/themes/…` salía «Solo humano» en
+  // pantalla y el commit se hacía igual. Se clasifica la ruta YA normalizada,
+  // para que `scss/atoms/../themes/x` no pase por un átomo.
   const nivel = clasificarRuta(destino.fichero);
+  destino.fichero = nivel.path;
+  if (nivel.fuera) fin(`✋ ${aMano} sale del repositorio. Una propuesta solo escribe dentro de él.`);
+  if (nivel.tier !== 'pr') {
+    fin(
+      `✋ El destino ${nivel.path} es de nivel «${nivel.label}» (${nivel.patron || 'por defecto'}), no «vía propuesta».\n` +
+      `   ${nivel.porque}\n\n` +
+      `   propose.js solo escribe en rutas \`pr\`. No se ha escrito ni commiteado nada.`
+    );
+  }
+  if (!fs.existsSync(path.join(ROOT, destino.fichero))) {
+    fin(`   ${destino.fichero} no existe. Crear un fichero de tokens nuevo es decidir una familia, y eso no lo hace propose.js.`);
+  }
+
   console.log(`   token        ${nombre}`);
   console.log(`   valor        ${valor}`);
   console.log(`   destino      ${destino.fichero}${destino.vecino ? `   (junto a ${destino.vecino})` : ''}`);
-  console.log(`   deducido de  familia «${destino.familia}», ${destino.segmentosComunes} segmento(s) en común`);
+  console.log(destino.aMano
+    ? `   indicado     a mano con --file`
+    : `   deducido de  familia «${destino.familia}», ${destino.segmentosComunes} segmento(s) en común`);
   console.log(`   nivel        ${nivel.label} — ${nivel.porque}\n`);
 
   if (seco) fin('   --dry-run: no se ha escrito nada.', 0);
@@ -282,13 +309,22 @@ function token() {
     `feat(tokens): ${nombre}\n\n` +
     (porque ? `${porque}\n\n` : '') +
     `Propuesta generada por scripts/propose.js.\n` +
-    `Destino deducido de la familia ${destino.familia} (vecino: ${destino.vecino}).\n` +
+    (destino.aMano
+      ? `Destino indicado a mano con --file: ${destino.fichero}.\n`
+      : `Destino deducido de la familia ${destino.familia} (vecino: ${destino.vecino}).\n`) +
     `Validacion en verde sobre el CSS recompilado; evidencia en ${relEv}.`);
 
   console.log(`\n✅ Rama ${rama} lista, un commit, validación en verde.`);
   console.log(`   evidencia    ${relEv}`);
   console.log(`   volver       git checkout ${ramaPrevia}`);
 
+  publicar(rama, relEv);
+}
+
+// ─── Publicar ────────────────────────────────────────────────────────────────
+
+/** Imprime cómo publicar la rama, o la publica si se pidió `--pr`. */
+function publicar(rama, relEv) {
   if (flag('--pr')) {
     try {
       git('push', '-u', 'origin', rama);
@@ -304,16 +340,209 @@ function token() {
   }
 }
 
+// ─── files ───────────────────────────────────────────────────────────────────
+//
+// La vía de propuesta para lo que no es un token: un componente, una utilidad,
+// un layout. Hasta la auditoría de 2026-10 solo existía `token`, aunque
+// CLAUDE.md y los modos decían que componentes y utilidades «van por
+// propose.js»: un agente que obedeciera no tenía herramienta, y lo que hacía
+// en la práctica era escribir y commitear a mano.
+//
+// Aquí el agente YA ha escrito el cambio en el árbol de trabajo —un componente
+// no se deduce como un token— y propose.js hace el resto de lo que hace con
+// un token: comprobar que puede, compilar, validar y dejar rama con evidencia.
+
+/** Las rutas con cambios en el árbol de trabajo, incluidos los no versionados. */
+function cambiosDelArbol() {
+  const partes = execFileSync('git', ['status', '--porcelain=v1', '-z', '--untracked-files=all'], { cwd: ROOT, encoding: 'utf8' })
+    .split('\0');
+  const rutas = [];
+  for (let i = 0; i < partes.length; i++) {
+    const e = partes[i];
+    if (!e) continue;
+    rutas.push(e.slice(3));
+    // En un renombrado o copia, el origen viene en la entrada siguiente, y
+    // también es parte del cambio: mover un fichero lo toca en los dos sitios.
+    if (/[RC]/.test(e.slice(0, 2))) rutas.push(partes[++i]);
+  }
+  return rutas.map((r) => clasificarRuta(r).path);
+}
+
+const cubre = (declarada, ruta) => ruta === declarada || (declarada.endsWith('/') && ruta.startsWith(declarada));
+
+const COMPONENTES = /^scss\/(atoms|molecules|organisms)\/|^scss\/abstracts\/tokens\/components\//;
+
+const slugDe = (texto) => texto
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')
+  .slice(0, 48).replace(/-+$/, '') || 'cambio';
+
+function files() {
+  // Las rutas son los argumentos sueltos: ni opciones ni el valor que sigue a
+  // una opción que lo lleva.
+  const conValor = new Set(['--why', '--branch', '--name', '--value', '--file']);
+  const declaradasCrudas = process.argv.slice(3).filter((a, i, todos) => !a.startsWith('--') && !conValor.has(todos[i - 1]));
+  const porque = arg('--why');
+  const seco = flag('--dry-run');
+
+  console.log('\n── PROPUESTA DE CAMBIO ─────────────────────────────────────────\n');
+  if (!declaradasCrudas.length) fin('   Faltan las rutas: node scripts/propose.js files <rutas…> --why "…"');
+  if (!porque) fin('   Falta --why. Va al commit y a la evidencia: es lo primero que lee quien revisa.');
+
+  // 1. ¿Puede proponerse cada ruta declarada? Antes de mirar el árbol: un
+  // «no» por nivel es más útil que un «no» por estado.
+  const declaradas = declaradasCrudas.map((r) => clasificarRuta(r));
+  const fuera = declaradas.filter((d) => d.fuera);
+  if (fuera.length) fin(`✋ Fuera del repositorio: ${fuera.map((d) => d.path).join(', ')}. Una propuesta solo escribe dentro de él.`);
+  const humanas = declaradas.filter((d) => d.tier === 'human');
+  if (humanas.length) {
+    fin(
+      `✋ Rutas de nivel «Solo humano»:\n` +
+      humanas.map((d) => `     ${d.path}   (${d.patron || 'por defecto'})`).join('\n') + '\n\n' +
+      `   ${contrato().tiers.human.que}\n` +
+      `   No se ha escrito ni commiteado nada. Deja el cambio como recomendación para una persona.`
+    );
+  }
+  const noPr = declaradas.filter((d) => d.tier !== 'pr');
+  if (noPr.length) {
+    fin(
+      `   Estas rutas no son «vía propuesta»:\n` +
+      noPr.map((d) => `     ${d.tier.padEnd(6)} ${d.path}`).join('\n') + '\n\n' +
+      `   propose.js files solo lleva rutas \`pr\`. Lo \`auto\` se commitea directamente; lo derivado\n` +
+      `   (CSS, registro, snapshot) lo regenera esta misma orden y entra solo en el commit.`
+    );
+  }
+
+  // 2. El árbol: cambios en esas rutas, y SOLO en esas. Una propuesta que
+  // arrastra trabajo ajeno no se puede revisar como una propuesta.
+  const cambios = cambiosDelArbol();
+  if (!cambios.length) fin('   No hay cambios en el árbol de trabajo. Escribe el cambio primero; propose.js lo valida y lo propone.');
+  const ajenos = cambios.filter((c) => !declaradas.some((d) => cubre(d.path, c)));
+  if (ajenos.length) {
+    fin(
+      `   Hay cambios fuera de las rutas declaradas:\n` +
+      ajenos.slice(0, 8).map((r) => `     ${r}`).join('\n') + (ajenos.length > 8 ? `\n     … y ${ajenos.length - 8} más` : '') + '\n\n' +
+      `   Una propuesta tiene que ser SOLO la propuesta. Decláralas, o guarda o descarta lo demás.`
+    );
+  }
+  const vacias = declaradas.filter((d) => !cambios.some((c) => cubre(d.path, c)));
+  if (vacias.length) fin(`   Declaradas sin cambios: ${vacias.map((d) => d.path).join(', ')}. ¿Ruta mal escrita?`);
+  // Lo que cambió de verdad, no lo declarado: `scss/atoms/` es `pr`, pero hay
+  // que mirar cada fichero por si un patrón más largo lo sube.
+  const detalle = cambios.map((c) => clasificarRuta(c));
+  const malos = detalle.filter((d) => d.tier !== 'pr');
+  if (malos.length) fin(`✋ Dentro de lo declarado hay rutas que no son \`pr\`: ${malos.map((d) => `${d.path} (${d.tier})`).join(', ')}.`);
+
+  const tocaComponentes = cambios.some((c) => COMPONENTES.test(c));
+  const ramaPrevia = git('rev-parse', '--abbrev-ref', 'HEAD');
+  const slug = slugDe(arg('--branch') ? arg('--branch').replace(/^.*\//, '') : porque);
+  const rama = arg('--branch') || `syx/propuesta-${slug}`;
+
+  for (const d of detalle) console.log(`   → ${d.tier.padEnd(6)} ${d.path}`);
+  console.log(`\n   por qué      ${porque}`);
+  console.log(`   rama         ${rama}`);
+  console.log(`   validación   build:css + validate${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens\n`);
+
+  if (seco) fin('   --dry-run: no se ha compilado ni commiteado nada.', 0);
+
+  try {
+    git('rev-parse', '--verify', '--quiet', `refs/heads/${rama}`);
+    fin(`   La rama ${rama} ya existe. Pásale otra con --branch.`);
+  } catch (e) { /* no existe: bien */ }
+
+  // 3. Compilar y validar sobre el resultado. Si falla, se deshace SOLO lo
+  // que ha generado la compilación: el cambio es trabajo del agente y no es
+  // de propose.js tirarlo.
+  const deshacerDerivados = () => {
+    for (const r of cambiosDelArbol()) {
+      if (declaradas.some((d) => cubre(d.path, r))) continue;
+      try { git('checkout', '--', r); } catch (e) { fs.rmSync(path.join(ROOT, r), { force: true }); }
+    }
+  };
+  let evidencia;
+  try {
+    console.log('   compilando y validando…');
+    execFileSync('npm', ['run', 'build:css'], { cwd: ROOT, stdio: 'ignore' });
+    if (tocaComponentes) execFileSync('node', ['scripts/build-component-registry.js'], { cwd: ROOT, stdio: 'ignore' });
+    evidencia = {
+      validador: execFileSync('node', ['scripts/syx-validate.js'], { cwd: ROOT, encoding: 'utf8' }),
+      snapshot: execFileSync('node', ['scripts/build-token-snapshot.js', '--check'], { cwd: ROOT, encoding: 'utf8' }),
+      registro: tocaComponentes
+        ? execFileSync('node', ['scripts/build-component-registry.js', '--check'], { cwd: ROOT, encoding: 'utf8' })
+        : null,
+    };
+  } catch (e) {
+    deshacerDerivados();
+    fin(`   La validación ha fallado, así que no hay rama. Tu cambio sigue en el árbol; lo compilado se ha deshecho.\n\n${(e.stdout || e.message).toString().split('\n').slice(-25).join('\n')}`);
+  }
+
+  // 4. Evidencia al lado del cambio. Sin pisar una anterior con el mismo nombre.
+  const dirEv = path.join(ROOT, 'contracts', 'propuestas');
+  fs.mkdirSync(dirEv, { recursive: true });
+  let relEv = `contracts/propuestas/${slug}.md`;
+  for (let n = 2; fs.existsSync(path.join(ROOT, relEv)); n++) relEv = `contracts/propuestas/${slug}-${n}.md`;
+  const derivados = cambiosDelArbol().filter((r) => !declaradas.some((d) => cubre(d.path, r)));
+  fs.writeFileSync(path.join(ROOT, relEv), [
+    `# Propuesta — ${porque}`,
+    '',
+    `**Generada por** \`scripts/propose.js files\` · ${new Date().toISOString()} · SYX v${syx.version}`,
+    '',
+    '## Qué',
+    '',
+    '| Fichero | Nivel |',
+    '|---|---|',
+    ...detalle.map((d) => `| \`${d.path}\` | ${d.label} (\`${d.patron}\`) |`),
+    '',
+    derivados.length ? `Regenerados por la compilación y dentro del commit: ${derivados.map((r) => `\`${r}\``).join(', ')}.\n` : '',
+    '## Evidencia',
+    '',
+    '```',
+    evidencia.validador.trim(),
+    '```',
+    '',
+    '```',
+    evidencia.snapshot.trim(),
+    '```',
+    '',
+    evidencia.registro ? '```\n' + evidencia.registro.trim() + '\n```\n' : '',
+    '## Qué revisar',
+    '',
+    '- Que el cambio hace lo que dice el porqué, no solo que compila.',
+    '- Que no introduce clases ni tokens que nadie consume.',
+    tocaComponentes ? '- Que la `description` y el `usage` del registro siguen diciendo la verdad: el generador los conserva, no los escribe.' : '',
+    '',
+  ].filter((l) => l !== '').join('\n') + '\n');
+
+  // 5. Rama y commit. Sin push.
+  git('checkout', '-b', rama);
+  git('add', '-A');
+  const resumen = porque.split('\n')[0].replace(/\.$/, '');
+  git('commit', '-q', '-m',
+    `feat(propuesta): ${resumen.length > 64 ? resumen.slice(0, 63) + '…' : resumen}\n\n` +
+    `${porque}\n\n` +
+    detalle.map((d) => `- ${d.path} (${d.tier})`).join('\n') + '\n\n' +
+    `Propuesta generada por scripts/propose.js files.\n` +
+    `Validación en verde sobre el CSS recompilado; evidencia en ${relEv}.`);
+
+  console.log(`\n✅ Rama ${rama} lista, un commit, validación en verde.`);
+  console.log(`   evidencia    ${relEv}`);
+  console.log(`   volver       git checkout ${ramaPrevia}`);
+  publicar(rama, relEv);
+}
+
 const orden = process.argv[2];
 if (orden === 'classify') classify();
 else if (orden === 'token') token();
+else if (orden === 'files') files();
 else {
   console.log(`
   node scripts/propose.js classify [rutas…]     nivel de confianza de unos cambios
   node scripts/propose.js token --name … --value …   propone un token de componente
+  node scripts/propose.js files <rutas…> --why "…"   propone un cambio ya escrito en rutas \`pr\`
 
     --why <texto>    la razón, que va al comentario, al commit y a la evidencia
-    --file <ruta>    fuerza el fichero destino (por defecto se deduce)
+    --file <ruta>    token: fuerza el fichero destino (por defecto se deduce; tiene que ser \`pr\`)
+    --branch <rama>  nombre de la rama (por defecto syx/token-… o syx/propuesta-…)
     --dry-run        dice qué haría y no toca nada
     --pr             además publica la rama y abre el PR
 `);
