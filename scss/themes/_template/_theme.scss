@@ -169,7 +169,10 @@
 // call this mixin instead of repeating the @font-face list.
 // ================================================
 @mixin theme-template-fonts {
-  // @include font-family("Your-Font--regular",
-  //   "#{-path}/your-font/YourFont-Regular",
-  //   400, normal, eot woff2 woff ttf svg);
+  // Una familia por tipografía y un @font-face por peso, solo woff2.
+  // Las que trae SYX (lista en $syx-fonts, abstracts/mixins/_font.scss):
+  // @include syx-font("Space Grotesk", 400 700);
+  // Una fuente propia, peso a peso, con el mismo nombre de familia:
+  // @include font-family("Your Font", "#{$fonts-path}/your-font/YourFont-Regular", 400, normal);
+  // @include font-family("Your Font", "#{$fonts-path}/your-font/YourFont-Bold", 700, normal);
 }

@@ -333,7 +333,9 @@
                                     <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">set by
                                         <code>color-mix()</code> (50 uses) and <code>:has()</code>. The two newest
                                         features used — relative colour and <code>subgrid</code> — sit behind
-                                        <code>@supports</code> with a fallback, so they raise nothing</span></td>
+                                        <code>@supports</code> with a fallback, so they raise nothing. The same floor
+                                        is the <code>browserslist</code> in <code>package.json</code>, and
+                                        <code>npm run check:soporte</code> fails the build if the compiled CSS needs more</span></td>
                                 <td style="text-align:left">Feature scan of the compiled CSS, counting only what is
                                     <em>not</em> guarded</td>
                             </tr>

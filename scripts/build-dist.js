@@ -52,7 +52,7 @@ async function main() {
       const entrada = path.join(SCSS, 'themes', tema, `${fichero}.scss`);
       if (!fs.existsSync(entrada)) throw new Error(`falta ${path.relative(ROOT, entrada)}`);
       const fuente = `@use 'themes/${tema}/${fichero}';\n@use 'utilities/index' as *;\n`;
-      const { css } = sass.compileString(fuente, { loadPaths: [SCSS], style: 'compressed', silenceDeprecations: ['import', 'global-builtin'] });
+      const { css } = sass.compileString(fuente, { loadPaths: [SCSS], style: 'compressed' });
       const salida = (await postcss([autoprefixer]).process(css, { from: undefined })).css;
       const destino = path.join(DIST, `${tema}.${nombre}.min.css`);
       fs.writeFileSync(destino, salida);

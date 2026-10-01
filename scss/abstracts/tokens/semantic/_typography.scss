@@ -51,6 +51,16 @@
   --semantic-font-weight-bold:    var(--primitive-font-weight-bold);
   --semantic-font-weight-black:   var(--primitive-font-weight-black); // 900 — display/hero text
 
+  // Pesos que acompañan a cada familia de rol. Desde que cada tipografía es
+  // UNA familia con varios pesos (acción 13 de la auditoría de 2026-10), la
+  // familia ya no lleva el peso dentro: `--semantic-font-family-primary-bold`
+  // es la misma familia que la regular, y lo que la hace negrita es este
+  // peso. Un tema cuya familia «bold» no tiene negrita (DM Mono 500, Bebas
+  // Neue 400) lo baja aquí en vez de pedir una negrita sintética.
+  --semantic-font-weight-primary-bold: var(--primitive-font-weight-bold);
+  --semantic-font-weight-heading:      var(--primitive-font-weight-bold);
+  --semantic-font-weight-heading-md:   var(--primitive-font-weight-medium);
+
   // LETTER SPACING
   // ================================================
   --semantic-letter-spacing-tight:  var(--primitive-letter-spacing-tight);

@@ -436,18 +436,31 @@ Multi-property background shorthand.
 
 ## Typography
 
-### `font-family($name, $path, $weight, $style, $display)`
+### `syx-font($family, $weights)`
 
-Generates a complete `@font-face` rule.
+Declares one of the fonts SYX ships: one family per typeface, one woff2
+`@font-face` per weight, plus a metric-matched fallback face
+(`"<Family> Fallback"`, Arial/Times New Roman/Courier New rescaled with
+`size-adjust`, `ascent-override` and `descent-override`) so the `swap` from
+fallback to webfont does not shift the layout. Families and weights live in
+`$syx-fonts`; asking for one that is not there is a compile error.
 
 ```scss
-@include font-family(
-  "Space Grotesk",
-  "../fonts/SpaceGrotesk-Regular",
-  400,
-  normal,
-  swap
-);
+@include syx-font("Space Grotesk", 400 700);
+
+// tokens name the family, then its fallback:
+// "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif
+// …and the weight goes in font-weight, not in the family name.
+```
+
+### `font-family($name, $path, $weight, $style, $exts: woff2)`
+
+A single `@font-face` for a font of your own (woff2 only by default, with
+`font-display: swap`). Give every weight the same `$name`.
+
+```scss
+@include font-family("Brand Sans", "../fonts/brand/BrandSans-Regular", 400, normal);
+@include font-family("Brand Sans", "../fonts/brand/BrandSans-Bold", 700, normal);
 ```
 
 ---

@@ -561,10 +561,10 @@
     // 'a' de un solo piso en cursiva, números tabulares) y es la
     // única familia con las 5 variables ya en /fonts. Syne, que
     // usan los example-*, es demasiado expresiva para un boceto.
-    --primitive-font-family-space-grotesk-light: "Google-Space-Grotesk--light", Arial, sans-serif;
-    --primitive-font-family-space-grotesk-regular: "Google-Space-Grotesk--regular", Arial, sans-serif;
-    --primitive-font-family-space-grotesk-medium: "Google-Space-Grotesk--medium", Arial, sans-serif;
-    --primitive-font-family-space-grotesk-bold: "Google-Space-Grotesk--bold", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-light: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-regular: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-medium: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+    --primitive-font-family-space-grotesk-bold: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
     // Monoespaciada del sistema: anotaciones, cotas y código.
     // Sin fichero local, así que va con pila de respaldo.
     --primitive-font-family-mono: ui-monospace, "JetBrains Mono", "SFMono-Regular", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -1196,33 +1196,5 @@
 // call this mixin instead of repeating the @font-face list.
 // ================================================
 @mixin theme-syx-sketch-fonts {
-  @include font-family(
-    "Google-Space-Grotesk--light",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Light",
-    300, normal, eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--regular",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Regular",
-    400, normal, eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--medium",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Medium",
-    500, normal, eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--semibold",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-SemiBold",
-    600, normal, eot woff2 woff ttf svg
-  );
-
-  @include font-family(
-    "Google-Space-Grotesk--bold",
-    "#{$fonts-path}/google-space-grotesk/SpaceGrotesk-Bold",
-    700, normal, eot woff2 woff ttf svg
-  );
+  @include syx-font("Space Grotesk", 300 400 500 600 700);
 }

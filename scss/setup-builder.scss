@@ -28,9 +28,10 @@
     --theme-radius: 0.75rem;
 
     // Inter Font Stack (Default)
-    --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --primitive-font-family-inter: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --semantic-font-family-primary: var(--primitive-font-family-inter);
     --semantic-font-family-primary-bold: var(--primitive-font-family-inter);
+    --semantic-font-weight-primary-bold: var(--primitive-font-weight-regular);
     --semantic-font-family-heading: var(--primitive-font-family-inter);
     --reset-html-font: normal normal 400 16px/24px var(--primitive-font-family-inter);
 
@@ -89,16 +90,7 @@
 
 // FONT SETUP
 // ===============================================
-@include font-family("Google-Inter--regular",
-    "#{$fonts-path}/google-inter/Inter-Regular",
-    400,
-    normal,
-    woff2 woff);
-@include font-family("Google-Inter--medium",
-    "#{$fonts-path}/google-inter/Inter-Medium",
-    500,
-    normal,
-    woff2 woff);
+@include syx-font("Inter", 400 500);
 
 // RESET: global
 // ===============================================
@@ -144,4 +136,4 @@
 // SYX ORGANISMS
 // ===============================================
 @include org-site-header(example-01);
-// ===============================================
+// ===============================================

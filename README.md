@@ -128,6 +128,18 @@ sass scss/styles-theme-example-01.scss css/styles-theme-example-01.css --style=c
 
 ---
 
+## Browser support
+
+**Chrome 111 · Edge 111 · Safari 16.2 (macOS and iOS) · Firefox 121.** That floor is
+set by `color-mix()` and `oklch()`, which the CSS uses without a fallback build. It is
+written down once, as the `browserslist` in `package.json`: Autoprefixer reads it, so
+the compiled CSS carries no prefixes for browsers below it, and `npm run check:soporte`
+reads it to fail the build if the compiled CSS uses anything the floor lacks outside an
+`@supports` block. Fonts ship as woff2 only, each with a metric-matched local fallback
+so the swap does not move the layout.
+
+---
+
 ## MCP server (for AI agents)
 
 SYX ships an MCP server so an agent can **ask** the design system instead of reading it.

@@ -72,7 +72,7 @@
     "check:reglas": "node scripts/check-reglas.js",
     "export:tokens": "node scripts/export-tokens.js",
     "export:figma": "node scripts/export-figma.js",
-    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:vitrina && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run build",
+    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:themes && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:registry && npm run check:mcp && npm run check:escaner && npm run check:vitrina && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run build && npm run check:soporte",
     "check:themes": "node scripts/check-theme-symmetry.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
@@ -85,6 +85,7 @@
     "mcp": "node scripts/mcp-server.js",
     "check:mcp": "node scripts/check-mcp.js",
     "check:package": "node scripts/check-package.js",
+    "check:soporte": "node scripts/check-soporte.js",
     "check:consumible": "node scripts/check-consumible.js",
     "check:propuesta": "node scripts/check-propuesta.js",
     "propose": "node scripts/propose.js",
@@ -132,11 +133,14 @@
     "sass": "^1.77.0",
     "stylelint": "^16.0.0",
     "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-no-unsupported-browser-features": "^8.1.2",
     "stylelint-order": "^6.0.0"
   },
   "browserslist": [
-    "last 2 versions",
-    "> 0.2%",
-    "not dead"
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 121",
+    "safari >= 16.2",
+    "ios_saf >= 16.2"
   ]
 }

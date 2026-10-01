@@ -38,9 +38,12 @@
     // -----------------------------------------------
     html {
       -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-      -ms-overflow-style: scrollbar;
       font: var(--reset-html-font);
+      // Síntesis: la cursiva sí (SYX no trae ficheros italic, y `em`/`cite`
+      // necesitan inclinarse); la negrita solo como último recurso, que desde
+      // que cada familia trae sus pesos reales queda para las que no tienen
+      // negrita (Inter, DM Mono, Bebas Neue); versalitas falsas, nunca.
+      font-synthesis: weight style;
     }
 
     // -----------------------------------------------
@@ -114,6 +117,13 @@
       font-family: var(--font-bold);
     }
 
+    // `--font-bold` era una familia de un solo peso (negrita), así que `em`
+    // salía en negrita además de en cursiva. Ahora la familia trae todos los
+    // pesos; el peso explícito conserva ese aspecto.
+    em {
+      font-weight: var(--semantic-font-weight-primary-bold);
+    }
+
     // -----------------------------------------------
     // ANCHOR
     // -----------------------------------------------
@@ -162,7 +172,6 @@
 
     pre {
       overflow: auto;
-      -ms-overflow-style: scrollbar;
     }
 
     // -----------------------------------------------
@@ -276,18 +285,12 @@
     }
 
     select {
-      -webkit-appearance: none;
       appearance: none;
       text-transform: none;
-
-      &::-ms-expand {
-        display: none;
-      }
     }
 
     input {
       @include margin(0);
-      -webkit-appearance: none;
       appearance: none;
       overflow: visible;
       line-height: inherit;
@@ -302,10 +305,12 @@
       &[type="time"],
       &[type="datetime-local"],
       &[type="month"] {
-        -webkit-appearance: listbox;
         appearance: listbox;
       }
 
+      // No es de IE: Edge (Chromium, dentro del soporte mínimo) pinta su
+      // propio botón de «mostrar contraseña» y solo se apaga con este
+      // pseudoelemento. ::-ms-expand sí era de IE y se fue.
       &[type="password"]::-ms-reveal {
         display: none;
       }
@@ -324,7 +329,6 @@
     [type="button"],
     [type="submit"],
     ::-webkit-file-upload-button {
-      -webkit-appearance: button;
       appearance: button;
     }
 
@@ -341,7 +345,6 @@
 
     [type="search"] {
       outline-offset: -2px;
-      -webkit-appearance: none;
       appearance: none;
 
       &::-webkit-search-cancel-button,
@@ -359,7 +362,6 @@
     textarea {
       @include margin(0);
       @include padding(1rem null null null);
-      -webkit-appearance: none;
       appearance: none;
       overflow: auto;
       resize: vertical;

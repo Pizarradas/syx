@@ -12,7 +12,7 @@
  * y que antes solo se descubría mirando el CSS.
  *
  * También falla si algún bundle-*.scss vuelve a declarar @font-face a mano
- * (@include font-family fuera de _theme.scss): la lista de fuentes vive en
+ * (@include font-family o syx-font fuera de _theme.scss): la lista vive en
  * theme-x-fonts(), una vez por tema.
  *
  * Uso: node scripts/check-setups.js   (npm run check:setups)
@@ -45,7 +45,7 @@ for (const t of THEMES) {
   const dir = path.join(ROOT, 'scss', 'themes', t);
   for (const f of fs.readdirSync(dir).filter((f) => /^bundle-.*\.scss$/.test(f))) {
     const c = fs.readFileSync(path.join(dir, f), 'utf8');
-    if (/^\s*@include font-family\(/m.test(c)) bundleOffenders.push(`themes/${t}/${f}`);
+    if (/^\s*@include (font-family|syx-font)\(/m.test(c)) bundleOffenders.push(`themes/${t}/${f}`);
   }
 }
 if (bundleOffenders.length) {
