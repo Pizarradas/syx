@@ -46,9 +46,7 @@
     @include sr-only();
 
     &:focus {
-      position: fixed;
-      top: var(--semantic-space-layout-sm);
-      left: var(--semantic-space-layout-sm);
+      @include fixed($top: var(--semantic-space-layout-sm), $left: var(--semantic-space-layout-sm));
       z-index: var(--semantic-z-index-skip-link, 9999);
       padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
       background: var(--semantic-color-primary);

@@ -48,6 +48,29 @@
     --semantic-color-primary: var(--primitive-color-brand-base);
 
     --layout-max-width: calc(360 * var(--primitive-space-base));
+
+    // Paleta propia del editor (pages/_theme-builder.scss)
+    // La herramienta no puede vestirse con los semánticos que está editando:
+    // el JS los reescribe aquí, en :root, en cada cambio. Se traduce desde
+    // primitivos en este fichero —el contrato (R01) lo permite en el setup y
+    // no en scss/pages/— para que la página consuma nombres con intención y no
+    // una rampa de grises.
+    --builder-page-bg: var(--primitive-color-white);
+    --builder-chrome-bg: var(--primitive-color-gray-900);
+    --builder-chrome-raised: var(--primitive-color-gray-800);
+    --builder-chrome-edge: var(--primitive-color-gray-700);
+    --builder-chrome-title: var(--primitive-color-gray-100);
+    --builder-chrome-label: var(--primitive-color-gray-400);
+    --builder-chrome-value: var(--primitive-color-blue-400);
+    --builder-chrome-accent: var(--primitive-color-blue-500);
+    --builder-chrome-input-text: var(--primitive-color-white);
+    --builder-font-size-title: var(--primitive-font-size-md);
+    --builder-font-size-control: var(--primitive-font-size-sm);
+    --builder-space-1: calc(1 * var(--primitive-space-base));
+    --builder-space-2: calc(2 * var(--primitive-space-base));
+    --builder-space-3: calc(3 * var(--primitive-space-base));
+    --builder-space-4: calc(4 * var(--primitive-space-base));
+    --builder-space-5: calc(5 * var(--primitive-space-base));
 }
 
 // DARK MODE
@@ -121,4 +144,4 @@
 // SYX ORGANISMS
 // ===============================================
 @include org-site-header(example-01);
-// ===============================================
+// ===============================================

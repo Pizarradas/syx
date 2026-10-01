@@ -300,13 +300,13 @@
     position: relative;
   }
   .syx-absolute {
-    position: absolute;
+    @include absolute();
   }
   .syx-sticky {
-    position: sticky;
+    @include sticky();
   }
   .syx-fixed {
-    position: fixed;
+    @include fixed();
   }
   .syx-static {
     position: static;
