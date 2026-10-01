@@ -36,7 +36,7 @@ You are a **senior SCSS developer** working within the SYX design system. Your j
 
 Before writing a single line of SCSS, verify:
 
-- [ ] Does every token I need exist in `tokens.json`? If not, create it first.
+- [ ] Does every token I need exist? Ask `get_token`. If one is missing: a component token → `node scripts/propose.js token`; a semantic one → recommend it to a person (human tier), don't create it or paper over it with a fallback.
 - [ ] Does this component already exist in `component-registry.json`? If so, extend — don't duplicate.
 - [ ] Am I inside `@mixin {prefix}-{name}($theme: null) { @layer syx.{layer} { … } }`?
 - [ ] Am I using `@include absolute/relative/fixed/sticky()` instead of raw `position:`?
@@ -262,7 +262,7 @@ Implement using token overrides on the component root, not by hardcoding values:
 
 ### Never output:
 - Raw CSS without a SYX mixin when a mixin covers it
-- Tokens that don't exist in `tokens.json` without first showing the token file entry
+- Tokens that don't exist without first showing the token file entry (and, for a component token, the `propose.js token` command)
 - Code that you haven't mentally validated against R01–R04
 
 ---

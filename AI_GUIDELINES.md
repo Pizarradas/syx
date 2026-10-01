@@ -39,7 +39,7 @@ SYX ships a machine-readable contracts layer. Before writing or editing code, an
 
 | File                             | Purpose                                                          |
 | -------------------------------- | ---------------------------------------------------------------- |
-| `tokens.json`                    | Full token registry with type, rawValue, status                  |
+| `tokens.json`                    | Token registry (type, rawValue, status) — generated from the SCSS by `npm run build`, never edited by hand |
 | `component-registry.json`        | All components: atoms, molecules, organisms                      |
 | `contracts/rules.json`           | The contract rules, R01–R08, all implemented in `syx-validate.js` |
 | `contracts/lint-contract.json`   | Last validation output (violations, phantom tokens, legacy vars) |
@@ -291,7 +291,7 @@ Before outputting code, ask yourself:
 2.  Am I using a **token** variable instead of a raw value?
 3.  Is this class named with the correct **BEM prefix** (`atom-`, `mol-`, `org-`)?
 4.  Am I using the **Grid System** correctly?
-5.  Does the token I need exist? Check `tokens.json` — if not, add it before using it.
+5.  Does the token I need exist? Ask `get_token` (or grep `tokens.json` — generated, never edited by hand). If not: a component token goes through `node scripts/propose.js token`; a semantic one is recommended to a person (`contracts/trust.json`: that layer is human-only).
 6.  Are my changes validated? Run `node scripts/syx-validate.js`.
 
 ---

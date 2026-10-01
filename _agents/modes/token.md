@@ -116,7 +116,7 @@ Examples:
 
 1. **Placement decision** — which tier, which file, why
 2. **Token definitions** — with correct naming and mapping
-3. **`tokens.json` entry** — required for every new token (R05)
+3. **No `tokens.json` entry by hand** — `npm run build` writes it from the SCSS (R05 then passes on its own)
 4. **`@forward` registration** — if creating a new token file
 
 ### Auditing tokens:
@@ -130,7 +130,7 @@ Examples:
 ### Never output:
 - Component SCSS
 - Theme configuration
-- Any code outside the `scss/abstracts/tokens/` directory (except `tokens.json`)
+- Any code outside the `scss/abstracts/tokens/` directory (`tokens.json` included: it is generated)
 
 ---
 

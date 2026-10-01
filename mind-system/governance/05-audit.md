@@ -75,7 +75,7 @@ hero de apertura y grid de noticias secundarias utilizando [SYX: UX → TOKEN �
 
 1. Atlas determina: N1 = titular apertura, N2 = máx 4 noticias destacadas, N3 = grid estándar, proporción 2:1 con sidebar de datos, densidad media.
 2. UX produce HTML: `org-hero-principal` (N1), `org-grid-editorial` (N2 + sidebar), `org-zona-secundaria` (N3). `atom-headline--3xl` solo en N1.
-3. TOKEN verifica `10.0`, define tokens ausentes, registra en `tokens.json`.
+3. TOKEN verifica `10.0` y define los tokens ausentes en `scss/abstracts/tokens/` (`tokens.json` se regenera solo con `npm run build`).
 4. UI implementa SCSS con proporciones `fr`/`clamp()`, sin `nth-child` de layout. AUDIT verifica R01–R08 + contratos Atlas sobre ese mismo SCSS simultáneamente.
 
 ---

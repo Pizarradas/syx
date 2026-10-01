@@ -149,7 +149,7 @@ These rules are never overridden by any mode:
 - **Never use `!important`.** SYX uses `@layer` for cascade management.
 - **Never write raw `transition:` or `position:` in component files.** Use mixins.
 - **Never hardcode design values** (hex colors, raw px/rem literals). Use tokens.
-- **Check `tokens.json` before using a token.** If it doesn't exist, create it first.
+- **Ask before using a token** — `get_token` (or a grep of `tokens.json`, which is generated from the SCSS: never edit it). If it is missing: a component token is proposed with `node scripts/propose.js token`; a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person, don't create it.
 - **Check `component-registry.json` before creating a component.** Reuse before creating.
 - **After writing code, run** `node scripts/syx-validate.js` to verify R01–R08 compliance. R01–R04 are errors and fail the run; R05, R06 and R08 are warnings (undocumented tokens, phantom entries, registry tokens no compiled CSS uses) and R07 is info (unprefixed legacy vars).
 
