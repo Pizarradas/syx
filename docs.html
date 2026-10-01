@@ -3632,6 +3632,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-breadcrumb__item</code> <code>atom-breadcrumb__link</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Wrap the list in &lt;nav aria-label=&quot;Breadcrumb&quot;&gt; with an &lt;ol&gt;. The current page is plain text with aria-current=&quot;page&quot;, not a link. Separators are CSS and are not read. Links take the system focus ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3640,23 +3641,24 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-atom-btn" aria-labelledby="ref-atom-btn-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-btn-titulo">Btn <code>.atom-btn</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_btn.scss</code></p>
-            <p class="atom-txt syx-mb-3">The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --filled makes the variant solid. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.</p>
+            <p class="atom-txt syx-mb-3">The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --danger marks a destructive action (delete, revoke) in the error state colour, never the brand; --filled makes any variant solid. Without a --size-* modifier a button is md, the same 48px height as a form field; --size-sm/--size-lg are 40/56px. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><button class="atom-btn atom-btn--primary atom-btn--size-md" type="button">Get started</button></div>
+            <div class="docs-ref__demo syx-mb-3"><button class="atom-btn atom-btn--primary atom-btn--size-md" type="button">Get started</button> <button class="atom-btn atom-btn--danger atom-btn--filled" type="button">Delete project</button></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-btn-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-btn-marcado"><code>&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Get started&lt;/button&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-btn-marcado"><code>&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Get started&lt;/button&gt; &lt;button class=&quot;atom-btn atom-btn--danger atom-btn--filled&quot; type=&quot;button&quot;&gt;Delete project&lt;/button&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
                 <tbody>
                   <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-btn</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-btn--circle</code> <code>atom-btn--filled</code> <code>atom-btn--has-icon</code> <code>atom-btn--primary</code> <code>atom-btn--quaternary</code> <code>atom-btn--secondary</code> <code>atom-btn--size-lg</code> <code>atom-btn--size-md</code> <code>atom-btn--size-sm</code> <code>atom-btn--tertiary</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-btn--circle</code> <code>atom-btn--danger</code> <code>atom-btn--filled</code> <code>atom-btn--has-icon</code> <code>atom-btn--primary</code> <code>atom-btn--quaternary</code> <code>atom-btn--secondary</code> <code>atom-btn--size-lg</code> <code>atom-btn--size-md</code> <code>atom-btn--size-sm</code> <code>atom-btn--tertiary</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:active</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-icon</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">64 component tokens</summary><div class="mol-disclosure__content"><code>--component-button-active-offset-x</code> <code>--component-button-active-offset-y</code> <code>--component-button-border-radius</code> <code>--component-button-border-radius-circle</code> <code>--component-button-border-style</code> <code>--component-button-border-width</code> <code>--component-button-disabled-bg</code> <code>--component-button-disabled-border</code> <code>--component-button-disabled-color</code> <code>--component-button-disabled-filled-color</code> <code>--component-button-font-family</code> <code>--component-button-font-size</code> <code>--component-button-font-size-lg</code> <code>--component-button-font-size-md</code> <code>--component-button-font-size-sm</code> <code>--component-button-line-height</code> <code>--component-button-primary-bg-hover</code> <code>--component-button-primary-border-hover</code> <code>--component-button-primary-color</code> <code>--component-button-primary-color-hover</code> <code>--component-button-primary-filled-bg</code> <code>--component-button-primary-filled-bg-hover</code> <code>--component-button-primary-filled-border-hover</code> <code>--component-button-primary-filled-color</code> <code>--component-button-primary-filled-color-hover</code> <code>--component-button-quaternary-bg-hover</code> <code>--component-button-quaternary-border-hover</code> <code>--component-button-quaternary-color</code> <code>--component-button-quaternary-color-hover</code> <code>--component-button-quaternary-filled-bg</code> <code>--component-button-quaternary-filled-bg-hover</code> <code>--component-button-quaternary-filled-border-hover</code> <code>--component-button-quaternary-filled-color</code> <code>--component-button-quaternary-filled-color-hover</code> <code>--component-button-secondary-bg-hover</code> <code>--component-button-secondary-border-hover</code> <code>--component-button-secondary-color</code> <code>--component-button-secondary-color-hover</code> <code>--component-button-secondary-filled-bg</code> <code>--component-button-secondary-filled-bg-hover</code> <code>--component-button-secondary-filled-border-hover</code> <code>--component-button-secondary-filled-color</code> <code>--component-button-secondary-filled-color-hover</code> <code>--component-button-shadow</code> <code>--component-button-shadow-active</code> <code>--component-button-shadow-hover</code> <code>--component-button-size-lg</code> <code>--component-button-size-md</code> <code>--component-button-size-sm</code> <code>--component-button-tertiary-bg-hover</code> <code>--component-button-tertiary-border-hover</code> <code>--component-button-tertiary-color</code> <code>--component-button-tertiary-color-hover</code> <code>--component-button-tertiary-filled-bg</code> <code>--component-button-tertiary-filled-bg-hover</code> <code>--component-button-tertiary-filled-border-hover</code> <code>--component-button-tertiary-filled-color</code> <code>--component-button-tertiary-filled-color-hover</code> <code>--component-button-transition-duration</code> <code>--component-button-transition-duration-active</code> <code>--component-button-transition-easing</code> <code>--component-icon-size-lg</code> <code>--component-icon-size-md</code> <code>--component-icon-size-sm</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">80 component tokens</summary><div class="mol-disclosure__content"><code>--component-button-active-offset-x</code> <code>--component-button-active-offset-y</code> <code>--component-button-border-radius</code> <code>--component-button-border-radius-circle</code> <code>--component-button-border-style</code> <code>--component-button-border-width</code> <code>--component-button-danger-bg-hover</code> <code>--component-button-danger-border</code> <code>--component-button-danger-border-hover</code> <code>--component-button-danger-color</code> <code>--component-button-danger-color-hover</code> <code>--component-button-danger-filled-bg</code> <code>--component-button-danger-filled-bg-hover</code> <code>--component-button-danger-filled-border</code> <code>--component-button-danger-filled-border-hover</code> <code>--component-button-danger-filled-color</code> <code>--component-button-danger-filled-color-hover</code> <code>--component-button-disabled-bg</code> <code>--component-button-disabled-border</code> <code>--component-button-disabled-color</code> <code>--component-button-disabled-filled-color</code> <code>--component-button-font-family</code> <code>--component-button-font-size</code> <code>--component-button-font-size-lg</code> <code>--component-button-font-size-md</code> <code>--component-button-font-size-sm</code> <code>--component-button-font-weight</code> <code>--component-button-height-lg</code> <code>--component-button-height-md</code> <code>--component-button-height-sm</code> <code>--component-button-line-height</code> <code>--component-button-padding-block</code> <code>--component-button-primary-bg-hover</code> <code>--component-button-primary-border-hover</code> <code>--component-button-primary-color</code> <code>--component-button-primary-color-hover</code> <code>--component-button-primary-filled-bg</code> <code>--component-button-primary-filled-bg-hover</code> <code>--component-button-primary-filled-border-hover</code> <code>--component-button-primary-filled-color</code> <code>--component-button-primary-filled-color-hover</code> <code>--component-button-quaternary-bg-hover</code> <code>--component-button-quaternary-border-hover</code> <code>--component-button-quaternary-color</code> <code>--component-button-quaternary-color-hover</code> <code>--component-button-quaternary-filled-bg</code> <code>--component-button-quaternary-filled-bg-hover</code> <code>--component-button-quaternary-filled-border-hover</code> <code>--component-button-quaternary-filled-color</code> <code>--component-button-quaternary-filled-color-hover</code> <code>--component-button-secondary-bg-hover</code> <code>--component-button-secondary-border-hover</code> <code>--component-button-secondary-color</code> <code>--component-button-secondary-color-hover</code> <code>--component-button-secondary-filled-bg</code> <code>--component-button-secondary-filled-bg-hover</code> <code>--component-button-secondary-filled-border-hover</code> <code>--component-button-secondary-filled-color</code> <code>--component-button-secondary-filled-color-hover</code> <code>--component-button-shadow</code> <code>--component-button-shadow-active</code> <code>--component-button-shadow-hover</code> <code>--component-button-size-lg</code> <code>--component-button-size-md</code> <code>--component-button-size-sm</code> <code>--component-button-tertiary-bg-hover</code> <code>--component-button-tertiary-border-hover</code> <code>--component-button-tertiary-color</code> <code>--component-button-tertiary-color-hover</code> <code>--component-button-tertiary-filled-bg</code> <code>--component-button-tertiary-filled-bg-hover</code> <code>--component-button-tertiary-filled-border-hover</code> <code>--component-button-tertiary-filled-color</code> <code>--component-button-tertiary-filled-color-hover</code> <code>--component-button-transition-duration</code> <code>--component-button-transition-duration-active</code> <code>--component-button-transition-easing</code> <code>--component-icon-size-lg</code> <code>--component-icon-size-md</code> <code>--component-icon-size-sm</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;button&gt; with an explicit type (&quot;button&quot;, or &quot;submit&quot; inside a form); an &lt;a href&gt; only when it navigates. Enter/Space come from the element. Icon-only (--circle) needs aria-label. Disable with the disabled attribute, not a class. Focus: system ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3680,7 +3682,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-check__input</code> <code>atom-check__label</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:checked</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-check-bg</code> <code>--component-check-bg-checked</code> <code>--component-check-border-color</code> <code>--component-check-border-color-hover</code> <code>--component-check-border-radius</code> <code>--component-check-border-width</code> <code>--component-check-gap</code> <code>--component-check-mark-height</code> <code>--component-check-mark-rotation</code> <code>--component-check-mark-thickness</code> <code>--component-check-mark-width</code> <code>--component-check-shadow-focus</code> <code>--component-check-size</code> <code>--component-check-status-disabled-opacity</code> <code>--component-check-transition-duration</code> <code>--component-check-transition-easing</code> <code>--component-form-field-border-focus</code> <code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-check-bg</code> <code>--component-check-bg-checked</code> <code>--component-check-border-color</code> <code>--component-check-border-color-hover</code> <code>--component-check-border-radius</code> <code>--component-check-border-width</code> <code>--component-check-gap</code> <code>--component-check-mark-color</code> <code>--component-check-mark-height</code> <code>--component-check-mark-rotation</code> <code>--component-check-mark-thickness</code> <code>--component-check-mark-width</code> <code>--component-check-shadow-focus</code> <code>--component-check-size</code> <code>--component-check-status-disabled-opacity</code> <code>--component-check-transition-duration</code> <code>--component-check-transition-easing</code> <code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Real &lt;input type=&quot;checkbox&quot;&gt; inside the &lt;label&gt;, so the text is its name and the whole row toggles it. Space toggles. Related boxes go in a &lt;fieldset&gt; with a &lt;legend&gt;. The focus ring is drawn on the visible box. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3705,6 +3708,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-code__attr</code> <code>atom-code__cls</code> <code>atom-code__cmt</code> <code>atom-code__tag</code> <code>atom-code__val</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">16 component tokens</summary><div class="mol-disclosure__content"><code>--component-code-bg</code> <code>--component-code-border-color</code> <code>--component-code-border-radius</code> <code>--component-code-border-width</code> <code>--component-code-color</code> <code>--component-code-font-size</code> <code>--component-code-inline-border-color</code> <code>--component-code-inline-border-radius</code> <code>--component-code-inline-border-width</code> <code>--component-code-inline-font-size</code> <code>--component-code-line-height</code> <code>--component-code-syntax-attr</code> <code>--component-code-syntax-comment</code> <code>--component-code-syntax-fn</code> <code>--component-code-syntax-tag</code> <code>--component-code-syntax-val</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Static content in &lt;pre&gt;&lt;code&gt;. A block that scrolls sideways needs tabindex=&quot;0&quot; (and a label) so it can be scrolled from the keyboard. Colour is never the only cue. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3729,6 +3733,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">16 component tokens</summary><div class="mol-disclosure__content"><code>--component-feature-icon-border-color</code> <code>--component-feature-icon-border-radius</code> <code>--component-feature-icon-border-style</code> <code>--component-feature-icon-border-width</code> <code>--component-feature-icon-layer-bg</code> <code>--component-feature-icon-layer-color</code> <code>--component-feature-icon-mixin-bg</code> <code>--component-feature-icon-mixin-color</code> <code>--component-feature-icon-molecule-bg</code> <code>--component-feature-icon-molecule-color</code> <code>--component-feature-icon-organism-bg</code> <code>--component-feature-icon-organism-color</code> <code>--component-feature-icon-shadow</code> <code>--component-feature-icon-size</code> <code>--component-feature-icon-token-bg</code> <code>--component-feature-icon-token-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Decorative: always aria-hidden=&quot;true&quot;; the meaning lives in the text next to it. Never focusable. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3739,11 +3744,11 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_form.scss</code></p>
             <p class="atom-txt syx-mb-3">The four canonical form primitives: .atom-label, .atom-input, .atom-select and .atom-input-wrapper. They are the raw controls only — validation state, message and icon live in mol-form-field, so use these bare only in a layout that handles its own error reporting.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><label class="atom-label" for="ref-atom-form-email">Email</label><span class="atom-input-wrapper"><input class="atom-input" id="ref-atom-form-email" type="email"></span></div>
+            <div class="docs-ref__demo syx-mb-3"><label class="atom-label" for="ref-atom-form-form-email">Email</label><span class="atom-input-wrapper"><input class="atom-input" id="ref-atom-form-form-email" type="email" autocomplete="email"></span><label class="atom-label" for="ref-atom-form-form-plan">Plan</label><span class="atom-input-wrapper"><select class="atom-select" id="ref-atom-form-form-plan"><option>Free</option><option>Pro</option></select></span></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-form-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;email&quot; type=&quot;email&quot;&gt;&lt;/span&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-atom-form-marcado"><code>&lt;label class=&quot;atom-label&quot; for=&quot;form-email&quot;&gt;Email&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;input class=&quot;atom-input&quot; id=&quot;form-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot;&gt;&lt;/span&gt;&lt;label class=&quot;atom-label&quot; for=&quot;form-plan&quot;&gt;Plan&lt;/label&gt;&lt;span class=&quot;atom-input-wrapper&quot;&gt;&lt;select class=&quot;atom-select&quot; id=&quot;form-plan&quot;&gt;&lt;option&gt;Free&lt;/option&gt;&lt;option&gt;Pro&lt;/option&gt;&lt;/select&gt;&lt;/span&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -3751,9 +3756,10 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Classes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-input-wrapper</code> <code>atom-label</code> <code>atom-select</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
-                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:disabled</code> <code>:hover</code></td></tr>
+                  <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-label</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-bg</code> <code>--component-form-field-bg-disabled</code> <code>--component-form-field-border</code> <code>--component-form-field-border-focus</code> <code>--component-form-field-border-radius</code> <code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-color-disabled</code> <code>--component-form-field-font-family</code> <code>--component-form-field-font-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-line-height</code> <code>--component-form-field-min-height</code> <code>--component-form-field-padding-x</code> <code>--component-form-field-padding-y</code> <code>--component-form-field-placeholder</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-duration</code> <code>--component-form-field-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-bg</code> <code>--component-form-field-bg-disabled</code> <code>--component-form-field-border</code> <code>--component-form-field-border-focus</code> <code>--component-form-field-border-radius</code> <code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-color-disabled</code> <code>--component-form-field-font-family</code> <code>--component-form-field-font-size</code> <code>--component-form-field-font-weight</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-line-height</code> <code>--component-form-field-min-height</code> <code>--component-form-field-padding-x</code> <code>--component-form-field-padding-y</code> <code>--component-form-field-placeholder</code> <code>--component-form-field-transition-duration</code> <code>--component-form-field-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Every control has a &lt;label for&gt; pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native &lt;select&gt;: keyboard and option list come from the browser. Controls are 48px tall at every width. Focus: system ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3779,6 +3785,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-icon</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Decorative by default: aria-hidden=&quot;true&quot;. When it is the only content of a control, the control carries the aria-label, not the icon. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3803,6 +3810,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">6 component tokens</summary><div class="mol-disclosure__content"><code>--component-icon-color</code> <code>--component-icon-size-lg</code> <code>--component-icon-size-md</code> <code>--component-icon-size-sm</code> <code>--component-icon-size-xl</code> <code>--component-icon-source</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Decorative by default: aria-hidden=&quot;true&quot;. When it is the only content of a control, the control carries the aria-label, not the icon. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3827,6 +3835,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">4 component tokens</summary><div class="mol-disclosure__content"><code>--component-label-border-radius</code> <code>--component-label-padding-lg</code> <code>--component-label-padding-md</code> <code>--component-label-padding-sm</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Plain text, no role. If it marks a state, the words must say it. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3850,7 +3859,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-link--primary</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:active</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">5 component tokens</summary><div class="mol-disclosure__content"><code>--component-link-decoration-thickness</code> <code>--component-link-primary-bg-hover</code> <code>--component-link-primary-color</code> <code>--component-link-primary-color-hover</code> <code>--component-link-primary-shadow-focus</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">4 component tokens</summary><div class="mol-disclosure__content"><code>--component-link-decoration-thickness</code> <code>--component-link-primary-bg-hover</code> <code>--component-link-primary-color</code> <code>--component-link-primary-color-hover</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;a href&gt;; if it performs an action it is a &lt;button&gt;. The text must make sense out of context (&quot;Read the docs&quot;, not &quot;here&quot;). Every variant takes the system focus ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3878,6 +3888,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;ul&gt;/&lt;ol&gt; so the item count is announced. The --primary marker is CSS; WebKit drops list semantics when list-style is none, so add role=&quot;list&quot; if that matters. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3886,16 +3897,19 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-atom-pagination" aria-labelledby="ref-atom-pagination-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-pagination-titulo">Pagination <code>.atom-pagination</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_pagination.scss</code></p>
-            <p class="atom-txt syx-mb-3">Page-by-page navigation over a finite, countable result set. Prev/next arrows come from the Lucide token system via ::before — mark the item --is-prev/--is-next rather than typing a character into the HTML. If the total is unknown or the list is a feed, this is the wrong control.</p>
+            <p class="atom-txt syx-mb-3">Page-by-page navigation over a finite, countable result set. Prev/next arrows come from the Lucide token system via ::before — mark the item --is-prev/--is-next and give the trigger an aria-label instead of visible text (a word overflows the square trigger). If the total is unknown or the list is a feed, this is the wrong control.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><nav aria-label="Pagination"><ul class="atom-pagination"><li class="atom-pagination__item atom-pagination__item--is-prev"><a class="atom-pagination__trigger" href="?p=1">Previous</a></li><li class="atom-pagination__item atom-pagination__item--is-active"><a class="atom-pagination__trigger" href="?p=2" aria-current="page">2</a></li></ul></nav></div>
+            <div class="docs-ref__demo syx-mb-3"><nav aria-label="Pagination"><ul class="atom-pagination"><li class="atom-pagination__item atom-pagination__item--is-prev"><a class="atom-pagination__trigger" href="?p=1" aria-label="Previous page"></a></li><li class="atom-pagination__item"><a class="atom-pagination__trigger" href="?p=1">1</a></li><li class="atom-pagination__item atom-pagination__item--is-active"><a class="atom-pagination__trigger" href="?p=2" aria-current="page">2</a></li><li class="atom-pagination__item"><a class="atom-pagination__trigger" href="?p=3">3</a></li><li class="atom-pagination__item atom-pagination__item--is-next"><a class="atom-pagination__trigger" href="?p=3" aria-label="Next page"></a></li></ul></nav></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-pagination-marcado">Copy</button>
               <pre class="atom-code syx-mb-0" id="ref-atom-pagination-marcado"><code>&lt;nav aria-label=&quot;Pagination&quot;&gt;
   &lt;ul class=&quot;atom-pagination&quot;&gt;
-    &lt;li class=&quot;atom-pagination__item atom-pagination__item--is-prev&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=1&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;atom-pagination__item atom-pagination__item--is-prev&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=1&quot; aria-label=&quot;Previous page&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;atom-pagination__item&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=1&quot;&gt;1&lt;/a&gt;&lt;/li&gt;
     &lt;li class=&quot;atom-pagination__item atom-pagination__item--is-active&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=2&quot; aria-current=&quot;page&quot;&gt;2&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;atom-pagination__item&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=3&quot;&gt;3&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;atom-pagination__item atom-pagination__item--is-next&quot;&gt;&lt;a class=&quot;atom-pagination__trigger&quot; href=&quot;?p=3&quot; aria-label=&quot;Next page&quot;&gt;&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
             </div>
@@ -3906,7 +3920,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-pagination__item--is-active</code> <code>atom-pagination__item--is-disabled</code> <code>atom-pagination__item--is-next</code> <code>atom-pagination__item--is-prev</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-pagination__item</code> <code>atom-pagination__trigger</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-pagination-bg-active</code> <code>--component-pagination-border-color-hover</code> <code>--component-pagination-border-radius</code> <code>--component-pagination-border-width</code> <code>--component-pagination-color</code> <code>--component-pagination-color-active</code> <code>--component-pagination-color-disabled</code> <code>--component-pagination-color-hover</code> <code>--component-pagination-font-family</code> <code>--component-pagination-gap</code> <code>--component-pagination-icon-filter</code> <code>--component-pagination-icon-size</code> <code>--component-pagination-item-size</code> <code>--component-pagination-shadow-focus</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">13 component tokens</summary><div class="mol-disclosure__content"><code>--component-pagination-bg-active</code> <code>--component-pagination-border-color-hover</code> <code>--component-pagination-border-radius</code> <code>--component-pagination-border-width</code> <code>--component-pagination-color</code> <code>--component-pagination-color-active</code> <code>--component-pagination-color-disabled</code> <code>--component-pagination-color-hover</code> <code>--component-pagination-font-family</code> <code>--component-pagination-gap</code> <code>--component-pagination-icon-filter</code> <code>--component-pagination-icon-size</code> <code>--component-pagination-item-size</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Wrap it in &lt;nav aria-label=&quot;Pagination&quot;&gt;; the current page carries aria-current=&quot;page&quot;. Prev/next are icon-only: aria-label (&quot;Previous page&quot;, &quot;Next page&quot;), no visible text. &lt;a href&gt; for page URLs, &lt;button type=&quot;button&quot;&gt; when script loads the results. A dead end uses --is-disabled plus disabled (button) or aria-disabled=&quot;true&quot; (link). No JS required.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3931,6 +3946,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">26 component tokens</summary><div class="mol-disclosure__content"><code>--component-pill-border-radius</code> <code>--component-pill-border-style</code> <code>--component-pill-border-width</code> <code>--component-pill-danger-bg</code> <code>--component-pill-danger-color</code> <code>--component-pill-dark-bg</code> <code>--component-pill-dark-border-color</code> <code>--component-pill-dark-color</code> <code>--component-pill-gap</code> <code>--component-pill-line-height</code> <code>--component-pill-neutral-bg</code> <code>--component-pill-neutral-border-color</code> <code>--component-pill-neutral-color</code> <code>--component-pill-primary-bg</code> <code>--component-pill-primary-border-color</code> <code>--component-pill-primary-color</code> <code>--component-pill-secondary-bg</code> <code>--component-pill-secondary-border-color</code> <code>--component-pill-secondary-color</code> <code>--component-pill-subtle-bg</code> <code>--component-pill-subtle-border-color</code> <code>--component-pill-subtle-color</code> <code>--component-pill-success-bg</code> <code>--component-pill-success-color</code> <code>--component-pill-warning-bg</code> <code>--component-pill-warning-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Static text, no role, not interactive (if it is clickable it is atom-btn). The state is in the words, never only in the colour. A count that updates needs an aria-live container. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3954,7 +3970,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-radio__input</code> <code>atom-radio__label</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:checked</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-border-focus</code> <code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-easing</code> <code>--component-radio-bg</code> <code>--component-radio-bg-checked</code> <code>--component-radio-border-color</code> <code>--component-radio-border-color-hover</code> <code>--component-radio-border-radius</code> <code>--component-radio-border-width</code> <code>--component-radio-checked-size</code> <code>--component-radio-dot-border-radius</code> <code>--component-radio-gap</code> <code>--component-radio-size</code> <code>--component-radio-status-disabled-opacity</code> <code>--component-radio-transition-duration</code> <code>--component-radio-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-easing</code> <code>--component-radio-bg</code> <code>--component-radio-bg-checked</code> <code>--component-radio-border-color</code> <code>--component-radio-border-color-hover</code> <code>--component-radio-border-radius</code> <code>--component-radio-border-width</code> <code>--component-radio-checked-size</code> <code>--component-radio-dot-border-radius</code> <code>--component-radio-dot-color</code> <code>--component-radio-gap</code> <code>--component-radio-size</code> <code>--component-radio-status-disabled-opacity</code> <code>--component-radio-transition-duration</code> <code>--component-radio-transition-easing</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Real &lt;input type=&quot;radio&quot;&gt; inside the &lt;label&gt;, one name per group, the group in &lt;fieldset&gt;&lt;legend&gt;. Arrow keys move the choice (browser). No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -3979,6 +3996,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-stat__label</code> <code>atom-stat__number</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Static. The explaining word is visible text next to the number; if the number animates, the final value is in the DOM from the start. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4002,7 +4020,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-switch__input</code> <code>atom-switch__label</code> <code>atom-switch__slider</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:checked</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">20 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-border-focus</code> <code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-easing</code> <code>--component-switch-bg-off</code> <code>--component-switch-bg-on</code> <code>--component-switch-border-color</code> <code>--component-switch-border-radius</code> <code>--component-switch-height</code> <code>--component-switch-slider-bg</code> <code>--component-switch-slider-radius</code> <code>--component-switch-slider-shadow</code> <code>--component-switch-slider-size</code> <code>--component-switch-status-disabled-opacity</code> <code>--component-switch-transition-duration</code> <code>--component-switch-transition-easing</code> <code>--component-switch-width</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-border-width</code> <code>--component-form-field-color</code> <code>--component-form-field-font-size</code> <code>--component-form-field-line-height</code> <code>--component-form-field-shadow-focus</code> <code>--component-form-field-transition-easing</code> <code>--component-switch-bg-off</code> <code>--component-switch-bg-on</code> <code>--component-switch-border-color</code> <code>--component-switch-border-radius</code> <code>--component-switch-height</code> <code>--component-switch-slider-bg</code> <code>--component-switch-slider-radius</code> <code>--component-switch-slider-shadow</code> <code>--component-switch-slider-size</code> <code>--component-switch-status-disabled-opacity</code> <code>--component-switch-transition-duration</code> <code>--component-switch-transition-easing</code> <code>--component-switch-width</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot;&gt; inside the &lt;label&gt;; the drawn track is aria-hidden. Space toggles and the on/off state is announced from the checkbox. It applies at once, so say what changed if it is not visible. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4011,17 +4030,17 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-atom-table" aria-labelledby="ref-atom-table-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-atom-table-titulo">Table <code>.atom-table</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">atom</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/atoms/_table.scss</code></p>
-            <p class="atom-txt syx-mb-3">Tabular data — rows that compare along shared columns. --resp wraps it in __container so the table scrolls instead of collapsing (it holds a min-width floor for exactly that reason), and --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.</p>
+            <p class="atom-txt syx-mb-3">Tabular data — rows that compare along shared columns. --resp goes on the wrapper &lt;div&gt; (with __container), never on the &lt;table&gt;: overflow has no effect on a table box, so the page itself scrolled sideways. The table keeps a min-width floor so it scrolls instead of collapsing, and --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="atom-table__container"><table class="atom-table atom-table--primary atom-table--resp"><thead><tr><th class="atom-table__th">Token</th></tr></thead><tbody><tr><td class="atom-table__td">--semantic-color-text-primary</td></tr></tbody></table></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="atom-table__container atom-table--resp" role="region" aria-label="Semantic tokens" tabindex="0"><table class="atom-table atom-table--primary"><thead><tr><th class="atom-table__th" scope="col">Token</th></tr></thead><tbody><tr><td class="atom-table__td">--semantic-color-text-primary</td></tr></tbody></table></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-atom-table-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-atom-table-marcado"><code>&lt;div class=&quot;atom-table__container&quot;&gt;
-  &lt;table class=&quot;atom-table atom-table--primary atom-table--resp&quot;&gt;
+              <pre class="atom-code syx-mb-0" id="ref-atom-table-marcado"><code>&lt;div class=&quot;atom-table__container atom-table--resp&quot; role=&quot;region&quot; aria-label=&quot;Semantic tokens&quot; tabindex=&quot;0&quot;&gt;
+  &lt;table class=&quot;atom-table atom-table--primary&quot;&gt;
     &lt;thead&gt;
       &lt;tr&gt;
-        &lt;th class=&quot;atom-table__th&quot;&gt;Token&lt;/th&gt;
+        &lt;th class=&quot;atom-table__th&quot; scope=&quot;col&quot;&gt;Token&lt;/th&gt;
       &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
@@ -4039,7 +4058,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-table--is-stick-thead</code> <code>atom-table--primary</code> <code>atom-table--resp</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-table__container</code> <code>atom-table__td</code> <code>atom-table__th</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">17 component tokens</summary><div class="mol-disclosure__content"><code>--component-table-bg-tfoot</code> <code>--component-table-bg-th</code> <code>--component-table-border-color</code> <code>--component-table-border-width</code> <code>--component-table-cell-padding-x</code> <code>--component-table-cell-padding-y</code> <code>--component-table-color-th</code> <code>--component-table-min-width</code> <code>--component-table-state-hover-bg</code> <code>--component-table-state-hover-border-color</code> <code>--component-table-state-hover-shadow</code> <code>--component-table-sticky-active-bg</code> <code>--component-table-sticky-active-color</code> <code>--component-table-sticky-max-height</code> <code>--component-table-th-font-family</code> <code>--component-table-th-font-size</code> <code>--component-table-th-line-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">18 component tokens</summary><div class="mol-disclosure__content"><code>--component-table-bg-tfoot</code> <code>--component-table-bg-th</code> <code>--component-table-border-color</code> <code>--component-table-border-width</code> <code>--component-table-cell-padding-x</code> <code>--component-table-cell-padding-y</code> <code>--component-table-color-th</code> <code>--component-table-min-width</code> <code>--component-table-state-hover-bg</code> <code>--component-table-state-hover-border-color</code> <code>--component-table-state-hover-color</code> <code>--component-table-state-hover-shadow</code> <code>--component-table-sticky-active-bg</code> <code>--component-table-sticky-active-color</code> <code>--component-table-sticky-max-height</code> <code>--component-table-th-font-family</code> <code>--component-table-th-font-size</code> <code>--component-table-th-line-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;table&gt; with &lt;th scope&gt; headers; name it with &lt;caption&gt; or aria-label. With --resp the scrolling element is the wrapper &lt;div&gt;: give it role=&quot;region&quot;, an aria-label and tabindex=&quot;0&quot; so it can be scrolled from the keyboard (it takes the system focus ring). No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4063,7 +4083,8 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-title--h1</code> <code>atom-title--h2</code> <code>atom-title--h3</code> <code>atom-title--h4</code> <code>atom-title--h5</code> <code>atom-title--h6</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">10 component tokens</summary><div class="mol-disclosure__content"><code>--component-title-color</code> <code>--component-title-font-family</code> <code>--component-title-h1</code> <code>--component-title-h2</code> <code>--component-title-h3</code> <code>--component-title-h4</code> <code>--component-title-h5</code> <code>--component-title-h6</code> <code>--component-title-line-height</code> <code>--component-title-margin-bottom</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">11 component tokens</summary><div class="mol-disclosure__content"><code>--component-title-color</code> <code>--component-title-font-family</code> <code>--component-title-font-weight</code> <code>--component-title-h1</code> <code>--component-title-h2</code> <code>--component-title-h3</code> <code>--component-title-h4</code> <code>--component-title-h5</code> <code>--component-title-h6</code> <code>--component-title-line-height</code> <code>--component-title-margin-bottom</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Pick the heading level from the document outline; the modifier only sets the size. Never skip levels to get a size. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4088,6 +4109,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Static body text. No role, no JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4116,6 +4138,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-alert__body</code> <code>mol-alert__title</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">16 component tokens</summary><div class="mol-disclosure__content"><code>--component-alert-accent-width</code> <code>--component-alert-bg</code> <code>--component-alert-border-radius</code> <code>--component-alert-color</code> <code>--component-alert-error-accent</code> <code>--component-alert-error-title-color</code> <code>--component-alert-gap</code> <code>--component-alert-info-accent</code> <code>--component-alert-info-title-color</code> <code>--component-alert-padding-block</code> <code>--component-alert-padding-inline</code> <code>--component-alert-success-accent</code> <code>--component-alert-success-title-color</code> <code>--component-alert-title-font-weight</code> <code>--component-alert-warning-accent</code> <code>--component-alert-warning-title-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">role=&quot;status&quot; (polite) for information; role=&quot;alert&quot; only for an error that needs attention now. The live region must be in the DOM before its text changes. Not focusable. No JS for a static message.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4126,11 +4149,11 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/molecules/_btn-group.scss</code></p>
             <p class="atom-txt syx-mb-3">Row of related actions with the standard gap between them, wrapping on narrow viewports. It arranges buttons; it does not rank them — the hierarchy is the buttons' own modifiers, and a group where every button is --primary has no primary action. .cont-set-btn is a deprecated alias.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-btn-group"><button class="atom-btn atom-btn--primary">Save</button><button class="atom-btn atom-btn--secondary">Cancel</button></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-btn-group"><button class="atom-btn atom-btn--primary atom-btn--size-md" type="button">Save</button><button class="atom-btn atom-btn--secondary atom-btn--size-md" type="button">Cancel</button></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-btn-group-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-btn-group-marcado"><code>&lt;div class=&quot;mol-btn-group&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--primary&quot;&gt;Save&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--secondary&quot;&gt;Cancel&lt;/button&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-btn-group-marcado"><code>&lt;div class=&quot;mol-btn-group&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; type=&quot;button&quot;&gt;Cancel&lt;/button&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4140,6 +4163,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">1 component tokens</summary><div class="mol-disclosure__content"><code>--component-btn-group-gap</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Every button inside has an explicit type. As a plain row it needs no role; if it behaves as one control, it becomes role=&quot;toolbar&quot; with an aria-label and arrow-key navigation in script. No JS otherwise.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4167,6 +4191,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-code-snippet__body</code> <code>mol-code-snippet__filename</code> <code>mol-code-snippet__header</code> <code>mol-code-snippet__label</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">15 component tokens</summary><div class="mol-disclosure__content"><code>--component-code-snippet-border-color</code> <code>--component-code-snippet-border-radius</code> <code>--component-code-snippet-border-style</code> <code>--component-code-snippet-border-width</code> <code>--component-code-snippet-header-bg</code> <code>--component-code-snippet-header-border-width</code> <code>--component-code-snippet-ko-border-color</code> <code>--component-code-snippet-ko-header-bg</code> <code>--component-code-snippet-ko-header-border-color</code> <code>--component-code-snippet-ko-label-color</code> <code>--component-code-snippet-ok-border-color</code> <code>--component-code-snippet-ok-header-bg</code> <code>--component-code-snippet-ok-header-border-color</code> <code>--component-code-snippet-ok-label-color</code> <code>--component-code-snippet-shadow</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">The header label states the verdict in words. A body that scrolls sideways needs tabindex=&quot;0&quot;. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4175,17 +4200,17 @@ scss/organisms/_site-header.scss</code></pre>
           <section class="docs-ref syx-mb-5" id="ref-mol-dialog" aria-labelledby="ref-mol-dialog-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-mol-dialog-titulo">Dialog <code>.mol-dialog</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_dialog.scss</code></p>
-            <p class="atom-txt syx-mb-3">A modal on the native &lt;dialog&gt;: open it with showModal() so the browser provides the top layer, focus trapping, Escape and an inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=&quot;alertdialog&quot; and autofocus the cancel button.</p>
+            <p class="atom-txt syx-mb-3">A modal on the native &lt;dialog&gt;. The usage is the closed markup: open it from script with dialog.showModal() — never with the open attribute, which gives no top layer, no focus trap, no Escape and no inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=&quot;alertdialog&quot;, point aria-describedby at the body and autofocus the cancel button.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><dialog class="mol-dialog" aria-labelledby="ref-mol-dialog-dlg-title" open><form method="dialog" class="mol-dialog__inner"><h2 class="mol-dialog__title" id="ref-mol-dialog-dlg-title">Delete “Report”?</h2><p class="mol-dialog__body">Files and history will be lost.</p><div class="mol-dialog__footer"><button class="atom-btn" value="cancel">Cancel</button><button class="atom-btn atom-btn--primary atom-btn--filled" value="ok">Delete</button></div></form></dialog></div>
+            <div class="docs-ref__demo syx-mb-3"><dialog class="mol-dialog" role="alertdialog" aria-labelledby="ref-mol-dialog-dlg-title" aria-describedby="ref-mol-dialog-dlg-desc"><form method="dialog" class="mol-dialog__inner"><h2 class="mol-dialog__title" id="ref-mol-dialog-dlg-title">Delete “Report”?</h2><p class="mol-dialog__body" id="ref-mol-dialog-dlg-desc">Files and history will be lost.</p><div class="mol-dialog__footer"><button class="atom-btn atom-btn--secondary atom-btn--size-md" value="cancel">Cancel</button><button class="atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md" value="ok">Delete</button></div></form></dialog></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-dialog-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-dialog-marcado"><code>&lt;dialog class=&quot;mol-dialog&quot; aria-labelledby=&quot;dlg-title&quot; open&gt;
+              <pre class="atom-code syx-mb-0" id="ref-mol-dialog-marcado"><code>&lt;dialog class=&quot;mol-dialog&quot; role=&quot;alertdialog&quot; aria-labelledby=&quot;dlg-title&quot; aria-describedby=&quot;dlg-desc&quot;&gt;
   &lt;form method=&quot;dialog&quot; class=&quot;mol-dialog__inner&quot;&gt;
     &lt;h2 class=&quot;mol-dialog__title&quot; id=&quot;dlg-title&quot;&gt;Delete “Report”?&lt;/h2&gt;
-    &lt;p class=&quot;mol-dialog__body&quot;&gt;Files and history will be lost.&lt;/p&gt;
-    &lt;div class=&quot;mol-dialog__footer&quot;&gt;&lt;button class=&quot;atom-btn&quot; value=&quot;cancel&quot; autofocus&gt;Cancel&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--primary atom-btn--filled&quot; value=&quot;ok&quot;&gt;Delete&lt;/button&gt;&lt;/div&gt;
+    &lt;p class=&quot;mol-dialog__body&quot; id=&quot;dlg-desc&quot;&gt;Files and history will be lost.&lt;/p&gt;
+    &lt;div class=&quot;mol-dialog__footer&quot;&gt;&lt;button class=&quot;atom-btn atom-btn--secondary atom-btn--size-md&quot; value=&quot;cancel&quot; autofocus&gt;Cancel&lt;/button&gt;&lt;button class=&quot;atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md&quot; value=&quot;ok&quot;&gt;Delete&lt;/button&gt;&lt;/div&gt;
   &lt;/form&gt;
 &lt;/dialog&gt;</code></pre>
             </div>
@@ -4197,6 +4222,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-dialog__body</code> <code>mol-dialog__footer</code> <code>mol-dialog__inner</code> <code>mol-dialog__title</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-dialog-backdrop</code> <code>--component-dialog-bg</code> <code>--component-dialog-border-color</code> <code>--component-dialog-border-radius</code> <code>--component-dialog-border-width</code> <code>--component-dialog-color</code> <code>--component-dialog-duration</code> <code>--component-dialog-easing</code> <code>--component-dialog-gap</code> <code>--component-dialog-max-width</code> <code>--component-dialog-padding</code> <code>--component-dialog-shadow</code> <code>--component-dialog-title-font-size</code> <code>--component-dialog-title-line-height</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;dialog&gt; opened with showModal() — the browser gives top layer, focus trap, Escape and an inert page; the open attribute gives none of it. aria-labelledby → title, aria-describedby → body. Destructive confirmation: role=&quot;alertdialog&quot; and autofocus on Cancel. &lt;form method=&quot;dialog&quot;&gt; buttons close it and return their value; focus goes back to the opener. JS: the showModal() call.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4224,6 +4250,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-disclosure__content</code> <code>mol-disclosure__summary</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">9 component tokens</summary><div class="mol-disclosure__content"><code>--component-disclosure-border-color</code> <code>--component-disclosure-border-width</code> <code>--component-disclosure-content-color</code> <code>--component-disclosure-content-padding-block-end</code> <code>--component-disclosure-duration</code> <code>--component-disclosure-marker-size</code> <code>--component-disclosure-summary-color</code> <code>--component-disclosure-summary-font-weight</code> <code>--component-disclosure-summary-padding-block</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;details&gt;/&lt;summary&gt;: Enter/Space toggle and the expanded state is announced by the browser. No interactive content inside &lt;summary&gt;, and never a &lt;div&gt; in its place. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4253,6 +4280,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-feature-card__body</code> <code>mol-feature-card__cta</code> <code>mol-feature-card__title</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">10 component tokens</summary><div class="mol-disclosure__content"><code>--component-feature-card-bg</code> <code>--component-feature-card-border-color</code> <code>--component-feature-card-border-color-hover</code> <code>--component-feature-card-border-radius</code> <code>--component-feature-card-border-style</code> <code>--component-feature-card-border-width</code> <code>--component-feature-card-hover-lift</code> <code>--component-feature-card-row-span</code> <code>--component-feature-card-shadow</code> <code>--component-feature-card-shadow-hover</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;article&gt; with a real heading. Only the CTA link is focusable (system ring); the card mirrors it with :focus-within. Icon aria-hidden. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4263,13 +4291,13 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/molecules/_form-field-set.scss</code></p>
             <p class="atom-txt syx-mb-3">Stacks related mol-form-field with the standard gap; --inline flows them in a row. Grouping for rhythm only — if the fields answer one question together, they also need a real fieldset and legend so the grouping is announced, not just seen.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field-set mol-form-field-set--inline"><div class="mol-form-field">...</div><div class="mol-form-field">...</div></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field-set mol-form-field-set--inline"><div class="mol-form-field"><label class="atom-label" for="ref-mol-form-field-set-ffs-given">First name</label><input class="atom-input" id="ref-mol-form-field-set-ffs-given" type="text" autocomplete="given-name"></div><div class="mol-form-field"><label class="atom-label" for="ref-mol-form-field-set-ffs-family">Last name</label><input class="atom-input" id="ref-mol-form-field-set-ffs-family" type="text" autocomplete="family-name"></div></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-form-field-set-marcado">Copy</button>
               <pre class="atom-code syx-mb-0" id="ref-mol-form-field-set-marcado"><code>&lt;div class=&quot;mol-form-field-set mol-form-field-set--inline&quot;&gt;
-  &lt;div class=&quot;mol-form-field&quot;&gt;...&lt;/div&gt;
-  &lt;div class=&quot;mol-form-field&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ffs-given&quot;&gt;First name&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ffs-given&quot; type=&quot;text&quot; autocomplete=&quot;given-name&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;mol-form-field&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ffs-family&quot;&gt;Last name&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ffs-family&quot; type=&quot;text&quot; autocomplete=&quot;family-name&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
@@ -4281,6 +4309,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>mol-form-field</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">2 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-set-min-width</code> <code>--component-form-group-gap</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Visual grouping only. If the fields answer one question together, wrap them in &lt;fieldset&gt;&lt;legend&gt; so the group is announced. Each field keeps its own &lt;label&gt;. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4291,11 +4320,11 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">system-reusable</span><code>scss/molecules/_form-field.scss</code></p>
             <p class="atom-txt syx-mb-3">The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ref-mol-form-field-email">Email</label><input class="atom-input" id="ref-mol-form-field-email" aria-invalid="true" aria-describedby="ref-mol-form-field-email-msg"><span class="mol-form-field__msg" id="ref-mol-form-field-email-msg">Enter a valid address.</span></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-form-field mol-form-field--is-error"><label class="atom-label" for="ref-mol-form-field-ff-email">Email</label><input class="atom-input" id="ref-mol-form-field-ff-email" type="email" autocomplete="email" aria-invalid="true" aria-describedby="ref-mol-form-field-ff-email-msg"><span class="mol-form-field__msg" id="ref-mol-form-field-ff-email-msg">Enter a valid address.</span></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-form-field-marcado">Copy</button>
-              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;</code></pre>
+              <pre class="atom-code syx-mb-0" id="ref-mol-form-field-marcado"><code>&lt;div class=&quot;mol-form-field mol-form-field--is-error&quot;&gt;&lt;label class=&quot;atom-label&quot; for=&quot;ff-email&quot;&gt;Email&lt;/label&gt;&lt;input class=&quot;atom-input&quot; id=&quot;ff-email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; aria-invalid=&quot;true&quot; aria-describedby=&quot;ff-email-msg&quot;&gt;&lt;span class=&quot;mol-form-field__msg&quot; id=&quot;ff-email-msg&quot;&gt;Enter a valid address.&lt;/span&gt;&lt;/div&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4306,6 +4335,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-input</code> <code>atom-label</code> <code>atom-select</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-form-field-color</code> <code>--component-form-field-error-border</code> <code>--component-form-field-error-color</code> <code>--component-form-field-icon-position-right</code> <code>--component-form-field-icon-size</code> <code>--component-form-field-label-margin-bottom</code> <code>--component-form-field-margin-bottom</code> <code>--component-form-field-msg-font-size</code> <code>--component-form-field-msg-line-height</code> <code>--component-form-field-msg-margin-top</code> <code>--component-form-field-success-border</code> <code>--component-form-field-success-color</code> <code>--component-form-field-warning-border</code> <code>--component-form-field-warning-color</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;label for&gt; on a unique id. On error: aria-invalid=&quot;true&quot; on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Validation itself is the app's. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4330,6 +4360,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">1 component tokens</summary><div class="mol-disclosure__content"><code>--component-label-group-gap</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Container only. If the labels are a list, use &lt;ul role=&quot;list&quot;&gt;. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
               </table>
@@ -4340,12 +4371,12 @@ scss/organisms/_site-header.scss</code></pre>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">molecule</span><span class="atom-pill atom-pill--subtle">generic</span><code>scss/molecules/_tabs.scss</code></p>
             <p class="atom-txt syx-mb-3">Tabbed panels whose state lives in ARIA: the active tab has aria-selected=&quot;true&quot;, hidden panels carry hidden. Behaviour (click, arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free: import 'syx-design-system/js/syx-tabs.js' wires every tablist present on load, and initTabs(root) from the same module wires markup rendered later. Without it the selected panel shows and the tabs never switch.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><div class="mol-tabs"><div class="mol-tabs__list" role="tablist" aria-label="Settings"><button class="mol-tabs__tab" role="tab" id="ref-mol-tabs-tab-1" aria-selected="true" aria-controls="ref-mol-tabs-panel-1">Profile</button><button class="mol-tabs__tab" role="tab" id="ref-mol-tabs-tab-2" aria-selected="false" aria-controls="ref-mol-tabs-panel-2" tabindex="-1">Notifications</button></div><div class="mol-tabs__panel" role="tabpanel" id="ref-mol-tabs-panel-1" aria-labelledby="ref-mol-tabs-tab-1" tabindex="0">Profile settings</div><div class="mol-tabs__panel" role="tabpanel" id="ref-mol-tabs-panel-2" aria-labelledby="ref-mol-tabs-tab-2" tabindex="0" hidden>Notification settings</div></div></div>
+            <div class="docs-ref__demo syx-mb-3"><div class="mol-tabs"><div class="mol-tabs__list" role="tablist" aria-label="Settings"><button class="mol-tabs__tab" type="button" role="tab" id="ref-mol-tabs-tab-1" aria-selected="true" aria-controls="ref-mol-tabs-panel-1">Profile</button><button class="mol-tabs__tab" type="button" role="tab" id="ref-mol-tabs-tab-2" aria-selected="false" aria-controls="ref-mol-tabs-panel-2" tabindex="-1">Notifications</button></div><div class="mol-tabs__panel" role="tabpanel" id="ref-mol-tabs-panel-1" aria-labelledby="ref-mol-tabs-tab-1" tabindex="0">Profile settings</div><div class="mol-tabs__panel" role="tabpanel" id="ref-mol-tabs-panel-2" aria-labelledby="ref-mol-tabs-tab-2" tabindex="0" hidden>Notification settings</div></div></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-mol-tabs-marcado">Copy</button>
               <pre class="atom-code syx-mb-0" id="ref-mol-tabs-marcado"><code>&lt;div class=&quot;mol-tabs&quot;&gt;
-  &lt;div class=&quot;mol-tabs__list&quot; role=&quot;tablist&quot; aria-label=&quot;Settings&quot;&gt;&lt;button class=&quot;mol-tabs__tab&quot; role=&quot;tab&quot; id=&quot;tab-1&quot; aria-selected=&quot;true&quot; aria-controls=&quot;panel-1&quot;&gt;Profile&lt;/button&gt;&lt;button class=&quot;mol-tabs__tab&quot; role=&quot;tab&quot; id=&quot;tab-2&quot; aria-selected=&quot;false&quot; aria-controls=&quot;panel-2&quot; tabindex=&quot;-1&quot;&gt;Notifications&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;mol-tabs__list&quot; role=&quot;tablist&quot; aria-label=&quot;Settings&quot;&gt;&lt;button class=&quot;mol-tabs__tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;tab-1&quot; aria-selected=&quot;true&quot; aria-controls=&quot;panel-1&quot;&gt;Profile&lt;/button&gt;&lt;button class=&quot;mol-tabs__tab&quot; type=&quot;button&quot; role=&quot;tab&quot; id=&quot;tab-2&quot; aria-selected=&quot;false&quot; aria-controls=&quot;panel-2&quot; tabindex=&quot;-1&quot;&gt;Notifications&lt;/button&gt;&lt;/div&gt;
   &lt;div class=&quot;mol-tabs__panel&quot; role=&quot;tabpanel&quot; id=&quot;panel-1&quot; aria-labelledby=&quot;tab-1&quot; tabindex=&quot;0&quot;&gt;Profile settings&lt;/div&gt;
   &lt;div class=&quot;mol-tabs__panel&quot; role=&quot;tabpanel&quot; id=&quot;panel-2&quot; aria-labelledby=&quot;tab-2&quot; tabindex=&quot;0&quot; hidden&gt;Notification settings&lt;/div&gt;
 &lt;/div&gt;</code></pre>
@@ -4358,6 +4389,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>mol-tabs__list</code> <code>mol-tabs__panel</code> <code>mol-tabs__tab</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">12 component tokens</summary><div class="mol-disclosure__content"><code>--component-tabs-border-color</code> <code>--component-tabs-border-width</code> <code>--component-tabs-gap</code> <code>--component-tabs-indicator-color</code> <code>--component-tabs-indicator-width</code> <code>--component-tabs-panel-padding-block</code> <code>--component-tabs-tab-color</code> <code>--component-tabs-tab-color-hover</code> <code>--component-tabs-tab-color-selected</code> <code>--component-tabs-tab-font-weight</code> <code>--component-tabs-tab-padding-block</code> <code>--component-tabs-tab-padding-inline</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=&quot;button&quot; on every tab; panels focusable (tabindex=&quot;0&quot;). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-tabs.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-tabs.js';
 // markup rendered later:
 import { initTabs } from 'syx-design-system/js/syx-tabs.js';
@@ -4370,19 +4402,19 @@ initTabs(container);</code></pre></td></tr>
           <section class="docs-ref syx-mb-5" id="ref-org-site-header" aria-labelledby="ref-org-site-header-titulo">
             <h4 class="atom-title atom-title--h5 syx-mb-2" id="ref-org-site-header-titulo">Site header <code>.org-site-header</code></h4>
             <p class="mol-label-group syx-mb-2"><span class="atom-pill atom-pill--neutral">organism</span><span class="atom-pill atom-pill--subtle">domain-reusable</span><code>scss/organisms/_site-header.scss</code></p>
-            <p class="atom-txt syx-mb-3">Mobile-first sticky header with a hamburger that opens a full nav drawer over an overlay; JS toggles [data-nav-open] on &lt;body&gt;. The header, drawer and overlay are three sibling classes and all three must be present. The __theme-select and __darkmode controls are documentation-site furniture — a product that ships no theme picker should drop them rather than hide them.</p>
+            <p class="atom-txt syx-mb-3">Mobile-first sticky header with a hamburger that opens a nav drawer over an overlay. The header, drawer and overlay are three sibling elements and all three must be present; the burger names the drawer with aria-controls. js/syx-site-nav.js (no dependencies) toggles [data-nav-open] on &lt;body&gt; and manages focus and inert. The __theme-select and __darkmode controls are documentation-site furniture — a product that ships no theme picker should drop them rather than hide them.</p>
             <p class="syx-type-overline syx-text-gray syx-mb-2">Live demo</p>
-            <div class="docs-ref__demo syx-mb-3"><header class="org-site-header"><a class="org-site-header__brand" href="/">SYX</a><nav class="org-site-header__nav">...</nav><button class="org-site-header__burger" aria-label="Menu" aria-expanded="false"><span class="org-site-header__burger-line"></span></button></header><div class="org-site-nav-overlay"></div><nav class="org-site-nav-drawer">...</nav></div>
+            <div class="docs-ref__demo syx-mb-3"><header class="org-site-header"><a class="org-site-header__brand" href="/">SYX</a><nav class="org-site-header__nav" aria-label="Main navigation"><a href="/docs">Docs</a><a href="/themes">Themes</a></nav><div class="org-site-header__actions"><button class="org-site-header__burger" type="button" aria-controls="ref-org-site-header-site-nav-drawer" aria-expanded="false" aria-label="Open navigation"><span class="org-site-header__burger-line" aria-hidden="true"></span><span class="org-site-header__burger-line" aria-hidden="true"></span><span class="org-site-header__burger-line" aria-hidden="true"></span></button></div></header><div class="org-site-nav-overlay" aria-hidden="true"></div><nav class="org-site-nav-drawer" id="ref-org-site-header-site-nav-drawer" aria-label="Mobile navigation"><a class="org-site-nav-drawer__link" href="/docs">Docs</a><a class="org-site-nav-drawer__link" href="/themes">Themes</a></nav></div>
             <div class="docs-ref__markup syx-mb-3">
               <p class="syx-type-overline syx-text-gray syx-mb-2">Markup</p>
               <button type="button" class="atom-btn atom-btn--tertiary atom-btn--size-sm docs-ref__copy" data-ref-copiar="ref-org-site-header-marcado">Copy</button>
               <pre class="atom-code syx-mb-0" id="ref-org-site-header-marcado"><code>&lt;header class=&quot;org-site-header&quot;&gt;
   &lt;a class=&quot;org-site-header__brand&quot; href=&quot;/&quot;&gt;SYX&lt;/a&gt;
-  &lt;nav class=&quot;org-site-header__nav&quot;&gt;...&lt;/nav&gt;
-  &lt;button class=&quot;org-site-header__burger&quot; aria-label=&quot;Menu&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;org-site-header__burger-line&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+  &lt;nav class=&quot;org-site-header__nav&quot; aria-label=&quot;Main navigation&quot;&gt;&lt;a href=&quot;/docs&quot;&gt;Docs&lt;/a&gt;&lt;a href=&quot;/themes&quot;&gt;Themes&lt;/a&gt;&lt;/nav&gt;
+  &lt;div class=&quot;org-site-header__actions&quot;&gt;&lt;button class=&quot;org-site-header__burger&quot; type=&quot;button&quot; aria-controls=&quot;site-nav-drawer&quot; aria-expanded=&quot;false&quot; aria-label=&quot;Open navigation&quot;&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;span class=&quot;org-site-header__burger-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
 &lt;/header&gt;
-&lt;div class=&quot;org-site-nav-overlay&quot;&gt;&lt;/div&gt;
-&lt;nav class=&quot;org-site-nav-drawer&quot;&gt;...&lt;/nav&gt;</code></pre>
+&lt;div class=&quot;org-site-nav-overlay&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+&lt;nav class=&quot;org-site-nav-drawer&quot; id=&quot;site-nav-drawer&quot; aria-label=&quot;Mobile navigation&quot;&gt;&lt;a class=&quot;org-site-nav-drawer__link&quot; href=&quot;/docs&quot;&gt;Docs&lt;/a&gt;&lt;a class=&quot;org-site-nav-drawer__link&quot; href=&quot;/themes&quot;&gt;Themes&lt;/a&gt;&lt;/nav&gt;</code></pre>
             </div>
             <div class="atom-table__container syx-mb-0">
               <table class="atom-table docs-ref__api">
@@ -4393,12 +4425,128 @@ initTabs(container);</code></pre></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>.is-scrolled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-btn</code> <code>atom-icon</code> <code>atom-select</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">4 component tokens</summary><div class="mol-disclosure__content"><code>--component-header-control-border-width</code> <code>--component-header-control-height</code> <code>--component-header-control-radius</code> <code>--component-section-padding-inline</code></div></details></td></tr>
-                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">&lt;header&gt; with a labelled desktop &lt;nav&gt; and a separately labelled drawer &lt;nav&gt;. Burger: &lt;button type=&quot;button&quot;&gt; with aria-controls (drawer id), aria-expanded and aria-label. js/syx-site-nav.js: closed drawer is inert (and visibility: hidden in CSS); opening moves focus to its first link and makes the rest of the page inert; Escape or the burger closes it and returns focus to the burger. The overlay is aria-hidden.</td></tr>
+                  <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><code>js/syx-site-nav.js</code><pre class="atom-code syx-mt-2 syx-mb-0"><code>import 'syx-design-system/js/syx-site-nav.js';
+// markup rendered later:
+import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js';
+initSiteNav(container);</code></pre></td></tr>
                 </tbody>
               </table>
             </div>
           </section>
         </section>
+        <script type="module">
+        /* js/syx-site-nav.js — copia literal; la fuente es ese fichero */
+        /**
+         * SYX — Cajón de navegación móvil de .org-site-header
+         * ───────────────────────────────────────────────────
+         * Hasta la auditoría de octubre de 2026 este código vivía copiado dentro de
+         * home.html, docs.html y why-syx.html, y las tres copias tenían el mismo
+         * fallo: el cajón cerrado solo se apartaba con translateY(-110%), así que a
+         * 375 px diez u once enlaces y un select recibían el foco fuera de pantalla
+         * (dentro de un aria-hidden="true"), y al abrirlo el foco se quedaba en la
+         * hamburguesa. Lo que hace ahora, sin dependencias:
+         *
+         *   cerrado   el cajón es `inert` (y el CSS lo pone en visibility: hidden):
+         *             ni foco, ni lector de pantalla, ni clics
+         *   abrir     el foco va al primer enlace del cajón; todo lo demás queda
+         *             `inert` salvo el camino hasta la hamburguesa (para cerrar) y
+         *             la capa de fondo (para cerrar con un clic fuera)
+         *   cerrar    Escape o la hamburguesa devuelven el foco a la hamburguesa;
+         *             un clic en un enlace del cajón cierra y deja navegar
+         *   escritorio si la hamburguesa deja de verse (≥ xl) con el cajón abierto,
+         *             se cierra: el cajón no existe en ese ancho
+         *
+         * Marcado que espera (la hamburguesa nombra el cajón con aria-controls):
+         *
+         *   <div class="org-site-nav-overlay"></div>
+         *   <nav class="org-site-nav-drawer" id="nav-drawer" aria-label="Mobile navigation">…</nav>
+         *   <header class="org-site-header">…
+         *     <button class="org-site-header__burger" type="button"
+         *             aria-controls="nav-drawer" aria-expanded="false" aria-label="Open navigation">…</button>
+         *   </header>
+         *
+         * Uso:  <script type="module" src="js/syx-site-nav.js"><\/script>
+         *       o import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js';
+         *
+         * (Auditoría 2026-10 · acción 3)
+         */
+
+        export function initSiteNav(root = document) {
+          for (const burger of root.querySelectorAll('.org-site-header__burger[aria-controls]')) {
+            const drawer = document.getElementById(burger.getAttribute('aria-controls'));
+            if (!drawer || drawer.dataset.syxSiteNav) continue;
+            drawer.dataset.syxSiteNav = 'on';
+            const overlay = document.querySelector('.org-site-nav-overlay');
+            const body = document.body;
+            // Lo que ESTE script volvió inerte, para no despertar al cerrar lo que
+            // otra pieza de la página hubiera dejado inerte por su cuenta.
+            let dormidos = [];
+
+            const abierto = () => body.hasAttribute('data-nav-open');
+
+            // Todo lo que no lleva a la hamburguesa ni es el cajón o su capa de
+            // fondo: los hermanos de cada antepasado de la hamburguesa.
+            const elResto = () => {
+              const fuera = [];
+              for (let n = burger; n && n !== body; n = n.parentElement) {
+                for (const h of n.parentElement ? n.parentElement.children : []) {
+                  if (h === n || h === drawer || h === overlay || h.inert) continue;
+                  if (h.tagName === 'SCRIPT' || h.tagName === 'STYLE') continue;
+                  fuera.push(h);
+                }
+              }
+              return fuera;
+            };
+
+            const abrir = () => {
+              body.setAttribute('data-nav-open', '');
+              drawer.inert = false;
+              drawer.removeAttribute('aria-hidden');
+              dormidos = elResto();
+              for (const el of dormidos) el.inert = true;
+              burger.setAttribute('aria-expanded', 'true');
+              burger.setAttribute('aria-label', 'Close navigation');
+              const primero = drawer.querySelector('a[href], button:not([disabled]), select, input, [tabindex]:not([tabindex="-1"])');
+              if (primero) primero.focus();
+            };
+
+            const cerrar = (devolverFoco) => {
+              body.removeAttribute('data-nav-open');
+              drawer.inert = true;
+              for (const el of dormidos) el.inert = false;
+              dormidos = [];
+              burger.setAttribute('aria-expanded', 'false');
+              burger.setAttribute('aria-label', 'Open navigation');
+              if (devolverFoco) burger.focus();
+            };
+
+            // Estado inicial: cerrado de verdad, aunque el marcado no lo dijera.
+            cerrar(false);
+
+            burger.addEventListener('click', () => (abierto() ? cerrar(true) : abrir()));
+            if (overlay) overlay.addEventListener('click', () => cerrar(true));
+            for (const a of drawer.querySelectorAll('a[href]')) a.addEventListener('click', () => cerrar(false));
+
+            document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape' && abierto()) {
+                e.preventDefault();
+                cerrar(true);
+              }
+            });
+
+            // En escritorio el cajón tiene display: none y la hamburguesa también.
+            window.addEventListener('resize', () => {
+              if (abierto() && getComputedStyle(burger).display === 'none') cerrar(false);
+            });
+          }
+        }
+
+        if (typeof document !== 'undefined') {
+          if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initSiteNav());
+          else initSiteNav();
+        }
+        </script>
         <script type="module">
         /* js/syx-tabs.js — copia literal; la fuente es ese fichero */
         /**

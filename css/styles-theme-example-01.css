@@ -121,10 +121,10 @@
 }
 
 :root {
-  --primitive-font-family-space-grotesk-regular: "Google-Space-Grotesk--regular", Arial, sans-serif;
-  --primitive-font-family-space-grotesk-bold: "Google-Space-Grotesk--bold", Arial, sans-serif;
-  --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
-  --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
+  --primitive-font-family-space-grotesk-regular: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+  --primitive-font-family-space-grotesk-bold: "Space Grotesk", "Space Grotesk Fallback", Arial, sans-serif;
+  --primitive-font-family-syne-medium: "Syne", "Syne Fallback", Arial, sans-serif;
+  --primitive-font-family-syne-bold: "Syne", "Syne Fallback", Arial, sans-serif;
   --primitive-font-family-mono: "Courier New", Courier, monospace;
   --primitive-font-size-xs: clamp(0.64rem, 0.61rem + 0.14vw, 0.72rem);
   --primitive-font-size-sm: clamp(0.8rem, 0.76rem + 0.18vw, 0.9rem);
@@ -249,6 +249,8 @@
   --semantic-color-state-error-text: var(--semantic-color-state-error);
   --semantic-color-state-warning-text: var(--semantic-color-state-warning);
   --semantic-color-state-info-text: var(--semantic-color-state-info);
+  --semantic-color-primary-strong: var(--semantic-color-primary);
+  --semantic-color-state-success-strong: var(--semantic-color-state-success);
 }
 
 @supports (color: oklch(from red l c h)) {
@@ -265,6 +267,14 @@
     --semantic-color-state-info-text: oklch(from var(--semantic-color-state-info) var(--semantic-brand-text-lightness) c h);
   }
 }
+@supports (color: oklch(from red clamp(0, l, 1) c h)) {
+  :root {
+    --semantic-brand-control-lightness-min: calc(var(--semantic-brand-text-lightness) - 0.12);
+    --semantic-brand-control-lightness-max: calc(var(--semantic-brand-text-lightness) + 0.12);
+    --semantic-color-primary-strong: oklch(from var(--semantic-color-primary) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
+    --semantic-color-state-success-strong: oklch(from var(--semantic-color-state-success) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
+  }
+}
 :root {
   --semantic-color-bg-primary: var(--primitive-color-white);
   --semantic-color-bg-secondary: var(--primitive-color-gray-50);
@@ -275,21 +285,33 @@
   --semantic-color-text-tertiary: var(--primitive-color-gray-400);
   --semantic-color-text-inverse: var(--primitive-color-white);
   --semantic-color-text-disabled: var(--primitive-color-gray-300);
-  --semantic-color-text-on-primary: var(--primitive-color-white);
+  --semantic-color-ink-light: var(--primitive-color-white);
+  --semantic-color-ink-dark: var(--primitive-color-black);
+  --semantic-color-on-primary: var(--semantic-color-text-inverse);
+  --semantic-color-on-secondary: var(--semantic-color-text-inverse);
+  --semantic-color-on-tertiary: var(--semantic-color-text-inverse);
+  --semantic-color-on-quaternary: var(--semantic-color-text-inverse);
+  --semantic-color-on-quinary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-primary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-secondary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-tertiary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-quaternary: var(--semantic-color-text-inverse);
+  --semantic-color-on-primary-strong: var(--semantic-color-on-primary);
+  --semantic-color-text-on-primary: var(--semantic-color-on-primary);
   --semantic-color-border-default: var(--primitive-color-gray-300);
   --semantic-color-border-subtle: var(--primitive-color-gray-200);
   --semantic-color-border-strong: var(--primitive-color-gray-400);
-  --semantic-color-border-focus: var(--semantic-color-primary);
+  --semantic-color-border-focus: var(--semantic-color-primary-strong);
   --semantic-color-border-control: var(--primitive-color-gray-500);
-  --semantic-color-link-default: var(--primitive-color-pink-500);
-  --semantic-color-link-hover: var(--primitive-color-purple-500);
-  --semantic-color-link-visited: var(--primitive-color-purple-500);
-  --semantic-color-link-active: var(--primitive-color-pink-500);
+  --semantic-color-link-default: var(--semantic-color-primary-text);
+  --semantic-color-link-hover: var(--semantic-color-secondary-text);
+  --semantic-color-link-visited: var(--semantic-color-secondary-text);
+  --semantic-color-link-active: var(--semantic-color-primary-text);
   --semantic-color-state-hover-primary: var(--primitive-color-pink-500);
   --semantic-color-state-hover-secondary: var(--primitive-color-purple-500);
   --semantic-color-state-hover-tertiary: var(--primitive-color-pink-500);
   --semantic-color-state-hover-quaternary: var(--primitive-color-pink-500);
-  --semantic-focus-ring-color: var(--primitive-color-pink-500);
+  --semantic-focus-ring-color: var(--semantic-color-primary-strong);
   --semantic-color-state-active: var(--primitive-color-purple-500);
   --semantic-color-state-disabled: var(--primitive-color-gray-300);
   --semantic-tone-success-bg: var(--primitive-color-success-500);
@@ -300,14 +322,14 @@
   --semantic-color-error: var(--semantic-tone-error-bg);
   --semantic-color-warning: var(--semantic-tone-warning-bg);
   --semantic-color-info: var(--semantic-tone-info-bg);
-  --semantic-color-state-focus: var(--primitive-color-pink-500);
+  --semantic-color-state-focus: var(--semantic-focus-ring-color);
   --semantic-color-state-success: var(--semantic-tone-success-bg);
   --semantic-color-state-error: var(--semantic-tone-error-bg);
   --semantic-color-state-warning: var(--semantic-tone-warning-bg);
   --semantic-color-state-info: var(--semantic-tone-info-bg);
-  --semantic-color-selection-text: var(--primitive-color-white);
-  --semantic-color-selection-bg: var(--primitive-color-purple-500);
-  --semantic-color-placeholder: var(--primitive-color-purple-500);
+  --semantic-color-selection-text: var(--semantic-color-on-primary);
+  --semantic-color-selection-bg: var(--semantic-color-primary);
+  --semantic-color-placeholder: var(--semantic-color-primary-text);
 }
 
 :root {
@@ -339,6 +361,9 @@
   --semantic-font-weight-medium: var(--primitive-font-weight-medium);
   --semantic-font-weight-bold: var(--primitive-font-weight-bold);
   --semantic-font-weight-black: var(--primitive-font-weight-black);
+  --semantic-font-weight-primary-bold: var(--primitive-font-weight-bold);
+  --semantic-font-weight-heading: var(--primitive-font-weight-bold);
+  --semantic-font-weight-heading-md: var(--primitive-font-weight-medium);
   --semantic-letter-spacing-tight: var(--primitive-letter-spacing-tight);
   --semantic-letter-spacing-normal: var(--primitive-letter-spacing-normal);
   --semantic-letter-spacing-wide: var(--primitive-letter-spacing-wide);
@@ -421,8 +446,8 @@
   --semantic-easing-out: cubic-bezier(0.16, 1, 0.3, 1);
   --semantic-easing-in-out: ease-in-out;
   --semantic-easing-linear: linear;
-  --semantic-focus-ring-width: 0.125rem;
-  --semantic-focus-ring-offset: 0.125rem;
+  --semantic-focus-ring-width: 2px;
+  --semantic-focus-ring-offset: 2px;
   --semantic-focus-ring-style: solid;
 }
 
@@ -451,10 +476,10 @@
   --component-button-primary-color-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-bg-hover: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-button-primary-border-hover: var(--semantic-color-state-hover-primary);
-  --component-button-primary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-primary-filled-color: var(--semantic-color-on-primary);
   --component-button-primary-filled-bg: var(--semantic-color-primary);
   --component-button-primary-filled-border: var(--semantic-color-primary);
-  --component-button-primary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-primary-filled-color-hover: var(--semantic-color-on-state-hover-primary);
   --component-button-primary-filled-bg-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-filled-border-hover: var(--semantic-color-state-hover-primary);
   --component-button-secondary-color: var(--semantic-color-secondary-text);
@@ -463,10 +488,10 @@
   --component-button-secondary-color-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-bg-hover: color-mix(in srgb, var(--semantic-color-secondary) 10%, transparent);
   --component-button-secondary-border-hover: var(--semantic-color-state-hover-secondary);
-  --component-button-secondary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
   --component-button-secondary-filled-bg: var(--semantic-color-secondary);
   --component-button-secondary-filled-border: var(--semantic-color-secondary);
-  --component-button-secondary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-secondary-filled-color-hover: var(--semantic-color-on-state-hover-secondary);
   --component-button-secondary-filled-bg-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-filled-border-hover: var(--semantic-color-state-hover-secondary);
   --component-button-tertiary-color: var(--semantic-color-tertiary-text);
@@ -475,10 +500,10 @@
   --component-button-tertiary-color-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-bg-hover: color-mix(in srgb, var(--semantic-color-tertiary) 10%, transparent);
   --component-button-tertiary-border-hover: var(--semantic-color-state-hover-tertiary);
-  --component-button-tertiary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-tertiary-filled-color: var(--semantic-color-on-tertiary);
   --component-button-tertiary-filled-bg: var(--semantic-color-tertiary);
   --component-button-tertiary-filled-border: var(--semantic-color-tertiary);
-  --component-button-tertiary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-tertiary-filled-color-hover: var(--semantic-color-on-state-hover-tertiary);
   --component-button-tertiary-filled-bg-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-filled-border-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-quaternary-color: var(--semantic-color-quaternary-text);
@@ -487,16 +512,17 @@
   --component-button-quaternary-color-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-bg-hover: color-mix(in srgb, var(--semantic-color-quaternary) 10%, transparent);
   --component-button-quaternary-border-hover: var(--semantic-color-state-hover-quaternary);
-  --component-button-quaternary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-quaternary-filled-color: var(--semantic-color-on-quaternary);
   --component-button-quaternary-filled-bg: var(--semantic-color-quaternary);
   --component-button-quaternary-filled-border: var(--semantic-color-quaternary);
-  --component-button-quaternary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-quaternary-filled-color-hover: var(--semantic-color-on-state-hover-quaternary);
   --component-button-quaternary-filled-bg-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-filled-border-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-padding-x: var(--semantic-space-component-lg);
   --component-button-padding-y: var(--semantic-space-component-sm);
   --component-button-gap: var(--semantic-space-inline-sm);
   --component-button-font-family: var(--semantic-font-family-primary-bold);
+  --component-button-font-weight: var(--semantic-font-weight-primary-bold);
   --component-button-font-size: var(--semantic-font-size-body);
   --component-button-line-height: var(--semantic-line-height-snug);
   --component-button-border-width: var(--semantic-border-width-default);
@@ -508,6 +534,10 @@
   --component-button-font-size-md: var(--semantic-font-size-body);
   --component-button-size-lg: var(--semantic-space-component-lg);
   --component-button-font-size-lg: var(--semantic-font-size-h6);
+  --component-button-height-sm: 2.5rem;
+  --component-button-height-md: var(--component-form-field-min-height);
+  --component-button-height-lg: 3.5rem;
+  --component-button-padding-block: var(--semantic-space-component-xs);
   --component-button-border-radius-circle: var(--semantic-border-radius-circle);
   --component-button-border-style: solid;
   --component-button-shadow: var(--semantic-shadow-none);
@@ -519,6 +549,17 @@
   --component-button-active-offset-y: 1px;
   --component-button-transition-duration-active: 0.1s;
   --component-btn-group-gap: 1rem;
+  --component-button-danger-color: var(--semantic-color-state-error-text);
+  --component-button-danger-border: var(--semantic-color-state-error);
+  --component-button-danger-color-hover: var(--semantic-color-state-error-text);
+  --component-button-danger-bg-hover: color-mix(in srgb, var(--semantic-color-state-error) 10%, transparent);
+  --component-button-danger-border-hover: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-bg: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-border: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-color: var(--semantic-color-bg-primary);
+  --component-button-danger-filled-bg-hover: color-mix(in oklch, var(--semantic-color-state-error-text) 80%, var(--semantic-color-text-primary));
+  --component-button-danger-filled-border-hover: var(--component-button-danger-filled-bg-hover);
+  --component-button-danger-filled-color-hover: var(--semantic-color-bg-primary);
   --component-button-disabled-bg: var(--semantic-color-state-disabled);
   --component-button-disabled-border: var(--semantic-color-state-disabled);
   --component-button-disabled-color: var(--semantic-color-text-disabled);
@@ -533,7 +574,7 @@
   --component-form-field-placeholder: var(--semantic-color-placeholder);
   --component-form-field-padding-x: var(--semantic-space-component-sm);
   --component-form-field-padding-y: var(--semantic-space-component-sm);
-  --component-form-field-min-height: calc(6 * var(--semantic-space-component-xs));
+  --component-form-field-min-height: max(3rem, 44px);
   --component-form-field-gap: var(--semantic-space-component-sm);
   --component-form-field-margin-bottom: var(--semantic-space-stack-md);
   --component-form-field-icon-size: var(--semantic-space-component-md);
@@ -543,6 +584,7 @@
   --component-form-field-msg-line-height: var(--semantic-line-height-caption);
   --component-form-field-label-margin-bottom: var(--semantic-space-stack-xs);
   --component-form-field-font-family: var(--semantic-font-family-primary-bold);
+  --component-form-field-font-weight: var(--semantic-font-weight-primary-bold);
   --component-form-field-font-size: var(--semantic-font-size-body);
   --component-form-field-font-size-sm: var(--semantic-font-size-body-small);
   --component-form-field-line-height: var(--semantic-line-height-normal);
@@ -568,7 +610,8 @@
   --component-check-border-color: var(--semantic-color-border-control);
   --component-check-border-color-hover: var(--semantic-color-primary);
   --component-check-color-checked: var(--semantic-color-primary);
-  --component-check-bg-checked: var(--semantic-color-primary);
+  --component-check-bg-checked: var(--semantic-color-primary-strong);
+  --component-check-mark-color: var(--semantic-color-on-primary-strong);
   --component-check-bg: var(--semantic-color-bg-primary);
   --component-check-shadow-focus: var(--semantic-shadow-focus);
   --component-check-icon-image: var(--lc-icon-check);
@@ -580,15 +623,16 @@
   --component-radio-border-color: var(--semantic-color-border-control);
   --component-radio-border-color-hover: var(--semantic-color-primary);
   --component-radio-color-checked: var(--semantic-color-primary);
-  --component-radio-bg-checked: var(--semantic-color-primary);
+  --component-radio-bg-checked: var(--semantic-color-primary-strong);
+  --component-radio-dot-color: var(--semantic-color-on-primary-strong);
   --component-radio-bg: var(--semantic-color-bg-primary);
-  --component-switch-width: calc(6 * var(--semantic-space-component-xs));
-  --component-switch-height: calc(3.5 * var(--semantic-space-component-xs));
-  --component-switch-slider-size: calc(2.5 * var(--semantic-space-component-xs));
+  --component-switch-width: 3rem;
+  --component-switch-height: 1.75rem;
+  --component-switch-slider-size: 1.25rem;
   --component-switch-slider-bg: var(--semantic-color-bg-primary);
   --component-switch-slider-radius: var(--semantic-border-radius-circle);
   --component-switch-bg-off: var(--semantic-color-bg-tertiary);
-  --component-switch-bg-on: var(--semantic-color-state-success);
+  --component-switch-bg-on: var(--semantic-color-state-success-strong);
   --component-switch-border-color: var(--semantic-color-border-control);
   --component-switch-status-disabled-opacity: 0.5;
   --component-switch-status-color-on: var(--semantic-color-state-success);
@@ -626,11 +670,11 @@
   --component-breadcrumb-font-size: var(--semantic-font-size-body-small);
   --component-breadcrumb-color: var(--semantic-color-primary-text);
   --component-breadcrumb-color-hover: var(--semantic-color-link-hover);
-  --component-breadcrumb-color-active: var(--semantic-color-text-inverse);
+  --component-breadcrumb-color-active: var(--semantic-color-on-primary);
   --component-breadcrumb-bg-active: var(--semantic-color-primary);
   --component-breadcrumb-icon-filter: var(--semantic-filter-primary);
   --component-pagination-gap: var(--semantic-space-inline-sm);
-  --component-pagination-item-size: calc(5 * var(--semantic-space-component-xs));
+  --component-pagination-item-size: 2.5rem;
   --component-pagination-icon-size: var(--semantic-space-component-md);
   --component-pagination-font-family: var(--semantic-font-family-primary);
   --component-pagination-font-size: var(--semantic-font-size-body-small);
@@ -640,7 +684,7 @@
   --component-pagination-border-color-hover: var(--semantic-color-primary);
   --component-pagination-color: var(--semantic-color-primary-text);
   --component-pagination-color-hover: var(--semantic-color-primary);
-  --component-pagination-color-active: var(--semantic-color-text-inverse);
+  --component-pagination-color-active: var(--semantic-color-on-primary);
   --component-pagination-bg-active: var(--semantic-color-primary);
   --component-pagination-color-disabled: var(--semantic-color-state-disabled);
   --component-pagination-bg-disabled: var(--semantic-color-state-disabled);
@@ -675,15 +719,16 @@
   --component-table-cell-padding-x: var(--semantic-space-component-sm);
   --component-table-cell-padding-y: var(--semantic-space-component-xs);
   --component-table-bg-th: var(--semantic-color-primary);
-  --component-table-color-th: var(--semantic-color-text-inverse);
+  --component-table-color-th: var(--semantic-color-on-primary);
   --component-table-bg-tfoot: var(--semantic-color-bg-tertiary);
   --component-table-border-width: var(--semantic-border-width-default);
   --component-table-border-color: var(--semantic-color-border-subtle);
   --component-table-state-hover-bg: var(--semantic-color-state-hover-primary);
+  --component-table-state-hover-color: var(--semantic-color-on-state-hover-primary);
   --component-table-state-hover-border-color: var(--semantic-color-primary);
   --component-table-state-hover-shadow: var(--semantic-shadow-focus);
   --component-table-sticky-active-bg: var(--semantic-color-primary);
-  --component-table-sticky-active-color: var(--semantic-color-text-inverse);
+  --component-table-sticky-active-color: var(--semantic-color-on-primary);
   --component-table-sticky-max-height: 450px;
   --component-table-min-width: 44rem;
   --component-table-scroll-mask: var(--semantic-color-bg-primary);
@@ -698,6 +743,7 @@
   --component-title-h5: var(--semantic-font-size-h5);
   --component-title-h6: var(--semantic-font-size-h6);
   --component-title-font-family: var(--semantic-font-family-heading);
+  --component-title-font-weight: var(--semantic-font-weight-heading);
   --component-title-line-height: var(--semantic-line-height-heading);
   --component-title-color: var(--semantic-color-text-primary);
   --component-title-margin-bottom: var(--semantic-space-stack-sm);
@@ -711,7 +757,7 @@
   --component-link-decoration-thickness: var(--semantic-border-width-thin);
   --component-link-decoration-color: var(--semantic-color-primary);
   --component-link-primary-color: var(--semantic-color-primary-text);
-  --component-link-primary-color-hover: var(--semantic-color-text-inverse);
+  --component-link-primary-color-hover: var(--semantic-color-on-primary);
   --component-link-primary-bg-hover: var(--semantic-color-primary);
   --component-link-primary-shadow-focus: var(--semantic-shadow-focus);
 }
@@ -934,10 +980,19 @@
   --component-code-syntax-tag: var(--semantic-color-primary);
   --component-code-syntax-attr: var(--semantic-color-secondary);
   --component-code-syntax-val: var(--semantic-color-tertiary);
-  --component-code-syntax-comment: var(--semantic-color-text-disabled);
+  --component-code-syntax-comment: var(--primitive-color-gray-400);
   --component-code-syntax-fn: var(--semantic-color-quaternary);
+  --component-code-syntax-lightness: 0.82;
 }
 
+@supports (color: oklch(from red l c h)) {
+  :root {
+    --component-code-syntax-tag: oklch(from var(--semantic-color-primary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-attr: oklch(from var(--semantic-color-secondary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-val: oklch(from var(--semantic-color-tertiary) var(--component-code-syntax-lightness) c h);
+    --component-code-syntax-fn: oklch(from var(--semantic-color-quaternary) var(--component-code-syntax-lightness) c h);
+  }
+}
 :root {
   --component-section-title-font-size: clamp(1.75rem, 4vw, 2.75rem);
   --component-section-title-weight: var(--semantic-font-weight-black);
@@ -1011,20 +1066,20 @@
   --component-hero-stats-border-width: var(--semantic-border-width-thin);
   --component-hero-stats-border-color: var(--semantic-color-border-subtle);
   --component-cta-bg: linear-gradient( 135deg, var(--semantic-color-primary) 0%, var(--semantic-color-secondary) 100% );
-  --component-cta-color: var(--semantic-color-text-inverse);
-  --component-cta-overline-color: color-mix(in srgb, var(--semantic-color-text-inverse) 75%, transparent);
-  --component-cta-sub-color: color-mix(in srgb, var(--semantic-color-text-inverse) 80%, transparent);
+  --component-cta-color: var(--semantic-color-on-primary);
+  --component-cta-overline-color: color-mix(in srgb, var(--semantic-color-on-primary) 75%, transparent);
+  --component-cta-sub-color: color-mix(in srgb, var(--semantic-color-on-primary) 80%, transparent);
   --component-cta-headline-font-size: clamp(1.75rem, 4vw, 3rem);
-  --component-cta-decor-bg: color-mix(in srgb, var(--semantic-color-text-inverse) 8%, transparent);
+  --component-cta-decor-bg: color-mix(in srgb, var(--semantic-color-on-primary) 8%, transparent);
   --component-cta-decor-size: 20rem;
   --component-cta-decor-radius: var(--semantic-border-radius-circle);
   --component-cta-decor-top: -4rem;
   --component-cta-decor-right: -4rem;
   --component-cta-code-bg: color-mix(in srgb, oklch(0 0 0) 20%, transparent);
   --component-cta-code-border-width: var(--semantic-border-width-thin);
-  --component-cta-code-border-color: color-mix(in srgb, var(--semantic-color-text-inverse) 20%, transparent);
+  --component-cta-code-border-color: color-mix(in srgb, var(--semantic-color-on-primary) 20%, transparent);
   --component-cta-code-border-radius: 0.5rem;
-  --component-cta-code-color: var(--semantic-color-text-inverse);
+  --component-cta-code-color: var(--semantic-color-on-primary);
   --component-cta-shadow-hard-color: var(--semantic-shadow-hard-color);
   --component-cta-border-block-width: 0;
   --component-cta-border-color: var(--semantic-color-border-strong);
@@ -1083,7 +1138,7 @@
   --component-token-component-badge-bg: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-token-component-badge-color: var(--semantic-color-primary-text);
   --component-token-component-badge-border: color-mix(in srgb, var(--semantic-color-primary) 20%, transparent);
-  --component-token-component-step-color: var(--component-token-step-color);
+  --component-token-component-step-color: var(--semantic-color-on-primary);
   --component-token-connector-line: linear-gradient( to bottom, var(--semantic-color-border-default), var(--semantic-color-primary) );
   --component-token-connector-opacity: 0.35;
   --component-token-connector-arrow-color: var(--semantic-color-primary-text);
@@ -1092,7 +1147,7 @@
   --component-token-rule-border-color: var(--semantic-color-primary);
   --component-token-rule-border-radius: var(--theme-radius);
   --component-token-rule-icon-bg: var(--semantic-color-primary);
-  --component-token-rule-icon-color: var(--semantic-color-text-inverse);
+  --component-token-rule-icon-color: var(--semantic-color-on-primary);
   --component-token-rule-icon-radius: var(--semantic-border-radius-circle);
   --component-score-size: 2rem;
   --component-ranking-max-offset: 0.35em;
@@ -1163,7 +1218,7 @@
   --component-tabs-tab-color-selected: var(--semantic-color-text-primary);
   --component-tabs-tab-font-weight: var(--semantic-font-weight-medium);
   --component-tabs-indicator-width: var(--semantic-border-width-thick);
-  --component-tabs-indicator-color: var(--semantic-color-primary);
+  --component-tabs-indicator-color: var(--semantic-color-primary-strong);
   --component-tabs-panel-padding-block: var(--semantic-space-component-lg);
 }
 
@@ -1332,9 +1387,9 @@
   --primitive-color-error-500: oklch(0.60 0.193 23.026);
   --primitive-color-warning-500: oklch(0.60 0.167 84.398);
   --primitive-color-disabled: oklch(0.60 0.012 247.971);
-  --primitive-font-family-syne-medium: "Google-Syne--medium", Arial, sans-serif;
-  --primitive-font-family-syne-bold: "Google-Syne--bold", Arial, sans-serif;
-  --primitive-font-family-inter: "Google-Inter--regular", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --primitive-font-family-syne-medium: "Syne", "Syne Fallback", Arial, sans-serif;
+  --primitive-font-family-syne-bold: "Syne", "Syne Fallback", Arial, sans-serif;
+  --primitive-font-family-inter: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --primitive-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   --primitive-icon-arrow-default: url('data:image/svg+xml;utf-8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.8299 11.2897L10.5899 7.0497C10.497 6.95598 10.3864 6.88158 10.2645 6.83081C10.1427 6.78004 10.012 6.75391 9.87994 6.75391C9.74793 6.75391 9.61723 6.78004 9.49537 6.83081C9.37351 6.88158 9.26291 6.95598 9.16994 7.0497C8.98369 7.23707 8.87915 7.49052 8.87915 7.7547C8.87915 8.01889 8.98369 8.27234 9.16994 8.4597L12.7099 11.9997L9.16994 15.5397C8.98369 15.7271 8.87915 15.9805 8.87915 16.2447C8.87915 16.5089 8.98369 16.7623 9.16994 16.9497C9.26338 17.0424 9.3742 17.1157 9.49604 17.1655C9.61787 17.2152 9.74834 17.2405 9.87994 17.2397C10.0115 17.2405 10.142 17.2152 10.2638 17.1655C10.3857 17.1157 10.4965 17.0424 10.5899 16.9497L14.8299 12.7097C14.9237 12.6167 14.9981 12.5061 15.0488 12.3843C15.0996 12.2624 15.1257 12.1317 15.1257 11.9997C15.1257 11.8677 15.0996 11.737 15.0488 11.6151C14.9981 11.4933 14.9237 11.3827 14.8299 11.2897Z" fill="black"/></svg>');
   --primitive-icon-arrow-double: url('data:image/svg+xml;utf-8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.46002 8.28978C8.27172 8.09617 8.01422 7.98529 7.74416 7.98154C7.47411 7.97779 7.21363 8.08147 7.02002 8.26978C6.82641 8.45808 6.71554 8.71558 6.71179 8.98564C6.70804 9.25569 6.81172 9.51617 7.00002 9.70978L9.34002 11.9998L7.00002 14.2898C6.90629 14.3827 6.8319 14.4933 6.78113 14.6152C6.73036 14.7371 6.70422 14.8678 6.70422 14.9998C6.70422 15.1318 6.73036 15.2625 6.78113 15.3844C6.8319 15.5062 6.90629 15.6168 7.00002 15.7098C7.09298 15.8035 7.20359 15.8779 7.32545 15.9287C7.4473 15.9794 7.57801 16.0056 7.71002 16.0056C7.84203 16.0056 7.97274 15.9794 8.0946 15.9287C8.21646 15.8779 8.32706 15.8035 8.42002 15.7098L11.42 12.7098C11.5138 12.6168 11.5881 12.5062 11.6389 12.3844C11.6897 12.2625 11.7158 12.1318 11.7158 11.9998C11.7158 11.8678 11.6897 11.7371 11.6389 11.6152C11.5881 11.4933 11.5138 11.3827 11.42 11.2898L8.46002 8.28978ZM16.96 11.2898L13.96 8.28978C13.7717 8.10147 13.5163 7.99569 13.25 7.99569C12.9837 7.99569 12.7283 8.10147 12.54 8.28978C12.3517 8.47808 12.2459 8.73348 12.2459 8.99978C12.2459 9.26608 12.3517 9.52147 12.54 9.70978L14.84 11.9998L12.54 14.2898C12.4463 14.3827 12.3719 14.4933 12.3211 14.6152C12.2704 14.7371 12.2442 14.8678 12.2442 14.9998C12.2442 15.1318 12.2704 15.2625 12.3211 15.3844C12.3719 15.5062 12.4463 15.6168 12.54 15.7098C12.633 15.8035 12.7436 15.8779 12.8654 15.9287C12.9873 15.9794 13.118 16.0056 13.25 16.0056C13.382 16.0056 13.5127 15.9794 13.6346 15.9287C13.7565 15.8779 13.8671 15.8035 13.96 15.7098L16.96 12.7098C17.0564 12.6195 17.134 12.511 17.1882 12.3906C17.2424 12.2701 17.2723 12.1401 17.276 12.0081C17.2797 11.8761 17.2572 11.7446 17.2099 11.6213C17.1625 11.498 17.0912 11.3854 17 11.2898H16.96Z" fill="black"/></svg>');
@@ -1367,10 +1422,15 @@
   --semantic-color-tertiary: var(--primitive-color-orange-500);
   --semantic-color-quaternary: var(--semantic-color-primary);
   --semantic-color-quinary: var(--primitive-color-error-500);
+  --semantic-color-on-primary: var(--semantic-color-ink-dark);
+  --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+  --semantic-color-on-tertiary: var(--semantic-color-ink-dark);
+  --semantic-color-on-quaternary: var(--semantic-color-ink-dark);
+  --semantic-color-on-quinary: var(--semantic-color-ink-dark);
   --semantic-color-senary: initial;
   --semantic-color-septenary: initial;
-  --semantic-color-placeholder: var(--semantic-color-primary);
-  --semantic-color-link-default: var(--semantic-color-primary);
+  --semantic-color-placeholder: var(--semantic-color-primary-text);
+  --semantic-color-link-default: var(--semantic-color-primary-text);
   --semantic-color-state-disabled: var(--primitive-color-disabled);
   --semantic-color-state-hover-primary: oklch(0.51 0.177 277.366);
   --semantic-color-state-hover-secondary: oklch(0.51 0.165 70.08);
@@ -1379,7 +1439,7 @@
   --semantic-tone-success-bg: var(--primitive-color-success-500);
   --semantic-tone-error-bg: var(--primitive-color-error-500);
   --semantic-tone-warning-bg: var(--primitive-color-warning-500);
-  --semantic-color-selection-text: var(--primitive-color-white);
+  --semantic-color-selection-text: var(--semantic-color-on-primary);
   --semantic-color-selection-bg: var(--semantic-color-primary);
   --reset-selection-color: var(--semantic-color-selection-text);
   --reset-selection-bg: var(--semantic-color-selection-bg);
@@ -1542,19 +1602,23 @@
     --semantic-color-border-default: var(--primitive-color-gray-700);
     --semantic-color-border-subtle: var(--primitive-color-gray-800);
     --semantic-color-border-strong: var(--primitive-color-gray-600);
-    --semantic-color-link-default: var(--semantic-color-primary);
-    --semantic-color-link-hover: var(--semantic-color-secondary);
-    --semantic-color-link-visited: var(--semantic-color-tertiary);
-    --semantic-color-link-active: var(--semantic-color-primary);
-    --semantic-focus-ring-color: var(--semantic-color-primary);
+    --semantic-color-link-default: var(--semantic-color-primary-text);
+    --semantic-color-link-hover: var(--semantic-color-secondary-text);
+    --semantic-color-link-visited: var(--semantic-color-tertiary-text);
+    --semantic-color-link-active: var(--semantic-color-primary-text);
+    --semantic-focus-ring-color: var(--semantic-color-primary-strong);
     --semantic-color-state-active: var(--semantic-color-secondary);
     --semantic-color-state-disabled: var(--primitive-color-gray-600);
     --semantic-color-state-hover-primary: var(--semantic-color-primary);
     --semantic-color-state-hover-secondary: var(--semantic-color-secondary);
     --semantic-color-state-hover-tertiary: var(--semantic-color-primary);
     --semantic-color-state-hover-quaternary: var(--semantic-color-primary);
-    --semantic-color-placeholder: var(--primitive-color-gray-500);
-    --semantic-color-selection-text: var(--primitive-color-white);
+    --semantic-color-on-state-hover-primary: var(--semantic-color-on-primary);
+    --semantic-color-on-state-hover-secondary: var(--semantic-color-on-secondary);
+    --semantic-color-on-state-hover-tertiary: var(--semantic-color-on-primary);
+    --semantic-color-on-state-hover-quaternary: var(--semantic-color-on-primary);
+    --semantic-color-placeholder: var(--semantic-color-primary-text);
+    --semantic-color-selection-text: var(--semantic-color-on-primary);
     --semantic-color-selection-bg: var(--semantic-color-primary);
     --semantic-shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.3);
     --semantic-shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.4), 0 1px 2px 0 oklch(0 0 0 / 0.3);
@@ -1570,7 +1634,7 @@
     --semantic-focus-ring-color: oklch(0.70 0.204 277.117);
     --btn-primary-bg-hover: oklch(0.70 0.204 277.117);
     --btn-secondary-bg-hover: oklch(0.88 0.115 95.746);
-    --semantic-color-link-default: oklch(0.70 0.204 277.117);
+    --semantic-color-link-default: var(--semantic-color-primary-text);
     --semantic-color-link-hover: oklch(0.88 0.115 95.746);
     --semantic-color-link-visited: oklch(0.60 0.23 276.966);
     --semantic-color-link-active: oklch(0.88 0.115 95.746);
@@ -1590,19 +1654,23 @@
   --semantic-color-border-default: var(--primitive-color-gray-700);
   --semantic-color-border-subtle: var(--primitive-color-gray-800);
   --semantic-color-border-strong: var(--primitive-color-gray-600);
-  --semantic-color-link-default: var(--semantic-color-primary);
-  --semantic-color-link-hover: var(--semantic-color-secondary);
-  --semantic-color-link-visited: var(--semantic-color-tertiary);
-  --semantic-color-link-active: var(--semantic-color-primary);
-  --semantic-focus-ring-color: var(--semantic-color-primary);
+  --semantic-color-link-default: var(--semantic-color-primary-text);
+  --semantic-color-link-hover: var(--semantic-color-secondary-text);
+  --semantic-color-link-visited: var(--semantic-color-tertiary-text);
+  --semantic-color-link-active: var(--semantic-color-primary-text);
+  --semantic-focus-ring-color: var(--semantic-color-primary-strong);
   --semantic-color-state-active: var(--semantic-color-secondary);
   --semantic-color-state-disabled: var(--primitive-color-gray-600);
   --semantic-color-state-hover-primary: var(--semantic-color-primary);
   --semantic-color-state-hover-secondary: var(--semantic-color-secondary);
   --semantic-color-state-hover-tertiary: var(--semantic-color-primary);
   --semantic-color-state-hover-quaternary: var(--semantic-color-primary);
-  --semantic-color-placeholder: var(--primitive-color-gray-500);
-  --semantic-color-selection-text: var(--primitive-color-white);
+  --semantic-color-on-state-hover-primary: var(--semantic-color-on-primary);
+  --semantic-color-on-state-hover-secondary: var(--semantic-color-on-secondary);
+  --semantic-color-on-state-hover-tertiary: var(--semantic-color-on-primary);
+  --semantic-color-on-state-hover-quaternary: var(--semantic-color-on-primary);
+  --semantic-color-placeholder: var(--semantic-color-primary-text);
+  --semantic-color-selection-text: var(--semantic-color-on-primary);
   --semantic-color-selection-bg: var(--semantic-color-primary);
   --semantic-shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.3);
   --semantic-shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.4), 0 1px 2px 0 oklch(0 0 0 / 0.3);
@@ -1611,7 +1679,7 @@
   --semantic-shadow-card: 0 1px 3px oklch(0 0 0 / 0.3), 0 4px 12px oklch(0 0 0 / 0.2);
   --semantic-shadow-focus: 0 0 0.313rem 0 var(--semantic-focus-ring-color);
   --semantic-brand-text-lightness: 0.80;
-  --semantic-color-border-focus: var(--semantic-color-primary);
+  --semantic-color-border-focus: var(--semantic-color-primary-strong);
   --btn-primary-filled-text: var(--primitive-color-white);
   --btn-secondary-filled-text: oklch(0.22 0.032 264.665);
   --semantic-color-state-hover-primary: oklch(0.70 0.204 277.117);
@@ -1619,7 +1687,7 @@
   --semantic-focus-ring-color: oklch(0.70 0.204 277.117);
   --btn-primary-bg-hover: oklch(0.70 0.204 277.117);
   --btn-secondary-bg-hover: oklch(0.88 0.115 95.746);
-  --semantic-color-link-default: oklch(0.70 0.204 277.117);
+  --semantic-color-link-default: var(--semantic-color-primary-text);
   --semantic-color-link-hover: oklch(0.88 0.115 95.746);
   --semantic-color-link-visited: oklch(0.60 0.23 276.966);
   --semantic-color-link-active: oklch(0.88 0.115 95.746);
@@ -1630,46 +1698,123 @@
 }
 
 @font-face {
-  font-family: "Google-Inter--regular";
-  src: url("../fonts/google-inter/Inter-Regular.woff2") format("woff2"), url("../fonts/google-inter/Inter-Regular.woff") format("woff");
+  font-family: "Inter";
+  src: url("../fonts/google-inter/Inter-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Google-Inter--medium";
-  src: url("../fonts/google-inter/Inter-Medium.woff2") format("woff2"), url("../fonts/google-inter/Inter-Medium.woff") format("woff");
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 107.32%;
+  ascent-override: 90.27%;
+  descent-override: 22.48%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/google-inter/Inter-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Google-Syne--medium";
-  src: url("../fonts/google-syne/Syne-Regular.eot?") format("eot"), url("../fonts/google-syne/Syne-Regular.woff2") format("woff2"), url("../fonts/google-syne/Syne-Regular.woff") format("woff"), url("../fonts/google-syne/Syne-Regular.ttf") format("truetype"), url("../fonts/google-syne/Syne-Regular.svg#Google-Syne--medium") format("svg");
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  size-adjust: 108.29%;
+  ascent-override: 89.46%;
+  descent-override: 22.28%;
+  line-gap-override: 0%;
 }
 @font-face {
-  font-family: "Google-Syne--bold";
-  src: url("../fonts/google-syne/Syne-Bold.eot?") format("eot"), url("../fonts/google-syne/Syne-Bold.woff2") format("woff2"), url("../fonts/google-syne/Syne-Bold.woff") format("woff"), url("../fonts/google-syne/Syne-Bold.ttf") format("truetype"), url("../fonts/google-syne/Syne-Bold.svg#Google-Syne--bold") format("svg");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Google-Space-Grotesk--regular";
-  src: url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.eot?") format("eot"), url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.woff2") format("woff2"), url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.woff") format("woff"), url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.ttf") format("truetype"), url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.svg#Google-Space-Grotesk--regular") format("svg");
+  font-family: "Syne";
+  src: url("../fonts/google-syne/Syne-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Google-Space-Grotesk--bold";
-  src: url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.eot?") format("eot"), url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.woff2") format("woff2"), url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.woff") format("woff"), url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.ttf") format("truetype"), url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.svg#Google-Space-Grotesk--bold") format("svg");
+  font-family: "Syne Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 98.92%;
+  ascent-override: 93.51%;
+  descent-override: 27.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Syne";
+  src: url("../fonts/google-syne/Syne-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Syne Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  font-weight: 500;
+  font-style: normal;
+  size-adjust: 106.43%;
+  ascent-override: 86.91%;
+  descent-override: 25.84%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Syne";
+  src: url("../fonts/google-syne/Syne-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+@font-face {
+  font-family: "Syne Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold");
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 113.97%;
+  ascent-override: 81.16%;
+  descent-override: 24.13%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial"), local("ArialMT"), local("Liberation Sans");
+  font-weight: 400;
+  font-style: normal;
+  size-adjust: 110.85%;
+  ascent-override: 88.77%;
+  descent-override: 26.34%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../fonts/google-space-grotesk/SpaceGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold");
+  font-weight: 700;
+  font-style: normal;
+  size-adjust: 102.46%;
+  ascent-override: 96.04%;
+  descent-override: 28.5%;
+  line-gap-override: 0%;
 }
 @layer syx.reset {
   *,
@@ -1678,19 +1823,14 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
   }
-  ::-moz-selection {
-    color: var(--reset-selection-color);
-    background-color: var(--reset-selection-bg);
-  }
   ::selection {
     color: var(--reset-selection-color);
     background-color: var(--reset-selection-bg);
   }
   html {
     -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
     font: var(--reset-html-font);
+    font-synthesis: weight style;
   }
   body {
     margin: 0;
@@ -1745,6 +1885,9 @@
   em {
     font-family: var(--font-bold);
   }
+  em {
+    font-weight: var(--semantic-font-weight-primary-bold);
+  }
   a {
     text-decoration: none;
     -webkit-text-decoration-skip: objects;
@@ -1774,7 +1917,6 @@
   }
   pre {
     overflow: auto;
-    -ms-overflow-style: scrollbar;
   }
   img {
     border-style: none;
@@ -1783,8 +1925,7 @@
     overflow: hidden;
   }
   video {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   table {
     border-collapse: collapse;
@@ -1861,19 +2002,12 @@
     white-space: normal;
   }
   select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
     text-transform: none;
-  }
-  select::-ms-expand {
-    display: none;
   }
   input {
     margin: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
     overflow: visible;
     line-height: inherit;
   }
@@ -1882,9 +2016,7 @@
     box-sizing: border-box;
   }
   input[type=date], input[type=time], input[type=datetime-local], input[type=month] {
-    -webkit-appearance: listbox;
-    -moz-appearance: listbox;
-         appearance: listbox;
+    appearance: listbox;
   }
   input[type=password]::-ms-reveal {
     display: none;
@@ -1897,7 +2029,6 @@
   [type=button],
   [type=submit],
   ::-webkit-file-upload-button {
-    -webkit-appearance: button;
     appearance: button;
   }
   ::-webkit-file-upload-button {
@@ -1908,9 +2039,7 @@
   }
   [type=search] {
     outline-offset: -2px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
   }
   [type=search]::-webkit-search-cancel-button, [type=search]::-webkit-search-decoration {
     -webkit-appearance: none;
@@ -1923,9 +2052,7 @@
   textarea {
     margin: 0;
     padding-top: 1rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
     overflow: auto;
     resize: vertical;
     min-height: 13rem;
@@ -2001,7 +2128,7 @@
     color: var(--semantic-color-text-primary);
   }
   a:not([class*=atom-btn]) {
-    color: var(--semantic-color-primary);
+    color: var(--semantic-color-link-default);
     text-decoration: none;
     font-weight: var(--primitive-font-weight-medium);
     transition: color 0.2s ease;
@@ -2251,14 +2378,14 @@
   }
 }
 @layer syx.utilities {
-  .syx-bg-auto {
-    background-size: auto;
-  }
   .syx-bg-cover {
     background-size: cover;
   }
   .syx-bg-contain {
     background-size: contain;
+  }
+  .syx-bg-auto {
+    background-size: auto;
   }
   .syx-bg-white {
     background-color: var(--semantic-color-bg-primary);
@@ -2322,25 +2449,29 @@
   }
   .syx-bg-color-primary {
     background-color: var(--semantic-color-primary);
-    color: var(--primitive-color-white);
+    color: var(--semantic-color-on-primary);
   }
   .syx-bg-color-primary-lt-1 {
     background-color: var(--semantic-color-bg-secondary);
   }
   .syx-bg-color-secondary {
     background-color: var(--semantic-color-secondary);
+    color: var(--semantic-color-on-secondary);
   }
   .syx-bg-color-secondary-lt-1 {
     background-color: var(--semantic-color-bg-tertiary);
   }
   .syx-bg-color-tertiary {
     background-color: var(--semantic-color-tertiary);
+    color: var(--semantic-color-on-tertiary);
   }
   .syx-bg-color-quaternary {
     background-color: var(--semantic-color-quaternary);
+    color: var(--semantic-color-on-quaternary);
   }
   .syx-bg-color-quinary {
     background-color: var(--semantic-color-quinary);
+    color: var(--semantic-color-on-quinary);
   }
 }
 @layer syx.base {
@@ -2630,7 +2761,7 @@
     text-decoration: underline;
   }
   .atom-breadcrumb__link:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
     border-radius: 2px;
   }
@@ -2653,14 +2784,16 @@
   }
   .atom-btn {
     -webkit-user-select: none;
-       -moz-user-select: none;
             user-select: none;
     text-align: center;
     box-shadow: var(--component-button-shadow);
     cursor: pointer;
     font-family: var(--component-button-font-family);
+    font-weight: var(--component-button-font-weight);
     font-size: var(--component-button-font-size);
     line-height: var(--component-button-line-height);
+    padding: var(--component-button-padding-block) var(--component-button-size-md);
+    min-block-size: var(--component-button-height-md);
     transition: border-color var(--component-button-transition-duration) var(--component-button-transition-easing), color var(--component-button-transition-duration) var(--component-button-transition-easing), background-color var(--component-button-transition-duration) var(--component-button-transition-easing), transform var(--component-button-transition-duration-active, 0.1s) var(--component-button-transition-easing);
   }
   @media (prefers-reduced-motion: reduce) {
@@ -2716,20 +2849,32 @@
     background-color: transparent;
     color: var(--component-button-quaternary-color);
   }
+  .atom-btn--danger {
+    border-color: var(--component-button-danger-border);
+  }
+  .atom-btn--danger.atom-btn--filled {
+    background-color: var(--component-button-danger-filled-bg);
+    border-color: var(--component-button-danger-filled-border);
+    color: var(--component-button-danger-filled-color);
+  }
+  .atom-btn--danger:not(.atom-btn--filled) {
+    background-color: transparent;
+    color: var(--component-button-danger-color);
+  }
   .atom-btn--size-sm {
-    padding: var(--component-button-size-sm);
+    padding: var(--component-button-padding-block) var(--component-button-size-sm);
+    min-block-size: var(--component-button-height-sm);
     font-size: var(--component-button-font-size-sm);
-    line-height: var(--component-button-size-sm);
   }
   .atom-btn--size-md {
-    padding: var(--component-button-size-md);
+    padding: var(--component-button-padding-block) var(--component-button-size-md);
+    min-block-size: var(--component-button-height-md);
     font-size: var(--component-button-font-size-md);
-    line-height: var(--component-button-size-md);
   }
   .atom-btn--size-lg {
-    padding: var(--component-button-size-lg);
+    padding: var(--component-button-padding-block) var(--component-button-size-lg);
+    min-block-size: var(--component-button-height-lg);
     font-size: var(--component-button-font-size-lg);
-    line-height: var(--component-button-size-lg);
   }
   .atom-btn:hover:not(:disabled) {
     cursor: pointer;
@@ -2775,11 +2920,22 @@
     border-color: var(--component-button-quaternary-filled-border-hover);
     color: var(--component-button-quaternary-filled-color-hover);
   }
+  .atom-btn:hover:not(:disabled).atom-btn--danger {
+    border-color: var(--component-button-danger-border-hover);
+    background-color: var(--component-button-danger-bg-hover);
+    color: var(--component-button-danger-color-hover);
+  }
+  .atom-btn:hover:not(:disabled).atom-btn--danger.atom-btn--filled {
+    background-color: var(--component-button-danger-filled-bg-hover);
+    border-color: var(--component-button-danger-filled-border-hover);
+    color: var(--component-button-danger-filled-color-hover);
+  }
   .atom-btn:focus:not(:disabled) {
     outline: 0;
   }
   .atom-btn:focus-visible:not(:disabled) {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-btn:disabled {
     cursor: not-allowed;
@@ -2788,6 +2944,14 @@
   }
   .atom-btn.atom-btn--circle {
     border-radius: var(--component-button-border-radius-circle);
+    padding-inline: 0;
+    min-inline-size: var(--component-button-height-md);
+  }
+  .atom-btn.atom-btn--circle.atom-btn--size-sm {
+    min-inline-size: var(--component-button-height-sm);
+  }
+  .atom-btn.atom-btn--circle.atom-btn--size-lg {
+    min-inline-size: var(--component-button-height-lg);
   }
   .atom-btn.atom-btn--filled:disabled {
     background-color: var(--component-button-disabled-bg);
@@ -2878,7 +3042,6 @@
     align-items: flex-start;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
             user-select: none;
   }
   .atom-check__input {
@@ -2944,12 +3107,12 @@
     border-color: var(--component-check-bg-checked);
   }
   .atom-check__input:checked + .atom-check__label::after {
-    border-right-color: var(--semantic-color-text-inverse);
-    border-bottom-color: var(--semantic-color-text-inverse);
+    border-right-color: var(--component-check-mark-color);
+    border-bottom-color: var(--component-check-mark-color);
     transform: rotate(var(--component-check-mark-rotation)) scale(1) translateY(-1px);
   }
   .atom-check__input:focus-visible + .atom-check__label::before {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-form-field-border-focus);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-check__input:disabled + .atom-check__label {
@@ -3025,7 +3188,7 @@
     display: block;
     font-family: var(--component-form-field-font-family);
     font-size: var(--component-form-field-font-size);
-    font-weight: var(--semantic-font-weight-medium);
+    font-weight: var(--component-form-field-font-weight);
     line-height: var(--component-form-field-line-height);
     color: var(--component-form-field-color);
     margin-bottom: var(--component-form-field-label-margin-bottom);
@@ -3039,12 +3202,14 @@
     display: block;
     width: 100%;
     height: var(--component-form-field-min-height);
+    min-block-size: var(--component-form-field-min-height);
     box-sizing: border-box;
     padding: var(--component-form-field-padding-y) var(--component-form-field-padding-x);
     border: var(--component-form-field-border-width) solid var(--component-form-field-border);
     border-radius: var(--component-form-field-border-radius);
     background-color: var(--component-form-field-bg);
     font-family: var(--component-form-field-font-family);
+    font-weight: var(--component-form-field-font-weight);
     font-size: var(--component-form-field-font-size);
     line-height: var(--component-form-field-line-height);
     color: var(--component-form-field-color);
@@ -3055,9 +3220,6 @@
       transition: none;
     }
   }
-  .atom-input::-moz-placeholder {
-    color: var(--component-form-field-placeholder);
-  }
   .atom-input::placeholder {
     color: var(--component-form-field-placeholder);
   }
@@ -3067,7 +3229,10 @@
   .atom-input:focus {
     outline: var(--semantic-focus-ring-width) solid transparent;
     border-color: var(--component-form-field-border-focus);
-    box-shadow: var(--component-form-field-shadow-focus);
+  }
+  .atom-input:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-input:disabled {
     background-color: var(--component-form-field-bg-disabled);
@@ -3078,6 +3243,7 @@
     display: block;
     width: 100%;
     height: var(--component-form-field-min-height);
+    min-block-size: var(--component-form-field-min-height);
     box-sizing: border-box;
     padding-top: 0;
     padding-bottom: 0;
@@ -3088,10 +3254,10 @@
     border-radius: var(--component-form-field-border-radius);
     background-color: var(--component-form-field-bg);
     font-family: var(--component-form-field-font-family);
+    font-weight: var(--component-form-field-font-weight);
     font-size: var(--component-form-field-font-size);
     color: var(--component-form-field-color);
-    -moz-appearance: none;
-         appearance: none;
+    appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
     transition: border-color var(--component-form-field-transition-duration) var(--component-form-field-transition-easing), box-shadow var(--component-form-field-transition-duration) var(--component-form-field-transition-easing);
@@ -3107,7 +3273,10 @@
   .atom-select:focus {
     outline: var(--semantic-focus-ring-width) solid transparent;
     border-color: var(--component-form-field-border-focus);
-    box-shadow: var(--component-form-field-shadow-focus);
+  }
+  .atom-select:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-select:disabled {
     background-color: var(--component-form-field-bg-disabled);
@@ -3486,6 +3655,10 @@
   .atom-link {
     position: relative;
   }
+  .atom-link:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
+  }
   .atom-link--primary {
     border: 0;
     display: inline-flex;
@@ -3517,10 +3690,6 @@
   .atom-link--primary:hover {
     color: var(--component-link-primary-color-hover);
     box-shadow: inset 100vw 0 0 0 var(--component-link-primary-bg-hover);
-  }
-  .atom-link--primary:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-link-primary-shadow-focus);
-    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-link--primary:active {
     color: var(--component-link-primary-color);
@@ -3593,7 +3762,7 @@
     counter-increment: list-number;
     font-size: var(--list-ordered-counter-font-size);
     line-height: var(--list-ordered-counter-line-height);
-    color: var(--semantic-color-text-inverse);
+    color: var(--semantic-color-on-primary);
     text-align: center;
     background-color: var(--semantic-color-primary);
   }
@@ -3676,7 +3845,7 @@
     color: var(--component-pagination-color-hover);
   }
   .atom-pagination__trigger:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-pagination-shadow-focus);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-pagination__trigger:disabled {
@@ -3746,7 +3915,6 @@
     align-items: flex-start;
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
             user-select: none;
   }
   .atom-radio__input {
@@ -3790,7 +3958,7 @@
     width: var(--component-radio-checked-size);
     height: var(--component-radio-checked-size);
     border-radius: var(--component-radio-dot-border-radius);
-    background-color: var(--semantic-color-text-inverse);
+    background-color: var(--component-radio-dot-color);
     transition: transform var(--component-radio-transition-duration) var(--component-radio-transition-easing);
   }
   @media (prefers-reduced-motion: reduce) {
@@ -3810,7 +3978,7 @@
     transform: translateY(-50%) scale(1);
   }
   .atom-radio__input:focus-visible + .atom-radio__label::before {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-form-field-border-focus);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-radio__input:disabled + .atom-radio__label {
@@ -3874,7 +4042,6 @@
     gap: var(--semantic-space-component-sm);
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
             user-select: none;
   }
   .atom-switch__input {
@@ -3936,7 +4103,7 @@
     box-shadow: var(--component-form-field-shadow-focus);
   }
   .atom-switch__input:focus-visible + .atom-switch__slider {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-form-field-border-focus);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-switch:has(.atom-switch__input:disabled) {
@@ -3993,6 +4160,7 @@
     background-color: var(--component-table-bg-th);
   }
   .atom-table--primary [class*=__td]:hover, .atom-table--primary [class*=__td]:focus-visible {
+    color: var(--component-table-state-hover-color);
     background-color: var(--component-table-state-hover-bg);
     border-color: var(--component-table-state-hover-border-color);
     box-shadow: var(--component-table-state-hover-shadow);
@@ -4007,6 +4175,10 @@
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+  }
+  .atom-table--resp:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-table--is-stick-thead {
     overflow-y: auto;
@@ -4025,13 +4197,14 @@
     background-color: var(--component-table-sticky-active-bg);
   }
   .atom-table--is-stick-thead [class*=__td]:first-of-type:hover, .atom-table--is-stick-thead [class*=__td]:first-of-type:focus-visible {
-    color: var(--component-table-state-hover-border-color);
+    color: var(--component-table-state-hover-color);
     background-color: var(--component-table-state-hover-bg);
   }
 }
 @layer syx.atoms {
   .atom-title {
     font-family: var(--component-title-font-family);
+    font-weight: var(--component-title-font-weight);
     line-height: var(--component-title-line-height);
     color: var(--component-title-color);
     margin-bottom: var(--component-title-margin-bottom);
@@ -4439,7 +4612,7 @@
     }
   }
   .mol-disclosure__summary:focus-visible {
-    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .mol-disclosure[open] > .mol-disclosure__summary::after {
@@ -4455,13 +4628,23 @@
     display: flex;
     gap: var(--component-tabs-gap);
     overflow-x: auto;
-    border-block-end: var(--component-tabs-border-width) solid var(--component-tabs-border-color);
+    padding: calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset));
+    margin-block-start: calc(-1 * (var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset)));
+    background-image: linear-gradient(var(--component-tabs-border-color), var(--component-tabs-border-color));
+    background-repeat: no-repeat;
+    background-size: 100% var(--component-tabs-border-width);
+    background-position: 0 calc(100% - var(--semantic-focus-ring-width) - var(--semantic-focus-ring-offset));
+  }
+  @media (forced-colors: active) {
+    .mol-tabs__list {
+      background-image: none;
+      border-block-end: var(--component-tabs-border-width) solid CanvasText;
+    }
   }
   .mol-tabs__tab {
     padding: var(--component-tabs-tab-padding-block) var(--component-tabs-tab-padding-inline);
     border: 0;
     border-block-end: var(--component-tabs-indicator-width) solid transparent;
-    margin-block-end: calc(-1 * var(--component-tabs-border-width));
     background: none;
     color: var(--component-tabs-tab-color);
     font: inherit;
@@ -4483,10 +4666,13 @@
     color: var(--component-tabs-tab-color-selected);
   }
   .mol-tabs__tab:focus-visible {
-    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
-    outline-offset: calc(-1 * var(--semantic-focus-ring-width));
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   @media (forced-colors: active) {
+    .mol-tabs__tab {
+      border-block-end-color: Canvas;
+    }
     .mol-tabs__tab[aria-selected=true] {
       border-block-end-color: Highlight;
     }
@@ -4495,7 +4681,7 @@
     padding-block: var(--component-tabs-panel-padding-block);
   }
   .mol-tabs__panel:focus-visible {
-    outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
 }
@@ -4549,6 +4735,10 @@
   .org-site-header__brand:hover {
     color: var(--semantic-color-primary-text);
   }
+  .org-site-header__brand:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
+  }
   .org-site-header__nav {
     display: none;
     align-items: center;
@@ -4588,7 +4778,7 @@
     border-bottom-color: var(--semantic-color-primary-text);
   }
   .org-site-header__nav a:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .org-site-header__actions {
@@ -4659,7 +4849,7 @@
     background-color: var(--semantic-color-bg-secondary);
   }
   .org-site-header__burger:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .org-site-header__burger-line {
@@ -4720,7 +4910,8 @@
     flex-direction: column;
     gap: var(--semantic-space-component-sm);
     transform: translateY(-110%);
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
   }
   @media (prefers-reduced-motion: reduce) {
     .org-site-nav-drawer {
@@ -4737,6 +4928,13 @@
   }
   body[data-nav-open] .org-site-nav-drawer {
     transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body[data-nav-open] .org-site-nav-drawer {
+      transition: none;
+    }
   }
   .org-site-nav-drawer__link {
     display: flex;
@@ -4761,7 +4959,7 @@
     color: var(--semantic-color-primary-text);
   }
   .org-site-nav-drawer__link:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .org-site-nav-drawer__theme {
@@ -4802,7 +5000,7 @@
     border-color: var(--semantic-color-primary);
   }
   .org-site-header__darkmode:focus-visible {
-    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
   }
   .org-site-header__darkmode .atom-icon {
@@ -5475,15 +5673,13 @@
   .org-home-hero {
     display: grid;
     grid-template-columns: var(--component-hero-columns);
-    -moz-column-gap: var(--component-hero-column-gap);
-         column-gap: var(--component-hero-column-gap);
+    column-gap: var(--component-hero-column-gap);
     align-content: start;
   }
   @media (min-width: 64em) {
     .org-home-hero {
       grid-template-columns: var(--component-hero-columns-wide);
-      -moz-column-gap: var(--component-hero-column-gap-wide);
-           column-gap: var(--component-hero-column-gap-wide);
+      column-gap: var(--component-hero-column-gap-wide);
     }
   }
   .org-home-hero::after {
@@ -5996,7 +6192,6 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    width: -moz-fit-content;
     width: fit-content;
     margin-bottom: 0.25rem;
   }
@@ -6123,15 +6318,6 @@
   }
 }
 @layer syx.utilities {
-  .syx-m-0 {
-    margin: 0;
-  }
-  .syx-mt-0 {
-    margin-top: 0;
-  }
-  .syx-mb-0 {
-    margin-bottom: 0;
-  }
   .syx-ml-0 {
     margin-left: 0;
   }
@@ -6576,14 +6762,8 @@
       height: auto;
     }
   }
-  .syx-w-full {
-    width: 100%;
-  }
   .syx-w-auto {
     width: auto;
-  }
-  .syx-h-full {
-    height: 100%;
   }
   .syx-h-auto {
     height: auto;
@@ -6706,24 +6886,19 @@
     gap: var(--semantic-space-layout-xl);
   }
   .syx-col-gap-1 {
-    -moz-column-gap: var(--semantic-space-inline-xs);
-         column-gap: var(--semantic-space-inline-xs);
+    column-gap: var(--semantic-space-inline-xs);
   }
   .syx-col-gap-2 {
-    -moz-column-gap: var(--semantic-space-inline-sm);
-         column-gap: var(--semantic-space-inline-sm);
+    column-gap: var(--semantic-space-inline-sm);
   }
   .syx-col-gap-3 {
-    -moz-column-gap: var(--semantic-space-inline-md);
-         column-gap: var(--semantic-space-inline-md);
+    column-gap: var(--semantic-space-inline-md);
   }
   .syx-col-gap-4 {
-    -moz-column-gap: var(--semantic-space-inline-lg);
-         column-gap: var(--semantic-space-inline-lg);
+    column-gap: var(--semantic-space-inline-lg);
   }
   .syx-col-gap-5 {
-    -moz-column-gap: var(--semantic-space-layout-xl);
-         column-gap: var(--semantic-space-layout-xl);
+    column-gap: var(--semantic-space-layout-xl);
   }
   .syx-row-gap-1 {
     row-gap: var(--semantic-space-inline-xs);
@@ -6822,10 +6997,10 @@
 }
 @layer syx.utilities {
   .syx-text-primary {
-    color: var(--semantic-color-primary);
+    color: var(--semantic-color-primary-text);
   }
   .syx-text-secondary {
-    color: var(--semantic-color-secondary);
+    color: var(--semantic-color-secondary-text);
   }
   .syx-prim-text-white {
     color: var(--primitive-color-white);
@@ -6857,13 +7032,13 @@
     color: var(--semantic-color-text-inverse);
   }
   .syx-text-error {
-    color: var(--semantic-color-error);
+    color: var(--semantic-color-state-error-text);
   }
   .syx-text-success {
-    color: var(--semantic-color-success);
+    color: var(--semantic-color-state-success-text);
   }
   .syx-text-warning {
-    color: var(--semantic-color-warning);
+    color: var(--semantic-color-state-warning-text);
   }
   .syx-text-facebook {
     color: var(--primitive-color-facebook);
@@ -6944,29 +7119,34 @@
     font-size: var(--primitive-fluid-font-display);
     line-height: var(--primitive-line-height-tight);
     font-family: var(--primitive-font-family-syne-bold);
+    font-weight: var(--primitive-font-weight-bold);
     letter-spacing: var(--primitive-letter-spacing-display);
   }
   .syx-type-h1 {
     font-size: var(--semantic-font-size-h1);
     line-height: var(--semantic-line-height-heading);
     font-family: var(--semantic-font-family-heading);
+    font-weight: var(--semantic-font-weight-heading);
     letter-spacing: var(--semantic-letter-spacing-tight);
   }
   .syx-type-h2 {
     font-size: var(--semantic-font-size-h2);
     line-height: var(--semantic-line-height-heading);
     font-family: var(--semantic-font-family-heading);
+    font-weight: var(--semantic-font-weight-heading);
     letter-spacing: var(--semantic-letter-spacing-tight);
   }
   .syx-type-h3 {
     font-size: var(--semantic-font-size-h3);
     line-height: var(--semantic-line-height-heading);
     font-family: var(--semantic-font-family-heading-md);
+    font-weight: var(--semantic-font-weight-heading-md);
   }
   .syx-type-h4 {
     font-size: var(--semantic-font-size-h4);
     line-height: var(--semantic-line-height-normal);
     font-family: var(--semantic-font-family-heading-md);
+    font-weight: var(--semantic-font-weight-heading-md);
   }
   .syx-type-body-large {
     font-size: var(--semantic-font-size-body-large);
@@ -7023,6 +7203,7 @@
   }
   .syx-bg-primary {
     background-color: var(--semantic-color-primary);
+    color: var(--semantic-color-on-primary);
   }
   .syx-bg-primary-light {
     background-color: var(--semantic-color-bg-secondary);
@@ -7147,45 +7328,28 @@
     padding-bottom: 100vh;
   }
   .syx-obj-cover {
-    -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .syx-obj-contain {
-    -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
   .syx-obj-fill {
-    -o-object-fit: fill;
-       object-fit: fill;
+    object-fit: fill;
   }
   .syx-obj-none {
-    -o-object-fit: none;
-       object-fit: none;
+    object-fit: none;
   }
   .syx-obj-scale-down {
-    -o-object-fit: scale-down;
-       object-fit: scale-down;
+    object-fit: scale-down;
   }
   .syx-obj-center {
-    -o-object-position: center;
-       object-position: center;
+    object-position: center;
   }
   .syx-obj-top {
-    -o-object-position: top;
-       object-position: top;
+    object-position: top;
   }
   .syx-obj-bottom {
-    -o-object-position: bottom;
-       object-position: bottom;
-  }
-  .syx-bg-cover {
-    background-size: cover;
-  }
-  .syx-bg-contain {
-    background-size: contain;
-  }
-  .syx-bg-auto {
-    background-size: auto;
+    object-position: bottom;
   }
 }
 @layer syx.utilities {
@@ -7239,10 +7403,11 @@
     z-index: var(--semantic-z-index-skip-link, 9999);
     padding: var(--semantic-space-component-sm) var(--semantic-space-component-md);
     background: var(--semantic-color-primary);
-    color: var(--semantic-color-text-inverse);
+    color: var(--semantic-color-on-primary);
     border-radius: var(--semantic-border-radius-default);
     font-size: var(--semantic-font-size-body-sm);
     font-family: var(--semantic-font-family-primary-bold);
+    font-weight: var(--semantic-font-weight-primary-bold);
     text-decoration: none;
     box-shadow: var(--semantic-shadow-md);
     width: auto;

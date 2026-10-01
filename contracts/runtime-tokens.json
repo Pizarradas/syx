@@ -2,9 +2,9 @@
   "_meta": {
     "source": "css/styles-theme-example-01.css",
     "stats": {
-      "total": 1419,
-      "official": 1144,
-      "legacy": 275
+      "total": 1462,
+      "official": 1185,
+      "legacy": 277
     }
   },
   "tokens": {
@@ -821,28 +821,28 @@
       "category": "primitive"
     },
     "--primitive-font-family-space-grotesk-regular": {
-      "value": "\"Google-Space-Grotesk--regular\", Arial, sans-serif",
+      "value": "\"Space Grotesk\", \"Space Grotesk Fallback\", Arial, sans-serif",
       "usedInSelectors": [
         ":root"
       ],
       "category": "primitive"
     },
     "--primitive-font-family-space-grotesk-bold": {
-      "value": "\"Google-Space-Grotesk--bold\", Arial, sans-serif",
+      "value": "\"Space Grotesk\", \"Space Grotesk Fallback\", Arial, sans-serif",
       "usedInSelectors": [
         ":root"
       ],
       "category": "primitive"
     },
     "--primitive-font-family-syne-medium": {
-      "value": "\"Google-Syne--medium\", Arial, sans-serif",
+      "value": "\"Syne\", \"Syne Fallback\", Arial, sans-serif",
       "usedInSelectors": [
         ":root"
       ],
       "category": "primitive"
     },
     "--primitive-font-family-syne-bold": {
-      "value": "\"Google-Syne--bold\", Arial, sans-serif",
+      "value": "\"Syne\", \"Syne Fallback\", Arial, sans-serif",
       "usedInSelectors": [
         ":root"
       ],
@@ -1611,12 +1611,40 @@
       ],
       "category": "semantic"
     },
+    "--semantic-color-primary-strong": {
+      "value": "var(--semantic-color-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-state-success-strong": {
+      "value": "var(--semantic-color-state-success)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
     "--semantic-brand-text-lightness": {
       "value": "0.45",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
         ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-brand-control-lightness-min": {
+      "value": "calc(var(--semantic-brand-text-lightness) - 0.12)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-brand-control-lightness-max": {
+      "value": "calc(var(--semantic-brand-text-lightness) + 0.12)",
+      "usedInSelectors": [
+        ":root"
       ],
       "category": "semantic"
     },
@@ -1701,8 +1729,100 @@
       ],
       "category": "semantic"
     },
-    "--semantic-color-text-on-primary": {
+    "--semantic-color-ink-light": {
       "value": "var(--primitive-color-white)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-ink-dark": {
+      "value": "var(--primitive-color-black)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-primary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-secondary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-tertiary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-quaternary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-quinary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-state-hover-primary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-state-hover-secondary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-state-hover-tertiary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-state-hover-quaternary": {
+      "value": "var(--semantic-color-text-inverse)",
+      "usedInSelectors": [
+        ":root",
+        ":root:not([data-theme=light])",
+        ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-on-primary-strong": {
+      "value": "var(--semantic-color-on-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-text-on-primary": {
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1736,7 +1856,7 @@
       "category": "semantic"
     },
     "--semantic-color-border-focus": {
-      "value": "var(--semantic-color-primary)",
+      "value": "var(--semantic-color-primary-strong)",
       "usedInSelectors": [
         ":root",
         ":root[data-theme=dark]"
@@ -1751,7 +1871,7 @@
       "category": "semantic"
     },
     "--semantic-color-link-default": {
-      "value": "var(--primitive-color-pink-500)",
+      "value": "var(--semantic-color-primary-text)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1760,7 +1880,7 @@
       "category": "semantic"
     },
     "--semantic-color-link-hover": {
-      "value": "var(--primitive-color-purple-500)",
+      "value": "var(--semantic-color-secondary-text)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1769,7 +1889,7 @@
       "category": "semantic"
     },
     "--semantic-color-link-visited": {
-      "value": "var(--primitive-color-purple-500)",
+      "value": "var(--semantic-color-secondary-text)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1778,7 +1898,7 @@
       "category": "semantic"
     },
     "--semantic-color-link-active": {
-      "value": "var(--primitive-color-pink-500)",
+      "value": "var(--semantic-color-primary-text)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1823,7 +1943,7 @@
       "category": "semantic"
     },
     "--semantic-focus-ring-color": {
-      "value": "var(--primitive-color-pink-500)",
+      "value": "var(--semantic-color-primary-strong)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1906,7 +2026,7 @@
       "category": "semantic"
     },
     "--semantic-color-state-focus": {
-      "value": "var(--primitive-color-pink-500)",
+      "value": "var(--semantic-focus-ring-color)",
       "usedInSelectors": [
         ":root"
       ],
@@ -1941,7 +2061,7 @@
       "category": "semantic"
     },
     "--semantic-color-selection-text": {
-      "value": "var(--primitive-color-white)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1950,7 +2070,7 @@
       "category": "semantic"
     },
     "--semantic-color-selection-bg": {
-      "value": "var(--primitive-color-purple-500)",
+      "value": "var(--semantic-color-primary)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1959,7 +2079,7 @@
       "category": "semantic"
     },
     "--semantic-color-placeholder": {
-      "value": "var(--primitive-color-purple-500)",
+      "value": "var(--semantic-color-primary-text)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -2158,6 +2278,27 @@
     },
     "--semantic-font-weight-black": {
       "value": "var(--primitive-font-weight-black)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-font-weight-primary-bold": {
+      "value": "var(--primitive-font-weight-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-font-weight-heading": {
+      "value": "var(--primitive-font-weight-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-font-weight-heading-md": {
+      "value": "var(--primitive-font-weight-medium)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2671,14 +2812,14 @@
       "category": "semantic"
     },
     "--semantic-focus-ring-width": {
-      "value": "0.125rem",
+      "value": "2px",
       "usedInSelectors": [
         ":root"
       ],
       "category": "semantic"
     },
     "--semantic-focus-ring-offset": {
-      "value": "0.125rem",
+      "value": "2px",
       "usedInSelectors": [
         ":root"
       ],
@@ -2783,7 +2924,7 @@
       "category": "component"
     },
     "--component-button-primary-filled-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2804,7 +2945,7 @@
       "category": "component"
     },
     "--component-button-primary-filled-color-hover": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-state-hover-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2867,7 +3008,7 @@
       "category": "component"
     },
     "--component-button-secondary-filled-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-secondary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2888,7 +3029,7 @@
       "category": "component"
     },
     "--component-button-secondary-filled-color-hover": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-state-hover-secondary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2951,7 +3092,7 @@
       "category": "component"
     },
     "--component-button-tertiary-filled-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-tertiary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -2972,7 +3113,7 @@
       "category": "component"
     },
     "--component-button-tertiary-filled-color-hover": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-state-hover-tertiary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3035,7 +3176,7 @@
       "category": "component"
     },
     "--component-button-quaternary-filled-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-quaternary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3056,7 +3197,7 @@
       "category": "component"
     },
     "--component-button-quaternary-filled-color-hover": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-state-hover-quaternary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3099,6 +3240,13 @@
     },
     "--component-button-font-family": {
       "value": "var(--semantic-font-family-primary-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-font-weight": {
+      "value": "var(--semantic-font-weight-primary-bold)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3181,6 +3329,34 @@
       ],
       "category": "component"
     },
+    "--component-button-height-sm": {
+      "value": "2.5rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-height-md": {
+      "value": "var(--component-form-field-min-height)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-height-lg": {
+      "value": "3.5rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-padding-block": {
+      "value": "var(--semantic-space-component-xs)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-button-border-radius-circle": {
       "value": "var(--semantic-border-radius-circle)",
       "usedInSelectors": [
@@ -3253,6 +3429,83 @@
     },
     "--component-btn-group-gap": {
       "value": "1rem",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-color": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-border": {
+      "value": "var(--semantic-color-state-error)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-color-hover": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-bg-hover": {
+      "value": "color-mix(in srgb, var(--semantic-color-state-error) 10%, transparent)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-border-hover": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-bg": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-border": {
+      "value": "var(--semantic-color-state-error-text)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-color": {
+      "value": "var(--semantic-color-bg-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-bg-hover": {
+      "value": "color-mix(in oklch, var(--semantic-color-state-error-text) 80%, var(--semantic-color-text-primary))",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-border-hover": {
+      "value": "var(--component-button-danger-filled-bg-hover)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-button-danger-filled-color-hover": {
+      "value": "var(--semantic-color-bg-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3336,7 +3589,7 @@
       "category": "component"
     },
     "--component-form-field-min-height": {
-      "value": "calc(6 * var(--semantic-space-component-xs))",
+      "value": "max(3rem, 44px)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3400,6 +3653,13 @@
     },
     "--component-form-field-font-family": {
       "value": "var(--semantic-font-family-primary-bold)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-form-field-font-weight": {
+      "value": "var(--semantic-font-weight-primary-bold)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3581,7 +3841,14 @@
       "category": "component"
     },
     "--component-check-bg-checked": {
-      "value": "var(--semantic-color-primary)",
+      "value": "var(--semantic-color-primary-strong)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-check-mark-color": {
+      "value": "var(--semantic-color-on-primary-strong)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3665,7 +3932,14 @@
       "category": "component"
     },
     "--component-radio-bg-checked": {
-      "value": "var(--semantic-color-primary)",
+      "value": "var(--semantic-color-primary-strong)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-radio-dot-color": {
+      "value": "var(--semantic-color-on-primary-strong)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3679,21 +3953,21 @@
       "category": "component"
     },
     "--component-switch-width": {
-      "value": "calc(6 * var(--semantic-space-component-xs))",
+      "value": "3rem",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-switch-height": {
-      "value": "calc(3.5 * var(--semantic-space-component-xs))",
+      "value": "1.75rem",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-switch-slider-size": {
-      "value": "calc(2.5 * var(--semantic-space-component-xs))",
+      "value": "1.25rem",
       "usedInSelectors": [
         ":root"
       ],
@@ -3721,7 +3995,7 @@
       "category": "component"
     },
     "--component-switch-bg-on": {
-      "value": "var(--semantic-color-state-success)",
+      "value": "var(--semantic-color-state-success-strong)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3966,7 +4240,7 @@
       "category": "component"
     },
     "--component-breadcrumb-color-active": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -3994,7 +4268,7 @@
       "category": "component"
     },
     "--component-pagination-item-size": {
-      "value": "calc(5 * var(--semantic-space-component-xs))",
+      "value": "2.5rem",
       "usedInSelectors": [
         ":root"
       ],
@@ -4064,7 +4338,7 @@
       "category": "component"
     },
     "--component-pagination-color-active": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4267,7 +4541,7 @@
       "category": "component"
     },
     "--component-table-color-th": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4301,6 +4575,13 @@
       ],
       "category": "component"
     },
+    "--component-table-state-hover-color": {
+      "value": "var(--semantic-color-on-state-hover-primary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-table-state-hover-border-color": {
       "value": "var(--semantic-color-primary)",
       "usedInSelectors": [
@@ -4323,7 +4604,7 @@
       "category": "component"
     },
     "--component-table-sticky-active-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -4406,6 +4687,13 @@
       ],
       "category": "component"
     },
+    "--component-title-font-weight": {
+      "value": "var(--semantic-font-weight-heading)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
     "--component-title-line-height": {
       "value": "var(--semantic-line-height-heading)",
       "usedInSelectors": [
@@ -4477,7 +4765,7 @@
       "category": "component"
     },
     "--component-link-primary-color-hover": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -5988,7 +6276,7 @@
       "category": "component"
     },
     "--component-code-syntax-comment": {
-      "value": "var(--semantic-color-text-disabled)",
+      "value": "var(--primitive-color-gray-400)",
       "usedInSelectors": [
         ":root"
       ],
@@ -5996,6 +6284,13 @@
     },
     "--component-code-syntax-fn": {
       "value": "var(--semantic-color-quaternary)",
+      "usedInSelectors": [
+        ":root"
+      ],
+      "category": "component"
+    },
+    "--component-code-syntax-lightness": {
+      "value": "0.82",
       "usedInSelectors": [
         ":root"
       ],
@@ -6506,21 +6801,21 @@
       "category": "component"
     },
     "--component-cta-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-cta-overline-color": {
-      "value": "color-mix(in srgb, var(--semantic-color-text-inverse) 75%, transparent)",
+      "value": "color-mix(in srgb, var(--semantic-color-on-primary) 75%, transparent)",
       "usedInSelectors": [
         ":root"
       ],
       "category": "component"
     },
     "--component-cta-sub-color": {
-      "value": "color-mix(in srgb, var(--semantic-color-text-inverse) 80%, transparent)",
+      "value": "color-mix(in srgb, var(--semantic-color-on-primary) 80%, transparent)",
       "usedInSelectors": [
         ":root"
       ],
@@ -6534,7 +6829,7 @@
       "category": "component"
     },
     "--component-cta-decor-bg": {
-      "value": "color-mix(in srgb, var(--semantic-color-text-inverse) 8%, transparent)",
+      "value": "color-mix(in srgb, var(--semantic-color-on-primary) 8%, transparent)",
       "usedInSelectors": [
         ":root"
       ],
@@ -6583,7 +6878,7 @@
       "category": "component"
     },
     "--component-cta-code-border-color": {
-      "value": "color-mix(in srgb, var(--semantic-color-text-inverse) 20%, transparent)",
+      "value": "color-mix(in srgb, var(--semantic-color-on-primary) 20%, transparent)",
       "usedInSelectors": [
         ":root"
       ],
@@ -6597,7 +6892,7 @@
       "category": "component"
     },
     "--component-cta-code-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -7010,7 +7305,7 @@
       "category": "component"
     },
     "--component-token-component-step-color": {
-      "value": "var(--component-token-step-color)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -7073,7 +7368,7 @@
       "category": "component"
     },
     "--component-token-rule-icon-color": {
-      "value": "var(--semantic-color-text-inverse)",
+      "value": "var(--semantic-color-on-primary)",
       "usedInSelectors": [
         ":root"
       ],
@@ -7507,7 +7802,7 @@
       "category": "component"
     },
     "--component-tabs-indicator-color": {
-      "value": "var(--semantic-color-primary)",
+      "value": "var(--semantic-color-primary-strong)",
       "usedInSelectors": [
         ":root"
       ],
@@ -8529,7 +8824,7 @@
       "category": "primitive"
     },
     "--primitive-font-family-inter": {
-      "value": "\"Google-Inter--regular\", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+      "value": "\"Inter\", \"Inter Fallback\", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
       "usedInSelectors": [
         ":root"
       ],
@@ -9044,7 +9339,6 @@
         ".atom-btn--primary:not(.atom-btn--filled)",
         ".atom-link--primary:after",
         ".atom-link--primary:hover",
-        ".atom-link--primary:focus-visible",
         ".atom-link--primary:active"
       ],
       "category": "legacy"
@@ -9067,6 +9361,13 @@
       "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
         ".atom-btn--quaternary:not(.atom-btn--filled)"
+      ],
+      "category": "legacy"
+    },
+    "--danger": {
+      "value": "not(.atom-btn--filled) {",
+      "usedInSelectors": [
+        ".atom-btn--danger:not(.atom-btn--filled)"
       ],
       "category": "legacy"
     },
@@ -10033,6 +10334,13 @@
       "value": "before {",
       "usedInSelectors": [
         ".atom-icon--lc-x-circle:before"
+      ],
+      "category": "legacy"
+    },
+    "--resp": {
+      "value": "focus-visible {",
+      "usedInSelectors": [
+        ".atom-table--resp:focus-visible"
       ],
       "category": "legacy"
     },

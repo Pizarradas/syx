@@ -8,9 +8,9 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 1419 |
-| Official (SYX-prefixed) | 1144 |
-| Legacy (no SYX prefix) | 275 |
+| Total custom properties in runtime CSS | 1462 |
+| Official (SYX-prefixed) | 1185 |
+| Legacy (no SYX prefix) | 277 |
 
 ## Source vs Runtime Gaps
 
@@ -18,13 +18,13 @@
 
 ### ✅ All official tokens documented
 
-## Legacy Vars (R07) — 275 found
+## Legacy Vars (R07) — 277 found
 
 | Lifecycle | Count | Action |
 |---|---|---|
 | 🔒 keep    | 127   | External dependency or intentional contract. No action. |
 | 🔄 migrate | 27 | Has a SYX equivalent. Replace `var(old)` → `var(new)`. |
-| 🗑️ kill    | 121   | No SYX equivalent. Remove from codebase. |
+| 🗑️ kill    | 123   | No SYX equivalent. Remove from codebase. |
 
 ### Top migration candidates
 
@@ -55,6 +55,6 @@
 
 _Each one excuses exactly one declaration, with its reason next to the code (`// syx-allow Rxx: …`)._
 
-- R03 `scss/base/_reset.scss:316` — no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello
-- R03 `scss/utilities/_accessibility.scss:77` — es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez
+- R03 `scss/base/_reset.scss:321` — no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello
+- R03 `scss/utilities/_accessibility.scss:78` — es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez
 

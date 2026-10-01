@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 542,
-      "omitidas": 307,
+      "variables": 549,
+      "omitidas": 341,
       "fueraDeAlcance": {
         "primitive": 231,
         "icon": 18,
@@ -71,29 +71,6 @@
           "valuesByMode": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "name": "semantic/border/focus",
-          "type": "COLOR",
-          "token": "--semantic-border-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
           }
         },
         {
@@ -307,29 +284,6 @@
           }
         },
         {
-          "name": "semantic/color/border/focus",
-          "type": "COLOR",
-          "token": "--semantic-color-border-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
           "name": "semantic/color/border/strong",
           "type": "COLOR",
           "token": "--semantic-color-border-strong",
@@ -422,118 +376,279 @@
           }
         },
         {
-          "name": "semantic/color/link/active",
+          "name": "semantic/color/ink/dark",
           "type": "COLOR",
-          "token": "--semantic-color-link-active",
+          "token": "--semantic-color-ink-dark",
           "valuesByMode": {
             "light": {
-              "r": 0.916,
+              "r": 0,
               "g": 0,
-              "b": 0.4058,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.916,
+              "r": 0,
               "g": 0,
-              "b": 0.4058,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
-          "name": "semantic/color/link/default",
+          "name": "semantic/color/ink/light",
           "type": "COLOR",
-          "token": "--semantic-color-link-default",
+          "token": "--semantic-color-ink-light",
           "valuesByMode": {
             "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
+              "r": 1,
+              "g": 1,
+              "b": 1,
               "a": 1
             },
             "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "semantic/color/link/hover",
-          "type": "COLOR",
-          "token": "--semantic-color-link-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "semantic/color/link/visited",
-          "type": "COLOR",
-          "token": "--semantic-color-link-visited",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5506,
-              "g": 0.3132,
+              "r": 1,
+              "g": 1,
               "b": 1,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#8c50ff"
+            "light": "#ffffff",
+            "dark": "#ffffff"
           }
         },
         {
-          "name": "semantic/color/placeholder",
+          "name": "semantic/color/on/primary",
           "type": "COLOR",
-          "token": "--semantic-color-placeholder",
+          "token": "--semantic-color-on-primary",
           "valuesByMode": {
             "light": {
-              "r": 0.916,
+              "r": 0,
               "g": 0,
-              "b": 0.4058,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.5021,
-              "g": 0.5021,
-              "b": 0.5021,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#808080"
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/primary/strong",
+          "type": "COLOR",
+          "token": "--semantic-color-on-primary-strong",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/quaternary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-quaternary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/quinary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-quinary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/secondary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-secondary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/state/hover/primary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-state-hover-primary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/state/hover/quaternary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-state-hover-quaternary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/state/hover/secondary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-state-hover-secondary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/state/hover/tertiary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-state-hover-tertiary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
+          "name": "semantic/color/on/tertiary",
+          "type": "COLOR",
+          "token": "--semantic-color-on-tertiary",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -663,15 +778,15 @@
               "a": 1
             },
             "dark": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
             "light": "#000000",
-            "dark": "#ffffff"
+            "dark": "#000000"
           }
         },
         {
@@ -741,29 +856,6 @@
           "hexByMode": {
             "light": "#d84448",
             "dark": "#d84448"
-          }
-        },
-        {
-          "name": "semantic/color/state/focus",
-          "type": "COLOR",
-          "token": "--semantic-color-state-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
           }
         },
         {
@@ -1025,21 +1117,21 @@
           "token": "--semantic-color-text-on-primary",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#ffffff"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -1171,29 +1263,6 @@
           }
         },
         {
-          "name": "semantic/focus/ring/color",
-          "type": "COLOR",
-          "token": "--semantic-focus-ring-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
           "name": "semantic/focus/ring/offset",
           "type": "FLOAT",
           "token": "--semantic-focus-ring-offset",
@@ -1225,8 +1294,8 @@
           "type": "STRING",
           "token": "--semantic-font-family-heading",
           "valuesByMode": {
-            "light": "\"Google-Syne--bold\",Arial,sans-serif",
-            "dark": "\"Google-Syne--bold\",Arial,sans-serif"
+            "light": "\"Syne\",\"Syne Fallback\",Arial,sans-serif",
+            "dark": "\"Syne\",\"Syne Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -1234,8 +1303,8 @@
           "type": "STRING",
           "token": "--semantic-font-family-heading-md",
           "valuesByMode": {
-            "light": "\"Google-Syne--medium\",Arial,sans-serif",
-            "dark": "\"Google-Syne--medium\",Arial,sans-serif"
+            "light": "\"Syne\",\"Syne Fallback\",Arial,sans-serif",
+            "dark": "\"Syne\",\"Syne Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -1252,8 +1321,8 @@
           "type": "STRING",
           "token": "--semantic-font-family-primary",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--regular\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--regular\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -1261,8 +1330,8 @@
           "type": "STRING",
           "token": "--semantic-font-family-primary-bold",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -1284,12 +1353,39 @@
           }
         },
         {
+          "name": "semantic/font/weight/heading",
+          "type": "FLOAT",
+          "token": "--semantic-font-weight-heading",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
+          }
+        },
+        {
+          "name": "semantic/font/weight/heading/md",
+          "type": "FLOAT",
+          "token": "--semantic-font-weight-heading-md",
+          "valuesByMode": {
+            "light": 500,
+            "dark": 500
+          }
+        },
+        {
           "name": "semantic/font/weight/medium",
           "type": "FLOAT",
           "token": "--semantic-font-weight-medium",
           "valuesByMode": {
             "light": 500,
             "dark": 500
+          }
+        },
+        {
+          "name": "semantic/font/weight/primary/bold",
+          "type": "FLOAT",
+          "token": "--semantic-font-weight-primary-bold",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
           }
         },
         {
@@ -1859,44 +1955,21 @@
           "token": "--component-breadcrumb-color-active",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
-          }
-        },
-        {
-          "name": "component/breadcrumb/color/hover",
-          "type": "COLOR",
-          "token": "--component-breadcrumb-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -1942,6 +2015,75 @@
           "valuesByMode": {
             "light": 2,
             "dark": 2
+          }
+        },
+        {
+          "name": "component/button/danger/border",
+          "type": "COLOR",
+          "token": "--component-button-danger-border",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8489,
+              "g": 0.2662,
+              "b": 0.2842,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8489,
+              "g": 0.2662,
+              "b": 0.2842,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d84448",
+            "dark": "#d84448"
+          }
+        },
+        {
+          "name": "component/button/danger/filled/color",
+          "type": "COLOR",
+          "token": "--component-button-danger-filled-color",
+          "valuesByMode": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#ffffff",
+            "dark": "#1b1b1b"
+          }
+        },
+        {
+          "name": "component/button/danger/filled/color/hover",
+          "type": "COLOR",
+          "token": "--component-button-danger-filled-color-hover",
+          "valuesByMode": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#ffffff",
+            "dark": "#1b1b1b"
           }
         },
         {
@@ -2041,8 +2183,35 @@
           "type": "STRING",
           "token": "--component-button-font-family",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "name": "component/button/font/weight",
+          "type": "FLOAT",
+          "token": "--component-button-font-weight",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
+          }
+        },
+        {
+          "name": "component/button/height/lg",
+          "type": "FLOAT",
+          "token": "--component-button-height-lg",
+          "valuesByMode": {
+            "light": 56,
+            "dark": 56
+          }
+        },
+        {
+          "name": "component/button/height/sm",
+          "type": "FLOAT",
+          "token": "--component-button-height-sm",
+          "valuesByMode": {
+            "light": 40,
+            "dark": 40
           }
         },
         {
@@ -2244,21 +2413,21 @@
           "token": "--component-button-primary-filled-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2267,21 +2436,21 @@
           "token": "--component-button-primary-filled-color-hover",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2474,21 +2643,21 @@
           "token": "--component-button-quaternary-filled-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2497,21 +2666,21 @@
           "token": "--component-button-quaternary-filled-color-hover",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2704,21 +2873,21 @@
           "token": "--component-button-secondary-filled-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2727,21 +2896,21 @@
           "token": "--component-button-secondary-filled-color-hover",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2934,21 +3103,21 @@
           "token": "--component-button-tertiary-filled-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -2957,21 +3126,21 @@
           "token": "--component-button-tertiary-filled-color-hover",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -3004,29 +3173,6 @@
           "hexByMode": {
             "light": "#ffffff",
             "dark": "#1b1b1b"
-          }
-        },
-        {
-          "name": "component/check/bg/checked",
-          "type": "COLOR",
-          "token": "--component-check-bg-checked",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
           }
         },
         {
@@ -3114,6 +3260,29 @@
           "valuesByMode": {
             "light": 1.5,
             "dark": 1.5
+          }
+        },
+        {
+          "name": "component/check/mark/color",
+          "type": "COLOR",
+          "token": "--component-check-mark-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -3602,118 +3771,35 @@
           }
         },
         {
-          "name": "component/code/syntax/attr",
-          "type": "COLOR",
-          "token": "--component-code-syntax-attr",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
           "name": "component/code/syntax/comment",
           "type": "COLOR",
           "token": "--component-code-syntax-comment",
           "valuesByMode": {
             "light": {
-              "r": 0.7432,
-              "g": 0.7432,
-              "b": 0.7432,
+              "r": 0.6205,
+              "g": 0.6205,
+              "b": 0.6205,
               "a": 1
             },
             "dark": {
-              "r": 0.3997,
-              "g": 0.3997,
-              "b": 0.3997,
+              "r": 0.6205,
+              "g": 0.6205,
+              "b": 0.6205,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#bebebe",
-            "dark": "#666666"
+            "light": "#9e9e9e",
+            "dark": "#9e9e9e"
           }
         },
         {
-          "name": "component/code/syntax/fn",
-          "type": "COLOR",
-          "token": "--component-code-syntax-fn",
+          "name": "component/code/syntax/lightness",
+          "type": "FLOAT",
+          "token": "--component-code-syntax-lightness",
           "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#009a65",
-            "dark": "#009a65"
-          }
-        },
-        {
-          "name": "component/code/syntax/tag",
-          "type": "COLOR",
-          "token": "--component-code-syntax-tag",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "component/code/syntax/val",
-          "type": "COLOR",
-          "token": "--component-code-syntax-val",
-          "valuesByMode": {
-            "light": {
-              "r": 0.5506,
-              "g": 0.3132,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5506,
-              "g": 0.3132,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#8c50ff",
-            "dark": "#8c50ff"
+            "light": 0.82,
+            "dark": 0.82
           }
         },
         {
@@ -3772,21 +3858,21 @@
           "token": "--component-cta-code-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -3795,21 +3881,21 @@
           "token": "--component-cta-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -4886,29 +4972,6 @@
           }
         },
         {
-          "name": "component/form/field/border/focus",
-          "type": "COLOR",
-          "token": "--component-form-field-border-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
           "name": "component/form/field/border/width",
           "type": "FLOAT",
           "token": "--component-form-field-border-width",
@@ -4991,8 +5054,17 @@
           "type": "STRING",
           "token": "--component-form-field-font-family",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "name": "component/form/field/font/weight",
+          "type": "FLOAT",
+          "token": "--component-form-field-font-weight",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
           }
         },
         {
@@ -5011,29 +5083,6 @@
           "valuesByMode": {
             "light": 1.5,
             "dark": 1.5
-          }
-        },
-        {
-          "name": "component/form/field/placeholder",
-          "type": "COLOR",
-          "token": "--component-form-field-placeholder",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5021,
-              "g": 0.5021,
-              "b": 0.5021,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#808080"
           }
         },
         {
@@ -5908,98 +5957,6 @@
           }
         },
         {
-          "name": "component/link/color",
-          "type": "COLOR",
-          "token": "--component-link-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "component/link/color/active",
-          "type": "COLOR",
-          "token": "--component-link-color-active",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "component/link/color/hover",
-          "type": "COLOR",
-          "token": "--component-link-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
-          "name": "component/link/color/visited",
-          "type": "COLOR",
-          "token": "--component-link-color-visited",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5506,
-              "g": 0.3132,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#8c50ff"
-          }
-        },
-        {
           "name": "component/link/decoration/color",
           "type": "COLOR",
           "token": "--component-link-decoration-color",
@@ -6060,21 +6017,21 @@
           "token": "--component-link-primary-color-hover",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -6202,21 +6159,21 @@
           "token": "--component-pagination-color-active",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -6270,8 +6227,17 @@
           "type": "STRING",
           "token": "--component-pagination-font-family",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--regular\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--regular\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "name": "component/pagination/item/size",
+          "type": "FLOAT",
+          "token": "--component-pagination-item-size",
+          "valuesByMode": {
+            "light": 40,
+            "dark": 40
           }
         },
         {
@@ -6895,29 +6861,6 @@
           }
         },
         {
-          "name": "component/radio/bg/checked",
-          "type": "COLOR",
-          "token": "--component-radio-bg-checked",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
-          }
-        },
-        {
           "name": "component/radio/border/color",
           "type": "COLOR",
           "token": "--component-radio-border-color",
@@ -6993,6 +6936,29 @@
           "hexByMode": {
             "light": "#ea0067",
             "dark": "#ea0067"
+          }
+        },
+        {
+          "name": "component/radio/dot/color",
+          "type": "COLOR",
+          "token": "--component-radio-dot-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -7736,29 +7702,6 @@
           }
         },
         {
-          "name": "component/switch/bg/on",
-          "type": "COLOR",
-          "token": "--component-switch-bg-on",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#009a65",
-            "dark": "#009a65"
-          }
-        },
-        {
           "name": "component/switch/border/color",
           "type": "COLOR",
           "token": "--component-switch-border-color",
@@ -7791,6 +7734,15 @@
           }
         },
         {
+          "name": "component/switch/height",
+          "type": "FLOAT",
+          "token": "--component-switch-height",
+          "valuesByMode": {
+            "light": 28,
+            "dark": 28
+          }
+        },
+        {
           "name": "component/switch/slider/bg",
           "type": "COLOR",
           "token": "--component-switch-slider-bg",
@@ -7811,6 +7763,15 @@
           "hexByMode": {
             "light": "#ffffff",
             "dark": "#1b1b1b"
+          }
+        },
+        {
+          "name": "component/switch/slider/size",
+          "type": "FLOAT",
+          "token": "--component-switch-slider-size",
+          "valuesByMode": {
+            "light": 20,
+            "dark": 20
           }
         },
         {
@@ -7875,6 +7836,15 @@
           "valuesByMode": {
             "light": "cubic-bezier(0.16,1,0.3,1)",
             "dark": "cubic-bezier(0.16,1,0.3,1)"
+          }
+        },
+        {
+          "name": "component/switch/width",
+          "type": "FLOAT",
+          "token": "--component-switch-width",
+          "valuesByMode": {
+            "light": 48,
+            "dark": 48
           }
         },
         {
@@ -8094,21 +8064,21 @@
           "token": "--component-table-color-th",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -8190,6 +8160,29 @@
           }
         },
         {
+          "name": "component/table/state/hover/color",
+          "type": "COLOR",
+          "token": "--component-table-state-hover-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
           "name": "component/table/sticky/active/bg",
           "type": "COLOR",
           "token": "--component-table-sticky-active-bg",
@@ -8218,21 +8211,21 @@
           "token": "--component-table-sticky-active-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -8249,8 +8242,8 @@
           "type": "STRING",
           "token": "--component-table-th-font-family",
           "valuesByMode": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -8283,29 +8276,6 @@
           "valuesByMode": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "name": "component/tabs/indicator/color",
-          "type": "COLOR",
-          "token": "--component-tabs-indicator-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ea0067",
-            "dark": "#ea0067"
           }
         },
         {
@@ -9222,8 +9192,17 @@
           "type": "STRING",
           "token": "--component-title-font-family",
           "valuesByMode": {
-            "light": "\"Google-Syne--bold\",Arial,sans-serif",
-            "dark": "\"Google-Syne--bold\",Arial,sans-serif"
+            "light": "\"Syne\",\"Syne Fallback\",Arial,sans-serif",
+            "dark": "\"Syne\",\"Syne Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "name": "component/title/font/weight",
+          "type": "FLOAT",
+          "token": "--component-title-font-weight",
+          "valuesByMode": {
+            "light": 700,
+            "dark": 700
           }
         },
         {
@@ -9282,21 +9261,21 @@
           "token": "--component-token-component-step-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -9520,21 +9499,21 @@
           "token": "--component-token-rule-icon-color",
           "valuesByMode": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#ffffff",
-            "dark": "#1b1b1b"
+            "light": "#000000",
+            "dark": "#000000"
           }
         },
         {
@@ -9741,6 +9720,7 @@
         ],
         "modificadores": [
           "atom-btn--circle",
+          "atom-btn--danger",
           "atom-btn--filled",
           "atom-btn--has-icon",
           "atom-btn--primary",
@@ -9762,7 +9742,8 @@
         "atom-icon"
       ],
       "variantes": {
-        "base": 6,
+        "base": 8,
+        "danger": 3,
         "filled": 1,
         "primary": 7,
         "quaternary": 7,
@@ -9783,6 +9764,72 @@
           "valores": {
             "light": 2,
             "dark": 2
+          }
+        },
+        {
+          "token": "--component-button-danger-border",
+          "variable": "component/button/danger/border",
+          "propiedad": "strokes",
+          "tipo": "COLOR",
+          "variante": "danger",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.8489,
+              "g": 0.2662,
+              "b": 0.2842,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8489,
+              "g": 0.2662,
+              "b": 0.2842,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-button-danger-filled-color",
+          "variable": "component/button/danger/filled/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "danger",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-button-danger-filled-color-hover",
+          "variable": "component/button/danger/filled/color/hover",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "danger",
+          "estado": "hover",
+          "valores": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
           }
         },
         {
@@ -9881,8 +9928,32 @@
           "variante": null,
           "estado": "default",
           "valores": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "token": "--component-button-height-lg",
+          "variable": "component/button/height/lg",
+          "propiedad": "height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 56,
+            "dark": 56
+          }
+        },
+        {
+          "token": "--component-button-height-sm",
+          "variable": "component/button/height/sm",
+          "propiedad": "height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 40,
+            "dark": 40
           }
         },
         {
@@ -10016,15 +10087,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10038,15 +10109,15 @@
           "estado": "hover",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10170,15 +10241,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10192,15 +10263,15 @@
           "estado": "hover",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10324,15 +10395,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10346,15 +10417,15 @@
           "estado": "hover",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10478,15 +10549,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10500,15 +10571,15 @@
           "estado": "hover",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -10564,6 +10635,10 @@
           "motivo": "sin propiedad equivalente en un nodo de Figma"
         },
         {
+          "token": "--component-button-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
+        },
+        {
           "token": "--component-button-transition-easing",
           "motivo": "sin propiedad equivalente en un nodo de Figma"
         }
@@ -10576,6 +10651,38 @@
         {
           "token": "--component-button-border-radius-circle",
           "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        },
+        {
+          "token": "--component-button-danger-bg-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-border-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-filled-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-filled-bg-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-filled-border",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-danger-filled-border-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-button-font-size",
@@ -10591,6 +10698,14 @@
         },
         {
           "token": "--component-button-font-size-sm",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-height-md",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-padding-block",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -10677,7 +10792,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 11
+        "base": 10
       },
       "propiedades": [
         {
@@ -10698,28 +10813,6 @@
               "r": 0.104,
               "g": 0.104,
               "b": 0.104,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-check-bg-checked",
-          "variable": "component/check/bg/checked",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "checked",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
               "a": 1
             }
           }
@@ -10781,6 +10874,28 @@
           }
         },
         {
+          "token": "--component-check-mark-color",
+          "variable": "component/check/mark/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        {
           "token": "--component-check-mark-height",
           "variable": "component/check/mark/height",
           "propiedad": "height",
@@ -10814,28 +10929,6 @@
           "valores": {
             "light": 0.5,
             "dark": 0.5
-          }
-        },
-        {
-          "token": "--component-form-field-border-focus",
-          "variable": "component/form/field/border/focus",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "focus",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
           }
         },
         {
@@ -10888,6 +10981,10 @@
         }
       ],
       "sinTraducir": [
+        {
+          "token": "--component-check-bg-checked",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
         {
           "token": "--component-check-border-radius",
           "motivo": "expresión CSS: solo un navegador la reduce"
@@ -11088,23 +11185,7 @@
       ],
       "sinPropiedad": [
         {
-          "token": "--component-code-syntax-attr",
-          "motivo": "sin propiedad equivalente en un nodo de Figma"
-        },
-        {
           "token": "--component-code-syntax-comment",
-          "motivo": "sin propiedad equivalente en un nodo de Figma"
-        },
-        {
-          "token": "--component-code-syntax-fn",
-          "motivo": "sin propiedad equivalente en un nodo de Figma"
-        },
-        {
-          "token": "--component-code-syntax-tag",
-          "motivo": "sin propiedad equivalente en un nodo de Figma"
-        },
-        {
-          "token": "--component-code-syntax-val",
           "motivo": "sin propiedad equivalente en un nodo de Figma"
         }
       ],
@@ -11116,6 +11197,22 @@
         {
           "token": "--component-code-inline-font-size",
           "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        },
+        {
+          "token": "--component-code-syntax-attr",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-syntax-fn",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-syntax-tag",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-syntax-val",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         }
       ]
     },
@@ -11445,6 +11542,7 @@
         "modificadores": [],
         "estados": [
           ":disabled",
+          ":focus-visible",
           ":hover"
         ]
       },
@@ -11452,7 +11550,7 @@
         "atom-label"
       ],
       "variantes": {
-        "base": 9
+        "base": 8
       },
       "propiedades": [
         {
@@ -11522,28 +11620,6 @@
           }
         },
         {
-          "token": "--component-form-field-border-focus",
-          "variable": "component/form/field/border/focus",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "focus",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-form-field-border-width",
           "variable": "component/form/field/border/width",
           "propiedad": "strokeWeight",
@@ -11607,8 +11683,8 @@
           "variante": null,
           "estado": "default",
           "valores": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -11626,8 +11702,8 @@
       ],
       "sinPropiedad": [
         {
-          "token": "--component-form-field-placeholder",
-          "motivo": "sin propiedad equivalente en un nodo de Figma"
+          "token": "--component-form-field-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
         },
         {
           "token": "--component-form-field-transition-easing",
@@ -11635,6 +11711,10 @@
         }
       ],
       "sinTraducir": [
+        {
+          "token": "--component-form-field-border-focus",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
         {
           "token": "--component-form-field-border-radius",
           "motivo": "expresión CSS: solo un navegador la reduce"
@@ -11660,8 +11740,8 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
-          "token": "--component-form-field-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
+          "token": "--component-form-field-placeholder",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-form-field-transition-duration",
@@ -11943,15 +12023,15 @@
           "estado": "hover",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -11967,10 +12047,6 @@
         {
           "token": "--component-link-primary-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
-        },
-        {
-          "token": "--component-link-primary-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
         }
       ]
     },
@@ -12016,7 +12092,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 7
+        "base": 8
       },
       "propiedades": [
         {
@@ -12084,15 +12160,15 @@
           "estado": "active",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -12149,8 +12225,20 @@
           "variante": null,
           "estado": "default",
           "valores": {
-            "light": "\"Google-Space-Grotesk--regular\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--regular\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
+          }
+        },
+        {
+          "token": "--component-pagination-item-size",
+          "variable": "component/pagination/item/size",
+          "propiedad": "width · height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 40,
+            "dark": 40
           }
         }
       ],
@@ -12175,14 +12263,6 @@
         {
           "token": "--component-pagination-icon-size",
           "motivo": "expresión CSS: solo un navegador la reduce"
-        },
-        {
-          "token": "--component-pagination-item-size",
-          "motivo": "expresión CSS: solo un navegador la reduce"
-        },
-        {
-          "token": "--component-pagination-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
         }
       ]
     },
@@ -12756,31 +12836,9 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 9
+        "base": 8
       },
       "propiedades": [
-        {
-          "token": "--component-form-field-border-focus",
-          "variable": "component/form/field/border/focus",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "focus",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          }
-        },
         {
           "token": "--component-form-field-color",
           "variable": "component/form/field/color",
@@ -12833,28 +12891,6 @@
               "r": 0.104,
               "g": 0.104,
               "b": 0.104,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-radio-bg-checked",
-          "variable": "component/radio/bg/checked",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "checked",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
               "a": 1
             }
           }
@@ -12916,6 +12952,28 @@
           }
         },
         {
+          "token": "--component-radio-dot-color",
+          "variable": "component/radio/dot/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        {
           "token": "--component-radio-status-disabled-opacity",
           "variable": "component/radio/status/disabled/opacity",
           "propiedad": "opacity",
@@ -12946,6 +13004,10 @@
         {
           "token": "--component-form-field-shadow-focus",
           "motivo": "sombra: en Figma es un efecto, no una variable"
+        },
+        {
+          "token": "--component-radio-bg-checked",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-radio-border-radius",
@@ -13011,31 +13073,9 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 10
+        "base": 11
       },
       "propiedades": [
-        {
-          "token": "--component-form-field-border-focus",
-          "variable": "component/form/field/border/focus",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "focus",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
-          }
-        },
         {
           "token": "--component-form-field-border-width",
           "variable": "component/form/field/border/width",
@@ -13105,28 +13145,6 @@
           }
         },
         {
-          "token": "--component-switch-bg-on",
-          "variable": "component/switch/bg/on",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6058,
-              "b": 0.3952,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-switch-border-color",
           "variable": "component/switch/border/color",
           "propiedad": "strokes",
@@ -13161,6 +13179,18 @@
           }
         },
         {
+          "token": "--component-switch-height",
+          "variable": "component/switch/height",
+          "propiedad": "height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 28,
+            "dark": 28
+          }
+        },
+        {
           "token": "--component-switch-slider-bg",
           "variable": "component/switch/slider/bg",
           "propiedad": "fills",
@@ -13183,6 +13213,18 @@
           }
         },
         {
+          "token": "--component-switch-slider-size",
+          "variable": "component/switch/slider/size",
+          "propiedad": "width · height",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 20,
+            "dark": 20
+          }
+        },
+        {
           "token": "--component-switch-status-disabled-opacity",
           "variable": "component/switch/status/disabled/opacity",
           "propiedad": "opacity",
@@ -13192,6 +13234,18 @@
           "valores": {
             "light": 0.5,
             "dark": 0.5
+          }
+        },
+        {
+          "token": "--component-switch-width",
+          "variable": "component/switch/width",
+          "propiedad": "width",
+          "tipo": "FLOAT",
+          "variante": null,
+          "estado": "default",
+          "valores": {
+            "light": 48,
+            "dark": 48
           }
         }
       ],
@@ -13215,7 +13269,7 @@
           "motivo": "sombra: en Figma es un efecto, no una variable"
         },
         {
-          "token": "--component-switch-height",
+          "token": "--component-switch-bg-on",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -13227,16 +13281,8 @@
           "motivo": "sombra: en Figma es un efecto, no una variable"
         },
         {
-          "token": "--component-switch-slider-size",
-          "motivo": "expresión CSS: solo un navegador la reduce"
-        },
-        {
           "token": "--component-switch-transition-duration",
           "motivo": "duración: Figma no guarda tiempo en variables"
-        },
-        {
-          "token": "--component-switch-width",
-          "motivo": "expresión CSS: solo un navegador la reduce"
         }
       ]
     },
@@ -13260,7 +13306,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 12
+        "base": 13
       },
       "propiedades": [
         {
@@ -13350,15 +13396,15 @@
           "estado": "default",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -13420,6 +13466,28 @@
           }
         },
         {
+          "token": "--component-table-state-hover-color",
+          "variable": "component/table/state/hover/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": null,
+          "estado": "hover",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        {
           "token": "--component-table-sticky-active-bg",
           "variable": "component/table/sticky/active/bg",
           "propiedad": "fills",
@@ -13450,15 +13518,15 @@
           "estado": "active",
           "valores": {
             "light": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             },
             "dark": {
-              "r": 0.104,
-              "g": 0.104,
-              "b": 0.104,
+              "r": 0,
+              "g": 0,
+              "b": 0,
               "a": 1
             }
           }
@@ -13483,8 +13551,8 @@
           "variante": null,
           "estado": "default",
           "valores": {
-            "light": "\"Google-Space-Grotesk--bold\",Arial,sans-serif",
-            "dark": "\"Google-Space-Grotesk--bold\",Arial,sans-serif"
+            "light": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif",
+            "dark": "\"Space Grotesk\",\"Space Grotesk Fallback\",Arial,sans-serif"
           }
         }
       ],
@@ -13565,8 +13633,8 @@
           "variante": null,
           "estado": "default",
           "valores": {
-            "light": "\"Google-Syne--bold\",Arial,sans-serif",
-            "dark": "\"Google-Syne--bold\",Arial,sans-serif"
+            "light": "\"Syne\",\"Syne Fallback\",Arial,sans-serif",
+            "dark": "\"Syne\",\"Syne Fallback\",Arial,sans-serif"
           }
         },
         {
@@ -13582,7 +13650,12 @@
           }
         }
       ],
-      "sinPropiedad": [],
+      "sinPropiedad": [
+        {
+          "token": "--component-title-font-weight",
+          "motivo": "FLOAT no encaja en fontName.style"
+        }
+      ],
       "sinTraducir": [
         {
           "token": "--component-title-h1",
@@ -14743,7 +14816,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 7
+        "base": 6
       },
       "propiedades": [
         {
@@ -14778,28 +14851,6 @@
           "valores": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "token": "--component-tabs-indicator-color",
-          "variable": "component/tabs/indicator/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.916,
-              "g": 0,
-              "b": 0.4058,
-              "a": 1
-            }
           }
         },
         {
@@ -14890,6 +14941,10 @@
       "sinTraducir": [
         {
           "token": "--component-tabs-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-tabs-indicator-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -15012,6 +15067,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-breadcrumb-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-breadcrumb-font-size",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15044,6 +15103,38 @@
       "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
     },
     {
+      "token": "--component-button-danger-bg-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-border-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-filled-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-filled-bg-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-filled-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-danger-filled-border-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-font-size",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15061,6 +15152,14 @@
     },
     {
       "token": "--component-button-gap",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-height-md",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-padding-block",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -15140,6 +15239,10 @@
       "motivo": "duración: Figma no guarda tiempo en variables"
     },
     {
+      "token": "--component-check-bg-checked",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-check-border-radius",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15186,6 +15289,22 @@
     {
       "token": "--component-code-snippet-shadow",
       "motivo": "sombra: en Figma es un efecto, no una variable"
+    },
+    {
+      "token": "--component-code-syntax-attr",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-syntax-fn",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-syntax-tag",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-syntax-val",
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-cta-bg",
@@ -15288,6 +15407,10 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
+      "token": "--component-form-field-border-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-form-field-border-radius",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15345,6 +15468,10 @@
     },
     {
       "token": "--component-form-field-padding-y",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-form-field-placeholder",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -15524,6 +15651,22 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-link-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-link-color-active",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-link-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-link-color-visited",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-link-primary-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15616,15 +15759,15 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
-      "token": "--component-pagination-item-size",
-      "motivo": "expresión CSS: solo un navegador la reduce"
-    },
-    {
       "token": "--component-pagination-shadow-focus",
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
       "token": "--component-pill-font-size",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-radio-bg-checked",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -15708,7 +15851,7 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
-      "token": "--component-switch-height",
+      "token": "--component-switch-bg-on",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -15728,20 +15871,12 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
-      "token": "--component-switch-slider-size",
-      "motivo": "expresión CSS: solo un navegador la reduce"
-    },
-    {
       "token": "--component-switch-status-icon-filter",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-switch-transition-duration",
       "motivo": "duración: Figma no guarda tiempo en variables"
-    },
-    {
-      "token": "--component-switch-width",
-      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-table-cell-padding-x",
@@ -15769,6 +15904,10 @@
     },
     {
       "token": "--component-tabs-gap",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-tabs-indicator-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -15908,6 +16047,10 @@
       "motivo": "degradado: en Figma es un fill, no una variable"
     },
     {
+      "token": "--semantic-border-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-border-radius-2xl",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15932,6 +16075,42 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-brand-control-lightness-max",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-brand-control-lightness-min",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-border-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-link-active",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-link-default",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-link-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-link-visited",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-placeholder",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-primary-strong",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-primary-text",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -15952,7 +16131,15 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-color-state-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-state-info-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-state-success-strong",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -16009,6 +16196,10 @@
     },
     {
       "token": "--semantic-filter-white",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-focus-ring-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {

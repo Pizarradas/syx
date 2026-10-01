@@ -3,13 +3,13 @@
     "generator": "scripts/syx-validate.js"
   },
   "stats": {
-    "sourceTokens": 1136,
-    "runtimeTokens": 1419,
-    "officialRuntime": 1144,
-    "legacyRuntime": 275,
+    "sourceTokens": 1177,
+    "runtimeTokens": 1462,
+    "officialRuntime": 1185,
+    "legacyRuntime": 277,
     "phantomTokens": 0,
     "undocumentedTokens": 0,
-    "unusedTokens": 119
+    "unusedTokens": 121
   },
   "phantomTokens": [],
   "unusedRegistryTokens": [
@@ -77,6 +77,7 @@
     "--component-link-color-hover",
     "--component-link-color-visited",
     "--component-link-decoration-color",
+    "--component-link-primary-shadow-focus",
     "--component-pagination-bg-disabled",
     "--component-pagination-border-color",
     "--component-pagination-font-size",
@@ -84,6 +85,7 @@
     "--component-pagination-icon-last",
     "--component-pagination-icon-next",
     "--component-pagination-icon-prev",
+    "--component-pagination-shadow-focus",
     "--component-pill-danger-border-color",
     "--component-pill-font-size",
     "--component-pill-success-border-color",
@@ -1149,7 +1151,6 @@
         ".atom-btn--primary:not(.atom-btn--filled)",
         ".atom-link--primary:after",
         ".atom-link--primary:hover",
-        ".atom-link--primary:focus-visible",
         ".atom-link--primary:active"
       ],
       "status": "kill",
@@ -1175,6 +1176,14 @@
       "value": "not(.atom-btn--filled) {",
       "usedInSelectors": [
         ".atom-btn--quaternary:not(.atom-btn--filled)"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
+    "--danger": {
+      "value": "not(.atom-btn--filled) {",
+      "usedInSelectors": [
+        ".atom-btn--danger:not(.atom-btn--filled)"
       ],
       "status": "kill",
       "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
@@ -2293,6 +2302,14 @@
       "status": "keep",
       "recommendation": "Keep — external dependency or intentional local contract."
     },
+    "--resp": {
+      "value": "focus-visible {",
+      "usedInSelectors": [
+        ".atom-table--resp:focus-visible"
+      ],
+      "status": "kill",
+      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+    },
     "--has-select": {
       "value": "not([class*=\"--is-\"]):before {",
       "usedInSelectors": [
@@ -2382,13 +2399,13 @@
     {
       "rule": "R03",
       "file": "scss/base/_reset.scss",
-      "line": 316,
+      "line": 321,
       "why": "no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello"
     },
     {
       "rule": "R03",
       "file": "scss/utilities/_accessibility.scss",
-      "line": 77,
+      "line": 78,
       "why": "es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez"
     }
   ]
