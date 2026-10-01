@@ -100,6 +100,28 @@ comprobar('la plantilla compila como un tema', () => {
   return `${(cssTema.length / 1024).toFixed(0)} KB · ${oscuros} bloque(s) de oscuro automático`;
 });
 
+// Tener el bloque no basta: sin dark-mode-tokens() dentro, el «oscuro» pinta
+// las superficies claras y todos los demás guardianes pasan, porque claro
+// sobre claro sigue contrastando. Lo que se exige es que el modo oscuro, por
+// las dos entradas, OSCUREZCA el fondo de verdad. (Lo encontró la suite de
+// mutación al quitar esa línea de la plantilla.)
+comprobar('el modo oscuro oscurece el fondo, por el SO y por elección', () => {
+  if (!cssTema) throw new Error('no compiló');
+  const { declaraciones, estado, resolver } = require('./check-modo-claro');
+  const decls = declaraciones(cssTema);
+  const L = (vars) => {
+    const m = /oklch\(\s*([\d.]+)(%?)/.exec(resolver(vars, vars['--semantic-color-bg-primary']) || '');
+    return m ? parseFloat(m[1]) / (m[2] ? 100 : 1) : null;
+  };
+  const claro = L(estado(decls, null, 'light'));
+  const porSO = L(estado(decls, null, 'dark'));
+  const elegido = L(estado(decls, 'dark', 'light'));
+  if ([claro, porSO, elegido].some((x) => x === null)) throw new Error('no se pudo resolver --semantic-color-bg-primary a oklch()');
+  const malos = [['oscuro por el SO', porSO], ['oscuro elegido', elegido]].filter(([, l]) => !(l < 0.5 && l < claro));
+  if (malos.length) throw new Error(`el fondo no oscurece: claro L ${claro} · ${malos.map(([n, l]) => `${n} L ${l}`).join(' · ')}`);
+  return `fondo L ${claro} en claro → ${porSO} por el SO · ${elegido} elegido`;
+});
+
 // ─── 3 · Los guardianes de los temas, sobre la copia ────────────────────────
 
 function guardian(script, args = []) {
