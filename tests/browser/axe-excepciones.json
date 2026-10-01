@@ -2,7 +2,82 @@
   "_meta": {
     "descripcion": "Violaciones de axe que se aceptan a sabiendas, acotadas por regla, componente y tema/modo. Cada una lleva su porqué y a quién le toca decidir; sin eso no entra. Vacío es el estado deseado: al arreglar una, se borra su entrada y la prueba vuelve a vigilarla.",
     "origen": "Primera ejecución de las pruebas en navegador (auditoría 2026-09, acción 17). check:contraste medía 12 pares de tokens y no incluía el color de marca usado como texto de enlace, como relleno bajo texto ni como sintaxis sobre el fondo del código. axe lo encontró en píxeles. Vaciado en la auditoría 2026-10 (acción 2): los cinco pares que se aceptaban (enlace, texto sobre el relleno de marca en botón y cabecera de tabla, sintaxis del código y píldora neutra de example-05) están ahora en contracts/contrast.json y cumplen en los siete temas.",
-    "formato": "Si alguna vez hace falta una excepción, lleva regla, componente, selector concreto, temas (tema/modo), la razón medida como suelo (`ratioMinima`), fecha de caducidad (`caduca`, AAAA-MM-DD) y su porqué. Sin todo eso no entra."
+    "formato": "Una excepción lleva regla, componente (o la página: \"docs.html\"), selector concreto (un trozo del selector de axe), temas (tema/modo), fecha de caducidad (`caduca`, AAAA-MM-DD), su porqué y, para contraste, la razón medida como suelo (`ratioMinima`). `tipo` es \"violacion\" (por defecto) o \"incompleto\": desde la auditoría 2026-10 (acción 8) un resultado que axe no supo decidir FALLA salvo que esté revisado aquí. Los incompletos de contraste los mide el arnés en píxeles en cada ejecución (tests/browser/lib/pixeles.mjs): si la medida baja del suelo o del mínimo de WCAG, la excepción deja de cubrirlos. `node run.mjs --axe --proponer` imprime las entradas de los que sí cumplen. Una excepción que en una ejecución completa no cubre nada para la prueba: se borra."
   },
-  "excepciones": []
+  "excepciones": [
+    {
+      "tipo": "incompleto",
+      "regla": "aria-valid-attr-value",
+      "componente": "menu",
+      "selector": "#menu-actions-btn",
+      "temas": [
+        "example-01/dark",
+        "example-01/light",
+        "example-02/dark",
+        "example-02/light",
+        "example-03/dark",
+        "example-03/light",
+        "example-04/dark",
+        "example-04/light",
+        "example-05/dark",
+        "example-05/light",
+        "example-06/dark",
+        "example-06/light",
+        "syx-sketch/dark",
+        "syx-sketch/light"
+      ],
+      "caduca": "2027-04-01",
+      "porque": "axe marca para revisión todo aria-controls de un botón con aria-haspopup, exista o no el destino (messageKey controlsWithinPopup): no comprueba el id. Revisado: #menu-actions está en el mismo usage, es el role=\"menu\" que abre popovertarget, e interaccion.mjs prueba que el botón lo abre y lo controla."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "tabs",
+      "selector": "#tab-1",
+      "temas": [
+        "example-01/dark",
+        "example-01/light",
+        "example-02/dark",
+        "example-02/light",
+        "example-03/dark",
+        "example-03/light",
+        "example-04/dark",
+        "example-04/light",
+        "example-05/dark",
+        "example-05/light",
+        "example-06/dark",
+        "example-06/light",
+        "syx-sketch/dark",
+        "syx-sketch/light"
+      ],
+      "ratioMinima": 9.24,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña activa contra el fondo real que tiene detrás da ≥ 9,24:1 en los siete temas y los dos modos (mínimo 4,5:1)."
+    },
+    {
+      "tipo": "incompleto",
+      "regla": "color-contrast",
+      "componente": "tabs",
+      "selector": "#tab-2",
+      "temas": [
+        "example-01/dark",
+        "example-01/light",
+        "example-02/dark",
+        "example-02/light",
+        "example-03/dark",
+        "example-03/light",
+        "example-04/dark",
+        "example-04/light",
+        "example-05/dark",
+        "example-05/light",
+        "example-06/dark",
+        "example-06/light",
+        "syx-sketch/dark",
+        "syx-sketch/light"
+      ],
+      "ratioMinima": 6.77,
+      "caduca": "2027-04-01",
+      "porque": "axe no resuelve el fondo: la línea base de la lista de pestañas se pinta como degradado en el borde de su caja de contenido (_tabs.scss), y axe no mide sobre degradados. Medido en píxeles, el texto de la pestaña inactiva contra el fondo real que tiene detrás da ≥ 6,77:1 en los siete temas y los dos modos (mínimo 4,5:1)."
+    }
+  ]
 }
