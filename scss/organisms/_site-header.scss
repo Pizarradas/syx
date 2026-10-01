@@ -40,16 +40,16 @@
     padding: 0 var(--component-section-padding-inline);
     // stylelint-disable-next-line declaration-block-no-duplicate-properties -- respaldo sólido para navegadores sin color-mix(); la línea de abajo lo sustituye
     background-color: var(--semantic-color-bg-primary);
-    border-block-end: 1px solid var(--semantic-color-border-subtle);
+    border-block-end: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
     width: 100%;
     // Glassmorphism polish
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    backdrop-filter: blur(0.75rem) saturate(150%);
+    -webkit-backdrop-filter: blur(0.75rem) saturate(150%);
     background-color: color-mix(in srgb, var(--semantic-color-bg-primary) 90%, transparent);
     @include transition(box-shadow 0.2s ease);
 
     &.is-scrolled {
-      box-shadow: 0 2px 16px color-mix(in srgb, black 8%, transparent);
+      box-shadow: 0 0.125rem 1rem color-mix(in srgb, black 8%, transparent);
     }
 
     // ── Brand ──────────────────────────────────
@@ -109,7 +109,7 @@
         white-space: nowrap;
         @include transition(color 0.2s ease);
         padding: 0.25rem 0;
-        border-block-end: 2px solid transparent;
+        border-block-end: var(--semantic-border-width-default) solid transparent;
 
         &:hover,
         &:focus-visible {
@@ -188,7 +188,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 5px;
+      gap: 0.3125rem;
       // Mismo cuadrado que el conmutador de modo, que es su vecino en móvil:
       // medía 2.5rem contra sus 2.75rem y el radio era otro.
       @include size(var(--component-header-control-height));
@@ -219,9 +219,9 @@
       &-line {
         display: block;
         width: 1.375rem;
-        height: 2px;
+        height: 0.125rem;
         background-color: var(--semantic-color-text-primary);
-        border-radius: 2px;
+        border-radius: 0.125rem;
         transform-origin: center;
         @include transition(transform 0.3s ease, opacity 0.2s ease, background-color 0.2s ease);
       }
@@ -233,9 +233,9 @@
     overflow: hidden; // prevent scroll behind overlay
 
     .org-site-header__burger {
-      .org-site-header__burger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .org-site-header__burger-line:nth-child(1) { transform: translateY(0.4375rem) rotate(45deg); }
       .org-site-header__burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
-      .org-site-header__burger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+      .org-site-header__burger-line:nth-child(3) { transform: translateY(-0.4375rem) rotate(-45deg); }
     }
   }
 
@@ -260,7 +260,7 @@
     @include fixed($top: $header-h, $left: 0, $right: 0);
     z-index: $mob-nav-z;
     background-color: var(--semantic-color-bg-primary);
-    border-block-end: 1px solid var(--semantic-color-border-subtle);
+    border-block-end: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
     padding: var(--semantic-space-layout-sm) var(--semantic-space-layout-md);
     display: flex;
     flex-direction: column;
@@ -276,7 +276,7 @@
       transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
       visibility 0s linear 0.35s
     );
-    box-shadow: 0 16px 32px color-mix(in srgb, black 12%, transparent);
+    box-shadow: 0 1rem 2rem color-mix(in srgb, black 12%, transparent);
 
     @include breakpoint(xl) {
       display: none;
@@ -323,7 +323,7 @@
     &__theme {
       margin-block-start: var(--semantic-space-component-sm);
       padding-block-start: var(--semantic-space-component-md);
-      border-block-start: 1px solid var(--semantic-color-border-subtle);
+      border-block-start: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
 
       label {
         display: block;
