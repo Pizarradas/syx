@@ -23,7 +23,8 @@
   --semantic-font-size-body-large:  var(--primitive-font-size-md);   // ~20px  — lead text
 
   // Backward-compatible alias (was 12px fixed — now fluid 14px)
-  --semantic-font-size-body-sm:     var(--primitive-font-size-sm);   // ~14px
+  // @deprecated --semantic-font-size-body-small: el mismo tamaño con su nombre de serie
+  --semantic-font-size-body-sm:     var(--semantic-font-size-body-small); // ~14px
 
   // FONT SIZES — HEADINGS (fluid, Major Third scale)
   // ================================================

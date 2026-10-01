@@ -19,7 +19,7 @@
  *   · contracts/resolved-tokens.json  valores por tema y modo (paso 0.2)
  *   · component-registry.json         clases y tokens reales  (paso 0.1)
  *   · css/styles-theme-*.css          para la cadena de alias, bajo demanda
- *   · scripts/lib/rules.js            R01–R04, R09, R10: el mismo motor que el validador
+ *   · scripts/lib/rules.js            R01–R04, R09–R11: el mismo motor que el validador
  *
  * QUÉ HACE ESTE FICHERO Y QUÉ NO
  * Solo protocolo: leer líneas, despachar métodos, escribir respuestas. Las
@@ -105,7 +105,7 @@ const HERRAMIENTAS = [
 
   {
     name: 'validate_snippet',
-    description: 'Pasa las reglas de contrato de árbol (R01–R04, R09 mixin inexistente, R10 excepciones) sobre un fragmento de SCSS ANTES de escribirlo, y avisa de los tokens que usa y no existen. El mismo motor y el mismo contracts/rules.json que npm run validate; una excepción se declara con `// syx-allow Rxx: porqué` en la línea de encima.',
+    description: 'Pasa las reglas de contrato de árbol (R01–R04, R09 mixin inexistente, R10 excepciones, R11 lo que lee un token de componente) sobre un fragmento de SCSS ANTES de escribirlo, y avisa de los tokens que usa y no existen. El mismo motor y el mismo contracts/rules.json que npm run validate; una excepción se declara con `// syx-allow Rxx: porqué` en la línea de encima.',
     inputSchema: {
       type: 'object',
       properties: {

@@ -66,13 +66,13 @@ violation six components later.
 
 | # | Axis | What is decided | Lands in | Token family |
 |---|---|---|---|---|
-| 1 | **Colour** | brand and accent hue, chroma envelope, neutral temperature, light or dark | primitives → theme | `--primitive-color-*` → `--semantic-color-*`, `--semantic-tone-*` |
+| 1 | **Colour** | brand and accent hue, chroma envelope, neutral temperature, light or dark | primitives → theme | `--primitive-color-*` → `--semantic-color-*` |
 | 2 | **Typography** | the pairing, the scale ratio, the weight range, tracking at display sizes | theme | `--semantic-font-family-*`, `--semantic-font-size-h1…h6`, `--semantic-font-weight-*`, `--semantic-letter-spacing-*` |
 | 3 | **Space & density** | the rhythm step, and how generous the layout is against the 4px grid | theme (rarely) | `--semantic-space-layout-*`, `--semantic-space-stack-*`, `--semantic-space-component-*` |
 | 4 | **Shape** | the radius language — square, soft, pill — and the border weight | theme | `--semantic-border-radius-*`, `--semantic-border-width-*` |
 | 5 | **Elevation** | how depth is signalled: diffuse shadow, hard offset, or borders only | theme | `--semantic-shadow-*` |
 | 6 | **Motion** | the duration ladder and the easing signature | theme | `--semantic-duration-*`, `--semantic-easing-*` |
-| 7 | **State** | how focus, hover and error announce themselves | theme | `--semantic-color-state-*`, `--semantic-focus-*`, `--semantic-outline-width` |
+| 7 | **State** | how focus, hover and error announce themselves | theme | `--semantic-color-state-*`, `--semantic-focus-*`, `--theme-focus-ring-width` |
 
 Two further axes exist and are **not tokens** — voice and imagery. Decide them anyway, in prose, and
 hand them to UX and CREATIVE. An identity whose photographic direction goes unstated gets one per page.

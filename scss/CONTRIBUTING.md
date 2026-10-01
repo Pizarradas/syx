@@ -164,7 +164,7 @@ Examples:
 Examples:
 --semantic-color-primary
 --semantic-color-text-primary
---semantic-tone-error-bg
+--semantic-color-state-error
 --semantic-space-inset-md
 --semantic-font-size-body
 --semantic-border-radius-sm

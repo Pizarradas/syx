@@ -114,10 +114,11 @@
     // -----------------------------------------------
     strong,
     em {
-      font-family: var(--font-bold);
+      font-family: var(--semantic-font-family-primary-bold);
     }
 
-    // `--font-bold` era una familia de un solo peso (negrita), así que `em`
+    // `--font-bold` (hoy --semantic-font-family-primary-bold) era una familia
+    // de un solo peso (negrita), así que `em`
     // salía en negrita además de en cursiva. Ahora la familia trae todos los
     // pesos; el peso explícito conserva ese aspecto.
     em {
@@ -219,7 +220,7 @@
     }
 
     th {
-      font-family: var(--font-bold);
+      font-family: var(--semantic-font-family-primary-bold);
       text-align: inherit;
     }
 

@@ -4,37 +4,44 @@
 // primitivos directos: blockquote, hr, code, pre y las celdas
 // de tabla. Sin estos tokens, un tema no podía cambiar el
 // aspecto de la documentación ni del código embebido.
+//
+// Hasta la acción 14 de la auditoría de 2026-10 estos tokens
+// seguían leyendo primitivos (gray-50, gray-200…): en modo
+// oscuro la cita y la cabecera de tabla se quedaban como
+// cajas claras sobre fondo oscuro. Ahora leen superficies,
+// textos y bordes semánticos (R11), que el modo oscuro ya
+// reasigna, y el código lee su propia paleta semántica.
 // ================================================
 
 :root {
   // BLOCKQUOTE
   // ================================================
-  --component-blockquote-bg: var(--primitive-color-gray-50);
-  --component-blockquote-color: var(--primitive-color-gray-600);
-  --component-blockquote-border-width: var(--primitive-border-width-4);
+  --component-blockquote-bg: var(--semantic-color-bg-secondary);
+  --component-blockquote-color: var(--semantic-color-text-secondary);
+  --component-blockquote-border-width: var(--semantic-border-width-thick);
   --component-blockquote-border-style: solid;
   --component-blockquote-border-color: var(--semantic-color-primary);
   --component-blockquote-border-radius: 0 var(--theme-radius) var(--theme-radius) 0;
 
   // HR
   // ================================================
-  --component-hr-thickness: var(--primitive-border-width-1);
-  --component-hr-color: var(--primitive-color-gray-200);
+  --component-hr-thickness: var(--semantic-border-width-thin);
+  --component-hr-color: var(--semantic-color-border-subtle);
   --component-hr-style: solid;
 
   // CODE — inline
   // ================================================
-  --component-code-inline-bg: var(--primitive-color-gray-100);
-  --component-code-inline-color: var(--primitive-color-red-600);
+  --component-code-inline-bg: var(--semantic-color-code-inline-bg);
+  --component-code-inline-color: var(--semantic-color-code-inline-fg);
   --component-code-inline-border-radius: 0.25rem;
   --component-code-inline-border-width: var(--semantic-border-width-thin);
-  --component-code-inline-border-color: var(--semantic-color-border-subtle);
+  --component-code-inline-border-color: var(--semantic-color-code-inline-border);
   --component-code-inline-font-size: 0.9em;
 
   // CODE — block
   // ================================================
-  --component-code-bg: var(--primitive-color-gray-900);
-  --component-code-color: var(--primitive-color-gray-100);
+  --component-code-bg: var(--semantic-color-code-bg);
+  --component-code-color: var(--semantic-color-code-fg);
   --component-code-border-radius: var(--theme-radius);
   --component-code-border-width: var(--semantic-border-width-thin);
   --component-code-border-color: var(--semantic-color-border-subtle);
@@ -43,30 +50,27 @@
 
   // TABLE — celdas (complementa _tables.scss)
   // ================================================
-  --component-table-base-border-width: var(--primitive-border-width-1);
-  --component-table-base-border-color: var(--primitive-color-gray-200);
-  --component-table-base-th-bg: var(--primitive-color-gray-50);
-  --component-table-base-th-color: var(--primitive-color-gray-800);
-  --component-table-base-th-border-width: var(--primitive-border-width-2);
-  --component-table-base-th-border-color: var(--primitive-color-gray-300);
-  --component-table-base-state-hover-bg: var(--primitive-color-gray-50);
+  --component-table-base-border-width: var(--semantic-border-width-thin);
+  --component-table-base-border-color: var(--semantic-color-border-subtle);
+  --component-table-base-th-bg: var(--semantic-color-bg-secondary);
+  // Era gray-800: el texto principal es gray-900, un peldaño más. La cabecera
+  // es texto principal; un gris propio solo para ella no era un rol.
+  --component-table-base-th-color: var(--semantic-color-text-primary);
+  --component-table-base-th-border-width: var(--semantic-border-width-default);
+  --component-table-base-th-border-color: var(--semantic-color-border-default);
+  --component-table-base-state-hover-bg: var(--semantic-color-bg-secondary);
 
   // CODE — colores de sintaxis
   // ================================================
   // Elegidos contra --component-code-bg (siempre oscuro), no contra el
-  // fondo de la página. Sin sintaxis relativa reproducen los roles de marca
-  // que usaba _code.scss; con ella (más abajo) se derivan.
-  --component-code-syntax-tag: var(--semantic-color-primary);
-  --component-code-syntax-attr: var(--semantic-color-secondary);
-  --component-code-syntax-val: var(--semantic-color-tertiary);
-  // El comentario es texto y también pide 4,5:1. text-disabled cambia con el
-  // modo (gris claro en claro, gris 600 en oscuro: 2,2:1 sobre el código);
-  // el fondo del código no cambia, así que el comentario tampoco.
-  --component-code-syntax-comment: var(--primitive-color-gray-400);
-  --component-code-syntax-fn: var(--semantic-color-quaternary);
-  // Luminosidad de la sintaxis derivada. Fija y alta porque el fondo es fijo
-  // y oscuro en todos los temas y modos.
-  --component-code-syntax-lightness: 0.82;
+  // fondo de la página. La paleta y su derivación con sintaxis relativa
+  // viven en la capa semántica (--semantic-color-code-*): un tema la
+  // cambia ahí, una vez, y no token a token en el componente.
+  --component-code-syntax-tag: var(--semantic-color-code-tag);
+  --component-code-syntax-attr: var(--semantic-color-code-attr);
+  --component-code-syntax-val: var(--semantic-color-code-val);
+  --component-code-syntax-comment: var(--semantic-color-code-comment);
+  --component-code-syntax-fn: var(--semantic-color-code-fn);
 
   // UTILIDAD .syx-bg-color-black — tinta del texto encima
   // ================================================
@@ -80,16 +84,3 @@
   --component-bg-color-black-text: currentColor;
 }
 
-// Los rellenos de marca rondan L 0,60: sobre el fondo del código daban
-// 3,9–4,4:1, y un terciario oscuro (example-03) 2,0:1. Se deriva cada rol con
-// su tono y su croma y la luminosidad de arriba: el código sigue teniendo los
-// colores del tema, solo más claros. Donde no hay sintaxis relativa se queda
-// el relleno, que es el comportamiento anterior.
-@supports (color: oklch(from red l c h)) {
-  :root {
-    --component-code-syntax-tag: oklch(from var(--semantic-color-primary) var(--component-code-syntax-lightness) c h);
-    --component-code-syntax-attr: oklch(from var(--semantic-color-secondary) var(--component-code-syntax-lightness) c h);
-    --component-code-syntax-val: oklch(from var(--semantic-color-tertiary) var(--component-code-syntax-lightness) c h);
-    --component-code-syntax-fn: oklch(from var(--semantic-color-quaternary) var(--component-code-syntax-lightness) c h);
-  }
-}

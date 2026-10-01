@@ -45,7 +45,7 @@ Create `scss/abstracts/tokens/components/_{name}.scss`:
   --component-{name}-bg:            var(--semantic-color-bg-primary);
   --component-{name}-color:         var(--semantic-color-text-primary);
   --component-{name}-border:        var(--semantic-color-border-default);
-  --component-{name}-border-width:  var(--semantic-border-width);
+  --component-{name}-border-width:  var(--semantic-border-width-thin);
   --component-{name}-radius:        var(--semantic-border-radius-default);
   --component-{name}-padding-y:     var(--semantic-space-component-md);
   --component-{name}-padding-x:     var(--semantic-space-component-lg);

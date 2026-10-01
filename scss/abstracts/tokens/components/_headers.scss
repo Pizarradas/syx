@@ -8,7 +8,13 @@
   // ================================================
   --component-header-height: calc(3.5 * var(--semantic-space-component-xs)); // 56px (3.5rem)
   --component-header-padding-y: var(--semantic-space-component-md);
-  --component-header-z-index: 5;
+  // Apilamiento de la cabecera y su menú móvil, sobre la escala semántica
+  // (--semantic-z-index-*). Antes eran literales en el organismo (199, 200 y
+  // 201) y estos dos tokens, 5 y 500, no los leía nadie. El orden no cambia:
+  // velo < cajón < cabecera, para que la hamburguesa quede encima del cajón
+  // abierto; y todo por debajo de modal, aviso efímero y tooltip.
+  --component-header-z-index: calc(var(--semantic-z-index-drawer) + 1);
+  --component-header-overlay-z-index: var(--semantic-z-index-overlay);
 
   // FAMILIA DE CONTROLES DE LA CABECERA
   // ================================================
@@ -28,7 +34,7 @@
   // SIDENAV (Part of Header Organism)
   // ================================================
   --component-sidenav-width: calc(15 * var(--semantic-space-component-xs)); // 240px (15rem)
-  --component-sidenav-z-index: 500;
+  --component-sidenav-z-index: var(--semantic-z-index-drawer);
   --component-sidenav-bg: var(--semantic-color-bg-primary); // Assuming white/primary bg
   --component-sidenav-shadow: 0.625rem 0 0.313rem -0.188rem var(--semantic-color-primary); // specific shadow
 

@@ -83,8 +83,16 @@ function main() {
         console.log(`   ${' '.repeat(16)} con el sistema en claro, el botón de tema no cambia el fondo`);
       } else if (enMedia && enManual) {
         console.log(`✅ ${theme.padEnd(16)} sin mixin propio · las dos entradas al oscuro activan`);
+      } else if (!enMedia && enManual) {
+        problemas++;
+        console.log(`❌ ${theme.padEnd(16)} solo hay oscuro manual: sin la media query no sigue al sistema`);
       } else {
-        console.log(`   ${theme.padEnd(16)} sin mixin de oscuro propio — se omite`);
+        // Hasta octubre de 2026 esto era «se omite»: un tema sin modo oscuro
+        // pasaba en verde. La plantilla de temas era justo eso, y todo tema
+        // nuevo nacía sin oscuro. (Auditoría 2026-10 · acción 14)
+        problemas++;
+        console.log(`❌ ${theme.padEnd(16)} sin modo oscuro: ninguna entrada llama a dark-mode-tokens()`);
+        console.log(`   ${' '.repeat(16)} un tema declara las dos (mira scss/themes/_template/_theme.scss)`);
       }
       continue;
     }

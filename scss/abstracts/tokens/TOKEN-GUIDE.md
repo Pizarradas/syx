@@ -154,9 +154,9 @@ Themes should only override **primitive tokens**. Semantic and component tokens 
 ```scss
 // 1. Define component tokens (if they don't exist)
 :root {
-  --component-button-danger-text: var(--semantic-tone-error-text);
+  --component-button-danger-text: var(--semantic-color-state-error-text);
   --component-button-danger-bg: transparent;
-  --component-button-danger-border: var(--semantic-tone-error-bg);
+  --component-button-danger-border: var(--semantic-color-state-error);
 }
 
 // 2. Use in the component
@@ -192,13 +192,13 @@ Themes should only override **primitive tokens**. Semantic and component tokens 
 // primitives/_colors.scss
 --primitive-color-info-500: hsl(200, 100%, 50%);
 
-// 2. Add semantic alias
+// 2. Point the semantic state at it
 // semantic/_colors.scss
---semantic-tone-info-bg: var(--primitive-color-info-500);
+--semantic-color-state-info: var(--primitive-color-info-500);
 
 // 3. Use in component
 // components/_alerts.scss
---component-alert-info-bg: var(--semantic-tone-info-bg);
+--component-alert-info-bg: var(--semantic-color-state-info);
 ```
 
 ---

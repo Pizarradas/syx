@@ -45,28 +45,13 @@ El bundle de compilación (`scss/styles-theme-example-01.scss`) importa el tema 
 themes/_template/ → themes/mi-marca/
 ```
 
-La plantilla `_template/` es un tema neutral con identidad visual mínima: sin colores de marca, sin fonts personalizadas. Es el punto de partida ideal.
+La plantilla `_template/` es el **contrato mínimo** de un tema: marca → roles, tintas sobre relleno, textos, forma, tipografía con `syx-font()`, iconos y modo oscuro con sus dos entradas. Cada declaración tiene lector y `npm run check:plantilla` la compila y la revisa como un tema más.
 
-### 2. Definir los tokens primitivos
+### 2. Cambiar los valores marcados con ✎
 
-En `themes/mi-marca/_theme.scss`, sobreescribir **solo los primitivos**:
+En `themes/mi-marca/_theme.scss`: la paleta de la marca como primitivos **propios** (`--primitive-color-brand-*`, no los del sistema reescritos con otro tono), qué primitivo es cada rol (`--semantic-color-primary`…), la tinta encima de cada relleno (`--semantic-color-on-*`, la elige `check:contraste`), textos, radios y la familia tipográfica.
 
-```scss
-@mixin theme-mi-marca {
-  // Color de marca
-  --primitive-color-purple-500: hsl(248, 62%, 22%);
-  --primitive-color-pink-500: hsl(350, 100%, 65%);
-
-  // Tipografía
-  --primitive-font-family-brand-regular: "Mi Fuente", sans-serif;
-  --primitive-font-family-brand-bold: "Mi Fuente Bold", sans-serif;
-
-  // Espaciado base
-  --primitive-space-base: 0.5rem;
-}
-```
-
-> **Regla de oro**: Solo overrides de primitivos. Los tokens semánticos y de componente cascadean automáticamente desde los primitivos. No hardcodees valores en los overrides.
+> **Regla de oro**: lo que el tema dice son ROLES (`--semantic-*`). Un componente nunca lee un primitivo (R01, R11), y una sobrescritura de componente solo puede leer roles. Qué puede y qué no puede declarar un tema: `THEMING-RULES.md`, «El contrato de un tema».
 
 ### 3. Ajustar `_setup.scss`
 
@@ -111,21 +96,9 @@ Tokens base que actúan como fallback si un tema no los overrides. Todos los tem
 
 ---
 
-## Tokens que un tema PUEDE sobreescribir
+## Qué declara un tema
 
-| Categoría        | Tokens                                                                                |
-| ---------------- | ------------------------------------------------------------------------------------- |
-| Colores de marca | `--primitive-color-{hue}-{shade}`                                                     |
-| Tipografía       | `--primitive-font-family-*` · `--primitive-font-size-*` · `--primitive-font-weight-*` |
-| Espaciado        | `--primitive-space-base` · `--primitive-space-{n}`                                    |
-| Bordes           | `--primitive-border-radius-*` · `--primitive-border-width-*`                          |
-| Sombras          | `--primitive-shadow-*`                                                                |
-
-## Tokens que un tema NO debe sobreescribir
-
-- `--semantic-*` — se calculan automáticamente desde los primitivos
-- `--component-*` — igual, se calculan desde semánticos
-- Excepciones: cuando un componente concreto necesita en un solo tema un ajuste visual que el sistema de tokens no puede expresar, se resuelve con un bloque `@if $theme == "nombre"` dentro del parcial del componente
+El contrato completo —qué DEBE declarar un tema, qué PUEDE y qué NO, con el guardián que vigila cada punto— está en `THEMING-RULES.md`, «El contrato de un tema». En corto: roles semánticos con la paleta del tema, sus dos entradas al modo oscuro, ninguna declaración sin lector (`check:consumidores`) y ningún token de componente que lea un primitivo o un color literal (R11).
 
 ---
 

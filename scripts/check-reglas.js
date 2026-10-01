@@ -39,6 +39,8 @@ const casos = [];
 const comprobar = (nombre, fn) => casos.push({ nombre, fn });
 
 const ATOMO = 'scss/atoms/_prueba.scss';
+const CAPA_COMPONENTE = 'scss/abstracts/tokens/components/_prueba.scss';
+const TEMA = 'scss/themes/prueba/_theme.scss';
 
 /** Qué reglas incumple un fragmento: ['R03', 'R04', …] (y 'sintaxis' si no parsea). */
 function incumple(codigo, rel = ATOMO) {
@@ -92,6 +94,20 @@ const DEBEN_FALLAR = [
   ['excepción separada por una línea en blanco', '.a {\n  // syx-allow R03: el autofill de Chrome lo necesita\n\n  transition: none;\n}', ['R03', 'R10']],
   ['excepción que solo cubre una de dos reglas', '.a {\n  // syx-allow R03, R04: el autofill de Chrome lo necesita\n  transition: none;\n}', ['R10']],
   ['excepción que no alcanza a la declaración siguiente', '.a {\n  // syx-allow R03: el autofill de Chrome lo necesita\n  transition: none;\n  transition-delay: 0s;\n}', ['R03']],
+  // R11: lo que lee un token de componente (acción 14 de 2026-10). R01 deja
+  // pasar primitivos en abstracts/ y en themes/; R11 mira justo ahí.
+  ['componente que lee un primitivo', ':root { --component-x-bg: var(--primitive-color-blue-50); }', ['R11'], CAPA_COMPONENTE],
+  ['componente que lee un primitivo dentro de un calc', ':root { --component-x-gap: calc(2 * var(--primitive-space-base)); }', ['R11'], CAPA_COMPONENTE],
+  ['componente que deriva de un primitivo', ':root { --component-x-fg: oklch(from var(--primitive-color-red-600) 0.45 c h); }', ['R11'], CAPA_COMPONENTE],
+  ['componente que mezcla con un primitivo', ':root { --component-x-bg: color-mix(in srgb, var(--semantic-color-primary) 12%, var(--primitive-color-white)); }', ['R11'], CAPA_COMPONENTE],
+  ['componente que lee una variable heredada', ':root { --component-x-gap: calc(3 * var(--base-measure)); }', ['R11'], CAPA_COMPONENTE],
+  ['componente con un color literal oklch', ':root { --component-x-color: oklch(1 0 0); }', ['R11'], CAPA_COMPONENTE],
+  ['componente con un hexadecimal', ':root { --component-x-color: #1e3aff; }', ['R11'], CAPA_COMPONENTE],
+  ['componente con white', ':root { --component-x-color: white; }', ['R11'], CAPA_COMPONENTE],
+  ['componente con una sombra de color literal', ':root { --component-x-shadow: 0 1px 2px rgb(0 0 0 / 0.2); }', ['R11'], CAPA_COMPONENTE],
+  ['sobrescritura de componente en un tema que lee un primitivo', '@mixin theme-x { :root { --component-pill-primary-bg: var(--primitive-color-blue-50); } }', ['R11'], TEMA],
+  ['sobrescritura de componente en el oscuro de un tema', '@mixin theme-x { :root[data-theme="dark"] { --component-code-bg: oklch(0.16 0.028 258); } }', ['R11'], TEMA],
+  ['excepción a R11 sin porqué', ':root {\n  // syx-allow R11:\n  --component-x: var(--primitive-y);\n}', ['R10', 'R11'], CAPA_COMPONENTE],
   // Lo que no se puede leer no se da por bueno
   ['SCSS que no parsea', '.a { color: red', ['sintaxis']],
 ];
@@ -122,11 +138,25 @@ const NO_DEBEN_FALLAR = [
   ['un mixin del sistema con espacio de nombres', '.a { @include mixins.transition(opacity .2s); }'],
   ['excepción bien escrita', '.a {\n  // syx-allow R03: el autofill de Chrome lo necesita\n  transition: background-color 600000s 0s;\n}'],
   ['excepción a dos reglas en una línea', '.a {\n  // syx-allow R03, R01: demostración de un caso doble\n  transition: color var(--primitive-duration-fast);\n}'],
+  // R11: lo que un token de componente SÍ puede leer
+  ['componente que lee un semántico', ':root { --component-x-bg: var(--semantic-color-tone-primary-subtle-bg); }', CAPA_COMPONENTE],
+  ['componente que hereda de otro componente', ':root { --component-x-hover: var(--component-x-bg); }', CAPA_COMPONENTE],
+  ['componente que deriva de un semántico', ':root { --component-x-fg: oklch(from var(--semantic-color-primary) 0.82 c h); }', CAPA_COMPONENTE],
+  ['componente que mezcla un semántico con transparente', ':root { --component-x-bg: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent); }', CAPA_COMPONENTE],
+  ['componente con transparent y currentColor', ':root { --component-x-bg: transparent; --component-x-fg: currentColor; }', CAPA_COMPONENTE],
+  ['componente con medidas literales', ':root { --component-x-gap: 0.75rem; --component-x-size: 3rem; }', CAPA_COMPONENTE],
+  ['componente que lee un icono', ':root { --component-x-icon: var(--lc-icon-check); --component-y-icon: var(--icon-logo); }', CAPA_COMPONENTE],
+  ['componente que lee la forma del tema', ':root { --component-x-radius: var(--theme-radius); --component-x-max: var(--layout-max-width); }', CAPA_COMPONENTE],
+  ['color de un ejemplo dentro de una cadena', ':root { --component-x-content: "white #fff oklch(1 0 0)"; }', CAPA_COMPONENTE],
+  ['un tema que traduce un primitivo a un semántico', '@mixin theme-x { :root { --semantic-color-tone-primary-subtle-bg: var(--primitive-color-blue-50); --semantic-color-code-bg: oklch(0.16 0.028 258); } }', TEMA],
+  ['la capa del sitio, que no es del sistema', ':root { --component-section-bg: var(--primitive-color-gray-50); }', 'scss/site/tokens/_prueba.scss'],
+  ['un átomo que fija su color en un modificador (R11 mira la capa de tokens)', '.a--white { --component-icon-color: oklch(1 0 0); }'],
+  ['excepción a R11 con porqué', ':root {\n  // syx-allow R11: demostración de una excepción bien escrita\n  --component-x: var(--primitive-y);\n}', CAPA_COMPONENTE],
 ];
 
-for (const [nombre, codigo] of NO_DEBEN_FALLAR) {
+for (const [nombre, codigo, rel] of NO_DEBEN_FALLAR) {
   comprobar(`pasa: ${nombre}`, () => {
-    const r = incumple(codigo);
+    const r = incumple(codigo, rel);
     if (r.length) throw new Error(`da ${r.join(', ')} y no debía`);
   });
 }
@@ -183,6 +213,22 @@ comprobar('contrato: lo que se prohíbe sale de rules.json (match)', () => {
   const dir = contratoTemporal((c) => { regla(c, 'R04').match.values.push('relative'); });
   const m = crearMotor({ root: dir });
   if (!m.revisar(ATOMO, '.a { position: relative; }').R04.length) throw new Error('no amplía R04 con el contrato');
+});
+
+comprobar('contrato: dónde se aplica una regla sale de rules.json (appliesIn)', () => {
+  const codigo = ':root { --component-x: var(--primitive-y); }';
+  if (motor.revisar(ATOMO, '.a { --component-x: oklch(1 0 0); }').R11.length) throw new Error('R11 salta fuera de appliesIn');
+  const dir = contratoTemporal((c) => { regla(c, 'R11').appliesIn.push('scss/atoms/'); });
+  const m = crearMotor({ root: dir });
+  if (!m.revisar(ATOMO, '.a { --component-x: oklch(1 0 0); }').R11.length) throw new Error('no amplía R11 con el contrato');
+  const sin = contratoTemporal((c) => { regla(c, 'R11').appliesIn = ['scss/otra-capa/']; });
+  if (crearMotor({ root: sin }).revisar(CAPA_COMPONENTE, codigo).R11.length) throw new Error('no la acota con el contrato');
+});
+
+comprobar('contrato: lo que puede leer un componente sale de rules.json (mayRead)', () => {
+  const codigo = ':root { --component-x: var(--primitive-y); }';
+  const dir = contratoTemporal((c) => { regla(c, 'R11').match.mayRead.push('--primitive-'); });
+  if (crearMotor({ root: dir }).revisar(CAPA_COMPONENTE, codigo).R11.length) throw new Error('no respeta mayRead');
 });
 
 comprobar('contrato: un match que el motor no sabe comprobar es un error, no un silencio', () => {

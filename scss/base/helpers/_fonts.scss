@@ -92,60 +92,63 @@
         }
       }
 
-      // &-weight
+      // &-weight — nombre histórico: son FAMILIAS (la del texto y la de su
+      // negrita), no pesos. Leían --font-weight-1/2, que guardaban familias.
       &-weight {
         // &-1
         &-1 {
-          font-family: var(--font-weight-1);
+          font-family: var(--semantic-font-family-primary);
         }
 
         // &-2
         &-2 {
-          font-family: var(--font-weight-2);
+          font-family: var(--semantic-font-family-primary-bold);
         }
       }
 
-      // &-scope
+      // &-scope — múltiplos de la unidad de espacio del tema (2, 2,5, 3, 4 y 5
+      // veces --primitive-space-base). Es lo que declaraban seis de los siete
+      // temas en los alias heredados --scope-1…5; ahora va aquí una vez.
       &-scope {
         // &-1 — smallest: relaxed line-height for readability
         &-1 {
-          font-size: var(--scope-1);
+          font-size: calc(2 * var(--primitive-space-base));
           line-height: var(--primitive-line-height-normal); // 1.5
         }
 
         // &-2
         &-2 {
-          font-size: var(--scope-2);
+          font-size: calc(2.5 * var(--primitive-space-base));
           line-height: var(--primitive-line-height-normal); // 1.5
           @include min-screen($token-breakpoint-md) {
-            font-size: calc(10% + var(--scope-2));
+            font-size: calc(10% + calc(2.5 * var(--primitive-space-base)));
           }
         }
 
         // &-3
         &-3 {
-          font-size: var(--scope-3);
+          font-size: calc(3 * var(--primitive-space-base));
           line-height: var(--primitive-line-height-snug); // 1.2
           @include min-screen($token-breakpoint-md) {
-            font-size: calc(20% + var(--scope-3));
+            font-size: calc(20% + calc(3 * var(--primitive-space-base)));
           }
         }
 
         // &-4
         &-4 {
-          font-size: var(--scope-4);
+          font-size: calc(4 * var(--primitive-space-base));
           line-height: var(--primitive-line-height-snug); // 1.2
           @include min-screen($token-breakpoint-md) {
-            font-size: calc(30% + var(--scope-4));
+            font-size: calc(30% + calc(4 * var(--primitive-space-base)));
           }
         }
 
         // &-5 — largest: tight line-height for display/heading use
         &-5 {
-          font-size: var(--scope-5);
+          font-size: calc(5 * var(--primitive-space-base));
           line-height: var(--primitive-line-height-tight); // 1
           @include min-screen($token-breakpoint-md) {
-            font-size: calc(50% + var(--scope-5));
+            font-size: calc(50% + calc(5 * var(--primitive-space-base)));
           }
         }
       }

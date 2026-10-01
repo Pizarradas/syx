@@ -1,16 +1,16 @@
 // ================================================
-// TEMPLATE THEME SETUP
+// PLANTILLA DE TEMA — CABLEADO
 // ================================================
-// Copy this file when creating a new theme.
-// Replace "template" with your theme name — that's all:
-// the component list lives in _shared/_bundle-full.scss and
-// the font list in this theme's _theme.scss (theme-x-fonts).
+// Cópialo con la carpeta y cambia «template» por el nombre del tema: nada
+// más. La lista de componentes vive en _shared/_bundle-full.scss y la de
+// fuentes en el _theme.scss de este tema (theme-x-fonts).
 // ================================================
 
 // CORE
 @use '../_base/universal' as *;
 @use '../_shared/core' as *;
 @use '../_shared/bundle-full' as *;
+// @use '../../site/bundle-site' as *; // CAPA DEL SITIO — ver abajo
 @use 'theme' as *;
 
 // THEME TOKENS
@@ -30,9 +30,8 @@
 // ================================================
 @include syx-bundle-full(template);
 
-// SITE LAYER — only the SYX site themes include it. A new theme
-// for a real product should NOT: it is SYX-page furniture.
-// If this theme must render the SYX site, add:
-//   @use '../../site/bundle-site' as *;   (in the CORE block)
-//   @include syx-bundle-site(template);   (here)
+// CAPA DEL SITIO — solo la llevan los temas que pintan las páginas de SYX
+// (home.html, docs.html…). Un tema para un producto NO: es mobiliario del
+// sitio. Para pintarlo, descomenta esta línea y el @use de arriba.
 // ================================================
+// @include syx-bundle-site(template);

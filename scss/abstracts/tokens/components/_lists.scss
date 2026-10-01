@@ -1,6 +1,11 @@
 // COMPONENT TOKENS: LISTS
 // ================================================
-// List-specific tokens that reference semantic tokens
+// List-specific tokens that reference semantic tokens.
+//
+// Hasta la acción 14 de la auditoría de 2026-10 el átomo no leía estos
+// tokens sino sus alias heredados (--list-ordered-gap, --list-lvl1-icon-pic,
+// --filter-primary…), y los temas escribían esos alias. Ahora el átomo lee
+// los de aquí y un tema que quiera otro ritmo los sobrescribe por su nombre.
 // ================================================
 
 :root {
@@ -11,7 +16,7 @@
   --component-list-ordered-gap: var(--semantic-space-stack-xl);
   --component-list-ordered-item-margin-top: var(--semantic-space-stack-lg);
   --component-list-ordered-counter-size: var(--semantic-space-component-lg);
-  --component-list-ordered-counter-font-size: var(--semantic-font-size-body-sm);
+  --component-list-ordered-counter-font-size: var(--semantic-font-size-body-small);
   --component-list-ordered-counter-line-height: var(--semantic-space-component-lg);
 
   // LIST: UNORDERED LEVEL 1
@@ -19,11 +24,19 @@
   --component-list-lvl1-gap: var(--semantic-space-stack-md);
   --component-list-item-margin-top: var(--semantic-space-stack-sm);
   --component-list-icon-size: var(--semantic-space-component-sm);
+  // Viñeta: un chevron de Lucide, teñido con el filtro del primario.
+  --component-list-lvl1-icon: var(--lc-icon-chevron-right);
+  --component-list-icon-filter: var(--semantic-filter-primary);
+  // Desplazamiento vertical de la viñeta respecto a la primera línea. Era un
+  // gancho sin declarar (`var(--list-icon-y, 0.2em)`) que vivía de su fallback.
+  --component-list-icon-offset-y: 0.2em;
 
   // LIST: UNORDERED LEVEL 2
   // ================================================
   --component-list-lvl2-margin-left: var(--semantic-space-component-sm);
   --component-list-lvl2-gap: var(--semantic-space-stack-xl);
+  --component-list-lvl2-icon: var(--lc-icon-chevrons-right);
+  --component-list-lvl2-icon-offset-y: var(--component-list-icon-offset-y);
 
   // LIST: UNORDERED LEVEL 3
   // ================================================

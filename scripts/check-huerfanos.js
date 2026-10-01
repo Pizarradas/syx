@@ -29,7 +29,7 @@
  *
  * QUÉ FALLA Y QUÉ SOLO SE CUENTA
  * Falla lo que lleva prefijo oficial —lo que el sistema declara suyo—. Las
- * variables heredadas sin prefijo (`--icon-logo`, `--filter-primary`) se
+ * variables heredadas sin prefijo (las de `setup-builder`, los iconos) se
  * cuentan y se nombran, pero no tumban nada: son deuda anterior a que hubiera
  * con qué medirla, y son justo el trabajo del modo MIGRATE. Cuando lleguen a
  * cero, `--fallar-si-legado` convierte esto en un guardián completo; ese día

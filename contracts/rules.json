@@ -27,6 +27,10 @@
       "onlyFor": "Rules with `inlineException: true`.",
       "enforcedBy": "R10",
       "why": "Whole-file exemptions hid what they did not mean to: files exempted for one line kept their exemption after the line was gone, and new violations in them passed unseen. A line-level exception carries its reason next to the code and dies (as an R10 error) when the code it excused changes."
+    },
+    "appliesIn": {
+      "semantics": "A rule with `appliesIn` is checked only on files under those paths (same path syntax as allowedIn); a rule without it is checked on the whole scope. allowedIn still subtracts from it.",
+      "why": "Some rules are about a layer, not about the tree: R11 judges what component tokens READ, and those are declared in two places only."
     }
   },
   "rules": [
@@ -189,6 +193,41 @@
         "kind": "exception-hygiene"
       },
       "inlineException": false,
+      "autofix": false
+    },
+    {
+      "id": "R11",
+      "severity": "error",
+      "category": "token-layer",
+      "description": "A --component-* token reads only the layers a theme controls: --semantic-*, other --component-*, the theme's shape and structure parameters (--theme-*, --layout-*) and the icon asset aliases (--icon-*, --lc-icon-*). Never a --primitive-* or an unprefixed (legacy) variable, and never a literal colour (hex, a colour function with no var() inside, white/black). Checked where component tokens are declared: the component token layer (scss/abstracts/tokens/components/) and the component overrides in themes (scss/themes/). transparent, currentColor and colours derived from a token (oklch(from var(--semantic-…) …), color-mix(… var(--semantic-…) …)) are allowed. The site layer (scss/site/tokens/) is outside the system and keeps its own rule (R01 allows primitives there).",
+      "resumen": "Un --component-* lee roles (--semantic-*, --component-*, --theme-*, --layout-*, iconos): ni --primitive-* ni heredadas ni colores literales",
+      "rationale": "R01 exempted scss/abstracts/ as a whole, so 55 component tokens read primitives and 82 more theme overrides did the same: the component escaped the theme. The primary pill was violet (h≈264–285) in example-06, whose brand is cyan, and did not change in dark mode. scripts/propose.js already refused this in new proposals; nothing refused it in existing code. A literal colour is the same shortcut: a role written by hand.",
+      "appliesIn": [
+        "scss/abstracts/tokens/components/",
+        "scss/themes/"
+      ],
+      "allowedIn": [],
+      "match": {
+        "kind": "component-token-source",
+        "declares": "--component-",
+        "mayRead": [
+          "--semantic-",
+          "--component-",
+          "--theme-",
+          "--layout-",
+          "--icon-",
+          "--lc-icon-"
+        ],
+        "colorLiterals": false,
+        "why": {
+          "--semantic-": "The roles: what every theme redefines, light and dark.",
+          "--component-": "Another token of the same layer (a variant that inherits from its base).",
+          "--theme-": "The theme's shape parameters (radius, focus, stroke): declared by every theme, so the component still follows it.",
+          "--layout-": "The theme's structural measures (content column, gutters): declared by the theme, like --theme-*.",
+          "--icon-, --lc-icon-": "Icon assets and their aliases: an image, not a colour or a space; there is no role to translate."
+        }
+      },
+      "inlineException": true,
       "autofix": false
     }
   ],

@@ -13,6 +13,13 @@
  * max() y clamp() de ellas, que es todo lo que el SCSS usa. Si mañana alguien
  * escribe algo que esto no sabe evaluar, el color sale null y check-contraste
  * lo informa como «sin medir»: nunca se aprueba un par que no se ha medido.
+ *
+ * Y entiende color-mix() —en srgb, srgb-linear, oklab y oklch, con alfa
+ * premultiplicado como lo hace el navegador— y `transparent`, porque los
+ * tonos suaves de la capa semántica (acción 14 de la auditoría de 2026-10)
+ * son el color del tono al 12 % sobre transparente: un fondo translúcido que
+ * se posa sobre la superficie de debajo. Para medir un texto sobre él hay que
+ * componerlo antes sobre esa superficie (el tercer argumento de contraste()).
  */
 'use strict';
 
@@ -118,10 +125,98 @@ function leerOklch(valor) {
   return { L, C, H, alfa: Number.isFinite(alfa) ? alfa : 1 };
 }
 
+// ─── Espacios de color ──────────────────────────────────────────────────────
+
+const aLineal = (x) => (x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+const aGamma = (x) => (x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055);
+
+function rgbAOklab([r, g, b]) {
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+  const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+  const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [
+    0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s,
+    1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+    0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s,
+  ];
+}
+function oklabARgb([L, a, b]) {
+  const C = Math.hypot(a, b);
+  const H = (Math.atan2(b, a) * 180) / Math.PI;
+  return oklchARgb(L, C, H);
+}
+
+/**
+ * color-mix(in <espacio>, <color> [p%], <color> [p%]) → { rgb lineal, alfa }.
+ * Porcentajes como la especificación: si falta uno es el resto hasta 100; si
+ * suman menos de 100, la diferencia se va al alfa. Alfa premultiplicado.
+ */
+function leerColorMix(v) {
+  const m = /^color-mix\(\s*in\s+([a-z-]+)(?:\s+(?:shorter|longer|increasing|decreasing)\s+hue)?\s*,(.*)\)$/i.exec(v);
+  if (!m) return null;
+  const espacio = m[1].toLowerCase();
+  // Los dos operandos, separados por la coma de primer nivel.
+  const resto = m[2];
+  let prof = 0, corte = -1;
+  for (let i = 0; i < resto.length; i++) {
+    if (resto[i] === '(') prof++;
+    else if (resto[i] === ')') prof--;
+    else if (resto[i] === ',' && prof === 0) { corte = i; break; }
+  }
+  if (corte === -1) return null;
+  const operando = (t) => {
+    const x = /^(.*?)(?:\s+(\d*\.?\d+)%)?$/.exec(t.trim());
+    return { color: leerColor(x[1].trim()), p: x[2] !== undefined ? +x[2] / 100 : null };
+  };
+  const a = operando(resto.slice(0, corte)), b = operando(resto.slice(corte + 1));
+  if (!a.color || !b.color) return null;
+  let p1 = a.p, p2 = b.p;
+  if (p1 === null && p2 === null) { p1 = 0.5; p2 = 0.5; }
+  else if (p1 === null) p1 = 1 - p2;
+  else if (p2 === null) p2 = 1 - p1;
+  const suma = p1 + p2;
+  if (suma <= 0) return null;
+  const multAlfa = Math.min(1, suma);
+  p1 /= suma; p2 /= suma;
+
+  const alfa = a.color.alfa * p1 + b.color.alfa * p2;
+  if (alfa === 0) return { rgb: [0, 0, 0], alfa: 0 };
+  // Canales en el espacio pedido, premultiplicados por su alfa (salvo el tono).
+  const canales = (c) => {
+    if (espacio === 'srgb') return c.rgb.map(aGamma);
+    if (espacio === 'srgb-linear') return c.rgb.slice();
+    if (espacio === 'oklab' || espacio === 'oklch') return rgbAOklab(c.rgb);
+    return null;
+  };
+  const ca = canales(a.color), cb = canales(b.color);
+  if (!ca || !cb) return null;
+  let mezcla;
+  if (espacio === 'oklch') {
+    const polar = ([L, x, y]) => [L, Math.hypot(x, y), (Math.atan2(y, x) * 180) / Math.PI];
+    const [La, Ca, Ha] = polar(ca), [Lb, Cb, Hb] = polar(cb);
+    // Tono «impotente» (croma ~0, o alfa 0): se toma el del otro color.
+    const sinTonoA = Ca < 1e-4 || a.color.alfa === 0, sinTonoB = Cb < 1e-4 || b.color.alfa === 0;
+    let h1 = sinTonoA ? Hb : Ha, h2 = sinTonoB ? Ha : Hb;
+    let d = h2 - h1;
+    if (d > 180) h1 += 360; else if (d < -180) h2 += 360; // shorter hue
+    const pm = (x, y) => (x * a.color.alfa * p1 + y * b.color.alfa * p2) / alfa;
+    const H = h1 * p1 + h2 * p2;
+    mezcla = { rgb: oklchARgb(pm(La, Lb), pm(Ca, Cb), H), alfa };
+  } else {
+    const v3 = [0, 1, 2].map((i) => (ca[i] * a.color.alfa * p1 + cb[i] * b.color.alfa * p2) / alfa);
+    const rgb = espacio === 'srgb' ? v3.map(aLineal) : espacio === 'srgb-linear' ? v3 : oklabARgb(v3);
+    mezcla = { rgb: rgb.map((x) => Math.min(1, Math.max(0, x))), alfa };
+  }
+  mezcla.alfa *= multAlfa;
+  return mezcla;
+}
+
 /** Color lineal [r,g,b] y alfa, o null si el valor no es un color que sepamos leer. */
 function leerColor(valor) {
   if (!valor) return null;
   const v = valor.trim();
+  if (/^transparent$/i.test(v)) return { rgb: [0, 0, 0], alfa: 0 };
+  if (/^color-mix\(/i.test(v)) return leerColorMix(v);
   const ok = leerOklch(v);
   if (ok) return { rgb: oklchARgb(ok.L, ok.C, ok.H), alfa: ok.alfa };
   const hex = /^#([0-9a-f]{6})$/i.exec(v);
@@ -137,11 +232,29 @@ function leerColor(valor) {
 
 const luminancia = (rgb) => 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
 
-/** Razón de contraste de WCAG 2.x, o null si alguno de los dos no se puede leer. */
-function contraste(primerPlano, fondo) {
-  const f = leerColor(primerPlano), b = leerColor(fondo);
+/** `arriba` (con su alfa) sobre `abajo`, compuesto en sRGB codificado como el navegador. */
+function componer(arriba, abajo) {
+  if (arriba.alfa >= 1) return { rgb: arriba.rgb, alfa: 1 };
+  const g = (i) => aGamma(arriba.rgb[i]) * arriba.alfa + aGamma(abajo.rgb[i]) * (1 - arriba.alfa);
+  return { rgb: [0, 1, 2].map((i) => aLineal(g(i))), alfa: 1 };
+}
+
+/**
+ * Razón de contraste de WCAG 2.x, o null si alguno no se puede leer. Si el
+ * fondo es translúcido hace falta saber sobre qué se posa (`base`); sin base,
+ * un fondo translúcido no se mide (null): medirlo como opaco aprobaría pares
+ * que el navegador no pinta así.
+ */
+function contraste(primerPlano, fondo, base) {
+  const f = leerColor(primerPlano);
+  let b = leerColor(fondo);
   if (!f || !b) return null;
-  const rgb = f.alfa < 1 ? f.rgb.map((x, i) => x * f.alfa + b.rgb[i] * (1 - f.alfa)) : f.rgb;
+  if (b.alfa < 1) {
+    const sb = base ? leerColor(base) : null;
+    if (!sb || sb.alfa < 1) return null;
+    b = componer(b, sb);
+  }
+  const rgb = componer(f, b).rgb;
   const y1 = luminancia(rgb), y2 = luminancia(b.rgb);
   return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05);
 }

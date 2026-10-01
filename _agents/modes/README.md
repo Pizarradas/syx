@@ -66,7 +66,7 @@ answer — the last column says which. The tier still ranks the *work*, not the 
 | **UI** | `ui.md` | Senior SCSS developer | `pr` | Token files, component SCSS, registration, contract validation |
 | **TOKEN** | `token.md` | Token architect | `pr` / recommends | Token creation, semantic mapping, registry management |
 | **THEME** | `theme.md` | Theme designer | recommends | OKLCH scales, `_theme.scss`, surface token coverage, dark mode |
-| **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R10 violations, structure/naming checks, verdicts |
+| **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R11 violations, structure/naming checks, verdicts |
 | **MIGRATE** | `migrate.md` | Migration specialist | `pr` / recommends | Legacy var resolution, impact analysis, per-variable replacement plans |
 | **BRAND** | `brand.md` | Brand identity architect | recommends | A two-round interview, then the seven identity axes with their provenance, the identity contract, and the specification THEME builds from. Never the theme file itself |
 
@@ -156,7 +156,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
    → Defines token names and semantic mappings
 
 3. [SYX: UI]: Implement the mol-search-autocomplete component
-   → Writes SCSS, proposes new tokens (`node scripts/propose.js token`) and the component (`node scripts/propose.js files`), validates R01–R04, R09, R10
+   → Writes SCSS, proposes new tokens (`node scripts/propose.js token`) and the component (`node scripts/propose.js files`), validates R01–R04, R09–R11
 
 4. [SYX: AUDIT]: Review the new mol-search-autocomplete
    → Confirms compliance, flags anything missed
