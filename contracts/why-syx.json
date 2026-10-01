@@ -1,0 +1,29 @@
+{
+  "_meta": {
+    "description": "Las puntuaciones y los pesos de why-syx.html. La página no se edita a mano en esas secciones: scripts/build-why-syx.js genera la matriz, el total, la clasificación y los seis perfiles desde aquí, y check:why-syx comprueba que coinciden.",
+    "remedido": "2026-10-01",
+    "criterios": [
+      "1. Frontend architecture", "2. Agnosticism & integration", "3. Styling architecture", "4. Ready-made UI",
+      "5. Art direction", "6. Technical debt", "7. Performance & SEO", "8. Accessibility", "9. Override friction",
+      "10. Learning curve", "11. AI-native workflow", "12. Ecosystem & support", "13. Interactive behaviour", "14. Browser floor"
+    ],
+    "evidencia": ["measured", "checkable", "judged", "checkable", "judged", "judged", "measured", "measured", "measured", "judged", "measured", "checkable", "checkable", "measured"]
+  },
+  "sistemas": [
+    { "id": "syx", "nombre": "SYX", "corto": "SYX", "version": "5.0.0", "puntos": [5, 5, 4, 3, 5, 4, 5, 4, 5, 3, 5, 1, 3, 3] },
+    { "id": "shadcn", "nombre": "Shadcn UI", "corto": "Shadcn UI", "version": "2026 registry (CLI 4.21), Tailwind v4 + React 19", "puntos": [4, 2, 4, 4, 5, 4, 4, 5, 4, 3, 4, 4, 5, 3] },
+    { "id": "tailwind", "nombre": "Tailwind CSS", "corto": "Tailwind", "version": "4.3.3", "puntos": [4, 5, 4, 1, 5, 3, 5, 2, 4, 4, 3, 5, 1, 4] },
+    { "id": "chakra", "nombre": "Chakra UI", "corto": "Chakra UI", "version": "3.37", "puntos": [3, 1, 5, 4, 3, 4, 2, 5, 3, 4, 2, 4, 5, 4] },
+    { "id": "bootstrap", "nombre": "Bootstrap", "corto": "Bootstrap", "version": "5.3.8", "puntos": [3, 5, 3, 4, 1, 3, 4, 4, 2, 5, 2, 5, 4, 5] },
+    { "id": "mui", "nombre": "Material UI", "corto": "MUI", "version": "9.4", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 3, 2, 5, 5, 4] },
+    { "id": "antd", "nombre": "Ant Design", "corto": "Ant Design", "version": "6.6", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 2, 2, 4, 5, 4] }
+  ],
+  "perfiles": [
+    { "id": "legacy", "titulo": "Legacy &amp; server-rendered", "sub": "JSP · PHP · .NET · Rails — the browser is modern, the server is not", "pesos": [3, 3, 2, 2, 1, 3, 2, 2, 3, 2, 1, 2, 1, 3] },
+    { "id": "react", "titulo": "React product under time-to-market pressure", "sub": "Ship the admin panel this quarter", "pesos": [2, 0, 2, 3, 1, 2, 2, 2, 1, 3, 1, 3, 3, 1] },
+    { "id": "multimarca", "titulo": "Multi-brand &amp; white-label", "sub": "One codebase, many identities, rebranded per client", "pesos": [2, 2, 3, 1, 3, 3, 2, 2, 3, 1, 2, 1, 1, 2] },
+    { "id": "publico", "titulo": "Public sector &amp; regulated accessibility", "sub": "Conformance is audited by someone who is not you", "pesos": [1, 2, 1, 2, 0, 2, 2, 3, 1, 2, 0, 3, 3, 3] },
+    { "id": "agentes", "titulo": "Codebase driven mostly by AI agents", "sub": "The main author of the CSS is not a person", "pesos": [3, 2, 2, 1, 1, 3, 1, 2, 3, 1, 3, 1, 1, 1] },
+    { "id": "seo", "titulo": "Content site where SEO decides", "sub": "Time to first byte is the product", "pesos": [2, 3, 1, 1, 3, 2, 3, 2, 2, 2, 1, 1, 1, 3] }
+  ]
+}

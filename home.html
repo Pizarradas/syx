@@ -275,7 +275,7 @@
         <h3 class="mol-feature-card__title">Native @layer</h3>
         <p class="mol-feature-card__body">
           All specificity in SYX is managed via native CSS <code>@layer</code>.
-          No hacks, no <code>!important</code>. The cascade finally working for you.
+          No hacks, and one deliberate <code>!important</code>, so <code>hidden</code> always hides. The cascade finally working for you.
         </p>
       </article>
 
@@ -491,7 +491,7 @@
         <p class="org-home-layers__body">
           SYX uses native CSS <code>@layer</code> to explicitly order style precedence. The stack covers
           everything from the global reset to the highest-priority utilities —
-          without a single <code>!important</code> or inflated selector.
+          without inflated selectors, and with a single, deliberate <code>!important</code>: the one that makes <code>hidden</code> win.
         </p>
         <pre class="atom-code" tabindex="0" role="group" aria-label="Code: the layer order">@layer
   syx.reset, syx.base, syx.tokens,

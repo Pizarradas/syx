@@ -26,9 +26,16 @@ Versión mayor: rompe compatibilidad. Lo que hay que tocar al actualizar desde 4
 - Utilidades físicas deprecadas en la auditoría 2026-10 (acción 13): `.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`, y los lados `l`/`r` físicos de `generate-utility-directional`. Ninguna página del sitio las usaba.
 - `--semantic-border-focus`, último alias de `base/_deprecated-aliases.scss` con retirada fijada en v5.0. El resto de tokens `@deprecated` (con `replacedBy` en `tokens.json`) no tenía fecha y sigue.
 
+### Changed — «Why SYX?» vuelto a medir en 5.0.0
+
+- **Puntuaciones generadas.** Las notas y los pesos viven en `contracts/why-syx.json`; `npm run build:why-syx` genera la matriz, el total, la clasificación, los seis perfiles, la frase de cabecera y la línea de versiones, y `check:why-syx` (en la cadena) falla si la página no coincide o si evalúa otra versión de SYX que la del paquete.
+- **SYX pasa de 52 a 55 y empata con Shadcn UI.** Ready-made UI 2 → 3, accesibilidad 3 → 4, comportamiento interactivo 1 → 3, deuda técnica 5 → 4 (5.0.0 es una versión que rompe). Los otros seis sistemas, revisados en sus versiones actuales del registro de npm (Tailwind 4.3.3, Chakra 3.37, Bootstrap 5.3.8, MUI 9.4, Ant Design 6.6, Shadcn CLI 4.21), no publicaron versión mayor y mantienen sus notas. La página dice por qué ese empate merece desconfianza: lo puntúa el autor.
+- **Medidas renovadas**: peso publicado (49,3–56,4 kB gz), JS opcional (11,6 kB gz en cinco módulos), el único `!important`, 68 bloques `@layer`, 1.127 tokens, 218 ficheros y 18.669 líneas, 38 guardianes, contraste 3.052/3.052. «Where SYX loses» se reescribe con lo que falla medido (colores forzados, WCAG 2.4.11, hover del botón outline, `:dir()` y `::backdrop` en el mínimo).
+- Home, docs y README: «sin `!important`» pasa a «uno, deliberado»; 1.127 tokens; reglas R01–R04 y R09–R11.
+
 ### Changed — css/ se publica minificado con Prepros
 
-- Quien mantiene SYX compila con Prepros minificando (sin autoprefixer). `check:prepros` lo acepta: exige que ningún punto de entrada pase por autoprefixer y que todos se minifiquen o ninguno; ya no cita `scss/styles-core.scss`, que no existe.
+- Quien mantiene SYX compila con Prepros minificando (sin autoprefixer). `check:prepros` lo acepta: exige que ningún punto de entrada pase por autoprefixer y que todos se minifiquen o ninguno. Una entrada que ya no existe (Prepros recuerda `scss/styles-core.scss` y la vuelve a escribir) se avisa sin fallar.
 - `npm run build:css` es `scripts/build-css.js`: compila solo los 8 puntos de entrada (antes `sass scss:css` compilaba 61 ficheros, 13 MB, incluidos los `index.scss` anidados) y no reescribe una hoja que ya significa lo mismo, así que `npm run check` no ensucia el árbol de quien compila con Prepros.
 - `css-normal.js` reescrito sobre `postcss-value-parser`: entiende lo que hace el minificador de Prepros (orden de las listas de selectores, `::before` = `:before`, `*` implícito, `:nth-child(1)` = `:first-child`, `from` = `0%`, sin espacios en `/`) y deja de igualar contenidos distintos dentro de cadenas y `url()`, como señaló la auditoría.
 

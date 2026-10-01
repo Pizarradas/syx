@@ -59,9 +59,12 @@ comprobar('prepros.config compila cada punto de entrada, sin prefijar y todos ig
   }
   // Minificar o no es decisión de quien mantiene SYX; mezclar, no.
   if (minifica.size > 1) malos.push('unos puntos de entrada se minifican y otros no');
-  for (const f of porFichero.keys()) if (!fs.existsSync(path.join(ROOT, f))) malos.push(`prepros.config cita ${f}, que no existe`);
+  // Un fichero que ya no existe no compila nada: Prepros guarda su lista y lo
+  // vuelve a escribir al abrir el proyecto, así que se avisa sin fallar.
+  const fantasmas = [...porFichero.keys()].filter((f) => !fs.existsSync(path.join(ROOT, f)));
   if (malos.length) throw new Error(malos.join(' · '));
-  return `${entradas.length} puntos de entrada · sin autoprefixer · ${[...minifica][0] ? 'minificados' : 'expandidos'}`;
+  return `${entradas.length} puntos de entrada · sin autoprefixer · ${[...minifica][0] ? 'minificados' : 'expandidos'}`
+    + (fantasmas.length ? ` · aviso: prepros.config recuerda ${fantasmas.join(', ')}, que no existe (inofensivo)` : '');
 });
 
 comprobar('build:css compila con Sass y no pisa lo que ya significa lo mismo', () => {
