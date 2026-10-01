@@ -1,0 +1,128 @@
+// MOLECULE: TOAST
+// ===============================================
+// Avisos efímeros en una esquina: confirman lo que acaba de pasar sin
+// interrumpir ni robar el foco. El contenedor (.mol-toast) es fijo y
+// apila los avisos (__item); js/syx-toast.js los crea con
+// showToast('Guardado'), los quita al cabo de un rato y pausa la cuenta
+// mientras el puntero o el foco están encima.
+//
+// <div class="mol-toast">
+//   <p class="mol-toast__live" role="status"></p>
+//   <div class="mol-toast__item mol-toast__item--success">
+//     <p class="mol-toast__text">Ajustes guardados</p>
+//     <button class="mol-toast__close" type="button" aria-label="Cerrar aviso">…</button>
+//   </div>
+// </div>
+//
+// POR QUÉ UNA REGIÓN VIVA APARTE (__live)
+// Si la región viva fuera el propio contenedor, cada aviso se leería con
+// su botón («Guardado, Cerrar aviso, botón»). El script escribe solo el
+// texto en __live, que es role="status" (cortés: no corta lo que el
+// lector esté diciendo) y existe en el DOM desde el principio, como
+// exigen las regiones vivas para anunciar.
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · Nada que haya que leer o hacer va solo en un aviso efímero: un error
+//   que exige atención es mol-alert con role="alert"; una acción
+//   importante, un diálogo.
+// · Movimiento reducido: aparece y se va sin desplazarse ni fundirse.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-toast($theme: null) {
+  @layer syx.molecules {
+    .mol-toast {
+      @include fixed();
+      inset-block-end: var(--component-toast-offset);
+      inset-inline-end: var(--component-toast-offset);
+      z-index: var(--component-toast-z-index);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--component-toast-gap);
+      box-sizing: border-box;
+      inline-size: min(var(--component-toast-max-width), 100% - 2 * var(--component-toast-offset));
+      // El contenedor ocupa la esquina aunque esté vacío: que no se coma
+      // los clics de lo que haya debajo. Los avisos los recuperan.
+      pointer-events: none;
+
+      &__live {
+        @include sr-only;
+      }
+
+      &__item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--semantic-space-inline-xs);
+        box-sizing: border-box;
+        inline-size: 100%;
+        padding-block: var(--component-toast-padding-block);
+        padding-inline: var(--component-toast-padding-inline) var(--component-toast-padding-block);
+        color: var(--component-toast-color);
+        pointer-events: auto;
+        background-color: var(--component-toast-bg);
+        border: var(--component-toast-border-width) solid var(--component-toast-border-color);
+        border-inline-start: var(--component-toast-accent-width) solid var(--component-toast-info-accent);
+        border-radius: var(--component-toast-border-radius);
+        box-shadow: var(--component-toast-shadow);
+        opacity: 1;
+        translate: 0 0;
+        @include transition(
+          opacity var(--component-toast-duration) var(--semantic-easing-out),
+          translate var(--component-toast-duration) var(--semantic-easing-out)
+        );
+
+        @starting-style {
+          opacity: 0;
+          translate: 0 0.5rem;
+        }
+
+        // Lo pone el script al cerrar; quita el aviso al acabar la transición
+        // (al instante con movimiento reducido, que no tiene transición).
+        &.is-leaving {
+          opacity: 0;
+          translate: 0 0.5rem;
+        }
+
+        &--info { border-inline-start-color: var(--component-toast-info-accent); }
+        &--success { border-inline-start-color: var(--component-toast-success-accent); }
+        &--warning { border-inline-start-color: var(--component-toast-warning-accent); }
+        &--error { border-inline-start-color: var(--component-toast-error-accent); }
+
+        @media (forced-colors: active) {
+          border-color: CanvasText;
+        }
+      }
+
+      &__text {
+        flex: 1;
+        align-self: center;
+        margin: 0;
+      }
+
+      &__close {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        inline-size: var(--component-toast-close-size);
+        block-size: var(--component-toast-close-size);
+        padding: 0;
+        color: var(--component-toast-close-color);
+        cursor: pointer;
+        background: none;
+        border: 0;
+        border-radius: var(--semantic-border-radius-sm);
+
+        &:hover {
+          background-color: var(--component-toast-close-bg-hover);
+        }
+
+        &:focus-visible {
+          @include focus-ring();
+        }
+      }
+    }
+  }
+}

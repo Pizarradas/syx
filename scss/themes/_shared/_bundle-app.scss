@@ -36,6 +36,10 @@
   @include atom-switch($theme);     // Toggles
   @include atom-table($theme);      // Data tables
   @include atom-title($theme);      // Section headings
+  @include atom-avatar($theme);         // People: photo or initials
+  @include atom-progress($theme);       // Determinate / indeterminate progress
+  @include atom-spinner($theme);        // Busy indicator with text
+  @include atom-skeleton($theme);       // Loading placeholders
 
   // MOLECULES
   // ================================================
@@ -46,11 +50,16 @@
   @include mol-dialog($theme);          // Modal dialogs
   @include mol-disclosure($theme);      // Show / hide, accordions
   @include mol-tabs($theme);            // Tabbed panels
+  @include mol-card($theme);            // Generic surface: header, body, footer
+  @include mol-empty-state($theme);     // Nothing here yet: what and what to do
+  @include mol-tooltip($theme);         // Short description on hover and focus
+  @include mol-menu($theme);            // Action menus (menu button)
+  @include mol-toast($theme);           // Ephemeral notifications
 
   // ORGANISMS
   // ================================================
+  @include org-app-shell($theme);        // Header + sidebar + content grid
   // Add as they are created:
-  // @include org-sidebar($theme);
   // @include org-data-table($theme);
   // @include org-dashboard($theme);
 }

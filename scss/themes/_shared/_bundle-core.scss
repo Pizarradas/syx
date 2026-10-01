@@ -9,10 +9,12 @@
 //   ✓ Fluid typography + spacing scale
 //   ✓ Essential atoms: btn, form, check, radio, switch,
 //      link, breadcrumb, icon, icon-lucide, label, pill, list, table,
-//      title, txt, pagination
+//      title, txt, pagination, avatar, progress, spinner, skeleton
 //   ✓ Essential molecules: form-field, btn-group,
-//      label-group, form-field-set
-//   ✓ Core organism: site-header
+//      label-group, form-field-set, alert, dialog, disclosure, tabs,
+//      card, empty-state, menu, toast, tooltip
+//   ✓ Core organisms: app-shell, site-header
+//   ✓ Layout: grid, stack, cluster (from _core.scss)
 //   ✓ Display/flex/spacing utilities
 //   ✓ Dark mode
 //
@@ -21,8 +23,9 @@
 //   ✕ pages/*
 //   ✕ scss/site/*    — SYX's own pages (home-*, evidence, score, …)
 //
-// Bundle size, MEASURED (2026-09-12, example-01, sass compressed):
-//   203 KB raw · 36 KB gzip.
+// Bundle size, MEASURED (2026-10-01, example-01, sass compressed):
+//   255 KB raw · 43 KB gzip (225 KB · 39 KB before the product
+//   components of audit 2026-10, action 15).
 // Goal: < 50 KB gzip — met. The old "< 120 KB uncompressed" goal
 // was never measured and is not realistic while every bundle
 // carries the full token system; gzip is the delivery metric.
@@ -59,6 +62,10 @@
   @include atom-table($theme);
   @include atom-title($theme);
   @include atom-txt($theme);
+  @include atom-avatar($theme);
+  @include atom-progress($theme);
+  @include atom-spinner($theme);
+  @include atom-skeleton($theme);
   // NOT included: atom-code
 
   // MOLECULES — all are production-relevant
@@ -71,8 +78,14 @@
   @include mol-dialog($theme);
   @include mol-disclosure($theme);
   @include mol-tabs($theme);
+  @include mol-card($theme);
+  @include mol-empty-state($theme);
+  @include mol-tooltip($theme);
+  @include mol-menu($theme);
+  @include mol-toast($theme);
 
   // ORGANISMS — site header
   // ================================================
+  @include org-app-shell($theme);
   @include org-site-header($theme);
 }

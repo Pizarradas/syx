@@ -1,0 +1,52 @@
+// COMPONENT TOKENS: LOADING
+// ================================================
+// atom-progress · atom-spinner · atom-skeleton — las tres formas de
+// decir «esto tarda»: cuánto falta (progress), que algo pasa sin saber
+// cuánto (spinner) y qué forma tendrá lo que llega (skeleton).
+// El relleno de la barra y el arco del spinner son límites de un
+// componente (WCAG 1.4.11, 3:1): usan la variante fuerte del primario,
+// la misma de los controles, y contracts/contrast.json los mide.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  // PROGRESS
+  // ================================================
+  --component-progress-height: 0.5rem;
+  --component-progress-border-radius: var(--semantic-border-radius-full);
+  // Pista en bg-secondary y no en bg-tertiary: el relleno tiene que
+  // separarse 3:1 también de la pista, y sobre el terciario se quedaba en
+  // 2,94–2,95:1 en el claro de example-05 y example-06.
+  --component-progress-track: var(--semantic-color-bg-secondary);
+  --component-progress-fill: var(--semantic-color-primary-strong);
+  --component-progress-duration: var(--semantic-duration-base);
+  // Una vuelta del tramo indeterminado: lenta a propósito, es un aviso
+  // de fondo y no debe tirar de la vista.
+  --component-progress-indeterminate-duration: 1.6s;
+  --component-progress-stripe-width: 0.375rem;
+
+  // SPINNER
+  // ================================================
+  --component-spinner-size-sm: 1rem;
+  --component-spinner-size-md: 1.5rem;
+  --component-spinner-size-lg: 2.5rem;
+  --component-spinner-thickness: var(--semantic-border-width-default);
+  --component-spinner-color: var(--semantic-color-primary-strong);
+  --component-spinner-track: var(--semantic-color-border-subtle);
+  --component-spinner-gap: var(--semantic-space-inline-xs);
+  --component-spinner-label-color: var(--semantic-color-text-secondary);
+  --component-spinner-duration: 0.8s;
+  // Con movimiento reducido el spinner no se para —quieto no diría que
+  // algo está pasando—, gira tres veces más despacio.
+  --component-spinner-duration-reduced: 2.4s;
+
+  // SKELETON
+  // ================================================
+  --component-skeleton-bg: var(--semantic-color-bg-tertiary);
+  --component-skeleton-highlight: var(--semantic-color-bg-secondary);
+  --component-skeleton-border-radius: var(--semantic-border-radius-sm);
+  --component-skeleton-text-height: 0.875em;
+  --component-skeleton-block-height: 8rem;
+  --component-skeleton-circle-size: var(--component-avatar-size-md);
+  --component-skeleton-duration: 1.5s;
+}

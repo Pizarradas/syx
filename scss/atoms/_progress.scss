@@ -1,0 +1,98 @@
+// ATOM: PROGRESS
+// ===============================================
+// Sobre el <progress> nativo: el rol progressbar, el valor y el máximo
+// ya los expone el navegador. Con value, es una barra determinada; sin
+// value, indeterminada (:indeterminate), con un tramo que recorre la
+// pista.
+//
+// <label class="atom-label" for="up">Subiendo informe.pdf</label>
+// <progress class="atom-progress" id="up" value="40" max="100">40 %</progress>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · Un nombre: <label for> o aria-label. Sin él, el lector dice «barra
+//   de progreso» y nada más.
+// · Con movimiento reducido el tramo indeterminado no se mueve: la pista
+//   se raya, que sigue diciendo «en curso, sin cifra».
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-progress($theme: null) {
+  @layer syx.atoms {
+    @keyframes atom-progress-indeterminate {
+      from { background-position: -70% 0; }
+      to { background-position: 170% 0; }
+    }
+
+    .atom-progress {
+      display: block;
+      inline-size: 100%;
+      block-size: var(--component-progress-height);
+      overflow: hidden;
+      color: var(--component-progress-fill);
+      vertical-align: middle;
+      appearance: none;
+      background-color: var(--component-progress-track);
+      border: 0;
+      border-radius: var(--component-progress-border-radius);
+
+      // Blink y WebKit pintan la pista y el valor en dos pseudoelementos;
+      // Gecko, el valor en ::-moz-progress-bar y la pista en el propio
+      // elemento. Las tres reglas van separadas: un selector que un motor
+      // no conoce invalida la regla entera.
+      &::-webkit-progress-bar {
+        background-color: var(--component-progress-track);
+        border-radius: inherit;
+      }
+
+      &::-webkit-progress-value {
+        background-color: var(--component-progress-fill);
+        border-radius: inherit;
+        @include transition(inline-size var(--component-progress-duration) var(--semantic-easing-out));
+      }
+
+      &::-moz-progress-bar {
+        background-color: var(--component-progress-fill);
+        border-radius: inherit;
+      }
+
+      &:indeterminate {
+        background-image: linear-gradient(var(--component-progress-fill), var(--component-progress-fill));
+        background-repeat: no-repeat;
+        background-size: 40% 100%;
+        animation: atom-progress-indeterminate var(--component-progress-indeterminate-duration) var(--semantic-easing-in-out) infinite;
+
+        &::-webkit-progress-bar {
+          background-color: transparent;
+        }
+
+        &::-moz-progress-bar {
+          background-color: transparent;
+        }
+
+        @include reduced-motion {
+          background-image: repeating-linear-gradient(
+            -45deg,
+            var(--component-progress-fill) 0 var(--component-progress-stripe-width),
+            transparent var(--component-progress-stripe-width) calc(2 * var(--component-progress-stripe-width))
+          );
+          background-size: auto;
+          animation: none;
+        }
+      }
+
+      // Colores forzados borran los fondos: la pista se vuelve un marco y
+      // el valor, el color de selección del sistema.
+      @media (forced-colors: active) {
+        forced-color-adjust: none;
+        background-color: Canvas;
+        border: var(--semantic-border-width-thin) solid CanvasText;
+
+        &::-webkit-progress-bar { background-color: Canvas; }
+        &::-webkit-progress-value { background-color: Highlight; }
+        &::-moz-progress-bar { background-color: Highlight; }
+        &:indeterminate { background-image: linear-gradient(Highlight, Highlight); }
+      }
+    }
+  }
+}

@@ -174,9 +174,9 @@ Step-by-step workflows for common tasks:
 ```
 scss/
   abstracts/tokens/     — 4-tier token system
-  atoms/                — 19 atoms
-  molecules/            — 10 molecules
-  organisms/            — 1 organism (site-header)
+  atoms/                — 23 atoms
+  molecules/            — 15 molecules
+  organisms/            — 2 organisms (app-shell, site-header)
   site/                 — SITE LAYER: 12 pieces used only by SYX's own pages,
                           outside the registry and the storybook; removable
   themes/*/             — 7 themes (6 example-* + syx-sketch) × 5-6 bundles (app, blog, core, docs, marketing; + home in the two SYX site themes)

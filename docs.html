@@ -333,6 +333,12 @@
       min-height: 16rem;
     }
 
+    /* Los avisos son fijos: dentro del marco se apilan en su esquina, y
+       necesitan sitio para no tapar el botón que los lanza. */
+    .docs-ref__demo:has(.mol-toast) {
+      min-height: 14rem;
+    }
+
     .docs-ref__markup {
       display: grid;
       grid-template-columns: 1fr auto;

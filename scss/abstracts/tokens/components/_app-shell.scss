@@ -1,0 +1,41 @@
+// COMPONENT TOKENS: APP SHELL
+// ================================================
+// org-app-shell · el armazón de una aplicación: cabecera, barra
+// lateral con la navegación de secciones y contenido. La barra
+// lateral va sobre bg-secondary; sus enlaces y el enlace de la
+// sección actual se miden sobre ese fondo en contracts/contrast.json.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-app-shell-bg: var(--semantic-color-bg-primary);
+  --component-app-shell-color: var(--semantic-color-text-primary);
+  --component-app-shell-border-width: var(--semantic-border-width-thin);
+  --component-app-shell-border-color: var(--semantic-color-border-subtle);
+  --component-app-shell-z-index: var(--semantic-z-index-sticky);
+
+  --component-app-shell-header-height: 3.5rem;
+  --component-app-shell-header-bg: var(--semantic-color-bg-primary);
+  --component-app-shell-header-padding-inline: var(--semantic-space-component-md);
+  --component-app-shell-brand-font-weight: var(--semantic-font-weight-bold);
+
+  --component-app-shell-sidebar-width: 15rem;
+  --component-app-shell-sidebar-bg: var(--semantic-color-bg-secondary);
+  --component-app-shell-sidebar-padding: var(--semantic-space-component-sm);
+
+  --component-app-shell-link-color: var(--semantic-color-text-secondary);
+  // Al pasar por encima cambia el fondo, no la tinta: text-primary sobre
+  // bg-tertiary da 3,18:1 en el claro de example-05; text-secondary es la
+  // que el sistema ya mide sobre ese fondo.
+  --component-app-shell-link-color-hover: var(--semantic-color-text-secondary);
+  --component-app-shell-link-bg-hover: var(--semantic-color-bg-tertiary);
+  --component-app-shell-link-color-current: var(--semantic-color-text-primary);
+  --component-app-shell-link-bg-current: var(--semantic-color-bg-primary);
+  --component-app-shell-link-indicator-width: var(--semantic-border-width-thick);
+  --component-app-shell-link-indicator-color: var(--semantic-color-primary-strong);
+  --component-app-shell-link-min-height: 2.75rem; // 44 px: diana táctil
+  --component-app-shell-link-padding-inline: var(--semantic-space-component-sm);
+  --component-app-shell-link-border-radius: var(--semantic-border-radius-sm);
+
+  --component-app-shell-main-padding: var(--semantic-space-component-lg);
+}

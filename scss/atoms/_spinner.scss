@@ -1,0 +1,81 @@
+// ATOM: SPINNER
+// ===============================================
+// Algo está pasando y no se sabe cuánto falta. Si se sabe, es
+// atom-progress. El anillo es un ::before, así que el texto no gira:
+// va oculto a la vista por defecto (__label) y visible con
+// atom-spinner--with-label.
+//
+// <span class="atom-spinner" role="status">
+//   <span class="atom-spinner__label">Cargando resultados…</span>
+// </span>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · Siempre un texto (__label): el anillo solo no le dice nada a un
+//   lector de pantalla. role="status" lo anuncia sin mover el foco; si el
+//   spinner se inserta con el texto ya dentro, algunos lectores no lo
+//   leen: inserta el contenedor vacío y el texto después, o anúncialo
+//   desde una región viva que ya exista.
+// · Con movimiento reducido gira tres veces más despacio en vez de
+//   pararse: quieto no diría que algo está pasando.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-spinner($theme: null) {
+  @layer syx.atoms {
+    @keyframes atom-spinner-rotate {
+      to { rotate: 1turn; }
+    }
+
+    .atom-spinner {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--component-spinner-gap);
+      color: var(--component-spinner-label-color);
+      vertical-align: middle;
+
+      &::before {
+        content: "";
+        flex-shrink: 0;
+        inline-size: var(--component-spinner-size-md);
+        block-size: var(--component-spinner-size-md);
+        border: var(--component-spinner-thickness) solid var(--component-spinner-track);
+        border-block-start-color: var(--component-spinner-color);
+        border-radius: var(--semantic-border-radius-circle);
+        animation: atom-spinner-rotate var(--component-spinner-duration) linear infinite;
+
+        @include reduced-motion {
+          animation-duration: var(--component-spinner-duration-reduced);
+        }
+      }
+
+      &__label {
+        @include sr-only;
+      }
+
+      &--with-label &__label {
+        @include sr-only-reset;
+      }
+
+      &--sm::before {
+        inline-size: var(--component-spinner-size-sm);
+        block-size: var(--component-spinner-size-sm);
+      }
+
+      &--lg::before {
+        inline-size: var(--component-spinner-size-lg);
+        block-size: var(--component-spinner-size-lg);
+      }
+
+      // Colores forzados repintan todos los bordes en CanvasText y el arco
+      // se confundiría con la pista: la pista desaparece y queda el arco.
+      @media (forced-colors: active) {
+        &::before {
+          forced-color-adjust: none;
+          border-color: Canvas;
+          border-block-start-color: CanvasText;
+        }
+      }
+    }
+  }
+}

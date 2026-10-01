@@ -65,7 +65,8 @@ npm install github:Pizarradas/syx#v4.28.0
 // The whole system for one theme, minified, without SYX's own site layer
 import 'syx-design-system/themes/syx-sketch.css';
 
-// Optional. Only mol-tabs needs JavaScript: click, arrow keys, Home/End.
+// Optional. Only the components with behaviour need JavaScript (see JavaScript
+// below); this one gives mol-tabs click, arrow keys and Home/End.
 import 'syx-design-system/js/syx-tabs.js';
 ```
 
@@ -129,6 +130,10 @@ in `sideEffects`, so a bare import survives `vite build`, webpack and Rollup
 | ---- | --- | ---------------- | ------------------------- |
 | `js/syx-tabs.js` | `mol-tabs` | wires every `[role="tablist"]` present on load | `import { initTabs } from 'syx-design-system/js/syx-tabs.js'; initTabs(container);` |
 | `js/syx-site-nav.js` | `org-site-header` (mobile drawer) | wires every burger with `aria-controls`: inert drawer when closed, focus into it on open, Escape returns focus | `import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js'; initSiteNav(container);` |
+| `js/syx-toast.js` | `mol-toast` | wires close buttons and `data-duration` countdowns of toasts in the HTML, and every `[data-syx-toast]` button | `import { showToast } from 'syx-design-system/js/syx-toast.js'; showToast('Saved', { tone: 'success' });` — `initToasts(container)` for toasts rendered later |
+| `js/syx-menu.js` | `mol-menu` | wires every `.mol-menu__trigger` with `aria-controls`: WAI-ARIA menu button keyboard (arrows, Home/End, typeahead, Escape/Tab return focus), `aria-expanded` kept in sync, list placed under the button | `import { initMenus } from 'syx-design-system/js/syx-menu.js'; initMenus(container);` |
+| `js/syx-tooltip.js` | `mol-tooltip` | opens each `__bubble` (a `popover="hint"`) from the control that names it in `aria-describedby`/`aria-labelledby`: keyboard focus and hover, hoverable, Escape closes, placed above or below, never over the control | `import { initTooltips } from 'syx-design-system/js/syx-tooltip.js'; initTooltips(container);` |
+| `js/syx-char-count.js` | `mol-form-field__count` (optional textarea counter) | writes what is left of `maxlength` into every `__count` named by a field's `aria-describedby`, and announces it once typing pauses | `import { initCharCount } from 'syx-design-system/js/syx-char-count.js'; initCharCount(container);` |
 
 Frameworks that render after load (React, Vue, Svelte…) should call the init
 function after mounting instead of relying on the bare import. Without a bundler:
@@ -309,7 +314,7 @@ npm run check:figma     # fails if those files are stale
 ```
 
 Each file carries the whole library for one theme: two **variable collections**
-(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 30
+(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 40
 components with the node property each token maps to.
 
 | In SYX | In Figma |
@@ -500,9 +505,9 @@ syx/
 │   │   └── _paths.scss          # Compile-time config (fonts/images paths)
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 19 atoms
-│   ├── molecules/               # 10 molecules
-│   ├── organisms/               # 1 organism (site-header)
+│   ├── atoms/                   # 23 atoms
+│   ├── molecules/               # 15 molecules
+│   ├── organisms/               # 2 organisms (app-shell, site-header)
 │   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities

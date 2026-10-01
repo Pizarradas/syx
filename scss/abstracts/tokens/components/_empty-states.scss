@@ -1,0 +1,27 @@
+// COMPONENT TOKENS: EMPTY STATES
+// ================================================
+// mol-empty-state · lo que se ve donde no hay nada todavía (una lista
+// sin elementos, una búsqueda sin resultados): qué pasa y qué hacer.
+// El icono es decorativo; el título y el texto son los que informan,
+// y se miden en contracts/contrast.json.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-empty-state-gap: var(--semantic-space-stack-xs);
+  --component-empty-state-padding-block: var(--semantic-space-component-xl);
+  --component-empty-state-padding-inline: var(--semantic-space-component-md);
+  --component-empty-state-title-color: var(--semantic-color-text-primary);
+  --component-empty-state-title-font-size: var(--semantic-font-size-h5);
+  --component-empty-state-title-font-weight: var(--semantic-font-weight-heading);
+  --component-empty-state-text-color: var(--semantic-color-text-secondary);
+  // En caracteres: el texto explica en una o dos líneas, no en un párrafo
+  // del ancho de la pantalla.
+  --component-empty-state-text-max-width: 42ch;
+  --component-empty-state-icon-size: 3.5rem;
+  --component-empty-state-icon-bg: var(--semantic-color-bg-secondary);
+  --component-empty-state-icon-color: var(--semantic-color-text-secondary);
+  --component-empty-state-border-width: var(--semantic-border-width-thin);
+  --component-empty-state-border-color: var(--semantic-color-border-default);
+  --component-empty-state-border-radius: var(--semantic-border-radius-lg);
+}

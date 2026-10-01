@@ -30,7 +30,7 @@ never edit a rule or a guard to make your own change pass.
 
 **To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.
 
-**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 30 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
+**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 40 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
 
 **Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
 `README.md` → *MCP server*), don't load those files to answer a point question. Use
@@ -179,8 +179,8 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 
 ```
 scss/abstracts/tokens/    — 4-tier token system (primitives → semantic → component)
-scss/atoms/               — 19 atoms, single-purpose
-scss/molecules/           — 10 molecules, composites
+scss/atoms/               — 23 atoms, single-purpose
+scss/molecules/           — 15 molecules, composites
 scss/organisms/           — 1 complex section (site-header)
 scss/site/                — SITE LAYER: 12 pieces used only by SYX's own pages
                             (home-*, evidence, score, ranking, compare-card,

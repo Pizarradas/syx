@@ -1,0 +1,202 @@
+// ORGANISM: APP SHELL
+// ===============================================
+// El armazón de una pantalla de aplicación (ajustes, un panel, una
+// consola): cabecera arriba, barra lateral con las secciones y el
+// contenido. Rejilla con áreas con nombre:
+//
+//   móvil (< 50em)          tableta y más (≥ 50em)
+//   ┌────────────┐          ┌──────┬─────────────┐
+//   │ header     │          │ header             │
+//   ├────────────┤          ├──────┬─────────────┤
+//   │ sidebar →→ │          │ side │ main        │
+//   ├────────────┤          │ bar  │             │
+//   │ main       │          │      │             │
+//   └────────────┘          └──────┴─────────────┘
+//
+// En móvil la navegación lateral se vuelve una fila con scroll
+// horizontal, sin JS y sin cajón. --full ocupa la ventana entera y fija
+// cabecera y barra lateral mientras el contenido hace scroll.
+//
+// <div class="org-app-shell">
+//   <header class="org-app-shell__header"><span class="org-app-shell__brand">Acme</span></header>
+//   <nav class="org-app-shell__sidebar" aria-label="Secciones">
+//     <ul class="org-app-shell__nav">
+//       <li><a class="org-app-shell__link" href="/" aria-current="page">Resumen</a></li>
+//     </ul>
+//   </nav>
+//   <main class="org-app-shell__main">…</main>
+// </div>
+//
+// Dentro del contenido, las primitivas layout-stack y layout-cluster
+// (scss/layout/) ordenan secciones y acciones.
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · <header>, <nav aria-label> y <main>: los tres puntos de referencia
+//   por los que se salta un lector de pantalla. Un solo <main> por página.
+// · La sección actual lleva aria-current="page"; el CSS la pinta por ese
+//   atributo, no por una clase.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin org-app-shell($theme: null) {
+  @layer syx.organisms {
+    .org-app-shell {
+      display: grid;
+      grid-template-areas:
+        "header"
+        "sidebar"
+        "main";
+      grid-template-rows: auto auto 1fr;
+      grid-template-columns: minmax(0, 1fr);
+      color: var(--component-app-shell-color);
+      background-color: var(--component-app-shell-bg);
+
+      @include breakpoint(tablet) {
+        grid-template-areas:
+          "header header"
+          "sidebar main";
+        grid-template-rows: auto 1fr;
+        grid-template-columns: var(--component-app-shell-sidebar-width) minmax(0, 1fr);
+      }
+
+      &__header {
+        display: flex;
+        grid-area: header;
+        align-items: center;
+        gap: var(--semantic-space-inline-sm);
+        min-block-size: var(--component-app-shell-header-height);
+        padding-inline: var(--component-app-shell-header-padding-inline);
+        background-color: var(--component-app-shell-header-bg);
+        border-block-end: var(--component-app-shell-border-width) solid var(--component-app-shell-border-color);
+      }
+
+      &__brand {
+        font-weight: var(--component-app-shell-brand-font-weight);
+      }
+
+      // Lo que va al final de la cabecera (cuenta, avisos, un menú).
+      &__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--semantic-space-inline-xs);
+        margin-inline-start: auto;
+      }
+
+      &__sidebar {
+        grid-area: sidebar;
+        min-inline-size: 0;
+        padding: var(--component-app-shell-sidebar-padding);
+        background-color: var(--component-app-shell-sidebar-bg);
+        border-block-end: var(--component-app-shell-border-width) solid var(--component-app-shell-border-color);
+
+        @include breakpoint(tablet) {
+          border-block-end: 0;
+          border-inline-end: var(--component-app-shell-border-width) solid var(--component-app-shell-border-color);
+        }
+      }
+
+      // En móvil, una fila con scroll horizontal. Un contenedor con scroll
+      // recorta lo que sale de su caja: el relleno del tamaño del anillo de
+      // foco lo deja entero (ver mol-tabs).
+      &__nav {
+        display: flex;
+        gap: var(--semantic-space-inline-xs);
+        margin: 0;
+        padding: calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset));
+        overflow-x: auto;
+        list-style: none;
+
+        @include breakpoint(tablet) {
+          flex-direction: column;
+          overflow-x: visible;
+        }
+
+        > li {
+          flex-shrink: 0;
+        }
+      }
+
+      &__link {
+        display: flex;
+        align-items: center;
+        min-block-size: var(--component-app-shell-link-min-height);
+        padding-inline: var(--component-app-shell-link-padding-inline);
+        color: var(--component-app-shell-link-color);
+        text-decoration: none;
+        white-space: nowrap;
+        // Filete de la sección actual reservado en todos los enlaces, en
+        // transparente: así marcar uno no desplaza su texto. Debajo en la
+        // fila del móvil (como una pestaña), al inicio en la columna.
+        border-block-end: var(--component-app-shell-link-indicator-width) solid transparent;
+        border-radius: var(--component-app-shell-link-border-radius);
+
+        @include breakpoint(tablet) {
+          border-block-end: 0;
+          border-inline-start: var(--component-app-shell-link-indicator-width) solid transparent;
+        }
+        @include transition(
+          color var(--semantic-duration-fast),
+          background-color var(--semantic-duration-fast)
+        );
+
+        &:hover {
+          color: var(--component-app-shell-link-color-hover);
+          background-color: var(--component-app-shell-link-bg-hover);
+        }
+
+        &:focus-visible {
+          @include focus-ring();
+        }
+
+        // La sección actual: color, fondo y el filete. El filete es lo que
+        // queda en colores forzados, donde fondo y color se igualan.
+        &[aria-current="page"] {
+          font-weight: var(--semantic-font-weight-medium);
+          color: var(--component-app-shell-link-color-current);
+          background-color: var(--component-app-shell-link-bg-current);
+          border-color: var(--component-app-shell-link-indicator-color);
+        }
+
+        // Colores forzados repintan el borde transparente en CanvasText y
+        // todos los enlaces parecerían el actual (le pasó a mol-tabs): Canvas
+        // lo vuelve invisible y solo el actual lo conserva, en Highlight.
+        @media (forced-colors: active) {
+          border-color: Canvas;
+
+          &[aria-current="page"] {
+            border-color: Highlight;
+          }
+        }
+      }
+
+      &__main {
+        grid-area: main;
+        min-inline-size: 0;
+        padding: var(--component-app-shell-main-padding);
+      }
+
+      // Ocupa la ventana: cabecera fija arriba y barra lateral fija a la
+      // izquierda (a la derecha en RTL), con su propio scroll.
+      &--full {
+        min-block-size: 100dvh;
+
+        .org-app-shell__header {
+          @include sticky();
+          inset-block-start: 0;
+          z-index: var(--component-app-shell-z-index);
+        }
+
+        @include breakpoint(tablet) {
+          .org-app-shell__sidebar {
+            @include sticky();
+            inset-block-start: var(--component-app-shell-header-height);
+            align-self: start;
+            max-block-size: calc(100dvh - var(--component-app-shell-header-height));
+            overflow-y: auto;
+          }
+        }
+      }
+    }
+  }
+}

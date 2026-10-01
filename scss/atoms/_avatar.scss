@@ -1,0 +1,69 @@
+// ATOM: AVATAR
+// ===============================================
+// La foto de una persona o, si no la hay, sus iniciales. Un solo
+// elemento con tamaño fijo y recorte; tres tamaños (--sm, md por
+// defecto, --lg) y la forma cuadrada para cuentas y organizaciones.
+//
+// <span class="atom-avatar"><img class="atom-avatar__img" src="ana.jpg" alt="Ana López"></span>
+// <span class="atom-avatar atom-avatar--lg" role="img" aria-label="Ana López">AL</span>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · La foto lleva alt con el nombre; si el nombre ya está escrito al
+//   lado, alt="" (si no, el lector lo dice dos veces).
+// · Las iniciales solas no dicen quién es: role="img" y aria-label con
+//   el nombre completo. Al lado del nombre visible, aria-hidden="true".
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-avatar($theme: null) {
+  @layer syx.atoms {
+    .atom-avatar {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      inline-size: var(--component-avatar-size-md);
+      block-size: var(--component-avatar-size-md);
+      overflow: hidden;
+      font-size: var(--component-avatar-font-size-md);
+      font-weight: var(--component-avatar-font-weight);
+      line-height: 1;
+      color: var(--component-avatar-color);
+      text-transform: uppercase;
+      vertical-align: middle;
+      user-select: none;
+      background-color: var(--component-avatar-bg);
+      border-radius: var(--component-avatar-border-radius);
+
+      &__img {
+        display: block;
+        inline-size: 100%;
+        block-size: 100%;
+        object-fit: cover;
+      }
+
+      &--sm {
+        inline-size: var(--component-avatar-size-sm);
+        block-size: var(--component-avatar-size-sm);
+        font-size: var(--component-avatar-font-size-sm);
+      }
+
+      &--lg {
+        inline-size: var(--component-avatar-size-lg);
+        block-size: var(--component-avatar-size-lg);
+        font-size: var(--component-avatar-font-size-lg);
+      }
+
+      &--square {
+        border-radius: var(--component-avatar-border-radius-square);
+      }
+
+      // Alto contraste: el fondo desaparece y las iniciales quedarían
+      // sueltas; un borde devuelve la forma.
+      @media (forced-colors: active) {
+        border: var(--semantic-border-width-thin) solid CanvasText;
+      }
+    }
+  }
+}

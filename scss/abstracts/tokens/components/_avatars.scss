@@ -1,0 +1,28 @@
+// COMPONENT TOKENS: AVATARS
+// ================================================
+// atom-avatar · foto o iniciales de una persona o una cuenta.
+// Las iniciales son texto: su color se mide contra el fondo del
+// avatar en contracts/contrast.json (4,5:1), no a ojo.
+// Los tamaños son literales a propósito: un avatar es un objeto de
+// tamaño fijo (cabe en una fila de tabla, en una cabecera), no una
+// distancia que deba crecer con la escala fluida de espaciado.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-avatar-bg: var(--semantic-color-bg-tertiary);
+  // text-secondary y no text-primary: es la tinta que el sistema ya mide
+  // sobre bg-tertiary (la píldora neutra). text-primary daba 3,18:1 en el
+  // modo claro de example-05, cuyo terciario es oscuro.
+  --component-avatar-color: var(--semantic-color-text-secondary);
+  --component-avatar-font-weight: var(--semantic-font-weight-bold);
+  --component-avatar-border-radius: var(--semantic-border-radius-circle);
+  --component-avatar-border-radius-square: var(--semantic-border-radius-default);
+
+  --component-avatar-size-sm: 2rem;
+  --component-avatar-size-md: 2.5rem;
+  --component-avatar-size-lg: 3.5rem;
+  --component-avatar-font-size-sm: var(--semantic-font-size-body-small);
+  --component-avatar-font-size-md: var(--semantic-font-size-body);
+  --component-avatar-font-size-lg: var(--semantic-font-size-body-large);
+}

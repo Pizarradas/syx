@@ -69,6 +69,10 @@ function pagina(tema, modo) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SYX · ${tema} · ${modo} · ${DIR}</title>
+  <!-- Las rutas relativas de los usage (img/avatar-demo.svg) son relativas a
+       la raíz del repositorio, como en docs.html; esta página vive en
+       /__prueba/tema/modo y sin <base> darían 404. -->
+  <base href="/">
   <link rel="stylesheet" href="/css/styles-theme-${tema}.css">
   <style>
     /* Solo el andamio de la página de pruebas: separa las secciones para
@@ -80,14 +84,28 @@ function pagina(tema, modo) {
        sin capa superior ni página inerte, y se dejan en el flujo para que
        axe los recorra y cada uno tenga su captura junto a los demás. */
     dialog[open] { position: static; margin: 0; }
+    /* Los avisos (mol-toast) son fijos: el marco los contiene en su sección,
+       como el de docs.html, y les deja sitio para no tapar su botón. */
+    .prueba:has(.mol-toast) { contain: layout paint; min-height: 14rem; }
   </style>
 </head>
 <body class="syx">
   <main>
 ${secciones}
   </main>
-  <script>for (const d of document.querySelectorAll('dialog:not([open])')) d.show();</script>
-${['syx-tabs', 'syx-site-nav'].filter((j) => fs.existsSync(path.join(ROOT, `js/${j}.js`))).map((j) => `  <script type="module" src="/js/${j}.js"></script>`).join('\n')}
+  <script>
+    for (const d of document.querySelectorAll('dialog:not([open])')) d.show();
+    // Los popovers (la burbuja de mol-tooltip, la lista de mol-menu) llegan
+    // cerrados, y axe no recorre lo que no se ve. Se les quita el atributo
+    // popover ANTES de que carguen los módulos: así se pintan en el flujo,
+    // junto a su disparador, con sus colores y su contraste, y cada uno sale
+    // en su captura. Abrirlos con showPopover() no valdría: un "auto" cierra
+    // a los demás y la capa superior los sacaría de su sección. El teclado y
+    // la apertura real se prueban aparte, con los popovers intactos, en
+    // interaccion.mjs.
+    for (const p of document.querySelectorAll('[popover]')) p.removeAttribute('popover');
+  </script>
+${fs.readdirSync(path.join(ROOT, 'js')).filter((f) => /^syx-.*\.js$/.test(f)).sort().map((f) => `  <script type="module" src="/js/${f}"></script>`).join('\n')}
 </body>
 </html>`;
 }

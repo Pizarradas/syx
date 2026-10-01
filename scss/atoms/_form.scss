@@ -5,7 +5,7 @@
 
 // atom: form
 // ===============================================
-// API: .atom-label · .atom-input-wrapper · .atom-input · .atom-select
+// API: .atom-label · .atom-input-wrapper · .atom-input · .atom-textarea · .atom-select
 // ===============================================
 @mixin atom-form($theme: null) {
   @layer syx.atoms {
@@ -34,9 +34,11 @@
     // -----------------------------------------------
     // INPUT — @canonical
     // For: <input type="text|email|password|number|…">
-    // and <textarea>
+    // TEXTAREA — @canonical (.atom-textarea, abajo): la misma caja, sin
+    // altura fija.
     // -----------------------------------------------
-    .atom-input {
+    .atom-input,
+    .atom-textarea {
       display: block;
       width: 100%;
       height: var(--component-form-field-min-height);
@@ -94,6 +96,25 @@
         border-color: var(--component-form-field-color-disabled);
         cursor: not-allowed;
       }
+    }
+
+    // -----------------------------------------------
+    // TEXTAREA — @canonical
+    // For: <textarea>
+    // Hasta octubre de 2026 el comentario de .atom-input decía servir
+    // también para <textarea>, pero su `height` fijo la dejaba en una sola
+    // línea de 48 px que no se podía estirar. Comparte todo con el campo
+    // (borde, foco, estados) salvo la altura: la marcan `rows` y el
+    // usuario, con un suelo de dos alturas táctiles y redimensionado solo
+    // en vertical, que es el que no rompe la maquetación.
+    // `textarea.atom-input` sigue funcionando, por compatibilidad.
+    // -----------------------------------------------
+    .atom-textarea,
+    textarea.atom-input {
+      height: auto;
+      min-block-size: var(--component-form-textarea-min-height);
+      line-height: var(--component-form-textarea-line-height);
+      resize: vertical;
     }
 
     // -----------------------------------------------

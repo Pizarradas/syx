@@ -14,6 +14,43 @@
   },
   "atoms": [
     {
+      "name": "avatar",
+      "layer": "atom",
+      "file": "scss/atoms/_avatar.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_avatars.scss"
+      ],
+      "classes": [
+        "atom-avatar"
+      ],
+      "modifiers": [
+        "atom-avatar--lg",
+        "atom-avatar--sm",
+        "atom-avatar--square"
+      ],
+      "elements": [
+        "atom-avatar__img"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-avatar-bg",
+        "--component-avatar-border-radius",
+        "--component-avatar-border-radius-square",
+        "--component-avatar-color",
+        "--component-avatar-font-size-lg",
+        "--component-avatar-font-size-md",
+        "--component-avatar-font-size-sm",
+        "--component-avatar-font-weight",
+        "--component-avatar-size-lg",
+        "--component-avatar-size-md",
+        "--component-avatar-size-sm"
+      ],
+      "description": "[scope: generic] A person's photo or, without one, their initials, at a fixed size: --sm (32px), md by default (40px), --lg (56px); --square for accounts and organisations. The photo is an <img class=\"atom-avatar__img\"> cropped with object-fit: cover. Initials sit on bg-tertiary in secondary text, measured at 4.5:1 in contracts/contrast.json.",
+      "usage": "<span class=\"atom-avatar atom-avatar--lg\"><img class=\"atom-avatar__img\" src=\"img/avatar-demo.svg\" alt=\"Ana López\" width=\"56\" height=\"56\"></span><span class=\"atom-avatar\" role=\"img\" aria-label=\"Ana López\">AL</span><span class=\"atom-avatar atom-avatar--sm atom-avatar--square\" role=\"img\" aria-label=\"Acme Inc.\">AC</span>",
+      "a11y": "Photo: alt with the person's name, or alt=\"\" when the name is written right next to it. Initials alone do not say who it is: role=\"img\" with aria-label=\"Full name\"; next to the visible name, aria-hidden=\"true\" instead. Not focusable — if it links to a profile, the link carries the name. In forced colours a border keeps the shape. No JS."
+    },
+    {
       "name": "breadcrumb",
       "layer": "atom",
       "file": "scss/atoms/_breadcrumb.scss",
@@ -297,13 +334,15 @@
       "layer": "atom",
       "file": "scss/atoms/_form.scss",
       "tokenFiles": [
-        "scss/abstracts/tokens/components/_forms.scss"
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_textareas.scss"
       ],
       "classes": [
         "atom-input",
         "atom-input-wrapper",
         "atom-label",
-        "atom-select"
+        "atom-select",
+        "atom-textarea"
       ],
       "modifiers": [],
       "elements": [],
@@ -334,11 +373,13 @@
         "--component-form-field-padding-y",
         "--component-form-field-placeholder",
         "--component-form-field-transition-duration",
-        "--component-form-field-transition-easing"
+        "--component-form-field-transition-easing",
+        "--component-form-textarea-line-height",
+        "--component-form-textarea-min-height"
       ],
-      "description": "[scope: system-reusable] The four canonical form primitives: .atom-label, .atom-input, .atom-select and .atom-input-wrapper. They are the raw controls only — validation state, message and icon live in mol-form-field, so use these bare only in a layout that handles its own error reporting.",
-      "usage": "<label class=\"atom-label\" for=\"form-email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"form-email\" type=\"email\" autocomplete=\"email\"></span><label class=\"atom-label\" for=\"form-plan\">Plan</label><span class=\"atom-input-wrapper\"><select class=\"atom-select\" id=\"form-plan\"><option>Free</option><option>Pro</option></select></span>",
-      "a11y": "Every control has a <label for> pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native <select>: keyboard and option list come from the browser. Controls are 48px tall at every width. Focus: system ring. No JS."
+      "description": "[scope: system-reusable] The five canonical form primitives: .atom-label, .atom-input, .atom-textarea, .atom-select and .atom-input-wrapper. .atom-textarea shares the input's box, border, focus and states but not its fixed height: rows sets it, with a floor of two touch heights and vertical-only resize (textarea.atom-input still works). They are the raw controls only — validation state, message and character count live in mol-form-field, so use these bare only in a layout that handles its own error reporting.",
+      "usage": "<label class=\"atom-label\" for=\"form-email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"form-email\" type=\"email\" autocomplete=\"email\"></span><label class=\"atom-label\" for=\"form-plan\">Plan</label><span class=\"atom-input-wrapper\"><select class=\"atom-select\" id=\"form-plan\"><option>Free</option><option>Pro</option></select></span><label class=\"atom-label\" for=\"form-notes\">Notes</label><textarea class=\"atom-textarea\" id=\"form-notes\" rows=\"3\"></textarea>",
+      "a11y": "Every control has a <label for> pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native <select>: keyboard and option list come from the browser. Inputs and selects are 48px tall at every width; a textarea is never shorter than two of those. Focus: system ring. No JS."
     },
     {
       "name": "icon-lucide",
@@ -647,6 +688,33 @@
       "a11y": "Static text, no role, not interactive (if it is clickable it is atom-btn). The state is in the words, never only in the colour. A count that updates needs an aria-live container. No JS."
     },
     {
+      "name": "progress",
+      "layer": "atom",
+      "file": "scss/atoms/_progress.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-progress"
+      ],
+      "modifiers": [],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-progress-border-radius",
+        "--component-progress-duration",
+        "--component-progress-fill",
+        "--component-progress-height",
+        "--component-progress-indeterminate-duration",
+        "--component-progress-stripe-width",
+        "--component-progress-track"
+      ],
+      "description": "[scope: generic] A progress bar on the native <progress>: with value it is determinate, without value it is indeterminate (:indeterminate) and a segment sweeps the track. The fill is primary-strong, measured at 3:1 against the page and the track (WCAG 1.4.11). Under reduced motion the indeterminate bar stops moving and shows static stripes. For an unknown wait with no bar, use atom-spinner.",
+      "usage": "<label class=\"atom-label\" for=\"pg-upload\">Uploading report.pdf</label><progress class=\"atom-progress\" id=\"pg-upload\" value=\"40\" max=\"100\">40%</progress><label class=\"atom-label\" for=\"pg-sync\">Syncing contacts</label><progress class=\"atom-progress\" id=\"pg-sync\">Syncing…</progress>",
+      "a11y": "Native <progress>: role progressbar, value and max come from the browser; remove value for indeterminate. It needs a name — <label for> on a unique id, or aria-label. The text inside <progress> is the fallback, not the name. Not focusable. Reduced motion: static stripes instead of the sweep. Forced colours: framed track, Highlight fill. No JS — the app updates value."
+    },
+    {
       "name": "radio",
       "layer": "atom",
       "file": "scss/atoms/_radio.scss",
@@ -692,6 +760,73 @@
       "description": "[scope: system-reusable] One choice out of a mutually exclusive set. Only meaningful in a group sharing a name, and the group needs a fieldset with a legend to be announced as a group. For independent choices use atom-check.",
       "usage": "<label class=\"atom-radio\"><input class=\"atom-radio__input\" type=\"radio\" name=\"theme\" value=\"dark\"><span class=\"atom-radio__label\">Dark</span></label>",
       "a11y": "Real <input type=\"radio\"> inside the <label>, one name per group, the group in <fieldset><legend>. Arrow keys move the choice (browser). No JS."
+    },
+    {
+      "name": "skeleton",
+      "layer": "atom",
+      "file": "scss/atoms/_skeleton.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-skeleton"
+      ],
+      "modifiers": [
+        "atom-skeleton--block",
+        "atom-skeleton--circle",
+        "atom-skeleton--text"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-skeleton-bg",
+        "--component-skeleton-block-height",
+        "--component-skeleton-border-radius",
+        "--component-skeleton-circle-size",
+        "--component-skeleton-duration",
+        "--component-skeleton-highlight",
+        "--component-skeleton-text-height"
+      ],
+      "description": "[scope: generic] A placeholder with the shape of the content that is on its way: --text (a line; the last of several stops at 60%), --circle (avatar size) and --block. A shimmer sweeps it; under reduced motion it stays flat. It is decoration: hide it from assistive technology and say what is loading in text.",
+      "usage": "<p class=\"syx-sr-only\" role=\"status\">Loading profile…</p><div class=\"layout-cluster layout-cluster--md\" aria-busy=\"true\"><span class=\"atom-skeleton atom-skeleton--circle\" aria-hidden=\"true\"></span><div class=\"layout-stack layout-stack--xs syx-flex-1\" aria-hidden=\"true\"><span class=\"atom-skeleton atom-skeleton--text\"></span><span class=\"atom-skeleton atom-skeleton--text\"></span></div></div>",
+      "a11y": "aria-hidden=\"true\" on every skeleton and aria-busy=\"true\" on the container that will be filled; remove aria-busy when the content lands. Say what is loading with text in a role=\"status\" outside the busy container (a busy region may hold its own announcements back). Never focusable. Reduced motion: no shimmer. Forced colours: a border keeps the shape. No JS."
+    },
+    {
+      "name": "spinner",
+      "layer": "atom",
+      "file": "scss/atoms/_spinner.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-spinner"
+      ],
+      "modifiers": [
+        "atom-spinner--lg",
+        "atom-spinner--sm",
+        "atom-spinner--with-label"
+      ],
+      "elements": [
+        "atom-spinner__label"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-spinner-color",
+        "--component-spinner-duration",
+        "--component-spinner-duration-reduced",
+        "--component-spinner-gap",
+        "--component-spinner-label-color",
+        "--component-spinner-size-lg",
+        "--component-spinner-size-md",
+        "--component-spinner-size-sm",
+        "--component-spinner-thickness",
+        "--component-spinner-track"
+      ],
+      "description": "[scope: generic] A busy indicator for a wait of unknown length: a ring drawn on ::before, so the text does not spin. The text lives in __label, visually hidden by default and shown with --with-label. --sm, md by default, --lg. Under reduced motion it spins three times slower instead of stopping, because a still ring says nothing. If the wait has a known end, use atom-progress.",
+      "usage": "<span class=\"atom-spinner\" role=\"status\"><span class=\"atom-spinner__label\">Loading results…</span></span><span class=\"atom-spinner atom-spinner--lg atom-spinner--with-label\" role=\"status\"><span class=\"atom-spinner__label\">Saving changes…</span></span>",
+      "a11y": "Always a text in __label: the ring alone says nothing to a screen reader. role=\"status\" announces it politely without moving focus; a live region inserted with its text already inside may not be read, so insert it empty and set the text after, or announce from a status region that already exists. Not focusable. Reduced motion: slower, not stopped. No JS."
     },
     {
       "name": "stat-counter",
@@ -938,6 +1073,56 @@
       "a11y": "Every button inside has an explicit type. As a plain row it needs no role; if it behaves as one control, it becomes role=\"toolbar\" with an aria-label and arrow-key navigation in script. No JS otherwise."
     },
     {
+      "name": "card",
+      "layer": "molecule",
+      "file": "scss/molecules/_card.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_card.scss"
+      ],
+      "classes": [
+        "mol-card"
+      ],
+      "modifiers": [
+        "mol-card--elevated",
+        "mol-card--flat"
+      ],
+      "elements": [
+        "mol-card__body",
+        "mol-card__footer",
+        "mol-card__header",
+        "mol-card__link",
+        "mol-card__media",
+        "mol-card__title"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-card-bg",
+        "--component-card-body-color",
+        "--component-card-border-color",
+        "--component-card-border-color-hover",
+        "--component-card-border-radius",
+        "--component-card-border-width",
+        "--component-card-color",
+        "--component-card-elevated-shadow",
+        "--component-card-elevated-shadow-hover",
+        "--component-card-flat-bg",
+        "--component-card-footer-border-color",
+        "--component-card-gap",
+        "--component-card-padding",
+        "--component-card-shadow",
+        "--component-card-title-font-size",
+        "--component-card-title-font-weight",
+        "--component-card-title-line-height"
+      ],
+      "description": "[scope: generic] The general-purpose surface for product screens: optional __media, __header (with __title and maybe a pill or an action), __body and __footer, spaced by the card itself. Bordered by default; --elevated swaps the border for a shadow and --flat drops both on bg-secondary. For a whole-card link, put .mol-card__link on the title's <a>: its ::after covers the card, the focus ring surrounds the card, and any other control inside stays clickable above it. Body text is text-secondary, measured on both backgrounds.",
+      "usage": "<article class=\"mol-card\"><header class=\"mol-card__header\"><h3 class=\"mol-card__title\">Storage</h3><span class=\"atom-pill atom-pill--neutral\">80% used</span></header><div class=\"mol-card__body\"><p>You have used 8 of 10 GB. Old exports are deleted after 30 days.</p></div><footer class=\"mol-card__footer\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-sm\" type=\"button\">Manage storage</button></footer></article><article class=\"mol-card mol-card--elevated\"><h3 class=\"mol-card__title\"><a class=\"mol-card__link\" href=\"#billing\">Billing</a></h3><div class=\"mol-card__body\"><p>Invoices, payment method and tax details.</p></div></article>",
+      "a11y": "<article> when the card makes sense on its own (an item in a list), <div> otherwise; the page decides the heading level of __title. Whole-card link: the <a class=\"mol-card__link\"> goes in the title so its name is the title, never an <a> wrapping the whole card (its name would be all the text). The ring is drawn on the link's ::after, around the card. Other controls inside are raised above the link area. Forced colours: every variant gets a visible frame. No JS."
+    },
+    {
       "name": "code-snippet",
       "layer": "molecule",
       "file": "scss/molecules/_code-snippet.scss",
@@ -1055,6 +1240,47 @@
       "a11y": "Native <details>/<summary>: Enter/Space toggle and the expanded state is announced by the browser. No interactive content inside <summary>, and never a <div> in its place. No JS."
     },
     {
+      "name": "empty-state",
+      "layer": "molecule",
+      "file": "scss/molecules/_empty-state.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_empty-states.scss"
+      ],
+      "classes": [
+        "mol-empty-state"
+      ],
+      "modifiers": [
+        "mol-empty-state--bordered"
+      ],
+      "elements": [
+        "mol-empty-state__actions",
+        "mol-empty-state__icon",
+        "mol-empty-state__text",
+        "mol-empty-state__title"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-empty-state-border-color",
+        "--component-empty-state-border-radius",
+        "--component-empty-state-border-width",
+        "--component-empty-state-gap",
+        "--component-empty-state-icon-bg",
+        "--component-empty-state-icon-color",
+        "--component-empty-state-icon-size",
+        "--component-empty-state-padding-block",
+        "--component-empty-state-padding-inline",
+        "--component-empty-state-text-color",
+        "--component-empty-state-text-max-width",
+        "--component-empty-state-title-color",
+        "--component-empty-state-title-font-size",
+        "--component-empty-state-title-font-weight"
+      ],
+      "description": "[scope: generic] What shows where there is nothing yet — an empty list, a search with no results: a decorative __icon, a __title that says what is going on, a __text that says why or what to do, and __actions with the way out. Centred, because it takes the place of the missing content. --bordered frames it with a dashed border for a zone that waits for content (a drop target, an empty column). Title and text are measured at 4.5:1.",
+      "usage": "<div class=\"mol-empty-state mol-empty-state--bordered\"><span class=\"mol-empty-state__icon\" aria-hidden=\"true\"><span class=\"atom-icon atom-icon--lc-search atom-icon--lg\"></span></span><h3 class=\"mol-empty-state__title\">No projects match “q4”</h3><p class=\"mol-empty-state__text\">Try another word, or clear the filters to see every project.</p><div class=\"mol-empty-state__actions\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\">Clear filters</button><button class=\"atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md\" type=\"button\">New project</button></div></div>",
+      "a11y": "The icon is decorative (aria-hidden=\"true\"); the title says what happened, at the heading level the page needs. If the empty state appears after an action (filter, search), announce it: put it inside a role=\"status\" container that already existed, or move focus to the title (tabindex=\"-1\") when it replaces what had focus. Not focusable itself; its buttons are. No JS."
+    },
+    {
       "name": "feature-card",
       "layer": "molecule",
       "file": "scss/molecules/_feature-card.scss",
@@ -1121,7 +1347,8 @@
       "layer": "molecule",
       "file": "scss/molecules/_form-field.scss",
       "tokenFiles": [
-        "scss/abstracts/tokens/components/_forms.scss"
+        "scss/abstracts/tokens/components/_forms.scss",
+        "scss/abstracts/tokens/components/_textareas.scss"
       ],
       "classes": [
         "mol-form-field"
@@ -1133,16 +1360,24 @@
         "mol-form-field--is-warning"
       ],
       "elements": [
+        "mol-form-field__count",
+        "mol-form-field__live",
         "mol-form-field__msg"
       ],
-      "states": [],
+      "states": [
+        ".is-limit"
+      ],
       "composedOf": [
         "atom-input",
         "atom-label",
-        "atom-select"
+        "atom-select",
+        "atom-textarea"
       ],
       "tokens": [
         "--component-form-field-color",
+        "--component-form-field-count-color",
+        "--component-form-field-count-font-size",
+        "--component-form-field-count-limit-color",
         "--component-form-field-error-border",
         "--component-form-field-error-color",
         "--component-form-field-icon-position-right",
@@ -1157,9 +1392,9 @@
         "--component-form-field-warning-border",
         "--component-form-field-warning-color"
       ],
-      "description": "[scope: system-reusable] The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce.",
-      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"ff-email\">Email</label><input class=\"atom-input\" id=\"ff-email\" type=\"email\" autocomplete=\"email\" aria-invalid=\"true\" aria-describedby=\"ff-email-msg\"><span class=\"mol-form-field__msg\" id=\"ff-email-msg\">Enter a valid address.</span></div>",
-      "a11y": "<label for> on a unique id. On error: aria-invalid=\"true\" on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Validation itself is the app's. No JS."
+      "description": "[scope: system-reusable] The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce. A textarea with maxlength can carry an optional __count: js/syx-char-count.js writes what is left (data-template, in the page's language), adds is-limit at the limit and announces it once typing pauses; without JS the markup text stays.",
+      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"ff-email\">Email</label><input class=\"atom-input\" id=\"ff-email\" type=\"email\" autocomplete=\"email\" aria-invalid=\"true\" aria-describedby=\"ff-email-msg\"><span class=\"mol-form-field__msg\" id=\"ff-email-msg\">Enter a valid address.</span></div><div class=\"mol-form-field\"><label class=\"atom-label\" for=\"ff-bio\">Short bio</label><textarea class=\"atom-textarea\" id=\"ff-bio\" rows=\"3\" maxlength=\"160\" aria-describedby=\"ff-bio-count\"></textarea><span class=\"mol-form-field__count\" id=\"ff-bio-count\" data-template=\"{n} characters left\">Up to 160 characters</span></div>",
+      "a11y": "<label for> on a unique id. On error: aria-invalid=\"true\" on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Character count: the textarea names __count in aria-describedby (heard on focus) and keeps maxlength; js/syx-char-count.js (no dependencies) adds a role=\"status\" region that says what is left after a pause, never on every key. Validation itself is the app's."
     },
     {
       "name": "label-group",
@@ -1181,6 +1416,53 @@
       "description": "[scope: system-reusable] Row of labels or pills sharing one gap, wrapping when it must. Use it for a tag list or a set of markers on one line. .cont-set-label is a deprecated alias.",
       "usage": "<div class=\"mol-label-group\"><span class=\"atom-pill atom-pill--neutral\">SCSS</span><span class=\"atom-pill atom-pill--neutral\">Tokens</span></div>",
       "a11y": "Container only. If the labels are a list, use <ul role=\"list\">. No JS."
+    },
+    {
+      "name": "menu",
+      "layer": "molecule",
+      "file": "scss/molecules/_menu.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_menus.scss"
+      ],
+      "classes": [
+        "mol-menu"
+      ],
+      "modifiers": [
+        "mol-menu__item--danger"
+      ],
+      "elements": [
+        "mol-menu__item",
+        "mol-menu__list",
+        "mol-menu__separator",
+        "mol-menu__trigger"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-menu-bg",
+        "--component-menu-border-color",
+        "--component-menu-border-radius",
+        "--component-menu-border-width",
+        "--component-menu-color",
+        "--component-menu-item-bg-hover",
+        "--component-menu-item-border-radius",
+        "--component-menu-item-danger-color",
+        "--component-menu-item-disabled-color",
+        "--component-menu-item-gap",
+        "--component-menu-item-min-height",
+        "--component-menu-item-padding-inline",
+        "--component-menu-max-height",
+        "--component-menu-min-width",
+        "--component-menu-separator-color",
+        "--component-menu-shadow",
+        "--component-menu-z-index"
+      ],
+      "description": "[scope: generic] A button that opens a list of actions (\"More\", \"Actions\", a table row's menu). The __list is popover=\"auto\": top layer, light dismiss and Escape come from the browser, and popovertarget opens it even without script. js/syx-menu.js adds the WAI-ARIA menu button keyboard, keeps aria-expanded true to the real state and places the list under the button (above if it does not fit), aligned to its start. __item--danger for destructive actions, aria-disabled=\"true\" for an action that exists but cannot run now, __separator between groups. To navigate to other pages this is not a menu: use a list of links or mol-disclosure.",
+      "usage": "<div class=\"mol-menu\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md mol-menu__trigger\" type=\"button\" id=\"menu-actions-btn\" aria-haspopup=\"menu\" aria-expanded=\"false\" aria-controls=\"menu-actions\" popovertarget=\"menu-actions\">Actions <span class=\"atom-icon atom-icon--lc-chevron-down atom-icon--sm\" aria-hidden=\"true\"></span></button><div class=\"mol-menu__list\" id=\"menu-actions\" role=\"menu\" aria-labelledby=\"menu-actions-btn\" popover=\"auto\"><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\">Rename</button><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\">Duplicate</button><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\" aria-disabled=\"true\">Move to folder</button><div class=\"mol-menu__separator\" role=\"separator\"></div><button class=\"mol-menu__item mol-menu__item--danger\" type=\"button\" role=\"menuitem\">Delete</button></div></div>",
+      "a11y": "Button: aria-haspopup=\"menu\", aria-expanded, aria-controls and popovertarget pointing at the list. List: role=\"menu\" with aria-labelledby → button; each option role=\"menuitem\" (a <button>, or an <a> for a link). Keyboard from js/syx-menu.js (no dependencies): ↓/Enter/Space open on the first option, ↑ on the last; ↑↓ move with wrap, Home/End, a letter jumps to the next option starting with it, Escape and Tab close and return focus to the button; activating an option closes the menu. aria-disabled options stay focusable but do nothing. Without JS, popovertarget still opens and closes it and Tab reaches the options."
     },
     {
       "name": "tabs",
@@ -1220,9 +1502,153 @@
       "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Behaviour (click, arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free: import 'syx-design-system/js/syx-tabs.js' wires every tablist present on load, and initTabs(root) from the same module wires markup rendered later. Without it the selected panel shows and the tabs never switch.",
       "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>",
       "a11y": "role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=\"button\" on every tab; panels focusable (tabindex=\"0\"). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable."
+    },
+    {
+      "name": "toast",
+      "layer": "molecule",
+      "file": "scss/molecules/_toast.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_toasts.scss"
+      ],
+      "classes": [
+        "mol-toast"
+      ],
+      "modifiers": [
+        "mol-toast__item--error",
+        "mol-toast__item--info",
+        "mol-toast__item--success",
+        "mol-toast__item--warning"
+      ],
+      "elements": [
+        "mol-toast__close",
+        "mol-toast__item",
+        "mol-toast__live",
+        "mol-toast__text"
+      ],
+      "states": [
+        ".is-leaving",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-toast-accent-width",
+        "--component-toast-bg",
+        "--component-toast-border-color",
+        "--component-toast-border-radius",
+        "--component-toast-border-width",
+        "--component-toast-close-bg-hover",
+        "--component-toast-close-color",
+        "--component-toast-close-size",
+        "--component-toast-color",
+        "--component-toast-duration",
+        "--component-toast-error-accent",
+        "--component-toast-gap",
+        "--component-toast-info-accent",
+        "--component-toast-max-width",
+        "--component-toast-offset",
+        "--component-toast-padding-block",
+        "--component-toast-padding-inline",
+        "--component-toast-shadow",
+        "--component-toast-success-accent",
+        "--component-toast-warning-accent",
+        "--component-toast-z-index"
+      ],
+      "description": "[scope: generic] Ephemeral notifications in a corner that confirm what just happened (\"Saved\", \"Link copied\") without interrupting or taking focus. The .mol-toast container is fixed and stacks __item elements (--info, --success, --warning, --error colour only the accent rule; text stays primary). js/syx-toast.js: showToast('Saved', { tone, duration }) creates one, announces only its text through the container's __live region (role=\"status\"), removes it after 6 s by default and pauses the countdown while the pointer or focus is on it or the tab is hidden; duration: 0 keeps it until dismissed. A button with data-syx-toast=\"Text\" shows one without writing JS. Never the only place for something that must be read or done: an error that needs attention is mol-alert with role=\"alert\".",
+      "usage": "<button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\" data-syx-toast=\"Link copied to the clipboard\" data-syx-toast-tone=\"success\">Copy link</button><div class=\"mol-toast\" data-dismiss-label=\"Dismiss notification\"><p class=\"mol-toast__live\" role=\"status\"></p><div class=\"mol-toast__item mol-toast__item--info\"><p class=\"mol-toast__text\">3 files moved to Archive</p><button class=\"mol-toast__close\" type=\"button\" aria-label=\"Dismiss notification\"><span class=\"atom-icon atom-icon--lc-x atom-icon--sm\" aria-hidden=\"true\"></span></button></div></div>",
+      "a11y": "The container holds a __live element with role=\"status\" that exists before any text arrives; js/syx-toast.js writes only the message there, so the close button is not read out. Focus never moves to a toast; its close button (aria-label, 32px target) is reachable with Tab, and closing it returns focus to where the user came from. The countdown pauses on hover, on focus and while the tab is hidden (WCAG 2.2.1); duration: 0 disables it. Reduced motion: no slide or fade. Without JS a static toast stays and its button does nothing."
+    },
+    {
+      "name": "tooltip",
+      "layer": "molecule",
+      "file": "scss/molecules/_tooltip.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_tooltips.scss"
+      ],
+      "classes": [
+        "mol-tooltip"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-tooltip__bubble"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-tooltip-bg",
+        "--component-tooltip-border-radius",
+        "--component-tooltip-color",
+        "--component-tooltip-duration",
+        "--component-tooltip-font-size",
+        "--component-tooltip-line-height",
+        "--component-tooltip-max-width",
+        "--component-tooltip-padding-block",
+        "--component-tooltip-padding-inline",
+        "--component-tooltip-shadow",
+        "--component-tooltip-z-index"
+      ],
+      "description": "[scope: generic] A short sentence that describes a control, on the Popover API: the __bubble is popover=\"hint\" (browsers that do not know hint treat it as manual), so it sits in the top layer above any overflow or z-index. js/syx-tooltip.js opens it on keyboard focus and on hover, keeps it while the pointer is over the control or the bubble, closes it on Escape, blur or leaving, and places it above the control — below if it does not fit — never over it. Position comes from script because CSS anchor positioning is not in the support floor. Colours are text-primary and bg-primary swapped, so contrast holds wherever primary text does. Plain text only.",
+      "usage": "<span class=\"mol-tooltip\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\" aria-describedby=\"tip-share\">Share</button><span class=\"mol-tooltip__bubble\" id=\"tip-share\" role=\"tooltip\" popover=\"hint\">Copies a view-only link to the clipboard</span></span>",
+      "a11y": "aria-describedby on the control points at the bubble, which carries role=\"tooltip\"; for an icon-only control the bubble is its name, so use aria-labelledby instead. WCAG 1.4.13: appears on focus and hover, hoverable (the pointer can move onto it), dismissed by Escape without moving focus or pointer, never covers the control. Nothing focusable inside. Never on a disabled control (no focus, no pointer events). JS: js/syx-tooltip.js (no dependencies); without it the bubble never opens, so do not put essential information only there."
     }
   ],
   "organisms": [
+    {
+      "name": "app-shell",
+      "layer": "organism",
+      "file": "scss/organisms/_app-shell.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_app-shell.scss"
+      ],
+      "classes": [
+        "org-app-shell"
+      ],
+      "modifiers": [
+        "org-app-shell--full"
+      ],
+      "elements": [
+        "org-app-shell__actions",
+        "org-app-shell__brand",
+        "org-app-shell__header",
+        "org-app-shell__link",
+        "org-app-shell__main",
+        "org-app-shell__nav",
+        "org-app-shell__sidebar"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-app-shell-bg",
+        "--component-app-shell-border-color",
+        "--component-app-shell-border-width",
+        "--component-app-shell-brand-font-weight",
+        "--component-app-shell-color",
+        "--component-app-shell-header-bg",
+        "--component-app-shell-header-height",
+        "--component-app-shell-header-padding-inline",
+        "--component-app-shell-link-bg-current",
+        "--component-app-shell-link-bg-hover",
+        "--component-app-shell-link-border-radius",
+        "--component-app-shell-link-color",
+        "--component-app-shell-link-color-current",
+        "--component-app-shell-link-color-hover",
+        "--component-app-shell-link-indicator-color",
+        "--component-app-shell-link-indicator-width",
+        "--component-app-shell-link-min-height",
+        "--component-app-shell-link-padding-inline",
+        "--component-app-shell-main-padding",
+        "--component-app-shell-sidebar-bg",
+        "--component-app-shell-sidebar-padding",
+        "--component-app-shell-sidebar-width",
+        "--component-app-shell-z-index"
+      ],
+      "description": "[scope: generic] The frame of an application screen (settings, a dashboard, a console): __header on top, a __sidebar with the section navigation and __main, laid out with named grid areas. Below 50em everything stacks and the sidebar's __nav becomes a horizontally scrolling row — no drawer, no JS; from 50em the sidebar is a column beside the content. --full fills the viewport and keeps the header and the sidebar in place while the content scrolls. The current section is painted from aria-current=\"page\" (colour, background and an inline-start rule that survives forced colours). Inside __main, layout-stack and layout-cluster arrange sections and actions.",
+      "usage": "<div class=\"org-app-shell\"><header class=\"org-app-shell__header\"><span class=\"org-app-shell__brand\">Acme Console</span><div class=\"org-app-shell__actions\"><span class=\"atom-avatar atom-avatar--sm\" role=\"img\" aria-label=\"Signed in as Ana López\">AL</span></div></header><nav class=\"org-app-shell__sidebar\" aria-label=\"Sections\"><ul class=\"org-app-shell__nav\"><li><a class=\"org-app-shell__link\" href=\"#overview\">Overview</a></li><li><a class=\"org-app-shell__link\" href=\"#settings\" aria-current=\"page\">Settings</a></li><li><a class=\"org-app-shell__link\" href=\"#billing\">Billing</a></li></ul></nav><main class=\"org-app-shell__main\"><div class=\"layout-stack\"><h2 class=\"atom-title atom-title--h4\">Settings</h2><p class=\"atom-txt\">Workspace name, members and notifications.</p><div class=\"layout-cluster layout-cluster--end\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\">Cancel</button><button class=\"atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md\" type=\"button\">Save</button></div></div></main></div>",
+      "a11y": "Three landmarks a screen-reader user jumps between: <header>, <nav aria-label> and <main> — one <main> per page (the docs demo nests it inside the docs page's own, which a real app never does). The current section carries aria-current=\"page\"; the CSS paints it from that attribute. Sidebar links are 44px tall; the scrolling row on small screens is padded so the focus ring is never clipped. No JS."
+    },
     {
       "name": "site-header",
       "layer": "organism",

@@ -7,8 +7,8 @@ Conocimiento específico del sistema SYX: tokens, pipeline SCSS, patrones de com
 > `ranking`, `compare-card`, `theme-swatch-card`). Están **fuera del registro
 > y del storybook**, entran solo por `syx-bundle-site($theme)` y son
 > desmontables. No son componentes del sistema: al auditar o razonar sobre el
-> inventario (30 componentes: 19 átomos, 10 moléculas, 1 organismo
-> `site-header`), la capa site no cuenta — pero sigue sujeta a los contratos
+> inventario (40 componentes: 23 átomos, 15 moléculas, 2 organismos:
+> `app-shell` y `site-header`), la capa site no cuenta — pero sigue sujeta a los contratos
 > R02 (sin `!important`) y al uso de tokens y mixins como cualquier SCSS.
 
 ---

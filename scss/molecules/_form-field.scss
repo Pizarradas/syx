@@ -50,6 +50,29 @@
       color: var(--component-form-field-color); // Default color
     }
 
+    // CHARACTER COUNT (opcional, para textarea con maxlength)
+    // ===============================================
+    // El número lo escribe js/syx-char-count.js; sin JS queda el texto
+    // del marcado («Hasta 160 caracteres»), que sigue siendo verdad.
+    // __live es la región viva que el script crea: anuncia lo que queda
+    // cuando se deja de escribir, no a cada tecla.
+    &__count {
+      display: block;
+      margin-block-start: var(--component-form-field-msg-margin-top);
+      font-size: var(--component-form-field-count-font-size);
+      line-height: var(--component-form-field-msg-line-height);
+      color: var(--component-form-field-count-color);
+      text-align: end;
+
+      &.is-limit {
+        color: var(--component-form-field-count-limit-color);
+      }
+    }
+
+    &__live {
+      @include sr-only;
+    }
+
     // STATE: HAS SELECT (Arrow Icon)
     // ===============================================
     &--has-select {
@@ -83,7 +106,8 @@
         color: var(--component-form-field-error-color);
       }
       
-      .atom-input {
+      .atom-input,
+      .atom-textarea {
         border-color: var(--component-form-field-error-border);
         &:focus {
            border-color: var(--component-form-field-error-border);
@@ -116,7 +140,8 @@
         color: var(--component-form-field-success-color);
       }
 
-      .atom-input {
+      .atom-input,
+      .atom-textarea {
          border-color: var(--component-form-field-success-border);
       }
 
@@ -142,7 +167,8 @@
         color: var(--component-form-field-warning-color);
       }
 
-      .atom-input {
+      .atom-input,
+      .atom-textarea {
         border-color: var(--component-form-field-warning-border);
       }
 
@@ -156,6 +182,7 @@
     // If an icon is present (state or select), add padding to the field
     &:where([class*="--has-select"], [class*="--is-"]) {
       .atom-input,
+      .atom-textarea,
       .atom-select {
         padding-inline-end: calc(0 + (var(--component-form-field-icon-position-right)) + (var(--component-form-field-icon-size)));
       }

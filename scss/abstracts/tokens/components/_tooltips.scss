@@ -1,0 +1,27 @@
+// COMPONENT TOKENS: TOOLTIPS
+// ================================================
+// mol-tooltip · una frase corta que describe un control, sobre la
+// Popover API. Fondo y texto son los del texto principal y el fondo de
+// página, invertidos: el contraste es simétrico, así que cumple en cada
+// tema y modo exactamente donde lo cumple el texto principal (se mide
+// igualmente en contracts/contrast.json). bg-inverse/text-inverse no
+// sirven: en el claro de example-02 y example-03 text-inverse es oscuro.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-tooltip-bg: var(--semantic-color-text-primary);
+  --component-tooltip-color: var(--semantic-color-bg-primary);
+  --component-tooltip-font-size: var(--semantic-font-size-body-small);
+  --component-tooltip-line-height: var(--semantic-line-height-snug);
+  --component-tooltip-padding-block: var(--semantic-space-component-xs);
+  --component-tooltip-padding-inline: var(--semantic-space-component-sm);
+  --component-tooltip-border-radius: var(--semantic-border-radius-default);
+  --component-tooltip-shadow: var(--semantic-shadow-md);
+  // En caracteres: una descripción, no un párrafo.
+  --component-tooltip-max-width: 32ch;
+  // Solo cuenta sin Popover API (Safari < 17): en la capa superior el
+  // z-index no hace falta.
+  --component-tooltip-z-index: var(--semantic-z-index-toast);
+  --component-tooltip-duration: var(--semantic-duration-fast);
+}

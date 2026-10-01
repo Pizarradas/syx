@@ -1,0 +1,34 @@
+// COMPONENT TOKENS: TOASTS
+// ================================================
+// mol-toast · avisos efímeros que confirman algo que acaba de pasar
+// («Guardado», «Enlace copiado») sin interrumpir. Superficie de página
+// con sombra y el filete del estado, como mol-alert: el color del
+// estado nunca va en el texto, que se queda en text-primary.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-toast-bg: var(--semantic-color-bg-primary);
+  --component-toast-color: var(--semantic-color-text-primary);
+  --component-toast-border-width: var(--semantic-border-width-thin);
+  --component-toast-border-color: var(--semantic-color-border-subtle);
+  --component-toast-border-radius: var(--semantic-border-radius-default);
+  --component-toast-accent-width: var(--semantic-border-width-thick);
+  --component-toast-shadow: var(--semantic-shadow-lg);
+  --component-toast-padding-block: var(--semantic-space-component-sm);
+  --component-toast-padding-inline: var(--semantic-space-component-md);
+  --component-toast-gap: var(--semantic-space-stack-xs);
+  --component-toast-offset: var(--semantic-space-component-md);
+  --component-toast-max-width: 24rem;
+  --component-toast-z-index: var(--semantic-z-index-toast);
+  --component-toast-duration: var(--semantic-duration-base);
+
+  --component-toast-close-size: 2rem; // 32 px: por encima de los 24 de WCAG 2.5.8
+  --component-toast-close-color: var(--semantic-color-text-secondary);
+  --component-toast-close-bg-hover: var(--semantic-color-bg-secondary);
+
+  --component-toast-info-accent: var(--semantic-color-state-info);
+  --component-toast-success-accent: var(--semantic-color-state-success);
+  --component-toast-warning-accent: var(--semantic-color-state-warning);
+  --component-toast-error-accent: var(--semantic-color-state-error);
+}
