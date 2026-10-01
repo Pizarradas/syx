@@ -129,6 +129,7 @@ in `sideEffects`, so a bare import survives `vite build`, webpack and Rollup
 | ---- | --- | ---------------- | ------------------------- |
 | `js/syx-tabs.js` | `mol-tabs` | wires every `[role="tablist"]` present on load | `import { initTabs } from 'syx-design-system/js/syx-tabs.js'; initTabs(container);` |
 | `js/syx-site-nav.js` | `org-site-header` (mobile drawer) | wires every burger with `aria-controls`: inert drawer when closed, focus into it on open, Escape returns focus | `import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js'; initSiteNav(container);` |
+| `js/syx-tooltip.js` | `mol-tooltip` | opens each `__bubble` (a `popover="hint"`) from the control that names it in `aria-describedby`/`aria-labelledby`: keyboard focus and hover, hoverable, Escape closes, placed above or below, never over the control | `import { initTooltips } from 'syx-design-system/js/syx-tooltip.js'; initTooltips(container);` |
 | `js/syx-char-count.js` | `mol-form-field__count` (optional textarea counter) | writes what is left of `maxlength` into every `__count` named by a field's `aria-describedby`, and announces it once typing pauses | `import { initCharCount } from 'syx-design-system/js/syx-char-count.js'; initCharCount(container);` |
 
 Frameworks that render after load (React, Vue, Svelte…) should call the init

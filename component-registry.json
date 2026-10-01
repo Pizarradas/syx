@@ -1455,6 +1455,39 @@
       "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Behaviour (click, arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free: import 'syx-design-system/js/syx-tabs.js' wires every tablist present on load, and initTabs(root) from the same module wires markup rendered later. Without it the selected panel shows and the tabs never switch.",
       "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>",
       "a11y": "role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=\"button\" on every tab; panels focusable (tabindex=\"0\"). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable."
+    },
+    {
+      "name": "tooltip",
+      "layer": "molecule",
+      "file": "scss/molecules/_tooltip.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_tooltips.scss"
+      ],
+      "classes": [
+        "mol-tooltip"
+      ],
+      "modifiers": [],
+      "elements": [
+        "mol-tooltip__bubble"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-tooltip-bg",
+        "--component-tooltip-border-radius",
+        "--component-tooltip-color",
+        "--component-tooltip-duration",
+        "--component-tooltip-font-size",
+        "--component-tooltip-line-height",
+        "--component-tooltip-max-width",
+        "--component-tooltip-padding-block",
+        "--component-tooltip-padding-inline",
+        "--component-tooltip-shadow",
+        "--component-tooltip-z-index"
+      ],
+      "description": "[scope: generic] A short sentence that describes a control, on the Popover API: the __bubble is popover=\"hint\" (browsers that do not know hint treat it as manual), so it sits in the top layer above any overflow or z-index. js/syx-tooltip.js opens it on keyboard focus and on hover, keeps it while the pointer is over the control or the bubble, closes it on Escape, blur or leaving, and places it above the control — below if it does not fit — never over it. Position comes from script because CSS anchor positioning is not in the support floor. Colours are text-primary and bg-primary swapped, so contrast holds wherever primary text does. Plain text only.",
+      "usage": "<span class=\"mol-tooltip\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\" aria-describedby=\"tip-share\">Share</button><span class=\"mol-tooltip__bubble\" id=\"tip-share\" role=\"tooltip\" popover=\"hint\">Copies a view-only link to the clipboard</span></span>",
+      "a11y": "aria-describedby on the control points at the bubble, which carries role=\"tooltip\"; for an icon-only control the bubble is its name, so use aria-labelledby instead. WCAG 1.4.13: appears on focus and hover, hoverable (the pointer can move onto it), dismissed by Escape without moving focus or pointer, never covers the control. Nothing focusable inside. Never on a disabled control (no focus, no pointer events). JS: js/syx-tooltip.js (no dependencies); without it the bubble never opens, so do not put essential information only there."
     }
   ],
   "organisms": [

@@ -1,0 +1,73 @@
+// MOLECULE: TOOLTIP
+// ===============================================
+// Una frase que describe un control, sobre la Popover API. La burbuja
+// es un popover="hint" (los navegadores que no conocen «hint» lo tratan
+// como "manual", que es su valor inválido por defecto). La abre
+// js/syx-tooltip.js con el puntero y con el foco, la cierra Escape y
+// la coloca encima del disparador —debajo si arriba no cabe—, nunca
+// sobre él.
+//
+// <span class="mol-tooltip">
+//   <button class="atom-btn" type="button" aria-describedby="tip-1">Compartir</button>
+//   <span class="mol-tooltip__bubble" id="tip-1" role="tooltip" popover="hint">Copia el enlace al portapapeles</span>
+// </span>
+//
+// POR QUÉ LA POSICIÓN LA PONE JS
+// CSS anchor positioning resolvería esto sin script, pero no está en el
+// soporte mínimo (Chrome 111 · Safari 16.2 · Firefox 121). El script
+// mide el disparador y escribe las coordenadas; aquí solo se anula la
+// colocación por defecto de un popover (centrado en la ventana).
+//
+// Accesibilidad — lo que el CSS no puede poner (WCAG 1.4.13):
+// · aria-describedby en el disparador apunta a la burbuja, role="tooltip"
+//   en ella. Si el control solo tiene un icono, la burbuja es su nombre:
+//   aria-labelledby en vez de aria-describedby.
+// · Aparece con el foco y con el puntero; se puede pasar el puntero
+//   encima sin que se cierre; Escape la cierra sin mover nada; no tapa el
+//   disparador. Solo texto: nada enfocable dentro.
+// · Nunca en un control deshabilitado: no recibe ni foco ni puntero.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-tooltip($theme: null) {
+  @layer syx.molecules {
+    .mol-tooltip {
+      display: inline-block;
+
+      &__bubble {
+        // El popover del navegador viene centrado en la ventana (inset: 0 y
+        // margin: auto) y con un borde: se anula, la posición la escribe JS.
+        inset: auto;
+        z-index: var(--component-tooltip-z-index);
+        box-sizing: border-box;
+        max-inline-size: var(--component-tooltip-max-width);
+        margin: 0;
+        padding-block: var(--component-tooltip-padding-block);
+        padding-inline: var(--component-tooltip-padding-inline);
+        overflow: visible;
+        font-size: var(--component-tooltip-font-size);
+        line-height: var(--component-tooltip-line-height);
+        color: var(--component-tooltip-color);
+        text-align: start;
+        background-color: var(--component-tooltip-bg);
+        // Transparente: invisible en color normal, y en colores forzados el
+        // navegador lo repinta, así la burbuja conserva su forma.
+        border: var(--semantic-border-width-thin) solid transparent;
+        border-radius: var(--component-tooltip-border-radius);
+        box-shadow: var(--component-tooltip-shadow);
+        opacity: 1;
+        @include transition(opacity var(--component-tooltip-duration) var(--semantic-easing-out));
+
+        // Entra con un fundido donde hay Popover API y @starting-style; donde
+        // no, aparece sin más. Sale sin transición: una burbuja que tarda en
+        // irse tapa lo que el usuario ya quiere ver.
+        &:popover-open {
+          @starting-style {
+            opacity: 0;
+          }
+        }
+      }
+    }
+  }
+}
