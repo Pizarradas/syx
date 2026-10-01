@@ -41,6 +41,19 @@
   --semantic-color-state-error-text: var(--semantic-color-state-error);
   --semantic-color-state-warning-text: var(--semantic-color-state-warning);
   --semantic-color-state-info-text: var(--semantic-color-state-info);
+
+  // BRAND COLORS — VARIANTE FUERTE (CONTROLES)
+  // ================================================
+  // El relleno de marca también se usa como LÍMITE de un control: el anillo de
+  // foco, el borde de un campo enfocado, el checkbox y el radio marcados, el
+  // indicador de la pestaña activa. WCAG 1.4.11 le pide 3:1 contra el fondo, y
+  // un primario claro (el cian de example-06, L 0,75) se queda en 2,0:1 sobre
+  // blanco. Como con la tinta, no se cambia el primario: se deriva una variante
+  // que solo se mueve si el primario cae fuera de la franja que se lee (más
+  // abajo). Por defecto, el propio relleno.
+  --semantic-color-primary-strong: var(--semantic-color-primary);
+  // El interruptor encendido se pinta con el verde de éxito: mismo problema.
+  --semantic-color-state-success-strong: var(--semantic-color-state-success);
 }
 
 // La tinta se DERIVA del propio color de marca: misma tonalidad y mismo croma,
@@ -73,6 +86,29 @@
   }
 }
 
+// La variante fuerte SUJETA la luminosidad del relleno a una franja alrededor
+// de la de la tinta: ±0,12. Sobre fondo claro (tinta 0,45) la franja es
+// 0,33–0,57; sobre oscuro (tinta 0,80), 0,68–0,92. El 0,57 no es redondo:
+// con 0,60 el verde de example-04 se quedaba en 2,92:1 sobre su bg-secondary
+// salvia. Un primario que ya está
+// dentro sale idéntico —clamp() lo deja pasar—, así que solo cambian los temas
+// cuyo relleno no llega a 3:1, y solo en luminosidad: tono y croma son los
+// suyos. Seguir a la tinta en vez de al modo es lo que hace que funcione en
+// los temas que ya son oscuros en su modo base.
+//
+// El @supports pide clamp() dentro de la sintaxis relativa, no solo la
+// sintaxis: es lo que se usa, y un navegador que tenga una sin la otra se
+// queda con el relleno, que es el comportamiento de antes.
+@supports (color: oklch(from red clamp(0, l, 1) c h)) {
+  :root {
+    --semantic-brand-control-lightness-min: calc(var(--semantic-brand-text-lightness) - 0.12);
+    --semantic-brand-control-lightness-max: calc(var(--semantic-brand-text-lightness) + 0.12);
+
+    --semantic-color-primary-strong: oklch(from var(--semantic-color-primary) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
+    --semantic-color-state-success-strong: oklch(from var(--semantic-color-state-success) clamp(var(--semantic-brand-control-lightness-min), l, var(--semantic-brand-control-lightness-max)) c h);
+  }
+}
+
 // stylelint-disable-next-line no-duplicate-selectors -- segundo :root a propósito: tiene que ir DESPUÉS del bloque @supports de las tintas
 :root {
   // SUPERFICIES: FONDO, TEXTO Y BORDE
@@ -96,10 +132,48 @@
   --semantic-color-text-tertiary: var(--primitive-color-gray-400);
   --semantic-color-text-inverse: var(--primitive-color-white);
   --semantic-color-text-disabled: var(--primitive-color-gray-300);
-  // Tinta sobre un relleno de marca (botón primario, píldora llena). Blanco
-  // por defecto en los dos modos, igual que antes; es temable: un tema cuyo
-  // primario sea claro la redefine en su _theme.scss.
-  --semantic-color-text-on-primary: var(--primitive-color-white);
+
+  // TINTA SOBRE RELLENO (on-color)
+  // ================================================
+  // Lo que va ENCIMA de un relleno de marca: el texto del botón relleno, la
+  // cabecera de tabla, la página activa, la marca del checkbox. Hasta octubre
+  // de 2026 todo eso era --semantic-color-text-inverse, que es «lo contrario
+  // del fondo de la página», no «lo que se lee sobre este relleno»: el blanco
+  // sobre el cian de example-06 daba 2,03:1, y sobre el blanco roto terciario
+  // de example-04, 1,13:1.
+  //
+  // Cada tema tiene dos tintas, una clara y una oscura, y cada relleno elige
+  // la que más contraste le da. Con rellenos en L ≈ 0,60 —la zona muerta donde
+  // ni el blanco ni un gris oscuro llegan a 4,5— la oscura tiene que ser negro
+  // o casi: por eso el valor por defecto es el negro y no el texto del tema.
+  // Un tema puede afinarlas (su tinta más oscura, su blanco roto) siempre que
+  // check:contraste siga en verde.
+  --semantic-color-ink-light: var(--primitive-color-white);
+  --semantic-color-ink-dark: var(--primitive-color-black);
+
+  // La elección no se puede calcular en CSS con el soporte mínimo del sistema
+  // (contrast-color() y la sintaxis relativa llegaron después de Chrome 111,
+  // Safari 16.2 y Firefox 121): la hace check:contraste, que mide cada relleno
+  // en los siete temas y los cuatro estados de modo y, si un par no llega,
+  // dice qué tinta declarar. Aquí, por defecto, el texto inverso de siempre:
+  // un tema que no declare nada pinta exactamente lo que pintaba.
+  --semantic-color-on-primary: var(--semantic-color-text-inverse);
+  --semantic-color-on-secondary: var(--semantic-color-text-inverse);
+  --semantic-color-on-tertiary: var(--semantic-color-text-inverse);
+  --semantic-color-on-quaternary: var(--semantic-color-text-inverse);
+  --semantic-color-on-quinary: var(--semantic-color-text-inverse);
+  // Los rellenos de hover son OTRO color (un peldaño más oscuro en claro) y
+  // pueden pedir la otra tinta. En oscuro el mixin dark-mode-tokens() los
+  // apunta al relleno base, y con ellos su tinta.
+  --semantic-color-on-state-hover-primary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-secondary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-tertiary: var(--semantic-color-text-inverse);
+  --semantic-color-on-state-hover-quaternary: var(--semantic-color-text-inverse);
+  // La variante fuerte (controles marcados) puede caer al otro lado de la zona
+  // muerta que el primario: tiene su propia tinta, por defecto la del primario.
+  --semantic-color-on-primary-strong: var(--semantic-color-on-primary);
+  // Nombre anterior de --semantic-color-on-primary. Se conserva como alias.
+  --semantic-color-text-on-primary: var(--semantic-color-on-primary);
 
   // BORDER COLORS
   // ================================================
@@ -108,8 +182,9 @@
   --semantic-color-border-strong: var(--primitive-color-gray-400);
   // Alias used by form-field-border-focus. Sigue al color primario del tema:
   // antes era pink-500 fijo, un resto de la plantilla, y seis de los siete
-  // temas enfocaban sus campos en rosa sin haberlo decidido nadie.
-  --semantic-color-border-focus: var(--semantic-color-primary);
+  // temas enfocaban sus campos en rosa sin haberlo decidido nadie. Es un
+  // límite de control (1.4.11, 3:1): va a la variante fuerte.
+  --semantic-color-border-focus: var(--semantic-color-primary-strong);
   // Borde de CONTROL: el que delimita un campo, un checkbox o un radio. WCAG
   // 1.4.11 le exige 3:1 contra el fondo, porque es lo único que dice dónde se
   // escribe. border-default es decorativo (1,4–2,4:1 en los temas) y no sirve.
@@ -119,10 +194,12 @@
 
   // LINK COLORS
   // ================================================
-  --semantic-color-link-default: var(--primitive-color-pink-500);
-  --semantic-color-link-hover: var(--primitive-color-purple-500);
-  --semantic-color-link-visited: var(--primitive-color-purple-500);
-  --semantic-color-link-active: var(--primitive-color-pink-500);
+  // El enlace es TEXTO: va a la tinta, no al relleno de marca (que en L 0,60
+  // se queda en 3,3–4,4:1 sobre cualquier fondo).
+  --semantic-color-link-default: var(--semantic-color-primary-text);
+  --semantic-color-link-hover: var(--semantic-color-secondary-text);
+  --semantic-color-link-visited: var(--semantic-color-secondary-text);
+  --semantic-color-link-active: var(--semantic-color-primary-text);
 
   // STATE COLORS - INTERACTIVE
   // ================================================
@@ -133,7 +210,8 @@
   --semantic-color-state-hover-secondary: var(--primitive-color-purple-500);
   --semantic-color-state-hover-tertiary: var(--primitive-color-pink-500);
   --semantic-color-state-hover-quaternary: var(--primitive-color-pink-500);
-  --semantic-focus-ring-color: var(--primitive-color-pink-500);
+  // Anillo de foco: límite de control, variante fuerte del primario.
+  --semantic-focus-ring-color: var(--semantic-color-primary-strong);
   --semantic-color-state-active: var(--primitive-color-purple-500);
   --semantic-color-state-disabled: var(--primitive-color-gray-300);
 
@@ -154,7 +232,7 @@
 
   // FEEDBACK STATE ALIASES — used by form fields, switch, and alert components
   // These point to tone-* tokens and are the "component-facing" contract.
-  --semantic-color-state-focus: var(--primitive-color-pink-500);
+  --semantic-color-state-focus: var(--semantic-focus-ring-color);
   --semantic-color-state-success: var(--semantic-tone-success-bg);
   --semantic-color-state-error: var(--semantic-tone-error-bg);
   --semantic-color-state-warning: var(--semantic-tone-warning-bg);
@@ -162,11 +240,13 @@
 
   // SELECTION COLORS
   // ================================================
-  // White text on primary brand color — high contrast, always readable
-  --semantic-color-selection-text: var(--primitive-color-white);
-  --semantic-color-selection-bg: var(--primitive-color-purple-500);
+  // La selección es un relleno de marca con texto encima: su tinta es la del
+  // primario, no un blanco fijo (que sobre un primario claro no se lee).
+  --semantic-color-selection-text: var(--semantic-color-on-primary);
+  --semantic-color-selection-bg: var(--semantic-color-primary);
 
   // PLACEHOLDER COLORS
   // ================================================
-  --semantic-color-placeholder: var(--primitive-color-purple-500);
+  // El placeholder es texto (4,5:1 sobre el campo): tinta, no relleno.
+  --semantic-color-placeholder: var(--semantic-color-primary-text);
 }

@@ -1,38 +1,8 @@
 {
   "_meta": {
     "descripcion": "Violaciones de axe que se aceptan a sabiendas, acotadas por regla, componente y tema/modo. Cada una lleva su porqué y a quién le toca decidir; sin eso no entra. Vacío es el estado deseado: al arreglar una, se borra su entrada y la prueba vuelve a vigilarla.",
-    "origen": "Primera ejecución de las pruebas en navegador (auditoría 2026-09, acción 17). check:contraste medía 12 pares de tokens y no incluía el color de marca usado como texto de enlace, como relleno bajo texto ni como sintaxis sobre el fondo del código. axe lo encontró en píxeles."
+    "origen": "Primera ejecución de las pruebas en navegador (auditoría 2026-09, acción 17). check:contraste medía 12 pares de tokens y no incluía el color de marca usado como texto de enlace, como relleno bajo texto ni como sintaxis sobre el fondo del código. axe lo encontró en píxeles. Vaciado en la auditoría 2026-10 (acción 2): los cinco pares que se aceptaban (enlace, texto sobre el relleno de marca en botón y cabecera de tabla, sintaxis del código y píldora neutra de example-05) están ahora en contracts/contrast.json y cumplen en los siete temas.",
+    "formato": "Si alguna vez hace falta una excepción, lleva regla, componente, selector concreto, temas (tema/modo), la razón medida como suelo (`ratioMinima`), fecha de caducidad (`caduca`, AAAA-MM-DD) y su porqué. Sin todo eso no entra."
   },
-  "excepciones": [
-    {
-      "regla": "color-contrast",
-      "componente": "feature-card",
-      "temas": ["example-01/light", "example-01/dark", "example-02/light", "example-02/dark", "example-04/light", "example-05/light", "example-05/dark", "example-06/light"],
-      "porque": "El enlace usa --semantic-color-link-default, que en estos temas es el color de marca de relleno (L≈0,60): 3,3–4,5:1. Arreglo propuesto: que el enlace use la tinta derivada (como --semantic-color-primary-text). Decide: quien mantiene los temas (scss/themes/ es human)."
-    },
-    {
-      "regla": "color-contrast",
-      "componente": "dialog",
-      "temas": ["example-01/light", "example-01/dark", "example-02/light", "example-02/dark", "example-03/light", "example-03/dark", "example-04/light", "example-05/light", "example-05/dark", "example-06/light"],
-      "porque": "El botón relleno (.atom-btn--filled, dentro del diálogo) pone --semantic-color-text-inverse sobre el primario de relleno: 3,6–4,5:1. Arreglar exige oscurecer (o aclarar en oscuro) el relleno de marca en esos temas: es una decisión de marca, no de componente."
-    },
-    {
-      "regla": "color-contrast",
-      "componente": "table",
-      "temas": ["example-01/light", "example-01/dark", "example-02/light", "example-02/dark", "example-04/light", "example-05/light", "example-05/dark", "example-06/light"],
-      "porque": "La cabecera de tabla es el mismo par que el botón relleno (texto inverso sobre primario). Se resuelve con la misma decisión de marca."
-    },
-    {
-      "regla": "color-contrast",
-      "componente": "code",
-      "temas": ["example-01/light", "example-01/dark", "example-02/light", "example-02/dark", "example-03/light", "example-03/dark", "example-05/light", "example-05/dark"],
-      "porque": "--component-code-syntax-tag es el primario de relleno sobre el fondo del código, que siempre es oscuro: 3,9–4,4:1. _surfaces.scss ya avisa de que un tema con marca oscura debe redefinirlo; estos no lo hacen. Decide: temas."
-    },
-    {
-      "regla": "color-contrast",
-      "componente": "label-group",
-      "temas": ["example-05/light"],
-      "porque": "La píldora neutra pone --semantic-color-text-secondary sobre --semantic-color-bg-tertiary: 3,2:1 en example-05 claro. El par no estaba en contracts/contrast.json. Decide: tema."
-    }
-  ]
+  "excepciones": []
 }

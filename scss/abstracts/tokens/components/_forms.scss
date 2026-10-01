@@ -92,7 +92,9 @@
   --component-check-border-color: var(--semantic-color-border-control);
   --component-check-border-color-hover: var(--semantic-color-primary);
   --component-check-color-checked: var(--semantic-color-primary);
-  --component-check-bg-checked: var(--semantic-color-primary);
+  --component-check-bg-checked: var(--semantic-color-primary-strong); // 1.4.11: el relleno marcado ES el límite del control
+  // La marca (el ✓) sobre ese relleno: también 3:1. Antes era el texto inverso.
+  --component-check-mark-color: var(--semantic-color-on-primary-strong);
   // Fondo del checkbox sin marcar: solo existia --component-check-bg-checked, asi que el control se pintaba transparente sobre cualquier superficie
   --component-check-bg: var(--semantic-color-bg-primary);
   --component-check-shadow-focus: var(--semantic-shadow-focus);
@@ -115,7 +117,8 @@
   --component-radio-border-color: var(--semantic-color-border-control);
   --component-radio-border-color-hover: var(--semantic-color-primary);
   --component-radio-color-checked: var(--semantic-color-primary);
-  --component-radio-bg-checked: var(--semantic-color-primary);
+  --component-radio-bg-checked: var(--semantic-color-primary-strong); // 1.4.11, como el checkbox
+  --component-radio-dot-color: var(--semantic-color-on-primary-strong);
   // Fondo del radio sin marcar: mismo caso que el checkbox, solo existia --component-radio-bg-checked
   --component-radio-bg: var(--semantic-color-bg-primary);
 
@@ -130,7 +133,7 @@
   // SWITCH: COLORS
   // ================================================
   --component-switch-bg-off: var(--semantic-color-bg-tertiary);
-  --component-switch-bg-on: var(--semantic-color-state-success);
+  --component-switch-bg-on: var(--semantic-color-state-success-strong); // 1.4.11: variante fuerte del verde
   --component-switch-border-color: var(--semantic-color-border-control);
   --component-switch-status-disabled-opacity: 0.5;
 

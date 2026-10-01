@@ -15,10 +15,13 @@
 
   // BUTTON: PRIMARY FILLED
   // ================================================
-  --component-button-primary-filled-color: var(--semantic-color-text-inverse);
+  // El texto de un relleno es su tinta on-* (la que el tema eligió midiendo),
+  // no el texto inverso de la página: ver «Tinta sobre relleno» en
+  // semantic/_colors.scss. El hover es otro relleno y lleva la suya.
+  --component-button-primary-filled-color: var(--semantic-color-on-primary);
   --component-button-primary-filled-bg: var(--semantic-color-primary);
   --component-button-primary-filled-border: var(--semantic-color-primary);
-  --component-button-primary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-primary-filled-color-hover: var(--semantic-color-on-state-hover-primary);
   --component-button-primary-filled-bg-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-filled-border-hover: var(--semantic-color-state-hover-primary);
 
@@ -33,10 +36,10 @@
 
   // BUTTON: SECONDARY FILLED
   // ================================================
-  --component-button-secondary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
   --component-button-secondary-filled-bg: var(--semantic-color-secondary);
   --component-button-secondary-filled-border: var(--semantic-color-secondary);
-  --component-button-secondary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-secondary-filled-color-hover: var(--semantic-color-on-state-hover-secondary);
   --component-button-secondary-filled-bg-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-filled-border-hover: var(--semantic-color-state-hover-secondary);
 
@@ -51,10 +54,10 @@
 
   // BUTTON: TERTIARY FILLED
   // ================================================
-  --component-button-tertiary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-tertiary-filled-color: var(--semantic-color-on-tertiary);
   --component-button-tertiary-filled-bg: var(--semantic-color-tertiary);
   --component-button-tertiary-filled-border: var(--semantic-color-tertiary);
-  --component-button-tertiary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-tertiary-filled-color-hover: var(--semantic-color-on-state-hover-tertiary);
   --component-button-tertiary-filled-bg-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-filled-border-hover: var(--semantic-color-state-hover-tertiary);
 
@@ -69,10 +72,10 @@
 
   // BUTTON: QUATERNARY FILLED
   // ================================================
-  --component-button-quaternary-filled-color: var(--semantic-color-text-inverse);
+  --component-button-quaternary-filled-color: var(--semantic-color-on-quaternary);
   --component-button-quaternary-filled-bg: var(--semantic-color-quaternary);
   --component-button-quaternary-filled-border: var(--semantic-color-quaternary);
-  --component-button-quaternary-filled-color-hover: var(--semantic-color-text-inverse);
+  --component-button-quaternary-filled-color-hover: var(--semantic-color-on-state-hover-quaternary);
   --component-button-quaternary-filled-bg-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-filled-border-hover: var(--semantic-color-state-hover-quaternary);
 

@@ -88,8 +88,21 @@
     --semantic-color-tertiary: var(--primitive-color-blue-500);
     --semantic-color-quaternary: var(--primitive-color-green-500);
     --semantic-color-quinary: var(--primitive-color-yellow-500);
-    --semantic-color-placeholder: var(--semantic-color-primary);
-    --semantic-color-link-default: var(--primitive-color-pink-500);
+
+    // Tinta sobre relleno (on-*): la que da ≥ 4,5:1 sobre cada relleno de
+    // marca, elegida por check:contraste. El relleno no cambia; cambia lo que
+    // va encima. Los que no aparecen se quedan en el texto inverso.
+    --semantic-color-on-primary: var(--semantic-color-ink-dark);
+    --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+    --semantic-color-on-tertiary: var(--semantic-color-ink-dark);
+    --semantic-color-on-quaternary: var(--semantic-color-ink-dark);
+    --semantic-color-on-quinary: var(--semantic-color-ink-dark);
+    --semantic-color-on-state-hover-primary: var(--semantic-color-ink-dark);
+    --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-dark);
+    --semantic-color-on-state-hover-tertiary: var(--semantic-color-ink-dark);
+    --semantic-color-on-state-hover-quaternary: var(--semantic-color-ink-dark);
+    --semantic-color-placeholder: var(--semantic-color-primary-text); // texto: tinta, no relleno
+    --semantic-color-link-default: var(--semantic-color-secondary-text); // el rosa, como tinta: pink-500 daba 3,80:1 sobre bg-secondary
 
     // Colors - State
     --semantic-color-state-disabled: var(--primitive-color-disabled);
@@ -310,7 +323,7 @@
     // modo oscuro si el sistema ya estaba en oscuro, o sea justo cuando el
     // botón no hacía falta.
     @include dark-mode-tokens();
-    --semantic-color-border-focus: var(--semantic-color-primary);
+    --semantic-color-border-focus: var(--semantic-color-primary-strong);
     --btn-primary-filled-text: oklch(0.193 0.069 300.442);
     --btn-secondary-filled-text: oklch(0.193 0.069 300.442);
   }

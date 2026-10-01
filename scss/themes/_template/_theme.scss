@@ -69,7 +69,10 @@
     --semantic-tone-error-bg: var(--primitive-color-error-500);
     --semantic-tone-warning-bg: var(--primitive-color-warning-500);
     --semantic-color-state-disabled: var(--primitive-color-disabled);
-    --semantic-focus-ring-color: var(--semantic-color-primary);
+    // Anillo de foco: la variante fuerte del primario (1.4.11, 3:1 sobre el
+    // fondo). Si tu primario ya llega, sale idéntica; si es muy claro, se
+    // oscurece lo justo sin cambiar de tono.
+    --semantic-focus-ring-color: var(--semantic-color-primary-strong);
     --semantic-color-state-hover-primary: var(--semantic-color-secondary);
 
     // Filters
@@ -104,6 +107,19 @@
     --btn-primary-text: var(--semantic-color-primary);
     --btn-primary-filled-text: var(--primitive-color-white);
 
+    // TINTA SOBRE RELLENO (on-*)
+    // Lo que va ENCIMA de cada relleno de marca (botón relleno, cabecera de
+    // tabla, página activa…). Elige entre la tinta clara y la oscura del tema
+    // la que dé ≥ 4,5:1 sobre ese relleno; no cambies el relleno para cuadrar.
+    // `npm run check:contraste` mide cada par y, si uno no llega, dice qué
+    // tinta declarar. Los que no declares se quedan en el texto inverso.
+    // --semantic-color-ink-light: var(--primitive-color-white);   // por defecto
+    // --semantic-color-ink-dark: var(--primitive-color-black);    // por defecto; tu casi-negro si llega
+    // Con los valores de esta plantilla: slate-700 lleva la clara (9,0:1);
+    // slate-500 (4,2:1 con blanco) y el ámbar terciario, la oscura.
+    --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+    --semantic-color-on-tertiary: var(--semantic-color-ink-dark);
+
     // Forms
     --form-font-family: var(--font-weight-2);
     --form-font-size: calc(2 * var(--base-measure));
@@ -136,7 +152,7 @@
     --btn-primary-bg-hover: oklch(0.312 0.024 256.824);
     --btn-secondary-bg-hover: oklch(0.453 0.029 256.809);
 
-    // BORDER FOCUS — azul sutil, accesible
+    // BORDER FOCUS — azul sutil, accesible (3,9:1 sobre blanco; 1.4.11 pide 3)
     --semantic-color-border-focus: oklch(0.593 0.159 252.507);
 
     // LINK COLORS — azul estándar, familiar, sin marca
@@ -158,8 +174,10 @@
     --semantic-border-radius-lg: 0.625rem; // 10px — cards
     --semantic-border-radius-circle: 9999px; // pills, switches
 
-    // PLACEHOLDER
-    --semantic-color-placeholder: oklch(0.715 0.021 256.747);
+    // PLACEHOLDER — es texto y pide 4,5:1 sobre el campo. El gris claro que
+    // había aquí (0.715) daba 2,5:1; el secundario de la plantilla da ~6:1.
+    // Con marca propia, la tinta: var(--semantic-color-primary-text).
+    --semantic-color-placeholder: var(--semantic-color-text-secondary);
 
     // Add more component-specific variables as needed...
   }

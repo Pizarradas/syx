@@ -153,16 +153,13 @@
         }
 
         // &-primary
+        // Los rellenos de marca llevan su tinta on-*: el texto que se ponga
+        // encima la hereda. Antes solo example-01 y -02 ponían blanco (4,3:1
+        // en example-01, por debajo de AA) y el resto heredaba el texto de la
+        // página, oscuro o claro según el modo, sin mirar el relleno.
         &-primary {
           background-color: var(--semantic-color-primary);
-
-          @if $theme == 'example-02' {
-            color: var(--primitive-color-white);
-          }
-
-          @if $theme == example-01 {
-            color: var(--primitive-color-white);
-          }
+          color: var(--semantic-color-on-primary);
 
           // &-lt
           &-lt {
@@ -176,6 +173,7 @@
         // &-secondary
         &-secondary {
           background-color: var(--semantic-color-secondary);
+          color: var(--semantic-color-on-secondary);
 
           // &-lt
           &-lt {
@@ -189,16 +187,19 @@
         // &-tertiary
         &-tertiary {
           background-color: var(--semantic-color-tertiary);
+          color: var(--semantic-color-on-tertiary);
         }
 
         // &-quaternary
         &-quaternary {
           background-color: var(--semantic-color-quaternary);
+          color: var(--semantic-color-on-quaternary);
         }
 
         // &-quinary
         &-quinary {
           background-color: var(--semantic-color-quinary);
+          color: var(--semantic-color-on-quinary);
         }
       }
     }

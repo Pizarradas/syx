@@ -105,8 +105,22 @@
     --semantic-color-tertiary: var(--primitive-color-silver-300);
     --semantic-color-quaternary: var(--primitive-color-gold-600);
     --semantic-color-quinary: var(--primitive-color-midnight-600);
-    --semantic-color-placeholder: var(--semantic-color-primary);
-    --semantic-color-link-default: var(--primitive-color-gold-500);
+
+    // Tinta sobre relleno (on-*): la que da ≥ 4,5:1 sobre cada relleno de
+    // marca, elegida por check:contraste. El relleno no cambia; cambia lo que
+    // va encima. Los que no aparecen se quedan en el texto inverso.
+    --semantic-color-on-primary: var(--semantic-color-ink-dark);
+    --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+    --semantic-color-on-tertiary: var(--semantic-color-ink-dark);
+    --semantic-color-on-quaternary: var(--semantic-color-ink-light);
+    --semantic-color-on-quinary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-primary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-tertiary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-quaternary: var(--semantic-color-ink-light);
+    --semantic-color-on-primary-strong: var(--semantic-color-ink-dark);
+    --semantic-color-placeholder: var(--semantic-color-primary-text); // texto: tinta, no relleno
+    --semantic-color-link-default: var(--semantic-color-primary-text); // el oro, como tinta: gold-500 daba 4,39:1
 
     // Deprecated mappings
 
@@ -120,7 +134,7 @@
     --semantic-tone-success-bg: var(--primitive-color-success-500);
     --semantic-tone-error-bg: var(--primitive-color-error-500);
     --semantic-tone-warning-bg: var(--primitive-color-warning-500);
-    --semantic-color-selection-text: var(--primitive-color-dark-900);
+    --semantic-color-selection-text: var(--semantic-color-on-primary);
     --semantic-color-selection-bg: var(--primitive-color-gold-500);
     --reset-selection-color: var(--semantic-color-selection-text);
     --reset-selection-bg: var(--semantic-color-selection-bg);
@@ -319,7 +333,7 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
-      --semantic-color-link-default: var(--primitive-color-gold-500);
+      --semantic-color-link-default: var(--semantic-color-primary-text); // el oro, como tinta: gold-500 daba 4,39:1
       --semantic-color-link-hover: var(--primitive-color-silver-300);
       --semantic-color-link-visited: var(--primitive-color-gold-600);
       --semantic-color-link-active: var(--primitive-color-silver-100);
@@ -333,7 +347,7 @@
       --btn-quaternary-bg-hover: var(--primitive-color-gold-600);
 
       --semantic-color-selection-bg: var(--primitive-color-gold-500);
-      --semantic-color-selection-text: var(--primitive-color-dark-900);
+      --semantic-color-selection-text: var(--semantic-color-on-primary);
 
       --btn-primary-filled-text: var(--primitive-color-dark-900);
       --btn-secondary-filled-text: var(--primitive-color-silver-300);
@@ -349,8 +363,8 @@
     // modo oscuro si el sistema ya estaba en oscuro, o sea justo cuando el
     // botón no hacía falta.
     @include dark-mode-tokens();
-    --semantic-color-border-focus: var(--semantic-color-primary);
-    --semantic-color-link-default: var(--primitive-color-gold-500);
+    --semantic-color-border-focus: var(--semantic-color-primary-strong);
+    --semantic-color-link-default: var(--semantic-color-primary-text); // el oro, como tinta: gold-500 daba 4,39:1
     --semantic-color-link-hover: var(--primitive-color-silver-300);
     --semantic-color-link-visited: var(--primitive-color-gold-600);
     --semantic-color-link-active: var(--primitive-color-silver-100);
@@ -364,7 +378,7 @@
     --btn-quaternary-bg-hover: var(--primitive-color-gold-600);
 
     --semantic-color-selection-bg: var(--primitive-color-gold-500);
-    --semantic-color-selection-text: var(--primitive-color-dark-900);
+    --semantic-color-selection-text: var(--semantic-color-on-primary);
 
     --btn-primary-filled-text: var(--primitive-color-dark-900);
     --btn-secondary-filled-text: var(--primitive-color-silver-300);
@@ -378,7 +392,7 @@
     --semantic-color-bg-tertiary: var(--primitive-color-dark-700);
     --semantic-color-bg-inverse: var(--primitive-color-silver-300);
     --semantic-color-text-primary: var(--primitive-color-silver-300);
-    --semantic-color-text-secondary: var(--primitive-color-silver-400); // era silver-500 → 4,39:1
+    --semantic-color-text-secondary: var(--primitive-color-silver-200); // silver-400 daba 3,19:1 sobre bg-tertiary (píldora neutra); era silver-500 → 4,39:1
     --semantic-color-text-tertiary: var(--primitive-color-dark-400); // era dark-600 → 3,01:1
     --semantic-color-text-inverse: var(--primitive-color-dark-900);
     --semantic-color-text-disabled: var(--primitive-color-disabled);

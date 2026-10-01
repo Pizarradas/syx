@@ -52,7 +52,7 @@ Tier 2 — Semantic        scss/abstracts/tokens/semantic/
 Tier 3 — Component       scss/abstracts/tokens/components/
   Per-component contracts. One file per component.
   --component-button-primary-filled-bg: var(--semantic-color-primary);
-  --component-button-primary-filled-color: var(--semantic-color-text-on-primary);
+  --component-button-primary-filled-color: var(--semantic-color-on-primary);
   ↓ only referenced by the matching component SCSS file
 
 Tier 4 — Page/Override   scss/pages/ or inline in themes

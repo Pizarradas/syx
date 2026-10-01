@@ -69,8 +69,19 @@
   --semantic-color-link-active: var(--primitive-color-blue-500);
   --semantic-color-state-hover-primary: var(--primitive-color-blue-600);
   --semantic-color-state-hover-secondary: var(--primitive-color-green-500);
+  // Tinta sobre relleno (on-*), elegida por check:contraste. El verde
+  // secundario es claro: el blanco daba 2,08:1 y pasa a la tinta del tema
+  // (16,5:1 de texto, ~8:1 sobre el verde). Rojo quinario: blanco en los
+  // dos modos. Lo que no aparece sigue en el texto inverso, que ya llegaba.
+  // Al no redeclararse en el oscuro, valen para los dos modos.
+  --semantic-color-ink-dark: var(--primitive-color-ink);
+  --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+  --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-dark);
+  --semantic-color-on-quinary: var(--semantic-color-ink-light);
   --semantic-focus-ring-color: var(--semantic-color-primary);
-  --semantic-color-placeholder: var(--primitive-color-gray-500);
+  // gray-500 se quedaba en 3,5:1 sobre el campo blanco; el placeholder es
+  // texto y pide 4,5. El terciario del tema (gray-600) da 5,5.
+  --semantic-color-placeholder: var(--semantic-color-text-tertiary);
   --component-button-primary-filled-bg: var(--semantic-color-primary);
   --component-button-primary-filled-border: var(--semantic-color-primary);
   --component-button-primary-filled-color: var(--semantic-color-text-inverse);
@@ -121,6 +132,9 @@
   --component-table-base-th-bg: var(--semantic-color-bg-secondary);
   --component-table-bg-th: var(--semantic-color-bg-inverse);
   --component-table-state-hover-bg: var(--primitive-color-blue-50);
+  // Este tema pinta el hover de la celda con un tinte suave, no con el
+  // relleno de hover: el texto sigue siendo el de la página.
+  --component-table-state-hover-color: var(--semantic-color-text-primary);
   --semantic-bg-grid-color: color-mix(in srgb, var(--primitive-color-blue-500) 9%, transparent);
   --semantic-tone-error-bg: var(--primitive-color-error-500);
   --semantic-tone-success-bg: var(--primitive-color-success-500);

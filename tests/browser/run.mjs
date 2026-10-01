@@ -96,11 +96,26 @@ function servir() {
 
 // ─── axe ─────────────────────────────────────────────────────────────────────
 
+// Una excepción acota un fallo concreto, no una familia: regla, componente,
+// selector, temas, razón medida (para contraste) y caducidad. Hasta octubre de
+// 2026 bastaban regla y componente, y 50 violaciones vivían bajo cinco
+// entradas sin fecha. La que no trae todo, o ya caducó, para la ejecución.
 const excepciones = JSON.parse(fs.readFileSync(path.join(AQUI, 'axe-excepciones.json'), 'utf8')).excepciones;
+const hoy = new Date().toISOString().slice(0, 10);
+for (const e of excepciones) {
+  const falta = ['regla', 'componente', 'selector', 'temas', 'caduca', 'porque']
+    .concat(e.regla === 'color-contrast' ? ['ratioMinima'] : [])
+    .filter((k) => !e[k]);
+  if (falta.length) { console.error(`❌ axe-excepciones.json: a una excepción le falta ${falta.join(', ')}.`); process.exit(2); }
+  if (e.caduca < hoy) { console.error(`❌ axe-excepciones.json: la excepción de ${e.componente} (${e.selector}) caducó el ${e.caduca}.`); process.exit(2); }
+}
 const exceptuada = (v) => excepciones.some((e) =>
   e.regla === v.regla &&
-  (!e.componente || e.componente === v.componente) &&
-  (!e.temas || e.temas.includes(`${v.tema}/${v.modo}`)));
+  e.componente === v.componente &&
+  v.objetivo.includes(e.selector) &&
+  e.temas.includes(`${v.tema}/${v.modo}`) &&
+  // La razón medida es un suelo: si empeora, deja de estar cubierta.
+  (e.ratioMinima === undefined || ((/contrast of ([\d.]+)/.exec(v.resumen) || [])[1] ?? 0) >= e.ratioMinima));
 
 async function axe(page) {
   await page.addScriptTag({ path: require.resolve('axe-core/axe.min.js') });

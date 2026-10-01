@@ -87,8 +87,11 @@ p {
   color: var(--semantic-color-text-primary);
 }
 
+// El enlace es texto: lleva el token de enlace (que apunta a la tinta de
+// marca), no el relleno. Con --semantic-color-primary daba 3,3–4,4:1 en seis
+// temas (axe, tarjeta de característica).
 a:not([class*="atom-btn"]) {
-  color: var(--semantic-color-primary);
+  color: var(--semantic-color-link-default);
   text-decoration: none;
   font-weight: var(--primitive-font-weight-medium);
   @include transition(color 0.2s ease);

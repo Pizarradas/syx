@@ -14,6 +14,13 @@
  * Un valor que no se puede leer (una función de color que el script no
  * conoce) se informa como «sin medir» y NO cuenta como aprobado.
  *
+ * Los pares de texto sobre relleno de marca (on-*) traen `alternativas`: las
+ * dos tintas del tema. Cuando uno no llega, el informe dice cuál de ellas sí
+ * llegaría, para que el tema la declare. El color de una tinta sobre un
+ * relleno no se puede calcular en CSS con el soporte mínimo del sistema
+ * (contrast-color() y la sintaxis relativa son posteriores), así que se elige
+ * aquí, midiendo, y queda escrito en el tema.
+ *
  * Uso: node scripts/check-contraste.js [--json]
  * ----------------------------------------------------------------------------
  */
@@ -33,6 +40,15 @@ const ESTADOS = [
   ['oscuro elegido', 'dark', 'light'],
 ];
 
+/** La primera alternativa del par que sí llega al mínimo sobre ese fondo, con su razón. */
+function sugerir(vars, par, bg) {
+  for (const alt of par.alternativas || []) {
+    const r = contraste(resolver(vars, vars[alt]), bg);
+    if (r !== null && r >= par.minimo) return `${par.primerPlano}: var(${alt}) → ${r.toFixed(2)}:1`;
+  }
+  return null;
+}
+
 function main() {
   const json = process.argv.includes('--json');
   const ficheros = fs.readdirSync(CSS_DIR).filter((f) => /^styles-theme-.+\.css$/.test(f)).sort();
@@ -48,7 +64,7 @@ function main() {
         const r = contraste(fg, bg);
         medidas++;
         if (r === null) sinMedir.push({ tema, estado: nombre, par: par.id, fg, bg });
-        else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio });
+        else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio, sugerencia: sugerir(vars, par, bg) });
       }
     }
   }
@@ -56,7 +72,10 @@ function main() {
     console.log(JSON.stringify({ medidas, fallos, sinMedir }, null, 2));
   } else {
     console.log('\n── CONTRASTE WCAG 2.2 AA ' + '─'.repeat(39) + '\n');
-    for (const x of fallos) console.log(`❌ ${x.tema.padEnd(11)} ${x.estado.padEnd(15)} ${x.par.padEnd(34)} ${x.ratio.toFixed(2)}:1 < ${x.minimo}:1 (${x.criterio})`);
+    for (const x of fallos) {
+      console.log(`❌ ${x.tema.padEnd(11)} ${x.estado.padEnd(15)} ${x.par.padEnd(34)} ${x.ratio.toFixed(2)}:1 < ${x.minimo}:1 (${x.criterio})`);
+      if (x.sugerencia) console.log(`   ${' '.repeat(28)}→ en el tema: ${x.sugerencia}`);
+    }
     for (const x of sinMedir) console.log(`⚠️  ${x.tema.padEnd(11)} ${x.estado.padEnd(15)} ${x.par.padEnd(34)} sin medir: ${x.fg || '(vacío)'} / ${x.bg || '(vacío)'}`);
     if (!fallos.length && !sinMedir.length) console.log(`✅ ${CONTRATO.pares.length} pares × ${ficheros.length} temas × ${ESTADOS.length} estados — todo cumple`);
     console.log(`\n   ${medidas} medidas · ${fallos.length} por debajo del mínimo · ${sinMedir.length} sin medir\n`);

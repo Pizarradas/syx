@@ -130,6 +130,16 @@ Verde = éxito y rojo = error son convenciones cognitivas universales (semáforo
 
 ---
 
+### 7. El relleno de marca no se toca: se ajusta lo que va encima
+
+Un `*-500` en L ≈ 0,60 no llega a 4,5:1 ni con blanco ni con gris oscuro. En vez de mover el relleno (la marca), SYX separa los trabajos:
+
+- **Texto encima del relleno:** `--semantic-color-on-{rol}` (y `on-state-hover-*`). El tema elige `--semantic-color-ink-light` o `--semantic-color-ink-dark`; `check:contraste` mide y sugiere cuál.
+- **El color como texto:** `--semantic-color-{rol}-text`, derivado con `oklch(from … var(--semantic-brand-text-lightness) c h)`.
+- **Límite de control (3:1):** `--semantic-color-primary-strong`, `oklch(from … clamp(min, l, max) c h)`: solo se mueve si el relleno cae fuera de la franja.
+
+---
+
 ## checklist
 
 - [ ] ¿Los primitivos usan `oklch()` (no hex, no hsl)?
@@ -140,3 +150,4 @@ Verde = éxito y rojo = error son convenciones cognitivas universales (semáforo
 - [ ] ¿El dark mode tiene bg-primary como el más oscuro (L más bajo)?
 - [ ] ¿Los tokens de estado son independientes del color de marca?
 - [ ] ¿El contraste `text-primary` / `bg-primary` ≥ 4.5:1?
+- [ ] ¿El texto sobre un relleno de marca usa `--semantic-color-on-*` (no `text-inverse`) y `check:contraste` está en verde?

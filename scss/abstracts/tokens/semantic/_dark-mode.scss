@@ -46,15 +46,18 @@
 
   // LINK COLORS
   // ================================================
-  --semantic-color-link-default: var(--semantic-color-primary);
-  --semantic-color-link-hover: var(--semantic-color-secondary);
-  --semantic-color-link-visited: var(--semantic-color-tertiary);
-  --semantic-color-link-active: var(--semantic-color-primary);
+  // Tinta, no relleno: con --semantic-brand-text-lightness en 0,80 (más
+  // abajo) la tinta ya es la versión clara del color de marca.
+  --semantic-color-link-default: var(--semantic-color-primary-text);
+  --semantic-color-link-hover: var(--semantic-color-secondary-text);
+  --semantic-color-link-visited: var(--semantic-color-tertiary-text);
+  --semantic-color-link-active: var(--semantic-color-primary-text);
 
   // STATE COLORS - INTERACTIVE
   // ================================================
-  // Focus ring: slightly brighter for dark bg contrast
-  --semantic-focus-ring-color: var(--semantic-color-primary);
+  // Anillo de foco: la variante fuerte, que en oscuro sube la luminosidad del
+  // primario si hace falta para llegar a 3:1 sobre el fondo.
+  --semantic-focus-ring-color: var(--semantic-color-primary-strong);
   --semantic-color-state-active: var(--semantic-color-secondary);
   --semantic-color-state-disabled: var(--primitive-color-gray-600);
 
@@ -63,15 +66,22 @@
   --semantic-color-state-hover-secondary: var(--semantic-color-secondary);
   --semantic-color-state-hover-tertiary: var(--semantic-color-primary);
   --semantic-color-state-hover-quaternary: var(--semantic-color-primary);
+  // …y su tinta encima sigue al relleno al que apuntan.
+  --semantic-color-on-state-hover-primary: var(--semantic-color-on-primary);
+  --semantic-color-on-state-hover-secondary: var(--semantic-color-on-secondary);
+  --semantic-color-on-state-hover-tertiary: var(--semantic-color-on-primary);
+  --semantic-color-on-state-hover-quaternary: var(--semantic-color-on-primary);
 
   // PLACEHOLDER
   // ================================================
-  --semantic-color-placeholder: var(--primitive-color-gray-500);
+  // Tinta de marca, como en claro. gray-500 se quedaba en 4,39:1 sobre los
+  // campos oscuros.
+  --semantic-color-placeholder: var(--semantic-color-primary-text);
 
   // SELECTION
   // ================================================
-  // Dark bg: white text on primary brand color — always readable
-  --semantic-color-selection-text: var(--primitive-color-white);
+  // Relleno de marca con texto encima: la tinta que el tema eligió para él.
+  --semantic-color-selection-text: var(--semantic-color-on-primary);
   --semantic-color-selection-bg: var(--semantic-color-primary);
 
   // SHADOWS

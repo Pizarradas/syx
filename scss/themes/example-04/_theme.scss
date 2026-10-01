@@ -92,14 +92,27 @@
     --semantic-color-tertiary: var(--primitive-color-moss-900);
     --semantic-color-quaternary: var(--primitive-color-forest-600);
     --semantic-color-quinary: var(--primitive-color-earth-600);
-    --semantic-color-placeholder: var(--semantic-color-primary);
-    --semantic-color-link-default: var(--primitive-color-forest-500);
+
+    // Tinta sobre relleno (on-*): la que da ≥ 4,5:1 sobre cada relleno de
+    // marca, elegida por check:contraste. El relleno no cambia; cambia lo que
+    // va encima. Los que no aparecen se quedan en el texto inverso.
+    --semantic-color-on-primary: var(--semantic-color-ink-dark);
+    --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+    --semantic-color-on-tertiary: var(--semantic-color-ink-light);
+    --semantic-color-on-quaternary: var(--semantic-color-ink-light);
+    --semantic-color-on-quinary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-primary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-tertiary: var(--semantic-color-ink-light);
+    --semantic-color-on-state-hover-quaternary: var(--semantic-color-ink-light);
+    --semantic-color-placeholder: var(--semantic-color-primary-text); // texto: tinta, no relleno
+    --semantic-color-link-default: var(--semantic-color-primary-text); // el verde, como tinta: forest-500 daba 3,28:1
 
     // Deprecated mappings
 
     // Colors - State
     --semantic-color-state-disabled: var(--primitive-color-disabled);
-    --semantic-focus-ring-color: var(--primitive-color-forest-500);
+    --semantic-focus-ring-color: var(--semantic-color-primary-strong); // 1.4.11: forest-500 daba 2,92:1 en claro
     --semantic-color-state-hover-primary: var(--primitive-color-forest-600);
     --semantic-color-state-hover-secondary: var(--primitive-color-earth-600);
     --semantic-color-state-hover-tertiary: var(--primitive-color-forest-600);
@@ -107,7 +120,7 @@
     --semantic-tone-success-bg: var(--primitive-color-success-500);
     --semantic-tone-error-bg: var(--primitive-color-error-500);
     --semantic-tone-warning-bg: var(--primitive-color-warning-500);
-    --semantic-color-selection-text: var(--primitive-color-white);
+    --semantic-color-selection-text: var(--semantic-color-on-primary);
     --semantic-color-selection-bg: var(--primitive-color-forest-500);
     --reset-selection-color: var(--semantic-color-selection-text);
     --reset-selection-bg: var(--semantic-color-selection-bg);
@@ -298,7 +311,7 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       @include dark-mode-tokens();
-      --semantic-color-link-default: var(--primitive-color-earth-500);
+      --semantic-color-link-default: var(--semantic-color-secondary-text); // la tierra, como tinta: earth-500 daba 3,42:1
       --semantic-color-link-hover: var(--primitive-color-forest-50);
       --semantic-color-link-visited: var(--primitive-color-forest-500);
       --semantic-color-link-active: var(--primitive-color-earth-600);
@@ -309,6 +322,7 @@
       --btn-tertiary-bg-hover: var(--primitive-color-earth-500);
       --btn-quaternary-bg-hover: var(--primitive-color-earth-500);
       --semantic-color-selection-bg: var(--primitive-color-forest-600);
+      --semantic-color-selection-text: var(--semantic-color-on-quaternary); // el relleno de la selección aquí es el cuaternario
       --btn-primary-filled-text: oklch(0.161 0.013 144.936);
       --btn-secondary-filled-text: oklch(0.161 0.013 144.936); // dark text on earth-green
     }
@@ -323,8 +337,8 @@
     // modo oscuro si el sistema ya estaba en oscuro, o sea justo cuando el
     // botón no hacía falta.
     @include dark-mode-tokens();
-    --semantic-color-border-focus: var(--semantic-color-primary);
-    --semantic-color-link-default: var(--primitive-color-earth-500);
+    --semantic-color-border-focus: var(--semantic-color-primary-strong);
+    --semantic-color-link-default: var(--semantic-color-secondary-text); // la tierra, como tinta: earth-500 daba 3,42:1
     --semantic-color-link-hover: var(--primitive-color-forest-50);
     --semantic-color-link-visited: var(--primitive-color-forest-500);
     --semantic-color-link-active: var(--primitive-color-earth-600);
@@ -335,6 +349,7 @@
     --btn-tertiary-bg-hover: var(--primitive-color-earth-500);
     --btn-quaternary-bg-hover: var(--primitive-color-earth-500);
     --semantic-color-selection-bg: var(--primitive-color-forest-600);
+    --semantic-color-selection-text: var(--semantic-color-on-quaternary); // el relleno de la selección aquí es el cuaternario
     --btn-primary-filled-text: oklch(0.161 0.013 144.936);
     --btn-secondary-filled-text: oklch(0.161 0.013 144.936); // dark text on earth-green
   }
