@@ -318,9 +318,18 @@
           margin-block-start: 0.5rem;
         }
 
+        // Los ejemplos van en una línea mientras caben: el reparto en filas
+        // del flex los mueve enteros a la siguiente antes de partir ninguno.
+        // Solo el que no cabe ni solo en su fila se parte (por los guiones,
+        // o donde sea). Con `nowrap`, el más largo
+        // (--component-button-primary-filled-color, 320 px) fijaba el ancho
+        // mínimo de la columna 1fr de la tarjeta y a 320 px la página medía
+        // 369: título, descripción y código salían de la ventana (WCAG
+        // 1.4.10, tests/browser/reflow.mjs). Auditoría 2026-10.
         .atom-code {
           font-size: 0.72rem;
-          white-space: nowrap;
+          white-space: normal;
+          overflow-wrap: anywhere;
         }
       }
 
