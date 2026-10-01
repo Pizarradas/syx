@@ -43,3 +43,10 @@ dist/
 # Pruebas en navegador: capturas y diferencias se regeneran en cada ejecución.
 tests/browser/out/
 tests/browser/diferencias/
+
+# Ejecuciones de scripts/eval-runner.js: transcripciones, respuestas y salida
+# cruda de cada agente. Pesan, cambian en cada ejecución y pueden traer lo que
+# el agente leyó. Solo se versiona el RESUMEN.md de cada una, que es lo que
+# sirve para comparar un modo o un modelo con el anterior.
+_agents/evals/runs/*/*
+!_agents/evals/runs/*/RESUMEN.md
