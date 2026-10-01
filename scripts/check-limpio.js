@@ -63,6 +63,9 @@ if (sucioAntes.length) {
 
 try {
   execFileSync('npm', ['run', 'build:css'], { cwd: ROOT, stdio: 'ignore' });
+  // dist/site/ también se versiona (las páginas del sitio lo cargan desde el
+  // propio repositorio): se compila para compararlo igual que css/.
+  execFileSync('npm', ['run', 'build:dist', '--', '--quiet'], { cwd: ROOT, stdio: 'ignore' });
 } catch (e) {
   console.log(`❌ La compilación falla:\n${(e.stdout || e.message).toString().split('\n').slice(-15).join('\n')}\n`);
   process.exit(1);
