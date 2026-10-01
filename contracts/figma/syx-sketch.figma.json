@@ -12,7 +12,7 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 730,
+      "variables": 729,
       "omitidas": 349,
       "fueraDeAlcance": {
         "primitive": 227,
@@ -48,29 +48,6 @@
           "valuesByMode": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "name": "semantic/border/focus",
-          "type": "COLOR",
-          "token": "--semantic-border-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1175,
-              "g": 0.2275,
-              "b": 0.9999,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5216,
-              "g": 0.6555,
-              "b": 0.9994,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#1e3aff",
-            "dark": "#85a7ff"
           }
         },
         {

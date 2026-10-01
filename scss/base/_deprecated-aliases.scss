@@ -16,16 +16,11 @@
 // Lo que queda aquí tiene prefijo oficial y lectores en el sistema:
 //   --layout-*      la rejilla (layout/grids) y la columna de contenido
 //   --theme-radius  el radio de superficie que cada tema declara
-//   --semantic-border-focus  sinónimo de --semantic-color-border-focus
+// (--semantic-border-focus, sinónimo de --semantic-color-border-focus, se
+// retiró en 5.0.0, como estaba fijado.)
 // ================================================
 
 :root {
-  // ================================================
-  // FOCUS
-  // ================================================
-  // @deprecated --semantic-color-border-focus: el borde de foco, sin «color» en el nombre
-  --semantic-border-focus: var(--semantic-color-border-focus);
-
   // ================================================
   // LAYOUT
   // ================================================

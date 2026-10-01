@@ -138,7 +138,7 @@ También: `.syx-col-gap-{1–5}` y `.syx-row-gap-{1–5}` (misma escala, igual d
 
 Insets: `.syx-inset-0` · `.syx-top-0` · `.syx-bottom-0` · `.syx-start-0` · `.syx-end-0`
 
-Deprecadas (físicas, se retiran en SYX v5.0): `.syx-left-0` → `.syx-start-0` · `.syx-right-0` → `.syx-end-0`
+Retiradas en 5.0.0 (eran físicas): `.syx-left-0` → `.syx-start-0` · `.syx-right-0` → `.syx-end-0`
 
 #### Vertical align
 
@@ -171,9 +171,9 @@ Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…
 
 **Shorthands**: `.syx-pad-section` (padding de sección) · `.syx-mx-auto` · `.syx-ms-auto` · `.syx-me-auto`
 
-**Deprecadas** (Auditoría 2026-10 · acción 13; se retiran en SYX v5.0). Siguen siendo izquierda/derecha **físicas** —quien las usa no ve ningún cambio, tampoco en RTL—, pero no siguen a la dirección del texto:
+**Retiradas en 5.0.0** (deprecadas desde la auditoría 2026-10, acción 13). Eran izquierda/derecha **físicas** y no seguían a la dirección del texto. Para migrar, sustituye cada clase por su equivalente lógica (en LTR pintan exactamente lo mismo):
 
-| Deprecada | Usa |
+| Retirada | Usa |
 | --- | --- |
 | `.syx-ml-*` · `.syx-mr-*` | `.syx-ms-*` · `.syx-me-*` |
 | `.syx-pl-*` · `.syx-pr-*` | `.syx-ps-*` · `.syx-pe-*` |
@@ -193,7 +193,7 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 
 #### Alineación
 
-`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — deprecadas: `.syx-text-left` · `.syx-text-right` (físicas; ver la tabla de `_spacing.scss`)
+`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — retiradas en 5.0.0: `.syx-text-left` · `.syx-text-right` (ver la tabla de `_spacing.scss`)
 
 #### Decoración
 

@@ -507,7 +507,7 @@ $spacing-map: (
 
 ### `generate-utility-directional($map, $prefix, $property)`
 
-Generates directional utility classes (t/b/s/e/x/y, lógicas; l/r quedan físicas y deprecadas).
+Generates directional utility classes (t/b/s/e/x/y, todas lógicas; las l/r físicas se retiraron en 5.0.0).
 
 ```scss
 @include generate-utility-directional($spacing-map, "syx-m", margin);

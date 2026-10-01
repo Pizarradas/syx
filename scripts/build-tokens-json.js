@@ -25,8 +25,8 @@
  *   semantic    scss/abstracts/tokens/semantic/*.scss
  *   component   scss/abstracts/tokens/components/*.scss
  *   reset       scss/base/_reset-tokens.scss
- *   layout      scss/base/_deprecated-aliases.scss  (también --theme-* y el
- *   theme                                            alias --semantic-border-focus)
+ *   layout      scss/base/_deprecated-aliases.scss
+ *   theme       scss/base/_deprecated-aliases.scss  (--theme-*)
  *   icon        scss/themes/_base/_universal.scss
  *   + CONTRATO DE TEMA: los tokens que el árbol común no declara pero que
  *     declaran TODOS los temas compilados (iconos de interfaz, filtros de

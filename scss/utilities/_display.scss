@@ -309,24 +309,16 @@
   // Inset helpers (útiles con .syx-absolute / .syx-relative)
   // Lógicos (Auditoría 2026-10 · acción 13): top/bottom son el eje de
   // bloque; los lados de la línea van con start/end (izquierda/derecha en
-  // LTR, al revés en RTL). .syx-left-0 y .syx-right-0 quedan FÍSICAS a
-  // propósito y DEPRECADAS: se retiran en SYX v5.0.
+  // LTR, al revés en RTL). .syx-left-0 y .syx-right-0, físicas, se
+  // retiraron en 5.0.0.
   .syx-inset-0 {
     inset: 0;
   }
   .syx-top-0 {
     inset-block-start: 0;
   }
-  .syx-right-0 { // DEPRECADA — física; usa .syx-end-0
-    // stylelint-disable-next-line property-disallowed-list -- utilidad deprecada, física a propósito
-    right: 0;
-  }
   .syx-bottom-0 {
     inset-block-end: 0;
-  }
-  .syx-left-0 { // DEPRECADA — física; usa .syx-start-0
-    // stylelint-disable-next-line property-disallowed-list -- utilidad deprecada, física a propósito
-    left: 0;
   }
   .syx-start-0 {
     inset-inline-start: 0;

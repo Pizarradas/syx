@@ -52,8 +52,8 @@ function processTheme(filePath) {
     // Look for [data-theme="dark"] block
     if (content.match(/\[data-theme="dark"\]\s*\{/)) {
         // Check if overrides exist, if not inject them at the top of the block
-        if (!content.includes('--semantic-border-focus: var(--semantic-color-primary)')) {
-            content = content.replace(/(\[data-theme="dark"\]\s*\{(?:\s*@include dark-mode-tokens\(\);\s*)?)/, '$1\n    --semantic-border-focus: var(--semantic-color-primary);');
+        if (!content.includes('--semantic-color-border-focus: var(--semantic-color-primary)')) {
+            content = content.replace(/(\[data-theme="dark"\]\s*\{(?:\s*@include dark-mode-tokens\(\);\s*)?)/, '$1\n    --semantic-color-border-focus: var(--semantic-color-primary);');
         }
     }
 
