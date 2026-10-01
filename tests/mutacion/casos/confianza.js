@@ -22,6 +22,18 @@ module.exports = [
     mutar: (t) => t.json('contracts/trust.json', (c) => { sacar(c.tiers.human.paths, 'scripts/'); c.tiers.auto.paths.push('scripts/'); }),
   },
   {
+    id: 'trust-instrucciones-por-nombre',
+    regresion: 'trust.json sin `**/CLAUDE*.md` ni `**/trust.json`: CLAUDE.local.md y un trust.json anidado vuelven a ser editables',
+    guardian: 'check:clasificacion',
+    seEscapaba: true,
+    comando: ['node', 'scripts/check-clasificacion.js'],
+    espera: /CLAUDE\.local\.md → |trust\.json → /,
+    mutar: (t) => t.json('contracts/trust.json', (c) => {
+      sacar(c.tiers.human.paths, '**/CLAUDE*.md');
+      sacar(c.tiers.human.paths, '**/trust.json');
+    }),
+  },
+  {
     id: 'trust-sin-gobernanza',
     regresion: 'trust.json sin la constitución ni governance/',
     guardian: 'check:clasificacion',

@@ -45,6 +45,7 @@ const PROPIETARIO = '@Pizarradas';
 /** Un patrón de trust.json, en sintaxis de CODEOWNERS (gitignore anclado). */
 function patronCodeowners(p) {
   if (p.startsWith('*.')) return p; // sin barra: cualquier profundidad, como en confianza.js
+  if (p.startsWith('**/')) return p; // un nombre de fichero en cualquier carpeta
   return `/${p}`; // carpeta (con `/` final) o fichero exacto, desde la raíz
 }
 
@@ -56,7 +57,10 @@ function generar() {
   }
   // Estable: a igual longitud, el orden de trust.json. A igual longitud dos
   // patrones no pueden anidarse, así que el desempate no decide nada.
-  filas.sort((a, b) => a.p.length - b.p.length);
+  // De lo general a lo específico; los patrones por nombre (`**/…`), al final:
+  // en confianza.js ganan a cualquier carpeta, y aquí gana la última línea.
+  const peso = (p) => (p.startsWith('**/') ? 1e6 : 0) + p.length;
+  filas.sort((a, b) => peso(a.p) - peso(b.p));
 
   // Sin comentarios al final de línea: CODEOWNERS no los define, y un `#`
   // tras el patrón podría leerse como un propietario mal escrito.

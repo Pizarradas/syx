@@ -17,7 +17,7 @@
  * LO QUE NO HACE, DICHO CLARO
  * Solo ve las herramientas de edición. Un `sed -i` por Bash no pasa por aquí:
  * el hook no es una frontera de seguridad, es una barandilla para el agente
- * que actúa de buena fe. La frontera está en el merge: el job Confianza de la
+ * que actúa de buena fe. La frontera está en el merge: el job Confianza (confianza.yml) de la
  * CI y la revisión de CODEOWNERS.
  *
  * CUANDO UNA PERSONA SÍ QUIERE QUE EL AGENTE ESCRIBA EN `human`
@@ -27,10 +27,17 @@
  * quien lo lanzó, no el de las órdenes que ejecuta el agente.
  *
  * QUÉ REPOSITORIO
- * El del FICHERO, no el de la sesión: se sube desde su carpeta hasta encontrar
- * contracts/trust.json. Así funciona en un worktree (donde
- * $CLAUDE_PROJECT_DIR sigue apuntando a la raíz original) y no opina sobre
- * ficheros de fuera de un repositorio SYX.
+ * El del FICHERO, no el de la sesión: la raíz de git que lo contiene (así
+ * funciona en un worktree, donde $CLAUDE_PROJECT_DIR sigue apuntando a la raíz
+ * original), y solo si en esa raíz hay contracts/trust.json; si no, no opina.
+ * Hasta la auditoría de 2026-10 II se subía hasta el PRIMER contracts/trust.json:
+ * escribir un `_agents/contracts/trust.json` (entonces `pr`) convertía `_agents/`
+ * en raíz con su propio contrato, y los modos y los evals salían con exit 0.
+ * Sin git, se toma la raíz SYX MÁS ALTA, nunca la más cercana.
+ *
+ * RUTAS REALES
+ * La ruta se resuelve con realpath (la carpeta existente más profunda, si el
+ * fichero aún no existe): `docs/nota.md` como enlace a CLAUDE.md es CLAUDE.md.
  */
 
 'use strict';
@@ -39,13 +46,36 @@ const fs = require('fs');
 const path = require('path');
 const { clasificarRuta } = require('./lib/confianza');
 
-/** La raíz SYX más cercana que contiene `abs`, o null. */
+const { execFileSync } = require('child_process');
+
+const esSyx = (dir) => fs.existsSync(path.join(dir, 'contracts', 'trust.json'));
+
+/** La ruta real: resuelve enlaces simbólicos aunque el fichero no exista aún. */
+function rutaReal(abs) {
+  let base = abs;
+  const resto = [];
+  while (!fs.existsSync(base)) {
+    const arriba = path.dirname(base);
+    if (arriba === base) return abs;
+    resto.unshift(path.basename(base));
+    base = arriba;
+  }
+  try { return path.join(fs.realpathSync(base), ...resto); } catch (e) { return abs; }
+}
+
+/** La raíz SYX que contiene `abs` (la de git, o la más alta), o null. */
 function raizDe(abs) {
   let dir = path.dirname(abs);
+  while (!fs.existsSync(dir)) dir = path.dirname(dir);
+  try {
+    const top = execFileSync('git', ['rev-parse', '--show-toplevel'], { cwd: dir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+    if (top) return esSyx(top) ? fs.realpathSync(top) : null;
+  } catch (e) { /* sin git: se sube a mano */ }
+  let raiz = null;
   for (;;) {
-    if (fs.existsSync(path.join(dir, 'contracts', 'trust.json'))) return dir;
+    if (esSyx(dir)) raiz = dir; // la MÁS ALTA: un trust.json anidado no manda
     const arriba = path.dirname(dir);
-    if (arriba === dir) return null;
+    if (arriba === dir) return raiz;
     dir = arriba;
   }
 }
@@ -70,7 +100,7 @@ const ti = entrada.tool_input || {};
 const ruta = ti.file_path || ti.notebook_path;
 if (!ruta) process.exit(0); // no es una escritura de fichero: no le toca
 
-const abs = path.resolve(entrada.cwd || process.cwd(), ruta);
+const abs = rutaReal(path.resolve(entrada.cwd || process.cwd(), ruta));
 const raiz = raizDe(abs);
 if (!raiz) process.exit(0); // fuera de un repositorio SYX: el contrato no habla de él
 

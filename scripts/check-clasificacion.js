@@ -77,7 +77,7 @@ comprobar('la ruta que devuelve es la canónica', () => {
 comprobar('una absoluta dentro del repositorio se clasifica como su relativa', () => niveles([
   [path.join(ROOT, 'scripts', 'propose.js'), 'human'],
   [path.join(ROOT, 'scss', 'atoms', '_button.scss'), 'pr'],
-  [path.join(ROOT, 'docs', 'nota.md'), 'auto'],
+  [path.join(ROOT, 'css', 'nota.css'), 'auto'],
 ]));
 
 comprobar('una ruta que sale del repositorio se marca fuera, y nunca es auto ni pr', () => {
@@ -138,12 +138,29 @@ comprobar('el resto de _agents/ se propone, y su mapa se escribe directo', () =>
   ['_agents/architecture.json', 'auto'],
 ]));
 
-comprobar('el markdown corriente sigue siendo automático', () => niveles([
-  ['README.md', 'auto'],
-  ['CHANGELOG.md', 'auto'],
-  ['docs/decisions/ACOPLE.md', 'auto'],
-  ['mind-system/knowledges/index.md', 'auto'],
-  ['contracts/propuestas/component-x.md', 'auto'],
+// Desde la auditoría de 2026-10 II el markdown corriente se propone (antes
+// `auto`): README, THEMING-RULES o el córtex instruyen a personas y agentes.
+comprobar('el markdown corriente y el córtex se proponen', () => niveles([
+  ['README.md', 'pr'],
+  ['CHANGELOG.md', 'pr'],
+  ['THEMING-RULES.md', 'pr'],
+  ['docs/decisions/ACOPLE.md', 'pr'],
+  ['mind-system/knowledges/index.md', 'pr'],
+  ['mind-system/knowledges/syx/token-system.md', 'pr'],
+  ['contracts/propuestas/component-x.md', 'pr'],
+]));
+
+// Lo que un agente carga como instrucciones, o el contrato de confianza, en
+// cualquier carpeta y con cualquier sufijo: es `human` aunque una carpeta más
+// larga diga otra cosa. En 2026-10 II salían `auto` y un trust.json anidado
+// engañaba al hook.
+comprobar('las instrucciones de agente y trust.json son humanas en cualquier carpeta', () => niveles([
+  ['CLAUDE.local.md', 'human'],
+  ['scss/CLAUDE.md', 'human'],
+  ['AGENTS.override.md', 'human'],
+  ['mind-system/knowledges/syx/CLAUDE.md', 'human'],
+  ['_agents/contracts/trust.json', 'human'],
+  ['css/trust.json', 'human'],
 ]));
 
 comprobar('el CSS compilado es derivado, no humano por omisión', () => niveles([
@@ -183,9 +200,35 @@ comprobar('el hook avisa en pr sin bloquear, y nombra propose.js', () => {
 });
 
 comprobar('el hook calla en auto y fuera del repositorio', () => {
-  for (const r of [path.join(ROOT, 'docs', 'nota.md'), '/tmp/fuera-de-syx.md']) {
+  for (const r of [path.join(ROOT, 'css', 'nota.css'), '/tmp/fuera-de-syx.md']) {
     const x = hook(llamada('Write', r));
     if (x.code !== 0 || x.out.trim()) throw new Error(`${r}: salió ${x.code} con «${x.out.trim()}»`);
+  }
+});
+
+// Las dos evasiones de la auditoría de 2026-10 II, en un repositorio de usar y
+// tirar: un contracts/trust.json anidado que se declara raíz y relaja todo, y
+// un enlace simbólico con nombre inocente que apunta a CLAUDE.md.
+comprobar('el hook no cambia de raíz por un trust.json anidado y resuelve enlaces', () => {
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'syx-hook-'));
+  try {
+    spawnSync('git', ['init', '-q'], { cwd: tmp });
+    for (const d of ['contracts', '_agents/contracts', '_agents/modes', 'docs']) fs.mkdirSync(path.join(tmp, d), { recursive: true });
+    fs.copyFileSync(path.join(ROOT, 'contracts', 'trust.json'), path.join(tmp, 'contracts', 'trust.json'));
+    fs.writeFileSync(path.join(tmp, '_agents', 'contracts', 'trust.json'), JSON.stringify({
+      _meta: { default: 'auto' }, tiers: { auto: { label: 'a', paths: ['modes/'] }, pr: { label: 'p', paths: [] }, human: { label: 'h', paths: [] } },
+    }));
+    fs.writeFileSync(path.join(tmp, 'CLAUDE.md'), '');
+    let enlace = true;
+    try { fs.symlinkSync(path.join('..', 'CLAUDE.md'), path.join(tmp, 'docs', 'nota.md')); } catch (e) { enlace = false; } // Windows sin permiso de enlaces
+    const casos = [path.join(tmp, '_agents', 'modes', 'ui.md'), ...(enlace ? [path.join(tmp, 'docs', 'nota.md')] : [])];
+    for (const r of casos) {
+      const x = hook({ ...llamada('Write', r), cwd: tmp });
+      if (x.code !== 2) throw new Error(`${path.relative(tmp, r)}: salió ${x.code}, esperaba el bloqueo de human`);
+    }
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
   }
 });
 

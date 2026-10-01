@@ -1,26 +1,37 @@
-# SYX — Confianza al etiquetar
-# ═════════════════════════════
-# El job «Confianza» de ci.yml exige la etiqueta `aprobado-humano` cuando una
-# PR toca rutas `human`. Pero la etiqueta se pone DESPUÉS de que haya corrido,
-# y ci.yml no escucha `labeled`: si lo hiciera, cada etiqueta relanzaría el
-# contrato en tres versiones de Node, la entrega y el navegador, y —peor— la
-# concurrencia cancelaría la ejecución que sí importa.
+# SYX — Confianza
+# ═══════════════
+# Clasifica el diff de una PR con contracts/trust.json. ROMPE si toca rutas
+# `human` y la PR no lleva la etiqueta `aprobado-humano` (scripts/
+# check-confianza.js explica por qué una etiqueta y qué no prueba).
 #
-# Aquí se vuelve a evaluar SOLO la confianza, con un job del mismo nombre: la
-# protección de rama ve el último resultado de «Confianza» para ese commit, sea
-# de un workflow o del otro.
+# POR QUÉ pull_request_target
+# Con `pull_request`, el YAML que se ejecuta es el de la PR: una PR podía
+# añadir `|| true` al paso y dejar «Confianza» en verde (auditoría 2026-10 II).
+# Con `pull_request_target` el YAML, el guardián y el contrato son SIEMPRE los
+# de la rama base. La PR solo aporta su diff: se descarga en pr/ y no se
+# ejecuta NADA de ella (ni npm, ni scripts): git lee sus ficheros y basta.
+#
+# LA APROBACIÓN CADUCA CON CADA PUSH
+# Antes, `aprobado-humano` seguía valiendo tras nuevos commits: se aprobaba
+# una versión y se fusionaba otra. Ahora, en cada `synchronize` se quita la
+# etiqueta y la PR vuelve a necesitarla si toca `human`.
+#
+# Sustituye al job «Confianza» de ci.yml y a la reevaluación al etiquetar:
+# este workflow escucha también `labeled` y `unlabeled`, con un job del mismo
+# nombre, así que la protección de rama sigue viendo «Confianza».
 
 name: SYX · Confianza
 
 on:
-  pull_request:
-    types: [labeled, unlabeled]
+  pull_request_target:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
 
 permissions:
   contents: read
+  pull-requests: write   # solo para quitar la etiqueta en cada push
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: confianza-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -28,22 +39,49 @@ jobs:
     name: Confianza
     runs-on: ubuntu-latest
     steps:
+      # La base: el guardián, su contrato y este YAML.
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+          persist-credentials: false
+
+      # La PR, solo como datos: con toda la historia para el diff contra la
+      # base. Nunca se ejecuta nada de aquí.
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: pr
           fetch-depth: 0
+          persist-credentials: false
+
+      - name: La base, visible desde el clon de la PR
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          REPO: ${{ github.repository }}
+        run: git -C pr fetch --no-tags "https://github.com/$REPO" "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      # El guardián y el contrato, tal como están en la BASE: una PR no
-      # reescribe a su propio juez. Solo si la base aún no tiene el guardián
-      # (la PR que lo introduce) se usa el de la PR. Sin `npm ci`: no tiene
-      # dependencias.
-      - name: Rutas human y pr del cambio
+
+      - name: La aprobación caduca con cada push
+        if: github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'aprobado-humano')
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
         run: |
-          git worktree add --detach "$RUNNER_TEMP/base" "origin/$GITHUB_BASE_REF"
-          if [ -f "$RUNNER_TEMP/base/scripts/check-confianza.js" ]; then
-            node "$RUNNER_TEMP/base/scripts/check-confianza.js" --repo "$GITHUB_WORKSPACE"
-          else
-            echo "La base no tiene aún scripts/check-confianza.js: se usa el de la PR."
-            node scripts/check-confianza.js
-          fi
+          gh pr edit "$PR" --repo "$REPO" --remove-label aprobado-humano
+          echo "Se ha quitado \`aprobado-humano\`: la aprobación era de la versión anterior." >> "$GITHUB_STEP_SUMMARY"
+
+      # Las etiquetas, leídas DESPUÉS de quitarla: el evento trae las de antes.
+      - name: Rutas human y pr del cambio
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api "repos/$REPO/pulls/$PR" --jq '{pull_request: {labels: .labels}}' > "$RUNNER_TEMP/evento.json"
+          GITHUB_EVENT_PATH="$RUNNER_TEMP/evento.json" node base/scripts/check-confianza.js --repo pr

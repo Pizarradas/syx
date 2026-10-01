@@ -5,14 +5,12 @@
     "principio": "La frontera sigue la dirección de la cascada que el sistema ya declara: cuanto más arriba se toca, a más sitios llega el cambio, y menos debe decidirlo nadie a solas.",
     "default": "human"
   },
-
   "tiers": {
     "auto": {
       "label": "Automático",
       "que": "El agente lo cambia y lo commitea sin intervención.",
       "porque": "Son ficheros derivados o descriptivos: un error se ve leyendo el diff y no se propaga a nada compilado.",
       "paths": [
-        "*.md",
         "_agents/architecture.md",
         "_agents/architecture.json",
         "css/",
@@ -22,7 +20,6 @@
         "contracts/dtcg/"
       ]
     },
-
     "pr": {
       "label": "Vía propuesta",
       "que": "El agente prepara rama, commit y evidencia; una persona revisa y fusiona.",
@@ -36,10 +33,11 @@
         "scss/pages/",
         "scss/layout/",
         "tokens.json",
-        "_agents/"
+        "_agents/",
+        "*.md",
+        "mind-system/knowledges/"
       ]
     },
-
     "human": {
       "label": "Solo humano",
       "que": "El agente puede analizar y recomendar, pero no escribir.",
@@ -69,11 +67,13 @@
         "mind-system/governance/",
         "mind-system/atlas-rules/",
         "mind-system/constitution.md",
-        "mind-system/README.md"
+        "mind-system/README.md",
+        "**/CLAUDE*.md",
+        "**/AGENTS*.md",
+        "**/trust.json"
       ]
     }
   },
-
   "notas": [
     "contracts/trust.json está en `human` a propósito: un agente que pudiera ampliar sus propios permisos no tendría permisos, tendría una sugerencia.",
     "contracts/rules.json también: las reglas con las que se valida un cambio no las mueve quien es validado.",
@@ -83,6 +83,8 @@
     ".claude/ entero es `human` porque ahí vive .claude/settings.json, que registra el hook que hace cumplir este contrato en Claude Code. Un hook que el agente puede desactivar no es un hook.",
     "css/ es `auto` porque es derivado: se compila de scss/ y la CI comprueba con check-limpio --strict que lo commiteado es exactamente lo compilado. Antes caía al `default` y toda propuesta de componente, que lo recompila, habría salido `human`.",
     "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera.",
-    "El patrón `*.md` alcanza a cualquier markdown en cualquier carpeta, así que la documentación que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`. Si no, hereda `auto` por ser markdown, y el agente acaba pudiendo reescribir el criterio por el que se le juzga."
+    "El patrón `*.md` está en `pr` desde la auditoría de 2026-10 II (antes en `auto`): la documentación cambia lo que leen personas y agentes, así que la revisa alguien, pero un error se ve en el diff. Lo que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`.",
+    "`**/CLAUDE*.md`, `**/AGENTS*.md` y `**/trust.json` son `human` estén donde estén, y un patrón por nombre gana a cualquier carpeta. En la auditoría de 2026-10 II, `CLAUDE.local.md`, `scss/CLAUDE.md`, `AGENTS.override.md` salían `auto` por ser markdown (Claude Code y otros agentes los cargan como instrucciones), y escribir un `_agents/contracts/trust.json` anidado engañaba al hook para que tomara `_agents/` como raíz.",
+    "El córtex (`mind-system/knowledges/`) es `pr`: los modos cargan sus módulos como conocimiento Always, así que un cambio ahí cambia lo que hace un agente. Hasta 2026-10 II era `auto` por `*.md`."
   ]
 }

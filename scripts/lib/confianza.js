@@ -73,6 +73,9 @@ function normalizarRuta(p, raiz = ROOT) {
  * cualquier regla general que lo abarque. Sin esto el orden de las claves del
  * JSON decidiría permisos, que es una forma silenciosa de equivocarse.
  */
+/** `claude*.md` → /^claude.*\.md$/ (ya en minúsculas). */
+const porNombre = (glob) => new RegExp(`^${glob.split('*').map((t) => t.replace(/[.+?^${}()|[\]\\]/g, '\\$&')).join('.*')}$`);
+
 function clasificarRuta(ruta, { raiz, contrato: otro } = {}) {
   // `contrato` permite clasificar con OTRO trust.json que el del disco. Lo usa
   // el guardián de la CI para juzgar una PR con el contrato de la rama base:
@@ -103,15 +106,23 @@ function clasificarRuta(ruta, { raiz, contrato: otro } = {}) {
   for (const [tier, def] of Object.entries(c.tiers)) {
     for (const patron of def.paths) {
       const pb = patron.toLowerCase();
-      // `*.md` vale en cualquier carpeta; un patrón con `/` final, como
-      // prefijo de carpeta; el resto, como fichero exacto.
-      const coincide = pb.startsWith('*.')
-        ? rb.endsWith(pb.slice(1))
-        : pb.endsWith('/')
-          ? rb.startsWith(pb)
-          : rb === pb;
-      if (coincide && patron.length > mejor.largo) {
-        mejor = { tier, patron, largo: patron.length };
+      // `*.md` vale en cualquier carpeta; `**/claude*.md`, un NOMBRE de
+      // fichero en cualquier carpeta (con `*` como comodín); un patrón con `/`
+      // final, como prefijo de carpeta; el resto, como fichero exacto.
+      const coincide = pb.startsWith('**/')
+        ? porNombre(pb.slice(3)).test(rb.slice(rb.lastIndexOf('/') + 1))
+        : pb.startsWith('*.')
+          ? rb.endsWith(pb.slice(1))
+          : pb.endsWith('/')
+            ? rb.startsWith(pb)
+            : rb === pb;
+      // Un patrón por nombre (`**/…`) gana a cualquier carpeta: dice «este
+      // fichero, esté donde esté». Sin eso, `mind-system/knowledges/` (pr)
+      // pesaría más que `**/CLAUDE*.md` (human) para un CLAUDE.md copiado ahí,
+      // y las instrucciones de un agente volverían a ser editables por él.
+      const largo = pb.startsWith('**/') ? 1e6 + patron.length : patron.length;
+      if (coincide && largo > mejor.largo) {
+        mejor = { tier, patron, largo };
       }
     }
   }

@@ -11,7 +11,7 @@
 #   desviación  informativo · nunca rompe · deja el informe a la vista
 #   navegador   PR y main · axe, foco, reflow y páginas rompen; la regresión
 #               visual informa
-#   confianza   solo en PR · segundos · rompe si toca rutas `human` sin aprobar
+#   confianza   en confianza.yml (pull_request_target: el juez es el de la base)
 #   mutación    solo en PR · minutos · rompe si un guardián deja pasar la
 #               regresión que dice parar
 #
@@ -110,40 +110,9 @@ jobs:
       - name: La vía de propuesta acierta y se niega donde debe
         run: npm run check:propuesta
 
-  # Clasifica el diff de la PR con contracts/trust.json y lo deja en el resumen
-  # del job. ROMPE si toca rutas `human` y la PR no lleva la etiqueta
-  # `aprobado-humano` (scripts/check-confianza.js explica por qué una etiqueta
-  # y qué no prueba). Poner o quitar la etiqueta no dispara este workflow
-  # —volvería a correr todo lo lento—: lo vuelve a evaluar confianza.yml, con
-  # un job del mismo nombre.
-  confianza:
-    name: Confianza
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    steps:
-      # Con toda la historia: el diff es `origin/<base>...HEAD`, y sin la rama
-      # base el guardián falla en vez de aprobar a ciegas.
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # El guardián y el contrato, tal como están en la BASE: una PR no
-      # reescribe a su propio juez. Solo si la base aún no tiene el guardián
-      # (la PR que lo introduce) se usa el de la PR. Sin `npm ci`: no tiene
-      # dependencias.
-      - name: Rutas human y pr del cambio
-        run: |
-          git worktree add --detach "$RUNNER_TEMP/base" "origin/$GITHUB_BASE_REF"
-          if [ -f "$RUNNER_TEMP/base/scripts/check-confianza.js" ]; then
-            node "$RUNNER_TEMP/base/scripts/check-confianza.js" --repo "$GITHUB_WORKSPACE"
-          else
-            echo "La base no tiene aún scripts/check-confianza.js: se usa el de la PR."
-            node scripts/check-confianza.js
-          fi
+  # La confianza (rutas human y pr del diff, etiqueta aprobado-humano) vive en
+  # confianza.yml, con pull_request_target: aquí, con pull_request, el YAML
+  # sería el de la PR y la PR controlaría a su propio juez (auditoría 2026-10 II).
 
   navegador:
     name: Navegador · axe, foco, reflow, páginas y regresión visual
