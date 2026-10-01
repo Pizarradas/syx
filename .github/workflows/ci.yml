@@ -171,6 +171,11 @@ jobs:
       - name: axe sobre todos los componentes, temas y modos
         run: node run.mjs --axe
 
+      # ROMPE. El teclado y las regiones vivas que prometen js/syx-*.js:
+      # menú (APG), tooltip (WCAG 1.4.13), toast y contador de caracteres.
+      - name: Teclado y regiones vivas
+        run: node interaccion.mjs
+
       # NO ROMPE. La referencia es la rama base, fotografiada en esta misma
       # máquina con este mismo arnés: no hay capturas versionadas que se
       # desfasen con cada versión de Chromium. Un cambio visual puede ser
