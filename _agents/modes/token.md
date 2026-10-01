@@ -169,7 +169,7 @@ Every theme must define all tokens in these categories. If any are missing, flag
 
 **Shape:**
 ```
---semantic-border-width
+--semantic-border-width-thin / -default / -thick
 --semantic-border-radius-sm / -md / -lg / -full
 ```
 
