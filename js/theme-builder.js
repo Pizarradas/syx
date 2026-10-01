@@ -261,8 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Text Hierarchy & On-Colors
     root.style.setProperty('--semantic-text-primary', isDark ? 'var(--primitive-color-white)' : 'var(--primitive-color-gray-900)');
-    root.style.setProperty('--semantic-text-secondary', isDark ? 'var(--primitive-color-gray-400)' : 'var(--primitive-color-gray-600)');
-    root.style.setProperty('--semantic-text-tertiary', isDark ? 'var(--primitive-color-gray-500)' : 'var(--primitive-color-gray-400)');
+    // Secundario y terciario, un escalón más oscuros en claro y más claros en
+    // oscuro que antes: el terciario (gray-400 sobre blanco) daba 3,48:1 y el
+    // secundario oscuro (gray-400 sobre gray-800) 3,76:1. Con la neutra por
+    // defecto, ahora los dos pasan AA (4,5:1) sobre surface-1 y surface-2.
+    // Lo mismo en el CSS exportado, más abajo. (Auditoría 2026-10 · acción 8)
+    root.style.setProperty('--semantic-text-secondary', isDark ? 'var(--primitive-color-gray-200)' : 'var(--primitive-color-gray-700)');
+    root.style.setProperty('--semantic-text-tertiary', isDark ? 'var(--primitive-color-gray-300)' : 'var(--primitive-color-gray-600)');
     root.style.setProperty('--semantic-text-disabled', isDark ? 'var(--primitive-color-gray-700)' : 'var(--primitive-color-gray-300)');
     root.style.setProperty('--semantic-text-inverse', isDark ? 'var(--primitive-color-gray-900)' : 'var(--primitive-color-white)');
 
@@ -813,8 +818,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     exportCSS += `\n  /* Text Hierarchy & On-Colors */\n`;
     exportCSS += `  --semantic-text-primary: var(--primitive-color-gray-900);\n`;
-    exportCSS += `  --semantic-text-secondary: var(--primitive-color-gray-600);\n`;
-    exportCSS += `  --semantic-text-tertiary: var(--primitive-color-gray-400);\n`;
+    exportCSS += `  --semantic-text-secondary: var(--primitive-color-gray-700);\n`;
+    exportCSS += `  --semantic-text-tertiary: var(--primitive-color-gray-600);\n`;
     exportCSS += `  --semantic-text-disabled: var(--primitive-color-gray-300);\n`;
     exportCSS += `  --semantic-text-inverse: var(--primitive-color-white);\n`;
     exportCSS += `\n  /* On-Colors (Foreground text mapped to backgrounds) */\n`;
@@ -933,8 +938,8 @@ document.addEventListener('DOMContentLoaded', () => {
     exportCSS += `  --semantic-background-inverse: var(--primitive-color-white);\n`;
     exportCSS += `\n  /* Text & On-Colors */\n`;
     exportCSS += `  --semantic-text-primary: var(--primitive-color-white);\n`;
-    exportCSS += `  --semantic-text-secondary: var(--primitive-color-gray-400);\n`;
-    exportCSS += `  --semantic-text-tertiary: var(--primitive-color-gray-500);\n`;
+    exportCSS += `  --semantic-text-secondary: var(--primitive-color-gray-200);\n`;
+    exportCSS += `  --semantic-text-tertiary: var(--primitive-color-gray-300);\n`;
     exportCSS += `  --semantic-text-disabled: var(--primitive-color-gray-700);\n`;
     exportCSS += `  --semantic-text-inverse: var(--primitive-color-gray-900);\n`;
     exportCSS += `  --semantic-on-secondary: var(--primitive-color-white);\n`;

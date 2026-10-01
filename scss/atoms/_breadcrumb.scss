@@ -24,7 +24,12 @@
 
       // Separator between items (CSS-only, no SVG dependency)
       &:not(:last-child)::after {
+        // El separador es decoración: con el texto alternativo vacío
+        // (`/ ""`) el lector de pantalla no dice «barra» entre miga y miga;
+        // la estructura ya la da la lista. La primera línea es para quien no
+        // entiende esa sintaxis (Safari < 17.4): sin ella no vería separador.
         content: "/";
+        content: "/" / "";
         color: var(--semantic-color-border-subtle);
         margin: 0 var(--semantic-space-inline-xs);
         font-size: 0.8em;
@@ -58,7 +63,7 @@
 
       &:focus-visible {
         @include focus-ring();
-        border-radius: 2px;
+        border-radius: var(--semantic-border-radius-sm);
       }
 
       // Active/current page state

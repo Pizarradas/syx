@@ -162,14 +162,22 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
   // exigiera no encontraría ninguno.
   const porAtributo = [...cssSistema.matchAll(/\[class([*^$~|]?)=["']?([^"'\]]+)["']?\]/g)]
     .map((m) => ({ op: m[1] || '=', v: m[2] }));
+  //
+  // Pero un selector de atributo que ya casa con la BASE de la clase no dice
+  // nada de ella: `[class*=atom-btn]` alcanza a `.atom-btn`, y con él a
+  // cualquier `atom-btn--lo-que-sea` que alguien invente. Se descarta el
+  // selector cuando una clase existente de la que esta es prolongación ya lo
+  // contiene. `atom-btn--fantasma` pasaba así la prueba de mutación
+  // (auditoría 2026-10, acción 8).
+  const casa = (a, c) =>
+    a.op === '*' ? c.includes(a.v)
+      : a.op === '^' ? c.startsWith(a.v)
+        : a.op === '$' ? c.endsWith(a.v)
+          : a.op === '~' || a.op === '=' ? c === a.v
+            : false;
   const alcanzadaPorAtributo = (c) =>
-    porAtributo.filter((a) =>
-      a.op === '*' ? c.includes(a.v)
-        : a.op === '^' ? c.startsWith(a.v)
-          : a.op === '$' ? c.endsWith(a.v)
-            : a.op === '~' || a.op === '=' ? c === a.v
-              : false
-    );
+    porAtributo.filter((a) => casa(a, c) &&
+      !clasesSyx.some((base) => base !== c && c.startsWith(base) && casa(a, base)));
 
   for (const file of files) {
     const rel = path.relative(process.cwd(), file);

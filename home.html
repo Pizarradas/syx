@@ -188,7 +188,7 @@
       Atomic Design and native <code>@layer</code>. Compatible with any front-end stack.
     </p>
 
-    <div class="org-home-hero__badge-row" aria-label="Key capabilities">
+    <div class="org-home-hero__badge-row" role="group" aria-label="Key capabilities">
       <span class="atom-pill atom-pill--neutral">Zero dependencies</span>
       <span class="atom-pill atom-pill--neutral">7 themes</span>
       <span class="atom-pill atom-pill--neutral">@layer native</span>
@@ -205,7 +205,7 @@
       </a>
     </div>
 
-    <div class="org-home-hero__stats" aria-label="System statistics">
+    <div class="org-home-hero__stats" role="group" aria-label="System statistics">
       <div class="atom-stat">
         <span class="atom-stat__number">v4</span>
         <span class="atom-stat__label">Current&nbsp;version</span>
@@ -367,7 +367,7 @@
           <code class="atom-code" role="listitem">--primitive-font-size-md</code>
         </div>
 
-        <span class="org-home-tokens__step" aria-label="Step 1">01</span>
+        <span class="org-home-tokens__step" role="img" aria-label="Step 1">01</span>
       </div>
 
       <!-- ── Connector ──────────────────────────────── -->
@@ -396,7 +396,7 @@
           <code class="atom-code" role="listitem">--theme-transition-speed</code>
         </div>
 
-        <span class="org-home-tokens__step" aria-label="Step 2">02</span>
+        <span class="org-home-tokens__step" role="img" aria-label="Step 2">02</span>
       </div>
 
       <!-- ── Connector ──────────────────────────────── -->
@@ -425,7 +425,7 @@
           <code class="atom-code" role="listitem">--semantic-color-text-secondary</code>
         </div>
 
-        <span class="org-home-tokens__step" aria-label="Step 3">03</span>
+        <span class="org-home-tokens__step" role="img" aria-label="Step 3">03</span>
       </div>
 
       <!-- ── Connector ──────────────────────────────── -->
@@ -454,7 +454,7 @@
           <code class="atom-code" role="listitem">--component-form-field-border</code>
         </div>
 
-        <span class="org-home-tokens__step" aria-label="Step 4">04</span>
+        <span class="org-home-tokens__step" role="img" aria-label="Step 4">04</span>
       </div>
 
     </div><!-- /.org-home-tokens__diagram -->
@@ -494,13 +494,13 @@
           everything from the global reset to the highest-priority utilities —
           without a single <code>!important</code> or inflated selector.
         </p>
-        <pre class="atom-code">@layer
+        <pre class="atom-code" tabindex="0" role="group" aria-label="Code: the layer order">@layer
   syx.reset, syx.base, syx.tokens,
   syx.atoms, syx.molecules, syx.organisms,
   syx.utilities;</pre>
       </div>
 
-      <div class="org-home-layers__visual" aria-label="SYX CSS layer stack">
+      <div class="org-home-layers__visual" role="group" aria-label="SYX CSS layer stack">
 
         <div class="org-home-layers__stack-item org-home-layers__stack-item--utilities">
           <span class="org-home-layers__stack-item-name">syx.utilities</span>
@@ -777,7 +777,7 @@
     </div>
 
     <!-- Mode System reference table -->
-    <div class="org-home-features__modes" aria-labelledby="modes-table-title">
+    <div class="org-home-features__modes" role="region" aria-labelledby="modes-table-title">
 
       <div class="org-home-features__modes-header">
         <h3 class="org-home-features__modes-title" id="modes-table-title">
@@ -793,7 +793,7 @@
         </p>
       </div>
 
-      <div class="org-home-features__modes-table-wrap">
+      <div class="org-home-features__modes-table-wrap" role="region" tabindex="0" aria-label="SYX agent mode system">
         <table class="atom-table atom-table--primary" aria-label="SYX agent mode system">
           <thead>
             <tr>
@@ -972,7 +972,7 @@
       </a>
     </div>
 
-    <code class="org-home-cta__code" aria-label="Compilation command">
+    <code class="org-home-cta__code" role="group" aria-label="Compilation command">
       <span class="atom-icon atom-icon--lc-terminal" aria-hidden="true"></span>
       sass scss/styles-theme-syx-sketch.scss css/styles-theme-syx-sketch.css
     </code>

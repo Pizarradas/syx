@@ -111,10 +111,9 @@
         border-color: var(--component-form-field-error-border);
         &:focus {
            border-color: var(--component-form-field-error-border);
-           box-shadow: var(
-             --component-form-field-error-shadow-focus,
-             0 0 0 1px var(--component-form-field-error-border)
-           );
+           // Sin respaldo: el token lo declara _forms.scss en todos los temas,
+           // y un respaldo en px era una copia que podía divergir de él.
+           box-shadow: var(--component-form-field-error-shadow-focus);
         }
       }
 

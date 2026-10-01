@@ -1,11 +1,14 @@
 {
   "name": "syx-tests-browser",
   "private": true,
-  "description": "Pruebas en navegador de SYX: axe sobre cada componente, tema y modo, y capturas para la regresión visual. No forma parte del paquete.",
+  "description": "Pruebas en navegador de SYX: axe, foco visible, orden de Tab, reflow y tamaño de objetivo sobre cada componente, tema y modo y sobre las páginas del sitio, y capturas para la regresión visual. No forma parte del paquete. Ver README.md.",
   "type": "module",
   "scripts": {
     "axe": "node run.mjs --axe",
     "interaccion": "node interaccion.mjs",
+    "foco": "node foco.mjs",
+    "reflow": "node reflow.mjs",
+    "sitio": "node sitio.mjs",
     "capturas": "node run.mjs --capturas out",
     "paginas": "node paginas.mjs --capturas out-paginas",
     "comparar": "node comparar.mjs"

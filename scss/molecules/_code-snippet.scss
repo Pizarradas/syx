@@ -62,11 +62,24 @@
       margin: 0;
       border-radius: 0;
       border: none;
+
+      // El cuerpo se enfoca (tabindex="0", para desplazarlo con el teclado),
+      // pero la molécula recorta lo que sale de ella (overflow: hidden, por
+      // las esquinas) y el anillo de atom-code quedaba cortado a la mitad: lo
+      // midió tests/browser/foco.mjs. El anillo lo pinta la molécula entera.
+      // (Auditoría 2026-10 · acción 8)
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &:has(.mol-code-snippet__body:focus-visible) {
+      @include focus-ring();
     }
 
     // --ok variant (correct example)
     &--ok {
-      border-color: var(--component-code-snippet-ok-border-color, var(--semantic-color-state-success, #16a34a));
+      border-color: var(--component-code-snippet-ok-border-color, var(--semantic-color-state-success));
 
       .mol-code-snippet__header {
         background-color: var(--component-code-snippet-ok-header-bg, oklch(0.97 0.021 158.247));
@@ -80,7 +93,7 @@
 
     // --ko variant (incorrect example)
     &--ko {
-      border-color: var(--component-code-snippet-ko-border-color, var(--semantic-color-state-error, #dc2626));
+      border-color: var(--component-code-snippet-ko-border-color, var(--semantic-color-state-error));
 
       .mol-code-snippet__header {
         background-color: var(--component-code-snippet-ko-header-bg, oklch(0.97 0.021 4.878));

@@ -70,7 +70,7 @@
         border-bottom: var(--component-check-mark-thickness) solid transparent;
         // stylelint-enable property-disallowed-list
         transform: rotate(var(--component-check-mark-rotation)) scale(0)
-          translateY(-1px);
+          translateY(-0.0625rem);
         transform-origin: center;
         @include transition(
           transform var(--component-check-transition-duration)
@@ -101,7 +101,7 @@
         border-bottom-color: var(--component-check-mark-color);
         // stylelint-enable property-disallowed-list
         transform: rotate(var(--component-check-mark-rotation)) scale(1)
-          translateY(-1px);
+          translateY(-0.0625rem);
       }
     }
 

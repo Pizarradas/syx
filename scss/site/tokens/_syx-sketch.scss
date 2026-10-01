@@ -335,7 +335,7 @@
     --component-section-overline-bg: transparent;
     --component-section-overline-border-width: 0;
     --component-section-overline-padding: 0;
-    --component-section-overline-color: var(--semantic-color-primary);
+    --component-section-overline-color: var(--semantic-color-primary-text); // texto: tinta, no relleno. El relleno daba 4,25:1 en oscuro sobre el degradado de la sección (medido en píxeles, auditoría 2026-10 · acción 8)
 
     // DIAGRAMA DE TOKENS — la misma paleta que el resto.
     // El naranja y el morado originales no existen en este tema:
