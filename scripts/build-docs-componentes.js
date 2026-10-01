@@ -35,6 +35,8 @@
  * · JS necesario              los js/syx-*.js que seleccionan una clase del
  *                             componente, con sus funciones exportadas
  *
+ * `--check` comprueba además que README.md nombre cada js/syx-*.js.
+ *
  * LA DEMO
  * El `usage` se pinta tal cual con dos retoques que solo afectan a la copia
  * viva, nunca al marcado que se copia: los id se prefijan (`ref-<clase>-`)
@@ -340,7 +342,18 @@ function main() {
   const { nav, cuerpo, total } = generar(registro);
   const nuevo = sustituir(sustituir(actual, 'ref-nav', nav), 'ref', cuerpo);
 
+  // El README es por donde entra quien adopta SYX: un js/syx-*.js que no
+  // nombra es un comportamiento que nadie sabrá importar (así pasó con
+  // initTabs). La tabla de su Quick Start → JavaScript se escribe a mano;
+  // esto solo impide que le falte una fila.
+  const readme = fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8');
+  const sinDocumentar = scriptsDelSistema().filter((s) => !readme.includes(s.fichero)).map((s) => s.fichero);
+
   if (check) {
+    if (sinDocumentar.length) {
+      console.error(`❌ README.md no nombra ${sinDocumentar.join(', ')}: añádelo a la tabla de Quick Start → JavaScript.`);
+      process.exit(1);
+    }
     if (nuevo !== actual) {
       console.error('❌ La referencia de componentes de docs.html no corresponde a component-registry.json.');
       console.error('   Regenera con: npm run build:docs-componentes');

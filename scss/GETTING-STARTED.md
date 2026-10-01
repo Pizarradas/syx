@@ -26,12 +26,14 @@ npm run build              # compile everything: the 7 themes + all bundles
 npm run watch              # watch the whole scss/ tree for changes
 ```
 
-For the minimal production bundle, compile a theme's `bundle-core.scss`:
+For the sheets an app consumes, build `dist/`:
 
 ```bash
-sass scss/themes/example-01/bundle-core.scss dist/core.css --style=compressed
-# measured: 203 KB raw · 36 KB gzip (goal: < 50 KB gzip)
+npm run build:dist         # dist/<theme>.core.min.css and dist/<theme>.full.min.css, all 7 themes
 ```
+
+It prints the size of every sheet as it writes them. They are not copied here:
+a measured number in a guide is right for one release and wrong for every later one.
 
 ### With Dart Sass CLI
 
@@ -55,15 +57,20 @@ sass --watch scss/styles-theme-example-01.scss:css/styles-theme-example-01.css
 
 ## 2. Use SYX in HTML
 
+Consuming SYX from an app (install, import a theme, optional JS, light/dark) is the
+README's *Quick Start*, and it is tested end to end by `npm run check:quickstart`.
+Inside this repository, after `npm run build:dist`:
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Link the compiled CSS for your context -->
-    <link rel="stylesheet" href="css/styles-theme-example-01.css" />
+    <!-- One theme, the whole system. css/styles-theme-*.css also works, but it
+         carries SYX's own site layer: it is the sheet of the SYX pages, not of an app. -->
+    <link rel="stylesheet" href="dist/example-01.full.min.css" />
   </head>
-  <!-- REQUIRED: two classes on body — syx (root scope) + syx--theme-* (theme context) -->
-  <body class="syx syx--theme-example-01">
+  <!-- No classes required on <html> or <body>; data-theme="dark|light" on <html> forces a mode -->
+  <body>
     <!-- SYX components use the .syx- prefix -->
     <button class="atom-btn atom-btn--primary">Primary Button</button>
     <button class="atom-btn atom-btn--secondary">Secondary Button</button>
@@ -195,13 +202,15 @@ defined once in `themes/_shared/_bundle-core.scss` (no showroom components,
 no site layer):
 
 ```bash
-sass scss/themes/example-01/bundle-core.scss dist/core.css --style=compressed
+sass scss/themes/example-01/bundle-core.scss build/core.css --style=compressed --no-source-map
 ```
 
-Measured (example-01): **203 KB raw · 36 KB gzip** — goal < 50 KB gzip.
+That is the bare bundle, without the `.syx-*` utilities; `npm run build:dist` adds
+them and runs autoprefixer, and is what the package ships as
+`syx-design-system/bundles/<theme>.core.min.css`. Its size is printed by the build.
 
 ```html
-<link rel="stylesheet" href="dist/core.css" />
+<link rel="stylesheet" href="build/core.css" />
 ```
 
 ---
