@@ -27,6 +27,9 @@
  *      `--primitive-*` citado en el córtex, la gobernanza, CLAUDE.md,
  *      AGENTS.md, AI_GUIDELINES.md y los modos existe (convención de ejemplos
  *      malos y nuevos más abajo, en la propia comprobación).
+ *   7. Presupuesto de contexto: la entrada de cada modo (CLAUDE.md, lo que
+ *      manda leer antes de nada, el modo y sus Always) ≤ 25 000 tokens y su
+ *      peor caso ≤ 60 000. Imprime la tabla; routing.md no copia las cifras.
  *
  * Uso: node scripts/check-conocimiento.js   ·   npm run check:conocimiento
  */
@@ -301,9 +304,120 @@ comprobar('ningún token citado es un fantasma', () => {
   return `${citas} citas de ${distintos.size} nombres en ${fuentes.length} documentos, todas existen`;
 });
 
+// ─── 7 · Presupuesto de contexto ────────────────────────────────────────────
+// Cada byte que un modo carga antes de decidir es contexto que no está para
+// la tarea. Hasta octubre de 2026 nadie lo medía: routing.md decía «un techo
+// de unos 83 KB» escrito a mano que no contaba la capa GSAP, y el peor caso
+// real de CREATIVE eran ~275 KB (≈ 79 000 tokens). Ahora se mide aquí y la
+// cifra la imprime este guardián; ningún documento la copia a mano.
+//
+//   entrada    CLAUDE.md + lo que manda leer «antes de nada» (su lista
+//              numerada) + el fichero del modo + sus módulos Always.
+//   peor caso  entrada + todo lo que puede entrar a la vez: When relevant,
+//              With GSAP, Self-check y la MAYOR de las cargas On request,
+//              sin contar dos veces un fichero. On request se carga de una
+//              en una —la que el brief nombra—, nunca la lista en bloque:
+//              sumarla entera mediría un encargo que pide Rive, Cavalry,
+//              Blender, una marca de referencia y un sistema de movimiento a
+//              la vez, que no existe. La suma completa se imprime igual
+//              («todo»), para que se vea.
+//   Tokens ≈ bytes / 3,5.
+//
+// Una CARPETA enrutada no se carga en bloque: entra su módulo de entrada
+// (index.md o el que se llama como la carpeta, sin su número de estrato) y, como mucho, UN fichero más,
+// el que ese módulo señale. Se mide así: entrada + el mayor de los demás. Una
+// carpeta sin módulo de entrada no se puede cargar sin cargarla entera, y
+// falla.
+const BYTES_POR_TOKEN = 3.5;
+const LIMITE_ENTRADA = 25000;
+const LIMITE_PEOR = 60000;
+const presupuesto = [];
+
+function entradaDeCarpeta(dir) {
+  // index.md, o el que se llama como la carpeta (sin su número de estrato:
+  // motion/03-creativa/ → creativa.md, que es como lo nombra el dominio).
+  const base = path.basename(dir);
+  for (const n of ['index.md', `${base}.md`, `${base.replace(/^\d+-/, '')}.md`]) {
+    if (fs.existsSync(path.join(dir, n))) return path.join(dir, n);
+  }
+  return null;
+}
+
+/** Los ficheros que carga una ruta del bloque Knowledge. */
+function ficherosDe(ruta) {
+  const p = path.join(K, ruta);
+  if (!fs.existsSync(p)) return [];
+  if (!fs.statSync(p).isDirectory()) return [p];
+  const entrada = entradaDeCarpeta(p);
+  if (!entrada) throw new Error(`${ruta} es una carpeta sin módulo de entrada (index.md o ${path.basename(p).replace(/^\d+-/, '')}.md): cargarla es cargarla en bloque`);
+  const resto = walk(p).filter((f) => f.endsWith('.md') && f !== entrada)
+    .sort((a, b) => fs.statSync(b).size - fs.statSync(a).size);
+  return [entrada, ...resto.slice(0, 1)];
+}
+
+function lecturaPrevia() {
+  const claude = path.join(ROOT, 'CLAUDE.md');
+  const t = fs.readFileSync(claude, 'utf8');
+  const i = t.indexOf('Before doing anything else, read:');
+  const lista = [];
+  if (i !== -1) {
+    for (const l of t.slice(i).split(/\r?\n/).slice(1)) {
+      const m = /^\d+\.\s+`([^`]+)`/.exec(l);
+      if (!m) { if (lista.length) break; continue; }
+      lista.push(path.join(ROOT, m[1]));
+    }
+  }
+  return [claude, ...lista.filter((f) => fs.existsSync(f))];
+}
+
+comprobar('cada modo cabe en su presupuesto de contexto', () => {
+  const previa = lecturaPrevia();
+  const bytes = (fs_) => [...fs_].reduce((a, f) => a + fs.statSync(f).size, 0);
+  const tok = (b) => Math.round(b / BYTES_POR_TOKEN);
+  const malos = [];
+  for (const m of modos) {
+    const b = bloques[m] || '';
+    const tiers = { always: [], relevant: [], gsap: [], request: [], self: [] };
+    for (const l of b.split('\n')) {
+      const mm = /^> · \*\*([^*]+?):?\*\*/.exec(l);
+      if (!mm) continue;
+      const k = mm[1].toLowerCase();
+      const tier = k.startsWith('always') ? 'always' : k.startsWith('when relevant') ? 'relevant'
+        : k.startsWith('with gsap') ? 'gsap' : k.startsWith('on request') ? 'request' : k.startsWith('self') ? 'self' : null;
+      if (tier) tiers[tier].push(...rutasEn(l));
+    }
+    const entrada = new Set([...previa, path.join(MODOS_DIR, `${m}.md`)]);
+    for (const r of tiers.always) for (const f of ficherosDe(r)) entrada.add(f);
+    const peor = new Set(entrada);
+    for (const t of ['relevant', 'gsap', 'self']) for (const r of tiers[t]) for (const f of ficherosDe(r)) peor.add(f);
+    const todo = new Set(peor);
+    let mayor = [];
+    for (const r of tiers.request) {
+      const nuevos = ficherosDe(r).filter((f) => !peor.has(f));
+      for (const f of nuevos) todo.add(f);
+      if (bytes(nuevos) > bytes(mayor)) mayor = nuevos;
+    }
+    for (const f of mayor) peor.add(f);
+    const fila = { modo: m, entrada: bytes(entrada), peor: bytes(peor), todo: bytes(todo) };
+    presupuesto.push(fila);
+    if (tok(fila.entrada) > LIMITE_ENTRADA) malos.push(`${m}: entrada ≈ ${tok(fila.entrada)} tokens (límite ${LIMITE_ENTRADA})`);
+    if (tok(fila.peor) > LIMITE_PEOR) malos.push(`${m}: peor caso ≈ ${tok(fila.peor)} tokens (límite ${LIMITE_PEOR})`);
+  }
+  if (malos.length) throw new Error(malos.join(' · ') + ' · Baja módulos de Always a When relevant, parte los grandes o cita el fichero concreto en vez de la carpeta');
+  const max = (k) => presupuesto.reduce((a, f) => (f[k] > a[k] ? f : a));
+  return `entrada máx. ${max('entrada').modo} ≈ ${tok(max('entrada').entrada)} tokens (≤ ${LIMITE_ENTRADA}) · peor caso máx. ${max('peor').modo} ≈ ${tok(max('peor').peor)} tokens (≤ ${LIMITE_PEOR})`;
+});
+
 console.log('\n── CÓRTEX ' + '─'.repeat(54) + '\n');
 for (const r of resultados) {
   console.log(`${r.ok ? '✅' : '❌'} ${r.nombre}${r.detalle ? ' — ' + r.detalle : ''}`.replace(/ · /g, r.ok ? ' · ' : '\n     · '));
+}
+if (presupuesto.length) {
+  const kb = (b) => `${(b / 1024).toFixed(0)} KB`.padStart(7);
+  const tk = (b) => `≈ ${Math.round(b / BYTES_POR_TOKEN / 100) / 10}k`.padStart(8);
+  console.log('\n   presupuesto de contexto (tokens ≈ bytes / 3,5)');
+  console.log(`   modo        entrada (≤ ${LIMITE_ENTRADA / 1000}k)    peor caso (≤ ${LIMITE_PEOR / 1000}k)   todo On request a la vez`);
+  for (const f of presupuesto) console.log(`   ${f.modo.padEnd(10)} ${kb(f.entrada)} ${tk(f.entrada)}   ${kb(f.peor)} ${tk(f.peor)}   ${kb(f.todo)} ${tk(f.todo)}`);
 }
 const fallos = resultados.filter((r) => !r.ok).length;
 console.log(`\n   ${resultados.length - fallos}/${resultados.length} comprobaciones\n`);
