@@ -1418,6 +1418,53 @@
       "a11y": "Container only. If the labels are a list, use <ul role=\"list\">. No JS."
     },
     {
+      "name": "menu",
+      "layer": "molecule",
+      "file": "scss/molecules/_menu.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_menus.scss"
+      ],
+      "classes": [
+        "mol-menu"
+      ],
+      "modifiers": [
+        "mol-menu__item--danger"
+      ],
+      "elements": [
+        "mol-menu__item",
+        "mol-menu__list",
+        "mol-menu__separator",
+        "mol-menu__trigger"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-menu-bg",
+        "--component-menu-border-color",
+        "--component-menu-border-radius",
+        "--component-menu-border-width",
+        "--component-menu-color",
+        "--component-menu-item-bg-hover",
+        "--component-menu-item-border-radius",
+        "--component-menu-item-danger-color",
+        "--component-menu-item-disabled-color",
+        "--component-menu-item-gap",
+        "--component-menu-item-min-height",
+        "--component-menu-item-padding-inline",
+        "--component-menu-max-height",
+        "--component-menu-min-width",
+        "--component-menu-separator-color",
+        "--component-menu-shadow",
+        "--component-menu-z-index"
+      ],
+      "description": "[scope: generic] A button that opens a list of actions (\"More\", \"Actions\", a table row's menu). The __list is popover=\"auto\": top layer, light dismiss and Escape come from the browser, and popovertarget opens it even without script. js/syx-menu.js adds the WAI-ARIA menu button keyboard, keeps aria-expanded true to the real state and places the list under the button (above if it does not fit), aligned to its start. __item--danger for destructive actions, aria-disabled=\"true\" for an action that exists but cannot run now, __separator between groups. To navigate to other pages this is not a menu: use a list of links or mol-disclosure.",
+      "usage": "<div class=\"mol-menu\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md mol-menu__trigger\" type=\"button\" id=\"menu-actions-btn\" aria-haspopup=\"menu\" aria-expanded=\"false\" aria-controls=\"menu-actions\" popovertarget=\"menu-actions\">Actions <span class=\"atom-icon atom-icon--lc-chevron-down atom-icon--sm\" aria-hidden=\"true\"></span></button><div class=\"mol-menu__list\" id=\"menu-actions\" role=\"menu\" aria-labelledby=\"menu-actions-btn\" popover=\"auto\"><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\">Rename</button><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\">Duplicate</button><button class=\"mol-menu__item\" type=\"button\" role=\"menuitem\" aria-disabled=\"true\">Move to folder</button><div class=\"mol-menu__separator\" role=\"separator\"></div><button class=\"mol-menu__item mol-menu__item--danger\" type=\"button\" role=\"menuitem\">Delete</button></div></div>",
+      "a11y": "Button: aria-haspopup=\"menu\", aria-expanded, aria-controls and popovertarget pointing at the list. List: role=\"menu\" with aria-labelledby → button; each option role=\"menuitem\" (a <button>, or an <a> for a link). Keyboard from js/syx-menu.js (no dependencies): ↓/Enter/Space open on the first option, ↑ on the last; ↑↓ move with wrap, Home/End, a letter jumps to the next option starting with it, Escape and Tab close and return focus to the button; activating an option closes the menu. aria-disabled options stay focusable but do nothing. Without JS, popovertarget still opens and closes it and Tab reaches the options."
+    },
+    {
       "name": "tabs",
       "layer": "molecule",
       "file": "scss/molecules/_tabs.scss",

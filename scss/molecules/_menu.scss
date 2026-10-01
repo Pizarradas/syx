@@ -1,0 +1,135 @@
+// MOLECULE: MENU
+// ===============================================
+// Un botón que abre una lista de acciones («Más», «Acciones», el menú
+// de una fila). La lista es un popover="auto": capa superior, cierre al
+// pulsar fuera y con Escape, todo del navegador. js/syx-menu.js pone el
+// teclado del patrón de menú de WAI-ARIA y la coloca bajo el botón.
+//
+// <div class="mol-menu">
+//   <button class="atom-btn mol-menu__trigger" type="button" id="m-btn"
+//           aria-haspopup="menu" aria-expanded="false" aria-controls="m-list" popovertarget="m-list">Acciones</button>
+//   <div class="mol-menu__list" id="m-list" role="menu" aria-labelledby="m-btn" popover="auto">
+//     <button class="mol-menu__item" type="button" role="menuitem">Renombrar</button>
+//     <div class="mol-menu__separator" role="separator"></div>
+//     <button class="mol-menu__item mol-menu__item--danger" type="button" role="menuitem">Borrar</button>
+//   </div>
+// </div>
+//
+// Para navegar a otra página no es un menú: es una lista de enlaces
+// (<nav>) o mol-disclosure. role="menu" promete el teclado de un menú
+// de aplicación, y eso es lo que da el script.
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · aria-haspopup="menu", aria-expanded y aria-controls en el botón;
+//   role="menu" con aria-labelledby en la lista; role="menuitem" en cada
+//   opción. El estado abierto lo lleva aria-expanded.
+// · Teclado (js/syx-menu.js): ↓/Intro/Espacio abren y van a la primera,
+//   ↑ a la última; ↑↓ recorren, Inicio/Fin, una letra salta a la opción
+//   que empieza por ella, Escape y Tab cierran y devuelven el foco al
+//   botón. Sin JS, popovertarget abre y cierra y las opciones se
+//   alcanzan con Tab.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-menu($theme: null) {
+  @layer syx.molecules {
+    .mol-menu {
+      display: inline-block;
+
+      // El botón es un atom-btn; lo propio del menú es el indicador del
+      // final (el chevron decorativo), que gira con el estado abierto. Se
+      // lee de aria-expanded, que mantiene js/syx-menu.js.
+      &__trigger > [aria-hidden="true"]:last-child {
+        @include transition(rotate var(--semantic-duration-fast) var(--semantic-easing-out));
+      }
+
+      &__trigger[aria-expanded="true"] > [aria-hidden="true"]:last-child {
+        rotate: 180deg;
+      }
+
+      &__list {
+        // Anula la colocación por defecto de un popover (centrado en la
+        // ventana, con borde y relleno propios): la posición la pone JS.
+        inset: auto;
+        z-index: var(--component-menu-z-index);
+        box-sizing: border-box;
+        min-inline-size: var(--component-menu-min-width);
+        max-block-size: var(--component-menu-max-height);
+        margin: 0;
+        // El relleno es del tamaño del anillo de foco: una lista con
+        // scroll recorta lo que sale de su caja (ver mol-tabs).
+        padding: calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset));
+        overflow-y: auto;
+        color: var(--component-menu-color);
+        background-color: var(--component-menu-bg);
+        border: var(--component-menu-border-width) solid var(--component-menu-border-color);
+        border-radius: var(--component-menu-border-radius);
+        box-shadow: var(--component-menu-shadow);
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+        gap: var(--component-menu-item-gap);
+        box-sizing: border-box;
+        inline-size: 100%;
+        min-block-size: var(--component-menu-item-min-height);
+        padding-block: 0;
+        padding-inline: var(--component-menu-item-padding-inline);
+        font: inherit;
+        color: inherit;
+        text-align: start;
+        text-decoration: none;
+        white-space: nowrap;
+        cursor: pointer;
+        background: none;
+        border: 0;
+        border-radius: var(--component-menu-item-border-radius);
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--component-menu-item-bg-hover);
+        }
+
+        &:focus-visible {
+          @include focus-ring();
+        }
+
+        &--danger {
+          color: var(--component-menu-item-danger-color);
+        }
+
+        // aria-disabled y no disabled: la opción sigue enfocable (el
+        // patrón de menú lo pide, para que se sepa que existe) pero no
+        // actúa. El script ignora su clic.
+        &[aria-disabled="true"] {
+          color: var(--component-menu-item-disabled-color);
+          cursor: not-allowed;
+        }
+
+        @media (forced-colors: active) {
+          &:hover,
+          &:focus-visible {
+            color: HighlightText;
+            forced-color-adjust: none;
+            background-color: Highlight;
+          }
+
+          // Con forced-color-adjust: none el anillo conservaría el color del
+          // tema sobre Canvas, sin contraste garantizado.
+          &:focus-visible {
+            outline-color: CanvasText;
+          }
+        }
+      }
+
+      // Una línea entre grupos de opciones. Borde y no fondo: en colores
+      // forzados el fondo desaparece y el borde no.
+      &__separator {
+        margin-block: var(--semantic-space-stack-xs);
+        border-block-start: var(--component-menu-border-width) solid var(--component-menu-separator-color);
+      }
+    }
+  }
+}

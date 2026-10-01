@@ -1,0 +1,32 @@
+// COMPONENT TOKENS: MENUS
+// ================================================
+// mol-menu · un botón que abre una lista de acciones, sobre la
+// Popover API (popover="auto": cierre al pulsar fuera y con Escape
+// los pone el navegador). El texto de las opciones y el de la
+// opción peligrosa se miden sobre el fondo de la lista y sobre el
+// fondo de la opción activa.
+// (Auditoría 2026-10 · acción 15)
+// ================================================
+
+:root {
+  --component-menu-bg: var(--semantic-color-bg-primary);
+  --component-menu-color: var(--semantic-color-text-primary);
+  --component-menu-border-width: var(--semantic-border-width-thin);
+  --component-menu-border-color: var(--semantic-color-border-subtle);
+  --component-menu-border-radius: var(--semantic-border-radius-default);
+  --component-menu-shadow: var(--semantic-shadow-lg);
+  --component-menu-min-width: 12rem;
+  --component-menu-max-height: 20rem;
+  // Solo cuenta sin Popover API (Safari < 17): en la capa superior el
+  // z-index no hace falta.
+  --component-menu-z-index: var(--semantic-z-index-dropdown);
+
+  --component-menu-item-min-height: 2.75rem; // 44 px: diana táctil (WCAG 2.5.8 pide 24)
+  --component-menu-item-padding-inline: var(--semantic-space-component-sm);
+  --component-menu-item-gap: var(--semantic-space-inline-xs);
+  --component-menu-item-border-radius: var(--semantic-border-radius-sm);
+  --component-menu-item-bg-hover: var(--semantic-color-bg-secondary);
+  --component-menu-item-danger-color: var(--semantic-color-state-error-text);
+  --component-menu-item-disabled-color: var(--semantic-color-text-disabled);
+  --component-menu-separator-color: var(--semantic-color-border-subtle);
+}
