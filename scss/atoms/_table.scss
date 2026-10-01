@@ -58,6 +58,7 @@
         // &:hover, &:focus
         &:hover,
         &:focus-visible {
+          color: var(--component-table-state-hover-color);
           background-color: var(--component-table-state-hover-bg);
           border-color: var(--component-table-state-hover-border-color);
           box-shadow: var(--component-table-state-hover-shadow);
@@ -114,7 +115,7 @@
               // &:hover, &:focus
               &:hover,
               &:focus-visible {
-                color: var(--component-table-state-hover-border-color);
+                color: var(--component-table-state-hover-color);
                 background-color: var(--component-table-state-hover-bg);
               }
             }

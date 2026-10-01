@@ -145,14 +145,19 @@
   // CTA FINAL
   // ================================================
   --component-cta-bg: linear-gradient( 135deg, var(--semantic-color-primary) 0%, var(--semantic-color-secondary) 100% );
-  --component-cta-color: var(--semantic-color-text-inverse);
-  --component-cta-overline-color: color-mix(in srgb, var(--semantic-color-text-inverse) 75%, transparent);
-  --component-cta-sub-color: color-mix(in srgb, var(--semantic-color-text-inverse) 80%, transparent);
+  // El texto va sobre un degradado de primario a secundario: lleva la tinta
+  // on-* del primario. En los seis temas que usan este degradado coincide con
+  // la del secundario (ambas oscuras); syx-sketch pinta el CTA en navy y
+  // declara su propia tinta. Un tema cuyos dos extremos pidan tintas
+  // distintas debe redefinir el fondo o el color. Antes, el texto inverso.
+  --component-cta-color: var(--semantic-color-on-primary);
+  --component-cta-overline-color: color-mix(in srgb, var(--semantic-color-on-primary) 75%, transparent);
+  --component-cta-sub-color: color-mix(in srgb, var(--semantic-color-on-primary) 80%, transparent);
   --component-cta-headline-font-size: clamp(1.75rem, 4vw, 3rem);
 
   // Círculo decorativo de la esquina. `-decor-bg: transparent`
   // lo apaga sin tocar el organismo.
-  --component-cta-decor-bg: color-mix(in srgb, var(--semantic-color-text-inverse) 8%, transparent);
+  --component-cta-decor-bg: color-mix(in srgb, var(--semantic-color-on-primary) 8%, transparent);
   --component-cta-decor-size: 20rem;
   --component-cta-decor-radius: var(--semantic-border-radius-circle);
   --component-cta-decor-top: -4rem;
@@ -160,9 +165,9 @@
 
   --component-cta-code-bg: color-mix(in srgb, oklch(0 0 0) 20%, transparent);
   --component-cta-code-border-width: var(--semantic-border-width-thin);
-  --component-cta-code-border-color: color-mix(in srgb, var(--semantic-color-text-inverse) 20%, transparent);
+  --component-cta-code-border-color: color-mix(in srgb, var(--semantic-color-on-primary) 20%, transparent);
   --component-cta-code-border-radius: 0.5rem;
-  --component-cta-code-color: var(--semantic-color-text-inverse);
+  --component-cta-code-color: var(--semantic-color-on-primary);
   // La sombra dura es tinta negra: sobre un CTA oscuro sería
   // invisible. Este token permite reasignarla dentro de la sección.
   --component-cta-shadow-hard-color: var(--semantic-shadow-hard-color);
@@ -247,7 +252,7 @@
   --component-token-component-badge-bg: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-token-component-badge-color: var(--semantic-color-primary-text);
   --component-token-component-badge-border: color-mix(in srgb, var(--semantic-color-primary) 20%, transparent);
-  --component-token-component-step-color: var(--component-token-step-color);
+  --component-token-component-step-color: var(--semantic-color-on-primary); // va sobre el primario
 
   --component-token-connector-line: linear-gradient( to bottom, var(--semantic-color-border-default), var(--semantic-color-primary) );
   --component-token-connector-opacity: 0.35;
@@ -258,7 +263,7 @@
   --component-token-rule-border-color: var(--semantic-color-primary);
   --component-token-rule-border-radius: var(--theme-radius);
   --component-token-rule-icon-bg: var(--semantic-color-primary);
-  --component-token-rule-icon-color: var(--semantic-color-text-inverse);
+  --component-token-rule-icon-color: var(--semantic-color-on-primary);
   --component-token-rule-icon-radius: var(--semantic-border-radius-circle);
 
   // ESCALA DE PUNTUACIÓN (why-syx)

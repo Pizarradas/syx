@@ -301,8 +301,11 @@
     background-color: var(--primitive-color-gray-200);
   }
 
+  // Relleno de marca: trae su tinta on-*, como el botón relleno. Va después
+  // de las .syx-text-* a propósito: sobre este fondo manda la tinta medida.
   .syx-bg-primary {
     background-color: var(--semantic-color-primary);
+    color: var(--semantic-color-on-primary);
   }
 
   .syx-bg-primary-light {
