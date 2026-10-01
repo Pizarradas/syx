@@ -1504,6 +1504,61 @@
       "a11y": "role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=\"button\" on every tab; panels focusable (tabindex=\"0\"). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable."
     },
     {
+      "name": "toast",
+      "layer": "molecule",
+      "file": "scss/molecules/_toast.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_toasts.scss"
+      ],
+      "classes": [
+        "mol-toast"
+      ],
+      "modifiers": [
+        "mol-toast__item--error",
+        "mol-toast__item--info",
+        "mol-toast__item--success",
+        "mol-toast__item--warning"
+      ],
+      "elements": [
+        "mol-toast__close",
+        "mol-toast__item",
+        "mol-toast__live",
+        "mol-toast__text"
+      ],
+      "states": [
+        ".is-leaving",
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-toast-accent-width",
+        "--component-toast-bg",
+        "--component-toast-border-color",
+        "--component-toast-border-radius",
+        "--component-toast-border-width",
+        "--component-toast-close-bg-hover",
+        "--component-toast-close-color",
+        "--component-toast-close-size",
+        "--component-toast-color",
+        "--component-toast-duration",
+        "--component-toast-error-accent",
+        "--component-toast-gap",
+        "--component-toast-info-accent",
+        "--component-toast-max-width",
+        "--component-toast-offset",
+        "--component-toast-padding-block",
+        "--component-toast-padding-inline",
+        "--component-toast-shadow",
+        "--component-toast-success-accent",
+        "--component-toast-warning-accent",
+        "--component-toast-z-index"
+      ],
+      "description": "[scope: generic] Ephemeral notifications in a corner that confirm what just happened (\"Saved\", \"Link copied\") without interrupting or taking focus. The .mol-toast container is fixed and stacks __item elements (--info, --success, --warning, --error colour only the accent rule; text stays primary). js/syx-toast.js: showToast('Saved', { tone, duration }) creates one, announces only its text through the container's __live region (role=\"status\"), removes it after 6 s by default and pauses the countdown while the pointer or focus is on it or the tab is hidden; duration: 0 keeps it until dismissed. A button with data-syx-toast=\"Text\" shows one without writing JS. Never the only place for something that must be read or done: an error that needs attention is mol-alert with role=\"alert\".",
+      "usage": "<button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\" data-syx-toast=\"Link copied to the clipboard\" data-syx-toast-tone=\"success\">Copy link</button><div class=\"mol-toast\" data-dismiss-label=\"Dismiss notification\"><p class=\"mol-toast__live\" role=\"status\"></p><div class=\"mol-toast__item mol-toast__item--info\"><p class=\"mol-toast__text\">3 files moved to Archive</p><button class=\"mol-toast__close\" type=\"button\" aria-label=\"Dismiss notification\"><span class=\"atom-icon atom-icon--lc-x atom-icon--sm\" aria-hidden=\"true\"></span></button></div></div>",
+      "a11y": "The container holds a __live element with role=\"status\" that exists before any text arrives; js/syx-toast.js writes only the message there, so the close button is not read out. Focus never moves to a toast; its close button (aria-label, 32px target) is reachable with Tab, and closing it returns focus to where the user came from. The countdown pauses on hover, on focus and while the tab is hidden (WCAG 2.2.1); duration: 0 disables it. Reduced motion: no slide or fade. Without JS a static toast stays and its button does nothing."
+    },
+    {
       "name": "tooltip",
       "layer": "molecule",
       "file": "scss/molecules/_tooltip.scss",
