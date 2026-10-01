@@ -128,6 +128,7 @@ in `sideEffects`, so a bare import survives `vite build`, webpack and Rollup
 | File | For | Bare import does | For markup rendered later |
 | ---- | --- | ---------------- | ------------------------- |
 | `js/syx-tabs.js` | `mol-tabs` | wires every `[role="tablist"]` present on load | `import { initTabs } from 'syx-design-system/js/syx-tabs.js'; initTabs(container);` |
+| `js/syx-site-nav.js` | `org-site-header` (mobile drawer) | wires every burger with `aria-controls`: inert drawer when closed, focus into it on open, Escape returns focus | `import { initSiteNav } from 'syx-design-system/js/syx-site-nav.js'; initSiteNav(container);` |
 
 Frameworks that render after load (React, Vue, Svelte…) should call the init
 function after mounting instead of relying on the bare import. Without a bundler:
