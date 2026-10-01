@@ -15,6 +15,7 @@
     justify-content: center;
     // Reset <a> text-decoration for all interactive states — single source of truth
     &, &:hover, &:focus, &:visited, &:active { text-decoration: none; }
+    -webkit-user-select: none; // Safari < 17 solo lo entiende con prefijo
     user-select: none;
     text-align: center;
     box-shadow: var(--component-button-shadow);

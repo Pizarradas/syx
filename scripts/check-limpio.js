@@ -28,6 +28,15 @@
  * esté a mitad de algo. Con `--strict` —que es como lo llama la integración
  * continua, donde el árbol SIEMPRE está limpio— no poder medir es un fallo.
  *
+ * EL FORMATO NO CUENTA (octubre de 2026)
+ * Las hojas de css/ se compilan con `npm run build:css` o con Prepros, y las
+ * dos son solo dart-sass expandido sobre los puntos de entrada de scss/ (sin
+ * autoprefixer: los prefijos que hacen falta se escriben en el SCSS). Pero el
+ * dart-sass de Prepros puede ser otra versión y formatear distinto. Por eso un
+ * .css que cambia se compara NORMALIZADO (scripts/lib/css-normal.js): si solo
+ * cambian espacios, saltos o comentarios, está limpio; una regla, un selector
+ * o un valor distinto, no.
+ *
  * Uso: node scripts/check-limpio.js [--strict]
  */
 
@@ -79,7 +88,19 @@ const soloLaMarca = (rel) => {
   return diff.length > 0 && diff.every((l) => l.includes('"generatedAt"'));
 };
 
-const reales = cambiados.filter((rel) => !(rel === 'contracts/resolved-tokens.json' && soloLaMarca(rel)));
+const { normalizar } = require('./lib/css-normal');
+const fs = require('fs');
+// Un .css que solo cambia de formato (otra versión de dart-sass, Prepros) no
+// es una desviación: lo que cuenta es lo que el navegador lee.
+const soloFormato = (rel) => {
+  if (!rel.endsWith('.css')) return false;
+  try {
+    const antes = execFileSync('git', ['show', `HEAD:${rel}`], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    return normalizar(antes) === normalizar(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
+  } catch { return false; }
+};
+
+const reales = cambiados.filter((rel) => !(rel === 'contracts/resolved-tokens.json' && soloLaMarca(rel)) && !soloFormato(rel));
 
 if (!reales.length) {
   git('checkout', '--', '.');

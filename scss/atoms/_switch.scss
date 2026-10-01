@@ -12,6 +12,7 @@
     align-items: center;
     gap: var(--semantic-space-component-sm);
     cursor: pointer;
+    -webkit-user-select: none; // Safari < 17 solo lo entiende con prefijo
     user-select: none;
 
     // &__input — hidden native checkbox

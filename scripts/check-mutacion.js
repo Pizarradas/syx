@@ -170,11 +170,10 @@ function arbol(dir) {
   return t;
 }
 
-/** Compila un tema como lo hace build:css (sass + autoprefixer), solo ese. */
+/** Compila un tema como lo hace build:css (solo Sass, como Prepros), solo ese. */
 function compilarTema(t, tema) {
   const css = `css/styles-theme-${tema}.css`;
   t.ejecutar(path.join(t.dir, 'node_modules/.bin/sass'), [`scss/styles-theme-${tema}.scss`, css, '--style=expanded', '--no-source-map']);
-  t.ejecutar(path.join(t.dir, 'node_modules/.bin/postcss'), [css, '--replace', '--no-map']);
 }
 
 const git = (t, ...a) => t.ejecutar('git', a);

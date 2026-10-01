@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 > **Versión pendiente de decidir.** Lo que hay aquí rompe compatibilidad (variables heredadas retiradas, `bundle-core` sin iconos Lucide ni utilidades, fuentes solo en woff2 con familias renombradas, `--semantic-tone-*-bg` ya no gobierna el estado): por SemVer es una **5.0.0**. Pero varias deprecaciones prometen su retirada «en v5.0» (utilidades físicas `.syx-ml-*`/`.syx-mr-*`…), así que cortar la 5.0 obliga a retirarlas ya o a aplazar la promesa. `release.yml` exige que esta sección esté vacía y la de la versión fechada antes de etiquetar.
 
+### Changed — el CSS lo gobierna el SCSS, y Prepros compila lo mismo que npm
+
+- Las páginas (home, docs, why-syx, theme-builder) vuelven a enlazar `css/styles-theme-<tema>.css` y `css/setup-builder.css`, compilados desde los puntos de entrada de `scss/`. Durante la acción 12 enlazaron `dist/site/`, que fabrica un script de Node y git no versiona: en un clon, o compilando con Prepros, salían sin estilos. `dist/` queda solo para el paquete npm.
+- `build:css` es solo Sass expandido, sin postcss/autoprefixer; los dos prefijos que el mínimo publicado aún pide (`-webkit-user-select`, `-webkit-text-decoration`) se escriben en el SCSS.
+- `prepros.config`: los 8 puntos de entrada, sin minificar ni prefijar (antes minificaba y dejaba `css/` distinto del repositorio).
+- `check:prepros` (nuevo) y `check-limpio` con comparación normalizada: un cambio solo de formato de otra versión de dart-sass no falla; un cambio de regla o valor sí.
+
 ### Auditoría de octubre de 2026 — resumen por acción
 
 Detalle en las secciones de abajo y en los mensajes de commit (`Auditoría 2026-10 · acción N`).

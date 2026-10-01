@@ -12,6 +12,7 @@
     display: inline-flex;
     align-items: flex-start;
     cursor: pointer;
+    -webkit-user-select: none; // Safari < 17 solo lo entiende con prefijo
     user-select: none;
 
     // &__input — hidden native checkbox

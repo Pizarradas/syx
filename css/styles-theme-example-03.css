@@ -1754,7 +1754,7 @@
   abbr[title],
   abbr[data-original-title] {
     -webkit-text-decoration: underline dotted;
-            text-decoration: underline dotted;
+    text-decoration: underline dotted;
     cursor: help;
     border-block-end: 0;
   }
@@ -1813,7 +1813,6 @@
     display: none;
   }
   input:-webkit-autofill {
-    -webkit-transition: background-color 600000s 0s, color 600000s 0s;
     transition: background-color 600000s 0s, color 600000s 0s;
   }
   [type=reset],
@@ -2587,9 +2586,7 @@
   .atom-breadcrumb__link {
     color: var(--semantic-color-primary-text);
     text-decoration: none;
-    transition: color var(--semantic-duration-fast) var(--semantic-easing-standard), -webkit-text-decoration var(--semantic-duration-fast) var(--semantic-easing-standard);
     transition: color var(--semantic-duration-fast) var(--semantic-easing-standard), text-decoration var(--semantic-duration-fast) var(--semantic-easing-standard);
-    transition: color var(--semantic-duration-fast) var(--semantic-easing-standard), text-decoration var(--semantic-duration-fast) var(--semantic-easing-standard), -webkit-text-decoration var(--semantic-duration-fast) var(--semantic-easing-standard);
   }
   @media (prefers-reduced-motion: reduce) {
     .atom-breadcrumb__link {
@@ -2627,7 +2624,7 @@
   }
   .atom-btn {
     -webkit-user-select: none;
-            user-select: none;
+    user-select: none;
     text-align: center;
     box-shadow: var(--component-button-shadow);
     cursor: pointer;
@@ -2889,7 +2886,7 @@
     align-items: flex-start;
     cursor: pointer;
     -webkit-user-select: none;
-            user-select: none;
+    user-select: none;
   }
   .atom-check__input {
     position: absolute;
@@ -3836,7 +3833,7 @@
     align-items: flex-start;
     cursor: pointer;
     -webkit-user-select: none;
-            user-select: none;
+    user-select: none;
   }
   .atom-radio__input {
     position: absolute;
@@ -3963,7 +3960,7 @@
     gap: var(--semantic-space-component-sm);
     cursor: pointer;
     -webkit-user-select: none;
-            user-select: none;
+    user-select: none;
   }
   .atom-switch__input {
     position: absolute;
@@ -4175,7 +4172,7 @@
     text-transform: uppercase;
     vertical-align: middle;
     -webkit-user-select: none;
-            user-select: none;
+    user-select: none;
     background-color: var(--component-avatar-bg);
     border-radius: var(--component-avatar-border-radius);
   }
@@ -4232,12 +4229,10 @@
   .atom-progress::-webkit-progress-value {
     background-color: var(--component-progress-fill);
     border-radius: inherit;
-    -webkit-transition: inline-size var(--component-progress-duration) var(--semantic-easing-out);
     transition: inline-size var(--component-progress-duration) var(--semantic-easing-out);
   }
   @media (prefers-reduced-motion: reduce) {
     .atom-progress::-webkit-progress-value {
-      -webkit-transition: none;
       transition: none;
     }
   }

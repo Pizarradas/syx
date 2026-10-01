@@ -251,6 +251,7 @@
 
     abbr[title],
     abbr[data-original-title] {
+      -webkit-text-decoration: underline dotted; // Safari: el atajo con estilo pide prefijo
       text-decoration: underline dotted;
       cursor: help;
       border-block-end: 0;

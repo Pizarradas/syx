@@ -276,6 +276,25 @@ pruned, split per context) and is not versioned. An app should use `dist/` — t
 exports — and never `css/`.
 To compile your own bundle from source, see [`scss/GETTING-STARTED.md`](scss/GETTING-STARTED.md).
 
+#### Compiling with Prepros
+
+The SCSS architecture owns every sheet: the 8 entry points in `scss/*.scss` (the 7
+`styles-theme-*.scss` and `setup-builder.scss`) compile to `css/` with **Sass alone**,
+expanded, no autoprefixer and no minifier. `npm run build:css` and Prepros produce the
+same CSS, and the versioned `prepros.config` is set up for that: each entry point is
+registered with *Minify* and *Autoprefixer* off. The few prefixes the published browser
+minimum still needs (`-webkit-user-select`, `-webkit-text-decoration`) are written in
+the SCSS. Open the project in Prepros, save any `.scss`, and the pages pick up the
+result.
+
+- `npm run check:prepros` fails if an entry point is missing from `prepros.config`, if
+  minify or autoprefixer are turned on, or if a page links a sheet that no entry point
+  produces.
+- `check-limpio` compares the compiled CSS **normalized**: if Prepros' dart-sass formats
+  differently (spacing, line breaks), it still passes; a different rule or value fails.
+- A new entry point = a new non-partial `scss/<name>.scss`, its line in `prepros.config`
+  (the guard tells you), and a `<link href="css/<name>.css">`.
+
 ```bash
 npm run export:tokens  # the tokens in W3C DTCG format (contracts/dtcg/, not versioned)
 npm run export:figma   # variables + components for Figma (contracts/figma/, see below)

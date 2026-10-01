@@ -32,6 +32,7 @@
       color: var(--component-avatar-color);
       text-transform: uppercase;
       vertical-align: middle;
+      -webkit-user-select: none; // Safari < 17 solo lo entiende con prefijo
       user-select: none;
       background-color: var(--component-avatar-bg);
       border-radius: var(--component-avatar-border-radius);
