@@ -23,6 +23,11 @@
     font-weight: var(--component-button-font-weight);
     font-size: var(--component-button-font-size);
     line-height: var(--component-button-line-height);
+    // Tamaño por defecto = md. Sin modificador de tamaño, el botón se
+    // pintaba con el relleno nativo (1px 6px: 27 px de alto y, en Chromium,
+    // fondo #efefef en las variantes sin --filled).
+    @include padding(var(--component-button-padding-block) var(--component-button-size-md));
+    min-block-size: var(--component-button-height-md);
     @include transition(
       border-color var(--component-button-transition-duration) var(--component-button-transition-easing),
       color var(--component-button-transition-duration) var(--component-button-transition-easing),
@@ -103,27 +108,47 @@
       }
     }
 
-    // &--size
+    // &--danger — acción destructiva, con el color de estado de error
+    &--danger {
+      border-color: var(--component-button-danger-border);
+
+      // Filled variant
+      &.atom-btn--filled {
+        background-color: var(--component-button-danger-filled-bg);
+        border-color: var(--component-button-danger-filled-border);
+        color: var(--component-button-danger-filled-color);
+      }
+
+      // Outline variant (no --filled class)
+      &:not(.atom-btn--filled) {
+        background-color: transparent;
+        color: var(--component-button-danger-color);
+      }
+    }
+
+    // &--size — el alto lo da un suelo (min-block-size) y --size-* el relleno
+    // lateral. Antes el mismo valor fluido iba de relleno en los cuatro lados
+    // y de line-height: md medía 72 px junto a campos de 44.
     &--size {
       // &-sm
       &-sm {
-        @include padding(var(--component-button-size-sm));
+        @include padding(var(--component-button-padding-block) var(--component-button-size-sm));
+        min-block-size: var(--component-button-height-sm);
         font-size: var(--component-button-font-size-sm);
-        line-height: var(--component-button-size-sm);
       }
 
       // &-md
       &-md {
-        @include padding(var(--component-button-size-md));
+        @include padding(var(--component-button-padding-block) var(--component-button-size-md));
+        min-block-size: var(--component-button-height-md);
         font-size: var(--component-button-font-size-md);
-        line-height: var(--component-button-size-md);
       }
 
       // &-lg
       &-lg {
-        @include padding(var(--component-button-size-lg));
+        @include padding(var(--component-button-padding-block) var(--component-button-size-lg));
+        min-block-size: var(--component-button-height-lg);
         font-size: var(--component-button-font-size-lg);
-        line-height: var(--component-button-size-lg);
       }
     }
 
@@ -186,6 +211,19 @@
             color: var(--component-button-quaternary-filled-color-hover);
           }
         }
+
+        // Danger variant hover
+        &.atom-btn--danger {
+          border-color: var(--component-button-danger-border-hover);
+          background-color: var(--component-button-danger-bg-hover);
+          color: var(--component-button-danger-color-hover);
+
+          &.atom-btn--filled {
+            background-color: var(--component-button-danger-filled-bg-hover);
+            border-color: var(--component-button-danger-filled-border-hover);
+            color: var(--component-button-danger-filled-color-hover);
+          }
+        }
       }
     }
 
@@ -201,7 +239,7 @@
     &:focus-visible {
       // &:not(:disabled)
       &:not(:disabled) {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+        @include focus-ring();
       }
     }
 
@@ -218,9 +256,15 @@
       color: var(--component-button-disabled-color);
     }
 
-    // Circle variant
+    // Circle variant — solo icono: un cuadrado del alto de su tamaño, sin
+    // relleno lateral (con el relleno de --size-* salía un óvalo).
     &.atom-btn--circle {
       @include border-radius(var(--component-button-border-radius-circle));
+      padding-inline: 0;
+      min-inline-size: var(--component-button-height-md);
+
+      &.atom-btn--size-sm { min-inline-size: var(--component-button-height-sm); }
+      &.atom-btn--size-lg { min-inline-size: var(--component-button-height-lg); }
     }
 
     // Filled disabled state

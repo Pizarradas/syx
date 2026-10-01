@@ -47,7 +47,7 @@
        ============================================= -->
   <div class="org-site-nav-overlay" id="nav-overlay" aria-hidden="true"></div>
 
-  <nav class="org-site-nav-drawer" id="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
+  <nav class="org-site-nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
     <a href="#features" class="org-site-nav-drawer__link">
       <span class="atom-icon atom-icon--lc-zap" aria-hidden="true"></span>
       Features
@@ -151,7 +151,7 @@
       </a>
 
       <!-- Hamburger — mobile only -->
-      <button class="org-site-header__burger" id="nav-burger" aria-controls="nav-drawer" aria-expanded="false"
+      <button class="org-site-header__burger" id="nav-burger" type="button" aria-controls="nav-drawer" aria-expanded="false"
         aria-label="Open navigation">
         <span class="org-site-header__burger-line" aria-hidden="true"></span>
         <span class="org-site-header__burger-line" aria-hidden="true"></span>
@@ -1040,9 +1040,6 @@
       var body = document.body;
       var cssLink = document.getElementById('syx-theme-css');
       var header = document.getElementById('site-header');
-      var burger = document.getElementById('nav-burger');
-      var drawer = document.getElementById('nav-drawer');
-      var overlay = document.getElementById('nav-overlay');
       var selDesk = document.getElementById('theme-switcher');
       var selMob = document.getElementById('theme-switcher-mobile');
       var dmToggle = document.getElementById('darkmode-toggle');
@@ -1158,33 +1155,9 @@
         });
       }
 
-      // ── Mobile nav toggle ─────────────────────────
-      function openNav() {
-        body.setAttribute('data-nav-open', '');
-        drawer.setAttribute('aria-hidden', 'false');
-        overlay.setAttribute('aria-hidden', 'false');
-        burger.setAttribute('aria-expanded', 'true');
-        burger.setAttribute('aria-label', 'Close navigation');
-      }
-
-      function closeNav() {
-        body.removeAttribute('data-nav-open');
-        drawer.setAttribute('aria-hidden', 'true');
-        overlay.setAttribute('aria-hidden', 'true');
-        burger.setAttribute('aria-expanded', 'false');
-        burger.setAttribute('aria-label', 'Open navigation');
-      }
-
-      if (burger) burger.addEventListener('click', function () { body.hasAttribute('data-nav-open') ? closeNav() : openNav(); });
-      if (overlay) overlay.addEventListener('click', closeNav);
-
-      drawer && drawer.querySelectorAll('.org-site-nav-drawer__link').forEach(function (l) {
-        l.addEventListener('click', closeNav);
-      });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && body.hasAttribute('data-nav-open')) closeNav();
-      });
+      // ── Mobile nav ───────────────────────────────
+      // Vive en js/syx-site-nav.js (foco, inert, Escape), compartido por las
+      // tres páginas. (Auditoría 2026-10 · acción 3)
 
       // ── Header scroll shadow ──────────────────────
       if (header && 'IntersectionObserver' in window) {
@@ -1199,6 +1172,7 @@
 
     })();
   </script>
+  <script type="module" src="js/syx-site-nav.js"></script>
 
 </body>
 

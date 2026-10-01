@@ -1,11 +1,11 @@
 {
   "_meta": {
     "version": "4.28.0",
-    "generated": "2026-09-30",
+    "generated": "2026-10-01",
     "generator": "scripts/build-component-registry.js",
     "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
-    "note": "Todo se genera salvo `description` y `usage`, que son prosa escrita a mano y se conservan entre regeneraciones. `tokenFiles` sustituye al antiguo `tokenFile`: un componente puede leer tokens declarados en varios ficheros, y el anterior apuntaba a rutas que no existían.",
+    "note": "Todo se genera salvo `description`, `usage` y `a11y`, que son prosa escrita a mano y se conservan entre regeneraciones. `tokenFiles` sustituye al antiguo `tokenFile`: un componente puede leer tokens declarados en varios ficheros, y el anterior apuntaba a rutas que no existían.",
     "layers": {
       "syx.atoms": "Componentes de un solo propósito. Prefijo: atom-",
       "syx.molecules": "Composiciones de 2 o más átomos. Prefijo: mol-",
@@ -33,7 +33,8 @@
       "composedOf": [],
       "tokens": [],
       "description": "[scope: system-reusable] Ancestor trail for the current page. Use it when the user arrived at a page nested two or more levels deep and needs to climb back. Not a substitute for primary navigation, and pointless on a flat site.",
-      "usage": "<nav aria-label=\"Breadcrumb\"><ol class=\"atom-breadcrumb\"><li class=\"atom-breadcrumb__item\"><a class=\"atom-breadcrumb__link\" href=\"/\">Home</a></li><li class=\"atom-breadcrumb__item\" aria-current=\"page\">Tokens</li></ol></nav>"
+      "usage": "<nav aria-label=\"Breadcrumb\"><ol class=\"atom-breadcrumb\"><li class=\"atom-breadcrumb__item\"><a class=\"atom-breadcrumb__link\" href=\"/\">Home</a></li><li class=\"atom-breadcrumb__item\" aria-current=\"page\">Tokens</li></ol></nav>",
+      "a11y": "Wrap the list in <nav aria-label=\"Breadcrumb\"> with an <ol>. The current page is plain text with aria-current=\"page\", not a link. Separators are CSS and are not read. Links take the system focus ring. No JS."
     },
     {
       "name": "btn",
@@ -48,6 +49,7 @@
       ],
       "modifiers": [
         "atom-btn--circle",
+        "atom-btn--danger",
         "atom-btn--filled",
         "atom-btn--has-icon",
         "atom-btn--primary",
@@ -75,6 +77,17 @@
         "--component-button-border-radius-circle",
         "--component-button-border-style",
         "--component-button-border-width",
+        "--component-button-danger-bg-hover",
+        "--component-button-danger-border",
+        "--component-button-danger-border-hover",
+        "--component-button-danger-color",
+        "--component-button-danger-color-hover",
+        "--component-button-danger-filled-bg",
+        "--component-button-danger-filled-bg-hover",
+        "--component-button-danger-filled-border",
+        "--component-button-danger-filled-border-hover",
+        "--component-button-danger-filled-color",
+        "--component-button-danger-filled-color-hover",
         "--component-button-disabled-bg",
         "--component-button-disabled-border",
         "--component-button-disabled-color",
@@ -84,7 +97,11 @@
         "--component-button-font-size-lg",
         "--component-button-font-size-md",
         "--component-button-font-size-sm",
+        "--component-button-height-lg",
+        "--component-button-height-md",
+        "--component-button-height-sm",
         "--component-button-line-height",
+        "--component-button-padding-block",
         "--component-button-primary-bg-hover",
         "--component-button-primary-border-hover",
         "--component-button-primary-color",
@@ -134,8 +151,9 @@
         "--component-icon-size-md",
         "--component-icon-size-sm"
       ],
-      "description": "[scope: system-reusable] The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --filled makes the variant solid. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.",
-      "usage": "<button class=\"atom-btn atom-btn--primary atom-btn--size-md\" type=\"button\">Get started</button>"
+      "description": "[scope: system-reusable] The action trigger. --primary is the single dominant action of a decision context; --secondary/--tertiary/--quaternary step down from it; --danger marks a destructive action (delete, revoke) in the error state colour, never the brand; --filled makes any variant solid. Without a --size-* modifier a button is md, the same 48px height as a form field; --size-sm/--size-lg are 40/56px. Use --circle only for an icon-only control, and give it an aria-label. If the element navigates rather than acts, it is atom-link.",
+      "usage": "<button class=\"atom-btn atom-btn--primary atom-btn--size-md\" type=\"button\">Get started</button> <button class=\"atom-btn atom-btn--danger atom-btn--filled\" type=\"button\">Delete project</button>",
+      "a11y": "Native <button> with an explicit type (\"button\", or \"submit\" inside a form); an <a href> only when it navigates. Enter/Space come from the element. Icon-only (--circle) needs aria-label. Disable with the disabled attribute, not a class. Focus: system ring. No JS."
     },
     {
       "name": "check",
@@ -176,14 +194,14 @@
         "--component-check-status-disabled-opacity",
         "--component-check-transition-duration",
         "--component-check-transition-easing",
-        "--component-form-field-border-focus",
         "--component-form-field-color",
         "--component-form-field-font-size",
         "--component-form-field-line-height",
         "--component-form-field-transition-easing"
       ],
       "description": "[scope: system-reusable] Checkbox with a visible label, for choices that are independent of each other. The native input stays in the DOM and carries the state; the styling hangs off it. For one on/off setting that applies immediately, atom-switch reads better; for mutually exclusive options, atom-radio.",
-      "usage": "<label class=\"atom-check\"><input class=\"atom-check__input\" type=\"checkbox\" name=\"opt\"><span class=\"atom-check__label\">Include drafts</span></label>"
+      "usage": "<label class=\"atom-check\"><input class=\"atom-check__input\" type=\"checkbox\" name=\"opt\"><span class=\"atom-check__label\">Include drafts</span></label>",
+      "a11y": "Real <input type=\"checkbox\"> inside the <label>, so the text is its name and the whole row toggles it. Space toggles. Related boxes go in a <fieldset> with a <legend>. The focus ring is drawn on the visible box. No JS."
     },
     {
       "name": "code",
@@ -226,7 +244,8 @@
         "--component-code-syntax-val"
       ],
       "description": "[scope: domain-reusable] Code shown as content, on its own dark surface that ignores the page theme so a dark brand colour cannot make the syntax invisible. --inline for a fragment inside a sentence. The __tag/__attr/__val/__cls/__cmt elements are the syntax roles; nothing else colours code. Use in technical and documentation products, not as a generic panel.",
-      "usage": "<pre class=\"atom-code\"><code>&lt;<span class=\"atom-code__tag\">button</span> <span class=\"atom-code__attr\">class</span>=<span class=\"atom-code__val\">\"atom-btn\"</span>&gt;</code></pre>"
+      "usage": "<pre class=\"atom-code\"><code>&lt;<span class=\"atom-code__tag\">button</span> <span class=\"atom-code__attr\">class</span>=<span class=\"atom-code__val\">\"atom-btn\"</span>&gt;</code></pre>",
+      "a11y": "Static content in <pre><code>. A block that scrolls sideways needs tabindex=\"0\" (and a label) so it can be scrolled from the keyboard. Colour is never the only cue. No JS."
     },
     {
       "name": "feature-icon",
@@ -268,7 +287,8 @@
         "--component-feature-icon-token-color"
       ],
       "description": "[scope: domain-reusable] Circular tinted container that gives an icon presence at the head of a card or list item. The shape is generic but the modifier set (--token, --mixin, --layer, --molecule, --organism) names SYX's own architecture: outside this domain only --primary carries meaning, so a new product needs its own modifiers rather than borrowing these. Always decorative — the meaning belongs to the text next to it.",
-      "usage": "<span class=\"atom-feature-icon atom-feature-icon--token\" aria-hidden=\"true\"><span class=\"atom-icon atom-icon--lc-layers\"></span></span>"
+      "usage": "<span class=\"atom-feature-icon atom-feature-icon--token\" aria-hidden=\"true\"><span class=\"atom-icon atom-icon--lc-layers\"></span></span>",
+      "a11y": "Decorative: always aria-hidden=\"true\"; the meaning lives in the text next to it. Never focusable. No JS."
     },
     {
       "name": "form",
@@ -287,6 +307,7 @@
       "elements": [],
       "states": [
         ":disabled",
+        ":focus-visible",
         ":hover"
       ],
       "composedOf": [
@@ -309,12 +330,12 @@
         "--component-form-field-padding-x",
         "--component-form-field-padding-y",
         "--component-form-field-placeholder",
-        "--component-form-field-shadow-focus",
         "--component-form-field-transition-duration",
         "--component-form-field-transition-easing"
       ],
       "description": "[scope: system-reusable] The four canonical form primitives: .atom-label, .atom-input, .atom-select and .atom-input-wrapper. They are the raw controls only — validation state, message and icon live in mol-form-field, so use these bare only in a layout that handles its own error reporting.",
-      "usage": "<label class=\"atom-label\" for=\"email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"email\" type=\"email\"></span>"
+      "usage": "<label class=\"atom-label\" for=\"form-email\">Email</label><span class=\"atom-input-wrapper\"><input class=\"atom-input\" id=\"form-email\" type=\"email\" autocomplete=\"email\"></span><label class=\"atom-label\" for=\"form-plan\">Plan</label><span class=\"atom-input-wrapper\"><select class=\"atom-select\" id=\"form-plan\"><option>Free</option><option>Pro</option></select></span>",
+      "a11y": "Every control has a <label for> pointing at a unique id (ids repeat across a page more often than you think). Use the right type and autocomplete. .atom-select is a native <select>: keyboard and option list come from the browser. Controls are 48px tall at every width. Focus: system ring. No JS."
     },
     {
       "name": "icon-lucide",
@@ -394,7 +415,8 @@
       ],
       "tokens": [],
       "description": "[scope: system-reusable] Extends .atom-icon with 63 Lucide glyphs as --lc-* modifiers. The SVGs are embedded as data URIs, not linked: they are painted with mask-image, and a cross-origin mask is blocked, which left the site iconless over file://. Regenerated by scripts/build-lucide-tokens.js from img/icons/lucide/ — do not hand-edit the modifier block.",
-      "usage": "<span class=\"atom-icon atom-icon--lc-home atom-icon--color-primary\" aria-hidden=\"true\"></span>"
+      "usage": "<span class=\"atom-icon atom-icon--lc-home atom-icon--color-primary\" aria-hidden=\"true\"></span>",
+      "a11y": "Decorative by default: aria-hidden=\"true\". When it is the only content of a control, the control carries the aria-label, not the icon. No JS."
     },
     {
       "name": "icon",
@@ -439,7 +461,8 @@
         "--component-icon-source"
       ],
       "description": "[scope: system-reusable] The icon primitive: a masked shape that inherits colour through --color-* modifiers and sizes through --sm/--md/--lg/--xl. This file holds the hand-drawn SYX set (arrows, bars, UI marks); the Lucide set extends the same class. An icon is decorative unless it is the only content of a control — mark it aria-hidden, or give the control an aria-label.",
-      "usage": "<span class=\"atom-icon atom-icon--ui-tick atom-icon--color-state-ok atom-icon--md\" aria-hidden=\"true\"></span>"
+      "usage": "<span class=\"atom-icon atom-icon--ui-tick atom-icon--color-state-ok atom-icon--md\" aria-hidden=\"true\"></span>",
+      "a11y": "Decorative by default: aria-hidden=\"true\". When it is the only content of a control, the control carries the aria-label, not the icon. No JS."
     },
     {
       "name": "label",
@@ -467,7 +490,8 @@
         "--component-label-padding-sm"
       ],
       "description": "[scope: system-reusable] Caution: two different things claim .atom-label. This file styles a small scope marker (--scope-1/-2/-3, --primary); scss/atoms/_form.scss declares the same class as a form field label. Check which one the compiled CSS gives you before relying on either, and prefer atom-pill for a standalone tag.",
-      "usage": "<span class=\"atom-label atom-label--scope-1\">Scope</span>"
+      "usage": "<span class=\"atom-label atom-label--scope-1\">Scope</span>",
+      "a11y": "Plain text, no role. If it marks a state, the words must say it. No JS."
     },
     {
       "name": "link",
@@ -493,11 +517,11 @@
         "--component-link-decoration-thickness",
         "--component-link-primary-bg-hover",
         "--component-link-primary-color",
-        "--component-link-primary-color-hover",
-        "--component-link-primary-shadow-focus"
+        "--component-link-primary-color-hover"
       ],
       "description": "[scope: system-reusable] Inline navigational link. Use it when the element takes the user somewhere; if it performs an action, it is atom-btn regardless of how it looks. --primary is the styled variant with its own focus and hover treatment.",
-      "usage": "<a class=\"atom-link atom-link--primary\" href=\"/docs\">Read the docs</a>"
+      "usage": "<a class=\"atom-link atom-link--primary\" href=\"/docs\">Read the docs</a>",
+      "a11y": "Native <a href>; if it performs an action it is a <button>. The text must make sense out of context (\"Read the docs\", not \"here\"). Every variant takes the system focus ring. No JS."
     },
     {
       "name": "list",
@@ -516,7 +540,8 @@
       "composedOf": [],
       "tokens": [],
       "description": "[scope: system-reusable] Unstyled list plus two authored variants: --primary draws its own marker through ::before so the bullet colour follows the theme, --ordered numbers. Use it for real sequences and sets. Do not use it to lay out cards — that is a grid.",
-      "usage": "<ul class=\"atom-list atom-list--primary\"><li class=\"atom-list__item\">Primitives</li><li class=\"atom-list__item\">Semantics</li></ul>"
+      "usage": "<ul class=\"atom-list atom-list--primary\"><li class=\"atom-list__item\">Primitives</li><li class=\"atom-list__item\">Semantics</li></ul>",
+      "a11y": "Native <ul>/<ol> so the item count is announced. The --primary marker is CSS; WebKit drops list semantics when list-style is none, so add role=\"list\" if that matters. No JS."
     },
     {
       "name": "pagination",
@@ -557,11 +582,11 @@
         "--component-pagination-gap",
         "--component-pagination-icon-filter",
         "--component-pagination-icon-size",
-        "--component-pagination-item-size",
-        "--component-pagination-shadow-focus"
+        "--component-pagination-item-size"
       ],
-      "description": "[scope: system-reusable] Page-by-page navigation over a finite, countable result set. Prev/next arrows come from the Lucide token system via ::before — mark the item --is-prev/--is-next rather than typing a character into the HTML. If the total is unknown or the list is a feed, this is the wrong control.",
-      "usage": "<nav aria-label=\"Pagination\"><ul class=\"atom-pagination\"><li class=\"atom-pagination__item atom-pagination__item--is-prev\"><a class=\"atom-pagination__trigger\" href=\"?p=1\">Previous</a></li><li class=\"atom-pagination__item atom-pagination__item--is-active\"><a class=\"atom-pagination__trigger\" href=\"?p=2\" aria-current=\"page\">2</a></li></ul></nav>"
+      "description": "[scope: system-reusable] Page-by-page navigation over a finite, countable result set. Prev/next arrows come from the Lucide token system via ::before — mark the item --is-prev/--is-next and give the trigger an aria-label instead of visible text (a word overflows the square trigger). If the total is unknown or the list is a feed, this is the wrong control.",
+      "usage": "<nav aria-label=\"Pagination\"><ul class=\"atom-pagination\"><li class=\"atom-pagination__item atom-pagination__item--is-prev\"><a class=\"atom-pagination__trigger\" href=\"?p=1\" aria-label=\"Previous page\"></a></li><li class=\"atom-pagination__item\"><a class=\"atom-pagination__trigger\" href=\"?p=1\">1</a></li><li class=\"atom-pagination__item atom-pagination__item--is-active\"><a class=\"atom-pagination__trigger\" href=\"?p=2\" aria-current=\"page\">2</a></li><li class=\"atom-pagination__item\"><a class=\"atom-pagination__trigger\" href=\"?p=3\">3</a></li><li class=\"atom-pagination__item atom-pagination__item--is-next\"><a class=\"atom-pagination__trigger\" href=\"?p=3\" aria-label=\"Next page\"></a></li></ul></nav>",
+      "a11y": "Wrap it in <nav aria-label=\"Pagination\">; the current page carries aria-current=\"page\". Prev/next are icon-only: aria-label (\"Previous page\", \"Next page\"), no visible text. <a href> for page URLs, <button type=\"button\"> when script loads the results. A dead end uses --is-disabled plus disabled (button) or aria-disabled=\"true\" (link). No JS required."
     },
     {
       "name": "pill",
@@ -615,7 +640,8 @@
         "--component-pill-warning-color"
       ],
       "description": "[scope: system-reusable] Compact uppercase badge for a status, a category or a count. --success/--warning/--danger carry state; --neutral/--subtle/--dark are quiet; --primary/--secondary follow the brand. It is a label, not a button: if it is clickable, use atom-btn. Colour alone never conveys the state — the text has to say it too.",
-      "usage": "<span class=\"atom-pill atom-pill--success\">Stable</span>"
+      "usage": "<span class=\"atom-pill atom-pill--success\">Stable</span>",
+      "a11y": "Static text, no role, not interactive (if it is clickable it is atom-btn). The state is in the words, never only in the colour. A count that updates needs an aria-live container. No JS."
     },
     {
       "name": "radio",
@@ -640,7 +666,6 @@
       ],
       "composedOf": [],
       "tokens": [
-        "--component-form-field-border-focus",
         "--component-form-field-color",
         "--component-form-field-font-size",
         "--component-form-field-line-height",
@@ -661,7 +686,8 @@
         "--component-radio-transition-easing"
       ],
       "description": "[scope: system-reusable] One choice out of a mutually exclusive set. Only meaningful in a group sharing a name, and the group needs a fieldset with a legend to be announced as a group. For independent choices use atom-check.",
-      "usage": "<label class=\"atom-radio\"><input class=\"atom-radio__input\" type=\"radio\" name=\"theme\" value=\"dark\"><span class=\"atom-radio__label\">Dark</span></label>"
+      "usage": "<label class=\"atom-radio\"><input class=\"atom-radio__input\" type=\"radio\" name=\"theme\" value=\"dark\"><span class=\"atom-radio__label\">Dark</span></label>",
+      "a11y": "Real <input type=\"radio\"> inside the <label>, one name per group, the group in <fieldset><legend>. Arrow keys move the choice (browser). No JS."
     },
     {
       "name": "stat-counter",
@@ -683,7 +709,8 @@
       "composedOf": [],
       "tokens": [],
       "description": "[scope: system-reusable] One number plus the word that explains it, sized to be read across the page. Use it for a figure that supports an argument. It stops working the moment there are many: four is a row of evidence, twelve is a table.",
-      "usage": "<div class=\"atom-stat\"><span class=\"atom-stat__number\">19</span><span class=\"atom-stat__label\">Atoms</span></div>"
+      "usage": "<div class=\"atom-stat\"><span class=\"atom-stat__number\">19</span><span class=\"atom-stat__label\">Atoms</span></div>",
+      "a11y": "Static. The explaining word is visible text next to the number; if the number animates, the final value is in the DOM from the start. No JS."
     },
     {
       "name": "switch",
@@ -709,7 +736,6 @@
       ],
       "composedOf": [],
       "tokens": [
-        "--component-form-field-border-focus",
         "--component-form-field-border-width",
         "--component-form-field-color",
         "--component-form-field-font-size",
@@ -731,7 +757,8 @@
         "--component-switch-width"
       ],
       "description": "[scope: system-reusable] Binary setting that takes effect on the spot, with no submit step. If the change only lands when a form is sent, the user expects a checkbox — use atom-check.",
-      "usage": "<label class=\"atom-switch\"><input class=\"atom-switch__input\" type=\"checkbox\" role=\"switch\"><span class=\"atom-switch__slider\" aria-hidden=\"true\"></span><span class=\"atom-switch__label\">Dark mode</span></label>"
+      "usage": "<label class=\"atom-switch\"><input class=\"atom-switch__input\" type=\"checkbox\" role=\"switch\"><span class=\"atom-switch__slider\" aria-hidden=\"true\"></span><span class=\"atom-switch__label\">Dark mode</span></label>",
+      "a11y": "<input type=\"checkbox\" role=\"switch\"> inside the <label>; the drawn track is aria-hidden. Space toggles and the on/off state is announced from the checkbox. It applies at once, so say what changed if it is not visible. No JS."
     },
     {
       "name": "table",
@@ -777,8 +804,9 @@
         "--component-table-th-font-size",
         "--component-table-th-line-height"
       ],
-      "description": "[scope: system-reusable] Tabular data — rows that compare along shared columns. --resp wraps it in __container so the table scrolls instead of collapsing (it holds a min-width floor for exactly that reason), and --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.",
-      "usage": "<div class=\"atom-table__container\"><table class=\"atom-table atom-table--primary atom-table--resp\"><thead><tr><th class=\"atom-table__th\">Token</th></tr></thead><tbody><tr><td class=\"atom-table__td\">--semantic-color-text-primary</td></tr></tbody></table></div>"
+      "description": "[scope: system-reusable] Tabular data — rows that compare along shared columns. --resp goes on the wrapper <div> (with __container), never on the <table>: overflow has no effect on a table box, so the page itself scrolled sideways. The table keeps a min-width floor so it scrolls instead of collapsing, and --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.",
+      "usage": "<div class=\"atom-table__container atom-table--resp\" role=\"region\" aria-label=\"Semantic tokens\" tabindex=\"0\"><table class=\"atom-table atom-table--primary\"><thead><tr><th class=\"atom-table__th\" scope=\"col\">Token</th></tr></thead><tbody><tr><td class=\"atom-table__td\">--semantic-color-text-primary</td></tr></tbody></table></div>",
+      "a11y": "Native <table> with <th scope> headers; name it with <caption> or aria-label. With --resp the scrolling element is the wrapper <div>: give it role=\"region\", an aria-label and tabindex=\"0\" so it can be scrolled from the keyboard (it takes the system focus ring). No JS."
     },
     {
       "name": "title",
@@ -814,7 +842,8 @@
         "--component-title-margin-bottom"
       ],
       "description": "[scope: system-reusable] Headline styling detached from document level: --h1 to --h6 set size only. Pick the heading tag from the document outline and the modifier from the visual hierarchy — they do not have to match, and forcing them to is how outlines get broken to win a size.",
-      "usage": "<h2 class=\"atom-title atom-title--h3\">Token architecture</h2>"
+      "usage": "<h2 class=\"atom-title atom-title--h3\">Token architecture</h2>",
+      "a11y": "Pick the heading level from the document outline; the modifier only sets the size. Never skip levels to get a size. No JS."
     },
     {
       "name": "txt",
@@ -832,7 +861,8 @@
       "composedOf": [],
       "tokens": [],
       "description": "[scope: system-reusable] Body copy. --primary only sets the bottom margin of a paragraph in a stack; colour, size and measure come from the semantic type scale, so there is nothing to configure here. If a paragraph needs to look secondary, that is a token role, not a modifier of this atom.",
-      "usage": "<p class=\"atom-txt atom-txt--primary\">SYX is a token-driven, native SCSS design system.</p>"
+      "usage": "<p class=\"atom-txt atom-txt--primary\">SYX is a token-driven, native SCSS design system.</p>",
+      "a11y": "Static body text. No role, no JS."
     }
   ],
   "molecules": [
@@ -877,7 +907,8 @@
         "--component-alert-warning-title-color"
       ],
       "description": "[scope: generic] A status message inside the page flow: --info, --success, --warning, --error. The state colours the accent rule and the title (state-*-text, measured at 4.5:1 on its background); the body stays in primary text. Use role=\"status\" for information and role=\"alert\" only for errors that need attention now; the role must be in the DOM before the text arrives.",
-      "usage": "<div class=\"mol-alert mol-alert--warning\" role=\"status\"><p class=\"mol-alert__title\">Your plan expires in 3 days</p><p class=\"mol-alert__body\">Renew it to keep your history.</p></div>"
+      "usage": "<div class=\"mol-alert mol-alert--warning\" role=\"status\"><p class=\"mol-alert__title\">Your plan expires in 3 days</p><p class=\"mol-alert__body\">Renew it to keep your history.</p></div>",
+      "a11y": "role=\"status\" (polite) for information; role=\"alert\" only for an error that needs attention now. The live region must be in the DOM before its text changes. Not focusable. No JS for a static message."
     },
     {
       "name": "btn-group",
@@ -897,7 +928,8 @@
         "--component-btn-group-gap"
       ],
       "description": "[scope: system-reusable] Row of related actions with the standard gap between them, wrapping on narrow viewports. It arranges buttons; it does not rank them — the hierarchy is the buttons' own modifiers, and a group where every button is --primary has no primary action. .cont-set-btn is a deprecated alias.",
-      "usage": "<div class=\"mol-btn-group\"><button class=\"atom-btn atom-btn--primary\">Save</button><button class=\"atom-btn atom-btn--secondary\">Cancel</button></div>"
+      "usage": "<div class=\"mol-btn-group\"><button class=\"atom-btn atom-btn--primary atom-btn--size-md\" type=\"button\">Save</button><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\">Cancel</button></div>",
+      "a11y": "Every button inside has an explicit type. As a plain row it needs no role; if it behaves as one control, it becomes role=\"toolbar\" with an aria-label and arrow-key navigation in script. No JS otherwise."
     },
     {
       "name": "code-snippet",
@@ -940,7 +972,8 @@
         "--component-code-snippet-shadow"
       ],
       "description": "[scope: domain-reusable] A code block with a header that judges it: --ok for the correct way, --ko for the rejected one, --neutral for a plain sample. Built for teaching a rule by showing both sides, so a lone --neutral snippet is usually just atom-code. The label has to state the verdict in words — the colour is not the message.",
-      "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\"><code>color: var(--semantic-color-text-primary);</code></pre></div>"
+      "usage": "<div class=\"mol-code-snippet mol-code-snippet--ok\"><div class=\"mol-code-snippet__header\"><span class=\"mol-code-snippet__label\">Correct</span></div><pre class=\"mol-code-snippet__body atom-code\"><code>color: var(--semantic-color-text-primary);</code></pre></div>",
+      "a11y": "The header label states the verdict in words. A body that scrolls sideways needs tabindex=\"0\". No JS."
     },
     {
       "name": "dialog",
@@ -977,8 +1010,9 @@
         "--component-dialog-title-font-size",
         "--component-dialog-title-line-height"
       ],
-      "description": "[scope: generic] A modal on the native <dialog>: open it with showModal() so the browser provides the top layer, focus trapping, Escape and an inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=\"alertdialog\" and autofocus the cancel button.",
-      "usage": "<dialog class=\"mol-dialog\" aria-labelledby=\"dlg-title\" open><form method=\"dialog\" class=\"mol-dialog__inner\"><h2 class=\"mol-dialog__title\" id=\"dlg-title\">Delete “Report”?</h2><p class=\"mol-dialog__body\">Files and history will be lost.</p><div class=\"mol-dialog__footer\"><button class=\"atom-btn\" value=\"cancel\" autofocus>Cancel</button><button class=\"atom-btn atom-btn--primary atom-btn--filled\" value=\"ok\">Delete</button></div></form></dialog>"
+      "description": "[scope: generic] A modal on the native <dialog>. The usage is the closed markup: open it from script with dialog.showModal() — never with the open attribute, which gives no top layer, no focus trap, no Escape and no inert page. Enters with @starting-style; no transition under reduced motion. For destructive confirmations use role=\"alertdialog\", point aria-describedby at the body and autofocus the cancel button.",
+      "usage": "<dialog class=\"mol-dialog\" role=\"alertdialog\" aria-labelledby=\"dlg-title\" aria-describedby=\"dlg-desc\"><form method=\"dialog\" class=\"mol-dialog__inner\"><h2 class=\"mol-dialog__title\" id=\"dlg-title\">Delete “Report”?</h2><p class=\"mol-dialog__body\" id=\"dlg-desc\">Files and history will be lost.</p><div class=\"mol-dialog__footer\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" value=\"cancel\" autofocus>Cancel</button><button class=\"atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md\" value=\"ok\">Delete</button></div></form></dialog>",
+      "a11y": "Native <dialog> opened with showModal() — the browser gives top layer, focus trap, Escape and an inert page; the open attribute gives none of it. aria-labelledby → title, aria-describedby → body. Destructive confirmation: role=\"alertdialog\" and autofocus on Cancel. <form method=\"dialog\"> buttons close it and return their value; focus goes back to the opener. JS: the showModal() call."
     },
     {
       "name": "disclosure",
@@ -1011,7 +1045,8 @@
         "--component-disclosure-summary-padding-block"
       ],
       "description": "[scope: generic] Show and hide on native <details>/<summary>: keyboard and expanded state come from the browser. Several with the same name=\"\" form an exclusive accordion. Never replace <summary> with a <div>.",
-      "usage": "<details class=\"mol-disclosure\" name=\"faq\"><summary class=\"mol-disclosure__summary\">Can I change plans?</summary><div class=\"mol-disclosure__content\">Yes, whenever you want.</div></details>"
+      "usage": "<details class=\"mol-disclosure\" name=\"faq\"><summary class=\"mol-disclosure__summary\">Can I change plans?</summary><div class=\"mol-disclosure__content\">Yes, whenever you want.</div></details>",
+      "a11y": "Native <details>/<summary>: Enter/Space toggle and the expanded state is announced by the browser. No interactive content inside <summary>, and never a <div> in its place. No JS."
     },
     {
       "name": "feature-card",
@@ -1046,7 +1081,8 @@
         "--component-feature-card-shadow-hover"
       ],
       "description": "[scope: system-reusable] One capability, stated once, inside a set whose members carry equal weight. It composes atom-feature-icon, a title and a body, and every card in the grid looks the same on purpose — the design asserts that no item outranks another. Wrong choice when the content has editorial hierarchy, when one item must dominate the others, or when the card carries article metadata (author, date, read time): use a layout that ranks, not a grid that levels.",
-      "usage": "<article class=\"mol-feature-card\"><span class=\"atom-feature-icon atom-feature-icon--token\" aria-hidden=\"true\"></span><h3 class=\"mol-feature-card__title\">Token system</h3><p class=\"mol-feature-card__body\">Four tiers, one direction.</p><a class=\"mol-feature-card__cta atom-link\" href=\"/tokens\">Learn more</a></article>"
+      "usage": "<article class=\"mol-feature-card\"><span class=\"atom-feature-icon atom-feature-icon--token\" aria-hidden=\"true\"></span><h3 class=\"mol-feature-card__title\">Token system</h3><p class=\"mol-feature-card__body\">Four tiers, one direction.</p><a class=\"mol-feature-card__cta atom-link\" href=\"/tokens\">Learn more</a></article>",
+      "a11y": "<article> with a real heading. Only the CTA link is focusable (system ring); the card mirrors it with :focus-within. Icon aria-hidden. No JS."
     },
     {
       "name": "form-field-set",
@@ -1071,7 +1107,8 @@
         "--component-form-group-gap"
       ],
       "description": "[scope: system-reusable] Stacks related mol-form-field with the standard gap; --inline flows them in a row. Grouping for rhythm only — if the fields answer one question together, they also need a real fieldset and legend so the grouping is announced, not just seen.",
-      "usage": "<div class=\"mol-form-field-set mol-form-field-set--inline\"><div class=\"mol-form-field\">...</div><div class=\"mol-form-field\">...</div></div>"
+      "usage": "<div class=\"mol-form-field-set mol-form-field-set--inline\"><div class=\"mol-form-field\"><label class=\"atom-label\" for=\"ffs-given\">First name</label><input class=\"atom-input\" id=\"ffs-given\" type=\"text\" autocomplete=\"given-name\"></div><div class=\"mol-form-field\"><label class=\"atom-label\" for=\"ffs-family\">Last name</label><input class=\"atom-input\" id=\"ffs-family\" type=\"text\" autocomplete=\"family-name\"></div></div>",
+      "a11y": "Visual grouping only. If the fields answer one question together, wrap them in <fieldset><legend> so the group is announced. Each field keeps its own <label>. No JS."
     },
     {
       "name": "form-field",
@@ -1115,7 +1152,8 @@
         "--component-form-field-warning-color"
       ],
       "description": "[scope: system-reusable] The complete field: label, control, state and message. Use this rather than the bare atoms whenever the field can be wrong — --is-error/--is-success/--is-warning set the state and __msg carries the explanation. Wire the message with aria-describedby and mark the invalid control aria-invalid; the modifier paints, it does not announce.",
-      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"email\">Email</label><input class=\"atom-input\" id=\"email\" aria-invalid=\"true\" aria-describedby=\"email-msg\"><span class=\"mol-form-field__msg\" id=\"email-msg\">Enter a valid address.</span></div>"
+      "usage": "<div class=\"mol-form-field mol-form-field--is-error\"><label class=\"atom-label\" for=\"ff-email\">Email</label><input class=\"atom-input\" id=\"ff-email\" type=\"email\" autocomplete=\"email\" aria-invalid=\"true\" aria-describedby=\"ff-email-msg\"><span class=\"mol-form-field__msg\" id=\"ff-email-msg\">Enter a valid address.</span></div>",
+      "a11y": "<label for> on a unique id. On error: aria-invalid=\"true\" on the control and aria-describedby pointing at __msg — the modifier paints, the attributes announce. Validation itself is the app's. No JS."
     },
     {
       "name": "label-group",
@@ -1135,7 +1173,8 @@
         "--component-label-group-gap"
       ],
       "description": "[scope: system-reusable] Row of labels or pills sharing one gap, wrapping when it must. Use it for a tag list or a set of markers on one line. .cont-set-label is a deprecated alias.",
-      "usage": "<div class=\"mol-label-group\"><span class=\"atom-pill atom-pill--neutral\">SCSS</span><span class=\"atom-pill atom-pill--neutral\">Tokens</span></div>"
+      "usage": "<div class=\"mol-label-group\"><span class=\"atom-pill atom-pill--neutral\">SCSS</span><span class=\"atom-pill atom-pill--neutral\">Tokens</span></div>",
+      "a11y": "Container only. If the labels are a list, use <ul role=\"list\">. No JS."
     },
     {
       "name": "tabs",
@@ -1173,7 +1212,8 @@
         "--component-tabs-tab-padding-inline"
       ],
       "description": "[scope: generic] Tabbed panels whose state lives in ARIA: the active tab has aria-selected=\"true\", hidden panels carry hidden. Keyboard (arrows, Home/End, roving tabindex) comes from js/syx-tabs.js, dependency-free; without it every panel stays in the document.",
-      "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>"
+      "usage": "<div class=\"mol-tabs\"><div class=\"mol-tabs__list\" role=\"tablist\" aria-label=\"Settings\"><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-1\" aria-selected=\"true\" aria-controls=\"panel-1\">Profile</button><button class=\"mol-tabs__tab\" type=\"button\" role=\"tab\" id=\"tab-2\" aria-selected=\"false\" aria-controls=\"panel-2\" tabindex=\"-1\">Notifications</button></div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-1\" aria-labelledby=\"tab-1\" tabindex=\"0\">Profile settings</div><div class=\"mol-tabs__panel\" role=\"tabpanel\" id=\"panel-2\" aria-labelledby=\"tab-2\" tabindex=\"0\" hidden>Notification settings</div></div>",
+      "a11y": "role tablist/tab/tabpanel, aria-selected, aria-controls and aria-labelledby; hidden on inactive panels; type=\"button\" on every tab; panels focusable (tabindex=\"0\"). Arrows, Home/End and roving tabindex come from js/syx-tabs.js (no dependencies); without it every panel stays reachable."
     }
   ],
   "organisms": [
@@ -1218,8 +1258,9 @@
         "--component-header-control-radius",
         "--component-section-padding-inline"
       ],
-      "description": "[scope: domain-reusable] Mobile-first sticky header with a hamburger that opens a full nav drawer over an overlay; JS toggles [data-nav-open] on <body>. The header, drawer and overlay are three sibling classes and all three must be present. The __theme-select and __darkmode controls are documentation-site furniture — a product that ships no theme picker should drop them rather than hide them.",
-      "usage": "<header class=\"org-site-header\"><a class=\"org-site-header__brand\" href=\"/\">SYX</a><nav class=\"org-site-header__nav\">...</nav><button class=\"org-site-header__burger\" aria-label=\"Menu\" aria-expanded=\"false\"><span class=\"org-site-header__burger-line\"></span></button></header><div class=\"org-site-nav-overlay\"></div><nav class=\"org-site-nav-drawer\">...</nav>"
+      "description": "[scope: domain-reusable] Mobile-first sticky header with a hamburger that opens a nav drawer over an overlay. The header, drawer and overlay are three sibling elements and all three must be present; the burger names the drawer with aria-controls. js/syx-site-nav.js (no dependencies) toggles [data-nav-open] on <body> and manages focus and inert. The __theme-select and __darkmode controls are documentation-site furniture — a product that ships no theme picker should drop them rather than hide them.",
+      "usage": "<header class=\"org-site-header\"><a class=\"org-site-header__brand\" href=\"/\">SYX</a><nav class=\"org-site-header__nav\" aria-label=\"Main navigation\"><a href=\"/docs\">Docs</a><a href=\"/themes\">Themes</a></nav><div class=\"org-site-header__actions\"><button class=\"org-site-header__burger\" type=\"button\" aria-controls=\"site-nav-drawer\" aria-expanded=\"false\" aria-label=\"Open navigation\"><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span></button></div></header><div class=\"org-site-nav-overlay\" aria-hidden=\"true\"></div><nav class=\"org-site-nav-drawer\" id=\"site-nav-drawer\" aria-label=\"Mobile navigation\"><a class=\"org-site-nav-drawer__link\" href=\"/docs\">Docs</a><a class=\"org-site-nav-drawer__link\" href=\"/themes\">Themes</a></nav>",
+      "a11y": "<header> with a labelled desktop <nav> and a separately labelled drawer <nav>. Burger: <button type=\"button\"> with aria-controls (drawer id), aria-expanded and aria-label. js/syx-site-nav.js: closed drawer is inert (and visibility: hidden in CSS); opening moves focus to its first link and makes the rest of the page inert; Escape or the burger closes it and returns focus to the burger. The overlay is aria-hidden."
     }
   ],
   "utilities": {

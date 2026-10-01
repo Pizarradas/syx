@@ -65,6 +65,10 @@ function pagina(tema, modo) {
        que cada captura recorte un componente y nada más. */
     body { margin: 0; padding: 24px; background: var(--semantic-color-bg-primary); }
     .prueba { display: flow-root; padding: 16px; margin: 0 0 16px; max-width: 720px; }
+    /* Los diálogos llegan cerrados (su usage no lleva \`open\`: se abren
+       con showModal()). Aquí se abren con show(), que es la misma apertura
+       sin capa superior ni página inerte, y se dejan en el flujo para que
+       axe los recorra y cada uno tenga su captura junto a los demás. */
     dialog[open] { position: static; margin: 0; }
   </style>
 </head>
@@ -72,7 +76,8 @@ function pagina(tema, modo) {
   <main>
 ${secciones}
   </main>
-${fs.existsSync(path.join(ROOT, 'js/syx-tabs.js')) ? '  <script type="module" src="/js/syx-tabs.js"></script>' : ''}
+  <script>for (const d of document.querySelectorAll('dialog:not([open])')) d.show();</script>
+${['syx-tabs', 'syx-site-nav'].filter((j) => fs.existsSync(path.join(ROOT, `js/${j}.js`))).map((j) => `  <script type="module" src="/js/${j}.js"></script>`).join('\n')}
 </body>
 </html>`;
 }

@@ -115,6 +115,20 @@
   --component-button-size-lg: var(--semantic-space-component-lg); // 32px
   --component-button-font-size-lg: var(--semantic-font-size-h6);
 
+  // BUTTON: ALTURAS
+  // ================================================
+  // Las --size-* daban el MISMO valor fluido como padding en los cuatro lados
+  // y como line-height: md medía 3 × 24 = 72 px a 1280 junto a campos de
+  // 44,5, y lg llegaba a 96. Ahora --size-* queda para el relleno lateral y
+  // el alto lo fija un suelo: md iguala a los campos de formulario, para que
+  // botón e input se alineen en una misma fila. El relleno vertical es
+  // pequeño a propósito: solo cuenta cuando el texto parte en dos líneas.
+  // (Auditoría 2026-10 · acción 4)
+  --component-button-height-sm: 2.5rem; // 40px
+  --component-button-height-md: var(--component-form-field-min-height); // 48px
+  --component-button-height-lg: 3.5rem; // 56px
+  --component-button-padding-block: var(--semantic-space-component-xs);
+
   // BUTTON: FORMA Y MOVIMIENTO
   // ================================================
   // Extraído de _btn.scss, donde estaba hardcodeado.
@@ -135,6 +149,28 @@
   // para que el feedback táctil no se sienta blando.
   --component-button-transition-duration-active: 0.1s;
   --component-btn-group-gap: 1rem;
+
+  // BUTTON: DANGER
+  // ================================================
+  // Acción destructiva (borrar, revocar). Sale del color de estado de error,
+  // no de la marca. El relleno usa la variante -text del error —la que el
+  // sistema ya ajusta para leerse a 4,5:1 sobre el fondo de página— y el
+  // texto, el propio fondo de página: el par queda en ≥ 4,5:1 en claro y en
+  // oscuro por construcción, sin un color nuevo por tema.
+  // (Auditoría 2026-10 · acción 4)
+  --component-button-danger-color: var(--semantic-color-state-error-text);
+  --component-button-danger-border: var(--semantic-color-state-error);
+  --component-button-danger-color-hover: var(--semantic-color-state-error-text);
+  --component-button-danger-bg-hover: color-mix(in srgb, var(--semantic-color-state-error) 10%, transparent);
+  --component-button-danger-border-hover: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-bg: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-border: var(--semantic-color-state-error-text);
+  --component-button-danger-filled-color: var(--semantic-color-bg-primary);
+  // Al pasar el ratón el relleno se aleja del fondo (más oscuro en claro,
+  // más claro en oscuro), así que el contraste del texto solo sube.
+  --component-button-danger-filled-bg-hover: color-mix(in oklch, var(--semantic-color-state-error-text) 80%, var(--semantic-color-text-primary));
+  --component-button-danger-filled-border-hover: var(--component-button-danger-filled-bg-hover);
+  --component-button-danger-filled-color-hover: var(--semantic-color-bg-primary);
 
   // BUTTON: DESHABILITADO
   // ================================================

@@ -40,6 +40,9 @@
       display: block;
       width: 100%;
       height: var(--component-form-field-min-height);
+      // Suelo explícito con el mismo token: si un contexto cambia `height`
+      // sin pensar en el tacto, el campo no baja de la altura del sistema.
+      min-block-size: var(--component-form-field-min-height);
       box-sizing: border-box;
       @include padding(
         var(--component-form-field-padding-y)
@@ -73,12 +76,17 @@
         border-color: var(--semantic-color-primary);
       }
 
+      // El halo difuso de --component-form-field-shadow-focus cambiaba el
+      // color solo 1,5–2,5:1 (medido en los 14 tema/modo): por debajo de los
+      // 3:1 de WCAG 2.4.13. Ahora lleva el anillo sólido común, que además
+      // sobrevive a los colores forzados por ser outline.
       &:focus {
-        // Transparente y no `none`: el anillo visible es el box-shadow, que el
-        // modo de alto contraste elimina; ahí el navegador pinta este outline.
         outline: var(--semantic-focus-ring-width) solid transparent;
         border-color: var(--component-form-field-border-focus);
-        box-shadow: var(--component-form-field-shadow-focus);
+      }
+
+      &:focus-visible {
+        @include focus-ring();
       }
 
       &:disabled {
@@ -102,6 +110,7 @@
       width: 100%;
       // Fixed height (not min-height) required for the line-height centering trick
       height: var(--component-form-field-min-height);
+      min-block-size: var(--component-form-field-min-height);
       box-sizing: border-box;
       // No vertical padding — text is centred by setting line-height = inner height
       padding-top: 0;
@@ -140,12 +149,17 @@
         border-color: var(--semantic-color-primary);
       }
 
+      // El halo difuso de --component-form-field-shadow-focus cambiaba el
+      // color solo 1,5–2,5:1 (medido en los 14 tema/modo): por debajo de los
+      // 3:1 de WCAG 2.4.13. Ahora lleva el anillo sólido común, que además
+      // sobrevive a los colores forzados por ser outline.
       &:focus {
-        // Transparente y no `none`: el anillo visible es el box-shadow, que el
-        // modo de alto contraste elimina; ahí el navegador pinta este outline.
         outline: var(--semantic-focus-ring-width) solid transparent;
         border-color: var(--component-form-field-border-focus);
-        box-shadow: var(--component-form-field-shadow-focus);
+      }
+
+      &:focus-visible {
+        @include focus-ring();
       }
 
       &:disabled {

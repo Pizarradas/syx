@@ -31,8 +31,12 @@
   // ================================================
   // Centraliza el anillo de foco: 6 componentes escribían
   // `outline: 0.2rem solid` a mano.
-  --semantic-focus-ring-width: 0.125rem; // 2px
-  --semantic-focus-ring-offset: 0.125rem; // 2px
+  // En px y no en rem: el navegador redondea el ancho del outline HACIA ABAJO
+  // a píxeles enteros. Con 0.125rem y un tema de raíz a 14 px (example-02…05)
+  // salían 1,75 px → 1 px pintado, la mitad del área que pide WCAG 2.4.13.
+  // Medido en Chromium (Auditoría 2026-10 · acción 1).
+  --semantic-focus-ring-width: 2px;
+  --semantic-focus-ring-offset: 2px;
   --semantic-focus-ring-style: solid;
 
   // MOTION PREFERENCES

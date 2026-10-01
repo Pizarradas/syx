@@ -24,18 +24,39 @@
 @mixin mol-tabs($theme: null) {
   @layer syx.molecules {
     .mol-tabs {
+      // La lista hace scroll horizontal, y un contenedor con scroll recorta
+      // todo lo que sale de su caja de relleno, el anillo de foco incluido.
+      // Antes el anillo iba hacia dentro (offset negativo) y su borde
+      // inferior caía sobre el indicador de la pestaña activa, del mismo
+      // color: medido, solo cambiaban 334 de los 516 px que pide WCAG
+      // 2.4.13. Ahora la lista deja un relleno del tamaño del anillo
+      // (ancho + separación) y el foco es el mismo de todo el sistema.
+      // La línea base, que era el borde inferior de la lista, se pinta como
+      // fondo en el borde de la caja de contenido: así sigue pasando por
+      // debajo de las pestañas aunque haya relleno.
       &__list {
         display: flex;
         gap: var(--component-tabs-gap);
         overflow-x: auto;
-        border-block-end: var(--component-tabs-border-width) solid var(--component-tabs-border-color);
+        padding: calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset));
+        margin-block-start: calc(-1 * (var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset)));
+        background-image: linear-gradient(var(--component-tabs-border-color), var(--component-tabs-border-color));
+        background-repeat: no-repeat;
+        background-size: 100% var(--component-tabs-border-width);
+        background-position: 0 calc(100% - var(--semantic-focus-ring-width) - var(--semantic-focus-ring-offset));
+
+        // Los colores forzados no respetan un degradado como línea: vuelve a
+        // ser un borde, en el color del sistema.
+        @media (forced-colors: active) {
+          background-image: none;
+          border-block-end: var(--component-tabs-border-width) solid CanvasText;
+        }
       }
 
       &__tab {
         padding: var(--component-tabs-tab-padding-block) var(--component-tabs-tab-padding-inline);
         border: 0;
         border-block-end: var(--component-tabs-indicator-width) solid transparent;
-        margin-block-end: calc(-1 * var(--component-tabs-border-width));
         background: none;
         color: var(--component-tabs-tab-color);
         font: inherit;
@@ -54,11 +75,16 @@
         }
 
         &:focus-visible {
-          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
-          outline-offset: calc(-1 * var(--semantic-focus-ring-width));
+          @include focus-ring();
         }
 
+        // En colores forzados el borde `transparent` de las pestañas no
+        // activas se repinta en CanvasText: todas parecían seleccionadas,
+        // con barra negra. Canvas las devuelve a invisibles y solo la
+        // activa conserva la barra, en Highlight.
         @media (forced-colors: active) {
+          border-block-end-color: Canvas;
+
           &[aria-selected="true"] {
             border-block-end-color: Highlight;
           }
@@ -69,8 +95,7 @@
         padding-block: var(--component-tabs-panel-padding-block);
 
         &:focus-visible {
-          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
-          outline-offset: var(--semantic-focus-ring-offset);
+          @include focus-ring();
         }
       }
     }

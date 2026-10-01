@@ -83,6 +83,12 @@
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch; // smooth scroll on iOS
+
+    // El contenedor con scroll lleva tabindex="0" para poder desplazarlo con
+    // el teclado (ver `a11y` en el registro): necesita el anillo común.
+    &:focus-visible {
+      @include focus-ring();
+    }
   }
 
   // stylelint-disable-next-line no-duplicate-selectors -- segundo bloque a propósito: los modificadores --is van después de --resp
