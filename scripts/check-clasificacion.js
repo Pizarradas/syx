@@ -112,6 +112,14 @@ comprobar('lo que instruye o juzga a un agente es solo humano', () => niveles([
   ['.claude/commands/syx.md', 'human'],
   ['.claude/settings.json', 'human'],
   ['mind-system/routing.md', 'human'],
+  // La constitución, la gobernanza y las reglas del atlas dicen a un agente
+  // qué puede decidir. Sin estas líneas, sacarlas de `human` las dejaba caer
+  // en el patrón `*.md` de `auto` y la cadena entera seguía en verde: lo
+  // encontró la prueba de mutación (auditoría 2026-10, acción 8).
+  ['mind-system/constitution.md', 'human'],
+  ['mind-system/README.md', 'human'],
+  ['mind-system/governance/04-conflicts.md', 'human'],
+  ['mind-system/atlas-rules/03-decision-engine.md', 'human'],
   ['_agents/modes/ui.md', 'human'],
   ['_agents/modes/README.md', 'human'],
   ['_agents/evals/tareas.json', 'human'],
