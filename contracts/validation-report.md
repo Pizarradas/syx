@@ -43,6 +43,6 @@
 
 _Each one excuses exactly one declaration, with its reason next to the code (`// syx-allow Rxx: …`)._
 
-- R03 `scss/base/_reset.scss:339` — no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello
+- R03 `scss/base/_reset.scss:340` — no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello
 - R03 `scss/utilities/_accessibility.scss:78` — es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez
 
