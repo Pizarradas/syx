@@ -15,6 +15,9 @@
 @use "organisms/index" as *;
 @use "themes/_base/universal" as *;
 @use "pages/theme-builder"; // Sidebar styles
+// Accesibilidad: .syx-skip-link y .syx-sr-only. La página no tenía enlace de
+// salto y su hoja no traía la clase (auditoría 2026-10, acción 8).
+@use "utilities/accessibility";
 
 // :ROOT
 // ===============================================

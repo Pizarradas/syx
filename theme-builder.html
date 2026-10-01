@@ -19,6 +19,16 @@
             /* Dot grid pattern */
         }
 
+        /* La columna de contenido va sobre fondo liso: los puntos de la
+           rejilla caían detrás del texto, y medido en píxeles el gris de un
+           epígrafe bajaba a 2,3:1 donde cruzaba un punto. La rejilla queda en
+           los márgenes del lienzo. (Auditoría 2026-10 · acción 8) */
+        .theme-builder__preview > .layout-grid > [class*="layout-grid__col"] {
+            background-color: var(--semantic-color-bg-primary);
+            border-radius: var(--theme-radius);
+            padding-inline: calc(5 * var(--primitive-space-base));
+        }
+
         /* Elevate the preview cards slightly in the canvas */
         .theme-builder__preview .atom-surface {
             box-shadow: 0 4px 24px -4px oklch(0 0 0 / 0.08), 0 0 0 1px var(--semantic-color-border-subtle);
@@ -104,10 +114,10 @@
             border-color: oklch(0.47 0.02 250);
         }
 
-        .theme-builder__control select:focus {
-            outline: none;
+        .theme-builder__control select:focus-visible {
             border-color: var(--semantic-color-primary);
-            box-shadow: 0 0 0 2px oklch(0.53 0.37 118 / 0.25);
+            outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+            outline-offset: var(--semantic-focus-ring-offset);
         }
 
         /* Range Sliders */
@@ -202,11 +212,17 @@
 
 
         /* --- Token Badges (Pills) --- */
-        .tb-token-badge {
+        /* Solo en la barra lateral: en la vista previa la píldora es la de
+           scss/pages/_theme-builder.scss, con los semánticos del tema que se
+           edita. Antes esta regla era global y pintaba las de la vista previa
+           de gris oscuro con el número de la escala en text-primary encima:
+           1,09:1 en claro. Y el gris de su texto daba 3,83:1 sobre su fondo.
+           (Auditoría 2026-10 · acción 8) */
+        .theme-builder__sidebar .tb-token-badge {
             display: inline-block;
             background: oklch(0.19 0.01 250);
             border: 1px solid oklch(0.23 0.01 250);
-            color: oklch(0.55 0.02 250);
+            color: oklch(0.75 0.02 250);
             border-radius: 4px;
             padding: 0.15rem 0.3rem;
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -243,6 +259,7 @@
 </head>
 
 <body class="syx">
+    <a href="#preview" class="syx-skip-link">Skip to preview</a>
     <div class="theme-builder">
 
         <!-- Sidebar / Configurator -->
@@ -259,14 +276,14 @@
                 <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-3"
                     style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: oklch(0.23 0.01 250); border: 1px solid oklch(0.31 0.01 250);">
                     <div>
-                        <span class="syx-type-body-small tb-d-block tb-text-black"
+                        <span class="syx-type-body-small tb-d-block tb-text-black" id="advanced-mode-label"
                             style="color: oklch(0.95 0.01 250); font-weight: 600;">Advanced Mode</span>
                         <span class="syx-type-caption" style="color: oklch(0.63 0.02 250);">Unlock deeper
                             tokens</span>
                     </div>
                     <label class="atom-switch">
-                        <input type="checkbox" class="atom-switch__input" id="advanced-mode-toggle">
-                        <span class="atom-switch__slider"></span>
+                        <input type="checkbox" class="atom-switch__input" id="advanced-mode-toggle" role="switch" aria-labelledby="advanced-mode-label">
+                        <span id="module-fluid-label" class="atom-switch__slider"></span>
                     </label>
                 </div>
 
@@ -296,8 +313,8 @@
                             </p>
                         </div>
                         <label class="atom-switch tb-mt-1">
-                            <input type="checkbox" class="atom-switch__input" id="module-fluid-toggle">
-                            <span class="atom-switch__slider"></span>
+                            <input type="checkbox" class="atom-switch__input" id="module-fluid-toggle" role="switch" aria-labelledby="module-fluid-label">
+                            <span id="module-palette-label" class="atom-switch__slider"></span>
                         </label>
                     </div>
 
@@ -315,15 +332,15 @@
                             </p>
                         </div>
                         <label class="atom-switch tb-mt-1">
-                            <input type="checkbox" class="atom-switch__input" id="module-palette-toggle">
-                            <span class="atom-switch__slider"></span>
+                            <input type="checkbox" class="atom-switch__input" id="module-palette-toggle" role="switch" aria-labelledby="module-palette-label">
+                            <span class="atom-switch__slider" aria-hidden="true"></span>
                         </label>
                     </div>
 
                     <!-- Advanced Components: Forms -->
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
-                            <span class="syx-type-body-small tb-d-block"
+                            <span id="module-forms-label" class="syx-type-body-small tb-d-block"
                                 style="color: var(--primitive-color-white); font-weight: 600;">Forms, Switches &
                                 Radios</span>
                             <p class="syx-type-caption tb-mt-1"
@@ -334,15 +351,15 @@
                             </p>
                         </div>
                         <label class="atom-switch tb-mt-1">
-                            <input type="checkbox" class="atom-switch__input" id="module-forms-toggle">
-                            <span class="atom-switch__slider"></span>
+                            <input type="checkbox" class="atom-switch__input" id="module-forms-toggle" role="switch" aria-labelledby="module-forms-label">
+                            <span class="atom-switch__slider" aria-hidden="true"></span>
                         </label>
                     </div>
 
                     <!-- Advanced Components: Tables & Layout -->
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
                         <div style="flex: 1; padding-right: 1rem;">
-                            <span class="syx-type-body-small tb-d-block"
+                            <span id="module-tables-label" class="syx-type-body-small tb-d-block"
                                 style="color: var(--primitive-color-white); font-weight: 600;">Tables, Lists &
                                 Pagination</span>
                             <p class="syx-type-caption tb-mt-1"
@@ -352,8 +369,8 @@
                             </p>
                         </div>
                         <label class="atom-switch tb-mt-1">
-                            <input type="checkbox" class="atom-switch__input" id="module-tables-toggle">
-                            <span class="atom-switch__slider"></span>
+                            <input type="checkbox" class="atom-switch__input" id="module-tables-toggle" role="switch" aria-labelledby="module-tables-label">
+                            <span id="module-disable-legacy-label" class="atom-switch__slider"></span>
                         </label>
                     </div>
 
@@ -370,8 +387,8 @@
                             </p>
                         </div>
                         <label class="atom-switch tb-mt-1">
-                            <input type="checkbox" class="atom-switch__input" id="module-disable-legacy-toggle">
-                            <span class="atom-switch__slider"></span>
+                            <input type="checkbox" class="atom-switch__input" id="module-disable-legacy-toggle" role="switch" aria-labelledby="module-disable-legacy-label">
+                            <span class="atom-switch__slider" aria-hidden="true"></span>
                         </label>
                     </div>
                 </div>
@@ -681,13 +698,13 @@
                 style="border: none; position: sticky; bottom: 0; background: oklch(0.18 0.01 250); z-index: 10; padding-top: 1rem; padding-bottom: 2rem; margin-bottom: -2rem;">
                 <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-4"
                     style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); box-shadow: var(--semantic-shadow-md); background: var(--semantic-color-bg-secondary);">
-                    <span class="syx-type-body-small tb-text-black"
+                    <span class="syx-type-body-small tb-text-black" id="dark-mode-label"
                         style="color: var(--semantic-color-text-primary);">Dark
                         Mode
                         Preview</span>
                     <label class="atom-switch">
-                        <input type="checkbox" class="atom-switch__input" id="dark-mode-toggle">
-                        <span class="atom-switch__slider"></span>
+                        <input type="checkbox" class="atom-switch__input" id="dark-mode-toggle" role="switch" aria-labelledby="dark-mode-label">
+                        <span class="atom-switch__slider" aria-hidden="true"></span>
                     </label>
                 </div>
                 <button id="btn-export" class="atom-btn atom-btn--primary atom-btn--filled tb-w-full"
@@ -699,7 +716,7 @@
         </aside>
 
         <!-- Canvas / Live Preview Area -->
-        <main class="theme-builder__preview">
+        <main class="theme-builder__preview" id="preview" tabindex="-1">
             <div class="layout-grid">
                 <div class="layout-grid__col-xs-12 layout-grid__col-md-10 tb-mx-auto tb-py-5">
 
