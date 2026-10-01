@@ -64,7 +64,6 @@ function build() {
 
   const out = {
     _meta: {
-      generatedAt: new Date().toISOString(),
       generator: 'scripts/build-token-snapshot.js',
       source: 'css/styles-theme-*.css',
       shape: 'Tres capas que se apilan. `base` lleva los tokens que valen lo mismo en TODOS los temas; themes[tema].light solo lo propio del tema; themes[tema].dark solo lo que cambia en oscuro. Valor en claro: { ...base, ...light }. En oscuro: { ...base, ...light, ...dark }. Un valor que empiece por "@asset/" se resuelve contra el mapa `assets`. El índice inverso valor → tokens no se guarda: se deriva de esto en una pasada. `unresolved` lista los tokens que computan a vacío y por qué.',
@@ -154,8 +153,8 @@ function build() {
   return { out, stats, themes };
 }
 
-// El snapshot se compara sin su marca de tiempo: lo que importa es si el
-// CONTENIDO cambió, no cuándo se generó.
+// El snapshot ya no lleva marca de tiempo (cambiaba en cada build y ensuciaba
+// el árbol); se sigue anulando por si se compara con uno antiguo que la tenga.
 const sinFecha = (o) => JSON.stringify({ ...o, _meta: { ...o._meta, generatedAt: null } });
 
 // Qué difiere exactamente entre el snapshot guardado y el que sale del CSS.

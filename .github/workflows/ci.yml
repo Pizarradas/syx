@@ -39,9 +39,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # `engines` promete >=18. Esta matriz es la primera vez que esa promesa
-        # se comprueba de verdad en vez de darse por buena.
-        node: ['18', '20', '22']
+        # `engines` promete >=20.19: es lo que exige sass 1.103 (su CLI carga
+        # chokidar 5, solo ESM). Prometía >=18 y la pata 18 no podía pasar
+        # (auditoría 2026-10, acción 10). La matriz cubre el suelo exacto y
+        # las dos LTS siguientes.
+        node: ['20.19', '22', '24']
 
     steps:
       - uses: actions/checkout@v4

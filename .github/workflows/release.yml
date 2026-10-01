@@ -37,10 +37,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: npm
           registry-url: 'https://registry.npmjs.org'
 
@@ -54,7 +56,16 @@ jobs:
             echo "::error::La etiqueta dice $ETIQUETA y package.json dice $PAQUETE"
             exit 1
           fi
-          node scripts/release-notes.js "$PAQUETE" > "$RUNNER_TEMP/notas.md"
+          # Sección fechada y [Unreleased] vacía, o no hay release.
+          node scripts/release-notes.js "$PAQUETE" --verificar > "$RUNNER_TEMP/notas.md"
+
+      - name: La etiqueta apunta a un commit de main
+        run: |
+          git fetch --quiet origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::$GITHUB_REF_NAME apunta a $GITHUB_SHA, que no está en main: se publica lo que se ha fusionado y revisado, no una rama"
+            exit 1
+          fi
 
       - name: El CSS commiteado es el compilado
         run: node scripts/check-limpio.js --strict
@@ -69,6 +80,13 @@ jobs:
 
       - name: El paquete se instala y responde
         run: npm run check:consumible
+
+      - name: axe sobre todos los componentes, temas y modos
+        working-directory: tests/browser
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          node run.mjs --axe
 
       - name: Empaquetar
         run: |

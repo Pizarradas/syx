@@ -20,8 +20,13 @@
 
 name: Pages
 
+# Se despliega DESPUÉS de que la CI («SYX», ci.yml) termine en verde sobre
+# main, no en paralelo: antes Pages publicaba cualquier push aunque los
+# guardianes estuvieran en rojo (auditoría 2026-10, acción 10).
 on:
-  push:
+  workflow_run:
+    workflows: [SYX]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -38,8 +43,12 @@ jobs:
   build:
     name: Construir sitio + catálogos
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+        with:
+          # El commit que la CI aprobó, no el último de main.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
       - uses: actions/setup-node@v4
         with:

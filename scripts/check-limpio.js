@@ -16,8 +16,9 @@
  * trabajo minificada mientras `build:css` emite expandido.
  *
  * LA MARCA DE TIEMPO NO CUENTA
- * `contracts/resolved-tokens.json` lleva un `generatedAt` que cambia en cada
- * compilación por diseño. Que el contenido coincida ya lo comprueba
+ * `contracts/resolved-tokens.json` llevaba un `generatedAt` que cambiaba en
+ * cada compilación; ya no lo lleva (octubre de 2026), pero un snapshot antiguo
+ * puede tenerlo. Que el contenido coincida ya lo comprueba
  * `check:tokens`; aquí solo se ignora ese campo, y si el fichero difiere en
  * algo MÁS que en él, se denuncia como cualquier otro.
  *

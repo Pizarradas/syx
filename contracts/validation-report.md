@@ -1,4 +1,4 @@
-# SYX Validation Report — 2026-10-01
+# SYX Validation Report
 
 **Verdict: ⚠️ WARNINGS**
 

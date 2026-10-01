@@ -372,13 +372,15 @@ const AST_RULES = MOTOR.reglas.map((r) => ({ id: r.id, label: r.resumen || r.des
 function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens, unused = []) {
   if (!fs.existsSync(CONTRACTS_DIR)) fs.mkdirSync(CONTRACTS_DIR, { recursive: true });
 
-  const ts = new Date().toISOString();
+  // Sin marca de tiempo: estos contratos se versionan, y una fecha que cambia
+  // en cada ejecución ensucia el árbol y obliga a commits de ruido. Cuándo
+  // cambió el contenido ya lo dice git.
 
   // runtime-tokens.json
   fs.writeFileSync(
     path.join(CONTRACTS_DIR, 'runtime-tokens.json'),
     JSON.stringify({
-      _meta: { generatedAt: ts, source: 'css/styles-theme-example-01.css', stats: runtimeData.stats },
+      _meta: { source: 'css/styles-theme-example-01.css', stats: runtimeData.stats },
       tokens: runtimeData.tokens
     }, null, 2)
   );
@@ -395,7 +397,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   fs.writeFileSync(
     path.join(CONTRACTS_DIR, 'token-contract.json'),
     JSON.stringify({
-      _meta: { generatedAt: ts, totalTokens: Object.keys(enriched).length },
+      _meta: { totalTokens: Object.keys(enriched).length },
       tokens: enriched
     }, null, 2)
   );
@@ -404,7 +406,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   fs.writeFileSync(
     path.join(CONTRACTS_DIR, 'lint-contract.json'),
     JSON.stringify({
-      _meta: { generatedAt: ts },
+      _meta: { generator: 'scripts/syx-validate.js' },
       stats: {
         sourceTokens:       Object.keys(sourceTokens).length,
         runtimeTokens:      runtimeData.stats.total,
@@ -437,7 +439,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   fs.writeFileSync(
     path.join(CONTRACTS_DIR, 'token-usage-map.json'),
     JSON.stringify({
-      _meta: { generatedAt: ts, totalMappedTokens: Object.keys(usageMap).length },
+      _meta: { totalMappedTokens: Object.keys(usageMap).length },
       map: usageMap
     }, null, 2)
   );
@@ -527,11 +529,10 @@ function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
 // ─── Module 9: Markdown Report ────────────────────────────────────────────────
 
 function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations, verdictFlags) {
-  const ts = new Date().toISOString().split('T')[0];
   const { hasErrors, hasWarnings } = verdictFlags;
   const verdict = hasErrors ? '❌ FAILED' : hasWarnings ? '⚠️ WARNINGS' : '✅ PASSED';
 
-  let md = `# SYX Validation Report — ${ts}\n\n`;
+  let md = `# SYX Validation Report\n\n`;
   md += `**Verdict: ${verdict}**\n\n`;
   md += `---\n\n`;
 
