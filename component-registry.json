@@ -1594,6 +1594,62 @@
   ],
   "organisms": [
     {
+      "name": "app-shell",
+      "layer": "organism",
+      "file": "scss/organisms/_app-shell.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_app-shell.scss"
+      ],
+      "classes": [
+        "org-app-shell"
+      ],
+      "modifiers": [
+        "org-app-shell--full"
+      ],
+      "elements": [
+        "org-app-shell__actions",
+        "org-app-shell__brand",
+        "org-app-shell__header",
+        "org-app-shell__link",
+        "org-app-shell__main",
+        "org-app-shell__nav",
+        "org-app-shell__sidebar"
+      ],
+      "states": [
+        ":focus-visible",
+        ":hover"
+      ],
+      "composedOf": [],
+      "tokens": [
+        "--component-app-shell-bg",
+        "--component-app-shell-border-color",
+        "--component-app-shell-border-width",
+        "--component-app-shell-brand-font-weight",
+        "--component-app-shell-color",
+        "--component-app-shell-header-bg",
+        "--component-app-shell-header-height",
+        "--component-app-shell-header-padding-inline",
+        "--component-app-shell-link-bg-current",
+        "--component-app-shell-link-bg-hover",
+        "--component-app-shell-link-border-radius",
+        "--component-app-shell-link-color",
+        "--component-app-shell-link-color-current",
+        "--component-app-shell-link-color-hover",
+        "--component-app-shell-link-indicator-color",
+        "--component-app-shell-link-indicator-width",
+        "--component-app-shell-link-min-height",
+        "--component-app-shell-link-padding-inline",
+        "--component-app-shell-main-padding",
+        "--component-app-shell-sidebar-bg",
+        "--component-app-shell-sidebar-padding",
+        "--component-app-shell-sidebar-width",
+        "--component-app-shell-z-index"
+      ],
+      "description": "[scope: generic] The frame of an application screen (settings, a dashboard, a console): __header on top, a __sidebar with the section navigation and __main, laid out with named grid areas. Below 50em everything stacks and the sidebar's __nav becomes a horizontally scrolling row — no drawer, no JS; from 50em the sidebar is a column beside the content. --full fills the viewport and keeps the header and the sidebar in place while the content scrolls. The current section is painted from aria-current=\"page\" (colour, background and an inline-start rule that survives forced colours). Inside __main, layout-stack and layout-cluster arrange sections and actions.",
+      "usage": "<div class=\"org-app-shell\"><header class=\"org-app-shell__header\"><span class=\"org-app-shell__brand\">Acme Console</span><div class=\"org-app-shell__actions\"><span class=\"atom-avatar atom-avatar--sm\" role=\"img\" aria-label=\"Signed in as Ana López\">AL</span></div></header><nav class=\"org-app-shell__sidebar\" aria-label=\"Sections\"><ul class=\"org-app-shell__nav\"><li><a class=\"org-app-shell__link\" href=\"#overview\">Overview</a></li><li><a class=\"org-app-shell__link\" href=\"#settings\" aria-current=\"page\">Settings</a></li><li><a class=\"org-app-shell__link\" href=\"#billing\">Billing</a></li></ul></nav><main class=\"org-app-shell__main\"><div class=\"layout-stack\"><h2 class=\"atom-title atom-title--h4\">Settings</h2><p class=\"atom-txt\">Workspace name, members and notifications.</p><div class=\"layout-cluster layout-cluster--end\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\">Cancel</button><button class=\"atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md\" type=\"button\">Save</button></div></div></main></div>",
+      "a11y": "Three landmarks a screen-reader user jumps between: <header>, <nav aria-label> and <main> — one <main> per page (the docs demo nests it inside the docs page's own, which a real app never does). The current section carries aria-current=\"page\"; the CSS paints it from that attribute. Sidebar links are 44px tall; the scrolling row on small screens is padded so the focus ring is never clipped. No JS."
+    },
+    {
       "name": "site-header",
       "layer": "organism",
       "file": "scss/organisms/_site-header.scss",

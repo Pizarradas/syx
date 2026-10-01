@@ -58,8 +58,8 @@
 
   // ORGANISMS
   // ================================================
+  @include org-app-shell($theme);        // Header + sidebar + content grid
   // Add as they are created:
-  // @include org-sidebar($theme);
   // @include org-data-table($theme);
   // @include org-dashboard($theme);
 }

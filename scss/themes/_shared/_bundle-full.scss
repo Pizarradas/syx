@@ -69,5 +69,6 @@
   // ================================================
   // The home-* organisms are not system components: they live in
   // scss/site/ and ship via syx-bundle-site (site layer, removable).
+  @include org-app-shell($theme);
   @include org-site-header($theme);
 }
