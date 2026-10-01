@@ -48,8 +48,7 @@
         }
 
         &:focus-visible {
-          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
-          outline-offset: var(--semantic-focus-ring-offset);
+          @include focus-ring();
         }
       }
 

@@ -200,7 +200,7 @@
     &:focus-visible {
       // &:not(:disabled)
       &:not(:disabled) {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
+        @include focus-ring();
       }
     }
 

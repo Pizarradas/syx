@@ -69,6 +69,10 @@
       }
 
       &:hover { color: var(--semantic-color-primary-text); }
+
+      &:focus-visible {
+        @include focus-ring();
+      }
     }
 
     // ── Desktop nav — hidden below 1280px ──────────
@@ -115,8 +119,7 @@
         // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
         // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
         &:focus-visible {
-          outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
-          outline-offset: var(--semantic-focus-ring-offset);
+          @include focus-ring();
         }
       }
     }
@@ -207,8 +210,7 @@
       // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
       // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
       &:focus-visible {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
-        outline-offset: var(--semantic-focus-ring-offset);
+        @include focus-ring();
       }
 
       // Three burger lines
@@ -297,8 +299,7 @@
       // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
       // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
       &:focus-visible {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
-        outline-offset: var(--semantic-focus-ring-offset);
+        @include focus-ring();
       }
     }
 
@@ -347,8 +348,7 @@
     // dejaba solo un subrayado de 2 px: mismo aspecto que el hover, y
     // por debajo del área que pide WCAG 2.2 (2.4.11 Focus Appearance).
     &:focus-visible {
-      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color);
-      outline-offset: var(--semantic-focus-ring-offset);
+      @include focus-ring();
     }
 
     .atom-icon { pointer-events: none; }

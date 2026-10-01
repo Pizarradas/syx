@@ -98,9 +98,7 @@
 
     // Focus visible
     &__input:focus-visible + &__label::before {
-      outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style)
-        var(--component-form-field-border-focus);
-      outline-offset: var(--semantic-focus-ring-offset);
+      @include focus-ring();
     }
 
     // Disabled

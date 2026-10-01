@@ -108,9 +108,10 @@
         color: var(--component-pagination-color-hover);
       }
 
+      // Antes el color del outline era --component-pagination-shadow-focus,
+      // una SOMBRA: la declaración se invalidaba y no había foco visible.
       &:focus-visible {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-pagination-shadow-focus);
-        outline-offset: var(--semantic-focus-ring-offset);
+        @include focus-ring();
       }
 
       &:disabled {

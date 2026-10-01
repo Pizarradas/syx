@@ -10,6 +10,12 @@
   .atom-link {
     @include position(relative);
 
+    // Foco en la clase base y no solo en --primary: el CTA de feature-card
+    // usa `atom-link` sin modificador y se quedaba con el anillo del navegador.
+    &:focus-visible {
+      @include focus-ring();
+    }
+
 
     // &--primary
     &--primary {
@@ -38,12 +44,6 @@
       &:hover {
         color: var(--component-link-primary-color-hover);
         box-shadow: inset 100vw 0 0 0 var(--component-link-primary-bg-hover);
-      }
-
-      // &:focus-visible
-      &:focus-visible {
-        outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--component-link-primary-shadow-focus);
-        outline-offset: var(--semantic-focus-ring-offset);
       }
 
       // &:active

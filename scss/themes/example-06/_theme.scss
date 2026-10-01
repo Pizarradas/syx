@@ -341,6 +341,12 @@
         --semantic-color-border-default: var(--primitive-color-space-600);
         --semantic-color-border-subtle: var(--primitive-color-space-700);
 
+        // Anillo de foco en claro: el cian 500 de la marca da 1,9:1 sobre el
+        // blanco y el foco no se veía (WCAG 2.4.13 pide 3:1 entre el antes y
+        // el después). El 700 de la misma rampa pasa de 4:1; en oscuro sigue
+        // el 500, que allí sí contrasta. (Auditoría 2026-10 · acción 1)
+        --semantic-focus-ring-color: var(--primitive-color-cyan-700);
+
         // Light mode text should be readable on neon cyan
         --btn-primary-filled-text: var(--primitive-color-space-950);
         --btn-secondary-filled-text: oklch(0.97 0.04 190); // light cyan text on dark violet

@@ -79,6 +79,16 @@
     "scss/at-else-closing-brace-newline-after": null,
     "scss/at-else-closing-brace-space-after": null,
     "scss/at-if-closing-brace-newline-after": null,
-    "scss/at-if-closing-brace-space-after": null
+    "scss/at-if-closing-brace-space-after": null,
+    "declaration-property-value-disallowed-list": [
+      {
+        "/^outline(-color)?$/": [
+          "/--[a-z0-9-]*shadow[a-z0-9-]*/"
+        ]
+      },
+      {
+        "message": "Un token de sombra (*-shadow-*) no es un color: invalida el outline al calcularse y el foco desaparece. Usa @include focus-ring() o --semantic-focus-ring-color (Auditoría 2026-10 · acción 1)."
+      }
+    ]
   }
 }

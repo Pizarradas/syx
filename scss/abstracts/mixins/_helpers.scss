@@ -62,11 +62,23 @@
 }
 
 // MIXIN: focus-ring($color, $offset)
-// Accessible focus outline using outline (not box-shadow, which is clipped).
+// EL patrón de foco del sistema: todo componente enfocable lo pinta con este
+// mixin dentro de :focus-visible, y nada más (Auditoría 2026-10 · acción 1).
+// · `outline` y no box-shadow: el modo de colores forzados borra las sombras
+//   pero conserva el outline (y lo repinta en un color del sistema), así que
+//   el mismo anillo sirve en los dos mundos sin una regla aparte.
+// · Ancho, estilo, color y separación salen de los cuatro tokens
+//   --semantic-focus-ring-*: un tema cambia el anillo de TODOS a la vez.
+// · Nunca un token de sombra (`*-shadow-focus`) como color: vale
+//   `0 0 0.313rem 0 <color>`, invalida el outline entero al calcularse y el
+//   foco desaparece (le pasaba a link y pagination). Lo vigila stylelint.
+// · Si un antepasado con scroll recortaría el anillo, se le da relleno a ese
+//   antepasado (ver mol-tabs); un $offset negativo mete el anillo dentro del
+//   componente y lo tapan su propio borde o su contenido.
 // @example
 //   a:focus-visible { @include focus-ring(); }
-@mixin focus-ring($color: var(--semantic-color-state-focus), $offset: 3px) {
-  outline: 2px solid $color;
+@mixin focus-ring($color: var(--semantic-focus-ring-color, CanvasText), $offset: var(--semantic-focus-ring-offset)) {
+  outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) $color;
   outline-offset: $offset;
 }
 
