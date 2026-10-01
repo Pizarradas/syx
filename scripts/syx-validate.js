@@ -5,6 +5,11 @@
  * Implements contracts/rules.json as executable checks.
  * Generates the full /contracts/ layer on every run.
  *
+ * Las reglas de árbol (R01–R04, R09, R10) las pasa scripts/lib/rules.js, el
+ * mismo motor que validate_snippet. Las severidades, las rutas permitidas y
+ * los prefijos oficiales se leen de contracts/rules.json: aquí no hay ninguna
+ * copia de esas decisiones.
+ *
  * Usage:
  *   node scripts/syx-validate.js                  — console report only
  *   node scripts/syx-validate.js --report          — console + writes contract files
@@ -20,30 +25,20 @@ const path = require('path');
 const ROOT          = path.resolve(__dirname, '..');
 const CSS_REF       = path.join(ROOT, 'css', 'styles-theme-example-01.css');
 const TOKENS_JSON   = path.join(ROOT, 'tokens.json');
-const RULES_JSON    = path.join(ROOT, 'contracts', 'rules.json');
 const CONTRACTS_DIR = path.join(ROOT, 'contracts');
 const SCSS_DIR      = path.join(ROOT, 'scss');
 
 const WRITE_REPORT  = process.argv.includes('--report');
 const STRICT        = process.argv.includes('--strict');
 
-// Official prefixes that are recognised as "SYX-governed"
-const OFFICIAL_PREFIXES = [
-  '--primitive-', '--semantic-', '--component-',
-  '--theme-', '--icon-', '--layout-', '--reset-'
-];
-
-// Files/paths allowed to use primitive tokens (R01 exceptions)
-const R01_ALLOWED = [
-  'scss/abstracts/',
-  'scss/themes/',
-  'scss/base/',
-  'scss/setup-builder.scss',
-  'scss/setup.scss',
-  'scss/utilities/',
-  'scss/pages/',              // page-level demos/showrooms intentionally reference primitives
-  'scss/site/_home-tokens.scss', // token showroom intentionally displays primitive values
-];
+// El contrato manda. Hasta octubre de 2026 este fichero lo leía (parseRules)
+// y no lo usaba: tenía su propia lista de rutas para R01, que además permitía
+// scss/pages/ cuando el contrato lo prohíbe.
+const { crearMotor } = require('./lib/rules');
+const MOTOR = crearMotor({ root: ROOT });
+const RULES = MOTOR.contrato;
+const OFFICIAL_PREFIXES = RULES.officialPrefixes;
+const severityOf = (id) => MOTOR.severidad(id);
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -57,10 +52,6 @@ function readAllScss(dir) {
       results.push({ path: fp, rel: path.relative(ROOT, fp).replace(/\\/g, '/'), content: fs.readFileSync(fp, 'utf8') });
   }
   return results;
-}
-
-function isR01Allowed(relPath) {
-  return R01_ALLOWED.some(p => relPath.startsWith(p) || relPath === p.replace(/\/$/, ''));
 }
 
 function flattenTokensJson(obj) {
@@ -93,16 +84,6 @@ function flattenTokensJson(obj) {
 
 function isOfficial(prop) {
   return OFFICIAL_PREFIXES.some(p => prop.startsWith(p));
-}
-
-// ─── Module 1: Parse Rules ────────────────────────────────────────────────────
-
-function parseRules() {
-  if (!fs.existsSync(RULES_JSON)) {
-    console.warn('⚠️  contracts/rules.json not found. Using built-in defaults.');
-    return { rules: [], officialPrefixes: OFFICIAL_PREFIXES };
-  }
-  return JSON.parse(fs.readFileSync(RULES_JSON, 'utf8'));
 }
 
 // ─── Module 2: Extract Runtime Tokens from CSS ───────────────────────────────
@@ -322,12 +303,11 @@ function buildUsageMap(scssFiles, runtimeData) {
   return map;
 }
 
-// ─── Module 6: SCSS Rule Checks (R01–R04) ────────────────────────────────────
+// ─── Module 6: SCSS Rule Checks (R01–R04, R09, R10) ──────────────────────────
 // Las reglas viven en lib/rules.js desde v4.15.0: el servidor MCP las necesita
 // para validar un fragmento ANTES de que se escriba, y dos copias de las mismas
-// reglas acaban diciendo cosas distintas.
-
-const { revisarTodos } = require('./lib/rules');
+// reglas acaban diciendo cosas distintas. Desde octubre de 2026 van sobre el
+// árbol (postcss-scss) y no por líneas.
 
 // ─── R08: tokens del registro que no usa nadie ───────────────────────────────
 // Se mide sobre el CSS COMPILADO de todos los temas y no sobre el SCSS: el SCSS
@@ -351,8 +331,13 @@ function unusedRegistryTokens() {
 }
 
 function runScssChecks(scssFiles) {
-  return revisarTodos(scssFiles);
+  const r = MOTOR.revisarTodos(scssFiles);
+  // Un fichero que no parsea no se puede declarar conforme: va como error.
+  return { ...r.violaciones, sintaxis: r.sintaxis, excepciones: r.excepciones };
 }
+
+// Las reglas de árbol en el orden del contrato, con su clave para lint-contract.
+const AST_RULES = MOTOR.reglas.map((r) => ({ id: r.id, label: r.resumen || r.description, severity: r.severity }));
 
 
 // ─── Module 7: Write Contract Files ──────────────────────────────────────────
@@ -411,7 +396,13 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
         R02_importantUsage:        scssViolations.R02.length,
         R03_rawTransition:         scssViolations.R03.length,
         R04_rawPosition:           scssViolations.R04.length,
-      }
+        R09_unknownMixin:          scssViolations.R09.length,
+        R10_exceptionHygiene:      scssViolations.R10.length,
+        parseErrors:               scssViolations.sintaxis.length,
+      },
+      // Las excepciones en línea vigentes, con su porqué: no son violaciones,
+      // pero quien audita tiene que poder verlas todas juntas.
+      inlineExceptions: scssViolations.excepciones.map((e) => ({ rule: e.regla, file: e.file, line: e.line, why: e.porque }))
     }, null, 2)
   );
 
@@ -434,7 +425,6 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
 // ─── Module 8: Console Report ─────────────────────────────────────────────────
 
 function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
-  const { R01, R02, R03, R04 } = scssViolations;
 
   console.log('\n┌─────────────────────────────────────────────────────────────┐');
   console.log('│  SYX Validate v2.0 — Contracts Layer Report                │');
@@ -482,30 +472,33 @@ function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
   // SCSS violations
   console.log('\n── SCSS RULE VIOLATIONS ─────────────────────────────────────\n');
 
-  const printViolations = (id, label, list, max = 5) => {
+  const printViolations = (id, label, list, severity, max = 5) => {
+    const icon = severity === 'error' ? '❌' : severity === 'warning' ? '⚠️ ' : 'ℹ️ ';
     if (list.length === 0) {
       console.log(`✅ ${id} — ${label}: 0 violations`);
     } else {
-      console.log(`❌ ${id} — ${label}: ${list.length} violations`);
-      list.slice(0, max).forEach(v => console.log(`   ${v.file}:${v.line} → ${v.content.substring(0, 80)}`));
+      console.log(`${icon} ${id} (${severity}) — ${label}: ${list.length} violations`);
+      list.slice(0, max).forEach(v => console.log(`   ${v.file}:${v.line} → ${v.content.substring(0, 80)}${v.motivo ? `  [${v.motivo}]` : ''}`));
       if (list.length > max) console.log(`   … and ${list.length - max} more. See contracts/lint-contract.json`);
     }
     console.log();
   };
 
-  printViolations('R01', 'Primitive tokens in components', R01);
-  printViolations('R02', '!important usage', R02);
-  printViolations('R03', 'Raw transition: property', R03, 3);
-  printViolations('R04', 'Raw position: absolute/fixed/sticky', R04, 3);
+  for (const r of AST_RULES) printViolations(r.id, r.label, scssViolations[r.id], r.severity);
+  if (scssViolations.sintaxis.length) {
+    printViolations('SCSS', 'Files that do not parse', scssViolations.sintaxis, 'error');
+  }
+  const exc = scssViolations.excepciones;
+  console.log(`ℹ️  ${exc.length} inline exception(s) (// syx-allow), each with its reason:`);
+  exc.forEach((e) => console.log(`   ${e.regla} ${e.file}:${e.line} — ${e.porque.substring(0, 90)}`));
+  console.log();
 }
 
 // ─── Module 9: Markdown Report ────────────────────────────────────────────────
 
-function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations) {
-  const { R01, R02, R03, R04 } = scssViolations;
+function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations, verdictFlags) {
   const ts = new Date().toISOString().split('T')[0];
-  const hasErrors   = R01.length + R02.length > 0;
-  const hasWarnings = crossCheckResult.phantoms.length + crossCheckResult.undocumented.length + R03.length + R04.length > 0;
+  const { hasErrors, hasWarnings } = verdictFlags;
   const verdict = hasErrors ? '❌ FAILED' : hasWarnings ? '⚠️ WARNINGS' : '✅ PASSED';
 
   let md = `# SYX Validation Report — ${ts}\n\n`;
@@ -572,24 +565,31 @@ function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViol
   }
 
   md += `## SCSS Rule Violations\n\n`;
-  md += `| Rule | Description | Count | Status |\n|---|---|---|---|\n`;
-  md += `| R01 | Primitive tokens in components | ${R01.length} | ${R01.length === 0 ? '✅' : '❌'} |\n`;
-  md += `| R02 | !important usage | ${R02.length} | ${R02.length === 0 ? '✅' : '❌'} |\n`;
-  md += `| R03 | Raw transition: property | ${R03.length} | ${R03.length === 0 ? '✅' : '⚠️'} |\n`;
-  md += `| R04 | Raw position: absolute/fixed/sticky | ${R04.length} | ${R04.length === 0 ? '✅' : '⚠️'} |\n\n`;
+  md += `| Rule | Description | Severity | Count | Status |\n|---|---|---|---|---|\n`;
+  for (const r of AST_RULES) {
+    const n = scssViolations[r.id].length;
+    md += `| ${r.id} | ${r.label} | ${r.severity} | ${n} | ${n === 0 ? '✅' : r.severity === 'error' ? '❌' : '⚠️'} |\n`;
+  }
+  md += '\n';
 
-  if (R01.length > 0) {
-    md += `### R01 Violations\n\n`;
-    R01.slice(0, 10).forEach(v => { md += `- \`${v.file}:${v.line}\` → \`${v.content.substring(0, 80)}\`\n`; });
-    if (R01.length > 10) md += `- … and ${R01.length - 10} more\n`;
+  for (const r of AST_RULES) {
+    const list = scssViolations[r.id];
+    if (!list.length) continue;
+    md += `### ${r.id} Violations\n\n`;
+    list.slice(0, 10).forEach(v => { md += `- \`${v.file}:${v.line}\` → \`${v.content.substring(0, 80)}\`${v.motivo ? ` — ${v.motivo}` : ''}\n`; });
+    if (list.length > 10) md += `- … and ${list.length - 10} more\n`;
     md += '\n';
   }
 
-  if (R02.length > 0) {
-    md += `### R02 Violations\n\n`;
-    R02.forEach(v => { md += `- \`${v.file}:${v.line}\` → \`${v.content.substring(0, 80)}\`\n`; });
-    md += '\n';
+  const exc = scssViolations.excepciones;
+  md += `### Inline exceptions (${exc.length})\n\n`;
+  if (exc.length) {
+    md += `_Each one excuses exactly one declaration, with its reason next to the code (\`// syx-allow Rxx: …\`)._\n\n`;
+    exc.forEach((e) => { md += `- ${e.regla} \`${e.file}:${e.line}\` — ${e.porque}\n`; });
+  } else {
+    md += `_None._\n`;
   }
+  md += '\n';
 
   const reportPath = path.join(CONTRACTS_DIR, 'validation-report.md');
   fs.writeFileSync(reportPath, md);
@@ -599,7 +599,6 @@ function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViol
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const rules       = parseRules();
   const scssFiles   = readAllScss(SCSS_DIR);
   const runtimeData = extractRuntimeTokens();
 
@@ -627,23 +626,30 @@ async function main() {
   }
   console.log();
 
+  // Final verdict — la severidad sale del contrato, regla a regla. Hasta
+  // septiembre de 2026 este bloque contaba R03 y R04 como avisos, así que un
+  // `transition:` en crudo no hacía fallar la CI; hasta octubre, las
+  // severidades estaban escritas aquí y el contrato solo las documentaba.
+  const findings = {
+    ...Object.fromEntries(AST_RULES.map((r) => [r.id, scssViolations[r.id].length])),
+    R05: crossCheckResult.undocumented.length,
+    R06: crossCheckResult.phantoms.length,
+    R08: unused.length,
+  };
+  const withSeverity = (sev) => Object.entries(findings).filter(([id, n]) => n > 0 && severityOf(id) === sev).map(([id]) => id);
+  const errorRules   = withSeverity('error');
+  const warningRules = withSeverity('warning');
+  if (scssViolations.sintaxis.length && severityOf('sintaxis') === 'error') errorRules.push('SCSS parse');
+  const hasErrors   = errorRules.length > 0;
+  const hasWarnings = warningRules.length > 0;
+
   if (WRITE_REPORT) {
     writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens, unused);
-    writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations);
+    writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations, { hasErrors, hasWarnings });
   }
 
-  // Final verdict — la severidad sale del contrato: R01–R04 son `error` en
-  // contracts/rules.json. Hasta septiembre de 2026 este bloque contaba R03 y R04
-  // como avisos, así que un `transition:` en crudo no hacía fallar la CI.
-  const { R01, R02, R03, R04 } = scssViolations;
-  const hasErrors   = R01.length + R02.length + R03.length + R04.length > 0;
-  const hasWarnings =
-    crossCheckResult.phantoms.length +
-    crossCheckResult.undocumented.length +
-    unused.length > 0;
-
   console.log('┌─────────────────────────────────────────────────────────────┐');
-  if (hasErrors)        console.log('│  Result: ❌ FAILED — fix errors before release              │');
+  if (hasErrors)        console.log(`│  Result: ❌ FAILED — errors in ${errorRules.join(', ')}`.padEnd(62) + '│');
   else if (hasWarnings) console.log('│  Result: ⚠️  PASSED WITH WARNINGS                           │');
   else                  console.log('│  Result: ✅ PASSED — all checks clean                       │');
   if (!WRITE_REPORT)    console.log('│  Tip: run with --report to generate contracts/ JSON files  │');

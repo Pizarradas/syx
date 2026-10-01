@@ -24,7 +24,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
-const { revisar, tokensInexistentes, DESCRIPCIONES } = require('./rules');
+const { crearMotor, tokensInexistentes } = require('./rules');
 const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
@@ -343,28 +343,41 @@ function crearConsulta({ root } = {}) {
     };
   }
 
+  // El mismo motor que `npm run validate`, montado sobre esta raíz: lee
+  // contracts/rules.json y los @mixin de scss/ de la versión desde la que se
+  // pregunta, que es la única respuesta que significa algo.
+  let motor = null;
+  const elMotor = () => (motor = motor || crearMotor({ root: ROOT }));
+
   function validateSnippet({ code, path: rel = 'scss/atoms/_nuevo.scss' }) {
     cargar();
-    const v = revisar(rel, code);
+    const m = elMotor();
+    const r = m.revisarDetalle(rel, code);
     const fuera = tokensInexistentes(code, conocidos);
     const rotos = fuera.filter((t) => !t.conFallback);
-    const total = Object.values(v).reduce((a, x) => a + x.length, 0);
+    const conCasos = Object.entries(r.violaciones).filter(([, x]) => x.length);
+    // Conforme es «sin errores»: la severidad la pone el contrato, no esto.
+    const errores = conCasos.filter(([k]) => m.severidad(k) === 'error').length;
     return {
       path: rel,
-      conforme: total === 0 && rotos.length === 0,
+      conforme: errores === 0 && !r.sintaxis && rotos.length === 0,
       violaciones: Object.fromEntries(
-        Object.entries(v)
-          .filter(([, x]) => x.length)
-          .map(([k, x]) => {
-            // R03 y R04 prohíben una propiedad en crudo. Decir cuál es el
-            // recambio es la mitad que faltaba: un contrato que prohíbe sin
-            // ofrecer alternativa consultable obliga a adivinar, y adivinar es
-            // de donde salen los nombres inventados.
-            const propiedad = { R03: 'transition', R04: 'position' }[k];
-            const recambio = propiedad ? recambioPara(propiedad, losMixins()) : null;
-            return [k, { regla: DESCRIPCIONES[k], casos: x, ...(recambio ? { recambio } : {}) }];
-          })
+        conCasos.map(([k, x]) => {
+          // R03 y R04 prohíben una propiedad en crudo. Decir cuál es el
+          // recambio es la mitad que faltaba: un contrato que prohíbe sin
+          // ofrecer alternativa consultable obliga a adivinar, y adivinar es
+          // de donde salen los nombres inventados.
+          const regla = m.reglas.find((y) => y.id === k);
+          const propiedad = regla.match.kind === 'property' ? regla.match.property : null;
+          const recambio = propiedad ? recambioPara(propiedad, losMixins()) : null;
+          return [k, { regla: m.DESCRIPCIONES[k], severidad: regla.severity, casos: x, ...(recambio ? { recambio } : {}) }];
+        })
       ),
+      // Si no parsea, no se puede declarar conforme: no se ha podido mirar.
+      ...(r.sintaxis ? { sintaxis: r.sintaxis } : {}),
+      // Las `// syx-allow` que el fragmento usa. No son violaciones, pero quien
+      // revisa tiene que verlas: son decisiones, y van con su porqué.
+      ...(r.usadas.length ? { excepciones: r.usadas.map((e) => ({ regla: e.regla, line: e.line, porque: e.porque })) } : {}),
       tokensInexistentes: fuera,
       nota: rotos.length
         ? 'Los tokens sin fallback y sin declarar dejan la propiedad sin valor.'

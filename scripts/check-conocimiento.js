@@ -17,12 +17,15 @@
  *   4. routing.md concuerda con los modos: cita todas las rutas que los modos
  *      cargan, y todas las que cita existen. Es un fichero derivado; si
  *      diverge, alguien editó uno de los dos lados y no el otro.
- *   5. El filtro SYX: todo bloque ```scss/```css del córtex pasa R01–R04 con
- *      scripts/lib/rules.js, juzgado en la capa que declara (`// capa: …` en
- *      su primera línea; sin declaración, como componente). No se juzgan los
- *      marcados como antipatrón (`✗` en la primera línea, o «nunca», «evitar»,
- *      «anti-patrón» justo antes) ni los de prototipo (`capa: prototipo …`),
- *      que se cuentan aparte para que no se cuelen en silencio.
+ *   5. El filtro SYX: todo bloque ```scss/```css del córtex pasa las reglas de
+ *      árbol (R01–R04, R09, R10) con scripts/lib/rules.js, juzgado en la capa
+ *      que declara (`// capa: …` en su primera línea; sin declaración, como
+ *      componente). No se juzgan los marcados como antipatrón (`✗` en la
+ *      primera línea, o «nunca», «evitar», «anti-patrón» justo antes) ni los de
+ *      prototipo (`capa: prototipo …`). Un bloque que no parsea como SCSS solo
+ *      pasa si lo declara (`// pseudocódigo` en su primera línea); si parsea,
+ *      se juzga aunque lo declare. Todos se cuentan aparte para que no se
+ *      cuelen en silencio.
  *
  * Uso: node scripts/check-conocimiento.js   ·   npm run check:conocimiento
  */
@@ -116,7 +119,7 @@ comprobar('routing.md concuerda con los modos', () => {
 let prototipo = 0;
 comprobar('el código del córtex pasa el filtro SYX', () => {
   const malos = [];
-  let revisados = 0, antipatron = 0;
+  let revisados = 0, antipatron = 0, pseudo = 0;
   for (const f of walk(K).filter((p) => p.endsWith('.md') && !rel(p).startsWith('vendors/'))) {
     const lineas = fs.readFileSync(f, 'utf8').split(/\r?\n/);
     for (let i = 0; i < lineas.length; i++) {
@@ -130,17 +133,21 @@ comprobar('el código del córtex pasa el filtro SYX', () => {
       if (/✗/.test(primera) || /\b(nunca|evitar|anti-?patr[oó]n)\b/i.test(antes)) antipatron++;
       else if (capa && capa.startsWith('prototipo')) prototipo++;
       else {
-        revisados++;
         const v = revisar(capa || 'scss/atoms/_ejemplo.scss', '\n' + cuerpo.join('\n'));
+        // Lo que no parsea no se puede juzgar. Solo se acepta si el bloque
+        // lo DICE (`pseudocódigo` en su primera línea); si no, es error: un
+        // bloque ilegible al motor es un bloque que nadie ha revisado.
+        if (v.sintaxis && /pseudoc[oó]digo/i.test(primera)) { pseudo++; i = j; continue; }
+        revisados++;
         for (const [regla, lista] of Object.entries(v)) {
-          for (const x of lista) malos.push(`${rel(f)}:${i + 1 + x.line} ${regla} ${x.content.trim()}`);
+          for (const x of lista) malos.push(`${rel(f)}:${i + 1 + x.line} ${regla} ${(x.content || '').trim()}${x.motivo ? ` [${x.motivo}]` : ''}`);
         }
       }
       i = j;
     }
   }
   if (malos.length) throw new Error(malos.join(' · '));
-  return `${revisados} bloques revisados · ${antipatron} marcados como antipatrón · ${prototipo} de prototipo`;
+  return `${revisados} bloques revisados · ${antipatron} marcados como antipatrón · ${prototipo} de prototipo · ${pseudo} de pseudocódigo`;
 });
 
 console.log('\n── CÓRTEX ' + '─'.repeat(54) + '\n');

@@ -312,6 +312,7 @@
 
       // Chrome autofill — prevent bg flash
       &:-webkit-autofill {
+        // syx-allow R03: no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello
         transition:
           background-color 600000s 0s,
           color 600000s 0s;

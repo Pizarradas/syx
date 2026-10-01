@@ -35,9 +35,11 @@ function evaluar({ tarea, respuesta, syx }) {
     bloques.forEach((code, i) => {
       const r = syx.validateSnippet({ code, path: tarea.scss.ruta });
       for (const [regla, v] of Object.entries(r.violaciones || {})) {
-        const n = Array.isArray(v) ? v.length : 1;
+        const n = Array.isArray(v) ? v.length : (v && v.casos ? v.casos.length : 1);
         c1.detalle.push(`bloque ${i + 1}: ${regla} (${n})`);
       }
+      // Un bloque que no parsea no ha pasado el contrato: no se ha podido mirar.
+      if (r.sintaxis) c1.detalle.push(`bloque ${i + 1}: no parsea (${r.sintaxis.content})`);
     });
   }
   c1.nota = c1.detalle.length ? 0 : 2;

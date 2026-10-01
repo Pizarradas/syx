@@ -73,6 +73,7 @@
   .syx-motion-safe {
     @include reduced-motion() {
       animation: none;
+      // syx-allow R03: es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez
       transition: none;
     }
   }
