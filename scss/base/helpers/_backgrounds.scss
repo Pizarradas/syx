@@ -4,8 +4,10 @@
 // ===============================================
 
 // THEME-AWARE MIXIN HELPER: backgrounds
-// Generates .syx-bg-* classes. Some blocks use @if $theme for compile-time
-// theme branching — this cannot be replaced by CSS custom properties alone.
+// Generates .syx-bg-* classes. Nothing here depends on $theme: what changes
+// between themes comes from tokens, so this CSS is identical for all seven
+// (dist/ publishes it once, shared). Keep it that way: a compile-time
+// `@if $theme` here forks the shared components file per theme.
 // Note: color is set on the container directly; children inherit via CSS
 // cascade. Components with their own color tokens are unaffected.
 // ===============================================
@@ -64,14 +66,11 @@
         // &-black
         &-black {
           background-color: var(--primitive-color-black);
-
-          @if $theme == 'example-02' {
-            color: var(--primitive-color-white);
-          }
-
-          @if $theme == example-01 {
-            color: var(--semantic-color-primary);
-          }
+          // La tinta la pone el tema (--component-bg-color-black-text; por
+          // defecto currentColor, o sea heredar). Aquí había dos `@if $theme`
+          // y eran lo único que hacía distinto el CSS de componentes entre
+          // temas: ver abstracts/tokens/components/_surfaces.scss.
+          color: var(--component-bg-color-black-text);
         }
 
         // &-white

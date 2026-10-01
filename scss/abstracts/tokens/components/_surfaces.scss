@@ -67,6 +67,17 @@
   // Luminosidad de la sintaxis derivada. Fija y alta porque el fondo es fijo
   // y oscuro en todos los temas y modos.
   --component-code-syntax-lightness: 0.82;
+
+  // UTILIDAD .syx-bg-color-black — tinta del texto encima
+  // ================================================
+  // `currentColor` en `color` equivale a heredar: es lo que hacía la
+  // utilidad en los temas que no fijaban tinta. Dos temas la fijan
+  // (example-01, example-02). Antes eso se decidía al COMPILAR, con
+  // `@if $theme` en base/helpers/_backgrounds.scss, y obligaba a
+  // compilar el CSS de componentes una vez por tema; como token, el
+  // CSS de componentes es el mismo para los siete y el tema solo
+  // cambia su fichero de tokens (auditoría 2026-10, acción 12).
+  --component-bg-color-black-text: currentColor;
 }
 
 // Los rellenos de marca rondan L 0,60: sobre el fondo del código daban
