@@ -21,9 +21,9 @@ Tier 3 — componente. Fichero nuevo: `scss/abstracts/tokens/components/_status.
 
 Cada uno apunta a la capa semántica. Los colores usan la tinta de texto de estado, no el relleno, porque aquí colorean texto.
 
-## tokens.json Entries
+## Registration
 
-Los seis van a `tokens.json` bajo la familia `status` (R05). Tienen consumidor: `.atom-status` (R08).
+Fichero nuevo: hace falta `@forward 'status';` en `scss/abstracts/tokens/components/index.scss`, y un fichero nuevo lo decide una persona: la línea va escrita aquí, no añadida. `tokens.json` no se toca a mano: `npm run build` lo regenera desde el SCSS y `check:tokens-json` lo vigila (R05). Tienen consumidor: `.atom-status` (R08).
 
 ## How it lands
 

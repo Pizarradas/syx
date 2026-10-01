@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-30T22:01:07.044Z",
+    "generatedAt": "2026-10-01T05:35:13.036Z",
     "generator": "scripts/build-token-snapshot.js",
     "source": "css/styles-theme-*.css",
     "shape": "Tres capas que se apilan. `base` lleva los tokens que valen lo mismo en TODOS los temas; themes[tema].light solo lo propio del tema; themes[tema].dark solo lo que cambia en oscuro. Valor en claro: { ...base, ...light }. En oscuro: { ...base, ...light, ...dark }. Un valor que empiece por \"@asset/\" se resuelve contra el mapa `assets`. El índice inverso valor → tokens no se guarda: se deriva de esto en una pasada. `unresolved` lista los tokens que computan a vacío y por qué.",
@@ -162,6 +162,7 @@
     "--primitive-fluid-font-h3": "clamp(1.875rem,1.63rem + 1.05vw,2.747rem)",
     "--primitive-fluid-font-h2": "clamp(2.125rem,1.75rem + 1.6vw,3.433rem)",
     "--primitive-fluid-font-h1": "clamp(2.5rem,1.9rem + 2.57vw,4.291rem)",
+    "--semantic-color-text-on-primary": "oklch(1 0 0)",
     "--semantic-font-size-overline": "clamp(0.64rem,0.61rem + 0.14vw,0.72rem)",
     "--semantic-font-size-caption": "clamp(0.64rem,0.61rem + 0.14vw,0.72rem)",
     "--semantic-font-size-body-small": "clamp(0.8rem,0.76rem + 0.18vw,0.9rem)",
@@ -468,7 +469,6 @@
     "--component-disclosure-summary-font-weight": "500",
     "--component-disclosure-marker-size": "0.5em",
     "--component-disclosure-content-padding-block-end": "clamp(1rem,0.82rem + 0.75vw,1.5rem)",
-    "--semantic-color-text-on-primary": "oklch(1 0 0)",
     "--icon-rrss-facebook": "@asset/3d8f4aaef5",
     "--icon-rrss-github": "@asset/6a23c8870e",
     "--icon-rrss-instagram": "@asset/74ac05de66",

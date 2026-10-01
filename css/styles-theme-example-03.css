@@ -267,14 +267,15 @@
 }
 :root {
   --semantic-color-bg-primary: var(--primitive-color-white);
-  --semantic-color-bg-secondary: var(--primitive-color-pink-50);
-  --semantic-color-bg-tertiary: var(--primitive-color-gray-50);
+  --semantic-color-bg-secondary: var(--primitive-color-gray-50);
+  --semantic-color-bg-tertiary: var(--primitive-color-gray-100);
   --semantic-color-bg-inverse: var(--primitive-color-black);
-  --semantic-color-text-primary: var(--primitive-color-purple-500);
-  --semantic-color-text-secondary: var(--primitive-color-gray-700);
-  --semantic-color-text-tertiary: var(--primitive-color-gray-500);
+  --semantic-color-text-primary: var(--primitive-color-gray-900);
+  --semantic-color-text-secondary: var(--primitive-color-gray-600);
+  --semantic-color-text-tertiary: var(--primitive-color-gray-400);
   --semantic-color-text-inverse: var(--primitive-color-white);
   --semantic-color-text-disabled: var(--primitive-color-gray-300);
+  --semantic-color-text-on-primary: var(--primitive-color-white);
   --semantic-color-border-default: var(--primitive-color-gray-300);
   --semantic-color-border-subtle: var(--primitive-color-gray-200);
   --semantic-color-border-strong: var(--primitive-color-gray-400);
@@ -1179,17 +1180,6 @@
 }
 
 :root {
-  --semantic-color-bg-primary: var(--primitive-color-white);
-  --semantic-color-bg-secondary: var(--primitive-color-gray-50);
-  --semantic-color-bg-tertiary: var(--primitive-color-gray-100);
-  --semantic-color-border-default: var(--primitive-color-gray-300);
-  --semantic-color-border-subtle: var(--primitive-color-gray-200);
-  --semantic-color-border-strong: var(--primitive-color-gray-400);
-  --semantic-color-text-primary: var(--primitive-color-gray-900);
-  --semantic-color-text-secondary: var(--primitive-color-gray-600);
-  --semantic-color-text-tertiary: var(--primitive-color-gray-400);
-  --semantic-color-text-inverse: var(--primitive-color-white);
-  --semantic-color-text-on-primary: var(--primitive-color-white);
   --reset-html-font: normal normal 500 16px/18px var(--semantic-font-family-primary);
   --reset-body-color: var(--semantic-color-text-primary);
   --reset-body-background-color: var(--semantic-color-bg-secondary);

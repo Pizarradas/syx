@@ -30,7 +30,7 @@
     "Handoff Notes for UI Mode": ["Traspaso a UI", "Notas para el modo UI", "Para el modo UI"],
     "Tier Placement": ["Nivel", "Capa", "En qué nivel van", "Nivel de confianza"],
     "Token Definitions": ["Tokens", "Definición de los tokens"],
-    "tokens.json Entries": ["Entradas de tokens.json", "Registro en tokens.json", "Entradas para tokens.json"],
+    "Registration": ["Registro", "Registro en tokens.json", "Entradas de tokens.json"],
     "How it lands": ["Entrega", "Cómo se aplica"],
     "Notes": ["Notas"],
     "Color Brief": ["Intención de color", "Color"],
@@ -134,7 +134,7 @@
         { "re": "var\\(--primitive-", "en": "scss", "forma": "menciona", "porque": "un token de componente apunta a la capa semántica, no a la primitiva" },
         { "comun": "commitMain" }
       ],
-      "secciones": ["Tier Placement", "Token Definitions", "tokens.json Entries", "How it lands"],
+      "secciones": ["Tier Placement", "Token Definitions", "Registration", "How it lands"],
       "criterio": [
         "¿Cada token nuevo tiene un consumidor real (R08), o es especulativo?",
         "¿Los nombres siguen la gramática --component-<componente>-<variante>-<propiedad>?"

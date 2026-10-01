@@ -1,15 +1,15 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-30T22:00:36.554Z"
+    "generatedAt": "2026-10-01T05:35:18.406Z"
   },
   "stats": {
-    "sourceTokens": 1145,
+    "sourceTokens": 1136,
     "runtimeTokens": 1419,
     "officialRuntime": 1144,
     "legacyRuntime": 275,
     "phantomTokens": 0,
     "undocumentedTokens": 0,
-    "unusedTokens": 121
+    "unusedTokens": 119
   },
   "phantomTokens": [],
   "unusedRegistryTokens": [
@@ -113,8 +113,6 @@
     "--semantic-border-radius-xl",
     "--semantic-border-width",
     "--semantic-color-quinary-text",
-    "--semantic-color-senary",
-    "--semantic-color-septenary",
     "--semantic-color-state-active",
     "--semantic-color-state-focus",
     "--semantic-color-text-on-primary",
@@ -2375,6 +2373,23 @@
     "R01_primitiveInComponents": 0,
     "R02_importantUsage": 0,
     "R03_rawTransition": 0,
-    "R04_rawPosition": 0
-  }
+    "R04_rawPosition": 0,
+    "R09_unknownMixin": 0,
+    "R10_exceptionHygiene": 0,
+    "parseErrors": 0
+  },
+  "inlineExceptions": [
+    {
+      "rule": "R03",
+      "file": "scss/base/_reset.scss",
+      "line": 316,
+      "why": "no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello"
+    },
+    {
+      "rule": "R03",
+      "file": "scss/utilities/_accessibility.scss",
+      "line": 77,
+      "why": "es el apagado de movimiento en sí, ya dentro de reduced-motion; transition() solo añadiría la misma guarda otra vez"
+    }
+  ]
 }

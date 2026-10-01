@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-30T22:00:36.554Z",
+    "generatedAt": "2026-10-01T05:35:18.406Z",
     "source": "css/styles-theme-example-01.css",
     "stats": {
       "total": 1419,
@@ -1631,7 +1631,7 @@
       "category": "semantic"
     },
     "--semantic-color-bg-secondary": {
-      "value": "var(--primitive-color-pink-50)",
+      "value": "var(--primitive-color-gray-50)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1640,7 +1640,7 @@
       "category": "semantic"
     },
     "--semantic-color-bg-tertiary": {
-      "value": "var(--primitive-color-gray-50)",
+      "value": "var(--primitive-color-gray-100)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1658,7 +1658,7 @@
       "category": "semantic"
     },
     "--semantic-color-text-primary": {
-      "value": "var(--primitive-color-purple-500)",
+      "value": "var(--primitive-color-gray-900)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1667,7 +1667,7 @@
       "category": "semantic"
     },
     "--semantic-color-text-secondary": {
-      "value": "var(--primitive-color-gray-700)",
+      "value": "var(--primitive-color-gray-600)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1676,7 +1676,7 @@
       "category": "semantic"
     },
     "--semantic-color-text-tertiary": {
-      "value": "var(--primitive-color-gray-500)",
+      "value": "var(--primitive-color-gray-400)",
       "usedInSelectors": [
         ":root",
         ":root:not([data-theme=light])",
@@ -1699,6 +1699,13 @@
         ":root",
         ":root:not([data-theme=light])",
         ":root[data-theme=dark]"
+      ],
+      "category": "semantic"
+    },
+    "--semantic-color-text-on-primary": {
+      "value": "var(--primitive-color-white)",
+      "usedInSelectors": [
+        ":root"
       ],
       "category": "semantic"
     },
@@ -7576,13 +7583,6 @@
         ":root"
       ],
       "category": "component"
-    },
-    "--semantic-color-text-on-primary": {
-      "value": "var(--primitive-color-white)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "category": "semantic"
     },
     "--reset-html-font": {
       "value": "normal normal 500 16px/18px var(--semantic-font-family-primary)",
