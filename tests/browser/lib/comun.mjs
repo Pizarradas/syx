@@ -45,8 +45,13 @@ export const scriptsSyx = (root = ROOT) => fs.readdirSync(path.join(root, 'js'))
  * `[data-componente]`, con las hojas de un tema y un modo.
  *   dir     'ltr' | 'rtl'
  *   hojas   rutas relativas a la raíz, con {tema} sustituido
+ *   popovers 'en-flujo' (se les quita el atributo y se pintan junto a su
+ *           disparador: lo que axe y las capturas necesitan) o 'intactos'
+ *           (se abren y se colocan como en una página real: lo que el foco
+ *           necesita, porque una burbuja en el flujo tapaba el anillo de su
+ *           propio disparador, cosa que en la página real no pasa)
  */
-export function paginaComponentes({ tema, modo, dir = 'ltr', hojas = ['css/styles-theme-{tema}.css'], root = ROOT }) {
+export function paginaComponentes({ tema, modo, dir = 'ltr', hojas = ['css/styles-theme-{tema}.css'], popovers = 'en-flujo', root = ROOT }) {
   const secciones = componentes(root).map((c) => `
     <section class="prueba" data-componente="${c.name}" aria-label="${c.name}">
       ${c.usage}
@@ -91,7 +96,7 @@ ${secciones}
     // a los demás y la capa superior los sacaría de su sección. El teclado y
     // la apertura real se prueban aparte, con los popovers intactos, en
     // interaccion.mjs.
-    for (const p of document.querySelectorAll('[popover]')) p.removeAttribute('popover');
+    ${popovers === 'en-flujo' ? "for (const p of document.querySelectorAll('[popover]')) p.removeAttribute('popover');" : '// popovers intactos'}
   </script>
 ${scriptsSyx(root).map((f) => `  <script type="module" src="/js/${f}"></script>`).join('\n')}
 </body>

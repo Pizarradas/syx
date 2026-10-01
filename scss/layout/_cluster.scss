@@ -27,9 +27,15 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: var(--semantic-space-inline-xs);
+      // Nunca menos que lo que ocupa el anillo de foco fuera de un control
+      // (su ancho más su separación). Con el hueco más pequeño
+      // del tema (0,18rem en example-04) el anillo de un botón se montaba
+      // sobre el borde del vecino y la mitad de ese lado no se veía: lo midió
+      // tests/browser/foco.mjs (auditoría 2026-10, acción 8).
+      $hueco-minimo: calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset));
+      gap: max(var(--semantic-space-inline-xs), #{$hueco-minimo});
 
-      &--xs { gap: var(--semantic-space-inline-xs); }
+      &--xs { gap: max(var(--semantic-space-inline-xs), #{$hueco-minimo}); }
       &--sm { gap: var(--semantic-space-inline-sm); }
       &--md { gap: var(--semantic-space-inline-md); }
       &--lg { gap: var(--semantic-space-inline-lg); }

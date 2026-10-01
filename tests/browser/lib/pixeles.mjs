@@ -113,13 +113,30 @@ export async function contrasteDeTexto(page, selector, { requerido: req } = {}) 
  */
 export function cambioDeFoco(antes, despues) {
   const a = leer(antes), b = leer(despues);
+  const n = a.width * a.height;
+  const estado = new Uint8Array(n); // 0 igual · 1 cambia · 2 cambia con ≥ 3:1
   let cambiados = 0, conContraste = 0;
-  for (let i = 0; i < a.data.length; i += 4) {
+  for (let p = 0; p < n; p++) {
+    const i = p * 4;
     if (a.data[i] === b.data[i] && a.data[i + 1] === b.data[i + 1] && a.data[i + 2] === b.data[i + 2]) continue;
     cambiados++;
-    if (contraste([a.data[i], a.data[i + 1], a.data[i + 2]], [b.data[i], b.data[i + 1], b.data[i + 2]]) >= 3) conContraste++;
+    estado[p] = 1;
+    if (contraste([a.data[i], a.data[i + 1], a.data[i + 2]], [b.data[i], b.data[i + 1], b.data[i + 2]]) >= 3) { estado[p] = 2; conContraste++; }
   }
-  return { cambiados, conContraste };
+  // El borde suavizado. Un anillo que no cae en píxel entero se pinta a medias
+  // en sus dos cantos, y esos píxeles a medio color no llegan a 3:1 aunque son
+  // anillo. Sin contarlos, un outline de 2 px —el ejemplo que WCAG da como
+  // aprobado de 2.4.13— suspendía por una docena de píxeles según dónde cayera
+  // el control. Cuenta como medio píxel cada píxel que cambia sin llegar a
+  // 3:1 pero toca (en cruz) uno que sí llega.
+  let borde = 0;
+  for (let p = 0; p < n; p++) {
+    if (estado[p] !== 1) continue;
+    const x = p % a.width;
+    if ((x > 0 && estado[p - 1] === 2) || (x < a.width - 1 && estado[p + 1] === 2) ||
+        (p >= a.width && estado[p - a.width] === 2) || (p + a.width < n && estado[p + a.width] === 2)) borde++;
+  }
+  return { cambiados, conContraste, area: conContraste + borde / 2 };
 }
 
 export { caja, dosFotogramas };

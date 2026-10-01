@@ -69,7 +69,8 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: var(--semantic-space-inline-xs);
+        // Ni menos que lo que ocupa el anillo de foco: ver layout-cluster.
+        gap: max(var(--semantic-space-inline-xs), calc(var(--semantic-focus-ring-width) + var(--semantic-focus-ring-offset)));
         margin-block-start: var(--component-empty-state-gap);
       }
     }
