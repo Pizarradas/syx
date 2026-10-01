@@ -70,6 +70,7 @@ Inline style (style="…")          → 1,0,0,0
 BEM produce selectores de clase única: `.atom-btn`, `.atom-btn__label`, `.atom-btn--primary`. La especificidad de todos estos selectores es idéntica: `0,1,0`.
 
 ```scss
+// pseudocódigo — ilustra la idea; no compila tal cual
 // ✓ BEM — especificidad plana (0,1,0)
 .atom-btn { … }
 .atom-btn__label { … }

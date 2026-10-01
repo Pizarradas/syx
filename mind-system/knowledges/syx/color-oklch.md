@@ -28,6 +28,7 @@ SYX usa OKLCH como formato de color en los tokens primitivos. No es una preferen
 **OKLCH:** perceptualmente uniforme. `L` de 0 a 1 produce incrementos perceptivos consistentes, independientemente del tono. Construir paletas es predecible.
 
 ```scss
+// pseudocódigo — ilustra la idea; no compila tal cual
 // OKLCH(Lightness Chroma Hue)
 oklch(0.55 0.22 260)
 //     ↑     ↑    ↑

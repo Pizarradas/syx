@@ -123,6 +123,7 @@ La interactividad es una mejora de la experiencia, no su fundamento. Cada compon
 Las capas también aplican dentro del CSS del componente:
 
 ```scss
+// pseudocódigo — ilustra la idea; no compila tal cual
 // Capa 1 — Base (no queries, no feature detection)
 // Funcional en cualquier viewport, cualquier dispositivo
 

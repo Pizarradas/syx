@@ -38,10 +38,10 @@ document.querySelectorAll("a, button, [data-cursor-hover]").forEach((el) => {
 ```
 
 CSS clave:
-```css
+```scss
 body.has-cursor { cursor: none; }
 body.has-cursor a, body.has-cursor button { cursor: none; }
-.cursor { position: fixed; pointer-events: none; mix-blend-mode: difference; }
+.cursor { @include fixed(); pointer-events: none; mix-blend-mode: difference; }
 .cursor.is-hover { width: 72px; height: 72px; }
 ```
 

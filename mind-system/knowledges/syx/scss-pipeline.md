@@ -22,6 +22,7 @@ Todo componente SYX sigue un template estricto: un mixin con parámetro `$theme`
 ### Template de componente
 
 ```scss
+// pseudocódigo — ilustra la idea; no compila tal cual
 // CORE
 // ===============================================
 @use "../abstracts/index" as *;

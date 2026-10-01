@@ -68,6 +68,7 @@ filter  // con precaución — puede crear stacking context
 
 **Propiedades prohibidas en animaciones:**
 ```scss
+// pseudocódigo — ilustra la idea; no compila tal cual
 // Estas recalculan el layout en cada frame → jank
 width, height
 top, right, bottom, left
