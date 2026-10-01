@@ -684,6 +684,33 @@
       "a11y": "Static text, no role, not interactive (if it is clickable it is atom-btn). The state is in the words, never only in the colour. A count that updates needs an aria-live container. No JS."
     },
     {
+      "name": "progress",
+      "layer": "atom",
+      "file": "scss/atoms/_progress.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-progress"
+      ],
+      "modifiers": [],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-progress-border-radius",
+        "--component-progress-duration",
+        "--component-progress-fill",
+        "--component-progress-height",
+        "--component-progress-indeterminate-duration",
+        "--component-progress-stripe-width",
+        "--component-progress-track"
+      ],
+      "description": "[scope: generic] A progress bar on the native <progress>: with value it is determinate, without value it is indeterminate (:indeterminate) and a segment sweeps the track. The fill is primary-strong, measured at 3:1 against the page and the track (WCAG 1.4.11). Under reduced motion the indeterminate bar stops moving and shows static stripes. For an unknown wait with no bar, use atom-spinner.",
+      "usage": "<label class=\"atom-label\" for=\"pg-upload\">Uploading report.pdf</label><progress class=\"atom-progress\" id=\"pg-upload\" value=\"40\" max=\"100\">40%</progress><label class=\"atom-label\" for=\"pg-sync\">Syncing contacts</label><progress class=\"atom-progress\" id=\"pg-sync\">Syncing…</progress>",
+      "a11y": "Native <progress>: role progressbar, value and max come from the browser; remove value for indeterminate. It needs a name — <label for> on a unique id, or aria-label. The text inside <progress> is the fallback, not the name. Not focusable. Reduced motion: static stripes instead of the sweep. Forced colours: framed track, Highlight fill. No JS — the app updates value."
+    },
+    {
       "name": "radio",
       "layer": "atom",
       "file": "scss/atoms/_radio.scss",
@@ -729,6 +756,73 @@
       "description": "[scope: system-reusable] One choice out of a mutually exclusive set. Only meaningful in a group sharing a name, and the group needs a fieldset with a legend to be announced as a group. For independent choices use atom-check.",
       "usage": "<label class=\"atom-radio\"><input class=\"atom-radio__input\" type=\"radio\" name=\"theme\" value=\"dark\"><span class=\"atom-radio__label\">Dark</span></label>",
       "a11y": "Real <input type=\"radio\"> inside the <label>, one name per group, the group in <fieldset><legend>. Arrow keys move the choice (browser). No JS."
+    },
+    {
+      "name": "skeleton",
+      "layer": "atom",
+      "file": "scss/atoms/_skeleton.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-skeleton"
+      ],
+      "modifiers": [
+        "atom-skeleton--block",
+        "atom-skeleton--circle",
+        "atom-skeleton--text"
+      ],
+      "elements": [],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-skeleton-bg",
+        "--component-skeleton-block-height",
+        "--component-skeleton-border-radius",
+        "--component-skeleton-circle-size",
+        "--component-skeleton-duration",
+        "--component-skeleton-highlight",
+        "--component-skeleton-text-height"
+      ],
+      "description": "[scope: generic] A placeholder with the shape of the content that is on its way: --text (a line; the last of several stops at 60%), --circle (avatar size) and --block. A shimmer sweeps it; under reduced motion it stays flat. It is decoration: hide it from assistive technology and say what is loading in text.",
+      "usage": "<p class=\"syx-sr-only\" role=\"status\">Loading profile…</p><div class=\"layout-cluster layout-cluster--md\" aria-busy=\"true\"><span class=\"atom-skeleton atom-skeleton--circle\" aria-hidden=\"true\"></span><div class=\"layout-stack layout-stack--xs syx-flex-1\" aria-hidden=\"true\"><span class=\"atom-skeleton atom-skeleton--text\"></span><span class=\"atom-skeleton atom-skeleton--text\"></span></div></div>",
+      "a11y": "aria-hidden=\"true\" on every skeleton and aria-busy=\"true\" on the container that will be filled; remove aria-busy when the content lands. Say what is loading with text in a role=\"status\" outside the busy container (a busy region may hold its own announcements back). Never focusable. Reduced motion: no shimmer. Forced colours: a border keeps the shape. No JS."
+    },
+    {
+      "name": "spinner",
+      "layer": "atom",
+      "file": "scss/atoms/_spinner.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_loading.scss"
+      ],
+      "classes": [
+        "atom-spinner"
+      ],
+      "modifiers": [
+        "atom-spinner--lg",
+        "atom-spinner--sm",
+        "atom-spinner--with-label"
+      ],
+      "elements": [
+        "atom-spinner__label"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-spinner-color",
+        "--component-spinner-duration",
+        "--component-spinner-duration-reduced",
+        "--component-spinner-gap",
+        "--component-spinner-label-color",
+        "--component-spinner-size-lg",
+        "--component-spinner-size-md",
+        "--component-spinner-size-sm",
+        "--component-spinner-thickness",
+        "--component-spinner-track"
+      ],
+      "description": "[scope: generic] A busy indicator for a wait of unknown length: a ring drawn on ::before, so the text does not spin. The text lives in __label, visually hidden by default and shown with --with-label. --sm, md by default, --lg. Under reduced motion it spins three times slower instead of stopping, because a still ring says nothing. If the wait has a known end, use atom-progress.",
+      "usage": "<span class=\"atom-spinner\" role=\"status\"><span class=\"atom-spinner__label\">Loading results…</span></span><span class=\"atom-spinner atom-spinner--lg atom-spinner--with-label\" role=\"status\"><span class=\"atom-spinner__label\">Saving changes…</span></span>",
+      "a11y": "Always a text in __label: the ring alone says nothing to a screen reader. role=\"status\" announces it politely without moving focus; a live region inserted with its text already inside may not be read, so insert it empty and set the text after, or announce from a status region that already exists. Not focusable. Reduced motion: slower, not stopped. No JS."
     },
     {
       "name": "stat-counter",

@@ -1,0 +1,68 @@
+// ATOM: SKELETON
+// ===============================================
+// La forma de lo que va a llegar —líneas de texto, un avatar, un
+// bloque— mientras llega. Es decoración: no lleva texto ni se anuncia.
+//
+// <div aria-busy="true">
+//   <div class="layout-stack layout-stack--xs" aria-hidden="true">
+//     <span class="atom-skeleton atom-skeleton--circle"></span>
+//     <span class="atom-skeleton atom-skeleton--text"></span>
+//     <span class="atom-skeleton atom-skeleton--text"></span>
+//   </div>
+// </div>
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · aria-hidden="true" en los esqueletos y aria-busy="true" en el
+//   contenedor que se va a llenar; quita aria-busy cuando llegue el
+//   contenido. Lo que está cargando se dice con texto (un role="status"
+//   fuera del contenedor ocupado), no con la forma.
+// · Con movimiento reducido el brillo no recorre la forma: queda plana.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin atom-skeleton($theme: null) {
+  @layer syx.atoms {
+    @keyframes atom-skeleton-shimmer {
+      from { background-position: 150% 0; }
+      to { background-position: -50% 0; }
+    }
+
+    .atom-skeleton {
+      display: block;
+      inline-size: 100%;
+      block-size: var(--component-skeleton-text-height);
+      background-color: var(--component-skeleton-bg);
+      background-image: linear-gradient(90deg, transparent, var(--component-skeleton-highlight), transparent);
+      background-repeat: no-repeat;
+      background-size: 50% 100%;
+      border-radius: var(--component-skeleton-border-radius);
+      animation: atom-skeleton-shimmer var(--component-skeleton-duration) var(--semantic-easing-in-out) infinite;
+
+      @include reduced-motion {
+        background-image: none;
+        animation: none;
+      }
+
+      // La última línea de un párrafo nunca llega al final: así el bloque
+      // se lee como texto y no como una tabla de barras.
+      &--text:last-child:not(:only-child) {
+        inline-size: 60%;
+      }
+
+      &--circle {
+        inline-size: var(--component-skeleton-circle-size);
+        block-size: var(--component-skeleton-circle-size);
+        border-radius: var(--semantic-border-radius-circle);
+      }
+
+      &--block {
+        block-size: var(--component-skeleton-block-height);
+      }
+
+      @media (forced-colors: active) {
+        border: var(--semantic-border-width-thin) solid CanvasText;
+      }
+    }
+  }
+}

@@ -37,6 +37,9 @@
   @include atom-table($theme);      // Data tables
   @include atom-title($theme);      // Section headings
   @include atom-avatar($theme);         // People: photo or initials
+  @include atom-progress($theme);       // Determinate / indeterminate progress
+  @include atom-spinner($theme);        // Busy indicator with text
+  @include atom-skeleton($theme);       // Loading placeholders
 
   // MOLECULES
   // ================================================
