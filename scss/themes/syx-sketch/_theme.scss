@@ -1082,7 +1082,7 @@
     // margen, como el texto de un plano. Además deja el titular y el
     // subtítulo en la misma vertical, que es lo que hace legible el salto
     // de tamaño entre ambos.
-    --component-hero-text-align: left;
+    --component-hero-text-align: start;
     --component-hero-justify: flex-start;
     --component-hero-content-inline: 0 auto;
     --component-hero-headline-max-width: 15ch;
@@ -1119,7 +1119,7 @@
     --component-section-padding-inline:
       max(clamp(1.5rem, 3.5vw, 4.5rem), calc((100% - var(--layout-max-width)) / 2));
     --component-section-padding-block: var(--semantic-space-layout-xl);
-    --component-section-align: left;
+    --component-section-align: start;
     --component-section-justify: flex-start;
     --component-section-header-margin-inline: 0 auto;
     --component-section-title-font-size: clamp(1.5rem, 2.6vw, 2rem);

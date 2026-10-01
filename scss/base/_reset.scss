@@ -56,7 +56,7 @@
       font-size: var(--reset-body-font-size);
       line-height: var(--reset-body-line-height);
       color: var(--reset-body-color);
-      text-align: left;
+      text-align: start;
       background-color: var(--reset-body-background-color);
     }
 
@@ -170,6 +170,22 @@
       font-size: 1em;
     }
 
+    // El código se escribe de izquierda a derecha también en una página
+    // RTL: sin esto, el algoritmo bidi recoloca la puntuación de los
+    // extremos y `<button class="x">` se lee `<"button class="x>`.
+    // `isolate` lo aísla del texto que lo rodea. Solo en RTL: en LTR,
+    // `unicode-bidi: isolate` ya movía 2 px las columnas de una tabla con
+    // código (docs.html). :dir() mira el atributo dir heredado, no la
+    // propiedad `direction`, así que no se realimenta. Sin :dir() (Chrome
+    // < 120, Safari < 16.4) el código queda como antes.
+    // (Auditoría 2026-10 · acción 13)
+    @supports selector(:dir(rtl)) {
+      :is(code, kbd, samp, pre):dir(rtl) {
+        direction: ltr;
+        unicode-bidi: isolate;
+      }
+    }
+
     pre {
       overflow: auto;
     }
@@ -198,7 +214,7 @@
 
     caption {
       @include padding(null 1rem null 1rem);
-      text-align: left;
+      text-align: start;
       caption-side: bottom;
     }
 
@@ -236,7 +252,7 @@
     abbr[data-original-title] {
       text-decoration: underline dotted;
       cursor: help;
-      border-bottom: 0;
+      border-block-end: 0;
     }
 
     // -----------------------------------------------
@@ -280,7 +296,7 @@
       max-width: 100%;
       font-size: 1.5rem;
       line-height: 1.5rem;
-      text-align: left;
+      text-align: start;
       white-space: normal;
     }
 

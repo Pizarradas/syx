@@ -38,7 +38,7 @@
 
       .org-home-layers__overline {
         display: block;
-        margin-bottom: var(--semantic-space-component-sm);
+        margin-block-end: var(--semantic-space-component-sm);
       }
 
       .org-home-layers__title {
@@ -55,7 +55,7 @@
         color: var(--semantic-color-text-secondary);
         line-height: var(--semantic-line-height-body);
         font-size: var(--semantic-font-size-body);
-        margin-bottom: var(--semantic-space-layout-sm);
+        margin-block-end: var(--semantic-space-layout-sm);
       }
     }
 
@@ -97,43 +97,43 @@
       &-desc {
         font-size: var(--semantic-font-size-overline);
         color: var(--semantic-color-text-secondary);
-        text-align: right;
+        text-align: end;
       }
 
       // Colored left accent bar per layer
       &--utilities {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-utilities-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-utilities-accent);
         background-color: var(--component-layer-utilities-bg);
         .org-home-layers__stack-item-name { color: var(--component-layer-utilities-color); }
       }
 
       &--organisms {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-organisms-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-organisms-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-organisms-color); }
       }
 
       &--molecules {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-molecules-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-molecules-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-molecules-color); }
       }
 
       &--atoms {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-atoms-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-atoms-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-atoms-color); }
       }
 
       &--tokens {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-tokens-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-tokens-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-tokens-color); }
       }
 
       &--base {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-base-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-base-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-base-color); }
       }
 
       &--reset {
-        border-left: var(--component-layer-item-accent-width) solid var(--component-layer-reset-accent);
+        border-inline-start: var(--component-layer-item-accent-width) solid var(--component-layer-reset-accent);
         .org-home-layers__stack-item-name { color: var(--component-layer-reset-color); }
       }
     }
@@ -143,7 +143,7 @@
       font-size: var(--semantic-font-size-overline);
       color: var(--semantic-color-text-secondary);
       text-align: var(--component-section-align);
-      margin-top: var(--semantic-space-component-md);
+      margin-block-start: var(--semantic-space-component-md);
       letter-spacing: var(--semantic-letter-spacing-wide);
       text-transform: uppercase;
     }

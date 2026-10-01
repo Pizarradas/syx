@@ -37,12 +37,17 @@
 
         // Chevron dibujado con bordes: sigue al color del texto y al
         // modo de alto contraste sin necesitar un icono.
+        // Físico a propósito: es una caja con los bordes derecho e inferior
+        // girada 45° = ⌄. Con bordes lógicos, en RTL el borde «final» es el
+        // izquierdo y el giro dibujaba un ‹ en vez de un ⌄. Un chevron
+        // vertical no se espeja: arriba y abajo no dependen de la dirección
+        // del texto. (Auditoría 2026-10 · acción 13)
         &::after {
           content: "";
           flex-shrink: 0;
           @include size(var(--component-disclosure-marker-size), var(--component-disclosure-marker-size));
-          border-inline-end: 0.125em solid currentColor;
-          border-block-end: 0.125em solid currentColor;
+          border-right: 0.125em solid currentColor;
+          border-bottom: 0.125em solid currentColor;
           rotate: 45deg;
           @include transition(rotate var(--component-disclosure-duration));
         }

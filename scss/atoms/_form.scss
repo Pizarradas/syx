@@ -19,7 +19,7 @@
       font-weight: var(--component-form-field-font-weight);
       line-height: var(--component-form-field-line-height);
       color: var(--component-form-field-color);
-      margin-bottom: var(--component-form-field-label-margin-bottom);
+      margin-block-end: var(--component-form-field-label-margin-bottom);
     }
 
     // -----------------------------------------------
@@ -103,7 +103,7 @@
     //   · appearance: none to enable custom styling
     //   · vertical centering via line-height trick (not padding-y)
     //     because padding-y > inner space in a fixed-height box
-    //   · extra right padding for the custom chevron arrow
+    //   · extra inline-end padding for the custom chevron arrow
     // -----------------------------------------------
     .atom-select {
       display: block;
@@ -113,16 +113,16 @@
       min-block-size: var(--component-form-field-min-height);
       box-sizing: border-box;
       // No vertical padding — text is centred by setting line-height = inner height
-      padding-top: 0;
-      padding-bottom: 0;
+      padding-block-start: 0;
+      padding-block-end: 0;
       // line-height = field height − top border − bottom border
       line-height: calc(
         var(--component-form-field-min-height) -
         (var(--component-form-field-border-width) * 2)
       );
-      // Horizontal: standard inset on the left, extra room for the chevron on the right
-      padding-left: var(--component-form-field-padding-x);
-      padding-right: calc(var(--component-form-field-padding-x) * 2.5);
+      // Horizontal: standard inset at the start, extra room for the chevron at the end
+      padding-inline-start: var(--component-form-field-padding-x);
+      padding-inline-end: calc(var(--component-form-field-padding-x) * 2.5);
       @include border(
         all,
         var(--component-form-field-border-width),

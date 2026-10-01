@@ -61,6 +61,10 @@
         margin: auto;
         width: var(--component-check-mark-width);
         height: var(--component-check-mark-height);
+        // Físico a propósito: el ✓ se dibuja con los bordes derecho e
+        // inferior de una caja girada 45°. Con bordes lógicos, en RTL saldría
+        // espejado (trazo largo hacia la izquierda), y una marca de
+        // verificación no se espeja. (Auditoría 2026-10 · acción 13)
         border-right: var(--component-check-mark-thickness) solid transparent;
         border-bottom: var(--component-check-mark-thickness) solid transparent;
         transform: rotate(var(--component-check-mark-rotation)) scale(0)
@@ -89,6 +93,7 @@
       }
 
       &::after {
+        // Físico a propósito: ver el dibujo del ✓ arriba.
         border-right-color: var(--component-check-mark-color);
         border-bottom-color: var(--component-check-mark-color);
         transform: rotate(var(--component-check-mark-rotation)) scale(1)
@@ -125,6 +130,7 @@
 
     .atom-check__input:checked + .atom-check__label::after {
       forced-color-adjust: none;
+      // Físico a propósito: ver el dibujo del ✓ arriba.
       border-right-color: HighlightText;
       border-bottom-color: HighlightText;
     }

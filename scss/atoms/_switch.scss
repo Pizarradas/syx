@@ -52,8 +52,12 @@
         background-color: var(--component-switch-slider-bg);
         border-radius: var(--component-switch-slider-radius);
         box-shadow: var(--component-switch-slider-shadow);
+        // Se anima inset-inline-start y no un translateX: transform es
+        // físico y en RTL mandaría el pomo fuera del carril. Moviendo el
+        // desplazamiento lógico, el pomo va de inicio a fin en los dos
+        // sentidos sin regla :dir(). (Auditoría 2026-10 · acción 13)
         @include transition(
-          transform var(--component-switch-transition-duration)
+          inset-inline-start var(--component-switch-transition-duration)
             var(--component-switch-transition-easing)
         );
       }
@@ -66,14 +70,15 @@
       line-height: var(--component-form-field-line-height);
     }
 
-    // Checked state — move knob right, turn track on
+    // Checked state — move knob to the end (derecha en LTR), turn track on
     &__input:checked + &__slider {
       background-color: var(--component-switch-bg-on);
       border-color: var(--component-switch-bg-on);
 
       &::before {
-        // Move knob: track-width - knob-size - 2*border-offset
-        transform: translateY(-50%) translateX(calc(var(--component-switch-width) - var(--component-switch-slider-size) - (var(--component-form-field-border-width) * 4)));
+        // Posición final: track-width - knob-size - 2*border-offset, desde
+        // el borde inicial del carril (= 2*border + el antiguo translateX).
+        inset-inline-start: calc(var(--component-switch-width) - var(--component-switch-slider-size) - (var(--component-form-field-border-width) * 2));
       }
     }
 

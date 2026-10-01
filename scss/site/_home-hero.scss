@@ -27,10 +27,12 @@
     // Radial gradient backdrop
     &::before {
       content: '';
-      @include absolute(
-        $top: var(--component-hero-backdrop-top),
-        $left: var(--component-hero-backdrop-left)
-      );
+      @include absolute($top: var(--component-hero-backdrop-top));
+      // Físico a propósito: por defecto es left: 50% + translateX(-50%), un
+      // centrado. transform es físico, así que el desplazamiento también
+      // debe serlo; con inset-inline-start, en RTL quedaría right: 50% y el
+      // translate lo sacaría del centro. (Auditoría 2026-10 · acción 13)
+      left: var(--component-hero-backdrop-left);
       @include size(
         var(--component-hero-backdrop-width),
         var(--component-hero-backdrop-height)
@@ -119,7 +121,7 @@
     // &__overline
     &__overline {
       display: inline-block;
-      margin-bottom: var(--semantic-space-component-md);
+      margin-block-end: var(--semantic-space-component-md);
     }
 
     // &__headline
@@ -165,7 +167,7 @@
       justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-component-md);
-      margin-bottom: var(--semantic-space-layout-lg);
+      margin-block-end: var(--semantic-space-layout-lg);
     }
 
     // &__badge-row — row of feature pills
@@ -174,7 +176,7 @@
       justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-component-sm);
-      margin-bottom: var(--semantic-space-layout-lg);
+      margin-block-end: var(--semantic-space-layout-lg);
     }
 
     // &__stats — row of atom-stat blocks
@@ -183,9 +185,9 @@
       justify-content: var(--component-hero-justify);
       flex-wrap: wrap;
       gap: var(--semantic-space-layout-md);
-      padding-top: var(--semantic-space-layout-sm);
-      border-top: var(--component-hero-stats-border-width) solid var(--component-hero-stats-border-color);
-      margin-top: var(--semantic-space-layout-sm);
+      padding-block-start: var(--semantic-space-layout-sm);
+      border-block-start: var(--component-hero-stats-border-width) solid var(--component-hero-stats-border-color);
+      margin-block-start: var(--semantic-space-layout-sm);
     }
 
     // &__scroll-hint
@@ -198,7 +200,7 @@
       color: var(--semantic-color-text-secondary);
       letter-spacing: var(--semantic-letter-spacing-wide);
       text-transform: uppercase;
-      margin-top: var(--semantic-space-layout-md);
+      margin-block-start: var(--semantic-space-layout-md);
       opacity: 0.7;
     }
   }

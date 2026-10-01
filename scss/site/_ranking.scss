@@ -34,10 +34,10 @@
         align-items: center;
         gap: var(--semantic-space-inline-md);
         padding: var(--semantic-space-stack-sm) 0;
-        border-bottom: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
+        border-block-end: var(--semantic-border-width-thin) solid var(--semantic-color-border-subtle);
 
         &:last-child {
-          border-bottom: 0;
+          border-block-end: 0;
         }
       }
 
@@ -45,7 +45,7 @@
         font-family: var(--semantic-font-family-mono);
         font-variant-numeric: tabular-nums;
         color: var(--semantic-color-text-tertiary);
-        text-align: right;
+        text-align: end;
       }
 
       &__name {
@@ -95,7 +95,7 @@
         border-radius: var(--semantic-border-radius-full);
         background: var(--semantic-color-primary);
         color: var(--semantic-color-primary-text);
-        margin-bottom: var(--semantic-space-stack-sm);
+        margin-block-end: var(--semantic-space-stack-sm);
 
         .atom-icon {
           width: var(--component-ranking-medal-icon-size);
@@ -105,7 +105,7 @@
 
       &__rank {
         color: var(--semantic-color-text-tertiary);
-        margin-bottom: var(--semantic-space-stack-xs);
+        margin-block-end: var(--semantic-space-stack-xs);
       }
 
       &__score {
@@ -123,7 +123,7 @@
         font-size: var(--semantic-font-size-body-small);
         font-weight: var(--semantic-font-weight-regular);
         color: var(--semantic-color-text-tertiary);
-        margin-left: var(--component-ranking-max-offset);
+        margin-inline-start: var(--component-ranking-max-offset);
       }
     }
   } // end @layer syx.molecules

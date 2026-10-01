@@ -21,7 +21,7 @@ ul, ol {
   // Restore basic spacing if not explicitly reset
   &:not([class*="atom-list--reset"]) {
     @include padding(null null null var(--layout-pad-4));
-    margin-bottom: var(--layout-gap-3);
+    margin-block-end: var(--layout-gap-3);
   }
 }
 
@@ -38,7 +38,7 @@ ol:not([class*="list-style-none"]) {
 }
 
 li {
-  margin-bottom: var(--layout-gap-1);
+  margin-block-end: var(--layout-gap-1);
 }
 
 
@@ -46,22 +46,22 @@ li {
 // ===============================================
 table {
   width: 100%;
-  margin-bottom: var(--layout-gap-4);
+  margin-block-end: var(--layout-gap-4);
   border-collapse: collapse;
   
   th, td {
     padding: var(--layout-pad-2) var(--layout-pad-3);
-    border-bottom:
+    border-block-end:
       var(--component-table-base-border-width)
       solid
       var(--component-table-base-border-color);
-    text-align: left;
+    text-align: start;
   }
 
   th {
     font-family: var(--semantic-font-family-heading);
     color: var(--component-table-base-th-color);
-    border-bottom:
+    border-block-end:
       var(--component-table-base-th-border-width)
       solid
       var(--component-table-base-th-border-color);
@@ -82,7 +82,7 @@ table {
 // TYPOGRAPHY ELEMENTS
 // ===============================================
 p {
-  margin-bottom: var(--layout-gap-3);
+  margin-block-end: var(--layout-gap-3);
   line-height: var(--primitive-line-height-relaxed);
   color: var(--semantic-color-text-primary);
 }
@@ -103,19 +103,19 @@ a:not([class*="atom-btn"]) {
 }
 
 blockquote {
-  border-left:
+  border-inline-start:
     var(--component-blockquote-border-width)
     var(--component-blockquote-border-style)
     var(--component-blockquote-border-color);
-  margin-left: 0;
-  margin-right: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   font-style: italic;
   color: var(--component-blockquote-color);
   background: var(--component-blockquote-bg);
   padding: var(--layout-pad-3);
   // Después del shorthand: antes iba delante y `padding` la anulaba, así que
   // la sangría del filete nunca llegó a aplicarse.
-  padding-left: var(--layout-pad-4);
+  padding-inline-start: var(--layout-pad-4);
   border-radius: var(--component-blockquote-border-radius);
 }
 
@@ -143,7 +143,7 @@ pre {
   padding: var(--layout-pad-3);
   border-radius: var(--component-code-border-radius);
   overflow-x: auto;
-  margin-bottom: var(--layout-gap-3);
+  margin-block-end: var(--layout-gap-3);
 
   code {
     background: transparent;

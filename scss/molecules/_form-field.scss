@@ -10,7 +10,7 @@
   .mol-form-field {
     @include position(relative);
     // Legacy support alias if needed, otherwise just standard margin
-    margin-bottom: var(--component-form-field-margin-bottom);
+    margin-block-end: var(--component-form-field-margin-bottom);
 
     // ICONS (State or Custom)
     // ===============================================
@@ -34,7 +34,7 @@
     // LABEL
     // ===============================================
     .atom-label {
-      margin-bottom: var(--component-form-field-label-margin-bottom);
+      margin-block-end: var(--component-form-field-label-margin-bottom);
       display: block;
       color: var(--component-form-field-color);
       font-weight: var(--semantic-font-weight-bold);
@@ -43,7 +43,7 @@
     // HELPER MESSAGE
     // ===============================================
     &__msg {
-      margin-top: var(--component-form-field-msg-margin-top);
+      margin-block-start: var(--component-form-field-msg-margin-top);
       display: block;
       font-size: var(--component-form-field-msg-font-size);
       line-height: var(--component-form-field-msg-line-height);
@@ -157,7 +157,7 @@
     &:where([class*="--has-select"], [class*="--is-"]) {
       .atom-input,
       .atom-select {
-        padding-right: calc(0 + (var(--component-form-field-icon-position-right)) + (var(--component-form-field-icon-size)));
+        padding-inline-end: calc(0 + (var(--component-form-field-icon-position-right)) + (var(--component-form-field-icon-size)));
       }
     }
 
