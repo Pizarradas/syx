@@ -48,7 +48,14 @@ const ROOT = path.join(__dirname, '..');
 const OFICIALES = ['--primitive-', '--semantic-', '--component-', '--theme-', '--lc-icon-'];
 const esOficial = (t) => OFICIALES.some((p) => t.startsWith(p));
 
-const sinComentarios = (css) => css.replace(/\/\*[\s\S]*?\*\//g, '');
+// Primero los comentarios de línea de Sass (`// …` a principio de línea o tras
+// espacio, `;`, `{` o `}`), y después los de bloque. Al revés, un `// ✕ pages/*`
+// abría un bloque que se tragaba las declaraciones de los ficheros siguientes:
+// pasó en octubre de 2026 al juntar bundles y temas, y un primitivo declarado
+// salía como huérfano. Una URL (`url(http://…)`, `'http://…'`) no empieza así.
+const sinComentarios = (css) => css
+  .replace(/(^|[\s;{}])\/\/[^\n]*/g, '$1')
+  .replace(/\/\*[\s\S]*?\*\//g, '');
 
 /** Lo que un texto CSS declara, y lo que pide con y sin red debajo. */
 function analizar(texto) {
