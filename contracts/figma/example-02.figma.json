@@ -12,14 +12,14 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 636,
-      "omitidas": 398,
+      "variables": 608,
+      "omitidas": 471,
       "fueraDeAlcance": {
-        "primitive": 231,
-        "icon": 18,
+        "primitive": 225,
+        "icon": 17,
         "reset": 26,
         "layout": 12,
-        "theme": 4
+        "theme": 2
       },
       "componentes": 40
     }
@@ -92,15 +92,6 @@
           }
         },
         {
-          "name": "semantic/border/width",
-          "type": "FLOAT",
-          "token": "--semantic-border-width",
-          "valuesByMode": {
-            "light": 1,
-            "dark": 1
-          }
-        },
-        {
           "name": "semantic/border/width/default",
           "type": "FLOAT",
           "token": "--semantic-border-width-default",
@@ -143,6 +134,38 @@
           "valuesByMode": {
             "light": 0.45,
             "dark": 0.8
+          }
+        },
+        {
+          "name": "semantic/code/syntax/lightness",
+          "type": "FLOAT",
+          "token": "--semantic-code-syntax-lightness",
+          "valuesByMode": {
+            "light": 0.82,
+            "dark": 0.82
+          }
+        },
+        {
+          "name": "semantic/color/bg/emphasis",
+          "type": "COLOR",
+          "token": "--semantic-color-bg-emphasis",
+          "valuesByMode": {
+            "light": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#1b1b1b",
+            "dark": "#1b1b1b"
           }
         },
         {
@@ -330,6 +353,121 @@
           }
         },
         {
+          "name": "semantic/color/code/bg",
+          "type": "COLOR",
+          "token": "--semantic-color-code-bg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.104,
+              "g": 0.104,
+              "b": 0.104,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#1b1b1b",
+            "dark": "#1b1b1b"
+          }
+        },
+        {
+          "name": "semantic/color/code/comment",
+          "type": "COLOR",
+          "token": "--semantic-color-code-comment",
+          "valuesByMode": {
+            "light": {
+              "r": 0.6205,
+              "g": 0.6205,
+              "b": 0.6205,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.6205,
+              "g": 0.6205,
+              "b": 0.6205,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#9e9e9e",
+            "dark": "#9e9e9e"
+          }
+        },
+        {
+          "name": "semantic/color/code/fg",
+          "type": "COLOR",
+          "token": "--semantic-color-code-fg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#e8e8e8",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "semantic/color/code/inline/bg",
+          "type": "COLOR",
+          "token": "--semantic-color-code-inline-bg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.9606,
+              "g": 0.9606,
+              "b": 0.9606,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#f5f5f5",
+            "dark": "#333333"
+          }
+        },
+        {
+          "name": "semantic/color/code/inline/border",
+          "type": "COLOR",
+          "token": "--semantic-color-code-inline-border",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8442,
+              "g": 0.8442,
+              "b": 0.8442,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d7d7d7",
+            "dark": "#333333"
+          }
+        },
+        {
           "name": "semantic/color/error",
           "type": "COLOR",
           "token": "--semantic-color-error",
@@ -402,6 +540,29 @@
           "name": "semantic/color/ink/light",
           "type": "COLOR",
           "token": "--semantic-color-ink-light",
+          "valuesByMode": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#ffffff",
+            "dark": "#ffffff"
+          }
+        },
+        {
+          "name": "semantic/color/on/emphasis",
+          "type": "COLOR",
+          "token": "--semantic-color-on-emphasis",
           "valuesByMode": {
             "light": {
               "r": 1,
@@ -1470,12 +1631,12 @@
           }
         },
         {
-          "name": "semantic/outline/width",
+          "name": "semantic/opacity/disabled",
           "type": "FLOAT",
-          "token": "--semantic-outline-width",
+          "token": "--semantic-opacity-disabled",
           "valuesByMode": {
-            "light": 2,
-            "dark": 2
+            "light": 0.5,
+            "dark": 0.5
           }
         },
         {
@@ -2243,21 +2404,21 @@
           "token": "--component-blockquote-bg",
           "valuesByMode": {
             "light": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 1,
+              "g": 0.8976,
+              "b": 0.9684,
               "a": 1
             },
             "dark": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#f5f5f5",
-            "dark": "#f5f5f5"
+            "light": "#ffe5f7",
+            "dark": "#333333"
           }
         },
         {
@@ -2307,21 +2468,21 @@
           "token": "--component-blockquote-color",
           "valuesByMode": {
             "light": {
-              "r": 0.3997,
-              "g": 0.3997,
-              "b": 0.3997,
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
               "a": 1
             },
             "dark": {
-              "r": 0.3997,
-              "g": 0.3997,
-              "b": 0.3997,
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#666666",
-            "dark": "#666666"
+            "light": "#4d4d4d",
+            "dark": "#bebebe"
           }
         },
         {
@@ -4009,21 +4170,21 @@
           "token": "--component-code-inline-bg",
           "valuesByMode": {
             "light": {
-              "r": 0.9085,
-              "g": 0.9085,
-              "b": 0.9085,
+              "r": 0.9606,
+              "g": 0.9606,
+              "b": 0.9606,
               "a": 1
             },
             "dark": {
-              "r": 0.9085,
-              "g": 0.9085,
-              "b": 0.9085,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#e8e8e8",
-            "dark": "#e8e8e8"
+            "light": "#f5f5f5",
+            "dark": "#333333"
           }
         },
         {
@@ -4065,29 +4226,6 @@
           "valuesByMode": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "name": "component/code/inline/color",
-          "type": "COLOR",
-          "token": "--component-code-inline-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c00129",
-            "dark": "#c00129"
           }
         },
         {
@@ -4196,75 +4334,6 @@
           }
         },
         {
-          "name": "component/code/snippet/ko/header/bg",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ko-header-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#fff0f3",
-            "dark": "#fff0f3"
-          }
-        },
-        {
-          "name": "component/code/snippet/ko/header/border/color",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ko-header-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ffb8c9",
-            "dark": "#ffb8c9"
-          }
-        },
-        {
-          "name": "component/code/snippet/ko/label/color",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ko-label-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.5728,
-              "g": 0.0267,
-              "b": 0.127,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5728,
-              "g": 0.0267,
-              "b": 0.127,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#920720",
-            "dark": "#920720"
-          }
-        },
-        {
           "name": "component/code/snippet/ok/border/color",
           "type": "COLOR",
           "token": "--component-code-snippet-ok-border-color",
@@ -4288,75 +4357,6 @@
           }
         },
         {
-          "name": "component/code/snippet/ok/header/bg",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ok-header-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#eafaf0",
-            "dark": "#eafaf0"
-          }
-        },
-        {
-          "name": "component/code/snippet/ok/header/border/color",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ok-header-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#9eecbb",
-            "dark": "#9eecbb"
-          }
-        },
-        {
-          "name": "component/code/snippet/ok/label/color",
-          "type": "COLOR",
-          "token": "--component-code-snippet-ok-label-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1301,
-              "g": 0.3547,
-              "b": 0.195,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1301,
-              "g": 0.3547,
-              "b": 0.195,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#215a32",
-            "dark": "#215a32"
-          }
-        },
-        {
           "name": "component/code/syntax/comment",
           "type": "COLOR",
           "token": "--component-code-syntax-comment",
@@ -4377,15 +4377,6 @@
           "hexByMode": {
             "light": "#9e9e9e",
             "dark": "#9e9e9e"
-          }
-        },
-        {
-          "name": "component/code/syntax/lightness",
-          "type": "FLOAT",
-          "token": "--component-code-syntax-lightness",
-          "valuesByMode": {
-            "light": 0.82,
-            "dark": 0.82
           }
         },
         {
@@ -5250,52 +5241,6 @@
           }
         },
         {
-          "name": "component/feature/icon/atom/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-atom-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#f3f3ff",
-            "dark": "#f3f3ff"
-          }
-        },
-        {
-          "name": "component/feature/icon/atom/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-atom-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#0034ff",
-            "dark": "#0034ff"
-          }
-        },
-        {
           "name": "component/feature/icon/border/color",
           "type": "COLOR",
           "token": "--component-feature-icon-border-color",
@@ -5337,242 +5282,12 @@
           }
         },
         {
-          "name": "component/feature/icon/layer/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-layer-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#faf5e7",
-            "dark": "#faf5e7"
-          }
-        },
-        {
-          "name": "component/feature/icon/layer/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-layer-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#6b4500",
-            "dark": "#6b4500"
-          }
-        },
-        {
-          "name": "component/feature/icon/mixin/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-mixin-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#fff0f3",
-            "dark": "#fff0f3"
-          }
-        },
-        {
-          "name": "component/feature/icon/mixin/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-mixin-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c00129",
-            "dark": "#c00129"
-          }
-        },
-        {
-          "name": "component/feature/icon/molecule/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-molecule-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#f5f3ff",
-            "dark": "#f5f3ff"
-          }
-        },
-        {
-          "name": "component/feature/icon/molecule/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-molecule-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#5d5e9e",
-            "dark": "#5d5e9e"
-          }
-        },
-        {
-          "name": "component/feature/icon/organism/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-organism-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#eafaf0",
-            "dark": "#eafaf0"
-          }
-        },
-        {
-          "name": "component/feature/icon/organism/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-organism-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#2a7840",
-            "dark": "#2a7840"
-          }
-        },
-        {
           "name": "component/feature/icon/size",
           "type": "FLOAT",
           "token": "--component-feature-icon-size",
           "valuesByMode": {
             "light": 48,
             "dark": 48
-          }
-        },
-        {
-          "name": "component/feature/icon/token/bg",
-          "type": "COLOR",
-          "token": "--component-feature-icon-token-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#f3f3ff",
-            "dark": "#f3f3ff"
-          }
-        },
-        {
-          "name": "component/feature/icon/token/color",
-          "type": "COLOR",
-          "token": "--component-feature-icon-token-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#0034ff",
-            "dark": "#0034ff"
           }
         },
         {
@@ -5997,12 +5712,12 @@
           }
         },
         {
-          "name": "component/header/z/index",
+          "name": "component/header/overlay/z/index",
           "type": "FLOAT",
-          "token": "--component-header-z-index",
+          "token": "--component-header-overlay-z-index",
           "valuesByMode": {
-            "light": 5,
-            "dark": 5
+            "light": 300,
+            "dark": 300
           }
         },
         {
@@ -6243,15 +5958,15 @@
               "a": 1
             },
             "dark": {
-              "r": 0.8442,
-              "g": 0.8442,
-              "b": 0.8442,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
             "light": "#d7d7d7",
-            "dark": "#d7d7d7"
+            "dark": "#333333"
           }
         },
         {
@@ -7211,75 +6926,6 @@
           }
         },
         {
-          "name": "component/pill/danger/bg",
-          "type": "COLOR",
-          "token": "--component-pill-danger-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#fff0f3",
-            "dark": "#fff0f3"
-          }
-        },
-        {
-          "name": "component/pill/danger/border/color",
-          "type": "COLOR",
-          "token": "--component-pill-danger-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#ffb8c9",
-            "dark": "#ffb8c9"
-          }
-        },
-        {
-          "name": "component/pill/danger/color",
-          "type": "COLOR",
-          "token": "--component-pill-danger-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c00129",
-            "dark": "#c00129"
-          }
-        },
-        {
           "name": "component/pill/dark/bg",
           "type": "COLOR",
           "token": "--component-pill-dark-bg",
@@ -7436,144 +7082,6 @@
           }
         },
         {
-          "name": "component/pill/primary/bg",
-          "type": "COLOR",
-          "token": "--component-pill-primary-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#f3f3ff",
-            "dark": "#f3f3ff"
-          }
-        },
-        {
-          "name": "component/pill/primary/border/color",
-          "type": "COLOR",
-          "token": "--component-pill-primary-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7831,
-              "g": 0.7975,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7831,
-              "g": 0.7975,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c8cbff",
-            "dark": "#c8cbff"
-          }
-        },
-        {
-          "name": "component/pill/primary/color",
-          "type": "COLOR",
-          "token": "--component-pill-primary-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#0034ff",
-            "dark": "#0034ff"
-          }
-        },
-        {
-          "name": "component/pill/secondary/bg",
-          "type": "COLOR",
-          "token": "--component-pill-secondary-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#f5f3ff",
-            "dark": "#f5f3ff"
-          }
-        },
-        {
-          "name": "component/pill/secondary/border/color",
-          "type": "COLOR",
-          "token": "--component-pill-secondary-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8402,
-              "g": 0.8075,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8402,
-              "g": 0.8075,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d6ceff",
-            "dark": "#d6ceff"
-          }
-        },
-        {
-          "name": "component/pill/secondary/color",
-          "type": "COLOR",
-          "token": "--component-pill-secondary-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#5d5e9e",
-            "dark": "#5d5e9e"
-          }
-        },
-        {
           "name": "component/pill/subtle/bg",
           "type": "COLOR",
           "token": "--component-pill-subtle-bg",
@@ -7640,144 +7148,6 @@
           "hexByMode": {
             "light": "#666666",
             "dark": "#9e9e9e"
-          }
-        },
-        {
-          "name": "component/pill/success/bg",
-          "type": "COLOR",
-          "token": "--component-pill-success-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#eafaf0",
-            "dark": "#eafaf0"
-          }
-        },
-        {
-          "name": "component/pill/success/border/color",
-          "type": "COLOR",
-          "token": "--component-pill-success-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#9eecbb",
-            "dark": "#9eecbb"
-          }
-        },
-        {
-          "name": "component/pill/success/color",
-          "type": "COLOR",
-          "token": "--component-pill-success-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#2a7840",
-            "dark": "#2a7840"
-          }
-        },
-        {
-          "name": "component/pill/warning/bg",
-          "type": "COLOR",
-          "token": "--component-pill-warning-bg",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#faf5e7",
-            "dark": "#faf5e7"
-          }
-        },
-        {
-          "name": "component/pill/warning/border/color",
-          "type": "COLOR",
-          "token": "--component-pill-warning-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.9294,
-              "g": 0.8398,
-              "b": 0.5732,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9294,
-              "g": 0.8398,
-              "b": 0.5732,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#edd692",
-            "dark": "#edd692"
-          }
-        },
-        {
-          "name": "component/pill/warning/color",
-          "type": "COLOR",
-          "token": "--component-pill-warning-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#6b4500",
-            "dark": "#6b4500"
           }
         },
         {
@@ -8667,8 +8037,8 @@
           "type": "FLOAT",
           "token": "--component-sidenav-z-index",
           "valuesByMode": {
-            "light": 500,
-            "dark": 500
+            "light": 400,
+            "dark": 400
           }
         },
         {
@@ -8998,15 +8368,15 @@
               "a": 1
             },
             "dark": {
-              "r": 0.8442,
-              "g": 0.8442,
-              "b": 0.8442,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
             "light": "#d7d7d7",
-            "dark": "#d7d7d7"
+            "dark": "#333333"
           }
         },
         {
@@ -9024,21 +8394,21 @@
           "token": "--component-table-base-state-hover-bg",
           "valuesByMode": {
             "light": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 1,
+              "g": 0.8976,
+              "b": 0.9684,
               "a": 1
             },
             "dark": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#f5f5f5",
-            "dark": "#f5f5f5"
+            "light": "#ffe5f7",
+            "dark": "#333333"
           }
         },
         {
@@ -9047,21 +8417,21 @@
           "token": "--component-table-base-th-bg",
           "valuesByMode": {
             "light": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 1,
+              "g": 0.8976,
+              "b": 0.9684,
               "a": 1
             },
             "dark": {
-              "r": 0.9606,
-              "g": 0.9606,
-              "b": 0.9606,
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#f5f5f5",
-            "dark": "#f5f5f5"
+            "light": "#ffe5f7",
+            "dark": "#333333"
           }
         },
         {
@@ -9076,15 +8446,15 @@
               "a": 1
             },
             "dark": {
-              "r": 0.7432,
-              "g": 0.7432,
-              "b": 0.7432,
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
               "a": 1
             }
           },
           "hexByMode": {
             "light": "#bebebe",
-            "dark": "#bebebe"
+            "dark": "#4d4d4d"
           }
         },
         {
@@ -9102,21 +8472,21 @@
           "token": "--component-table-base-th-color",
           "valuesByMode": {
             "light": {
-              "r": 0.1989,
-              "g": 0.1989,
-              "b": 0.1989,
+              "r": 0.1223,
+              "g": 0.0733,
+              "b": 0.1956,
               "a": 1
             },
             "dark": {
-              "r": 0.1989,
-              "g": 0.1989,
-              "b": 0.1989,
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
               "a": 1
             }
           },
           "hexByMode": {
-            "light": "#333333",
-            "dark": "#333333"
+            "light": "#1f1332",
+            "dark": "#e8e8e8"
           }
         },
         {
@@ -12613,7 +11983,9 @@
         "modificadores": [
           "atom-code--inline"
         ],
-        "estados": []
+        "estados": [
+          ":focus-visible"
+        ]
       },
       "composedOf": [],
       "variantes": {
@@ -12823,12 +12195,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 3,
-        "layer": 2,
-        "mixin": 2,
-        "molecule": 2,
-        "organism": 2,
-        "token": 2
+        "base": 3
       },
       "propiedades": [
         {
@@ -12866,182 +12233,6 @@
           }
         },
         {
-          "token": "--component-feature-icon-layer-bg",
-          "variable": "component/feature/icon/layer/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "layer",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-layer-color",
-          "variable": "component/feature/icon/layer/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "layer",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-mixin-bg",
-          "variable": "component/feature/icon/mixin/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "mixin",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-mixin-color",
-          "variable": "component/feature/icon/mixin/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "mixin",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-molecule-bg",
-          "variable": "component/feature/icon/molecule/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "molecule",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-molecule-color",
-          "variable": "component/feature/icon/molecule/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "molecule",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-organism-bg",
-          "variable": "component/feature/icon/organism/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "organism",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-organism-color",
-          "variable": "component/feature/icon/organism/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "organism",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-feature-icon-size",
           "variable": "component/feature/icon/size",
           "propiedad": "width · height",
@@ -13051,50 +12242,6 @@
           "valores": {
             "light": 48,
             "dark": 48
-          }
-        },
-        {
-          "token": "--component-feature-icon-token-bg",
-          "variable": "component/feature/icon/token/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "token",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-feature-icon-token-color",
-          "variable": "component/feature/icon/token/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "token",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            }
           }
         }
       ],
@@ -13106,12 +12253,60 @@
       ],
       "sinTraducir": [
         {
+          "token": "--component-feature-icon-atom-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-atom-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-feature-icon-border-radius",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-layer-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-layer-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-mixin-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-mixin-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-molecule-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-molecule-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-organism-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-organism-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-feature-icon-shadow",
           "motivo": "sombra: en Figma es un efecto, no una variable"
+        },
+        {
+          "token": "--component-feature-icon-token-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-feature-icon-token-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
         }
       ]
     },
@@ -13671,8 +12866,86 @@
       "composedOf": [],
       "variantes": {},
       "propiedades": [],
-      "sinPropiedad": [],
-      "sinTraducir": []
+      "sinPropiedad": [
+        {
+          "token": "--component-list-ordered-margin-bottom",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        },
+        {
+          "token": "--component-list-ordered-margin-top",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        }
+      ],
+      "sinTraducir": [
+        {
+          "token": "--component-list-icon-filter",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-icon-offset-y",
+          "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        },
+        {
+          "token": "--component-list-icon-size",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-item-margin-top",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-lvl1-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-lvl1-icon",
+          "motivo": "imagen embebida: en Figma es un asset, no una variable"
+        },
+        {
+          "token": "--component-list-lvl2-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-lvl2-icon",
+          "motivo": "imagen embebida: en Figma es un asset, no una variable"
+        },
+        {
+          "token": "--component-list-lvl2-icon-offset-y",
+          "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+        },
+        {
+          "token": "--component-list-lvl2-margin-left",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-lvl3-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-lvl3-margin-left",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-ordered-counter-font-size",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-ordered-counter-line-height",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-ordered-counter-size",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-ordered-gap",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-list-ordered-item-margin-top",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        }
+      ]
     },
     {
       "component": "pagination",
@@ -13893,14 +13166,9 @@
       "composedOf": [],
       "variantes": {
         "base": 4,
-        "danger": 2,
         "dark": 3,
         "neutral": 3,
-        "primary": 3,
-        "secondary": 3,
-        "subtle": 3,
-        "success": 2,
-        "warning": 2
+        "subtle": 3
       },
       "propiedades": [
         {
@@ -13925,50 +13193,6 @@
           "valores": {
             "light": 1,
             "dark": 1
-          }
-        },
-        {
-          "token": "--component-pill-danger-bg",
-          "variable": "component/pill/danger/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "danger",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-danger-color",
-          "variable": "component/pill/danger/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "danger",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7521,
-              "g": 0.0056,
-              "b": 0.1604,
-              "a": 1
-            }
           }
         },
         {
@@ -14128,138 +13352,6 @@
           }
         },
         {
-          "token": "--component-pill-primary-bg",
-          "variable": "component/pill/primary/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "primary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9518,
-              "g": 0.9531,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-primary-border-color",
-          "variable": "component/pill/primary/border/color",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "primary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.7831,
-              "g": 0.7975,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7831,
-              "g": 0.7975,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-primary-color",
-          "variable": "component/pill/primary/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "primary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.2037,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-secondary-bg",
-          "variable": "component/pill/secondary/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "secondary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9607,
-              "g": 0.9541,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-secondary-border-color",
-          "variable": "component/pill/secondary/border/color",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "secondary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.8402,
-              "g": 0.8075,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8402,
-              "g": 0.8075,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-secondary-color",
-          "variable": "component/pill/secondary/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "secondary",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.3639,
-              "g": 0.3688,
-              "b": 0.6187,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-pill-subtle-bg",
           "variable": "component/pill/subtle/bg",
           "propiedad": "fills",
@@ -14324,94 +13416,6 @@
               "a": 1
             }
           }
-        },
-        {
-          "token": "--component-pill-success-bg",
-          "variable": "component/pill/success/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "success",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-success-color",
-          "variable": "component/pill/success/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "success",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1628,
-              "g": 0.4704,
-              "b": 0.2509,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-warning-bg",
-          "variable": "component/pill/warning/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "warning",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.9791,
-              "g": 0.9608,
-              "b": 0.9063,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pill-warning-color",
-          "variable": "component/pill/warning/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "warning",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4194,
-              "g": 0.2706,
-              "b": 0,
-              "a": 1
-            }
-          }
         }
       ],
       "sinPropiedad": [
@@ -14420,7 +13424,56 @@
           "motivo": "sin propiedad equivalente en un nodo de Figma"
         }
       ],
-      "sinTraducir": []
+      "sinTraducir": [
+        {
+          "token": "--component-pill-danger-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-danger-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-primary-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-primary-border-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-primary-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-secondary-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-secondary-border-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-secondary-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-success-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-success-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-warning-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-pill-warning-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        }
+      ]
     },
     {
       "component": "progress",
@@ -16003,13 +15056,15 @@
           "mol-code-snippet--neutral",
           "mol-code-snippet--ok"
         ],
-        "estados": []
+        "estados": [
+          ":focus-visible"
+        ]
       },
       "composedOf": [],
       "variantes": {
         "base": 4,
-        "ko": 4,
-        "ok": 4
+        "ko": 1,
+        "ok": 1
       },
       "propiedades": [
         {
@@ -16103,72 +15158,6 @@
           }
         },
         {
-          "token": "--component-code-snippet-ko-header-bg",
-          "variable": "component/code/snippet/ko/header/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "ko",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.9397,
-              "b": 0.9533,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-code-snippet-ko-header-border-color",
-          "variable": "component/code/snippet/ko/header/border/color",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "ko",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            },
-            "dark": {
-              "r": 1,
-              "g": 0.723,
-              "b": 0.7894,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-code-snippet-ko-label-color",
-          "variable": "component/code/snippet/ko/label/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "ko",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.5728,
-              "g": 0.0267,
-              "b": 0.127,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5728,
-              "g": 0.0267,
-              "b": 0.127,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-code-snippet-ok-border-color",
           "variable": "component/code/snippet/ok/border/color",
           "propiedad": "strokes",
@@ -16189,72 +15178,6 @@
               "a": 1
             }
           }
-        },
-        {
-          "token": "--component-code-snippet-ok-header-bg",
-          "variable": "component/code/snippet/ok/header/bg",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "ok",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.918,
-              "g": 0.9793,
-              "b": 0.9405,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-code-snippet-ok-header-border-color",
-          "variable": "component/code/snippet/ok/header/border/color",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "ok",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.6209,
-              "g": 0.9264,
-              "b": 0.7334,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-code-snippet-ok-label-color",
-          "variable": "component/code/snippet/ok/label/color",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "ok",
-          "estado": "default",
-          "valores": {
-            "light": {
-              "r": 0.1301,
-              "g": 0.3547,
-              "b": 0.195,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1301,
-              "g": 0.3547,
-              "b": 0.195,
-              "a": 1
-            }
-          }
         }
       ],
       "sinPropiedad": [
@@ -16266,6 +15189,30 @@
       "sinTraducir": [
         {
           "token": "--component-code-snippet-border-radius",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ko-header-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ko-header-border-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ko-label-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ok-header-bg",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ok-header-border-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-code-snippet-ok-label-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -17069,6 +16016,10 @@
         {
           "token": "--component-form-field-error-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-form-field-error-shadow-focus",
+          "motivo": "sombra: en Figma es un efecto, no una variable"
         },
         {
           "token": "--component-form-field-icon-position-right",
@@ -18269,10 +17220,23 @@
           }
         }
       ],
-      "sinPropiedad": [],
+      "sinPropiedad": [
+        {
+          "token": "--component-header-overlay-z-index",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        },
+        {
+          "token": "--component-sidenav-z-index",
+          "motivo": "sin propiedad equivalente en un nodo de Figma"
+        }
+      ],
       "sinTraducir": [
         {
           "token": "--component-header-control-radius",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-header-z-index",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -18608,11 +17572,39 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-code-inline-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-code-inline-font-size",
       "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
     },
     {
       "token": "--component-code-snippet-border-radius",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ko-header-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ko-header-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ko-label-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ok-header-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ok-header-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-code-snippet-ok-label-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -18752,12 +17744,60 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-feature-icon-atom-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-atom-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-feature-icon-border-radius",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-layer-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-layer-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-mixin-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-mixin-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-molecule-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-molecule-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-organism-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-organism-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-feature-icon-shadow",
       "motivo": "sombra: en Figma es un efecto, no una variable"
+    },
+    {
+      "token": "--component-feature-icon-token-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-feature-icon-token-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-form-field-border-focus",
@@ -18881,7 +17921,7 @@
     },
     {
       "token": "--component-header-logo-icon",
-      "motivo": "imagen embebida: en Figma es un asset, no una variable"
+      "motivo": "valor no traducible a una variable de Figma"
     },
     {
       "token": "--component-header-logo-icon-size",
@@ -18909,6 +17949,10 @@
     },
     {
       "token": "--component-header-social-icon-size",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-header-z-index",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -19040,6 +18084,14 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
+      "token": "--component-list-icon-filter",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-list-icon-offset-y",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+    },
+    {
       "token": "--component-list-icon-size",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -19052,8 +18104,20 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-list-lvl1-icon",
+      "motivo": "imagen embebida: en Figma es un asset, no una variable"
+    },
+    {
       "token": "--component-list-lvl2-gap",
       "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-list-lvl2-icon",
+      "motivo": "imagen embebida: en Figma es un asset, no una variable"
+    },
+    {
+      "token": "--component-list-lvl2-icon-offset-y",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
     },
     {
       "token": "--component-list-lvl2-margin-left",
@@ -19152,7 +18216,67 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
+      "token": "--component-pill-danger-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-danger-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-danger-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-pill-font-size",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-primary-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-primary-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-primary-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-secondary-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-secondary-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-secondary-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-success-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-success-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-success-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-warning-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-warning-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pill-warning-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -19572,6 +18696,74 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-color-category-1-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-1-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-2-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-2-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-3-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-3-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-4-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-4-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-5-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-5-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-6-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-category-6-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-code-attr",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-code-fn",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-code-inline-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-code-tag",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-code-val",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-link-active",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -19608,6 +18800,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-color-secondary-strong",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-secondary-text",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -19637,6 +18833,66 @@
     },
     {
       "token": "--semantic-color-tertiary-text",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-error-subtle-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-error-subtle-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-error-subtle-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-primary-subtle-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-primary-subtle-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-primary-subtle-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-secondary-subtle-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-secondary-subtle-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-secondary-subtle-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-success-subtle-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-success-subtle-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-success-subtle-fg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-warning-subtle-bg",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-warning-subtle-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-color-tone-warning-subtle-fg",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {

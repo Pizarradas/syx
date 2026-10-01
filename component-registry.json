@@ -310,6 +310,8 @@
       "states": [],
       "composedOf": [],
       "tokens": [
+        "--component-feature-icon-atom-bg",
+        "--component-feature-icon-atom-color",
         "--component-feature-icon-border-color",
         "--component-feature-icon-border-radius",
         "--component-feature-icon-border-style",
@@ -573,7 +575,9 @@
       "name": "list",
       "layer": "atom",
       "file": "scss/atoms/_list.scss",
-      "tokenFiles": [],
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_lists.scss"
+      ],
       "classes": [
         "atom-list"
       ],
@@ -584,7 +588,27 @@
       "elements": [],
       "states": [],
       "composedOf": [],
-      "tokens": [],
+      "tokens": [
+        "--component-list-icon-filter",
+        "--component-list-icon-offset-y",
+        "--component-list-icon-size",
+        "--component-list-item-margin-top",
+        "--component-list-lvl1-gap",
+        "--component-list-lvl1-icon",
+        "--component-list-lvl2-gap",
+        "--component-list-lvl2-icon",
+        "--component-list-lvl2-icon-offset-y",
+        "--component-list-lvl2-margin-left",
+        "--component-list-lvl3-gap",
+        "--component-list-lvl3-margin-left",
+        "--component-list-ordered-counter-font-size",
+        "--component-list-ordered-counter-line-height",
+        "--component-list-ordered-counter-size",
+        "--component-list-ordered-gap",
+        "--component-list-ordered-item-margin-top",
+        "--component-list-ordered-margin-bottom",
+        "--component-list-ordered-margin-top"
+      ],
       "description": "[scope: system-reusable] Unstyled list plus two authored variants: --primary draws its own marker through ::before so the bullet colour follows the theme, --ordered numbers. Use it for real sequences and sets. Do not use it to lay out cards — that is a grid.",
       "usage": "<ul class=\"atom-list atom-list--primary\"><li class=\"atom-list__item\">Primitives</li><li class=\"atom-list__item\">Semantics</li></ul>",
       "a11y": "Native <ul>/<ol> so the item count is announced. The --primary marker is CSS; WebKit drops list semantics when list-style is none, so add role=\"list\" if that matters. No JS."
@@ -1692,7 +1716,10 @@
         "--component-header-control-border-width",
         "--component-header-control-height",
         "--component-header-control-radius",
-        "--component-section-padding-inline"
+        "--component-header-overlay-z-index",
+        "--component-header-z-index",
+        "--component-section-padding-inline",
+        "--component-sidenav-z-index"
       ],
       "description": "[scope: domain-reusable] Mobile-first sticky header with a hamburger that opens a nav drawer over an overlay. The header, drawer and overlay are three sibling elements and all three must be present; the burger names the drawer with aria-controls. js/syx-site-nav.js (no dependencies) toggles [data-nav-open] on <body> and manages focus and inert. The __theme-select and __darkmode controls are documentation-site furniture — a product that ships no theme picker should drop them rather than hide them.",
       "usage": "<header class=\"org-site-header\"><a class=\"org-site-header__brand\" href=\"/\">SYX</a><nav class=\"org-site-header__nav\" aria-label=\"Main navigation\"><a href=\"/docs\">Docs</a><a href=\"/themes\">Themes</a></nav><div class=\"org-site-header__actions\"><button class=\"org-site-header__burger\" type=\"button\" aria-controls=\"site-nav-drawer\" aria-expanded=\"false\" aria-label=\"Open navigation\"><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span><span class=\"org-site-header__burger-line\" aria-hidden=\"true\"></span></button></div></header><div class=\"org-site-nav-overlay\" aria-hidden=\"true\"></div><nav class=\"org-site-nav-drawer\" id=\"site-nav-drawer\" aria-label=\"Mobile navigation\"><a class=\"org-site-nav-drawer__link\" href=\"/docs\">Docs</a><a class=\"org-site-nav-drawer__link\" href=\"/themes\">Themes</a></nav>",

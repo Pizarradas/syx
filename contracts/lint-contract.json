@@ -3,13 +3,13 @@
     "generator": "scripts/syx-validate.js"
   },
   "stats": {
-    "sourceTokens": 1089,
-    "runtimeTokens": 1610,
-    "officialRuntime": 1329,
-    "legacyRuntime": 281,
+    "sourceTokens": 1128,
+    "runtimeTokens": 1425,
+    "officialRuntime": 1363,
+    "legacyRuntime": 62,
     "phantomTokens": 0,
     "undocumentedTokens": 0,
-    "unusedTokens": 99
+    "unusedTokens": 95
   },
   "phantomTokens": [],
   "unusedRegistryTokens": [
@@ -18,7 +18,11 @@
     "--component-breadcrumb-color-active",
     "--component-breadcrumb-color-hover",
     "--component-breadcrumb-font-size",
+    "--component-breadcrumb-gap",
     "--component-breadcrumb-icon-filter",
+    "--component-breadcrumb-icon-margin-right",
+    "--component-breadcrumb-icon-size",
+    "--component-breadcrumb-item-padding-x",
     "--component-button-gap",
     "--component-button-padding-x",
     "--component-button-padding-y",
@@ -38,10 +42,10 @@
     "--component-check-color-checked",
     "--component-check-icon-image",
     "--component-check-icon-size",
-    "--component-feature-icon-atom-bg",
-    "--component-feature-icon-atom-color",
+    "--component-check-line-height",
     "--component-form-field-font-size-sm",
     "--component-form-field-gap",
+    "--component-form-group-margin-bottom",
     "--component-header-bg",
     "--component-header-bg-scrolled",
     "--component-header-height",
@@ -55,7 +59,6 @@
     "--component-header-padding-y",
     "--component-header-social-gap",
     "--component-header-social-icon-size",
-    "--component-header-z-index",
     "--component-hr-style",
     "--component-label-font-size",
     "--component-label-line-height",
@@ -78,6 +81,7 @@
     "--component-pill-success-border-color",
     "--component-pill-warning-border-color",
     "--component-radio-color-checked",
+    "--component-radio-line-height",
     "--component-sidenav-bg",
     "--component-sidenav-link-arrow-size",
     "--component-sidenav-link-font-weight",
@@ -85,1235 +89,35 @@
     "--component-sidenav-link-padding-y",
     "--component-sidenav-shadow",
     "--component-sidenav-width",
-    "--component-sidenav-z-index",
     "--component-switch-icon-off",
     "--component-switch-icon-on",
     "--component-switch-status-color-off",
     "--component-switch-status-color-on",
     "--component-switch-status-icon-filter",
-    "--semantic-border-focus",
     "--semantic-border-radius-2xl",
     "--semantic-border-radius-xl",
-    "--semantic-border-width",
     "--semantic-color-quinary-text",
     "--semantic-color-state-active",
-    "--semantic-color-state-focus",
-    "--semantic-color-text-on-primary",
     "--semantic-filter-black",
     "--semantic-filter-secondary",
     "--semantic-filter-white",
-    "--semantic-outline-width",
     "--semantic-shadow-card",
     "--semantic-shadow-inner",
     "--semantic-shadow-xl",
     "--semantic-shadow-xs",
     "--semantic-space-layout-xs",
     "--semantic-z-index-base",
-    "--semantic-z-index-drawer",
-    "--semantic-z-index-modal",
-    "--semantic-z-index-overlay"
+    "--semantic-z-index-modal"
   ],
   "undocumentedComponentTokens": [],
   "legacyVars": {
-    "--base-measure": {
-      "value": "var(--primitive-space-base)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-space-base",
-      "replacedBy": "--primitive-space-base",
-      "replaceWith": "var(--primitive-space-base)"
-    },
-    "--font-family-1": {
-      "value": "var(--semantic-font-family-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-font-family-body",
-      "replacedBy": "--semantic-font-family-body",
-      "replaceWith": "var(--semantic-font-family-body)"
-    },
-    "--font-family-2": {
-      "value": "var(--semantic-font-family-primary-bold)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-font-family-heading",
-      "replacedBy": "--semantic-font-family-heading",
-      "replaceWith": "var(--semantic-font-family-heading)"
-    },
-    "--font-weight-1": {
-      "value": "var(--font-family-1)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-font-weight-regular",
-      "replacedBy": "--primitive-font-weight-regular",
-      "replaceWith": "var(--primitive-font-weight-regular)"
-    },
-    "--font-weight-2": {
-      "value": "var(--font-family-2)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --primitive-font-weight-bold",
-      "replacedBy": "--primitive-font-weight-bold",
-      "replaceWith": "var(--primitive-font-weight-bold)"
-    },
-    "--font-bold": {
-      "value": "var(--semantic-font-family-primary-bold)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--gap-1": {
-      "value": "var(--primitive-space-1)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--inner-1": {
-      "value": "var(--primitive-space-1)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--font-size-1": {
-      "value": "var(--semantic-font-size-body)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--font-size-2": {
-      "value": "var(--semantic-font-size-h5)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--font-size-3": {
-      "value": "var(--semantic-font-size-h4)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--font-size-4": {
-      "value": "var(--semantic-font-size-h3)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--font-size-5": {
-      "value": "var(--semantic-font-size-h2)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--dimension-1": {
-      "value": "var(--primitive-size-1)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--dimension-2": {
-      "value": "var(--primitive-size-2)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--dimension-3": {
-      "value": "var(--primitive-size-3)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--dimension-4": {
-      "value": "var(--primitive-size-4)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--dimension-5": {
-      "value": "var(--primitive-size-5)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--scope-1": {
-      "value": "var(--font-size-1)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--scope-2": {
-      "value": "var(--font-size-2)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--scope-3": {
-      "value": "var(--font-size-3)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--scope-4": {
-      "value": "var(--font-size-4)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--scope-5": {
-      "value": "var(--font-size-5)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-primary-font-color": {
-      "value": "var(--semantic-color-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-primary-filled-font-color": {
-      "value": "var(--component-button-primary-filled-color)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-secondary-font-color": {
-      "value": "var(--semantic-color-secondary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-secondary-filled-font-color": {
-      "value": "var(--component-button-secondary-filled-color)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-tertiary-font-color": {
-      "value": "var(--semantic-color-tertiary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-tertiary-filled-font-color": {
-      "value": "var(--component-button-tertiary-filled-color)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-quaternary-font-color": {
-      "value": "var(--semantic-color-quaternary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-quaternary-filled-font-color": {
-      "value": "var(--component-button-quaternary-filled-color)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-gap": {
-      "value": "var(--component-breadcrumb-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-item-highlighted-p-x": {
-      "value": "var(--component-breadcrumb-item-padding-x)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-item-icon-margin-r": {
-      "value": "var(--component-breadcrumb-icon-margin-right)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-item-icon-size": {
-      "value": "var(--component-breadcrumb-icon-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-gap": {
-      "value": "var(--component-pagination-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-item-size": {
-      "value": "var(--component-pagination-item-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-icon-size": {
-      "value": "var(--component-pagination-icon-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--check-gap": {
-      "value": "var(--component-check-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--check-line-height": {
-      "value": "var(--component-check-line-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--check-uncheck-size": {
-      "value": "var(--component-check-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--check-checked-icon-size": {
-      "value": "var(--component-check-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--form-font-family": {
-      "value": "var(--component-form-field-font-family)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--form-font-size": {
-      "value": "var(--component-form-field-font-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--form-line-height": {
-      "value": "var(--component-form-field-line-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--form-inner-field": {
-      "value": "var(--component-form-field-padding-x)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--form-height-size": {
-      "value": "var(--component-form-field-min-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--radio-gap": {
-      "value": "var(--component-radio-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--radio-line-height": {
-      "value": "var(--component-radio-line-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--radio-uncheck-size": {
-      "value": "var(--component-radio-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--radio-checked-size": {
-      "value": "var(--component-radio-checked-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-w-size": {
-      "value": "var(--component-switch-width)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-h-size": {
-      "value": "var(--component-switch-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-slider-w-size": {
-      "value": "var(--component-switch-slider-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-slider-h-size": {
-      "value": "var(--component-switch-slider-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-slider-background-color": {
-      "value": "var(--component-switch-slider-bg)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-slider-radius": {
-      "value": "var(--component-switch-slider-radius)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-disabled": {
-      "value": "var(--component-switch-status-disabled-opacity)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--cont-group-form-field-m-b": {
-      "value": "var(--component-form-group-margin-bottom)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--cont-group-form-field-icon-p-r": {
-      "value": "var(--semantic-space-component-xs)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--cont-group-form-field-icon-size": {
-      "value": "var(--semantic-size-icon-sm, var(--primitive-size-1))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-m-t": {
-      "value": "var(--component-list-ordered-margin-top)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-m-b": {
-      "value": "var(--component-list-ordered-margin-bottom)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-gap": {
-      "value": "var(--component-list-ordered-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-item-m-t": {
-      "value": "var(--component-list-ordered-item-margin-top)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-counter-size": {
-      "value": "var(--component-list-ordered-counter-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-counter-font-size": {
-      "value": "var(--component-list-ordered-counter-font-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-ordered-counter-line-height": {
-      "value": "var(--component-list-ordered-counter-line-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl1-gap": {
-      "value": "var(--component-list-lvl1-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-item-m-t": {
-      "value": "var(--component-list-item-margin-top)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-icon-size": {
-      "value": "var(--component-list-icon-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl2-m-l": {
-      "value": "var(--component-list-lvl2-margin-left)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl2-gap": {
-      "value": "var(--component-list-lvl2-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl3-m-l": {
-      "value": "var(--component-list-lvl3-margin-left)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl3-gap": {
-      "value": "var(--component-list-lvl3-gap)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--table-th-font-size": {
-      "value": "var(--component-table-th-font-size)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--table-th-line-height": {
-      "value": "var(--component-table-th-line-height)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--txt-m-b": {
-      "value": "var(--semantic-space-stack-sm)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-color-black": {
-      "value": "invert(0%) sepia(40%) saturate(20%) hue-rotate(356deg) brightness(90%) contrast(104%)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-color-white": {
-      "value": "invert(99%) sepia(1%) saturate(4%) hue-rotate(355deg) brightness(103%) contrast(104%)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-primary": {
-      "value": "brightness(0) saturate(100%) invert(28%) sepia(80%) saturate(1800%) hue-rotate(230deg) brightness(95%) contrast(95%)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-secondary": {
-      "value": "brightness(0) saturate(100%) invert(72%) sepia(60%) saturate(1200%) hue-rotate(5deg) brightness(100%) contrast(95%)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-state-ok": {
-      "value": "var(--primitive-filter-success)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-state-warning": {
-      "value": "var(--primitive-filter-warning)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-state-disabled": {
-      "value": "var(--primitive-filter-disabled)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-color-brown": {
-      "value": "initial",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filter-color-blue": {
-      "value": "initial",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--scope-6": {
-      "value": "calc(5.4 * var(--base-measure))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-primary-text": {
-      "value": "var(--semantic-color-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-primary-filled-text": {
-      "value": "oklch(0.22 0.032 264.665)",
-      "usedInSelectors": [
-        ":root",
-        ":root:not([data-theme=light])",
-        ":root[data-theme=dark]"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-secondary-text": {
-      "value": "var(--semantic-color-secondary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-secondary-filled-text": {
-      "value": "oklch(0.21 0.032 264.665)",
-      "usedInSelectors": [
-        ":root",
-        ":root:not([data-theme=light])",
-        ":root[data-theme=dark]"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-tertiary-text": {
-      "value": "var(--semantic-color-tertiary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-tertiary-filled-text": {
-      "value": "oklch(0.22 0.032 264.665)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-quaternary-text": {
-      "value": "var(--semantic-color-quaternary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-quaternary-filled-text": {
-      "value": "oklch(0.22 0.032 264.665)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-item-icon-p-r": {
-      "value": "calc(-4 * var(--base-measure))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--breadcrumb-item-icon-pic": {
-      "value": "var(--icon-arrow-default)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--check-checked-icon-pic": {
-      "value": "var(--icon-user-interface-tick)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl1-icon-pic": {
-      "value": "var(--lc-icon-chevron-right)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--list-lvl2-icon-pic": {
-      "value": "var(--lc-icon-chevrons-right)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-back-icon-pic": {
-      "value": "var(--icon-arrow-double)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-prev-icon-pic": {
-      "value": "var(--icon-arrow-default)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-next-icon-pic": {
-      "value": "var(--icon-arrow-default)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pagination-forward-icon-pic": {
-      "value": "var(--icon-arrow-double)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-w-size": {
-      "value": "calc(9 * var(--base-measure))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-h-size": {
-      "value": "calc(0 * var(--base-measure))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-icon-size": {
-      "value": "calc(7 * var(--base-measure))",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-icon-ok-pic": {
-      "value": "var(--icon-user-interface-tick)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-icon-ko-pic": {
-      "value": "var(--icon-user-interface-cancel)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--switch-status-icon-filter": {
-      "value": "var(--filter-primary)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--cont-group-form-field-success-icon-pic": {
-      "value": "var(--icon-user-interface-tick)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--cont-group-form-field-warning-icon-pic": {
-      "value": "var(--icon-user-interface-exclamation-mark)",
-      "usedInSelectors": [
-        ":root"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-primary-bg-hover": {
-      "value": "oklch(0.70 0.204 277.117)",
-      "usedInSelectors": [
-        ":root:not([data-theme=light])",
-        ":root[data-theme=dark]"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--btn-secondary-bg-hover": {
-      "value": "oklch(0.88 0.115 95.746)",
-      "usedInSelectors": [
-        ":root:not([data-theme=light])",
-        ":root[data-theme=dark]"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--facebook-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--facebook-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--github-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--github-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--instagram-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--instagram-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--linkedin-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--linkedin-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--pinterest-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--pinterest-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--snapchat-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--snapchat-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--twitter-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--twitter-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--whatsapp-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--whatsapp-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--youtube-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".syx-icon--youtube-primary:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--primary": {
-      "value": "not(.atom-btn--filled) {",
-      "usedInSelectors": [
-        ".atom-btn--primary:not(.atom-btn--filled)",
-        ".atom-link--primary:after",
-        ".atom-link--primary:hover",
-        ".atom-link--primary:dir(rtl):hover",
-        ".atom-link--primary:active"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--secondary": {
-      "value": "not(.atom-btn--filled) {",
-      "usedInSelectors": [
-        ".atom-btn--secondary:not(.atom-btn--filled)"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--tertiary": {
-      "value": "not(.atom-btn--filled) {",
-      "usedInSelectors": [
-        ".atom-btn--tertiary:not(.atom-btn--filled)"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--quaternary": {
-      "value": "not(.atom-btn--filled) {",
-      "usedInSelectors": [
-        ".atom-btn--quaternary:not(.atom-btn--filled)"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--danger": {
-      "value": "not(.atom-btn--filled) {",
-      "usedInSelectors": [
-        ".atom-btn--danger:not(.atom-btn--filled)"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--filled": {
-      "value": "disabled {",
-      "usedInSelectors": [
-        ".atom-btn.atom-btn--filled:disabled"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--arrow-default": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--arrow-default:before",
-        ".atom-icon--arrow-default:dir(rtl)::before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--arrow-double": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--arrow-double:before",
-        ".atom-icon--arrow-double:dir(rtl)::before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--content-bars": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--content-bars:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--rrss-email": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--rrss-email:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--ui-cancel": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--ui-cancel:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--ui-exclamation": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--ui-exclamation:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--ui-home": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--ui-home:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--ui-tick": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--ui-tick:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--color-primary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-primary:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-primary",
-      "replacedBy": "--semantic-color-primary",
-      "replaceWith": "var(--semantic-color-primary)"
-    },
-    "--color-secondary": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-secondary:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-secondary",
-      "replacedBy": "--semantic-color-secondary",
-      "replaceWith": "var(--semantic-color-secondary)"
-    },
-    "--color-state-ok": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-state-ok:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-success",
-      "replacedBy": "--semantic-color-state-success",
-      "replaceWith": "var(--semantic-color-state-success)"
-    },
-    "--color-state-ko": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-state-ko:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-error",
-      "replacedBy": "--semantic-color-state-error",
-      "replaceWith": "var(--semantic-color-state-error)"
-    },
-    "--color-state-warning": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-state-warning:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate → --semantic-color-state-warning",
-      "replacedBy": "--semantic-color-state-warning",
-      "replaceWith": "var(--semantic-color-state-warning)"
-    },
-    "--color-white": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-white:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
-    "--color-black": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--color-black:before"
-      ],
-      "status": "migrate",
-      "recommendation": "Migrate — has a likely SYX semantic equivalent. Review manually to confirm replacement."
-    },
     "--lc-icon-home": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-home' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8' /%3E%3Cpath d='M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z' /%3E%3C/svg%3E\")",
       "usedInSelectors": [
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-menu": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-menu' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M4 5h16' /%3E%3Cpath d='M4 12h16' /%3E%3Cpath d='M4 19h16' /%3E%3C/svg%3E\")",
@@ -1321,7 +125,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-x": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-x' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M18 6 6 18' /%3E%3Cpath d='m6 6 12 12' /%3E%3C/svg%3E\")",
@@ -1329,7 +133,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-layers": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z' /%3E%3Cpath d='M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12' /%3E%3Cpath d='M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17' /%3E%3C/svg%3E\")",
@@ -1337,7 +141,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevron-right": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m9 18 6-6-6-6' /%3E%3C/svg%3E\")",
@@ -1345,7 +149,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevron-left": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-left' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m15 18-6-6 6-6' /%3E%3C/svg%3E\")",
@@ -1353,7 +157,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevron-down": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-down' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m6 9 6 6 6-6' /%3E%3C/svg%3E\")",
@@ -1361,7 +165,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevron-up": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-chevron-up' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m18 15-6-6-6 6' /%3E%3C/svg%3E\")",
@@ -1369,7 +173,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevrons-right": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='13 17 18 12 13 7'/%3E%3Cpolyline points='6 17 11 12 6 7'/%3E%3C/svg%3E\")",
@@ -1377,7 +181,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevrons-down": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m7 6 5 5 5-5' /%3E%3Cpath d='m7 13 5 5 5-5' /%3E%3C/svg%3E\")",
@@ -1385,7 +189,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-chevrons-left": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='11 17 6 12 11 7'/%3E%3Cpolyline points='18 17 13 12 18 7'/%3E%3C/svg%3E\")",
@@ -1393,7 +197,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-arrow-right": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3Cpath d='m12 5 7 7-7 7' /%3E%3C/svg%3E\")",
@@ -1401,7 +205,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-arrow-left": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-left' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m12 19-7-7 7-7' /%3E%3Cpath d='M19 12H5' /%3E%3C/svg%3E\")",
@@ -1409,7 +213,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-search": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-search' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m21 21-4.34-4.34' /%3E%3Ccircle cx='11' cy='11' r='8' /%3E%3C/svg%3E\")",
@@ -1417,7 +221,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-plus": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-plus' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3Cpath d='M12 5v14' /%3E%3C/svg%3E\")",
@@ -1425,7 +229,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-minus": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-minus' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M5 12h14' /%3E%3C/svg%3E\")",
@@ -1433,7 +237,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-check": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20 6 9 17l-5-5' /%3E%3C/svg%3E\")",
@@ -1441,7 +245,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-trash": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-trash-2' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 11v6' /%3E%3Cpath d='M14 11v6' /%3E%3Cpath d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6' /%3E%3Cpath d='M3 6h18' /%3E%3Cpath d='M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2' /%3E%3C/svg%3E\")",
@@ -1449,7 +253,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-pencil": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-pencil' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z' /%3E%3Cpath d='m15 5 4 4' /%3E%3C/svg%3E\")",
@@ -1457,7 +261,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-download": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-download' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 15V3' /%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' /%3E%3Cpath d='m7 10 5 5 5-5' /%3E%3C/svg%3E\")",
@@ -1465,7 +269,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-copy": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-copy' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2' /%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' /%3E%3C/svg%3E\")",
@@ -1473,7 +277,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-external-link": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-external-link' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 3h6v6' /%3E%3Cpath d='M10 14 21 3' /%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6' /%3E%3C/svg%3E\")",
@@ -1481,7 +285,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-filter": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-filter' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z' /%3E%3C/svg%3E\")",
@@ -1489,7 +293,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-rocket": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5' /%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09' /%3E%3Cpath d='M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z' /%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05' /%3E%3C/svg%3E\")",
@@ -1497,7 +301,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-terminal": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 19h8' /%3E%3Cpath d='m4 17 6-6-6-6' /%3E%3C/svg%3E\")",
@@ -1505,7 +309,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-book-open": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 7v14' /%3E%3Cpath d='M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z' /%3E%3C/svg%3E\")",
@@ -1513,7 +317,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-github": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' /%3E%3Cpath d='M9 18c-4.51 2-5-2-7-2' /%3E%3C/svg%3E\")",
@@ -1521,7 +325,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-zap": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z' /%3E%3C/svg%3E\")",
@@ -1529,7 +333,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-info": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-info' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='M12 16v-4' /%3E%3Cpath d='M12 8h.01' /%3E%3C/svg%3E\")",
@@ -1537,7 +341,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-warning": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-alert-triangle' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3' /%3E%3Cpath d='M12 9v4' /%3E%3Cpath d='M12 17h.01' /%3E%3C/svg%3E\")",
@@ -1545,7 +349,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-success": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
@@ -1553,7 +357,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-error": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-x' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m15 9-6 6' /%3E%3Cpath d='m9 9 6 6' /%3E%3C/svg%3E\")",
@@ -1561,7 +365,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-shield-check": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
@@ -1569,7 +373,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-moon": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401' /%3E%3C/svg%3E\")",
@@ -1577,7 +381,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-sun": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='4' /%3E%3Cpath d='M12 2v2' /%3E%3Cpath d='M12 20v2' /%3E%3Cpath d='m4.93 4.93 1.41 1.41' /%3E%3Cpath d='m17.66 17.66 1.41 1.41' /%3E%3Cpath d='M2 12h2' /%3E%3Cpath d='M20 12h2' /%3E%3Cpath d='m6.34 17.66-1.41 1.41' /%3E%3Cpath d='m19.07 4.93-1.41 1.41' /%3E%3C/svg%3E\")",
@@ -1585,7 +389,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-palette": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z' /%3E%3Ccircle cx='13.5' cy='6.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='17.5' cy='10.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='6.5' cy='12.5' r='.5' fill='currentColor' /%3E%3Ccircle cx='8.5' cy='7.5' r='.5' fill='currentColor' /%3E%3C/svg%3E\")",
@@ -1593,7 +397,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-user": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-user' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2' /%3E%3Ccircle cx='12' cy='7' r='4' /%3E%3C/svg%3E\")",
@@ -1601,7 +405,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-settings": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-settings' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915' /%3E%3Ccircle cx='12' cy='12' r='3' /%3E%3C/svg%3E\")",
@@ -1609,7 +413,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-mail": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-mail' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7' /%3E%3Crect x='2' y='4' width='20' height='16' rx='2' /%3E%3C/svg%3E\")",
@@ -1617,7 +421,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-database": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cellipse cx='12' cy='5' rx='9' ry='3' /%3E%3Cpath d='M3 5V19A9 3 0 0 0 21 19V5' /%3E%3Cpath d='M3 12A9 3 0 0 0 21 12' /%3E%3C/svg%3E\")",
@@ -1625,7 +429,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-link": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71' /%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' /%3E%3C/svg%3E\")",
@@ -1633,7 +437,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-component": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z' /%3E%3Cpath d='m3.3 7 8.7 5 8.7-5' /%3E%3Cpath d='M12 22V12' /%3E%3C/svg%3E\")",
@@ -1641,7 +445,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-box": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z' /%3E%3Cpath d='m3.3 7 8.7 5 8.7-5' /%3E%3Cpath d='M12 22V12' /%3E%3C/svg%3E\")",
@@ -1649,7 +453,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-coins": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M13.744 17.736a6 6 0 1 1-7.48-7.48' /%3E%3Cpath d='M15 6h1v4' /%3E%3Cpath d='m6.134 14.768.866-.5 2 3.464' /%3E%3Ccircle cx='16' cy='8' r='6' /%3E%3C/svg%3E\")",
@@ -1657,7 +461,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-atom": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='1' /%3E%3Cpath d='M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z' /%3E%3Cpath d='M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z' /%3E%3C/svg%3E\")",
@@ -1665,7 +469,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-package": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z' /%3E%3Cpath d='M12 22V12' /%3E%3Cpolyline points='3.29 7 12 12 20.71 7' /%3E%3Cpath d='m7.5 4.27 9 5.15' /%3E%3C/svg%3E\")",
@@ -1673,7 +477,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-file-text": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z' /%3E%3Cpath d='M14 2v5a1 1 0 0 0 1 1h5' /%3E%3Cpath d='M10 9H8' /%3E%3Cpath d='M16 13H8' /%3E%3Cpath d='M16 17H8' /%3E%3C/svg%3E\")",
@@ -1681,7 +485,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-git-branch": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M15 6a9 9 0 0 0-9 9V3' /%3E%3Ccircle cx='18' cy='6' r='3' /%3E%3Ccircle cx='6' cy='18' r='3' /%3E%3C/svg%3E\")",
@@ -1689,7 +493,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-bot": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M12 8V4H8' /%3E%3Crect width='16' height='12' x='4' y='8' rx='2' /%3E%3Cpath d='M2 14h2' /%3E%3Cpath d='M20 14h2' /%3E%3Cpath d='M15 13v2' /%3E%3Cpath d='M9 13v2' /%3E%3C/svg%3E\")",
@@ -1697,7 +501,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-activity": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2' /%3E%3C/svg%3E\")",
@@ -1705,7 +509,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-check-circle": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-circle-check' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m9 12 2 2 4-4' /%3E%3C/svg%3E\")",
@@ -1713,7 +517,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-pie-chart": {
       "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z' /%3E%3Cpath d='M21.21 15.89A10 10 0 1 1 8 2.83' /%3E%3C/svg%3E\")",
@@ -1721,7 +525,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-layout": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-layout' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Crect width='18' height='18' x='3' y='3' rx='2' /%3E%3Cpath d='M3 9h18' /%3E%3Cpath d='M9 21V9' /%3E%3C/svg%3E\")",
@@ -1729,7 +533,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-code": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-code' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m16 18 6-6-6-6' /%3E%3Cpath d='m8 6-6 6 6 6' /%3E%3C/svg%3E\")",
@@ -1737,7 +541,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-corner-down-right": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-corner-down-right' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m15 10 5 5-5 5' /%3E%3Cpath d='M4 4v7a4 4 0 0 0 4 4h12' /%3E%3C/svg%3E\")",
@@ -1745,7 +549,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-arrow-up": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-arrow-up' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m5 12 7-7 7 7' /%3E%3Cpath d='M12 19V5' /%3E%3C/svg%3E\")",
@@ -1753,7 +557,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-users": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-users' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' /%3E%3Cpath d='M16 3.128a4 4 0 0 1 0 7.744' /%3E%3Cpath d='M22 21v-2a4 4 0 0 0-3-3.87' /%3E%3Ccircle cx='9' cy='7' r='4' /%3E%3C/svg%3E\")",
@@ -1761,7 +565,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-award": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-award' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526' /%3E%3Ccircle cx='12' cy='8' r='6' /%3E%3C/svg%3E\")",
@@ -1769,7 +573,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-git-compare": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-git-compare' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='18' cy='18' r='3' /%3E%3Ccircle cx='6' cy='6' r='3' /%3E%3Cpath d='M13 6h3a2 2 0 0 1 2 2v7' /%3E%3Cpath d='M11 18H8a2 2 0 0 1-2-2V9' /%3E%3C/svg%3E\")",
@@ -1777,7 +581,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-briefcase": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-briefcase' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Cpath d='M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16' /%3E%3Crect width='20' height='14' x='2' y='6' rx='2' /%3E%3C/svg%3E\")",
@@ -1785,7 +589,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--lc-icon-x-circle": {
       "value": "url(\"data:image/svg+xml,%3Csvg class='lucide lucide-x-circle' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' %3E%3Ccircle cx='12' cy='12' r='10' /%3E%3Cpath d='m15 9-6 6' /%3E%3Cpath d='m9 9 6 6' /%3E%3C/svg%3E\")",
@@ -1793,573 +597,7 @@
         ":root"
       ],
       "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-home": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-home:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-menu": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-menu:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-x": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-x:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-layers": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-layers:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevron-right": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevron-right:before",
-        ".atom-icon--lc-chevron-right:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevron-left": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevron-left:before",
-        ".atom-icon--lc-chevron-left:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevron-down": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevron-down:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevron-up": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevron-up:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevrons-right": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevrons-right:before",
-        ".atom-icon--lc-chevrons-right:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevrons-down": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevrons-down:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-chevrons-left": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-chevrons-left:before",
-        ".atom-icon--lc-chevrons-left:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-arrow-right": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-arrow-right:before",
-        ".atom-icon--lc-arrow-right:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-arrow-left": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-arrow-left:before",
-        ".atom-icon--lc-arrow-left:dir(rtl)::before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-search": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-search:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-plus": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-plus:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-minus": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-minus:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-check": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-check:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-trash": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-trash:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-pencil": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-pencil:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-download": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-download:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-copy": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-copy:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-external-link": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-external-link:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-filter": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-filter:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-rocket": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-rocket:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-terminal": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-terminal:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-book-open": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-book-open:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-github": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-github:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-zap": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-zap:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-info": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-info:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-warning": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-warning:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-success": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-success:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-error": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-error:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-shield-check": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-shield-check:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-moon": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-moon:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-sun": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-sun:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-palette": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-palette:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-user": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-user:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-settings": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-settings:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-mail": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-mail:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-database": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-database:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-link": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-link:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-component": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-component:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-box": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-box:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-coins": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-coins:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-atom": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-atom:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-package": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-package:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-file-text": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-file-text:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-git-branch": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-git-branch:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-bot": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-bot:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-activity": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-activity:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-check-circle": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-check-circle:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-pie-chart": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-pie-chart:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-layout": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-layout:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-code": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-code:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-corner-down-right": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-corner-down-right:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-arrow-up": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-arrow-up:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-users": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-users:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-award": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-award:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-git-compare": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-git-compare:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-briefcase": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-briefcase:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--lc-x-circle": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".atom-icon--lc-x-circle:before"
-      ],
-      "status": "keep",
-      "recommendation": "Keep — external dependency or intentional local contract."
-    },
-    "--resp": {
-      "value": "focus-visible {",
-      "usedInSelectors": [
-        ".atom-table--resp:focus-visible"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--sm": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".atom-spinner--sm::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--lg": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".atom-spinner--lg::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--text": {
-      "value": "last-child:not(:only-child) {",
-      "usedInSelectors": [
-        ".atom-skeleton--text:last-child:not(:only-child)"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--has-select": {
-      "value": "not([class*=\"--is-\"]):before {",
-      "usedInSelectors": [
-        ".mol-form-field--has-select:not([class*=\"--is-\"]):before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--is-error": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".mol-form-field--is-error:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--is-success": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".mol-form-field--is-success:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--is-warning": {
-      "value": "before {",
-      "usedInSelectors": [
-        ".mol-form-field--is-warning:before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--elevated": {
-      "value": "has(.mol-card__link):hover {",
-      "usedInSelectors": [
-        ".mol-card--elevated:has(.mol-card__link):hover"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+      "recommendation": "Keep — Iconos de Lucide como data URI, generados por scripts/build-lucide-tokens.js: una biblioteca externa con su propio prefijo, que los componentes leen como asset (R11 los admite como --icon-*)."
     },
     "--_layer-hue": {
       "value": "var(--component-token-primitive-accent)",
@@ -2369,40 +607,8 @@
         ".org-home-tokens__layer--semantic",
         ".org-home-tokens__layer--component"
       ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--primitive": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".org-home-tokens__layer--primitive::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--theme": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".org-home-tokens__layer--theme::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--semantic": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".org-home-tokens__layer--semantic::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
-    },
-    "--component": {
-      "value": ":before {",
-      "usedInSelectors": [
-        ".org-home-tokens__layer--component::before"
-      ],
-      "status": "kill",
-      "recommendation": "Remove — no known SYX equivalent. Verify no active usage."
+      "status": "keep",
+      "recommendation": "Keep — Prefijo de variable LOCAL de un componente (convención CSS): no sale de su selector ni es API. Hoy, --_layer-hue en las capas de la home (scss/site/_home-tokens.scss)."
     }
   },
   "scssViolations": {
@@ -2412,13 +618,14 @@
     "R04_rawPosition": 0,
     "R09_unknownMixin": 0,
     "R10_exceptionHygiene": 0,
+    "R11_componentTokenSource": 0,
     "parseErrors": 0
   },
   "inlineExceptions": [
     {
       "rule": "R03",
       "file": "scss/base/_reset.scss",
-      "line": 337,
+      "line": 338,
       "why": "no es movimiento, es el truco que retrasa 600000s el fondo de autofill de Chrome; el mixin lo apagaría con reduced-motion y volvería el destello"
     },
     {
