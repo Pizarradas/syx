@@ -54,14 +54,11 @@ jobs:
         with:
           node-version: '20'
 
-      # Las páginas cargan dist/site/site.min.css y dist/site/site.<tema>.tokens.min.css
-      # (auditoría 2026-10, acción 12). dist/ no se versiona: `npm ci` corre
-      # `prepare`, que es scripts/build-dist.js, y lo genera desde el SCSS de
-      # este mismo commit. Sin este paso el sitio se publicaría sin estilos.
-      - name: Dependencias y hojas del sitio (dist/)
-        run: |
-          npm ci --no-fund --no-audit
-          test -s dist/site/site.min.css
+      # Las páginas cargan css/styles-theme-<tema>.css y css/setup-builder.css,
+      # compilados desde scss/ y versionados (check-limpio lo garantiza). No
+      # dependen de dist/, que es solo para el paquete npm.
+      - name: Las hojas del sitio están en css/
+        run: test -s css/styles-theme-syx-sketch.css && test -s css/setup-builder.css
 
       - name: Dependencias de los tres Storybooks
         run: |

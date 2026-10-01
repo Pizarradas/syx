@@ -120,8 +120,8 @@ if (!bandera('--solo-paginas')) {
 // ─── Páginas del sitio ───────────────────────────────────────────────────────
 
 if (!bandera('--solo-componentes')) {
-  if (!fs.existsSync(path.join(ROOT, 'dist', 'site', 'site.min.css'))) {
-    console.error('❌ No hay dist/site/: npm run build (o build:dist) en la raíz.');
+  if (!fs.existsSync(path.join(ROOT, 'css', 'styles-theme-syx-sketch.css'))) {
+    console.error('❌ No hay css/styles-theme-*.css: npm run build:css en la raíz (o compila scss/ con Prepros).');
     process.exit(2);
   }
   console.log(`\n── REFLOW A ${ANCHO} PX · páginas del sitio ──\n`);

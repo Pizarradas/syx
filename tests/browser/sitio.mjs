@@ -12,7 +12,7 @@
  *
  *   AXE    WCAG 2.2 A y AA, con los incompletos medidos en píxeles igual que
  *          run.mjs, a 375 y a 1280 px, en claro y en oscuro, con el CSS de
- *          dist/site que cargan las páginas y su tema por defecto. Las
+ *          css/ que cargan las páginas (compilado desde scss/) y su tema por defecto. Las
  *          excepciones van en axe-excepciones.json con `componente` = la
  *          página ("docs.html") y `temas` = "<ancho>/<modo>" ("375/light";
  *          con el cajón abierto, "cajon-375/light").
@@ -21,7 +21,7 @@
  *          dentro, y ese foco se ve; Tab no sale de él; Escape lo cierra y
  *          devuelve el foco a la hamburguesa. Y axe con el cajón abierto.
  *
- * Uso (desde la raíz, con dist/ generado: npm run build):
+ * Uso (desde la raíz, con css/ compilado):
  *   node tests/browser/sitio.mjs [--paginas home,docs] [--solo-axe | --solo-cajon] [--proponer]
  */
 
@@ -33,8 +33,8 @@ import { cambioDeFoco, dosFotogramas } from './lib/pixeles.mjs';
 
 const ANCHOS = [375, 1280];
 const paginas = (arg('--paginas') || PAGINAS.join(',')).split(',').filter(Boolean);
-if (!fs.existsSync(path.join(ROOT, 'dist', 'site', 'site.min.css'))) {
-  console.error('❌ No hay dist/site/: npm run build (o build:dist) en la raíz.');
+if (!fs.existsSync(path.join(ROOT, 'css', 'styles-theme-syx-sketch.css'))) {
+  console.error('❌ No hay css/styles-theme-*.css: npm run build:css en la raíz (o compila scss/ con Prepros).');
   process.exit(2);
 }
 let excepciones;

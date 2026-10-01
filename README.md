@@ -267,14 +267,12 @@ npm run check          # every guard
 ```
 
 `css/styles-theme-<theme>.css` is the *showroom* sheet: the system **plus** the site
-layer (`scss/site/`), unminified. It is versioned because half the guards measure against
-it, but the SYX pages no longer load it: they load `dist/site/site.min.css` (system + site
-layer, shared) and `dist/site/site.<theme>.tokens.min.css` (the theme, pruned against the
-pages' own rules and markup), and the theme switcher swaps only the second one.
-`theme-builder.html` loads `dist/site/site.builder.min.css`, minified but **not** pruned: the
-editor rewrites primitives and semantics from JavaScript. `dist/` is not versioned —
-`npm install` builds it, and the Pages workflow runs `npm ci` before publishing. `dist/site/`
-does not travel in the package. An app should use `dist/` — through the
+layer (`scss/site/`), compiled from `scss/styles-theme-<theme>.scss`. It is what the SYX
+pages load (the theme switcher swaps it), and `theme-builder.html` loads
+`css/setup-builder.css`, compiled from `scss/setup-builder.scss`. Every sheet the pages
+link comes from an entry point in `scss/`, so Prepros (or `npm run build:css`) is all it
+takes to see them styled. `dist/` is built by Node only for the npm package (minified,
+pruned, split per context) and is not versioned. An app should use `dist/` — through the
 exports — and never `css/`.
 To compile your own bundle from source, see [`scss/GETTING-STARTED.md`](scss/GETTING-STARTED.md).
 
