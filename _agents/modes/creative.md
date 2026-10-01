@@ -173,6 +173,26 @@ Always include:
 4. **Promotion path** (if relevant): what would need to happen to bring this into the SYX production system.
 5. **A `## Why` block**, and in this mode its first line is always the **art direction**: which character the build commits to, and which observable properties carry it — contrast, typographic scale, spacing rhythm, accent strength, how many things compete for attention at once. Format and threshold in `_agents/decision-record.md`.
 
+Structured as:
+
+```
+## Concept
+[the concept statement — what effect, and why these techniques]
+
+## Build
+[the self-contained HTML + CSS (or JS), with its prefers-reduced-motion alternative]
+
+## Technique Log
+[every non-obvious technique, one line each — the comment block below, or this section]
+
+## Promotion Path
+[what it takes to bring this into SYX — the Motion Spec for UI, the tokens for TOKEN —
+ or «none: this stays a standalone file»]
+
+## Why
+[the art direction first, then every technique whose cost is not obvious]
+```
+
 ```html
 <!--
   🎨 SYX CREATIVE — experimental build
