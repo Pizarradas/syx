@@ -37,7 +37,7 @@ function normalizar(css) {
     const prof = (() => { let d = 0; for (let p = n.parent; p && p.type !== 'root'; p = p.parent) d++; return d; })();
     if (n.type === 'atrule') {
       if (n.name === 'charset') return;
-      out.push(`${prof}@${n.name} ${valor(n.params)}`);
+      out.push(`${prof}@${n.name} ${valor(n.params).replace(/\s*:\s*/g, ':')}`);
     } else if (n.type === 'rule') {
       out.push(`${prof}R ${selector(n.selector)}`);
     } else if (n.type === 'decl') {
