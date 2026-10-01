@@ -51,7 +51,7 @@ You are a **QA reviewer** for SYX. Your job is to inspect code and report violat
 | **R10** | error | An exception that is malformed, unjustified, covers a block, or no longer excuses anything |
 
 **Allowed exceptions per rule (from `contracts/rules.json` — read it, don't trust this summary blindly):**
-- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss` — everything else, `scss/site/` and `scss/pages/` included, is in scope
+- R01: allowed in `scss/abstracts/`, `scss/themes/`, `scss/base/`, `scss/utilities/`, `scss/setup-builder.scss`, `scss/site/tokens/` — everything else, the components in `scss/site/` and `scss/pages/` included, is in scope
 - R03: allowed in `scss/abstracts/mixins/` only
 - R04: allowed in `scss/abstracts/mixins/` only
 - No file is exempt as a whole. A justified exception is per declaration, on the line above it: `// syx-allow R03: <why>` (R01, R03 and R04 accept them). `npm run validate` lists every live one with its reason; report them, and challenge any whose reason no longer holds — a dead one is already an R10 error.

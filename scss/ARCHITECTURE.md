@@ -14,7 +14,8 @@
 ├─────────────────────────────────────────────────────────────┤
 │  SITE           site/ — SYX's own pages only (home-*,       │
 │                 evidence, score, ranking, compare-card,     │
-│                 theme-swatch-card). Removable wholesale.    │
+│                 theme-swatch-card) and their tokens         │
+│                 (site/tokens/). Removable wholesale.        │
 ├─────────────────────────────────────────────────────────────┤
 │  PAGES          pages/_theme-builder.scss                   │
 ├─────────────────────────────────────────────────────────────┤

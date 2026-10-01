@@ -15,8 +15,15 @@
 // sin este @use, Sass los resuelve como indefinidos (un mixin se
 // resuelve en el fichero donde se escribe, no en el que lo incluye).
 @use 'index' as *;
+@use 'tokens' as *;
 
 @mixin syx-bundle-site($theme: null) {
+  // TOKENS DEL SITIO — su propio :root (defaults + ajustes del tema).
+  // Van aquí y no en abstracts/tokens/ para que ningún bundle del sistema
+  // los cargue: ver scss/site/tokens/_defaults.scss.
+  // ================================================
+  @include site-tokens($theme);
+
   // ATOMS (why-syx.html)
   // ================================================
   @include atom-evidence($theme);

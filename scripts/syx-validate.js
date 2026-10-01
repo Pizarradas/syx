@@ -183,6 +183,25 @@ function tokensPrivadosDeTema() {
   return out;
 }
 
+// Tokens de la capa del sitio (scss/site/tokens/): hero, CTA, secciones,
+// puntuación… de las páginas de SYX. Desde la auditoría de octubre de 2026
+// (acción 12) no viven en abstracts/ ni viajan en los bundles del sistema, así
+// que tampoco están en tokens.json, que es el registro del SISTEMA. El CSS de
+// referencia es la hoja showroom, que sí lleva la capa del sitio: se cuentan
+// aparte, como los privados de tema, y no como componentes sin registrar.
+function tokensDelSitio() {
+  const { leerDeclaraciones } = require('./lib/scss-tokens');
+  const dir = path.join(ROOT, 'scss', 'site', 'tokens');
+  const out = new Set();
+  if (!fs.existsSync(dir)) return out;
+  for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.scss'))) {
+    for (const d of leerDeclaraciones(fs.readFileSync(path.join(dir, f), 'utf8'))) {
+      if (isOfficial(d.name)) out.add(d.name);
+    }
+  }
+  return out;
+}
+
 function crossCheck(sourceTokens, runtimeData) {
   const runtimeKeys = new Set(Object.keys(runtimeData.tokens));
   const sourceKeys  = new Set(Object.keys(sourceTokens));
@@ -205,11 +224,13 @@ function crossCheck(sourceTokens, runtimeData) {
   // cuentan aparte para que no se confundan con un token común sin registrar,
   // que es lo que R05 vigila.
   const privados = tokensPrivadosDeTema();
+  const delSitio = tokensDelSitio();
   const fuera = [...runtimeKeys].filter(k => !sourceKeys.has(k) && isOfficial(k));
-  const undocumented = fuera.filter(k => !privados.has(k));
-  const themePrivate = fuera.filter(k => privados.has(k));
+  const undocumented = fuera.filter(k => !privados.has(k) && !delSitio.has(k));
+  const themePrivate = fuera.filter(k => privados.has(k) && !delSitio.has(k));
+  const site = fuera.filter(k => delSitio.has(k));
 
-  return { phantoms, undocumented, themePrivate };
+  return { phantoms, undocumented, themePrivate, site };
 }
 
 // ─── Module 4: Catalog Legacy Vars ───────────────────────────────────────────
@@ -488,6 +509,9 @@ function printReport(runtimeData, crossCheck, legacyVars, scssViolations) {
   }
   if (crossCheck.themePrivate && crossCheck.themePrivate.length) {
     console.log(`ℹ️  R05 — ${crossCheck.themePrivate.length} token(s) privados del tema de referencia, fuera de tokens.json por diseño (ver tokens.json _meta.themeContract)`);
+  }
+  if (crossCheck.site && crossCheck.site.length) {
+    console.log(`ℹ️  R05 — ${crossCheck.site.length} token(s) de la capa del sitio (scss/site/tokens/), fuera de tokens.json por diseño: no son del sistema`);
   }
 
   // Legacy vars

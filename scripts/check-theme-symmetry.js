@@ -104,6 +104,33 @@ function main() {
     }
   }
 
+  // La capa del sitio tiene sus propios ajustes por tema (scss/site/tokens/
+  // _<tema>.scss), con la misma forma: un mixin de claro y otro de oscuro.
+  // Vivían dentro del _theme.scss y este guardián los veía; al salir de ahí
+  // (auditoría 2026-10, acción 12) se siguen mirando aquí, con el mismo
+  // criterio, para que mover tokens no sea perder vigilancia.
+  const SITE_DIR = path.join(ROOT, 'scss', 'site', 'tokens');
+  const delSitio = fs.existsSync(SITE_DIR)
+    ? fs.readdirSync(SITE_DIR).filter((f) => /^_.+\.scss$/.test(f)).map((f) => f.slice(1, -5)).filter((t) => themes.includes(t))
+    : [];
+  for (const theme of delSitio) {
+    const scss = fs.readFileSync(path.join(SITE_DIR, `_${theme}.scss`), 'utf8');
+    const darkBody = mixinBody(scss, `site-tokens-${theme}-dark`);
+    if (!darkBody) { console.log(`   ${('site/' + theme).padEnd(16)} sin mixin de oscuro — se omite`); continue; }
+    const lightBody = mixinBody(scss, `site-tokens-${theme}-light`);
+    const dark = tokensIn(darkBody);
+    const light = lightBody ? tokensIn(lightBody) : new Set();
+    const huerfanos = [...dark].filter((t) => !light.has(t));
+    if (huerfanos.length === 0) {
+      console.log(`✅ ${('site/' + theme).padEnd(16)} ${dark.size} tokens, simetría completa`);
+    } else {
+      problemas++;
+      console.log(`❌ ${('site/' + theme).padEnd(16)} ${huerfanos.length} de ${dark.size} tokens que el oscuro`);
+      console.log(`   ${' '.repeat(16)} cambia y el claro forzado no revierte:`);
+      huerfanos.slice(0, 12).forEach((t) => console.log(`      → ${t}`));
+    }
+  }
+
   console.log('');
   if (problemas && strict) process.exit(1);
 }
