@@ -1,0 +1,77 @@
+// MOLECULE: EMPTY STATE
+// ===============================================
+// Donde todavía no hay nada: un icono que lo ilustra, un título que dice
+// qué pasa, un texto que dice por qué o qué hacer, y la acción que lo
+// resuelve. Centrado, porque ocupa el sitio del contenido que falta.
+//
+// <div class="mol-empty-state">
+//   <span class="mol-empty-state__icon" aria-hidden="true"><span class="atom-icon atom-icon--lc-search atom-icon--lg"></span></span>
+//   <h3 class="mol-empty-state__title">Sin resultados</h3>
+//   <p class="mol-empty-state__text">Prueba con otra palabra o quita algún filtro.</p>
+//   <div class="mol-empty-state__actions"><button class="atom-btn" type="button">Quitar filtros</button></div>
+// </div>
+//
+// --bordered lo enmarca con un borde discontinuo: para una zona que
+// espera contenido (soltar un archivo, una columna vacía).
+//
+// Accesibilidad — lo que el CSS no puede poner:
+// · El icono es decorativo (aria-hidden): el título dice lo que pasa.
+// · Si el estado vacío aparece tras una acción (filtrar, buscar),
+//   anúncialo: role="status" en un contenedor que ya existía, o el foco
+//   en el título (tabindex="-1") si sustituye a lo que tenía el foco.
+// (Auditoría 2026-10 · acción 15)
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-empty-state($theme: null) {
+  @layer syx.molecules {
+    .mol-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--component-empty-state-gap);
+      padding-block: var(--component-empty-state-padding-block);
+      padding-inline: var(--component-empty-state-padding-inline);
+      text-align: center;
+
+      &--bordered {
+        border: var(--component-empty-state-border-width) dashed var(--component-empty-state-border-color);
+        border-radius: var(--component-empty-state-border-radius);
+      }
+
+      &__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        inline-size: var(--component-empty-state-icon-size);
+        block-size: var(--component-empty-state-icon-size);
+        margin-block-end: var(--component-empty-state-gap);
+        color: var(--component-empty-state-icon-color);
+        background-color: var(--component-empty-state-icon-bg);
+        border-radius: var(--semantic-border-radius-circle);
+      }
+
+      &__title {
+        margin: 0;
+        font-size: var(--component-empty-state-title-font-size);
+        font-weight: var(--component-empty-state-title-font-weight);
+        line-height: var(--semantic-line-height-heading);
+        color: var(--component-empty-state-title-color);
+      }
+
+      &__text {
+        max-inline-size: var(--component-empty-state-text-max-width);
+        margin: 0;
+        color: var(--component-empty-state-text-color);
+      }
+
+      &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--semantic-space-inline-xs);
+        margin-block-start: var(--component-empty-state-gap);
+      }
+    }
+  }
+}

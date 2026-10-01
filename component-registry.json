@@ -1240,6 +1240,47 @@
       "a11y": "Native <details>/<summary>: Enter/Space toggle and the expanded state is announced by the browser. No interactive content inside <summary>, and never a <div> in its place. No JS."
     },
     {
+      "name": "empty-state",
+      "layer": "molecule",
+      "file": "scss/molecules/_empty-state.scss",
+      "tokenFiles": [
+        "scss/abstracts/tokens/components/_empty-states.scss"
+      ],
+      "classes": [
+        "mol-empty-state"
+      ],
+      "modifiers": [
+        "mol-empty-state--bordered"
+      ],
+      "elements": [
+        "mol-empty-state__actions",
+        "mol-empty-state__icon",
+        "mol-empty-state__text",
+        "mol-empty-state__title"
+      ],
+      "states": [],
+      "composedOf": [],
+      "tokens": [
+        "--component-empty-state-border-color",
+        "--component-empty-state-border-radius",
+        "--component-empty-state-border-width",
+        "--component-empty-state-gap",
+        "--component-empty-state-icon-bg",
+        "--component-empty-state-icon-color",
+        "--component-empty-state-icon-size",
+        "--component-empty-state-padding-block",
+        "--component-empty-state-padding-inline",
+        "--component-empty-state-text-color",
+        "--component-empty-state-text-max-width",
+        "--component-empty-state-title-color",
+        "--component-empty-state-title-font-size",
+        "--component-empty-state-title-font-weight"
+      ],
+      "description": "[scope: generic] What shows where there is nothing yet — an empty list, a search with no results: a decorative __icon, a __title that says what is going on, a __text that says why or what to do, and __actions with the way out. Centred, because it takes the place of the missing content. --bordered frames it with a dashed border for a zone that waits for content (a drop target, an empty column). Title and text are measured at 4.5:1.",
+      "usage": "<div class=\"mol-empty-state mol-empty-state--bordered\"><span class=\"mol-empty-state__icon\" aria-hidden=\"true\"><span class=\"atom-icon atom-icon--lc-search atom-icon--lg\"></span></span><h3 class=\"mol-empty-state__title\">No projects match “q4”</h3><p class=\"mol-empty-state__text\">Try another word, or clear the filters to see every project.</p><div class=\"mol-empty-state__actions\"><button class=\"atom-btn atom-btn--secondary atom-btn--size-md\" type=\"button\">Clear filters</button><button class=\"atom-btn atom-btn--primary atom-btn--filled atom-btn--size-md\" type=\"button\">New project</button></div></div>",
+      "a11y": "The icon is decorative (aria-hidden=\"true\"); the title says what happened, at the heading level the page needs. If the empty state appears after an action (filter, search), announce it: put it inside a role=\"status\" container that already existed, or move focus to the title (tabindex=\"-1\") when it replaces what had focus. Not focusable itself; its buttons are. No JS."
+    },
+    {
       "name": "feature-card",
       "layer": "molecule",
       "file": "scss/molecules/_feature-card.scss",
