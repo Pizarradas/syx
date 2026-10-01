@@ -57,15 +57,15 @@ una sola vez por tema.
 `-950`. Los temas reales **rebindean** familias primitivas
 existentes (`--primitive-color-blue-500`, `--primitive-color-cyan-500`,
 `--primitive-color-gray-*`… con comentario `// rebind:`); las escalas van
-de `-50` a `-900`. En los ejemplos siguientes `{marca}` y `{acento}`
-son huecos: van las familias que el tema rebindea.
+de `-50` a `-900`. En los ejemplos siguientes `blue` hace de familia de marca y `cyan`
+de acento: en un tema real van las familias que ese tema rebindea.
 
 **Sección 1 — Color Primitivos** (solo `oklch()` aquí):
 ```scss
 :root {
-  --primitive-color-{marca}-50:  oklch(…);
+  --primitive-color-blue-50:  oklch(…);
   // … 50 a 900
-  --primitive-color-{acento}-50: oklch(…);
+  --primitive-color-cyan-50: oklch(…);
   // … 50 a 900
 }
 ```
@@ -75,18 +75,18 @@ son huecos: van las familias que el tema rebindea.
 // capa: scss/themes/{nombre}/_theme.scss — aquí var(--primitive-*) es correcto (R01)
 :root {
   // Los 12 tokens de superficie obligatorios:
-  --semantic-color-bg-primary:   var(--primitive-color-{marca}-50);
-  --semantic-color-bg-secondary: var(--primitive-color-{marca}-100);
-  --semantic-color-bg-tertiary:  var(--primitive-color-{marca}-200);
-  --semantic-color-border-subtle:  var(--primitive-color-{marca}-100);
-  --semantic-color-border-default: var(--primitive-color-{marca}-200);
-  --semantic-color-border-strong:  var(--primitive-color-{marca}-400);
-  --semantic-color-text-primary:   var(--primitive-color-{marca}-900);
-  --semantic-color-text-secondary: var(--primitive-color-{marca}-600);
-  --semantic-color-text-tertiary:  var(--primitive-color-{marca}-400);
+  --semantic-color-bg-primary:   var(--primitive-color-blue-50);
+  --semantic-color-bg-secondary: var(--primitive-color-blue-100);
+  --semantic-color-bg-tertiary:  var(--primitive-color-blue-200);
+  --semantic-color-border-subtle:  var(--primitive-color-blue-100);
+  --semantic-color-border-default: var(--primitive-color-blue-200);
+  --semantic-color-border-strong:  var(--primitive-color-blue-400);
+  --semantic-color-text-primary:   var(--primitive-color-blue-900);
+  --semantic-color-text-secondary: var(--primitive-color-blue-600);
+  --semantic-color-text-tertiary:  var(--primitive-color-blue-400);
   --semantic-color-text-inverse:   oklch(1 0 0);
-  --semantic-color-primary:        var(--primitive-color-{acento}-500);
-  --semantic-color-state-hover-primary:  var(--primitive-color-{acento}-600);
+  --semantic-color-primary:        var(--primitive-color-cyan-500);
+  --semantic-color-state-hover-primary:  var(--primitive-color-cyan-600);
 }
 ```
 
@@ -105,19 +105,19 @@ son huecos: van las familias que el tema rebindea.
 ```scss
 // capa: scss/themes/{nombre}/_theme.scss
 // LIGHT: bg-primary = más claro, bg-tertiary = menos claro
---semantic-color-bg-primary:   var(--primitive-color-{marca}-50);   // 0.97 L
---semantic-color-bg-secondary: var(--primitive-color-{marca}-100);
---semantic-color-bg-tertiary:  var(--primitive-color-{marca}-200);  // 0.82 L
+--semantic-color-bg-primary:   var(--primitive-color-blue-50);   // 0.97 L
+--semantic-color-bg-secondary: var(--primitive-color-blue-100);
+--semantic-color-bg-tertiary:  var(--primitive-color-blue-200);  // 0.82 L
 
 // DARK: bg-primary = más oscuro, bg-tertiary = menos oscuro
---semantic-color-bg-primary:   var(--primitive-color-{marca}-900);  // 0.22 L
---semantic-color-bg-secondary: var(--primitive-color-{marca}-800);
---semantic-color-bg-tertiary:  var(--primitive-color-{marca}-700);  // 0.42 L
+--semantic-color-bg-primary:   var(--primitive-color-blue-900);  // 0.22 L
+--semantic-color-bg-secondary: var(--primitive-color-blue-800);
+--semantic-color-bg-tertiary:  var(--primitive-color-blue-700);  // 0.42 L
 
 // DARK: texto inverso
---semantic-color-text-primary:   var(--primitive-color-{marca}-50);
---semantic-color-text-secondary: var(--primitive-color-{marca}-200);
---semantic-color-text-tertiary:  var(--primitive-color-{marca}-400);
+--semantic-color-text-primary:   var(--primitive-color-blue-50);
+--semantic-color-text-secondary: var(--primitive-color-blue-200);
+--semantic-color-text-tertiary:  var(--primitive-color-blue-400);
 --semantic-color-text-inverse:   oklch(0.1 0 0);
 ```
 

@@ -49,7 +49,7 @@ Los tokens semánticos se nombran por su función, no por su color:
 --semantic-color-blue-500: oklch(0.55 0.22 260);
 
 // ✓ Nombre de función — estable entre temas
---semantic-color-primary: var(--primitive-color-{marca}-500);
+--semantic-color-primary: var(--primitive-color-blue-500);
 ```
 
 Un token llamado `primary` puede ser azul en un tema, rojo en otro, y verde en un tercero. El nombre es invariante; el valor cambia por tema.
@@ -92,7 +92,7 @@ El gris sobre color produce contraste impredecible. El valor `#6b7280` (4.6:1 so
 
 **Alternativas para texto muted sobre fondos de color:**
 - Blanco con opacidad: `rgba(255,255,255, 0.75)` — perceptualmente muted, contraste predecible
-- Mismo tono más oscuro: `var(--primitive-color-{marca}-800)` sobre `brand-100` — mismo tono, mayor L
+- Mismo tono más oscuro: `var(--primitive-color-blue-800)` sobre `brand-100` — mismo tono, mayor L
 
 ---
 

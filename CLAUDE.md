@@ -3,8 +3,9 @@
 You are working with **SYX**, a token-driven, native SCSS design system (v4.28.0).
 
 Before doing anything else, read:
-1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet
-2. `contracts/rules.json` — the contract rules (9 KB). `syx-validate.js` implements R01–R10
+1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet. Its rule
+   table (R01–R10) is the readable form of `contracts/rules.json`, the machine contract that
+   `syx-validate.js` and `validate_snippet` run: ask `validate_snippet` instead of reading it.
 
 **Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB)
 are the sources of truth, but reading them whole costs some 80 000 tokens of context before
