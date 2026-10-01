@@ -142,11 +142,11 @@ placeholders for the families the theme rebinds.
 // FONTS — single source of truth: the setup and every bundle call this.
 // -----------------------------------------------
 @mixin theme-{name}-fonts {
-  @include font-family("Your-Font--regular",
-    "#{$fonts-path}/your-font/YourFont-Regular",
-    400, normal, eot woff2 woff ttf svg);
-  // …one block per weight/style
+  @include syx-font("Space Grotesk", 400 700);   // a font SYX ships ($syx-fonts)
+  // your own: one family name, one woff2 face per weight/style
+  @include font-family("Your Font", "#{$fonts-path}/your-font/YourFont-Regular", 400, normal);
 }
+// Tokens name the family (+ "<Family> Fallback"); the weight goes in font-weight.
 ```
 
 ---
