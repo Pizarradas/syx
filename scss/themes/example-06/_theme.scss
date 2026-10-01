@@ -97,12 +97,24 @@
         --semantic-color-tertiary: var(--primitive-color-neon-100);
         --semantic-color-quaternary: var(--primitive-color-cyan-600);
         --semantic-color-quinary: var(--primitive-color-violet-600);
-        --semantic-color-placeholder: var(--semantic-color-primary);
-        --semantic-color-link-default: var(--primitive-color-cyan-500);
+
+        // Tinta sobre relleno (on-*): la que da ≥ 4,5:1 sobre cada relleno de
+        // marca, elegida por check:contraste. El relleno no cambia; cambia lo que
+        // va encima. Los que no aparecen se quedan en el texto inverso.
+        --semantic-color-on-primary: var(--semantic-color-ink-dark);
+        --semantic-color-on-secondary: var(--semantic-color-ink-dark);
+        --semantic-color-on-tertiary: var(--semantic-color-ink-dark);
+        --semantic-color-on-quaternary: var(--semantic-color-ink-dark);
+        --semantic-color-on-quinary: var(--semantic-color-ink-light);
+        --semantic-color-on-state-hover-primary: var(--semantic-color-ink-dark);
+        --semantic-color-on-state-hover-tertiary: var(--semantic-color-ink-dark);
+        --semantic-color-on-state-hover-quaternary: var(--semantic-color-ink-dark);
+        --semantic-color-placeholder: var(--semantic-color-primary-text); // texto: tinta, no relleno
+        --semantic-color-link-default: var(--semantic-color-primary-text); // el cian, como tinta: cyan-500 daba 2,03:1 sobre blanco
 
         // Colors - State
         --semantic-color-state-disabled: var(--primitive-color-disabled);
-        --semantic-focus-ring-color: var(--primitive-color-cyan-500);
+        --semantic-focus-ring-color: var(--semantic-color-primary-strong); // 1.4.11: el cian daba 2,03:1 sobre blanco
         --semantic-color-state-hover-primary: var(--primitive-color-cyan-600);
         --semantic-color-state-hover-secondary: var(--primitive-color-violet-600);
         --semantic-color-state-hover-tertiary: var(--primitive-color-cyan-600);
@@ -295,7 +307,7 @@
         // lo afinan, que es justo lo que este tema quería.
         @include dark-mode-tokens();
 
-        --semantic-color-border-focus: var(--semantic-color-primary);
+        --semantic-color-border-focus: var(--semantic-color-primary-strong);
         --semantic-color-bg-primary: var(--primitive-color-space-950);
         --semantic-color-bg-secondary: var(--primitive-color-space-900);
         --semantic-color-bg-tertiary: var(--primitive-color-space-800);
