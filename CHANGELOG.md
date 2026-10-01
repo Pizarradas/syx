@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — el catálogo para pantallas de producto (auditoría 2026-10, acción 15)
+
+Lo que una adopción real (una pantalla de ajustes con Vite) tuvo que escribir a mano o echó de menos. Diez componentes nuevos y dos primitivas de layout: 40 componentes (23 átomos, 15 moléculas, 2 organismos).
+
+- **Átomos:** `atom-avatar` (foto o iniciales, tres tamaños, `--square`), `atom-progress` sobre `<progress>` nativo (determinada e indeterminada; rayas quietas con movimiento reducido), `atom-spinner` (texto siempre, más lento con movimiento reducido) y `atom-skeleton` (`--text`, `--circle`, `--block`, con `aria-busy` en el contenedor). `.atom-textarea`: el comentario de `.atom-input` decía servir para `<textarea>`, pero su altura fija lo dejaba en una línea.
+- **Moléculas:** `mol-card` (cabecera, cuerpo, pie; con borde, `--elevated`, `--flat`; tarjeta entera enlazada accesible), `mol-empty-state`, `mol-tooltip` (Popover API, `popover="hint"`, WCAG 1.4.13), `mol-menu` (`popover="auto"` y el teclado de APG) y `mol-toast` (región viva aparte, sin robar el foco, pausa con puntero, foco o pestaña oculta). `mol-form-field__count`: contador de caracteres opcional.
+- **Organismo:** `org-app-shell`: cabecera, barra lateral y contenido en grid; en móvil la navegación pasa a una fila con scroll, sin JS; `--full` fija cabecera y barra lateral.
+- **Layout:** `layout-stack` y `layout-cluster` en `scss/layout/`, junto a `layout-grid` e incluidas en todos los bundles. Ponen nombre a lo que ya permitían las utilidades, con la escala de espaciado correcta por defecto.
+- **JavaScript, sin dependencias:** `js/syx-tooltip.js`, `js/syx-menu.js`, `js/syx-toast.js` (`showToast()` y `data-syx-toast`) y `js/syx-char-count.js`. La posición de tooltip y menú la calcula el script: CSS anchor positioning no está en el soporte mínimo. Sin Popover API (Safari < 17) caen a `hidden`.
+- **Tokens:** nueve ficheros nuevos en `scss/abstracts/tokens/components/`, todos alias de `--semantic-*` o `--component-*`, sin literales de color. `contracts/contrast.json` pasa de 66 a 91 pares; tres tokens se eligieron por medida (iniciales del avatar, pista del progreso, enlace de la barra lateral al pasar por encima), porque la primera opción no llegaba en example-05 o example-06.
+- **Pruebas:** el arnés de axe saca los popovers al flujo para recorrerlos (0 violaciones en 7 temas × 2 modos) y `tests/browser/interaccion.mjs` prueba el teclado del menú, el tooltip con foco, puntero y Escape (también como `popover="manual"`, lo que ven Safari y Firefox), el toast y el contador. En la CI.
+- `bundle-core` medido: 255 KB sin comprimir, 43 KB con gzip (antes 225 y 39); sigue bajo el objetivo de 50 KB.
+
+
 ### Fixed — auditoría de septiembre de 2026, fases 1 y 2 (2026-09-30)
 
 - **Accesibilidad.** Nuevo `--semantic-color-border-control` para el borde de campo, checkbox, radio y switch (de 1,43–2,40:1 a ≥ 3:1, WCAG 1.4.11) y tinta de estado `--semantic-color-state-{success,error,warning,info}-text` (el texto de error pasa de 3,56–4,35:1 a ≥ 4,5:1). `warning-text` se citaba con fallback y no existía. Texto terciario y secundario de example-03 y example-05 corregidos.

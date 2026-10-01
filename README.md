@@ -65,7 +65,8 @@ npm install github:Pizarradas/syx#v4.28.0
 // The whole system for one theme, minified, without SYX's own site layer
 import 'syx-design-system/themes/syx-sketch.css';
 
-// Optional. Only mol-tabs needs JavaScript: click, arrow keys, Home/End.
+// Optional. Only the components with behaviour need JavaScript (see JavaScript
+// below); this one gives mol-tabs click, arrow keys and Home/End.
 import 'syx-design-system/js/syx-tabs.js';
 ```
 
@@ -313,7 +314,7 @@ npm run check:figma     # fails if those files are stale
 ```
 
 Each file carries the whole library for one theme: two **variable collections**
-(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 30
+(`SYX · Semantic`, `SYX · Component`) with a `light` and a `dark` mode, and the 40
 components with the node property each token maps to.
 
 | In SYX | In Figma |
@@ -504,9 +505,9 @@ syx/
 │   │   └── _paths.scss          # Compile-time config (fonts/images paths)
 │   │
 │   ├── base/                    # Reset, elements, helpers
-│   ├── atoms/                   # 19 atoms
-│   ├── molecules/               # 10 molecules
-│   ├── organisms/               # 1 organism (site-header)
+│   ├── atoms/                   # 23 atoms
+│   ├── molecules/               # 15 molecules
+│   ├── organisms/               # 2 organisms (app-shell, site-header)
 │   ├── site/                    # SITE LAYER: SYX's own pages only — removable
 │   ├── layout/                  # Grid system
 │   ├── utilities/               # Display, spacing, text utilities
