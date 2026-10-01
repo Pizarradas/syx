@@ -53,7 +53,7 @@ scss/themes/{name}/
 ├── _setup.scss           ← Generated boilerplate (~15 lines); components register in _shared/_bundle-full.scss, not here
 ├── bundle-app.scss       ← App context
 ├── bundle-blog.scss      ← Blog/editorial context
-├── bundle-core.scss      ← Minimal production bundle (203 KB raw · 36 KB gzip)
+├── bundle-core.scss      ← Minimal production bundle (sizes: dist/sizes.json)
 ├── bundle-docs.scss      ← Documentation context
 └── bundle-marketing.scss ← Marketing/landing context
 ```
