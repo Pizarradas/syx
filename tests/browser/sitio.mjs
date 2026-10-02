@@ -194,6 +194,20 @@ if (bandera('--proponer')) {
 }
 // --json FICHERO: lo sin revisar, entero, para estudiarlo fuera.
 if (arg('--json')) fs.writeFileSync(arg('--json'), JSON.stringify(sinCubrir, null, 1));
+// En GitHub Actions, cada fallo también como anotación: las anotaciones se
+// leen sin iniciar sesión (la API pública de check-runs), los logs no. Sin
+// esto, un fallo que solo aparece con el Chromium de la CI no se podía ver
+// desde fuera (octubre de 2026: Pages dejó de desplegar sin saberse por qué).
+if (process.env.GITHUB_ACTIONS) {
+  const anotar = (titulo, texto) => console.log(`::error title=${titulo}::${String(texto).replace(/%/g, '%25').replace(/\r?\n/g, '%0A')}`);
+  for (const v of agrupar(sinCubrir, (x) => `${x.tipo}|${x.componente}|${x.regla}|${x.objetivo}`, (x) => `${x.tema}/${x.modo}`)) {
+    anotar(`sitio · ${v.componente} · ${v.regla}`, `${v.tipo} — ${[...v.donde].join(', ')}\n${v.objetivo}\n${String(v.resumen).split('\n').slice(0, 3).join('\n')}${v.medida ? `\nmedido: ${v.medida.error || `${v.medida.ratio}:1 (${v.medida.fg} sobre ${v.medida.bg}, mínimo ${v.medida.requerido}:1)`}` : ''}`);
+  }
+  for (const f of agrupar(fallos, (x) => `${x.prueba}|${x.componente}|${x.detalle}`, (x) => x.donde)) {
+    anotar(`sitio · ${f.componente} · ${f.prueba}`, `${[...f.donde].join(', ')}\n${f.detalle}`);
+  }
+  for (const e of muertas) anotar('sitio · axe-excepciones.json', `la excepción ${e.regla} de ${e.componente} (${e.selector || e.dentro}) ya no cubre nada`);
+}
 const total = sinCubrir.length + fallos.length + muertas.length;
 console.log(total ? '' : '\n   Las cuatro páginas pasan axe a 375 y 1280 px en los dos modos, y el cajón móvil se usa con el teclado.\n');
 process.exitCode = total ? 1 : 0;
