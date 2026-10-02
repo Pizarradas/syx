@@ -195,6 +195,10 @@
   // oscuro tiene que seguir siendo un corte, así que sube al escalón más
   // alto en vez de fundirse con la página.
   --component-cta-bg: var(--semantic-bg-grid), linear-gradient(oklch(0.355 0.042 263), oklch(0.355 0.042 263));
+  // El subtítulo, un escalón más claro que en claro: gray-300 sobre este navy
+  // daba 4,48:1 medido en píxeles con el Chromium de la CI (la retícula del
+  // fondo resta), justo por debajo de 4,5. Con gray-200 queda holgado.
+  --component-cta-sub-color: var(--primitive-color-gray-200);
 
   // Footer: un escalón por encima de la página, igual que en claro.
   --component-footer-bg: oklch(0.265 0.036 259);
