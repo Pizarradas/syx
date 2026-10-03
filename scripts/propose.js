@@ -140,7 +140,7 @@ function token() {
 
   // 2. ¿Existe ya?
   const previo = syx.getToken({ token: nombre });
-  if (previo.encontrado) {
+  if (previo.found) {
     fin(`   ${nombre} ya existe y vale ${previo.value}.\n   Cambiar un token existente no es proponer uno nuevo: hazlo a mano o abre la conversación.`);
   }
 
@@ -178,14 +178,14 @@ function token() {
     // De los que valen ese color, el que hay que recomendar es el SEMÁNTICO:
     // apuntar a otro token de componente sería acoplar dos componentes por el
     // color, que es justo lo que la capa semántica está ahí para evitar.
-    const semanticos = cerca.exactos.filter((t) => t.startsWith('--semantic-'));
+    const semanticos = cerca.exact.filter((t) => t.startsWith('--semantic-'));
     fin(
       `   El valor es un color literal, y un token de componente debe apuntar a uno semántico.\n` +
       (semanticos.length
         ? `   Ese color ya es ${semanticos.slice(0, 4).join(', ')}${semanticos.length > 4 ? `, y ${semanticos.length - 4} más` : ''}.\n` +
           `   Usa var(${semanticos[0]}) si es el papel que le corresponde.`
-        : cerca.exactos.length
-          ? `   Existe como ${cerca.exactos.slice(0, 3).join(', ')}, pero ninguno es semántico:\n` +
+        : cerca.exact.length
+          ? `   Existe como ${cerca.exact.slice(0, 3).join(', ')}, pero ninguno es semántico:\n` +
             `   ese color no tiene todavía un papel en el sistema, y dárselo es cosa de la capa semántica, que es solo humana.`
           : `   Si de verdad es un color nuevo, entra por la capa primitiva, que es solo humana.`)
     );

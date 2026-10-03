@@ -123,7 +123,8 @@ if (ignorados.length) {
 }
 
 if (flag('--json')) {
-  console.log(JSON.stringify(informe, null, 2));
+  // Claves públicas en inglés, como el MCP y la API (scripts/lib/claves.js).
+  console.log(JSON.stringify(require('./lib/claves').aIngles(informe), null, 2));
   process.exit(0);
 }
 

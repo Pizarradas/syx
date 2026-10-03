@@ -61,16 +61,7 @@ node scripts/syx-validate.js           # Quick check (console only)
 node scripts/syx-validate.js --report  # Full audit + write contracts/
 ```
 
-### Exporting outward
-
-```bash
-npm run export:tokens   # → contracts/dtcg/    W3C DTCG, one file per theme + mode
-npm run export:figma    # → contracts/figma/   variables + components, one file per theme
-npm run check:figma     # fails if the Figma export is stale
-```
-
-Both read `contracts/resolved-tokens.json`, which is built from the **compiled** CSS —
-so a change you have not compiled does not exist for either. Run `npm run build` first.
+Exports (W3C DTCG, Figma) and how they are built: `README.md` → *Figma* and `_agents/workflows/export-to-figma.md`.
 
 ### Current contract rules
 
@@ -93,9 +84,7 @@ so a change you have not compiled does not exist for either. Run `npm run build`
 transition: background-color 600000s 0s;
 ```
 
-An exception that no longer excuses anything is an R10 error, and so is a single-file `allowedIn` entry that excuses nothing. `npm run validate` lists every live exception with its reason; `validate_snippet` returns them under `excepciones`.
-
-> **Current status: ⚠️ PASSED WITH WARNINGS** — R01–R04 and R09–R11 all passing (two inline R03 exceptions). Warnings are R08 (unused registry tokens).
+An exception that no longer excuses anything is an R10 error, and so is a single-file `allowedIn` entry that excuses nothing. `npm run validate` lists every live exception with its reason; `validate_snippet` returns them under `exceptions`.
 
 ---
 
@@ -116,40 +105,9 @@ An exception that no longer excuses anything is an R10 error, and so is a single
 - **Semantic**: "Primary action is blue." → `scss/abstracts/tokens/semantic/`
 - **Component**: "Button background is Primary Action." → `scss/abstracts/tokens/components/`
 
-### 3. Semantic Token Reference (key tokens)
+### 3. Which tokens exist
 
-#### Typography
-
-| Token                             | Value         | Use               |
-| --------------------------------- | ------------- | ----------------- |
-| `--semantic-font-weight-regular`  | regular (400) | body text         |
-| `--semantic-font-weight-medium`   | medium (500)  | labels, secondary |
-| `--semantic-font-weight-bold`     | bold (700)    | emphasis          |
-| `--semantic-font-weight-black`    | black (900)   | hero/display text |
-| `--semantic-font-size-overline`   | ~11px         | tags, pills       |
-| `--semantic-font-size-body-small` | ~14px         | secondary text    |
-| `--semantic-font-size-body`       | ~16px         | default body      |
-| `--semantic-font-size-body-large` | ~20px         | lead text         |
-| `--semantic-font-family-mono`     | monospace     | code blocks       |
-
-#### Color — State feedback
-
-| Token                            | Purpose                |
-| -------------------------------- | ---------------------- |
-| `--semantic-focus-ring-color`    | focus ring color       |
-| `--semantic-color-state-success` | success state          |
-| `--semantic-color-state-error`   | error state            |
-| `--semantic-color-state-warning` | warning state          |
-| `--semantic-color-state-info`    | info state             |
-| `--semantic-color-border-focus`  | focus border on inputs |
-
-#### Legacy variable classification
-
-Legacy variables (no official `--semantic/primitive/component` prefix) are classified in `lint-contract.json` as:
-
-- `keep` — external dep or intentional local contract (e.g. `--form-*`, `--lc-*`)
-- `migrate` — replace with corresponding `--semantic-*` token (migration target in `replacedBy`)
-- `kill` — remove, no SYX equivalent
+Do not rely on a list copied into a document: ask `get_token` / `find_token_by_value`, or grep `tokens.json`. Legacy, unprefixed variables and their `keep` / `migrate` / `kill` classification live in `contracts/lint-contract.json` (MIGRATE mode).
 
 ---
 
@@ -239,53 +197,9 @@ node scripts/syx-validate.js
 
 ---
 
-## 🎛️ The Mode System
+## 🎛️ Modes and workflows
 
-Before a workflow, pick a lens. A **mode** tunes the whole response to one discipline and declares
-what it may write. Activate one with a `[SYX: MODE]:` prefix — or `/syx MODE …` in Claude Code — and
-**read `_agents/modes/{mode}.md` before answering**:
-
-| Tier | Mode | Does | Writes |
-| :--- | :--- | :--- | :--- |
-| 1 | `[SYX: SKETCH]:` | Throwaway visual prototype | nothing |
-| 2 | `[SYX: UX]:` | Structure, flow, accessibility | nothing |
-| 3 | `[SYX: CREATIVE]:` | Experimental build, exempt from contracts | nothing |
-| 4 | `[SYX: TOKEN]:` | Token architecture | `pr` / recommends |
-| 5 | `[SYX: THEME]:` | OKLCH scales, `_theme.scss` | recommends |
-| 6 | `[SYX: UI]:` | Component SCSS | `pr` |
-| 7 | `[SYX: AUDIT]:` | R01–R11 conformance | nothing |
-| 8 | `[SYX: MIGRATE]:` | Legacy variable resolution | `pr` / recommends |
-| 9 | `[SYX: BRAND]:` | A complete visual identity — asks you axis by axis, or decides them all | recommends |
-
-Use the **lowest tier that does the job**. Compose them with `→` (pipeline) and `+` (evaluative),
-where **`+` groups before `→`** — so `[SYX: UX → UI + AUDIT]:` is `UX → (UI + AUDIT)`.
-
-The tier is the cost of the turn, not the order of the work. BRAND sits last because it is the most
-expensive response in the system — seven identity axes that have to come out consistent with each
-other — but it runs **first** in the chain it belongs to: `BRAND → THEME → TOKEN → UI`. Running
-THEME before BRAND inverts the dependency and yields a palette with no identity to answer to.
-
-Every mode file opens with two blocks. **`Trust`** is its permission ceiling, graded by
-`contracts/trust.json` and verified by `npm run check:modos` — a mode never grants a permission, it
-inherits one. **`Knowledge`** is its reading list from `mind-system/knowledges/`, the cortex that
-carries the reasoning (colour theory, UX laws, WCAG, scale models, motion). Knowledge informs; it
-never executes. **If a module recommends what a rule above forbids, the rule wins.**
-
-Full detail: `_agents/modes/README.md`, and `mind-system/README.md` for the precedence ladder.
-
----
-
-## 🤖 Agent Workflows
-
-SYX ships pre-built agent workflows in `_agents/workflows/`:
-
-| Workflow            | Command           | What it does                                  |
-| ------------------- | ----------------- | --------------------------------------------- |
-| `/create-component` | See workflow file | Create atom, molecule or organism             |
-| `/create-theme`     | See workflow file | Clone template and configure new theme        |
-| `/audit-tokens`     | See workflow file | Run full token health check                   |
-| `/update-changelog` | See workflow file | Maintain CHANGELOG using Conventional Commits |
-| `/export-to-figma`  | See workflow file | Stand up the SYX library in Figma, in the right order |
+Modes (`[SYX: MODE]:`) and their permission ceilings: the table in `CLAUDE.md` / `AGENTS.md`, detail in `_agents/modes/README.md`. Step-by-step workflows: `_agents/workflows/`.
 
 ---
 

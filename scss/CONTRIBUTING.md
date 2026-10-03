@@ -15,6 +15,10 @@
 
 ---
 
+## Language
+
+Everything that tells an agent or an adopter what to write is in **English**: the entry files, `CONSUMING.md`, `README.md`, `THEMING-RULES.md`, the guides and READMEs under `scss/`, the modes, workflows and prompts in `_agents/`, the app template, and the keys of the API, MCP server and `syx-scan --json`. Reasoning and history may stay in Spanish: the cortex (`mind-system/`), the evals, `CHANGELOG.md`, `docs/decisions/` and code comments. `npm run check:conocimiento` fails when an English document drifts into Spanish.
+
 ## Code Style Rules
 
 ### SCSS Authoring
@@ -22,12 +26,12 @@
 ```scss
 // ✅ Correct
 .atom-btn--primary {
-  color: var(--component-btn-primary-color);
+  color: var(--component-button-primary-color);
   @include padding(
-    var(--component-btn-padding-y) var(--component-btn-padding-x)
+    var(--component-button-padding-y) var(--component-button-padding-x)
   );
   @include transition(color 0.2s ease, background-color 0.2s ease);
-  @include border-radius(var(--component-btn-border-radius));
+  @include border-radius(var(--component-button-border-radius));
 }
 
 // ❌ Wrong — raw CSS instead of mixins
@@ -43,41 +47,41 @@
 
 Follow this order for consistency:
 
-<!-- syx: ejemplo-nuevo -->
 ```scss
-.mol-example {
-  // 1. Positioning (use mixin)
-  @include absolute($top: 0);
+.atom-btn {
+  // 1. Positioning
+  @include relative();
 
   // 2. Display / Box model
-  display: flex;
   @include flex-center();
+  // or: display: grid; grid-template-columns: …;
 
   // 3. Dimensions
-  @include size(100%, 48px);
+  min-block-size: var(--component-button-height-md);
 
-  // 4. Spacing (use mixin)
-  @include margin(null auto);
-  @include padding(var(--component-x-padding-y) var(--component-x-padding-x));
+  // 4. Spacing
+  @include padding(var(--component-button-padding-y) var(--component-button-padding-x));
 
   // 5. Typography
-  font-size: var(--component-x-font-size);
-  font-weight: var(--primitive-font-weight-medium);
-  line-height: var(--component-x-line-height);
-  color: var(--component-x-color);
+  font-family: var(--component-button-font-family);
+  font-size: var(--component-button-font-size);
+  font-weight: var(--component-button-font-weight);
+  line-height: var(--component-button-line-height);
+  color: var(--component-button-primary-color);
+  text-decoration: none;
 
   // 6. Visual
-  background-color: var(--component-x-bg);
-  @include border(all, var(--component-x-border-width), solid, var(--component-x-border));
-  @include border-radius(var(--component-x-border-radius));
-  box-shadow: var(--component-x-shadow);
+  background-color: var(--component-button-primary-bg);
+  @include border(all, var(--component-button-border-width), var(--component-button-border-style), var(--component-button-primary-border));
+  @include border-radius(var(--component-button-border-radius));
+  box-shadow: var(--component-button-shadow);
 
-  // 7. Transitions (always last before states)
-  @include transition(color 0.2s ease);
+  // 7. Transitions — ALWAYS last, before states
+  @include transition(color var(--component-button-transition-duration) var(--component-button-transition-easing));
 
-  // 8. States (&:hover, &:focus, &:disabled, &--modifier)
+  // 8. States (interactive, disabled, modifiers)
   &:hover { … }
-  &:focus-visible { … }
+  &:focus-visible { @include focus-ring(); }
   &:disabled { … }
   &--modifier { … }
 }
@@ -151,7 +155,7 @@ Follow this order for consistency:
 Examples:
 --primitive-color-blue-500
 --primitive-space-4
---primitive-font-size-2
+--primitive-font-size-md
 --primitive-font-weight-bold
 --primitive-border-radius-md
 --primitive-shadow-lg
@@ -166,7 +170,7 @@ Examples:
 --semantic-color-primary
 --semantic-color-text-primary
 --semantic-color-state-error
---semantic-space-inset-md
+--semantic-space-component-md
 --semantic-font-size-body
 --semantic-border-radius-sm
 ```
@@ -177,8 +181,8 @@ Examples:
 --component-{name}-{property}-{variant}-{state}
 
 Examples:
---component-btn-primary-bg
---component-btn-primary-bg-hover
+--component-button-primary-filled-bg
+--component-button-primary-filled-bg-hover
 --component-form-field-border-focus
 --component-header-height
 ```

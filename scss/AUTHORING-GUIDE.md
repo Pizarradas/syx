@@ -281,7 +281,7 @@ Use `@extend` only within the same `@layer`. Prefer mixins over `@extend` when s
 ```scss
 // ✅ Shared visual pattern → extract a private mixin
 @mixin --card-interactive-state {
-  box-shadow: var(--component-card-shadow-hover);
+  box-shadow: var(--component-card-elevated-shadow-hover);
   @include transition(box-shadow 0.2s ease);
 }
 
@@ -304,11 +304,11 @@ SYX mixins skip `null` values. Use this aggressively to replace raw CSS and avoi
 
 ```scss
 // These two are equivalent in output — but only the mixin version is null-safe
-@include padding(var(--semantic-space-inset-md) null);
+@include padding(var(--semantic-space-component-md) null);
 // Output: padding-top: …; padding-bottom: …;  ← no left/right emitted
 
 // Raw CSS always emits all properties
-padding: var(--semantic-space-inset-md) 0; // ← emits all 4, sets left/right to 0
+padding: var(--semantic-space-component-md) 0; // ← emits all 4, sets left/right to 0
 ```
 
 Practical impact: if a component only needs vertical padding, use `@include padding(var(--y) null)` instead of the 4-value shorthand. Cleaner token expression, no unintended side-effects.
@@ -317,7 +317,7 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 
 | SCSS token reference                   | CSS output                                                                           | Notes                                   |
 | -------------------------------------- | ------------------------------------------------------------------------------------ | --------------------------------------- |
-| `var(--component-btn-primary-bg)`      | `var(--component-btn-primary-bg)`                                                    | 1 property, runtime                     |
+| `var(--component-button-primary-filled-bg)`      | `var(--component-button-primary-filled-bg)`                                                    | 1 property, runtime                     |
 | `var(--primitive-color-blue-500)`      | `var(--primitive-color-blue-500)`                                                    | ❌ skips semantic layer                 |
 | Hardcoded `#3b82f6`                    | `#3b82f6`                                                                            | ❌ breaks theming                       |
 | `@include size(100%, 48px)`            | `width: 100%; height: 48px;`                                                         | null-safe                               |
@@ -341,38 +341,37 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 
 Follow this order inside every rule (matches `CONTRIBUTING.md`):
 
-<!-- syx: ejemplo-nuevo -->
 ```scss
-.mol-example {
+.atom-btn {
   // 1. Positioning
-  @include absolute($top: 0, $left: 0);
+  @include relative();
 
   // 2. Display / Box model
   @include flex-center();
   // or: display: grid; grid-template-columns: …;
 
   // 3. Dimensions
-  @include size(100%, 48px);
+  min-block-size: var(--component-button-height-md);
 
   // 4. Spacing
-  @include margin(null auto);
-  @include padding(var(--component-x-inset-y) var(--component-x-inset-x));
+  @include padding(var(--component-button-padding-y) var(--component-button-padding-x));
 
   // 5. Typography
-  font-size: var(--component-x-font-size);
-  font-weight: var(--primitive-font-weight-medium);
-  line-height: var(--component-x-line-height);
-  color: var(--component-x-color);
+  font-family: var(--component-button-font-family);
+  font-size: var(--component-button-font-size);
+  font-weight: var(--component-button-font-weight);
+  line-height: var(--component-button-line-height);
+  color: var(--component-button-primary-color);
   text-decoration: none;
 
   // 6. Visual
-  background-color: var(--component-x-bg);
-  @include border(all, var(--component-x-border-width), solid, var(--component-x-border-color));
-  @include border-radius(var(--component-x-radius));
-  box-shadow: var(--component-x-shadow);
+  background-color: var(--component-button-primary-bg);
+  @include border(all, var(--component-button-border-width), var(--component-button-border-style), var(--component-button-primary-border));
+  @include border-radius(var(--component-button-border-radius));
+  box-shadow: var(--component-button-shadow);
 
   // 7. Transitions — ALWAYS last, before states
-  @include transition(color 0.2s ease, background-color 0.2s ease);
+  @include transition(color var(--component-button-transition-duration) var(--component-button-transition-easing));
 
   // 8. States (interactive, disabled, modifiers)
   &:hover { … }
@@ -423,11 +422,11 @@ The offsets are written top/right/bottom/left but **emitted as logical propertie
 
 ```scss
 // 1-value: all sides
-@include padding(var(--semantic-space-inset-md));
+@include padding(var(--semantic-space-component-md));
 // → padding: …
 
 // 2-value: top/bottom | left/right
-@include padding(var(--semantic-space-inset-y) var(--semantic-space-inset-x));
+@include padding(var(--semantic-space-component-sm) var(--semantic-space-component-md));
 // → padding: … …
 
 // 4-value: top | right | bottom | left (null = skip that side)
@@ -459,7 +458,7 @@ For other flex combinations, use direct properties (no mixin needed):
 display: flex;
 align-items: flex-start;
 flex-wrap: wrap;
-gap: var(--semantic-space-gap-md);
+gap: var(--semantic-space-inline-md);
 ```
 
 ### 4.4 Transition Mixin
@@ -503,14 +502,14 @@ The most important behavioral mixin. It **automatically adds the `prefers-reduce
 ```scss
 // ✅ Mobile-first
 .org-hero__title {
-  font-size: var(--semantic-font-size-xl); // mobile
+  font-size: var(--semantic-font-size-h3); // mobile
 
   @include breakpoint(tablet) {
-    font-size: var(--semantic-font-size-2xl); // tablet+
+    font-size: var(--semantic-font-size-h2); // tablet+
   }
 
   @include breakpoint(desktop) {
-    font-size: var(--semantic-font-size-display); // desktop+
+    font-size: var(--semantic-font-size-h1); // desktop+
   }
 }
 ```
@@ -565,7 +564,7 @@ Always apply `@include focus-ring()` inside `:focus-visible`, never `:focus`:
 );
 
 // border-radius (separate mixin)
-@include border-radius(var(--component-btn-radius));
+@include border-radius(var(--component-button-border-radius));
 
 // Individual corners
 @include border-radius(
@@ -748,22 +747,22 @@ Or use the full class name in a comment inside the HTML template (PurgeCSS scans
 
 ---
 
-### 5.10 Propiedades lógicas y RTL
+### 5.10 Logical properties and RTL
 
-SYX escribe los lados con **propiedades lógicas**: `margin-inline-start` en vez de `margin-left`, `inset-block-start` en vez de `top`, `text-align: start` en vez de `left`. En una página LTR pinta exactamente igual; con `dir="rtl"` (árabe, hebreo) los componentes se espejan solos. (Auditoría 2026-10 · acción 13)
+SYX writes sides with **logical properties**: `margin-inline-start` instead of `margin-left`, `inset-block-start` instead of `top`, `text-align: start` instead of `left`. An LTR page paints exactly the same; with `dir="rtl"` (Arabic, Hebrew) components mirror themselves. (Audit 2026-10 · action 13)
 
-- **Mixins.** `margin()`, `padding()`, `position()`/`absolute()`/`fixed()`/`sticky()`/`relative()`, `border()`, `border-radius()`, `triangle()` y `cover` emiten ya propiedades lógicas. Su firma no cambia: top/right/bottom/left se traduce a block-start/inline-end/block-end/inline-start.
-- **A mano.** Escribe `margin-block-end`, `padding-inline-start`, `border-inline-start`, `inset-inline-end`, `border-start-end-radius`, `text-align: start`. `npm run lint` rechaza las físicas de lado en `scss/` (`property-disallowed-list` y `declaration-property-value-allowed-list` en `.stylelintrc.json`).
-- **Excepciones.** Solo lo que de verdad es físico: un dibujo hecho con bordes y girado (el ✓ de `atom-check`, el ⌄ de `mol-disclosure`), un centrado con `translate` (`absolute-center`), una sombra que cae hacia un lado. Se exceptúa en la línea, con el porqué:
+- **Mixins.** `margin()`, `padding()`, `position()`/`absolute()`/`fixed()`/`sticky()`/`relative()`, `border()`, `border-radius()`, `triangle()` and `cover` already emit logical properties. Their signature does not change: top/right/bottom/left map to block-start/inline-end/block-end/inline-start.
+- **By hand.** Write `margin-block-end`, `padding-inline-start`, `border-inline-start`, `inset-inline-end`, `border-start-end-radius`, `text-align: start`. `npm run lint` rejects physical side properties in `scss/` (`property-disallowed-list` and `declaration-property-value-allowed-list` in `.stylelintrc.json`).
+- **Exceptions.** Only what is truly physical: a drawing made of rotated borders (the ✓ of `atom-check`, the ⌄ of `mol-disclosure`), centring with `translate` (`absolute-center`), a shadow that falls to one side. The exception goes on the line, with its reason:
   ```scss
-  // stylelint-disable-next-line property-disallowed-list -- centrado con translateX, que es físico
+  // stylelint-disable-next-line property-disallowed-list -- centred with translateX, which is physical
   left: 50%;
   ```
-- **`transform` es físico.** Si mueves algo con `translateX`, en RTL va al revés. Mejor anima el desplazamiento lógico (el pomo de `atom-switch` anima `inset-inline-start`) o espeja con `:dir(rtl)`.
-- **Iconos direccionales.** `@include mirror-rtl('::before')` espeja con `scale: -1 1` una flecha o un chevron de «siguiente/anterior» en RTL (paginación, viñetas de `atom-list`, `atom-icon--lc-arrow-*`/`--lc-chevron(s)-left/right`, `atom-icon--arrow-*`). Va tras `@supports selector(:dir(rtl))`: en navegadores del mínimo sin `:dir()` el icono queda sin espejar. Arriba/abajo no se espejan.
-- **Código.** `code`, `kbd`, `samp` y `pre` llevan `direction: ltr` + `unicode-bidi: isolate`: el código se lee de izquierda a derecha también en una página RTL.
-- **Utilidades.** Usa `.syx-ms-*`/`.syx-me-*`/`.syx-ps-*`/`.syx-pe-*`, `.syx-ms-auto`/`.syx-me-auto`, `.syx-start-0`/`.syx-end-0` y `.syx-text-start`/`.syx-text-end`. Las físicas ❌ (`.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`) ✓ se **retiraron en 5.0.0**: eran izquierda/derecha físicas y no seguían a la dirección del texto.
-- **Probarlo.** `node tests/browser/run.mjs --axe --rtl` y `--capturas DIR --rtl` montan la página de pruebas con `dir="rtl"`.
+- **`transform` is physical.** If you move something with `translateX`, it goes the other way in RTL. Animate the logical offset instead (the `atom-switch` knob animates `inset-inline-start`) or mirror with `:dir(rtl)`.
+- **Directional icons.** `@include mirror-rtl('::before')` mirrors a "next/previous" arrow or chevron in RTL with `scale: -1 1` (pagination, `atom-list` bullets, `atom-icon--lc-arrow-*`/`--lc-chevron(s)-left/right`, `atom-icon--arrow-*`). It sits behind `@supports selector(:dir(rtl))`: in minimum-support browsers without `:dir()` the icon stays unmirrored. Up/down are not mirrored.
+- **Code.** `code`, `kbd`, `samp` and `pre` carry `direction: ltr` + `unicode-bidi: isolate`: code reads left to right on an RTL page too.
+- **Utilities.** Use `.syx-ms-*`/`.syx-me-*`/`.syx-ps-*`/`.syx-pe-*`, `.syx-ms-auto`/`.syx-me-auto`, `.syx-start-0`/`.syx-end-0` and `.syx-text-start`/`.syx-text-end`. The physical ones ❌ (`.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`) ✓ were **retired in 5.0.0**: they were physical left/right and did not follow the text direction.
+- **Testing it.** `node tests/browser/run.mjs --axe --rtl` and `--capturas DIR --rtl` mount the test page with `dir="rtl"`.
 
 ---
 

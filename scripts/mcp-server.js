@@ -47,20 +47,20 @@ const syx = crearConsulta({ root: ROOT });
 const HERRAMIENTAS = [
   {
     name: 'list_themes',
-    description: 'Los temas disponibles y sus modos. Empieza por aquí si no sabes qué nombre pasar a las demás herramientas.',
+    description: 'The available themes and their modes. Start here if you do not know which theme name to pass to the other tools.',
     inputSchema: { type: 'object', properties: {} },
     run: () => syx.listThemes(),
   },
 
   {
     name: 'get_token',
-    description: 'El valor REAL de un token en un tema y un modo, con la cadena de alias que lo produce. Responde a "¿de qué color es esto aquí?" sin tener que resolver la cascada.',
+    description: 'The REAL value of a token in a theme and mode, with the alias chain that produces it (`chain`). Answers "what colour is this here?" without resolving the cascade yourself. `found: false` comes with `suggestions`.',
     inputSchema: {
       type: 'object',
       properties: {
-        token: { type: 'string', description: 'Nombre completo, p. ej. --component-button-primary-filled-bg' },
-        theme: { type: 'string', description: 'Por defecto syx-sketch' },
-        mode: { type: 'string', enum: ['light', 'dark'], description: 'Por defecto light' },
+        token: { type: 'string', description: 'Full name, e.g. --component-button-primary-filled-bg' },
+        theme: { type: 'string', description: 'Defaults to syx-sketch' },
+        mode: { type: 'string', enum: ['light', 'dark'], description: 'Defaults to light' },
       },
       required: ['token'],
     },
@@ -69,11 +69,11 @@ const HERRAMIENTAS = [
 
   {
     name: 'find_token_by_value',
-    description: 'Qué token o tokens valen un color o medida concretos. Es la consulta que evita escribir el valor a pelo: antes de poner un #1e3aff en una hoja, preguntar cuál es su token.',
+    description: 'Which token(s) hold a given colour or measure (`exact`, or `partial` matches). Ask this before hardcoding a value: before writing #1e3aff in a stylesheet, find its token.',
     inputSchema: {
       type: 'object',
       properties: {
-        value: { type: 'string', description: 'p. ej. oklch(0.498 0.282 266.24) o 1.5rem' },
+        value: { type: 'string', description: 'e.g. oklch(0.498 0.282 266.24) or 1.5rem' },
         theme: { type: 'string' },
         mode: { type: 'string', enum: ['light', 'dark'] },
       },
@@ -84,7 +84,7 @@ const HERRAMIENTAS = [
 
   {
     name: 'list_components',
-    description: 'El inventario de componentes con su capa y sus clases base. Generado desde el código y contrastado contra el CSS compilado: lo que sale de aquí existe.',
+    description: 'The component inventory with each layer and base classes. Generated from the code and checked against the compiled CSS: whatever this returns exists.',
     inputSchema: {
       type: 'object',
       properties: { layer: { type: 'string', enum: ['atom', 'molecule', 'organism'] } },
@@ -94,10 +94,10 @@ const HERRAMIENTAS = [
 
   {
     name: 'get_component',
-    description: 'Todo lo de un componente: clases, modificadores, elementos, estados, de qué se compone y qué tokens consume (todo verificado contra el CSS compilado), más la prosa escrita a mano: description, usage (marcado de ejemplo) y a11y (rol y ARIA que exige el marcado, teclado y JS necesario — léelo antes de escribir el HTML).',
+    description: 'Everything about one component: classes, modifiers, elements, states, what it is composed of and which tokens it reads (all verified against the compiled CSS), plus hand-written prose: description, usage (example markup) and a11y (role and ARIA the markup needs, keyboard, required JS — read it before writing the HTML).',
     inputSchema: {
       type: 'object',
-      properties: { name: { type: 'string', description: 'p. ej. btn, feature-card, site-header' } },
+      properties: { name: { type: 'string', description: 'e.g. btn, feature-card, site-header' } },
       required: ['name'],
     },
     run: (a) => syx.getComponent(a),
@@ -105,12 +105,12 @@ const HERRAMIENTAS = [
 
   {
     name: 'validate_snippet',
-    description: 'Pasa las reglas de contrato de árbol (R01–R04, R09 mixin inexistente, R10 excepciones, R11 lo que lee un token de componente) sobre un fragmento de SCSS ANTES de escribirlo, y avisa de los tokens que usa y no existen. El mismo motor y el mismo contracts/rules.json que npm run validate; una excepción se declara con `// syx-allow Rxx: porqué` en la línea de encima.',
+    description: 'Runs the contract rules (R01–R04, R09 unknown mixin, R10 exceptions, R11 what a component token may read) over an SCSS snippet BEFORE you write it, and reports tokens it uses that do not exist (`valid`, `violations`, `unknownTokens`). Same engine and contracts/rules.json as npm run validate; an exception is declared with `// syx-allow Rxx: why` on the line above.',
     inputSchema: {
       type: 'object',
       properties: {
-        code: { type: 'string', description: 'El SCSS a revisar' },
-        path: { type: 'string', description: 'Dónde va a vivir. Importa: las excepciones dependen de la ruta. Por defecto scss/atoms/_nuevo.scss, que es el contexto más estricto.' },
+        code: { type: 'string', description: 'The SCSS to check' },
+        path: { type: 'string', description: 'Where it will live. It matters: exceptions depend on the path. Defaults to scss/atoms/_nuevo.scss, the strictest context.' },
       },
       required: ['code'],
     },
@@ -119,18 +119,18 @@ const HERRAMIENTAS = [
 
   {
     name: 'classify_change',
-    description: 'Antes de tocar nada: qué nivel de confianza tiene cambiar estos ficheros (automático, vía propuesta o solo humano) y, si preguntas por un token nuevo, en qué fichero va — deducido de su familia, no de una tabla. Sin argumentos, devuelve los tres niveles y qué abarca cada uno.',
+    description: 'Before touching anything: which trust tier changing these files has (automatic, via proposal, or human only) and, for a new token, which file it goes in — deduced from its family, not a table. With no arguments, returns the three tiers and what each covers.',
     inputSchema: {
       type: 'object',
       properties: {
         paths: {
           type: 'array',
           items: { type: 'string' },
-          description: 'Rutas relativas al repositorio que el cambio tocaría',
+          description: 'Repository-relative paths the change would touch',
         },
         token: {
           type: 'string',
-          description: 'Un token --component-* que quieras crear; responde con el fichero donde debe ir',
+          description: 'A --component-* token you want to create; answers with the file it belongs in',
         },
       },
     },
@@ -139,12 +139,12 @@ const HERRAMIENTAS = [
 
   {
     name: 'scan_for_drift',
-    description: 'Lee ficheros .html o .css de una aplicación y señala dónde se ha apartado del sistema: fallbacks que ya no son el valor real del token, tokens que no existen, colores a pelo que ya son token, clases y modificadores que no pintan nada. No modifica nada.',
+    description: 'Reads an app\'s markup and styles (.html, .css, .scss, .vue, .svelte, .astro, .jsx, .tsx) and reports where it drifted from the system (`findings`): expired fallbacks, tokens that do not exist, new tokens under SYX prefixes, primitives read by the app, app rules painting SYX classes, hand-written values that are already tokens, classes and modifiers that paint nothing. Changes nothing.',
     inputSchema: {
       type: 'object',
       properties: {
-        files: { type: 'array', items: { type: 'string' }, description: 'Rutas a ficheros .html o .css' },
-        theme: { type: 'string', description: 'Tema contra el que comparar. Por defecto syx-sketch' },
+        files: { type: 'array', items: { type: 'string' }, description: 'Paths to the files to scan' },
+        theme: { type: 'string', description: 'Theme to compare against. Defaults to syx-sketch' },
         mode: { type: 'string', enum: ['light', 'dark'] },
       },
       required: ['files'],
@@ -154,20 +154,20 @@ const HERRAMIENTAS = [
 
   {
     name: 'list_mixins',
-    description: 'Los mixins del sistema con su firma y cuántas veces se usa cada uno. Los mixins solo existen en el SCSS —no dejan rastro reconocible en el CSS compilado—, así que esto es lo único que hay para saber qué existe sin leerse la carpeta entera.',
+    description: 'The system mixins with their signature and how often each is used. Mixins only exist in the SCSS — they leave no recognisable trace in the compiled CSS — so this is the only way to know what exists without reading the whole folder.',
     inputSchema: {
       type: 'object',
-      properties: { file: { type: 'string', description: 'Filtra por fichero, p. ej. positioning o helpers' } },
+      properties: { file: { type: 'string', description: 'Filter by file, e.g. positioning or helpers' } },
     },
     run: (a) => syx.listMixins(a),
   },
 
   {
     name: 'get_mixin',
-    description: 'Todo lo de un mixin: firma, parámetros con sus valores por defecto, qué propiedades emite, a qué otros mixins llama, quién lo usa como alias y los ejemplos de su documentación. Pregúntalo ANTES de escribir CSS en crudo que una regla vaya a rechazar.',
+    description: 'Everything about one mixin: signature, parameters with defaults, which properties it emits, which mixins it calls, who uses it as an alias, and its documented examples. Ask BEFORE writing raw CSS a rule will reject.',
     inputSchema: {
       type: 'object',
-      properties: { name: { type: 'string', description: 'p. ej. transition, absolute, size' } },
+      properties: { name: { type: 'string', description: 'e.g. transition, absolute, size' } },
       required: ['name'],
     },
     run: (a) => syx.getMixin(a),
@@ -175,13 +175,13 @@ const HERRAMIENTAS = [
 
   {
     name: 'get_figma_spec',
-    description: 'Un componente de SYX en la forma que entiende la Plugin API de Figma: cada token con su propiedad de nodo (cornerRadius, fills, strokeWeight…), su valor ya convertido —colores en RGB de 0 a 1, medidas en píxeles— y el nombre de la variable. Pregúntalo ANTES de crear nada en Figma: get_component da nombres de token, y un nodo necesita números. Dice también qué NO se pudo traducir y por qué.',
+    description: 'A SYX component in the shape the Figma Plugin API understands: each token with its node property (cornerRadius, fills, strokeWeight…), its value already converted — colours as 0–1 RGB, measures in pixels — and its variable name. Ask BEFORE creating anything in Figma: get_component gives token names, and a node needs numbers. It also says what could NOT be translated, and why (`unmapped`, `untranslated`).',
     inputSchema: {
       type: 'object',
       properties: {
-        component: { type: 'string', description: 'p. ej. btn, feature-card, site-header' },
-        theme: { type: 'string', description: 'Por defecto syx-sketch' },
-        mode: { type: 'string', enum: ['light', 'dark'], description: 'Por defecto light' },
+        component: { type: 'string', description: 'e.g. btn, feature-card, site-header' },
+        theme: { type: 'string', description: 'Defaults to syx-sketch' },
+        mode: { type: 'string', enum: ['light', 'dark'], description: 'Defaults to light' },
       },
       required: ['component'],
     },

@@ -236,15 +236,15 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
         if (declaradosApp.has(v.token) && !TOKENS_SYX.test(v.token)) continue; // token de la app
         const real = syx.getToken({ token: v.token, theme, mode });
 
-        if (!real.encontrado && !TOKENS_SYX.test(v.token)) continue; // de otra librería: no es asunto de SYX
-        if (!real.encontrado) {
+        if (!real.found && !TOKENS_SYX.test(v.token)) continue; // de otra librería: no es asunto de SYX
+        if (!real.found) {
           añadir({
             tipo: 'token-inexistente',
             gravedad: 'alta',
             file: rel, linea,
             que: `${v.token} no existe en el sistema`,
             detalle: `La aplicación pinta siempre el fallback (${v.fallback}) creyendo que es una excepción.`,
-            sugerencia: real.sugerencias?.length ? `¿Quisiste decir ${real.sugerencias.slice(0, 3).join(', ')}?` : null,
+            sugerencia: real.suggestions?.length ? `¿Quisiste decir ${real.suggestions.slice(0, 3).join(', ')}?` : null,
           });
           continue;
         }
@@ -267,10 +267,10 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     // ── 1b. var() sin fallback de un token que no existe ───────────────────
     for (const t of trozos) {
       for (const v of varsSinFallback(t.css)) {
-        if (syx.getToken({ token: v.token, theme, mode }).encontrado) continue;
+        if (syx.getToken({ token: v.token, theme, mode }).found) continue;
         if (declaradosApp.has(v.token)) continue; // lo declara la app (si usurpa un prefijo de SYX, sale en 1c)
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, v.indice).split('\n').length - 1;
-        const cerca = syx.getToken({ token: v.token, theme, mode }).sugerencias || [];
+        const cerca = syx.getToken({ token: v.token, theme, mode }).suggestions || [];
         const deSyx = TOKENS_SYX.test(v.token);
         añadir({
           tipo: 'token-inexistente',
@@ -297,7 +297,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     for (const t of trozos) {
       for (const d of declaraciones(t.css)) {
         if (!TOKENS_SYX.test(d.token)) continue;
-        if (syx.getToken({ token: d.token, theme, mode }).encontrado) continue;
+        if (syx.getToken({ token: d.token, theme, mode }).found) continue;
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, d.indice).split('\n').length - 1;
         añadir({
           tipo: 'token-usurpado',
@@ -318,7 +318,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
           detalle: 'Un primitivo es un valor sin significado: no sigue al modo oscuro ni a un cambio de marca. La app empieza en los semánticos.',
           sugerencia: (() => {
             const v = syx.getToken({ token: m[1], theme, mode });
-            const sem = v.encontrado ? syx.findTokenByValue({ value: v.value, theme, mode }).exactos.filter((x) => x.startsWith('--semantic-')) : [];
+            const sem = v.found ? syx.findTokenByValue({ value: v.value, theme, mode }).exact.filter((x) => x.startsWith('--semantic-')) : [];
             return sem.length ? `Hoy vale lo mismo que ${sem.slice(0, 3).join(', ')}` : 'Busca el rol: get_token / find_token_by_value.';
           })(),
         });
@@ -349,15 +349,15 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
         const valor = m[1];
         const linea = t.unaLinea ? t.desde : t.desde + sinVars.slice(0, m.index).split('\n').length - 1;
         const cerca = syx.findTokenByValue({ value: valor, theme, mode });
-        const semanticos = cerca.exactos.filter((x) => x.startsWith('--semantic-'));
-        if (!cerca.exactos.length) continue; // un color propio de la app no es desviación
+        const semanticos = cerca.exact.filter((x) => x.startsWith('--semantic-'));
+        if (!cerca.exact.length) continue; // un color propio de la app no es desviación
         añadir({
           tipo: 'valor-a-pelo',
           gravedad: 'media',
           file: rel, linea,
           que: `${valor} escrito a mano, existiendo como token`,
-          detalle: `es ${(semanticos.length ? semanticos : cerca.exactos).slice(0, 3).join(', ')}`,
-          sugerencia: `var(${(semanticos[0] || cerca.exactos[0])})`,
+          detalle: `es ${(semanticos.length ? semanticos : cerca.exact).slice(0, 3).join(', ')}`,
+          sugerencia: `var(${(semanticos[0] || cerca.exact[0])})`,
         });
       }
     }

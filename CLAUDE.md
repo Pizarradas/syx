@@ -7,59 +7,39 @@ You are working with **SYX**, a token-driven, native SCSS design system (v5.0.0)
 
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet. Its rule
-   table (R01–R11) is the readable form of `contracts/rules.json`, the machine contract that
-   `syx-validate.js` and `validate_snippet` run: ask `validate_snippet` instead of reading it.
+   table (R01–R11) is the readable form of `contracts/rules.json`; ask `validate_snippet`
+   instead of reading the JSON.
 
-**Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB)
-are the sources of truth, but reading them whole costs some 80 000 tokens of context before
-the first decision. With the `syx` MCP server, never open them: `get_token`,
-`find_token_by_value`, `list_components` and `get_component` answer the same questions one at a
-time. Without it, search them for the one entry the task needs (`grep '"--semantic-color-'
-tokens.json`) instead of reading them. The rule does not change — check a token before using or
-creating it, check a component before creating one — only the way of checking does.
+**Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB) are the
+sources of truth; reading them whole costs some 80 000 tokens. With the `syx` MCP server, ask:
+`get_token` (real value in a theme and mode, with its alias chain), `find_token_by_value` (before
+hardcoding anything), `get_component` (verified classes, modifiers, a11y), `get_mixin` (what to write
+where R03/R04 forbid raw CSS), `validate_snippet` (R01–R04, R09–R11 **before** writing),
+`get_figma_spec` (numbers for a Figma node — never convert `oklch()` or `rem` by hand),
+`classify_change` and `scan_for_drift`. Without the server, grep the one entry you need
+(`grep '"--semantic-color-' tokens.json`). In an app that installs SYX, `require('syx-design-system')`
+answers the same queries. The full tool table is in `README.md` → *MCP server*.
 
-**Before writing anything, know the tier.** `contracts/trust.json` grades changes:
-docs and derived artifacts are automatic; component tokens, components and utilities
-go through `node scripts/propose.js` — `token` for a new component token (it deduces the
-destination file), `files <paths…> --why "…"` for a component or utility you have already
-written in the tree. Both compile, validate and leave a branch plus evidence, and both
-refuse any path that is not tier `pr`. Primitives, semantics, themes, mixins,
-`scripts/`, the contracts themselves and every document that instructs or grades an agent
-(this file, `AGENTS.md`, `AI_GUIDELINES.md`, `.claude/`, `_agents/modes/`, `_agents/evals/`)
-are human-only — analyse and recommend, never write; the hook in `.claude/settings.json`
-blocks the edit, and CI fails a PR that touches them without a person's approval. Unmatched
-paths are human-only. Ask `classify_change` rather than guessing, and
-never edit a rule or a guard to make your own change pass.
-
-**To check an app against the system**, don't read its CSS looking for smells: `scan_for_drift` (or `npx syx-scan`) reports expired fallbacks, non-existent tokens, hand-written values that are already tokens, and classes that paint nothing — ignoring code examples.
-
-**To take SYX into Figma**, ask `get_figma_spec` per component while drawing, or run `npm run export:figma` for the whole library (`contracts/figma/<theme>.figma.json`: two variable collections with light and dark, plus the 40 components with the node property each token maps to). Never translate an `oklch()` or a `rem` by hand — `scripts/lib/figma.js` does it, and it is the same conversion both routes use. See `README.md` → *Figma*.
-
-**Cheaper route: the MCP server.** If `syx` is registered as an MCP server (see
-`README.md` → *MCP server*), don't load those files to answer a point question. Use
-`get_token` for a token's real value in a theme and mode, `find_token_by_value` before
-hardcoding anything, `get_component` for a component's verified classes and modifiers,
-`get_mixin` before writing a property a rule will reject — R03 and R04 say what you may not write, and `get_mixin` says what to write instead —
-`get_figma_spec` before creating anything in Figma — `get_component` returns token *names*, and a Figma node needs numbers —
-and `validate_snippet` to pass R01–R04 and R09–R11 over SCSS **before** writing it (it now names the replacement mixin itself). It runs the same
-rules as `npm run validate`, from `scripts/lib/rules.js`. The server exposes eleven tools
-in total — `list_themes` and `list_mixins` round out the nine above; the full table is in
-`README.md`. In an app that installs SYX instead of cloning it,
-`require('syx-design-system')` gives the same queries as a Node API.
+**Before writing anything, know the tier.** `contracts/trust.json` grades changes: docs and derived
+artifacts are automatic; component tokens, components and utilities go through
+`node scripts/propose.js` (`token` for a new component token, `files <paths…> --why "…"` for what you
+already wrote). Primitives, semantics, themes, mixins, `scripts/`, the contracts and every document
+that instructs or grades an agent (this file, `AGENTS.md`, `AI_GUIDELINES.md`, `.claude/`,
+`_agents/modes/`, `_agents/evals/`) are human-only: analyse and recommend, never write. The hook in
+`.claude/settings.json` blocks the edit and CI fails the PR without a person's approval. Unmatched
+paths are human-only. Ask `classify_change` rather than guessing, and never edit a rule or a guard
+to make your own change pass.
 
 ---
 
 ## Two layers: the engine and the cortex
 
 ```
-_agents/        ENGINE  — what a mode does, in what format, under what permission ceiling.
-                          Always loaded. Guarded by `npm run check:modos`. Ships with the package.
-mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCAG, scale models,
-                          prestige, motion, and the ATLAS editorial rules. Loaded on demand.
-                          Informs; never executes. Not published to npm.
+_agents/        ENGINE  — what a mode does, in what format, under what permission ceiling. Always loaded.
+mind-system/    CORTEX  — why a decision is right (colour, UX laws, WCAG, scales, motion, ATLAS). On demand.
 ```
 
-**Precedence, highest first.** When two documents in this repository disagree, the higher rung wins — no exceptions by context:
+**Precedence, highest first** — when two documents disagree, the higher rung wins:
 
 | # | Authority | Decides | Checked? |
 |---|---|---|---|
@@ -70,111 +50,51 @@ mind-system/    CORTEX  — why a decision is right: colour theory, UX laws, WCA
 | 5 | `mind-system/atlas-rules/` | Editorial decisions (guest domain) | ⚠️ declared only |
 | 6 | `mind-system/knowledges/` | The reasoning | ⚠️ declared only |
 
-A knowledge module never authorises anything, never creates a token, and never wins an argument
-against a rule: if one recommends what R01 forbids, the module is what needs fixing. When
-`[ATLAS]:` wraps a mode, ATLAS decides **what** to build and **why** — editorial level, hierarchy,
-density, proportion, zone, advertising — and nothing above rung 5. Entry point:
+A knowledge module never authorises anything and never wins against a rule. When `[ATLAS]:` wraps a
+mode, ATLAS decides **what** to build and **why**, and nothing above rung 5. Entry point:
 `mind-system/README.md`; the mode↔knowledge wiring is `mind-system/routing.md`.
 
 ---
 
 ## Mode System
 
-When the user's message begins with a `[SYX: MODE]:` prefix, activate the corresponding mode **before responding**. Read the mode file and let it override your default behavior for the entire response. Each mode file opens with two blocks: `Trust` (what it may write) and `Knowledge` (which cortex modules it loads, and when), and every mode but SKETCH answers for its decisions with `## Why` lines — one line per decision that had an alternative, specified once in `_agents/decision-record.md`. AUDIT and MIGRATE attach the line to each finding or variable instead of closing with a block; that placement is argued there too.
-
-Two operators compose modes: `→` is a pipeline (each output feeds the next), `+` is evaluative
-(both modes work the same artifact). **`+` groups before `→`**, so `[SYX: UX → UI + AUDIT]:` reads
-as `UX → (UI + AUDIT)`. The `/syx` slash command (`.claude/commands/syx.md`) takes the same grammar
-and resolves to the same files — use it when the user types `/syx`, and honour the prefix when they
-type that instead. Neither form picks a mode on its own: choosing the lens picks the tier, and the
-tier is what the turn costs.
-
-### Resource Tiers
-
-Modes are calibrated by complexity and AI resource consumption. Choose the right tier for the task to avoid spending context budget unnecessarily.
-
-The **Files loaded** column is the cost *without* the MCP server: what a mode has to read to
-answer a point question when it can only open files. With `syx` registered, most of those reads
-become a call that returns the one answer, and the column that matters is the last one.
-
-| Tier | Mode | Cost | Files loaded (no MCP) | Ask instead | Typical turns |
-|---|---|---|---|---|---|
-| 1 | `[SYX: SKETCH]:` | ⚡ Minimal | 0 | — | 1 |
-| 2 | `[SYX: UX]:` | 🔵 Light | 1 (`component-registry.json`) | `list_components`, `get_component` | 1–2 |
-| 3 | `[SYX: CREATIVE]:` | 🟡 Medium | 0–1 | `get_component`, `find_token_by_value` | 1–2 |
-| 4 | `[SYX: TOKEN]:` | 🟠 Medium-High | 2 (`tokens.json`, `rules.json`) | `get_token`, `find_token_by_value`, `classify_change` | 2–3 |
-| 5 | `[SYX: THEME]:` | 🟠 Medium-High | 3 (`tokens.json`, theme file, `rules.json`) | `get_token` (per theme + mode) | 2–3 |
-| 6 | `[SYX: UI]:` | 🔴 High | 4+ (tokens, registry, rules, component files) | `get_component`, `get_mixin`, `validate_snippet` | 3–4 |
-| 7 | `[SYX: AUDIT]:` | 🔴 High | N (component tree being audited) | `validate_snippet`, `scan_for_drift` | 2–4 |
-| 8 | `[SYX: MIGRATE]:` | 🔴 Very High | N+ (all files referencing the migrated variable) | `find_token_by_value`, `get_token`, `scan_for_drift` | 4–6 |
-| 9 | `[SYX: BRAND]:` | 🔴 Very High | 3 (`tokens.json`, `rules.json`, `component-registry.json`) | `get_token` (per axis), `find_token_by_value`, `list_components` | 3–5 |
-
-> **Tip:** Start with SKETCH or UX to validate the concept. Escalate to TOKEN → UI → AUDIT only when the idea is confirmed.
-
-**The tier measures interrogating the system, not the cortex.** They are two separate axes and
-adding them together gives a wrong number. The tier counts what it costs to ask SYX (`tokens.json`,
-`component-registry.json`, `contracts/`); the mode's `Knowledge` block counts what it costs to load
-the corpus. CREATIVE is tier 3 and, as soon as anything moves, still loads most of the `motion/` domain —
-its knowledge strata, plus the GSAP layer when there is a library: cheap in system reads,
-expensive in corpus. SKETCH is the one disciplined exception — its tier 1 is bought
-by reading nothing, so its `Knowledge` block has no **Always** line at all.
-
-**BRAND is the second exception, in the opposite direction.** It reads three files and still sits at
-tier 9, because the tier ranks the work and BRAND's work is the only one that has to come out
-internally consistent across seven axes at once. The expensive part is the coherence check, not the
-reads. It sits at the end of the table rather than between UI and AUDIT for a duller reason: the
-numbers are cited in three indices, and renumbering eight rows to insert one costs more than the
-ordering is worth.
-
-### Mode Reference
+When the message begins with `[SYX: MODE]:` (or `/syx MODE …`), read the mode file **before
+responding** and let it govern the whole response. `→` is a pipeline, `+` is evaluative, and `+`
+groups first: `[SYX: UX → UI + AUDIT]:` is `UX → (UI + AUDIT)`. Each mode opens with a `Trust` block
+(what it may write — it inherits permission, never grants it) and a `Knowledge` block (which cortex
+modules it loads, and when). Tiers, costs and when to escalate: `_agents/modes/README.md`.
 
 | Prefix | Mode file | Writes | When to use |
 |---|---|---|---|
-| `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | nothing | Quick POCs, wireframes, flow diagrams, layout experiments — no token/registry checks |
-| `[SYX: UX]:` | `_agents/modes/ux.md` | nothing | Component selection, HTML structure, accessibility, interaction design |
-| `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | nothing | Experimental builds, awwwards-style pages, advanced CSS techniques, creative exploration |
-| `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, code generation, contract compliance — SCSS via `propose.js`, `component-registry.json` direct |
-| `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens, token audits |
-| `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Creating or modifying themes, OKLCH scales, dark mode |
-| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R11), violation detection, codebase health |
-| `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
-| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — interviews you axis by axis, or decides the lot on request; hands over the seven axes, their provenance, its invariants and the spec THEME builds the theme from |
+| `[SYX: SKETCH]:` | `_agents/modes/sketch.md` | nothing | Quick POCs, wireframes, flow diagrams — no token/registry checks |
+| `[SYX: UX]:` | `_agents/modes/ux.md` | nothing | Component selection, HTML structure, accessibility, interaction |
+| `[SYX: CREATIVE]:` | `_agents/modes/creative.md` | nothing | Experimental builds, advanced CSS, creative exploration |
+| `[SYX: UI]:` | `_agents/modes/ui.md` | `auto` + `pr` | SCSS implementation, token usage, contract compliance |
+| `[SYX: TOKEN]:` | `_agents/modes/token.md` | `pr` / recommends | Token architecture, creating/migrating tokens |
+| `[SYX: THEME]:` | `_agents/modes/theme.md` | recommends | Themes, OKLCH scales, dark mode |
+| `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | R01–R11 conformance, violations, codebase health |
+| `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, per-variable replacement |
+| `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity: the seven axes and the spec THEME builds from |
 
-**A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
-may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead
-of reading. Those lists are checked against `contracts/trust.json` by `npm run check:modos`, so a
-mode cannot quietly hand itself a permission the contract doesn't give it. THEME and BRAND never
-write; TOKEN and MIGRATE write the lower half of what they touch and hand over the upper half.
-
-If no prefix is present, use the base rules below and apply common sense about which mode is most relevant.
+Without a prefix, apply the base rules below and use the mode that fits.
 
 ---
 
 ## Base Rules (always active, all modes)
 
-These rules are never overridden by any mode:
-
-- **Never use `--primitive-*` tokens in component files.** Always map through `--semantic-*`.
+- **Never use `--primitive-*` in component files.** Map through `--semantic-*`.
 - **Never use `!important`.** SYX uses `@layer` for cascade management.
-- **Never write raw `transition`/`transition-*` or `position: absolute|fixed|sticky` outside the mixins.** Use mixins. The rules run on the parsed SCSS: formatting does not dodge them. A justified exception goes on the line above, `// syx-allow R03: <why>`, and excuses that one declaration only.
-- **Never hardcode design values** (hex colors, raw px/rem literals). Use tokens.
-- **Ask before using a token** — `get_token` (or a grep of `tokens.json`, which is generated from the SCSS: never edit it). If it is missing: a component token is proposed with `node scripts/propose.js token`; a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person, don't create it.
-- **Check `component-registry.json` before creating a component.** Reuse before creating.
-- **After writing code, run** `node scripts/syx-validate.js` to verify R01–R11 compliance. Severities come from `contracts/rules.json`: R01–R04, R09 (unknown mixin) and R10 (dead or unjustified exception) are errors and fail the run; R05, R06 and R08 are warnings (undocumented tokens, phantom entries, registry tokens no compiled CSS uses) and R07 is info (unprefixed legacy vars).
+- **Never write raw `transition`/`transition-*` or `position: absolute|fixed|sticky` outside the mixins.**
+  A justified exception goes on the line above, `// syx-allow R03: <why>`, and excuses that one declaration.
+- **Never hardcode design values** (hex colours, raw px/rem). Use tokens.
+- **Ask before using a token** (`get_token`). Missing: a component token is proposed with
+  `node scripts/propose.js token`; a semantic or primitive one is recommended to a person.
+- **Check the registry before creating a component.** Reuse before creating.
+- **After writing code, run** `node scripts/syx-validate.js`. R01–R04, R09 and R10 are errors;
+  R05, R06 and R08 warnings; R07 info (`contracts/rules.json`).
 
----
-
-## Available Workflows
-
-Pre-built step-by-step workflows live in `_agents/workflows/`:
-
-| Workflow | File | What it does |
-|---|---|---|
-| Create component | `_agents/workflows/create-component.md` | New atom, molecule, or organism |
-| Create theme | `_agents/workflows/create-theme.md` | Clone template, configure new theme |
-| Audit tokens | `_agents/workflows/audit-tokens.md` | Full token health check |
-| Update changelog | `_agents/workflows/update-changelog.md` | Conventional Commits changelog |
-| Export to Figma | `_agents/workflows/export-to-figma.md` | Stand up the SYX library in Figma: variables, components, and what won't travel |
+Step-by-step workflows (create a component or theme, audit tokens, changelog, export to Figma) live in
+`_agents/workflows/`. The ecosystem as a graph: `_agents/architecture.md`.
 
 ---
 
@@ -182,23 +102,11 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 
 ```
 scss/abstracts/tokens/    — 4 kinds of token (primitive, theme, semantic, component); colour path primitive → semantic → component
-scss/atoms/               — 23 atoms, single-purpose
-scss/molecules/           — 15 molecules, composites
-scss/organisms/           — 2 complex sections (app-shell, site-header)
-scss/site/                — SITE LAYER: 12 pieces used only by SYX's own pages
-                            (home-*, evidence, score, ranking, compare-card,
-                            theme-swatch-card). Outside the registry and the
-                            storybook; removable.
+scss/atoms/               — 23 atoms · scss/molecules/ — 15 molecules · scss/organisms/ — 2 (app-shell, site-header)
+scss/site/                — SITE LAYER: pieces used only by SYX's own pages; outside the registry; removable
 scss/themes/*/            — 7 themes (6 example-* + syx-sketch), 6 bundle contexts
-contracts/                — machine-readable validation output
-_agents/                  — THE ENGINE: modes (Trust + Knowledge blocks), workflows, prompts
-_agents/architecture.md   — the ecosystem as diagrams-as-code; architecture.json is the
-                            same graph machine-readable — start here to frame any change
-mind-system/              — THE CORTEX: README (precedence), constitution, routing,
-                            governance/ (ATLAS ↔ modes), atlas-rules/ (guest domain),
-                            knowledges/ (ux · ui · front · syx · branding · motion · vendors)
-scripts/syx-validate.js   — contract validator (run after any change)
-index.js                  — package entry point: the same queries as an npm dependency
-scripts/mcp-server.js     — MCP server (stdio) — ask the system instead of reading it
-scripts/lib/              — shared engine: css-tokens.js, rules.js (AST rule engine: R01–R04, R09–R11), consulta.js
+contracts/                — machine-readable contracts and validation output
+_agents/                  — THE ENGINE: modes, workflows, prompts, evals
+mind-system/              — THE CORTEX: precedence, routing, governance, atlas-rules, knowledges
+scripts/                  — validator, MCP server (mcp-server.js), scanner, propose.js; lib/ = shared engine
 ```

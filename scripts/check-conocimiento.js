@@ -28,11 +28,14 @@
  *      cuelen en silencio.
  *   6. Ningún token fantasma: todo `--semantic-*`, `--component-*` y
  *      `--primitive-*` citado en el córtex, la gobernanza, CLAUDE.md,
- *      AGENTS.md, AI_GUIDELINES.md, CONSUMING.md, la plantilla de app y los modos existe (convención de ejemplos
+ *      AGENTS.md, AI_GUIDELINES.md, CONSUMING.md, README.md, THEMING-RULES.md,
+ *      las guías y README de scss/, la plantilla de app y los modos existe (convención de ejemplos
  *      malos y nuevos más abajo, en la propia comprobación).
  *   7. Presupuesto de contexto: la entrada de cada modo (CLAUDE.md, lo que
- *      manda leer antes de nada, el modo y sus Always) ≤ 25 000 tokens y su
+ *      manda leer antes de nada, el modo y sus Always) ≤ 22 000 tokens y su
  *      peor caso ≤ 60 000. Imprime la tabla; routing.md no copia las cifras.
+ *   8. Idioma: lo que instruye a un agente está en inglés (la política, en
+ *      la propia comprobación).
  *
  * Uso: node scripts/check-conocimiento.js   ·   npm run check:conocimiento
  */
@@ -239,7 +242,9 @@ function citasJuzgables(texto) {
       const sig = l[m.index + m[0].length] || '';
       const patron = /[*{<[]/.test(sig) || m[0].endsWith('-');
       const nombre = patron ? m[0].replace(/-+$/, '-') : m[0];
-      if (modo === 'nuevo-todo' || (modo === 'nuevo-bloque' && /^\s*:/.test(l.slice(m.index + m[0].length)))) {
+      // En un bloque marcado, crea el nombre lo que lo declara (`--x:`) y lo que
+      // se lo pasa a propose.js (`--name --x`): README enseña a proponer uno.
+      if (modo === 'nuevo-todo' || (modo === 'nuevo-bloque' && (/^\s*:/.test(l.slice(m.index + m[0].length)) || /--name\s+$/.test(l.slice(0, m.index))))) {
         nuevos.add(nombre);
         continue;
       }
@@ -288,7 +293,11 @@ comprobar('ningún token citado es un fantasma', () => {
   const fuentes = [
     ...walk(K).filter((p) => !rel(p).startsWith('vendors/')),
     ...walk(path.join(ROOT, 'mind-system', 'governance')),
-    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md', 'CONSUMING.md', 'templates/app/AGENTS.md'].map((f) => path.join(ROOT, f)),
+    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md', 'CONSUMING.md', 'templates/app/AGENTS.md', 'README.md', 'THEMING-RULES.md'].map((f) => path.join(ROOT, f)),
+    // Las guías de autor y los README de scss/: un agente que escribe un
+    // componente las lee igual que las entradas. En octubre de 2026 quedaban
+    // aquí 54 tokens inexistentes que ningún guardián miraba.
+    ...walk(path.join(ROOT, 'scss')),
     ...walk(MODOS_DIR),
   ].filter((p) => p.endsWith('.md') && fs.existsSync(p));
   const fantasmas = new Map(); // nombre → [dónde]
@@ -309,6 +318,53 @@ comprobar('ningún token citado es un fantasma', () => {
       ' · Usa el nombre real (get_token / tokens.json), reescribe el ejemplo, o márcalo con ❌, <!-- syx: ejemplo-incorrecto --> si el error es a propósito, o <!-- syx: ejemplo-nuevo --> si el ejemplo crea el token');
   }
   return `${citas} citas de ${distintos.size} nombres en ${fuentes.length} documentos, todas existen`;
+});
+
+// ─── 8 · Un idioma para lo que instruye ─────────────────────────────────────
+// Hasta octubre de 2026 la mitad de las guías que lee un agente estaba en
+// español y la otra mitad en inglés, y la API mezclaba `found` con
+// `encontrado`. Un agente que lee las dos versiones de un mismo concepto acaba
+// escribiendo la que no es. La política, desde entonces:
+//   · EN INGLÉS lo que dice a un agente o a quien adopta SYX qué escribir: las
+//     entradas, el contrato de consumo, README, THEMING-RULES, las guías y los
+//     README de scss/, los modos, flujos y prompts de _agents/, la plantilla
+//     de app y las claves de la API (scripts/lib/claves.js).
+//   · EN ESPAÑOL, si se quiere, lo que es razonamiento o historia: el córtex
+//     (mind-system/), los evals (son respuestas de referencia, y algunos miden
+//     respuestas en español), CHANGELOG, docs/decisions/ y los comentarios
+//     del código.
+// Se mide fuera de los bloques de código, por palabras vacías: no es un
+// detector de idioma, es una alarma para un párrafo que se quedó sin traducir.
+const VACIAS_ES = new Set('el la los las de que y en un una por para con no es se del al lo como más pero sus su este esta son también cuando hay sin sobre'.split(' '));
+const VACIAS_EN = new Set('the of and to in is a for that with as on it this are be by or not from an if when which use'.split(' '));
+const UMBRAL_ES = 0.15;
+
+comprobar('lo que instruye a un agente está en inglés', () => {
+  const fuentes = [
+    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md', 'CONSUMING.md', 'README.md', 'THEMING-RULES.md'].map((f) => path.join(ROOT, f)),
+    ...walk(path.join(ROOT, 'scss')),
+    ...walk(path.join(ROOT, 'templates')),
+    ...walk(MODOS_DIR),
+    ...['workflows', 'prompts'].flatMap((d) => walk(path.join(ROOT, '_agents', d))),
+    ...fs.readdirSync(path.join(ROOT, '_agents')).filter((f) => f.endsWith('.md')).map((f) => path.join(ROOT, '_agents', f)),
+  ].filter((p) => p.endsWith('.md') && fs.existsSync(p));
+  const malos = [];
+  for (const f of fuentes) {
+    const texto = fs.readFileSync(f, 'utf8').replace(/```[\s\S]*?```/g, ' ');
+    const lineas = texto.split(/\r?\n/);
+    let es = 0, en = 0;
+    const sospechosas = [];
+    lineas.forEach((l, i) => {
+      const w = l.toLowerCase().match(/[a-záéíóúñ]+/g) || [];
+      const e = w.filter((x) => VACIAS_ES.has(x)).length;
+      es += e; en += w.filter((x) => VACIAS_EN.has(x)).length;
+      if (e >= 4) sospechosas.push(i + 1);
+    });
+    const r = es / Math.max(1, es + en);
+    if (r > UMBRAL_ES) malos.push(`${path.relative(ROOT, f).split(path.sep).join('/')} (${Math.round(r * 100)} % español; líneas ${sospechosas.slice(0, 4).join(', ')})`);
+  }
+  if (malos.length) throw new Error(malos.join(' · ') + ' · Tradúcelo al inglés o, si es razonamiento o historia, muévelo a mind-system/ o docs/decisions/');
+  return `${fuentes.length} documentos en inglés`;
 });
 
 // ─── 7 · Presupuesto de contexto ────────────────────────────────────────────
@@ -336,7 +392,11 @@ comprobar('ningún token citado es un fantasma', () => {
 // carpeta sin módulo de entrada no se puede cargar sin cargarla entera, y
 // falla.
 const BYTES_POR_TOKEN = 3.5;
-const LIMITE_ENTRADA = 25000;
+// 25 000 hasta octubre de 2026, con BRAND en 24 463. Al quitar de CLAUDE.md
+// y AI_GUIDELINES.md lo que repetían de los índices de modos y flujos, la
+// entrada de todos los modos bajó unos 3 800 tokens; el límite baja con ella
+// para que no se vuelva a llenar sin que nadie lo decida.
+const LIMITE_ENTRADA = 22000;
 const LIMITE_PEOR = 60000;
 const presupuesto = [];
 

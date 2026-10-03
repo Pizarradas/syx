@@ -1,66 +1,66 @@
 # utilities/
 
-Clases de utilidad **tema-agnósticas**. Viven en `@layer syx.utilities` — el layer más alto del stack, lo que significa que **siempre sobreescriben** a cualquier componente (`atom-*`, `mol-*`, `org-*`) sin necesitar `!important`.
+**Theme-agnostic** utility classes. They live in `@layer syx.utilities` — the highest layer in the stack, which means they **always override** any component (`atom-*`, `mol-*`, `org-*`) without needing `!important`.
 
-**Prefijo**: `.syx-*`
+**Prefix**: `.syx-*`
 **Layer**: `@layer syx.utilities`
-**Tema-dependientes**: ❌ No — son iguales en todos los temas
+**Theme-dependent**: ❌ No — they are the same in every theme
 
-> **Diferencia clave con `base/helpers/`**: Las utilidades aquí son universales (no cambian por tema). Si necesitas clases de color, tipografía o iconos que sí varían por tema, usa los helpers de `base/helpers/`.
+> **Key difference from `base/helpers/`**: The utilities here are universal (they do not change by theme). If you need color, typography or icon classes that do vary by theme, use the helpers in `base/helpers/`.
 
 ---
 
-## Tabla de escala numérica
+## Numeric scale table
 
-Varias utilidades usan una escala `-1` a `-5` cuyos valores **son siempre los mismos** y mapean directamente a tokens semánticos. Esta tabla es la llave de decodificación:
+Several utilities use a `-1` to `-5` scale whose values **are always the same** and map directly to semantic tokens. This table is the decoding key:
 
-| Paso | Token semántico              | Valor aprox.     |
+| Step | Semantic token               | Approx. value    |
 | ---- | ---------------------------- | ---------------- |
 | `-1` | `--semantic-space-inline-xs` | 8px              |
 | `-2` | `--semantic-space-inline-sm` | 16px             |
 | `-3` | `--semantic-space-inline-md` | 24px             |
 | `-4` | `--semantic-space-inline-lg` | 32px             |
-| `-5` | `--semantic-space-layout-xl` | 32–48px (fluido) |
+| `-5` | `--semantic-space-layout-xl` | 32–48px (fluid)  |
 
-El paso `-0` es siempre `0`. El **espaciado es fluido** en el rango layout: el valor exacto varía entre el mínimo y máximo según el viewport.
+Step `-0` is always `0`. **Spacing is fluid** in the layout range: the exact value varies between the minimum and maximum depending on the viewport.
 
-Aplica a: `.syx-m-*` · `.syx-p-*` · `.syx-gap-*` · `.syx-col-gap-*` · `.syx-row-gap-*`
-
----
-
-## Cuándo usar estas clases
-
-Usa `utilities/` para:
-
-- **Componer layouts** con flexbox/grid sin escribir CSS propio
-- **Ajustar espaciado** puntualmente (márgenes, paddings)
-- **Ocultar/mostrar** elementos por breakpoint
-- **Controlar tipografía** (peso, alineación, transform, color semántico)
-- **Insertar iframes/mapas/videos** responsivos
-- **Accesibilidad** (skip links, screen reader only)
-
-**No** uses estas clases para:
-
-- Colores de marca específicos del tema → usa `base/helpers/` (`.syx-bg-color-primary`, `.syx-font-color-primary`)
-- Iconos SVG → usa `base/helpers/` (`.syx-icon--facebook-primary`)
-- Componentes → usa `atoms/`, `molecules/`, `organisms/`
+Applies to: `.syx-m-*` · `.syx-p-*` · `.syx-gap-*` · `.syx-col-gap-*` · `.syx-row-gap-*`
 
 ---
 
-## Archivos y clases
+## When to use these classes
 
-### `_display.scss` — Display, Flex, Grid, Position, Visibilidad
+Use `utilities/` to:
+
+- **Compose layouts** with flexbox/grid without writing your own CSS
+- **Adjust spacing** in one-off cases (margins, paddings)
+- **Hide/show** elements by breakpoint
+- **Control typography** (weight, alignment, transform, semantic color)
+- **Embed responsive** iframes/maps/videos
+- **Accessibility** (skip links, screen reader only)
+
+**Do not** use these classes for:
+
+- Theme-specific brand colors → use `base/helpers/` (`.syx-bg-color-primary`, `.syx-font-color-primary`)
+- SVG icons → use `base/helpers/` (`.syx-icon--facebook-primary`)
+- Components → use `atoms/`, `molecules/`, `organisms/`
+
+---
+
+## Files and classes
+
+### `_display.scss` — Display, Flex, Grid, Position, Visibility
 
 #### Display
 
-| Clase                 | Efecto                                |
+| Class                 | Effect                                |
 | --------------------- | ------------------------------------- |
 | `.syx-d-flex`         | `display: flex`                       |
 | `.syx-d-inline-flex`  | `display: inline-flex`                |
 | `.syx-d-block`        | `display: block`                      |
 | `.syx-d-inline-block` | `display: inline-block`               |
 | `.syx-d-inline`       | `display: inline`                     |
-| `.syx-d-none`         | `display: none` (esconde el elemento) |
+| `.syx-d-none`         | `display: none` (hides the element)   |
 | `.syx-d-grid`         | `display: grid`                       |
 | `.syx-d-inline-grid`  | `display: inline-grid`                |
 | `.syx-d-contents`     | `display: contents`                   |
@@ -69,15 +69,15 @@ Usa `utilities/` para:
 | `.syx-d-table-row`    | `display: table-row`                  |
 | `.syx-d-list-item`    | `display: list-item`                  |
 
-#### Visibilidad responsiva
+#### Responsive visibility
 
-| Clase            | Comportamiento                          |
+| Class            | Behavior                                |
 | ---------------- | --------------------------------------- |
-| `.syx-d-sm-only` | Solo visible en mobile (< 48em)         |
-| `.syx-d-sm-up`   | Visible desde 48em (768px) en adelante  |
-| `.syx-d-md-up`   | Visible desde 64em (1024px) en adelante |
-| `.syx-d-lg-up`   | Visible desde 80em (1280px) en adelante |
-| `.syx-d-xlg-up`  | Visible desde 90em (1440px) en adelante |
+| `.syx-d-sm-only` | Visible on mobile only (< 48em)         |
+| `.syx-d-sm-up`   | Visible from 48em (768px) up            |
+| `.syx-d-md-up`   | Visible from 64em (1024px) up           |
+| `.syx-d-lg-up`   | Visible from 80em (1280px) up           |
+| `.syx-d-xlg-up`  | Visible from 90em (1440px) up           |
 
 #### Width / Height
 
@@ -87,7 +87,7 @@ Usa `utilities/` para:
 
 `.syx-border` · `.syx-border-none`
 
-#### Flex — dirección
+#### Flex — direction
 
 `.syx-flex-row` · `.syx-flex-row-reverse` · `.syx-flex-col` · `.syx-flex-col-reverse`
 
@@ -115,9 +115,9 @@ Usa `utilities/` para:
 
 `.syx-self-start` · `.syx-self-end` · `.syx-self-center` · `.syx-self-auto`
 
-#### Gap (referencias a tokens `--semantic-space-inline-*`)
+#### Gap (references to `--semantic-space-inline-*` tokens)
 
-| Clase        | Token                        |
+| Class        | Token                        |
 | ------------ | ---------------------------- |
 | `.syx-gap-0` | 0                            |
 | `.syx-gap-1` | `--semantic-space-inline-xs` |
@@ -126,7 +126,7 @@ Usa `utilities/` para:
 | `.syx-gap-4` | `--semantic-space-inline-lg` |
 | `.syx-gap-5` | `--semantic-space-layout-xl` |
 
-También: `.syx-col-gap-{1–5}` y `.syx-row-gap-{1–5}` (misma escala, igual de exhaustivo)
+Also: `.syx-col-gap-{1–5}` and `.syx-row-gap-{1–5}` (same scale, equally exhaustive)
 
 #### Overflow
 
@@ -138,23 +138,23 @@ También: `.syx-col-gap-{1–5}` y `.syx-row-gap-{1–5}` (misma escala, igual d
 
 Insets: `.syx-inset-0` · `.syx-top-0` · `.syx-bottom-0` · `.syx-start-0` · `.syx-end-0`
 
-Retiradas en 5.0.0 (eran físicas): ❌ `.syx-left-0` ✓ → `.syx-start-0` · ❌ `.syx-right-0` ✓ → `.syx-end-0`
+Retired in 5.0.0 (they were physical): ❌ `.syx-left-0` ✓ → `.syx-start-0` · ❌ `.syx-right-0` ✓ → `.syx-end-0`
 
 #### Vertical align
 
 `.syx-valign-top` · `.syx-valign-middle` · `.syx-valign-bottom` · `.syx-valign-baseline` · `.syx-valign-sub` · `.syx-valign-super`
 
-#### Animaciones
+#### Animations
 
-`.syx-fade-in` — fade in suave con `cubic-bezier`
+`.syx-fade-in` — smooth fade in with `cubic-bezier`
 
 ---
 
-### `_spacing.scss` — Margin y Padding
+### `_spacing.scss` — Margin and Padding
 
-Escalas del 0 al 5 mapeadas a `--semantic-space-inline-*` y `--semantic-space-layout-*`:
+Scales from 0 to 5 mapped to `--semantic-space-inline-*` and `--semantic-space-layout-*`:
 
-| Sufijo | Token                        |
+| Suffix | Token                        |
 | ------ | ---------------------------- |
 | `-0`   | 0                            |
 | `-1`   | `--semantic-space-inline-xs` |
@@ -163,17 +163,17 @@ Escalas del 0 al 5 mapeadas a `--semantic-space-inline-*` y `--semantic-space-la
 | `-4`   | `--semantic-space-inline-lg` |
 | `-5`   | `--semantic-space-layout-xl` |
 
-Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…): `t`/`b` son el eje de bloque, `x`/`y` los dos ejes, y los lados de la línea van con `s` (start: izquierda en LTR, derecha en RTL) y `e` (end).
+All of them emit **logical properties** (`margin-block-start`, `padding-inline`…): `t`/`b` are the block axis, `x`/`y` the two axes, and the line sides use `s` (start: left in LTR, right in RTL) and `e` (end).
 
 **Margin**: `.syx-m-{0–5}` · `.syx-mt-*` · `.syx-mb-*` · `.syx-ms-*` · `.syx-me-*` · `.syx-mx-*` · `.syx-my-*`
 
-**Padding**: `.syx-p-{0–5}` · `.syx-pt-*` · `.syx-pb-*` · `.syx-ps-*` · `.syx-pe-*` · `.syx-px-*` · `.syx-py-*` (`.syx-pis-*`/`.syx-pie-*` son alias de `ps`/`pe`)
+**Padding**: `.syx-p-{0–5}` · `.syx-pt-*` · `.syx-pb-*` · `.syx-ps-*` · `.syx-pe-*` · `.syx-px-*` · `.syx-py-*` (`.syx-pis-*`/`.syx-pie-*` are aliases of `ps`/`pe`)
 
-**Shorthands**: `.syx-pad-section` (padding de sección) · `.syx-mx-auto` · `.syx-ms-auto` · `.syx-me-auto`
+**Shorthands**: `.syx-pad-section` (section padding) · `.syx-mx-auto` · `.syx-ms-auto` · `.syx-me-auto`
 
-**Retiradas en 5.0.0** (deprecadas desde la auditoría 2026-10, acción 13). Eran izquierda/derecha **físicas** y no seguían a la dirección del texto. Para migrar, sustituye cada clase por su equivalente lógica (en LTR pintan exactamente lo mismo):
+**Retired in 5.0.0** (deprecated since the 2026-10 audit, action 13). They were **physical** left/right and did not follow the text direction. To migrate, replace each class with its logical equivalent (in LTR they paint exactly the same):
 
-| Retirada | Usa |
+| Retired | Use |
 | --- | --- |
 | ❌ `.syx-ml-*` · `.syx-mr-*` | ✓ `.syx-ms-*` · `.syx-me-*` |
 | ❌ `.syx-pl-*` · `.syx-pr-*` | ✓ `.syx-ps-*` · `.syx-pe-*` |
@@ -183,19 +183,19 @@ Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…
 
 ---
 
-### `_text.scss` — Texto, Tipografía y Color
+### `_text.scss` — Text, Typography and Color
 
-#### Color de texto
+#### Text color
 
 `.syx-text-primary` · `.syx-text-secondary` · `.syx-text-white` · `.syx-text-gray` · `.syx-text-muted` · `.syx-text-inverse` · `.syx-text-error` · `.syx-text-success` · `.syx-text-warning`
 
-Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-instagram` · `.syx-text-whatsapp`
+Brand colors: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-instagram` · `.syx-text-whatsapp`
 
-#### Alineación
+#### Alignment
 
-`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — retiradas en 5.0.0: ❌ `.syx-text-left` · `.syx-text-right` ✓ (ver la tabla de `_spacing.scss`)
+`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — retired in 5.0.0: ❌ `.syx-text-left` · `.syx-text-right` ✓ (see the `_spacing.scss` table)
 
-#### Decoración
+#### Decoration
 
 `.syx-text-underline` · `.syx-text-overline` · `.syx-text-strikethrough` · `.syx-text-no-underline`
 
@@ -207,34 +207,34 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 
 `.syx-font-medium` · `.syx-font-bold`
 
-#### Medida de texto (max-width)
+#### Text measure (max-width)
 
 `.syx-max-w-15ch` · `.syx-max-w-50ch` · `.syx-max-w-65ch`
 
-#### Escala tipográfica fluida (Major Third × 1.250, fluid `clamp()`)
+#### Fluid type scale (Major Third × 1.250, fluid `clamp()`)
 
-| Clase                           | Uso                         |
+| Class                           | Use                         |
 | ------------------------------- | --------------------------- |
-| `.syx-type-h1` – `.syx-type-h4` | Headings de contenido       |
+| `.syx-type-h1` – `.syx-type-h4` | Content headings            |
 | `.syx-type-body-large`          | Lead paragraph              |
-| `.syx-type-body`                | Texto estándar              |
-| `.syx-type-body-small`          | Texto secundario / metadata |
+| `.syx-type-body`                | Standard text               |
+| `.syx-type-body-small`          | Secondary text / metadata   |
 | `.syx-type-caption`             | Caption / overline          |
 
-> Para headings dentro de componentes de contenido (artículos, cards) prefiere `atom-title atom-title--h{n}`.
-> `syx-type-*` es mejor para headings de página o secciones de layout.
+> For headings inside content components (articles, cards) prefer `atom-title atom-title--h{n}`.
+> `syx-type-*` is better for page headings or layout sections.
 
 ---
 
-### `_media.scss` — Imágenes, Iframes y Object-fit
+### `_media.scss` — Images, Iframes and Object-fit
 
-#### Imagen responsiva
+#### Responsive image
 
 ```html
 <img class="syx-img-fluid" src="..." alt="..." />
 ```
 
-#### Embed con aspect-ratio
+#### Embed with aspect-ratio
 
 ```html
 <div class="syx-embed syx-embed--16by9">
@@ -242,9 +242,9 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 </div>
 ```
 
-Variantes: `--16by9` · `--8by5` · `--3by2` · `--4by3` · `--1by1`
+Variants: `--16by9` · `--8by5` · `--3by2` · `--4by3` · `--1by1`
 
-#### Mapa (Google Maps, etc.)
+#### Map (Google Maps, etc.)
 
 ```html
 <div class="syx-map syx-map--16by9">
@@ -252,7 +252,7 @@ Variantes: `--16by9` · `--8by5` · `--3by2` · `--4by3` · `--1by1`
 </div>
 ```
 
-Variantes: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
+Variants: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
 
 #### Object-fit
 
@@ -270,18 +270,18 @@ Variantes: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
 
 ### `_accessibility.scss` — A11y
 
-| Clase                    | Uso                                                           |
+| Class                    | Use                                                           |
 | ------------------------ | ------------------------------------------------------------- |
-| `.syx-sr-only`           | Oculta visualmente, accesible a lectores de pantalla          |
-| `.syx-sr-only-focusable` | Como `sr-only` pero visible al recibir foco (tab)             |
-| `.syx-skip-link`         | Skip-to-content al inicio del `<body>`                        |
-| `.syx-motion-safe`       | Deshabilita animaciones si el usuario prefiere reduced-motion |
+| `.syx-sr-only`           | Visually hidden, accessible to screen readers                 |
+| `.syx-sr-only-focusable` | Like `sr-only` but visible when it receives focus (tab)       |
+| `.syx-skip-link`         | Skip-to-content at the start of the `<body>`                  |
+| `.syx-motion-safe`       | Disables animations if the user prefers reduced-motion        |
 
 ```html
-<!-- Skip link — al principio del <body> -->
+<!-- Skip link — at the start of the <body> -->
 <a href="#main-content" class="syx-skip-link">Ir al contenido principal</a>
 
-<!-- Etiqueta accesible para un icono -->
+<!-- Accessible label for an icon -->
 <button class="atom-btn atom-btn--primary atom-btn--circle" type="button">
   <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
   <span class="syx-sr-only">Buscar</span>
@@ -290,10 +290,10 @@ Variantes: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
 
 ---
 
-## Patrón de composición típico
+## Typical composition pattern
 
 ```html
-<!-- Card centrada, flex column, gap-3 -->
+<!-- Centered card, flex column, gap-3 -->
 <div class="syx-d-flex syx-flex-col syx-items-center syx-gap-3 syx-p-4">
   <img class="syx-img-fluid syx-obj-cover" src="..." alt="..." />
   <p class="syx-type-body syx-text-gray syx-max-w-65ch">...</p>
@@ -305,11 +305,11 @@ Variantes: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
 
 ---
 
-## Añadir nuevas utilidades
+## Adding new utilities
 
-1. Crear `_mi-utilidad.scss` en esta carpeta
-2. Envolver todo en `@layer syx.utilities { ... }`
-3. Usar prefijo `.syx-{propiedad}-{valor}`
-4. Registrar el `@forward` en `utilities/index.scss`
-5. No usar `!important`
-6. No hardcodear valores — referenciar tokens `--semantic-*` o `--primitive-*`
+1. Create `_mi-utilidad.scss` in this folder
+2. Wrap everything in `@layer syx.utilities { ... }`
+3. Use the prefix `.syx-{propiedad}-{valor}`
+4. Register the `@forward` in `utilities/index.scss`
+5. Do not use `!important`
+6. Do not hardcode values — reference `--semantic-*` or `--primitive-*` tokens

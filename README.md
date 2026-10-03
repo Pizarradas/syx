@@ -218,24 +218,31 @@ const syx = require('syx-design-system');
 syx.getToken({ token: '--component-button-primary-filled-bg', mode: 'dark' }).value;
 // → 'oklch(0.740 0.133 267)'
 
-syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exactos;
+syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exact;
 syx.getComponent({ name: 'btn' }).modifiers;
-syx.validateSnippet({ code: '.card { color: var(--semantic-color-primary); }' }).conforme;
+syx.validateSnippet({ code: '.card { color: var(--semantic-color-primary); }' }).valid;
 ```
 
-The API and the MCP server answer from the same layer, and some of its result keys
-are Spanish — the repository's working language. They are part of the contract (the
-MCP server returns the same shapes), so they are documented rather than renamed:
+The API, the MCP server and `syx-scan --json` answer from the same layer with the same
+English keys. The ones that are not self-explanatory:
 
 | Key | Returned by | Means |
 | --- | ----------- | ----- |
-| `encontrado` | `getToken`, `getComponent`, `getMixin` | whether the name exists |
-| `cadena` | `getToken` | the alias chain, from the token down to the literal |
-| `esExpresion` / `sinValor` | `getToken` | the value is a CSS expression only a browser can reduce / the token has no value in that theme and mode |
-| `exactos` / `parciales` | `findTokenByValue` | tokens holding exactly that value / partial matches |
-| `conforme` | `validateSnippet` | `true` when the snippet breaks no rule |
-| `violaciones` / `tokensInexistentes` / `nota` | `validateSnippet` | the broken rules / tokens that do not exist / a remark |
-| `hallazgos` | `scan` | the drift findings |
+| `found` / `suggestions` | `getToken`, `getComponent`, `getMixin`, `getFigmaSpec` | whether the name exists / close names when it does not |
+| `chain` | `getToken` | the alias chain, from the token down to the literal (`token`, `declared`) |
+| `isExpression` / `unresolved` | `getToken` | the value is a CSS expression only a browser can reduce / why the token has no value in that theme and mode |
+| `exact` / `partial` | `findTokenByValue` | tokens holding exactly that value / partial matches |
+| `valid` | `validateSnippet` | `true` when the snippet breaks no rule |
+| `violations` / `unknownTokens` / `exceptions` / `note` | `validateSnippet` | the broken rules (`rule`, `severity`, `cases`, `replacement`) / tokens that do not exist / the `syx-allow` lines used / a remark |
+| `change` / `destination` / `destinationTier` | `classifyChange` | the trust tier of the paths / the file a new token belongs in / that file's tier |
+| `findings` / `byType` / `bySeverity` | `scan` | the drift findings (`type`, `severity`, `file`, `line`, `what`, `detail`, `suggestion`) and their counts |
+| `properties` / `unmapped` / `untranslated` | `getFigmaSpec` | each token as a Figma node property / tokens with no node property / tokens that could not be converted |
+
+Keys are English; values are not translated (rule descriptions and finding texts are in
+Spanish, and severities are `alta`, `media`, `baja`). Up to 5.x the Node API keeps the
+former Spanish key names (`encontrado`, `exactos`, `hallazgos`…) as non-enumerable aliases,
+so existing code keeps working; JSON output (MCP, `--json`) carries only the English keys.
+The aliases go in 6.0.
 
 The **contracts travel with the package**, so your app validates against the exact
 version it has installed — not against whatever is on `main` today.
@@ -456,6 +463,7 @@ Anything that matches no pattern falls to **human only**. `contracts/rules.json`
 could rewrite the rules it is judged by, or the guard that judges it, would not
 have permissions — it would have a suggestion.
 
+<!-- syx: ejemplo-nuevo -->
 ```bash
 # Where does this change sit?
 npm run propose classify scss/atoms/_btn.scss CHANGELOG.md

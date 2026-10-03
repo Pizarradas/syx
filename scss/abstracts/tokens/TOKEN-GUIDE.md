@@ -55,9 +55,8 @@ values for colorizing icons (`--primitive-filter-*`).
 ```scss
 --primitive-color-purple-500
 --primitive-space-4
---primitive-font-size-2
+--primitive-font-size-md
 --primitive-icon-arrow-default   // SVG data-URI
---primitive-filter-error         // CSS filter value
 ```
 
 ### Layer 2: Semantic Tokens
@@ -151,16 +150,17 @@ Themes should only override **primitive tokens**. Semantic and component tokens 
 
 ### Example 1: Create a New Button Variant
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // 1. Define component tokens (if they don't exist)
 :root {
-  --component-button-danger-text: var(--semantic-color-state-error-text);
+  --component-button-danger-color: var(--semantic-color-state-error-text);
   --component-button-danger-bg: transparent;
   --component-button-danger-border: var(--semantic-color-state-error);
 }
 
 // 2. Use in the component
-.button--danger {
+.atom-btn--danger {
   color: var(--component-button-danger-color);
   background: var(--component-button-danger-bg);
   border: var(--component-button-border-width) solid
@@ -177,8 +177,8 @@ Themes should only override **primitive tokens**. Semantic and component tokens 
   --primitive-space-base: 0.25rem;
 
   // Change brand colors
-  --primitive-color-purple-500: hsl(280, 60%, 30%);
-  --primitive-color-pink-500: hsl(350, 100%, 65%);
+  --primitive-color-purple-500: oklch(0.4 0.14 300);
+  --primitive-color-pink-500: oklch(0.7 0.2 5);
 
   // Change typography
   --primitive-font-family-space-grotesk-regular: "Helvetica", Arial, sans-serif;
@@ -187,10 +187,11 @@ Themes should only override **primitive tokens**. Semantic and component tokens 
 
 ### Example 3: Add a New State Color
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // 1. Add primitive
 // primitives/_colors.scss
---primitive-color-info-500: hsl(200, 100%, 50%);
+--primitive-color-info-500: oklch(0.65 0.15 240);
 
 // 2. Point the semantic state at it
 // semantic/_colors.scss

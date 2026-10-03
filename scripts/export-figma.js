@@ -41,7 +41,9 @@ const OUT_DIR = path.join(ROOT, 'contracts', 'figma');
 const { crearConsulta } = require('./lib/consulta');
 const figma = require('./lib/figma');
 
-const syx = crearConsulta({ root: ROOT });
+// Crudo: el formato de contracts/figma/ es el de este exportador, no el de la
+// API pública (cuyas claves salen en inglés por scripts/lib/claves.js).
+const syx = crearConsulta({ root: ROOT, crudo: true });
 
 // Las capas que suben. El resto —primitive por R01, y las familias sueltas que
 // R07 ya señala como legado— se cuentan y se dicen, pero no se exportan.

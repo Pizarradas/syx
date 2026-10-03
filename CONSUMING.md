@@ -227,7 +227,7 @@ For **one context only**, override the token on your own wrapper instead of `:ro
 existing token is allowed; reading `--component-*` in your own rules is not.
 
 You may override tokens that exist. You may not create new names under SYX's
-prefixes: a new token is `--lumen-*`. Detail: `THEMING-RULES.md` → *Sobrescribir tokens desde tu aplicación*.
+prefixes: a new token is `--lumen-*`. Detail: `THEMING-RULES.md` → *Overriding tokens from your app*.
 
 ---
 

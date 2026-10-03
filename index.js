@@ -18,7 +18,7 @@
  *   const syx = require('syx-design-system');
  *
  *   syx.getToken({ token: '--component-button-primary-filled-bg', mode: 'dark' }).value
- *   syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exactos
+ *   syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exact
  *   syx.getComponent({ name: 'btn' }).modifiers
  *   syx.validateSnippet({ code: '.mi-clase { color: var(--semantic-color-primary); }' })
  *   syx.cssPath('example-03')   // ruta absoluta a la hoja compilada

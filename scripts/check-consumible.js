@@ -76,7 +76,7 @@ comprobar('la API responde el valor de un token en claro y en oscuro', () => {
     const t = '--component-button-primary-filled-bg';
     const a = syx.getToken({ token: t });
     const b = syx.getToken({ token: t, theme: 'syx-sketch', mode: 'dark' });
-    console.log(JSON.stringify({ a: a.value, b: b.value, cadena: (b.cadena || []).length }));
+    console.log(JSON.stringify({ a: a.value, b: b.value, cadena: (b.chain || []).length }));
   `);
   const r = JSON.parse(salida);
   if (!r.a || !r.b) throw new Error('sin valor');
@@ -124,7 +124,7 @@ comprobar('el validador de fragmentos funciona instalado', () => {
     const syx = require('${PKG.name}');
     const malo = syx.validateSnippet({ code: '.x { color: var(--primitive-color-blue-500); }' });
     const bueno = syx.validateSnippet({ code: '.x { color: var(--semantic-color-primary); }' });
-    console.log(JSON.stringify({ malo: malo.conforme, bueno: bueno.conforme }));
+    console.log(JSON.stringify({ malo: malo.valid, bueno: bueno.valid }));
   `);
   const r = JSON.parse(salida);
   if (r.malo !== false || r.bueno !== true) throw new Error(`veredictos ${JSON.stringify(r)}`);
@@ -145,7 +145,7 @@ comprobar('el servidor MCP arranca desde el bin instalado', () => {
   const lineas = r.trim().split('\n').map((l) => JSON.parse(l));
   if (lineas[0].result?.serverInfo?.name !== 'syx') throw new Error('initialize no responde');
   const comp = JSON.parse(lineas[1].result.content[0].text);
-  if (!comp.encontrado || !comp.classes.includes('atom-btn')) throw new Error('get_component no responde bien');
+  if (!comp.found || !comp.classes.includes('atom-btn')) throw new Error('get_component no responde bien');
 });
 
 comprobar('nada resuelve fuera del paquete instalado', () => {

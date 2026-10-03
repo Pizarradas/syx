@@ -70,26 +70,26 @@ comprobar('get_token da valores distintos en claro y oscuro', async () => {
   const tk = '--component-button-primary-filled-bg';
   const a = salida(await rpc('tools/call', { name: 'get_token', arguments: { token: tk, mode: 'light' } }));
   const b = salida(await rpc('tools/call', { name: 'get_token', arguments: { token: tk, mode: 'dark' } }));
-  if (!a.encontrado || !b.encontrado) throw new Error('token no encontrado');
+  if (!a.found || !b.found) throw new Error('token no encontrado');
   if (a.value === b.value) throw new Error('claro y oscuro dan el mismo valor: la dimensión de modo no llega');
-  if (!Array.isArray(b.cadena) || !b.cadena.length) throw new Error('sin cadena de alias');
+  if (!Array.isArray(b.chain) || !b.chain.length) throw new Error('sin cadena de alias');
 });
 
 comprobar('get_token responde con sugerencias a un token que no existe', async () => {
   const r = salida(await rpc('tools/call', { name: 'get_token', arguments: { token: '--component-button-inventado' } }));
-  if (r.encontrado !== false) throw new Error('deberia no encontrarlo');
-  if (!Array.isArray(r.sugerencias)) throw new Error('sin sugerencias');
+  if (r.found !== false) throw new Error('deberia no encontrarlo');
+  if (!Array.isArray(r.suggestions)) throw new Error('sin sugerencias');
 });
 
 comprobar('find_token_by_value encuentra el token de un color', async () => {
   const t = salida(await rpc('tools/call', { name: 'get_token', arguments: { token: '--semantic-color-primary' } }));
   const r = salida(await rpc('tools/call', { name: 'find_token_by_value', arguments: { value: t.value } }));
-  if (!r.exactos.includes('--semantic-color-primary')) throw new Error('no se encuentra a sí mismo');
+  if (!r.exact.includes('--semantic-color-primary')) throw new Error('no se encuentra a sí mismo');
 });
 
 comprobar('get_component solo devuelve clases que existen en el CSS', async () => {
   const r = salida(await rpc('tools/call', { name: 'get_component', arguments: { name: 'btn' } }));
-  if (!r.encontrado) throw new Error('btn no encontrado');
+  if (!r.found) throw new Error('btn no encontrado');
   if (!r.classes.includes('atom-btn')) throw new Error('sin la clase base');
   const fs = require('fs');
   const css = fs.readFileSync(path.join(ROOT, 'css', 'styles-theme-syx-sketch.css'), 'utf8');
@@ -110,11 +110,11 @@ comprobar('validate_snippet caza R01, R03 y R04 y el token inexistente', async (
       ].join('\n'),
     },
   }));
-  if (r.conforme) throw new Error('deberia no ser conforme');
+  if (r.valid) throw new Error('deberia no ser conforme');
   for (const regla of ['R01', 'R03', 'R04']) {
-    if (!r.violaciones[regla]) throw new Error(`no detecta ${regla}`);
+    if (!r.violations[regla]) throw new Error(`no detecta ${regla}`);
   }
-  if (!r.tokensInexistentes.some((t) => t.token === '--component-btn-primary-bg' && !t.conFallback)) {
+  if (!r.unknownTokens.some((t) => t.token === '--component-btn-primary-bg' && !t.hasFallback)) {
     throw new Error('no detecta el token inexistente sin fallback');
   }
 });
@@ -124,15 +124,15 @@ comprobar('validate_snippet aprueba un fragmento conforme', async () => {
     name: 'validate_snippet',
     arguments: { code: '.atom-x {\n  color: var(--semantic-color-primary);\n}' },
   }));
-  if (!r.conforme) throw new Error('deberia ser conforme: ' + JSON.stringify(r.violaciones));
+  if (!r.valid) throw new Error('deberia ser conforme: ' + JSON.stringify(r.violations));
 });
 
 comprobar('classify_change deduce el fichero de un token y el nivel de un cambio', async () => {
   const t = salida(await rpc('tools/call', { name: 'classify_change', arguments: { token: '--component-pill-glow' } }));
-  if (!t.destino?.resuelto) throw new Error('no deduce el destino');
-  if (!t.destino.fichero.endsWith('_pills.scss')) throw new Error(`lo manda a ${t.destino.fichero}`);
+  if (!t.destination?.resolved) throw new Error('no deduce el destino');
+  if (!t.destination.file.endsWith('_pills.scss')) throw new Error(`lo manda a ${t.destination.file}`);
   const c = salida(await rpc('tools/call', { name: 'classify_change', arguments: { paths: ['CHANGELOG.md', 'scss/themes/example-01/_theme.scss'] } }));
-  if (c.cambio.tier !== 'human') throw new Error(`nivel ${c.cambio.tier}: un cambio no es más libre que su fichero más delicado`);
+  if (c.change.tier !== 'human') throw new Error(`nivel ${c.change.tier}: un cambio no es más libre que su fichero más delicado`);
 });
 
 comprobar('scan_for_drift devuelve un informe bien formado', async () => {
@@ -141,15 +141,15 @@ comprobar('scan_for_drift devuelve un informe bien formado', async () => {
   // se comprueba es el protocolo. Que DETECTE lo prueba check-escaner.js con su
   // fichero de mentira, donde la respuesta es conocida y no cambia sola.
   const r = salida(await rpc('tools/call', { name: 'scan_for_drift', arguments: { files: ['docs.html'] } }));
-  if (r.ficheros !== 1) throw new Error(`dice haber leído ${r.ficheros} ficheros`);
-  if (typeof r.total !== 'number' || !Array.isArray(r.hallazgos)) throw new Error('informe mal formado');
-  if (r.total !== r.hallazgos.length) throw new Error('el total no cuadra con los hallazgos');
+  if (r.files !== 1) throw new Error(`dice haber leído ${r.files} ficheros`);
+  if (typeof r.total !== 'number' || !Array.isArray(r.findings)) throw new Error('informe mal formado');
+  if (r.total !== r.findings.length) throw new Error('el total no cuadra con los hallazgos');
   if (r.theme !== 'syx-sketch') throw new Error('no dice contra qué tema compara');
 });
 
 comprobar('get_mixin trae la firma y los parámetros leídos del SCSS', async () => {
   const r = salida(await rpc('tools/call', { name: 'get_mixin', arguments: { name: 'position' } }));
-  if (!r.encontrado) throw new Error('no encuentra position');
+  if (!r.found) throw new Error('no encuentra position');
   if (!r.params.some((p) => p.name === '$top' && p.default === 'null')) throw new Error('no lee los valores por defecto');
   // Los alias son la forma en que de verdad se escribe: nadie llama a
   // `position(absolute, …)` teniendo `absolute(…)`.
@@ -167,41 +167,41 @@ comprobar('validate_snippet dice QUÉ mixin usar, no solo que está mal', async 
     name: 'validate_snippet',
     arguments: { code: '.x {\n  transition: color 0.2s ease;\n  position: absolute;\n}' },
   }));
-  if (r.violaciones.R03?.recambio?.mixin !== 'transition') throw new Error('R03 no ofrece recambio');
-  if (r.violaciones.R04?.recambio?.mixin !== 'position') throw new Error('R04 no ofrece recambio');
-  if (!r.violaciones.R04.recambio.alias.includes('absolute')) throw new Error('R04 no ofrece el alias corto');
+  if (r.violations.R03?.replacement?.mixin !== 'transition') throw new Error('R03 no ofrece recambio');
+  if (r.violations.R04?.replacement?.mixin !== 'position') throw new Error('R04 no ofrece recambio');
+  if (!r.violations.R04.replacement.alias.includes('absolute')) throw new Error('R04 no ofrece el alias corto');
 });
 
 comprobar('get_figma_spec devuelve números, no CSS, y cambia con el modo', async () => {
   const pedir = (mode) => rpc('tools/call', { name: 'get_figma_spec', arguments: { component: 'btn', mode } });
   const a = salida(await pedir('light'));
   const b = salida(await pedir('dark'));
-  if (!a.encontrado) throw new Error('btn no encontrado');
+  if (!a.found) throw new Error('btn no encontrado');
   if (a.figmaName !== 'atom/btn') throw new Error(`nombre en Figma inesperado: ${a.figmaName}`);
-  if (!a.clases.base.includes('atom-btn')) throw new Error('no lleva la clase del registro');
+  if (!a.classes.base.includes('atom-btn')) throw new Error('no lleva la clase del registro');
 
   // Lo que justifica que esta herramienta exista: un nodo de Figma no acepta
   // `oklch(…)`. Si aquí sale una cadena de CSS, el agente la copiaría tal cual.
-  const fill = a.propiedades.find((p) => p.token === '--component-button-primary-filled-bg');
+  const fill = a.properties.find((p) => p.token === '--component-button-primary-filled-bg');
   if (!fill) throw new Error('sin el fondo del botón primario');
-  if (fill.propiedad !== 'fills') throw new Error(`lo manda a ${fill.propiedad}`);
-  if (typeof fill.valor?.r !== 'number') throw new Error('el color no viene en RGB numérico');
+  if (fill.property !== 'fills') throw new Error(`lo manda a ${fill.property}`);
+  if (typeof fill.value?.r !== 'number') throw new Error('el color no viene en RGB numérico');
 
-  const oscuro = b.propiedades.find((p) => p.token === fill.token);
-  if (JSON.stringify(fill.valor) === JSON.stringify(oscuro.valor)) {
+  const oscuro = b.properties.find((p) => p.token === fill.token);
+  if (JSON.stringify(fill.value) === JSON.stringify(oscuro.value)) {
     throw new Error('claro y oscuro dan el mismo color: la dimensión de modo no llega');
   }
 
   // Un tipo en una propiedad que no lo admite es peor que la propiedad ausente.
-  for (const p of a.propiedades) {
-    if (p.tipo === 'STRING' && !p.propiedad.startsWith('fontName')) {
-      throw new Error(`${p.token} mete un STRING en ${p.propiedad}`);
+  for (const p of a.properties) {
+    if (p.type === 'STRING' && !p.property.startsWith('fontName')) {
+      throw new Error(`${p.token} mete un STRING en ${p.property}`);
     }
   }
   // Y lo descartado se descarta con motivo, que es lo que impide que un agente
   // salga a buscar en Figma algo que Figma no tiene.
-  for (const lista of [a.sinTraducir, a.sinPropiedad]) {
-    if (lista.some((x) => !x.motivo)) throw new Error('hay descartes sin motivo');
+  for (const lista of [a.untranslated, a.unmapped]) {
+    if (lista.some((x) => !x.reason)) throw new Error('hay descartes sin motivo');
   }
 });
 

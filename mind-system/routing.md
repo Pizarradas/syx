@@ -24,7 +24,7 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 
 | Tramo | Qué suma | Límite |
 |---|---|---|
-| **Entrada** | `CLAUDE.md` + lo que manda leer antes de nada (`AI_GUIDELINES.md`, `contracts/rules.json`) + el fichero del modo + sus módulos **Always** | ≤ 25 000 tokens |
+| **Entrada** | `CLAUDE.md` + lo que manda leer antes de nada (`AI_GUIDELINES.md`, `contracts/rules.json`) + el fichero del modo + sus módulos **Always** | ≤ 22 000 tokens |
 | **Peor caso** | Entrada + todo **When relevant** + **With GSAP** + **Self-check** + la mayor carga **On request** | ≤ 60 000 tokens |
 
 Tokens ≈ bytes / 3,5. Las cifras no se copian aquí a mano —se quedaban viejas: esta página llegó a prometer un techo de 83 KB que no contaba la capa GSAP mientras el peor caso real de CREATIVE pasaba de 270 KB—; las mide e imprime `npm run check:conocimiento`, que falla si un modo se pasa. Si se pasa, la salida es bajar un módulo de **Always** a **When relevant** con su disparador, partir el módulo grande o citar el fichero concreto en vez de la carpeta; no subir el límite.

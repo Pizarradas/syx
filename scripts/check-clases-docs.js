@@ -91,7 +91,7 @@ const SUELTA = new RegExp(`\`(${PREFIJO}[A-Za-z0-9_-]+)\``, 'g');
 const ES_CLASE = new RegExp(`^${PREFIJO}`);
 // Nombres que NO son clases aunque lleven el prefijo: el paquete, sus binarios,
 // sus scripts, el tema syx-sketch y los mixins de bundle (`syx-core`, `syx-bundle-*`).
-const NO_CLASE = /^(syx-(design-system|mcp|scan|init|validate|sketch|core|bundle-[a-z-]+)|syx-[a-z-]+\.(js|css|scss|md)|layout-[a-z-]+\.(scss|css))$/;
+const NO_CLASE = /^(syx-(design-system|mcp|scan|init|validate|sketch|core|allow|reuse|bundle-[a-z-]+)|syx-[a-z-]+\.(js|css|scss|md)|layout-[a-z-]+\.(scss|css))$/;
 
 const MARCA = /<!--\s*syx:\s*ejemplo-(incorrecto|nuevo)\s*-->/;
 const NEGATIVO = /[❌✗]/;

@@ -121,7 +121,7 @@ No meaning.            General UI feel.         Meaningful state.        Compone
 ```scss
 // ✅ Correct — component uses semantic token
 .atom-btn--primary {
-  background: var(--component-btn-primary-bg);
+  background: var(--component-button-primary-filled-bg);
 }
 
 // ❌ Wrong — component skips to primitive

@@ -1,84 +1,84 @@
 # themes/
 
-Cada subdirectorio representa un **tema visual completo** del sistema. Un tema define los tokens primitivos específicos de la marca (paleta de color, tipografía, espaciado base) y llama a los helpers temáticos para generar las clases `.syx-*` de su propio bundle CSS.
+Each subdirectory represents a **complete visual theme** of the system. A theme defines the brand-specific primitive tokens (color palette, typography, base spacing) and calls the themed helpers to generate the `.syx-*` classes of its own CSS bundle.
 
 ---
 
-## Estructura de un tema
+## Structure of a theme
 
 ```
 themes/
-├── _base/          # Valores universales (RRSS, marcas externas) + stack @layer
-├── _shared/        # syx-core + los bundles compartidos (_bundle-full, _bundle-app…)
-├── _template/      # Plantilla neutral para crear nuevos temas
-├── example-01/     # Tema 1
-│   ├── _theme.scss      ← ÚNICO fichero por-tema de verdad: tokens + theme-x-fonts()
-│   ├── _setup.scss      ← ~15 líneas de cableado (solo cambia el nombre del tema)
-│   └── bundle-*.scss    ← Bundles de contexto (app, docs, marketing, blog)
+├── _base/          # Universal values (social networks, external brands) + @layer stack
+├── _shared/        # syx-core + the shared bundles (_bundle-full, _bundle-app…)
+├── _template/      # Neutral template for creating new themes
+├── example-01/     # Theme 1
+│   ├── _theme.scss      ← The ONLY truly per-theme file: tokens + theme-x-fonts()
+│   ├── _setup.scss      ← ~15 lines of wiring (only the theme name changes)
+│   └── bundle-*.scss    ← Context bundles (app, docs, marketing, blog)
 ├── example-02/
 └── ...
 ```
 
 ---
 
-## Cómo funciona un tema
+## How a theme works
 
-El bundle de compilación (`scss/styles-theme-example-01.scss`) importa el tema así:
+The build bundle (`scss/styles-theme-example-01.scss`) imports the theme like this:
 
-1. `@use "themes/example-01/setup"` — que ejecuta toda la cadena de setup
-   - `@include universal-values()` emite automáticamente el stack `@layer` como primera regla CSS
-2. Cada `_setup.scss` hace exactamente seis llamadas:
-   - `@include universal-values()` — valores universales + stack `@layer`
-   - `@include theme-example-01()` — tokens del tema (`_theme.scss`)
-   - `@include theme-example-01-fonts()` — los `@font-face` (declarados una vez en `_theme.scss`)
-   - `@include syx-core(example-01)` — reset, elementos base, helpers `.syx-*` y grid (`_shared/_core.scss`)
-   - `@include syx-bundle-full(example-01)` — todos los componentes del sistema (`_shared/_bundle-full.scss`)
-   - `@include syx-bundle-site(example-01)` — la capa site (solo los temas del sitio de SYX; desmontable)
+1. `@use "themes/example-01/setup"` — which runs the whole setup chain
+   - `@include universal-values()` automatically emits the `@layer` stack as the first CSS rule
+2. Each `_setup.scss` makes exactly six calls:
+   - `@include universal-values()` — universal values + `@layer` stack
+   - `@include theme-example-01()` — theme tokens (`_theme.scss`)
+   - `@include theme-example-01-fonts()` — the `@font-face` rules (declared once in `_theme.scss`)
+   - `@include syx-core(example-01)` — reset, base elements, `.syx-*` helpers and grid (`_shared/_core.scss`)
+   - `@include syx-bundle-full(example-01)` — all the system components (`_shared/_bundle-full.scss`)
+   - `@include syx-bundle-site(example-01)` — the site layer (only the SYX site themes; removable)
 
 ---
 
-## Crear un nuevo tema
+## Create a new theme
 
-### 1. Copiar la plantilla
+### 1. Copy the template
 
 ```
 themes/_template/ → themes/mi-marca/
 ```
 
-La plantilla `_template/` es el **contrato mínimo** de un tema: marca → roles, tintas sobre relleno, textos, forma, tipografía con `syx-font()`, iconos y modo oscuro con sus dos entradas. Cada declaración tiene lector y `npm run check:plantilla` la compila y la revisa como un tema más.
+The `_template/` template is the **minimum contract** of a theme: brand → roles, inks on fills, text, shape, typography with `syx-font()`, icons and dark mode with its two entry points. Every declaration has a reader, and `npm run check:plantilla` compiles it and checks it like any other theme.
 
-### 2. Cambiar los valores marcados con ✎
+### 2. Change the values marked with ✎
 
-En `themes/mi-marca/_theme.scss`: la paleta de la marca como primitivos **propios** (`--primitive-color-brand-*`, no los del sistema reescritos con otro tono), qué primitivo es cada rol (`--semantic-color-primary`…), la tinta encima de cada relleno (`--semantic-color-on-*`, la elige `check:contraste`), textos, radios y la familia tipográfica.
+In `themes/mi-marca/_theme.scss`: the brand palette as the theme's **own** primitives (`--primitive-color-brand-*`, not the system ones rewritten with another hue), which primitive each role is (`--semantic-color-primary`…), the ink on top of each fill (`--semantic-color-on-*`, chosen by `check:contraste`), text, radii and the font family.
 
-> **Regla de oro**: lo que el tema dice son ROLES (`--semantic-*`). Un componente nunca lee un primitivo (R01, R11), y una sobrescritura de componente solo puede leer roles. Qué puede y qué no puede declarar un tema: `THEMING-RULES.md`, «El contrato de un tema».
+> **Golden rule**: what the theme states are ROLES (`--semantic-*`). A component never reads a primitive (R01, R11), and a component override can only read roles. What a theme can and cannot declare: `THEMING-RULES.md`, "The theme contract".
 
-### 3. Ajustar `_setup.scss`
+### 3. Adjust `_setup.scss`
 
-Sustituir "template" por el nombre del tema — nada más. Los helpers los
-emite `syx-core()` y la lista de componentes vive en
+Replace "template" with the theme name — nothing else. The helpers are
+emitted by `syx-core()` and the component list lives in
 `themes/_shared/_bundle-full.scss`:
 
 ```scss
 // themes/mi-marca/_setup.scss
 @include universal-values();
 @include theme-mi-marca();
-@include theme-mi-marca-fonts();  // ← las fuentes, declaradas en _theme.scss
+@include theme-mi-marca-fonts();  // ← the fonts, declared in _theme.scss
 @include syx-core(mi-marca);
 @include syx-bundle-full(mi-marca);
 ```
 
-### 4. Crear el punto de entrada
+### 4. Create the entry point
 
-Crear `scss/styles-theme-mi-marca.scss`:
+Create `scss/styles-theme-mi-marca.scss`:
 
 ```scss
-// El @layer order es emitido automáticamente por universal-values() en _setup.scss
+// The @layer order is emitted automatically by universal-values() in _setup.scss
 @use "themes/mi-marca/setup";
-@use "utilities/index" as *;  // las utilidades .syx-* entran SOLO por aquí
+@use "utilities/index" as *;  // the .syx-* utilities come in ONLY through here
 ```
 
-### 5. Compilar
+### 5. Compile
 
 ```bash
 sass --no-source-map scss/styles-theme-mi-marca.scss:css/styles-theme-mi-marca.css
@@ -86,32 +86,32 @@ sass --no-source-map scss/styles-theme-mi-marca.scss:css/styles-theme-mi-marca.c
 
 ---
 
-## Directorio `_shared/`
+## `_shared/` directory
 
-Contiene mixins y estilos compartidos entre todos los temas. No debe contener tokens específicos de ningún tema.
+Contains mixins and styles shared across all themes. It must not contain tokens specific to any theme.
 
-## Directorio `_base/`
+## `_base/` directory
 
-Tokens base que actúan como fallback si un tema no los overrides. Todos los temas los heredan de forma implícita.
-
----
-
-## Qué declara un tema
-
-El contrato completo —qué DEBE declarar un tema, qué PUEDE y qué NO, con el guardián que vigila cada punto— está en `THEMING-RULES.md`, «El contrato de un tema». En corto: roles semánticos con la paleta del tema, sus dos entradas al modo oscuro, ninguna declaración sin lector (`check:consumidores`) y ningún token de componente que lea un primitivo o un color literal (R11).
+Base tokens that act as a fallback if a theme does not override them. All themes inherit them implicitly.
 
 ---
 
-## Variables de entorno de tema
+## What a theme declares
 
-La variable `$theme` que se pasa a los helpers es una string usada por el mixin para comparaciones `@if $theme == "mi-marca"`. Esto permite lógica de compilación por tema (por ejemplo, fondos especiales solo para un tema).
+The full contract —what a theme MUST declare, what it MAY and what it MAY NOT, with the guard that watches each point— is in `THEMING-RULES.md`, "The theme contract". In short: semantic roles with the theme palette, its two dark-mode entry points, no declaration without a reader (`check:consumidores`) and no component token that reads a primitive or a literal color (R11).
+
+---
+
+## Theme environment variables
+
+The `$theme` variable passed to the helpers is a string used by the mixin for `@if $theme == "mi-marca"` comparisons. This allows per-theme build logic (for example, special backgrounds for one theme only).
 
 <!-- syx: ejemplo-nuevo -->
 ```scss
-// Ejemplo de lógica de tema en _backgrounds.scss
+// Example of theme logic in _backgrounds.scss
 @if $theme == "example-02" {
   .syx-bg-color-special {
-    background: var(--semantic-color-brand-secondary);
+    background: var(--semantic-color-secondary);
   }
 }
 ```

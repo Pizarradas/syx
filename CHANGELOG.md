@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — documentación para agentes: un idioma, sin nombres fantasma y más ligera
+
+- **Claves de la API en inglés.** `index.js`, el servidor MCP y `syx-scan --json` responden con `found`, `suggestions`, `chain`, `exact`, `partial`, `valid`, `violations`, `unknownTokens`, `findings`, `byType`, `bySeverity`… La traducción se hace una vez, en la frontera (`scripts/lib/claves.js`). **Cambio de contrato para quien lea el JSON del MCP o de `--json`**: allí solo hay claves inglesas. En la API de Node las españolas siguen como alias no enumerables (`r.encontrado` funciona) hasta la 6.0. Los valores no cambian: textos y gravedades (`alta|media|baja`) siguen en español. Las descripciones de las 11 herramientas MCP, en inglés.
+- **Un idioma para lo que instruye.** `THEMING-RULES.md` y los README de `scss/` (atoms, helpers, layout, themes, plantilla, utilities, mixins) pasan al inglés, y §5.10 de la guía de autor. La política está en `scss/CONTRIBUTING.md` → *Language*: inglés para lo que dice qué escribir; español permitido en el córtex, los evals, el CHANGELOG, las decisiones y los comentarios. `check:conocimiento` lo vigila (comprobación 8).
+- **Sin tokens fantasma en las guías de autor.** El guardián de tokens cubre ahora `scss/**/*.md`, `README.md` y `THEMING-RULES.md`; corregidos los 42 nombres que no existían (`--component-btn-*` → `--component-button-*`, `--semantic-space-inset-*` → `--semantic-space-component-*`, `--semantic-font-size-xl` → `h3`…). Los ejemplos de orden de propiedades usan ya un `atom-btn` real con sus tokens y pasan `validate_snippet`; antes leían un primitivo (R01) y valores a pelo. Los tutoriales que crean tokens van marcados `<!-- syx: ejemplo-nuevo -->`, que ahora reconoce también `propose token --name`.
+- **Entrada más ligera.** `CLAUDE.md` (15,7 → 7 KB) y `AI_GUIDELINES.md` (16 → 11,4 KB) dejan de repetir las tablas de modos, flujos, exportaciones y una referencia de tokens copiada a mano. La entrada de cada modo baja unos 3.800 tokens (BRAND 24.463 → 20.645) y el límite baja de 25.000 a 22.000 para que no se vuelva a llenar.
+
 ### Changed — SYX primero: prefijo por proyecto y consulta obligatoria antes de crear
 
 - **El prefijo de lo propio es el nombre del proyecto**, no un `app-` genérico: `npx syx-init` lo toma del `package.json` (`@pizarradas/umbra-mag` → `umbramag`), `--prefix` lo fija. `umbra-masthead` dice de dónde sale y, si aparece un `motoro-masthead` casi igual, señala un candidato a organismo de SYX. El bloque escrito pasa a decir «Project prefix»; los escritos como «App prefix» se respetan en `--update`.

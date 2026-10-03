@@ -1,61 +1,61 @@
 # layout/
 
-Las piezas de maquetación de SYX: la **rejilla de columnas** y dos **primitivas** para lo que una pantalla de producto repite sin parar —una columna con espacio regular y una fila que envuelve—.
+SYX's layout pieces: the **column grid** and two **primitives** for what a product screen repeats over and over —a column with regular spacing and a row that wraps—.
 
-| Clase | Fichero | Para |
+| Class | File | For |
 | ----- | ------- | ---- |
-| `layout-grid` | `grids/_grid.scss` | La página o una sección: 12 columnas con los gutters del tema |
-| `layout-stack` | `_stack.scss` | Bloques uno debajo de otro con el mismo espacio (`--xs` … `--xl`) |
-| `layout-cluster` | `_cluster.scss` | Elementos en fila que bajan de línea si no caben (`--xs` … `--lg`, `--between`, `--end`) |
+| `layout-grid` | `grids/_grid.scss` | The page or a section: 12 columns with the theme gutters |
+| `layout-stack` | `_stack.scss` | Blocks one below another with the same spacing (`--xs` … `--xl`) |
+| `layout-cluster` | `_cluster.scss` | Items in a row that wrap to a new line if they don't fit (`--xs` … `--lg`, `--between`, `--end`) |
 
-**Layer**: `@layer syx.base` — cualquier utilidad `.syx-*` las sobrescribe sin `!important`.
-**Se incluyen** desde `themes/_shared/_core.scss`, así que están en todos los bundles.
-El armazón de una aplicación (cabecera, barra lateral y contenido) es un componente con color propio: `org-app-shell`, en `organisms/`.
-
----
-
-## Cuándo usar el grid
-
-Usa `layout-grid` para **layouts de página completos** o **secciones de contenido** que requieran una rejilla de columnas con gutters coherentes con el sistema de espaciado.
-
-Para micro-layouts (flex row, centrado, alineaciones puntuales), usa las utilidades de `utilities/_display.scss` (`.syx-d-flex`, `.syx-gap-*`, etc.).
+**Layer**: `@layer syx.base` — any `.syx-*` utility overrides them without `!important`.
+**They are included** from `themes/_shared/_core.scss`, so they are in every bundle.
+The shell of an application (header, sidebar and content) is a component with its own color: `org-app-shell`, in `organisms/`.
 
 ---
 
-## Estructura base
+## When to use the grid
+
+Use `layout-grid` for **full-page layouts** or **content sections** that need a column grid with gutters consistent with the spacing system.
+
+For micro-layouts (flex row, centering, one-off alignments), use the utilities in `utilities/_display.scss` (`.syx-d-flex`, `.syx-gap-*`, etc.).
+
+---
+
+## Base structure
 
 ```html
-<!-- Contenedor grid + 2 columnas -->
+<!-- Grid container + 2 columns -->
 <div class="layout-grid">
-  <div class="layout-grid__col-xs-6">Columna izquierda</div>
-  <div class="layout-grid__col-xs-6">Columna derecha</div>
+  <div class="layout-grid__col-xs-6">Left column</div>
+  <div class="layout-grid__col-xs-6">Right column</div>
 </div>
 ```
 
 ```html
-<!-- 3 columnas desiguales -->
+<!-- 3 unequal columns -->
 <div class="layout-grid">
   <div class="layout-grid__col-xs-3">Sidebar</div>
-  <div class="layout-grid__col-xs-6">Contenido principal</div>
+  <div class="layout-grid__col-xs-6">Main content</div>
   <div class="layout-grid__col-xs-3">Aside</div>
 </div>
 ```
 
-La suma de columnas debe ser **12** (sistema de 12 columnas).
+The columns must add up to **12** (12-column system).
 
 ---
 
-## Modificadores del contenedor
+## Container modifiers
 
-| Modificador                 | Efecto                                    |
+| Modifier                    | Effect                                    |
 | --------------------------- | ----------------------------------------- |
-| `layout-grid--no-padding`   | Elimina el padding lateral del contenedor |
-| `layout-grid--is-edge2edge` | Grid a ancho completo sin padding lateral |
-| `layout-grid--no-gap`       | Elimina el gap entre columnas             |
-| `layout-grid--align-center` | Alineación vertical centrada              |
+| `layout-grid--no-padding`   | Removes the container's side padding      |
+| `layout-grid--is-edge2edge` | Full-width grid with no side padding      |
+| `layout-grid--no-gap`       | Removes the gap between columns           |
+| `layout-grid--align-center` | Vertically centered alignment             |
 
 ```html
-<!-- Grid sin padding (para imágenes de borde a borde) -->
+<!-- Grid without padding (for edge-to-edge images) -->
 <div class="layout-grid layout-grid--no-padding">
   <div class="layout-grid__col-xs-12">
     <img class="syx-img-fluid syx-obj-cover syx-w-full" src="..." alt="..." />
@@ -65,34 +65,34 @@ La suma de columnas debe ser **12** (sistema de 12 columnas).
 
 ---
 
-## Breakpoints responsivos
+## Responsive breakpoints
 
-El grid usa un sistema mobile-first. Las columnas pueden especificarse por breakpoint:
+The grid uses a mobile-first system. Columns can be specified per breakpoint:
 
 ```html
-<!-- 12 columnas en mobile, 6 en tablet, 4 en desktop -->
+<!-- 12 columns on mobile, 6 on tablet, 4 on desktop -->
 <div class="layout-grid__col-xs-12 layout-grid__col-sm-6 layout-grid__col-md-4">
   ...
 </div>
 ```
 
-| Modificador    | Breakpoint                         |
+| Modifier       | Breakpoint                         |
 | -------------- | ---------------------------------- |
-| `__col-xs-{n}` | Todas las pantallas (mobile-first) |
+| `__col-xs-{n}` | All screens (mobile-first)         |
 | `__col-sm-{n}` | ≥ 48em (768px)                     |
 | `__col-md-{n}` | ≥ 64em (1024px)                    |
 | `__col-lg-{n}` | ≥ 80em (1280px)                    |
 
 ---
 
-## Grid anidado
+## Nested grid
 
-Para grids dentro de grids, el grid hijo hereda el padding del contenedor padre. Usa `--no-pad` en el hijo para eliminar el doble padding:
+For grids inside grids, the child grid inherits the parent container's padding. Use `--no-pad` on the child to remove the double padding:
 
 ```html
 <div class="layout-grid">
   <div class="layout-grid__col-xs-8">
-    <!-- Grid anidado — usa layout-grid__nested para el grid hijo -->
+    <!-- Nested grid — use layout-grid__nested for the child grid -->
     <div class="layout-grid__nested">
       <div class="layout-grid__col-xs-6">Sub-col A</div>
       <div class="layout-grid__col-xs-6">Sub-col B</div>
@@ -102,14 +102,14 @@ Para grids dentro de grids, el grid hijo hereda el padding del contenedor padre.
 </div>
 ```
 
-> `layout-grid__nested` tiene `padding: 0` por defecto para evitar el doble gutter. No es necesario usar ningún modificador adicional.
+> `layout-grid__nested` has `padding: 0` by default to avoid the double gutter. No additional modifier is needed.
 
 ---
 
-## Stack y cluster
+## Stack and cluster
 
 ```html
-<!-- Una pantalla de ajustes: secciones apiladas, acciones que envuelven -->
+<!-- A settings screen: stacked sections, actions that wrap -->
 <div class="layout-stack layout-stack--lg">
   <section>…</section>
   <section>…</section>
@@ -120,27 +120,27 @@ Para grids dentro de grids, el grid hijo hereda el padding del contenedor padre.
 </div>
 ```
 
-| Modificador | Stack (`--semantic-space-stack-*`) | Cluster (`--semantic-space-inline-*`) |
+| Modifier | Stack (`--semantic-space-stack-*`) | Cluster (`--semantic-space-inline-*`) |
 | ----------- | ---------------------------------- | ------------------------------------- |
-| por defecto | `md` (24 px) | `xs` (8 px) |
+| default | `md` (24 px) | `xs` (8 px) |
 | `--xs` … `--lg` | 8 · 16 · 24 · 32 px | 8 · 16 · 24 · 32 px |
 | `--xl` | 48 px | — |
-| `--between` | — | reparte a los extremos |
-| `--end` | — | alinea al final de la línea (lógico: en RTL es la izquierda) |
+| `--between` | — | spreads to the ends |
+| `--end` | — | aligns to the end of the line (logical: in RTL it is the left) |
 
-No duplican las utilidades: `layout-stack` es `syx-d-flex syx-flex-col` con la escala de pila por defecto, y `layout-cluster` es `syx-d-flex syx-flex-wrap syx-items-center` con la escala en línea. Usa la primitiva cuando el patrón sea ese (se lee mejor y el espaciado sale de la escala correcta) y las utilidades para un ajuste puntual. Usan `gap`, nunca márgenes: un hijo con `hidden` no deja hueco.
+They do not duplicate the utilities: `layout-stack` is `syx-d-flex syx-flex-col` with the stack scale by default, and `layout-cluster` is `syx-d-flex syx-flex-wrap syx-items-center` with the inline scale. Use the primitive when the pattern is exactly that (it reads better and the spacing comes from the right scale) and the utilities for a one-off adjustment. They use `gap`, never margins: a child with `hidden` leaves no gap.
 
 ---
 
-## Combinación con utilidades
+## Combining with utilities
 
-Las utilidades `.syx-*` se pueden añadir directamente a columnas del grid:
+`.syx-*` utilities can be added directly to grid columns:
 
 ```html
 <div class="layout-grid syx-gap-4">
   <div class="layout-grid__col-xs-6 syx-d-flex syx-flex-col syx-justify-center">
-    <h2 class="syx-type-h2">Título</h2>
-    <p class="atom-txt syx-text-gray">Descripción</p>
+    <h2 class="syx-type-h2">Title</h2>
+    <p class="atom-txt syx-text-gray">Description</p>
   </div>
   <div class="layout-grid__col-xs-6">
     <img class="syx-img-fluid syx-obj-cover" src="..." alt="..." />
@@ -150,19 +150,19 @@ Las utilidades `.syx-*` se pueden añadir directamente a columnas del grid:
 
 ---
 
-## Notas técnicas
+## Technical notes
 
-- El grid usa CSS `padding` y `gap` para los gutters — los valores vienen de los tokens `--layout-*` del tema activo
-- El modificador `--no-padding` / `--is-edge2edge` aplica `padding: 0` — sin necesidad de `!important` gracias a `@layer syx.base`
-- No hay dependencias JS — es CSS puro
+- The grid uses CSS `padding` and `gap` for the gutters — the values come from the active theme's `--layout-*` tokens
+- The `--no-padding` / `--is-edge2edge` modifier applies `padding: 0` — no `!important` needed thanks to `@layer syx.base`
+- There are no JS dependencies — it is pure CSS
 
 ---
 
-## Añadir nuevos sistemas de layout
+## Adding new layout systems
 
-Si necesitas un sistema de layout diferente (masonry, CSS subgrid, etc.):
+If you need a different layout system (masonry, CSS subgrid, etc.):
 
-1. Crear `grids/_mi-layout.scss` (una rejilla) o `_mi-primitiva.scss` (una primitiva)
-2. Añadir su `@forward` en `layout/index.scss`
-3. Incluir su mixin en `themes/_shared/_core.scss`
-4. Documentar en este README
+1. Create `grids/_mi-layout.scss` (a grid) or `_mi-primitiva.scss` (a primitive)
+2. Add its `@forward` in `layout/index.scss`
+3. Include its mixin in `themes/_shared/_core.scss`
+4. Document it in this README

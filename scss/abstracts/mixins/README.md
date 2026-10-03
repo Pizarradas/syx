@@ -22,7 +22,7 @@ All mixins are available via the abstracts index:
 
 ### `position($position, $top, $right, $bottom, $left)`
 
-Null-safe shorthand for `position` + offsets. Los desplazamientos salen como **propiedades lógicas** (`$top` → `inset-block-start`, `$right` → `inset-inline-end`, `$bottom` → `inset-block-end`, `$left` → `inset-inline-start`): igual en LTR, espejado en RTL. Para centrar con `translate`, usa `absolute-center`, que es físico a propósito.
+Null-safe shorthand for `position` + offsets. The offsets are output as **logical properties** (`$top` → `inset-block-start`, `$right` → `inset-inline-end`, `$bottom` → `inset-block-end`, `$left` → `inset-inline-start`): the same in LTR, mirrored in RTL. To center with `translate`, use `absolute-center`, which is physical on purpose.
 
 ```scss
 @include position(absolute, $top: 0, $right: 0);
@@ -104,7 +104,7 @@ Null-skipping shorthand for `margin`. Pass a space-separated list; `null` skips 
 // → margin-block-start: 1rem; margin-block-end: 2rem;
 
 @include margin(1rem 2rem 3rem 4rem);
-// → margin-block: 1rem 3rem; margin-inline: 4rem 2rem;  (inicio fin = izquierda derecha en LTR)
+// → margin-block: 1rem 3rem; margin-inline: 4rem 2rem;  (start end = left right in LTR)
 ```
 
 ---
@@ -114,7 +114,7 @@ Null-skipping shorthand for `margin`. Pass a space-separated list; `null` skips 
 Null-skipping shorthand for `padding`. Same API as `margin`.
 
 ```scss
-@include padding(var(--component-btn-padding-y) var(--component-btn-padding-x));
+@include padding(var(--component-button-padding-y) var(--component-button-padding-x));
 // → padding: … …;
 
 @include padding(null var(--layout-pad-4));
@@ -146,7 +146,7 @@ Sets `width` and `height`. If only `$width` is given, applies to both.
 
 ### `border($sides, $width, $style, $color)`
 
-Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `left` (también `no-*`, `vertical`, `horizontal`, `top-left`…). Sale lógico: `top` → `border-block-start`, `left` → `border-inline-start`, `horizontal` → `border-inline`.
+Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `left` (also `no-*`, `vertical`, `horizontal`, `top-left`…). Output is logical: `top` → `border-block-start`, `left` → `border-inline-start`, `horizontal` → `border-inline`.
 
 ```scss
 @include border(all, 1px, solid, var(--component-form-field-border));
@@ -165,7 +165,7 @@ Directional border shorthand. `$sides` can be `all`, `top`, `right`, `bottom`, `
 // → border-radius: …;
 
 @include border-radius(4px 8px);
-// → border-radius: 4px 8px;   (simétrica: igual en LTR y RTL)
+// → border-radius: 4px 8px;   (symmetric: the same in LTR and RTL)
 
 @include border-radius(4px 0 0 4px);
 // → border-start-start-radius: 4px; border-start-end-radius: 0;
@@ -400,7 +400,7 @@ Multi-line text clamp with ellipsis.
 
 ### `mirror-rtl($pseudo)`
 
-Espeja en horizontal (`scale: -1 1`) un icono direccional —flecha o chevron de «siguiente/anterior»— cuando el texto va de derecha a izquierda. Se incluye en el elemento; `$pseudo` apunta a su pseudo-elemento. Va tras `@supports selector(:dir(rtl))`, así que en navegadores sin `:dir()` el icono simplemente no se espeja.
+Mirrors a directional icon horizontally (`scale: -1 1`) —a “next/previous” arrow or chevron— when the text runs right to left. It is included on the element; `$pseudo` targets its pseudo-element. It sits behind `@supports selector(:dir(rtl))`, so in browsers without `:dir()` the icon is simply not mirrored.
 
 ```scss
 .atom-pagination__trigger {
@@ -498,8 +498,8 @@ $spacing-map: (
   lg: 2rem,
 );
 
-// Ilustración con un mapa inventado (sm/md/lg): las utilidades reales salen
-// de la escala 0–5 del sistema (.syx-p-0 … .syx-p-5).
+// Illustration with a made-up map (sm/md/lg): the real utilities come
+// from the system's 0–5 scale (.syx-p-0 … .syx-p-5).
 @include generate-utility($spacing-map, "syx-p", padding);
 // → .syx-p-sm { padding: 0.5rem; }
 //   .syx-p-md { padding: 1rem; }
@@ -510,7 +510,7 @@ $spacing-map: (
 
 ### `generate-utility-directional($map, $prefix, $property)`
 
-Generates directional utility classes (t/b/s/e/x/y, todas lógicas; las l/r físicas se retiraron en 5.0.0).
+Generates directional utility classes (t/b/s/e/x/y, all logical; the physical l/r were retired in 5.0.0).
 
 <!-- syx: ejemplo-nuevo -->
 ```scss
@@ -542,7 +542,7 @@ Legacy visually-hidden (prefer `sr-only()` for new code).
 
 ### `triangle($size, $color, $direction)`
 
-CSS triangle using borders. Bordes lógicos: `right` apunta al final de la línea y en RTL se espeja; `up`/`down` no cambian.
+CSS triangle using borders. Logical borders: `right` points to the end of the line and is mirrored in RTL; `up`/`down` do not change.
 
 ```scss
 @include triangle(8px, var(--semantic-color-primary), down);

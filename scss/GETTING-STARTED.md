@@ -138,7 +138,7 @@ touch scss/atoms/_tooltip.scss
       // &__content
       &__content {
         @include absolute($top: calc(100% + 0.5rem), $left: 50%);
-        @include padding(var(--semantic-space-inset-sm));
+        @include padding(var(--semantic-space-component-sm));
         @include transition(opacity 0.2s ease, transform 0.2s ease);
         // ... rest of styles
       }
@@ -156,14 +156,15 @@ touch scss/atoms/_tooltip.scss
 
 ### Step 3 — Add component tokens
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // scss/abstracts/tokens/components/_tooltip.scss
 :root {
   --component-tooltip-bg: var(--semantic-color-text-primary);
-  --component-tooltip-color: var(--primitive-color-white);
+  --component-tooltip-color: var(--semantic-color-text-inverse);
   --component-tooltip-border-radius: var(--semantic-border-radius-sm);
-  --component-tooltip-padding-x: var(--semantic-space-inset-sm);
-  --component-tooltip-padding-y: var(--semantic-space-inset-xs);
+  --component-tooltip-padding-inline: var(--semantic-space-component-sm);
+  --component-tooltip-padding-block: var(--semantic-space-component-xs);
 }
 ```
 
@@ -258,9 +259,10 @@ sass scss/styles-theme-my-brand.scss css/styles-theme-my-brand.css
 
 ### Adding a new color
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // 1. Add primitive (scss/abstracts/tokens/primitives/_colors.scss)
---primitive-color-teal-500: hsl(175, 100%, 40%);
+--primitive-color-teal-500: oklch(0.7 0.13 185);
 
 // 2. Point the semantic state at it (scss/abstracts/tokens/semantic/_colors.scss)
 --semantic-color-state-info: var(--primitive-color-teal-500);
@@ -351,7 +353,7 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 | `transition: color 0.2s ease;`            | `@include transition(color 0.2s ease);`              |
 | `position: absolute; top: 0;`             | `@include absolute($top: 0);`                        |
 | `color: #3B82F6;`                         | `color: var(--semantic-color-primary);`              |
-| `color: var(--primitive-color-blue-500);` | `color: var(--component-btn-primary-color);`         |
+| `color: var(--primitive-color-blue-500);` | `color: var(--component-button-primary-color);`         |
 | `!important` anywhere                     | Use `@layer` — utilities always win                  |
 | Skipping token layers                     | Always Primitive → Semantic → Component              |
 | Using `.helper-dsp-flex`                  | Use `.syx-d-flex` (utilities layer)                  |

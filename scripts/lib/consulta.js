@@ -25,12 +25,13 @@ const fs = require('fs');
 const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
 const { crearMotor, tokensInexistentes } = require('./rules');
+const { aIngles } = require('./claves');
 const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
 const figma = require('./figma');
 
-function crearConsulta({ root } = {}) {
+function crearConsulta({ root, crudo = false } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
   const F = {
     snap: path.join(ROOT, 'contracts', 'resolved-tokens.json'),
@@ -416,6 +417,13 @@ function crearConsulta({ root } = {}) {
   const scan = ({ files = [], theme = 'syx-sketch', mode = 'light' } = {}) =>
     escanear({ files, syx: api, theme, mode });
 
+  // La frontera pública: claves en inglés, con las de antes como alias no
+  // enumerables hasta la 6.0 (scripts/lib/claves.js). Por dentro, las
+  // funciones se siguen llamando entre sí con sus claves de siempre.
+  // `crudo: true` las deja como están: lo usa export-figma.js, cuyo formato
+  // (contracts/figma/) es suyo y no la API pública.
+  const publica = (fn) => (crudo ? fn : (...args) => aIngles(fn(...args)));
+
   const api = {
     root: ROOT,
     get version() {
@@ -423,18 +431,18 @@ function crearConsulta({ root } = {}) {
     },
     cssPath,
     scssPath,
-    listThemes,
-    getToken,
-    findTokenByValue,
+    listThemes: publica(listThemes),
+    getToken: publica(getToken),
+    findTokenByValue: publica(findTokenByValue),
     listTokens,
-    listComponents,
-    getComponent,
-    getFigmaSpec,
-    validateSnippet,
-    classifyChange,
-    scan,
-    listMixins,
-    getMixin,
+    listComponents: publica(listComponents),
+    getComponent: publica(getComponent),
+    getFigmaSpec: publica(getFigmaSpec),
+    validateSnippet: publica(validateSnippet),
+    classifyChange: publica(classifyChange),
+    scan: publica(scan),
+    listMixins: publica(listMixins),
+    getMixin: publica(getMixin),
   };
 
   return api;

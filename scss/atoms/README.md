@@ -1,29 +1,29 @@
 # atoms/
 
-Los átomos son los **componentes de interfaz más pequeños e indivisibles** del sistema. Cada uno es autosuficiente: tiene sus propios tokens de componente, sus variantes BEM y su accesibilidad incorporada. Se montan en `@layer syx.atoms`.
+Atoms are the **smallest, indivisible interface components** of the system. Each one is self-sufficient: it has its own component tokens, its BEM variants and its built-in accessibility. They are mounted in `@layer syx.atoms`.
 
-**Prefijo de clases**: `atom-*`
+**Class prefix**: `atom-*`
 **Layer**: `@layer syx.atoms`
-**Las utilidades `.syx-*` siempre sobreescriben a los átomos** (por diseño del stack de layers)
+**`.syx-*` utilities always override atoms** (by design of the layer stack)
 
 ---
 
-## Cuándo usar átomos
+## When to use atoms
 
-- Para construir **cualquier elemento interactivo básico**: botones, campos, checks, links
-- Como **bloques de construcción** de moléculas y organismos
-- Nunca dividas un átomo — si necesitas dos componentes juntos, ya es una molécula
+- To build **any basic interactive element**: buttons, fields, checks, links
+- As **building blocks** of molecules and organisms
+- Never split an atom — if you need two components together, it is already a molecule
 
 ---
 
-## Catálogo de átomos
+## Atom catalog
 
-### `atom-btn` — Botón
+### `atom-btn` — Button
 
-El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
+The most used atom. It has color, fill style and size variants.
 
 ```html
-<!-- Variante y relleno son independientes -->
+<!-- Variant and fill are independent -->
 <button class="atom-btn atom-btn--primary atom-btn--filled">
   Primary filled
 </button>
@@ -33,7 +33,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 </button>
 <button class="atom-btn atom-btn--secondary">Secondary outline</button>
 
-<!-- Tamaños -->
+<!-- Sizes -->
 <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm">
   Small
 </button>
@@ -44,10 +44,10 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
   Large
 </button>
 
-<!-- Circular (solo icono) -->
+<!-- Circular (icon only) -->
 <button
   class="atom-btn atom-btn--primary atom-btn--filled atom-btn--circle"
-  aria-label="Buscar"
+  aria-label="Search"
 >
   <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
 </button>
@@ -58,33 +58,33 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 </button>
 ```
 
-**Modificadores disponibles:**
+**Available modifiers:**
 
 - Color: `--primary` · `--secondary`
-- Estilo: `--filled` (sólido) · sin modificador (outline)
-- Tamaño: `--size-sm` · `--size-lg` (medium es el default)
-- Forma: `--circle` (para botones de solo icono)
+- Style: `--filled` (solid) · no modifier (outline)
+- Size: `--size-sm` · `--size-lg` (medium is the default)
+- Shape: `--circle` (for icon-only buttons)
 
 ---
 
-### Formulario (`atom-input`, `atom-select`, `atom-textarea`, `atom-label`) — Campo de texto / Select
+### Form (`atom-input`, `atom-select`, `atom-textarea`, `atom-label`) — Text field / Select
 
 ```html
-<!-- Input con label -->
+<!-- Input with label -->
 <label class="atom-label" for="email">Email</label>
 <span class="atom-input-wrapper">
-  <input class="atom-input" id="email" type="email" placeholder="Escribe..." />
+  <input class="atom-input" id="email" type="email" placeholder="Type..." />
 </span>
 
 <!-- Select -->
 <span class="atom-input-wrapper">
   <select class="atom-select">
-    <option>Opción 1</option>
+    <option>Option 1</option>
   </select>
 </span>
 ```
 
-> Siempre envuelve el campo en `mol-form-field` para obtener el espaciado y label correctos.
+> Always wrap the field in `mol-form-field` to get the correct spacing and label.
 
 ---
 
@@ -93,19 +93,19 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 ```html
 <label class="atom-check">
   <input type="checkbox" class="atom-check__input" />
-  Texto de la opción
+  Option text
 </label>
 
 <!-- Checked -->
 <label class="atom-check">
   <input type="checkbox" class="atom-check__input" checked />
-  Seleccionado
+  Selected
 </label>
 
 <!-- Disabled -->
 <label class="atom-check">
   <input type="checkbox" class="atom-check__input" disabled />
-  Deshabilitado
+  Disabled
 </label>
 ```
 
@@ -116,11 +116,11 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 ```html
 <label class="atom-radio">
   <input type="radio" class="atom-radio__input" name="grupo" />
-  Opción A
+  Option A
 </label>
 <label class="atom-radio">
   <input type="radio" class="atom-radio__input" name="grupo" checked />
-  Opción B
+  Option B
 </label>
 ```
 
@@ -132,25 +132,25 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 <label class="atom-switch">
   <input type="checkbox" class="atom-switch__input" role="switch" />
   <span class="atom-switch__slider" aria-hidden="true"></span>
-  Activar notificaciones
+  Enable notifications
 </label>
 ```
 
 ---
 
-### `atom-link` — Enlace semántico
+### `atom-link` — Semantic link
 
 ```html
-<a class="atom-link" href="#">Enlace estándar</a>
-<a class="atom-link atom-link--primary" href="#">Enlace en el color primario</a>
+<a class="atom-link" href="#">Standard link</a>
+<a class="atom-link atom-link--primary" href="#">Link in the primary color</a>
 ```
 
 ---
 
-### `atom-label` — Etiqueta de campo
+### `atom-label` — Field label
 
 ```html
-<label class="atom-label" for="mi-campo">Nombre</label>
+<label class="atom-label" for="mi-campo">Name</label>
 <label class="atom-label atom-label--primary" for="mi-campo">Email *</label>
 ```
 
@@ -169,9 +169,9 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 
 ---
 
-### `atom-icon` — Icono
+### `atom-icon` — Icon
 
-Base para iconos de la librería interna del sistema (flechas, controles, UI icons). Para iconos de RRSS usa `base/helpers/_icons.scss`.
+Base for icons from the system's internal library (arrows, controls, UI icons). For social network icons use `base/helpers/_icons.scss`.
 
 ```html
 <span class="atom-icon atom-icon--arrow-default" aria-hidden="true"></span>
@@ -179,46 +179,46 @@ Base para iconos de la librería interna del sistema (flechas, controles, UI ico
 <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
 ```
 
-> Siempre `aria-hidden="true"` en iconos decorativos. Añade `syx-sr-only` si el icono porta significado.
+> Always `aria-hidden="true"` on decorative icons. Add `syx-sr-only` if the icon carries meaning.
 
 ---
 
-### `atom-title` — Heading de contenido
+### `atom-title` — Content heading
 
-Para headings dentro de componentes (cards, artículos). Para headings de página/layout, usa `syx-type-h*` de utilities.
+For headings inside components (cards, articles). For page/layout headings, use `syx-type-h*` from utilities.
 
 ```html
-<h2 class="atom-title atom-title--h2">Título de sección</h2>
-<h3 class="atom-title atom-title--h3">Subtítulo</h3>
-<h4 class="atom-title atom-title--h4">Título de card</h4>
+<h2 class="atom-title atom-title--h2">Section title</h2>
+<h3 class="atom-title atom-title--h3">Subtitle</h3>
+<h4 class="atom-title atom-title--h4">Card title</h4>
 ```
 
 ---
 
-### `atom-txt` — Bloque de texto
+### `atom-txt` — Text block
 
-Texto de párrafo con estilos base del sistema.
+Paragraph text with the system's base styles.
 
 ```html
-<p class="atom-txt">Párrafo estándar con estilos de SYX.</p>
-<p class="atom-txt atom-txt--primary">Párrafo en el color primario.</p>
-<p class="atom-txt syx-type-body-small">Texto pequeño / metadata: el tamaño lo pone la utilidad.</p>
+<p class="atom-txt">Standard paragraph with SYX styles.</p>
+<p class="atom-txt atom-txt--primary">Paragraph in the primary color.</p>
+<p class="atom-txt syx-type-body-small">Small text / metadata: the size is set by the utility.</p>
 ```
 
 ---
 
-### `atom-breadcrumb` — Migas de pan
+### `atom-breadcrumb` — Breadcrumbs
 
 ```html
-<nav aria-label="Ruta de navegación">
+<nav aria-label="Breadcrumb">
   <ol class="atom-breadcrumb">
-    <li class="atom-breadcrumb__item"><a href="/">Inicio</a></li>
+    <li class="atom-breadcrumb__item"><a href="/">Home</a></li>
     <li class="atom-breadcrumb__item"><a href="/blog">Blog</a></li>
     <li
       class="atom-breadcrumb__item"
       aria-current="page"
     >
-      Artículo
+      Article
     </li>
   </ol>
 </nav>
@@ -226,31 +226,31 @@ Texto de párrafo con estilos base del sistema.
 
 ---
 
-### `atom-list` — Lista estilizada
+### `atom-list` — Styled list
 
 ```html
 <ul class="atom-list">
-  <li class="atom-list__item">Elemento 1</li>
-  <li class="atom-list__item">Elemento 2</li>
+  <li class="atom-list__item">Item 1</li>
+  <li class="atom-list__item">Item 2</li>
 </ul>
 ```
 
 ---
 
-### `atom-table` — Tabla
+### `atom-table` — Table
 
 ```html
 <table class="atom-table">
   <thead>
     <tr>
-      <th>Columna</th>
-      <th>Otra</th>
+      <th>Column</th>
+      <th>Other</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Dato</td>
-      <td>Dato</td>
+      <td>Data</td>
+      <td>Data</td>
     </tr>
   </tbody>
 </table>
@@ -258,10 +258,10 @@ Texto de párrafo con estilos base del sistema.
 
 ---
 
-### `atom-pagination` — Paginación
+### `atom-pagination` — Pagination
 
 ```html
-<nav class="atom-pagination" aria-label="Paginación">
+<nav class="atom-pagination" aria-label="Pagination">
   <a class="atom-pagination__item" href="#">«</a>
   <a class="atom-pagination__item atom-pagination__item--is-active" href="#" aria-current="page">1</a>
   <a class="atom-pagination__item" href="#">2</a>
@@ -271,9 +271,9 @@ Texto de párrafo con estilos base del sistema.
 
 ---
 
-### `atom-feature-icon` — Icono destacado para Cards
+### `atom-feature-icon` — Featured icon for Cards
 
-Para tarjetas de características con contenedor redondeado / sombreado especial sobre el icono neutro.
+For feature cards with a special rounded / shadowed container over the neutral icon.
 
 ```html
 <div class="atom-feature-icon">
@@ -283,9 +283,9 @@ Para tarjetas de características con contenedor redondeado / sombreado especial
 
 ---
 
-### `atom-stat` — Contador numérico grande
+### `atom-stat` — Large numeric counter
 
-Para paneles de Hero o contadores estadísticos que ocupan gran tamaño.
+For Hero panels or statistic counters that take up a large size.
 
 ```html
 <p class="atom-stat"><span class="atom-stat__number">100/100</span> <span class="atom-stat__label">Lighthouse</span></p>
@@ -293,9 +293,9 @@ Para paneles de Hero o contadores estadísticos que ocupan gran tamaño.
 
 ---
 
-## Reglas de los átomos
+## Atom rules
 
-1. **Nunca hardcodear valores** — siempre tokens `--component-*`
-2. **Siempre accesibilidad**: `aria-*`, roles, `disabled` nativo
-3. **BEM estricto**: `.atom-switch__slider`, `.atom-btn--primary`, nunca `.atom-btn .icon`
-4. **No incluir layout propio**: un átomo no se posiciona a sí mismo en la página — eso es responsabilidad de la molécula u organismo que lo contiene
+1. **Never hardcode values** — always `--component-*` tokens
+2. **Always accessibility**: `aria-*`, roles, native `disabled`
+3. **Strict BEM**: `.atom-switch__slider`, `.atom-btn--primary`, never `.atom-btn .icon`
+4. **No layout of its own**: an atom does not position itself on the page — that is the responsibility of the molecule or organism that contains it

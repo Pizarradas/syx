@@ -351,8 +351,8 @@ function evaluar({ tarea, respuesta, syx, equivalentes = {}, anexos = [] }) {
     if (bloques.length < (tarea.scss.minBloques || 1)) c1.detalle.push(`se esperaba código SCSS para ${tarea.scss.ruta} y no hay bloque \`\`\`scss`);
     bloques.forEach(({ code, path: ruta }, i) => {
       const r = syx.validateSnippet({ code, path: ruta || tarea.scss.ruta });
-      for (const [regla, v] of Object.entries(r.violaciones || {})) {
-        const n = Array.isArray(v) ? v.length : (v && v.casos ? v.casos.length : 1);
+      for (const [regla, v] of Object.entries(r.violations || {})) {
+        const n = Array.isArray(v) ? v.length : (v && v.cases ? v.cases.length : 1);
         c1.detalle.push(`${ruta && ruta !== tarea.scss.ruta ? ruta : `bloque ${i + 1}`}: ${regla} (${n})`);
       }
       // Un bloque que no parsea no ha pasado el contrato: no se ha podido mirar.
@@ -388,7 +388,7 @@ function evaluar({ tarea, respuesta, syx, equivalentes = {}, anexos = [] }) {
     if (!enCodigo && usos.length && usos.every(Boolean)) continue;
     if (t.startsWith('--primitive-')) continue; // R01 lo mide C1 donde importa
     const r = syx.getToken({ token: t });
-    if (!r.encontrado) c2.detalle.push(`${t} no existe${r.sugerencias && r.sugerencias.length ? ` (¿${r.sugerencias.slice(0, 2).join(', ')}?)` : ''}`);
+    if (!r.found) c2.detalle.push(`${t} no existe${r.suggestions && r.suggestions.length ? ` (¿${r.suggestions.slice(0, 2).join(', ')}?)` : ''}`);
   }
   c2.nota = c2.detalle.length ? 0 : 2;
   criterios.push(c2);
