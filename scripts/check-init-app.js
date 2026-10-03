@@ -47,7 +47,7 @@ comprobar('crea los cinco ficheros en una app vacía', () => {
   if (faltan.length) throw new Error(`faltan ${faltan.join(', ')}`);
   const agents = fs.readFileSync(path.join(vacia, 'AGENTS.md'), 'utf8');
   if (/\{\{/.test(agents)) throw new Error('quedan marcadores {{…}} sin sustituir');
-  if (!agents.includes('**App prefix: `app`**')) throw new Error('el prefijo por defecto no es app');
+  if (!agents.includes('**Project prefix: `app`**')) throw new Error('sin package.json, el prefijo no es app');
   return FICHEROS.length + ' ficheros';
 });
 
@@ -65,8 +65,24 @@ comprobar('es idempotente y --update conserva el prefijo', () => {
   const despues = FICHEROS.map((f) => fs.readFileSync(path.join(ajena, f), 'utf8'));
   const cambiados = FICHEROS.filter((f, i) => antes[i] !== despues[i]);
   if (cambiados.length) throw new Error(`la segunda pasada cambió ${cambiados.join(', ')}`);
-  if (!despues[0].includes('**App prefix: `shop`**')) throw new Error('--update perdió el prefijo shop');
+  if (!despues[0].includes('**Project prefix: `shop`**')) throw new Error('--update perdió el prefijo shop');
   return 'sin cambios en la segunda pasada · prefijo shop conservado';
+});
+
+comprobar('el prefijo por defecto es el nombre del proyecto', () => {
+  const pr = path.join(tmp, 'proyecto');
+  fs.mkdirSync(pr);
+  fs.writeFileSync(path.join(pr, 'package.json'), JSON.stringify({ name: '@pizarradas/umbra-mag' }));
+  correr(['--dir', pr]);
+  const t = fs.readFileSync(path.join(pr, 'AGENTS.md'), 'utf8');
+  if (!t.includes('**Project prefix: `umbramag`**')) throw new Error('no tomó el prefijo de package.json');
+  // Un AGENTS.md escrito por la versión anterior («App prefix») se respeta.
+  const viejo = path.join(tmp, 'viejo');
+  fs.mkdirSync(viejo);
+  fs.writeFileSync(path.join(viejo, 'AGENTS.md'), '<!-- syx:start -->\n**App prefix: `shop`** — x\n<!-- syx:end -->\n');
+  correr(['--dir', viejo, '--update']);
+  if (!fs.readFileSync(path.join(viejo, 'AGENTS.md'), 'utf8').includes('**Project prefix: `shop`**')) throw new Error('perdió el prefijo de un bloque antiguo');
+  return '@pizarradas/umbra-mag → umbramag · bloque antiguo conserva shop';
 });
 
 comprobar('rechaza un prefijo de SYX', () => {

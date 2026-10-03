@@ -79,7 +79,7 @@ function expandir(patron) {
   return fuera.sort();
 }
 
-const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && !['--theme', '--mode', '--ignorar'].includes(process.argv[process.argv.indexOf(a) - 1]));
+const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && !['--theme', '--mode', '--ignorar', '--prefix'].includes(process.argv[process.argv.indexOf(a) - 1]));
 const files = [...new Set(patrones.flatMap(expandir))].filter((f) => ESCANEABLE.test(f));
 
 if (!files.length) {
@@ -87,11 +87,28 @@ if (!files.length) {
   process.exit(patrones.length ? 1 : 0);
 }
 
+// El prefijo del proyecto: --prefix, o el que `syx-init` dejó en AGENTS.md
+// (se busca desde la carpeta actual hacia arriba). Sin él no se puede saber
+// qué clases son del proyecto y la comprobación de consulta previa no corre.
+function prefijoDelProyecto() {
+  if (arg('--prefix')) return arg('--prefix');
+  for (let d = process.cwd(); ; d = path.dirname(d)) {
+    const f = path.join(d, 'AGENTS.md');
+    if (fs.existsSync(f)) {
+      const m = /\*\*(?:App|Project) prefix: `([a-z][a-z0-9]*)`\*\*/.exec(fs.readFileSync(f, 'utf8'));
+      if (m) return m[1];
+    }
+    if (path.dirname(d) === d) return null;
+  }
+}
+const prefijo = prefijoDelProyecto();
+
 const informe = escanear({
   files,
   syx,
   theme: arg('--theme', 'syx-sketch'),
   mode: arg('--mode', 'light'),
+  prefijo,
 });
 
 // --ignorar tipo[,tipo]: para adoptar el escáner por partes en una app con
@@ -121,6 +138,7 @@ const TITULOS = {
   'primitivo-en-app': 'Primitivos leídos desde la aplicación',
   'pinta-clase-syx': 'La aplicación pinta clases de SYX',
   'movimiento-sin-salida': 'Transiciones sin salida para prefers-reduced-motion',
+  'sin-consulta': 'Componentes propios sin constancia de consulta a SYX',
   contrato: 'Reglas del sistema rotas en el consumidor',
   'base-sin-estilos': 'Bases sin estilos, con modificadores que sí existen',
   'gancho-js': 'Clases que solo usa el JavaScript',
@@ -130,6 +148,7 @@ const MARCA = { alta: '🔴', media: '🟠', baja: '·' };
 console.log('\n── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────\n');
 console.log(`   comparado contra    ${informe.theme} · ${informe.mode} · SYX v${syx.version}`);
 console.log(`   ficheros            ${informe.ficheros}`);
+if (prefijo) console.log(`   prefijo proyecto    ${prefijo}-*`);
 if (informe.ignorados) console.log(`   ignorados           ${informe.ignorados.hallazgos} de tipo ${informe.ignorados.tipos.join(', ')} (--ignorar)`);
 console.log(`   hallazgos           ${informe.total}   (${Object.entries(informe.porGravedad).map(([k, v]) => `${v} ${k}`).join(' · ') || 'ninguno'})\n`);
 

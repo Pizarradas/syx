@@ -326,7 +326,7 @@ The block name is the layer prefix plus the component name. There is no `syx-` i
 | `layout-` | Grid                                            | `.layout-grid`                |
 | `is-`     | State                                           | `.is-active`, `.is-scrolled`  |
 | `js-`     | JavaScript hook (no styles)                     | `.js-toggle`                  |
-| `app-`    | An app's own components (`CONSUMING.md`), never SYX's | `.app-plan-card`        |
+| project   | An app's own components, prefixed with the project's name (`CONSUMING.md`), never SYX's | `.umbra-masthead` |
 
 > **Removed:** The `u-` prefix (`.u-p-sm`, `.u-text-primary`, etc.) has been deprecated and unified under `syx-`. All public utility classes use `.syx-{property}-{value}` exclusively.
 

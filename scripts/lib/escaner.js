@@ -155,8 +155,10 @@ const ABSTRACTS_ENTEROS = /@(use|import|forward)\s+["'][^"']*scss\/abstracts(\/i
  * @param {object}   opciones.syx      la capa de consulta (index.js o crearConsulta)
  * @param {string}   opciones.theme    tema contra el que se compara
  * @param {string}   opciones.mode     modo
+ * @param {string}   [opciones.prefijo] prefijo del proyecto (`umbra`): activa la
+ *                                      comprobación de consulta previa (3d)
  */
-function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
+function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = null }) {
   const hallazgos = [];
   const añadir = (h) => hallazgos.push(h);
 
@@ -215,6 +217,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
     }
   } catch (e) { /* sin registro, sin excepciones: se juzga todo */ }
 
+  const bloquesVistos = new Set(); // 3d: cada bloque propio se juzga una vez, en su primera regla
   const declaradosApp = new Set();
   for (const file of files) {
     for (const t of trozosDe(file, fs.readFileSync(file, 'utf8'))) for (const d of declaraciones(t.css)) declaradosApp.add(d.token);
@@ -302,7 +305,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
           file: rel, linea,
           que: `${d.token} se declara con prefijo de SYX y SYX no lo tiene`,
           detalle: 'Parece del sistema y no lo es: el próximo que lo lea lo buscará en SYX, y una versión futura puede declararlo con otro valor.',
-          sugerencia: `Los tokens de la app llevan el prefijo de la app (${d.token.replace(/^--(syx-)?(primitive|semantic|component|theme|layout|reset|prv|sem|cmp)?-?/, '--app-')}) — CONSUMING.md §5.`,
+          sugerencia: `Los tokens de la app llevan el prefijo de la app (${d.token.replace(/^--(syx-)?(primitive|semantic|component|theme|layout|reset|prv|sem|cmp)?-?/, `--${prefijo || 'app'}-`)}) — CONSUMING.md §5.`,
         });
       }
       for (const m of t.css.matchAll(/var\(\s*(--primitive-[a-zA-Z0-9-]+)/g)) {
@@ -455,6 +458,45 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
       }
     }
 
+    // ── 3d. Bloques propios sin constancia de haber consultado SYX ───────────
+    // SYX es la fuente: un componente del proyecto solo se crea cuando ninguna
+    // pieza del sistema sirve. El contrato pide dejarlo dicho encima de la
+    // primera regla del bloque (`/* syx-reuse: checked mol-card — … */`), y esto
+    // comprueba que está. No juzga si la razón es buena —eso es de una
+    // persona—, pero obliga a que el agente haya mirado antes de inventar.
+    if (prefijo) {
+      const re = new RegExp(`\\.(${prefijo}-[a-z0-9]+(?:-[a-z0-9]+)*)(?![\\w-])`, 'g');
+      for (const t of trozos) {
+        const lineas = t.css.split('\n');
+        lineas.forEach((l, i) => {
+          if (!l.includes('{')) return;
+          const selector = l.slice(0, l.indexOf('{'));
+          for (const m of selector.matchAll(re)) {
+            const bloque = m[1];
+            if (bloquesVistos.has(bloque)) continue;
+            bloquesVistos.add(bloque);
+            // Lo que hay justo encima: comentarios y líneas en blanco, hasta la
+            // regla anterior. El comentario de un bloque no vale para el siguiente.
+            const encima = [];
+            for (let k = i - 1; k >= 0; k--) {
+              const x = lineas[k].trim();
+              if (/[{};]\s*$/.test(x) && !/^(\/\*|\*|\/\/)/.test(x)) break;
+              encima.unshift(x);
+            }
+            const antes = encima.join('\n');
+            if (/syx-reuse\s*:/.test(antes) || /syx-reuse\s*:/.test(l)) continue;
+            añadir({
+              tipo: 'sin-consulta', gravedad: 'media', file: rel,
+              linea: t.unaLinea ? t.desde : t.desde + i,
+              que: `.${bloque} se crea sin decir qué de SYX se consultó`,
+              detalle: 'Un componente propio solo nace cuando ningún componente, modificador, composición o token de SYX sirve.',
+              sugerencia: `Encima de su primera regla: /* syx-reuse: checked <piezas de SYX> — <por qué no sirven> */`,
+            });
+          }
+        });
+      }
+    }
+
     // ── 4. Clases que parecen del sistema y no lo son ───────────────────────
     if (esHtml) {
       // Los <script> de la propia página, para distinguir una clase muerta de
@@ -561,7 +603,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
           que: `.${clase} no existe en el CSS del sistema${veces > 1 ? ` (${veces} usos)` : ''}`,
           detalle: esModificador
             ? `.${base} sí existe; el modificador no, así que no pinta nada.`
-            : 'Lleva prefijo de SYX pero el sistema no la declara. Si es un componente de la app, lleva el prefijo de la app (CONSUMING.md).',
+            : 'Lleva prefijo de SYX pero el sistema no la declara. Si es un componente del proyecto, lleva el prefijo del proyecto (CONSUMING.md).',
           sugerencia: cercanas.length ? `Existen: ${cercanas.map((c) => '.' + c).join(', ')}` : null,
         });
       }

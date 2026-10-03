@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — SYX primero: prefijo por proyecto y consulta obligatoria antes de crear
+
+- **El prefijo de lo propio es el nombre del proyecto**, no un `app-` genérico: `npx syx-init` lo toma del `package.json` (`@pizarradas/umbra-mag` → `umbramag`), `--prefix` lo fija. `umbra-masthead` dice de dónde sale y, si aparece un `motoro-masthead` casi igual, señala un candidato a organismo de SYX. El bloque escrito pasa a decir «Project prefix»; los escritos como «App prefix» se respetan en `--update`.
+- **Consultar antes de crear**: la plantilla de `AGENTS.md` abre con el bucle *buscar en SYX → reutilizar → solo entonces crear → verificar*, y todo bloque nuevo del proyecto lleva encima de su primera regla qué piezas de SYX se miraron y por qué no sirven (`/* syx-reuse: checked mol-card — … */`).
+- **Escáner**: `sin-consulta` (media) señala el bloque del proyecto que nace sin esa línea; el prefijo lo lee de `--prefix` o del `AGENTS.md` del proyecto. La sugerencia de `token-usurpado` usa ese prefijo.
+
 ### Added — contrato de consumo para cualquier agente
 
 Un agente que construía una app sobre SYX devolvía `syx-atm-btn`, `--syx-sem-*`, `atom-btn--sm` u `org-header`. No se los inventaba del todo: los documentos para agentes hablaban de cómo **cambiar** SYX, no de cómo **usarlo**, se quedaban en `node_modules/` donde ningún agente mira, y varias guías enseñaban clases que no existen.

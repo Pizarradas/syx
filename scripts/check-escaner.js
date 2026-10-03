@@ -204,7 +204,16 @@ fs.writeFileSync(path.join(app, 'layout.scss'), [
   '}',
   '',
 ].join('\n'));
-const informeApp = escanear({ files: ['tokens.css', 'app.scss', 'Card.jsx', 'layout.scss'].map((f) => path.join(app, f)), syx });
+fs.writeFileSync(path.join(app, 'propio.css'), [
+  '@layer syx.app {',
+  '  /* syx-reuse: checked mol-card, layout-grid — needs a two-column editorial header */',
+  '  .lumen-masthead { display: grid; }',
+  '  .lumen-masthead__title { margin: 0; }',   // elemento de un bloque ya justificado: no
+  '  .lumen-opening { display: grid; }',      // bloque nuevo sin justificar: sí
+  '}',
+  '',
+].join('\n'));
+const informeApp = escanear({ files: ['tokens.css', 'app.scss', 'Card.jsx', 'layout.scss', 'propio.css'].map((f) => path.join(app, f)), syx, prefijo: 'lumen' });
 const enApp = (tipo, trozo) => {
   const h = informeApp.hallazgos.find((x) => x.tipo === tipo && JSON.stringify(x).includes(trozo));
   if (!h) throw new Error(`no encontró ${tipo} con «${trozo}»\n     encontró: ${informeApp.hallazgos.map((x) => `${x.tipo}: ${x.que}`).join(' | ')}`);
@@ -219,7 +228,7 @@ comprobar('app: los abstracts enteros importados, como grave', () => {
 
 comprobar('app: un token nuevo con prefijo de SYX', () => {
   const h = enApp('token-usurpado', '--component-plan-card-bg');
-  if (!h.sugerencia.includes('--app-plan-card-bg')) throw new Error(`sugiere ${h.sugerencia}`);
+  if (!h.sugerencia.includes('--lumen-plan-card-bg')) throw new Error(`sugiere ${h.sugerencia}`);
 });
 
 comprobar('app: leer un primitivo, con el semántico que vale lo mismo', () => {
@@ -255,6 +264,14 @@ comprobar('app: colocar, :has() y sobrescribir un token NO es pintar', () => {
 comprobar('app: una transition en crudo en SCSS, con el mixin al lado', () => {
   const h = enApp('movimiento-sin-salida', 'transform 1s');
   if (!/@include transition/.test(h.sugerencia)) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: un bloque propio sin syx-reuse, y solo ese', () => {
+  const malos = informeApp.hallazgos.filter((h) => h.tipo === 'sin-consulta');
+  if (malos.length !== 1 || !malos[0].que.includes('.lumen-opening')) {
+    throw new Error(`esperaba solo .lumen-opening, encontró: ${malos.map((h) => h.que).join(' | ') || 'nada'}`);
+  }
+  if (malos[0].gravedad !== 'media') throw new Error(`gravedad ${malos[0].gravedad}: tiene que forzar el bucle del agente`);
 });
 
 comprobar('app: NO denuncia los tokens que la propia app declara', () => {

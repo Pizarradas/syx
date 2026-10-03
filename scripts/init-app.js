@@ -28,7 +28,7 @@
  * final. SYX-VOCABULARY.md es entero de SYX y se regenera siempre.
  *
  * Uso:
- *   npx syx-init                    prefijo app-
+ *   npx syx-init                    prefijo = nombre del package.json (o app-)
  *   npx syx-init --prefix shop      prefijo propio
  *   npx syx-init --update           tras actualizar SYX (conserva el prefijo)
  *   npx syx-init --dir ruta/app     otra raíz
@@ -53,17 +53,31 @@ const INICIO = /<!--\s*syx:start[\s\S]*?-->/;
 const FIN = /<!--\s*syx:end\s*-->/;
 
 // ─── El prefijo ──────────────────────────────────────────────────────────────
-// En --update se recupera del bloque ya escrito: cambiar de prefijo en silencio
-// dejaría el contrato diciendo una cosa y el código otra.
+// Uno por proyecto, y con su nombre: `umbra-masthead` dice de dónde sale, y si
+// mañana aparece un `motoro-masthead` casi igual, es candidato a organismo de
+// SYX. Un `app-` genérico en todos los proyectos borraba esa pista.
+//   1. --prefix, si se da;
+//   2. el que ya figura en el bloque de AGENTS.md (--update no lo cambia en
+//      silencio: el contrato diría una cosa y el código otra);
+//   3. el nombre del package.json de la app, sin ámbito ni guiones;
+//   4. `app`, si no hay nada de lo anterior o no vale.
+const RESERVADOS = ['atom', 'mol', 'org', 'syx', 'layout', 'is', 'js', 'semantic', 'component', 'primitive', 'theme', 'reset', 'icon', 'page', 'tpl'];
+const valido = (p) => /^[a-z][a-z0-9]*$/.test(p) && !RESERVADOS.includes(p);
 function prefijoPrevio() {
   const f = path.join(DIR, 'AGENTS.md');
   if (!fs.existsSync(f)) return null;
-  const m = /\*\*App prefix: `([a-z][a-z0-9]*)`\*\*/.exec(fs.readFileSync(f, 'utf8'));
+  const m = /\*\*(?:App|Project) prefix: `([a-z][a-z0-9]*)`\*\*/.exec(fs.readFileSync(f, 'utf8'));
   return m ? m[1] : null;
 }
-const PREFIJO = arg('--prefix') || prefijoPrevio() || 'app';
-const RESERVADOS = ['atom', 'mol', 'org', 'syx', 'layout', 'is', 'semantic', 'component', 'primitive', 'theme', 'reset', 'icon', 'page', 'tpl'];
-if (!/^[a-z][a-z0-9]*$/.test(PREFIJO) || RESERVADOS.includes(PREFIJO)) {
+function prefijoDelPaquete() {
+  try {
+    const nombre = JSON.parse(fs.readFileSync(path.join(DIR, 'package.json'), 'utf8')).name || '';
+    const p = nombre.replace(/^@[^/]+\//, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    return valido(p) && p.length <= 16 ? p : null;
+  } catch (e) { return null; }
+}
+const PREFIJO = arg('--prefix') || prefijoPrevio() || prefijoDelPaquete() || 'app';
+if (!valido(PREFIJO)) {
   console.error(`\n   El prefijo «${PREFIJO}» no vale: una palabra en minúsculas y que no sea de SYX (${RESERVADOS.join(', ')}).\n`);
   process.exit(1);
 }
