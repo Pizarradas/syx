@@ -47,8 +47,9 @@ Output:
 
 ## Example Usage
 
+<!-- syx: ejemplo-nuevo -->
 ```
-Create a new SYX molecule called "alert".
+Create a new SYX molecule called "notice".
 
 Description: An inline notification block that combines an icon, a title, and body text. The icon is on the left, the text content on the right. Supports tonal variants for feedback states.
 
@@ -59,11 +60,11 @@ Modifiers needed: --info, --success, --warning, --error
 Elements needed: __icon, __content, __title, __body
 
 HTML example:
-<div class="mol-alert mol-alert--info" role="alert">
+<div class="mol-notice mol-notice--info" role="status">
   <span class="atom-icon atom-icon--lc-info" aria-hidden="true"></span>
-  <div class="mol-alert__content">
-    <p class="mol-alert__title atom-title atom-title--h6">Note</p>
-    <p class="mol-alert__body atom-txt">Your changes have been saved.</p>
+  <div class="mol-notice__content">
+    <p class="mol-notice__title atom-title atom-title--h6">Note</p>
+    <p class="mol-notice__body atom-txt">Your changes have been saved.</p>
   </div>
 </div>
 ```

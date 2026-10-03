@@ -61,9 +61,7 @@ Use correct SYX class names from `component-registry.json`:
 
 ```html
 <!-- Good: semantic, correct prefixes, BEM -->
-<button class="atom-btn atom-btn--primary" type="button">
-  <span class="atom-btn__label">Save changes</span>
-</button>
+<button class="atom-btn atom-btn--primary atom-btn--filled" type="button">Save changes</button>
 
 <!-- Bad: wrong element, missing type, no BEM -->
 <div class="btn" onclick="...">Save changes</div>

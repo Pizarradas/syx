@@ -333,7 +333,7 @@ SYX uses native CSS `@layer` to manage specificity without `!important`.
 ### Layer Stack
 
 ```css
-@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.utilities;
+@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.app, syx.utilities;
 ```
 
 | Layer           | Content                    | Wins over  |
@@ -344,6 +344,7 @@ SYX uses native CSS `@layer` to manage specificity without `!important`.
 | `syx.atoms`     | Atomic components          | tokens     |
 | `syx.molecules` | Composite components       | atoms      |
 | `syx.organisms` | Complex UI sections        | molecules  |
+| `syx.app`       | Reserved for the consuming app (empty in SYX) | organisms |
 | `syx.utilities` | Utility classes            | everything |
 
 ### Golden Rule

@@ -23,7 +23,8 @@
   },
   "bin": {
     "syx-mcp": "scripts/mcp-server.js",
-    "syx-scan": "scripts/scan-drift.js"
+    "syx-scan": "scripts/scan-drift.js",
+    "syx-init": "scripts/init-app.js"
   },
   "files": [
     "index.js",
@@ -39,7 +40,9 @@
     "tokens.json",
     "component-registry.json",
     "_agents/",
+    "templates/",
     "AGENTS.md",
+    "CONSUMING.md",
     "CLAUDE.md",
     "AI_GUIDELINES.md",
     "THEMING-RULES.md",
@@ -80,7 +83,7 @@
     "check:compilado": "node scripts/check-compilado.js",
     "export:tokens": "node scripts/export-tokens.js",
     "export:figma": "node scripts/export-figma.js",
-    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:compilado && npm run check:themes && npm run check:plantilla && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:consumidores && npm run check:registry && npm run check:usage && npm run check:mcp && npm run check:escaner && npm run check:docs-componentes && npm run check:recuentos && npm run check:vitrina && npm run check:why-syx && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run check:soporte && npm run check:prepros && npm run check:pages && npm run build",
+    "check": "npm run lint && npm run validate:report && npm run check:reglas && npm run check:compilado && npm run check:themes && npm run check:plantilla && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:consumidores && npm run check:registry && npm run check:usage && npm run check:mcp && npm run check:escaner && npm run check:init-app && npm run check:clases-docs && npm run check:docs-componentes && npm run check:recuentos && npm run check:vitrina && npm run check:why-syx && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run check:soporte && npm run check:prepros && npm run check:pages && npm run build",
     "check:themes": "node scripts/check-theme-symmetry.js --strict",
     "check:plantilla": "node scripts/check-plantilla.js",
     "check:prepros": "node scripts/check-prepros.js",
@@ -106,6 +109,9 @@
     "propose": "node scripts/propose.js",
     "scan": "node scripts/scan-drift.js",
     "check:escaner": "node scripts/check-escaner.js",
+    "init-app": "node scripts/init-app.js",
+    "check:init-app": "node scripts/check-init-app.js",
+    "check:clases-docs": "node scripts/check-clases-docs.js",
     "check:limpio": "node scripts/check-limpio.js",
     "check:mixins": "node scripts/check-mixins.js",
     "check:figma": "node scripts/export-figma.js --check",
@@ -123,7 +129,7 @@
     "check:contraste": "node scripts/check-contraste.js",
     "check:conocimiento": "node scripts/check-conocimiento.js",
     "prepare": "node scripts/build-dist.js --quiet",
-    "check:vitrina": "node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html --fallar-si-media",
+    "check:vitrina": "node scripts/scan-drift.js home.html docs.html why-syx.html theme-builder.html --fallar-si-media --ignorar primitivo-en-app,pinta-clase-syx,movimiento-sin-salida",
     "build:why-syx": "node scripts/build-why-syx.js",
     "check:why-syx": "node scripts/build-why-syx.js --check",
     "check:clasificacion": "node scripts/check-clasificacion.js",

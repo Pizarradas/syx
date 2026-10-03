@@ -106,6 +106,7 @@ El contrato completo —qué DEBE declarar un tema, qué PUEDE y qué NO, con el
 
 La variable `$theme` que se pasa a los helpers es una string usada por el mixin para comparaciones `@if $theme == "mi-marca"`. Esto permite lógica de compilación por tema (por ejemplo, fondos especiales solo para un tema).
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // Ejemplo de lógica de tema en _backgrounds.scss
 @if $theme == "example-02" {

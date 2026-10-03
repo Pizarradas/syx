@@ -14,12 +14,12 @@ Mixins **tema-conscientes** que generan clases `.syx-*` dentro de `@layer syx.ut
 
 Usa las clases de `base/helpers/` para:
 
-- **Colores de fondo** temáticos (`.syx-bg-color-primary`, `.syx-bg-color-brand-*`)
-- **Colores de texto** temáticos (`.syx-font-color-primary`, `.syx-font-color-brand-*`)
+- **Colores de fondo** temáticos (`.syx-bg-color-primary` … `.syx-bg-color-quinary`, `.syx-bg-color-white`, `.syx-bg-color-black`)
+- **Colores de texto** temáticos (`.syx-font-color-primary` … `.syx-font-color-quinary`, `.syx-font-color-white`, `.syx-font-color-black`)
 - **Tipografía** con escala de fuentes del tema (`.syx-font-size-1` a `.syx-font-size-5`)
 - **Dimensiones** del sistema de dimensiones del tema (`.syx-size-1` a `.syx-size-5`)
 - **Iconos de RRSS** (`.syx-icon`, `.syx-icon--facebook-primary`, etc.)
-- **Pesos y familias de fuente** del tema (`.syx-font-weight-light`, `.syx-font-scope-*`)
+- **Pesos y familias de fuente** del tema (`.syx-font-bold`, `.syx-font-medium`, `.syx-font-weight-1`/`-2` —familias, no pesos—, `.syx-font-scope-1`…`-5`)
 
 **No** uses estas clases para:
 
@@ -49,8 +49,8 @@ Genera clases de tamaño de fondo y **color de fondo temático**.
 ```html
 <div class="syx-bg-color-primary">Fondo primario del tema activo</div>
 <div class="syx-bg-color-secondary">Fondo secundario</div>
-<div class="syx-bg-color-neutral">Fondo neutro</div>
-<div class="syx-bg-color-dark">Fondo oscuro</div>
+<div class="syx-bg-color-tertiary">Fondo terciario</div>
+<div class="syx-bg-color-black">Fondo negro</div>
 <div class="syx-bg-color-white">Fondo blanco</div>
 ```
 
@@ -67,30 +67,29 @@ Color, peso y "scope" (tamaño + line-height combinados) de tipografía.
 ```html
 <p class="syx-font-color-primary">Texto en color primario del tema</p>
 <p class="syx-font-color-secondary">Texto en color secundario</p>
-<p class="syx-font-color-neutral">Texto neutro</p>
-<p class="syx-font-color-dark">Texto oscuro</p>
+<p class="syx-font-color-tertiary">Texto en color terciario</p>
+<p class="syx-font-color-black">Texto negro</p>
 <p class="syx-font-color-white">Texto blanco</p>
-<p class="syx-font-color-brand-primary">Color de marca primario</p>
 ```
 
 #### Peso de fuente
 
 ```html
-<span class="syx-font-weight-light">Light</span>
-<span class="syx-font-weight-regular">Regular</span>
-<span class="syx-font-weight-medium">Medium</span>
-<span class="syx-font-weight-semibold">Semibold</span>
-<span class="syx-font-weight-bold">Bold</span>
+<span class="syx-font-medium">Medium</span>
+<span class="syx-font-bold">Bold (peso y familia de negrita)</span>
+<!-- nombre histórico: -weight-1/-2 cambian la FAMILIA (texto / negrita), no el peso -->
+<span class="syx-font-weight-1">Familia de texto</span>
+<span class="syx-font-weight-2">Familia de negrita</span>
 ```
 
 #### Scope (tamaño + interlineado del tema)
 
 ```html
-<p class="syx-font-scope-xs">XS — texto más pequeño del sistema</p>
-<p class="syx-font-scope-sm">SM</p>
-<p class="syx-font-scope-md">MD — cuerpo base</p>
-<p class="syx-font-scope-lg">LG</p>
-<p class="syx-font-scope-xl">XL</p>
+<p class="syx-font-scope-1">1 — texto más pequeño del sistema</p>
+<p class="syx-font-scope-2">2</p>
+<p class="syx-font-scope-3">3</p>
+<p class="syx-font-scope-4">4</p>
+<p class="syx-font-scope-5">5</p>
 ```
 
 ---
@@ -125,7 +124,7 @@ Tamaños width/height del sistema de dimensiones del tema. Los tokens `--dimensi
 
 ---
 
-> **`helper-spacer` retirado (2026-09-12):** las clases `.syx-spacer-*` no
+> **`helper-spacer` retirado (2026-09-12):** las clases ❌ `.syx-spacer-*` ✓ no
 > tenían ningún uso real en el sitio ni en el sistema. Para espaciado usa
 > `utilities/_spacing.scss` (`.syx-mt-*`, `.syx-pt-*`, …).
 
@@ -170,4 +169,4 @@ Usar siempre `aria-hidden="true"` en iconos decorativos. Si el icono **es** la e
 2. Definir `@mixin helper-mi-helper($theme: null) { @layer syx.utilities { ... } }`
 3. Usar `.syx-*` como prefijo para las clases generadas
 4. `@forward` en `helpers/helpers.scss`
-5. Llamar `@include helper-mi-helper($theme)` una sola vez en `themes/_shared/_core.scss` (`syx-core`)
+5. Llamar `@include helper-mi-helper($theme)` una sola vez en `themes/_shared/_core.scss` (el mixin `syx-core()`)

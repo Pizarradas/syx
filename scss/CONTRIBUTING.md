@@ -43,8 +43,9 @@
 
 Follow this order for consistency:
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
-.syx-component {
+.mol-example {
   // 1. Positioning (use mixin)
   @include absolute($top: 0);
 

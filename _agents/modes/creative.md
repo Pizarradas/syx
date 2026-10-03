@@ -110,6 +110,7 @@ Even in creative mode:
 
 Use SYX naming when it aids clarity and handoff. In fully custom creative builds, a flat naming convention is acceptable — but must be consistent:
 
+<!-- syx: ejemplo-nuevo -->
 ```css
 /* Preferred — SYX naming survives a potential UI-mode promotion */
 .org-hero { … }

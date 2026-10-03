@@ -45,7 +45,7 @@
 SYX uses native CSS `@layer` to manage specificity without `!important`.
 
 ```css
-@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.utilities;
+@layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.app, syx.utilities;
 ```
 
 | Layer           | Content                               | Wins over  |
@@ -56,9 +56,16 @@ SYX uses native CSS `@layer` to manage specificity without `!important`.
 | `syx.atoms`     | Atomic components                     | tokens     |
 | `syx.molecules` | Composite components                  | atoms      |
 | `syx.organisms` | Complex UI sections (+ site layer)    | molecules  |
+| `syx.app`       | **Reserved for the consuming app** — empty in SYX's own CSS | organisms |
 | `syx.utilities` | All public utility classes (`.syx-*`) | everything |
 
 **Result:** Utility classes always override component styles. No `!important` needed anywhere.
+
+> **Why `syx.app` exists:** an app that builds on SYX needs somewhere to put its own
+> components that beats SYX's components and still loses to SYX's utilities. A layer the app
+> declares itself can only go before `syx` (and lose to everything) or after it (and beat the
+> utilities too); a sub-layer can only be slotted *between* if SYX names it. SYX never writes
+> in it. The contract for using it is `CONSUMING.md` §5.
 
 > **Why `syx.tokens` is empty:** the `:root` blocks that declare tokens are
 > deliberately emitted **outside** any `@layer` — unlayered styles beat every
@@ -282,9 +289,9 @@ Pages          — Page-specific overrides and layouts
 
 | Layer       | Count | Contents                                                                                                                                                 |
 | ----------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Atoms       | 19    | breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, radio, stat-counter, switch, table, title, txt |
-| Molecules   | 6     | btn-group, code-snippet, feature-card, form-field, form-field-set, label-group                                                                           |
-| Organisms   | 1     | site-header                                                                                                                                              |
+| Atoms       | 23    | avatar, breadcrumb, btn, check, code, feature-icon, form, icon, icon-lucide, label, link, list, pagination, pill, progress, radio, skeleton, spinner, stat-counter, switch, table, title, txt |
+| Molecules   | 15    | alert, btn-group, card, code-snippet, dialog, disclosure, empty-state, feature-card, form-field, form-field-set, label-group, menu, tabs, toast, tooltip |
+| Organisms   | 2     | app-shell, site-header |
 | Site layer  | 12    | `scss/site/` — SYX's own pages only, outside the registry: home-cta, home-features, home-footer, home-hero, home-layers, home-themes, home-tokens, evidence, score, ranking, compare-card, theme-swatch-card |
 | Pages       | 1     | theme-builder                                                                                                                                            |
 
@@ -294,24 +301,32 @@ Pages          — Page-specific overrides and layouts
 
 ### BEM
 
+The block name is the layer prefix plus the component name. There is no `syx-` in it.
+
+<!-- syx: ejemplo-nuevo -->
 ```scss
-.syx-block {
+.mol-block {
 }
-.syx-block__element {
+.mol-block__element {
 }
-.syx-block--modifier {
+.mol-block--modifier {
 }
-.syx-block__element--modifier {
+.mol-block__element--modifier {
 }
 ```
 
 ### Prefixes
 
-| Prefix | Meaning                     | Example                    |
-| ------ | --------------------------- | -------------------------- |
-| `syx-` | SYX utility or component    | `.atom-btn`, `.syx-d-flex` |
-| `is-`  | State                       | `.is-open`, `.is-active`   |
-| `js-`  | JavaScript hook (no styles) | `.js-toggle`               |
+| Prefix    | Meaning                                         | Example                       |
+| --------- | ----------------------------------------------- | ----------------------------- |
+| `atom-`   | Atom                                            | `.atom-btn`                   |
+| `mol-`    | Molecule                                        | `.mol-card`                   |
+| `org-`    | Organism                                        | `.org-site-header`            |
+| `syx-`    | Utility — **never** a component                 | `.syx-d-flex`, `.syx-p-2`     |
+| `layout-` | Grid                                            | `.layout-grid`                |
+| `is-`     | State                                           | `.is-active`, `.is-scrolled`  |
+| `js-`     | JavaScript hook (no styles)                     | `.js-toggle`                  |
+| `app-`    | An app's own components (`CONSUMING.md`), never SYX's | `.app-plan-card`        |
 
 > **Removed:** The `u-` prefix (`.u-p-sm`, `.u-text-primary`, etc.) has been deprecated and unified under `syx-`. All public utility classes use `.syx-{property}-{value}` exclusively.
 

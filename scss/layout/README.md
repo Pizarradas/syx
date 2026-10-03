@@ -16,7 +16,7 @@ El armazón de una aplicación (cabecera, barra lateral y contenido) es un compo
 
 ## Cuándo usar el grid
 
-Usa `syx-grid` para **layouts de página completos** o **secciones de contenido** que requieran una rejilla de columnas con gutters coherentes con el sistema de espaciado.
+Usa `layout-grid` para **layouts de página completos** o **secciones de contenido** que requieran una rejilla de columnas con gutters coherentes con el sistema de espaciado.
 
 Para micro-layouts (flex row, centrado, alineaciones puntuales), usa las utilidades de `utilities/_display.scss` (`.syx-d-flex`, `.syx-gap-*`, etc.).
 

@@ -73,11 +73,11 @@ Inside this repository, after `npm run build:dist`:
   </head>
   <!-- No classes required on <html> or <body>; data-theme="dark|light" on <html> forces a mode -->
   <body>
-    <!-- SYX components use the .syx- prefix -->
+    <!-- Components carry their layer prefix: atom-, mol-, org-. Never syx-. -->
     <button class="atom-btn atom-btn--primary">Primary Button</button>
     <button class="atom-btn atom-btn--secondary">Secondary Button</button>
 
-    <!-- Utility classes also use .syx- prefix -->
+    <!-- Utilities, and only utilities, use the syx- prefix -->
     <!-- All utilities live in @layer syx.utilities — they always win -->
     <div class="syx-d-flex syx-gap-2 syx-items-center">
       <span class="syx-p-1 syx-bg-primary syx-text-white">Badge</span>
@@ -106,7 +106,9 @@ Inside this repository, after `npm run build:dist`:
 
 ## 3. Create a New Atom
 
-Follow this checklist when adding a new atomic component.
+Follow this checklist when adding a new atomic component. The walk-through builds a
+minimal `atom-tooltip` to show the steps — SYX already ships a full `mol-tooltip`, so in
+real work check `component-registry.json` first and reuse it.
 
 ### Step 1 — Create the file
 
@@ -117,6 +119,7 @@ touch scss/atoms/_tooltip.scss
 
 ### Step 2 — Write the mixin
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // scss/atoms/_tooltip.scss
 // CORE
@@ -266,13 +269,14 @@ sass scss/styles-theme-my-brand.scss css/styles-theme-my-brand.css
 --component-alert-info-bg: var(--semantic-color-state-info);
 
 // 4. Use in component SCSS
-.syx-alert--info {
+.mol-alert--info {
   background: var(--component-alert-info-bg);
 }
 ```
 
 ### Adding a new spacing value
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // Step 1: Primitive (primitives/_spacing.scss)
 // Use an existing step or add a new one with a comment explaining why.
@@ -284,8 +288,8 @@ sass scss/styles-theme-my-brand.scss css/styles-theme-my-brand.css
 // Step 2: Semantic alias (semantic/_spacing.scss)
 --semantic-space-layout-hero: var(--primitive-space-20);
 
-// Step 3: Use directly
-.syx-hero {
+// Step 3: Use directly (in a new organism)
+.org-hero {
   @include padding(var(--semantic-space-layout-hero) null);
 }
 ```

@@ -237,7 +237,8 @@ Components must support three density contexts without layout breakage. Implemen
 | Default | _(none)_ | `× 1` | As designed |
 | Comfortable | `--comfortable` | `× 1.375` | As designed |
 
-Implement using token overrides on the component root, not by hardcoding values:
+Implement using token overrides on the component root, not by hardcoding values (a new modifier is a new component change: it goes through `propose.js`):
+<!-- syx: ejemplo-nuevo -->
 ```scss
 .atom-btn--compact {
   --component-button-padding-y: calc(var(--semantic-space-component-sm) * 0.75);

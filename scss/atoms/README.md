@@ -49,7 +49,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
   class="atom-btn atom-btn--primary atom-btn--filled atom-btn--circle"
   aria-label="Buscar"
 >
-  <span class="atom-icon atom-icon--search" aria-hidden="true"></span>
+  <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
 </button>
 
 <!-- Disabled -->
@@ -67,7 +67,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 
 ---
 
-### `atom-form` — Campo de texto / Select
+### Formulario (`atom-input`, `atom-select`, `atom-textarea`, `atom-label`) — Campo de texto / Select
 
 ```html
 <!-- Input con label -->
@@ -103,7 +103,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 </label>
 
 <!-- Disabled -->
-<label class="atom-check atom-check--disabled">
+<label class="atom-check">
   <input type="checkbox" class="atom-check__input" disabled />
   Deshabilitado
 </label>
@@ -131,7 +131,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 ```html
 <label class="atom-switch">
   <input type="checkbox" class="atom-switch__input" role="switch" />
-  <span class="atom-switch__track" aria-hidden="true"></span>
+  <span class="atom-switch__slider" aria-hidden="true"></span>
   Activar notificaciones
 </label>
 ```
@@ -142,9 +142,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 
 ```html
 <a class="atom-link" href="#">Enlace estándar</a>
-<a class="atom-link atom-link--secondary" href="#">Enlace secundario</a>
-<a class="atom-link atom-link--subtle" href="#">Enlace sutil</a>
-<a class="atom-link atom-link--inverse" href="#">Enlace sobre fondo oscuro</a>
+<a class="atom-link atom-link--primary" href="#">Enlace en el color primario</a>
 ```
 
 ---
@@ -153,7 +151,7 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 
 ```html
 <label class="atom-label" for="mi-campo">Nombre</label>
-<label class="atom-label atom-label--required" for="mi-campo">Email *</label>
+<label class="atom-label atom-label--primary" for="mi-campo">Email *</label>
 ```
 
 ---
@@ -165,8 +163,8 @@ El átomo más usado. Tiene variantes de color, estilo de relleno y tamaño.
 <span class="atom-pill atom-pill--primary">Primary</span>
 <span class="atom-pill atom-pill--success">Success</span>
 <span class="atom-pill atom-pill--warning">Warning</span>
-<span class="atom-pill atom-pill--error">Error</span>
-<span class="atom-pill atom-pill--info">Info</span>
+<span class="atom-pill atom-pill--danger">Error</span>
+<span class="atom-pill atom-pill--neutral">Info</span>
 ```
 
 ---
@@ -177,8 +175,8 @@ Base para iconos de la librería interna del sistema (flechas, controles, UI ico
 
 ```html
 <span class="atom-icon atom-icon--arrow-default" aria-hidden="true"></span>
-<span class="atom-icon atom-icon--close" aria-hidden="true"></span>
-<span class="atom-icon atom-icon--search" aria-hidden="true"></span>
+<span class="atom-icon atom-icon--lc-x" aria-hidden="true"></span>
+<span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
 ```
 
 > Siempre `aria-hidden="true"` en iconos decorativos. Añade `syx-sr-only` si el icono porta significado.
@@ -203,8 +201,8 @@ Texto de párrafo con estilos base del sistema.
 
 ```html
 <p class="atom-txt">Párrafo estándar con estilos de SYX.</p>
-<p class="atom-txt atom-txt--lead">Lead paragraph destacado.</p>
-<p class="atom-txt atom-txt--small">Texto pequeño / metadata.</p>
+<p class="atom-txt atom-txt--primary">Párrafo en el color primario.</p>
+<p class="atom-txt syx-type-body-small">Texto pequeño / metadata: el tamaño lo pone la utilidad.</p>
 ```
 
 ---
@@ -217,7 +215,7 @@ Texto de párrafo con estilos base del sistema.
     <li class="atom-breadcrumb__item"><a href="/">Inicio</a></li>
     <li class="atom-breadcrumb__item"><a href="/blog">Blog</a></li>
     <li
-      class="atom-breadcrumb__item atom-breadcrumb__item--active"
+      class="atom-breadcrumb__item"
       aria-current="page"
     >
       Artículo
@@ -265,7 +263,7 @@ Texto de párrafo con estilos base del sistema.
 ```html
 <nav class="atom-pagination" aria-label="Paginación">
   <a class="atom-pagination__item" href="#">«</a>
-  <a class="atom-pagination__item atom-pagination__item--active" href="#">1</a>
+  <a class="atom-pagination__item atom-pagination__item--is-active" href="#" aria-current="page">1</a>
   <a class="atom-pagination__item" href="#">2</a>
   <a class="atom-pagination__item" href="#">»</a>
 </nav>
@@ -285,12 +283,12 @@ Para tarjetas de características con contenedor redondeado / sombreado especial
 
 ---
 
-### `atom-stat-counter` — Contador numérico grande
+### `atom-stat` — Contador numérico grande
 
 Para paneles de Hero o contadores estadísticos que ocupan gran tamaño.
 
 ```html
-<p class="atom-stat-counter">100/100</p>
+<p class="atom-stat"><span class="atom-stat__number">100/100</span> <span class="atom-stat__label">Lighthouse</span></p>
 ```
 
 ---
@@ -299,5 +297,5 @@ Para paneles de Hero o contadores estadísticos que ocupan gran tamaño.
 
 1. **Nunca hardcodear valores** — siempre tokens `--component-*`
 2. **Siempre accesibilidad**: `aria-*`, roles, `disabled` nativo
-3. **BEM estricto**: `.atom-btn__icon`, `.atom-btn--primary`, nunca `.atom-btn .icon`
+3. **BEM estricto**: `.atom-switch__slider`, `.atom-btn--primary`, nunca `.atom-btn .icon`
 4. **No incluir layout propio**: un átomo no se posiciona a sí mismo en la página — eso es responsabilidad de la molécula u organismo que lo contiene

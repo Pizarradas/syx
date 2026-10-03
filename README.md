@@ -16,7 +16,8 @@
 | You want to… | Read | Time |
 |---|---|---|
 | Use SYX in a page or an app | *Quick Start* below, then `THEMING-RULES.md` | 5 min |
-| Build with SYX through an AI agent | `CLAUDE.md` (Claude Code) or `AGENTS.md` (any other agent), and register the MCP server | 5 min |
+| Build an app on SYX with any AI agent | `npx syx-init` in the app (writes the contract to `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, Copilot's instructions and a closed `SYX-VOCABULARY.md`), then `CONSUMING.md` | 5 min |
+| Change SYX itself through an AI agent | `CLAUDE.md` (Claude Code) or `AGENTS.md` (any other agent), and register the MCP server | 5 min |
 | Write or change a component | `scss/GETTING-STARTED.md`, then `scss/AUTHORING-GUIDE.md` | 15 min |
 | Understand why the system is the way it is | `mind-system/README.md` (precedence ladder), `docs/decisions/` | as long as it takes |
 
@@ -28,7 +29,7 @@ Everything else in the root is either the package itself or one of these entry p
 
 SYX is a **component-first design system** that provides:
 
-- A **4-layer token architecture** (Primitive → Theme / Architecture → Semantic Tones → Component Aliases)
+- A **4-kind token architecture** — primitive, theme (structure: radius, focus ring), semantic, component — whose colour path is always primitive → semantic → component
 - A **native SCSS mixin library** (15 files, Bourbon-philosophy, null-safe)
 - An **Atomic Design component hierarchy** (Atoms → Molecules → Organisms)
 - A **multi-context bundle system** (docs / app / marketing / blog per theme)

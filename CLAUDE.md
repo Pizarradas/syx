@@ -2,6 +2,9 @@
 
 You are working with **SYX**, a token-driven, native SCSS design system (v5.0.0).
 
+> **Building a website or an app that *uses* SYX, rather than changing SYX?** Read
+> `CONSUMING.md` instead, and run `npx syx-init` in the app.
+
 Before doing anything else, read:
 1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet. Its rule
    table (R01–R11) is the readable form of `contracts/rules.json`, the machine contract that
@@ -178,10 +181,10 @@ Pre-built step-by-step workflows live in `_agents/workflows/`:
 ## Project Structure (quick reference)
 
 ```
-scss/abstracts/tokens/    — 4-tier token system (primitives → semantic → component)
+scss/abstracts/tokens/    — 4 kinds of token (primitive, theme, semantic, component); colour path primitive → semantic → component
 scss/atoms/               — 23 atoms, single-purpose
 scss/molecules/           — 15 molecules, composites
-scss/organisms/           — 1 complex section (site-header)
+scss/organisms/           — 2 complex sections (app-shell, site-header)
 scss/site/                — SITE LAYER: 12 pieces used only by SYX's own pages
                             (home-*, evidence, score, ranking, compare-card,
                             theme-swatch-card). Outside the registry and the

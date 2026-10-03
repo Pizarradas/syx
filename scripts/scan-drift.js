@@ -6,14 +6,17 @@
  *
  * Uso:
  *   node scripts/scan-drift.js docs.html
+ *   npx syx-scan src                       (una carpeta: todo .html/.css/.scss/.vue/.svelte/.astro/.jsx/.tsx)
  *   node scripts/scan-drift.js "src/**\/*.html" src/app.css --theme example-03
  *   npx syx-scan app/**\/*.html --json > desviacion.json
+ *   npx syx-scan src --ignorar primitivo-en-app   (adoptarlo por partes; lo ignorado se cuenta)
  *
  * Desde una aplicación que instala el paquete, `npx syx-scan` compara contra
  * la versión de SYX que esa aplicación tiene instalada, que es la única
  * comparación que significa algo.
  *
- * Sale con código 1 solo si se le pide con `--fallar-si-alta`: por defecto
+ * Sale con código 1 solo si se le pide con `--fallar-si-alta` (o
+ * `--fallar-si-media`, que es lo que pide CONSUMING.md a una app): por defecto
  * informa y no rompe nada, porque la primera vez que se corre sobre una
  * aplicación de verdad va a encontrar de todo, y eso no es motivo para tumbar
  * la integración continua de nadie el día uno.
@@ -38,7 +41,21 @@ const flag = (n) => process.argv.includes(n);
 // Expansión mínima de comodines: `dir/*.html` y `dir/**/*.css`. Suficiente para
 // no depender de un paquete de globs en un proyecto cuyo argumento es no tener
 // dependencias.
+// Una carpeta a secas (`npx syx-scan src`) es «todo lo escaneable que hay dentro».
+const ESCANEABLE = /\.(html?|css|scss|vue|svelte|astro|jsx|tsx)$/i;
 function expandir(patron) {
+  if (!/[*?]/.test(patron) && fs.existsSync(patron) && fs.statSync(patron).isDirectory()) {
+    const fuera = [];
+    const andar = (dir) => {
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (e.name === 'node_modules' || e.name.startsWith('.')) continue;
+        const p = path.join(dir, e.name);
+        if (e.isDirectory()) andar(p); else if (ESCANEABLE.test(e.name)) fuera.push(p);
+      }
+    };
+    andar(patron);
+    return fuera.sort();
+  }
   if (!/[*?]/.test(patron)) return fs.existsSync(patron) ? [patron] : [];
   const partes = patron.split('/');
   const i = partes.findIndex((p) => /[*?]/.test(p));
@@ -62,11 +79,11 @@ function expandir(patron) {
   return fuera.sort();
 }
 
-const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && process.argv[process.argv.indexOf(a) - 1] !== '--theme' && process.argv[process.argv.indexOf(a) - 1] !== '--mode');
-const files = [...new Set(patrones.flatMap(expandir))].filter((f) => /\.(html?|css)$/i.test(f));
+const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && !['--theme', '--mode', '--ignorar'].includes(process.argv[process.argv.indexOf(a) - 1]));
+const files = [...new Set(patrones.flatMap(expandir))].filter((f) => ESCANEABLE.test(f));
 
 if (!files.length) {
-  console.log('\n   Nada que escanear. Pasa ficheros .html o .css:\n   node scripts/scan-drift.js docs.html\n');
+  console.log('\n   Nada que escanear. Pasa ficheros .html, .css, .scss, .vue, .svelte, .astro, .jsx o .tsx:\n   node scripts/scan-drift.js docs.html\n');
   process.exit(patrones.length ? 1 : 0);
 }
 
@@ -76,6 +93,17 @@ const informe = escanear({
   theme: arg('--theme', 'syx-sketch'),
   mode: arg('--mode', 'light'),
 });
+
+// --ignorar tipo[,tipo]: para adoptar el escáner por partes en una app con
+// deuda previa. Lo ignorado se dice, no se esconde.
+const ignorados = (arg('--ignorar') || '').split(',').filter(Boolean);
+if (ignorados.length) {
+  const antes = informe.hallazgos.length;
+  informe.hallazgos = informe.hallazgos.filter((h) => !ignorados.includes(h.tipo));
+  informe.ignorados = { tipos: ignorados, hallazgos: antes - informe.hallazgos.length };
+  informe.total = informe.hallazgos.length;
+  informe.porGravedad = informe.hallazgos.reduce((a, h) => ({ ...a, [h.gravedad]: (a[h.gravedad] || 0) + 1 }), {});
+}
 
 if (flag('--json')) {
   console.log(JSON.stringify(informe, null, 2));
@@ -88,6 +116,11 @@ const TITULOS = {
   'valor-a-pelo': 'Valores escritos a mano que ya son token',
   'clase-fantasma': 'Clases con pinta de SYX que el sistema no declara',
   'modificador-inventado': 'Modificadores que no pintan nada',
+  'modificador-sin-bloque': 'Modificadores sin su bloque',
+  'token-usurpado': 'Tokens nuevos con prefijo de SYX',
+  'primitivo-en-app': 'Primitivos leídos desde la aplicación',
+  'pinta-clase-syx': 'La aplicación pinta clases de SYX',
+  'movimiento-sin-salida': 'Transiciones sin salida para prefers-reduced-motion',
   contrato: 'Reglas del sistema rotas en el consumidor',
   'base-sin-estilos': 'Bases sin estilos, con modificadores que sí existen',
   'gancho-js': 'Clases que solo usa el JavaScript',
@@ -97,6 +130,7 @@ const MARCA = { alta: '🔴', media: '🟠', baja: '·' };
 console.log('\n── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────\n');
 console.log(`   comparado contra    ${informe.theme} · ${informe.mode} · SYX v${syx.version}`);
 console.log(`   ficheros            ${informe.ficheros}`);
+if (informe.ignorados) console.log(`   ignorados           ${informe.ignorados.hallazgos} de tipo ${informe.ignorados.tipos.join(', ')} (--ignorar)`);
 console.log(`   hallazgos           ${informe.total}   (${Object.entries(informe.porGravedad).map(([k, v]) => `${v} ${k}`).join(' · ') || 'ninguno'})\n`);
 
 if (!informe.total) {

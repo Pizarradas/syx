@@ -63,9 +63,11 @@ function trozosCss(html) {
 function clasesDe(html) {
   const limpio = vaciar(html);
   const fuera = [];
-  for (const m of limpio.matchAll(/\bclass\s*=\s*"([^"]*)"/gi)) {
+  // `class="…"` y, en JSX/TSX, `className="…"` o `className={'…'}`.
+  for (const m of limpio.matchAll(/\bclass(?:Name)?\s*=\s*(?:\{\s*)?(["'`])([^"'`]*)\1/g)) {
     const linea = lineaDe(limpio, m.index);
-    for (const c of m[1].split(/\s+/).filter(Boolean)) fuera.push({ clase: c, linea });
+    const lista = m[2].split(/\s+/).filter(Boolean);
+    for (const c of lista) fuera.push({ clase: c, linea, junto: lista });
   }
   return fuera;
 }
@@ -132,6 +134,18 @@ function distancia(a, b) {
 }
 
 const PREFIJOS_SYX = /^(atom|mol|org|syx)-/;
+// Los espacios de nombres de token que son de SYX. Un token fuera de ellos es
+// de la app (o de otra librería): el escáner no tiene opinión sobre su nombre.
+// `--syx-*` no es de SYX —sus tokens no llevan ese prefijo— pero lo parece, y
+// es justo lo que inventa un modelo (`--syx-sem-primary`): se juzga como suyo.
+const TOKENS_SYX = /^--(syx|primitive|semantic|component|theme|layout|reset)-/;
+
+/** `--x: …` declarados en un CSS (no las lecturas `var(--x)`). */
+const declaraciones = (css) =>
+  [...css.matchAll(/(^|[;{\s])(--[a-zA-Z0-9_-]+)\s*:/g)].map((m) => ({ token: m[2], indice: m.index + m[1].length }));
+
+/** `@use`/`@import` de los abstracts ENTEROS (no de sus mixins): re-emite los tokens por defecto. */
+const ABSTRACTS_ENTEROS = /@(use|import|forward)\s+["'][^"']*scss\/abstracts(\/index)?["']/g;
 
 // ─── El escáner ──────────────────────────────────────────────────────────────
 
@@ -179,20 +193,47 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
     porAtributo.filter((a) => casa(a, c) &&
       !clasesSyx.some((base) => base !== c && c.startsWith(base) && casa(a, base)));
 
+  // Primera pasada: los tokens que la propia app declara. `var(--app-card-bg)`
+  // no es un token inexistente si la app lo declara en otro fichero: es su
+  // capa de componente, la que el contrato de consumo le pide que tenga.
+  const ES_MARCADO = /\.(html?|vue|svelte|astro|jsx|tsx)$/i;
+  const ES_JSX = /\.(jsx|tsx)$/i;
+  const trozosDe = (file, bruto) =>
+    ES_JSX.test(file) ? []
+      : ES_MARCADO.test(file) ? trozosCss(bruto)
+        : [{ css: bruto, desde: 1, origen: path.basename(file) }];
+  // Hay modificadores que el propio sistema enseña sin su bloque:
+  // `atom-table--resp` va en `atom-table__container`, no en `atom-table`. Si el
+  // `usage` del registro lo escribe así, así es como se usa.
+  const modificadoresSueltos = new Set();
+  try {
+    for (const { name } of syx.listComponents().components) {
+      const c = syx.getComponent({ name });
+      for (const { clase, junto } of clasesDe(c.usage || '')) {
+        if (clase.includes('--') && !junto.includes(clase.split('--')[0])) modificadoresSueltos.add(clase);
+      }
+    }
+  } catch (e) { /* sin registro, sin excepciones: se juzga todo */ }
+
+  const declaradosApp = new Set();
+  for (const file of files) {
+    for (const t of trozosDe(file, fs.readFileSync(file, 'utf8'))) for (const d of declaraciones(t.css)) declaradosApp.add(d.token);
+  }
+
   for (const file of files) {
     const rel = path.relative(process.cwd(), file);
     const bruto = fs.readFileSync(file, 'utf8');
-    const esHtml = /\.html?$/i.test(file);
-    const trozos = esHtml
-      ? trozosCss(bruto)
-      : [{ css: bruto, desde: 1, origen: path.basename(file) }];
+    const esHtml = ES_MARCADO.test(file);
+    const trozos = trozosDe(file, bruto);
 
     // ── 1. Fallbacks que ya no coinciden con el sistema ────────────────────
     for (const t of trozos) {
       for (const v of varsConFallback(t.css)) {
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, v.indice).split('\n').length - 1;
+        if (declaradosApp.has(v.token) && !TOKENS_SYX.test(v.token)) continue; // token de la app
         const real = syx.getToken({ token: v.token, theme, mode });
 
+        if (!real.encontrado && !TOKENS_SYX.test(v.token)) continue; // de otra librería: no es asunto de SYX
         if (!real.encontrado) {
           añadir({
             tipo: 'token-inexistente',
@@ -224,15 +265,76 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
     for (const t of trozos) {
       for (const v of varsSinFallback(t.css)) {
         if (syx.getToken({ token: v.token, theme, mode }).encontrado) continue;
+        if (declaradosApp.has(v.token)) continue; // lo declara la app (si usurpa un prefijo de SYX, sale en 1c)
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, v.indice).split('\n').length - 1;
         const cerca = syx.getToken({ token: v.token, theme, mode }).sugerencias || [];
+        const deSyx = TOKENS_SYX.test(v.token);
         añadir({
           tipo: 'token-inexistente',
-          gravedad: 'alta',
+          // Fuera de los prefijos de SYX puede venir de otra hoja que no se ha
+          // escaneado: se avisa, sin gritar.
+          gravedad: deSyx ? 'alta' : 'baja',
           file: rel, linea,
-          que: `${v.token} no existe, y se usa sin fallback`,
-          detalle: 'La propiedad se queda sin valor: el elemento no se pinta. No hay nada que avise, ni en consola ni al compilar.',
-          sugerencia: cerca.length ? `¿Quisiste decir ${cerca.slice(0, 3).join(', ')}?` : null,
+          que: deSyx ? `${v.token} no existe, y se usa sin fallback` : `${v.token} no lo declaran ni SYX ni los ficheros escaneados`,
+          detalle: deSyx
+            ? 'La propiedad se queda sin valor: el elemento no se pinta. No hay nada que avise, ni en consola ni al compilar.'
+            : 'Si lo declara otra hoja, escanéala también; si no, la propiedad se queda sin valor.',
+          sugerencia: /^--syx-/.test(v.token)
+            ? 'Los tokens de SYX no llevan prefijo syx-: son --primitive-*, --semantic-*, --component-*.'
+            : deSyx && cerca.length ? `¿Quisiste decir ${cerca.slice(0, 3).join(', ')}?` : null,
+        });
+      }
+    }
+
+    // ── 1c. Tokens nuevos con prefijo de SYX, y lecturas de primitivos ──────
+    // Las dos formas en que una app se salta la cadena de tokens: inventar
+    // un `--component-*` (o `--semantic-*`) que el sistema no tiene, como si
+    // fuera parte de él, y leer un `--primitive-*`, que es materia de los
+    // temas. Sobrescribir un token que SÍ existe es legítimo (THEMING-RULES).
+    for (const t of trozos) {
+      for (const d of declaraciones(t.css)) {
+        if (!TOKENS_SYX.test(d.token)) continue;
+        if (syx.getToken({ token: d.token, theme, mode }).encontrado) continue;
+        const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, d.indice).split('\n').length - 1;
+        añadir({
+          tipo: 'token-usurpado',
+          gravedad: 'media',
+          file: rel, linea,
+          que: `${d.token} se declara con prefijo de SYX y SYX no lo tiene`,
+          detalle: 'Parece del sistema y no lo es: el próximo que lo lea lo buscará en SYX, y una versión futura puede declararlo con otro valor.',
+          sugerencia: `Los tokens de la app llevan el prefijo de la app (${d.token.replace(/^--(syx-)?(primitive|semantic|component|theme|layout|reset|prv|sem|cmp)?-?/, '--app-')}) — CONSUMING.md §5.`,
+        });
+      }
+      for (const m of t.css.matchAll(/var\(\s*(--primitive-[a-zA-Z0-9-]+)/g)) {
+        const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, m.index).split('\n').length - 1;
+        añadir({
+          tipo: 'primitivo-en-app',
+          gravedad: 'media',
+          file: rel, linea,
+          que: `lee ${m[1]}`,
+          detalle: 'Un primitivo es un valor sin significado: no sigue al modo oscuro ni a un cambio de marca. La app empieza en los semánticos.',
+          sugerencia: (() => {
+            const v = syx.getToken({ token: m[1], theme, mode });
+            const sem = v.encontrado ? syx.findTokenByValue({ value: v.value, theme, mode }).exactos.filter((x) => x.startsWith('--semantic-')) : [];
+            return sem.length ? `Hoy vale lo mismo que ${sem.slice(0, 3).join(', ')}` : 'Busca el rol: get_token / find_token_by_value.';
+          })(),
+        });
+      }
+    }
+
+    // ── 1d. Los abstracts enteros importados desde la app ───────────────────
+    // `@use '…/scss/abstracts'` arrastra los ~75 KB de tokens por defecto, sin
+    // capa y DESPUÉS del tema: el tema queda pisado. La app solo necesita los
+    // mixins: `scss/abstracts/mixins/mixins`.
+    if (/\.scss$/i.test(file)) {
+      for (const m of bruto.matchAll(ABSTRACTS_ENTEROS)) {
+        añadir({
+          tipo: 'contrato',
+          gravedad: 'alta',
+          file: rel, linea: lineaDe(bruto, m.index),
+          que: 'importa scss/abstracts entero',
+          detalle: 'Re-emite todos los tokens por defecto de SYX después del tema y los pisa.',
+          sugerencia: "@use 'syx-design-system/scss/abstracts/mixins/mixins' as *;",
         });
       }
     }
@@ -279,6 +381,80 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
       });
     }
 
+    // ── 3b. Movimiento sin salida para quien lo pide reducido ───────────────
+    // En SCSS la app tiene el mixin (`@include transition()`), que añade el
+    // `prefers-reduced-motion`; en CSS plano, al menos que el fichero lo trate.
+    const esScss = /\.scss$/i.test(file);
+    const tieneReducido = /prefers-reduced-motion/.test(bruto);
+    if (esScss || !tieneReducido) {
+      for (const t of trozos) {
+        t.css.split('\n').forEach((l, i) => {
+          if (!/(^|[;{\s])transition(-[a-z-]+)?\s*:/.test(l) || /^\s*\/\//.test(l)) return;
+          añadir({
+            tipo: 'movimiento-sin-salida', gravedad: 'media', file: rel, linea: t.unaLinea ? t.desde : t.desde + i,
+            que: 'transition en crudo', detalle: l.trim().slice(0, 90),
+            sugerencia: esScss
+              ? "@include transition(…) — @use 'syx-design-system/scss/abstracts/mixins/mixins'; añade la salida de prefers-reduced-motion"
+              : 'Añade @media (prefers-reduced-motion: reduce) { transition: none; } (CONSUMING.md §5).',
+          });
+        });
+      }
+    }
+
+    // ── 3c. La app pinta una clase de SYX ───────────────────────────────────
+    // `.mol-card__header { display: flex }` desde la app: el componente deja
+    // de ser el del sistema y nadie lo ve en el registro. La app puede COLOCAR
+    // una pieza de SYX (márgenes, rejilla, orden) y sobrescribir sus tokens;
+    // pintarla, no. Se mira cada bloque cuyo selector nombra una clase de SYX
+    // y se juzgan solo sus declaraciones directas.
+    if (!esHtml || trozos.length) {
+      const COLOCAR = /^(margin|margin-[a-z-]+|grid-area|grid-column|grid-row|grid-column-[a-z]+|grid-row-[a-z]+|order|align-self|justify-self|place-self|flex|flex-grow|flex-shrink|flex-basis|inline-size|max-inline-size|min-inline-size|width|max-width|min-width)$/;
+      for (const t of trozos) {
+        const css = t.css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).replace(/\/\/[^\n]*/g, (m) => ' '.repeat(m.length));
+        let i = 0;
+        while ((i = css.indexOf('{', i)) !== -1) {
+          const inicio = Math.max(css.lastIndexOf('}', i - 1), css.lastIndexOf('{', i - 1), css.lastIndexOf(';', i - 1)) + 1;
+          const selector = css.slice(inicio, i).trim();
+          // Cuerpo directo: hasta su llave de cierre, sin los bloques anidados.
+          let nivel = 1; let j = i + 1; let directo = '';
+          while (j < css.length && nivel > 0) {
+            const ch = css[j];
+            if (ch === '{') nivel++;
+            else if (ch === '}') nivel--;
+            else if (nivel === 1) directo += ch;
+            j++;
+          }
+          // El SUJETO del selector es lo que se pinta: el último compuesto de
+          // cada alternativa, sin lo que va entre paréntesis.
+          // `.demo:has(.mol-dialog)` pinta `.demo`, no el diálogo.
+          const sujetoSyx = selector.startsWith('@') ? null : selector.split(',')
+            .map((alt) => {
+              let sin = alt; let antes;
+              do { antes = sin; sin = sin.replace(/\([^()]*\)/g, ''); } while (sin !== antes);
+              const partes = sin.trim().split(/\s*[\s>+~]\s*/);
+              return /\.((atom|mol|org)-[A-Za-z0-9_-]+)/.exec(partes[partes.length - 1] || '');
+            })
+            .find(Boolean);
+          const syxEn = sujetoSyx ? [null, null, sujetoSyx[1]] : null;
+          if (syxEn) {
+            const props = [...directo.matchAll(/(?:^|;)\s*([a-zA-Z-]+)\s*:/g)].map((m) => m[1].toLowerCase())
+              .filter((p) => !p.startsWith('--'));
+            const pinta = props.filter((p) => !COLOCAR.test(p));
+            if (pinta.length) {
+              añadir({
+                tipo: 'pinta-clase-syx', gravedad: 'media', file: rel,
+                linea: t.unaLinea ? t.desde : t.desde + css.slice(0, i).split('\n').length - 1,
+                que: `la app pinta .${syxEn[2]} (${[...new Set(pinta)].slice(0, 4).join(', ')})`,
+                detalle: `selector «${selector.replace(/\s+/g, ' ').slice(0, 70)}»: una clase de SYX solo se coloca (margin, grid-*, order, align/justify-self, flex) desde la app.`,
+                sugerencia: 'Usa un modificador que exista, sobrescribe sus tokens, o compón un elemento propio (app-*) dentro — CONSUMING.md §3–4.',
+              });
+            }
+          }
+          i++;
+        }
+      }
+    }
+
     // ── 4. Clases que parecen del sistema y no lo son ───────────────────────
     if (esHtml) {
       // Los <script> de la propia página, para distinguir una clase muerta de
@@ -299,6 +475,30 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
         return null;
       };
 
+      // Un modificador sin su bloque: `class="atom-btn--primary"` a secas. El
+      // modificador existe, pero el CSS lo escribe como `.atom-btn--primary`
+      // DENTRO de `.atom-btn` (o asume sus estilos base): solo, pinta a medias.
+      const sinBloque = new Map();
+      for (const { clase, linea, junto } of clasesDe(bruto)) {
+        if (!PREFIJOS_SYX.test(clase) || !clase.includes('--')) continue;
+        if (modificadoresSueltos.has(clase)) continue;
+        const base = clase.split('--')[0];
+        if (!clasesSistema.has(clase) || junto.includes(base)) continue;
+        if (!clasesSistema.has(base) && !clasesSyx.some((c) => c.startsWith(base + '__'))) continue;
+        if (!sinBloque.has(clase)) sinBloque.set(clase, { linea, base, veces: 0 });
+        sinBloque.get(clase).veces++;
+      }
+      for (const [clase, { linea, base, veces }] of sinBloque) {
+        añadir({
+          tipo: 'modificador-sin-bloque',
+          gravedad: 'media',
+          file: rel, linea,
+          que: `.${clase} sin .${base}${veces > 1 ? ` (${veces} usos)` : ''}`,
+          detalle: 'Un modificador varía un bloque; sin el bloque faltan sus estilos base.',
+          sugerencia: `class="${base} ${clase}"`,
+        });
+      }
+
       const vistas = new Map();
       for (const { clase, linea } of clasesDe(bruto)) {
         if (!PREFIJOS_SYX.test(clase)) continue; // clases propias de la app: no opinamos
@@ -309,12 +509,18 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
       for (const [clase, { linea, veces }] of vistas) {
         const base = clase.split('--')[0];
         const esModificador = clase.includes('--') && clasesSistema.has(base);
-        const cercanas = clasesSyx
+        // Para un modificador inventado, primero la familia del propio bloque
+        // que contiene lo que se quiso decir (`atom-btn--sm` → `atom-btn--size-sm`);
+        // la distancia de edición sola proponía `.atom-icon--sm`.
+        const cola = esModificador ? clase.slice(base.length + 2) : '';
+        const deFamilia = esModificador
+          ? clasesSyx.filter((c) => c.startsWith(base + '--') && c.slice(base.length + 2).split('-').includes(cola))
+          : [];
+        const cercanas = [...new Set([...deFamilia, ...clasesSyx
           .map((c) => ({ c, d: distancia(clase, c) }))
           .filter((x) => x.d <= 4)
           .sort((a, b) => a.d - b.d)
-          .slice(0, 3)
-          .map((x) => x.c);
+          .map((x) => x.c)])].slice(0, 3);
         const porAttr = alcanzadaPorAtributo(clase);
         if (porAttr.length) continue; // la pinta un selector de atributo
 
@@ -355,7 +561,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light' }) {
           que: `.${clase} no existe en el CSS del sistema${veces > 1 ? ` (${veces} usos)` : ''}`,
           detalle: esModificador
             ? `.${base} sí existe; el modificador no, así que no pinta nada.`
-            : 'Lleva prefijo de SYX pero el sistema no la declara.',
+            : 'Lleva prefijo de SYX pero el sistema no la declara. Si es un componente de la app, lleva el prefijo de la app (CONSUMING.md).',
           sugerencia: cercanas.length ? `Existen: ${cercanas.map((c) => '.' + c).join(', ')}` : null,
         });
       }

@@ -18,11 +18,15 @@
     - SYX uses CSS `@layer` to manage specificity. Utilities always win.
 4.  **NEVER skip the token layer.**
     - Do not use Primitives (`--primitive-*`) in components.
-    - **Always** map: Primitive → Semantic → Component.
+    - **Always** map: Primitive → Semantic → Component. That is the colour path; the
+      fourth kind of token, `--theme-*` (radius, focus ring), is structural and components
+      may read it directly. Four kinds, three steps — see `scss/ARCHITECTURE.md`.
 5.  **NEVER mix naming prefixes.**
     - Atoms MUST start with `.atom-`
     - Molecules MUST start with `.mol-`
     - Organisms MUST start with `.org-`
+    - `.syx-` is for utilities only. A component is never `syx-atom-*`, `syx-mol-*`, `syx-org-*`,
+      and a token is never `--syx-*`.
 6.  **NEVER declare `transition` (or any `transition-*`) or `position: absolute|fixed|sticky` directly.**
     - ❌ `transition: opacity 0.2s ease;` → ✅ `@include transition(opacity 0.2s ease);`
     - ❌ `transition-property: opacity;` is the same violation, longhand.
@@ -193,6 +197,7 @@ When asked to "create a new component X":
 
 **Step 2: Create Mixin** (`scss/atoms/_x.scss` OR `molecules/_x.scss`)
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 @use "../abstracts/index" as *;
 

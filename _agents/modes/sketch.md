@@ -99,6 +99,7 @@ A SKETCH communicates **structure, hierarchy, and flow** — not aesthetics. If 
   - Modifiers → `--modifier`
   - Elements → `__element`
 - **Mobile first.** Base CSS targets 320px+. Use only `min-width` media queries. Declare mobile layout first, desktop overrides after:
+  <!-- syx: ejemplo-nuevo -->
   ```css
   .mol-plan-grid { display: flex; flex-direction: column; gap: 1rem; }
   @media (min-width: 640px) { .mol-plan-grid { flex-direction: row; } }

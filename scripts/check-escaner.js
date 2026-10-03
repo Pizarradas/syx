@@ -176,6 +176,92 @@ comprobar('distingue un asidero de JavaScript de una clase muerta', () => {
   if (h.gravedad !== 'baja') throw new Error('un asidero no es un error grave');
 });
 
+// ─── Una app que construye sobre SYX (CONSUMING.md) ──────────────────────────
+// Lo que un agente inventa cuando no tiene el contrato delante, y lo que una
+// app hace bien y el escáner no debe castigar: declarar sus propios tokens.
+
+const app = path.join(tmp, 'app');
+fs.mkdirSync(app);
+fs.writeFileSync(path.join(app, 'tokens.css'), ':root {\n  --app-card-bg: var(--semantic-color-bg-secondary);\n}\n');
+fs.writeFileSync(path.join(app, 'app.scss'), [
+  "@use 'syx-design-system/scss/abstracts' as *;",
+  ':root { --component-plan-card-bg: var(--semantic-color-bg-primary); }',
+  '@layer syx.app {',
+  '  .app-card { background: var(--app-card-bg); color: var(--primitive-color-blue-500); border-color: var(--syx-sem-primary); }',
+  '}',
+  '',
+].join('\n'));
+fs.writeFileSync(path.join(app, 'Card.jsx'), 'export const Card = () => <article className="mol-card app-card"><button className={"atom-btn--primary"}>Go</button><button className="atom-btn atom-btn--sm">x</button></article>;\n');
+fs.writeFileSync(path.join(app, 'layout.scss'), [
+  '@layer syx.app {',
+  '  .app-plan { transition: transform 1s; }',
+  '  .app-plan--top {',
+  '    .mol-card__header { display: flex; gap: 1rem; }',   // pinta un elemento de SYX: sí
+  '  }',
+  '  .app-grid .atom-btn { margin-inline-start: auto; order: 2; }', // solo lo coloca: no
+  '  .app-demo:has(.mol-dialog) { min-height: 20rem; }',   // pinta .app-demo, no el diálogo: no
+  '  .app-scope .mol-card { --component-card-bg: var(--semantic-color-bg-secondary); }', // sobrescribe un token: no
+  '}',
+  '',
+].join('\n'));
+const informeApp = escanear({ files: ['tokens.css', 'app.scss', 'Card.jsx', 'layout.scss'].map((f) => path.join(app, f)), syx });
+const enApp = (tipo, trozo) => {
+  const h = informeApp.hallazgos.find((x) => x.tipo === tipo && JSON.stringify(x).includes(trozo));
+  if (!h) throw new Error(`no encontró ${tipo} con «${trozo}»\n     encontró: ${informeApp.hallazgos.map((x) => `${x.tipo}: ${x.que}`).join(' | ')}`);
+  return h;
+};
+
+comprobar('app: los abstracts enteros importados, como grave', () => {
+  const h = enApp('contrato', 'abstracts entero');
+  if (h.gravedad !== 'alta') throw new Error(`gravedad ${h.gravedad}: pisa el tema entero`);
+  if (!h.sugerencia.includes('abstracts/mixins/mixins')) throw new Error('no dice qué importar en su lugar');
+});
+
+comprobar('app: un token nuevo con prefijo de SYX', () => {
+  const h = enApp('token-usurpado', '--component-plan-card-bg');
+  if (!h.sugerencia.includes('--app-plan-card-bg')) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: leer un primitivo, con el semántico que vale lo mismo', () => {
+  const h = enApp('primitivo-en-app', '--primitive-color-blue-500');
+  if (!h.sugerencia.includes('--semantic-')) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: un token --syx-* inventado es grave y lo explica', () => {
+  const h = enApp('token-inexistente', '--syx-sem-primary');
+  if (h.gravedad !== 'alta') throw new Error(`gravedad ${h.gravedad}`);
+});
+
+comprobar('app: el modificador sin su bloque, también en JSX', () => {
+  const h = enApp('modificador-sin-bloque', 'atom-btn--primary');
+  if (!h.sugerencia.includes('atom-btn atom-btn--primary')) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: un modificador inventado sugiere el de su familia', () => {
+  const h = enApp('modificador-inventado', 'atom-btn--sm');
+  if (!/atom-btn--size-sm/.test(h.sugerencia || '')) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: pinta un elemento de SYX desde un bloque anidado', () => {
+  const h = enApp('pinta-clase-syx', 'mol-card__header');
+  if (!/display/.test(h.que)) throw new Error(`no nombra la propiedad: ${h.que}`);
+});
+
+comprobar('app: colocar, :has() y sobrescribir un token NO es pintar', () => {
+  const malos = informeApp.hallazgos.filter((h) => h.tipo === 'pinta-clase-syx' && !h.que.includes('mol-card__header'));
+  if (malos.length) throw new Error(malos.map((h) => h.que).join(' | '));
+});
+
+comprobar('app: una transition en crudo en SCSS, con el mixin al lado', () => {
+  const h = enApp('movimiento-sin-salida', 'transform 1s');
+  if (!/@include transition/.test(h.sugerencia)) throw new Error(`sugiere ${h.sugerencia}`);
+});
+
+comprobar('app: NO denuncia los tokens que la propia app declara', () => {
+  const malos = informeApp.hallazgos.filter((h) => JSON.stringify(h).includes('--app-card-bg'));
+  if (malos.length) throw new Error(`denuncia --app-card-bg, que la app declara en tokens.css: ${malos.map((h) => h.tipo).join(', ')}`);
+});
+
 // ─── Lo que NO tiene que encontrar ───────────────────────────────────────────
 
 comprobar('no señala un fallback que coincide con el sistema', () => {

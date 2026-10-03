@@ -2,11 +2,14 @@
 
 > Practical decision rules for writing HTML and SCSS with SYX. Read this before writing your first component.
 
-> **On example names:** code samples in this guide use hypothetical components
-> (`mol-card`, `org-header`, `mol-search`, `org-hero`…) to illustrate patterns.
-> They are **not** part of the system — the real inventory is the *Current
-> Inventory* table below (23 atoms · 15 molecules · 2 organisms: `app-shell`, `site-header`).
-> Check `component-registry.json` (or `list_components`) before using any name.
+> **On example names:** every sample that *uses* a component uses a real one, with its
+> real modifiers — an agent copies what it reads, and a plausible name that does not
+> exist paints nothing. Samples that teach how to *write a new* component use invented
+> names and are marked `<!-- syx: ejemplo-nuevo -->` in the source. The real inventory is
+> the *Current Inventory* table below (23 atoms · 15 molecules · 2 organisms: `app-shell`,
+> `site-header`); check `component-registry.json` (or `list_components`) before using any
+> name. `npm run check:clases-docs` fails if a sample cites a class that does not exist.
+> Building an app on SYX rather than changing SYX? Read `CONSUMING.md` instead.
 
 ---
 
@@ -56,12 +59,13 @@ Is it a one-off layout or override for a specific page only?
 
 ```
 "I need a button"                → atom-btn ✅
-"I need a button with an icon"   → atom-btn + atom-icon (compose in HTML) ✅
+"I need a button with an icon"   → atom-btn atom-btn--has-icon + atom-icon (compose in HTML) ✅
                                    NOT a new mol- with both baked in ❌
-"I need a search field"          → mol-search (input + icon + btn) ✅
-"I need a navigation header"     → org-header ✅
+"I need a search field"          → mol-form-field + atom-btn, composed in HTML;
+                                   a new mol-* only once the pair recurs ✅
+"I need a navigation header"     → org-site-header (it exists) ✅
 "I need to center a div on this page only" → .syx-mx-auto or .syx-text-center ✅
-"I need a hero section"          → org-hero (reusable) or pages/_landing.scss (page-only) ✅
+"I need a hero section"          → a new org-* if reusable, or pages/_landing.scss (page-only) ✅
 ```
 
 > **Rule of thumb:** If you're not sure between atom and molecule, ask: _"Would these sub-parts ever make sense independently?"_ If yes → keep them separate atoms. If no → molecule.
@@ -76,15 +80,15 @@ Always start with the semantically correct element, then apply SYX classes. Neve
 
 ```html
 <!-- ✅ Semantic + SYX classes -->
-<nav aria-label="Main navigation" class="org-navbar">
-  <ul class="org-navbar__list" role="list">
+<nav aria-label="Main navigation" class="org-site-header__nav">
+  <ul role="list">
     <li><a href="/" class="atom-link">Home</a></li>
   </ul>
 </nav>
 
 <!-- ❌ Wrong — div soup with classes doing semantic work -->
-<div class="org-navbar">
-  <div class="org-navbar__list">
+<div class="org-site-header__nav">
+  <div>
     <div><span class="atom-link">Home</span></div>
   </div>
 </div>
@@ -95,13 +99,12 @@ Always start with the semantically correct element, then apply SYX classes. Neve
 The BEM block, element, and modifier classes map 1:1 to what's in SCSS:
 
 ```html
-<!-- Block: atom-btn -->
-<!-- Element: atom-btn__icon -->
-<!-- Modifier: atom-btn--primary  -->
-<button class="atom-btn atom-btn--primary">
-  <span class="atom-btn__icon" aria-hidden="true">…</span>
-  <span class="atom-btn__label">Save</span>
-</button>
+<!-- Block: mol-card · Element: mol-card__title · Modifier: mol-card--elevated -->
+<article class="mol-card mol-card--elevated">
+  <div class="mol-card__body">
+    <h3 class="mol-card__title">Save</h3>
+  </div>
+</article>
 ```
 
 **Rules:**
@@ -117,20 +120,18 @@ The BEM block, element, and modifier classes map 1:1 to what's in SCSS:
 - **Never extend BEM depth beyond 2 levels.** If you need `__element__sub-element`, you have two separate elements.
   ```html
   <!-- ✅ -->
-  <div class="mol-card__footer"><span class="mol-card__date">…</span></div>
+  <div class="mol-card__header"><h3 class="mol-card__title">…</h3></div>
   <!-- ❌ -->
-  <span class="mol-card__footer__date">…</span>
+  <h3 class="mol-card__header__title">…</h3>
   ```
 - **State classes use `is-`**, not BEM modifiers. BEM modifiers are permanent variants; `is-` is dynamic state.
   ```html
   <!-- ✅ Permanent variant -->
-  <button class="atom-btn atom-btn--ghost">
-    <!-- ✅ Dynamic JS state -->
-    <button class="atom-btn is-loading">
-      <!-- ❌ Don't mix conventions-->
-      <button class="atom-btn atom-btn--loading"></button>
-    </button>
-  </button>
+  <button class="atom-btn atom-btn--tertiary">…</button>
+  <!-- ✅ Dynamic state, toggled by the page's script -->
+  <header class="org-site-header is-scrolled">…</header>
+  <!-- ❌ Don't mix conventions -->
+  <button class="atom-btn atom-btn--loading"></button>
   ```
 
 ### 2.3 Composing Components in HTML
@@ -139,14 +140,12 @@ Organisms and molecules are composed in HTML, not in SCSS. Keep SCSS partials fr
 
 ```html
 <!-- ✅ Composed in HTML — molecules live inside organisms -->
-<header class="org-header">
-  <div class="org-header__inner layout-grid">
-    <a href="/" class="atom-link org-header__logo">…</a>
-    <nav class="org-navbar">…</nav>
-    <div class="mol-btn-group">
-      <button class="atom-btn atom-btn--ghost atom-btn--sm">Log in</button>
-      <button class="atom-btn atom-btn--primary atom-btn--sm">Sign up</button>
-    </div>
+<header class="org-site-header">
+  <a href="/" class="org-site-header__brand">…</a>
+  <nav class="org-site-header__nav" aria-label="Main">…</nav>
+  <div class="org-site-header__actions mol-btn-group">
+    <button class="atom-btn atom-btn--tertiary atom-btn--size-sm" type="button">Log in</button>
+    <button class="atom-btn atom-btn--primary atom-btn--filled atom-btn--size-sm" type="button">Sign up</button>
   </div>
 </header>
 
@@ -174,10 +173,11 @@ These are not optional:
 ```html
 <!-- ✅ Icon-only button done right -->
 <button
-  class="atom-btn atom-btn--ghost atom-btn--circle"
+  class="atom-btn atom-btn--tertiary atom-btn--circle"
+  type="button"
   aria-label="Close menu"
 >
-  <span class="atom-icon --lc-x" aria-hidden="true"></span>
+  <span class="atom-icon atom-icon--lc-x" aria-hidden="true"></span>
 </button>
 ```
 
@@ -197,12 +197,12 @@ Use `.layout-grid` for all main content areas. Never invent ad-hoc flex containe
 </main>
 
 <!-- ✅ Full-bleed section with inner constrained content -->
-<section class="org-hero">
+<section aria-labelledby="hero-title">
   <div class="layout-grid">
     <div
       class="layout-grid__col-xs-12 layout-grid__col-md-8 layout-grid__col-lg-6"
     >
-      <h1 class="atom-title atom-title--display">…</h1>
+      <h1 id="hero-title" class="atom-title atom-title--h1">…</h1>
     </div>
   </div>
 </section>
@@ -220,24 +220,24 @@ Every SCSS decision has a cost in the compiled CSS. These rules keep output lean
 
 ```scss
 // ✅ Efficient — 3 levels max
-.org-header {
-  &__nav {                        // level 2
-    &--open { … }                 // level 3
+.mol-menu {
+  &__item {                       // level 2
+    &--danger { … }               // level 3
   }
 }
-// Outputs: .org-header__nav--open { }
+// Outputs: .mol-menu__item--danger { }
 
 // ❌ Expensive — 5 levels compiles to a monster selector
-.org-header {
-  &__nav {
-    &__list {
-      &__item {
+.mol-menu {
+  &__list {
+    &__item {
+      &__link {
         &--active { … }
       }
     }
   }
 }
-// Outputs: .org-header__nav__list__item--active { }
+// Outputs: .mol-menu__list__item__link--active { }
 ```
 
 ### 3.2 The @mixin Wrapper Pattern
@@ -251,7 +251,7 @@ Every component MUST be wrapped in a `@mixin` with a `$theme` parameter. This is
     .mol-card {
       // base styles
     }
-    .mol-card--featured {
+    .mol-card--elevated {
       // modifier
     }
   }
@@ -288,12 +288,12 @@ Use `@extend` only within the same `@layer`. Prefer mixins over `@extend` when s
 .mol-card {
   @include --card-interactive-state;
 }
-.mol-card-featured {
+.mol-feature-card {
   @include --card-interactive-state;
 }
 
 // ❌ @extend across components is unpredictable
-.mol-card-featured {
+.mol-feature-card {
   @extend .mol-card; // risky — may pull unexpected rules
 }
 ```
@@ -341,8 +341,9 @@ Practical impact: if a component only needs vertical padding, use `@include padd
 
 Follow this order inside every rule (matches `CONTRIBUTING.md`):
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
-.syx-component {
+.mol-example {
   // 1. Positioning
   @include absolute($top: 0, $left: 0);
 
@@ -498,6 +499,7 @@ The most important behavioral mixin. It **automatically adds the `prefers-reduce
 
 **Mobile-first default:** Write base styles for mobile, then use `@include breakpoint(tablet)` to progressively enhance. Never write desktop-first and override with `max-screen`.
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // ✅ Mobile-first
 .org-hero__title {
@@ -581,12 +583,12 @@ Always apply `@include focus-ring()` inside `:focus-visible`, never `:focus`:
 The most common mistake: **adding visual design to a utility class**.
 
 ```html
-<!-- The user adds a visual class that doesn't exist → invents it as a util -->
+<!-- ❌ The user adds a visual class that doesn't exist → invents it as a util -->
 <div class="syx-card-featured">…</div>
 ← ❌ This is a molecule, not a util
 
 <!-- ✅ Correct: use the component -->
-<div class="mol-card mol-card--featured">…</div>
+<div class="mol-card mol-card--elevated">…</div>
 ```
 
 **Utilities are adjectives, not nouns.** `.syx-d-flex` (adjective: display is flex) is a util. `.mol-card` (noun: a card) is a molecule.
@@ -714,6 +716,7 @@ SYX handles dark mode via the `prefers-color-scheme` media query inside componen
 
 Only use `@include darkmode { … }` in page-level or organism files where you need structural differences (e.g. showing/hiding a pattern overlay):
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 // ✅ OK in organism — structural dark mode difference
 .org-hero::before {
@@ -759,7 +762,7 @@ SYX escribe los lados con **propiedades lógicas**: `margin-inline-start` en vez
 - **`transform` es físico.** Si mueves algo con `translateX`, en RTL va al revés. Mejor anima el desplazamiento lógico (el pomo de `atom-switch` anima `inset-inline-start`) o espeja con `:dir(rtl)`.
 - **Iconos direccionales.** `@include mirror-rtl('::before')` espeja con `scale: -1 1` una flecha o un chevron de «siguiente/anterior» en RTL (paginación, viñetas de `atom-list`, `atom-icon--lc-arrow-*`/`--lc-chevron(s)-left/right`, `atom-icon--arrow-*`). Va tras `@supports selector(:dir(rtl))`: en navegadores del mínimo sin `:dir()` el icono queda sin espejar. Arriba/abajo no se espejan.
 - **Código.** `code`, `kbd`, `samp` y `pre` llevan `direction: ltr` + `unicode-bidi: isolate`: el código se lee de izquierda a derecha también en una página RTL.
-- **Utilidades.** Usa `.syx-ms-*`/`.syx-me-*`/`.syx-ps-*`/`.syx-pe-*`, `.syx-ms-auto`/`.syx-me-auto`, `.syx-start-0`/`.syx-end-0` y `.syx-text-start`/`.syx-text-end`. Las físicas (`.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`) se **retiraron en 5.0.0**: eran izquierda/derecha físicas y no seguían a la dirección del texto.
+- **Utilidades.** Usa `.syx-ms-*`/`.syx-me-*`/`.syx-ps-*`/`.syx-pe-*`, `.syx-ms-auto`/`.syx-me-auto`, `.syx-start-0`/`.syx-end-0` y `.syx-text-start`/`.syx-text-end`. Las físicas ❌ (`.syx-ml-*`, `.syx-mr-*`, `.syx-pl-*`, `.syx-pr-*`, `.syx-ml-auto`, `.syx-mr-auto`, `.syx-left-0`, `.syx-right-0`, `.syx-text-left`, `.syx-text-right`) ✓ se **retiraron en 5.0.0**: eran izquierda/derecha físicas y no seguían a la dirección del texto.
 - **Probarlo.** `node tests/browser/run.mjs --axe --rtl` y `--capturas DIR --rtl` montan la página de pruebas con `dir="rtl"`.
 
 ---

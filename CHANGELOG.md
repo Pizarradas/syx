@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — contrato de consumo para cualquier agente
+
+Un agente que construía una app sobre SYX devolvía `syx-atm-btn`, `--syx-sem-*`, `atom-btn--sm` u `org-header`. No se los inventaba del todo: los documentos para agentes hablaban de cómo **cambiar** SYX, no de cómo **usarlo**, se quedaban en `node_modules/` donde ningún agente mira, y varias guías enseñaban clases que no existen.
+
+- **`CONSUMING.md`**: el contrato de una app que depende de SYX, sin suponer modelo ni herramienta. Vocabulario cerrado, orden de reutilización (componente → modificador → composición → token → componente propio), prefijo propio (`app-`, `--app-`), la capa `syx.app`, la cadena semántico → `--app-*` → reglas, y la verificación.
+- **`npx syx-init`** (`scripts/init-app.js`): escribe en la raíz de la app `AGENTS.md` (la convención abierta), `GEMINI.md` y `CLAUDE.md` (importan `AGENTS.md`), `.github/copilot-instructions.md` y **`SYX-VOCABULARY.md`**, la lista cerrada de clases, modificadores, elementos, estados, utilidades y tokens semánticos de la versión instalada, para el modelo que no puede ejecutar nada. Solo toca lo que hay entre `<!-- syx:start -->` y `<!-- syx:end -->`; `--prefix` y `--update`. Plantillas en `templates/app/`. Probado por `check:init-app`, que además exige que todo nombre del vocabulario exista.
+- **Capa `syx.app`**, reservada y vacía, entre `syx.organisms` y `syx.utilities`: lo de la app gana a los componentes y pierde contra las utilidades. Una capa declarada por la app solo podía ir antes (perdiendo contra todo) o después (ganando también a las utilidades).
+- **`check:clases-docs`**: toda clase con prefijo de SYX citada en los documentos que leen los agentes existe en el CSS compilado. Encontró 99; corregidas o marcadas como ejemplo (`<!-- syx: ejemplo-nuevo -->`, ❌).
+- **Escáner** (`syx-scan`): lee carpetas, `.scss`, `.vue`, `.svelte`, `.astro`, `.jsx`/`.tsx` (`className`); señala tokens nuevos con prefijo de SYX (`token-usurpado`), primitivos leídos desde la app (`primitivo-en-app`), reglas de la app que pintan una clase de SYX (`pinta-clase-syx`: solo puede colocarla), transiciones sin salida de `prefers-reduced-motion` (`movimiento-sin-salida`), modificadores sin su bloque, `--syx-*` inventados y `@use` de `scss/abstracts` entero (re-emitía ~75 KB de tokens por defecto encima del tema); sugiere el modificador de la familia (`atom-btn--sm` → `atom-btn--size-sm`); `--ignorar tipo`. Los dos últimos tipos de regla salieron de una prueba a ciegas: un agente con el contrato delante y el escáner viejo entregó «0 hallazgos» con `.mol-card__header` repintado y un `transition` a pelo.
+
+### Fixed
+
+- El escáner ya no denuncia como «token inexistente» (gravedad alta) los `--app-*` que la propia app declara.
+- Documentación que enseñaba clases inexistentes: `GETTING-STARTED.md` decía que los componentes usan el prefijo `syx-`; `ARCHITECTURE.md` daba `.syx-block` como forma BEM y `syx-` como prefijo de componente; `AUTHORING-GUIDE.md`, `atoms/README.md`, `base/helpers/README.md` y `utilities/README.md` usaban `atom-btn--sm`, `--ghost`, `__icon`, `org-header`, `atom-link--secondary`, `atom-pill--error`, `syx-font-weight-light`… El inventario de `ARCHITECTURE.md` (19 átomos, 6 moléculas) vuelve a cuadrar con el registro.
+- «4 capas de tokens» frente a «Primitive → Semantic → Component»: son cuatro clases de token (primitivo, tema, semántico, componente) y tres pasos en el camino del color. Lo dicen igual `README.md`, `AGENTS.md`, `CLAUDE.md` y `AI_GUIDELINES.md`.
+
+### Pendiente
+
+- Las páginas de SYX incumplen tres reglas nuevas del escáner: `theme-builder.html` lee 26 `--primitive-*` y tiene 4 `transition` sin salida de movimiento reducido; `docs.html` y `theme-builder.html` pintan `.atom-icon`, `.atom-surface` y `.atom-title` desde su CSS. `check:vitrina` las ignora (`--ignorar primitivo-en-app,pinta-clase-syx,movimiento-sin-salida`) hasta migrarlas.
+- `mind-system/governance/` (ATLAS) cita `atom-headline--{3xl…xs}` y organismos editoriales que SYX no tiene; queda fuera de `check:clases-docs` hasta decidir si ATLAS se mapea a `atom-title--h{n}` o SYX gana esos componentes.
+
 ## [5.0.0] — 2026-10-01
 
 Versión mayor: rompe compatibilidad. Lo que hay que tocar al actualizar desde 4.x:

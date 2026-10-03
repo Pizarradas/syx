@@ -490,6 +490,7 @@ A single `@font-face` for a font of your own (woff2 only by default, with
 
 Generates utility classes from a Sass map.
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 $spacing-map: (
   sm: 0.5rem,
@@ -497,6 +498,8 @@ $spacing-map: (
   lg: 2rem,
 );
 
+// Ilustración con un mapa inventado (sm/md/lg): las utilidades reales salen
+// de la escala 0–5 del sistema (.syx-p-0 … .syx-p-5).
 @include generate-utility($spacing-map, "syx-p", padding);
 // → .syx-p-sm { padding: 0.5rem; }
 //   .syx-p-md { padding: 1rem; }
@@ -509,6 +512,7 @@ $spacing-map: (
 
 Generates directional utility classes (t/b/s/e/x/y, todas lógicas; las l/r físicas se retiraron en 5.0.0).
 
+<!-- syx: ejemplo-nuevo -->
 ```scss
 @include generate-utility-directional($spacing-map, "syx-m", margin);
 // → .syx-mt-sm { margin-block-start: 0.5rem; }

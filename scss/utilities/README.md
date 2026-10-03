@@ -41,7 +41,7 @@ Usa `utilities/` para:
 
 **No** uses estas clases para:
 
-- Colores de marca específicos del tema → usa `base/helpers/` (`.syx-bg-color-primary`, `.syx-font-color-brand-*`)
+- Colores de marca específicos del tema → usa `base/helpers/` (`.syx-bg-color-primary`, `.syx-font-color-primary`)
 - Iconos SVG → usa `base/helpers/` (`.syx-icon--facebook-primary`)
 - Componentes → usa `atoms/`, `molecules/`, `organisms/`
 
@@ -138,7 +138,7 @@ También: `.syx-col-gap-{1–5}` y `.syx-row-gap-{1–5}` (misma escala, igual d
 
 Insets: `.syx-inset-0` · `.syx-top-0` · `.syx-bottom-0` · `.syx-start-0` · `.syx-end-0`
 
-Retiradas en 5.0.0 (eran físicas): `.syx-left-0` → `.syx-start-0` · `.syx-right-0` → `.syx-end-0`
+Retiradas en 5.0.0 (eran físicas): ❌ `.syx-left-0` ✓ → `.syx-start-0` · ❌ `.syx-right-0` ✓ → `.syx-end-0`
 
 #### Vertical align
 
@@ -175,11 +175,11 @@ Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…
 
 | Retirada | Usa |
 | --- | --- |
-| `.syx-ml-*` · `.syx-mr-*` | `.syx-ms-*` · `.syx-me-*` |
-| `.syx-pl-*` · `.syx-pr-*` | `.syx-ps-*` · `.syx-pe-*` |
-| `.syx-ml-auto` · `.syx-mr-auto` | `.syx-ms-auto` · `.syx-me-auto` |
-| `.syx-left-0` · `.syx-right-0` | `.syx-start-0` · `.syx-end-0` |
-| `.syx-text-left` · `.syx-text-right` | `.syx-text-start` · `.syx-text-end` |
+| ❌ `.syx-ml-*` · `.syx-mr-*` | ✓ `.syx-ms-*` · `.syx-me-*` |
+| ❌ `.syx-pl-*` · `.syx-pr-*` | ✓ `.syx-ps-*` · `.syx-pe-*` |
+| ❌ `.syx-ml-auto` · `.syx-mr-auto` | ✓ `.syx-ms-auto` · `.syx-me-auto` |
+| ❌ `.syx-left-0` · `.syx-right-0` | ✓ `.syx-start-0` · `.syx-end-0` |
+| ❌ `.syx-text-left` · `.syx-text-right` | ✓ `.syx-text-start` · `.syx-text-end` |
 
 ---
 
@@ -187,13 +187,13 @@ Todas emiten **propiedades lógicas** (`margin-block-start`, `padding-inline`…
 
 #### Color de texto
 
-`.syx-text-primary` · `.syx-text-secondary` · `.syx-text-white` · `.syx-text-black` · `.syx-text-gray` · `.syx-text-muted` · `.syx-text-inverse` · `.syx-text-error` · `.syx-text-success` · `.syx-text-warning`
+`.syx-text-primary` · `.syx-text-secondary` · `.syx-text-white` · `.syx-text-gray` · `.syx-text-muted` · `.syx-text-inverse` · `.syx-text-error` · `.syx-text-success` · `.syx-text-warning`
 
 Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-instagram` · `.syx-text-whatsapp`
 
 #### Alineación
 
-`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — retiradas en 5.0.0: `.syx-text-left` · `.syx-text-right` (ver la tabla de `_spacing.scss`)
+`.syx-text-center` · `.syx-text-start` · `.syx-text-end` · `.syx-text-justify` — retiradas en 5.0.0: ❌ `.syx-text-left` · `.syx-text-right` ✓ (ver la tabla de `_spacing.scss`)
 
 #### Decoración
 
@@ -205,7 +205,7 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 
 #### Font weight
 
-`.syx-font-regular` · `.syx-font-medium` · `.syx-font-bold`
+`.syx-font-medium` · `.syx-font-bold`
 
 #### Medida de texto (max-width)
 
@@ -215,8 +215,7 @@ Colores de marca: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-inst
 
 | Clase                           | Uso                         |
 | ------------------------------- | --------------------------- |
-| `.syx-type-display-1`           | Hero / portadas             |
-| `.syx-type-h1` – `.syx-type-h6` | Headings de contenido       |
+| `.syx-type-h1` – `.syx-type-h4` | Headings de contenido       |
 | `.syx-type-body-large`          | Lead paragraph              |
 | `.syx-type-body`                | Texto estándar              |
 | `.syx-type-body-small`          | Texto secundario / metadata |
@@ -283,8 +282,8 @@ Variantes: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
 <a href="#main-content" class="syx-skip-link">Ir al contenido principal</a>
 
 <!-- Etiqueta accesible para un icono -->
-<button class="atom-btn">
-  <span class="syx-icon syx-icon--search" aria-hidden="true"></span>
+<button class="atom-btn atom-btn--primary atom-btn--circle" type="button">
+  <span class="atom-icon atom-icon--lc-search" aria-hidden="true"></span>
   <span class="syx-sr-only">Buscar</span>
 </button>
 ```

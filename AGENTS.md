@@ -3,6 +3,10 @@
 You are working with **SYX**, a token-driven, native SCSS design system (v5.0.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
+> **Building a website or an app that *uses* SYX, rather than changing SYX?** This file is
+> not for you: read `CONSUMING.md` (in an app, `node_modules/syx-design-system/CONSUMING.md`),
+> and run `npx syx-init` in the app so every agent finds the contract at its root.
+
 Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
@@ -105,7 +109,7 @@ These rules are **never overridden** by any mode or user instruction:
 2. **Never use `!important`.** SYX uses CSS `@layer` for cascade control.
 3. **Never write raw `transition:` or `position:` in component files.** Use `@include transition()`, `@include absolute()`, etc.
 4. **Never hardcode design values.** No hex colors, no raw `px`/`rem` literals. Use tokens.
-5. **Never skip the token layer.** Primitive → Semantic → Component. Always.
+5. **Never skip the token layer.** Primitive → Semantic → Component. Always. (`--theme-*` is the fourth, structural kind of token; components may read it directly.)
 6. **Always ask before using a token** — `get_token` (or a grep of `tokens.json`, which `npm run build` generates from the SCSS: never edit it by hand). If it is missing: a component token is proposed with `node scripts/propose.js token` (see `_agents/workflows/create-component.md` Step 1); a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person.
 7. **Always check `component-registry.json` before creating a new component.** Reuse before creating.
 8. **Validate after any code change.** Run `node scripts/syx-validate.js` (or describe the check if you cannot execute).
@@ -139,7 +143,7 @@ label, and `.github/CODEOWNERS` (generated from `trust.json`) asks for the owner
 | Atom | `atom-` | `scss/atoms/` | Single HTML element, no dependencies |
 | Molecule | `mol-` | `scss/molecules/` | Combines 2+ atoms into one logical unit |
 | Organism | `org-` | `scss/organisms/` | Full UI section (today: site-header) |
-| Utility | `syx-` | `scss/utilities/` | Pure CSS helper, no markup dependency |
+| Utility | `syx-` | `scss/utilities/` | Pure CSS helper, no markup dependency. **Only** utilities use `syx-`: never `syx-atom-*`, `syx-mol-*`, `syx-org-*` |
 
 ---
 
@@ -173,7 +177,7 @@ Step-by-step workflows for common tasks:
 
 ```
 scss/
-  abstracts/tokens/     — 4-tier token system
+  abstracts/tokens/     — 4 kinds of token (primitive, theme, semantic, component); colour path primitive → semantic → component
   atoms/                — 23 atoms
   molecules/            — 15 molecules
   organisms/            — 2 organisms (app-shell, site-header)

@@ -28,7 +28,7 @@
  *      cuelen en silencio.
  *   6. Ningún token fantasma: todo `--semantic-*`, `--component-*` y
  *      `--primitive-*` citado en el córtex, la gobernanza, CLAUDE.md,
- *      AGENTS.md, AI_GUIDELINES.md y los modos existe (convención de ejemplos
+ *      AGENTS.md, AI_GUIDELINES.md, CONSUMING.md, la plantilla de app y los modos existe (convención de ejemplos
  *      malos y nuevos más abajo, en la propia comprobación).
  *   7. Presupuesto de contexto: la entrada de cada modo (CLAUDE.md, lo que
  *      manda leer antes de nada, el modo y sus Always) ≤ 25 000 tokens y su
@@ -288,7 +288,7 @@ comprobar('ningún token citado es un fantasma', () => {
   const fuentes = [
     ...walk(K).filter((p) => !rel(p).startsWith('vendors/')),
     ...walk(path.join(ROOT, 'mind-system', 'governance')),
-    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md'].map((f) => path.join(ROOT, f)),
+    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md', 'CONSUMING.md', 'templates/app/AGENTS.md'].map((f) => path.join(ROOT, f)),
     ...walk(MODOS_DIR),
   ].filter((p) => p.endsWith('.md') && fs.existsSync(p));
   const fantasmas = new Map(); // nombre → [dónde]
