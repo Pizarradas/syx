@@ -40,7 +40,7 @@ knowledges/
 | `index.md` | Mapa del dominio UI | — |
 | `refactoring-ui.md` | Spacing, jerarquía visual, composición (Wathan & Schoger) | UI mode |
 | `color-theory.md` | Distribución 60/30/10, semántica del color | CREATIVE, TOKEN, THEME, BRAND |
-| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | CREATIVE, UI, BRAND |
+| `typography-systems.md` | Escalas modulares, line-height, letter-spacing, clamp() | CREATIVE, UI, BRAND, ROADMAP |
 | `motion-principles.md` | Easing, duración, GPU-composited properties | CREATIVE, UI, BRAND |
 | `practical-ui.md` | Correcciones ópticas, densidad, elevación | CREATIVE, BRAND |
 
@@ -50,12 +50,12 @@ knowledges/
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio front | — |
 | `html-semantics.md` | Elementos semánticos, jerarquía de headings, ARIA base | UX mode |
-| `css-architecture.md` | Cascada, especificidad, @layer, progressive enhancement CSS | UI mode |
+| `css-architecture.md` | Cascada, especificidad, @layer, progressive enhancement CSS | UI, ROADMAP |
 | `mobile-first.md` | Worst-case first, breakpoints min-width, DOM order | UX, UI, SKETCH, AUDIT |
-| `progressive-enhancement.md` | Capas HTML/CSS/JS independientes | UX, AUDIT |
+| `progressive-enhancement.md` | Capas HTML/CSS/JS independientes | UX, AUDIT, ROADMAP |
 | `accessibility-wcag.md` | WCAG 2.1/2.2 AA, ARIA, gestión del foco | UX, AUDIT |
 | `javascript-patterns.md` | Patrones JS para interactividad accesible | UX mode |
-| `size-models.md` | Modelos de dimensionado y primitivos de escala | TOKEN, THEME, BRAND |
+| `size-models.md` | Modelos de dimensionado y primitivos de escala | TOKEN, THEME, BRAND, ROADMAP |
 | `size-models-checklist.md` | Checklist de dimensionado — TOKEN lo lee contra su propio output | TOKEN (self-check), AUDIT |
 
 ### `syx/` — Sistema SYX
@@ -63,9 +63,9 @@ knowledges/
 | Módulo | Contenido | Cargado por |
 |--------|-----------|-------------|
 | `index.md` | Mapa del dominio SYX | — |
-| `token-system.md` | Cuatro tiers, contratos, naming convention | TOKEN, UI, AUDIT, MIGRATE, BRAND |
-| `scss-pipeline.md` | @mixin template, @layer, mixins de referencia | UI, AUDIT |
-| `component-patterns.md` | BEM, prefijos atom/mol/org, estructura de componente | UI, AUDIT, SKETCH, MIGRATE |
+| `token-system.md` | Cuatro tiers, contratos, naming convention | TOKEN, UI, AUDIT, MIGRATE, BRAND, ROADMAP |
+| `scss-pipeline.md` | @mixin template, @layer, mixins de referencia | UI, AUDIT, ROADMAP |
+| `component-patterns.md` | BEM, prefijos atom/mol/org, estructura de componente | UI, AUDIT, SKETCH, MIGRATE, ROADMAP |
 | `theme-system.md` | Estructura de `_theme.scss`, secciones obligatorias | THEME, AUDIT, BRAND |
 | `color-oklch.md` | Por qué OKLCH, construcción de escalas, dark mode | TOKEN, THEME, BRAND |
 

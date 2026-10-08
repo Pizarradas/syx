@@ -51,6 +51,10 @@
     "Info": ["Información"],
     "Additional Violations": ["Otras violaciones", "Violaciones adicionales"],
     "Verdict": ["Veredicto"],
+    "Capability Check": ["Comprobación de capacidades", "Capacidades"],
+    "Already Covered": ["Ya cubierto", "Ya resuelto"],
+    "Proposals": ["Propuestas"],
+    "Ledger Update": ["Actualización del registro"],
     "Validation Command": ["Comando de validación"],
     "Usages Found": ["Usos encontrados", "Usos"],
     "Tier Check": ["Comprobación de nivel"],
@@ -492,6 +496,60 @@
       ],
       "referencia": "referencias/brand-02.md",
       "mutante": { "buscar": "[SYX: THEME]", "poner": "el otro modo" }
+    },
+    {
+      "id": "roadmap-01",
+      "modo": "roadmap",
+      "titulo": "Una hoja de ruta que no repite lo que ya existe",
+      "enunciado": "[SYX: ROADMAP]: Propón una hoja de ruta de mejoras de CSS/SCSS para SYX: container queries, funciones modernas (clamp(), lh, color-mix()), espaciado y tipografía fluidos, y DX (un linter de tokens, exportación automatizada desde Figma).",
+      "scss": null,
+      "debe": [
+        { "re": "find_capability|capabilities\\.json", "seccion": "Capability Check", "porque": "cada idea pasa por el registro antes de escribirse" },
+        { "re": "_fluid\\.scss|fluid-spacing", "seccion": "Already Covered", "porque": "el espaciado fluido ya existe y se dice dónde" },
+        { "re": "color-no-hex|unit-disallowed-list|\\.stylelintrc|hardcoded-value-lint", "seccion": "Already Covered", "porque": "el lint de hex y px ya existe y se dice dónde" },
+        { "re": "16\\.4|browserslist", "forma": "afirma", "porque": "lh choca con el suelo de navegadores y la respuesta lo nombra" }
+      ],
+      "noDebe": [
+        { "comun": "escribio" },
+        { "comun": "commitMain" },
+        { "re": "(tipograf\\p{L}*|font-size|type scale|typograph\\p{L}*)[^\\n]{0,50}(fluid\\p{L}*|clamp)|(fluid\\p{L}*|clamp)[^\\n]{0,30}(tipograf\\p{L}*|font-size|typograph\\p{L}*)", "seccion": "Proposals", "porque": "propone tipografía fluida, que ya está hecha" },
+        { "re": "--semantic-space-fluid|(espaciado|spacing)[^\\n]{0,30}flu\\p{L}*", "seccion": "Proposals", "porque": "propone un espaciado fluido que ya existe con otro nombre" },
+        { "re": "color-mix", "seccion": "Proposals", "porque": "propone color-mix(), que ya usan las capas de tokens" },
+        { "re": "stylelint|linter de tokens|token lint\\p{L}*", "seccion": "Proposals", "porque": "propone el lint de valores a pelo, que ya existe" },
+        { "re": "style dictionary|(desde|from) figma|figma (a|to|→) (scss|code|c[oó]digo)|_primitives\\.scss", "seccion": "Proposals", "porque": "propone importar tokens desde Figma, una dirección descartada a propósito" }
+      ],
+      "secciones": ["Capability Check", "Already Covered", "Proposals"],
+      "criterio": [
+        "¿Deja fuera de Proposals todo lo que el registro marca como done o rejected?",
+        "¿Cada propuesta trae una evidencia de ausencia concreta (una búsqueda o el gap del registro) y no un «SYX podría adoptar X»?"
+      ],
+      "referencia": "referencias/roadmap-01.md",
+      "mutante": { "buscar": "## Already Covered", "poner": "## Notes" }
+    },
+    {
+      "id": "roadmap-02",
+      "modo": "roadmap",
+      "titulo": "Un nombre que no existe para algo que sí",
+      "enunciado": "[SYX: ROADMAP]: Quiero añadir --semantic-space-fluid-sm y --semantic-space-fluid-lg para tener por fin un espaciado fluido. ¿Lo metemos en la hoja de ruta?",
+      "scss": null,
+      "tokens": { "ignorar": "^--semantic-space-fluid-" },
+      "debe": [
+        { "re": "--semantic-space-(layout|component)-", "seccion": "Already Covered", "porque": "lleva al nombre real del espaciado fluido" },
+        { "re": "\\bdone\\b|ya existe|already (exists|there|built)", "seccion": "Capability Check", "forma": "afirma", "porque": "el registro dice que está hecho y la respuesta lo dice" }
+      ],
+      "noDebe": [
+        { "comun": "escribio" },
+        { "comun": "commitMain" },
+        { "re": "--semantic-space-fluid-(sm|lg)", "seccion": "Proposals", "porque": "propone los alias que el registro desaconseja" },
+        { "re": "(a[ñn]ad\\p{L}*|crea\\p{L}*|add\\p{L}*|introduc\\p{L}*)[^.\\n]{0,40}--semantic-space-fluid", "porque": "recomienda crear un segundo nombre para el mismo valor" }
+      ],
+      "secciones": ["Capability Check", "Already Covered"],
+      "criterio": [
+        "¿Explica que el espaciado fluido ya existe y con qué tokens se consume?",
+        "¿Evita convertir el nombre que pidió el usuario en un alias nuevo?"
+      ],
+      "referencia": "referencias/roadmap-02.md",
+      "mutante": { "buscar": "None — no hay nada que añadir a la hoja de ruta.", "poner": "Crear `--semantic-space-fluid-sm` y `--semantic-space-fluid-lg` como alias de la escala layout." }
     }
   ]
 }

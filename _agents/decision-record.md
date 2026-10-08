@@ -94,6 +94,7 @@ stands. If it does, delete the line and write the real reason.
 | **THEME** | Scale steps that are not the generated ones · a contrast decision at the AA boundary · a structural override via `@if $theme` |
 | **AUDIT** | **Severity and the fix, never the violation.** The rule states the violation. What needs justifying is why this one is an error and that one a warning, and why the recommended fix is the cheapest correct one |
 | **MIGRATE** | Queue order · risk classification · a replacement token chosen over the literal equivalent |
+| **ROADMAP** | **The ranking and the exclusions the ledger did not decide.** Why one proposal goes before another that also survived the capability check · an idea kept out of Proposals for a reason `find_capability` did not give. An idea dropped because the ledger says `done` owes nothing — the evidence is the justification |
 | **BRAND** | **Every axis the user delegated (`IA`) and every axis left inheriting** — those two are the whole point: an axis the user chose is their call and owes nothing, an axis you chose for them owes an argument they can reject, and an axis that simply did not move is the cheapest decision to make silently and the one nobody downstream can tell apart from an oversight · the register chosen over the one the brief also allowed · an invariant that costs something elsewhere |
 
 CREATIVE's row is the one that changes behaviour most. That mode already picks a

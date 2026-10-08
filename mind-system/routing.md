@@ -35,61 +35,61 @@ Tokens ≈ bytes / 3,5. Las cifras no se copian aquí a mano —se quedaban viej
 
 `●` Always · `○` When relevant · `◐` With GSAP · `·` On request · `✓` Self-check
 
-| Módulo | SKETCH | UX | CREATIVE | TOKEN | THEME | UI | AUDIT | MIGRATE | BRAND |
-|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-| `ux/laws-of-ux.md` | | ● | | | | | | | |
-| `ux/nielsen-heuristics.md` | | ● | | | | | | | |
-| `ux/dont-make-me-think.md` | | ○ | | | | | | | |
-| `ux/microinteractions.md` | | ○ | | | | | | | |
-| `ux/strategic-writing-for-ux.md` | | ○ | | | | | | | |
-| `ui/refactoring-ui.md` | | | | | | ○ | | | |
-| `ui/color-theory.md` | | | ○ | ○ | ○ | | | | ● |
-| `ui/typography-systems.md` | | | ○ | | | ○ | | | ○ |
-| `ui/motion-principles.md` | | | ● | | | ○ | | | ○ |
-| `ui/practical-ui.md` | | | ○ | | | | | | ○ |
-| `front/html-semantics.md` | | ● | | | | | | | |
-| `front/mobile-first.md` | · | ● | | | | ● | ○ | | |
-| `front/accessibility-wcag.md` | | ● | | | | | ○ | | |
-| `front/progressive-enhancement.md` | | ○ | | | | | ○ | | |
-| `front/javascript-patterns.md` | | ○ | | | | | | | |
-| `front/css-architecture.md` | | | | | | ○ | | | |
-| `front/size-models.md` | | | | ○ | ○ | | | | ○ |
-| `front/size-models-checklist.md` | | | | ✓ | | | ○ | | |
-| `syx/token-system.md` | | | | ● | ● | ● | ● | ● | ● |
-| `syx/scss-pipeline.md` | | | | | | ● | ● | | |
-| `syx/component-patterns.md` | · | | ○ | | | ● | ● | ○ | |
-| `syx/theme-system.md` | | | | | ● | | ○ | | ● |
-| `syx/color-oklch.md` | | | | ○ | ● | | | | ○ |
-| `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● |
-| `branding/perception-of-prestige.rules.md` | | | · | | | | · | | · |
-| `motion/01-direccion/direccion.md` | | | ○ | | | | | | |
-| `motion/01-direccion/` (brief) | | | · | | | | | | |
-| `motion/01-direccion/motion-spec.md` | | | ○ | | | · | | | |
-| `motion/02-proposito/` | | ○ | | | | | | | |
-| `motion/02-proposito/patrones-de-transicion.md` | | ○ | | | | ○ | | | |
-| `motion/03-creativa/creativa.md` | | | ○ | | | | | | |
-| `motion/03-creativa/` (resto del estrato) | | | · | | | | | | |
-| `motion/03-creativa/personalidad.md` | | | ○ | | | | | | ○ |
-| `motion/03-creativa/lenguaje-de-marca.md` | | | ○ | | | | | | ○ |
-| `motion/04-teoria/teoria.md` | | | ○ | | | | | | |
-| `motion/04-teoria/` (principios, easing, springs, timing) | | | · | | | | | | |
-| `motion/05-tipografia/tipografia-cinetica.md` | | | ○ | | | | | | |
-| `motion/06-sistema/mapeo-por-plataforma.md` | | | · | | | | | | |
-| `motion/06-sistema/escala.md` | | | · | ○ | ○ | | | | |
-| `motion/07-accesibilidad/accesibilidad.md` | | ○ | ○ | | | ○ | ○ | | |
-| `motion/08-ejecucion/css/css.md` | | | ○ | | | · | | | |
-| `motion/08-ejecucion/css/` (recetas, generador) | | | · | | | · | | | |
-| `motion/08-ejecucion/js/` | | | ◐ | | | | | | |
-| `motion/08-ejecucion/gsap/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | |
-| `motion/08-ejecucion/gsap/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | |
-| `motion/08-ejecucion/gsap/02-capacidades/index.md` | | | ◐ | | | | | | |
-| `motion/08-ejecucion/gsap/03-patrones/` | | | ◐ | | | · | | | |
-| `motion/08-ejecucion/gsap/04-glosario/index.md` | · | | · | | | | | | |
-| `motion/08-ejecucion/rive/` | | | · | | | | | | |
-| `motion/08-ejecucion/cavalry-ae/` | | | · | | | | | | |
-| `motion/08-ejecucion/blender/` | | | · | | | | | | |
-| `motion/09-critica/critica.md` | | | ○ | | | | · | | |
-| `vendors/awesome-design/` | · | | · | | · | | | | · |
+| Módulo | SKETCH | UX | CREATIVE | TOKEN | THEME | UI | AUDIT | MIGRATE | BRAND | ROADMAP |
+|---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+| `ux/laws-of-ux.md` | | ● | | | | | | | | |
+| `ux/nielsen-heuristics.md` | | ● | | | | | | | | |
+| `ux/dont-make-me-think.md` | | ○ | | | | | | | | |
+| `ux/microinteractions.md` | | ○ | | | | | | | | |
+| `ux/strategic-writing-for-ux.md` | | ○ | | | | | | | | |
+| `ui/refactoring-ui.md` | | | | | | ○ | | | | |
+| `ui/color-theory.md` | | | ○ | ○ | ○ | | | | ● | |
+| `ui/typography-systems.md` | | | ○ | | | ○ | | | ○ | ○ |
+| `ui/motion-principles.md` | | | ● | | | ○ | | | ○ | |
+| `ui/practical-ui.md` | | | ○ | | | | | | ○ | |
+| `front/html-semantics.md` | | ● | | | | | | | | |
+| `front/mobile-first.md` | · | ● | | | | ● | ○ | | | |
+| `front/accessibility-wcag.md` | | ● | | | | | ○ | | | |
+| `front/progressive-enhancement.md` | | ○ | | | | | ○ | | | ○ |
+| `front/javascript-patterns.md` | | ○ | | | | | | | | |
+| `front/css-architecture.md` | | | | | | ○ | | | | ○ |
+| `front/size-models.md` | | | | ○ | ○ | | | | ○ | ○ |
+| `front/size-models-checklist.md` | | | | ✓ | | | ○ | | | |
+| `syx/token-system.md` | | | | ● | ● | ● | ● | ● | ● | ● |
+| `syx/scss-pipeline.md` | | | | | | ● | ● | | | ● |
+| `syx/component-patterns.md` | · | | ○ | | | ● | ● | ○ | | ● |
+| `syx/theme-system.md` | | | | | ● | | ○ | | ● | |
+| `syx/color-oklch.md` | | | | ○ | ● | | | | ○ | |
+| `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● | |
+| `branding/perception-of-prestige.rules.md` | | | · | | | | · | | · | |
+| `motion/01-direccion/direccion.md` | | | ○ | | | | | | | |
+| `motion/01-direccion/` (brief) | | | · | | | | | | | |
+| `motion/01-direccion/motion-spec.md` | | | ○ | | | · | | | | |
+| `motion/02-proposito/` | | ○ | | | | | | | | |
+| `motion/02-proposito/patrones-de-transicion.md` | | ○ | | | | ○ | | | | |
+| `motion/03-creativa/creativa.md` | | | ○ | | | | | | | |
+| `motion/03-creativa/` (resto del estrato) | | | · | | | | | | | |
+| `motion/03-creativa/personalidad.md` | | | ○ | | | | | | ○ | |
+| `motion/03-creativa/lenguaje-de-marca.md` | | | ○ | | | | | | ○ | |
+| `motion/04-teoria/teoria.md` | | | ○ | | | | | | | |
+| `motion/04-teoria/` (principios, easing, springs, timing) | | | · | | | | | | | |
+| `motion/05-tipografia/tipografia-cinetica.md` | | | ○ | | | | | | | |
+| `motion/06-sistema/mapeo-por-plataforma.md` | | | · | | | | | | | |
+| `motion/06-sistema/escala.md` | | | · | ○ | ○ | | | | | |
+| `motion/07-accesibilidad/accesibilidad.md` | | ○ | ○ | | | ○ | ○ | | | |
+| `motion/08-ejecucion/css/css.md` | | | ○ | | | · | | | | |
+| `motion/08-ejecucion/css/` (recetas, generador) | | | · | | | · | | | | |
+| `motion/08-ejecucion/js/` | | | ◐ | | | | | | | |
+| `motion/08-ejecucion/gsap/01-fundamentos/modelo-mental.md` | | | ◐ | | | | | | | |
+| `motion/08-ejecucion/gsap/01-fundamentos/vocabulario-base.md` | | | ◐ | | | · | | | | |
+| `motion/08-ejecucion/gsap/02-capacidades/index.md` | | | ◐ | | | | | | | |
+| `motion/08-ejecucion/gsap/03-patrones/` | | | ◐ | | | · | | | | |
+| `motion/08-ejecucion/gsap/04-glosario/index.md` | · | | · | | | | | | | |
+| `motion/08-ejecucion/rive/` | | | · | | | | | | | |
+| `motion/08-ejecucion/cavalry-ae/` | | | · | | | | | | | |
+| `motion/08-ejecucion/blender/` | | | · | | | | | | | |
+| `motion/09-critica/critica.md` | | | ○ | | | | · | | | |
+| `vendors/awesome-design/` | · | | · | | · | | | | · | |
 
 ---
 
@@ -106,20 +106,20 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | | `strategic-writing-for-ux` | UX |
 | `ui/` | `refactoring-ui` | UI |
 | | `color-theory` | CREATIVE · TOKEN · THEME · BRAND |
-| | `typography-systems` | CREATIVE · UI · BRAND |
+| | `typography-systems` | CREATIVE · UI · BRAND · ROADMAP |
 | | `motion-principles` | CREATIVE · UI · BRAND |
 | | `practical-ui` | CREATIVE · BRAND |
 | `front/` | `html-semantics` | UX |
-| | `css-architecture` | UI |
+| | `css-architecture` | UI · ROADMAP |
 | | `mobile-first` | SKETCH · UX · UI · AUDIT |
-| | `progressive-enhancement` | UX · AUDIT |
+| | `progressive-enhancement` | UX · AUDIT · ROADMAP |
 | | `accessibility-wcag` | UX · AUDIT |
 | | `javascript-patterns` | UX |
-| | `size-models` | TOKEN · THEME · BRAND |
+| | `size-models` | TOKEN · THEME · BRAND · ROADMAP |
 | | `size-models-checklist` | TOKEN · AUDIT |
-| `syx/` | `token-system` | TOKEN · THEME · UI · AUDIT · MIGRATE · BRAND |
-| | `scss-pipeline` | UI · AUDIT |
-| | `component-patterns` | SKETCH · CREATIVE · UI · AUDIT · MIGRATE |
+| `syx/` | `token-system` | TOKEN · THEME · UI · AUDIT · MIGRATE · BRAND · ROADMAP |
+| | `scss-pipeline` | UI · AUDIT · ROADMAP |
+| | `component-patterns` | SKETCH · CREATIVE · UI · AUDIT · MIGRATE · ROADMAP |
 | | `theme-system` | THEME · AUDIT · BRAND |
 | | `color-oklch` | TOKEN · THEME · BRAND |
 | `branding/` | `perception-of-prestige-foundations` | UX · CREATIVE · BRAND |
@@ -206,6 +206,8 @@ Abortar es decisión del usuario, no del modo.
 | `[SYX: BRAND → THEME → UI]:` | Identidad completa hasta el componente que la estrena |
 | `[SYX: BRAND → CREATIVE]:` | Página experimental que **hereda** registro y contrato en vez de elegir carácter. La dirección de arte de CREATIVE pasa a ser una desviación declarada, no una invención |
 | `[SYX: BRAND → THEME → CREATIVE]:` | Lo mismo, pero además con los tokens ya construidos: la página hereda la identidad **y** los valores que la pintan |
+| `[SYX: ROADMAP → TOKEN]:` | Una propuesta del roadmap que sobrevive a `find_capability` y se convierte en tokens |
+| `[SYX: ROADMAP → UX → UI]:` | Una propuesta aprobada que se convierte en componente |
 | `[SYX: BRAND + AUDIT]:` | Identidad verificada: que cada token nombrado exista y que ningún bloque entregado rompa R01–R04 |
 
 ### Combinaciones inválidas
@@ -220,6 +222,8 @@ Abortar es decisión del usuario, no del modo.
 | `MIGRATE + AUDIT` | AUDIT detecta, MIGRATE resuelve. Solo tiene sentido `AUDIT → MIGRATE`. |
 | `UI → BRAND` | El orden es al revés. Una identidad se decide antes que lo que la viste. |
 | `THEME → BRAND` | Igual de invertido, y más caro: produce una paleta sin identidad a la que responder. Es exactamente como seis de los siete temas acabaron siendo recoloreados. |
+| `ROADMAP + AUDIT` | AUDIT mide conformidad con R01–R11, no decide qué falta. Para pasar de lo que falta a lo que se viola, `AUDIT` en otro turno. |
+| `UI → ROADMAP` | El orden es al revés. Se decide qué hacer antes de hacerlo. |
 | `[ATLAS]:` sin modo | `[ATLAS]:` es un envoltorio, no un modo. Necesita al menos un `[SYX: MODE]`. |
 
 Para las combinaciones con contexto editorial (`[ATLAS]: … utilizando [SYX: …]`), ver `governance/01-invocation.md`.

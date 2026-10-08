@@ -86,7 +86,7 @@
   },
 
   "modes": {
-    "description": "Nine lenses over a task, activated by the `[SYX: MODE]:` prefix or `/syx`. A mode grants no permission: its Trust block is checked against trust.json by check:modos. Tier = cost of interrogating the system, not of loading the cortex - two separate axes.",
+    "description": "Ten lenses over a task, activated by the `[SYX: MODE]:` prefix or `/syx`. A mode grants no permission: its Trust block is checked against trust.json by check:modos. Tier = cost of interrogating the system, not of loading the cortex - two separate axes.",
     "source": ["_agents/modes/", "CLAUDE.md", "_agents/modes/README.md"],
     "list": [
       { "tier": 1, "mode": "SKETCH", "writes": "nothing" },
@@ -97,7 +97,8 @@
       { "tier": 6, "mode": "UI", "writes": "auto + pr" },
       { "tier": 7, "mode": "AUDIT", "writes": "nothing" },
       { "tier": 8, "mode": "MIGRATE", "writes": "pr + recommends" },
-      { "tier": 9, "mode": "BRAND", "writes": "recommends" }
+      { "tier": 9, "mode": "BRAND", "writes": "recommends" },
+      { "tier": 10, "mode": "ROADMAP", "writes": "recommends" }
     ],
     "grammar": {
       "pipeline": "A -> B : each output feeds the next",
@@ -151,6 +152,7 @@
       { "script": "check:huerfanos", "guards": "orphan files" },
       { "script": "check:registry", "guards": "component-registry.json in sync with compiled CSS" },
       { "script": "check:mcp", "guards": "MCP server answers like a client would see" },
+      { "script": "check:capacidades", "guards": "every capabilities.json entry still has its evidence on disk, and the reference questions still find their entry" },
       { "script": "check:escaner", "guards": "the drift scanner itself" },
       { "script": "check:figma", "guards": "figma export in sync" },
       { "script": "check:mixins", "guards": "mixin docs point at real code" },

@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — comprobar antes de proponer: registro de capacidades y modo ROADMAP
+
+Una revisión externa de SYX propuso seis mejoras de CSS/SCSS. Cinco ya estaban hechas —`clamp()` en toda la escala tipográfica, `color-mix()` en los tokens de hover, una escala de espaciado fluida, un lint de hex y px en los componentes, exportación DTCG y a Figma— y la sexta, generar `_primitives.scss` y `_semantic.scss` desde Figma, invertía una decisión. No incumplió ninguna regla: buscó por nombres que se imaginó (`.mol-card`, `--semantic-space-fluid-*`), no los encontró y dio cada mejora por pendiente. Nada le pedía comprobar si una idea ya existía, y ningún fichero respondía a esa pregunta.
+
+- **`contracts/capabilities.json`**: qué resuelve ya SYX, contado por concepto. Cada entrada lleva estado (`done` · `partial` · `rejected` · `open`), alias en los dos idiomas —también los nombres que no existen—, la evidencia en disco y, según el estado, qué falta (`gap`), qué lo impide (`blocker`) o por qué se descartó (`decision`). Trece entradas para empezar, las seis de aquella revisión incluidas. Tier `human`: es la vara con la que se descartan propuestas.
+- **`find_capability`**, herramienta MCP número 12 y `findCapability()` en la API de Node: busca por palabras en ese registro y devuelve cada coincidencia con fichero y línea. Una consulta sin resultado lo dice: no estar en el registro no prueba que falte.
+- **Modo `[SYX: ROADMAP]`** (tier 10, no escribe): toda idea pasa por `find_capability`; lo `done` y lo `rejected` van a *Already Covered* con su evidencia, y solo llega a *Proposals* lo que demuestra su ausencia con búsquedas por concepto. Sin prefijo, una petición de mejoras, de hoja de ruta o de «qué falta» es ROADMAP. Regla base nueva en `AGENTS.md` y `CLAUDE.md`. Cableado en `routing.md`, `constitution.md`, `decision-record.md`, el comando `/syx` y los índices.
+- **`npm run check:capacidades`**: cada evidencia sigue existiendo en disco, y ocho preguntas de referencia —las de la revisión, redactadas como las escribiría quien no conoce SYX— siguen llevando a su entrada.
+- **Evals `roadmap-01` y `roadmap-02`**, con la revisión original como anti-referencia: recita `find_capability` y la evidencia, y aun así propone lo que ya existe. Suspende por la frontera.
+- **Documentación**: `docs.html` (diez modos, fila de ROADMAP, y la tabla de herramientas MCP pasa de «diez» a las doce reales: le faltaba también `get_figma_spec`; `check:capacidades` entre los guardianes), `home.html` (diez modos y su fila), `README.md`, `AI_GUIDELINES.md`, `_agents/architecture.*`, los índices del córtex (`knowledges/index.md`, `knowledges/syx/index.md`) y el delta de ATLAS para ROADMAP (`governance/02-mode-delta.md`).
+- **`GEMINI.md` y `.github/copilot-instructions.md`** en la raíz: punteros a `AGENTS.md`, para que esos agentes no entren en el repositorio sin contrato. `**/GEMINI*.md` pasa a `human`, como `CLAUDE*.md` y `AGENTS*.md`.
+
+### Fixed — el corrector de evals leía las secciones sin sus subsecciones
+
+- Una regla con `seccion` solo veía las líneas bajo el encabezado exacto: lo escrito bajo `### 1. …` dentro de `## Proposals` no estaba «en Proposals». La anti-referencia de ROADMAP aprobaba la frontera proponiendo todo lo prohibido en subsecciones. Ahora un encabezado incluye a los de nivel inferior que abre (`scripts/lib/evaluar.js`).
+- En un checkout de Windows (`core.autocrlf`) las referencias llegan con CRLF, y el corrector buscaba los bloques con un salto `\n` pegado a la valla: C1 suspendía cinco respuestas correctas (ui-01, ui-02, token-01, migrate-01 y `buenas/ui-01-espanol.md`) y `npm run check` se paraba en `check:evals`. Ahora acepta `\r?\n`.
+
 ### Changed — documentación para agentes: un idioma, sin nombres fantasma y más ligera
 
 - **Claves de la API en inglés.** `index.js`, el servidor MCP y `syx-scan --json` responden con `found`, `suggestions`, `chain`, `exact`, `partial`, `valid`, `violations`, `unknownTokens`, `findings`, `byType`, `bySeverity`… La traducción se hace una vez, en la frontera (`scripts/lib/claves.js`). **Cambio de contrato para quien lea el JSON del MCP o de `--json`**: allí solo hay claves inglesas. En la API de Node las españolas siguen como alias no enumerables (`r.encontrado` funciona) hasta la 6.0. Los valores no cambian: textos y gravedades (`alta|media|baja`) siguen en español. Las descripciones de las 11 herramientas MCP, en inglés.

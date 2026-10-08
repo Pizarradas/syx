@@ -56,10 +56,10 @@ comprobar('initialize responde con protocolo y nombre', async () => {
   if (r.result.serverInfo?.name !== 'syx') throw new Error('serverInfo.name inesperado');
 });
 
-comprobar('tools/list expone las 11 herramientas con esquema', async () => {
+comprobar('tools/list expone las 12 herramientas con esquema', async () => {
   const r = await rpc('tools/list', {});
   const t = r.result.tools;
-  if (t.length !== 11) throw new Error(`esperaba 11 herramientas, hay ${t.length}`);
+  if (t.length !== 12) throw new Error(`esperaba 12 herramientas, hay ${t.length}`);
   for (const x of t) {
     if (!x.description) throw new Error(`${x.name} sin descripción`);
     if (x.inputSchema?.type !== 'object') throw new Error(`${x.name} con esquema mal formado`);
@@ -203,6 +203,18 @@ comprobar('get_figma_spec devuelve números, no CSS, y cambia con el modo', asyn
   for (const lista of [a.untranslated, a.unmapped]) {
     if (lista.some((x) => !x.reason)) throw new Error('hay descartes sin motivo');
   }
+});
+
+comprobar('find_capability encuentra por concepto, no por nombre, y dice lo que no sabe', async () => {
+  const pedir = (query) => rpc('tools/call', { name: 'find_capability', arguments: { query } }).then(salida);
+  // El caso que lo motivó: un nombre que no existe tiene que llevar a lo que sí.
+  const a = await pedir('--semantic-space-fluid-sm');
+  if (a.matches[0]?.id !== 'fluid-spacing' || a.matches[0].status !== 'done') throw new Error(`--semantic-space-fluid-sm → ${JSON.stringify(a.matches.map((m) => m.id))}`);
+  if (!a.matches[0].evidence.every((e) => typeof e.line === 'number')) throw new Error('evidencia sin línea');
+  const b = await pedir('tokens desde Figma a _primitives.scss');
+  if (b.matches[0]?.status !== 'rejected' || !b.matches[0].decision) throw new Error('lo descartado no viene con su decisión');
+  const c = await pedir('zzz qwerty');
+  if (c.found !== false || !c.note) throw new Error('una consulta sin resultado no avisa de que eso no prueba nada');
 });
 
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {

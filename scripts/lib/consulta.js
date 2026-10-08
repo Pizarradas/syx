@@ -30,6 +30,7 @@ const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
 const figma = require('./figma');
+const capacidades = require('./capacidades');
 
 function crearConsulta({ root, crudo = false } = {}) {
   const ROOT = root || path.join(__dirname, '..', '..');
@@ -417,6 +418,13 @@ function crearConsulta({ root, crudo = false } = {}) {
   const scan = ({ files = [], theme = 'syx-sketch', mode = 'light' } = {}) =>
     escanear({ files, syx: api, theme, mode });
 
+  /**
+   * ¿SYX ya resuelve esto? Busca por concepto en contracts/capabilities.json y
+   * devuelve estado y evidencia. Responde en inglés de origen: el registro es
+   * nuevo y no arrastra claves españolas que traducir.
+   */
+  const findCapability = ({ query } = {}) => capacidades.responder(ROOT, { query });
+
   // La frontera pública: claves en inglés, con las de antes como alias no
   // enumerables hasta la 6.0 (scripts/lib/claves.js). Por dentro, las
   // funciones se siguen llamando entre sí con sus claves de siempre.
@@ -443,6 +451,7 @@ function crearConsulta({ root, crudo = false } = {}) {
     scan: publica(scan),
     listMixins: publica(listMixins),
     getMixin: publica(getMixin),
+    findCapability,
   };
 
   return api;

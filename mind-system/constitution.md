@@ -21,6 +21,7 @@ Cada modo tiene un dominio exclusivo. Operar fuera del dominio propio es un erro
 | **AUDIT** | Revisión de conformidad | Evaluativo | Informe R01–R08, veredicto | nada |
 | **MIGRATE** | Resolución de deuda técnica | Operativo | Plan de migración variable a variable | `pr` / recomienda |
 | **BRAND** | Identidad visual completa | Generativo + evaluativo | Los siete ejes de una identidad, su procedencia, invariantes y la especificación que THEME construye | recomienda |
+| **ROADMAP** | Qué le falta a SYX | Evaluativo | Comprobación de capacidades, lo ya cubierto con su evidencia, propuestas con prueba de ausencia, entradas para `contracts/capabilities.json` | recomienda |
 
 La columna **Escribe** es un resumen de lectura rápida. La fuente es `contracts/trust.json`; el bloque `Trust` del modo es su lectura autorizada.
 
@@ -40,9 +41,12 @@ Tier 6 — UI         → implementación SCSS
 Tier 7 — AUDIT      → verificación de conformidad
 Tier 8 — MIGRATE    → resolución de deuda legacy
 Tier 9 — BRAND      → identidad completa, coherente en los siete ejes
+Tier 10 — ROADMAP   → qué falta, contrastado con lo que ya existe
 ```
 
 Regla: usar el tier más bajo que cumpla el objetivo. No escalar innecesariamente.
+
+ROADMAP va detrás de BRAND por la misma razón que BRAND va detrás de MIGRATE: los números se citan en varios índices y renumerar cuesta más que el orden. Su trabajo es de tier medio —pregunta a `find_capability` y lee poco—, pero su error es caro: una propuesta de algo que ya existe hace perder a quien la lee el tiempo de refutarla.
 
 BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo es el único que tiene que salir coherente en siete ejes a la vez, y el tier ordena el trabajo, no las lecturas.
 
@@ -83,6 +87,11 @@ BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo
 - Con identidad decidida, CREATIVE la **hereda**: su dirección de arte pasa a ser una desviación declarada en el `## Why`, no una invención.
 - Sin BRAND, CREATIVE sigue eligiendo carácter por encargo y dejándolo escrito.
 
+### ROADMAP vs AUDIT
+- **AUDIT** mide lo que hay contra R01–R11: violaciones, veredicto. Tiene prohibido sugerir arquitectura.
+- **ROADMAP** decide qué falta: solo propone lo que `find_capability` y una búsqueda por concepto demuestran ausente. No juzga conformidad.
+- Un hallazgo de AUDIT nunca es una propuesta de ROADMAP, y una propuesta de ROADMAP nunca es una violación.
+
 ### CREATIVE vs UI
 - **CREATIVE** produce prototipos exentos de R01–R08.
 - **UI** es la única vía para llevar un output de CREATIVE a producción.
@@ -96,6 +105,7 @@ BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo
 ```
 [SYX: SKETCH]:  [SYX: UX]:  [SYX: CREATIVE]:  [SYX: TOKEN]:
 [SYX: THEME]:   [SYX: UI]:  [SYX: AUDIT]:     [SYX: MIGRATE]:
+[SYX: BRAND]:   [SYX: ROADMAP]:
 ```
 
 ### Pipeline secuencial (`→`)

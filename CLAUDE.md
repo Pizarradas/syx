@@ -16,7 +16,8 @@ sources of truth; reading them whole costs some 80 000 tokens. With the `syx` MC
 hardcoding anything), `get_component` (verified classes, modifiers, a11y), `get_mixin` (what to write
 where R03/R04 forbid raw CSS), `validate_snippet` (R01–R04, R09–R11 **before** writing),
 `get_figma_spec` (numbers for a Figma node — never convert `oklch()` or `rem` by hand),
-`classify_change` and `scan_for_drift`. Without the server, grep the one entry you need
+`classify_change`, `scan_for_drift` and `find_capability` (whether SYX already solves an idea, before
+proposing it). Without the server, grep the one entry you need
 (`grep '"--semantic-color-' tokens.json`). In an app that installs SYX, `require('syx-design-system')`
 answers the same queries. The full tool table is in `README.md` → *MCP server*.
 
@@ -75,8 +76,10 @@ modules it loads, and when). Tiers, costs and when to escalate: `_agents/modes/R
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | R01–R11 conformance, violations, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, per-variable replacement |
 | `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity: the seven axes and the spec THEME builds from |
+| `[SYX: ROADMAP]:` | `_agents/modes/roadmap.md` | recommends | Improvements, roadmap, "what is missing" — only what `find_capability` proves is not done |
 
-Without a prefix, apply the base rules below and use the mode that fits.
+Without a prefix, apply the base rules below and use the mode that fits. A request for improvements,
+a roadmap or a review of what SYX lacks is ROADMAP, prefix or not.
 
 ---
 
@@ -90,6 +93,9 @@ Without a prefix, apply the base rules below and use the mode that fits.
 - **Ask before using a token** (`get_token`). Missing: a component token is proposed with
   `node scripts/propose.js token`; a semantic or primitive one is recommended to a person.
 - **Check the registry before creating a component.** Reuse before creating.
+- **Ask `find_capability` before proposing an improvement.** `contracts/capabilities.json` records
+  what SYX already solves, by concept. Proposing something it lists as `done` is an error, and not
+  finding a name you guessed is not proof that the feature is missing.
 - **After writing code, run** `node scripts/syx-validate.js`. R01–R04, R09 and R10 are errors;
   R05, R06 and R08 warnings; R07 info (`contracts/rules.json`).
 

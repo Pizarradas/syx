@@ -34,8 +34,10 @@
 const path = require('path');
 const { seccionesDelModo, whyDelModo, normalizar } = require('./formato-modos');
 
-const BLOQUE_SCSS = /```scss\n([\s\S]*?)```/g;
-const BLOQUE_DIFF = /```diff\n([\s\S]*?)```/g;
+// `\r?` porque en un checkout de Windows (core.autocrlf) las referencias llegan
+// con CRLF y el bloque no se encontraba: C1 suspendía cinco respuestas buenas.
+const BLOQUE_SCSS = /```scss\r?\n([\s\S]*?)```/g;
+const BLOQUE_DIFF = /```diff\r?\n([\s\S]*?)```/g;
 
 // Un diff entrega el código que queda: sus líneas «+» y de contexto, sin las
 // «-» ni las cabeceras.
@@ -122,6 +124,9 @@ function analizar(texto, anexos = []) {
   const titulos = [];
   let valla = null;
   let actual = null;
+  // Los encabezados abiertos, del más externo al actual: una línea bajo
+  // «### 1. Presets» está también en el «## Proposals» que la contiene.
+  let pila = [];
   let antes = false;
   texto.split(/\r?\n/).forEach((l, i) => {
     const t = l.trim();
@@ -146,7 +151,9 @@ function analizar(texto, anexos = []) {
       const h = t.match(/^(#{1,4})\s+(.+?)\s*#*$/);
       const b = !h && t.match(/^\*\*([^*]{2,60}?):?\*\*:?/);
       if (h) {
-        actual = { nivel: h[1].length, titulo: h[2], norm: normalizar(h[2]), i };
+        pila = pila.filter((x) => x.nivel < h[1].length);
+        actual = { nivel: h[1].length, titulo: h[2], norm: normalizar(h[2]), i, padres: pila.slice() };
+        pila.push(actual);
         titulos.push(actual);
       } else if (b) {
         titulos.push({ nivel: 9, titulo: b[1], norm: normalizar(b[1]), i, negrita: true });
@@ -178,7 +185,8 @@ function aliasDe(canonica, equivalentes) {
 }
 
 function enSeccion(linea, canonica, equivalentes) {
-  return aliasDe(canonica, equivalentes).some((a) => (linea.titulo && coincideTitulo(linea.titulo.norm, a)) || (linea.etiqueta && coincideTitulo(linea.etiqueta, a)));
+  const abiertos = linea.titulo ? [linea.titulo, ...(linea.titulo.padres || [])] : [];
+  return aliasDe(canonica, equivalentes).some((a) => abiertos.some((t) => coincideTitulo(t.norm, a)) || (linea.etiqueta && coincideTitulo(linea.etiqueta, a)));
 }
 
 // ── C3 · reglas con forma ───────────────────────────────────────────────────

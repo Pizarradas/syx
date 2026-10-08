@@ -70,6 +70,8 @@
         "mind-system/README.md",
         "**/CLAUDE*.md",
         "**/AGENTS*.md",
+        "**/GEMINI*.md",
+        "contracts/capabilities.json",
         "**/trust.json"
       ]
     }
@@ -84,7 +86,8 @@
     "css/ es `auto` porque es derivado: se compila de scss/ y la CI comprueba con check-limpio --strict que lo commiteado es exactamente lo compilado. Antes caía al `default` y toda propuesta de componente, que lo recompila, habría salido `human`.",
     "Lo que no encaja en ningún patrón cae en `human` por el `default`: se elige equivocarse hacia el lado que solo cuesta una espera.",
     "El patrón `*.md` está en `pr` desde la auditoría de 2026-10 II (antes en `auto`): la documentación cambia lo que leen personas y agentes, así que la revisa alguien, pero un error se ve en el diff. Lo que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`.",
-    "`**/CLAUDE*.md`, `**/AGENTS*.md` y `**/trust.json` son `human` estén donde estén, y un patrón por nombre gana a cualquier carpeta. En la auditoría de 2026-10 II, `CLAUDE.local.md`, `scss/CLAUDE.md`, `AGENTS.override.md` salían `auto` por ser markdown (Claude Code y otros agentes los cargan como instrucciones), y escribir un `_agents/contracts/trust.json` anidado engañaba al hook para que tomara `_agents/` como raíz.",
+    "`**/CLAUDE*.md`, `**/AGENTS*.md`, `**/GEMINI*.md` y `**/trust.json` son `human` estén donde estén, y un patrón por nombre gana a cualquier carpeta. En la auditoría de 2026-10 II, `CLAUDE.local.md`, `scss/CLAUDE.md`, `AGENTS.override.md` salían `auto` por ser markdown (Claude Code y otros agentes los cargan como instrucciones), y escribir un `_agents/contracts/trust.json` anidado engañaba al hook para que tomara `_agents/` como raíz.",
+    "`contracts/capabilities.json` es `human` aunque el `default` ya lo daría: se nombra para que nadie lo saque de ahí por error. Es la vara con la que ROADMAP descarta propuestas; si el agente pudiera escribirlo, podría marcar `open` lo que quiere proponer. ROADMAP entrega las entradas nuevas y una persona las añade.",
     "El córtex (`mind-system/knowledges/`) es `pr`: los modos cargan sus módulos como conocimiento Always, así que un cambio ahí cambia lo que hace un agente. Hasta 2026-10 II era `auto` por `*.md`."
   ]
 }

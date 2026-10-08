@@ -118,3 +118,15 @@ Ver protocolo completo en `05-audit.md`.
 
 Atlas no decide la identidad —color, forma, movimiento siguen siendo de BRAND—, pero sí el marco editorial en el que la identidad tiene que funcionar.
 
+---
+
+## ROADMAP
+
+| Standalone | Con `[ATLAS]:` |
+|---|---|
+| Cada idea pasa por `find_capability` antes de proponerse | Igual, y además por las reglas Atlas: una propuesta que ya resuelve una regla de `atlas-rules/` va a *Already Covered* con la regla citada |
+| Propuestas ordenadas por coste y alcance en SYX | Propuestas ordenadas también por el nivel editorial (N1–N4) al que sirven |
+| No escribe | No escribe — no cambia |
+
+Atlas no amplía lo que ROADMAP puede proponer: una propuesta que choca con una regla Atlas se declara como conflicto en `04-conflicts.md`, no entra en *Proposals*.
+

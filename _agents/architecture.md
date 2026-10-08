@@ -46,7 +46,7 @@ flowchart TB
     end
 
     subgraph QUERY["QUERY SURFACE — ask, don't read"]
-        MCP["MCP server — 11 tools<br/>scripts/mcp-server.js"]
+        MCP["MCP server — 12 tools<br/>scripts/mcp-server.js"]
         NODE["Node API<br/>require('syx-design-system')"]
         CONSULTA["scripts/lib/consulta.js<br/>one answering layer"]
     end
@@ -127,7 +127,7 @@ review on every `human` and `pr` path — which only binds once branch protectio
 
 ---
 
-## 4. Modes — nine lenses and how they compose
+## 4. Modes — ten lenses and how they compose
 
 ```mermaid
 flowchart LR
@@ -146,6 +146,7 @@ flowchart LR
         MIGRATE["8 MIGRATE — pr"]
     end
     BRAND["9 BRAND — recommends<br/>seven axes, one identity"]
+    ROADMAP["10 ROADMAP — recommends<br/>only what find_capability proves absent"]
 
     SKETCH --> UX --> TOKEN --> UI --> AUDIT
     CREATIVE --> TOKEN
@@ -153,6 +154,8 @@ flowchart LR
     AUDIT --> MIGRATE
     BRAND --> THEME
     BRAND --> CREATIVE
+    ROADMAP --> TOKEN
+    ROADMAP --> UX
 ```
 
 Grammar: `→` pipeline (each output feeds the next), `+` evaluative (same artifact),
@@ -198,6 +201,7 @@ flowchart TB
     CHECK --> T4["check:huerfanos — orphans"]
     CHECK --> T5["check:registry — registry vs compiled CSS"]
     CHECK --> T6["check:mcp — server smoke test"]
+    CHECK --> T6b["check:capacidades — capability ledger evidence on disk"]
     CHECK --> T7["check:escaner — the scanner itself"]
     CHECK --> T8["check:figma — export sync"]
     CHECK --> T9["check:mixins — mixin docs vs code"]

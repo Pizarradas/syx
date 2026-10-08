@@ -722,9 +722,10 @@
         <p class="mol-feature-card__body">
           <code>_agents/</code> ships step-by-step workflows
           (<code>create-component</code>, <code>create-theme</code>, <code>audit-tokens</code>,
-          <code>update-changelog</code>) and 9 specialist modes — from the zero-cost
+          <code>update-changelog</code>) and 10 specialist modes — from the zero-cost
           <code>[SYX: SKETCH]:</code> prototyper to the full-depth
-          <code>[SYX: MIGRATE]:</code> specialist. Every mode opens with two declared blocks:
+          <code>[SYX: MIGRATE]:</code> specialist, and a <code>[SYX: ROADMAP]:</code> strategist that
+          checks every idea against what SYX already does before proposing it. Every mode opens with two declared blocks:
           <strong>Trust</strong>, the paths it may write, graded by <code>contracts/trust.json</code>
           and verified by <code>npm run check:modos</code> — a mode never grants itself a permission,
           it inherits one — and <strong>Knowledge</strong>, the reading list it pulls from
@@ -784,7 +785,7 @@
         </h3>
         <p class="org-home-features__modes-sub">
           Prefix any message with <code>[SYX: MODE]:</code> to route it to a specialist agent —
-          or <code>/syx MODE …</code> in Claude Code, same grammar, same nine files.
+          or <code>/syx MODE …</code> in Claude Code, same grammar, same ten files.
           Pick the lowest tier that serves the task; escalate only when the concept is confirmed.
           Compose them with <code>&rarr;</code> (pipeline) and <code>+</code> (evaluative), where
           <code>+</code> groups first: <code>[SYX: UX &rarr; UI + AUDIT]:</code> is
@@ -929,6 +930,20 @@
               <td class="atom-table__td" style="white-space: nowrap;"><strong>recommends</strong></td>
               <td class="atom-table__td">Decide a complete visual identity — colour, typography, space, shape, elevation, motion and state as one coherent set, instead of a recolour. It asks you axis by axis, or decides the lot if you'd rather</td>
               <td class="atom-table__td">The seven axes with their positions and their provenance (yours, the AI's, or inherited), an identity contract of falsifiable invariants, and the specification THEME builds the theme from &mdash; BRAND decides the direction, THEME writes the file</td>
+            </tr>
+            <tr>
+              <td class="atom-table__td">
+                <code>[SYX: ROADMAP]:</code><br>
+                <strong>ROADMAP</strong><br>
+                <small>Systems strategist</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;">
+                <span title="Tier 10 — Medium-High">🟠 Medium-high</span><br>
+                <small>1 ledger · 1–2 turns</small>
+              </td>
+              <td class="atom-table__td" style="white-space: nowrap;"><strong>recommends</strong></td>
+              <td class="atom-table__td">Decide what SYX should do next — improvements, a roadmap, what is missing — without proposing what it already does</td>
+              <td class="atom-table__td">Every idea checked with <code>find_capability</code>, what is already covered with the file and line that prove it, and only the proposals that show their absence</td>
             </tr>
           </tbody>
         </table>
