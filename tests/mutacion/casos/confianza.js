@@ -51,7 +51,10 @@ module.exports = [
     guardian: 'check-confianza (diff)',
     seEscapaba: true,
     necesita: ['git'],
-    env: () => ({ SYX_BASE: 'base', GITHUB_ACTIONS: '' }),
+    // Sin GITHUB_EVENT_PATH: en la CI de una PR apunta al evento real, y si esa
+    // PR lleva `aprobado-humano` el guardián aprobaría la regresión por una
+    // etiqueta que no es de esta copia (PR #3: «ESCAPA» con la etiqueta puesta).
+    env: () => ({ SYX_BASE: 'base', GITHUB_ACTIONS: '', GITHUB_EVENT_PATH: '' }),
     comando: ['node', 'scripts/check-confianza.js'],
     espera: /contracts\/trust\.json/,
     mutar: (t) => t.json('contracts/trust.json', (c) => { sacar(c.tiers.human.paths, 'scripts/'); c.tiers.auto.paths.push('scripts/'); }),
