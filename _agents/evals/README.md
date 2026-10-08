@@ -1,6 +1,6 @@
 # Tareas de referencia de los modos
 
-Los modos son documentos: prometen un comportamiento, pero nada medía si un agente que los sigue lo cumple. Este banco lo mide con **18 tareas** —dos por modo— y una rúbrica común. Sirve para comparar un modo antes y después de cambiarlo, o dos modelos con el mismo modo.
+Los modos son documentos: prometen un comportamiento, pero nada medía si un agente que los sigue lo cumple. Este banco lo mide con **20 tareas** —dos por modo— y una rúbrica común. Sirve para comparar un modo antes y después de cambiarlo, o dos modelos con el mismo modo.
 
 | Fichero | Qué es |
 |---|---|
@@ -73,7 +73,7 @@ node scripts/eval-modo.js --lista
 **Con un agente de verdad**, el runner:
 
 ```
-npm run eval:runner                              # las 18, con `claude -p`
+npm run eval:runner                              # las 20, con `claude -p`
 npm run eval:runner -- --modo ui,token           # un filtro por modo
 npm run eval:runner -- --id audit-01 --paralelo 3 --etiqueta sonnet
 SYX_AGENT_MODEL=<modelo> npm run eval:runner     # otro modelo de Claude

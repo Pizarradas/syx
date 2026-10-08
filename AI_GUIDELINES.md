@@ -201,6 +201,8 @@ node scripts/syx-validate.js
 
 Modes (`[SYX: MODE]:`) and their permission ceilings: the table in `CLAUDE.md` / `AGENTS.md`, detail in `_agents/modes/README.md`. Step-by-step workflows: `_agents/workflows/`.
 
+Proposing an improvement, a roadmap item or "what SYX is missing" is ROADMAP mode, prefix or not: every idea goes through `find_capability` (`contracts/capabilities.json`) first, and only what is proven absent becomes a proposal.
+
 ---
 
 ## 📋 Mixin Cheatsheet (Most Used)

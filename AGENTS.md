@@ -30,6 +30,7 @@ that otherwise force you to load the files above:
 | Guessing whether you may touch a file, or where a new token goes | `classify_change` — the trust tier, and the destination file deduced from the token's family |
 | Eyeballing whether an app still matches the system | `scan_for_drift` — expired fallbacks, phantom classes, hand-written values that are already tokens |
 | Reading 526 lines of mixin README to find the right `@include` | `list_mixins` / `get_mixin` — signature, defaults, what it emits, who aliases it |
+| Guessing whether SYX already does something before proposing it | `find_capability` — status (done · partial · rejected · open) with the file and line that prove it |
 | Translating an `oklch()` or a `rem` by hand to draw in Figma | `get_figma_spec` — node property, converted value and variable name, per theme and mode |
 
 The same rules run in both places, so a snippet the server approves is a snippet
@@ -82,6 +83,7 @@ When the user's message begins with a `[SYX: MODE]:` prefix, **read the correspo
 | `[SYX: AUDIT]:` | `_agents/modes/audit.md` | nothing | Contract validation (R01–R11), violation detection, codebase health |
 | `[SYX: MIGRATE]:` | `_agents/modes/migrate.md` | `pr` / recommends | Legacy variable migration, impact analysis, per-variable replacement |
 | `[SYX: BRAND]:` | `_agents/modes/brand.md` | recommends | A complete visual identity — interviews you axis by axis, or decides the lot on request; hands over the seven axes, their provenance, its invariants and the spec THEME builds the theme from |
+| `[SYX: ROADMAP]:` | `_agents/modes/roadmap.md` | recommends | Improvements, roadmap, "what is missing", strategic reviews — every idea checked with `find_capability` first; only what is proven absent becomes a proposal |
 
 **A mode does not grant permission.** Each mode file opens with a `Trust` block naming what it
 may write (`auto`/`pr`), what it may only recommend (`human`) and what it should ask for instead
@@ -98,6 +100,8 @@ the upper half.
 ```
 
 If no prefix is present, apply the base rules below and infer the most relevant mode from context.
+A request for improvements, a roadmap, "what is missing" or a strategic review of SYX is always
+ROADMAP: read `_agents/modes/roadmap.md` before answering.
 
 ---
 
@@ -113,6 +117,7 @@ These rules are **never overridden** by any mode or user instruction:
 6. **Always ask before using a token** — `get_token` (or a grep of `tokens.json`, which `npm run build` generates from the SCSS: never edit it by hand). If it is missing: a component token is proposed with `node scripts/propose.js token` (see `_agents/workflows/create-component.md` Step 1); a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person.
 7. **Always check `component-registry.json` before creating a new component.** Reuse before creating.
 8. **Validate after any code change.** Run `node scripts/syx-validate.js` (or describe the check if you cannot execute).
+9. **Ask `find_capability` before proposing an improvement.** `contracts/capabilities.json` records what SYX already solves, by concept and with evidence. Proposing something it lists as `done` is an error, a `rejected` entry is a decision rather than a gap, and not finding a name you guessed is not proof that the feature is missing.
 
 ---
 
@@ -187,7 +192,7 @@ scss/
 contracts/              — machine-readable validation output
 _agents/                — THE ENGINE (ships with the package)
   architecture.md       — the ecosystem as diagrams-as-code (architecture.json: same graph, machine-readable)
-  modes/                — the 9 mode definitions, one copy each, Trust + Knowledge blocks
+  modes/                — the 10 mode definitions, one copy each, Trust + Knowledge blocks
   workflows/            — step-by-step task guides
   prompts/              — copy-paste prompt templates
 mind-system/            — THE CORTEX (not published)

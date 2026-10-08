@@ -12,6 +12,7 @@ Prefix your message with `[SYX: MODE]:` to activate a mode:
 [SYX: TOKEN]: I need tokens for a data table with striped rows
 [SYX: THEME]: Create a dark mode variant for example-04
 [SYX: AUDIT]: Review scss/organisms/_site-header.scss for contract violations
+[SYX: ROADMAP]: What should SYX modernise in its CSS next?
 ```
 
 The prefix is the **portable** form: it is plain text, so it works in Claude Code, Codex, Cursor or
@@ -26,10 +27,10 @@ In Claude Code there is a second door to the same room, `.claude/commands/syx.md
 /syx ATLAS UX → UI a section front for markets
 ```
 
-It takes the same grammar and resolves to the same nine files — it is a pointer, not a copy, so
+It takes the same grammar and resolves to the same ten files — it is a pointer, not a copy, so
 there is nothing to keep in sync. What it adds is that the harness runs it: autocomplete on `/syx`,
 and the mode file gets read because the command says to, instead of because an agent remembered a
-convention. There is deliberately **one** command rather than nine: nine would be nine
+convention. There is deliberately **one** command rather than ten: ten would be ten
 near-identical files restating what each mode is, which is the duplication this system just spent a
 refactor removing.
 
@@ -51,6 +52,7 @@ Modes are calibrated by AI context consumption and output complexity. Pick the l
 | 7 | **AUDIT** | 🔴 High | 2–4 | `validate_snippet`, `scan_for_drift` |
 | 8 | **MIGRATE** | 🔴 Very High | 4–6 | `find_token_by_value`, `scan_for_drift` |
 | 9 | **BRAND** | 🔴 Very High | 3–5 | `get_token` (per axis), `find_token_by_value`, `list_components` |
+| 10 | **ROADMAP** | 🟠 Medium-High | 1–2 | `find_capability` (every idea), `get_component`, `get_token`, `classify_change` |
 
 The cost of a mode used to be measured in files loaded. With the MCP server registered
 (`npm run mcp`, or `npx -y syx-mcp`) most of those reads become one call that returns one
@@ -69,6 +71,7 @@ answer — the last column says which. The tier still ranks the *work*, not the 
 | **AUDIT** | `audit.md` | QA reviewer | nothing | R01–R11 violations, structure/naming checks, verdicts |
 | **MIGRATE** | `migrate.md` | Migration specialist | `pr` / recommends | Legacy var resolution, impact analysis, per-variable replacement plans |
 | **BRAND** | `brand.md` | Brand identity architect | recommends | A two-round interview, then the seven identity axes with their provenance, the identity contract, and the specification THEME builds from. Never the theme file itself |
+| **ROADMAP** | `roadmap.md` | Systems strategist | recommends | A capability check of every idea, what is already covered (with evidence), proposals that prove their absence, and ledger entries for `contracts/capabilities.json` |
 
 The **Writes** column is not advice, it is `contracts/trust.json` read through
 `scripts/lib/confianza.js`. Each mode file opens with a `Trust` block listing the paths it may
@@ -90,7 +93,7 @@ per decision that had a competent alternative, in the form *what was decided —
 would change it*. The third field is the one that matters; a justification nobody can falsify is
 decoration. The format, the threshold for owing a line, and what each mode specifically owes live
 once in `_agents/decision-record.md` — no mode file restates them, for the same reason there is one
-`/syx` command instead of nine. SKETCH is exempt, and the exemption is argued there rather than
+`/syx` command instead of ten. SKETCH is exempt, and the exemption is argued there rather than
 assumed; AUDIT and MIGRATE attach the line to each finding or variable instead of closing with a
 block, and that placement is argued there too.
 

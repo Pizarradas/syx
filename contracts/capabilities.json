@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "schema": "syx.capabilities/1",
+    "description": "Qué sabe hacer ya SYX, contado por concepto y no por nombre de token o de clase. Lo consulta la herramienta MCP find_capability (y `require('syx-design-system').findCapability`), lo exige el modo ROADMAP antes de proponer nada, y check:capacidades comprueba que cada evidencia sigue existiendo.",
+    "porque": "Una revisión externa propuso para SYX seis mejoras: cinco ya estaban hechas (clamp() en tipografía, color-mix(), espaciado fluido, un lint de hex y px, exportación de tokens) y la sexta, importar tokens desde Figma, invertía una decisión. No incumplió ninguna regla: buscó por nombres que se imaginó (`.mol-card`, `--semantic-space-fluid-*`), no los encontró y dio la mejora por pendiente. tokens.json y component-registry.json responden «¿existe este nombre?»; este fichero responde «¿esto ya está resuelto, y dónde?».",
+    "statuses": {
+      "done": "Already solved. Proposing it again is an error; improving what exists must cite the evidence.",
+      "partial": "Partly there. Only what `gap` describes may be proposed.",
+      "rejected": "Ruled out on purpose. `decision` says why; reopening it is a person's decision, not an improvement.",
+      "open": "Not there. `gap` says what is missing and `blocker` what stands in the way, if anything."
+    },
+    "evidence": "Cada evidencia es un fichero y una expresión regular que tiene que encontrarse en él. Si alguien borra lo que la sostiene, check:capacidades falla y la entrada se corrige: un registro que afirma sin prueba es el mismo error que vino a evitar.",
+    "aliases": "En los dos idiomas y con las formas con las que alguien lo pediría sin conocer SYX, incluidos los nombres que NO existen. Se busca por palabras, no por expresión exacta."
+  },
+  "capabilities": [
+    {
+      "id": "fluid-typography",
+      "title": "Fluid typography with clamp()",
+      "aliases": ["tipografía fluida", "fluid type", "clamp", "clamp()", "escalar tipografía", "font-size fluido", "responsive font size", "tamaño de letra fluido", "type scale"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/abstracts/tokens/primitives/_typography.scss", "match": "--primitive-font-size-[a-z0-9-]+:\\s*clamp\\(" }
+      ],
+      "note": "Every step of the type scale is clamp(min @ 375px, preferred, max @ 1440px). Components read it through --semantic-font-size-*."
+    },
+    {
+      "id": "fluid-spacing",
+      "title": "Fluid spacing scale",
+      "aliases": ["espaciado fluido", "fluid spacing", "fluid space", "space fluid", "--semantic-space-fluid", "semantic-space-fluid-sm", "semantic-space-fluid-lg", "márgenes fluidos", "paddings fluidos", "escala de espaciado", "spacing scale", "rítmica", "vertical rhythm"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/abstracts/tokens/primitives/_fluid.scss", "match": "--primitive-fluid-space-md:\\s*clamp\\(" },
+        { "path": "scss/abstracts/tokens/semantic/_spacing.scss", "match": "--semantic-space-layout-md:\\s*var\\(--primitive-fluid-space-md\\)" }
+      ],
+      "note": "Consumed as --semantic-space-layout-* and --semantic-space-component-*. Do not add --semantic-space-fluid-* aliases: they would be a second name for the same value."
+    },
+    {
+      "id": "color-mix-states",
+      "title": "Hover and border tints with color-mix()",
+      "aliases": ["color-mix", "color-mix()", "transparencias", "hover tint", "estados hover", "bordes dinámicos", "alpha", "opacidad de color", "variables de transparencia"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/abstracts/tokens/components/_buttons.scss", "match": "--component-button-primary-bg-hover:\\s*color-mix\\(in srgb" }
+      ],
+      "note": "color-mix() lives in the token layers (component and semantic), not inside component rules: a component reads --component-*-hover and stays theme-agnostic."
+    },
+    {
+      "id": "hardcoded-value-lint",
+      "title": "Lint against hard-coded hex and px in components",
+      "aliases": ["linter de tokens", "stylelint", "valores hardcodeados", "hardcoded values", "prohibir hex", "prohibir px", "#fff", "16px", "token lint", "lint de tokens"],
+      "status": "done",
+      "evidence": [
+        { "path": ".stylelintrc.json", "match": "\"color-no-hex\"" },
+        { "path": ".stylelintrc.json", "match": "\"unit-disallowed-list\"" }
+      ],
+      "note": "Scoped to scss/atoms, molecules, organisms and layout; an exception is per line with its reason. Named colours (`red`) are not linted by stylelint but by the contract: R11 forbids a literal colour in a component token, and AUDIT flags raw values."
+    },
+    {
+      "id": "logical-properties-lint",
+      "title": "Logical properties enforced by lint",
+      "aliases": ["propiedades lógicas", "logical properties", "margin-inline", "padding-block", "rtl", "text-align start"],
+      "status": "done",
+      "evidence": [
+        { "path": ".stylelintrc.json", "match": "\"property-disallowed-list\"" }
+      ]
+    },
+    {
+      "id": "token-export",
+      "title": "Token export: W3C DTCG (Style Dictionary) and Figma variables",
+      "aliases": ["style dictionary", "dtcg", "exportar tokens", "export tokens", "figma variables", "variables de figma", "tokens json", "design tokens export"],
+      "status": "done",
+      "evidence": [
+        { "path": "scripts/export-tokens.js", "match": "DTCG" },
+        { "path": "scripts/export-figma.js", "match": "Exportador a Figma" }
+      ],
+      "note": "npm run export:tokens writes DTCG per theme and mode (what Style Dictionary reads); npm run export:figma writes the variable collections Figma imports."
+    },
+    {
+      "id": "figma-to-scss-import",
+      "title": "Generating _primitives / _semantic SCSS from Figma",
+      "aliases": ["importar desde figma", "figma a scss", "figma to code", "figma to scss", "exportación automatizada desde figma", "tokens desde figma", "_primitives.scss", "_semantic.scss", "sincronizar figma"],
+      "status": "rejected",
+      "evidence": [
+        { "path": "scripts/export-figma.js", "match": "POR QUÉ NO SE EXPORTAN LOS PRIMITIVOS" }
+      ],
+      "decision": "The flow runs code → Figma, on purpose. The SCSS is the source of truth and Figma receives semantic and component variables only; primitives are not even exported, so the shortcut R01 closes in code does not open in design. Generating primitives and semantics from Figma would invert that direction and write, from outside, two layers that contracts/trust.json reserves for a person.",
+      "instead": "token-export"
+    },
+    {
+      "id": "cascade-layers",
+      "title": "Specificity managed with @layer, no !important",
+      "aliases": ["@layer", "cascade layers", "capas de cascada", "especificidad", "specificity", "!important"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/ARCHITECTURE.md", "match": "@layer syx\\.reset, syx\\.base" },
+        { "path": "contracts/rules.json", "match": "\"id\": \"R02\"" }
+      ]
+    },
+    {
+      "id": "container-queries",
+      "title": "Container queries in components",
+      "aliases": ["container queries", "@container", "container-type", "consultas de contenedor", "layout según el contenedor", "responsive por contenedor", "mol-card container"],
+      "status": "partial",
+      "evidence": [
+        { "path": "scss/site/_home-features.scss", "match": "@container syx-card-grid" }
+      ],
+      "gap": "Only the site layer uses one. No registry component does, and none needs a migration: component layouts do not switch on viewport @media (mol-card only has forced-colors). Worth it per component, when one has to change layout according to the slot it is placed in — not as a blanket replacement of @media.",
+      "note": "Before proposing, name the component and the slot that needs it (get_component), and show the @media it would replace, if any."
+    },
+    {
+      "id": "typography-presets",
+      "title": "Typography role presets (size + line-height + tracking + weight)",
+      "aliases": ["contrato tipográfico", "contrato de tipografía semántica", "type presets", "text styles", "estilos de texto", "--semantic-type-heading-1", "semantic-type", "heading-1", "typography tokens grouped"],
+      "status": "partial",
+      "evidence": [
+        { "path": "scss/abstracts/tokens/semantic/_typography.scss", "match": "--semantic-line-height-heading" },
+        { "path": "scss/abstracts/mixins/_helpers.scss", "match": "@mixin text\\(\\$size: null, \\$weight: null, \\$lh: null" }
+      ],
+      "gap": "The parts exist as separate semantic tokens and the text() mixin takes them one by one. There is no preset per role (heading-1, body, caption). A single custom property cannot carry four declarations, so a preset would be a mixin or a utility class per role — or the `font` shorthand, which resets the font properties it does not name."
+    },
+    {
+      "id": "lh-unit",
+      "title": "The lh unit",
+      "aliases": ["lh", "unidad lh", "lh unit", "rlh", "espaciado por interlineado"],
+      "status": "open",
+      "gap": "Not used anywhere.",
+      "blocker": "The browser floor in package.json (browserslist) includes Safari and iOS 16.2; lh ships in 16.4. Either the floor goes up — a decision for a person — or every use carries a fallback.",
+      "evidence": [
+        { "path": "package.json", "match": "\"safari >= 16\\.2\"" }
+      ]
+    },
+    {
+      "id": "dark-mode",
+      "title": "Light and dark modes per theme",
+      "aliases": ["dark mode", "modo oscuro", "tema oscuro", "prefers-color-scheme", "light/dark"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/abstracts/tokens/semantic/_dark-mode.scss", "match": "--semantic-" }
+      ]
+    },
+    {
+      "id": "focus-ring",
+      "title": "Focus ring mixin",
+      "aliases": ["focus ring", "anillo de foco", "focus-visible", "outline de foco", "focus state"],
+      "status": "done",
+      "evidence": [
+        { "path": "scss/abstracts/mixins/_helpers.scss", "match": "@mixin focus-ring\\(" }
+      ]
+    }
+  ]
+}

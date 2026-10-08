@@ -174,6 +174,16 @@ const HERRAMIENTAS = [
   },
 
   {
+    name: 'find_capability',
+    description: 'Does SYX already do this, and where? Searches contracts/capabilities.json by concept — in English or Spanish, by any name, including names that do not exist — and returns each match with its status (done · partial · rejected · open), the file and line that prove it, what is still missing (`gap`) or why it was ruled out (`decision`). Ask BEFORE proposing any improvement, feature or roadmap item: a proposal for something `done` is an error. `found: false` is not proof of absence. With no query, lists the whole ledger.',
+    inputSchema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'The idea in plain words, e.g. "container queries for cards", "tipografía fluida", "--semantic-space-fluid-sm"' } },
+    },
+    run: (a) => syx.findCapability(a),
+  },
+
+  {
     name: 'get_figma_spec',
     description: 'A SYX component in the shape the Figma Plugin API understands: each token with its node property (cornerRadius, fills, strokeWeight…), its value already converted — colours as 0–1 RGB, measures in pixels — and its variable name. Ask BEFORE creating anything in Figma: get_component gives token names, and a node needs numbers. It also says what could NOT be translated, and why (`unmapped`, `untranslated`).',
     inputSchema: {

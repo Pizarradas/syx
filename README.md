@@ -333,6 +333,7 @@ The server answers with the value the browser would paint.
 ```bash
 npm run mcp        # starts the server on stdio
 npm run check:mcp  # smoke test: talks to it like a client would
+npm run check:capacidades  # the capability ledger behind find_capability still has its evidence
 ```
 
 Register it in any MCP client (Claude Desktop, Claude Code, Cursor…):
@@ -371,6 +372,7 @@ From a clone instead of the installed package:
 | `scan_for_drift` | Where a consuming app has drifted from the system |
 | `list_mixins` / `get_mixin` | The 44 mixins: signature, defaults, what they emit, how often each is used |
 | `get_figma_spec` | One component in the shape Figma's Plugin API understands: node property, converted value, variable name |
+| `find_capability` | Whether SYX already solves an idea, by concept: done · partial · rejected · open, with the file and line that prove it (`contracts/capabilities.json`) |
 
 No dependencies: plain JSON-RPC over stdio. It reads `contracts/resolved-tokens.json`
 and `component-registry.json`, both generated from source and arbitrated against the
@@ -610,7 +612,7 @@ syx/
 ├── img/                         # Images and icons
 │
 ├── _agents/                     # THE ENGINE — loaded always, ships with the package
-│   ├── modes/                   # 9 mode definitions (Trust + Knowledge blocks)
+│   ├── modes/                   # 10 mode definitions (Trust + Knowledge blocks)
 │   ├── workflows/               # Step-by-step task guides
 │   └── prompts/                 # Copy-paste prompt templates
 │
@@ -644,7 +646,7 @@ syx/
 | [CLAUDE.md](CLAUDE.md)                                                  | Claude Code entry point — mode routing, base rules, workflow references |
 | [AI_GUIDELINES.md](AI_GUIDELINES.md)                                    | AI First field guide — contracts, tokens, mixins, naming conventions |
 | [_agents/architecture.md](_agents/architecture.md)                      | The ecosystem as diagrams-as-code; [architecture.json](_agents/architecture.json) is the same graph, machine-readable |
-| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 9 specialist lenses activated by `[SYX: MODE]:` prefix |
+| [_agents/modes/README.md](_agents/modes/README.md)                      | Mode system — 10 specialist lenses activated by `[SYX: MODE]:` prefix |
 | [mind-system/README.md](mind-system/README.md)                          | The cortex — precedence ladder, engine vs. knowledge |
 | [mind-system/routing.md](mind-system/routing.md)                        | Mode ↔ knowledge wiring, with the reverse index |
 | [THEMING-RULES.md](THEMING-RULES.md)                                    | Token substitution contract                         |

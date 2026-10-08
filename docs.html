@@ -612,7 +612,7 @@
           The Mode System
         </a>
         <div class="docs-sidebar__sub">
-          <a href="#modes-eight" class="docs-sidebar__link" data-nav-section="modes-eight">1 The nine modes</a>
+          <a href="#modes-eight" class="docs-sidebar__link" data-nav-section="modes-eight">1 The ten modes</a>
           <a href="#modes-invoke" class="docs-sidebar__link" data-nav-section="modes-invoke">2 Two doors, one room</a>
           <a href="#modes-compose" class="docs-sidebar__link" data-nav-section="modes-compose">3 Composing modes</a>
           <a href="#modes-blocks" class="docs-sidebar__link" data-nav-section="modes-blocks">4 Trust &amp; Knowledge</a>
@@ -1566,8 +1566,8 @@ syx.getToken({
             </div>
           </div>
 
-          <p class="syx-type-overline syx-text-gray syx-mb-2">The ten tools</p>
-          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="The ten tools">
+          <p class="syx-type-overline syx-text-gray syx-mb-2">The twelve tools</p>
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="The twelve tools">
             <table class="atom-table" style="min-width:620px">
               <thead>
                 <tr>
@@ -1626,6 +1626,16 @@ syx.getToken({
                   <td><code>get_mixin</code></td>
                   <td>One mixin's parameters and defaults, what it emits, who aliases it</td>
                   <td>Guessing the arguments</td>
+                </tr>
+                <tr>
+                  <td><code>get_figma_spec</code></td>
+                  <td>One component as Figma's Plugin API needs it: node property, converted value, variable name</td>
+                  <td>Converting oklch() colours and rem sizes by hand</td>
+                </tr>
+                <tr>
+                  <td><code>find_capability</code></td>
+                  <td>Whether SYX already solves an idea, by concept: done, partial, rejected or open, with the file and line that prove it</td>
+                  <td>Proposing what already exists because a guessed name was not found</td>
                 </tr>
               </tbody>
             </table>
@@ -1862,6 +1872,10 @@ npx syx-scan app/ --json &gt; drift.json      # for CI</code></pre>
                 <tr>
                   <td><code>check:mcp</code></td>
                   <td>A server that answers wrongly, or not at all, over the real protocol</td>
+                </tr>
+                <tr>
+                  <td><code>check:capacidades</code></td>
+                  <td>A capability ledger that still says <em>done</em> after the file proving it was renamed or deleted &mdash; and a reference question that no longer finds its entry</td>
                 </tr>
                 <tr>
                   <td><code>check:escaner</code></td>
@@ -2374,19 +2388,19 @@ npm run check:figma    # fails if those files are stale
         <p class="atom-txt syx-text-gray syx-mb-4">The section above is how the system answers and guards itself. This
           one is how you drive it. A <strong>mode</strong> is a lens: instead of a general-purpose answer, you get one
           tuned to a single discipline, with a declared permission ceiling and a declared reading list. There are
-          nine, and they are deliberately siloed &mdash; a UX pass and a UI pass on the same problem produce a better
+          ten, and they are deliberately siloed &mdash; a UX pass and a UI pass on the same problem produce a better
           result than one answer trying to be both.</p>
 
         <!-- ─── 1 · THE NINE ─── -->
         <section class="syx-mb-5" id="modes-eight">
           <h3 class="atom-title atom-title--h5 syx-mb-3">
-            1 &mdash; The nine modes
+            1 &mdash; The ten modes
           </h3>
           <p class="atom-txt syx-text-gray syx-mb-3">Ordered by tier, which ranks how much context the mode spends.
             <strong>Use the lowest tier that does the job.</strong> Start at SKETCH or UX to check the idea is worth
             anything; escalate to TOKEN &rarr; UI &rarr; AUDIT once it is confirmed.</p>
 
-          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="1 — The nine modes">
+          <div class="syx-mb-4" style="overflow-x:auto" role="region" tabindex="0" aria-label="1 — The ten modes">
             <table class="atom-table" style="min-width:680px">
               <thead>
                 <tr>
@@ -2461,6 +2475,13 @@ npm run check:figma    # fails if those files are stale
                   <td>recommends</td>
                   <td>A two-round interview &mdash; register first, then the seven axes with <code>IA</code> always on the table &mdash; then the axes with their provenance, the identity contract, and the specification THEME builds from. Never the theme file: BRAND decides the direction, THEME writes it</td>
                 </tr>
+                <tr>
+                  <td>10</td>
+                  <td><code>[SYX: ROADMAP]:</code></td>
+                  <td>Systems strategist</td>
+                  <td>recommends</td>
+                  <td>A capability check of every idea against <code>contracts/capabilities.json</code>, what is already covered with its evidence, and only the proposals that prove their absence. Without a prefix, any request for improvements or a roadmap lands here</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -2473,10 +2494,15 @@ npm run check:figma    # fails if those files are stale
               pulls the whole motion domain when there is GSAP: cheap in system reads, expensive in corpus. SKETCH is
               the one disciplined exception &mdash; its tier 1 is bought by reading nothing at all, so it has no
               <em>Always</em> line.</p>
-            <p class="atom-txt syx-mb-0">BRAND is the second exception, in the opposite direction. It reads three
+            <p class="atom-txt syx-mb-2">BRAND is the second exception, in the opposite direction. It reads three
               files and still sits at tier 9, because the tier ranks the work and BRAND's work is the only one that
               has to come out internally consistent across seven axes at once. The expensive part is the coherence
               check, not the reads.</p>
+            <p class="atom-txt syx-mb-0">ROADMAP is tier 10 for the same bookkeeping reason BRAND sits after
+              MIGRATE: renumbering costs more than the order is worth. It reads little &mdash; one
+              <code>find_capability</code> per idea &mdash; but its failure is expensive in a different way: a
+              proposal for something already built costs the reader the time to refute it. It exists because an
+              external review proposed six improvements and five were already in the repository.</p>
           </div>
         </section>
 
@@ -2508,13 +2534,13 @@ scss/organisms/_site-header.scss</code></pre>
           </div>
 
           <p class="atom-txt syx-text-gray syx-mb-3"><code>.claude/commands/syx.md</code> takes the same grammar and
-            resolves to the same nine files. It is a <strong>pointer, not a copy</strong>, so there is nothing to keep
+            resolves to the same ten files. It is a <strong>pointer, not a copy</strong>, so there is nothing to keep
             in sync. What it adds is that the harness runs it: autocomplete, and the mode file gets read because the
             command says so rather than because an agent remembered a convention.</p>
 
           <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
             <p class="syx-type-overline syx-text-gray syx-mb-2">Two decisions that look wrong and aren't</p>
-            <p class="atom-txt syx-mb-2"><strong>One command, not nine.</strong> Nine would be nine near-identical
+            <p class="atom-txt syx-mb-2"><strong>One command, not ten.</strong> Ten would be ten near-identical
               files restating what each mode is &mdash; the duplication this system spent a refactor removing.</p>
             <p class="atom-txt syx-mb-0"><strong>A command, not a skill.</strong> A skill auto-invokes on its
               description, and here that is a defect: modes are lenses chosen on purpose, and choosing the lens chooses
