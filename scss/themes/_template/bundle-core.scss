@@ -1,0 +1,30 @@
+// SYX — THEME BUNDLE: core (made from scss/themes/_template)
+// ================================================
+// The leanest functional bundle — production-ready minimum.
+// Contents defined once in _shared/_bundle-core.scss. build-dist compiles
+// it for every theme (<theme>.core.min.css): a theme without it breaks
+// `npm run build`, `npm pack` and `npm install` from git.
+// ================================================
+
+// CORE
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-core' as *;
+@use 'theme' as *;
+
+// THEME TOKENS
+// ================================================
+@include universal-values();
+@include theme-template();
+
+// FONTS (declared once in _theme.scss)
+// ================================================
+@include theme-template-fonts();
+
+// CORE (reset + elements + grid; the .syx-* helpers ship apart)
+// ================================================
+@include syx-core(template, $helpers: false);
+
+// BUNDLE: production minimum
+// ================================================
+@include syx-bundle-core(template);

@@ -1,0 +1,24 @@
+// SYX — THEME BUNDLE: docs (made from scss/themes/_template)
+// ================================================
+// The full system without the site layer. build-dist compiles it for
+// every theme (<theme>.full.min.css, <theme>.tokens.min.css): a theme
+// without it breaks `npm run build`, `npm pack` and `npm install` from git.
+// ================================================
+@use '../../abstracts/index' as *;
+@use '../../base/index' as *;
+@use '../../layout/grids/grid' as *;
+@use '../../atoms/index' as *;
+@use '../../molecules/index' as *;
+@use '../../organisms/index' as *;
+@use '../_base/universal' as *;
+@use '../_shared/core' as *;
+@use '../_shared/bundle-full' as *;
+@use 'theme' as *;
+
+@include universal-values();
+@include theme-template();
+
+@include theme-template-fonts();
+
+@include syx-core(template);
+@include syx-bundle-full(template);

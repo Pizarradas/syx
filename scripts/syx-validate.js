@@ -15,6 +15,8 @@
  *   node scripts/syx-validate.js --report          — console + writes contract files
  *   node scripts/syx-validate.js --strict          — exit 1 if any error/warning
  *   node scripts/syx-validate.js --report --strict — full run, CI-safe
+ *   node scripts/syx-validate.js --check           — no escribe: falla si algún fichero
+ *                                                    de contracts/ que genera está desfasado
  */
 
 const fs   = require('fs');
@@ -28,7 +30,14 @@ const TOKENS_JSON   = path.join(ROOT, 'tokens.json');
 const CONTRACTS_DIR = path.join(ROOT, 'contracts');
 const SCSS_DIR      = path.join(ROOT, 'scss');
 
-const WRITE_REPORT  = process.argv.includes('--report');
+// --check genera lo mismo que --report pero no escribe: compara. Es el guardián
+// de runtime-tokens.json, token-contract.json, lint-contract.json,
+// token-usage-map.json y validation-report.md (npm run check:contratos). Hasta
+// la fricción 8 nada comprobaba que lo commiteado fuera lo generado, y sin eso
+// no se podían declarar `auto` en contracts/trust.json con la razón de css/:
+// «se regenera, y un guardián comprueba que coincide».
+const CHECK         = process.argv.includes('--check');
+const WRITE_REPORT  = process.argv.includes('--report') || CHECK;
 const STRICT        = process.argv.includes('--strict');
 
 // El contrato manda. Hasta octubre de 2026 este fichero lo leía (parseRules)
@@ -41,6 +50,15 @@ const OFFICIAL_PREFIXES = RULES.officialPrefixes;
 const severityOf = (id) => MOTOR.severidad(id);
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
+
+const desfasados = [];
+/** Escribe un contrato; con --check, solo anota si el del disco no es este. */
+function escribir(fichero, contenido) {
+  if (!CHECK) return fs.writeFileSync(fichero, contenido);
+  // Un checkout con core.autocrlf trae CRLF: el fin de línea no es contenido.
+  const actual = fs.existsSync(fichero) ? fs.readFileSync(fichero, 'utf8').replace(/\r\n/g, '\n') : null;
+  if (actual !== contenido.replace(/\r\n/g, '\n')) desfasados.push(path.relative(ROOT, fichero).replace(/\\/g, '/'));
+}
 
 function readAllScss(dir) {
   const results = [];
@@ -324,7 +342,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   // cambió el contenido ya lo dice git.
 
   // runtime-tokens.json
-  fs.writeFileSync(
+  escribir(
     path.join(CONTRACTS_DIR, 'runtime-tokens.json'),
     JSON.stringify({
       _meta: { source: 'css/styles-theme-example-01.css', stats: runtimeData.stats },
@@ -341,7 +359,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
       usageCount: (usageMap[prop]?.usages || []).length
     };
   }
-  fs.writeFileSync(
+  escribir(
     path.join(CONTRACTS_DIR, 'token-contract.json'),
     JSON.stringify({
       _meta: { totalTokens: Object.keys(enriched).length },
@@ -350,7 +368,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   );
 
   // lint-contract.json
-  fs.writeFileSync(
+  escribir(
     path.join(CONTRACTS_DIR, 'lint-contract.json'),
     JSON.stringify({
       _meta: { generator: 'scripts/syx-validate.js' },
@@ -384,7 +402,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
   );
 
   // token-usage-map.json
-  fs.writeFileSync(
+  escribir(
     path.join(CONTRACTS_DIR, 'token-usage-map.json'),
     JSON.stringify({
       _meta: { totalMappedTokens: Object.keys(usageMap).length },
@@ -392,6 +410,7 @@ function writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scs
     }, null, 2)
   );
 
+  if (CHECK) return;
   console.log('\n📁 Contracts written to contracts/');
   console.log('   → runtime-tokens.json');
   console.log('   → token-contract.json');
@@ -579,8 +598,8 @@ function writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViol
   md += '\n';
 
   const reportPath = path.join(CONTRACTS_DIR, 'validation-report.md');
-  fs.writeFileSync(reportPath, md);
-  console.log('   → validation-report.md');
+  escribir(reportPath, md);
+  if (!CHECK) console.log('   → validation-report.md');
 }
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
@@ -633,6 +652,15 @@ async function main() {
   if (WRITE_REPORT) {
     writeContracts(runtimeData, crossCheckResult, legacyVars, usageMap, scssViolations, sourceTokens, unused);
     writeMarkdownReport(runtimeData, crossCheckResult, legacyVars, scssViolations, { hasErrors, hasWarnings });
+  }
+
+  if (CHECK) {
+    if (desfasados.length) {
+      console.log(`❌ contracts/ no es lo que genera este validador: ${desfasados.join(', ')}`);
+      console.log('   Regenera con: npm run validate:report\n');
+      process.exit(1);
+    }
+    console.log('✅ contracts/ al día: runtime-tokens, token-contract, lint-contract, token-usage-map y validation-report son lo generado.\n');
   }
 
   console.log('┌─────────────────────────────────────────────────────────────┐');

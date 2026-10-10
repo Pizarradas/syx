@@ -27,13 +27,10 @@ and regenerate. `classify_change` says who may do that.
 → classify_change { "token": "--component-button-border-radius" }
 ```
 
-> **Open point, stated rather than worked around.** `contracts/figma/` matches no pattern
-> in `contracts/trust.json`, so it falls to the `human` default — while `contracts/dtcg/`,
-> the artifact it is a sibling of, is `auto`. Until a human adds it, an agent running
-> `npm run export:figma` is writing to a human-tier path and **must ask first**. The fix is
-> one line in the `auto` list, next to `contracts/dtcg/`; it is not an agent's to make,
-> because an agent that can widen its own permissions does not have permissions, it has a
-> suggestion.
+> **Tier.** `contracts/figma/` is `auto` in `contracts/trust.json`, next to `contracts/dtcg/`:
+> everything in it is written by `scripts/export-figma.js`, and `npm run check:figma` fails
+> both on a stale file and on any file the exporter does not generate. Regenerating it is
+> yours; hand-editing it is still never right.
 
 ---
 

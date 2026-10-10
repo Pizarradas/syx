@@ -27,6 +27,25 @@ module.exports = [
     mutar: (t) => t.reemplazar('scss/abstracts/tokens/components/_card.scss', ':root {\n',
       ':root {\n  --component-card-sello-gap: var(--semantic-space-stack-sm);\n'),
   },
+  // Fricción 8: estos derivados son `auto` en trust.json porque un guardián
+  // compara lo commiteado con lo generado. Si el guardián no mira, `auto` es
+  // un permiso para escribir lo que sea.
+  {
+    id: 'contrato-editado-a-mano',
+    regresion: 'contracts/lint-contract.json editado a mano (una variable heredada que «ya no está»)',
+    guardian: 'check:contratos',
+    comando: ['node', 'scripts/syx-validate.js', '--check'],
+    espera: /lint-contract\.json/,
+    mutar: (t) => t.json('contracts/lint-contract.json', (c) => { c.stats.legacyRuntime = 0; }),
+  },
+  {
+    id: 'figma-fichero-de-mas',
+    regresion: 'un fichero en contracts/figma/ que el exportador no genera',
+    guardian: 'check:figma',
+    comando: ['node', 'scripts/export-figma.js', '--check'],
+    espera: /intruso\.figma\.json/,
+    mutar: (t) => t.escribir('contracts/figma/intruso.figma.json', '{}\n'),
+  },
   {
     id: 'js-sin-side-effects',
     regresion: 'un js/syx-*.js que `sideEffects` no declara',

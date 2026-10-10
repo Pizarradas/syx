@@ -209,7 +209,10 @@ fs.writeFileSync(path.join(app, 'propio.css'), [
   '  /* syx-reuse: checked mol-card, layout-grid — needs a two-column editorial header */',
   '  .lumen-masthead { display: grid; }',
   '  .lumen-masthead__title { margin: 0; }',   // elemento de un bloque ya justificado: no
-  '  .lumen-opening { display: grid; }',      // bloque nuevo sin justificar: sí
+  // Bloque nuevo sin justificar que PINTA (font-weight): sí, y `media`. Hasta
+  // la fricción 7 era `{ display: grid }`; un bloque que solo coloca sale
+  // ahora `baja`, y eso se prueba aparte (app hemi-).
+  '  .lumen-opening { display: grid; font-weight: 700; }',
   '}',
   '',
 ].join('\n'));
@@ -272,6 +275,112 @@ comprobar('app: un bloque propio sin syx-reuse, y solo ese', () => {
     throw new Error(`esperaba solo .lumen-opening, encontró: ${malos.map((h) => h.que).join(' | ') || 'nada'}`);
   }
   if (malos[0].gravedad !== 'media') throw new Error(`gravedad ${malos[0].gravedad}: tiene que forzar el bucle del agente`);
+});
+
+// ─── Fricción 7: lo que costaba el escáner en una app recién hecha ───────────
+// Una app `hemi-` dio 23 `sin-consulta` media, casi todos piezas que solo
+// colocan; comparaba contra syx-sketch aunque la app cargara otro tema; y las
+// clases que pone el JavaScript no se miraban.
+
+const hemi = path.join(tmp, 'hemi');
+fs.mkdirSync(hemi);
+fs.writeFileSync(path.join(hemi, 'shell.css'), [
+  '.hemi-wrap { display: grid; gap: 1rem; padding-inline: 1rem; max-inline-size: 60rem; }', // solo coloca: baja
+  '.hemi-num { font-variant-numeric: tabular-nums; }',                                       // tipografía: media
+  '.hemi-stack { display: flex; }',
+  '.hemi-stack--alert { color: var(--semantic-color-text-primary); }',                       // su modificador pinta: media
+  '.hemi-pin { position: relative; inset: 0; }',                                             // position no es colocar: media
+  '.hemi-row { display: flex; --hemi-row-gap: 1rem; }',                                      // custom property: media
+  '@media (min-width: 40rem) { .hemi-side { display: grid; } }',                             // solo coloca, dentro de @media: baja
+  '.hemi-spread { display: flex; }',
+  '@media (min-width: 40rem) { .hemi-spread { box-shadow: none; } }',                        // pinta en otra regla: media
+  '',
+].join('\n'));
+fs.writeFileSync(path.join(hemi, 'mezcla.scss'), '.hemi-mix { display: grid; @include algo; }\n'); // @include: no se sabe qué emite → media
+fs.writeFileSync(path.join(hemi, 'layout.css'), [
+  '/* syx-reuse-file: app shell layout only; SYX layout-* covers the page, not these inner splits */',
+  '.hemi-shell { display: grid; grid-template-columns: 1fr 2fr; }', // coloca + declaración del fichero: nada
+  '.hemi-shell__aside { padding: 1rem; }',
+  '.hemi-hero { display: grid; background: var(--semantic-color-bg-secondary); }', // pinta: la del fichero no basta
+  '',
+].join('\n'));
+fs.writeFileSync(path.join(hemi, 'vacia.css'), '/* syx-reuse-file: */\n.hemi-gap { gap: 1rem; }\n'); // sin porqué: no vale
+fs.writeFileSync(path.join(hemi, 'ui.js'), [
+  "export function pinta(el, size, name, x) {",
+  "  el.classList.add('atom-btn--sm');",                         // modificador inventado: sí
+  "  el.className = 'atom-btn hemi-card app-thing js-hook';",     // existe, o no es de SYX: no
+  "  el.classList.add(`atom-btn--${size}`);",                    // interpolado: no se juzga
+  "  el.classList.toggle('atom-icon--' + name, true);",          // a medias: no se juzga
+  "  el.innerHTML = `<p class=\"atom-txtx ${x}\">hola</p>`;",     // clase fantasma en una plantilla: sí
+  "  // el.classList.add('atom-comentada');",                    // comentado: no
+  "  el.classList.add('foo-bar--baz');",                         // no es de SYX: no
+  "  el.setAttribute('class', 'mol-card mol-cardd');",           // fantasma por setAttribute: sí
+  "}",
+  '',
+].join('\n'));
+fs.writeFileSync(path.join(hemi, 'ui.min.js'), "a.classList.add('atom-de-un-bundle');\n");
+const informeHemi = escanear({
+  files: ['shell.css', 'mezcla.scss', 'layout.css', 'vacia.css', 'ui.js'].map((f) => path.join(hemi, f)), syx, prefijo: 'hemi',
+});
+const consulta = (bloque) => informeHemi.hallazgos.find((h) => h.tipo === 'sin-consulta' && h.que.startsWith(`.${bloque} `));
+const gravedadDe = (bloque, esperada) => {
+  const h = consulta(bloque);
+  const g = h ? h.gravedad : 'ninguna';
+  if (g !== esperada) throw new Error(`.${bloque}: ${g}, esperaba ${esperada}${h ? ` — ${h.detalle}` : ''}`);
+  return h;
+};
+
+comprobar('hemi: un bloque que solo coloca es sin-consulta baja, no media', () => {
+  gravedadDe('hemi-wrap', 'baja');
+  gravedadDe('hemi-side', 'baja');
+  if (!/syx-reuse-file/.test(consulta('hemi-wrap').sugerencia)) throw new Error('no ofrece la declaración por fichero');
+});
+
+comprobar('hemi: lo que pinta sigue siendo media (tipografía, color de un modificador, position, custom property, @include, otra regla)', () => {
+  for (const b of ['hemi-num', 'hemi-stack', 'hemi-pin', 'hemi-row', 'hemi-mix', 'hemi-spread']) gravedadDe(b, 'media');
+});
+
+comprobar('hemi: syx-reuse-file excusa lo que solo coloca en su fichero, y nada más', () => {
+  gravedadDe('hemi-shell', 'ninguna');
+  const h = gravedadDe('hemi-hero', 'media');
+  if (!/syx-reuse-file/.test(h.detalle) || !/background/.test(h.detalle)) throw new Error(`no explica por qué no basta: ${h.detalle}`);
+  gravedadDe('hemi-gap', 'baja'); // un syx-reuse-file sin porqué no cuenta
+});
+
+comprobar('hemi: las clases de SYX que pone el JavaScript se juzgan como en el marcado', () => {
+  const enJs = informeHemi.hallazgos.filter((h) => h.file.endsWith('ui.js'));
+  const nombres = enJs.map((h) => `${h.tipo}:${(h.que.match(/\.([\w-]+)/) || [])[1]}`).sort();
+  const esperado = ['clase-fantasma:atom-txtx', 'clase-fantasma:mol-cardd', 'modificador-inventado:atom-btn--sm'];
+  if (JSON.stringify(nombres) !== JSON.stringify(esperado)) throw new Error(`encontró ${nombres.join(', ') || 'nada'}; esperaba ${esperado.join(', ')}`);
+  const sm = enJs.find((h) => h.que.includes('atom-btn--sm'));
+  if (sm.linea !== 2) throw new Error(`línea ${sm.linea}, esperaba 2`);
+});
+
+const CLI = path.join(__dirname, 'scan-drift.js');
+const syxScan = (cwd, ...args) => require('child_process').spawnSync(process.execPath, [CLI, ...args], { cwd, encoding: 'utf8' });
+
+comprobar('hemi: syx-scan lee .js de una carpeta, pero no un .min.js', () => {
+  const r = syxScan(hemi, '.', '--prefix', 'hemi', '--json');
+  const j = JSON.parse(r.stdout);
+  const ficheros = new Set(j.findings.map((h) => h.file.replace(/\\/g, '/')));
+  if (!ficheros.has('ui.js')) throw new Error('no leyó ui.js');
+  if (JSON.stringify(j).includes('atom-de-un-bundle')) throw new Error('leyó un .min.js');
+});
+
+comprobar('hemi: el tema sale de --tema, o de syx.theme en el package.json de la app', () => {
+  const sinPkg = JSON.parse(syxScan(hemi, 'shell.css', '--json').stdout);
+  if (sinPkg.theme !== 'syx-sketch') throw new Error(`sin package.json comparó contra ${sinPkg.theme}`);
+  fs.writeFileSync(path.join(hemi, 'package.json'), JSON.stringify({ name: 'hemi', syx: { theme: 'example-03' } }));
+  try {
+    const delPkg = JSON.parse(syxScan(hemi, 'shell.css', '--json').stdout);
+    if (delPkg.theme !== 'example-03') throw new Error(`con syx.theme example-03 comparó contra ${delPkg.theme}`);
+    const dado = JSON.parse(syxScan(hemi, 'shell.css', '--tema', 'example-02', '--json').stdout);
+    if (dado.theme !== 'example-02') throw new Error(`--tema example-02 comparó contra ${dado.theme}`);
+    const malo = syxScan(hemi, 'shell.css', '--tema', 'no-existe');
+    if (malo.status !== 1 || !/no existe/.test(malo.stdout)) throw new Error(`un tema inexistente salió ${malo.status}: ${malo.stdout.trim()}`);
+  } finally {
+    fs.rmSync(path.join(hemi, 'package.json'), { force: true });
+  }
 });
 
 comprobar('app: NO denuncia los tokens que la propia app declara', () => {

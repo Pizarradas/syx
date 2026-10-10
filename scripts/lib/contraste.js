@@ -23,7 +23,11 @@
  */
 'use strict';
 
-function oklchARgb(L, C, hGrados) {
+/**
+ * oklch → sRGB lineal SIN recortar. Un canal fuera de [0, 1] dice que el color
+ * cae fuera de la gama sRGB; resolveColor() (consulta.js) lo usa para avisar.
+ */
+function oklchALineal(L, C, hGrados) {
   const h = (hGrados * Math.PI) / 180;
   const a = C * Math.cos(h), b = C * Math.sin(h);
   const l_ = L + 0.3963377774 * a + 0.2158037573 * b;
@@ -34,7 +38,13 @@ function oklchARgb(L, C, hGrados) {
     4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
     -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
     -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s,
-  ].map((x) => Math.min(1, Math.max(0, x))); // lineal, recortado a la gama sRGB
+  ];
+}
+
+function oklchARgb(L, C, hGrados) {
+  // lineal, recortado canal a canal a la gama sRGB (no es el mapeo de gama de
+  // CSS Color 4, que reduce croma: para un color fuera de gama puede diferir)
+  return oklchALineal(L, C, hGrados).map((x) => Math.min(1, Math.max(0, x)));
 }
 
 /**
@@ -259,4 +269,4 @@ function contraste(primerPlano, fondo, base) {
   return (Math.max(y1, y2) + 0.05) / (Math.min(y1, y2) + 0.05);
 }
 
-module.exports = { leerColor, leerOklch, contraste };
+module.exports = { leerColor, leerOklch, contraste, oklchALineal, rgbAOklab, aGamma };

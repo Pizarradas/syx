@@ -30,6 +30,7 @@ const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
 const figma = require('./figma');
+const contraste = require('./contraste');
 const capacidades = require('./capacidades');
 
 function crearConsulta({ root, crudo = false } = {}) {
@@ -195,6 +196,83 @@ function crearConsulta({ root, crudo = false } = {}) {
       tokens[k] = resolverAsset(v);
     }
     return { theme, mode, total: Object.keys(tokens).length, tokens };
+  }
+
+  /**
+   * Un color de SYX en la forma que entiende una librería que pinta en canvas.
+   *
+   * POR QUÉ EXISTE
+   * ECharts, Chart.js y D3 sobre canvas no saben leer `oklch()`, y todo SYX está
+   * escrito en `oklch()`. Sin esto, cada aplicación resolvía los tokens pintando
+   * un píxel en un canvas y leyéndolo con getImageData, o los copiaba en hex a
+   * su JavaScript, fuera del sistema y sin modo oscuro.
+   *
+   * QUÉ CONVERSOR USA
+   * El de contraste.js, el mismo con el que check:contraste mide los pares: es
+   * el único que entiende también la sintaxis relativa (`oklch(from …)`) y
+   * `color-mix()`, que los tonos suaves y los categóricos del modo oscuro usan.
+   * El hex se escribe con `figma.aHex`, el de get_figma_spec. Ningún número de
+   * color sale de un tercer sitio.
+   *
+   * GAMA
+   * Lo que cae fuera de sRGB se RECORTA canal a canal en lineal; no se aplica el
+   * mapeo de gama de CSS Color 4 (que reduce croma). `detailed: true` dice si
+   * hubo recorte (`clipped`; null cuando el valor es un color-mix, cuyo recorte
+   * no se sigue).
+   *
+   * Acepta un token (`--semantic-color-primary`, también envuelto en `var()`)
+   * o un color CSS literal que contraste.js sepa leer. Devuelve una cadena; con
+   * `detailed: true`, el objeto entero. Lo que no puede convertir lo LANZA, con
+   * el motivo: un color inventado en un gráfico es peor que un error.
+   */
+  function resolveColor(entrada, opciones = {}) {
+    if (entrada && typeof entrada === 'object') { opciones = entrada; entrada = entrada.token; }
+    const { theme = 'syx-sketch', mode = 'light', format = 'hex', detailed = false } = opciones;
+    if (!['hex', 'rgb', 'oklch'].includes(format)) {
+      throw new Error(`resolveColor: unknown format "${format}" (hex | rgb | oklch)`);
+    }
+    const bruto = String(entrada == null ? '' : entrada).trim();
+    const nombre = (/^var\(\s*(--[\w-]+)\s*\)$/.exec(bruto) || [])[1] || (bruto.startsWith('--') ? bruto : null);
+    let valor = bruto;
+    if (nombre) {
+      const r = getToken({ token: nombre, theme, mode });
+      if (!r.encontrado) {
+        throw new Error(`resolveColor: ${nombre} does not exist in ${theme}/${mode}` +
+          (r.sugerencias.length ? `. Similar: ${r.sugerencias.slice(0, 5).join(', ')}` : ''));
+      }
+      valor = r.value;
+      if (r.sinValor || !valor) throw new Error(`resolveColor: ${nombre} has no value in ${theme}/${mode}`);
+    }
+    const color = contraste.leerColor(valor);
+    if (!color) throw new Error(`resolveColor: ${nombre || 'value'} is not a colour that can be converted: ${valor}`);
+
+    const srgb = color.rgb.map((x) => Math.min(1, Math.max(0, contraste.aGamma(x))));
+    const rgb = srgb.map((x) => Math.round(x * 255));
+    const alpha = Math.round(color.alfa * 1000) / 1000;
+    const hex = figma.aHex({ r: srgb[0], g: srgb[1], b: srgb[2], a: alpha });
+
+    const ok = contraste.leerOklch(valor);
+    const clipped = ok
+      ? contraste.oklchALineal(ok.L, ok.C, ok.H).some((x) => x < -1e-4 || x > 1 + 1e-4)
+      : /^color-mix\(/i.test(String(valor).trim()) ? null : false;
+
+    let salida;
+    if (format === 'hex') salida = hex;
+    else if (format === 'rgb') salida = alpha < 1 ? `rgba(${rgb.join(', ')}, ${alpha})` : `rgb(${rgb.join(', ')})`;
+    else {
+      // oklch: los números del propio valor si lo es (sin recorte); si es una
+      // mezcla, los del resultado ya en gama.
+      let L, C, H;
+      if (ok) ({ L, C, H } = ok);
+      else {
+        const [l, a, b] = contraste.rgbAOklab(color.rgb);
+        L = l; C = Math.hypot(a, b); H = C < 1e-4 ? 0 : ((Math.atan2(b, a) * 180) / Math.PI + 360) % 360;
+      }
+      const n = (x, d) => String(Math.round(x * 10 ** d) / 10 ** d);
+      salida = `oklch(${n(L, 4)} ${n(C, 4)} ${n(H, 2)}${alpha < 1 ? ` / ${alpha}` : ''})`;
+    }
+    if (!detailed) return salida;
+    return { token: nombre, theme, mode, value: valor, color: salida, hex, rgb, alpha, clipped };
   }
 
   const listComponents = ({ layer } = {}) => ({
@@ -443,6 +521,7 @@ function crearConsulta({ root, crudo = false } = {}) {
     getToken: publica(getToken),
     findTokenByValue: publica(findTokenByValue),
     listTokens,
+    resolveColor,
     listComponents: publica(listComponents),
     getComponent: publica(getComponent),
     getFigmaSpec: publica(getFigmaSpec),

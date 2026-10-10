@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — colores de SYX para librerías que pintan en canvas
+
+ECharts, Chart.js y D3 sobre canvas no leen `oklch()`, y todo SYX está escrito en `oklch()`. Una landing de datos acabó resolviendo cada token pintando un píxel en un canvas y leyéndolo con `getImageData`, y con los colores de partido en hex dentro de su JavaScript, fuera del sistema y sin modo oscuro.
+
+- **`resolveColor(token, { theme, mode, format })`** en la API de Node (`require('syx-design-system')`): `'hex'` · `'rgb'` · `'oklch'`, por tema y modo, desde `contracts/resolved-tokens.json`. Convierte con `scripts/lib/contraste.js` —el de `check:contraste`, el único que entiende `oklch(from …)` y `color-mix()`— y escribe el hex con `figma.aHex`: no hay un tercer conversor. Lo que cae fuera de sRGB se recorta canal a canal y `detailed: true` lo dice (`clipped`). Lo que no puede convertir lo lanza con el motivo.
+- **`js/syx-colors.js`**: `resolveColor()` y `resolveColors()` en el navegador, también en `window.SYX`. Lee el token con una sonda (`color: var(--x)` y su color calculado), así que respeta tema, modo y overrides de la aplicación, y pasa a sRGB lo que devuelva el navegador (`oklch()`, `oklab()`, `color(srgb|srgb-linear|display-p3 …)`, `rgb()`). Sin canvas y sin dependencias.
+- **`npm run check:colores`**, en la cadena de `check`: valores conocidos de sRGB, `resolveColor()` contra el conversor de Figma en cada token `oklch()` de los siete temas y los dos modos, y `js/syx-colors.js` contra `resolveColor()` en esos mismos tokens con un DOM simulado. `check:consumible` comprueba que ambos viajan en el paquete.
+- `scripts/lib/contraste.js` exporta `oklchALineal` (sin recortar), `rgbAOklab` y `aGamma`; `oklchARgb` da lo mismo que antes.
+- **Documentación**: `CONSUMING.md` → *Colours in JavaScript and canvas charts*, la tabla de JavaScript del `README.md` y el ejemplo de `index.js`.
+
+### Changed — fricciones 7 y 8: el escáner cuesta menos y una propuesta de componente llega con sus derivados
+
+- **Derivados en `auto`** (`contracts/trust.json`): `contracts/figma/`, `contracts/lint-contract.json`, `runtime-tokens.json`, `token-contract.json` y `token-usage-map.json`. Un cambio de átomo los regenera y, al caer al `default`, `propose.js` y el job de confianza clasificaban la propuesta entera como «Solo humano». `docs.html` pasa a `pr`, no a `auto`: solo su referencia de componentes es generada; el resto es prosa que ningún guardián compara. CODEOWNERS regenerado.
+- **`npm run check:contratos`** (`syx-validate.js --check`), en la cadena antes de `validate:report`: falla si los cuatro contratos de syx-validate o `validation-report.md` no son lo que genera el validador. Hasta ahora nada lo comprobaba. **`check:figma`** falla además si en `contracts/figma/` hay un fichero que el exportador no genera.
+- **`propose.js`** regenera también la exportación a Figma, los contratos (`validate --report`) y la referencia de `docs.html`, y deja en la evidencia el resultado de sus tres guardianes. `files` ya no se niega porque el agente hubiera compilado antes: un derivado versionado, o `docs.html` tocado solo dentro de sus marcadores, se sobrescribe con lo que sale de compilar. Un derivado nuevo o prosa de `docs.html` sin declarar siguen siendo ajenos.
+- **Modo MIGRATE**: el estado de una variable heredada sale de `contracts/legacy-map.json` (humano); `lint-contract.json` es un informe que se regenera, no un fichero que se edita.
+- **`syx-scan`**: `sin-consulta` es *baja* para un bloque del proyecto que solo coloca (display, grid, gap, padding, margin, tamaños, flex, alineación, order) y *media* si pinta; `/* syx-reuse-file: <por qué> */` excusa los bloques que solo colocan en ese fichero, nunca los que pintan. `--tema <nombre>` y, por defecto, `syx.theme` del `package.json` de la app (antes, siempre `syx-sketch`). Lee las clases de SYX que un `.js`/`.ts` pone en el DOM con un literal (`className`, `classList.*`, `setAttribute('class')`, `class="…"` en plantillas), sin juzgar lo interpolado. `check:escaner` lo cubre con una app `hemi-` de prueba. CONSUMING.md §3 y §8.
+
 ### Added — comprobar antes de proponer: registro de capacidades y modo ROADMAP
 
 Una revisión externa de SYX propuso seis mejoras de CSS/SCSS. Cinco ya estaban hechas —`clamp()` en toda la escala tipográfica, `color-mix()` en los tokens de hover, una escala de espaciado fluida, un lint de hex y px en los componentes, exportación DTCG y a Figma— y la sexta, generar `_primitives.scss` y `_semantic.scss` desde Figma, invertía una decisión. No incumplió ninguna regla: buscó por nombres que se imaginó (`.mol-card`, `--semantic-space-fluid-*`), no los encontró y dio cada mejora por pendiente. Nada le pedía comprobar si una idea ya existía, y ningún fichero respondía a esa pregunta.

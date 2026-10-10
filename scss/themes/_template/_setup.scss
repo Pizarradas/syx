@@ -1,8 +1,9 @@
 // ================================================
 // PLANTILLA DE TEMA — CABLEADO
 // ================================================
-// Cópialo con la carpeta y cambia «template» por el nombre del tema: nada
-// más. La lista de componentes vive en _shared/_bundle-full.scss y la de
+// Lo instancia `npm run theme:new <nombre>`: copia los .scss de esta carpeta
+// y pone el nombre del tema en los mixins y en las llamadas de bundle. Nada
+// más: la lista de componentes vive en _shared/_bundle-full.scss y la de
 // fuentes en el _theme.scss de este tema (theme-x-fonts).
 // ================================================
 
@@ -32,6 +33,8 @@
 
 // CAPA DEL SITIO — solo la llevan los temas que pintan las páginas de SYX
 // (home.html, docs.html…). Un tema para un producto NO: es mobiliario del
-// sitio. Para pintarlo, descomenta esta línea y el @use de arriba.
+// sitio. Para pintarlo, descomenta esta línea y el @use de arriba. Sin
+// ella el tema viaja igual en el paquete (bundle-docs, bundle-core) y
+// build-dist lo deja fuera de dist/site/.
 // ================================================
 // @include syx-bundle-site(template);

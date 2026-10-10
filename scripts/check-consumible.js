@@ -130,6 +130,27 @@ comprobar('el validador de fragmentos funciona instalado', () => {
   if (r.malo !== false || r.bueno !== true) throw new Error(`veredictos ${JSON.stringify(r)}`);
 });
 
+comprobar('los colores para canvas se resuelven desde el paquete instalado', () => {
+  // resolveColor() y js/syx-colors.js: lo que una app de gráficos necesita para
+  // no copiar los colores en hex. La conversión la prueba check:colores; aquí,
+  // que viajan y responden por el nombre del paquete.
+  const salida = enConsumidor(`
+    const syx = require('${PKG.name}');
+    const fs = require('fs');
+    const js = require.resolve('${PKG.name}/js/syx-colors.js');
+    const t = '--semantic-color-primary';
+    console.log(JSON.stringify({
+      claro: syx.resolveColor(t),
+      oscuro: syx.resolveColor(t, { mode: 'dark', format: 'rgb' }),
+      js: fs.readFileSync(js, 'utf8').includes('export function resolveColor'),
+    }));
+  `);
+  const r = JSON.parse(salida);
+  if (!/^#[0-9a-f]{6}$/.test(r.claro)) throw new Error(`resolveColor da ${r.claro}`);
+  if (!/^rgb\(\d+, \d+, \d+\)$/.test(r.oscuro)) throw new Error(`resolveColor rgb da ${r.oscuro}`);
+  if (!r.js) throw new Error('js/syx-colors.js no viaja o no exporta resolveColor');
+});
+
 comprobar('el servidor MCP arranca desde el bin instalado', () => {
   const bin = path.join(tmp, 'node_modules', '.bin', Object.keys(PKG.bin)[0]);
   if (!fs.existsSync(bin)) throw new Error(`no se creó ${path.basename(bin)} en node_modules/.bin`);

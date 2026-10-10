@@ -66,10 +66,112 @@ function clasesDe(html) {
   // `class="…"` y, en JSX/TSX, `className="…"` o `className={'…'}`.
   for (const m of limpio.matchAll(/\bclass(?:Name)?\s*=\s*(?:\{\s*)?(["'`])([^"'`]*)\1/g)) {
     const linea = lineaDe(limpio, m.index);
-    const lista = m[2].split(/\s+/).filter(Boolean);
+    // Un trozo interpolado (`atom-btn--${size}` en un className de JSX) no es
+    // una clase: es la mitad de una. Juzgarlo daba un modificador inventado.
+    const lista = m[2].split(/\s+/).filter(Boolean).filter((c) => !/[${}]/.test(c));
     for (const c of lista) fuera.push({ clase: c, linea, junto: lista });
   }
   return fuera;
+}
+
+/**
+ * Clases que un .js/.ts pone en el DOM con un literal.
+ *
+ * POR QUÉ
+ * Una app que monta su interfaz desde JavaScript escribe las clases ahí, y el
+ * escáner solo leía marcado: un `classList.add('atom-btn--sm')` que no pinta
+ * nada pasaba sin que nadie lo viera (fricción 7, una app `hemi-`).
+ *
+ * QUÉ LEE, Y NADA MÁS
+ *   · `className = '…'`, `className += '…'`, `className: '…'`
+ *   · `class="…"` dentro de una plantilla (`\`<p class="…">\``)
+ *   · `classList.add|remove|toggle|replace|contains('…', …)`
+ *   · `setAttribute('class', '…')`
+ * Solo los trozos ESTÁTICOS: lo que toca una interpolación (`atom-btn--${t}`)
+ * o termina en guion (`'atom-btn--' + t`) es media clase y no se juzga. Quien
+ * decide si una clase se denuncia sigue siendo el prefijo de SYX: aquí solo se
+ * extraen, y las de la app o de otra librería no se miran nunca.
+ */
+function clasesDeScript(js) {
+  const limpio = js
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    // `//` tras un espacio o un signo, no tras `:` — `'https://…'` no es un
+    // comentario. Si se come un `' //'` dentro de una cadena, solo se pierde
+    // una clase: el error que se acepta es el que calla, no el que acusa.
+    .replace(/(^|[\s;{}()])\/\/[^\n]*/g, (m, antes) => antes + ' '.repeat(m.length - antes.length));
+  const fuera = [];
+  const anotar = (texto, indice) => {
+    const linea = lineaDe(limpio, indice);
+    const lista = texto.replace(/\$\{[^}]*\}/g, '\u0000').split(/\s+/)
+      .filter((c) => /^[A-Za-z][A-Za-z0-9_-]*$/.test(c) && !/[-_]$/.test(c));
+    for (const c of lista) fuera.push({ clase: c, linea, junto: lista });
+  };
+  const CADENA = /(["'`])((?:\\.|(?!\1)[^\\])*)\1/g;
+  for (const m of limpio.matchAll(/\bclass(?:Name)?\s*(?:\+?=|:)\s*(?:\{\s*)?(["'`])((?:\\.|(?!\1)[^\\])*)\1/g)) {
+    anotar(m[2], m.index);
+  }
+  for (const m of limpio.matchAll(/\.classList\s*\.\s*(?:add|remove|toggle|replace|contains)\s*\(([^)]*)\)/g)) {
+    const desde = m.index + m[0].indexOf('(') + 1;
+    for (const s of m[1].matchAll(CADENA)) anotar(s[2], desde + s.index);
+  }
+  for (const m of limpio.matchAll(/\.setAttribute\s*\(\s*(["'])class\1\s*,\s*(["'`])((?:\\.|(?!\2)[^\\])*)\2/g)) {
+    anotar(m[3], m.index);
+  }
+  return fuera;
+}
+
+// ─── Bloques del proyecto que solo colocan ───────────────────────────────────
+// Lo que la fricción 7 midió: de 23 `sin-consulta` en una app recién hecha,
+// casi todos eran `.hemi-wrap`, `.hemi-num`… piezas que reparten espacio y no
+// pintan nada. Pedirles la misma constancia que a una tarjeta propia convierte
+// el aviso en ruido, y el ruido enseña a no leer el informe.
+//
+// «Colocar» es una lista CERRADA de propiedades. Lo que no está en ella —un
+// color, una fuente, un borde, una sombra, `position`, una custom property
+// (puede llevar un color) o un `@include`/`@extend` (no se sabe qué emite)—
+// cuenta como pintar. Equivocarse aquí hacia «pinta» solo cuesta un aviso de
+// más; hacia «coloca» escondería un componente propio.
+const SOLO_COLOCA = /^(display|gap|row-gap|column-gap|grid|grid-[a-z-]+|padding|padding-[a-z-]+|margin|margin-[a-z-]+|(min-|max-)?(inline-size|block-size|width|height)|flex|flex-[a-z-]+|align-[a-z-]+|justify-[a-z-]+|place-[a-z-]+|order)$/;
+
+/** `/* syx-reuse-file: <por qué> *\/` con un porqué no vacío. */
+const REUSE_FICHERO = /\/\*\s*syx-reuse-file\s*:\s*[^\s*](?:[^*]|\*(?!\/))*\*\//;
+
+/**
+ * Para cada bloque del proyecto (`.hemi-wrap`), qué propiedades declaran sus
+ * reglas, las de sus elementos y modificadores incluidas, y las anidadas
+ * dentro de ellas. `opaco` si alguna regla hace algo que no se puede leer como
+ * una lista de propiedades (`@include`, `@extend`, `@apply`).
+ */
+function propiedadesDeBloques(trozos, prefijo) {
+  const mapa = new Map();
+  const familia = new RegExp(`\\.(${prefijo}-[a-z0-9]+(?:-[a-z0-9]+)*)(?:(?:__|--)[A-Za-z0-9_-]*)?(?![\\w-])`, 'g');
+  for (const t of trozos) {
+    const css = t.css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).replace(/\/\/[^\n]*/g, (m) => ' '.repeat(m.length));
+    let i = 0;
+    while ((i = css.indexOf('{', i)) !== -1) {
+      const inicio = Math.max(css.lastIndexOf('}', i - 1), css.lastIndexOf('{', i - 1), css.lastIndexOf(';', i - 1)) + 1;
+      const selector = css.slice(inicio, i).trim();
+      let nivel = 1; let j = i + 1;
+      while (j < css.length && nivel > 0) {
+        if (css[j] === '{') nivel++;
+        else if (css[j] === '}') nivel--;
+        j++;
+      }
+      if (!selector.startsWith('@')) {
+        const cuerpo = css.slice(i + 1, j - 1);
+        const props = [...cuerpo.matchAll(/(?:^|[;{}])\s*([a-zA-Z-]+)\s*:/g)].map((m) => m[1].toLowerCase());
+        const opaco = /@(include|extend|apply)\b/.test(cuerpo);
+        for (const m of selector.matchAll(familia)) {
+          if (!mapa.has(m[1])) mapa.set(m[1], { props: new Set(), opaco: false });
+          const e = mapa.get(m[1]);
+          for (const p of props) e.props.add(p);
+          if (opaco) e.opaco = true;
+        }
+      }
+      i++;
+    }
+  }
+  return mapa;
 }
 
 // ─── var(--token, fallback) con paréntesis equilibrados ──────────────────────
@@ -200,8 +302,9 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
   // capa de componente, la que el contrato de consumo le pide que tenga.
   const ES_MARCADO = /\.(html?|vue|svelte|astro|jsx|tsx)$/i;
   const ES_JSX = /\.(jsx|tsx)$/i;
+  const ES_SCRIPT = /\.(m?js|cjs|m?ts|cts)$/i;
   const trozosDe = (file, bruto) =>
-    ES_JSX.test(file) ? []
+    ES_JSX.test(file) || ES_SCRIPT.test(file) ? []
       : ES_MARCADO.test(file) ? trozosCss(bruto)
         : [{ css: bruto, desde: 1, origen: path.basename(file) }];
   // Hay modificadores que el propio sistema enseña sin su bloque:
@@ -219,9 +322,16 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
 
   const bloquesVistos = new Set(); // 3d: cada bloque propio se juzga una vez, en su primera regla
   const declaradosApp = new Set();
+  const todosLosTrozos = [];
   for (const file of files) {
-    for (const t of trozosDe(file, fs.readFileSync(file, 'utf8'))) for (const d of declaraciones(t.css)) declaradosApp.add(d.token);
+    for (const t of trozosDe(file, fs.readFileSync(file, 'utf8'))) {
+      todosLosTrozos.push(t);
+      for (const d of declaraciones(t.css)) declaradosApp.add(d.token);
+    }
   }
+  // 3d: qué declara cada bloque del proyecto en TODO lo escaneado. Si pinta en
+  // otro fichero, no solo coloca, aunque aquí solo se le vea un `display`.
+  const propsBloque = prefijo ? propiedadesDeBloques(todosLosTrozos, prefijo) : new Map();
 
   for (const file of files) {
     const rel = path.relative(process.cwd(), file);
@@ -464,13 +574,24 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     // primera regla del bloque (`/* syx-reuse: checked mol-card — … */`), y esto
     // comprueba que está. No juzga si la razón es buena —eso es de una
     // persona—, pero obliga a que el agente haya mirado antes de inventar.
+    //
+    // Un bloque que solo COLOCA (SOLO_COLOCA, en él, sus elementos y sus
+    // modificadores, en todo lo escaneado) sale `baja`, no `media`, y lo
+    // excusa también una declaración por fichero —`/* syx-reuse-file: … */`—,
+    // para no pedir una línea a cada `.app-wrap`. Un bloque que pinta sigue
+    // necesitando la suya aunque el fichero declare: es justo el caso en que
+    // una pieza de SYX podía servir.
     if (prefijo) {
       const re = new RegExp(`\\.(${prefijo}-[a-z0-9]+(?:-[a-z0-9]+)*)(?![\\w-])`, 'g');
+      const declaraFichero = REUSE_FICHERO.test(trozos.map((t) => t.css).join('\n'));
       for (const t of trozos) {
         const lineas = t.css.split('\n');
         lineas.forEach((l, i) => {
           if (!l.includes('{')) return;
-          const selector = l.slice(0, l.indexOf('{'));
+          // Cada selector de la línea, no solo el primero: en
+          // `@media (…) { .app-side { … } }` el bloque va tras la primera llave.
+          const selector = l.split('{').slice(0, -1)
+            .map((seg) => seg.slice(Math.max(seg.lastIndexOf('}'), seg.lastIndexOf(';')) + 1)).join(',');
           for (const m of selector.matchAll(re)) {
             const bloque = m[1];
             if (bloquesVistos.has(bloque)) continue;
@@ -485,11 +606,24 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
             }
             const antes = encima.join('\n');
             if (/syx-reuse\s*:/.test(antes) || /syx-reuse\s*:/.test(l)) continue;
+            const info = propsBloque.get(bloque);
+            const pinta = info ? [...info.props].filter((p) => !SOLO_COLOCA.test(p)) : [];
+            const coloca = !!info && info.props.size > 0 && !info.opaco && !pinta.length;
+            if (coloca && declaraFichero) continue;
+            const linea = t.unaLinea ? t.desde : t.desde + i;
+            const que = `.${bloque} se crea sin decir qué de SYX se consultó`;
+            if (coloca) {
+              añadir({
+                tipo: 'sin-consulta', gravedad: 'baja', file: rel, linea, que,
+                detalle: `Solo coloca (${[...info.props].slice(0, 4).join(', ')}): no pinta, así que es poco probable que una pieza de SYX lo sustituya — pero puede que una utilidad o un layout ya lo hagan.`,
+                sugerencia: 'Encima de su primera regla, /* syx-reuse: … */, o una vez por fichero: /* syx-reuse-file: <por qué> */',
+              });
+              continue;
+            }
             añadir({
-              tipo: 'sin-consulta', gravedad: 'media', file: rel,
-              linea: t.unaLinea ? t.desde : t.desde + i,
-              que: `.${bloque} se crea sin decir qué de SYX se consultó`,
-              detalle: 'Un componente propio solo nace cuando ningún componente, modificador, composición o token de SYX sirve.',
+              tipo: 'sin-consulta', gravedad: 'media', file: rel, linea, que,
+              detalle: 'Un componente propio solo nace cuando ningún componente, modificador, composición o token de SYX sirve.' +
+                (declaraFichero ? ` El syx-reuse-file del fichero no basta: este bloque pinta (${info && info.opaco ? '@include/@extend' : pinta.slice(0, 4).join(', ')}).` : ''),
               sugerencia: `Encima de su primera regla: /* syx-reuse: checked <piezas de SYX> — <por qué no sirven> */`,
             });
           }
@@ -498,14 +632,22 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     }
 
     // ── 4. Clases que parecen del sistema y no lo son ───────────────────────
-    if (esHtml) {
+    // En marcado, los atributos class; en un .js/.ts, los literales con que
+    // pone clases en el DOM (clasesDeScript). En un script no se mira el
+    // modificador sin su bloque —`classList.add('atom-btn--primary')` sobre
+    // un botón que ya es `.atom-btn` es lo normal— ni se rebaja a asidero lo
+    // que el propio script usa: ahí TODO lo usa el script.
+    const esScript = ES_SCRIPT.test(file);
+    if (esHtml || esScript) {
+      const usadas = esScript ? clasesDeScript(bruto) : clasesDe(bruto);
       // Los <script> de la propia página, para distinguir una clase muerta de
       // un gancho de JavaScript. `.syx--theme-syx-sketch` no la declara ningún
       // CSS, pero el script cambia de tema construyendo `syx--theme-${nombre}`:
       // es un asidero, no una desviación, y llamarlo error una vez basta para
       // que nadie vuelva a leer el informe.
-      const guiones = [...bruto.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).join('\n');
+      const guiones = esScript ? '' : [...bruto.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((m) => m[1]).join('\n');
       const esGancho = (clase) => {
+        if (esScript) return null;
         for (let n = clase.length; n >= 8; n--) {
           const trozo = clase.slice(0, n);
           // Un prefijo demasiado corto acierta por casualidad («atom» está en
@@ -521,7 +663,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
       // modificador existe, pero el CSS lo escribe como `.atom-btn--primary`
       // DENTRO de `.atom-btn` (o asume sus estilos base): solo, pinta a medias.
       const sinBloque = new Map();
-      for (const { clase, linea, junto } of clasesDe(bruto)) {
+      for (const { clase, linea, junto } of esScript ? [] : usadas) {
         if (!PREFIJOS_SYX.test(clase) || !clase.includes('--')) continue;
         if (modificadoresSueltos.has(clase)) continue;
         const base = clase.split('--')[0];
@@ -542,7 +684,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
       }
 
       const vistas = new Map();
-      for (const { clase, linea } of clasesDe(bruto)) {
+      for (const { clase, linea } of usadas) {
         if (!PREFIJOS_SYX.test(clase)) continue; // clases propias de la app: no opinamos
         if (clasesSistema.has(clase)) continue;
         if (!vistas.has(clase)) vistas.set(clase, { linea, veces: 0 });
@@ -625,4 +767,4 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
   };
 }
 
-module.exports = { escanear, trozosCss, clasesDe, varsConFallback, vaciar, distancia };
+module.exports = { escanear, trozosCss, clasesDe, clasesDeScript, varsConFallback, vaciar, distancia };

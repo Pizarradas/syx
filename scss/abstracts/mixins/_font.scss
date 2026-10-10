@@ -3,6 +3,7 @@
 @use 'sass:map';
 @use 'sass:string';
 @use 'sass:list';
+@use 'sass:meta';
 @use '../paths' as *;
 @use '../maps/maps' as *;
 // ================================================
@@ -177,4 +178,44 @@ $syx-fonts: (
 			line-gap-override: 0%;
 		}
 	}
+}
+
+// FUENTES DE FUERA
+// ===============================================
+// Familias genéricas de CSS: el respaldo de una fuente de fuera acaba en una.
+$syx-font-genericas: (serif, sans-serif, monospace, cursive, fantasy, system-ui,
+	ui-serif, ui-sans-serif, ui-monospace, ui-rounded, math, emoji, fangsong);
+
+// syx-font-external — una familia que SYX no trae y que el tema carga por su
+// cuenta (un <link> a Google Fonts, un CDN, el @font-face de la app).
+//   @include syx-font-external("Public Sans", (Arial, sans-serif), "Google Fonts");
+// No emite @font-face ni cara de respaldo métrica: la carga es de quien
+// consume. Lo que hace es dejarla declarada, para que check:setups distinga
+// una familia que se carga fuera de una que el tema nombra y nunca carga. La
+// marca es un comentario en el CSS expandido (el comprimido lo quita: no pesa
+// en producción):
+//   /* syx-font-external: "Public Sans"; fallback: Arial, sans-serif */
+// En los tokens, la familia va seguida de ese mismo respaldo:
+//   "Public Sans", Arial, sans-serif
+// Si la familia está en $syx-fonts, se declara con syx-font(): trae el woff2
+// y el respaldo con métricas, que aquí no hay.
+@mixin syx-font-external($family, $fallback-stack, $source: null) {
+	@if meta.type-of($family) != string {
+		@error "syx-font-external: la familia es un nombre entre comillas, no «#{meta.inspect($family)}».";
+	}
+	@if map.has-key($syx-fonts, $family) {
+		@error "syx-font-external: «#{$family}» ya está en $syx-fonts; decláralo con syx-font(), que trae el woff2 y el respaldo métrico.";
+	}
+	@if not list.index($syx-font-genericas, list.nth($fallback-stack, -1)) {
+		@error "syx-font-external: el respaldo de «#{$family}» tiene que acabar en una familia genérica (#{$syx-font-genericas}), no en «#{list.nth($fallback-stack, -1)}».";
+	}
+
+	$respaldo: null;
+	@each $f in $fallback-stack {
+		@if $respaldo { $respaldo: "#{$respaldo}, #{meta.inspect($f)}"; } @else { $respaldo: meta.inspect($f); }
+	}
+	$marca: "#{meta.inspect(string.quote($family))}; fallback: #{$respaldo}";
+	@if $source { $marca: "#{$marca}; source: #{$source}"; }
+
+	/* syx-font-external: #{$marca} */
 }

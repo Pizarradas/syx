@@ -2,7 +2,8 @@
 // ================================================
 // For landing pages, homepages, and promotional content.
 // Optimized for visual impact: buttons, titles,
-// pills, links. No form controls or data components.
+// pills, links, stats and tables (pricing, comparisons).
+// No form controls.
 // ================================================
 // Usage: @use '../_bundles/bundle-marketing' as *;
 //        @include syx-bundle-marketing($theme);
@@ -28,6 +29,8 @@
   @include atom-label($theme);      // Badges, tags
   @include atom-link($theme);       // Text links
   @include atom-pill($theme);       // Tags, categories
+  @include atom-stat($theme);       // Key figures, social proof
+  @include atom-table($theme);      // Pricing, comparison tables
   @include atom-title($theme);      // Headings
   @include atom-txt($theme);        // Body text
 
