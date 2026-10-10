@@ -6804,22 +6804,26 @@
     stroke-width: calc(var(--component-hero-stack-stroke-guide) * var(--component-hero-stack-scale));
   }
   .org-home-hero__stack-label {
-    fill: var(--component-hero-stack-ink);
+    color: var(--component-hero-stack-ink);
+    fill: currentColor;
     font-family: var(--component-hero-stack-font);
     letter-spacing: var(--semantic-letter-spacing-wide);
   }
   .org-home-hero__stack-tag-num {
-    fill: var(--component-hero-stack-accent);
+    color: var(--component-hero-stack-accent);
+    fill: currentColor;
     font-family: var(--component-hero-stack-font);
     font-weight: var(--semantic-font-weight-medium);
   }
   .org-home-hero__stack-tag-name {
-    fill: var(--component-hero-stack-ink);
+    color: var(--component-hero-stack-ink);
+    fill: currentColor;
     font-family: var(--component-hero-stack-font);
     font-weight: var(--semantic-font-weight-medium);
   }
   .org-home-hero__stack-tag-desc {
-    fill: var(--component-hero-stack-label);
+    color: var(--component-hero-stack-label);
+    fill: currentColor;
     font-family: var(--component-hero-stack-font-text);
   }
 }
