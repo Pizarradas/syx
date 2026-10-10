@@ -7,9 +7,6 @@
 // ===============================================
 // A large numeric stat with a descriptive label.
 // Composes: nothing (standalone atom)
-// Tokens: --component-stat-* (scss/abstracts/tokens/components/_stats.scss).
-//   An app re-aligns or re-scales it by overriding those tokens on its own
-//   container, never by painting .atom-stat.
 // Usage:
 //   <div class="atom-stat">
 //     <span class="atom-stat__number">19</span>
@@ -22,18 +19,18 @@
   .atom-stat {
     display: flex;
     flex-direction: column;
-    align-items: var(--component-stat-align-items);
-    gap: var(--component-stat-gap);
-    text-align: var(--component-stat-text-align);
+    align-items: center;
+    gap: calc(var(--semantic-space-component-xs, 0.25rem) * 2);
+    text-align: center;
 
     // &__number
     &__number {
       font-family: var(--semantic-font-family-heading);
-      font-size: var(--component-stat-number-font-size);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       font-weight: var(--semantic-font-weight-black);
       line-height: 1;
-      color: var(--component-stat-number-color);
-      letter-spacing: var(--component-stat-number-letter-spacing);
+      color: var(--semantic-color-primary-text);
+      letter-spacing: -0.02em;
     }
 
     // &__label
@@ -41,30 +38,27 @@
       font-family: var(--semantic-font-family-primary);
       font-size: var(--semantic-font-size-body-small);
       font-weight: var(--semantic-font-weight-medium);
-      color: var(--component-stat-label-color);
+      color: var(--semantic-color-text-secondary);
       letter-spacing: var(--semantic-letter-spacing-wide);
       text-transform: uppercase;
     }
 
-    // --start: aligned to the start, for a stat inside running text or a left-aligned row
-    &--start {
-      --component-stat-align-items: flex-start;
-      --component-stat-text-align: start;
-    }
-
     // --light variant (for dark backgrounds)
     &--light {
-      --component-stat-number-color: var(--semantic-color-text-inverse);
-      --component-stat-label-color: var(--semantic-color-text-inverse);
-
+      .atom-stat__number {
+        color: var(--semantic-color-text-inverse);
+      }
       .atom-stat__label {
-        opacity: var(--component-stat-label-inverse-opacity);
+        color: var(--semantic-color-text-inverse);
+        opacity: 0.75;
       }
     }
 
     // --accent: secondary brand color
     &--accent {
-      --component-stat-number-color: var(--semantic-color-secondary-text);
+      .atom-stat__number {
+        color: var(--semantic-color-secondary-text);
+      }
     }
   }
 

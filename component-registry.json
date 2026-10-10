@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "5.0.0",
-    "generated": "2026-10-10",
+    "generated": "2026-10-02",
     "generator": "scripts/build-component-registry.js",
     "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
@@ -355,7 +355,9 @@
         ":focus-visible",
         ":hover"
       ],
-      "composedOf": [],
+      "composedOf": [
+        "atom-label"
+      ],
       "tokens": [
         "--component-form-field-bg",
         "--component-form-field-bg-disabled",
@@ -518,31 +520,25 @@
         "scss/abstracts/tokens/components/_labels.scss"
       ],
       "classes": [
-        "atom-scope-label"
+        "atom-label"
       ],
       "modifiers": [
         "atom-label--primary",
         "atom-label--scope-1",
         "atom-label--scope-2",
-        "atom-label--scope-3",
-        "atom-scope-label--1",
-        "atom-scope-label--2",
-        "atom-scope-label--3",
-        "atom-scope-label--primary"
+        "atom-label--scope-3"
       ],
       "elements": [],
       "states": [],
       "composedOf": [],
       "tokens": [
         "--component-label-border-radius",
-        "--component-label-font-size",
-        "--component-label-line-height",
         "--component-label-padding-lg",
         "--component-label-padding-md",
         "--component-label-padding-sm"
       ],
-      "description": "[scope: system-reusable] A small scope marker: atom-scope-label with --1/--2/--3 (padding steps) and --primary (radius). The old atom-label--scope-1…3 and atom-label--primary still work as deprecated aliases; don't use them in new markup, because .atom-label is the form field label (scss/atoms/_form.scss) and drags its block layout and typography in. Prefer atom-pill for a standalone tag.",
-      "usage": "<span class=\"atom-scope-label atom-scope-label--1\">Scope</span>",
+      "description": "[scope: system-reusable] Caution: two different things claim .atom-label. This file styles a small scope marker (--scope-1/-2/-3, --primary); scss/atoms/_form.scss declares the same class as a form field label. Check which one the compiled CSS gives you before relying on either, and prefer atom-pill for a standalone tag.",
+      "usage": "<span class=\"atom-label atom-label--scope-1\">Scope</span>",
       "a11y": "Plain text, no role. If it marks a state, the words must say it. No JS."
     },
     {
@@ -862,16 +858,13 @@
       "name": "stat-counter",
       "layer": "atom",
       "file": "scss/atoms/_stat-counter.scss",
-      "tokenFiles": [
-        "scss/abstracts/tokens/components/_stats.scss"
-      ],
+      "tokenFiles": [],
       "classes": [
         "atom-stat"
       ],
       "modifiers": [
         "atom-stat--accent",
-        "atom-stat--light",
-        "atom-stat--start"
+        "atom-stat--light"
       ],
       "elements": [
         "atom-stat__label",
@@ -879,16 +872,7 @@
       ],
       "states": [],
       "composedOf": [],
-      "tokens": [
-        "--component-stat-align-items",
-        "--component-stat-gap",
-        "--component-stat-label-color",
-        "--component-stat-label-inverse-opacity",
-        "--component-stat-number-color",
-        "--component-stat-number-font-size",
-        "--component-stat-number-letter-spacing",
-        "--component-stat-text-align"
-      ],
+      "tokens": [],
       "description": "[scope: system-reusable] One number plus the word that explains it, sized to be read across the page. Use it for a figure that supports an argument. It stops working the moment there are many: four is a row of evidence, twelve is a table.",
       "usage": "<div class=\"atom-stat\"><span class=\"atom-stat__number\">19</span><span class=\"atom-stat__label\">Atoms</span></div>",
       "a11y": "Static. The explaining word is visible text next to the number; if the number animates, the final value is in the DOM from the start. No JS."
