@@ -232,6 +232,11 @@
       Explore
     </p>
 
+    <!-- Pila isométrica animada (js/site/hero-stack.js). Decorativa: oculta
+         hasta que el script confirma que el tema trae sus estilos; sin JS o en
+         otro tema se queda la figura estática del ::after. -->
+    <svg class="org-home-hero__stack" data-hero-stack aria-hidden="true" focusable="false" hidden></svg>
+
   </section>
 
 
@@ -1190,6 +1195,13 @@
     })();
   </script>
   <script type="module" src="js/syx-site-nav.js"></script>
+  <!-- Solo la web: GSAP para la pila del hero. No entra en el paquete de npm. -->
+  <script src="js/site/vendor/gsap/gsap.min.js" defer></script>
+  <script src="js/site/vendor/gsap/ScrollTrigger.min.js" defer></script>
+  <script src="js/site/vendor/gsap/ScrambleTextPlugin.min.js" defer></script>
+  <script src="js/site/vendor/gsap/Draggable.min.js" defer></script>
+  <script src="js/site/vendor/gsap/InertiaPlugin.min.js" defer></script>
+  <script src="js/site/hero-stack.js" defer></script>
 
 </body>
 

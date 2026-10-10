@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — web: la pila del hero, animada
+
+La figura del hero de la home (el alzado de las 7 `@layer`) deja de ser una imagen fija y pasa a ser un SVG que se dibuja en el navegador, en isométrica real, con GSAP. Solo la web: nada de esto entra en el paquete de npm.
+
+- **Entrada**: se trazan las escuadras y la cota; cada placa dibuja su contorno de abajo arriba —el orden de la cascada— y entran cantos, relleno y rayado. Después cada capa gira 90° por su cuenta, alternando el sentido, y luego la pila entera, como un cubo de Rubik.
+- **Scroll** (ScrollTrigger + ScrambleText): el hero se fija con la figura centrada, la cámara se aleja, la pila se abre y cada placa recibe su nombre de capa (`syx.reset` … `syx.utilities`) y su número de precedencia.
+- **Arrastre** (Draggable + Inertia): sobre una placa gira esa capa; sobre el fondo, la pila entera. Al soltar encaja en el múltiplo de 90°.
+- La geometría sale de datos y se proyecta en cada fotograma (`mind-system/knowledges/isometric/`): sin `scaleY` ni transformaciones sobre la figura; las cotas miden la pila en vivo.
+- **`js/site/hero-stack.js`** y **`js/site/vendor/gsap/`** (GSAP 3.13, licencia estándar gratuita). `package.json → files` solo publica `js/syx-*.js`, así que SYX sigue sin dependencias.
+- **`scss/site/_home-hero.scss`**: `.org-home-hero__stack` y sus piezas, en el hueco de la figura del `::after`; `.org-home-hero--live` apaga la figura estática. Tokens `--component-hero-stack-*` en `scss/site/tokens/` (claro y oscuro de `syx-sketch` con los mismos tonos que la figura estática).
+- Decorativa (`aria-hidden`). Solo arranca donde el tema enciende la figura (hoy `syx-sketch`) y en pantalla ancha; al cambiar de tema se vuelve a decidir. Sin JS se queda la figura estática; con `prefers-reduced-motion: reduce` aparece en su estado final, sin entrada, sin hero fijo y sin arrastre.
+
 ### Added — colores de SYX para librerías que pintan en canvas
 
 ECharts, Chart.js y D3 sobre canvas no leen `oklch()`, y todo SYX está escrito en `oklch()`. Una landing de datos acabó resolviendo cada token pintando un píxel en un canvas y leyéndolo con `getImageData`, y con los colores de partido en hex dentro de su JavaScript, fuera del sistema y sin modo oscuro.

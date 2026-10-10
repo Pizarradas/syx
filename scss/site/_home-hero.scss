@@ -204,6 +204,125 @@
       margin-block-start: var(--semantic-space-layout-md);
       opacity: 0.7;
     }
+
+    // &--live — la pila animada (js/site/hero-stack.js) sustituye a la figura
+    // estática del ::after. El script solo pone la clase cuando el tema trae
+    // estos estilos; sin JS o en otro tema, el ::after sigue como estaba.
+    // Va aquí, después del ::after, para ganarle por orden de origen.
+    &--live::after {
+      display: none;
+    }
+
+    // &__stack — la pila animada. Ocupa el mismo hueco que la figura del
+    // ::after (segunda columna, todas las filas) y obedece a los mismos
+    // interruptores de display, así que también desaparece por debajo de
+    // portátil. Va después de `> *` para ganarle la columna.
+    &__stack {
+      display: var(--component-hero-figure-display, none);
+      grid-column: 2;
+      grid-row: 1 / span var(--component-hero-figure-row-span);
+      align-self: center;
+      justify-self: center;
+      inline-size: 100%;
+      max-inline-size: var(--component-hero-stack-max-width);
+      block-size: auto;
+      // Sin cursor ni touch-action aquí: Draggable los pone en línea al
+      // activarse (grab / grabbing, y pan-y para no robar el scroll vertical).
+      overflow: visible;
+
+      @include breakpoint(laptop) {
+        display: var(--component-hero-figure-display-wide);
+      }
+    }
+
+    // Piezas del dibujo. Los grosores se multiplican por la escala de cámara
+    // para que no adelgacen cuando la vista explosionada se aleja.
+    &__stack-side {
+      fill: var(--component-hero-stack-surface);
+      stroke: var(--component-hero-stack-ink);
+      stroke-width: calc(var(--component-hero-stack-stroke-side) * var(--component-hero-stack-scale));
+      stroke-linejoin: round;
+    }
+
+    &__stack-top {
+      fill: var(--component-hero-stack-surface);
+      fill-opacity: var(--component-hero-stack-top-opacity);
+    }
+
+    &__stack-edge {
+      fill: none;
+      stroke: var(--component-hero-stack-ink);
+      stroke-width: calc(var(--component-hero-stack-stroke-edge) * var(--component-hero-stack-scale));
+      stroke-linejoin: round;
+    }
+
+    // La placa de arriba —syx.utilities, la de más precedencia— va en el azul del tema.
+    &__stack-plate--accent &__stack-side,
+    &__stack-plate--accent &__stack-edge {
+      stroke: var(--component-hero-stack-accent);
+    }
+
+    &__stack-plate--accent &__stack-edge {
+      stroke-width: calc(var(--component-hero-stack-stroke-accent) * var(--component-hero-stack-scale));
+    }
+
+    &__stack-hatch-line {
+      stroke: var(--component-hero-stack-hatch);
+      stroke-width: var(--component-hero-stack-stroke-hatch);
+    }
+
+    &__stack-guide {
+      fill: none;
+      stroke: var(--component-hero-stack-guide);
+      stroke-width: calc(var(--component-hero-stack-stroke-guide) * var(--component-hero-stack-scale));
+
+      &--dash {
+        stroke-width: calc(var(--component-hero-stack-stroke-dash) * var(--component-hero-stack-scale));
+        stroke-dasharray: var(--component-hero-stack-dash);
+      }
+    }
+
+    &__stack-leader {
+      fill: none;
+      stroke: var(--component-hero-stack-guide);
+      stroke-width: calc(var(--component-hero-stack-stroke-dash) * var(--component-hero-stack-scale));
+    }
+
+    &__stack-dim {
+      fill: none;
+      stroke: var(--component-hero-stack-ink);
+      stroke-width: calc(var(--component-hero-stack-stroke-guide) * var(--component-hero-stack-scale));
+    }
+
+    // Los textos pintan con `fill: currentColor` y el tono va en `color`:
+    // así el color del texto es el de siempre para quien lo mide (axe y la
+    // medida en píxeles de tests/browser quitan el texto con `color`).
+    &__stack-label {
+      color: var(--component-hero-stack-ink);
+      fill: currentColor;
+      font-family: var(--component-hero-stack-font);
+      letter-spacing: var(--semantic-letter-spacing-wide);
+    }
+
+    &__stack-tag-num {
+      color: var(--component-hero-stack-accent);
+      fill: currentColor;
+      font-family: var(--component-hero-stack-font);
+      font-weight: var(--semantic-font-weight-medium);
+    }
+
+    &__stack-tag-name {
+      color: var(--component-hero-stack-ink);
+      fill: currentColor;
+      font-family: var(--component-hero-stack-font);
+      font-weight: var(--semantic-font-weight-medium);
+    }
+
+    &__stack-tag-desc {
+      color: var(--component-hero-stack-label);
+      fill: currentColor;
+      font-family: var(--component-hero-stack-font-text);
+    }
   }
 
   } // end @layer syx.organisms

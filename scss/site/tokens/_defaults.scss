@@ -127,6 +127,32 @@
     --component-hero-column-gap-wide: var(--component-hero-column-gap);
     --component-hero-figure-display-wide: none;
 
+    // Pila isométrica animada (js/site/hero-stack.js). Ocupa el hueco de la
+    // figura del ::after y hereda sus mismos interruptores de display. El
+    // script comprueba que --component-hero-stack-ink exista antes de
+    // arrancar: es su forma de saber que la capa del sitio está cargada.
+    --component-hero-stack-max-width: 27.5rem;
+    --component-hero-stack-ink: var(--semantic-color-text-primary);
+    --component-hero-stack-accent: var(--semantic-color-primary);
+    --component-hero-stack-guide: var(--semantic-color-border-default);
+    --component-hero-stack-surface: var(--semantic-color-bg-primary);
+    --component-hero-stack-hatch: var(--semantic-color-border-subtle);
+    --component-hero-stack-label: var(--semantic-color-text-secondary);
+    --component-hero-stack-font: var(--semantic-font-family-mono);
+    --component-hero-stack-font-text: var(--semantic-font-family-primary);
+    --component-hero-stack-top-opacity: 0.8;
+    // Trazos en unidades del dibujo (viewBox 383 × 465). El script escribe
+    // --component-hero-stack-scale al alejar la cámara, para que el grosor en
+    // pantalla no adelgace cuando la vista se abre.
+    --component-hero-stack-scale: 1;
+    --component-hero-stack-stroke-side: 0.9px;
+    --component-hero-stack-stroke-edge: 1.15px;
+    --component-hero-stack-stroke-accent: 2.2px;
+    --component-hero-stack-stroke-guide: 1.2px;
+    --component-hero-stack-stroke-dash: 1px;
+    --component-hero-stack-stroke-hatch: 1.1px;
+    --component-hero-stack-dash: 3 4;
+
     // Telón de fondo. Puede ser un degradado, una retícula
     // (`var(--semantic-bg-grid)`) o `none`.
     --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, color-mix(in srgb, var(--semantic-color-primary) 18%, transparent) 0%, transparent 70% );
