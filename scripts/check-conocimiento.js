@@ -119,7 +119,7 @@ comprobar('routing.md concuerda con los modos', () => {
   // Cubierta si routing.md la cita tal cual o cita una carpeta que la contiene.
   const faltan = [...cargas.keys()].filter((r) => ![...citadas].some((c) => c === r || (c.endsWith('/') && r.startsWith(c))));
   // Solo se exige que existan las rutas completas del córtex (empiezan por un dominio).
-  const DOMINIOS = /^(ux|ui|front|syx|branding|motion|vendors)\//;
+  const DOMINIOS = /^(ux|ui|front|syx|branding|motion|isometric|vendors)\//;
   const sobran = [...citadas].filter((r) => DOMINIOS.test(r) && !fs.existsSync(path.join(K, r)));
   const malos = [...faltan.map((r) => `routing.md no cita ${r}`), ...sobran.map((r) => `routing.md cita ${r}, que no existe`)];
   if (malos.length) throw new Error(malos.join(' · '));
