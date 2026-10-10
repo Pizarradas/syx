@@ -5698,6 +5698,24 @@
   --component-hero-columns-wide: var(--component-hero-columns);
   --component-hero-column-gap-wide: var(--component-hero-column-gap);
   --component-hero-figure-display-wide: none;
+  --component-hero-stack-max-width: 27.5rem;
+  --component-hero-stack-ink: var(--semantic-color-text-primary);
+  --component-hero-stack-accent: var(--semantic-color-primary);
+  --component-hero-stack-guide: var(--semantic-color-border-default);
+  --component-hero-stack-surface: var(--semantic-color-bg-primary);
+  --component-hero-stack-hatch: var(--semantic-color-border-subtle);
+  --component-hero-stack-label: var(--semantic-color-text-secondary);
+  --component-hero-stack-font: var(--semantic-font-family-mono);
+  --component-hero-stack-font-text: var(--semantic-font-family-primary);
+  --component-hero-stack-top-opacity: 0.8;
+  --component-hero-stack-scale: 1;
+  --component-hero-stack-stroke-side: 0.9px;
+  --component-hero-stack-stroke-edge: 1.15px;
+  --component-hero-stack-stroke-accent: 2.2px;
+  --component-hero-stack-stroke-guide: 1.2px;
+  --component-hero-stack-stroke-dash: 1px;
+  --component-hero-stack-stroke-hatch: 1.1px;
+  --component-hero-stack-dash: 3 4;
   --component-hero-backdrop: radial-gradient( ellipse at 50% 0%, color-mix(in srgb, var(--semantic-color-primary) 18%, transparent) 0%, transparent 70% );
   --component-hero-backdrop-width: min(900px, 120vw);
   --component-hero-backdrop-height: min(600px, 80vw);
@@ -6659,6 +6677,89 @@
     text-transform: uppercase;
     margin-block-start: var(--semantic-space-layout-md);
     opacity: 0.7;
+  }
+  .org-home-hero--live::after {
+    display: none;
+  }
+  .org-home-hero__stack {
+    display: var(--component-hero-figure-display, none);
+    grid-column: 2;
+    grid-row: 1/span var(--component-hero-figure-row-span);
+    align-self: center;
+    justify-self: center;
+    inline-size: 100%;
+    max-inline-size: var(--component-hero-stack-max-width);
+    block-size: auto;
+    overflow: visible;
+  }
+  @media (min-width: 64em) {
+    .org-home-hero__stack {
+      display: var(--component-hero-figure-display-wide);
+    }
+  }
+  .org-home-hero__stack-side {
+    fill: var(--component-hero-stack-surface);
+    stroke: var(--component-hero-stack-ink);
+    stroke-width: calc(var(--component-hero-stack-stroke-side) * var(--component-hero-stack-scale));
+    stroke-linejoin: round;
+  }
+  .org-home-hero__stack-top {
+    fill: var(--component-hero-stack-surface);
+    fill-opacity: var(--component-hero-stack-top-opacity);
+  }
+  .org-home-hero__stack-edge {
+    fill: none;
+    stroke: var(--component-hero-stack-ink);
+    stroke-width: calc(var(--component-hero-stack-stroke-edge) * var(--component-hero-stack-scale));
+    stroke-linejoin: round;
+  }
+  .org-home-hero__stack-plate--accent .org-home-hero__stack-side, .org-home-hero__stack-plate--accent .org-home-hero__stack-edge {
+    stroke: var(--component-hero-stack-accent);
+  }
+  .org-home-hero__stack-plate--accent .org-home-hero__stack-edge {
+    stroke-width: calc(var(--component-hero-stack-stroke-accent) * var(--component-hero-stack-scale));
+  }
+  .org-home-hero__stack-hatch-line {
+    stroke: var(--component-hero-stack-hatch);
+    stroke-width: var(--component-hero-stack-stroke-hatch);
+  }
+  .org-home-hero__stack-guide {
+    fill: none;
+    stroke: var(--component-hero-stack-guide);
+    stroke-width: calc(var(--component-hero-stack-stroke-guide) * var(--component-hero-stack-scale));
+  }
+  .org-home-hero__stack-guide--dash {
+    stroke-width: calc(var(--component-hero-stack-stroke-dash) * var(--component-hero-stack-scale));
+    stroke-dasharray: var(--component-hero-stack-dash);
+  }
+  .org-home-hero__stack-leader {
+    fill: none;
+    stroke: var(--component-hero-stack-guide);
+    stroke-width: calc(var(--component-hero-stack-stroke-dash) * var(--component-hero-stack-scale));
+  }
+  .org-home-hero__stack-dim {
+    fill: none;
+    stroke: var(--component-hero-stack-ink);
+    stroke-width: calc(var(--component-hero-stack-stroke-guide) * var(--component-hero-stack-scale));
+  }
+  .org-home-hero__stack-label {
+    fill: var(--component-hero-stack-ink);
+    font-family: var(--component-hero-stack-font);
+    letter-spacing: var(--semantic-letter-spacing-wide);
+  }
+  .org-home-hero__stack-tag-num {
+    fill: var(--component-hero-stack-accent);
+    font-family: var(--component-hero-stack-font);
+    font-weight: var(--semantic-font-weight-medium);
+  }
+  .org-home-hero__stack-tag-name {
+    fill: var(--component-hero-stack-ink);
+    font-family: var(--component-hero-stack-font);
+    font-weight: var(--semantic-font-weight-medium);
+  }
+  .org-home-hero__stack-tag-desc {
+    fill: var(--component-hero-stack-label);
+    font-family: var(--component-hero-stack-font-text);
   }
 }
 @layer syx.organisms {

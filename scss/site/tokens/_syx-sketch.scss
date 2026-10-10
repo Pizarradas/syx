@@ -110,6 +110,14 @@
   --component-footer-border-color: var(--semantic-color-border-strong);
   --component-cta-border-block-width: 0;
   --component-cta-border-color: var(--semantic-color-border-strong);
+  // Pila animada del hero: los mismos tonos que la figura estática de arriba
+  // (tinta gray-900, azul del tema, guías y rayado en blue-200, placas blancas).
+  --component-hero-stack-ink: var(--primitive-color-gray-900);
+  --component-hero-stack-accent: var(--semantic-color-primary);
+  --component-hero-stack-guide: var(--primitive-color-blue-200);
+  --component-hero-stack-surface: var(--semantic-color-bg-primary);
+  --component-hero-stack-hatch: var(--primitive-color-blue-200);
+  --component-hero-stack-label: var(--semantic-color-text-secondary);
 }
 
 // MODO OSCURO
@@ -207,6 +215,14 @@
   --component-footer-border-color: var(--primitive-color-gray-500);
   --component-cta-border-block-width: 2px;
   --component-cta-border-color: var(--primitive-color-gray-500);
+  // Pila animada del hero en oscuro: tinta clara, placas un escalón por
+  // encima del fondo y guías en gray-700, como la figura estática oscura.
+  --component-hero-stack-ink: var(--primitive-color-gray-300);
+  --component-hero-stack-accent: var(--semantic-color-primary);
+  --component-hero-stack-guide: var(--primitive-color-gray-700);
+  --component-hero-stack-surface: var(--semantic-color-bg-secondary);
+  --component-hero-stack-hatch: var(--primitive-color-gray-700);
+  --component-hero-stack-label: var(--semantic-color-text-secondary);
 }
 
 @mixin site-tokens-syx-sketch {

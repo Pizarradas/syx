@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 612,
-      "omitidas": 466,
+      "variables": 627,
+      "omitidas": 469,
       "fueraDeAlcance": {
         "primitive": 241,
         "icon": 17,
@@ -5935,6 +5935,225 @@
           "valuesByMode": {
             "light": "center",
             "dark": "center"
+          }
+        },
+        {
+          "name": "component/hero/stack/accent",
+          "type": "COLOR",
+          "token": "--component-hero-stack-accent",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0.7959,
+              "b": 0.7642,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0.7959,
+              "b": 0.7642,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#00cbc3",
+            "dark": "#00cbc3"
+          }
+        },
+        {
+          "name": "component/hero/stack/guide",
+          "type": "COLOR",
+          "token": "--component-hero-stack-guide",
+          "valuesByMode": {
+            "light": {
+              "r": 0.2259,
+              "g": 0.3037,
+              "b": 0.4311,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.3017,
+              "g": 0.3017,
+              "b": 0.3017,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#3a4d6e",
+            "dark": "#4d4d4d"
+          }
+        },
+        {
+          "name": "component/hero/stack/hatch",
+          "type": "COLOR",
+          "token": "--component-hero-stack-hatch",
+          "valuesByMode": {
+            "light": {
+              "r": 0.1395,
+              "g": 0.2,
+              "b": 0.2993,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.1989,
+              "g": 0.1989,
+              "b": 0.1989,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#24334c",
+            "dark": "#333333"
+          }
+        },
+        {
+          "name": "component/hero/stack/ink",
+          "type": "COLOR",
+          "token": "--component-hero-stack-ink",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0112,
+              "g": 0.0225,
+              "b": 0.0509,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.9085,
+              "g": 0.9085,
+              "b": 0.9085,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#03060d",
+            "dark": "#e8e8e8"
+          }
+        },
+        {
+          "name": "component/hero/stack/label",
+          "type": "COLOR",
+          "token": "--component-hero-stack-label",
+          "valuesByMode": {
+            "light": {
+              "r": 0.0777,
+              "g": 0.1228,
+              "b": 0.1968,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7432,
+              "g": 0.7432,
+              "b": 0.7432,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#141f32",
+            "dark": "#bebebe"
+          }
+        },
+        {
+          "name": "component/hero/stack/max/width",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-max-width",
+          "valuesByMode": {
+            "light": 440,
+            "dark": 440
+          }
+        },
+        {
+          "name": "component/hero/stack/scale",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-scale",
+          "valuesByMode": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/accent",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-accent",
+          "valuesByMode": {
+            "light": 2.2,
+            "dark": 2.2
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/dash",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-dash",
+          "valuesByMode": {
+            "light": 1,
+            "dark": 1
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/edge",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-edge",
+          "valuesByMode": {
+            "light": 1.15,
+            "dark": 1.15
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/guide",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-guide",
+          "valuesByMode": {
+            "light": 1.2,
+            "dark": 1.2
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/hatch",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-hatch",
+          "valuesByMode": {
+            "light": 1.1,
+            "dark": 1.1
+          }
+        },
+        {
+          "name": "component/hero/stack/stroke/side",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-stroke-side",
+          "valuesByMode": {
+            "light": 0.9,
+            "dark": 0.9
+          }
+        },
+        {
+          "name": "component/hero/stack/surface",
+          "type": "COLOR",
+          "token": "--component-hero-stack-surface",
+          "valuesByMode": {
+            "light": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.0112,
+              "g": 0.0225,
+              "b": 0.0509,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#ffffff",
+            "dark": "#03060d"
+          }
+        },
+        {
+          "name": "component/hero/stack/top/opacity",
+          "type": "FLOAT",
+          "token": "--component-hero-stack-top-opacity",
+          "valuesByMode": {
+            "light": 0.8,
+            "dark": 0.8
           }
         },
         {
@@ -18072,6 +18291,18 @@
     {
       "token": "--component-hero-padding-block-start",
       "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-hero-stack-dash",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-hero-stack-font",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-hero-stack-font-text",
+      "motivo": "valor no traducible a una variable de Figma"
     },
     {
       "token": "--component-hero-sub-font-size",
