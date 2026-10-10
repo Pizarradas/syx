@@ -1,9 +1,9 @@
 // ================================================
 // PLANTILLA DE TEMA — EL CONTRATO MÍNIMO
 // ================================================
-// El punto de partida de un tema nuevo: copia esta carpeta a
-// scss/themes/<tu-tema>/, sustituye «template» por el nombre del tema en
-// _theme.scss y _setup.scss y cambia los valores marcados con ✎. Lo que no
+// El punto de partida de un tema nuevo: `npm run theme:new <tu-tema>` copia
+// esta carpeta a scss/themes/<tu-tema>/ y pone el nombre en los mixins y en
+// las llamadas de bundle; tú cambias los valores marcados con ✎. Lo que no
 // está aquí lo pone el sistema (superficies, bordes, sombras, escala
 // tipográfica, tintas derivadas…), en claro y en oscuro.
 //
@@ -153,6 +153,11 @@
 // @font-face por peso, solo woff2. Las que trae SYX están en $syx-fonts
 // (abstracts/mixins/_font.scss); una propia se declara peso a peso:
 //   @include font-family("Tu Fuente", "#{$fonts-path}/tu-fuente/TuFuente-Regular", 400, normal);
+// Una que se carga fuera (un <link> a Google Fonts) se registra sin @font-face,
+// con el respaldo que llevará el token detrás ("Public Sans", Arial, sans-serif):
+//   @include syx-font-external("Public Sans", (Arial, sans-serif), "Google Fonts");
+// check:setups falla si un --semantic-font-family-* nombra una familia que no
+// sale de aquí ni es del sistema.
 @mixin theme-template-fonts {
   @include syx-font("Space Grotesk", 400 700);
 }

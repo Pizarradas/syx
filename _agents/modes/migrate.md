@@ -5,8 +5,8 @@
 > **Trust** — graded by `contracts/trust.json`, verified by `npm run check:modos`.
 >
 > · **Writes:** `scss/atoms/`, `scss/molecules/`, `scss/organisms/`, `scss/layout/`, `scss/utilities/`, `scss/pages/` — tier `pr`, one variable per proposal, prepared with `node scripts/propose.js files <paths…> --why "…"`.
-> · **Recommends only:** `scss/base/`, `scss/themes/`, `scss/abstracts/`, `contracts/lint-contract.json` — a legacy variable that lives up here is not migrated by an agent. Produce the impact analysis and the exact diff; a person applies it, and updates the contract in the same move.
-> · **Reads:** `contracts/rules.json`, `tokens.json`, `mind-system/knowledges/`
+> · **Recommends only:** `scss/base/`, `scss/themes/`, `scss/abstracts/`, `contracts/legacy-map.json` — a legacy variable that lives up here is not migrated by an agent. Produce the impact analysis and the exact diff; a person applies it, and updates the map in the same move.
+> · **Reads:** `contracts/rules.json`, `contracts/lint-contract.json`, `tokens.json`, `mind-system/knowledges/`
 > · **Ask, don't read:** `find_token_by_value` finds the SYX equivalent of a legacy value, `get_token` confirms it resolves the same in every theme, and `scan_for_drift` shows what the migration left behind on a built page.
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
@@ -27,13 +27,13 @@ You are a **migration specialist** for SYX. Your job is to eliminate legacy CSS 
 2. **Use `lint-contract.json` as your source of truth.** It has the migration target for every legacy var.
 3. **Never break a theme.** Every migration must leave all 7 themes compiling correctly.
 4. **One variable at a time.** Don't batch migrations across unrelated variables in a single pass.
-5. **Leave the `lint-contract.json` update written out.** The contract must reflect current reality, but it is human-only: give the exact diff so the person who merges applies it in the same move.
+5. **Leave the `legacy-map.json` update written out.** The map must reflect current reality, but it is human-only: give the exact diff so the person who merges applies it in the same move. `lint-contract.json` is not edited by anyone: `node scripts/syx-validate.js --report` regenerates it from the map and the compiled CSS.
 
 ---
 
 ## Understanding Legacy Variable Status
 
-`contracts/lint-contract.json` classifies every legacy variable with a status:
+`contracts/lint-contract.json` reports every legacy variable with a status, taken from `contracts/legacy-map.json`:
 
 | Status | Meaning | Action |
 |---|---|---|
@@ -101,9 +101,9 @@ node scripts/syx-validate.js --report
 
 All themes must compile. R01–R04 must still pass. The legacy variable must no longer appear in `contracts/lint-contract.json` after the next validation run.
 
-### Step 8 — Update `lint-contract.json`
+### Step 8 — Leave the map update written out
 
-Remove the migrated variable's entry from `legacyVars`. Update the `stats.legacyRuntime` count.
+Write the exact diff for `contracts/legacy-map.json` (the variable as `migrada`, with its `por`) for the person who merges. Do not edit `lint-contract.json`: the validation run of Step 7 regenerates it, and `npm run check:contratos` fails if the committed copy is not what the validator produces.
 
 ---
 

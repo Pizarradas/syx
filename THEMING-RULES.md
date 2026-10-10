@@ -107,7 +107,7 @@ A theme is a list of declarations. This contract says which ones it must have, w
 | The ink on each fill | `--semantic-color-on-*`, `--semantic-color-on-state-hover-*` | `check:contraste` |
 | What every theme declares and the system reads | icons `--icon-*` | `check:plantilla` |
 | Dark mode with **both its entry points**, both using `dark-mode-tokens()` | `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {…} }` and `:root[data-theme="dark"] {…}` | `check:themes --strict`, `check:modo-claro` |
-| Its fonts, once | `theme-x-fonts()` with `syx-font()` | `check:setups` |
+| Its fonts, once — every family its `--semantic-font-family-*` names | `theme-x-fonts()` with `syx-font()`, or `syx-font-external()` for one loaded elsewhere | `check:setups` |
 
 Surfaces, text, borders, shadows, type scale, the brand ink as text (`--semantic-color-*-text`) and the controls' strong variant are provided by the system, in light and dark. A theme declares them only when it wants something else.
 

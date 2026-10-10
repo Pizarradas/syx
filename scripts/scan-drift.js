@@ -6,14 +6,21 @@
  *
  * Uso:
  *   node scripts/scan-drift.js docs.html
- *   npx syx-scan src                       (una carpeta: todo .html/.css/.scss/.vue/.svelte/.astro/.jsx/.tsx)
- *   node scripts/scan-drift.js "src/**\/*.html" src/app.css --theme example-03
+ *   npx syx-scan src                       (una carpeta: todo .html/.css/.scss/.vue/.svelte/.astro/.jsx/.tsx/.js/.ts)
+ *   node scripts/scan-drift.js "src/**\/*.html" src/app.css --tema example-03
  *   npx syx-scan app/**\/*.html --json > desviacion.json
  *   npx syx-scan src --ignorar primitivo-en-app   (adoptarlo por partes; lo ignorado se cuenta)
  *
  * Desde una aplicación que instala el paquete, `npx syx-scan` compara contra
  * la versión de SYX que esa aplicación tiene instalada, que es la única
  * comparación que significa algo.
+ *
+ * EL TEMA CONTRA EL QUE SE COMPARA
+ * `--tema <nombre>` (o `--theme`); si no, el `syx.theme` del package.json de
+ * la app (el más cercano desde la carpeta actual hacia arriba); si tampoco,
+ * syx-sketch. Antes era siempre syx-sketch, y una app con example-03 recibía
+ * los fallbacks y los valores a pelo juzgados contra un tema que no carga
+ * (fricción 7).
  *
  * Sale con código 1 solo si se le pide con `--fallar-si-alta` (o
  * `--fallar-si-media`, que es lo que pide CONSUMING.md a una app): por defecto
@@ -42,7 +49,9 @@ const flag = (n) => process.argv.includes(n);
 // no depender de un paquete de globs en un proyecto cuyo argumento es no tener
 // dependencias.
 // Una carpeta a secas (`npx syx-scan src`) es «todo lo escaneable que hay dentro».
-const ESCANEABLE = /\.(html?|css|scss|vue|svelte|astro|jsx|tsx)$/i;
+// Los .js/.ts solo se leen para las clases que ponen en el DOM con un literal
+// (scripts/lib/escaner.js · clasesDeScript). Un .min.js es un bundle ajeno.
+const ESCANEABLE = /^(?!.*\.min\.js$).*\.(html?|css|scss|vue|svelte|astro|jsx|tsx|m?js|cjs|m?ts|cts)$/i;
 function expandir(patron) {
   if (!/[*?]/.test(patron) && fs.existsSync(patron) && fs.statSync(patron).isDirectory()) {
     const fuera = [];
@@ -79,11 +88,11 @@ function expandir(patron) {
   return fuera.sort();
 }
 
-const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && !['--theme', '--mode', '--ignorar', '--prefix'].includes(process.argv[process.argv.indexOf(a) - 1]));
+const patrones = process.argv.slice(2).filter((a) => !a.startsWith('--') && !['--theme', '--tema', '--mode', '--ignorar', '--prefix'].includes(process.argv[process.argv.indexOf(a) - 1]));
 const files = [...new Set(patrones.flatMap(expandir))].filter((f) => ESCANEABLE.test(f));
 
 if (!files.length) {
-  console.log('\n   Nada que escanear. Pasa ficheros .html, .css, .scss, .vue, .svelte, .astro, .jsx o .tsx:\n   node scripts/scan-drift.js docs.html\n');
+  console.log('\n   Nada que escanear. Pasa ficheros .html, .css, .scss, .vue, .svelte, .astro, .jsx, .tsx, .js o .ts:\n   node scripts/scan-drift.js docs.html\n');
   process.exit(patrones.length ? 1 : 0);
 }
 
@@ -103,10 +112,35 @@ function prefijoDelProyecto() {
 }
 const prefijo = prefijoDelProyecto();
 
+// El tema de la app: --tema/--theme, o `syx.theme` en su package.json.
+function temaDelProyecto() {
+  const dado = arg('--tema') || arg('--theme');
+  if (dado) return { tema: dado, origen: '--tema' };
+  for (let d = process.cwd(); ; d = path.dirname(d)) {
+    const f = path.join(d, 'package.json');
+    if (fs.existsSync(f)) {
+      try {
+        const t = JSON.parse(fs.readFileSync(f, 'utf8')).syx?.theme;
+        if (typeof t === 'string' && t) return { tema: t, origen: `${path.relative(process.cwd(), f).replace(/\\/g, '/')} · syx.theme` };
+      } catch (e) { /* un package.json roto no es asunto del escáner */ }
+      // El package.json más cercano es el de la app: no se sigue subiendo
+      // hasta el de otro proyecto que la contenga.
+      return { tema: 'syx-sketch', origen: 'por defecto' };
+    }
+    if (path.dirname(d) === d) return { tema: 'syx-sketch', origen: 'por defecto' };
+  }
+}
+const { tema, origen: origenTema } = temaDelProyecto();
+const temas = syx.listThemes().themes;
+if (!temas.includes(tema)) {
+  console.log(`\n   El tema «${tema}» (${origenTema}) no existe en SYX v${syx.version}. Temas: ${temas.join(', ')}\n`);
+  process.exit(1);
+}
+
 const informe = escanear({
   files,
   syx,
-  theme: arg('--theme', 'syx-sketch'),
+  theme: tema,
   mode: arg('--mode', 'light'),
   prefijo,
 });
@@ -147,7 +181,7 @@ const TITULOS = {
 const MARCA = { alta: '🔴', media: '🟠', baja: '·' };
 
 console.log('\n── DESVIACIÓN RESPECTO A SYX ───────────────────────────────────\n');
-console.log(`   comparado contra    ${informe.theme} · ${informe.mode} · SYX v${syx.version}`);
+console.log(`   comparado contra    ${informe.theme} · ${informe.mode} · SYX v${syx.version}   (tema: ${origenTema})`);
 console.log(`   ficheros            ${informe.ficheros}`);
 if (prefijo) console.log(`   prefijo proyecto    ${prefijo}-*`);
 if (informe.ignorados) console.log(`   ignorados           ${informe.ignorados.hallazgos} de tipo ${informe.ignorados.tipos.join(', ')} (--ignorar)`);

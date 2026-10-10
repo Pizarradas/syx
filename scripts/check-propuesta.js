@@ -22,6 +22,9 @@
  *   4. Que `files`, la vía para componentes y utilidades, se niega fuera de
  *      `pr` sin tocar el trabajo del agente, y que dentro de `pr` deja la
  *      misma rama con evidencia que `token`.
+ *   5. Que la rama llega con los derivados al día (Figma, contratos, la
+ *      referencia de docs.html) y que lo regenerado antes de tiempo no la
+ *      bloquea, pero lo escrito a mano fuera de lo declarado sí.
  *
  * Uso: node scripts/check-propuesta.js   ·   npm run check:propuesta
  */
@@ -324,6 +327,56 @@ comprobar('el commit de files lleva el cambio, lo compilado y la evidencia', () 
   if (!css.includes('atom-pill--prueba')) throw new Error('la variante no llegó al CSS compilado');
   const msg = enCopia('log', '-1', '--format=%B');
   if (/undefined|null/.test(msg)) throw new Error(`el mensaje tiene huecos sin rellenar:\n${msg}`);
+});
+
+// ─── 5. Los derivados (fricción 8) ───────────────────────────────────────────
+// Una propuesta de componente regenera la exportación a Figma, los contratos
+// de syx-validate y la referencia de docs.html, y la rama tiene que pasar sus
+// guardianes. Lo que el agente regeneró ANTES no la bloquea; lo que escribió a
+// mano fuera de lo declarado, sí.
+
+const enTmp = (...a) => execFileSync(process.execPath, a, { cwd: tmp, encoding: 'utf8' });
+
+comprobar('la rama de files pasa check:figma, check:contratos y check:docs-componentes', () => {
+  for (const a of [['scripts/export-figma.js', '--check'], ['scripts/syx-validate.js', '--check'], ['scripts/build-docs-componentes.js', '--check']]) {
+    try { enTmp(...a); } catch (e) { throw new Error(`${a.join(' ')} falla en la rama:\n     ${(e.stdout || e.message).toString().trim().split('\n').slice(-3).join('\n     ')}`); }
+  }
+  const ev = enCopia('diff', '--name-only', `${antesDeFiles}..HEAD`).split('\n').find((f) => f.startsWith('contracts/propuestas/'));
+  contiene(fs.readFileSync(path.join(tmp, ev), 'utf8'), 'check:figma', 'la evidencia no trae los guardianes de los derivados');
+});
+
+const DOCS = 'docs.html';
+const FIGMA = 'contracts/figma/syx-sketch.figma.json';
+/** Mete una línea DENTRO de la referencia generada de docs.html. */
+const tocarSeccionGenerada = () => {
+  const f = path.join(tmp, DOCS);
+  fs.writeFileSync(f, fs.readFileSync(f, 'utf8').replace(/(<!-- syx:ref:inicio[^>]*-->)/, '$1\n<!-- regenerado a destiempo -->'));
+};
+
+comprobar('files niega docs.html tocado a mano fuera de la referencia generada, sin declararlo', () => {
+  fs.appendFileSync(path.join(tmp, PILL), '\n// cambio de prueba\n');
+  fs.appendFileSync(path.join(tmp, DOCS), '\n<!-- prosa escrita a mano -->\n');
+  negarFiles([PILL, '--why', 'Prueba'], DOCS, 'no señala docs.html como ajeno', [PILL, DOCS]);
+});
+
+comprobar('files niega un fichero nuevo en contracts/figma/: un derivado nuevo no lo regenera nadie', () => {
+  fs.appendFileSync(path.join(tmp, PILL), '\n// cambio de prueba\n');
+  fs.writeFileSync(path.join(tmp, 'contracts/figma/intruso.figma.json'), '{}\n');
+  negarFiles([PILL, '--why', 'Prueba'], 'contracts/figma/intruso.figma.json', 'no señala el fichero nuevo', [PILL, 'contracts/figma/intruso.figma.json']);
+});
+
+comprobar('files acepta derivados regenerados antes de tiempo y los deja como salen de compilar', () => {
+  const BTN = 'scss/atoms/_btn.scss';
+  fs.appendFileSync(path.join(tmp, BTN), '\n// comentario de prueba\n');
+  fs.appendFileSync(path.join(tmp, FIGMA), '\n');
+  tocarSeccionGenerada();
+  const antes = enCopia('rev-parse', 'HEAD');
+  const r = proponer('files', BTN, '--why', 'Comentario de prueba en el boton', '--branch', 'syx/propuesta-derivados');
+  if (r.code !== 0) throw new Error(`no la aceptó:\n     ${r.salida.trim().split('\n').slice(-8).join('\n     ')}`);
+  if (enCopia('status', '--porcelain')) throw new Error('dejó el árbol sucio');
+  const tocados = enCopia('diff', '--name-only', `${antes}..HEAD`).split('\n');
+  if (!tocados.includes(BTN)) throw new Error(`el commit no incluye ${BTN}`);
+  for (const f of [FIGMA, DOCS]) if (tocados.includes(f)) throw new Error(`${f} entró en el commit con lo que el agente le había puesto`);
 });
 
 (async () => {

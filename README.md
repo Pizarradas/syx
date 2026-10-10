@@ -134,6 +134,7 @@ in `sideEffects`, so a bare import survives `vite build`, webpack and Rollup
 | `js/syx-toast.js` | `mol-toast` | wires close buttons and `data-duration` countdowns of toasts in the HTML, and every `[data-syx-toast]` button | `import { showToast } from 'syx-design-system/js/syx-toast.js'; showToast('Saved', { tone: 'success' });` — `initToasts(container)` for toasts rendered later |
 | `js/syx-menu.js` | `mol-menu` | wires every `.mol-menu__trigger` with `aria-controls`: WAI-ARIA menu button keyboard (arrows, Home/End, typeahead, Escape/Tab return focus), `aria-expanded` kept in sync, list placed under the button | `import { initMenus } from 'syx-design-system/js/syx-menu.js'; initMenus(container);` |
 | `js/syx-tooltip.js` | `mol-tooltip` | opens each `__bubble` (a `popover="hint"`) from the control that names it in `aria-describedby`/`aria-labelledby`: keyboard focus and hover, hoverable, Escape closes, placed above or below, never over the control | `import { initTooltips } from 'syx-design-system/js/syx-tooltip.js'; initTooltips(container);` |
+| `js/syx-colors.js` | canvas charts (ECharts, Chart.js, D3) | nothing on the page; exposes `window.SYX.resolveColor` | `import { resolveColor } from 'syx-design-system/js/syx-colors.js'; resolveColor('--semantic-color-primary', { format: 'rgb' });` — reads the token as the page resolves it and converts `oklch()` to hex/rgb (`CONSUMING.md` → *Colours in JavaScript and canvas charts*) |
 | `js/syx-char-count.js` | `mol-form-field__count` (optional textarea counter) | writes what is left of `maxlength` into every `__count` named by a field's `aria-describedby`, and announces it once typing pauses | `import { initCharCount } from 'syx-design-system/js/syx-char-count.js'; initCharCount(container);` |
 
 Frameworks that render after load (React, Vue, Svelte…) should call the init
@@ -512,7 +513,13 @@ means anything.
 npx syx-scan "src/**/*.html" src/app.css          # from a consuming app
 npm run scan -- docs.html --todo                  # from this repo
 npx syx-scan app/ --json > drift.json             # for CI
+npx syx-scan src --tema example-03                # against the app's theme
 ```
+
+It compares against the theme the app loads (`--tema`, else `"syx": { "theme" }` in
+the app's `package.json`, else `syx-sketch`), and in `.js`/`.ts` files it reads the
+class literals the code puts in the DOM. The details are in
+[CONSUMING.md §8](CONSUMING.md#8-checking-the-work).
 
 | What it finds | Why it matters |
 | ------------- | -------------- |

@@ -186,6 +186,7 @@ function main() {
   console.log('\n── EXPORTACIÓN A FIGMA ─────────────────────────────────────────\n');
 
   let fallos = 0;
+  let sobran = 0;
   const total = { variables: 0, omitidas: 0 };
 
   if (!check) fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -225,8 +226,19 @@ function main() {
   }
 
   if (check) {
-    console.log(`\n   ${temas.length - fallos}/${temas.length} temas al día\n`);
-    process.exit(fallos ? 1 : 0);
+    // Lo que sobra también desfasa. contracts/figma/ es `auto` en trust.json
+    // porque TODO lo que hay dentro sale de aquí; un fichero que no sale de
+    // aquí no lo comprobaría nadie, y entraría sin revisión (fricción 8).
+    if (!arg('--theme') && fs.existsSync(OUT_DIR)) {
+      const esperados = new Set(temas.map((t) => path.basename(fichero(t))));
+      for (const f of fs.readdirSync(OUT_DIR)) {
+        if (esperados.has(f)) continue;
+        console.log(`❌ contracts/figma/${f} no lo genera este exportador. Bórralo, o añade su tema.`);
+        sobran++;
+      }
+    }
+    console.log(`\n   ${temas.length - fallos}/${temas.length} temas al día${sobran ? ` · ${sobran} fichero(s) que sobran` : ''}\n`);
+    process.exit(fallos || sobran ? 1 : 0);
   }
 
   console.log(`\n   ${temas.length} fichero(s) en contracts/figma/`);

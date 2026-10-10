@@ -21,6 +21,7 @@
  *   syx.findTokenByValue({ value: 'oklch(0.498 0.282 266.24)' }).exact
  *   syx.getComponent({ name: 'btn' }).modifiers
  *   syx.validateSnippet({ code: '.mi-clase { color: var(--semantic-color-primary); }' })
+ *   syx.resolveColor('--semantic-color-primary', { mode: 'dark', format: 'rgb' })  // para canvas
  *   syx.cssPath('example-03')   // ruta absoluta a la hoja compilada
  *
  * Es la misma capa que sirve el servidor MCP (`npx syx-mcp`), a propósito: un

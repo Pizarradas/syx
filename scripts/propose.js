@@ -248,9 +248,10 @@ function token() {
     execFileSync('npm', ['run', 'build:css'], { cwd: ROOT, stdio: 'ignore' });
     execFileSync('node', ['scripts/build-component-registry.js'], { cwd: ROOT, stdio: 'ignore' });
     evidencia = {
-      validador: execFileSync('node', ['scripts/syx-validate.js'], { cwd: ROOT, encoding: 'utf8' }),
+      validador: execFileSync('node', ['scripts/syx-validate.js', '--report'], { cwd: ROOT, encoding: 'utf8' }),
       snapshot: execFileSync('node', ['scripts/build-token-snapshot.js', '--check'], { cwd: ROOT, encoding: 'utf8' }),
     };
+    evidencia.derivados = regenerarDerivados();
   } catch (e) {
     git('checkout', '--', '.');
     fin(`   La validación ha fallado, así que no hay rama. Revertido.\n\n${(e.stdout || e.message).toString().split('\n').slice(-25).join('\n')}`);
@@ -296,6 +297,10 @@ function token() {
     '',
     '```',
     evidencia.snapshot.trim(),
+    '```',
+    '',
+    '```',
+    evidencia.derivados,
     '```',
     '',
     '## Qué revisar',
@@ -374,6 +379,58 @@ function cambiosDelArbol() {
 
 const cubre = (declarada, ruta) => ruta === declarada || (declarada.endsWith('/') && ruta.startsWith(declarada));
 
+// ─── Derivados ───────────────────────────────────────────────────────────────
+//
+// Lo que una propuesta regenera ENTERO, y por eso entra en su commit sin que
+// el agente lo declare. Hasta la fricción 8 esta orden recompilaba el CSS, el
+// registro y el snapshot, pero no la exportación a Figma, los contratos de
+// syx-validate ni la referencia de docs.html: la rama llegaba con ellos
+// desfasados, y check:figma, check:contratos y check:docs-componentes la
+// tumbaban. Y si el agente los había regenerado antes de llamar aquí, eran
+// «cambios fuera de las rutas declaradas» y la propuesta se negaba.
+const REGENERADOS = [
+  'css/', 'tokens.json', 'component-registry.json',
+  'contracts/resolved-tokens.json', 'contracts/validation-report.md',
+  'contracts/lint-contract.json', 'contracts/runtime-tokens.json',
+  'contracts/token-contract.json', 'contracts/token-usage-map.json',
+  'contracts/figma/',
+];
+
+/** El fichero existe en HEAD: un derivado NUEVO no lo regenera nadie, lo escribió alguien. */
+function versionado(r) {
+  try { execFileSync('git', ['cat-file', '-e', `HEAD:${r}`], { cwd: ROOT, stdio: 'ignore' }); return true; } catch (e) { return false; }
+}
+
+/** docs.html solo cambia dentro de los marcadores que escribe build-docs-componentes.js. */
+function soloSeccionGenerada(r) {
+  const fuera = (t) => t.replace(/\r\n/g, '\n').replace(/<!-- syx:(ref|ref-nav):inicio[^>]*-->[\s\S]*?<!-- syx:\1:fin -->/g, '');
+  try {
+    const antes = execFileSync('git', ['show', `HEAD:${r}`], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    return fuera(antes) === fuera(fs.readFileSync(path.join(ROOT, r), 'utf8'));
+  } catch (e) { return false; }
+}
+
+/**
+ * Un cambio del árbol que esta orden va a sobrescribir: un derivado ya
+ * versionado, o docs.html tocado solo en su parte generada. No es trabajo
+ * ajeno, es una regeneración adelantada; lo que tenga se pisa con la buena.
+ */
+const loRegenera = (r) =>
+  (REGENERADOS.some((d) => cubre(d, r)) && versionado(r)) || (r === 'docs.html' && soloSeccionGenerada(r));
+
+/** Exportación a Figma, contratos de syx-validate y referencia de docs.html, y sus guardianes. */
+function regenerarDerivados() {
+  const correr = (...a) => execFileSync('node', a, { cwd: ROOT, encoding: 'utf8' });
+  correr('scripts/export-figma.js');
+  correr('scripts/build-docs-componentes.js');
+  const ultimas = (t, n = 2) => t.trim().split('\n').filter((l) => l.trim()).slice(-n).join('\n');
+  return [
+    `check:figma            ${ultimas(correr('scripts/export-figma.js', '--check'), 1).trim()}`,
+    `check:docs-componentes ${ultimas(correr('scripts/build-docs-componentes.js', '--check'), 1).trim()}`,
+    `check:contratos        ${ultimas(correr('scripts/syx-validate.js', '--check').split('┌')[0], 1).trim()}`,
+  ].join('\n');
+}
+
 const COMPONENTES = /^scss\/(atoms|molecules|organisms)\/|^scss\/abstracts\/tokens\/components\//;
 
 const slugDe = (texto) => texto
@@ -413,13 +470,16 @@ function files() {
       `   Estas rutas no son «vía propuesta»:\n` +
       noPr.map((d) => `     ${d.tier.padEnd(6)} ${d.path}`).join('\n') + '\n\n' +
       `   propose.js files solo lleva rutas \`pr\`. Lo \`auto\` se commitea directamente; lo derivado\n` +
-      `   (CSS, registro, snapshot) lo regenera esta misma orden y entra solo en el commit.`
+      `   (CSS, registro, snapshot, contratos, Figma, referencia de docs.html) lo regenera esta\n` +
+      `   misma orden y entra solo en el commit.`
     );
   }
 
   // 2. El árbol: cambios en esas rutas, y SOLO en esas. Una propuesta que
   // arrastra trabajo ajeno no se puede revisar como una propuesta.
-  const cambios = cambiosDelArbol();
+  // Lo que esta orden regenera de todos modos no cuenta como ajeno (ni como
+  // propio): si el agente ya compiló, su copia se pisa con la que sale aquí.
+  const cambios = cambiosDelArbol().filter((c) => declaradas.some((d) => cubre(d.path, c)) || !loRegenera(c));
   if (!cambios.length) fin('   No hay cambios en el árbol de trabajo. Escribe el cambio primero; propose.js lo valida y lo propone.');
   const ajenos = cambios.filter((c) => !declaradas.some((d) => cubre(d.path, c)));
   if (ajenos.length) {
@@ -445,7 +505,8 @@ function files() {
   for (const d of detalle) console.log(`   → ${d.tier.padEnd(6)} ${d.path}`);
   console.log(`\n   por qué      ${porque}`);
   console.log(`   rama         ${rama}`);
-  console.log(`   validación   build:css + validate${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens\n`);
+  console.log(`   validación   build:css + validate${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens`);
+  console.log(`   regenera     contratos (validate --report), Figma, referencia de docs.html\n`);
 
   if (seco) fin('   --dry-run: no se ha compilado ni commiteado nada.', 0);
 
@@ -469,12 +530,13 @@ function files() {
     execFileSync('npm', ['run', 'build:css'], { cwd: ROOT, stdio: 'ignore' });
     if (tocaComponentes) execFileSync('node', ['scripts/build-component-registry.js'], { cwd: ROOT, stdio: 'ignore' });
     evidencia = {
-      validador: execFileSync('node', ['scripts/syx-validate.js'], { cwd: ROOT, encoding: 'utf8' }),
+      validador: execFileSync('node', ['scripts/syx-validate.js', '--report'], { cwd: ROOT, encoding: 'utf8' }),
       snapshot: execFileSync('node', ['scripts/build-token-snapshot.js', '--check'], { cwd: ROOT, encoding: 'utf8' }),
       registro: tocaComponentes
         ? execFileSync('node', ['scripts/build-component-registry.js', '--check'], { cwd: ROOT, encoding: 'utf8' })
         : null,
     };
+    evidencia.derivados = regenerarDerivados();
   } catch (e) {
     deshacerDerivados();
     fin(`   La validación ha fallado, así que no hay rama. Tu cambio sigue en el árbol; lo compilado se ha deshecho.\n\n${(e.stdout || e.message).toString().split('\n').slice(-25).join('\n')}`);
@@ -509,6 +571,10 @@ function files() {
     '```',
     '',
     evidencia.registro ? '```\n' + evidencia.registro.trim() + '\n```\n' : '',
+    '```',
+    evidencia.derivados,
+    '```',
+    '',
     '## Qué revisar',
     '',
     '- Que el cambio hace lo que dice el porqué, no solo que compila.',

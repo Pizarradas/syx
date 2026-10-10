@@ -167,6 +167,24 @@ comprobar('el CSS compilado es derivado, no humano por omisión', () => niveles(
   ['css/styles-theme-syx-sketch.css', 'auto'],
 ]));
 
+// Fricción 8: un cambio de componente regenera estos ficheros, y al caer al
+// `default` la propuesta entera salía `human`. Son `auto` porque los escribe
+// entero un script y un guardián los compara (check:figma, check:contratos).
+// docs.html solo se genera en parte: se propone. Y lo que decide el contenido
+// de lint-contract.json —legacy-map.json— sigue siendo humano.
+comprobar('los derivados de un componente son auto; docs.html se propone; legacy-map.json no', () => niveles([
+  ['contracts/figma/syx-sketch.figma.json', 'auto'],
+  ['contracts/lint-contract.json', 'auto'],
+  ['contracts/runtime-tokens.json', 'auto'],
+  ['contracts/token-contract.json', 'auto'],
+  ['contracts/token-usage-map.json', 'auto'],
+  ['contracts/validation-report.md', 'auto'],
+  ['docs.html', 'pr'],
+  ['contracts/legacy-map.json', 'human'],
+  ['contracts/figma/../rules.json', 'human'],
+  ['contracts/figma/trust.json', 'human'],
+]));
+
 // ─── 3. El hook de Claude Code ───────────────────────────────────────────────
 
 const HOOK = path.join(__dirname, 'hook-confianza.js');
