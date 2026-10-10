@@ -8,8 +8,9 @@
 # Con `pull_request`, el YAML que se ejecuta es el de la PR: una PR podía
 # añadir `|| true` al paso y dejar «Confianza» en verde (auditoría 2026-10 II).
 # Con `pull_request_target` el YAML, el guardián y el contrato son SIEMPRE los
-# de la rama base. La PR solo aporta su diff: se descarga en pr/ y no se
-# ejecuta NADA de ella (ni npm, ni scripts): git lee sus ficheros y basta.
+# de la rama base. La PR solo aporta su diff: se descarga en pr/ con git (no
+# con actions/checkout) y no se ejecuta NADA de ella (ni npm, ni scripts):
+# git lee sus ficheros y basta.
 #
 # LA APROBACIÓN CADUCA CON CADA PUSH
 # Antes, `aprobado-humano` seguía valiendo tras nuevos commits: se aprobaba
@@ -47,20 +48,29 @@ jobs:
           persist-credentials: false
 
       # La PR, solo como datos: con toda la historia para el diff contra la
-      # base. Nunca se ejecuta nada de aquí.
-      - uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.sha }}
-          path: pr
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: La base, visible desde el clon de la PR
+      # base, y la base visible como origin/<rama>. Nunca se ejecuta nada de aquí.
+      #
+      # Con git y no con actions/checkout: desde 2026-10 checkout se niega a
+      # bajar el código de un fork en un pull_request_target salvo con
+      # `allow-unsafe-pr-checkout: true`, y toda PR desde un fork fallaba aquí
+      # antes de leer la etiqueta. Esa opción no hace falta: el riesgo que
+      # vigila es EJECUTAR el código de la PR, y este job solo lo lee con git.
+      # refs/pull/<n>/head vive en este mismo repositorio venga de donde venga
+      # la PR, y se pide el head_sha exacto del evento: lo juzgado es lo que
+      # el evento dice, no lo último que se haya subido después.
+      - name: La PR y la base, solo como datos
         env:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
-        run: git -C pr fetch --no-tags "https://github.com/$REPO" "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+        run: |
+          git init -q pr
+          git -C pr fetch --no-tags "https://github.com/$REPO" \
+            "+refs/pull/$PR/head:refs/remotes/pr/head" \
+            "+refs/heads/$BASE_REF:refs/remotes/origin/$BASE_REF"
+          git -C pr cat-file -e "$HEAD_SHA^{commit}" || git -C pr fetch --no-tags "https://github.com/$REPO" "$HEAD_SHA"
+          git -C pr checkout -q --detach "$HEAD_SHA"
 
       - uses: actions/setup-node@v4
         with:
