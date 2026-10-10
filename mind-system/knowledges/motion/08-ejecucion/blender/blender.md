@@ -15,6 +15,8 @@
 
 Blender es un entorno 3D con un Graph Editor potente: todo lo de `motion/04-teoria/` se aplica directamente a las F-curves. Aquí se suman la **cámara**, la **luz** y la **profundidad**, y con ellas nuevas responsabilidades de accesibilidad (mareo por movimiento de cámara).
 
+Si la pieza es una ilustración flat isométrica que va a la web, la cámara exacta, el shader de tres tonos y la exportación a SVG por piezas o a capas PNG están en `isometric/04-blender/blender.md`. Este módulo sigue mandando en las curvas y en la API de 5.x.
+
 ---
 
 ## rules
