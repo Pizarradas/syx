@@ -146,7 +146,7 @@
     "map": [
       { "script": "validate", "guards": "R01-R04, R09-R11 errors + R05, R06, R08 warnings over scss and tokens.json (severities from rules.json)" },
       { "script": "check:themes", "guards": "theme symmetry across the seven themes" },
-      { "script": "check:setups", "guards": "identical selector sets across the seven compiled entry points; no hand-written @font-face in bundles (fonts live in theme-x-fonts())" },
+      { "script": "check:setups", "guards": "identical selector sets across the seven compiled entry points; no hand-written @font-face in bundles (fonts live in theme-x-fonts()); every family a theme names in --semantic-font-family-* is loaded (syx-font / syx-font-external) or a system font" },
       { "script": "check:version", "guards": "version citations agree with package.json" },
       { "script": "check:tokens", "guards": "tokens.json snapshot in sync with source" },
       { "script": "check:huerfanos", "guards": "orphan files" },

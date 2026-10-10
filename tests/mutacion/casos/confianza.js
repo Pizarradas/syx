@@ -46,6 +46,19 @@ module.exports = [
     }),
   },
   {
+    id: 'trust-docs-html-auto',
+    regresion: 'trust.json: docs.html bajado a auto (su prosa escrita a mano saldría sin revisión)',
+    guardian: 'check:clasificacion',
+    comando: ['node', 'scripts/check-clasificacion.js'],
+    espera: /docs\.html → auto/,
+    mutar: (t) => t.json('contracts/trust.json', (c) => {
+      const i = c.tiers.pr.paths.indexOf('docs.html');
+      if (i === -1) throw new Error('trust.json ya no tiene docs.html en pr');
+      c.tiers.pr.paths.splice(i, 1);
+      c.tiers.auto.paths.push('docs.html');
+    }),
+  },
+  {
     id: 'trust-scripts-auto-en-pr',
     regresion: 'una PR que baja `scripts/` a auto en su propio trust.json',
     guardian: 'check-confianza (diff)',

@@ -52,6 +52,17 @@
  *   sizes.json                      tamaños raw/gzip/brotli de todo lo anterior
  *                                   y de lo que descarga cada página
  *
+ * QUÉ TEMAS ENTRAN EN CADA FAMILIA
+ * full y core, todos los temas (carpeta con _theme.scss): cada uno trae su
+ * bundle-docs.scss y su bundle-core.scss, también los que salen de la
+ * plantilla. El sitio, solo los que llevan su capa sin comentar en el
+ * _setup.scss (`@include syx-bundle-site(...)`): un tema para un producto no
+ * la lleva —la plantilla la deja comentada a propósito—, y exigirle el mismo
+ * CSS con capa que a los temas del sitio tumbaba el build, `npm pack` y la
+ * instalación desde git (octubre de 2026, al crear un tema de producto desde
+ * la plantilla). La igualdad del CSS con capa se sigue exigiendo entre TODOS
+ * los temas en full y core, y entre los del sitio en el sitio.
+ *
  * Las cifras de tamaño de la documentación salen de aquí (`npm run build:dist`
  * o dist/sizes.json); no se escriben a mano.
  *
@@ -70,6 +81,7 @@ const zlib = require('zlib');
 const sass = require('sass');
 const postcss = require('postcss');
 const autoprefixer = require('autoprefixer');
+const { llevaCapaSitio } = require('./lib/plantilla-tema');
 
 const ROOT = path.resolve(__dirname, '..');
 const SCSS = path.join(ROOT, 'scss');
@@ -214,15 +226,19 @@ async function main() {
   const temas = fs.readdirSync(path.join(SCSS, 'themes'))
     .filter((d) => !d.startsWith('_') && fs.existsSync(path.join(SCSS, 'themes', d, '_theme.scss')))
     .sort();
+  // El sitio solo con los temas que llevan su capa (ver la cabecera).
+  const temasSitio = temas.filter((t) => llevaCapaSitio(path.join(SCSS, 'themes', t)));
+  if (!temasSitio.length) throw new Error('ningún tema lleva la capa del sitio (`@include syx-bundle-site(...)` en su _setup.scss): las páginas no tendrían hoja');
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
   const salidas = new Map(); // fichero → contenido
   const poda = {};
 
-  // Una familia = un bundle compilado en los siete temas y partido en piezas.
-  async function familia(nombre, fuentePorTema, extra = []) {
+  // Una familia = un bundle compilado en sus temas (todos, por defecto) y
+  // partido en piezas.
+  async function familia(nombre, fuentePorTema, extra = [], deTemas = temas) {
     const piezas = [];
-    for (const tema of temas) piezas.push({ tema, ...partir(await compilar(fuentePorTema(tema)), `${nombre}/${tema}`) });
+    for (const tema of deTemas) piezas.push({ tema, ...partir(await compilar(fuentePorTema(tema)), `${nombre}/${tema}`) });
     // El CSS con capa tiene que ser el mismo en todos los temas: es lo que se
     // publica una vez. Si un mixin vuelve a decidir por tema al compilar, se
     // para aquí con el bloque que difiere.
@@ -300,7 +316,7 @@ async function main() {
     if (!fs.existsSync(f)) continue;
     for (const m of fs.readFileSync(f, 'utf8').matchAll(/--[a-z][\w-]*/g)) citados.add(m[0]);
   }
-  const site = await familia('site', (t) => ({ fichero: path.join(SCSS, `styles-theme-${t}.scss`) }), citados);
+  const site = await familia('site', (t) => ({ fichero: path.join(SCSS, `styles-theme-${t}.scss`) }), citados, temasSitio);
   // Un nivel más hondo que dist/: las url() relativas (las fuentes) suben uno más.
   const enSite = (css) => css.replace(/url\((["']?)\.\.\//g, 'url($1../../');
   salidas.set('site/site.min.css', enSite(site.orden + site.compartido));
@@ -320,15 +336,15 @@ async function main() {
   for (const [f, css] of salidas) hojas[f] = medir(css);
   const suma = (lista) => lista.reduce((a, f) => ({ raw: a.raw + hojas[f].raw, gzip: a.gzip + hojas[f].gzip, brotli: a.brotli + hojas[f].brotli }), { raw: 0, gzip: 0, brotli: 0 });
   const paginas = {};
-  for (const t of temas) {
+  for (const t of temasSitio) {
     const lista = ['site/site.min.css', `site/site.${t}.tokens.min.css`];
     paginas[`páginas · ${t}`] = { hojas: lista, ...suma(lista) };
   }
-  for (const t of temas) paginas[`cambiar a ${t}`] = { hojas: [`site/site.${t}.tokens.min.css`], ...suma([`site/site.${t}.tokens.min.css`]) };
+  for (const t of temasSitio) paginas[`cambiar a ${t}`] = { hojas: [`site/site.${t}.tokens.min.css`], ...suma([`site/site.${t}.tokens.min.css`]) };
   paginas['theme-builder'] = { hojas: ['site/site.builder.min.css'], ...suma(['site/site.builder.min.css']) };
   // Referencia: lo que cargaban las páginas antes, la hoja showroom de css/.
   const referencia = {};
-  for (const t of temas) {
+  for (const t of temasSitio) {
     const f = path.join(ROOT, 'css', `styles-theme-${t}.css`);
     if (fs.existsSync(f)) referencia[`css/styles-theme-${t}.css`] = medir(fs.readFileSync(f));
   }

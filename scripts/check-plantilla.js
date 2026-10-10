@@ -12,8 +12,9 @@
  * QUÉ HACE
  * Copia el árbol a un directorio temporal (scss/, scripts/, contracts/ y lo
  * que leen los guardianes; node_modules enlazado), instancia la plantilla
- * como un tema más siguiendo sus propias instrucciones —copiar la carpeta y
- * cambiar «template» por el nombre— y la compila dos veces:
+ * como un tema más con lo mismo que usa `npm run theme:new`
+ * (scripts/lib/plantilla-tema.js: copiar sus .scss y poner el nombre en los
+ * identificadores) y la compila dos veces:
  *
  *   plantilla-prueba   tal cual, como la usaría un producto (sin la capa del
  *                      sitio). Sobre ella:
@@ -29,6 +30,13 @@
  *   plantilla-sitio    con la capa del sitio activada como dice su _setup:
  *       · check:setups --temas example-01,plantilla-sitio   las mismas
  *         clases que un tema real
+ *   las dos juntas, con los temas reales:
+ *       · build-dist.js   lo que corre `prepare` (npm pack, npm publish e
+ *         instalación desde git): la plantilla trae bundle-docs y bundle-core
+ *         y entra en el paquete; sin la capa del sitio se queda fuera de
+ *         dist/site/, y con ella entra. Hasta octubre de 2026 un tema hecho
+ *         con la plantilla tumbaba el build, el pack y la instalación, y aquí
+ *         no se veía porque nadie compilaba sus bundles.
  *
  * Los guardianes se ejecutan desde la COPIA (sus propios scripts/, con su
  * ROOT), así que miden la plantilla y nada más: en el css/ de la copia solo
@@ -48,6 +56,7 @@ const { spawnSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const sass = require('sass');
 const { revisarTema, vivosEn } = require('./lib/consumo-tema');
+const plantilla = require('./lib/plantilla-tema');
 const postcss = require('postcss');
 
 const conservar = process.argv.includes('--conservar');
@@ -60,27 +69,21 @@ const REFERENCIA = 'example-01';
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'syx-plantilla-'));
 for (const d of ['scss', 'scripts', 'contracts', 'js']) fs.cpSync(path.join(ROOT, d), path.join(tmp, d), { recursive: true });
 for (const f of ['package.json']) fs.copyFileSync(path.join(ROOT, f), path.join(tmp, f));
-fs.symlinkSync(path.join(ROOT, 'node_modules'), path.join(tmp, 'node_modules'), 'dir');
+// En Windows un enlace simbólico pide permisos de administrador o el modo
+// desarrollador (EPERM); una unión de directorio, no, y para node_modules hace
+// lo mismo. En el resto de sistemas 'junction' se ignora.
+fs.symlinkSync(path.join(ROOT, 'node_modules'), path.join(tmp, 'node_modules'), process.platform === 'win32' ? 'junction' : 'dir');
 fs.mkdirSync(path.join(tmp, 'css'));
 
-// ─── 2 · Instanciar la plantilla, como dice ella misma ──────────────────────
+// ─── 2 · Instanciar la plantilla, como lo hace theme:new ────────────────────
 
-const PLANTILLA = path.join(tmp, 'scss', 'themes', '_template');
 function instanciar(nombre, { sitio }) {
-  const dir = path.join(tmp, 'scss', 'themes', nombre);
-  fs.mkdirSync(dir);
-  for (const f of ['_theme.scss', '_setup.scss']) {
-    let s = fs.readFileSync(path.join(PLANTILLA, f), 'utf8').replace(/\btemplate\b/g, nombre);
-    if (sitio) {
-      // Las dos líneas que el _setup de la plantilla dice descomentar.
-      s = s.replace(/^\/\/ (@use '\.\.\/\.\.\/site\/bundle-site' as \*;)/m, '$1')
-        .replace(new RegExp(`^// (@include syx-bundle-site\\(${nombre}\\);)`, 'm'), '$1');
-    }
-    fs.writeFileSync(path.join(dir, f), s);
-  }
-  // Punto de entrada, igual que los de los temas reales.
-  const entrada = fs.readFileSync(path.join(ROOT, 'scss', `styles-theme-${REFERENCIA}.scss`), 'utf8').replaceAll(REFERENCIA, nombre);
-  fs.writeFileSync(path.join(tmp, 'scss', `styles-theme-${nombre}.scss`), entrada);
+  plantilla.instanciar({
+    scssDir: path.join(tmp, 'scss'),
+    nombre,
+    // Las dos líneas que el _setup de la plantilla dice descomentar.
+    transformar: (s, f) => (sitio && f === '_setup.scss' ? plantilla.activarCapaSitio(s, nombre) : s),
+  });
 }
 instanciar(TEMA, { sitio: false });
 instanciar(SITIO, { sitio: true });
@@ -140,6 +143,19 @@ comprobar('check:themes --strict — las dos entradas al modo oscuro', () => gua
 comprobar('check:modo-claro — elegir modo no depende del sistema operativo', () => guardian('check-modo-claro.js'));
 comprobar('check:contraste — WCAG 2.2 AA en los cuatro estados', () => guardian('check-contraste.js'));
 comprobar(`check:setups — las mismas clases que ${REFERENCIA} (con la capa del sitio)`, () => guardian('check-setups.js', ['--temas', `${REFERENCIA},${SITIO}`]));
+
+// Lo que corre `prepare`: si falla aquí, falla `npm i` desde git para quien
+// haya creado un tema con la plantilla. Se ejecuta sobre la copia entera
+// (los temas reales y las dos instancias), y se comprueba qué salió.
+comprobar('build-dist — la plantilla entra en el paquete, y en el sitio solo con su capa', () => {
+  guardian('build-dist.js', ['--quiet']);
+  const dist = (f) => fs.existsSync(path.join(tmp, 'dist', f));
+  const faltan = [TEMA, SITIO].flatMap((t) => [`${t}.full.min.css`, `${t}.core.min.css`, `${t}.tokens.min.css`]).filter((f) => !dist(f));
+  if (faltan.length) throw new Error(`no salen en dist/: ${faltan.join(', ')}`);
+  if (!dist(`site/site.${SITIO}.tokens.min.css`)) throw new Error(`con la capa del sitio, ${SITIO} no entra en dist/site/`);
+  if (dist(`site/site.${TEMA}.tokens.min.css`)) throw new Error(`sin la capa del sitio, ${TEMA} entra en dist/site/`);
+  return `${TEMA} y ${SITIO} en el paquete · solo ${SITIO} en dist/site/`;
+});
 
 // ─── 4 · Cada línea de la plantilla tiene lector ────────────────────────────
 

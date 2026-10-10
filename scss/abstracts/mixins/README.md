@@ -472,6 +472,20 @@ fallback to webfont does not shift the layout. Families and weights live in
 // …and the weight goes in font-weight, not in the family name.
 ```
 
+### `syx-font-external($family, $fallback-stack, $source: null)`
+
+For a family SYX does not ship and the page loads elsewhere (a Google Fonts
+`<link>`, a CDN). Emits no `@font-face`: it leaves a
+`/* syx-font-external: … */` marker in expanded CSS (compressed output drops
+it) so `check:setups` knows the family is loaded on purpose. The fallback stack
+must end in a generic family, and the token must end with that same stack.
+A family that is in `$syx-fonts` is a compile error: use `syx-font()`.
+
+```scss
+@include syx-font-external("Public Sans", (Arial, sans-serif), "Google Fonts");
+// token: "Public Sans", Arial, sans-serif
+```
+
 ### `font-family($name, $path, $weight, $style, $exts: woff2)`
 
 A single `@font-face` for a font of your own (woff2 only by default, with

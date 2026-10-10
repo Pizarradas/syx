@@ -17,7 +17,12 @@
         "contracts/validation-report.md",
         "contracts/resolved-tokens.json",
         "component-registry.json",
-        "contracts/dtcg/"
+        "contracts/dtcg/",
+        "contracts/figma/",
+        "contracts/lint-contract.json",
+        "contracts/runtime-tokens.json",
+        "contracts/token-contract.json",
+        "contracts/token-usage-map.json"
       ]
     },
     "pr": {
@@ -35,7 +40,8 @@
         "tokens.json",
         "_agents/",
         "*.md",
-        "mind-system/knowledges/"
+        "mind-system/knowledges/",
+        "docs.html"
       ]
     },
     "human": {
@@ -88,6 +94,9 @@
     "El patrón `*.md` está en `pr` desde la auditoría de 2026-10 II (antes en `auto`): la documentación cambia lo que leen personas y agentes, así que la revisa alguien, pero un error se ve en el diff. Lo que además es ley —gobernanza, constitución, reglas Atlas, la escalera de precedencia— se nombra explícitamente en `human`.",
     "`**/CLAUDE*.md`, `**/AGENTS*.md`, `**/GEMINI*.md` y `**/trust.json` son `human` estén donde estén, y un patrón por nombre gana a cualquier carpeta. En la auditoría de 2026-10 II, `CLAUDE.local.md`, `scss/CLAUDE.md`, `AGENTS.override.md` salían `auto` por ser markdown (Claude Code y otros agentes los cargan como instrucciones), y escribir un `_agents/contracts/trust.json` anidado engañaba al hook para que tomara `_agents/` como raíz.",
     "`contracts/capabilities.json` es `human` aunque el `default` ya lo daría: se nombra para que nadie lo saque de ahí por error. Es la vara con la que ROADMAP descarta propuestas; si el agente pudiera escribirlo, podría marcar `open` lo que quiere proponer. ROADMAP entrega las entradas nuevas y una persona las añade.",
+    "Los derivados de un cambio de componente son `auto` desde la fricción 8, con la razón de css/: los regenera un script y un guardián de `npm run check` comprueba que lo commiteado es lo generado. contracts/figma/ lo escribe scripts/export-figma.js y lo vigila check:figma, que además falla si en la carpeta hay un fichero que el exportador no genera; contracts/runtime-tokens.json, token-contract.json, lint-contract.json y token-usage-map.json (y validation-report.md, que ya era `auto` sin guardián) los escribe enteros scripts/syx-validate.js --report y los vigila check:contratos (syx-validate.js --check). Antes caían al `default`, y toda propuesta de componente, que los regenera, salía `human` en propose.js y en el job de confianza.",
+    "lint-contract.json es `auto` porque es un informe, no una decisión: el estado de cada variable heredada (migrate, keep, kill) sale de contracts/legacy-map.json, que sigue en `human` por el `default`. Quien migra cambia el mapa; el informe se regenera.",
+    "docs.html es `pr`, no `auto`, aunque una parte se genere: la referencia de componentes (entre `<!-- syx:ref:inicio -->` y `<!-- syx:ref:fin -->`, y su índice) la escribe scripts/build-docs-componentes.js y la vigila check:docs-componentes, pero el resto de la página —la galería, la guía, las tablas de modos y de herramientas— está escrito a mano y ningún guardián lo compara con nada. En `auto`, un agente podría reescribir esa prosa sin que la viera nadie con la excusa de regenerar la referencia. En `pr`, una regeneración llega dentro de la propuesta y una persona la ve.",
     "El córtex (`mind-system/knowledges/`) es `pr`: los modos cargan sus módulos como conocimiento Always, así que un cambio ahí cambia lo que hace un agente. Hasta 2026-10 II era `auto` por `*.md`."
   ]
 }

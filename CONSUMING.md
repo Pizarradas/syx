@@ -88,7 +88,12 @@ Stop at the first step that does the job.
    components in its markup; its own CSS covers only what is new (section 4–5). Say so where
    it is born — on the line above its first rule, which SYX pieces were checked and why they
    don't fit: `/* syx-reuse: checked mol-card, layout-grid — needs a two-column header */`.
-   `syx-scan` reports a project block without it (`sin-consulta`).
+   `syx-scan` reports a project block without it (`sin-consulta`): *media* when the block
+   paints (colour, type, border, shadow, `position`, a custom property, an `@include`),
+   *baja* when it only places things (`display`, `grid-*`, `gap`, `padding*`, `margin*`,
+   sizes, `flex*`, `align-*`/`justify-*`/`place-*`, `order`). Layout-only blocks can share one
+   line per file instead — `/* syx-reuse-file: app shell splits; layout-* covers the page only */`
+   — but a block that paints still needs its own `syx-reuse:` line even in that file.
 
 Never: ❌ add a modifier or element to a SYX block (`atom-btn--compact`) ✓, wrap a SYX class
 in an app selector to change it, or copy a SYX component's CSS into an app class.
@@ -229,6 +234,49 @@ existing token is allowed; reading `--component-*` in your own rules is not.
 You may override tokens that exist. You may not create new names under SYX's
 prefixes: a new token is `--lumen-*`. Detail: `THEMING-RULES.md` → *Overriding tokens from your app*.
 
+### Colours in JavaScript and canvas charts
+
+Every SYX colour is written in `oklch()`, and canvas libraries (ECharts, Chart.js, D3 drawing
+on a `<canvas>`) don't parse it. Don't copy the colours into your JS as hex, and don't resolve
+them by painting a pixel and reading `getImageData`: ask SYX for the value in the format the
+library takes.
+
+**In the browser** — `js/syx-colors.js` reads the token as the page resolves it (theme, dark
+mode and your token overrides included) and converts it in JS:
+
+```js
+import { resolveColor, resolveColors } from 'syx-design-system/js/syx-colors.js';
+
+const primary = resolveColor('--semantic-color-primary');                 // '#1e3aff'
+const accent = resolveColor('var(--lumen-chart-accent)', { format: 'rgb' }); // 'rgb(30, 58, 255)'
+const series = resolveColors(['--semantic-color-primary', '--semantic-color-state-success']);
+```
+
+Without a bundler, `<script type="module" src="node_modules/syx-design-system/js/syx-colors.js">`
+exposes the same functions as `window.SYX.resolveColor` / `window.SYX.resolveColors`.
+Options: `format` (`'hex'` default, `'rgb'`, `'oklch'`) and `scope` (the element whose context
+counts, for a container with its own theme or local overrides; default `<body>`). It accepts a
+token (`--x` or `var(--x)`) or any CSS colour. The value is a snapshot: when the mode changes
+(`data-theme`, `prefers-color-scheme`), call it again and update the chart.
+
+**In Node** (server-side rendering, build scripts, exporting a palette) the package answers
+from its contracts, per theme and mode:
+
+```js
+const syx = require('syx-design-system');
+syx.resolveColor('--semantic-color-primary', { theme: 'example-03', mode: 'dark', format: 'rgb' });
+// 'rgb(215, 70, 74)'
+syx.resolveColor('--semantic-color-primary', { detailed: true });
+// { token, theme, mode, value: 'oklch(0.498 0.282 266.24)', color, hex, rgb: [30, 58, 255], alpha, clipped }
+```
+
+Both convert with the CSS Color 4 matrices. Colours outside the sRGB gamut are **clipped** per
+channel (not chroma-reduced as CSS Color 4 gamut mapping does), so a very saturated colour may
+differ slightly from what a wide-gamut screen paints; `detailed: true` reports `clipped`.
+Translucent colours come back as `rgba(…)` or 8-digit hex. Anything they cannot convert throws
+an error with the reason rather than returning a guess. `npm run check:colores` keeps the
+browser and Node conversions identical, token by token.
+
 ---
 
 ## 7. Names that agents invent (all wrong)
@@ -255,15 +303,27 @@ primitive → semantic → component; `--theme-*` is structural and may be read 
 ## 8. Checking the work
 
 ```bash
-npx syx-scan src                       # a folder: every .html .css .scss .vue .svelte .astro .jsx .tsx inside
+npx syx-scan src                       # a folder: every .html .css .scss .vue .svelte .astro .jsx .tsx .js .ts inside
 npx syx-scan src --fallar-si-media     # for CI: exit 1 on any alta or media finding
+npx syx-scan src --tema example-03     # compare against this theme (default: package.json "syx": { "theme" })
 ```
+
+It compares against the theme your app loads: `--tema <name>` (`--theme` also works), else
+`"syx": { "theme": "<name>" }` in the app's `package.json`, else `syx-sketch`. The report's
+first line says which one it used and why.
+
+In `.js`/`.ts` files it reads only the class literals your code puts in the DOM —
+`className = '…'`, `classList.add('…')` (and `remove`/`toggle`/`replace`/`contains`),
+`setAttribute('class', '…')`, `class="…"` inside a template string — and judges the ones with a
+SYX prefix exactly as in markup. Interpolated or concatenated pieces (`` `atom-btn--${size}` ``,
+`'atom-icon--' + name`) are not judged; `.min.js` files are skipped.
 
 It reports, against the installed version: classes with a SYX prefix that don't exist, invented
 modifiers, modifiers without their block, SYX tokens that don't exist, new tokens created under
 SYX's prefixes, `--primitive-*` read by the app, app rules that paint a SYX class, transitions
 without a reduced-motion exit, `@use` of the whole `scss/abstracts`, hand-written values that are
-already a token, expired fallbacks and `!important`. It does not judge literal lengths in your
+already a token, expired fallbacks, `!important`, and project blocks born without a
+`syx-reuse:` line (section 3, step 5). It does not judge literal lengths in your
 rules (rule 7) — that one is on you. With MCP, `validate_snippet` runs the rules *before* you write
 and `scan_for_drift` is the same scanner.
 
