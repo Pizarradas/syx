@@ -9,8 +9,10 @@
   // ================================================
   --semantic-font-family-primary:       var(--primitive-font-family-space-grotesk-regular);
   --semantic-font-family-primary-bold:  var(--primitive-font-family-space-grotesk-bold);
-  --semantic-font-family-heading:       var(--primitive-font-family-syne-bold);
-  --semantic-font-family-heading-md:    var(--primitive-font-family-syne-medium);
+  // Los títulos heredan la familia del tema: un tema que no los declara ya no
+  // nombra Syne sin cargarla (check:setups).
+  --semantic-font-family-heading:       var(--semantic-font-family-primary-bold);
+  --semantic-font-family-heading-md:    var(--semantic-font-family-heading);
   --semantic-font-family-mono:          "Courier New", Courier, monospace;
 
   // FONT SIZES — UI TEXT
