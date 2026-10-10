@@ -3,34 +3,43 @@
 @use "../abstracts/index" as *;
 // ===============================================
 
-// atom: label
+// atom: scope-label
+// ===============================================
+// A small scope marker: --1, --2, --3 (padding steps) and --primary (radius).
+// Usage: <span class="atom-scope-label atom-scope-label--1">Scope</span>
+//
+// Until October 2026 this marker was `.atom-label --scope-1…3 / --primary`,
+// and scss/atoms/_form.scss also declares `.atom-label` as the form field
+// label: the base class of a scope marker carried a form label's block layout
+// and typography. The old modifiers stay as deprecated aliases so nothing
+// breaks; new markup uses `atom-scope-label`.
 // ===============================================
 @mixin atom-label($theme: null) {
   @layer syx.atoms {
-  .atom-label {
+  .atom-scope-label {
+    display: inline-block;
+    font-size: var(--component-label-font-size);
+    line-height: var(--component-label-line-height);
+  }
 
-    // &--primary
-    &--primary {
-      @include border-radius(var(--component-label-border-radius));
-    }
+  .atom-scope-label--primary,
+  .atom-label--primary { // deprecated alias
+    @include border-radius(var(--component-label-border-radius));
+  }
 
-    // &--scope
-    &--scope {
-      // &-1
-      &-1 {
-        @include padding(var(--component-label-padding-sm));
-      }
+  .atom-scope-label--1,
+  .atom-label--scope-1 { // deprecated alias
+    @include padding(var(--component-label-padding-sm));
+  }
 
-      // &-2
-      &-2 {
-        @include padding(var(--component-label-padding-md)); 
-      }
+  .atom-scope-label--2,
+  .atom-label--scope-2 { // deprecated alias
+    @include padding(var(--component-label-padding-md));
+  }
 
-      // &-3
-      &-3 {
-        @include padding(var(--component-label-padding-lg)); 
-      }
-    }
+  .atom-scope-label--3,
+  .atom-label--scope-3 { // deprecated alias
+    @include padding(var(--component-label-padding-lg));
   }
   } // end @layer syx.atoms
 }
