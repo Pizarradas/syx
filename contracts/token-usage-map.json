@@ -848,6 +848,7 @@
         "scss/abstracts/tokens/components/_buttons.scss",
         "scss/abstracts/tokens/components/_forms.scss",
         "scss/abstracts/tokens/components/_tables.scss",
+        "scss/abstracts/tokens/semantic/_typography.scss",
         "scss/base/helpers/_fonts.scss",
         "scss/base/_reset.scss",
         "scss/utilities/_accessibility.scss"
@@ -1748,6 +1749,7 @@
     "--semantic-font-family-heading": {
       "usages": [
         "scss/abstracts/tokens/components/_titles.scss",
+        "scss/abstracts/tokens/semantic/_typography.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/base/_elements.scss",
         "scss/base/_reset-tokens.scss",
@@ -2224,18 +2226,6 @@
         "scss/abstracts/tokens/semantic/_typography.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
-      ]
-    },
-    "--primitive-font-family-syne-bold": {
-      "usages": [
-        "scss/abstracts/tokens/semantic/_typography.scss",
-        "scss/themes/example-01/_theme.scss",
-        "scss/utilities/_text.scss"
-      ]
-    },
-    "--primitive-font-family-syne-medium": {
-      "usages": [
-        "scss/abstracts/tokens/semantic/_typography.scss"
       ]
     },
     "--primitive-font-size-xs": {
@@ -7310,6 +7300,17 @@
         "scss/themes/example-05/_theme.scss",
         "scss/themes/example-06/_theme.scss",
         "scss/themes/syx-sketch/_theme.scss"
+      ]
+    },
+    "--primitive-font-family-syne-bold": {
+      "usages": [
+        "scss/themes/example-01/_theme.scss",
+        "scss/utilities/_text.scss"
+      ]
+    },
+    "--primitive-font-family-syne-medium": {
+      "usages": [
+        "scss/themes/example-01/_theme.scss"
       ]
     },
     "--primitive-font-family-mono": {
