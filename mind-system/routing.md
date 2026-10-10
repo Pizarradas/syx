@@ -89,6 +89,13 @@ Tokens ≈ bytes / 3,5. Las cifras no se copian aquí a mano —se quedaban viej
 | `motion/08-ejecucion/cavalry-ae/` | | | · | | | | | | | |
 | `motion/08-ejecucion/blender/` | | | · | | | | | | | |
 | `motion/09-critica/critica.md` | | | ○ | | | | · | | | |
+| `isometric/01-fundamentos/` | | | · | | | | | | | |
+| `isometric/01-fundamentos/fundamentos.md` | | | · | | | | · | | | |
+| `isometric/02-svg-web/` | | | · | | | | | | | |
+| `isometric/02-svg-web/svg-web.md` | | | · | | | · | | | | |
+| `isometric/03-animacion/` | | | · | | | | | | | |
+| `isometric/04-blender/` | | | · | | | | | | | |
+| `isometric/05-prompts-imagen/` | | | · | | | | | | | |
 | `vendors/awesome-design/` | · | | · | | · | | | | · | |
 
 ---
@@ -140,6 +147,9 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | | `08-ejecucion/gsap/04-glosario/index` | SKETCH · CREATIVE |
 | | `08-ejecucion/rive/*` · `cavalry-ae/*` · `blender/*` | CREATIVE |
 | | `09-critica/critica` | CREATIVE · AUDIT |
+| `isometric/` | `01-fundamentos/*` | CREATIVE · AUDIT (`fundamentos`) |
+| | `02-svg-web/*` | CREATIVE · UI (`svg-web`) |
+| | `03-animacion/*` · `04-blender/*` · `05-prompts-imagen/*` | CREATIVE |
 | `vendors/` | `awesome-design/*` | SKETCH · CREATIVE · THEME · BRAND |
 
 **Sin modo, a propósito** — son navegación o andamiaje de autor, no corpus:
@@ -153,14 +163,18 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | `motion/00-indice/fuentes.md` | Bibliografía comentada del dominio |
 | `motion/08-ejecucion/gsap/index.md` · `gsap/00-indice/mapa-del-sistema.md` | Mapa de la capa GSAP |
 | `motion/08-ejecucion/gsap/05-plantillas/plantilla-patron.md` | Schema para escribir un patrón nuevo |
+| `isometric/index.md` | Mapa del dominio isométrico y sus estratos |
+| `isometric/00-indice/fuentes.md` · `isometric/00-indice/prompt-universal.md` | Fuentes y contradicciones; versión exportable del dominio para IAs sin archivos |
 
 Cualquier otro módulo que acabe sin modo en el índice inverso es un huérfano y hay que resolverlo: enrutarlo a un modo, o retirarlo.
 
 ---
 
-## Dos notas de precedencia dentro del córtex
+## Tres notas de precedencia dentro del córtex
 
 **Motion.** `ui/motion-principles.md` es el suelo físico de la UI web — easing, duración, propiedades compuestas por GPU, `prefers-reduced-motion`, escrito en tokens `--semantic-*` — y **prevalece sobre todo el dominio `motion/` para código de `scss/`**. Una receta de GSAP o de CSS que rompa un principio físico está mal, no está siendo audaz. Dentro del dominio `motion/` manda su propia escalera (accesibilidad > propósito > sistema > dirección creativa > preferencia técnica), y `07-accesibilidad/` va delante de cualquier patrón. CREATIVE carga el suelo siempre, el módulo de entrada de cada estrato cuando algo se mueve (y el resto del estrato solo si ese módulo lo pide) y la capa GSAP solo cuando hay librería, en ese orden y a propósito. Un encargo que solo toca uno o dos estratos carga bastante menos que el peor caso; cuánto, lo imprime `npm run check:conocimiento` (ver *Presupuesto de contexto*).
+
+**Isométrico.** `isometric/` entra siempre **On request** y de estrato en estrato: primero `01-fundamentos/`, después solo el motor que el encargo decide (`02-svg-web/`, `04-blender/` o `05-prompts-imagen/`) y `03-animacion/` si algo se mueve. Su animación está por debajo de `ui/motion-principles.md` y de `motion/07-accesibilidad/`, y su CSS es prototipo: dentro de `scss/` se reescribe con el sistema. El control de calidad de `01-fundamentos/fundamentos.md` es **asesor** en AUDIT, como la crítica de motion.
 
 **Prestigio.** `branding/perception-of-prestige.rules.md` trae 18 reglas con su propio formato de informe. Cuando AUDIT las usa, lo que encuentra es **asesor**: no lleva número R, no aparece en la capa 1 del informe y no convierte por sí solo un PASS en FAIL. Mezclar una recomendación de percepción con una violación de contrato devalúa las dos.
 

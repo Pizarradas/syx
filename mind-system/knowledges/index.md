@@ -16,6 +16,8 @@ knowledges/
                Es el suelo de BRAND: los siete ejes de una identidad se deciden aquí
   motion/    → El movimiento como disciplina: propósito, carácter, teoría, tipografía cinética,
                sistema, accesibilidad, ejecución (CSS, JS, GSAP, Rive, Cavalry/AE, Blender) y crítica
+  isometric/ → Ilustración flat isométrica: proyección exacta, tres tonos, profundidad, control de
+               calidad, y sus motores (SVG/CSS desde datos, Blender, prompts de imagen) y su animación
 ```
 
 ---
@@ -93,6 +95,19 @@ Dominio organizado en estratos, en el orden en que se toma una decisión de movi
 | `07-accesibilidad/` | Reduced motion, destellos, pausa, riesgo vestibular | UX, CREATIVE, UI, AUDIT |
 | `08-ejecucion/` | `css/` · `js/` · `gsap/` (fundamentos, capacidades, 10 patrones, glosario) · `rive/` · `cavalry-ae/` · `blender/` | CREATIVE; UI y SKETCH (on-demand) |
 | `09-critica/` | Protocolo de visionado, diagnóstico, rúbrica | CREATIVE; AUDIT (on-demand, asesor) |
+
+### `isometric/` — Ilustración flat isométrica
+
+Heros, infografías, iconos y diagramas en volumen. El principio es *se calcula, no se dibuja*: la escena se describe como datos o se modela en Blender, y las herramientas del dominio (`02-svg-web/herramientas/`, `04-blender/herramientas/`) la proyectan con la misma fórmula de tres tonos en las tres vías. El movimiento se subordina a `ui/motion-principles.md` y `motion/07-accesibilidad/`. Mapa completo: `isometric/index.md`.
+
+| Estrato | Contenido | Cargado por |
+|--------|-----------|-------------|
+| `index.md` · `00-indice/` | Mapa, fuentes y contradicciones, prompt universal exportable | — |
+| `01-fundamentos/` | Especificación, ejes, geometría, composición, control de calidad, puente con SYX · matemáticas · color y luz | CREATIVE (on-demand); AUDIT (on-demand, asesor) |
+| `02-svg-web/` | Escena JSON → SVG, estructura animable de tres capas, escáner · CSS 3D · a11y y SVGO | CREATIVE (on-demand); UI (on-demand) |
+| `03-animacion/` | Animar en espacio de mundo, destino, guion · recetas GSAP/CSS · Lottie y Rive | CREATIVE (on-demand) |
+| `04-blender/` | Cámara exacta, shader de tres tonos, exportación a SVG por piezas o a capas PNG | CREATIVE (on-demand) |
+| `05-prompts-imagen/` | Prompts para modelos de imagen, series, Blender como estructura · plantilla | CREATIVE (on-demand) |
 
 ### `vendors/` — Bibliotecas de referencia externas
 

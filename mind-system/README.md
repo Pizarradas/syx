@@ -59,7 +59,7 @@ mind-system/
     05-audit.md        protocolo AUDIT de tres capas
 
   atlas-rules/         DOMINIO INVITADO — reglas editoriales de ATLAS (00–12)
-  knowledges/          el corpus: ux · ui · front · syx · branding · motion · vendors
+  knowledges/          el corpus: ux · ui · front · syx · branding · motion · isometric · vendors
 ```
 
 Los modos **no** viven aquí. Viven en `_agents/modes/`, en un único ejemplar. Cada uno abre con su bloque `Trust` y, desde el acople, con un bloque `Knowledge` que dice qué módulos de este córtex carga y cuándo.
