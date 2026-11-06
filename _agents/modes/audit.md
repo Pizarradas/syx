@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `syx/component-patterns.md` · `syx/scss-pipeline.md` · `syx/token-system.md` — naming, structure and tier checks.
 > · **When relevant:** `front/accessibility-wcag.md` on HTML audits · `front/mobile-first.md` and `front/progressive-enhancement.md` on CSS audits, to catch `max-width` queries and layers that fail open · `front/size-models-checklist.md` when auditing type or spacing tokens · `syx/theme-system.md` when the subject is a `_theme.scss` · `motion/07-accesibilidad/accesibilidad.md` when the subject animates (WCAG 2.2.2, 2.3.1).

@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `syx/token-system.md` — to confirm the replacement token exists in the right tier.
 > · **When relevant:** `syx/component-patterns.md` to establish the scope in which the legacy variable is used.

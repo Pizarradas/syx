@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `ui/motion-principles.md` — the physical layer (easing, duration, GPU-composited properties, reduced-motion). It outranks any library pattern: a GSAP recipe that breaks these is wrong, not clever. · `branding/perception-of-prestige-foundations.md`.
 > · **When relevant:** `ui/color-theory.md` · `ui/typography-systems.md` · `ui/practical-ui.md` · `syx/component-patterns.md` as a naming guide, applied loosely.

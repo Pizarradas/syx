@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.1.0] — 2026-11-06
+
+### Added — auditoría de 2026-11, tanda 3
+
+- **Tipos y ESM**: `index.d.ts`, `js/syx-*.d.ts` e `index.mjs`. `import { getToken } from 'syx-design-system'` ya funciona: antes daba `SyntaxError`.
+- **`SECURITY.md`, `CONTRIBUTING.md` y *Versioning* en el README**: qué es estable, qué entra en cada tipo de versión y cómo se deprecia.
+
+### Changed
+
+- **El paquete** deja de llevar `_agents/` salvo `_agents/modes/`, y los scripts `check-*`, `eval-*`, `patch-*` y el hook: 121 ficheros internos, con ejemplos de lo que está mal al alcance de cualquier agente que leyera `node_modules`. Los modos dicen qué hacer si un módulo del córtex no existe.
+- **Evals**: el workflow corre con `--estricto`: una ejecución con 0 aprobadas salía en verde.
+- **Presupuesto de contexto**: `check:conocimiento` mide también la ruta de `AGENTS.md` con `decision-record.md`, con techo de 26 000 tokens. `AGENTS.md` deja de mandar leer `contracts/rules.json`, que `CLAUDE.md` mandaba no leer.
+
 ### Fixed — auditoría de 2026-11, tanda 2
 
 - **`check:compilado`**: para R01 decide la capa donde acaba la declaración, no el fichero que la escribió. `$p: unquote('var(--primitive-x)'); @include padding($p)` blanqueaba el primitivo porque lo emitía un mixin. Falla además si un `--primitive-*`, `--semantic-*` o `--theme-*` se declara en una ruta `pr`: R11 mira qué nombre se lee, no quién lo declara.

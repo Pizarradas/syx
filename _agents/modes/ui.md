@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `syx/scss-pipeline.md` · `syx/component-patterns.md` · `syx/token-system.md` · `front/mobile-first.md`.
 > · **When relevant:** `ui/refactoring-ui.md` for spacing, colour and composition calls · `ui/typography-systems.md` when the component carries text · `ui/motion-principles.md` when it transitions or animates — the physical floor, written in SYX tokens · `motion/02-proposito/patrones-de-transicion.md` when it transitions between containers or views · `motion/07-accesibilidad/accesibilidad.md` when it animates beyond a colour change · `front/css-architecture.md` for cascade and specificity calls.
