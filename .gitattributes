@@ -1,0 +1,15 @@
+# Todo fichero de texto se guarda y se extrae con LF, también en Windows.
+#
+# Sin esto, unos ficheros iban con CRLF y otros con LF según quién los tocase, y
+# cuatro guardianes que comparan bytes (check:tokens-json, check:docs-componentes,
+# check:why-syx, check:codeowners) fallaban a quien clonaba en Windows. Un generador
+# siempre escribe LF: la extracción tiene que coincidir con lo que generaría.
+* text=auto eol=lf
+
+# La excepción: PowerShell en Windows espera CRLF.
+*.ps1 text eol=crlf
+
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary
