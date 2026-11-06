@@ -98,11 +98,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" \
-            --title "SYX ${GITHUB_REF_NAME}" \
-            --notes-file "$RUNNER_TEMP/notas.md" \
-            --verify-tag \
-            ./*.tgz "syx-dist-${GITHUB_REF_NAME}.tar.gz"
+          # Si ya existe, es un reintento: npm no llegó a publicarse y hay que poder
+          # relanzar sin borrar la release.
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            echo "La release ya existe: se sigue con npm."
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              --title "SYX ${GITHUB_REF_NAME}" \
+              --notes-file "$RUNNER_TEMP/notas.md" \
+              --verify-tag \
+              ./*.tgz "syx-dist-${GITHUB_REF_NAME}.tar.gz"
+          fi
 
       - name: Publicar en npm (solo si el repositorio lo ha decidido)
         if: vars.PUBLICAR_NPM == 'true'
