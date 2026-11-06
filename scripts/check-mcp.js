@@ -217,6 +217,38 @@ comprobar('find_capability encuentra por concepto, no por nombre, y dice lo que 
   if (c.found !== false || !c.note) throw new Error('una consulta sin resultado no avisa de que eso no prueba nada');
 });
 
+comprobar('ping responde, como exige la especificación', async () => {
+  const r = await rpc('ping');
+  if (r.error) throw new Error('ping no está implementado');
+});
+
+comprobar('un argumento obligatorio ausente es un error, no un falso limpio', async () => {
+  const r = await rpc('tools/call', { name: 'scan_for_drift', arguments: {} });
+  if (!r.result?.isError) throw new Error('`scan_for_drift {}` debería fallar');
+});
+
+comprobar('un modo que no existe es un error', async () => {
+  const r = await rpc('tools/call', { name: 'get_token', arguments: { token: '--semantic-color-primary', mode: 'sepia' } });
+  if (!r.result?.isError) throw new Error('aceptó mode: sepia');
+});
+
+comprobar('scan_for_drift no sale de la carpeta del proyecto ni lee lo que no es código', async () => {
+  for (const f of ['/etc/passwd', 'package.json']) {
+    const r = await rpc('tools/call', { name: 'scan_for_drift', arguments: { files: [f] } });
+    if (!r.result?.isError) throw new Error(`leyó ${f}`);
+  }
+});
+
+comprobar('una errata en un token sugiere el token correcto', async () => {
+  const r = salida(await rpc('tools/call', { name: 'get_token', arguments: { token: '--semantic-color-primry' } }));
+  if (r.suggestions?.[0] !== '--semantic-color-primary') throw new Error(`sugiere ${r.suggestions?.[0]}`);
+});
+
+comprobar('validate_snippet normaliza la ruta', async () => {
+  const r = salida(await rpc('tools/call', { name: 'validate_snippet', arguments: { code: '.a { position: fixed; }', path: 'scss/abstracts/mixins/../../atoms/_btn.scss' } }));
+  if (r.valid) throw new Error('`..` heredó los permisos de los mixins');
+});
+
 comprobar('una herramienta desconocida da error de protocolo, no un cuelgue', async () => {
   const r = await rpc('tools/call', { name: 'no_existe', arguments: {} });
   if (!r.error) throw new Error('deberia devolver error');

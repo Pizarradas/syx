@@ -774,4 +774,6 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
   };
 }
 
-module.exports = { escanear, trozosCss, clasesDe, clasesDeScript, varsConFallback, vaciar, distancia };
+const ESCANEABLE = /^(?!.*\.min\.js$).*\.(html?|css|scss|vue|svelte|astro|jsx|tsx|m?js|cjs|m?ts|cts)$/i;
+
+module.exports = { ESCANEABLE, escanear, trozosCss, clasesDe, clasesDeScript, varsConFallback, vaciar, distancia };

@@ -33,8 +33,10 @@
 
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const { crearConsulta } = require('./lib/consulta');
+const { ESCANEABLE } = require('./lib/escaner');
 
 const ROOT = path.join(__dirname, '..');
 const syx = crearConsulta({ root: ROOT });
@@ -149,7 +151,7 @@ const HERRAMIENTAS = [
       },
       required: ['files'],
     },
-    run: (a) => syx.scan(a),
+    run: (a) => syx.scan({ ...a, files: ficherosEscaneables(a.files) }),
   },
 
   {
@@ -229,8 +231,9 @@ function manejar(msg) {
 
   if (method === 'tools/call') {
     const h = HERRAMIENTAS.find((x) => x.name === params?.name);
-    if (!h) return fallar(id, -32601, `Herramienta desconocida: ${params?.name}`);
+    if (!h) return fallar(id, -32602, `Herramienta desconocida: ${params?.name}`);
     try {
+      argumentosValidos(h, params.arguments || {});
       const salida = h.run(params.arguments || {});
       return responder(id, { content: [{ type: 'text', text: JSON.stringify(salida, null, 2) }] });
     } catch (e) {
@@ -243,7 +246,45 @@ function manejar(msg) {
     }
   }
 
+  if (method === 'ping') return responder(id, {});
+
   fallar(id, -32601, `Método no soportado: ${method}`);
+}
+
+/**
+ * Lo que declara inputSchema se hace cumplir antes de ejecutar. Sin esto,
+ * `scan_for_drift {}` respondía `total: 0`, un «limpio» sin haber mirado nada, y
+ * `get_token {mode: 'sepia'}` daba `found: true` con el valor de light.
+ */
+function argumentosValidos(h, args) {
+  const { required = [], properties = {} } = h.inputSchema;
+  for (const k of required) {
+    if (args[k] === undefined) throw new Error(`Falta el argumento obligatorio \`${k}\`.`);
+  }
+  for (const [k, v] of Object.entries(args)) {
+    const def = properties[k];
+    if (def?.enum && !def.enum.includes(v)) throw new Error(`\`${k}\` tiene que ser uno de: ${def.enum.join(', ')}.`);
+    if (def?.type === 'array' && (!Array.isArray(v) || !v.length)) throw new Error(`\`${k}\` tiene que ser una lista con algo dentro.`);
+    if (def?.type === 'string' && typeof v !== 'string') throw new Error(`\`${k}\` tiene que ser un texto.`);
+  }
+}
+
+// Un servidor MCP lee lo que le pida quien lo llama, y ese puede ser un agente
+// manipulado: se limita a ficheros de código bajo la carpeta del proyecto.
+const MAX_BYTES = 5 * 1024 * 1024;
+function ficherosEscaneables(files) {
+  // Con el servidor arrancado desde un clon, SYX_SCAN_ROOT dice dónde está la app.
+  const raiz = fs.realpathSync(process.env.SYX_SCAN_ROOT || process.cwd());
+  return files.map((f) => {
+    const abs = path.resolve(raiz, f);
+    if (!fs.existsSync(abs)) throw new Error(`No se puede escanear ${f}: no existe.`);
+    const real = fs.realpathSync(abs);
+    if (real !== raiz && !real.startsWith(raiz + path.sep)) throw new Error(`No se puede escanear ${f}: está fuera de la carpeta del proyecto.`);
+    if (!ESCANEABLE.test(real)) throw new Error(`No se puede escanear ${f}: no es un fichero de marcado o estilos.`);
+    const s = fs.statSync(real);
+    if (!s.isFile() || s.size > MAX_BYTES) throw new Error(`No se puede escanear ${f}: no es un fichero normal de menos de 5 MB.`);
+    return real;
+  });
 }
 
 function main() {
