@@ -307,6 +307,11 @@ async function probar(c) {
   if (resultados.some((r) => r.c.seEscapaba)) console.log('\n   ¹ pasaba toda la cadena antes de la auditoría de octubre de 2026');
 
   const malos = resultados.filter((r) => r.estado !== 'parada' && r.estado !== 'saltado');
+  // Sin casos, «0 de 0 paradas» era un verde. Con --solo se pide un subconjunto.
+  if (!process.argv.includes('--solo') && resultados.length < 30) {
+    console.log(`\n❌ Solo ${resultados.length} casos de mutación (suelo: 30): ¿se han borrado?`);
+    process.exit(1);
+  }
   for (const r of malos) console.log(`\n❌ ${r.c.id} — ${r.estado}: ${r.detalle}`);
   const saltados = resultados.filter((r) => r.estado === 'saltado').length;
   console.log(`\n   ${resultados.length - malos.length - saltados} de ${resultados.length} paradas${saltados ? ` · ${saltados} saltada(s) por --sin-navegador` : ''}${malos.length ? ` · ${malos.length} sin parar` : ''}.\n`);

@@ -154,6 +154,29 @@
           {
             "message": "px a pelo en un componente: no sigue la escala del tema ni la letra de quien lee. Usa un token o rem; si es un píxel físico, `// stylelint-disable-next-line unit-disallowed-list -- porqué` (Auditoría 2026-10 · acción 8)."
           }
+        ],
+        "color-named": [
+          "never",
+          {
+            "message": "Color con nombre en un componente: no sigue al tema ni al modo. Usa un token (auditoría 2026-11)."
+          }
+        ],
+        "function-disallowed-list": [
+          [
+            "rgb",
+            "rgba",
+            "hsl",
+            "hsla",
+            "hwb",
+            "lab",
+            "lch",
+            "oklab",
+            "oklch",
+            "color"
+          ],
+          {
+            "message": "Función de color literal en un componente: no sigue al tema ni al modo. Usa un token; si de verdad es fijo, `// stylelint-disable-next-line function-disallowed-list -- porqué` (auditoría 2026-11)."
+          }
         ]
       }
     }

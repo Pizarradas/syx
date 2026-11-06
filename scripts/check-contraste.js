@@ -56,8 +56,18 @@ function sugerir(vars, par, bg, base) {
   return null;
 }
 
+// Un contrato vaciado no es un contrato cumplido. Con `pares: []` o `minimo: 1`
+// esto daba verde: el suelo vive aquí y no en el fichero que se mide.
+const SUELO_DE_PARES = 100;
+const MINIMOS_WCAG = [3, 4.5];
+
 function main() {
   const json = process.argv.includes('--json');
+  const raros = CONTRATO.pares.filter((p) => !MINIMOS_WCAG.includes(p.minimo));
+  if (CONTRATO.pares.length < SUELO_DE_PARES || raros.length) {
+    console.error(`❌ contracts/contrast.json: ${CONTRATO.pares.length} pares (suelo: ${SUELO_DE_PARES}); mínimos fuera de WCAG AA: ${raros.map((p) => p.id).join(', ') || 'ninguno'}`);
+    process.exit(1);
+  }
   const ficheros = fs.readdirSync(CSS_DIR).filter((f) => /^styles-theme-.+\.css$/.test(f)).sort();
   const fallos = [], sinMedir = [];
   let medidas = 0;
