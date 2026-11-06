@@ -210,11 +210,11 @@
         <span class="atom-stat__label">Current&nbsp;version</span>
       </div>
       <div class="atom-stat">
-        <span class="atom-stat__number">19</span>
+        <span class="atom-stat__number">23</span>
         <span class="atom-stat__label">Atoms</span>
       </div>
       <div class="atom-stat">
-        <span class="atom-stat__number">6</span>
+        <span class="atom-stat__number">15</span>
         <span class="atom-stat__label">Molecules</span>
       </div>
       <div class="atom-stat">
@@ -700,7 +700,7 @@
         </span>
         <h3 class="mol-feature-card__title">Automated validation</h3>
         <p class="mol-feature-card__body">
-          <code>syx-validate.js</code> enforces seven contract rules (R01–R07) against
+          <code>syx-validate.js</code> enforces eleven contract rules (R01–R11) against
           every SCSS file and cross-checks runtime CSS against the token registry —
           undocumented tokens, phantom entries and unprefixed legacy vars included.
           CI-ready, exits non-zero on violations.
@@ -905,7 +905,7 @@
                 <small>N files · 2–4 turns</small>
               </td>
               <td class="atom-table__td" style="white-space: nowrap;"><strong>nothing</strong></td>
-              <td class="atom-table__td">Validate the contract rules — R01–R04, R09 and R10 are errors, R05, R06 and R08 warnings, R07 info — plus naming and structure checks</td>
+              <td class="atom-table__td">Validate the contract rules — R01–R04 and R09–R11 are errors, R05, R06 and R08 warnings, R07 info — plus naming and structure checks</td>
               <td class="atom-table__td">Per-rule verdict report, violations with exact line, correction recommendations</td>
             </tr>
             <tr>
@@ -957,7 +957,7 @@
       <p class="org-home-features__modes-sub syx-mt-3">
         <strong>What &ldquo;AI cost&rdquo; counts.</strong> The file column is what a mode has to open
         when it can <em>only</em> open files. With the MCP server registered
-        (<code>npx -y syx-mcp</code>) most of those reads collapse into one call that returns one
+        (<code>npx -y -p syx-design-system syx-mcp</code>) most of those reads collapse into one call that returns one
         answer, and the tier ranks the work rather than the reading. It counts interrogating the
         system — tokens, registry, contracts — not the knowledge a mode loads to reason with, which
         is a separate axis declared per mode.

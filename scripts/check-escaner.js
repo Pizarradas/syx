@@ -140,6 +140,17 @@ comprobar('la clase con pinta de SYX que no existe, con la real al lado', () => 
   if (!h.sugerencia) throw new Error('no sugiere ninguna parecida');
 });
 
+comprobar('no denuncia el ancla de un bloque cuyos elementos existen', () => {
+  // `.mol-tabs` no declara nada, pero agrupa `__list`, `__tab` y `__panel`. El
+  // Quick Start del README la usa: denunciarla dejaba en rojo a quien lo copiaba.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'syx-ancla-'));
+  const f = path.join(dir, 'tabs.html');
+  fs.writeFileSync(f, '<div class="mol-tabs"><div class="mol-tabs__list"></div></div>');
+  const r = escanear({ files: [f], syx });
+  fs.rmSync(dir, { recursive: true, force: true });
+  if (JSON.stringify(r.hallazgos).includes('.mol-tabs ')) throw new Error('la denuncia, y sus elementos existen en el CSS');
+});
+
 comprobar('no denuncia una clase que pinta por selector de atributo', () => {
   // `.atom-list--primary [class*=__item]` alcanza a `.atom-list__item` sin que
   // ese nombre exista como selector de clase. Borrarla del marcado —que es lo

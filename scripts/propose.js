@@ -47,6 +47,9 @@ const { tokensInexistentes } = require('./lib/rules');
 
 const syx = crearConsulta({ root: ROOT });
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+// Hex, px y lados físicos solo los para stylelint: sin esto, una propuesta salía
+// «en verde» con lo que la CI iba a rechazar.
+const lint = () => execFileSync('npm', ['run', '-s', 'lint'], { cwd: ROOT, encoding: 'utf8' });
 // Los nombres de token EMPIEZAN por `--`, así que no se puede usar el truco
 // habitual de «el siguiente argumento vale si no parece una opción»: haría
 // imposible pasar `--name --component-x-bg`. Se comparan contra las opciones
@@ -121,6 +124,14 @@ function token() {
   console.log('\n── PROPUESTA DE TOKEN ──────────────────────────────────────────\n');
   if (!nombre || !valor) fin('   Faltan --name o --value.');
   if (!/^--[a-z][a-z0-9-]*$/.test(nombre)) fin(`   «${nombre}» no es un nombre de custom property válido.`);
+  // El valor y el motivo se escriben tal cual en el SCSS. Un `;` o un salto de
+  // línea en --value colaba una declaración más (un --semantic-*, sin pasar por
+  // el paso 1), y `syx-allow` en --why redactaba su propia excepción a R11.
+  const sinLiterales = valor.replace(/"[^"]*"|'[^']*'|url\([^)]*\)/g, '');
+  if (/[;{}\n\r]/.test(sinLiterales)) fin('   --value tiene que ser un único valor: sin `;`, llaves ni saltos de línea.');
+  if (porque && /[\n\r]|syx-allow/i.test(porque)) {
+    fin('   --why es una línea de motivo: sin saltos de línea y sin `syx-allow`. Una excepción la justifica una persona.');
+  }
 
   // 1. ¿Puede escribirse esta capa?
   const capa = nombre.split('-')[2];
@@ -250,6 +261,7 @@ function token() {
     evidencia = {
       validador: execFileSync('node', ['scripts/syx-validate.js', '--report'], { cwd: ROOT, encoding: 'utf8' }),
       snapshot: execFileSync('node', ['scripts/build-token-snapshot.js', '--check'], { cwd: ROOT, encoding: 'utf8' }),
+      lint: lint(),
     };
     evidencia.derivados = regenerarDerivados();
   } catch (e) {
@@ -505,7 +517,7 @@ function files() {
   for (const d of detalle) console.log(`   → ${d.tier.padEnd(6)} ${d.path}`);
   console.log(`\n   por qué      ${porque}`);
   console.log(`   rama         ${rama}`);
-  console.log(`   validación   build:css + validate${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens`);
+  console.log(`   validación   build:css + validate + lint${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens`);
   console.log(`   regenera     contratos (validate --report), Figma, referencia de docs.html\n`);
 
   if (seco) fin('   --dry-run: no se ha compilado ni commiteado nada.', 0);
@@ -535,7 +547,23 @@ function files() {
       registro: tocaComponentes
         ? execFileSync('node', ['scripts/build-component-registry.js', '--check'], { cwd: ROOT, encoding: 'utf8' })
         : null,
+      lint: lint(),
     };
+    // Un componente sin su línea en el bundle compila, valida y entra en el
+    // registro, y no llega a ninguna hoja. El bundle es de nivel humano: se dice
+    // aquí, y no cuando la CI lo tumbe.
+    const css = fs.readFileSync(syx.cssPath('syx-sketch'), 'utf8');
+    const inertes = tocaComponentes ? syx.listComponents().components.filter((c) => {
+      return cambios.includes(c.file) && !(c.classes || []).some((k) => css.includes(`.${k}`));
+    }) : [];
+    if (inertes.length) {
+      deshacerDerivados();
+      fin(
+        `   ${inertes.map((c) => c.classes?.[0] || c.name).join(', ')} no aparece en el CSS compilado: le falta su línea en\n` +
+        `   scss/themes/_shared/_bundle-full.scss, que es de nivel humano. Tu cambio sigue en el árbol.\n` +
+        `   Pide a una persona que añada \`@include <mixin>($theme);\` y vuelve a proponer.`
+      );
+    }
     evidencia.derivados = regenerarDerivados();
   } catch (e) {
     deshacerDerivados();

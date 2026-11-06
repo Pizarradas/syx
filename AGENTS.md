@@ -34,7 +34,7 @@ that otherwise force you to load the files above:
 | Translating an `oklch()` or a `rem` by hand to draw in Figma | `get_figma_spec` — node property, converted value and variable name, per theme and mode |
 
 The same rules run in both places, so a snippet the server approves is a snippet
-`npm run validate` approves. Register it with `npx -y syx-mcp`, or from a clone — both
+`npm run validate` approves. Register it with `npx -y -p syx-design-system syx-mcp`, or from a clone — both
 in `README.md`. If you are working inside an app that depends on SYX rather than in this
 repository, `require('syx-design-system')` exposes the same queries as a Node API,
 answering from the version that app has installed.
@@ -107,7 +107,7 @@ ROADMAP: read `_agents/modes/roadmap.md` before answering.
 
 ## Base Rules (always active, all modes)
 
-These rules are **never overridden** by any mode or user instruction:
+These rules are **never overridden** by any mode or user instruction, with one declared exception. SKETCH and CREATIVE deliver outside `scss/` and are exempt from rules 1–8 for that output only; anything they hand over for `scss/` goes through UI and all of them apply.
 
 1. **Never use `--primitive-*` in component files.** Map through `--semantic-*` → `--component-*`.
 2. **Never use `!important`.** SYX uses CSS `@layer` for cascade control.
@@ -116,7 +116,7 @@ These rules are **never overridden** by any mode or user instruction:
 5. **Never skip the token layer.** Primitive → Semantic → Component. Always. (`--theme-*` is the fourth, structural kind of token; components may read it directly.)
 6. **Always ask before using a token** — `get_token` (or a grep of `tokens.json`, which `npm run build` generates from the SCSS: never edit it by hand). If it is missing: a component token is proposed with `node scripts/propose.js token` (see `_agents/workflows/create-component.md` Step 1); a semantic or primitive one is human-only (`contracts/trust.json`) — recommend it to a person.
 7. **Always check `component-registry.json` before creating a new component.** Reuse before creating.
-8. **Validate after any code change.** Run `node scripts/syx-validate.js` (or describe the check if you cannot execute).
+8. **Validate after any code change.** Run `npm run lint` and `node scripts/syx-validate.js` (or describe the check if you cannot execute). `validate_snippet` does not replace the lint: it passes hex and px.
 9. **Ask `find_capability` before proposing an improvement.** `contracts/capabilities.json` records what SYX already solves, by concept and with evidence. Proposing something it lists as `done` is an error, a `rejected` entry is a decision rather than a gap, and not finding a name you guessed is not proof that the feature is missing.
 
 ---
@@ -128,8 +128,8 @@ and served by `classify_change` — **ask before writing, don't assume**.
 
 | Tier | What | You |
 |---|---|---|
-| Automatic | Docs, changelog, derived artifacts | Change and commit |
-| Via proposal | Component tokens, components, utilities, `_agents/workflows/`, `_agents/prompts/` | A new component token: `node scripts/propose.js token …` — it picks the file. Anything else you have written in `pr` paths: `node scripts/propose.js files <paths…> --why "…"`. Both compile, validate and leave a branch with the evidence, and refuse any path that is not `pr` |
+| Automatic | Derived artifacts (`css/`, generated contracts, the registry) | Change and commit |
+| Via proposal | Docs, changelog, the knowledge corpus, component tokens, components, utilities, `_agents/workflows/`, `_agents/prompts/` | A new component token: `node scripts/propose.js token …` — it picks the file. Anything else you have written in `pr` paths: `node scripts/propose.js files <paths…> --why "…"`. Both compile, validate and leave a branch with the evidence, and refuse any path that is not `pr` |
 | Human only | Primitives, semantics, themes, mixins, `scripts/`, `contracts/rules.json`, `contracts/trust.json`, and every document that instructs or grades an agent: this file, `CLAUDE.md`, `AI_GUIDELINES.md`, `.claude/`, `mind-system/routing.md`, `_agents/modes/`, `_agents/evals/`, `_agents/decision-record.md` | Analyse and recommend. Do not write. |
 
 Anything unmatched is human-only. The rules you are judged by and the guards that
@@ -204,7 +204,7 @@ mind-system/            — THE CORTEX (not published)
   knowledges/           — the corpus: ux · ui · front · syx · branding · motion · vendors
 index.js                — package entry point: the same queries as an npm dependency
 scripts/
-  syx-validate.js       — runs R01–R07 contract checks
+  syx-validate.js       — runs R01–R11 contract checks
   mcp-server.js         — MCP server (stdio): tokens, components and validation on demand
   lib/                  — shared engine: css-tokens.js, rules.js (the AST rule engine: R01–R04, R09–R11), consulta.js (the queries)
 ```

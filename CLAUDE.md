@@ -21,8 +21,8 @@ proposing it). Without the server, grep the one entry you need
 (`grep '"--semantic-color-' tokens.json`). In an app that installs SYX, `require('syx-design-system')`
 answers the same queries. The full tool table is in `README.md` → *MCP server*.
 
-**Before writing anything, know the tier.** `contracts/trust.json` grades changes: docs and derived
-artifacts are automatic; component tokens, components and utilities go through
+**Before writing anything, know the tier.** `contracts/trust.json` grades changes: derived artifacts
+are automatic; docs, component tokens, components and utilities go through
 `node scripts/propose.js` (`token` for a new component token, `files <paths…> --why "…"` for what you
 already wrote). Primitives, semantics, themes, mixins, `scripts/`, the contracts and every document
 that instructs or grades an agent (this file, `AGENTS.md`, `AI_GUIDELINES.md`, `.claude/`,
@@ -85,6 +85,9 @@ a roadmap or a review of what SYX lacks is ROADMAP, prefix or not.
 
 ## Base Rules (always active, all modes)
 
+One declared exception: SKETCH and CREATIVE deliver outside `scss/` and are exempt from these for that
+output only. What they hand over for `scss/` goes through UI and all of them apply.
+
 - **Never use `--primitive-*` in component files.** Map through `--semantic-*`.
 - **Never use `!important`.** SYX uses `@layer` for cascade management.
 - **Never write raw `transition`/`transition-*` or `position: absolute|fixed|sticky` outside the mixins.**
@@ -96,7 +99,7 @@ a roadmap or a review of what SYX lacks is ROADMAP, prefix or not.
 - **Ask `find_capability` before proposing an improvement.** `contracts/capabilities.json` records
   what SYX already solves, by concept. Proposing something it lists as `done` is an error, and not
   finding a name you guessed is not proof that the feature is missing.
-- **After writing code, run** `node scripts/syx-validate.js`. R01–R04, R09 and R10 are errors;
+- **After writing code, run** `npm run lint` (hex, px, physical sides) and `node scripts/syx-validate.js`. R01–R04 and R09–R11 are errors;
   R05, R06 and R08 warnings; R07 info (`contracts/rules.json`).
 
 Step-by-step workflows (create a component or theme, audit tokens, changelog, export to Figma) live in

@@ -147,18 +147,8 @@ function main() {
     }
     const informe = escanear({ files: ficheros, syx, theme: TEMA, mode: 'light' });
     const MALOS = new Set(['clase-fantasma', 'modificador-inventado', 'base-sin-estilos', 'token-inexistente']);
-    // Un bloque sin estilos propios cuyos elementos (`__`) sí existen es el
-    // ancla del bloque, no una clase inventada: `.mol-tabs` no declara nada,
-    // pero agrupa `__list`, `__tab` y `__panel`, y es el asidero de
-    // js/syx-tabs.js. El escáner ya perdona así a una base con modificadores
-    // (`--`); aquí se perdona también con elementos.
-    const esAncla = (que) => {
-      const clase = (/^\.([a-zA-Z0-9_-]+) /.exec(que) || [])[1];
-      return clase && [...clasesCss].some((x) => x.startsWith(`${clase}__`));
-    };
     for (const h of informe.hallazgos) {
       if (!MALOS.has(h.tipo)) continue;
-      if (h.tipo === 'clase-fantasma' && esAncla(h.que)) continue;
       fallos.push({ c: path.basename(h.file, '.html'), que: `${h.que}${h.sugerencia ? ` — ${h.sugerencia}` : ''}` });
     }
   } finally {

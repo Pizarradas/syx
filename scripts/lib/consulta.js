@@ -26,7 +26,7 @@ const path = require('path');
 const { parseBlocks, declaredFor, cadenaDeAlias, canonico } = require('./css-tokens');
 const { crearMotor, tokensInexistentes } = require('./rules');
 const { aIngles } = require('./claves');
-const { clasificarCambios, destinoDeToken, contrato } = require('./confianza');
+const { clasificarCambios, destinoDeToken, contrato, normalizarRuta } = require('./confianza');
 const { leer: leerMixins, recambioPara } = require('./mixins');
 const { escanear, distancia } = require('./escaner');
 const figma = require('./figma');
@@ -137,15 +137,23 @@ function crearConsulta({ root, crudo = false } = {}) {
     };
   };
 
+  // Por parecido real. Antes filtraba por la raíz (`semantic`): ocho entradas
+  // siempre iguales, de modo que una errata de una letra no llevaba al token
+  // correcto y un agente podía coger uno ajeno que parecía respuesta.
+  const masParecidos = (buscado, candidatos) => {
+    const tope = Math.max(3, Math.ceil(buscado.length / 3));
+    return candidatos
+      .map((c) => ({ c, d: distancia(buscado, c) }))
+      .filter((x) => x.d <= tope)
+      .sort((a, b) => a.d - b.d || a.c.localeCompare(b.c))
+      .slice(0, 8)
+      .map((x) => x.c);
+  };
+
   function getToken({ token, theme = 'syx-sketch', mode = 'light' }) {
     const mapa = efectivo(theme, mode);
-    if (!(token in mapa)) {
-      const raiz = token.replace(/^--/, '').split('-')[0];
-      return {
-        encontrado: false,
-        token,
-        sugerencias: Object.keys(mapa).filter((k) => k.includes(raiz)).slice(0, 8),
-      };
+    if (!Object.prototype.hasOwnProperty.call(mapa, token)) {
+      return { encontrado: false, token, sugerencias: masParecidos(token, Object.keys(mapa)) };
     }
     const roto = snap.themes[theme].unresolved;
     const porQueVacio = (roto[mode] || roto)[token];
@@ -156,6 +164,9 @@ function crearConsulta({ root, crudo = false } = {}) {
       theme,
       mode,
       value: resolverAsset(mapa[token]),
+      // Un token solo del sitio existe aquí, pero no llega a dist/ ni a una app:
+      // validate_snippet lo da por inexistente, y el agente tiene que saber por qué.
+      ...(conocidos.has(token) ? {} : { scope: 'site' }),
       esExpresion: snap.themes[theme].expressions.includes(token),
       sinValor: porQueVacio || null,
       cadena: decl ? cadenaDeAlias(decl, token) : null,
@@ -165,7 +176,9 @@ function crearConsulta({ root, crudo = false } = {}) {
   function findTokenByValue({ value, theme = 'syx-sketch', mode = 'light' }) {
     const inv = indiceInverso(theme, mode);
     const buscado = canonico(value);
-    const exactos = inv.get(buscado) || [];
+    // Primero lo que una app puede usar: los tokens solo del sitio van detrás.
+    const delSistema = (ks) => [...ks].sort((a, b) => conocidos.has(b) - conocidos.has(a));
+    const exactos = delSistema(inv.get(buscado) || []);
     // Sin coincidencia exacta se ofrecen los que CONTIENEN el texto, que es lo
     // que hace útil buscar "266.24" o "blue" sin saber la sintaxis exacta.
     const parciales = exactos.length
@@ -282,18 +295,26 @@ function crearConsulta({ root, crudo = false } = {}) {
       .map((c) => ({ name: c.name, layer: c.layer, classes: c.classes, file: c.file })),
   });
 
+  // Los nombres con los que se pide un componente que aquí se llama de otro modo.
+  const SINONIMOS = {
+    button: 'btn', modal: 'dialog', dropdown: 'menu', accordion: 'disclosure', collapse: 'disclosure',
+    badge: 'pill', tag: 'pill', chip: 'pill', input: 'form-field', select: 'form-field', textarea: 'form-field',
+    checkbox: 'check', toggle: 'switch', snackbar: 'toast', notification: 'toast', popover: 'tooltip',
+  };
+
   function getComponent({ name }) {
     const c = componentes().find(
       (x) => x.name === name || x.classes.includes(name) || x.classes.includes(name.replace(/^\./, ''))
     );
     if (!c) {
+      const pedido = String(name).replace(/^\./, '').replace(/^(atom|mol|org)-/, '').toLowerCase();
+      const nombres = componentes().map((x) => x.name);
+      const directo = SINONIMOS[pedido] ? [SINONIMOS[pedido]] : [];
+      const contienen = nombres.filter((n) => n.includes(pedido) || pedido.includes(n));
       return {
         encontrado: false,
         name,
-        sugerencias: componentes()
-          .map((x) => x.name)
-          .filter((n) => n.includes(name) || name.includes(n))
-          .slice(0, 8),
+        sugerencias: [...new Set([...directo, ...contienen, ...masParecidos(pedido, nombres)])].slice(0, 8),
       };
     }
     return { encontrado: true, ...c };
@@ -432,6 +453,9 @@ function crearConsulta({ root, crudo = false } = {}) {
   function validateSnippet({ code, path: rel = 'scss/atoms/_nuevo.scss' }) {
     cargar();
     const m = elMotor();
+    // Normalizada, igual que classify_change: `scss/abstracts/mixins/../../atoms/x.scss`
+    // heredaba los permisos de los mixins.
+    rel = normalizarRuta(rel).rel;
     const r = m.revisarDetalle(rel, code);
     const fuera = tokensInexistentes(code, conocidos);
     const rotos = fuera.filter((t) => !t.conFallback);
@@ -440,6 +464,9 @@ function crearConsulta({ root, crudo = false } = {}) {
     const errores = conCasos.filter(([k]) => m.severidad(k) === 'error').length;
     return {
       path: rel,
+      // `conforme` es «sin errores de contrato», no «sin nada que arreglar»: quien
+      // lo lee tiene que saber qué se queda sin mirar.
+      notChecked: 'Literal colours, px and physical sides are caught by `npm run lint`, not here. An unknown breakpoint name fails at compile time.',
       conforme: errores === 0 && !r.sintaxis && rotos.length === 0,
       violaciones: Object.fromEntries(
         conCasos.map(([k, x]) => {

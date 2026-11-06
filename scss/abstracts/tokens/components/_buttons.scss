@@ -9,7 +9,7 @@
   --component-button-primary-color: var(--semantic-color-primary-text);
   --component-button-primary-bg: transparent;
   --component-button-primary-border: var(--semantic-color-primary);
-  --component-button-primary-color-hover: var(--semantic-color-state-hover-primary);
+  --component-button-primary-color-hover: var(--semantic-color-primary-text); // texto: --primary-text, no el tono de relleno (THEMING-RULES)
   --component-button-primary-bg-hover: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent); // subtle tint on hover (outline)
   --component-button-primary-border-hover: var(--semantic-color-state-hover-primary);
 
@@ -30,7 +30,7 @@
   --component-button-secondary-color: var(--semantic-color-secondary-text);
   --component-button-secondary-bg: transparent;
   --component-button-secondary-border: var(--semantic-color-secondary);
-  --component-button-secondary-color-hover: var(--semantic-color-state-hover-secondary);
+  --component-button-secondary-color-hover: var(--semantic-color-secondary-text); // texto: --secondary-text, no el tono de relleno (THEMING-RULES)
   --component-button-secondary-bg-hover: color-mix(in srgb, var(--semantic-color-secondary) 10%, transparent); // subtle tint on hover (outline)
   --component-button-secondary-border-hover: var(--semantic-color-state-hover-secondary);
 
@@ -48,7 +48,7 @@
   --component-button-tertiary-color: var(--semantic-color-tertiary-text);
   --component-button-tertiary-bg: transparent;
   --component-button-tertiary-border: var(--semantic-color-tertiary);
-  --component-button-tertiary-color-hover: var(--semantic-color-state-hover-tertiary);
+  --component-button-tertiary-color-hover: var(--semantic-color-tertiary-text); // texto: --tertiary-text, no el tono de relleno (THEMING-RULES)
   --component-button-tertiary-bg-hover: color-mix(in srgb, var(--semantic-color-tertiary) 10%, transparent); // subtle tint on hover (outline)
   --component-button-tertiary-border-hover: var(--semantic-color-state-hover-tertiary);
 
@@ -66,7 +66,7 @@
   --component-button-quaternary-color: var(--semantic-color-quaternary-text);
   --component-button-quaternary-bg: transparent;
   --component-button-quaternary-border: var(--semantic-color-quaternary);
-  --component-button-quaternary-color-hover: var(--semantic-color-state-hover-quaternary);
+  --component-button-quaternary-color-hover: var(--semantic-color-quaternary-text); // texto: --quaternary-text, no el tono de relleno (THEMING-RULES)
   --component-button-quaternary-bg-hover: color-mix(in srgb, var(--semantic-color-quaternary) 10%, transparent); // subtle tint on hover (outline)
   --component-button-quaternary-border-hover: var(--semantic-color-state-hover-quaternary);
 

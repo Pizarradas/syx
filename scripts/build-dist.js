@@ -278,6 +278,7 @@ async function main() {
       // @layer que ve el navegador fija la precedencia, y las hojas se
       // pueden cargar en cualquier orden.
       compartido: capaTokens(compartido) + texto(capas),
+      invariante,
       nCompartido: contar(compartido),
       delTema,
     };
@@ -291,7 +292,27 @@ async function main() {
 
   salidas.set('syx.components.min.css', full.orden + full.compartido);
   salidas.set('syx.components.core.min.css', core.orden + core.compartido);
-  salidas.set('syx.utilities.min.css', full.orden + texto(helpers.capas) + texto(utilidades.capas));
+  // Las utilidades se suman al core, y core poda contra sus propios componentes:
+  // lo que solo leen .syx-size-* o .syx-bg-color-* se quedaba sin declarar. La hoja
+  // trae esos tokens compartidos; si también se carga el full, son los mismos valores.
+  const leidasPorUtilidades = alcanzables(
+    usadosPorReglas([...helpers.capas, ...utilidades.capas]),
+    declaraciones(full.piezas[0].tokens)
+  );
+  const tokensDeUtilidades = filtrar(
+    full.piezas[0].tokens,
+    (p) => p.startsWith('--') && leidasPorUtilidades.has(p) && full.invariante.has(p),
+    { fuentes: false }
+  );
+  salidas.set('syx.utilities.min.css', full.orden + capaTokens(tokensDeUtilidades) + texto(helpers.capas) + texto(utilidades.capas));
+
+  // La combinación modular que documenta el README no puede dejar nada en el aire.
+  const modular = [`syx.components.core.min.css`, `syx.utilities.min.css`].map((f) => salidas.get(f)).join('')
+    + texto(full.delTema(full.piezas[0]));
+  const declaradasModular = new Set([...modular.matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
+  const sinDeclarar = [...new Set([...modular.matchAll(/var\(\s*(--[\w-]+)\s*\)/g)].map((m) => m[1]))]
+    .filter((t) => !declaradasModular.has(t));
+  if (sinDeclarar.length) throw new Error(`tokens + core + utilidades deja sin declarar: ${sinDeclarar.join(', ')}`);
 
   for (const p of full.piezas) {
     const pc = core.piezas.find((x) => x.tema === p.tema);

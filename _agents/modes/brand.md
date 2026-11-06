@@ -240,7 +240,7 @@ The chain does not end at the file. The identity is real when:
 
 ```
 npm run build       every bundle compiles, all seven themes
-npm run validate    R01–R07 over the result — R05 catches a token the theme uses but nobody declared
+npm run validate    R01–R11 over the result — R05 catches a token the theme uses but nobody declared
 scan_for_drift      over the pages built with it
 ```
 

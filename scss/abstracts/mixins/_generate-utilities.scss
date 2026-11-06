@@ -8,8 +8,20 @@
 
 @use 'sass:map';
 @use 'sass:meta';
+@use 'sass:string';
+
+// Sin esta guarda, cualquier propiedad pasaba: `position` y `transition` salían
+// de aquí con permiso de R03/R04, y sin la guarda de reduced-motion.
+@function -syx-propiedad-de-utilidad($property) {
+  $nombre: meta.inspect($property);
+  @if $nombre == 'position' or string.index($nombre, 'transition') == 1 {
+    @error 'SYX: generate-utility no emite `#{$nombre}`: usa los mixins de posición y transición.';
+  }
+  @return $property;
+}
 
 @mixin generate-utility($prefix, $property, $map, $hover: false) {
+  $property: -syx-propiedad-de-utilidad($property);
   @each $key, $value in $map {
     // Only generate if value is not null and valid
     @if $value != null {
@@ -35,6 +47,7 @@
 // .syx-ml-*/.syx-mr-*.
 // ================================================
 @mixin generate-utility-directional($prefix, $property, $map) {
+  $property: -syx-propiedad-de-utilidad($property);
   @each $key, $value in $map {
     @if $value != null {
       // All sides

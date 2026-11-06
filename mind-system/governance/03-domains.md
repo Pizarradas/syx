@@ -9,7 +9,7 @@ Cada sistema es soberano en su dominio. Ninguno sobreescribe al otro dentro de s
 | Dominio | Sistema autoridad | Justificación |
 |---|---|---|
 | Quién puede escribir en qué fichero | **`contracts/trust.json`** | Ni Modes ni Atlas. Lo lee `scripts/lib/confianza.js` y lo responde `classify_change`. Está en tier `human` a propósito: un agente que pudiera ampliar sus permisos no tendría permisos, tendría una sugerencia |
-| Token SCSS (primitivos, semánticos, componente) | **Modes** (TOKEN, UI) | Validador automatizado (`syx-validate.js`), contratos R01–R08 verificables |
+| Token SCSS (primitivos, semánticos, componente) | **Modes** (TOKEN, UI) | Validador automatizado (`syx-validate.js`), contratos R01–R11 verificables |
 | Nomenclatura de tokens en CSS | **Modes** | Prefijos `--primitive-*`, `--semantic-*`, `--component-*` auditados y consolidados |
 | Escala de color (formato) | **Modes** | OKLCH en primitivos. Hex solo en fallbacks o POCs Atlas standalone |
 | Naming de clases (BEM, prefijos) | **Compartido** | Ambos sistemas usan `.atom-`, `.mol-`, `.org-`. Sin conflicto |
@@ -83,7 +83,7 @@ En POCs Atlas que se promuevan a SCSS, el stack se adapta al de Modes en el paso
 ## Qué no cambia en cada sistema
 
 **Lo que NO cambia en Modes:**
-- R01–R08 se aplican siempre, con o sin Atlas activo.
+- R01–R11 se aplican siempre, con o sin Atlas activo.
 - Las exenciones de SKETCH (valores hardcoded) y CREATIVE (sin contratos) se mantienen en su dominio técnico.
 - `syx-validate.js` es el validador autorizado para SCSS.
 - THEME mode usa OKLCH. Atlas no cambia esto.

@@ -55,7 +55,7 @@ Modes are calibrated by AI context consumption and output complexity. Pick the l
 | 10 | **ROADMAP** | 🟠 Medium-High | 1–2 | `find_capability` (every idea), `get_component`, `get_token`, `classify_change` |
 
 The cost of a mode used to be measured in files loaded. With the MCP server registered
-(`npm run mcp`, or `npx -y syx-mcp`) most of those reads become one call that returns one
+(`npm run mcp`, or `npx -y -p syx-design-system syx-mcp`) most of those reads become one call that returns one
 answer — the last column says which. The tier still ranks the *work*, not the reading.
 
 ## Available Modes
@@ -115,7 +115,7 @@ If a middle step turns out to have no work — TOKEN finds every token it needed
 the user's call, not the mode's.
 
 Not every pair composes. `SKETCH + AUDIT` and `CREATIVE + AUDIT` are contradictions (both modes are
-exempt from the contracts AUDIT enforces); `UI → TOKEN` and `THEME → UI` run the dependency
+exempt from the contracts AUDIT enforces); `UI → TOKEN` and `THEME → UI` without BRAND in front run the dependency
 backwards, and so do `UI → BRAND` and `THEME → BRAND` — an identity is decided before the palette
 that carries it, not after. `BRAND + AUDIT` **is** valid, unlike the other two recommendation-only
 pairs: BRAND's output already names real tokens, so AUDIT has something to check.
@@ -194,7 +194,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
    → The component the identity asked for, built to contract
 
 5. npm run build && npm run validate
-   → Every bundle compiles, R01–R07 clean. This is where an identity stops being a document.
+   → Every bundle compiles, R01–R11 clean. This is where an identity stops being a document.
 
 6. [SYX: AUDIT]: Check the pages against the identity contract
    → Contract violations as R-findings; identity invariants as advisory; scan_for_drift

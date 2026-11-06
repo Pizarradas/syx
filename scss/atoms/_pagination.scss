@@ -32,6 +32,20 @@
           border-color: var(--component-pagination-bg-active);
           color: var(--component-pagination-color-active);
           font-weight: var(--semantic-font-weight-bold);
+
+          // Sin esto, el :hover general gana por especificidad y pinta el número
+          // del color del fondo: 1:1 en todos los temas.
+          &:hover:not(:disabled) {
+            border-color: var(--component-pagination-bg-active);
+            color: var(--component-pagination-color-active);
+          }
+
+          @media (forced-colors: active) {
+            background-color: Highlight;
+            border-color: Highlight;
+            color: HighlightText;
+            forced-color-adjust: none;
+          }
         }
       }
 
@@ -57,11 +71,22 @@
             display: block;
             width: var(--component-pagination-icon-size, 1em);
             height: var(--component-pagination-icon-size, 1em);
-            background-image: var(--lc-icon-chevron-left);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            filter: var(--component-pagination-icon-filter, none);
+            // Por máscara, como .atom-icon: el color sale de currentColor y el
+            // chevron responde al tema. Como imagen era negro también en oscuro.
+            background-color: currentColor;
+            mask-image: var(--component-pagination-icon-prev);
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-image: var(--component-pagination-icon-prev);
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+
+            @media (forced-colors: active) {
+              background-color: CanvasText;
+              forced-color-adjust: none;
+            }
           }
         }
       }
@@ -76,11 +101,22 @@
             display: block;
             width: var(--component-pagination-icon-size, 1em);
             height: var(--component-pagination-icon-size, 1em);
-            background-image: var(--lc-icon-chevron-right);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            filter: var(--component-pagination-icon-filter, none);
+            // Por máscara, como .atom-icon: el color sale de currentColor y el
+            // chevron responde al tema. Como imagen era negro también en oscuro.
+            background-color: currentColor;
+            mask-image: var(--component-pagination-icon-next);
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            -webkit-mask-image: var(--component-pagination-icon-next);
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+
+            @media (forced-colors: active) {
+              background-color: CanvasText;
+              forced-color-adjust: none;
+            }
           }
         }
       }

@@ -33,7 +33,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { escanear } = require('./lib/escaner');
+const { ESCANEABLE, escanear } = require('./lib/escaner');
 const { crearConsulta } = require('./lib/consulta');
 
 const ROOT = path.join(__dirname, '..');
@@ -51,7 +51,6 @@ const flag = (n) => process.argv.includes(n);
 // Una carpeta a secas (`npx syx-scan src`) es «todo lo escaneable que hay dentro».
 // Los .js/.ts solo se leen para las clases que ponen en el DOM con un literal
 // (scripts/lib/escaner.js · clasesDeScript). Un .min.js es un bundle ajeno.
-const ESCANEABLE = /^(?!.*\.min\.js$).*\.(html?|css|scss|vue|svelte|astro|jsx|tsx|m?js|cjs|m?ts|cts)$/i;
 function expandir(patron) {
   if (!/[*?]/.test(patron) && fs.existsSync(patron) && fs.statSync(patron).isDirectory()) {
     const fuera = [];

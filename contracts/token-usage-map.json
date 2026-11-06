@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "totalMappedTokens": 1528
+    "totalMappedTokens": 1527
   },
   "map": {
     "--primitive-fluid-space-xs": {
@@ -1413,7 +1413,6 @@
         "scss/abstracts/tokens/components/_lists.scss",
         "scss/abstracts/tokens/components/_navigation.scss",
         "scss/atoms/_icon-lucide.scss",
-        "scss/atoms/_pagination.scss",
         "scss/themes/_template/_theme.scss"
       ]
     },
@@ -1474,8 +1473,7 @@
     "--lc-icon-chevron-left": {
       "usages": [
         "scss/abstracts/tokens/components/_navigation.scss",
-        "scss/atoms/_icon-lucide.scss",
-        "scss/atoms/_pagination.scss"
+        "scss/atoms/_icon-lucide.scss"
       ]
     },
     "--lc-icon-chevrons-left": {
@@ -3678,7 +3676,12 @@
         "scss/atoms/_pagination.scss"
       ]
     },
-    "--component-pagination-icon-filter": {
+    "--component-pagination-icon-prev": {
+      "usages": [
+        "scss/atoms/_pagination.scss"
+      ]
+    },
+    "--component-pagination-icon-next": {
       "usages": [
         "scss/atoms/_pagination.scss"
       ]
@@ -8451,14 +8454,6 @@
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },
     "--component-pagination-shadow-focus": {
-      "usages": [],
-      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
-    },
-    "--component-pagination-icon-prev": {
-      "usages": [],
-      "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
-    },
-    "--component-pagination-icon-next": {
       "usages": [],
       "note": "defined in CSS/tokens.json but no var() usage found in SCSS (may be set directly)"
     },

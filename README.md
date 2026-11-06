@@ -342,7 +342,7 @@ Register it in any MCP client (Claude Desktop, Claude Code, Cursor…):
 ```json
 {
   "mcpServers": {
-    "syx": { "command": "npx", "args": ["-y", "syx-mcp"] }
+    "syx": { "command": "npx", "args": ["-y", "-p", "syx-design-system", "syx-mcp"] }
   }
 }
 ```
@@ -457,8 +457,8 @@ read without running anything, and `classify_change` serves them over MCP.
 
 | Tier | What | Why |
 | ---- | ---- | --- |
-| **Automatic** | Docs, changelog, derived artifacts | A mistake is visible in the diff and reaches nothing compiled |
-| **Via proposal** | Component tokens, components, utilities | Scoped to one component — reviewable at a glance, but it ships |
+| **Automatic** | Derived artifacts: `css/`, generated contracts, the registry | A generator writes them and a guard checks the result |
+| **Via proposal** | Docs, changelog, component tokens, components, utilities | Scoped to one component — reviewable at a glance, but it ships |
 | **Human only** | Primitives, semantics, themes, mixins, the guards, the rules themselves | One change lands in all 7 themes at once, or changes the criteria everything else is judged by |
 
 Anything that matches no pattern falls to **human only**. `contracts/rules.json`,

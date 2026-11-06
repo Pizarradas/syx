@@ -142,5 +142,5 @@ Si se necesita una agrupación diferente, separar en turnos.
 | Combinación | Por qué no |
 |---|---|
 | `[ATLAS]: ... utilizando [SYX: SKETCH + AUDIT]` | SKETCH está exento de contratos. AUDIT sobre un sketch es contradictorio. |
-| `[ATLAS]: ... utilizando [SYX: CREATIVE + AUDIT]` | CREATIVE está exento de R01–R08. Usar `CREATIVE → TOKEN → UI + AUDIT`. |
+| `[ATLAS]: ... utilizando [SYX: CREATIVE + AUDIT]` | CREATIVE está exento de R01–R11. Usar `CREATIVE → TOKEN → UI + AUDIT`. |
 | `[ATLAS]:` sin modo SYX | `[ATLAS]:` es un wrapper, no un modo. Siempre necesita al menos un `[SYX: MODE]`. |

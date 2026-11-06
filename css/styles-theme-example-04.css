@@ -525,7 +525,7 @@
   --component-button-primary-color: var(--semantic-color-primary-text);
   --component-button-primary-bg: transparent;
   --component-button-primary-border: var(--semantic-color-primary);
-  --component-button-primary-color-hover: var(--semantic-color-state-hover-primary);
+  --component-button-primary-color-hover: var(--semantic-color-primary-text);
   --component-button-primary-bg-hover: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-button-primary-border-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-filled-color: var(--semantic-color-on-primary);
@@ -537,7 +537,7 @@
   --component-button-secondary-color: var(--semantic-color-secondary-text);
   --component-button-secondary-bg: transparent;
   --component-button-secondary-border: var(--semantic-color-secondary);
-  --component-button-secondary-color-hover: var(--semantic-color-state-hover-secondary);
+  --component-button-secondary-color-hover: var(--semantic-color-secondary-text);
   --component-button-secondary-bg-hover: color-mix(in srgb, var(--semantic-color-secondary) 10%, transparent);
   --component-button-secondary-border-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
@@ -549,7 +549,7 @@
   --component-button-tertiary-color: var(--semantic-color-tertiary-text);
   --component-button-tertiary-bg: transparent;
   --component-button-tertiary-border: var(--semantic-color-tertiary);
-  --component-button-tertiary-color-hover: var(--semantic-color-state-hover-tertiary);
+  --component-button-tertiary-color-hover: var(--semantic-color-tertiary-text);
   --component-button-tertiary-bg-hover: color-mix(in srgb, var(--semantic-color-tertiary) 10%, transparent);
   --component-button-tertiary-border-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-filled-color: var(--semantic-color-on-tertiary);
@@ -561,7 +561,7 @@
   --component-button-quaternary-color: var(--semantic-color-quaternary-text);
   --component-button-quaternary-bg: transparent;
   --component-button-quaternary-border: var(--semantic-color-quaternary);
-  --component-button-quaternary-color-hover: var(--semantic-color-state-hover-quaternary);
+  --component-button-quaternary-color-hover: var(--semantic-color-quaternary-text);
   --component-button-quaternary-bg-hover: color-mix(in srgb, var(--semantic-color-quaternary) 10%, transparent);
   --component-button-quaternary-border-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-filled-color: var(--semantic-color-on-quaternary);
@@ -735,7 +735,7 @@
   --component-pagination-border-color: transparent;
   --component-pagination-border-color-hover: var(--semantic-color-primary);
   --component-pagination-color: var(--semantic-color-primary-text);
-  --component-pagination-color-hover: var(--semantic-color-primary);
+  --component-pagination-color-hover: var(--semantic-color-primary-text);
   --component-pagination-color-active: var(--semantic-color-on-primary);
   --component-pagination-bg-active: var(--semantic-color-primary);
   --component-pagination-color-disabled: var(--semantic-color-state-disabled);
@@ -3692,6 +3692,18 @@
     color: var(--component-pagination-color-active);
     font-weight: var(--semantic-font-weight-bold);
   }
+  .atom-pagination__item--is-active .atom-pagination__trigger:hover:not(:disabled) {
+    border-color: var(--component-pagination-bg-active);
+    color: var(--component-pagination-color-active);
+  }
+  @media (forced-colors: active) {
+    .atom-pagination__item--is-active .atom-pagination__trigger {
+      background-color: Highlight;
+      border-color: Highlight;
+      color: HighlightText;
+      forced-color-adjust: none;
+    }
+  }
   .atom-pagination__item--is-disabled .atom-pagination__trigger {
     color: var(--component-pagination-color-disabled);
     background-color: transparent;
@@ -3709,11 +3721,21 @@
     display: block;
     width: var(--component-pagination-icon-size, 1em);
     height: var(--component-pagination-icon-size, 1em);
-    background-image: var(--lc-icon-chevron-left);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    filter: var(--component-pagination-icon-filter, none);
+    background-color: currentColor;
+    mask-image: var(--component-pagination-icon-prev);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: var(--component-pagination-icon-prev);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+  @media (forced-colors: active) {
+    .atom-pagination__item--is-prev .atom-pagination__trigger::before {
+      background-color: CanvasText;
+      forced-color-adjust: none;
+    }
   }
   @supports selector(:dir(rtl)) {
     .atom-pagination__item--is-next .atom-pagination__trigger:dir(rtl)::before {
@@ -3725,11 +3747,21 @@
     display: block;
     width: var(--component-pagination-icon-size, 1em);
     height: var(--component-pagination-icon-size, 1em);
-    background-image: var(--lc-icon-chevron-right);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    filter: var(--component-pagination-icon-filter, none);
+    background-color: currentColor;
+    mask-image: var(--component-pagination-icon-next);
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: var(--component-pagination-icon-next);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+  @media (forced-colors: active) {
+    .atom-pagination__item--is-next .atom-pagination__trigger::before {
+      background-color: CanvasText;
+      forced-color-adjust: none;
+    }
   }
   .atom-pagination__trigger {
     display: inline-flex;
@@ -4437,21 +4469,21 @@
     border-color: var(--component-code-snippet-ok-border-color, var(--semantic-color-state-success));
   }
   .mol-code-snippet--ok .mol-code-snippet__header {
-    background-color: var(--component-code-snippet-ok-header-bg, oklch(97% 0.021 158.247deg));
-    border-block-end-color: var(--component-code-snippet-ok-header-border-color, oklch(88% 0.103 155.902deg));
+    background-color: var(--component-code-snippet-ok-header-bg);
+    border-block-end-color: var(--component-code-snippet-ok-header-border-color);
   }
   .mol-code-snippet--ok .mol-code-snippet__label {
-    color: var(--component-code-snippet-ok-label-color, oklch(42% 0.09 150.23deg));
+    color: var(--component-code-snippet-ok-label-color);
   }
   .mol-code-snippet--ko {
     border-color: var(--component-code-snippet-ko-border-color, var(--semantic-color-state-error));
   }
   .mol-code-snippet--ko .mol-code-snippet__header {
-    background-color: var(--component-code-snippet-ko-header-bg, oklch(97% 0.021 4.878deg));
-    border-block-end-color: var(--component-code-snippet-ko-header-border-color, oklch(88% 0.112 8.017deg));
+    background-color: var(--component-code-snippet-ko-header-bg);
+    border-block-end-color: var(--component-code-snippet-ko-header-border-color);
   }
   .mol-code-snippet--ko .mol-code-snippet__label {
-    color: var(--component-code-snippet-ko-label-color, oklch(42% 0.165 21.562deg));
+    color: var(--component-code-snippet-ko-label-color);
   }
   .mol-code-snippet--neutral .mol-code-snippet__label {
     color: var(--semantic-color-text-secondary);

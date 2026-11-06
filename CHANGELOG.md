@@ -9,6 +9,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — auditoría de 2026-11, tanda 2
+
+- **`check:compilado`**: para R01 decide la capa donde acaba la declaración, no el fichero que la escribió. `$p: unquote('var(--primitive-x)'); @include padding($p)` blanqueaba el primitivo porque lo emitía un mixin. Falla además si un `--primitive-*`, `--semantic-*` o `--theme-*` se declara en una ruta `pr`: R11 mira qué nombre se lee, no quién lo declara.
+- **`generate-utility*`** da `@error` con `position` y `transition*`.
+- **Colores literales en componentes**: stylelint niega `rgb()`, `hsl()`, `oklch()` y similares y los colores con nombre en átomos, moléculas, organismos y layout. Son reglas de lint y no R-numbers: el contrato sigue en R01–R11. `mol-code-snippet` pierde seis fallbacks que eran valores literales de tokens ya declarados.
+- **`check:cadena`**, en `check`: exige los pasos imprescindibles, que cada uno ejecute su script y que el lint mire `scss/`. Quitar `check:compilado`, dejarlo en `node -e 0` o declarar `ignoreFiles` daba verde.
+- **Guardianes vacíos**: `check:contraste` falla con menos de 100 pares o mínimos fuera de WCAG, y `check:mutacion` con menos de 30 casos: «0 de 0 paradas» era verde.
+- **`propose.js files`** niega un componente que no llega al CSS y dice que falta su línea en el bundle, que es de nivel humano. `AI_GUIDELINES.md` y `create-component.md` corrigen la ruta del `@forward` y dejan de mandar editar el registro a mano.
+- **Servidor MCP**: valida los argumentos contra `inputSchema`: `scan_for_drift {}` respondía `total: 0`, un limpio sin haber mirado nada, y `mode: 'sepia'` daba `found: true`. Responde a `ping`. Una herramienta desconocida es `-32602`. `scan_for_drift` se limita a ficheros de código bajo la carpeta del proyecto, o bajo `SYX_SCAN_ROOT`, de menos de 5 MB. `validate_snippet` normaliza `path`, y `get_token` no confunde `constructor` con un token.
+- **Sugerencias**: `get_token` y `get_component` ordenan por parecido real, y `get_component` entiende `button`, `modal`, `dropdown` y otros sinónimos. Antes, una errata de una letra no llevaba al token correcto.
+- **Tokens del sitio**: `get_token` los marca con `scope: 'site'` y `find_token_by_value` da primero los del sistema.
+- **`syx.utilities.min.css`** trae los tokens compartidos que lee: sobre `core` quedaban 21 sin declarar. `build-dist` falla si esa combinación vuelve a dejar alguno.
+- **Modo AUDIT**: el veredicto sale solo de R01–R11 y todo lo demás es asesor; pedirle un arreglo se pasa a otro modo; un valor sin token se resuelve con `needs a token: hand to TOKEN`; R02 cita su excepción.
+- **Composición**: `+` significa que el segundo evalúa el output del primero; `[blocked: human]` detiene un pipeline que depende de lo que solo se puede recomendar; `THEME → UI` es inválido sin BRAND delante.
+
+### Fixed — auditoría de 2026-11, tanda 1
+
+La auditoría de noviembre encontró lo que `npm run check` no miraba: los bundles que no son `full`, el estado hover y lo que un agente recibe como «válido». Informe completo fuera del repositorio.
+
+- **Paginación.** Al pasar el ratón por la página actual, el `:hover` general ganaba por especificidad y pintaba el número del color del fondo (1:1 en todos los temas). Prev/next pasan de imagen negra a máscara con `currentColor`, leyendo por fin `--component-pagination-icon-prev/next`: eran negros también en oscuro. En `forced-colors`, la página actual se marca con `Highlight`.
+- **Contraste en hover.** `--component-button-{primary,secondary,tertiary,quaternary}-color-hover` y `--component-pagination-color-hover` usaban un tono de relleno como texto: fallaban AA en 17-20 de 28 estados. Pasan a `--semantic-color-{rol}-text`. `contrast.json` añade 9 pares (118 pares, 3304 medidas).
+- **Bundles `core` y `app`**: pedían `--lc-icon-*` sin declararlos, y prev/next y las viñetas salían en blanco. **`atom-icon-nucleo`**, generado por `build-lucide-tokens.js`, lleva los 7 iconos que leen los componentes. **`check:huerfanos` compila ahora `app`, `blog`, `core` y `marketing`**: decía medir «bundle por bundle» y solo leía los ocho de `css/`.
+- **`breakpoint()`** con una clave desconocida pasa de `@warn` a `@error`: la regla desaparecía del CSS sin que nada fallase. `front/mobile-first.md`, cargado siempre por UI y UX, y otros tres textos enseñaban `sm` y `lg`, que no existen.
+- **`syx-scan`** ya no da por inventada `.mol-tabs`: el Quick Start del README salía en rojo. La excepción vivía en `check-usage.js`, de modo que el guardián interno tapaba lo que sufría quien consume SYX; pasa al escáner.
+- **`propose.js`** ejecuta `npm run lint`: una propuesta salía en verde con hex y px que la CI rechazaba. `token` niega un `--value` con `;`, llaves o saltos de línea, que colaba otra declaración, y un `--why` con `syx-allow`, que redactaba su propia excepción.
+- **`validate_snippet`** dice qué no revisa, en `notChecked`.
+- **`npx -y syx-mcp` no es un paquete, es un `bin`**: pasa a `npx -y -p syx-design-system syx-mcp` en todos los documentos.
+- **Rangos de reglas**: «R01–R07» y «R01–R08» seguían en una treintena de documentos; literalmente, R09–R11 quedaban negociables. `check:recuentos` vigila ahora esos rangos y las tarjetas de la portada, que anunciaban 19 átomos y 6 moléculas.
+- **`CLAUDE.md`, `AGENTS.md` y `README.md`** llamaban «automática» a la documentación, que en `trust.json` es `pr`. Las reglas base declaran la exención de SKETCH y CREATIVE, en vez de decir que nada las anula. La instrucción tras escribir código incluye `npm run lint`.
+
 ### Added — web: la pila del hero, animada
 
 La figura del hero de la home (el alzado de las 7 `@layer`) deja de ser una imagen fija y pasa a ser un SVG que se dibuja en el navegador, en isométrica real, con GSAP. Solo la web: nada de esto entra en el paquete de npm.

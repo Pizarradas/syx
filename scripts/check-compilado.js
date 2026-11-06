@@ -83,6 +83,10 @@ const selectorDe = (nodo) => {
   return ':root';
 };
 
+const CAPA_COMPONENTE = /(^|\.)syx\.(atoms|molecules|organisms)$/;
+const CAPA_ALTA = /^--(primitive|semantic|theme)-/;
+const RUTAS_PR = /^scss\/(atoms|molecules|organisms|layout|utilities|pages|abstracts\/tokens\/components)\//;
+
 const fallos = [];
 let declaraciones = 0;
 
@@ -100,6 +104,13 @@ for (const entrada of entradas) {
       const f = o.source.startsWith('file:') ? fileURLToPath(o.source) : path.resolve(path.dirname(abs), o.source);
       origen = path.relative(ROOT, f).split(path.sep).join('/');
     }
+    // Las capas altas se declaran en su sitio, y son de nivel humano. Un
+    // `--semantic-x` escrito en una ruta `pr` se saltaba trust.json con un alias
+    // de un salto: R11 mira qué nombre se lee, no quién lo declara.
+    if (origen && CAPA_ALTA.test(decl.prop) && RUTAS_PR.test(origen) && !origen.includes('_deprecated')) {
+      fallos.push({ entrada, regla: 'capa', motivo: `${decl.prop} se declara fuera de su capa`, donde: `${capaDe(decl)} ${selectorDe(decl)}`, origen: `${origen}:${o.line}` });
+    }
+
     // El nodo emitido, con lo que el motor necesita ver.
     const nodo = { type: 'decl', prop: decl.prop, value: decl.value, important: decl.important, parent: null };
     for (const regla of reglas) {
@@ -111,7 +122,12 @@ for (const entrada of entradas) {
       // de donde venga (un átomo que declara uno con un literal es el mismo
       // atajo), salvo la capa del sitio, que tiene su propia regla.
       if (regla.id === 'R11' ? origen.startsWith('scss/site/') : !motor.aplicaA(regla, origen)) continue;
-      if (motor.permitidoEn(regla, origen)) continue;
+      // Lo que emite un mixin nace en scss/abstracts/mixins/, que R01 permite, venga
+      // de donde venga el valor: `$p: unquote('var(--primitive-x)')` e
+      // `@include padding($p)` blanqueaban el primitivo. Para R01 decide la capa en
+      // la que acaba la declaración, no el fichero que la escribió.
+      const blanqueo = regla.id === 'R01' && CAPA_COMPONENTE.test(capaDe(decl));
+      if (!blanqueo && motor.permitidoEn(regla, origen)) continue;
       if (regla.inlineException && excusadaEnLinea(origen, o.line, regla.id)) continue;
       fallos.push({ entrada, regla: regla.id, motivo, donde: `${capaDe(decl)} ${selectorDe(decl)}`, origen: `${origen}:${o.line}` });
     }

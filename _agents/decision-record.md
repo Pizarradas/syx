@@ -40,7 +40,7 @@ the decision, it was not a decision — it was the only option, and it needs no 
 
 Only the ones where a competent alternative existed:
 
-- **A rule left the choice open.** R01–R08 forbid; they almost never choose. Every
+- **A rule left the choice open.** R01–R11 forbid; they almost never choose. Every
   gap they leave is a decision somebody made.
 - **More than one existing thing fits** — two components, two tokens, two patterns.
 - **A number came out of a range** — the grid split, the column count, the density

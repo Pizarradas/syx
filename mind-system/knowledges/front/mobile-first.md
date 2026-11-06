@@ -57,10 +57,10 @@ Si el diseño funciona en esas condiciones, escalar hacia condiciones mejores es
   display: grid;
   grid-template-columns: 1fr;        // móvil: columna única
 
-  @include breakpoint(sm) {          // 640px+
+  @include breakpoint(phablet) {     // 600px+
     grid-template-columns: 1fr 1fr;
   }
-  @include breakpoint(lg) {          // 1024px+
+  @include breakpoint(laptop) {      // 1024px+
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -84,18 +84,22 @@ Si el diseño funciona en esas condiciones, escalar hacia condiciones mejores es
 | Nombre | `min-width` | Uso típico |
 |--------|-------------|-----------|
 | base | — | 320px — columna única, layout de flujo |
-| `sm` | 640px | Dos columnas, CTAs inline |
-| `md` | 768px | Sidebar visible, formularios side-by-side |
-| `lg` | 1024px | Tres columnas, layout editorial completo |
-| `xl` | 1200px | Max-width del contenedor, ajustes de espaciado |
+| `phablet` | 600px | Dos columnas, CTAs inline |
+| `tablet` | 800px | Sidebar visible, formularios side-by-side |
+| `laptop` | 1024px | Tres columnas, layout editorial completo |
+| `desktop` | 1120px | Ajustes de espaciado |
+| `xl` | 1280px | Colapso de la navegación |
+| `wide` | 1440px | Max-width del contenedor |
+
+Es el mapa `$syx-breakpoints` de `scss/abstracts/mixins/_media-queries.scss`. Una clave que no esté ahí es un error de compilación.
 
 **Documentar siempre** el comportamiento de cada breakpoint en el HTML:
 
 ```html
 <!-- RESPONSIVE:
   - base (320px): columna única, imagen arriba del texto
-  - sm (640px+): dos columnas, imagen a la izquierda
-  - lg (1024px+): tres columnas con sidebar
+  - phablet (600px+): dos columnas, imagen a la izquierda
+  - laptop (1024px+): tres columnas con sidebar
 -->
 ```
 

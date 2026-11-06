@@ -37,7 +37,7 @@ Activate the SYX mode system for this request: **$ARGUMENTS**
 ## Guardrails
 
 - **Invalid compositions**: `SKETCH + AUDIT` and `CREATIVE + AUDIT` (both modes are exempt from the
-  very contracts AUDIT enforces), `UI → TOKEN` and `THEME → UI` (dependency backwards),
+  very contracts AUDIT enforces), `UI → TOKEN` and `THEME → UI` without BRAND in front (dependency backwards),
   `MIGRATE + AUDIT` (only `AUDIT → MIGRATE` makes sense), `UI → BRAND` and `THEME → BRAND` (an
   identity is decided before the palette that carries it). Say so and propose the correct form
   instead of running it anyway. `BRAND + AUDIT` **is** valid — BRAND names real tokens, so there is

@@ -78,7 +78,7 @@ Modos de la spec (`accessibility.reduced_motion`):
 ### 4. Detección por plataforma
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 /* CSS: estrategia "no-motion-first" (recomendada) */
 .card { transition: opacity var(--duration-moderate-01) linear; }
 @media (prefers-reduced-motion: no-preference) {

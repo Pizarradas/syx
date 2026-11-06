@@ -55,7 +55,7 @@ flowchart TB
 
     TRUST -->|gates every write| ENGINE
     TRUST -->|gates every write| SOURCE
-    RULES -->|validates R01–R07| SOURCE
+    RULES -->|validates R01–R11| SOURCE
     MODES -->|Knowledge blocks are the source of| ROUTE
     KNOW -.->|informs, never executes| MODES
     SOURCE -->|sass + postcss| CSS
