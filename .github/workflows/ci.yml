@@ -65,7 +65,7 @@ jobs:
       - name: El CSS commiteado es el compilado
         run: node scripts/check-limpio.js --strict
 
-      # Validador R01–R07, simetría de temas, coherencia de versión, snapshot de
+      # Validador R01–R11, simetría de temas, coherencia de versión, snapshot de
       # tokens, huérfanos, registro de componentes, servidor MCP, escáner, mixins,
       # coherencia de los modos, codificación, paquete y build.
       - name: npm run check

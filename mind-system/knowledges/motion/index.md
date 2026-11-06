@@ -138,7 +138,7 @@ Dos escaleras distintas, y conviene no mezclarlas.
 
 **Dentro del dominio** (`01-direccion/direccion.md`): accesibilidad > propósito > sistema > dirección creativa > preferencia técnica. Romper un nivel exige una excepción documentada en la Motion Spec.
 
-**Dentro del repositorio** (`../../README.md`): todo este dominio es el escalón 6. Por encima siguen `contracts/trust.json`, R01–R08 y el bloque `Trust` de cada modo. Ninguna excepción de la spec alcanza a esos escalones: un `transition:` en crudo en un componente es R03 aunque la spec lo justifique.
+**Dentro del repositorio** (`../../README.md`): todo este dominio es el escalón 6. Por encima siguen `contracts/trust.json`, R01–R11 y el bloque `Trust` de cada modo. Ninguna excepción de la spec alcanza a esos escalones: un `transition:` en crudo en un componente es R03 aunque la spec lo justifique.
 
 Y una precedencia dentro del córtex que se mantiene: **`ui/motion-principles.md` es el suelo físico de la UI web de SYX y prevalece sobre este dominio para código de `scss/`**. `04-teoria/` es la teoría completa de la que ese suelo es el resumen aplicado; están reconciliados, y si vuelven a divergir es un error que se corrige, no una opción a elegir.
 
@@ -146,7 +146,7 @@ Y una precedencia dentro del córtex que se mantiene: **`ui/motion-principles.md
 
 ## El filtro SYX en este dominio
 
-Los bloques de código de `08-ejecucion/`, `06-sistema/mapeo-por-plataforma.md` y `07-accesibilidad/` son **web genérica o de otras herramientas**: la capa de prototipo de CREATIVE, exenta de R01–R08, y cada módulo lo dice en su `concepts`. Nombres como `--duration-moderate-02` pertenecen a la escala de referencia de `06-sistema/`, no a `tokens.json`. Dentro de `scss/` la mecánica es la misma y se escribe en SYX: `@include transition()`, `var(--semantic-duration-*)`, `var(--semantic-easing-*)`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `../index.md`.
+Los bloques de código de `08-ejecucion/`, `06-sistema/mapeo-por-plataforma.md` y `07-accesibilidad/` son **web genérica o de otras herramientas**: la capa de prototipo de CREATIVE, exenta de R01–R11, y cada módulo lo dice en su `concepts`. Nombres como `--duration-moderate-02` pertenecen a la escala de referencia de `06-sistema/`, no a `tokens.json`. Dentro de `scss/` la mecánica es la misma y se escribe en SYX: `@include transition()`, `var(--semantic-duration-*)`, `var(--semantic-easing-*)`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `../index.md`.
 
 ---
 

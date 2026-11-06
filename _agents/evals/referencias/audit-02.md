@@ -12,7 +12,7 @@ Cambio revisado: `_agents/evals/fixtures/audit-02.diff`. `classify_change` sobre
 
 ## Verdict
 
-Contract: PASS (R01–R08) · Frontera: FAIL. No se fusiona tal cual. La parte del tema sale del PR y la decide una persona con la medida de contraste delante. La del botón puede seguir como propuesta si alguien explica por qué.
+Contract: PASS (R01–R11) · Frontera: FAIL. No se fusiona tal cual. La parte del tema sale del PR y la decide una persona con la medida de contraste delante. La del botón puede seguir como propuesta si alguien explica por qué.
 
 ## Validation Command
 

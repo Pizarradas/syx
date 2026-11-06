@@ -106,6 +106,38 @@ for (const f of ficheros()) {
   if (fix && nuevo !== texto) fs.writeFileSync(f, nuevo);
 }
 
+// ─── Las cifras de las tarjetas de portada ───────────────────────────────────
+// PATRON exige cifra y sustantivo pegados, y aquí hay `</span>` por medio: la
+// portada anunció 19 átomos y 6 moléculas con el registro en 23 y 15.
+const TARJETA = /atom-stat__number">(\d+)<\/span>\s*<span class="atom-stat__label">([^<]+)</g;
+for (const f of ['home.html', 'why-syx.html'].map((n) => path.join(ROOT, n))) {
+  const texto = fs.readFileSync(f, 'utf8');
+  for (const m of texto.matchAll(TARJETA)) {
+    const capa = CAPA[m[2].trim().toLowerCase()];
+    if (!capa) continue;
+    vistos++;
+    if (+m[1] !== cuenta[capa]) {
+      fallos.push(`${path.relative(ROOT, f)}:${texto.slice(0, m.index).split('\n').length}  «${m[1]} ${m[2].trim()}» — el registro dice ${cuenta[capa]}`);
+    }
+  }
+}
+
+// ─── Los rangos de reglas ────────────────────────────────────────────────────
+// Solo dos rangos dicen algo cierto: R01–R04, las de árbol más antiguas, y el
+// contrato entero. Cuando se añadieron R09–R11, «R01–R08» siguió en 23 documentos
+// y, leído al pie de la letra, las reglas nuevas quedaban negociables.
+const reglas = JSON.parse(fs.readFileSync(path.join(ROOT, 'contracts', 'rules.json'), 'utf8')).rules;
+const ultima = Math.max(...reglas.map((r) => +r.id.slice(1)));
+const RANGO = /R01(?:–|&ndash;|-)R(\d\d)/g;
+const historico = (f) => f.includes(`${path.sep}runs${path.sep}`);
+for (const f of ficheros().filter((x) => !historico(x))) {
+  const texto = fs.readFileSync(f, 'utf8');
+  for (const m of texto.matchAll(RANGO)) {
+    if (+m[1] === 4 || +m[1] === ultima) continue;
+    fallos.push(`${path.relative(ROOT, f)}:${texto.slice(0, m.index).split('\n').length}  «${m[0]}» — el contrato llega a R${ultima}`);
+  }
+}
+
 console.log('\n── RECUENTOS DE COMPONENTES ────────────────────────────────────\n');
 console.log(`   registro            ${cuenta.total} componentes · ${cuenta.atoms} átomos · ${cuenta.molecules} moléculas · ${cuenta.organisms} organismos`);
 console.log(`   cifras leídas       ${vistos}\n`);

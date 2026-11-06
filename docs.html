@@ -1551,7 +1551,7 @@ safelist: [/^atom-btn--/, /^is-/];
               <p class="syx-type-overline syx-text-gray syx-mb-2">Register it in any MCP client</p>
               <pre class="atom-code" tabindex="0" role="group" aria-label="Code: Register it in any MCP client"><code>{
   "mcpServers": {
-    "syx": { "command": "npx", "args": ["-y", "syx-mcp"] }
+    "syx": { "command": "npx", "args": ["-y", "-p", "syx-design-system", "syx-mcp"] }
   }
 }</code></pre>
             </div>
@@ -1604,7 +1604,7 @@ syx.getToken({
                 </tr>
                 <tr>
                   <td><code>validate_snippet</code></td>
-                  <td>R01&ndash;R04 over SCSS <strong>before</strong> it is written, plus non-existent tokens</td>
+                  <td>R01&ndash;R04 and R09&ndash;R11 over SCSS <strong>before</strong> it is written, plus non-existent tokens</td>
                   <td>Writing first and validating later</td>
                 </tr>
                 <tr>
@@ -2459,7 +2459,7 @@ npm run check:figma    # fails if those files are stale
                   <td><code>[SYX: AUDIT]:</code></td>
                   <td>QA reviewer</td>
                   <td>nothing</td>
-                  <td>Contract violations with a verdict &mdash; R01&ndash;R04 errors, R05&ndash;R07 warnings, R08 declared but not yet implemented &mdash; plus structure and naming checks</td>
+                  <td>Contract violations with a verdict &mdash; R01&ndash;R04 and R09&ndash;R11 errors, R05, R06 and R08 warnings, R07 info &mdash; plus structure and naming checks</td>
                 </tr>
                 <tr>
                   <td>8</td>
@@ -2724,8 +2724,8 @@ scss/organisms/_site-header.scss</code></pre>
                 <tr>
                   <td>2</td>
                   <td><code>contracts/rules.json</code></td>
-                  <td>R01&ndash;R08</td>
-                  <td>R01&ndash;R07 &mdash; <code>npm run validate</code></td>
+                  <td>R01&ndash;R11</td>
+                  <td><code>npm run validate</code></td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -4030,7 +4030,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-pagination__item--is-active</code> <code>atom-pagination__item--is-disabled</code> <code>atom-pagination__item--is-next</code> <code>atom-pagination__item--is-prev</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><code>atom-pagination__item</code> <code>atom-pagination__trigger</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">13 component tokens</summary><div class="mol-disclosure__content"><code>--component-pagination-bg-active</code> <code>--component-pagination-border-color-hover</code> <code>--component-pagination-border-radius</code> <code>--component-pagination-border-width</code> <code>--component-pagination-color</code> <code>--component-pagination-color-active</code> <code>--component-pagination-color-disabled</code> <code>--component-pagination-color-hover</code> <code>--component-pagination-font-family</code> <code>--component-pagination-gap</code> <code>--component-pagination-icon-filter</code> <code>--component-pagination-icon-size</code> <code>--component-pagination-item-size</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">14 component tokens</summary><div class="mol-disclosure__content"><code>--component-pagination-bg-active</code> <code>--component-pagination-border-color-hover</code> <code>--component-pagination-border-radius</code> <code>--component-pagination-border-width</code> <code>--component-pagination-color</code> <code>--component-pagination-color-active</code> <code>--component-pagination-color-disabled</code> <code>--component-pagination-color-hover</code> <code>--component-pagination-font-family</code> <code>--component-pagination-gap</code> <code>--component-pagination-icon-next</code> <code>--component-pagination-icon-prev</code> <code>--component-pagination-icon-size</code> <code>--component-pagination-item-size</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Wrap it in &lt;nav aria-label=&quot;Pagination&quot;&gt;; the current page carries aria-current=&quot;page&quot;. Prev/next are icon-only: aria-label (&quot;Previous page&quot;, &quot;Next page&quot;), no visible text. &lt;a href&gt; for page URLs, &lt;button type=&quot;button&quot;&gt; when script loads the results. A dead end uses --is-disabled plus disabled (button) or aria-disabled=&quot;true&quot; (link). No JS required.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>

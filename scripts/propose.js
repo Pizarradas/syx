@@ -47,6 +47,9 @@ const { tokensInexistentes } = require('./lib/rules');
 
 const syx = crearConsulta({ root: ROOT });
 const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+// Hex, px y lados físicos solo los para stylelint: sin esto, una propuesta salía
+// «en verde» con lo que la CI iba a rechazar.
+const lint = () => execFileSync('npm', ['run', '-s', 'lint'], { cwd: ROOT, encoding: 'utf8' });
 // Los nombres de token EMPIEZAN por `--`, así que no se puede usar el truco
 // habitual de «el siguiente argumento vale si no parece una opción»: haría
 // imposible pasar `--name --component-x-bg`. Se comparan contra las opciones
@@ -121,6 +124,14 @@ function token() {
   console.log('\n── PROPUESTA DE TOKEN ──────────────────────────────────────────\n');
   if (!nombre || !valor) fin('   Faltan --name o --value.');
   if (!/^--[a-z][a-z0-9-]*$/.test(nombre)) fin(`   «${nombre}» no es un nombre de custom property válido.`);
+  // El valor y el motivo se escriben tal cual en el SCSS. Un `;` o un salto de
+  // línea en --value colaba una declaración más (un --semantic-*, sin pasar por
+  // el paso 1), y `syx-allow` en --why redactaba su propia excepción a R11.
+  const sinLiterales = valor.replace(/"[^"]*"|'[^']*'|url\([^)]*\)/g, '');
+  if (/[;{}\n\r]/.test(sinLiterales)) fin('   --value tiene que ser un único valor: sin `;`, llaves ni saltos de línea.');
+  if (porque && /[\n\r]|syx-allow/i.test(porque)) {
+    fin('   --why es una línea de motivo: sin saltos de línea y sin `syx-allow`. Una excepción la justifica una persona.');
+  }
 
   // 1. ¿Puede escribirse esta capa?
   const capa = nombre.split('-')[2];
@@ -250,6 +261,7 @@ function token() {
     evidencia = {
       validador: execFileSync('node', ['scripts/syx-validate.js', '--report'], { cwd: ROOT, encoding: 'utf8' }),
       snapshot: execFileSync('node', ['scripts/build-token-snapshot.js', '--check'], { cwd: ROOT, encoding: 'utf8' }),
+      lint: lint(),
     };
     evidencia.derivados = regenerarDerivados();
   } catch (e) {
@@ -535,6 +547,7 @@ function files() {
       registro: tocaComponentes
         ? execFileSync('node', ['scripts/build-component-registry.js', '--check'], { cwd: ROOT, encoding: 'utf8' })
         : null,
+      lint: lint(),
     };
     evidencia.derivados = regenerarDerivados();
   } catch (e) {

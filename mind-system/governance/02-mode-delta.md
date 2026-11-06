@@ -43,7 +43,7 @@ Pasos adicionales antes de escribir HTML cuando `[ATLAS]:` está activo:
 
 | Standalone | Con `[ATLAS]:` |
 |---|---|
-| Exento de R01–R08 y contratos técnicos | Exento de R01–R08 — no cambia |
+| Exento de R01–R11 y contratos técnicos | Exento de R01–R11 — no cambia |
 | Sin restricciones de accesibilidad | Sujeto a CA-01–CA-04. La exención es técnica, no editorial ni de accesibilidad. |
 | Libre en jerarquía visual | Debe mantener un N1 claro — no puede producir una página sin jerarquía identificable |
 
@@ -89,7 +89,7 @@ Verificaciones adicionales antes del pre-flight estándar:
 
 | Standalone | Con `[ATLAS]:` |
 |---|---|
-| Capa 1: contratos R01–R08 | Capa 1: contratos R01–R08 — no cambia |
+| Capa 1: contratos R01–R11 | Capa 1: contratos R01–R11 — no cambia |
 | — | Capa 2: contratos Atlas (CL-03, CL-04, CC-03, CC-05, CT-02, CA-01, CP-01, CP-02) |
 | — | Capa 3: jerarquía editorial — mapear N1/N2/N3/N4, verificar tipografía contra `10.0` |
 | Veredicto: PASS / FAIL | Veredicto: PASS / FAIL / PASS WITH WARNINGS (incluye las tres capas) |

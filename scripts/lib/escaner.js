@@ -714,6 +714,13 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
         // repetidos. (`.atom-txt` fue el caso que la originó; hoy ya declara
         // su base.)
         const familia = [...clasesSistema].filter((x) => x.startsWith(clase + '--'));
+        // Un bloque sin estilos propios cuyos elementos (`__`) sí existen es el
+        // ancla del bloque: `.mol-tabs` no declara nada, pero agrupa `__list`,
+        // `__tab` y `__panel`, y es el asidero de js/syx-tabs.js. No es un hallazgo.
+        // Vivía como excepción en check-usage.js: el guardián interno lo perdonaba
+        // y el escáner público lo daba por inventado, con el Quick Start del README
+        // en rojo para quien seguía CONSUMING.md.
+        if (!familia.length && [...clasesSistema].some((x) => x.startsWith(clase + '__'))) continue;
         if (familia.length) {
           añadir({
             tipo: 'base-sin-estilos',

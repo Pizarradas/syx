@@ -230,7 +230,7 @@ Abortar es decisión del usuario, no del modo.
 |---|---|
 | `SKETCH + AUDIT` | SKETCH está exento de contratos por diseño. Auditarlo es contradictorio. |
 | `SKETCH + UI` | Boceto y producción. No hay handoff útil en el mismo turno. |
-| `CREATIVE + AUDIT` | CREATIVE está exento de R01–R08. Usar `CREATIVE → TOKEN → UI + AUDIT`. |
+| `CREATIVE + AUDIT` | CREATIVE está exento de R01–R11. Usar `CREATIVE → TOKEN → UI + AUDIT`. |
 | `UI → TOKEN` | El orden es al revés. TOKEN define, UI implementa. |
 | `THEME → UI` | THEME opera en `_theme.scss`. No genera componentes para que UI procese. |
 | `MIGRATE + AUDIT` | AUDIT detecta, MIGRATE resuelve. Solo tiene sentido `AUDIT → MIGRATE`. |

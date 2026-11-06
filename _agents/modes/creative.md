@@ -48,7 +48,7 @@ that they stop being re-decided page by page. Two things change when it arrives:
   see `_agents/decision-record.md` — but it now reads *"I moved away from the identity here, and
   this is what it bought"*, which is a claim someone can accept or reject. An invented character is
   not.
-- **A deviation is allowed and has to be declared.** This mode stays exempt from R01–R08; that
+- **A deviation is allowed and has to be declared.** This mode stays exempt from R01–R11; that
   exemption has never covered silence. Departing from an invariant is a legitimate creative call,
   and stating which invariant and why is what keeps the identity from dying by a thousand
   reasonable exceptions.

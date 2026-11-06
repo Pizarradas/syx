@@ -9,7 +9,7 @@
  * su bloque `:root[data-theme="light"]` solo revertía 17. Con el sistema en
  * oscuro, pulsar el toggle a claro dejaba la página a medias — fondo blanco con
  * tarjetas, píldoras, botones y telón del hero todavía en valores de oscuro.
- * No lo detecta ninguna regla R01–R08 porque, token a token, todo era válido.
+ * No lo detecta ninguna regla R01–R11 porque, token a token, todo era válido.
  *
  * Uso:  node scripts/check-theme-symmetry.js [--strict]
  * ----------------------------------------------------------------------------

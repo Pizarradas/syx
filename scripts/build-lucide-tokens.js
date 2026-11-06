@@ -23,6 +23,16 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SVG_DIR = path.join(ROOT, 'img', 'icons', 'lucide');
 const TARGET = path.join(ROOT, 'scss', 'atoms', '_icon-lucide.scss');
+const NUCLEO = path.join(ROOT, 'scss', 'base', '_icon-nucleo.scss'); // en base/ y no en atoms/: son tokens, no un componente, y lo que hay en atoms/ entra en el registro
+
+/**
+ * Los iconos que leen los propios componentes (paginación, listas, formularios).
+ * Los bundles core y app no llevan atom-icon-lucide, que pesa ~29 KB, y sin estos
+ * sus componentes pedían tokens que nadie declaraba: prev/next y viñetas en blanco.
+ * check-huerfanos.js compila esos bundles: si un componente empieza a leer otro
+ * icono, falla hasta que se añade aquí.
+ */
+const ICONOS_NUCLEO = ['chevron-left', 'chevron-right', 'chevrons-left', 'chevrons-right', 'check', 'warning', 'x'];
 
 /**
  * Mapa token → fichero. Casi todos coinciden; estos son los alias
@@ -147,6 +157,22 @@ function main() {
   }
 
   fs.writeFileSync(TARGET, scss);
+
+  const lineas = ICONOS_NUCLEO.map((t) => `    --lc-icon-${t}: url("data:image/svg+xml,${map.get(TOKEN_TO_FILE[t] || t)}");`);
+  fs.writeFileSync(NUCLEO, [
+    '// GENERADO por scripts/build-lucide-tokens.js: no editar a mano.',
+    '// ===============================================',
+    '// base: icon — núcleo',
+    '// Los iconos que leen los componentes, para los bundles sin atom-icon-lucide',
+    '// (core y app). Los que llevan el juego completo no incluyen esto.',
+    '// ===============================================',
+    '@mixin atom-icon-nucleo($theme: null) {',
+    '  :root {',
+    ...lineas,
+    '  }',
+    '}',
+    '',
+  ].join('\n'));
   const kb = ([...map.values()].reduce((a, v) => a + v.length, 0) / 1024).toFixed(1);
   console.log(`${map.size} iconos disponibles · ${replaced} tokens reescritos · ~${kb} KB incrustados`);
   console.log('Recuerda recompilar:  npm run build:css');

@@ -440,6 +440,9 @@ function crearConsulta({ root, crudo = false } = {}) {
     const errores = conCasos.filter(([k]) => m.severidad(k) === 'error').length;
     return {
       path: rel,
+      // `conforme` es «sin errores de contrato», no «sin nada que arreglar»: quien
+      // lo lee tiene que saber qué se queda sin mirar.
+      notChecked: 'Hex, px and physical sides are caught by `npm run lint`. Non-hex literal colours are not checked by anything yet. An unknown breakpoint name fails at compile time.',
       conforme: errores === 0 && !r.sintaxis && rotos.length === 0,
       violaciones: Object.fromEntries(
         conCasos.map(([k, x]) => {

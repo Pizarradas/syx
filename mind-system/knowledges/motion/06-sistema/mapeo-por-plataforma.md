@@ -17,7 +17,7 @@ La fuente es `tokens.json` (DTCG). Estas tablas explican cómo se traduce cada t
 
 ### El bloque CSS/SCSS de este módulo
 
-Es **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01–R08) o cualquier proyecto que no sea el propio SYX. Nombres como `--duration-moderate-02` o `--easing-enter-productive` son la escala de referencia de `motion/06-sistema/escala.md`, no tokens de `tokens.json`. Dentro de `scss/` la mecánica es la misma, pero se escribe en SYX: `@include transition()` en lugar de `transition:` en crudo (R03), `@include absolute()` y compañía en lugar de `position:` (R04), `var(--semantic-duration-*)` y `var(--semantic-easing-*)` en lugar de valores sueltos, y `@include breakpoint()` con `min-width`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `index.md`.
+Es **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01–R11) o cualquier proyecto que no sea el propio SYX. Nombres como `--duration-moderate-02` o `--easing-enter-productive` son la escala de referencia de `motion/06-sistema/escala.md`, no tokens de `tokens.json`. Dentro de `scss/` la mecánica es la misma, pero se escribe en SYX: `@include transition()` en lugar de `transition:` en crudo (R03), `@include absolute()` y compañía en lugar de `position:` (R04), `var(--semantic-duration-*)` y `var(--semantic-easing-*)` en lugar de valores sueltos, y `@include breakpoint()` con `min-width`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `index.md`.
 
 ---
 
@@ -26,7 +26,7 @@ Es **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01�
 ### CSS custom properties
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 :root {
   /* primitivos */
   --duration-fast-01: 70ms;  --duration-fast-02: 110ms;

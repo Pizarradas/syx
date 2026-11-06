@@ -52,7 +52,7 @@ gsap.to(track, {
 
 ## Fallback mobile y reduced-motion
 - **Base (sin media query)**: `flex-direction: column`, padding vertical, sin pin. Es el estado por defecto, no el fallback — el recorrido lateral es la mejora.
-- **`@include breakpoint(lg)`**: a partir de ahí, `flex-direction: row` y se activa el ScrollTrigger con el pin.
+- **`@include breakpoint(laptop)`**: a partir de ahí, `flex-direction: row` y se activa el ScrollTrigger con el pin.
 - `prefers-reduced-motion: reduce`: ignorar el ScrollTrigger y quedarse en el estado base.
 
 > SYX es mobile-first estricto: solo `min-width`, siempre vía `@include breakpoint()`. Escribir esto como `max-width: 1023px` invierte la dirección de la cascada y AUDIT lo marca. La diferencia no es cosmética: con `min-width` el estado columna es lo que se pinta si el JS nunca llega, que es justo lo que quieres en un patrón que depende de GSAP.

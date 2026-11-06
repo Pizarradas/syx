@@ -481,7 +481,7 @@ The most important behavioral mixin. It **automatically adds the `prefers-reduce
 
 ```scss
 // Named breakpoints (recommended)
-@include breakpoint(mobile)  { … }  // ≤ 767px
+@include breakpoint(mobile-only) { … }  // max-width: 37.5em (600px)
 @include breakpoint(tablet)  { … }  // min-width: 50em (800px)
 @include breakpoint(desktop) { … }  // min-width: 70em (1120px)
 @include breakpoint(wide)    { … }  // min-width: 90em (1440px)

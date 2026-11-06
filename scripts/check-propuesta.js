@@ -135,6 +135,16 @@ comprobar('niega un valor que lee un token deprecado y dice cuál usar', () => {
     '--semantic-color-state-error', 'no dice el sustituto');
 });
 
+comprobar('niega un --value que cuela una segunda declaración', () => {
+  negar(['token', '--name', '--component-card-zz', '--value', 'var(--semantic-color-primary);\n  --semantic-rogue: crimson', '--why', 'prueba'],
+    'un único valor', 'no explica el rechazo');
+});
+
+comprobar('niega un --why que redacta su propia excepción', () => {
+  negar(['token', '--name', '--component-card-zz', '--value', 'var(--semantic-color-primary)', '--why', 'syx-allow R11: aprobado'],
+    'sin `syx-allow`', 'no explica el rechazo');
+});
+
 comprobar('niega un token que ya existe', () => {
   negar(['token', '--name', '--component-feature-card-bg', '--value', 'var(--semantic-color-primary)'],
     'ya existe', 'no lo señala');

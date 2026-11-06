@@ -78,12 +78,27 @@ const bundles = fs
   .filter((f) => f.endsWith('.css'))
   .sort();
 
+// css/ solo tiene los bundles completos. Los demás no se compilan a disco, y por
+// eso `core` y `app` llevaron meses pidiendo iconos que no declaraban sin que nada
+// saltase: se compilan aquí, un tema basta porque la lista de componentes de un
+// bundle es la misma en todos.
+const sass = require('sass');
+const parciales = ['app', 'blog', 'core', 'marketing'].map((b) => {
+  const fichero = path.join(ROOT, 'scss', 'themes', 'syx-sketch', `bundle-${b}.scss`);
+  return { nombre: `bundle-${b}`, css: sass.compile(fichero, { style: 'expanded', logger: sass.Logger.silent }).css };
+});
+
 let oficiales = 0;
 let legado = 0;
 const legadoVistos = new Set();
 
-for (const f of bundles) {
-  const a = analizar(fs.readFileSync(path.join(ROOT, 'css', f), 'utf8'));
+const hojas = [
+  ...bundles.map((f) => ({ nombre: f, css: fs.readFileSync(path.join(ROOT, 'css', f), 'utf8') })),
+  ...parciales,
+];
+
+for (const { nombre: f, css } of hojas) {
+  const a = analizar(css);
   const h = huerfanos(a);
   const of = h.filter(esOficial);
   const le = h.filter((t) => !esOficial(t));
@@ -148,7 +163,7 @@ if (deFallback.length) {
 
 const fallarLegado = process.argv.includes('--fallar-si-legado');
 console.log(
-  `\n   ${bundles.length} bundles · ${oficiales} huérfano(s) oficial(es) · ${legado} referencia(s) heredada(s)\n`
+  `\n   ${hojas.length} hojas · ${oficiales} huérfano(s) oficial(es) · ${legado} referencia(s) heredada(s)\n`
 );
 
 process.exit(oficiales || ofFuente.length || (fallarLegado && legado) ? 1 : 0);

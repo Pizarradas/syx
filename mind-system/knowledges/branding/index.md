@@ -34,4 +34,4 @@ Fundamentos de percepción de marca, credibilidad y prestigio visual. Respalda l
 | CREATIVE | `perception-of-prestige-foundations.md` | Siempre — fundamento para decisiones de registro premium |
 | CREATIVE | `perception-of-prestige.rules.md` | On-demand — cuando el brief exige premium/credibilidad explícita |
 | UX | `perception-of-prestige-foundations.md` | On-demand — cuando el contexto implica confianza, autoridad o conversión |
-| AUDIT | `perception-of-prestige.rules.md` | On-demand — cuando se audita percepción de marca, no solo contratos R01–R08 |
+| AUDIT | `perception-of-prestige.rules.md` | On-demand — cuando se audita percepción de marca, no solo contratos R01–R11 |

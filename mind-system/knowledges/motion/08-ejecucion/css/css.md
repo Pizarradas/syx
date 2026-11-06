@@ -37,7 +37,7 @@ Traduce la Motion Spec a CSS. **No reinterpreta valores**: usa los tokens de `mo
 
 ### Los bloques de código de este módulo
 
-Son **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01–R08) o cualquier proyecto que no sea el propio SYX. Nombres como `--duration-moderate-02` o `--easing-enter-productive` son la escala de referencia de `motion/06-sistema/escala.md`, no tokens de `tokens.json`. Dentro de `scss/` la mecánica es la misma, pero se escribe en SYX: `@include transition()` en lugar de `transition:` en crudo (R03), `@include absolute()` y compañía en lugar de `position:` (R04), `var(--semantic-duration-*)` y `var(--semantic-easing-*)` en lugar de valores sueltos, y `@include breakpoint()` con `min-width`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `index.md`.
+Son **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01–R11) o cualquier proyecto que no sea el propio SYX. Nombres como `--duration-moderate-02` o `--easing-enter-productive` son la escala de referencia de `motion/06-sistema/escala.md`, no tokens de `tokens.json`. Dentro de `scss/` la mecánica es la misma, pero se escribe en SYX: `@include transition()` en lugar de `transition:` en crudo (R03), `@include absolute()` y compañía en lugar de `position:` (R04), `var(--semantic-duration-*)` y `var(--semantic-easing-*)` en lugar de valores sueltos, y `@include breakpoint()` con `min-width`. La ruta a producción es siempre CREATIVE → TOKEN → UI. Ver *El filtro SYX* en `index.md`.
 
 ### Módulos relacionados
 
@@ -52,7 +52,7 @@ Son **web genérica**: la capa de prototipo que produce CREATIVE (exenta de R01�
 ### 2. Fundamentos
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 .card {
   /* estrategia no-motion-first: por defecto solo effects */
   transition: opacity var(--duration-moderate-01) linear, background-color var(--duration-fast-02) linear;
@@ -104,7 +104,7 @@ Lo que se pierde respecto al prototipo, y conviene saberlo: bajo `prefers-reduce
 Baseline 2024:
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 .toast {
   opacity: 1; translate: 0 0;
   transition: opacity 150ms linear, translate 240ms var(--easing-enter-productive),
@@ -127,7 +127,7 @@ Baseline 2024:
 Baseline desde diciembre de 2023. Genera las paradas muestreando la función (`motion/08-ejecucion/css/spring-to-linear.js`):
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 :root {
   --spring-spatial-default: linear(0, 0.0417, 0.1471 …, 1); /* generado */
   --spring-spatial-default-duration: 348ms;                  /* = settleMs del token */
@@ -143,7 +143,7 @@ Baseline desde diciembre de 2023. Genera las paradas muestreando la función (`m
 ### 6. `@property` (animar custom properties)
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 @property --angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .ring { background: conic-gradient(var(--c) var(--angle), transparent 0); transition: --angle 1000ms var(--easing-enter-expressive); }
 ```
@@ -153,7 +153,7 @@ Sirve para gradientes, contadores con `counter()` y `@property <integer>`, másc
 ### 7. Scroll-driven animations
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .reveal {
@@ -180,7 +180,7 @@ else document.startViewTransition({ update, types: ['forward'] });
 ```
 
 ```css
-/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R08. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
+/* capa: prototipo fuera de scss/ — CREATIVE, exento de R01–R11. En un componente se escribe en SYX: ver «En SYX» en motion/08-ejecucion/css/css.md */
 .card-img { view-transition-name: hero; }           /* único por página */
 .list-item { view-transition-class: item; }          /* estilo compartido */
 ::view-transition-group(hero) { animation-duration: var(--duration-slow-01); animation-timing-function: var(--easing-standard-expressive); }

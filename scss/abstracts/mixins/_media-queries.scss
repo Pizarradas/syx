@@ -39,7 +39,9 @@ $syx-breakpoints: (
       }
     }
   } @else {
-    @warn 'SYX: Unknown breakpoint `#{$name}`. Available: #{map.keys($syx-breakpoints)}';
+    // @error y no @warn: con @warn la regla desaparecía del CSS sin que nada
+    // fallase, y un componente se quedaba sin su layout de escritorio.
+    @error 'SYX: Unknown breakpoint `#{$name}`. Available: #{map.keys($syx-breakpoints)}';
   }
 }
 

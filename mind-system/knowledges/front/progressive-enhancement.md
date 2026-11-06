@@ -128,7 +128,7 @@ Las capas también aplican dentro del CSS del componente:
 // Funcional en cualquier viewport, cualquier dispositivo
 
 // Capa 2 — Layout (min-width únicamente)
-@include breakpoint(sm) { … }
+@include breakpoint(phablet) { … }
 
 // Capa 3 — Enhancement (@supports)
 @supports (backdrop-filter: blur(8px)) {

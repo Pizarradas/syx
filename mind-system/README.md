@@ -23,7 +23,7 @@ Es la pieza que hace que los dos sistemas convivan sin contradecirse. Cuando dos
 | # | Autoridad | Qué decide | ¿Verificado? |
 |---|---|---|---|
 | 1 | `contracts/trust.json` | Quién puede escribir qué | ✅ `scripts/lib/confianza.js` · `classify_change` |
-| 2 | `contracts/rules.json` | R01–R08 | ✅ `scripts/lib/rules.js` · `npm run validate` |
+| 2 | `contracts/rules.json` | R01–R11 | ✅ `scripts/lib/rules.js` · `npm run validate` |
 | 3 | `_agents/modes/*.md` → bloque `Trust` | El techo de cada modo | ✅ `npm run check:modos` |
 | 4 | `mind-system/governance/` | Cómo se componen Atlas y los modos | ⚠️ solo declarado |
 | 5 | `mind-system/atlas-rules/` | Decisiones editoriales (dominio invitado) | ⚠️ solo declarado |
@@ -36,7 +36,7 @@ Esto corrige de forma deliberada la formulación anterior de la constitución, q
 La formulación correcta es más estrecha y más útil:
 
 > Atlas prevalece **dentro de su dominio** — nivel editorial, jerarquía, densidad, proporción, zona, publicidad — que es un dominio que los modos no cubren en absoluto.
-> Atlas no prevalece sobre R01–R08, ni sobre `trust.json`, ni sobre el bloque `Trust` de un modo. Ahí no hay conflicto que arbitrar: hay un contrato y un documento que no lo conocía.
+> Atlas no prevalece sobre R01–R11, ni sobre `trust.json`, ni sobre el bloque `Trust` de un modo. Ahí no hay conflicto que arbitrar: hay un contrato y un documento que no lo conocía.
 
 Los escalones 1–3 los comprueba una máquina. Los escalones 4–6 hoy solo están escritos, y un documento puede prometer cualquier cosa — que es exactamente el argumento con el que se escribió `check-modos.js`. Ver *Lo que todavía no vigila nadie*, al final.
 

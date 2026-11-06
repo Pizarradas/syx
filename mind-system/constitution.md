@@ -18,7 +18,7 @@ Cada modo tiene un dominio exclusivo. Operar fuera del dominio propio es un erro
 | **TOKEN** | Arquitectura del sistema de tokens | Operativo | Ficheros de token, `tokens.json`, mapeos semánticos | `pr` / recomienda |
 | **THEME** | Configuración de temas visuales | Operativo | Escalas OKLCH, `_theme.scss`, cobertura de superficie | recomienda |
 | **UI** | Implementación SCSS de componentes | Operativo | SCSS conforme R01–R04, tokens de componente, registro | `pr` |
-| **AUDIT** | Revisión de conformidad | Evaluativo | Informe R01–R08, veredicto | nada |
+| **AUDIT** | Revisión de conformidad | Evaluativo | Informe R01–R11, veredicto | nada |
 | **MIGRATE** | Resolución de deuda técnica | Operativo | Plan de migración variable a variable | `pr` / recomienda |
 | **BRAND** | Identidad visual completa | Generativo + evaluativo | Los siete ejes de una identidad, su procedencia, invariantes y la especificación que THEME construye | recomienda |
 | **ROADMAP** | Qué le falta a SYX | Evaluativo | Comprobación de capacidades, lo ya cubierto con su evidencia, propuestas con prueba de ausencia, entradas para `contracts/capabilities.json` | recomienda |
@@ -93,7 +93,7 @@ BRAND va al final y no entre UI y AUDIT: lee solo tres ficheros, pero su trabajo
 - Un hallazgo de AUDIT nunca es una propuesta de ROADMAP, y una propuesta de ROADMAP nunca es una violación.
 
 ### CREATIVE vs UI
-- **CREATIVE** produce prototipos exentos de R01–R08.
+- **CREATIVE** produce prototipos exentos de R01–R11.
 - **UI** es la única vía para llevar un output de CREATIVE a producción.
 - CREATIVE nunca produce código que se copie directamente a `scss/`.
 
@@ -161,7 +161,7 @@ El mapa completo de qué módulo entra en qué modo está en `routing.md`.
 
 ## Reglas de prioridad
 
-1. **R01–R08 no se negocian** en UI, AUDIT y MIGRATE. Ninguna justificación conceptual las anula.
+1. **R01–R11 no se negocian** en UI, AUDIT y MIGRATE. Ninguna justificación conceptual las anula.
 2. **WCAG AA es el suelo.** Ninguna decisión estética lo justifica ceder.
 3. **SKETCH y CREATIVE están exentos de contratos técnicos.** Sus outputs nunca van a producción directamente. La exención es técnica: no cubre accesibilidad.
 4. **TOKEN es upstream de UI y THEME.** Si TOKEN no ha definido un token, UI no puede usarlo.
@@ -183,7 +183,7 @@ Fuera de ese dominio, Atlas no prevalece:
 |---|---|
 | Nivel editorial, densidad, zona, proporción, publicidad | **Atlas** |
 | Nomenclatura de tokens, tiers, formato de color | **Modes** — `03-domains.md`, tabla de puente |
-| Conformidad R01–R08 | **Modes** — verificado por máquina |
+| Conformidad R01–R11 | **Modes** — verificado por máquina |
 | Quién puede escribir dónde | **`contracts/trust.json`** — no lo discute ningún documento |
 | Accesibilidad | El estándar más estricto, que en la práctica es UX citando WCAG |
 

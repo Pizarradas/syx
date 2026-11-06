@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 625,
-      "omitidas": 471,
+      "variables": 620,
+      "omitidas": 476,
       "fueraDeAlcance": {
         "primitive": 236,
         "icon": 17,
@@ -2829,29 +2829,6 @@
           }
         },
         {
-          "name": "component/button/primary/color/hover",
-          "type": "COLOR",
-          "token": "--component-button-primary-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#008117",
-            "dark": "#009d43"
-          }
-        },
-        {
           "name": "component/button/primary/filled/bg",
           "type": "COLOR",
           "token": "--component-button-primary-filled-bg",
@@ -3039,29 +3016,6 @@
           "name": "component/button/quaternary/border/hover",
           "type": "COLOR",
           "token": "--component-button-quaternary-border-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#008117",
-            "dark": "#009d43"
-          }
-        },
-        {
-          "name": "component/button/quaternary/color/hover",
-          "type": "COLOR",
-          "token": "--component-button-quaternary-color-hover",
           "valuesByMode": {
             "light": {
               "r": 0,
@@ -3289,29 +3243,6 @@
           }
         },
         {
-          "name": "component/button/secondary/color/hover",
-          "type": "COLOR",
-          "token": "--component-button-secondary-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.5046,
-              "b": 0.1522,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1476,
-              "g": 0.5927,
-              "b": 0.3526,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#008127",
-            "dark": "#26975a"
-          }
-        },
-        {
           "name": "component/button/secondary/filled/bg",
           "type": "COLOR",
           "token": "--component-button-secondary-filled-bg",
@@ -3499,29 +3430,6 @@
           "name": "component/button/tertiary/border/hover",
           "type": "COLOR",
           "token": "--component-button-tertiary-border-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#008117",
-            "dark": "#009d43"
-          }
-        },
-        {
-          "name": "component/button/tertiary/color/hover",
-          "type": "COLOR",
-          "token": "--component-button-tertiary-color-hover",
           "valuesByMode": {
             "light": {
               "r": 0,
@@ -7060,29 +6968,6 @@
           "hexByMode": {
             "light": "#7d8086",
             "dark": "#666666"
-          }
-        },
-        {
-          "name": "component/pagination/color/hover",
-          "type": "COLOR",
-          "token": "--component-pagination-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#009d43",
-            "dark": "#009d43"
           }
         },
         {
@@ -10925,10 +10810,10 @@
         "base": 8,
         "danger": 3,
         "filled": 1,
-        "primary": 7,
-        "quaternary": 7,
-        "secondary": 7,
-        "tertiary": 7,
+        "primary": 6,
+        "quaternary": 6,
+        "secondary": 6,
+        "tertiary": 6,
         "size-lg": 1,
         "size-md": 1,
         "size-sm": 1
@@ -11171,28 +11056,6 @@
           }
         },
         {
-          "token": "--component-button-primary-color-hover",
-          "variable": "component/button/primary/color/hover",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "primary",
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-button-primary-filled-bg",
           "variable": "component/button/primary/filled/bg",
           "propiedad": "fills",
@@ -11306,28 +11169,6 @@
           "token": "--component-button-quaternary-border-hover",
           "variable": "component/button/quaternary/border/hover",
           "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "quaternary",
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-button-quaternary-color-hover",
-          "variable": "component/button/quaternary/color/hover",
-          "propiedad": "fills",
           "tipo": "COLOR",
           "variante": "quaternary",
           "estado": "hover",
@@ -11479,28 +11320,6 @@
           }
         },
         {
-          "token": "--component-button-secondary-color-hover",
-          "variable": "component/button/secondary/color/hover",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": "secondary",
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.5046,
-              "b": 0.1522,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.1476,
-              "g": 0.5927,
-              "b": 0.3526,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-button-secondary-filled-bg",
           "variable": "component/button/secondary/filled/bg",
           "propiedad": "fills",
@@ -11614,28 +11433,6 @@
           "token": "--component-button-tertiary-border-hover",
           "variable": "component/button/tertiary/border/hover",
           "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": "tertiary",
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.5065,
-              "b": 0.0906,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-button-tertiary-color-hover",
-          "variable": "component/button/tertiary/color/hover",
-          "propiedad": "fills",
           "tipo": "COLOR",
           "variante": "tertiary",
           "estado": "hover",
@@ -11897,6 +11694,10 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-primary-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-quaternary-bg-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
@@ -11905,11 +11706,19 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-quaternary-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-secondary-bg-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-button-secondary-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-secondary-color-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -11942,6 +11751,10 @@
         },
         {
           "token": "--component-button-tertiary-color",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-tertiary-color-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -13200,7 +13013,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 8
+        "base": 7
       },
       "propiedades": [
         {
@@ -13304,28 +13117,6 @@
           }
         },
         {
-          "token": "--component-pagination-color-hover",
-          "variable": "component/pagination/color/hover",
-          "propiedad": "fills",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            },
-            "dark": {
-              "r": 0,
-              "g": 0.6148,
-              "b": 0.2619,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-pagination-font-family",
           "variable": "component/pagination/font/family",
           "propiedad": "fontName.family",
@@ -13361,12 +13152,20 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-pagination-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-pagination-gap",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
-          "token": "--component-pagination-icon-filter",
-          "motivo": "sin valor"
+          "token": "--component-pagination-icon-next",
+          "motivo": "imagen embebida: en Figma es un asset, no una variable"
+        },
+        {
+          "token": "--component-pagination-icon-prev",
+          "motivo": "imagen embebida: en Figma es un asset, no una variable"
         },
         {
           "token": "--component-pagination-icon-size",
@@ -17679,6 +17478,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-primary-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-quaternary-bg-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -17687,11 +17490,19 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-quaternary-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-secondary-bg-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-button-secondary-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-secondary-color-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17728,6 +17539,10 @@
     },
     {
       "token": "--component-button-tertiary-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-tertiary-color-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -18424,6 +18239,10 @@
     },
     {
       "token": "--component-pagination-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-pagination-color-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {

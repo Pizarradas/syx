@@ -271,6 +271,6 @@ console.log(`
    1. Primera línea de cada hoja de estilos de la app (en SCSS, tras los @use):
       @layer syx.reset, syx.base, syx.tokens, syx.atoms, syx.molecules, syx.organisms, syx.app, syx.utilities;
    2. Antes de dar algo por bueno:  npx syx-scan src   (en CI: --fallar-si-media)
-   3. Opcional, MCP en cualquier cliente:  { "mcpServers": { "syx": { "command": "npx", "args": ["-y", "syx-mcp"] } } }
+   3. Opcional, MCP en cualquier cliente:  { "mcpServers": { "syx": { "command": "npx", "args": ["-y", "-p", "syx-design-system", "syx-mcp"] } } }
    4. Asistente sin acceso a ficheros: pega AGENTS.md y SYX-VOCABULARY.md en sus instrucciones.
 `);

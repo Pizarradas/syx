@@ -5,7 +5,7 @@ Sistema de gobernanza que define cómo operan juntos los dos sistemas de reglas:
 - **SYX Modes** (`_agents/modes/`) — autoridad de implementación: SCSS, tokens, componentes, temas.
 - **Atlas Rules** (`../atlas-rules/`) — autoridad estructural: jerarquía editorial, layout, densidad, contexto, proporciones.
 
-> **Dónde encaja esto.** Este sistema es el escalón 4 de la escalera de precedencia de `../README.md`. Está por debajo de `contracts/trust.json`, de `contracts/rules.json` y del bloque `Trust` de cada modo, que son los tres escalones que comprueba una máquina. Ninguna regla de esta carpeta puede levantar un permiso que el contrato no dé, ni excusar una violación de R01–R08. Atlas es autoridad de dominio, no de rango: ver `04-conflicts.md`.
+> **Dónde encaja esto.** Este sistema es el escalón 4 de la escalera de precedencia de `../README.md`. Está por debajo de `contracts/trust.json`, de `contracts/rules.json` y del bloque `Trust` de cada modo, que son los tres escalones que comprueba una máquina. Ninguna regla de esta carpeta puede levantar un permiso que el contrato no dé, ni excusar una violación de R01–R11. Atlas es autoridad de dominio, no de rango: ver `04-conflicts.md`.
 
 ---
 
