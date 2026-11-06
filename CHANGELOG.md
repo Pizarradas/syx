@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **README y CONSUMING**: la instalación pasa a `npm install syx-design-system`, publicado en npm desde la 5.1.0.
+
 ## [5.1.0] — 2026-11-06
 
 ### Added — auditoría de 2026-11, tanda 3
