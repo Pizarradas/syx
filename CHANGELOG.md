@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **El paquete** deja de llevar `_agents/` salvo `_agents/modes/`, y los scripts `check-*`, `eval-*`, `patch-*` y el hook: 121 ficheros internos, con ejemplos de lo que está mal al alcance de cualquier agente que leyera `node_modules`. Los modos dicen qué hacer si un módulo del córtex no existe.
+- **`release.yml`** se puede reintentar: si la release ya existe, sigue con npm. `repository.url` usa la mayúscula real del repositorio, que `--provenance` compara.
 - **Evals**: el workflow corre con `--estricto`: una ejecución con 0 aprobadas salía en verde.
 - **Presupuesto de contexto**: `check:conocimiento` mide también la ruta de `AGENTS.md` con `decision-record.md`, con techo de 26 000 tokens. `AGENTS.md` deja de mandar leer `contracts/rules.json`, que `CLAUDE.md` mandaba no leer.
 
