@@ -63,10 +63,10 @@ Create `scss/abstracts/tokens/components/_{name}.scss`:
 
 ## Step 2: Register the Token File
 
-Add to `scss/abstracts/tokens/index.scss`:
+Add to `scss/abstracts/tokens/components/index.scss`:
 
 ```scss
-@forward "components/{name}";
+@forward "{name}";
 ```
 
 ---
@@ -161,7 +161,11 @@ Add to `scss/{layer}/index.scss`:
 
 ## Step 5: Register in the shared full bundle
 
-Add **one** line to `scss/themes/_shared/_bundle-full.scss`, in its layer
+**This step is human-only** (`scss/themes/` in `contracts/trust.json`). Hand a person
+this line as a recommendation and stop until it is in place: `propose.js files`
+refuses a component that does not reach the compiled CSS.
+
+They add **one** line to `scss/themes/_shared/_bundle-full.scss`, in its layer
 section, alphabetically:
 
 ```scss

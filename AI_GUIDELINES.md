@@ -182,12 +182,14 @@ When asked to "create a new component X":
 **Step 3: Register**
 
 - Add `@forward "x";` to the corresponding index file (`scss/molecules/index.scss`).
-- Add `@forward "components/x";` to `scss/abstracts/tokens/index.scss`.
+- Add `@forward "x";` to `scss/abstracts/tokens/components/index.scss`.
 - Add `@include mol-x($theme);` **once** to `scss/themes/_shared/_bundle-full.scss`
   (and to the context bundles that need it) — never to per-theme `_setup.scss`
   files, which are generated boilerplate. Without this line the component
-  compiles in no theme.
-- Add entry to `component-registry.json`.
+  compiles in no theme, and `propose.js` refuses it. That file is human-only: hand
+  the line over as a recommendation.
+- Run `npm run build:registry`. Entries are generated; only `description`, `usage`
+  and `a11y` are written by hand.
 
 **Step 4: Validate**
 

@@ -115,10 +115,10 @@ El output de un modo es el input del siguiente.
 [SYX: UX → TOKEN → UI]: diseña, tokeniza e implementa un campo de búsqueda con autocompletar
 ```
 
-Si un paso intermedio no tiene trabajo, el pipeline **continúa** con los recursos existentes y emite un handoff explícito. Abortar es decisión del usuario, no del modo.
+Si un paso intermedio no tiene trabajo, el pipeline **continúa** con los recursos existentes y emite un handoff explícito. Si el siguiente depende de algo que este paso solo puede recomendar, se detiene con `[blocked: human]`. Abortar por cualquier otra razón es decisión del usuario, no del modo.
 
 ### Composición evaluativa (`+`)
-Ambos modos operan sobre el mismo artefacto y sus outputs se presentan juntos.
+El segundo modo evalúa el output del primero, en el mismo turno, y los dos se presentan juntos.
 
 ```
 [SYX: UI + AUDIT]: implementa y valida el componente atom-badge

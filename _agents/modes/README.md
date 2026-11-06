@@ -115,7 +115,7 @@ If a middle step turns out to have no work — TOKEN finds every token it needed
 the user's call, not the mode's.
 
 Not every pair composes. `SKETCH + AUDIT` and `CREATIVE + AUDIT` are contradictions (both modes are
-exempt from the contracts AUDIT enforces); `UI → TOKEN` and `THEME → UI` run the dependency
+exempt from the contracts AUDIT enforces); `UI → TOKEN` and `THEME → UI` without BRAND in front run the dependency
 backwards, and so do `UI → BRAND` and `THEME → BRAND` — an identity is decided before the palette
 that carries it, not after. `BRAND + AUDIT` **is** valid, unlike the other two recommendation-only
 pairs: BRAND's output already names real tokens, so AUDIT has something to check.

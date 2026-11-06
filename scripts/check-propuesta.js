@@ -145,6 +145,19 @@ comprobar('niega un --why que redacta su propia excepción', () => {
     'sin `syx-allow`', 'no explica el rechazo');
 });
 
+comprobar('files niega un componente que no llega al CSS, y conserva el cambio', () => {
+  const f = path.join(tmp, 'scss', 'atoms', '_zinerte.scss');
+  const idx = path.join(tmp, 'scss', 'atoms', 'index.scss');
+  const antes = fs.readFileSync(idx, 'utf8');
+  fs.writeFileSync(f, '@mixin atom-zinerte($theme: null) {\n  @layer syx.atoms {\n    .atom-zinerte { display: block; }\n  }\n}\n');
+  fs.appendFileSync(idx, "@forward 'zinerte';\n");
+  const r = proponer('files', 'scss/atoms/_zinerte.scss', 'scss/atoms/index.scss', '--why', 'prueba', '--branch', 'z/inerte');
+  fs.rmSync(f); fs.writeFileSync(idx, antes);
+  execFileSync('bash', ['-c', `cd "${tmp}" && git checkout -- . && git clean -qfd`]);
+  if (r.code === 0) throw new Error('lo aceptó');
+  contiene(r.salida, '_bundle-full.scss', 'no dice qué falta');
+});
+
 comprobar('niega un token que ya existe', () => {
   negar(['token', '--name', '--component-feature-card-bg', '--value', 'var(--semantic-color-primary)'],
     'ya existe', 'no lo señala');

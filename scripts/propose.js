@@ -517,7 +517,7 @@ function files() {
   for (const d of detalle) console.log(`   → ${d.tier.padEnd(6)} ${d.path}`);
   console.log(`\n   por qué      ${porque}`);
   console.log(`   rama         ${rama}`);
-  console.log(`   validación   build:css + validate${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens`);
+  console.log(`   validación   build:css + validate + lint${tocaComponentes ? ' + registro de componentes' : ''} + snapshot de tokens`);
   console.log(`   regenera     contratos (validate --report), Figma, referencia de docs.html\n`);
 
   if (seco) fin('   --dry-run: no se ha compilado ni commiteado nada.', 0);
@@ -549,6 +549,21 @@ function files() {
         : null,
       lint: lint(),
     };
+    // Un componente sin su línea en el bundle compila, valida y entra en el
+    // registro, y no llega a ninguna hoja. El bundle es de nivel humano: se dice
+    // aquí, y no cuando la CI lo tumbe.
+    const css = fs.readFileSync(syx.cssPath('syx-sketch'), 'utf8');
+    const inertes = tocaComponentes ? syx.listComponents().components.filter((c) => {
+      return cambios.includes(c.file) && !(c.classes || []).some((k) => css.includes(`.${k}`));
+    }) : [];
+    if (inertes.length) {
+      deshacerDerivados();
+      fin(
+        `   ${inertes.map((c) => c.classes?.[0] || c.name).join(', ')} no aparece en el CSS compilado: le falta su línea en\n` +
+        `   scss/themes/_shared/_bundle-full.scss, que es de nivel humano. Tu cambio sigue en el árbol.\n` +
+        `   Pide a una persona que añada \`@include <mixin>($theme);\` y vuelve a proponer.`
+      );
+    }
     evidencia.derivados = regenerarDerivados();
   } catch (e) {
     deshacerDerivados();
