@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `syx/theme-system.md` · `syx/token-system.md` (what a theme may and may not overwrite) · `syx/color-oklch.md` (perceptually even scales).
 > · **When relevant:** `ui/color-theory.md` for distribution and meaning · `front/size-models.md` if the theme touches scale primitives · `motion/06-sistema/escala.md` if it redefines `--semantic-duration-*` or `--semantic-easing-*`.

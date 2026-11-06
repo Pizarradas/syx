@@ -1,6 +1,6 @@
 # SYX — Claude Code Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v5.0.0).
+You are working with **SYX**, a token-driven, native SCSS design system (v5.1.0).
 
 > **Building a website or an app that *uses* SYX, rather than changing SYX?** Read
 > `CONSUMING.md` instead, and run `npx syx-init` in the app.

@@ -397,6 +397,10 @@ const BYTES_POR_TOKEN = 3.5;
 // entrada de todos los modos bajó unos 3 800 tokens; el límite baja con ella
 // para que no se vuelva a llenar sin que nadie lo decida.
 const LIMITE_ENTRADA = 22000;
+// La ruta canónica: AGENTS.md, que se declara entrada de todo agente, es más largo
+// que CLAUDE.md, y `## Why` obliga a leer decision-record.md. Medir solo CLAUDE.md
+// dejaba fuera lo que de verdad se carga.
+const LIMITE_CANONICA = 26000;
 const LIMITE_PEOR = 60000;
 const presupuesto = [];
 
@@ -465,14 +469,18 @@ comprobar('cada modo cabe en su presupuesto de contexto', () => {
       if (bytes(nuevos) > bytes(mayor)) mayor = nuevos;
     }
     for (const f of mayor) peor.add(f);
-    const fila = { modo: m, entrada: bytes(entrada), peor: bytes(peor), todo: bytes(todo) };
+    const canonica = new Set([...entrada].filter((f) => f !== path.join(ROOT, 'CLAUDE.md')));
+    canonica.add(path.join(ROOT, 'AGENTS.md'));
+    if (m !== 'sketch') canonica.add(path.join(ROOT, '_agents', 'decision-record.md'));
+    const fila = { modo: m, entrada: bytes(entrada), canonica: bytes(canonica), peor: bytes(peor), todo: bytes(todo) };
     presupuesto.push(fila);
     if (tok(fila.entrada) > LIMITE_ENTRADA) malos.push(`${m}: entrada ≈ ${tok(fila.entrada)} tokens (límite ${LIMITE_ENTRADA})`);
+    if (tok(fila.canonica) > LIMITE_CANONICA) malos.push(`${m}: ruta AGENTS.md ≈ ${tok(fila.canonica)} tokens (límite ${LIMITE_CANONICA})`);
     if (tok(fila.peor) > LIMITE_PEOR) malos.push(`${m}: peor caso ≈ ${tok(fila.peor)} tokens (límite ${LIMITE_PEOR})`);
   }
   if (malos.length) throw new Error(malos.join(' · ') + ' · Baja módulos de Always a When relevant, parte los grandes o cita el fichero concreto en vez de la carpeta');
   const max = (k) => presupuesto.reduce((a, f) => (f[k] > a[k] ? f : a));
-  return `entrada máx. ${max('entrada').modo} ≈ ${tok(max('entrada').entrada)} tokens (≤ ${LIMITE_ENTRADA}) · peor caso máx. ${max('peor').modo} ≈ ${tok(max('peor').peor)} tokens (≤ ${LIMITE_PEOR})`;
+  return `entrada máx. ${max('entrada').modo} ≈ ${tok(max('entrada').entrada)} tokens (≤ ${LIMITE_ENTRADA}) · ruta AGENTS.md máx. ${max('canonica').modo} ≈ ${tok(max('canonica').canonica)} (≤ ${LIMITE_CANONICA}) · peor caso máx. ${max('peor').modo} ≈ ${tok(max('peor').peor)} tokens (≤ ${LIMITE_PEOR})`;
 });
 
 console.log('\n── CÓRTEX ' + '─'.repeat(54) + '\n');

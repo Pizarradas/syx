@@ -1,6 +1,6 @@
 # SYX — Agent Entry Point
 
-You are working with **SYX**, a token-driven, native SCSS design system (v5.0.0).  
+You are working with **SYX**, a token-driven, native SCSS design system (v5.1.0).  
 This file is the canonical entry point for all AI agents and tools (OpenAI Codex, Cursor, Copilot, Claude Code, etc.).
 
 > **Building a website or an app that *uses* SYX, rather than changing SYX?** This file is
@@ -10,7 +10,8 @@ This file is the canonical entry point for all AI agents and tools (OpenAI Codex
 Before doing anything else, read these files in order:
 
 1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
-2. `contracts/rules.json` — the contract rules. `syx-validate.js` implements R01–R11
+
+`contracts/rules.json` holds the contract rules; `AI_GUIDELINES.md` is their readable form, and `validate_snippet` applies them. Read the JSON only to explain a verdict.
 
 `tokens.json` (the full token registry, ≈ 280 KB) and `component-registry.json` (the component
 inventory, ≈ 45 KB) are the sources of truth, but do **not** load them whole: that is some 80 000

@@ -11,7 +11,7 @@
 
 > **Knowledge** — the cortex under `mind-system/knowledges/`, routed by `mind-system/routing.md`.
 > It informs; it never executes. If a module argues for something a rule forbids, the rule wins and
-> the module is the thing that needs fixing. Paths below are relative to that folder.
+> the module is the thing that needs fixing. Paths below are relative to that folder. In an installed package the cortex is not shipped: if a path does not exist, carry on without it and say so.
 >
 > · **Always:** `branding/perception-of-prestige-foundations.md` (what a register signals before it is read) · `syx/token-system.md` (which tier owns which axis) · `syx/theme-system.md` (what a theme may and may not overwrite) · `ui/color-theory.md` (distribution and meaning).
 > · **When relevant:** `syx/color-oklch.md` when the identity sets or argues palette steps (lightness, chroma, the dead zone around L 0.60) · `ui/typography-systems.md` when it moves the type axis (scale ratio, line-height, tracking) · `front/size-models.md` when the identity moves the scale ratio · `ui/motion-principles.md` when it moves the motion axis, with `motion/03-creativa/personalidad.md` (archetypes → curves and durations) and `motion/03-creativa/lenguaje-de-marca.md` (the one-page motion language) · `ui/practical-ui.md` for density and elevation calls.

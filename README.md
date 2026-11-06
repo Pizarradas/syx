@@ -1,7 +1,7 @@
 # SYX Design System
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-7c3aed.svg)
-![Version](https://img.shields.io/badge/version-5.0.0-7c3aed)
+![Version](https://img.shields.io/badge/version-5.1.0-7c3aed)
 ![CSS](<https://img.shields.io/badge/CSS-@layer%20%7C%20color--mix()-informational>)
 ![Sass](https://img.shields.io/badge/Sass-Dart%20Sass-CC6699?logo=sass)
 
@@ -56,7 +56,7 @@ section lies, that check goes red.
 ```bash
 npm install github:Pizarradas/syx
 # or pin a tagged release once one exists
-npm install github:Pizarradas/syx#v5.0.0
+npm install github:Pizarradas/syx#v5.1.0
 ```
 
 ### 2. Import one theme (and the JS, only if you use tabs)
@@ -705,6 +705,20 @@ The table with what each one looks like and how to import it is in the
 [Quick Start](#themes). To make your own, start from `scss/themes/_template/README.md`.
 
 ---
+
+## Versioning
+
+SYX follows [semantic versioning](https://semver.org). What counts as public:
+
+| Stable | Not stable |
+| ------ | ---------- |
+| `--semantic-*` tokens, the `exports` of the package, documented classes and modifiers, the Node API, the MCP tools, `syx-scan` and `syx-init` flags | `--primitive-*`, `--component-*`, anything under `scripts/` that is not a `bin`, `scss/site/`, the contents of `contracts/` beyond `rules.json` |
+
+- **Major:** removes or renames something stable. A removal is announced first: the name keeps working as a deprecated alias for at least one minor release, and `@deprecated` says what replaces it.
+- **Minor:** adds something, or makes a guard stricter so that code which used to pass can now fail.
+- **Patch:** fixes something without changing what is stable.
+
+Report vulnerabilities as [SECURITY.md](SECURITY.md) explains. Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Status
 

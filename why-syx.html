@@ -8,7 +8,7 @@
     <!-- Primary meta -->
     <title>SYX Design System — Why SYX: A Measured Comparison</title>
     <meta name="description"
-        content="A self-assessment of SYX against Shadcn UI, Tailwind CSS, Chakra UI, Bootstrap, Material UI and Ant Design across 14 criteria, separating measured facts from checkable facts from opinion. SYX comes second overall.">
+        content="A self-assessment of SYX against Shadcn UI, Tailwind CSS, Chakra UI, Bootstrap, Material UI and Ant Design across 14 criteria, separating measured facts from checkable facts from opinion. SYX ties for first overall.">
     <meta name="author" content="José Luis Pizarro">
     <meta name="keywords"
         content="CSS design system, design tokens, CSS @layer, Atomic Design, Dart Sass, responsive, WCAG, SYX, Tailwind CSS, Material UI, Chakra UI, Ant Design">
@@ -223,7 +223,7 @@
                     <p class="atom-txt syx-mb-1" style="font-size:0.85rem">
                         <strong>Re-measured:</strong> October 2026 &nbsp;·&nbsp;
                         <strong>Versions:</strong>
-                        <!-- why-syx:versiones -->SYX v5.0.0 &nbsp;·&nbsp; Shadcn UI (2026 registry) &nbsp;·&nbsp; Tailwind CSS 4.3.3 &nbsp;·&nbsp; Chakra UI 3.37 &nbsp;·&nbsp; Bootstrap 5.3.8 &nbsp;·&nbsp; Material UI 9.4 &nbsp;·&nbsp; Ant Design 6.6<!-- /why-syx:versiones -->
+                        <!-- why-syx:versiones -->SYX v5.1.0 &nbsp;·&nbsp; Shadcn UI (2026 registry) &nbsp;·&nbsp; Tailwind CSS 4.3.3 &nbsp;·&nbsp; Chakra UI 3.37 &nbsp;·&nbsp; Bootstrap 5.3.8 &nbsp;·&nbsp; Material UI 9.4 &nbsp;·&nbsp; Ant Design 6.6<!-- /why-syx:versiones -->
                     </p>
                     <p class="atom-txt syx-mb-0" style="font-size:0.8rem;color:var(--semantic-color-text-secondary)">
                         April 2026 scored SYX v4.2.0 against Material UI v6 and Ant Design v5 and kept those scores after both shipped a new major; September fixed that and added three criteria. October re-measures SYX at 5.0.0 after three internal audits, and re-checks the other six at their current versions: none shipped a new major, so their scores stand. SYX&rsquo;s own scores and the profile weights now live in <code>contracts/why-syx.json</code>, and the tables below are generated from it, so a score cannot change in one table and not in the others. Scores are a dated snapshot, not a live ranking.
@@ -237,7 +237,7 @@
             <section id="measured" aria-labelledby="measured-heading" class="syx-mb-5">
                 <h2 class="atom-title atom-title--h2 syx-mb-1" id="measured-heading">Measured: what SYX actually is</h2>
                 <p class="atom-txt syx-text-gray syx-mb-4">Nothing in this table is an estimate or a round number.
-                    Each row names the command that produces it, against SYX v5.0.0.</p>
+                    Each row names the command that produces it, against SYX v5.1.0.</p>
 
                 <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-4 syx-overflow-auto" role="region" tabindex="0" aria-label="Measured: what SYX actually is (table)">
                     <table class="atom-table" style="min-width:820px">
@@ -251,8 +251,8 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left">Weight of a theme bundle</td>
-                                <td style="text-align:left"><strong>49.3 – 56.4 kB gzipped</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">317–399 kB raw · 39.2–43.4 kB brotli · 7 themes, as published (Prepros, minified). The reference theme is the heaviest because it also carries this site&rsquo;s own layer</span></td>
+                                <td style="text-align:left"><strong>51.3 – 59.0 kB gzipped</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">363–451 kB raw · 40.4–44.8 kB brotli · 7 themes, with the site layer (<code>dist/</code>, without it: 40.6–43.4 kB gzipped, 253–282 kB raw), as published (Prepros, minified). The reference theme is the heaviest because it also carries this site&rsquo;s own layer</span></td>
                                 <td style="text-align:left"><code>gzip -9</code> and brotli 11 over <code>css/styles-theme-*.css</code></td>
                             </tr>
                             <tr>
@@ -291,7 +291,7 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Source size</td>
-                                <td style="text-align:left"><strong>218 SCSS files · 18,669 lines</strong></td>
+                                <td style="text-align:left"><strong>221 SCSS files · 19,045 lines</strong></td>
                                 <td style="text-align:left"><code>scss/</code></td>
                             </tr>
                             <tr>
@@ -1144,7 +1144,7 @@
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Not a small system to learn</span>
-                            <p class="atom-txt syx-mb-3">18,669 lines of SCSS across 218 files, 1,127 tokens in the public contract, a four-tier token cascade, eleven contract rules, ten agent modes, twelve MCP tools and 39 guards. The pay-off is that an agent can be told no by a machine instead of by a reviewer — but the surface a human has to hold is not small.</p>
+                            <p class="atom-txt syx-mb-3">19,045 lines of SCSS across 221 files, 1,127 tokens in the public contract, a four-tier token cascade, eleven contract rules, ten agent modes, twelve MCP tools and 39 guards. The pay-off is that an agent can be told no by a machine instead of by a reviewer — but the surface a human has to hold is not small.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">Bootstrap scores 5 on learning curve. SYX scores 3.</p>
                         </div>
                     </div>
@@ -1429,7 +1429,7 @@
             </a>
 
             <div class="org-home-footer__meta">
-                <strong>SYX Design System</strong> · v5.0.0<br>
+                <strong>SYX Design System</strong> · v5.1.0<br>
                 Modular CSS design system · Zero external dependencies
             </div>
 

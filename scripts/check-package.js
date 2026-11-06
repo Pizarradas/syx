@@ -81,7 +81,11 @@ function expandir(destino) {
     .map((f) => prefijoDir + f);
 }
 
-for (const [sub, destino] of Object.entries(pkg.exports || {})) {
+// Una entrada puede ser una ruta o un objeto de condiciones (types, import, require).
+const destinos = Object.entries(pkg.exports || {}).flatMap(([s, d]) => (
+  typeof d === 'string' ? [[s, d]] : Object.values(d).map((v) => [s, v])
+));
+for (const [sub, destino] of destinos) {
   const reales = expandir(destino);
   if (!reales.length) {
     errores.push(`exports["${sub}"] → ${destino} no corresponde a ningún fichero`);

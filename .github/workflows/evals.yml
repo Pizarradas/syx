@@ -71,7 +71,7 @@ jobs:
             echo "::error::Falta el secreto ANTHROPIC_API_KEY"
             exit 1
           fi
-          args=(--paralelo "${PARALELO:-3}" --salida _agents/evals/runs/ci)
+          args=(--estricto --paralelo "${PARALELO:-3}" --salida _agents/evals/runs/ci)
           [ -n "$MODO" ] && args+=(--modo "$MODO")
           [ -n "$ID" ] && args+=(--id "$ID")
           node scripts/eval-runner.js "${args[@]}"
