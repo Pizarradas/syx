@@ -1,7 +1,7 @@
 # Building an app on SYX — the consumer contract
 
 > **Who this is for:** any agent or person writing a website or an app that *depends on*
-> SYX (`npm install github:Pizarradas/syx`). If you are changing SYX itself, this is the
+> SYX (`npm install syx-design-system`). If you are changing SYX itself, this is the
 > wrong file: read `AGENTS.md`.
 >
 > **SYX is the source of truth.** An agent working on an app does not design the UI
