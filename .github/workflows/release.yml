@@ -8,14 +8,32 @@
 #   (escribir la sección «## [x.y.z] — fecha» en CHANGELOG.md)
 #   git commit -am "release: x.y.z" && git tag vx.y.z && git push --follow-tags
 #
-# El flujo comprueba que la etiqueta, package.json y el CHANGELOG dicen la misma
-# versión, pasa la cadena entera, empaqueta y crea la release con el .tgz y las
-# hojas minificadas adjuntas. Las notas salen del CHANGELOG, no se reescriben.
+# TRES TRABAJOS, CADA UNO CON LO MÍNIMO (auditoría 2026-11, F0-05)
+#   construir  contents: read · sin secretos. Comprueba que la etiqueta,
+#              package.json y el CHANGELOG dicen la misma versión, pasa la
+#              cadena entera, empaqueta UNA vez y guarda el .tgz con su sha256.
+#   release    contents: write · no instala nada ni ejecuta código del repo:
+#              solo sube ese .tgz y las hojas minificadas a la release.
+#   npm        id-token: write · no hace checkout ni `npm ci`: descarga el
+#              .tgz de la release, comprueba que su sha256 es el que salió de
+#              «construir» y lo publica con --ignore-scripts. Así ninguna
+#              devDependency se ejecuta con permiso de publicar, y lo que
+#              llega a npm es, byte a byte, lo que hay en la release.
+#
+# Antes (hasta la 5.1) era un solo trabajo con contents: write, id-token y el
+# NPM_TOKEN a la vez, después de `npm ci`: cualquier dependencia de desarrollo
+# comprometida podía publicar. Y `npm publish` volvía a empaquetar, así que el
+# .tgz de npm y el de la release no eran necesariamente el mismo.
 #
 # npm: NO publica salvo que alguien lo decida en el repositorio, con la
-# variable PUBLICAR_NPM = true y el secreto NPM_TOKEN. Publicar en un registro
-# público es irreversible y es una decisión de quien mantiene el paquete.
-# (Auditoría 2026-09 · acción 22)
+# variable PUBLICAR_NPM = true. Publicar en un registro público es
+# irreversible y es una decisión de quien mantiene el paquete.
+# Autenticación: Trusted Publishing (OIDC), sin token guardado. Requiere, una
+# vez, en npmjs.com → syx-design-system → Settings → Trusted publisher:
+# GitHub Actions · organización Pizarradas · repositorio syx · workflow
+# release.yml · entorno npm · acción permitida «npm publish». La procedencia
+# (provenance) la genera npm automáticamente con OIDC.
+# (Auditoría 2026-09 · acción 22; auditoría 2026-11 · F0-05)
 
 name: Publicación
 
@@ -23,28 +41,32 @@ on:
   push:
     tags: ['v*.*.*']
 
-permissions:
-  contents: write     # crear la release
-  id-token: write     # procedencia de npm, si se publica
+# Nada por defecto: cada trabajo pide lo suyo.
+permissions: {}
 
 concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  publicar:
-    name: Versión ${{ github.ref_name }}
+  construir:
+    name: Construir ${{ github.ref_name }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      tgz: ${{ steps.empaquetar.outputs.tgz }}
+      sha256: ${{ steps.empaquetar.outputs.sha256 }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
+          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
           cache: npm
-          registry-url: 'https://registry.npmjs.org'
 
       - run: npm ci
 
@@ -57,7 +79,8 @@ jobs:
             exit 1
           fi
           # Sección fechada y [Unreleased] vacía, o no hay release.
-          node scripts/release-notes.js "$PAQUETE" --verificar > "$RUNNER_TEMP/notas.md"
+          mkdir -p salida
+          node scripts/release-notes.js "$PAQUETE" --verificar > salida/notas.md
 
       - name: La etiqueta apunta a un commit de main
         run: |
@@ -88,30 +111,99 @@ jobs:
           npx playwright install --with-deps chromium
           node run.mjs --axe
 
-      - name: Empaquetar
+      - name: Empaquetar una sola vez
+        id: empaquetar
         run: |
           npm run build:dist
-          npm pack
-          tar -czf "syx-dist-${GITHUB_REF_NAME}.tar.gz" dist
+          TGZ="$(npm pack --pack-destination salida --silent | tail -n 1)"
+          tar -czf "salida/syx-dist-${GITHUB_REF_NAME}.tar.gz" dist
+          SHA="$(sha256sum "salida/$TGZ" | cut -d' ' -f1)"
+          echo "tgz=$TGZ" >> "$GITHUB_OUTPUT"
+          echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
+          echo "$TGZ · sha256 $SHA" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: publicacion
+          path: salida/
+          if-no-files-found: error
+          retention-days: 7
+
+  release:
+    name: Release ${{ github.ref_name }}
+    needs: construir
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # crear la release y subir sus ficheros
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: publicacion
+          path: salida
+
+      - name: El .tgz es el que salió de construir
+        env:
+          TGZ: ${{ needs.construir.outputs.tgz }}
+          SHA: ${{ needs.construir.outputs.sha256 }}
+        run: echo "$SHA  salida/$TGZ" | sha256sum -c -
 
       - name: Crear la release
         env:
           GH_TOKEN: ${{ github.token }}
+          TGZ: ${{ needs.construir.outputs.tgz }}
         run: |
           # Si ya existe, es un reintento: npm no llegó a publicarse y hay que poder
           # relanzar sin borrar la release.
-          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
-            echo "La release ya existe: se sigue con npm."
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            # El .tgz que ya tiene tiene que ser el que acaba de salir: si no, npm
+            # recibiría algo distinto de lo que se revisó en la release.
+            gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --pattern "$TGZ" --dir existente
+            if ! cmp -s "existente/$TGZ" "salida/$TGZ"; then
+              echo "::error::La release $GITHUB_REF_NAME ya tiene un $TGZ distinto del que se acaba de construir. Bórrala o publica otra versión."
+              exit 1
+            fi
+            echo "La release ya existe con el mismo .tgz: se sigue con npm."
           else
             gh release create "$GITHUB_REF_NAME" \
+              --repo "$GITHUB_REPOSITORY" \
               --title "SYX ${GITHUB_REF_NAME}" \
-              --notes-file "$RUNNER_TEMP/notas.md" \
+              --notes-file salida/notas.md \
               --verify-tag \
-              ./*.tgz "syx-dist-${GITHUB_REF_NAME}.tar.gz"
+              "salida/$TGZ" "salida/syx-dist-${GITHUB_REF_NAME}.tar.gz"
           fi
 
-      - name: Publicar en npm (solo si el repositorio lo ha decidido)
-        if: vars.PUBLICAR_NPM == 'true'
+  npm:
+    name: npm ${{ github.ref_name }}
+    needs: [construir, release]
+    if: vars.PUBLICAR_NPM == 'true'
+    runs-on: ubuntu-latest
+    # El entorno permite exigir una aprobación manual antes de publicar
+    # (Settings → Environments → npm) y es parte de la identidad que npm
+    # comprueba en el Trusted publisher.
+    environment: npm
+    permissions:
+      contents: read    # descargar el .tgz de la release
+      id-token: write   # OIDC con npm: sin token guardado
+    steps:
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          # Trusted Publishing pide npm ≥ 11.5.1, que trae Node 24. Sin caché:
+          # en un trabajo que publica no se reutiliza nada de otra ejecución.
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Descargar de la release el .tgz que se va a publicar
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --provenance --access public
+          GH_TOKEN: ${{ github.token }}
+          TGZ: ${{ needs.construir.outputs.tgz }}
+          SHA: ${{ needs.construir.outputs.sha256 }}
+        run: |
+          gh release download "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --pattern "$TGZ" --dir publicar
+          echo "$SHA  publicar/$TGZ" | sha256sum -c -
+
+      - name: Publicar en npm ese mismo .tgz, sin ejecutar scripts
+        env:
+          TGZ: ${{ needs.construir.outputs.tgz }}
+        run: |
+          npm --version
+          npm publish "./publicar/$TGZ" --access public --ignore-scripts --provenance

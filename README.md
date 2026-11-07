@@ -263,7 +263,7 @@ version it has installed — not against whatever is on `main` today.
 Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
 that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and
 attaches the package and the minified sheets to a GitHub release. It also publishes to npm while the
-repository variable `PUBLICAR_NPM` is `true`.
+repository variable `PUBLICAR_NPM` is `true`. Build, release and publish are three jobs with the least permissions each: the one that publishes to npm installs nothing, authenticates with Trusted Publishing (OIDC, no stored token) and publishes the very `.tgz` attached to the release, checked by its sha256, with `--ignore-scripts`. `npm run check:acciones` guards that, and that every action is pinned to a commit SHA.
 
 ### Working on SYX itself
 
