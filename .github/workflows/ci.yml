@@ -114,12 +114,26 @@ jobs:
   # confianza.yml, con pull_request_target: aquí, con pull_request, el YAML
   # sería el de la PR y la PR controlaría a su propio juez (auditoría 2026-10 II).
 
+  # Tres trabajos en paralelo en lugar de uno en serie (plan de mejora
+  # 2026-11, velocidad): el foco (~150 s) y las páginas (~170 s) iban uno
+  # detrás de otro y marcaban el tiempo de todo el PR (~8 min). Cada grupo
+  # repite la preparación (~45 s), pero el más lento acaba en ~3,5 min.
   navegador:
-    name: Navegador · axe, foco, reflow, páginas y regresión visual
+    name: Navegador · ${{ matrix.nombre }}
     runs-on: ubuntu-latest
     # En los PR y en main. En cada push a cualquier rama sería lento para lo
     # que aporta: lo que se fusiona pasa siempre por aquí.
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - grupo: componentes
+            nombre: axe, teclado, hidden, reflow y regresión visual
+          - grupo: foco
+            nombre: foco visible, orden de Tab y trampas
+          - grupo: sitio
+            nombre: páginas del sitio y cajón móvil
     defaults:
       run:
         working-directory: tests/browser
@@ -148,33 +162,39 @@ jobs:
       # miden en píxeles. Lo aceptado a sabiendas está en
       # axe-excepciones.json, acotado y con caducidad.
       - name: axe sobre todos los componentes, temas y modos
+        if: matrix.grupo == 'componentes'
         run: node run.mjs --axe
 
       # ROMPE. El teclado y las regiones vivas que prometen js/syx-*.js:
       # menú (APG), tooltip (WCAG 1.4.13), toast y contador de caracteres.
       - name: Teclado y regiones vivas
+        if: matrix.grupo == 'componentes'
         run: node interaccion.mjs
 
       # ROMPE. El atributo hidden oculta cualquier clase y modificador del
       # sistema y el usage de cada componente, también con el core (que no
       # lleva utilidades). Auditoría 2026-10 II: 31 de 42 lo ignoraban.
       - name: hidden oculta cualquier componente
+        if: matrix.grupo == 'componentes'
         run: node oculto.mjs
 
       # ROMPE. Lo que axe no ve: el foco de cada enfocable se distingue en
       # píxeles (2.4.7/2.4.11/2.4.13), Tab recorre sin trampas y un diálogo
       # modal atrapa.
       - name: Foco visible, orden de Tab y trampas
+        if: matrix.grupo == 'foco'
         run: node foco.mjs
 
       # ROMPE. A 320 px nada se desplaza en horizontal (1.4.10) y los
       # objetivos miden 24 × 24 (2.5.8), en componentes y páginas.
       - name: Reflow a 320 px y tamaño de objetivo
+        if: matrix.grupo == 'componentes'
         run: node reflow.mjs
 
       # ROMPE. Las cuatro páginas del sitio en axe a 375 y 1280 px, claro y
       # oscuro, y el cajón móvil con el teclado.
       - name: Las páginas del sitio y el cajón móvil
+        if: matrix.grupo == 'sitio'
         run: node sitio.mjs
 
       # NO ROMPE. La referencia es la rama base, fotografiada en esta misma
@@ -182,23 +202,23 @@ jobs:
       # desfasen con cada versión de Chromium. Un cambio visual puede ser
       # justo el que se buscaba; lo decide quien revisa, con las imágenes.
       - name: Capturas del cambio
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.grupo == 'componentes'
         run: node run.mjs --capturas out/despues
 
       - name: Capturas de la rama base
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.grupo == 'componentes'
         run: |
           git worktree add "$RUNNER_TEMP/base" "origin/${{ github.base_ref }}"
           node run.mjs --capturas out/antes --raiz "$RUNNER_TEMP/base"
 
       - name: Comparar
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.grupo == 'componentes'
         run: |
           node comparar.mjs out/antes out/despues diferencias diferencias/informe.md
           cat diferencias/informe.md >> "$GITHUB_STEP_SUMMARY"
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.grupo == 'componentes'
         with:
           name: regresion-visual
           path: |
