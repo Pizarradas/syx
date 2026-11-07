@@ -84,14 +84,13 @@ Si el diseño funciona en esas condiciones, escalar hacia condiciones mejores es
 | Nombre | `min-width` | Uso típico |
 |--------|-------------|-----------|
 | base | — | 320px — columna única, layout de flujo |
-| `phablet` | 600px | Dos columnas, CTAs inline |
-| `tablet` | 800px | Sidebar visible, formularios side-by-side |
-| `laptop` | 1024px | Tres columnas, layout editorial completo |
-| `desktop` | 1120px | Ajustes de espaciado |
-| `xl` | 1280px | Colapso de la navegación |
-| `wide` | 1440px | Max-width del contenedor |
+| `sm` · `phablet` | 37.5em (600px) | Dos columnas, CTAs inline |
+| `md` · `tablet` | 48em (768px) | Sidebar visible, formularios side-by-side |
+| `lg` · `laptop` | 64em (1024px) | Tres columnas, layout editorial completo |
+| `xl` · `desktop` | 80em (1280px) | Ajustes de espaciado, colapso de la navegación |
+| `xxl` · `wide` | 90em (1440px) | Max-width del contenedor |
 
-Es el mapa `$syx-breakpoints` de `scss/abstracts/mixins/_media-queries.scss`. Una clave que no esté ahí es un error de compilación.
+Es el mapa `$syx-breakpoints` de `scss/abstracts/mixins/_media-queries.scss`, que lee la escala de `scss/abstracts/tokens/primitives/_breakpoints.scss` (una sola escala desde noviembre de 2026). Una clave que no esté ahí es un error de compilación.
 
 **Documentar siempre** el comportamiento de cada breakpoint en el HTML:
 

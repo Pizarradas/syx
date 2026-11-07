@@ -7,9 +7,9 @@ This file is the canonical entry point for all AI agents and tools (OpenAI Codex
 > not for you: read `CONSUMING.md` (in an app, `node_modules/syx-design-system/CONSUMING.md`),
 > and run `npx syx-init` in the app so every agent finds the contract at its root.
 
-Before doing anything else, read these files in order:
-
-1. `AI_GUIDELINES.md` — strict rules, mixin cheatsheet, token architecture, naming conventions
+**With a mode prefix**, read the mode file and let it govern: it carries its own rules, format and
+knowledge. **Without one**, before writing SCSS read `AI_GUIDELINES.md` — strict rules, mixin
+cheatsheet, token architecture, naming conventions.
 
 `contracts/rules.json` holds the contract rules; `AI_GUIDELINES.md` is their readable form, and `validate_snippet` applies them. Read the JSON only to explain a verdict.
 

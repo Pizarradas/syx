@@ -452,7 +452,11 @@ const BYTES_POR_TOKEN = 3.5;
 // y AI_GUIDELINES.md lo que repetían de los índices de modos y flujos, la
 // entrada de todos los modos bajó unos 3 800 tokens; el límite baja con ella
 // para que no se vuelva a llenar sin que nadie lo decida.
-const LIMITE_ENTRADA = 22000;
+// 22 000 hasta noviembre de 2026. Con un modo ya no se lee AI_GUIDELINES.md
+// (el modo trae sus reglas), los principios visuales de UI pasaron a un módulo
+// When relevant y UX dejó de repetir lo que cargan sus módulos Always: UI bajó
+// de 19,5k a 11,4k, UX de 20,7k a 15,5k y BRAND, el mayor, a 17,7k.
+const LIMITE_ENTRADA = 18000;
 // La ruta canónica: AGENTS.md, que se declara entrada de todo agente, es más largo
 // que CLAUDE.md, y `## Why` obliga a leer decision-record.md. Medir solo CLAUDE.md
 // dejaba fuera lo que de verdad se carga.
