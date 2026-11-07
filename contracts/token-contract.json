@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "totalTokens": 1127
+    "totalTokens": 1129
   },
   "tokens": {
     "--primitive-color-black": {
@@ -851,7 +851,7 @@
       "status": "active",
       "layer": "primitive",
       "inRuntime": true,
-      "usageCount": 8
+      "usageCount": 9
     },
     "--primitive-color-facebook": {
       "key": "color-facebook",
@@ -2260,7 +2260,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 25
+      "usageCount": 24
     },
     "--semantic-color-secondary": {
       "key": "color-secondary",
@@ -2409,7 +2409,7 @@
       "status": "active",
       "layer": "semantic",
       "inRuntime": true,
-      "usageCount": 12
+      "usageCount": 16
     },
     "--semantic-color-state-success-strong": {
       "key": "color-state-success-strong",
@@ -4574,12 +4574,12 @@
     "--component-button-primary-border": {
       "key": "button-primary-border",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-text",
+      "rawValue": "var(--semantic-color-primary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-primary-color-hover": {
       "key": "button-primary-color-hover",
@@ -4634,12 +4634,12 @@
     "--component-button-primary-filled-border": {
       "key": "button-primary-filled-border",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-text",
+      "rawValue": "var(--semantic-color-primary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-primary-filled-color-hover": {
       "key": "button-primary-filled-color-hover",
@@ -4694,12 +4694,12 @@
     "--component-button-secondary-border": {
       "key": "button-secondary-border",
       "type": "ALIAS",
-      "value": "--semantic-color-secondary",
-      "rawValue": "var(--semantic-color-secondary)",
+      "value": "--semantic-color-secondary-text",
+      "rawValue": "var(--semantic-color-secondary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-secondary-color-hover": {
       "key": "button-secondary-color-hover",
@@ -4754,12 +4754,12 @@
     "--component-button-secondary-filled-border": {
       "key": "button-secondary-filled-border",
       "type": "ALIAS",
-      "value": "--semantic-color-secondary",
-      "rawValue": "var(--semantic-color-secondary)",
+      "value": "--semantic-color-secondary-text",
+      "rawValue": "var(--semantic-color-secondary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-secondary-filled-color-hover": {
       "key": "button-secondary-filled-color-hover",
@@ -4814,12 +4814,12 @@
     "--component-button-tertiary-border": {
       "key": "button-tertiary-border",
       "type": "ALIAS",
-      "value": "--semantic-color-tertiary",
-      "rawValue": "var(--semantic-color-tertiary)",
+      "value": "--semantic-color-tertiary-text",
+      "rawValue": "var(--semantic-color-tertiary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-tertiary-color-hover": {
       "key": "button-tertiary-color-hover",
@@ -4874,12 +4874,12 @@
     "--component-button-tertiary-filled-border": {
       "key": "button-tertiary-filled-border",
       "type": "ALIAS",
-      "value": "--semantic-color-tertiary",
-      "rawValue": "var(--semantic-color-tertiary)",
+      "value": "--semantic-color-tertiary-text",
+      "rawValue": "var(--semantic-color-tertiary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-tertiary-filled-color-hover": {
       "key": "button-tertiary-filled-color-hover",
@@ -4934,12 +4934,12 @@
     "--component-button-quaternary-border": {
       "key": "button-quaternary-border",
       "type": "ALIAS",
-      "value": "--semantic-color-quaternary",
-      "rawValue": "var(--semantic-color-quaternary)",
+      "value": "--semantic-color-quaternary-text",
+      "rawValue": "var(--semantic-color-quaternary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-quaternary-color-hover": {
       "key": "button-quaternary-color-hover",
@@ -4994,12 +4994,12 @@
     "--component-button-quaternary-filled-border": {
       "key": "button-quaternary-filled-border",
       "type": "ALIAS",
-      "value": "--semantic-color-quaternary",
-      "rawValue": "var(--semantic-color-quaternary)",
+      "value": "--semantic-color-quaternary-text",
+      "rawValue": "var(--semantic-color-quaternary-text)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
-      "usageCount": 0
+      "usageCount": 1
     },
     "--component-button-quaternary-filled-color-hover": {
       "key": "button-quaternary-filled-color-hover",
@@ -5905,8 +5905,8 @@
     "--component-check-border-color-hover": {
       "key": "check-border-color-hover",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -6035,8 +6035,8 @@
     "--component-radio-border-color-hover": {
       "key": "radio-border-color-hover",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -6605,8 +6605,8 @@
     "--component-pagination-border-color-hover": {
       "key": "pagination-border-color-hover",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -6787,6 +6787,26 @@
       "type": "ALIAS",
       "value": "--semantic-space-component-lg",
       "rawValue": "var(--semantic-space-component-lg)",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-list-ordered-counter-bg": {
+      "key": "list-ordered-counter-bg",
+      "type": "ALIAS",
+      "value": "--semantic-color-primary",
+      "rawValue": "var(--semantic-color-primary)",
+      "status": "active",
+      "layer": "component",
+      "inRuntime": true,
+      "usageCount": 1
+    },
+    "--component-list-ordered-counter-color": {
+      "key": "list-ordered-counter-color",
+      "type": "ALIAS",
+      "value": "--semantic-color-on-primary",
+      "rawValue": "var(--semantic-color-on-primary)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -7035,8 +7055,8 @@
     "--component-table-state-hover-border-color": {
       "key": "table-state-hover-border-color",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -7798,8 +7818,8 @@
     "--component-feature-card-border-color-hover": {
       "key": "feature-card-border-color-hover",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,
@@ -8508,8 +8528,8 @@
     "--component-blockquote-border-color": {
       "key": "blockquote-border-color",
       "type": "ALIAS",
-      "value": "--semantic-color-primary",
-      "rawValue": "var(--semantic-color-primary)",
+      "value": "--semantic-color-primary-strong",
+      "rawValue": "var(--semantic-color-primary-strong)",
       "status": "active",
       "layer": "component",
       "inRuntime": true,

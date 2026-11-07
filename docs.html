@@ -128,12 +128,12 @@
       background: var(--semantic-color-bg-secondary);
     }
 
-    .docs-sidebar__link .atom-icon {
+    .docs-sidebar__link .docs-sidebar__icon {
       opacity: .6;
       flex-shrink: 0;
     }
 
-    .docs-sidebar__link.is-active .atom-icon {
+    .docs-sidebar__link.is-active .docs-sidebar__icon {
       opacity: 1;
     }
 
@@ -555,7 +555,7 @@
 
       <a href="https://github.com/Pizarradas/syx"
         class="atom-btn atom-btn--primary atom-btn--filled atom-btn--has-icon atom-btn--size-sm"
-        aria-label="View on GitHub" target="_blank" rel="noopener">
+        aria-label="GitHub repository" target="_blank" rel="noopener">
         <span class="atom-icon atom-icon--lc-github" aria-hidden="true"></span>
         <span class="syx-d-sm-up">GitHub</span>
       </a>
@@ -580,7 +580,7 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Guide</span>
         <a href="#guide" class="docs-sidebar__link" data-nav-section="guide">
-          <span class="atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
           Authoring Guide
         </a>
         <div class="docs-sidebar__sub">
@@ -597,7 +597,7 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Agentic</span>
         <a href="#agentic" class="docs-sidebar__link" data-nav-section="agentic">
-          <span class="atom-icon atom-icon--lc-bot atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-bot atom-icon--sm" aria-hidden="true"></span>
           Agentic Design System
         </a>
         <div class="docs-sidebar__sub">
@@ -614,7 +614,7 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Modes</span>
         <a href="#modes" class="docs-sidebar__link" data-nav-section="modes">
-          <span class="atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-layers atom-icon--sm" aria-hidden="true"></span>
           The Mode System
         </a>
         <div class="docs-sidebar__sub">
@@ -629,23 +629,23 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Reference</span>
         <a href="#utilities" class="docs-sidebar__link" data-nav-section="utilities">
-          <span class="atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-zap atom-icon--sm" aria-hidden="true"></span>
           Utilities
         </a>
         <a href="#layout" class="docs-sidebar__link" data-nav-section="layout">
-          <span class="atom-icon atom-icon--lc-layout atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-layout atom-icon--sm" aria-hidden="true"></span>
           Layout
         </a>
         <a href="#atoms" class="docs-sidebar__link" data-nav-section="atoms">
-          <span class="atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
           Atoms
         </a>
         <a href="#molecules" class="docs-sidebar__link" data-nav-section="molecules">
-          <span class="atom-icon atom-icon--lc-package atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-package atom-icon--sm" aria-hidden="true"></span>
           Molecules
         </a>
         <a href="#organisms" class="docs-sidebar__link" data-nav-section="organisms">
-          <span class="atom-icon atom-icon--lc-box atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-box atom-icon--sm" aria-hidden="true"></span>
           Organisms
         </a>
       </div>
@@ -654,7 +654,7 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Components</span>
         <a href="#components" class="docs-sidebar__link" data-nav-section="components">
-          <span class="atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>
           Component reference
         </a>
         <div class="docs-sidebar__sub">
@@ -705,19 +705,19 @@
       <div class="docs-sidebar__group">
         <span class="docs-sidebar__group-label">Links</span>
         <a href="home.html" class="docs-sidebar__link">
-          <span class="atom-icon atom-icon--lc-home atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-home atom-icon--sm" aria-hidden="true"></span>
           Home
         </a>
         <a href="why-syx.html" class="docs-sidebar__link">
-          <span class="atom-icon atom-icon--lc-pie-chart atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-pie-chart atom-icon--sm" aria-hidden="true"></span>
           Why SYX
         </a>
         <a href="storybook/" class="docs-sidebar__link">
-          <span class="atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-atom atom-icon--sm" aria-hidden="true"></span>
           Storybook
         </a>
         <a href="https://github.com/Pizarradas/syx" class="docs-sidebar__link" target="_blank" rel="noopener">
-          <span class="atom-icon atom-icon--lc-github atom-icon--sm" aria-hidden="true"></span>
+          <span class="docs-sidebar__icon atom-icon atom-icon--lc-github atom-icon--sm" aria-hidden="true"></span>
           GitHub
         </a>
       </div>
@@ -3662,7 +3662,7 @@ scss/organisms/_site-header.scss</code></pre>
           <p class="syx-type-overline syx-text-gray syx-mb-2">Live example — the header at the top of this page is this
             organism</p>
           <header class="org-site-header syx-mb-3">
-            <a href="#" class="org-site-header__brand" aria-label="Brand Home">
+            <a href="#" class="org-site-header__brand">
               <span class="atom-icon atom-icon--lc-home atom-icon--color-primary" aria-hidden="true"></span>
               Brand Name
             </a>
@@ -3773,7 +3773,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><code>:active</code> <code>:disabled</code> <code>:focus-visible</code> <code>:hover</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Composes</th><td class="atom-table__td"><code>atom-icon</code></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">80 component tokens</summary><div class="mol-disclosure__content"><code>--component-button-active-offset-x</code> <code>--component-button-active-offset-y</code> <code>--component-button-border-radius</code> <code>--component-button-border-radius-circle</code> <code>--component-button-border-style</code> <code>--component-button-border-width</code> <code>--component-button-danger-bg-hover</code> <code>--component-button-danger-border</code> <code>--component-button-danger-border-hover</code> <code>--component-button-danger-color</code> <code>--component-button-danger-color-hover</code> <code>--component-button-danger-filled-bg</code> <code>--component-button-danger-filled-bg-hover</code> <code>--component-button-danger-filled-border</code> <code>--component-button-danger-filled-border-hover</code> <code>--component-button-danger-filled-color</code> <code>--component-button-danger-filled-color-hover</code> <code>--component-button-disabled-bg</code> <code>--component-button-disabled-border</code> <code>--component-button-disabled-color</code> <code>--component-button-disabled-filled-color</code> <code>--component-button-font-family</code> <code>--component-button-font-size</code> <code>--component-button-font-size-lg</code> <code>--component-button-font-size-md</code> <code>--component-button-font-size-sm</code> <code>--component-button-font-weight</code> <code>--component-button-height-lg</code> <code>--component-button-height-md</code> <code>--component-button-height-sm</code> <code>--component-button-line-height</code> <code>--component-button-padding-block</code> <code>--component-button-primary-bg-hover</code> <code>--component-button-primary-border-hover</code> <code>--component-button-primary-color</code> <code>--component-button-primary-color-hover</code> <code>--component-button-primary-filled-bg</code> <code>--component-button-primary-filled-bg-hover</code> <code>--component-button-primary-filled-border-hover</code> <code>--component-button-primary-filled-color</code> <code>--component-button-primary-filled-color-hover</code> <code>--component-button-quaternary-bg-hover</code> <code>--component-button-quaternary-border-hover</code> <code>--component-button-quaternary-color</code> <code>--component-button-quaternary-color-hover</code> <code>--component-button-quaternary-filled-bg</code> <code>--component-button-quaternary-filled-bg-hover</code> <code>--component-button-quaternary-filled-border-hover</code> <code>--component-button-quaternary-filled-color</code> <code>--component-button-quaternary-filled-color-hover</code> <code>--component-button-secondary-bg-hover</code> <code>--component-button-secondary-border-hover</code> <code>--component-button-secondary-color</code> <code>--component-button-secondary-color-hover</code> <code>--component-button-secondary-filled-bg</code> <code>--component-button-secondary-filled-bg-hover</code> <code>--component-button-secondary-filled-border-hover</code> <code>--component-button-secondary-filled-color</code> <code>--component-button-secondary-filled-color-hover</code> <code>--component-button-shadow</code> <code>--component-button-shadow-active</code> <code>--component-button-shadow-hover</code> <code>--component-button-size-lg</code> <code>--component-button-size-md</code> <code>--component-button-size-sm</code> <code>--component-button-tertiary-bg-hover</code> <code>--component-button-tertiary-border-hover</code> <code>--component-button-tertiary-color</code> <code>--component-button-tertiary-color-hover</code> <code>--component-button-tertiary-filled-bg</code> <code>--component-button-tertiary-filled-bg-hover</code> <code>--component-button-tertiary-filled-border-hover</code> <code>--component-button-tertiary-filled-color</code> <code>--component-button-tertiary-filled-color-hover</code> <code>--component-button-transition-duration</code> <code>--component-button-transition-duration-active</code> <code>--component-button-transition-easing</code> <code>--component-icon-size-lg</code> <code>--component-icon-size-md</code> <code>--component-icon-size-sm</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">88 component tokens</summary><div class="mol-disclosure__content"><code>--component-button-active-offset-x</code> <code>--component-button-active-offset-y</code> <code>--component-button-border-radius</code> <code>--component-button-border-radius-circle</code> <code>--component-button-border-style</code> <code>--component-button-border-width</code> <code>--component-button-danger-bg-hover</code> <code>--component-button-danger-border</code> <code>--component-button-danger-border-hover</code> <code>--component-button-danger-color</code> <code>--component-button-danger-color-hover</code> <code>--component-button-danger-filled-bg</code> <code>--component-button-danger-filled-bg-hover</code> <code>--component-button-danger-filled-border</code> <code>--component-button-danger-filled-border-hover</code> <code>--component-button-danger-filled-color</code> <code>--component-button-danger-filled-color-hover</code> <code>--component-button-disabled-bg</code> <code>--component-button-disabled-border</code> <code>--component-button-disabled-color</code> <code>--component-button-disabled-filled-color</code> <code>--component-button-font-family</code> <code>--component-button-font-size</code> <code>--component-button-font-size-lg</code> <code>--component-button-font-size-md</code> <code>--component-button-font-size-sm</code> <code>--component-button-font-weight</code> <code>--component-button-height-lg</code> <code>--component-button-height-md</code> <code>--component-button-height-sm</code> <code>--component-button-line-height</code> <code>--component-button-padding-block</code> <code>--component-button-primary-bg-hover</code> <code>--component-button-primary-border</code> <code>--component-button-primary-border-hover</code> <code>--component-button-primary-color</code> <code>--component-button-primary-color-hover</code> <code>--component-button-primary-filled-bg</code> <code>--component-button-primary-filled-bg-hover</code> <code>--component-button-primary-filled-border</code> <code>--component-button-primary-filled-border-hover</code> <code>--component-button-primary-filled-color</code> <code>--component-button-primary-filled-color-hover</code> <code>--component-button-quaternary-bg-hover</code> <code>--component-button-quaternary-border</code> <code>--component-button-quaternary-border-hover</code> <code>--component-button-quaternary-color</code> <code>--component-button-quaternary-color-hover</code> <code>--component-button-quaternary-filled-bg</code> <code>--component-button-quaternary-filled-bg-hover</code> <code>--component-button-quaternary-filled-border</code> <code>--component-button-quaternary-filled-border-hover</code> <code>--component-button-quaternary-filled-color</code> <code>--component-button-quaternary-filled-color-hover</code> <code>--component-button-secondary-bg-hover</code> <code>--component-button-secondary-border</code> <code>--component-button-secondary-border-hover</code> <code>--component-button-secondary-color</code> <code>--component-button-secondary-color-hover</code> <code>--component-button-secondary-filled-bg</code> <code>--component-button-secondary-filled-bg-hover</code> <code>--component-button-secondary-filled-border</code> <code>--component-button-secondary-filled-border-hover</code> <code>--component-button-secondary-filled-color</code> <code>--component-button-secondary-filled-color-hover</code> <code>--component-button-shadow</code> <code>--component-button-shadow-active</code> <code>--component-button-shadow-hover</code> <code>--component-button-size-lg</code> <code>--component-button-size-md</code> <code>--component-button-size-sm</code> <code>--component-button-tertiary-bg-hover</code> <code>--component-button-tertiary-border</code> <code>--component-button-tertiary-border-hover</code> <code>--component-button-tertiary-color</code> <code>--component-button-tertiary-color-hover</code> <code>--component-button-tertiary-filled-bg</code> <code>--component-button-tertiary-filled-bg-hover</code> <code>--component-button-tertiary-filled-border</code> <code>--component-button-tertiary-filled-border-hover</code> <code>--component-button-tertiary-filled-color</code> <code>--component-button-tertiary-filled-color-hover</code> <code>--component-button-transition-duration</code> <code>--component-button-transition-duration-active</code> <code>--component-button-transition-easing</code> <code>--component-icon-size-lg</code> <code>--component-icon-size-md</code> <code>--component-icon-size-sm</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;button&gt; with an explicit type (&quot;button&quot;, or &quot;submit&quot; inside a form); an &lt;a href&gt; only when it navigates. Enter/Space come from the element. Icon-only (--circle) needs aria-label. Disable with the disabled attribute, not a class. Focus: system ring. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>
@@ -4003,7 +4003,7 @@ scss/organisms/_site-header.scss</code></pre>
                   <tr><th class="atom-table__th" scope="row">Modifiers</th><td class="atom-table__td"><code>atom-list--ordered</code> <code>atom-list--primary</code></td></tr>
                   <tr><th class="atom-table__th" scope="row">Elements</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
                   <tr><th class="atom-table__th" scope="row">States</th><td class="atom-table__td"><span class="syx-text-gray">—</span></td></tr>
-                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">19 component tokens</summary><div class="mol-disclosure__content"><code>--component-list-icon-filter</code> <code>--component-list-icon-offset-y</code> <code>--component-list-icon-size</code> <code>--component-list-item-margin-top</code> <code>--component-list-lvl1-gap</code> <code>--component-list-lvl1-icon</code> <code>--component-list-lvl2-gap</code> <code>--component-list-lvl2-icon</code> <code>--component-list-lvl2-icon-offset-y</code> <code>--component-list-lvl2-margin-left</code> <code>--component-list-lvl3-gap</code> <code>--component-list-lvl3-margin-left</code> <code>--component-list-ordered-counter-font-size</code> <code>--component-list-ordered-counter-line-height</code> <code>--component-list-ordered-counter-size</code> <code>--component-list-ordered-gap</code> <code>--component-list-ordered-item-margin-top</code> <code>--component-list-ordered-margin-bottom</code> <code>--component-list-ordered-margin-top</code></div></details></td></tr>
+                  <tr><th class="atom-table__th" scope="row">Tokens</th><td class="atom-table__td"><details class="mol-disclosure"><summary class="mol-disclosure__summary">21 component tokens</summary><div class="mol-disclosure__content"><code>--component-list-icon-filter</code> <code>--component-list-icon-offset-y</code> <code>--component-list-icon-size</code> <code>--component-list-item-margin-top</code> <code>--component-list-lvl1-gap</code> <code>--component-list-lvl1-icon</code> <code>--component-list-lvl2-gap</code> <code>--component-list-lvl2-icon</code> <code>--component-list-lvl2-icon-offset-y</code> <code>--component-list-lvl2-margin-left</code> <code>--component-list-lvl3-gap</code> <code>--component-list-lvl3-margin-left</code> <code>--component-list-ordered-counter-bg</code> <code>--component-list-ordered-counter-color</code> <code>--component-list-ordered-counter-font-size</code> <code>--component-list-ordered-counter-line-height</code> <code>--component-list-ordered-counter-size</code> <code>--component-list-ordered-gap</code> <code>--component-list-ordered-item-margin-top</code> <code>--component-list-ordered-margin-bottom</code> <code>--component-list-ordered-margin-top</code></div></details></td></tr>
                   <tr><th class="atom-table__th" scope="row">Accessibility</th><td class="atom-table__td">Native &lt;ul&gt;/&lt;ol&gt; so the item count is announced. The --primary marker is CSS; WebKit drops list semantics when list-style is none, so add role=&quot;list&quot; if that matters. No JS.</td></tr>
                   <tr><th class="atom-table__th" scope="row">JavaScript</th><td class="atom-table__td"><span class="syx-text-gray">None — CSS only.</span></td></tr>
                 </tbody>

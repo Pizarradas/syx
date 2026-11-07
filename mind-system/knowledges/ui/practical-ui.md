@@ -47,7 +47,8 @@ Los componentes soportan tres densidades mediante modificadores CSS:
 | Default | _(ninguna)_ | × 1 | Como diseñado |
 | Comfortable | `--comfortable` | × 1.375 | Como diseñado |
 
-**Implementación mediante token override:**
+**Implementación mediante token override** (un modificador nuevo es un cambio de componente: pasa por `propose.js`):
+<!-- syx: ejemplo-nuevo -->
 ```scss
 .atom-btn--compact {
   --component-button-padding-y: calc(var(--semantic-space-component-sm) * 0.75);
@@ -73,10 +74,10 @@ child-radius = parent-radius − parent-padding
 ```scss
 // ✓ Correcto
 .mol-card { @include border-radius(var(--semantic-border-radius-lg)); /* 12px */ }
-.mol-card__image { @include border-radius(var(--semantic-border-radius-sm)); /* 4px = 12 - 8 */ }
+.mol-card__media { @include border-radius(var(--semantic-border-radius-sm)); /* 4px = 12 - 8 */ }
 
 // ✗ Incorrecto
-.mol-card__image { @include border-radius(var(--semantic-border-radius-lg)); /* 12px — bulge */ }
+.mol-card__media { @include border-radius(var(--semantic-border-radius-lg)); /* 12px — bulge */ }
 ```
 
 ---

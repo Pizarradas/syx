@@ -87,6 +87,8 @@
   --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
   --component-button-secondary-filled-color-hover: var(--semantic-color-on-state-hover-secondary);
   --component-button-secondary-color: var(--semantic-color-secondary-strong);
+  --component-button-secondary-border: var(--semantic-color-secondary-strong); // el borde lee ahora su propio token
+  --component-button-secondary-filled-border: var(--semantic-color-secondary-strong);
   // Tonos suaves: la paleta de plano del tema, peldaño 50 de fondo, 200 de
   // borde y 700 de tinta (600 el rojo). Antes se escribían píldora a píldora
   // en el componente; desde la acción 14 (2026-10) son roles semánticos y la
@@ -210,6 +212,8 @@
   --component-button-secondary-filled-color: var(--semantic-color-text-inverse);
   --component-button-secondary-filled-color-hover: var(--semantic-color-text-inverse);
   --component-button-secondary-color: var(--semantic-color-secondary-strong);
+  --component-button-secondary-border: var(--semantic-color-secondary-strong); // el borde lee ahora su propio token
+  --component-button-secondary-filled-border: var(--semantic-color-secondary-strong);
 
   // Superficies con color: en oscuro los tintes claros
   // desaparecen, así que van a navy con trazo de color.

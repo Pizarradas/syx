@@ -27,12 +27,7 @@
         .theme-builder__preview > .layout-grid > [class*="layout-grid__col"] {
             background-color: var(--semantic-color-bg-primary);
             border-radius: var(--theme-radius);
-            padding-inline: calc(5 * var(--primitive-space-base));
-        }
-
-        /* Elevate the preview cards slightly in the canvas */
-        .theme-builder__preview .atom-surface {
-            box-shadow: 0 4px 24px -4px oklch(0 0 0 / 0.08), 0 0 0 1px var(--semantic-color-border-subtle);
+            padding-inline: var(--builder-space-5);
         }
 
         /* --- Sidebar Aesthetics (Deep Dark Mode) --- */
@@ -44,9 +39,9 @@
             /* p-gray-100 equivalent */
         }
 
-        .theme-builder__sidebar .atom-title {
-            color: oklch(0.95 0.01 250);
-            /* Brighter white for main title */
+        /* Brighter white for the sidebar titles: the title's own token, not a repaint */
+        .theme-builder__sidebar {
+            --component-title-color: oklch(0.95 0.01 250);
         }
 
         .theme-builder__group {
@@ -256,6 +251,15 @@
         body.is-advanced .tb-advanced-only {
             display: block;
         }
+
+        /* Quien pide menos movimiento no ve las transiciones del editor */
+        @media (prefers-reduced-motion: reduce) {
+            .theme-builder *,
+            .theme-builder *::before,
+            .theme-builder *::after {
+                transition: none;
+            }
+        }
     </style>
 </head>
 
@@ -266,16 +270,16 @@
         <!-- Sidebar / Configurator -->
         <aside class="theme-builder__sidebar">
             <div>
-                <h1 class="atom-title atom-title--h4 syx-mb-1" style="color: var(--primitive-color-white);">SYX Builder
+                <h1 class="atom-title atom-title--h4 syx-mb-1" style="color: var(--builder-chrome-strong);">SYX Builder
                 </h1>
-                <p class="atom-txt syx-type-body-small" style="color: var(--primitive-color-gray-400);">Real-time theme
+                <p class="atom-txt syx-type-body-small" style="color: var(--builder-chrome-label);">Real-time theme
                     configurator</p>
             </div>
 
             <!-- Advanced Mode Toggle -->
             <div class="theme-builder__group tb-mb-4 tb-mt-4" style="border: none; padding-bottom: 0;">
                 <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-3"
-                    style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: oklch(0.23 0.01 250); border: 1px solid oklch(0.31 0.01 250);">
+                    style="padding: var(--builder-space-3); border-radius: var(--theme-radius); background: oklch(0.23 0.01 250); border: 1px solid oklch(0.31 0.01 250);">
                     <div>
                         <span class="syx-type-body-small tb-d-block tb-text-black" id="advanced-mode-label"
                             style="color: oklch(0.95 0.01 250); font-weight: 600;">Advanced Mode</span>
@@ -291,11 +295,11 @@
                 <!-- Scalability Modules (Only visible in Advanced Mode) -->
                 <div class="tb-advanced-only">
                     <h3 class="theme-builder__group-title tb-mt-4 tb-mb-3"
-                        style="border-bottom: 1px solid var(--primitive-color-gray-800); padding-bottom: 0.5rem; color: var(--primitive-color-white);">
+                        style="border-bottom: 1px solid var(--builder-chrome-raised); padding-bottom: 0.5rem; color: var(--builder-chrome-strong);">
                         System Architecture
                         Modules</h3>
                     <p class="syx-type-caption tb-mb-4"
-                        style="color: var(--primitive-color-gray-400); font-size: 0.75rem;">
+                        style="color: var(--builder-chrome-label); font-size: 0.75rem;">
                         SYX is a massive UI framework. Toggle these modular architectures to inject advanced semantic
                         CSS into your export only when needed.
                     </p>
@@ -304,10 +308,10 @@
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
                             <span id="module-fluid-label" class="syx-type-body-small tb-d-block"
-                                style="color: var(--primitive-color-white); font-weight: 600;">Fluid Typography &
+                                style="color: var(--builder-chrome-strong); font-weight: 600;">Fluid Typography &
                                 Spacing</span>
                             <p class="syx-type-caption tb-mt-1"
-                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                style="color: var(--builder-chrome-label); font-size: 0.75rem; line-height: 1.4; margin: 0;">
                                 Injects <code>clamp()</code> mathematical functions
                                 (<code>--primitive-fluid-space-*</code>, <code>font-*</code>). Perfect for responsive
                                 layouts that automatically scale across mobile and desktop without media queries.
@@ -323,10 +327,10 @@
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
                             <span id="module-palette-label" class="syx-type-body-small tb-d-block"
-                                style="color: var(--primitive-color-white); font-weight: 600;">Extended Color
+                                style="color: var(--builder-chrome-strong); font-weight: 600;">Extended Color
                                 Palette</span>
                             <p class="syx-type-caption tb-mt-1"
-                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                style="color: var(--builder-chrome-label); font-size: 0.75rem; line-height: 1.4; margin: 0;">
                                 Generates and injects 5 complete 11-step color scales (Yellow, Red, Blue, Green, Purple)
                                 calculated from OKLCH math. Crucial for complex UIs, charts, or multiple semantic
                                 states.
@@ -342,10 +346,10 @@
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
                             <span id="module-forms-label" class="syx-type-body-small tb-d-block"
-                                style="color: var(--primitive-color-white); font-weight: 600;">Forms, Switches &
+                                style="color: var(--builder-chrome-strong); font-weight: 600;">Forms, Switches &
                                 Radios</span>
                             <p class="syx-type-caption tb-mt-1"
-                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                style="color: var(--builder-chrome-label); font-size: 0.75rem; line-height: 1.4; margin: 0;">
                                 Outputs hundreds of specific component variables (<code>--component-form-*</code>,
                                 <code>--component-switch-*</code>) required to perfectly render and align forms inside
                                 the SYX ecosystem.
@@ -361,10 +365,10 @@
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
                         <div style="flex: 1; padding-right: 1rem;">
                             <span id="module-tables-label" class="syx-type-body-small tb-d-block"
-                                style="color: var(--primitive-color-white); font-weight: 600;">Tables, Lists &
+                                style="color: var(--builder-chrome-strong); font-weight: 600;">Tables, Lists &
                                 Pagination</span>
                             <p class="syx-type-caption tb-mt-1"
-                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                style="color: var(--builder-chrome-label); font-size: 0.75rem; line-height: 1.4; margin: 0;">
                                 Injects structural tokens for complex data-grids, interactive components, active table
                                 states, and deep breadcrumb/pagination component UI alignments.
                             </p>
@@ -379,10 +383,10 @@
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
                         <div style="flex: 1; padding-right: 1rem;">
                             <span id="module-disable-legacy-label" class="syx-type-body-small tb-d-block"
-                                style="color: var(--primitive-color-warning-500); font-weight: 600;">Disable Legacy
+                                style="color: var(--builder-chrome-warning); font-weight: 600;">Disable Legacy
                                 Bridge</span>
                             <p class="syx-type-caption tb-mt-1"
-                                style="color: var(--primitive-color-gray-400); font-size: 0.75rem; line-height: 1.4; margin: 0;">
+                                style="color: var(--builder-chrome-label); font-size: 0.75rem; line-height: 1.4; margin: 0;">
                                 Opt-out of generating the backward compatibility layer for old SYX variables. Exports a
                                 strict, zero-bloat modern OKLCH token tree.
                             </p>
@@ -698,7 +702,7 @@
             <div class="theme-builder__group tb-mt-4"
                 style="border: none; position: sticky; bottom: 0; background: oklch(0.18 0.01 250); z-index: 10; padding-top: 1rem; padding-bottom: 2rem; margin-bottom: -2rem;">
                 <div class="tb-d-flex tb-justify-between tb-align-center tb-mb-4"
-                    style="padding: calc(3 * var(--primitive-space-base)); border-radius: var(--theme-radius); box-shadow: var(--semantic-shadow-md); background: var(--semantic-color-bg-secondary);">
+                    style="padding: var(--builder-space-3); border-radius: var(--theme-radius); box-shadow: var(--semantic-shadow-md); background: var(--semantic-color-bg-secondary);">
                     <span class="syx-type-body-small tb-text-black" id="dark-mode-label"
                         style="color: var(--semantic-color-text-primary);">Dark
                         Mode
@@ -802,7 +806,7 @@
                         <div class="layout-grid__col-xs-12 tb-mt-4">
                             <h3 class="atom-title atom-title--h5 tb-mb-3">Semantic Tokens in Action</h3>
                             <div class="tb-p-4"
-                                style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
+                                style="padding: var(--builder-space-4); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
                                 <div class="tb-d-flex tb-justify-between tb-mb-4">
                                     <span class="tb-token-badge">--semantic-color-bg-primary</span>
                                     <span class="tb-token-badge">--semantic-color-border-subtle</span>
@@ -810,7 +814,7 @@
                                 <div class="layout-grid__nested tb-align-center">
                                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6">
                                         <div class="tb-mb-3"
-                                            style="padding: calc(4 * var(--primitive-space-base)); background: var(--semantic-color-bg-secondary); border-radius: var(--theme-radius); border: 1px solid var(--semantic-color-border-default);">
+                                            style="padding: var(--builder-space-4); background: var(--semantic-color-bg-secondary); border-radius: var(--theme-radius); border: 1px solid var(--semantic-color-border-default);">
                                             <h4 class="atom-title atom-title--h6"
                                                 style="color: var(--semantic-color-text-primary);">Bg Secondary & Text
                                                 Primary</h4>
@@ -849,9 +853,9 @@
                                 style="border-bottom: 1px solid var(--semantic-color-border-subtle);">Typography Scale
                             </h3>
                             <div
-                                style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
+                                style="padding: var(--builder-space-4); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); border: 1px solid var(--semantic-color-border-subtle);">
                                 <div class="tb-d-flex"
-                                    style="flex-direction: column; gap: calc(3 * var(--primitive-space-base));">
+                                    style="flex-direction: column; gap: var(--builder-space-3);">
                                     <div class="tb-d-flex tb-align-center tb-justify-between">
                                         <div><code class="syx-type-caption tb-mb-3"
                                                 style="color: var(--semantic-color-text-tertiary); display: block;">.syx-type-h1</code><span
@@ -902,19 +906,19 @@
                                 style="border-bottom: 1px solid var(--semantic-color-border-subtle);">Elevation & Radius
                             </h3>
                             <div class="tb-d-flex tb-h-full"
-                                style="flex-direction: column; gap: calc(4 * var(--primitive-space-base));">
+                                style="flex-direction: column; gap: var(--builder-space-4);">
                                 <div class="tb-d-flex tb-align-center tb-justify-between"
-                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-sm); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    style="padding: var(--builder-space-4); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-sm); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
                                     <span class="syx-type-body-small">Shadow SM + Theme Radius</span>
                                     <span class="tb-token-badge">--semantic-shadow-sm</span>
                                 </div>
                                 <div class="tb-d-flex tb-align-center tb-justify-between"
-                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-md); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    style="padding: var(--builder-space-4); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-md); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
                                     <span class="syx-type-body-small">Shadow MD + Theme Radius</span>
                                     <span class="tb-token-badge">--semantic-shadow-md</span>
                                 </div>
                                 <div class="tb-d-flex tb-align-center tb-justify-between"
-                                    style="padding: calc(4 * var(--primitive-space-base)); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-lg); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
+                                    style="padding: var(--builder-space-4); border-radius: var(--theme-radius); background: var(--semantic-color-bg-primary); box-shadow: var(--semantic-shadow-lg); border: 1px solid var(--semantic-color-border-subtle); flex: 1;">
                                     <span class="syx-type-body-small">Shadow LG + Theme Radius</span>
                                     <span class="tb-token-badge">--semantic-shadow-lg</span>
                                 </div>

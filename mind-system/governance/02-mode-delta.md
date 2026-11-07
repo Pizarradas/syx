@@ -16,7 +16,7 @@ Añadir al final del output de SKETCH en contexto Atlas:
 ```html
 <!-- Handoff a [ATLAS + SYX: UI]:
      Nivel editorial: N[X]
-     Tipografía: atom-headline--[variante] (según atlas-rules/10.0)
+     Tipografía: atom-title--h[1-6] (según atlas-rules/10.0)
      Contratos Atlas a verificar en promoción: CL-03, CC-03, CC-05 -->
 ```
 
@@ -26,14 +26,14 @@ Añadir al final del output de SKETCH en contexto Atlas:
 
 | Standalone | Con `[ATLAS]:` |
 |---|---|
-| Decide jerarquía por criterio UX | Recibe N1/N2/N3/N4 ya asignados — aplica `atom-headline` según `10.0` |
+| Decide jerarquía por criterio UX | Recibe N1/N2/N3/N4 ya asignados — aplica `atom-title` según `10.0` |
 | Elige layout libremente | Usa proporción 2:1 si hay sidebar de datos |
 | HTML mobile-first | HTML mobile-first + N1 primero en DOM obligatorio |
 | Documenta estados | Documenta estados + densidad por nivel |
 
 Pasos adicionales antes de escribir HTML cuando `[ATLAS]:` está activo:
 1. Identificar el nivel editorial del contenido (N1/N2/N3/N4 según `06.1`).
-2. Asignar `atom-headline` según la tabla de `10.0`.
+2. Asignar `atom-title` según la tabla de `10.0`.
 3. Contemplar proporción 2:1 si hay sidebar de datos.
 4. Incluir los 4 niveles de densidad de `04.4` en la documentación de estados.
 

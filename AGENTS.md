@@ -94,6 +94,7 @@ BRAND never writes either. TOKEN and MIGRATE write the lower half of what they t
 the upper half.
 
 **How to activate a mode:**
+<!-- syx: ejemplo-nuevo -->
 ```
 [SYX: UX]: Design a login form for the dashboard
 [SYX: UI]: Implement the atom-badge component

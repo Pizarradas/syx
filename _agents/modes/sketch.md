@@ -188,6 +188,7 @@ flowchart TD
 
 ### 3. ASCII Layout (for quick spatial sketching)
 
+<!-- syx: ejemplo-nuevo -->
 ```
 ┌─────────────────────────────────┐
 │  org-site-header                │

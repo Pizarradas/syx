@@ -66,7 +66,7 @@ El contenido es accesible sin CSS ni JS:
 <!-- JS hace document.getElementById("headline").textContent = "Título" -->
 
 <!-- ✓ Correcto — contenido en HTML -->
-<h1 class="org-hero__headline">Título del artículo</h1>
+<h1 class="umbra-hero__headline">Título del artículo</h1>
 ```
 
 **DOM order = prioridad de lectura:** el N1 editorial debe estar primero en el DOM, independientemente de su posición visual. (Ver `mobile-first.md` §4.)
@@ -100,12 +100,12 @@ La interactividad es una mejora de la experiencia, no su fundamento. Cada compon
 ```html
 <!-- No-JS: acordeón visible, todos los paneles expandidos -->
 <!-- JS: colapsa paneles, añade toggle con aria-expanded -->
-<div class="mol-accordion">
-  <div class="mol-accordion__item">
-    <button class="mol-accordion__trigger" aria-expanded="true">
+<div class="umbra-accordion">
+  <div class="umbra-accordion__item">
+    <button class="umbra-accordion__trigger" aria-expanded="true">
       ¿Cómo me suscribo?
     </button>
-    <div class="mol-accordion__panel">
+    <div class="umbra-accordion__panel">
       Puedes suscribirte desde tu perfil…
     </div>
   </div>
@@ -132,7 +132,7 @@ Las capas también aplican dentro del CSS del componente:
 
 // Capa 3 — Enhancement (@supports)
 @supports (backdrop-filter: blur(8px)) {
-  .mol-header { backdrop-filter: blur(8px); }
+  .org-site-header { backdrop-filter: blur(8px); }
 }
 
 // Capa 4 — Motion (prefers-*)

@@ -272,7 +272,7 @@ function generar(registro) {
     `<div class="docs-sidebar__group">`,
     `  <span class="docs-sidebar__group-label">Components</span>`,
     `  <a href="#components" class="docs-sidebar__link" data-nav-section="components">`,
-    `    <span class="atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>`,
+    `    <span class="docs-sidebar__icon atom-icon atom-icon--lc-book-open atom-icon--sm" aria-hidden="true"></span>`,
     `    Component reference`,
     `  </a>`,
     `  <div class="docs-sidebar__sub">`,

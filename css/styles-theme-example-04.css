@@ -524,49 +524,49 @@
 :root {
   --component-button-primary-color: var(--semantic-color-primary-text);
   --component-button-primary-bg: transparent;
-  --component-button-primary-border: var(--semantic-color-primary);
+  --component-button-primary-border: var(--semantic-color-primary-text);
   --component-button-primary-color-hover: var(--semantic-color-primary-text);
   --component-button-primary-bg-hover: color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-button-primary-border-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-filled-color: var(--semantic-color-on-primary);
   --component-button-primary-filled-bg: var(--semantic-color-primary);
-  --component-button-primary-filled-border: var(--semantic-color-primary);
+  --component-button-primary-filled-border: var(--semantic-color-primary-text);
   --component-button-primary-filled-color-hover: var(--semantic-color-on-state-hover-primary);
   --component-button-primary-filled-bg-hover: var(--semantic-color-state-hover-primary);
   --component-button-primary-filled-border-hover: var(--semantic-color-state-hover-primary);
   --component-button-secondary-color: var(--semantic-color-secondary-text);
   --component-button-secondary-bg: transparent;
-  --component-button-secondary-border: var(--semantic-color-secondary);
+  --component-button-secondary-border: var(--semantic-color-secondary-text);
   --component-button-secondary-color-hover: var(--semantic-color-secondary-text);
   --component-button-secondary-bg-hover: color-mix(in srgb, var(--semantic-color-secondary) 10%, transparent);
   --component-button-secondary-border-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-filled-color: var(--semantic-color-on-secondary);
   --component-button-secondary-filled-bg: var(--semantic-color-secondary);
-  --component-button-secondary-filled-border: var(--semantic-color-secondary);
+  --component-button-secondary-filled-border: var(--semantic-color-secondary-text);
   --component-button-secondary-filled-color-hover: var(--semantic-color-on-state-hover-secondary);
   --component-button-secondary-filled-bg-hover: var(--semantic-color-state-hover-secondary);
   --component-button-secondary-filled-border-hover: var(--semantic-color-state-hover-secondary);
   --component-button-tertiary-color: var(--semantic-color-tertiary-text);
   --component-button-tertiary-bg: transparent;
-  --component-button-tertiary-border: var(--semantic-color-tertiary);
+  --component-button-tertiary-border: var(--semantic-color-tertiary-text);
   --component-button-tertiary-color-hover: var(--semantic-color-tertiary-text);
   --component-button-tertiary-bg-hover: color-mix(in srgb, var(--semantic-color-tertiary) 10%, transparent);
   --component-button-tertiary-border-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-filled-color: var(--semantic-color-on-tertiary);
   --component-button-tertiary-filled-bg: var(--semantic-color-tertiary);
-  --component-button-tertiary-filled-border: var(--semantic-color-tertiary);
+  --component-button-tertiary-filled-border: var(--semantic-color-tertiary-text);
   --component-button-tertiary-filled-color-hover: var(--semantic-color-on-state-hover-tertiary);
   --component-button-tertiary-filled-bg-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-tertiary-filled-border-hover: var(--semantic-color-state-hover-tertiary);
   --component-button-quaternary-color: var(--semantic-color-quaternary-text);
   --component-button-quaternary-bg: transparent;
-  --component-button-quaternary-border: var(--semantic-color-quaternary);
+  --component-button-quaternary-border: var(--semantic-color-quaternary-text);
   --component-button-quaternary-color-hover: var(--semantic-color-quaternary-text);
   --component-button-quaternary-bg-hover: color-mix(in srgb, var(--semantic-color-quaternary) 10%, transparent);
   --component-button-quaternary-border-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-filled-color: var(--semantic-color-on-quaternary);
   --component-button-quaternary-filled-bg: var(--semantic-color-quaternary);
-  --component-button-quaternary-filled-border: var(--semantic-color-quaternary);
+  --component-button-quaternary-filled-border: var(--semantic-color-quaternary-text);
   --component-button-quaternary-filled-color-hover: var(--semantic-color-on-state-hover-quaternary);
   --component-button-quaternary-filled-bg-hover: var(--semantic-color-state-hover-quaternary);
   --component-button-quaternary-filled-border-hover: var(--semantic-color-state-hover-quaternary);
@@ -660,7 +660,7 @@
   --component-check-border-width: var(--semantic-border-width-default);
   --component-check-border-radius: var(--semantic-border-radius-default);
   --component-check-border-color: var(--semantic-color-border-control);
-  --component-check-border-color-hover: var(--semantic-color-primary);
+  --component-check-border-color-hover: var(--semantic-color-primary-strong);
   --component-check-color-checked: var(--semantic-color-primary);
   --component-check-bg-checked: var(--semantic-color-primary-strong);
   --component-check-mark-color: var(--semantic-color-on-primary-strong);
@@ -673,7 +673,7 @@
   --component-radio-checked-size: var(--semantic-space-component-xs);
   --component-radio-border-width: var(--semantic-border-width-default);
   --component-radio-border-color: var(--semantic-color-border-control);
-  --component-radio-border-color-hover: var(--semantic-color-primary);
+  --component-radio-border-color-hover: var(--semantic-color-primary-strong);
   --component-radio-color-checked: var(--semantic-color-primary);
   --component-radio-bg-checked: var(--semantic-color-primary-strong);
   --component-radio-dot-color: var(--semantic-color-on-primary-strong);
@@ -733,7 +733,7 @@
   --component-pagination-border-width: var(--semantic-border-width-default);
   --component-pagination-border-radius: var(--semantic-border-radius-default);
   --component-pagination-border-color: transparent;
-  --component-pagination-border-color-hover: var(--semantic-color-primary);
+  --component-pagination-border-color-hover: var(--semantic-color-primary-strong);
   --component-pagination-color: var(--semantic-color-primary-text);
   --component-pagination-color-hover: var(--semantic-color-primary-text);
   --component-pagination-color-active: var(--semantic-color-on-primary);
@@ -755,6 +755,8 @@
   --component-list-ordered-counter-size: var(--semantic-space-component-lg);
   --component-list-ordered-counter-font-size: var(--semantic-font-size-body-small);
   --component-list-ordered-counter-line-height: var(--semantic-space-component-lg);
+  --component-list-ordered-counter-bg: var(--semantic-color-primary);
+  --component-list-ordered-counter-color: var(--semantic-color-on-primary);
   --component-list-lvl1-gap: var(--semantic-space-stack-md);
   --component-list-item-margin-top: var(--semantic-space-stack-sm);
   --component-list-icon-size: var(--semantic-space-component-sm);
@@ -782,7 +784,7 @@
   --component-table-border-color: var(--semantic-color-border-subtle);
   --component-table-state-hover-bg: var(--semantic-color-state-hover-primary);
   --component-table-state-hover-color: var(--semantic-color-on-state-hover-primary);
-  --component-table-state-hover-border-color: var(--semantic-color-primary);
+  --component-table-state-hover-border-color: var(--semantic-color-primary-strong);
   --component-table-state-hover-shadow: var(--semantic-shadow-focus);
   --component-table-sticky-active-bg: var(--semantic-color-primary);
   --component-table-sticky-active-color: var(--semantic-color-on-primary);
@@ -876,7 +878,7 @@
   --component-feature-card-border-color: var(--semantic-color-border-subtle);
   --component-feature-card-border-radius: var(--semantic-border-radius-lg);
   --component-feature-card-shadow: var(--semantic-shadow-none);
-  --component-feature-card-border-color-hover: var(--semantic-color-primary);
+  --component-feature-card-border-color-hover: var(--semantic-color-primary-strong);
   --component-feature-card-shadow-hover: 0 8px 24px color-mix(in srgb, var(--semantic-color-primary) 10%, transparent);
   --component-feature-card-hover-lift: -2px;
   --component-feature-card-row-span: 3;
@@ -953,7 +955,7 @@
   --component-blockquote-color: var(--semantic-color-text-secondary);
   --component-blockquote-border-width: var(--semantic-border-width-thick);
   --component-blockquote-border-style: solid;
-  --component-blockquote-border-color: var(--semantic-color-primary);
+  --component-blockquote-border-color: var(--semantic-color-primary-strong);
   --component-blockquote-border-radius: 0 var(--theme-radius) var(--theme-radius) 0;
   --component-hr-thickness: var(--semantic-border-width-thin);
   --component-hr-color: var(--semantic-color-border-subtle);
@@ -2735,9 +2737,10 @@
     box-shadow: var(--component-button-shadow-active);
   }
   .atom-btn--primary {
-    border-color: var(--component-button-primary-color);
+    border-color: var(--component-button-primary-border);
   }
   .atom-btn--primary.atom-btn--filled {
+    border-color: var(--component-button-primary-filled-border);
     background-color: var(--component-button-primary-filled-bg);
     color: var(--component-button-primary-filled-color);
   }
@@ -2746,9 +2749,10 @@
     color: var(--component-button-primary-color);
   }
   .atom-btn--secondary {
-    border-color: var(--component-button-secondary-color);
+    border-color: var(--component-button-secondary-border);
   }
   .atom-btn--secondary.atom-btn--filled {
+    border-color: var(--component-button-secondary-filled-border);
     background-color: var(--component-button-secondary-filled-bg);
     color: var(--component-button-secondary-filled-color);
   }
@@ -2757,9 +2761,10 @@
     color: var(--component-button-secondary-color);
   }
   .atom-btn--tertiary {
-    border-color: var(--component-button-tertiary-color);
+    border-color: var(--component-button-tertiary-border);
   }
   .atom-btn--tertiary.atom-btn--filled {
+    border-color: var(--component-button-tertiary-filled-border);
     background-color: var(--component-button-tertiary-filled-bg);
     color: var(--component-button-tertiary-filled-color);
   }
@@ -2768,9 +2773,10 @@
     color: var(--component-button-tertiary-color);
   }
   .atom-btn--quaternary {
-    border-color: var(--component-button-quaternary-color);
+    border-color: var(--component-button-quaternary-border);
   }
   .atom-btn--quaternary.atom-btn--filled {
+    border-color: var(--component-button-quaternary-filled-border);
     background-color: var(--component-button-quaternary-filled-bg);
     color: var(--component-button-quaternary-filled-color);
   }
@@ -3759,9 +3765,9 @@
     counter-increment: list-number;
     font-size: var(--component-list-ordered-counter-font-size);
     line-height: var(--component-list-ordered-counter-line-height);
-    color: var(--semantic-color-on-primary);
+    color: var(--component-list-ordered-counter-color);
     text-align: center;
-    background-color: var(--semantic-color-primary);
+    background-color: var(--component-list-ordered-counter-bg);
   }
 }
 @layer syx.atoms {
@@ -5368,7 +5374,7 @@
     color: var(--component-app-shell-color);
     background-color: var(--component-app-shell-bg);
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-app-shell {
       grid-template-areas: "header header" "sidebar main";
       grid-template-rows: auto 1fr;
@@ -5401,7 +5407,7 @@
     background-color: var(--component-app-shell-sidebar-bg);
     border-block-end: var(--component-app-shell-border-width) solid var(--component-app-shell-border-color);
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-app-shell__sidebar {
       border-block-end: 0;
       border-inline-end: var(--component-app-shell-border-width) solid var(--component-app-shell-border-color);
@@ -5415,7 +5421,7 @@
     overflow-x: auto;
     list-style: none;
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-app-shell__nav {
       flex-direction: column;
       overflow-x: visible;
@@ -5435,7 +5441,7 @@
     border-block-end: var(--component-app-shell-link-indicator-width) solid transparent;
     border-radius: var(--component-app-shell-link-border-radius);
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-app-shell__link {
       border-block-end: 0;
       border-inline-start: var(--component-app-shell-link-indicator-width) solid transparent;
@@ -5484,7 +5490,7 @@
     inset-block-start: 0;
     z-index: var(--component-app-shell-z-index);
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-app-shell--full .org-app-shell__sidebar {
       position: sticky;
       inset-block-start: var(--component-app-shell-header-height);
@@ -6635,7 +6641,7 @@
     text-align: center;
     margin: 0 auto;
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-home-footer__inner {
       flex-direction: row;
       justify-content: space-between;
@@ -6669,7 +6675,7 @@
     gap: var(--semantic-space-component-sm) var(--semantic-space-component-md);
     justify-content: center;
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-home-footer__nav {
       justify-content: flex-end;
     }
@@ -6945,7 +6951,7 @@
     margin: 0 auto;
     align-items: center;
   }
-  @media (min-width: 50em) {
+  @media (min-width: 48em) {
     .org-home-layers__inner {
       grid-template-columns: 1fr 1fr;
     }

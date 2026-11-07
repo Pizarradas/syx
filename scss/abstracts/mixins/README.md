@@ -204,16 +204,16 @@ Named breakpoint shorthand. Mobile-first (min-width).
 | ------------- | ----------------- | --------- |
 | `mobile-only` | max-width: 37.5em | 600px     |
 | `phablet`     | min-width: 37.5em | 600px     |
-| `tablet`      | min-width: 50em   | 800px     |
+| `tablet`, `md` | min-width: 48em  | 768px     |
 | `laptop`      | min-width: 64em   | 1024px    |
-| `desktop`     | min-width: 70em   | 1120px    |
+| `desktop`, `xl` | min-width: 80em | 1280px    |
 | `wide`        | min-width: 90em   | 1440px    |
 
 ```scss
 @include breakpoint(tablet) {
   font-size: 1.25rem;
 }
-// → @media (min-width: 50em) { font-size: 1.25rem; }
+// → @media (min-width: 48em) { font-size: 1.25rem; }
 ```
 
 ---

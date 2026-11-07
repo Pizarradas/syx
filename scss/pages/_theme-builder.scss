@@ -20,7 +20,7 @@
     overflow: hidden;
     background-color: var(--builder-page-bg);
 
-    @include min-screen(861px) {
+    @include breakpoint(md) {
         flex-direction: row;
     }
 
@@ -33,7 +33,7 @@
         background-color: var(--builder-chrome-bg);
         border-block-end: 1px solid var(--builder-chrome-raised);
 
-        @include min-screen(861px) {
+        @include breakpoint(md) {
             width: 320px;
             height: 100%;
             border-block-end: none;

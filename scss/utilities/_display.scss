@@ -59,35 +59,35 @@
   // .syx-d-xlg-up   → visible desde 1440px en adelante
 
   .syx-d-sm-only {
-    @include min-screen(48em) {
+    @include breakpoint(md) {
       @include hide-visually;
     }
   }
 
   .syx-d-sm-up {
     @include hide-visually;
-    @include min-screen(48em) {
+    @include breakpoint(md) {
       @include unhide-visually;
     }
   }
 
   .syx-d-md-up {
     @include hide-visually;
-    @include min-screen(64em) {
+    @include breakpoint(lg) {
       @include unhide-visually;
     }
   }
 
   .syx-d-lg-up {
     @include hide-visually;
-    @include min-screen(80em) {
+    @include breakpoint(xl) {
       @include unhide-visually;
     }
   }
 
   .syx-d-xlg-up {
     @include hide-visually;
-    @include min-screen(90em) {
+    @include breakpoint(xxl) {
       @include unhide-visually;
     }
   }

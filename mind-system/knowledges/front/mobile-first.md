@@ -53,7 +53,7 @@ Si el diseño funciona en esas condiciones, escalar hacia condiciones mejores es
 
 ```scss
 // ✓ Mobile-first: base para móvil, overrides para pantallas mayores
-.mol-card-grid {
+.umbra-card-grid {
   display: grid;
   grid-template-columns: 1fr;        // móvil: columna única
 
@@ -66,7 +66,7 @@ Si el diseño funciona en esas condiciones, escalar hacia condiciones mejores es
 }
 
 // ✗ Mobile-last: señal de diseño desde desktop
-.mol-card-grid {
+.umbra-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
@@ -113,11 +113,11 @@ La estructura del HTML refleja la prioridad del contenido para el usuario, no la
 
 ```html
 <!-- ✓ Correcto: contenido principal primero en el DOM -->
-<div class="org-grid-editorial">
-  <main class="org-grid-editorial__content">   <!-- N1 y N2 aquí -->
+<div class="diario-grid-editorial">
+  <main class="diario-grid-editorial__content">   <!-- N1 y N2 aquí -->
     …
   </main>
-  <aside class="org-grid-editorial__sidebar">  <!-- datos de mercado, publicidad -->
+  <aside class="diario-grid-editorial__sidebar">  <!-- datos de mercado, publicidad -->
     …
   </aside>
 </div>
@@ -167,7 +167,7 @@ Cada componente interactivo tiene un estado funcional sin JavaScript:
 ```html
 <!-- No-JS: el menú es una lista visible y navegable -->
 <!-- JS: colapsa el menú en un toggle con aria-expanded -->
-<nav class="mol-menu-principal">
+<nav class="umbra-menu-principal">
   <ul>
     <li><a href="/economia">Economía</a></li>
   </ul>

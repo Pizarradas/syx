@@ -217,7 +217,7 @@ const TOKEN = /--(?:semantic|component|primitive)-[A-Za-z0-9-]*/g;
  * Las citas de token juzgables de un markdown y los nombres que el propio
  * documento crea en un ejemplo marcado: { citas: [{ nombre, patron, linea }], nuevos }.
  */
-function citasJuzgables(texto) {
+function citasJuzgables(texto, patronRe = TOKEN) {
   const lineas = texto.split(/\r?\n/);
   const citas = [];
   const nuevos = new Set();
@@ -237,14 +237,15 @@ function citasJuzgables(texto) {
       else if (!malo) juzgable.push([pos, pos + t.length]);
       pos += t.length;
     }
-    for (const m of l.matchAll(TOKEN)) {
+    for (const m of l.matchAll(patronRe)) {
       if (!juzgable.some(([a, b]) => m.index >= a && m.index < b)) continue;
       const sig = l[m.index + m[0].length] || '';
       const patron = /[*{<[]/.test(sig) || m[0].endsWith('-');
       const nombre = patron ? m[0].replace(/-+$/, '-') : m[0];
       // En un bloque marcado, crea el nombre lo que lo declara (`--x:`) y lo que
       // se lo pasa a propose.js (`--name --x`): README enseña a proponer uno.
-      if (modo === 'nuevo-todo' || (modo === 'nuevo-bloque' && (/^\s*:/.test(l.slice(m.index + m[0].length)) || /--name\s+$/.test(l.slice(0, m.index))))) {
+      // Para las clases, un bloque marcado crea todas las que cita: no hay `--x:` que lo distinga.
+      if (modo === 'nuevo-todo' || (modo === 'nuevo-bloque' && (patronRe !== TOKEN || /^\s*:/.test(l.slice(m.index + m[0].length)) || /--name\s+$/.test(l.slice(0, m.index))))) {
         nuevos.add(nombre);
         continue;
       }
@@ -318,6 +319,61 @@ comprobar('ningún token citado es un fantasma', () => {
       ' · Usa el nombre real (get_token / tokens.json), reescribe el ejemplo, o márcalo con ❌, <!-- syx: ejemplo-incorrecto --> si el error es a propósito, o <!-- syx: ejemplo-nuevo --> si el ejemplo crea el token');
   }
   return `${citas} citas de ${distintos.size} nombres en ${fuentes.length} documentos, todas existen`;
+});
+
+// ─── 6b · Clases fantasma ───────────────────────────────────────────────────
+// Lo mismo que los tokens, para las clases: `atom-`, `mol-` y `org-` son el
+// vocabulario de SYX (contrato de consumo), y un documento que instruye a un
+// agente con una que no existe le enseña a inventarla. En noviembre de 2026
+// ATLAS citaba `atom-headline--3xl` en 22 sitios y una docena de organismos
+// editoriales que SYX no tiene. Cuenta como existente toda clase que declara
+// el CSS compilado de css/; la convención de ejemplos es la de los tokens.
+const CLASE = /(?<![\w-])(?:atom|mol|org)-[a-z0-9]+(?:-[a-z0-9]+)*(?:__[a-z0-9]+(?:-[a-z0-9]+)*)?(?:--[a-z0-9]+(?:-[a-z0-9]+)*)?-?/g;
+
+comprobar('ninguna clase de SYX citada es un fantasma', () => {
+  const conocidas = new Set();
+  for (const f of fs.readdirSync(path.join(ROOT, 'css')).filter((x) => x.endsWith('.css'))) {
+    for (const m of fs.readFileSync(path.join(ROOT, 'css', f), 'utf8').matchAll(/\.((?:atom|mol|org)-[a-zA-Z0-9_-]+)/g)) conocidas.add(m[1]);
+  }
+  // Como en el escáner: un bloque cuyos elementos existen (`mol-tabs`, con
+  // `.mol-tabs__tab`) es el ancla de esa familia, y `atom-list__item` lo
+  // alcanza `.atom-list--x [class*=__item]` aunque nadie escriba la clase.
+  const porAtributo = new Set();
+  for (const f of fs.readdirSync(path.join(ROOT, 'css')).filter((x) => x.endsWith('.css'))) {
+    for (const m of fs.readFileSync(path.join(ROOT, 'css', f), 'utf8').matchAll(/\[class\*=["']?(__[a-z0-9-]+)/g)) porAtributo.add(m[1]);
+  }
+  const lista = [...conocidas];
+  const existe = (c) => {
+    if (c.patron) return lista.some((k) => k.startsWith(c.nombre));
+    if (conocidas.has(c.nombre)) return true;
+    if (!c.nombre.includes('__') && lista.some((k) => k.startsWith(`${c.nombre}__`))) return true;
+    const [bloque, elemento] = c.nombre.split('__');
+    return Boolean(elemento) && !elemento.includes('--') && porAtributo.has(`__${elemento}`) && lista.some((k) => k === bloque || k.startsWith(`${bloque}--`));
+  };
+  const fuentes = [
+    ...walk(K).filter((p) => !rel(p).startsWith('vendors/')),
+    ...walk(path.join(ROOT, 'mind-system', 'governance')),
+    ...walk(path.join(ROOT, 'mind-system', 'atlas-rules')),
+    ...['CLAUDE.md', 'AGENTS.md', 'AI_GUIDELINES.md', 'CONSUMING.md', 'templates/app/AGENTS.md', 'README.md', 'THEMING-RULES.md'].map((f) => path.join(ROOT, f)),
+    ...walk(path.join(ROOT, 'scss')),
+    ...walk(MODOS_DIR),
+  ].filter((p) => p.endsWith('.md') && fs.existsSync(p));
+  const fantasmas = new Map();
+  let citas = 0;
+  for (const f of fuentes) {
+    const { citas: cs, nuevos } = citasJuzgables(fs.readFileSync(f, 'utf8'), CLASE);
+    for (const c of cs) {
+      citas++;
+      if (existe(c) || nuevos.has(c.nombre)) continue;
+      if (!fantasmas.has(c.nombre)) fantasmas.set(c.nombre, []);
+      fantasmas.get(c.nombre).push(`${path.relative(ROOT, f).split(path.sep).join('/')}:${c.linea}`);
+    }
+  }
+  if (fantasmas.size) {
+    throw new Error([...fantasmas].map(([n, d]) => `${n} (${d.slice(0, 3).join(', ')}${d.length > 3 ? `, +${d.length - 3}` : ''})`).join(' · ') +
+      ' · Usa la clase real (get_component / component-registry.json), dale a lo propio el prefijo del proyecto (CONSUMING.md), o márcalo con ❌ / <!-- syx: ejemplo-incorrecto --> / <!-- syx: ejemplo-nuevo -->');
+  }
+  return `${citas} citas de clases en ${fuentes.length} documentos, todas existen`;
 });
 
 // ─── 8 · Un idioma para lo que instruye ─────────────────────────────────────

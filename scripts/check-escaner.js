@@ -457,6 +457,94 @@ comprobar('sobre las páginas reales no denuncia nada que sí exista', () => {
   if (!r.hallazgos.length && !paginas.length) throw new Error('no ha leído ninguna página');
 });
 
+// ─── Un tema se juzga con el contrato de THEMING-RULES, no con el de una app ──
+// Hasta la 5.1 el escáner daba 14 avisos medios a la propia plantilla de tema:
+// trataba como desviación declarar la paleta propia, leerla y escribirla con
+// literales, que es justo lo que THEMING-RULES pide (plan 2026-11, F1-05).
+
+const temaFalso = path.join(tmp, '_theme.scss');
+fs.writeFileSync(temaFalso, `@mixin theme-falso {
+  :root {
+    --primitive-color-brand-500: oklch(0.6 0.2 30);
+    --semantic-color-primary: var(--primitive-color-brand-500);
+    --semantic-color-text-primary: oklch(0.498 0.282 266.24);
+    --component-x-bg: var(--primitive-color-brand-500);
+    --component-y-color: oklch(0.498 0.282 266.24);
+    --semantic-color-inventado: var(--semantic-color-primary);
+    @supports (color: oklch(0 0 0)) { --semantic-shadow-xs: none; }
+  }
+  .falso { color: var(--primitive-color-brand-500); }
+  @include dark-mode-tokens;
+}
+`);
+const informeTema = escanear({ files: [temaFalso], syx });
+const enTema = (tipo, trozo) => informeTema.hallazgos.filter((h) => h.tipo === tipo && JSON.stringify(h).includes(trozo));
+
+comprobar('tema: su paleta propia, leída y escrita con literales, no es desviación', () => {
+  const malos = informeTema.hallazgos.filter((h) => /brand-500 se declara|--semantic-color-primary|--semantic-color-text-primary|oklch\(0 0 0\)/.test(h.que) && !/--component-/.test(h.que));
+  if (malos.length) throw new Error(malos.map((h) => `L${h.linea} ${h.tipo}: ${h.que}`).join('\n     '));
+});
+comprobar('tema: un --component-* que lee un primitivo o un color a pelo (R11)', () => {
+  if (!enTema('primitivo-en-app', '--component-x-bg lee --primitive-color-brand-500').length) throw new Error('no ve el primitivo en --component-x-bg');
+  if (!enTema('valor-a-pelo', 'oklch(0.498 0.282 266.24)').some((h) => h.linea === 7)) throw new Error('no ve el color a pelo en --component-y-color (línea 7)');
+});
+comprobar('tema: un --semantic-* que el sistema no tiene, y una regla que pinta con un primitivo', () => {
+  if (!enTema('token-usurpado', '--semantic-color-inventado').length) throw new Error('no ve --semantic-color-inventado');
+  if (!informeTema.hallazgos.some((h) => h.tipo === 'primitivo-en-app' && h.linea === 11)) throw new Error('no ve la regla .falso que pinta con un primitivo (línea 11)');
+});
+comprobar('tema: la plantilla y los siete temas de SYX dan 0 avisos altos y 0 medios', () => {
+  const dir = path.join(ROOT, 'scss', 'themes');
+  const temas = fs.readdirSync(dir).filter((t) => t === '_template' || fs.existsSync(path.join(ROOT, 'css', `styles-theme-${t}.css`)));
+  const malos = [];
+  for (const t of temas) {
+    const files = fs.readdirSync(path.join(dir, t)).filter((f) => f.endsWith('.scss')).map((f) => path.join(dir, t, f));
+    const r = escanear({ files, syx, theme: t === '_template' ? 'syx-sketch' : t });
+    for (const h of r.hallazgos.filter((x) => x.gravedad !== 'baja')) malos.push(`${t} L${h.linea} ${h.tipo}: ${h.que}`);
+  }
+  if (temas.length < 8) throw new Error(`solo ${temas.length} temas`);
+  if (malos.length) throw new Error(malos.slice(0, 8).join('\n     '));
+  return `${temas.length} temas`;
+});
+
+// ─── Legibilidad y nombre accesible (plan 2026-11, F1-06) ────────────────────
+const legible = path.join(tmp, 'legible.html');
+fs.writeFileSync(legible, `<!doctype html><html><head><style>
+  .tabla-tomas td { font-variant-numeric: oldstyle-nums; }
+  .titulo { font-variant-numeric: oldstyle-nums; }
+  .estado-pill { font-size: clamp(0.64rem, 0.6rem + 0.1vw, 0.72rem); }
+  .estado-grande { font-size: 0.875rem; }
+</style></head><body>
+<button aria-label="Marcar dosis">Tomada</button>
+<button aria-label="Tomada a las 9:00">Tomada</button>
+<a href="#" aria-label="Ver en GitHub">GitHub</a>
+<button aria-label="Cerrar"><span class="atom-icon" aria-hidden="true"></span></button>
+<pre><code>&lt;button aria-label="Otra cosa"&gt;Visible&lt;/button&gt;</code></pre>
+</body></html>`);
+const informeLegible = escanear({ files: [legible], syx });
+const enLegible = (tipo) => informeLegible.hallazgos.filter((h) => h.tipo === tipo);
+
+comprobar('cifras de estilo antiguo en una tabla, y solo en datos', () => {
+  const h = enLegible('cifras-de-estilo-antiguo');
+  if (h.length !== 1 || !/tabla-tomas/.test(h[0].que)) throw new Error(`esperaba solo .tabla-tomas td: ${h.map((x) => x.que).join(' | ') || 'nada'}`);
+});
+comprobar('una etiqueta de estado por debajo de 14 px, por su mínimo, como aviso', () => {
+  const h = enLegible('etiqueta-de-estado-pequena');
+  if (h.length !== 1 || !/estado-pill/.test(h[0].que) || h[0].gravedad !== 'baja') throw new Error(h.map((x) => `${x.gravedad} ${x.que}`).join(' | ') || 'nada');
+});
+comprobar('nombre accesible que no contiene el texto visible (WCAG 2.5.3), sin tocar iconos ni ejemplos', () => {
+  const h = enLegible('nombre-sin-texto-visible');
+  const medias = h.filter((x) => x.gravedad === 'media').map((x) => x.que);
+  const bajas = h.filter((x) => x.gravedad === 'baja').map((x) => x.que);
+  if (medias.length !== 1 || !/Marcar dosis/.test(medias[0])) throw new Error(`medias: ${medias.join(' | ') || 'ninguna'}`);
+  if (bajas.length !== 1 || !/Ver en GitHub/.test(bajas[0])) throw new Error(`bajas: ${bajas.join(' | ') || 'ninguna'}`);
+});
+
+comprobar('las páginas propias pasan el escáner sin reglas apagadas (check:vitrina sin --ignorar)', () => {
+  const vitrina = require(path.join(ROOT, 'package.json')).scripts['check:vitrina'] || '';
+  if (!/--fallar-si-media/.test(vitrina)) throw new Error(`check:vitrina no falla con avisos medios: ${vitrina}`);
+  if (/--ignorar/.test(vitrina)) throw new Error(`check:vitrina apaga reglas: ${vitrina}`);
+});
+
 comprobar('sobre home.html no inventa desviación donde no la hay', () => {
   const r = escanear({ files: [path.join(ROOT, 'home.html')], syx });
   const graves = r.hallazgos.filter((h) => h.gravedad === 'alta');

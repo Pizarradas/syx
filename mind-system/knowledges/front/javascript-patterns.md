@@ -27,8 +27,8 @@ El JavaScript en componentes SYX sigue un patrón consistente:
 ```javascript
 // Patrón estándar de inicialización
 function initComponent() {
-  document.querySelectorAll('.mol-accordion').forEach((el, i) => {
-    const trigger = el.querySelector('.mol-accordion__trigger');
+  document.querySelectorAll('.umbra-accordion').forEach((el, i) => {
+    const trigger = el.querySelector('.umbra-accordion__trigger');
     trigger.id = `syx-accordion-trigger-${i + 1}`;
     trigger.setAttribute('aria-expanded', 'false');
     // Estado inicial: colapsado (JS mejora sobre el estado visible no-JS)
@@ -134,7 +134,7 @@ document.addEventListener('keydown', (event) => {
     return;
   }
 
-  const openDropdown = document.querySelector('.mol-dropdown[aria-expanded="true"]');
+  const openDropdown = document.querySelector('.umbra-dropdown[aria-expanded="true"]');
   if (openDropdown) {
     closeDropdown(openDropdown);
     return;

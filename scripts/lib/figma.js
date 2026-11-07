@@ -180,6 +180,9 @@ function aVariable(token, bruto) {
 
   if (RELATIVAS.test(v)) return { omitido: 'unidad relativa: Figma no tiene contexto con el que resolverla' };
   const n = aNumero(v);
+  // Figma lee la opacidad de una capa en porcentaje (0–100): una variable con
+  // 0.5 enlazada a la opacidad deja la capa al 0,5 %, invisible (lo vio RUIDO).
+  if (n !== null && /(^|-)opacity(-|$)/.test(token.replace(/^--/, '')) && n <= 1) return { tipo: 'FLOAT', valor: redondear(n * 100) };
   if (n !== null) return { tipo: 'FLOAT', valor: n };
 
   if (/^-?[\d.]+m?s$/.test(v)) return { omitido: 'duración: Figma no guarda tiempo en variables' };

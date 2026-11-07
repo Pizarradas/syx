@@ -67,18 +67,18 @@ Inline style (style="…")          → 1,0,0,0
 
 ### 3. BEM — especificidad plana
 
-BEM produce selectores de clase única: `.atom-btn`, `.atom-btn__label`, `.atom-btn--primary`. La especificidad de todos estos selectores es idéntica: `0,1,0`.
+BEM produce selectores de clase única: `.mol-card`, `.mol-card__title`, `.mol-card--flat`. La especificidad de todos estos selectores es idéntica: `0,1,0`.
 
 ```scss
 // pseudocódigo — ilustra la idea; no compila tal cual
 // ✓ BEM — especificidad plana (0,1,0)
-.atom-btn { … }
-.atom-btn__label { … }
-.atom-btn--primary { … }
+.mol-card { … }
+.mol-card__title { … }
+.mol-card--flat { … }
 
 // ✗ Anidamiento profundo — especificidad acumulada
-.mol-card .atom-btn { … }          // 0,2,0 — más específico que .atom-btn--primary
-.org-hero .mol-card .atom-btn { … } // 0,3,0 — difícil de sobreescribir
+.mol-card .atom-btn { … }               // 0,2,0 — más específico que .atom-btn--primary
+.org-app-shell .mol-card .atom-btn { … } // 0,3,0 — difícil de sobreescribir
 ```
 
 **Regla SYX:** nesting máximo de 3 niveles en SCSS. Los selectores compilados no deben tener especificidad mayor que `0,2,0` para estilos de componente.
@@ -113,10 +113,10 @@ Las CSS Custom Properties (tokens) se heredan y se pueden sobreescribir en cualq
   --component-button-primary-filled-bg: var(--semantic-color-primary);
 }
 
-// Override en contexto específico
-.org-hero {
+// Override en contexto específico: una zona propia de la aplicación
+.umbra-hero {
   --component-button-primary-filled-bg: var(--semantic-color-bg-inverse);
-  // Todos los botones primarios rellenos dentro de .org-hero usan el valor overrideado
+  // Todos los botones primarios rellenos dentro de .umbra-hero usan el valor overrideado
 }
 ```
 

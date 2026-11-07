@@ -16,19 +16,19 @@
     grid-template-rows: 1fr;
     max-width: var(--layout-max-width);
     gap: var(--layout-gap-1);
-    @include min-screen(48em) {
+    @include breakpoint(md) {
       @include padding(null var(--layout-pad-2) null var(--layout-pad-2));
       gap: var(--layout-gap-2);
     }
-    @include min-screen(64em) {
+    @include breakpoint(lg) {
       @include padding(null var(--layout-pad-3) null var(--layout-pad-3));
       gap: var(--layout-gap-3);
     }
-    @include min-screen(80em) {
+    @include breakpoint(xl) {
       @include padding(null var(--layout-pad-4) null var(--layout-pad-4));
       gap: var(--layout-gap-4);
     }
-    @include min-screen(90em) {
+    @include breakpoint(xxl) {
       @include padding(null var(--layout-pad-5) null var(--layout-pad-5));
       gap: var(--layout-gap-5);
     }
@@ -112,7 +112,7 @@
 
       // &-sm
       &-sm {
-        @include min-screen(48em) {
+        @include breakpoint(md) {
           // &-1
           &-1 {
             grid-column: auto/span 1;
@@ -177,7 +177,7 @@
 
       // &-md
       &-md {
-        @include min-screen(64em) {
+        @include breakpoint(lg) {
           // &-1
           &-1 {
             grid-column: auto/span 1;
@@ -242,7 +242,7 @@
 
       // &-lg
       &-lg {
-        @include min-screen(80em) {
+        @include breakpoint(xl) {
           // &-1
           &-1 {
             grid-column: auto/span 1;
@@ -315,16 +315,16 @@
       // No horizontal padding by default for nested grids to prevent double gutter
       @include padding(null 0); 
       
-      @include min-screen(48em) {
+      @include breakpoint(md) {
         gap: var(--layout-gap-2);
       }
-      @include min-screen(64em) {
+      @include breakpoint(lg) {
         gap: var(--layout-gap-3);
       }
-      @include min-screen(80em) {
+      @include breakpoint(xl) {
         gap: var(--layout-gap-4);
       }
-      @include min-screen(90em) {
+      @include breakpoint(xxl) {
         gap: var(--layout-gap-5);
       }
     }

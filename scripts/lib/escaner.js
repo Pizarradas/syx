@@ -32,6 +32,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const postcss = require('postcss');
+const postcssScss = require('postcss-scss');
 
 // ─── Recorte de zonas que no son la aplicación ───────────────────────────────
 
@@ -241,6 +243,22 @@ const PREFIJOS_SYX = /^(atom|mol|org|syx)-/;
 // `--syx-*` no es de SYX —sus tokens no llevan ese prefijo— pero lo parece, y
 // es justo lo que inventa un modelo (`--syx-sem-primary`): se juzga como suyo.
 const TOKENS_SYX = /^--(syx|primitive|semantic|component|theme|layout|reset)-/;
+/** Selectores de datos: tablas, horas, fechas, importes, métricas. */
+const ES_DATO = /\b(table|thead|tbody|td|th|time|data|output)\b|[._-](table|tabla|time|hora|date|fecha|price|precio|importe|amount|total|stat|metric|metrica|dato|value|valor|dosis|kpi)/i;
+/** Selectores de etiquetas de estado. */
+const ES_ESTADO = /[._-](badge|pill|tag|chip|status|estado|label|etiqueta)\b/i;
+
+/** El menor tamaño en px que puede dar un font-size (px y rem; clamp() y min() por su mínimo). */
+function tamañoMinimoPx(valor) {
+  const nums = [...valor.matchAll(/(-?[\d.]+)(px|rem)\b/g)].map((m) => (m[2] === 'rem' ? +m[1] * 16 : +m[1]));
+  if (!nums.length) return null;
+  if (/^\s*(clamp|min)\(/.test(valor)) return Math.min(...nums);
+  if (/^\s*max\(/.test(valor)) return Math.max(...nums);
+  return nums.length === 1 ? nums[0] : null; // calc(): no se adivina
+}
+
+/** Un fichero de tema: declara su mixin (o el de sus tintas de respaldo) o entra en el modo oscuro del sistema. */
+const ES_TEMA = /@mixin\s+(?:theme-[\w-]+|tintas-respaldo)\b|@include\s+dark-mode-tokens\b/;
 
 /** `--x: …` declarados en un CSS (no las lecturas `var(--x)`). */
 const declaraciones = (css) =>
@@ -259,8 +277,12 @@ const ABSTRACTS_ENTEROS = /@(use|import|forward)\s+["'][^"']*scss\/abstracts(\/i
  * @param {string}   opciones.mode     modo
  * @param {string}   [opciones.prefijo] prefijo del proyecto (`umbra`): activa la
  *                                      comprobación de consulta previa (3d)
+ * @param {string}   [opciones.rol]    'app', 'tema' o 'auto' (por defecto): cada
+ *                                      fichero que es un tema (declara `@mixin
+ *                                      theme-…` o usa `dark-mode-tokens()`) se
+ *                                      juzga con el contrato de THEMING-RULES
  */
-function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = null }) {
+function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = null, rol = 'auto' }) {
   const hallazgos = [];
   const añadir = (h) => hallazgos.push(h);
 
@@ -269,6 +291,10 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
   const cssSistema = fs.readFileSync(syx.cssPath(theme), 'utf8');
   const clasesSistema = new Set([...cssSistema.matchAll(/\.([a-zA-Z][a-zA-Z0-9_-]*)/g)].map((m) => m[1]));
   const clasesSyx = [...clasesSistema].filter((c) => PREFIJOS_SYX.test(c));
+  // Lo que declara el CSS del sistema también existe aunque no esté en
+  // tokens.json: los iconos de Lucide (`--lc-icon-*`), por ejemplo, viven en
+  // atoms/_icon-lucide.scss como data URI.
+  const declaradosSistema = new Set(declaraciones(cssSistema).map((d) => d.token));
 
   // No todo lo que pinta se escribe como `.clase`.
   //
@@ -338,6 +364,10 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     const bruto = fs.readFileSync(file, 'utf8');
     const esHtml = ES_MARCADO.test(file);
     const trozos = trozosDe(file, bruto);
+    // Un tema no es una aplicación (THEMING-RULES, «The theme contract»): puede
+    // declarar sus propios primitivos y leerlos para darles rol. Lo que no
+    // puede es que un `--component-*` lea un primitivo (R11).
+    const esTema = rol === 'tema' || (rol === 'auto' && ES_TEMA.test(bruto));
 
     // ── 1. Fallbacks que ya no coinciden con el sistema ────────────────────
     for (const t of trozos) {
@@ -379,6 +409,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
       for (const v of varsSinFallback(t.css)) {
         if (syx.getToken({ token: v.token, theme, mode }).found) continue;
         if (declaradosApp.has(v.token)) continue; // lo declara la app (si usurpa un prefijo de SYX, sale en 1c)
+        if (declaradosSistema.has(v.token)) continue; // lo declara el CSS del sistema
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, v.indice).split('\n').length - 1;
         const cerca = syx.getToken({ token: v.token, theme, mode }).suggestions || [];
         const deSyx = TOKENS_SYX.test(v.token);
@@ -407,6 +438,7 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     for (const t of trozos) {
       for (const d of declaraciones(t.css)) {
         if (!TOKENS_SYX.test(d.token)) continue;
+        if (esTema && /^--primitive-/.test(d.token)) continue; // la paleta propia del tema
         if (syx.getToken({ token: d.token, theme, mode }).found) continue;
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, d.indice).split('\n').length - 1;
         añadir({
@@ -420,6 +452,23 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
       }
       for (const m of t.css.matchAll(/var\(\s*(--primitive-[a-zA-Z0-9-]+)/g)) {
         const linea = t.unaLinea ? t.desde : t.desde + t.css.slice(0, m.index).split('\n').length - 1;
+        if (esTema) {
+          // En un tema, leer un primitivo es como da rol a su paleta. Solo
+          // está mal si quien lee es un `--component-*`: R11.
+          // Fuera de un custom property (una regla que pinta), se juzga como en una app.
+          const antes = t.css.slice(0, m.index);
+          const decl = /(--[a-zA-Z0-9_-]+)\s*:[^;{}]*$/.exec(antes);
+          if (decl && !/^--component-/.test(decl[1])) continue;
+          if (decl) añadir({
+            tipo: 'primitivo-en-app',
+            gravedad: 'media',
+            file: rel, linea,
+            que: `${decl[1]} lee ${m[1]}`,
+            detalle: 'Un token de componente que lee un primitivo deja de seguir al tema y al modo (R11, THEMING-RULES «What a theme MUST NOT declare»).',
+            sugerencia: 'Que lea un --semantic-* (o otro --component-*, --theme-*, --layout-*).',
+          });
+          if (decl) continue;
+        }
         añadir({
           tipo: 'primitivo-en-app',
           gravedad: 'media',
@@ -454,10 +503,24 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
 
     // ── 2. Valores a pelo que el sistema ya tiene como token ────────────────
     for (const t of trozos) {
-      const sinVars = t.css.replace(/var\([^)]*\)/g, ' ');
+      // Un color dentro de un comentario no pinta (`// Primary: oklch(…)` en la
+      // cabecera de un tema). Se vacía conservando la longitud y las líneas.
+      let sinComentarios = t.css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '));
+      if (/\.s[ac]ss$/i.test(file)) sinComentarios = sinComentarios.replace(/(^|[^:])\/\/[^\n]*/g, (m, p1) => p1 + ' '.repeat(m.length - p1.length));
+      const sinVars = sinComentarios.replace(/var\([^)]*\)/g, ' ');
       for (const m of sinVars.matchAll(/(#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?|oklch)\([^)]*\))/g)) {
         const valor = m[1];
         const linea = t.unaLinea ? t.desde : t.desde + sinVars.slice(0, m.index).split('\n').length - 1;
+        // La condición de un @supports o un @media no pinta: `@supports (color:
+        // oklch(0 0 0))` pregunta si el navegador entiende la función.
+        if (/@(supports|media)\b[^{};]*$/.test(sinVars.slice(0, m.index))) continue;
+        if (esTema) {
+          // Un tema escribe su paleta con literales: es donde nacen los
+          // valores. Un color a pelo solo es desviación en un --component-* (R11).
+          // Fuera de un custom property (una regla que pinta), se juzga como siempre.
+          const decl = /(--[a-zA-Z0-9_-]+)\s*:[^;{}]*$/.exec(sinVars.slice(0, m.index));
+          if (decl && !/^--component-/.test(decl[1])) continue;
+        }
         const cerca = syx.findTokenByValue({ value: valor, theme, mode });
         const semanticos = cerca.exact.filter((x) => x.startsWith('--semantic-'));
         if (!cerca.exact.length) continue; // un color propio de la app no es desviación
@@ -627,6 +690,63 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
               sugerencia: `Encima de su primera regla: /* syx-reuse: checked <piezas de SYX> — <por qué no sirven> */`,
             });
           }
+        });
+      }
+    }
+
+    // ── 3c. Legibilidad de datos, etiquetas de estado y nombre accesible ──────
+    // Plan de mejora 2026-11, F1-06. Tres cosas que el benchmark Salud+ dejó a
+    // la vista y que ningún guardián miraba: horas como «o8:oo» (cifras de
+    // estilo antiguo en una tabla), etiquetas de estado de 10 px, y un botón
+    // que dice «Tomada» y se anuncia como «Marcar dosis» (WCAG 2.5.3).
+    for (const t of trozos) {
+      if (t.unaLinea) continue; // un atributo style no tiene selector que juzgar
+      let raiz = null;
+      try { raiz = (/\.s[ac]ss$/i.test(file) ? postcssScss : postcss).parse(t.css); } catch (e) { /* CSS a medias: lo juzgan las otras reglas */ }
+      if (!raiz) continue;
+      raiz.walkDecls((d) => {
+        const sel = d.parent && d.parent.selector;
+        if (!sel) return;
+        const linea = t.desde + (d.source && d.source.start ? d.source.start.line - 1 : 0);
+        const v = d.value;
+        if ((d.prop === 'font-variant-numeric' && /oldstyle-nums/.test(v)) || (d.prop === 'font-feature-settings' && /["']onum["']/.test(v))) {
+          if (ES_DATO.test(sel)) añadir({
+            tipo: 'cifras-de-estilo-antiguo', gravedad: 'media', file: rel, linea,
+            que: `${sel.trim()} pide cifras de estilo antiguo (${d.prop}: ${v})`,
+            detalle: 'En horas, importes y tablas las cifras de estilo antiguo bajan y suben de la línea: «08:00» se lee «o8:oo» y las columnas no alinean.',
+            sugerencia: 'font-variant-numeric: lining-nums tabular-nums;',
+          });
+        }
+        if (d.prop === 'font-size' && ES_ESTADO.test(sel)) {
+          const px = tamañoMinimoPx(v);
+          if (px !== null && px < 14) añadir({
+            tipo: 'etiqueta-de-estado-pequena', gravedad: 'baja', file: rel, linea,
+            que: `${sel.trim()} pone la etiqueta a ${+px.toFixed(1)} px`,
+            detalle: 'Una etiqueta de estado (pendiente, tomada, fuera de rango) es información: por debajo de 14 px cuesta leerla, sobre todo con baja visión.',
+            sugerencia: 'Al menos 0.875rem (14 px).',
+          });
+        }
+      });
+    }
+    if (esHtml) {
+      const limpio = vaciar(bruto);
+      for (const m of limpio.matchAll(/<(button|a|summary|label)\b([^>]*)\baria-label\s*=\s*"([^"]*)"([^>]*)>([\s\S]*?)<\/\1>/gi)) {
+        const visible = m[5].replace(/<[^>]*\baria-hidden\s*=\s*"true"[^>]*>[\s\S]*?<\/[a-z]+>/gi, ' ')
+          .replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ').trim();
+        if (!visible || /\{|\$\{/.test(visible)) continue; // solo icono, o texto que pone el JS
+        const nombre = m[3].replace(/\s+/g, ' ').trim();
+        const norm = (x) => x.toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\p{L}\p{N} ]/gu, '').trim();
+        if (norm(nombre).startsWith(norm(visible))) continue;
+        // WCAG 2.5.3 exige que el nombre CONTENGA el texto visible; que empiece
+        // por él es la recomendación (la voz suele decir solo el principio).
+        const contiene = norm(nombre).includes(norm(visible));
+        añadir({
+          tipo: 'nombre-sin-texto-visible', gravedad: contiene ? 'baja' : 'media', file: rel, linea: lineaDe(limpio, m.index),
+          que: `<${m[1]}> se ve «${visible.slice(0, 40)}» y se llama «${nombre.slice(0, 40)}»`,
+          detalle: contiene
+            ? 'El nombre contiene el texto visible pero no empieza por él: cumple WCAG 2.5.3 por poco, y el control por voz funciona mejor si empieza igual.'
+            : 'Quien usa control por voz dice lo que ve; si el nombre accesible no contiene ese texto, el control no responde (WCAG 2.5.3, Label in Name).',
+          sugerencia: `aria-label="${visible}${nombre.toLowerCase().includes(visible.toLowerCase()) ? '' : ' …'}", o quita el aria-label y deja el texto.`,
         });
       }
     }
