@@ -325,7 +325,7 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 // MEDIA QUERIES
 @include breakpoint(tablet) { … }           // min-width: 48em (= md)
 @include breakpoint(desktop) { … }          // min-width: 80em (= xl)
-@include min-screen(48em) { … }          // 768px
+@include breakpoint(md) { … }             // 48em (768px)
 @include darkmode { … }
 @include reduced-motion { … }
 

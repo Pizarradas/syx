@@ -220,17 +220,17 @@ Named breakpoint shorthand. Mobile-first (min-width).
 
 ### `min-screen($min)` / `max-screen($max)` / `screen($min, $max)`
 
-Raw value range helpers.
+Low-level range helpers that `breakpoint()` is built on. Pass them a token of the scale, never a
+literal: `check:breakpoints` rejects any width outside `tokens/primitives/_breakpoints.scss`.
 
 ```scss
-@include min-screen(768px) { … }
-// → @media (min-width: 768px) { … }
+@use '../tokens/primitives/breakpoints' as bp;
 
-@include max-screen(600px) { … }
-// → @media (max-width: 600px) { … }
+@include min-screen(bp.$token-breakpoint-md) { … }
+// → @media (min-width: 48em) { … }
 
-@include screen(600px, 1024px) { … }
-// → @media (min-width: 600px) and (max-width: 1024px) { … }
+@include screen(bp.$token-breakpoint-sm, bp.$token-breakpoint-lg) { … }
+// → @media (min-width: 37.5em) and (max-width: 64em) { … }
 ```
 
 ---

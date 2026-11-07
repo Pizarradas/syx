@@ -14,6 +14,8 @@
  *   2. En scss/, fuera de esa escala y del mixin, nadie escribe un breakpoint
  *      literal: `min-screen(48em)`, `@media (min-width: 768px)`…
  *   3. El mapa con nombre de _media-queries.scss solo lee esa escala.
+ *   4. Las guías (*.md de scss/ y de la raíz) no enseñan breakpoints literales
+ *      en sus bloques ```scss, salvo en un ejemplo marcado ❌.
  *
  * Uso: node scripts/check-breakpoints.js   ·   npm run check:breakpoints
  */
@@ -60,6 +62,31 @@ for (const f of scssDe(path.join(ROOT, 'scss'))) {
   });
 }
 
+// 4 · Las guías no enseñan literales
+const LITERAL = /\b(?:min-screen|max-screen|screen)\(\s*[\d.]+[a-z]+|@media[^{]*\((?:min|max)-width:\s*[\d.]+[a-z]+/;
+function mdDe(dir, hondo) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) return hondo && e.name !== 'node_modules' ? mdDe(p, hondo) : [];
+    return e.name.endsWith('.md') && e.name !== 'CHANGELOG.md' ? [p] : [];
+  });
+}
+let guias = 0;
+for (const f of [...mdDe(ROOT, false), ...mdDe(path.join(ROOT, 'scss'), true)]) {
+  guias++;
+  let enBloque = false;
+  let incorrecto = false;
+  fs.readFileSync(f, 'utf8').split('\n').forEach((l, i) => {
+    if (/^\s*```/.test(l)) { enBloque = !enBloque && /^\s*```s?css\b/.test(l); incorrecto = false; return; }
+    if (!enBloque) return;
+    if (/❌|✗/.test(l)) incorrecto = true;
+    else if (/✅|✓/.test(l)) incorrecto = false;
+    if (!incorrecto && LITERAL.test(l.replace(/\/\/.*$/, ''))) {
+      errores.push(`${path.relative(ROOT, f).replace(/\\/g, '/')}:${i + 1} la guía enseña un breakpoint literal: usa breakpoint(sm|md|lg|xl|xxl) o bp.$token-breakpoint-*, o márcalo ❌`);
+    }
+  });
+}
+
 // 3 · El mapa con nombre
 const mixin = fs.readFileSync(MIXIN, 'utf8');
 const mapa = /\$syx-breakpoints:\s*\(([\s\S]*?)\)\s*!default/.exec(mixin);
@@ -74,4 +101,4 @@ if (errores.length) {
   console.error(`❌ check:breakpoints — ${errores.length} problema(s):\n${errores.map((e) => `   · ${e}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`✓ check:breakpoints — ${consultas} media queries en css/, todas en la escala ${[...escala].join(' · ')}`);
+console.log(`✓ check:breakpoints — ${consultas} media queries en css/, todas en la escala ${[...escala].join(' · ')}; ${guias} guías sin literales`);

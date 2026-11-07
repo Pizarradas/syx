@@ -229,11 +229,14 @@ Always use named breakpoints from `$syx-breakpoints`:
 @include breakpoint(tablet) { … }
 @include breakpoint(desktop) { … }
 
-// ✅ Also OK for one-off values — always use em, never px
-@include min-screen(48em) { … }   // 768px
-@include min-screen(64em) { … }   // 1024px
-@include min-screen(80em) { … }   // 1280px
-@include min-screen(90em) { … }   // 1440px
+// ✅ Scale aliases — the only widths check:breakpoints accepts
+@include breakpoint(md) { … }    // 48em · 768px
+@include breakpoint(lg) { … }    // 64em · 1024px
+@include breakpoint(xl) { … }    // 80em · 1280px
+@include breakpoint(xxl) { … }   // 90em · 1440px
+
+// ❌ Wrong — a literal width, even in em (outside the token scale)
+@include min-screen(48em) { … }
 
 // ❌ Wrong — raw @media
 @media (min-width: 768px) { … }

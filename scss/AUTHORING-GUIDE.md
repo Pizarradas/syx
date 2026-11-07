@@ -486,9 +486,10 @@ The most important behavioral mixin. It **automatically adds the `prefers-reduce
 @include breakpoint(desktop) { … }  // min-width: 80em (1280px), = xl
 @include breakpoint(wide)    { … }  // min-width: 90em (1440px)
 
-// Custom values — always em, never px (zoom-safe)
-@include min-screen(48em)  { … }  // 768px equivalent
-@include max-screen(49.9em){ … }  // mobile-only upper bound
+// Scale aliases: sm 37.5em · md 48em · lg 64em · xl 80em · xxl 90em
+@include breakpoint(md)    { … }  // min-width: 48em (768px)
+// No one-off values: check:breakpoints rejects any width outside the scale.
+// A component that needs its own threshold wants a container query instead.
 
 // Special
 @include darkmode { … }           // prefers-color-scheme: dark
