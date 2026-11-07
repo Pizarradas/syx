@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Registro de métricas por versión** (F1-08): `npm run build:metricas` escribe `metrics/<versión>.json` (tamaño del paquete, gzip de cada hoja de `dist/`, bytes de fuentes por tema, avisos del escáner sobre la plantilla, pasos de `check` y casos de mutación) e imprime la diferencia con la versión anterior. La release lo comprueba (`check:metricas`) y lo adjunta. La línea base es `metrics/5.1.0.json`, medida sobre la 5.1.0 publicada. No mide el tiempo de CI.
 - **`syx-tintas-respaldo`**, comando del paquete: genera el parcial de respaldo de un tema propio desde su hoja compilada (`npx syx-tintas-respaldo css/mi-tema.css scss/themes/mi-tema/_tintas-respaldo.scss`). La plantilla trae el parcial vacío y ya lo incluye.
 - **`check:contraste` mide dos ramas**, con y sin color relativo: un token que sin él siga siendo una expresión relativa sale «sin medir» y no aprueba. **`check:tintas-respaldo`** falla si un parcial está desfasado o si aparece un token relativo sin respaldo. `check:plantilla` genera el respaldo de la plantilla con el comando, como haría quien crea un tema, antes de medirla.
 - **`THIRD_PARTY_NOTICES.md`**, que viaja en el paquete: las seis familias tipográficas (OFL 1.1), los iconos de Lucide incrustados en cada hoja (ISC; MIT los derivados de Feather), y GSAP y awesome-design-md, que solo usa el sitio.
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **`salud-css.json`**: métricas del benchmark externo, que vive fuera del repositorio.
 - **`site.webmanifest` y `browserconfig.xml`**: ninguna página los enlazaba y sus iconos no existían.
 
 ### Security

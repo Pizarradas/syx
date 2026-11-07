@@ -114,6 +114,8 @@
     "check:prepros": "node scripts/check-prepros.js",
     "check:pages": "node scripts/check-pages.js",
     "check:raiz": "node scripts/check-raiz.js",
+    "build:metricas": "npm run build:dist && node scripts/build-metricas.js",
+    "check:metricas": "node scripts/build-metricas.js --check",
     "check:acciones": "node scripts/check-acciones.js",
     "check:version": "node scripts/check-version.js",
     "build:tokens": "node scripts/build-token-snapshot.js",
