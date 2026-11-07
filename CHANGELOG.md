@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Fuente raíz en %** (F0-09): `--reset-html-font` fijaba el tamaño en px (de 13 a 18 según el tema) y el interlineado a veces en px. Con el navegador en 20 px, el rem seguía en 16 y nada crecía. Ahora va en % (100 % = la preferencia del navegador; a 16 px se ve igual que antes) y el interlineado, sin unidad. `check:raiz` lo vigila, con su caso de mutación.
 - **Contraste en navegadores sin color relativo** (F0-08): Chrome y Edge 111–118, Firefox 121–127 y Safari 16.2–16.3, que el browserslist declara soportados, pintaban las tintas de marca y de estado, las variantes fuertes y los colores de código con el relleno de marca: hasta 49 pares por debajo de AA en un tema. Cada tema lleva ahora `_tintas-respaldo.scss`, generado desde su hoja compilada, con esos valores como literal dentro de `@supports not (…)`. El browserslist no cambia.
 - **Theme Builder**: tres interruptores (*Fluid Typography*, *Extended Color Palette* y *Disable Legacy Bridge*) se anunciaban sin nombre: su `aria-labelledby` apuntaba al deslizador vacío del interruptor anterior. Ahora apuntan a su título.
 
@@ -37,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Publicación en tres trabajos** (F0-05): `construir` (solo lectura, sin secretos) pasa la cadena y empaqueta una vez; `release` sube ese `.tgz` con su sha256; `npm` no hace checkout ni `npm ci`, se autentica con Trusted Publishing (OIDC, sin `NPM_TOKEN`) y publica el `.tgz` de la release con `--ignore-scripts`. Antes un solo trabajo tenía a la vez `contents: write`, `id-token` y el token después de instalar las devDependencies, y `npm publish` volvía a empaquetar.
 - **Actions fijadas por SHA** en los cinco workflows, con su versión en un comentario, y **Dependabot** para `github-actions` (F0-06). La CLI de Claude Code de `evals.yml` va con versión fija.
 - **`check:acciones`** lo vigila, con dos casos de mutación.
+- **Quién aprueba** (F0-10): `aprobado-humano` solo cuenta si la puso, la última vez, una cuenta de persona con permiso *maintain* o *admin*. Una etiqueta puesta por un bot, una app o una cuenta de solo escritura se ignora y la PR queda sin aprobar. No se exige que sea distinta del autor: SYX tiene un solo mantenedor. `check:acciones` lo vigila.
 
 ## [5.1.0] — 2026-11-06
 

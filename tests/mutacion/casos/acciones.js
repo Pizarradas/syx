@@ -28,4 +28,12 @@ module.exports = [
       '      - name: Descargar de la release el .tgz que se va a publicar',
       '      - run: npm ci\n\n      - name: Descargar de la release el .tgz que se va a publicar'),
   },
+  {
+    id: 'aprobacion-de-cualquiera',
+    regresion: 'confianza.yml vuelve a aceptar la etiqueta la ponga quien la ponga',
+    guardian: 'check:acciones',
+    comando: ACCIONES,
+    espera: /confianza\.yml: no comprueba que `aprobado-humano` la pusiera una persona/,
+    mutar: (t) => t.reemplazar('.github/workflows/confianza.yml', '[ "$TIPO" = "User" ] && ', ''),
+  },
 ];

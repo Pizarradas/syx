@@ -14,6 +14,8 @@
  *      npm no hace checkout ni `npm ci` (ninguna devDependency se ejecuta con
  *      permiso de publicar), no usa token guardado (OIDC) y publica el .tgz
  *      de la release con --ignore-scripts.
+ *   5. confianza.yml: `aprobado-humano` solo cuenta si la puso una persona
+ *      (type User) con permiso maintain o admin (auditoría 2026-11, F0-10).
  *
  * Uso: node scripts/check-acciones.js   ·   npm run check:acciones
  */
@@ -70,6 +72,14 @@ else {
     if (!/--ignore-scripts/.test(pub[1])) errores.push('release.yml: `npm publish` sin --ignore-scripts');
   }
   if (!/sha256sum -c/.test(npm)) errores.push('release.yml: el trabajo `npm` no comprueba el sha256 del .tgz');
+}
+
+// ─── confianza.yml ───────────────────────────────────────────────────────────
+const confianza = fs.readFileSync(path.join(WF, 'confianza.yml'), 'utf8');
+if (!/select\(\.event == "labeled" and \.label\.name == "aprobado-humano"\)/.test(confianza)
+  || !/collaborators\/\$LOGIN\/permission/.test(confianza)
+  || !/"\$TIPO" = "User"/.test(confianza)) {
+  errores.push('confianza.yml: no comprueba que `aprobado-humano` la pusiera una persona con permiso maintain o admin');
 }
 
 if (errores.length) {
