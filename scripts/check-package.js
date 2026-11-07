@@ -109,6 +109,21 @@ for (const [nombre, destino] of Object.entries(pkg.bin || {})) {
   if (!primera.startsWith('#!')) errores.push(`bin["${nombre}"] → ${destino} sin shebang: no arrancaría`);
 }
 
+// ─── 2b. Lo que es de otros viaja con su licencia ─────────────────────────────
+// Hasta la 5.1, Space Grotesk y Syne viajaban sin su OFL y el paquete no decía
+// en ningún sitio que llevaba iconos de Lucide incrustados en cada hoja. La OFL
+// exige que la licencia acompañe a la fuente; la ISC, que el aviso acompañe a
+// las copias. Cada carpeta de fuentes que viaja lleva su LICENSE y el aviso de
+// terceros viaja con el paquete.
+
+if (!viaja('THIRD_PARTY_NOTICES.md')) errores.push('THIRD_PARTY_NOTICES.md no viaja en el paquete');
+const carpetasDeFuentes = new Set(
+  [...dentro].filter((f) => f.startsWith('fonts/')).map((f) => f.split('/').slice(0, 2).join('/'))
+);
+for (const carpeta of carpetasDeFuentes) {
+  if (!viaja(`${carpeta}/LICENSE`)) errores.push(`${carpeta}/ viaja sin su LICENSE`);
+}
+
 // ─── 3. El CSS que viaja no apunta a nada que se quede fuera ─────────────────
 // Es la comprobación que más valor da: las url() de las fuentes son relativas y
 // nadie las mira nunca. Se distingue entre «está en el repositorio pero no

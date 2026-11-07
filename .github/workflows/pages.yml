@@ -92,7 +92,7 @@ jobs:
       - name: Montar el sitio
         run: |
           mkdir -p _site/storybook
-          cp *.html robots.txt site.webmanifest browserconfig.xml _site/
+          cp *.html robots.txt sitemap.xml _site/
           # Solo lo versionado: dist/ es del paquete npm y no existe en un clon
           # (check-pages comprueba que cada ruta de esta copia está en git).
           cp -r css js fonts img assets _site/
