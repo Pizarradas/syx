@@ -7,6 +7,7 @@
 // ================================================
 
 @use '../../abstracts/index' as *;
+@use 'tintas-respaldo' as *; // GENERADO: scripts/build-tintas-respaldo.js
 
 @mixin theme-example-03 {
   :root {
@@ -247,6 +248,9 @@
       --semantic-shadow-lg: var(--primitive-shadow-lg);
     }
   }
+  // Navegadores del browserslist sin color relativo: las tintas como literal.
+  // Va al final para ganar, a igual especificidad, a lo declarado arriba.
+  @include tintas-respaldo;
 }
 
 // FONTS — single source of truth: setup and every bundle-*.scss

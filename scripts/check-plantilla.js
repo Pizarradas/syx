@@ -20,7 +20,9 @@
  *                      sitio). Sobre ella:
  *       · check:themes --strict     las dos entradas al modo oscuro
  *       · check:modo-claro          elegir modo no depende del SO
- *       · check:contraste           WCAG 2.2 AA en los cuatro estados
+ *       · check:contraste           WCAG 2.2 AA en los cuatro estados, con y
+ *         sin color relativo, después de generar sus tintas de respaldo con
+ *         `syx-tintas-respaldo`, como haría quien crea el tema
  *       · cada declaración de la plantilla la lee el sistema (sin la
  *         excepción de API de check:consumidores: la plantilla es el
  *         contrato MÍNIMO, y una línea que solo sirve a una aplicación
@@ -95,9 +97,18 @@ const comprobar = (nombre, fn) => casos.push({ nombre, fn });
 let cssTema = null;
 
 comprobar('la plantilla compila como un tema', () => {
-  const r = sass.compile(path.join(tmp, 'scss', `styles-theme-${TEMA}.scss`), { style: 'expanded', loadPaths: [path.join(tmp, 'scss')] });
-  cssTema = r.css;
-  fs.writeFileSync(path.join(tmp, 'css', `styles-theme-${TEMA}.css`), cssTema);
+  const compilar = () => sass.compile(path.join(tmp, 'scss', `styles-theme-${TEMA}.scss`), { style: 'expanded', loadPaths: [path.join(tmp, 'scss')] }).css;
+  const hoja = path.join(tmp, 'css', `styles-theme-${TEMA}.css`);
+  fs.writeFileSync(hoja, compilar());
+  // Lo que hace quien crea un tema: generar las tintas de respaldo con el
+  // comando del paquete y volver a compilar. Sin esto, en un navegador del
+  // browserslist sin color relativo el tema no llega a AA (check:contraste lo
+  // mide en esa rama).
+  const parcial = path.join(tmp, 'scss', 'themes', TEMA, '_tintas-respaldo.scss');
+  const g = spawnSync(process.execPath, [path.join(tmp, 'scripts', 'build-tintas-respaldo.js'), hoja, parcial], { cwd: tmp, encoding: 'utf8' });
+  if (g.status !== 0) throw new Error(`syx-tintas-respaldo falla: ${(g.stderr || g.stdout).trim()}`);
+  cssTema = compilar();
+  fs.writeFileSync(hoja, cssTema);
   const oscuros = (cssTema.match(/@media\s*\(prefers-color-scheme:\s*dark\)/g) || []).length;
   if (!oscuros) throw new Error('0 bloques prefers-color-scheme: la plantilla no trae modo oscuro');
   return `${(cssTema.length / 1024).toFixed(0)} KB · ${oscuros} bloque(s) de oscuro automático`;
@@ -163,7 +174,9 @@ comprobar('cada declaración de la plantilla la lee el sistema', () => {
   if (!cssTema) throw new Error('no compiló');
   // Sin páginas ni excepción de API: el contrato mínimo se mide contra el
   // sistema solo (ver la cabecera).
-  const r = revisarTema({ root: tmp, dirTema: path.join(tmp, 'scss', 'themes', TEMA), css: cssTema, externos: new Set(), api: new Set() });
+  // _tintas-respaldo.scss es derivado (syx-tintas-respaldo): repite tokens que
+  // declara el sistema, no líneas del contrato de la plantilla.
+  const r = revisarTema({ root: tmp, dirTema: path.join(tmp, 'scss', 'themes', TEMA), css: cssTema, externos: new Set(), api: new Set(), excluir: ['_tintas-respaldo.scss'] });
   if (r.sinConsumidor.length) {
     throw new Error(`${r.sinConsumidor.length} sin lector: ${r.sinConsumidor.map((x) => `${x.token} (${x.file.replace(TEMA, '_template')}:${x.line})`).join(', ')}`);
   }

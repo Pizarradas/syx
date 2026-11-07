@@ -1,0 +1,116 @@
+// ════════════════════════════════════════════════════════════════
+// GENERADO por scripts/build-tintas-respaldo.js — no editar a mano.
+// Regenerar: npm run build:css · comprobar: npm run check:tintas-respaldo
+// ════════════════════════════════════════════════════════════════
+// Tema example-06: lo que pinta un navegador con color relativo, escrito como
+// literal para los que no lo tienen. Ver la cabecera del script.
+
+@mixin tintas-respaldo {
+  @supports not (color: oklch(from red l c h)) {
+    // sin elegir, SO claro
+    :root {
+      --semantic-color-primary-text: oklch(0.45 0.15 190);
+      --semantic-color-secondary-text: oklch(0.45 0.25 300);
+      --semantic-color-tertiary-text: oklch(0.45 0.05 190);
+      --semantic-color-quaternary-text: oklch(0.45 0.13 190);
+      --semantic-color-quinary-text: oklch(0.45 0.20 300);
+      --semantic-color-state-success-text: oklch(0.45 0.15 150);
+      --semantic-color-state-error-text: oklch(0.45 0.20 25);
+      --semantic-color-state-warning-text: oklch(0.45 0.16 80);
+      --semantic-color-state-info-text: oklch(0.45 0.275 270.486);
+      --semantic-color-code-tag: oklch(0.82 0.15 190);
+      --semantic-color-code-attr: oklch(0.82 0.25 300);
+      --semantic-color-code-val: oklch(0.82 0.05 190);
+      --semantic-color-code-fn: oklch(0.82 0.13 190);
+      --semantic-color-code-inline-fg: oklch(0.45 0.205 22.32);
+    }
+
+    // sin elegir, SO oscuro
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --semantic-color-primary-text: oklch(0.8 0.15 190);
+        --semantic-color-secondary-text: oklch(0.8 0.25 300);
+        --semantic-color-tertiary-text: oklch(0.8 0.05 190);
+        --semantic-color-quaternary-text: oklch(0.8 0.13 190);
+        --semantic-color-quinary-text: oklch(0.8 0.20 300);
+        --semantic-color-state-success-text: oklch(0.8 0.15 150);
+        --semantic-color-state-error-text: oklch(0.8 0.20 25);
+        --semantic-color-state-warning-text: oklch(0.8 0.16 80);
+        --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+        --semantic-color-code-tag: oklch(0.82 0.15 190);
+        --semantic-color-code-attr: oklch(0.82 0.25 300);
+        --semantic-color-code-val: oklch(0.82 0.05 190);
+        --semantic-color-code-fn: oklch(0.82 0.13 190);
+        --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+      }
+    }
+
+    // claro elegido
+    :root[data-theme="light"] {
+      --semantic-color-primary-text: oklch(0.45 0.15 190);
+      --semantic-color-secondary-text: oklch(0.45 0.25 300);
+      --semantic-color-tertiary-text: oklch(0.45 0.05 190);
+      --semantic-color-quaternary-text: oklch(0.45 0.13 190);
+      --semantic-color-quinary-text: oklch(0.45 0.20 300);
+      --semantic-color-state-success-text: oklch(0.45 0.15 150);
+      --semantic-color-state-error-text: oklch(0.45 0.20 25);
+      --semantic-color-state-warning-text: oklch(0.45 0.16 80);
+      --semantic-color-state-info-text: oklch(0.45 0.275 270.486);
+      --semantic-color-code-tag: oklch(0.82 0.15 190);
+      --semantic-color-code-attr: oklch(0.82 0.25 300);
+      --semantic-color-code-val: oklch(0.82 0.05 190);
+      --semantic-color-code-fn: oklch(0.82 0.13 190);
+      --semantic-color-code-inline-fg: oklch(0.45 0.205 22.32);
+    }
+
+    // oscuro elegido
+    :root[data-theme="dark"] {
+      --semantic-color-primary-text: oklch(0.8 0.15 190);
+      --semantic-color-secondary-text: oklch(0.8 0.25 300);
+      --semantic-color-tertiary-text: oklch(0.8 0.05 190);
+      --semantic-color-quaternary-text: oklch(0.8 0.13 190);
+      --semantic-color-quinary-text: oklch(0.8 0.20 300);
+      --semantic-color-state-success-text: oklch(0.8 0.15 150);
+      --semantic-color-state-error-text: oklch(0.8 0.20 25);
+      --semantic-color-state-warning-text: oklch(0.8 0.16 80);
+      --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+      --semantic-color-code-tag: oklch(0.82 0.15 190);
+      --semantic-color-code-attr: oklch(0.82 0.25 300);
+      --semantic-color-code-val: oklch(0.82 0.05 190);
+      --semantic-color-code-fn: oklch(0.82 0.13 190);
+      --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+    }
+  }
+
+  @supports not (color: oklch(from red clamp(0, l, 1) c h)) {
+    // sin elegir, SO claro
+    :root {
+      --semantic-color-primary-strong: oklch(0.57 0.15 190);
+      --semantic-color-state-success-strong: oklch(0.57 0.15 150);
+      --semantic-color-secondary-strong: oklch(0.57 0.25 300);
+    }
+
+    // sin elegir, SO oscuro
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --semantic-color-primary-strong: oklch(0.75 0.15 190);
+        --semantic-color-state-success-strong: oklch(0.7 0.15 150);
+        --semantic-color-secondary-strong: oklch(0.68 0.25 300);
+      }
+    }
+
+    // claro elegido
+    :root[data-theme="light"] {
+      --semantic-color-primary-strong: oklch(0.57 0.15 190);
+      --semantic-color-state-success-strong: oklch(0.57 0.15 150);
+      --semantic-color-secondary-strong: oklch(0.57 0.25 300);
+    }
+
+    // oscuro elegido
+    :root[data-theme="dark"] {
+      --semantic-color-primary-strong: oklch(0.75 0.15 190);
+      --semantic-color-state-success-strong: oklch(0.7 0.15 150);
+      --semantic-color-secondary-strong: oklch(0.68 0.25 300);
+    }
+  }
+}

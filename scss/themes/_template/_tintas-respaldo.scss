@@ -1,0 +1,18 @@
+// ════════════════════════════════════════════════════════════════
+// TINTAS DE RESPALDO — vacío hasta que lo generes
+// ════════════════════════════════════════════════════════════════
+// Las tintas de texto (`--semantic-color-*-text`), las variantes fuertes
+// (`*-strong`) y los colores de código se derivan de tus colores de marca con
+// sintaxis de color relativa. Los navegadores del browserslist de SYX que no la
+// tienen (Chrome y Edge 111–118, Firefox 121–127, Safari 16.2–16.3) pintan, en
+// su lugar, el relleno de marca, que como texto no llega a 4,5:1.
+//
+// Este parcial les da el valor ya calculado. Cada vez que cambies un color de
+// marca o de estado del tema, compila la hoja y ejecuta:
+//
+//   npx syx-tintas-respaldo css/<tu-hoja>.css scss/themes/<tu-tema>/_tintas-respaldo.scss
+//
+// y vuelve a compilar. `--check` al final lo comprueba sin escribir (para la CI).
+
+@mixin tintas-respaldo {
+}

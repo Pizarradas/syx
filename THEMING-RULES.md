@@ -88,7 +88,7 @@ A brand colour does four different jobs and each has its own token. The **fill**
 
 Whatever is not declared stays at `--semantic-color-text-inverse`, the previous behaviour. Hover fills are a different colour and may need the other ink (in light mode, one step darker usually needs the light one): that is why they have their own `on-state-hover-*`. In dark mode, `dark-mode-tokens()` points each hover to its base fill, and its ink along with it.
 
-**The ink and the strong variant derive themselves** with relative syntax inside `@supports`; where it is not available, they fall back to the fill (the previous behaviour). A theme that is already dark in its base mode raises `--semantic-brand-text-lightness` to 0.80 and both derivations follow it. A strong variant that falls inside the band comes out identical to the fill: only the themes that fell short change.
+**The ink and the strong variant derive themselves** with relative syntax inside `@supports`. Browsers in the browserslist that lack it (Chrome and Edge 111–118, Firefox 121–127, Safari 16.2–16.3) get the same values as literals from the theme's `_tintas-respaldo.scss`, inside `@supports not (…)`: it is generated from the compiled sheet (`npm run build:css` inside SYX; `npx syx-tintas-respaldo <sheet.css> <partial.scss>` in an app) and `check:contraste` measures both branches. The fallback is static: if a page changes a brand colour at runtime, the ink follows it only where relative syntax exists. A theme that is already dark in its base mode raises `--semantic-brand-text-lightness` to 0.80 and both derivations follow it. A strong variant that falls inside the band comes out identical to the fill: only the themes that fell short change.
 
 The pairs live in `contracts/contrast.json` (text on each fill and its hover, filled buttons, table header, active page, selection, link, placeholder, code syntax, focus ring, checked controls, switch, tab). A new theme is not finished until `npm run check:contraste` passes green.
 
@@ -154,7 +154,7 @@ What went away were legacy aliases and declarations without a reader. The exampl
 
 1. Copy `scss/themes/_template/` and replace `template` with the name (see its README).
 2. Change the values marked with ✎: brand, text, shape, typography.
-3. Create `scss/styles-theme-<tema>.scss`, compile (`npm run build`) and run `npm run check` until it is green: `check:contraste` will tell you which `on-*` ink to declare on each fill, and `check:consumidores` which declarations nobody reads.
+3. Create `scss/styles-theme-<tema>.scss`, compile (`npm run build`: it also writes the theme's `_tintas-respaldo.scss`) and run `npm run check` until it is green: `check:contraste` will tell you which `on-*` ink to declare on each fill, and `check:consumidores` which declarations nobody reads.
 
 ---
 

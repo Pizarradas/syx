@@ -88,6 +88,7 @@ theme by hand, regenerate the ones whose guard fails.
 | Artifact | Regenerate with | Guard |
 | --- | --- | --- |
 | `css/styles-theme-<theme>.css` | `npm run build:css` | `check:compilado`, `check:themes`, `check:contraste`… |
+| `scss/themes/<theme>/_tintas-respaldo.scss` (the brand inks as literals for browsers without relative colour syntax) | `npm run build:css` inside SYX; `npx syx-tintas-respaldo <sheet.css> <partial.scss>` in an app, then compile again | `check:tintas-respaldo`, `check:contraste` |
 | `contracts/resolved-tokens.json` | `npm run build:css` (runs `build:tokens`) | `check:tokens` |
 | `tokens.json` | `npm run build:css` (runs `build:tokens-json`) | `check:tokens-json` |
 | `contracts/token-contract.json`, `contracts/lint-contract.json`, `contracts/token-usage-map.json`, `contracts/runtime-tokens.json`, `contracts/validation-report.md` | `npm run validate:report` | none: `npm run check` rewrites them |

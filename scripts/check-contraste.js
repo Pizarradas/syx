@@ -26,6 +26,11 @@
  * del par, o --semantic-color-bg-primary si no lo dice. Sin superficie opaca
  * debajo, el par sale «sin medir».
  *
+ * Mide dos ramas: la del navegador moderno, con color relativo, y la de un
+ * navegador del browserslist que no lo tiene, donde solo valen los respaldos
+ * de scripts/build-tintas-respaldo.js. Un token que en esa rama siga siendo
+ * una expresión relativa no pinta: sale «sin medir» y no aprueba.
+ *
  * Uso: node scripts/check-contraste.js [--json]
  * ----------------------------------------------------------------------------
  */
@@ -40,6 +45,7 @@ const CSS_DIR = path.join(ROOT, 'css');
 const CONTRATO = JSON.parse(fs.readFileSync(path.join(ROOT, 'contracts', 'contrast.json'), 'utf8'));
 // Superficie sobre la que se compone un fondo translúcido si el par no dice otra.
 const SUPERFICIE = '--semantic-color-bg-primary';
+const RAMAS = [['moderna', ''], ['sin-relativo', ' · sin color relativo']];
 const ESTADOS = [
   ['claro', 'none', 'light'],
   ['oscuro', 'none', 'dark'],
@@ -73,16 +79,21 @@ function main() {
   let medidas = 0;
   for (const f of ficheros) {
     const tema = f.replace(/^styles-theme-|\.css$/g, '');
-    const decls = declaraciones(fs.readFileSync(path.join(CSS_DIR, f), 'utf8'));
-    for (const [nombre, eleccion, so] of ESTADOS) {
-      const vars = estado(decls, eleccion, so);
-      for (const par of CONTRATO.pares) {
-        const fg = resolver(vars, vars[par.primerPlano]), bg = resolver(vars, vars[par.fondo]);
-        const base = resolver(vars, vars[par.sobre || SUPERFICIE]);
-        const r = contraste(fg, bg, base);
-        medidas++;
-        if (r === null) sinMedir.push({ tema, estado: nombre, par: par.id, fg, bg });
-        else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio, sugerencia: sugerir(vars, par, bg, base) });
+    const css = fs.readFileSync(path.join(CSS_DIR, f), 'utf8');
+    for (const [rama, etiqueta] of RAMAS) {
+      const decls = declaraciones(css, rama);
+      for (const [nombreEstado, eleccion, so] of ESTADOS) {
+        const nombre = nombreEstado + etiqueta;
+        const vars = estado(decls, eleccion, so);
+        for (const par of CONTRATO.pares) {
+          const fg = resolver(vars, vars[par.primerPlano]), bg = resolver(vars, vars[par.fondo]);
+          const base = resolver(vars, vars[par.sobre || SUPERFICIE]);
+          // Sin color relativo, una expresión `from` no es un color: no pinta.
+          const r = rama === 'sin-relativo' && /\bfrom\b/.test(fg + bg + base) ? null : contraste(fg, bg, base);
+          medidas++;
+          if (r === null) sinMedir.push({ tema, estado: nombre, par: par.id, fg, bg });
+          else if (r < par.minimo) fallos.push({ tema, estado: nombre, par: par.id, ratio: +r.toFixed(2), minimo: par.minimo, criterio: par.criterio, sugerencia: sugerir(vars, par, bg, base) });
+        }
       }
     }
   }
@@ -91,11 +102,11 @@ function main() {
   } else {
     console.log('\n── CONTRASTE WCAG 2.2 AA ' + '─'.repeat(39) + '\n');
     for (const x of fallos) {
-      console.log(`❌ ${x.tema.padEnd(11)} ${x.estado.padEnd(15)} ${x.par.padEnd(34)} ${x.ratio.toFixed(2)}:1 < ${x.minimo}:1 (${x.criterio})`);
+      console.log(`❌ ${x.tema.padEnd(11)} ${x.estado.padEnd(36)} ${x.par.padEnd(34)} ${x.ratio.toFixed(2)}:1 < ${x.minimo}:1 (${x.criterio})`);
       if (x.sugerencia) console.log(`   ${' '.repeat(28)}→ en el tema: ${x.sugerencia}`);
     }
-    for (const x of sinMedir) console.log(`⚠️  ${x.tema.padEnd(11)} ${x.estado.padEnd(15)} ${x.par.padEnd(34)} sin medir: ${x.fg || '(vacío)'} / ${x.bg || '(vacío)'}`);
-    if (!fallos.length && !sinMedir.length) console.log(`✅ ${CONTRATO.pares.length} pares × ${ficheros.length} temas × ${ESTADOS.length} estados — todo cumple`);
+    for (const x of sinMedir) console.log(`⚠️  ${x.tema.padEnd(11)} ${x.estado.padEnd(36)} ${x.par.padEnd(34)} sin medir: ${x.fg || '(vacío)'} / ${x.bg || '(vacío)'}`);
+    if (!fallos.length && !sinMedir.length) console.log(`✅ ${CONTRATO.pares.length} pares × ${ficheros.length} temas × ${ESTADOS.length} estados × ${RAMAS.length} ramas — todo cumple`);
     console.log(`\n   ${medidas} medidas · ${fallos.length} por debajo del mínimo · ${sinMedir.length} sin medir\n`);
   }
   process.exitCode = fallos.length || sinMedir.length ? 1 : 0;

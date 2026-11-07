@@ -1524,6 +1524,98 @@
   }
 }
 
+@supports not (color: oklch(from red l c h)) {
+  :root {
+    --semantic-color-primary-text: oklch(0.45 0.241 6.902);
+    --semantic-color-secondary-text: oklch(0.45 0.241 6.902);
+    --semantic-color-tertiary-text: oklch(0.45 0.247 293.009);
+    --semantic-color-quaternary-text: oklch(0.45 0.149 162.48);
+    --semantic-color-quinary-text: oklch(0.45 0.165 70.08);
+    --semantic-color-state-success-text: oklch(0.45 0.149 162.48);
+    --semantic-color-state-error-text: oklch(0.45 0.185 23.046);
+    --semantic-color-state-warning-text: oklch(0.45 0.165 70.08);
+    --semantic-color-state-info-text: oklch(0.45 0.247 293.009);
+    --semantic-color-code-tag: oklch(0.82 0.241 6.902);
+    --semantic-color-code-attr: oklch(0.82 0.241 6.902);
+    --semantic-color-code-val: oklch(0.82 0.247 293.009);
+    --semantic-color-code-fn: oklch(0.82 0.149 162.48);
+    --semantic-color-code-inline-fg: oklch(0.45 0.205 22.32);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme=light]) {
+      --semantic-color-primary-text: oklch(0.8 0.241 6.902);
+      --semantic-color-secondary-text: oklch(0.8 0.241 6.902);
+      --semantic-color-tertiary-text: oklch(0.8 0.247 293.009);
+      --semantic-color-quaternary-text: oklch(0.8 0.149 162.48);
+      --semantic-color-quinary-text: oklch(0.8 0.165 70.08);
+      --semantic-color-state-success-text: oklch(0.8 0.149 162.48);
+      --semantic-color-state-error-text: oklch(0.8 0.185 23.046);
+      --semantic-color-state-warning-text: oklch(0.8 0.165 70.08);
+      --semantic-color-state-info-text: oklch(0.8 0.247 293.009);
+      --semantic-color-code-tag: oklch(0.82 0.241 6.902);
+      --semantic-color-code-attr: oklch(0.82 0.241 6.902);
+      --semantic-color-code-val: oklch(0.82 0.247 293.009);
+      --semantic-color-code-fn: oklch(0.82 0.149 162.48);
+      --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+    }
+  }
+  :root[data-theme=light] {
+    --semantic-color-primary-text: oklch(0.45 0.241 6.902);
+    --semantic-color-secondary-text: oklch(0.45 0.241 6.902);
+    --semantic-color-tertiary-text: oklch(0.45 0.247 293.009);
+    --semantic-color-quaternary-text: oklch(0.45 0.149 162.48);
+    --semantic-color-quinary-text: oklch(0.45 0.165 70.08);
+    --semantic-color-state-success-text: oklch(0.45 0.149 162.48);
+    --semantic-color-state-error-text: oklch(0.45 0.185 23.046);
+    --semantic-color-state-warning-text: oklch(0.45 0.165 70.08);
+    --semantic-color-state-info-text: oklch(0.45 0.247 293.009);
+    --semantic-color-code-tag: oklch(0.82 0.241 6.902);
+    --semantic-color-code-attr: oklch(0.82 0.241 6.902);
+    --semantic-color-code-val: oklch(0.82 0.247 293.009);
+    --semantic-color-code-fn: oklch(0.82 0.149 162.48);
+    --semantic-color-code-inline-fg: oklch(0.45 0.205 22.32);
+  }
+  :root[data-theme=dark] {
+    --semantic-color-primary-text: oklch(0.8 0.241 6.902);
+    --semantic-color-secondary-text: oklch(0.8 0.241 6.902);
+    --semantic-color-tertiary-text: oklch(0.8 0.247 293.009);
+    --semantic-color-quaternary-text: oklch(0.8 0.149 162.48);
+    --semantic-color-quinary-text: oklch(0.8 0.165 70.08);
+    --semantic-color-state-success-text: oklch(0.8 0.149 162.48);
+    --semantic-color-state-error-text: oklch(0.8 0.185 23.046);
+    --semantic-color-state-warning-text: oklch(0.8 0.165 70.08);
+    --semantic-color-state-info-text: oklch(0.8 0.247 293.009);
+    --semantic-color-code-tag: oklch(0.82 0.241 6.902);
+    --semantic-color-code-attr: oklch(0.82 0.241 6.902);
+    --semantic-color-code-val: oklch(0.82 0.247 293.009);
+    --semantic-color-code-fn: oklch(0.82 0.149 162.48);
+    --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+  }
+}
+@supports not (color: oklch(from red clamp(0, l, 1) c h)) {
+  :root {
+    --semantic-color-primary-strong: oklch(0.57 0.241 6.902);
+    --semantic-color-state-success-strong: oklch(0.57 0.149 162.48);
+    --semantic-color-secondary-strong: oklch(0.57 0.241 6.902);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme=light]) {
+      --semantic-color-primary-strong: oklch(0.68 0.241 6.902);
+      --semantic-color-state-success-strong: oklch(0.68 0.149 162.48);
+      --semantic-color-secondary-strong: oklch(0.68 0.241 6.902);
+    }
+  }
+  :root[data-theme=light] {
+    --semantic-color-primary-strong: oklch(0.57 0.241 6.902);
+    --semantic-color-state-success-strong: oklch(0.57 0.149 162.48);
+    --semantic-color-secondary-strong: oklch(0.57 0.241 6.902);
+  }
+  :root[data-theme=dark] {
+    --semantic-color-primary-strong: oklch(0.68 0.241 6.902);
+    --semantic-color-state-success-strong: oklch(0.68 0.149 162.48);
+    --semantic-color-secondary-strong: oklch(0.68 0.241 6.902);
+  }
+}
 @font-face {
   font-family: "Space Grotesk";
   src: url("../fonts/google-space-grotesk/SpaceGrotesk-Regular.woff2") format("woff2");
