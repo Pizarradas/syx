@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **La jerarquía de titulares se invertía en móvil:** por debajo de ~540 px el h3 (`2xl`, 30 px) salía más pequeño que el h4 (`xl`, 31,25 px). Los titulares usan ahora dos razones: ×1,125 en el suelo (h4 28 px, h3 31,6 px, h2 35,6 px, h1 40 px a 375 px) y ×1,25 en el techo, que no cambia. **Cambia el aspecto en móvil:** el h4 baja unos 3 px y el h3 y el h2 suben de 1,5 a 2 px. Además, `2xl`, `3xl` y `4xl` no llegaban a su máximo a 1440 px (el h2 se quedaba en 51 px de 55); ahora sí. Lo vigila `check:escala-tipo`.
 - **Opacidad en Figma:** `contracts/figma/*.figma.json` exportaba la opacidad en tanto por uno (0.5) y Figma la lee en porcentaje: una capa enlazada quedaba al 0,5 %. Ahora va en 0–100, y `check:figma` falla si vuelve.
 - **Nombres accesibles:** el enlace a GitHub de las tres páginas se anunciaba «View on GitHub» con el texto visible «GitHub»; ahora «GitHub repository». El ejemplo de `org-site-header` en docs ya no tapa el texto visible con otro nombre.
 - **`syx-scan` no enseñaba los tipos sin título:** salían en el recuento y en `--fallar-si-*`, pero no en pantalla.
