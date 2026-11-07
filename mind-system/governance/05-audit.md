@@ -25,8 +25,8 @@ Las definiciones normativas de cada contrato están en `atlas-rules/09-contratos
 | `CC-05` — Controles interactivos con JS | Verificar que botones con `cursor: pointer` tienen comportamiento JS |
 | `CT-02` — Sin hex crudos | Ya cubierto por R01+R07. En contexto Atlas verificar también en CSS inline |
 | `CA-01` — Jerarquía de headings | Mapear `<hN>` del documento y verificar secuencia |
-| `CP-01` — Publicidad en el grid | `.mol-publicidad` no usa `position: absolute/fixed` fuera del flujo |
-| `CP-02` — Publicidad etiquetada | `.mol-publicidad__label` presente en cada bloque publicitario |
+| `CP-01` — Publicidad en el grid | `.diario-publicidad` no usa `position: absolute/fixed` fuera del flujo |
+| `CP-02` — Publicidad etiquetada | `.diario-publicidad__label` presente en cada bloque publicitario |
 
 ---
 
@@ -34,9 +34,9 @@ Las definiciones normativas de cada contrato están en `atlas-rules/09-contratos
 
 Verificar que la tipografía implementada corresponde a los niveles editoriales definidos por Atlas (según `atlas-rules/10.0`):
 
-- Un único elemento N1 en la página. Solo `atom-headline--3xl` o `--xl` puede ser N1.
-- N2: máximo 4 elementos con `atom-headline--lg`.
-- Metadatos y etiquetas (N4): usan `atom-headline--xs` o body type, nunca headings de alto nivel.
+- Un único elemento N1 en la página. Solo `atom-title--h1` o `--h2` puede ser N1.
+- N2: máximo 4 elementos con `atom-title--h3`.
+- Metadatos y etiquetas (N4): usan `atom-title--h6` o body type, nunca headings de alto nivel.
 
 ---
 
@@ -55,7 +55,7 @@ Verificar que la tipografía implementada corresponde a los niveles editoriales 
 N1: [elemento encontrado — debe ser exactamente 1]
 N2: [elementos encontrados — máximo esperado: 4]
 N3: [elementos encontrados — máximo esperado: 9]
-Problemas: [si hay más de 1 N1, o si atom-headline no corresponde al nivel]
+Problemas: [si hay más de 1 N1, o si atom-title no corresponde al nivel]
 
 ## Verdict
 PASS / FAIL / PASS WITH WARNINGS
@@ -74,7 +74,7 @@ hero de apertura y grid de noticias secundarias utilizando [SYX: UX → TOKEN �
 ```
 
 1. Atlas determina: N1 = titular apertura, N2 = máx 4 noticias destacadas, N3 = grid estándar, proporción 2:1 con sidebar de datos, densidad media.
-2. UX produce HTML: `org-hero-principal` (N1), `org-grid-editorial` (N2 + sidebar), `org-zona-secundaria` (N3). `atom-headline--3xl` solo en N1.
+2. UX produce HTML: `diario-hero-principal` (N1), `diario-grid-editorial` (N2 + sidebar), `diario-zona-secundaria` (N3). `atom-title--h1` solo en N1.
 3. TOKEN verifica `10.0` y define los tokens ausentes en `scss/abstracts/tokens/` (`tokens.json` se regenera solo con `npm run build`).
 4. UI implementa SCSS con proporciones `fr`/`clamp()`, sin `nth-child` de layout. AUDIT verifica R01–R11 + contratos Atlas sobre ese mismo SCSS simultáneamente.
 

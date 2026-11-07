@@ -197,6 +197,20 @@ function main() {
     total.omitidas += salida._meta.cuentas.omitidas;
 
     if (check) {
+      // Figma lee la opacidad en porcentaje: una variable de opacidad entre 0 y 1
+      // (exclusivo el 0) dejaría la capa casi invisible al enlazarla.
+      const opacidades = [];
+      JSON.stringify(salida, (k, v) => {
+        if (v && typeof v === 'object' && v.type === 'FLOAT' && /(^|-)opacity(-|$)/.test(String(v.token || '').replace(/^--/, ''))) {
+          for (const x of Object.values(v.valuesByMode || {})) if (typeof x === 'number' && x > 0 && x <= 1) opacidades.push(`${v.token} = ${x}`);
+        }
+        return v;
+      });
+      if (opacidades.length) {
+        console.log(`❌ ${tema}: opacidad en tanto por uno, Figma la lee en %: ${opacidades.slice(0, 3).join(', ')}`);
+        fallos++;
+        continue;
+      }
       // Se compara el contenido sin la versión: subir de versión no desfasa una
       // exportación cuyos valores no han cambiado, y hacer fallar el guardián
       // por eso enseñaría a ignorarlo.

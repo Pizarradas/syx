@@ -40,22 +40,22 @@ SYX usa BEM (Block Element Modifier) con prefijos de nivel atómico. Los prefijo
 ```
 
 ```html
-<!-- Atom: botón -->
-<button class="atom-btn atom-btn--primary" type="button">
-  <span class="atom-btn__label">Guardar</span>
-  <span class="atom-btn__icon" aria-hidden="true">…</span>
+<!-- Atom: botón. atom-btn no tiene elementos: el icono es un atom-icon dentro -->
+<button class="atom-btn atom-btn--primary atom-btn--has-icon" type="button">
+  <span class="atom-icon atom-icon--lc-check" aria-hidden="true"></span>
+  Guardar
 </button>
 
-<!-- Molecule: campo de formulario -->
-<div class="mol-form-field mol-form-field--error">
-  <label class="mol-form-field__label" for="email">Email</label>
-  <input class="mol-form-field__input atom-form" type="email" id="email" />
-  <span class="mol-form-field__error" role="alert">Email no válido</span>
+<!-- Molecule: campo de formulario (componen atoms: atom-label, atom-input) -->
+<div class="mol-form-field mol-form-field--is-error">
+  <label class="atom-label" for="email">Email</label>
+  <input class="atom-input" type="email" id="email" aria-invalid="true" aria-describedby="email-msg" />
+  <span class="mol-form-field__msg" id="email-msg">Email no válido</span>
 </div>
 
 <!-- Organism: header del sitio -->
-<header class="org-site-header org-site-header--sticky">
-  <div class="org-site-header__logo">…</div>
+<header class="org-site-header">
+  <a class="org-site-header__brand" href="/">…</a>
   <nav class="org-site-header__nav">…</nav>
   <div class="org-site-header__actions">…</div>
 </header>
@@ -67,24 +67,24 @@ SYX usa BEM (Block Element Modifier) con prefijos de nivel atómico. Los prefijo
 
 **Dos guiones para elementos (`__`) y modificadores (`--`):**
 ```scss
-.atom-btn { }           // Block
-.atom-btn__label { }    // Element
-.atom-btn--primary { }  // Modifier
+.mol-card { }           // Block
+.mol-card__title { }    // Element
+.mol-card--flat { }     // Modifier
 ```
 
 **Nombres en kebab-case:**
 ```
 ✓ .mol-form-field-set
-✓ .atom-btn--icon-only
+✓ .atom-btn--has-icon
 ✗ .molFormFieldSet
-✗ .atom-btn--iconOnly
+✗ .atom-btn--hasIcon
 ```
 
 **Un nivel de elemento — sin elementos de elementos:**
 ```scss
 // ✓ Correcto
 .mol-card__header { }
-.mol-card__header-title { }   // "header title" como un concepto
+.org-site-header__burger-line { }   // "burger line" como un concepto
 
 // ✗ Incorrecto (elementos anidados)
 .mol-card__header__title { }  // No existe en BEM
@@ -93,8 +93,8 @@ SYX usa BEM (Block Element Modifier) con prefijos de nivel atómico. Los prefijo
 **Modificadores en el bloque, no en los elementos:**
 ```html
 <!-- ✓ El modificador va en el bloque -->
-<div class="mol-card mol-card--featured">
-  <h3 class="mol-card__title">…</h3>  <!-- no .mol-card__title--featured -->
+<div class="mol-card mol-card--elevated">
+  <h3 class="mol-card__title">…</h3>  <!-- ✗ no .mol-card__title--elevated -->
 </div>
 ```
 
@@ -106,8 +106,8 @@ SYX usa BEM (Block Element Modifier) con prefijos de nivel atómico. Los prefijo
 |-----------|---------|-----------|
 | Prefijo incorrecto | `.button-primary` | `.atom-btn--primary` |
 | Nombre sin prefijo | `.card` | `.mol-card` |
-| Prefijo de nivel equivocado | `.atom-card` (card es molecule) | `.mol-card` |
-| Elementos de elementos | `.mol-card__header__title` | `.mol-card__header-title` |
+| Prefijo de nivel equivocado | ❌ `.atom-card` (card es molecule) | ✓ `.mol-card` |
+| Elementos de elementos | ❌ `.mol-card__header__title` | ✓ un elemento con nombre compuesto, como `.org-site-header__burger-line` |
 | Selector de atributo para BEM | `[class*="--primary"]` | `.atom-btn--primary` |
 | camelCase | `.molCard` | `.mol-card` |
 

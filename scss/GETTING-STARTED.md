@@ -323,9 +323,9 @@ SYX provides over 40 native mixins. Always prefer them over raw CSS properties.
 @include flex-between();                     // display:flex + space-between
 
 // MEDIA QUERIES
-@include breakpoint(tablet) { … }           // min-width: 50em
-@include breakpoint(desktop) { … }          // min-width: 70em
-@include min-screen(48em) { … }          // 768px
+@include breakpoint(tablet) { … }           // min-width: 48em (= md)
+@include breakpoint(desktop) { … }          // min-width: 80em (= xl)
+@include breakpoint(md) { … }             // 48em (768px)
 @include darkmode { … }
 @include reduced-motion { … }
 

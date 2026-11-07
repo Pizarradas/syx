@@ -43,10 +43,11 @@
 
     // &--primary
     &--primary {
-      border-color: var(--component-button-primary-color);
+      border-color: var(--component-button-primary-border);
 
       // Filled variant
       &.atom-btn--filled {
+        border-color: var(--component-button-primary-filled-border);
         background-color: var(--component-button-primary-filled-bg);
         color: var(--component-button-primary-filled-color);
       }
@@ -60,10 +61,11 @@
 
     // &--secondary
     &--secondary {
-      border-color: var(--component-button-secondary-color);
+      border-color: var(--component-button-secondary-border);
 
       // Filled variant
       &.atom-btn--filled {
+        border-color: var(--component-button-secondary-filled-border);
         background-color: var(--component-button-secondary-filled-bg);
         color: var(--component-button-secondary-filled-color);
       }
@@ -77,10 +79,11 @@
 
     // &--tertiary
     &--tertiary {
-      border-color: var(--component-button-tertiary-color);
+      border-color: var(--component-button-tertiary-border);
 
       // Filled variant
       &.atom-btn--filled {
+        border-color: var(--component-button-tertiary-filled-border);
         background-color: var(--component-button-tertiary-filled-bg);
         color: var(--component-button-tertiary-filled-color);
       }
@@ -94,10 +97,11 @@
 
     // &--quaternary
     &--quaternary {
-      border-color: var(--component-button-quaternary-color);
+      border-color: var(--component-button-quaternary-border);
 
       // Filled variant
       &.atom-btn--filled {
+        border-color: var(--component-button-quaternary-filled-border);
         background-color: var(--component-button-quaternary-filled-bg);
         color: var(--component-button-quaternary-filled-color);
       }

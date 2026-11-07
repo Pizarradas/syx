@@ -28,4 +28,12 @@ module.exports = [
     mutar: (t) => t.editar('mind-system/knowledges/syx/token-system.md',
       (s) => `${s.trimEnd()}\n\nPara las superficies elevadas, usa \`--semantic-color-surface-elevada\`.\n`),
   },
+  {
+    id: 'conocimiento-clase-fantasma',
+    regresion: 'la gobernanza de ATLAS vuelve a citar atom-headline, que SYX no tiene',
+    guardian: 'check:conocimiento',
+    comando: ['node', 'scripts/check-conocimiento.js'],
+    espera: /ninguna clase de SYX citada es un fantasma[\s\S]*atom-headline--3xl/,
+    mutar: (t) => t.reemplazar('mind-system/governance/01-invocation.md', 'atom-title--h1 / --h2', 'atom-headline--3xl / --xl'),
+  },
 ];

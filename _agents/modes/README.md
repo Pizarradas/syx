@@ -6,6 +6,7 @@ Modes let you activate a specific lens when working with SYX. Instead of a gener
 
 Prefix your message with `[SYX: MODE]:` to activate a mode:
 
+<!-- syx: ejemplo-nuevo -->
 ```
 [SYX: UX]: Design a notification banner with dismiss action
 [SYX: UI]: Implement the atom-tag component with --primary and --neutral variants
@@ -21,6 +22,7 @@ honour it.
 
 In Claude Code there is a second door to the same room, `.claude/commands/syx.md`:
 
+<!-- syx: ejemplo-nuevo -->
 ```
 /syx UI implement the atom-tag component with --primary and --neutral variants
 /syx UX → TOKEN → UI + AUDIT a search field with autocomplete
@@ -151,6 +153,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 ## Typical Workflows
 
 ### Standard component workflow
+<!-- syx: ejemplo-nuevo -->
 ```
 1. [SYX: UX]: Design the search input with autocomplete dropdown
    → Defines HTML, components, states, a11y requirements
@@ -166,6 +169,7 @@ This boundary is deliberate. A UX pass and a UI pass on the same problem produce
 ```
 
 ### Idea validation workflow (low cost)
+<!-- syx: ejemplo-nuevo -->
 ```
 1. [SYX: SKETCH]: Quick layout of a card grid with filter bar
    → Instant HTML + inline styles, no file reads, single turn
@@ -210,6 +214,7 @@ identity that *cannot* skip them is telling you something — it needs vocabular
 does not have yet, and BRAND has to say which, not improvise around it.
 
 ### Creative exploration workflow
+<!-- syx: ejemplo-nuevo -->
 ```
 1. [SYX: CREATIVE]: Experimental hero section — scroll-driven parallax type
    → Self-contained HTML + CSS, advanced techniques, technique log

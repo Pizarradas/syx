@@ -131,21 +131,21 @@
 
           // &-sm — 768px → 48em
           &-sm {
-            @include min-screen(48em) {
+            @include breakpoint(md) {
               background-color: transparent;
             }
           }
 
           // &-md — 1024px → 64em
           &-md {
-            @include min-screen(64em) {
+            @include breakpoint(lg) {
               background-color: transparent;
             }
           }
 
           // &-lg — 1280px → 80em
           &-lg {
-            @include min-screen(80em) {
+            @include breakpoint(xl) {
               background-color: transparent;
             }
           }

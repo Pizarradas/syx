@@ -11,18 +11,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Una sola escala de breakpoints** (paso 2 del plan de mejora): el mapa con nombre de `breakpoint()` lee los primitivos de `tokens/primitives/_breakpoints.scss` y gana los alias `sm`, `md`, `lg`, `xl` y `xxl`. **Cambia el comportamiento:** `tablet` pasa de 50em (800 px) a 48em (768 px), como ya hacían la rejilla y las utilidades; `desktop` pasa de 70em (1120 px) a 80em (1280 px), y el Theme Builder parte la pantalla a 48em en vez de a 861 px. La rejilla, las utilidades de visualización y los helpers usan `breakpoint()` en lugar de valores a mano. `check:breakpoints` lo vigila.
+- **Trazos de marca con la variante fuerte:** el borde de check y radio al pasar el ratón, el de la paginación, el de la fila de tabla, el filete de la cita y el borde de la tarjeta destacada leen `--semantic-color-primary-strong` (3:1, WCAG 1.4.11) en lugar del relleno de marca. En los temas cuyo primario cae fuera de la franja legible, el trazo se ve algo más oscuro en claro y más claro en oscuro.
+- **El escáner distingue un tema de una aplicación:** un fichero que declara `@mixin theme-…` o usa `dark-mode-tokens()` se juzga con el contrato de THEMING-RULES (paleta propia, primitivos y literales permitidos; un `--component-*` que lee un primitivo o un color a pelo sigue siendo desviación). La plantilla pasa de 14 avisos medios y 8 bajos a ninguno, y los siete temas también. Ya no cuenta como color a pelo lo que va en un comentario o en la condición de un `@supports`, ni como token inexistente lo que declara el CSS del sistema (los iconos `--lc-icon-*`).
+- **`check:vitrina` sin reglas apagadas:** las páginas propias pasan el escáner entero. El Theme Builder usa su paleta `--builder-*` en lugar de primitivos, tiene salida para `prefers-reduced-motion` y sobrescribe el token del título en lugar de repintarlo; la barra lateral de docs pinta su propio `docs-sidebar__icon`.
+- **ATLAS y el córtex citan clases que existen:** `atom-headline--*` pasa a `atom-title--h1…h6`; las piezas editoriales llevan el prefijo del proyecto (`diario-`), como pide el contrato de consumo; los ejemplos de `component-patterns.md` usan el marcado real de `atom-btn`, `mol-form-field` y `org-site-header`.
 - **README y CONSUMING**: la instalación pasa a `npm install syx-design-system`, publicado en npm desde la 5.1.0.
 - **Home**: el *Quick start* enseña `npm install syx-design-system` en lugar de clonar y compilar con Sass.
 - **Web pública**: canonical y `og:url` propios en cada página (apuntaban al repositorio de GitHub), `og:image` y `twitter:image` con `assets/og-image.jpg` (era un JPEG con extensión `.png`), tarjeta `summary` porque la imagen es cuadrada, `sitemap.xml` nuevo y `robots.txt` apuntando a él en lugar de a `syntaxys.design`.
 
 ### Fixed
 
+- **Opacidad en Figma:** `contracts/figma/*.figma.json` exportaba la opacidad en tanto por uno (0.5) y Figma la lee en porcentaje: una capa enlazada quedaba al 0,5 %. Ahora va en 0–100, y `check:figma` falla si vuelve.
+- **Nombres accesibles:** el enlace a GitHub de las tres páginas se anunciaba «View on GitHub» con el texto visible «GitHub»; ahora «GitHub repository». El ejemplo de `org-site-header` en docs ya no tapa el texto visible con otro nombre.
+- **`syx-scan` no enseñaba los tipos sin título:** salían en el recuento y en `--fallar-si-*`, pero no en pantalla.
 - **Fuente raíz en %** (F0-09): `--reset-html-font` fijaba el tamaño en px (de 13 a 18 según el tema) y el interlineado a veces en px. Con el navegador en 20 px, el rem seguía en 16 y nada crecía. Ahora va en % (100 % = la preferencia del navegador; a 16 px se ve igual que antes) y el interlineado, sin unidad. `check:raiz` lo vigila, con su caso de mutación.
 - **Contraste en navegadores sin color relativo** (F0-08): Chrome y Edge 111–118, Firefox 121–127 y Safari 16.2–16.3, que el browserslist declara soportados, pintaban las tintas de marca y de estado, las variantes fuertes y los colores de código con el relleno de marca: hasta 49 pares por debajo de AA en un tema. Cada tema lleva ahora `_tintas-respaldo.scss`, generado desde su hoja compilada, con esos valores como literal dentro de `@supports not (…)`. El browserslist no cambia.
 - **Theme Builder**: tres interruptores (*Fluid Typography*, *Extended Color Palette* y *Disable Legacy Bridge*) se anunciaban sin nombre: su `aria-labelledby` apuntaba al deslizador vacío del interruptor anterior. Ahora apuntan a su título.
 
 ### Added
 
+- **Tres reglas nuevas en `syx-scan`** (F1-06): `cifras-de-estilo-antiguo` (media) en tablas, horas, fechas e importes; `etiqueta-de-estado-pequena` (baja) por debajo de 14 px; `nombre-sin-texto-visible` (WCAG 2.5.3): media si el nombre accesible no contiene el texto visible, baja si lo contiene sin empezar por él.
+- **`check:conocimiento` vigila las clases**, no solo los tokens: toda `atom-`/`mol-`/`org-` citada en el córtex, la gobernanza, ATLAS, las entradas, las guías de `scss/` y los modos tiene que existir en el CSS compilado (había 68 que no existían).
+- **Tokens que faltaban o no se leían:** `--component-list-ordered-counter-bg` y `-color` para el contador de `atom-list--ordered`, que leía el semántico directamente; los bordes `--component-button-{variante}-border` y `-filled-border` existían y nadie los leía: ahora los lee `atom-btn`, con el mismo valor que tenía el borde.
+- Casos de mutación nuevos para el escáner en temas, la vitrina, los breakpoints y las clases fantasma.
 - **Registro de métricas por versión** (F1-08): `npm run build:metricas` escribe `metrics/<versión>.json` (tamaño del paquete, gzip de cada hoja de `dist/`, bytes de fuentes por tema, avisos del escáner sobre la plantilla, pasos de `check` y casos de mutación) e imprime la diferencia con la versión anterior. La release lo comprueba (`check:metricas`) y lo adjunta. La línea base es `metrics/5.1.0.json`, medida sobre la 5.1.0 publicada. No mide el tiempo de CI.
 - **`syx-tintas-respaldo`**, comando del paquete: genera el parcial de respaldo de un tema propio desde su hoja compilada (`npx syx-tintas-respaldo css/mi-tema.css scss/themes/mi-tema/_tintas-respaldo.scss`). La plantilla trae el parcial vacío y ya lo incluye.
 - **`check:contraste` mide dos ramas**, con y sin color relativo: un token que sin él siga siendo una expresión relativa sale «sin medir» y no aprueba. **`check:tintas-respaldo`** falla si un parcial está desfasado o si aparece un token relativo sin respaldo. `check:plantilla` genera el respaldo de la plantilla con el comando, como haría quien crea un tema, antes de medirla.
@@ -37,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+- `download-artifact` 8.0.2 y `configure-pages` 6.0.0, a la par de las demás actions.
 - **Publicación en tres trabajos** (F0-05): `construir` (solo lectura, sin secretos) pasa la cadena y empaqueta una vez; `release` sube ese `.tgz` con su sha256; `npm` no hace checkout ni `npm ci`, se autentica con Trusted Publishing (OIDC, sin `NPM_TOKEN`) y publica el `.tgz` de la release con `--ignore-scripts`. Antes un solo trabajo tenía a la vez `contents: write`, `id-token` y el token después de instalar las devDependencies, y `npm publish` volvía a empaquetar.
 - **Actions fijadas por SHA** en los cinco workflows, con su versión en un comentario, y **Dependabot** para `github-actions` (F0-06). La CLI de Claude Code de `evals.yml` va con versión fija.
 - **`check:acciones`** lo vigila, con dos casos de mutación.

@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 622,
-      "omitidas": 474,
+      "variables": 610,
+      "omitidas": 488,
       "fueraDeAlcance": {
         "primitive": 234,
         "icon": 17,
@@ -1681,8 +1681,8 @@
           "type": "FLOAT",
           "token": "--semantic-opacity-disabled",
           "valuesByMode": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -2445,29 +2445,6 @@
           }
         },
         {
-          "name": "component/blockquote/border/color",
-          "type": "COLOR",
-          "token": "--component-blockquote-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
-          }
-        },
-        {
           "name": "component/blockquote/border/style",
           "type": "STRING",
           "token": "--component-blockquote-border-style",
@@ -2829,29 +2806,6 @@
           }
         },
         {
-          "name": "component/button/primary/border",
-          "type": "COLOR",
-          "token": "--component-button-primary-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
-          }
-        },
-        {
           "name": "component/button/primary/border/hover",
           "type": "COLOR",
           "token": "--component-button-primary-border-hover",
@@ -2917,29 +2871,6 @@
           },
           "hexByMode": {
             "light": "#c50028",
-            "dark": "#d7464a"
-          }
-        },
-        {
-          "name": "component/button/primary/filled/border",
-          "type": "COLOR",
-          "token": "--component-button-primary-filled-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
             "dark": "#d7464a"
           }
         },
@@ -3036,29 +2967,6 @@
           }
         },
         {
-          "name": "component/button/quaternary/border",
-          "type": "COLOR",
-          "token": "--component-button-quaternary-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7712,
-              "g": 0,
-              "b": 0.1579,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7712,
-              "g": 0,
-              "b": 0.1579,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c50028",
-            "dark": "#c50028"
-          }
-        },
-        {
           "name": "component/button/quaternary/border/hover",
           "type": "COLOR",
           "token": "--component-button-quaternary-border-hover",
@@ -3125,29 +3033,6 @@
           "hexByMode": {
             "light": "#c50028",
             "dark": "#d7464a"
-          }
-        },
-        {
-          "name": "component/button/quaternary/filled/border",
-          "type": "COLOR",
-          "token": "--component-button-quaternary-filled-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7712,
-              "g": 0,
-              "b": 0.1579,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7712,
-              "g": 0,
-              "b": 0.1579,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#c50028",
-            "dark": "#c50028"
           }
         },
         {
@@ -3243,29 +3128,6 @@
           }
         },
         {
-          "name": "component/button/secondary/border",
-          "type": "COLOR",
-          "token": "--component-button-secondary-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7441,
-              "g": 0.4087,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7441,
-              "g": 0.4087,
-              "b": 0,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#be6800",
-            "dark": "#be6800"
-          }
-        },
-        {
           "name": "component/button/secondary/border/hover",
           "type": "COLOR",
           "token": "--component-button-secondary-border-hover",
@@ -3331,29 +3193,6 @@
           },
           "hexByMode": {
             "light": "#b03600",
-            "dark": "#be6800"
-          }
-        },
-        {
-          "name": "component/button/secondary/filled/border",
-          "type": "COLOR",
-          "token": "--component-button-secondary-filled-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.7441,
-              "g": 0.4087,
-              "b": 0,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.7441,
-              "g": 0.4087,
-              "b": 0,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#be6800",
             "dark": "#be6800"
           }
         },
@@ -3450,29 +3289,6 @@
           }
         },
         {
-          "name": "component/button/tertiary/border",
-          "type": "COLOR",
-          "token": "--component-button-tertiary-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.4063,
-              "g": 0.2647,
-              "b": 0.1654,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4063,
-              "g": 0.2647,
-              "b": 0.1654,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#68432a",
-            "dark": "#68432a"
-          }
-        },
-        {
           "name": "component/button/tertiary/border/hover",
           "type": "COLOR",
           "token": "--component-button-tertiary-border-hover",
@@ -3539,29 +3355,6 @@
           "hexByMode": {
             "light": "#c50028",
             "dark": "#d7464a"
-          }
-        },
-        {
-          "name": "component/button/tertiary/filled/border",
-          "type": "COLOR",
-          "token": "--component-button-tertiary-filled-border",
-          "valuesByMode": {
-            "light": {
-              "r": 0.4063,
-              "g": 0.2647,
-              "b": 0.1654,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.4063,
-              "g": 0.2647,
-              "b": 0.1654,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#68432a",
-            "dark": "#68432a"
           }
         },
         {
@@ -3877,29 +3670,6 @@
           }
         },
         {
-          "name": "component/check/border/color/hover",
-          "type": "COLOR",
-          "token": "--component-check-border-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
-          }
-        },
-        {
           "name": "component/check/border/width",
           "type": "FLOAT",
           "token": "--component-check-border-width",
@@ -3995,8 +3765,8 @@
           "type": "FLOAT",
           "token": "--component-check-status-disabled-opacity",
           "valuesByMode": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -5122,29 +4892,6 @@
           }
         },
         {
-          "name": "component/feature/card/border/color/hover",
-          "type": "COLOR",
-          "token": "--component-feature-card-border-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
-          }
-        },
-        {
           "name": "component/feature/card/border/style",
           "type": "STRING",
           "token": "--component-feature-card-border-style",
@@ -5787,8 +5534,8 @@
           "type": "FLOAT",
           "token": "--component-hero-figure-opacity",
           "valuesByMode": {
-            "light": 1,
-            "dark": 1
+            "light": 100,
+            "dark": 100
           }
         },
         {
@@ -6060,8 +5807,8 @@
           "type": "FLOAT",
           "token": "--component-hero-stack-top-opacity",
           "valuesByMode": {
-            "light": 0.8,
-            "dark": 0.8
+            "light": 80,
+            "dark": 80
           }
         },
         {
@@ -6669,6 +6416,52 @@
           }
         },
         {
+          "name": "component/list/ordered/counter/bg",
+          "type": "COLOR",
+          "token": "--component-list-ordered-counter-bg",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d7464a",
+            "dark": "#d7464a"
+          }
+        },
+        {
+          "name": "component/list/ordered/counter/color",
+          "type": "COLOR",
+          "token": "--component-list-ordered-counter-color",
+          "valuesByMode": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#000000",
+            "dark": "#000000"
+          }
+        },
+        {
           "name": "component/list/ordered/margin/bottom",
           "type": "FLOAT",
           "token": "--component-list-ordered-margin-bottom",
@@ -6936,29 +6729,6 @@
           "hexByMode": {
             "light": "#00000000",
             "dark": "#00000000"
-          }
-        },
-        {
-          "name": "component/pagination/border/color/hover",
-          "type": "COLOR",
-          "token": "--component-pagination-border-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
           }
         },
         {
@@ -7383,29 +7153,6 @@
           }
         },
         {
-          "name": "component/radio/border/color/hover",
-          "type": "COLOR",
-          "token": "--component-radio-border-color-hover",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
-            "dark": "#d7464a"
-          }
-        },
-        {
           "name": "component/radio/border/width",
           "type": "FLOAT",
           "token": "--component-radio-border-width",
@@ -7474,8 +7221,8 @@
           "type": "FLOAT",
           "token": "--component-radio-status-disabled-opacity",
           "valuesByMode": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -8470,8 +8217,8 @@
           "type": "FLOAT",
           "token": "--component-switch-status-disabled-opacity",
           "valuesByMode": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -8778,29 +8525,6 @@
           },
           "hexByMode": {
             "light": "#c50028",
-            "dark": "#d7464a"
-          }
-        },
-        {
-          "name": "component/table/state/hover/border/color",
-          "type": "COLOR",
-          "token": "--component-table-state-hover-border-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#d7464a",
             "dark": "#d7464a"
           }
         },
@@ -10180,8 +9904,8 @@
           "type": "FLOAT",
           "token": "--component-token-connector-opacity",
           "valuesByMode": {
-            "light": 0.35,
-            "dark": 0.35
+            "light": 35,
+            "dark": 35
           }
         },
         {
@@ -11736,6 +11460,10 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-primary-border",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-primary-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
@@ -11744,7 +11472,15 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-primary-filled-border",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-quaternary-bg-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-quaternary-border",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -11756,7 +11492,15 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-quaternary-filled-border",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-secondary-bg-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-secondary-border",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -11765,6 +11509,10 @@
         },
         {
           "token": "--component-button-secondary-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-secondary-filled-border",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -11796,11 +11544,19 @@
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
+          "token": "--component-button-tertiary-border",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
           "token": "--component-button-tertiary-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-button-tertiary-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-button-tertiary-filled-border",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -11831,7 +11587,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 10
+        "base": 9
       },
       "propiedades": [
         {
@@ -11874,28 +11630,6 @@
               "r": 0.5021,
               "g": 0.5021,
               "b": 0.5021,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-check-border-color-hover",
-          "variable": "component/check/border/color/hover",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
               "a": 1
             }
           }
@@ -11966,8 +11700,8 @@
           "variante": null,
           "estado": "disabled",
           "valores": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -12022,6 +11756,10 @@
       "sinTraducir": [
         {
           "token": "--component-check-bg-checked",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-check-border-color-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -12954,8 +12692,55 @@
         "estados": []
       },
       "composedOf": [],
-      "variantes": {},
-      "propiedades": [],
+      "variantes": {
+        "ordered": 2
+      },
+      "propiedades": [
+        {
+          "token": "--component-list-ordered-counter-bg",
+          "variable": "component/list/ordered/counter/bg",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "ordered",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8426,
+              "g": 0.2748,
+              "b": 0.2917,
+              "a": 1
+            }
+          }
+        },
+        {
+          "token": "--component-list-ordered-counter-color",
+          "variable": "component/list/ordered/counter/color",
+          "propiedad": "fills",
+          "tipo": "COLOR",
+          "variante": "ordered",
+          "estado": "default",
+          "valores": {
+            "light": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        }
+      ],
       "sinPropiedad": [
         {
           "token": "--component-list-ordered-margin-bottom",
@@ -13059,7 +12844,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 7
+        "base": 6
       },
       "propiedades": [
         {
@@ -13069,28 +12854,6 @@
           "tipo": "COLOR",
           "variante": null,
           "estado": "active",
-          "valores": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          }
-        },
-        {
-          "token": "--component-pagination-border-color-hover",
-          "variable": "component/pagination/border/color/hover",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
           "valores": {
             "light": {
               "r": 0.8426,
@@ -13189,6 +12952,10 @@
       ],
       "sinPropiedad": [],
       "sinTraducir": [
+        {
+          "token": "--component-pagination-border-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
         {
           "token": "--component-pagination-border-radius",
           "motivo": "expresión CSS: solo un navegador la reduce"
@@ -13643,7 +13410,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 8
+        "base": 7
       },
       "propiedades": [
         {
@@ -13725,28 +13492,6 @@
           }
         },
         {
-          "token": "--component-radio-border-color-hover",
-          "variable": "component/radio/border/color/hover",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-radio-border-width",
           "variable": "component/radio/border/width",
           "propiedad": "strokeWeight",
@@ -13788,8 +13533,8 @@
           "variante": null,
           "estado": "disabled",
           "valores": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         }
       ],
@@ -13814,6 +13559,10 @@
         },
         {
           "token": "--component-radio-bg-checked",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-radio-border-color-hover",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -14239,8 +13988,8 @@
           "variante": null,
           "estado": "disabled",
           "valores": {
-            "light": 0.5,
-            "dark": 0.5
+            "light": 50,
+            "dark": 50
           }
         },
         {
@@ -14313,7 +14062,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 13
+        "base": 12
       },
       "propiedades": [
         {
@@ -14451,28 +14200,6 @@
           }
         },
         {
-          "token": "--component-table-state-hover-border-color",
-          "variable": "component/table/state/hover/border/color",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-table-state-hover-color",
           "variable": "component/table/state/hover/color",
           "propiedad": "fills",
@@ -14571,6 +14298,10 @@
         },
         {
           "token": "--component-table-cell-padding-y",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
+        {
+          "token": "--component-table-state-hover-border-color",
           "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
@@ -15776,7 +15507,7 @@
       },
       "composedOf": [],
       "variantes": {
-        "base": 4
+        "base": 3
       },
       "propiedades": [
         {
@@ -15824,28 +15555,6 @@
           }
         },
         {
-          "token": "--component-feature-card-border-color-hover",
-          "variable": "component/feature/card/border/color/hover",
-          "propiedad": "strokes",
-          "tipo": "COLOR",
-          "variante": null,
-          "estado": "hover",
-          "valores": {
-            "light": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.8426,
-              "g": 0.2748,
-              "b": 0.2917,
-              "a": 1
-            }
-          }
-        },
-        {
           "token": "--component-feature-card-border-width",
           "variable": "component/feature/card/border/width",
           "propiedad": "strokeWeight",
@@ -15873,6 +15582,10 @@
         }
       ],
       "sinTraducir": [
+        {
+          "token": "--component-feature-card-border-color-hover",
+          "motivo": "expresión CSS: solo un navegador la reduce"
+        },
         {
           "token": "--component-feature-card-border-radius",
           "motivo": "expresión CSS: solo un navegador la reduce"
@@ -17404,6 +17117,10 @@
       "motivo": "currentColor es una referencia al contexto, no un color"
     },
     {
+      "token": "--component-blockquote-border-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-blockquote-border-radius",
       "motivo": "valor no traducible a una variable de Figma"
     },
@@ -17520,6 +17237,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-primary-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-primary-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -17528,7 +17249,15 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-primary-filled-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-quaternary-bg-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-quaternary-border",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17540,7 +17269,15 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-quaternary-filled-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-secondary-bg-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-secondary-border",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17549,6 +17286,10 @@
     },
     {
       "token": "--component-button-secondary-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-secondary-filled-border",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17584,11 +17325,19 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--component-button-tertiary-border",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-button-tertiary-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-button-tertiary-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-button-tertiary-filled-border",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17629,6 +17378,10 @@
     },
     {
       "token": "--component-check-bg-checked",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-check-border-color-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -17822,6 +17575,10 @@
     {
       "token": "--component-evidence-padding",
       "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-feature-card-border-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-feature-card-border-radius",
@@ -18280,6 +18037,10 @@
       "motivo": "sombra: en Figma es un efecto, no una variable"
     },
     {
+      "token": "--component-pagination-border-color-hover",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--component-pagination-border-radius",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -18401,6 +18162,10 @@
     },
     {
       "token": "--component-radio-bg-checked",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-radio-border-color-hover",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
@@ -18549,6 +18314,10 @@
     },
     {
       "token": "--component-table-scroll-hint",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-table-state-hover-border-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {

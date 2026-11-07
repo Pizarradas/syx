@@ -176,6 +176,9 @@ const TITULOS = {
   contrato: 'Reglas del sistema rotas en el consumidor',
   'base-sin-estilos': 'Bases sin estilos, con modificadores que sí existen',
   'gancho-js': 'Clases que solo usa el JavaScript',
+  'cifras-de-estilo-antiguo': 'Cifras de estilo antiguo en datos',
+  'etiqueta-de-estado-pequena': 'Etiquetas de estado por debajo de 14 px',
+  'nombre-sin-texto-visible': 'Nombres accesibles que no dicen lo que se ve (WCAG 2.5.3)',
 };
 const MARCA = { alta: '🔴', media: '🟠', baja: '·' };
 
@@ -191,6 +194,9 @@ if (!informe.total) {
   process.exit(0);
 }
 
+// Un tipo nuevo sin título no se puede quedar fuera del informe: saldría en
+// el recuento y en --fallar-si-*, pero no en pantalla.
+for (const h of informe.hallazgos) if (!TITULOS[h.tipo]) TITULOS[h.tipo] = h.tipo;
 for (const tipo of Object.keys(TITULOS)) {
   const grupo = informe.hallazgos.filter((h) => h.tipo === tipo);
   if (!grupo.length) continue;

@@ -3,27 +3,38 @@
 // Responsive breakpoint helpers.
 // Named breakpoints use a mobile-first (min-width) approach.
 //
-// Breakpoint scale (em-based for zoom-safety):
-//   mobile-only  → max-width: 37.5em  (600px)
-//   phablet      → min-width: 37.5em  (600px)
-//   tablet       → min-width: 50em    (800px)
-//   laptop       → min-width: 64em    (1024px)
-//   desktop      → min-width: 70em    (1120px)
-//   wide         → min-width: 90em    (1440px)
+// Breakpoint scale (em-based for zoom-safety). ONE scale: the primitive
+// tokens in tokens/primitives/_breakpoints.scss. The named breakpoints below
+// are aliases of it (plan de mejora 2026-11, paso 2): until 5.1 this map had
+// its own values (tablet 50em, desktop 70em) while the grid, the display
+// utilities and the helpers switched at the tokens' 48/64/80/90em, so a page
+// changed layout at 768px and again at 800px.
+//   mobile-only  → max-width: sm  37.5em (600px)
+//   phablet, sm  → min-width: sm  37.5em (600px)
+//   tablet, md   → min-width: md  48em   (768px)   — was 50em (800px)
+//   laptop, lg   → min-width: lg  64em   (1024px)
+//   desktop, xl  → min-width: xl  80em   (1280px)  — was 70em (1120px)
+//   wide, xxl    → min-width: xxl 90em   (1440px)
 // ================================================
 @use 'sass:map';
 @use 'sass:meta';
+@use '../tokens/primitives/breakpoints' as bp;
 
 
-// BREAKPOINT MAP — single source of truth
+// BREAKPOINT MAP — aliases of the primitive scale, never values of its own.
+// check:breakpoints fails on a value here, or on a literal breakpoint in scss/.
 $syx-breakpoints: (
-  'mobile-only': (max-width: 37.5em),
-  'phablet':     (min-width: 37.5em),
-  'tablet':      (min-width: 50em),
-  'laptop':      (min-width: 64em),
-  'desktop':     (min-width: 70em),
-  'xl':          (min-width: 80em),     // 1280px — nav collapse threshold
-  'wide':        (min-width: 90em),
+  'mobile-only': (max-width: bp.$token-breakpoint-sm),
+  'phablet':     (min-width: bp.$token-breakpoint-sm),
+  'sm':          (min-width: bp.$token-breakpoint-sm),
+  'tablet':      (min-width: bp.$token-breakpoint-md),
+  'md':          (min-width: bp.$token-breakpoint-md),
+  'laptop':      (min-width: bp.$token-breakpoint-lg),
+  'lg':          (min-width: bp.$token-breakpoint-lg),
+  'desktop':     (min-width: bp.$token-breakpoint-xl),
+  'xl':          (min-width: bp.$token-breakpoint-xl),     // nav collapse threshold
+  'wide':        (min-width: bp.$token-breakpoint-xxl),
+  'xxl':         (min-width: bp.$token-breakpoint-xxl),
 ) !default;
 
 // MIXIN: breakpoint($name)

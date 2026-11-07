@@ -80,7 +80,7 @@ La navegación es la interfaz del modelo mental del usuario sobre el sistema. De
 
 **En SYX:**
 - El estado activo en `mol-menu` usa `aria-current="page"`
-- Los flujos profundos tienen `mol-breadcrumb` con destino etiquetado
+- Los flujos profundos tienen `atom-breadcrumb` con destino etiquetado
 - El primer nivel de navegación tiene máximo 7 ítems
 
 ---

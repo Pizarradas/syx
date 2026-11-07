@@ -344,19 +344,19 @@
 
   // Responsive background transparent (migrada de helper-bg-color-transparent-*)
   .syx-bg-transparent-sm {
-    @include min-screen(48em) {
+    @include breakpoint(md) {
       background-color: transparent;
     }
   }
 
   .syx-bg-transparent-md {
-    @include min-screen(64em) {
+    @include breakpoint(lg) {
       background-color: transparent;
     }
   }
 
   .syx-bg-transparent-lg {
-    @include min-screen(80em) {
+    @include breakpoint(xl) {
       background-color: transparent;
     }
   }

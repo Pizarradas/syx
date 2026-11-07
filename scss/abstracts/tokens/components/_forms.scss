@@ -98,7 +98,7 @@
   --component-check-border-width: var(--semantic-border-width-default);
   --component-check-border-radius: var(--semantic-border-radius-default);
   --component-check-border-color: var(--semantic-color-border-control);
-  --component-check-border-color-hover: var(--semantic-color-primary);
+  --component-check-border-color-hover: var(--semantic-color-primary-strong); // trazo: 3:1 (1.4.11), no el relleno
   --component-check-color-checked: var(--semantic-color-primary);
   --component-check-bg-checked: var(--semantic-color-primary-strong); // 1.4.11: el relleno marcado ES el límite del control
   // La marca (el ✓) sobre ese relleno: también 3:1. Antes era el texto inverso.
@@ -123,7 +123,7 @@
   // ================================================
   --component-radio-border-width: var(--semantic-border-width-default);
   --component-radio-border-color: var(--semantic-color-border-control);
-  --component-radio-border-color-hover: var(--semantic-color-primary);
+  --component-radio-border-color-hover: var(--semantic-color-primary-strong); // trazo: 3:1 (1.4.11), no el relleno
   --component-radio-color-checked: var(--semantic-color-primary);
   --component-radio-bg-checked: var(--semantic-color-primary-strong); // 1.4.11, como el checkbox
   --component-radio-dot-color: var(--semantic-color-on-primary-strong);
