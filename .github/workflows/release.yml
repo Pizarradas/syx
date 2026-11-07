@@ -6,7 +6,8 @@
 #
 #   npm version minor --no-git-tag-version   # o patch / major
 #   (escribir la sección «## [x.y.z] — fecha» en CHANGELOG.md)
-#   git commit -am "release: x.y.z" && git tag vx.y.z && git push --follow-tags
+#   npm run build:metricas                    # escribe metrics/x.y.z.json
+#   git add -A && git commit -m "release: x.y.z" && git tag vx.y.z && git push --follow-tags
 #
 # TRES TRABAJOS, CADA UNO CON LO MÍNIMO (auditoría 2026-11, F0-05)
 #   construir  contents: read · sin secretos. Comprueba que la etiqueta,
@@ -122,6 +123,13 @@ jobs:
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
           echo "$TGZ · sha256 $SHA" >> "$GITHUB_STEP_SUMMARY"
 
+      # El registro de la versión (F1-08) tiene que ser lo que mide este árbol:
+      # dist/ ya está construido, así que mide lo que se publica.
+      - name: Las métricas commiteadas son las de esta versión
+        run: |
+          node scripts/build-metricas.js --check
+          cp "metrics/${GITHUB_REF_NAME#v}.json" "salida/metricas-${GITHUB_REF_NAME}.json"
+
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: publicacion
@@ -169,7 +177,7 @@ jobs:
               --title "SYX ${GITHUB_REF_NAME}" \
               --notes-file salida/notas.md \
               --verify-tag \
-              "salida/$TGZ" "salida/syx-dist-${GITHUB_REF_NAME}.tar.gz"
+              "salida/$TGZ" "salida/syx-dist-${GITHUB_REF_NAME}.tar.gz" "salida/metricas-${GITHUB_REF_NAME}.json"
           fi
 
   npm:

@@ -260,7 +260,7 @@ version it has installed — not against whatever is on `main` today.
 | `npx syx-mcp` | The MCP server, from the installed package |
 | `npx syx-tintas-respaldo <sheet.css> <partial.scss>` | For a theme of your own: writes its brand inks as literals for browsers without relative colour syntax (see `THEMING-RULES.md`) |
 
-Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
+Before tagging, `npm run build:metricas` writes `metrics/X.Y.Z.json` — package size, gzip of every sheet in `dist/`, font bytes per theme, scanner warnings on the theme template and the number of guards — and prints the difference with the previous version; the release checks it and attaches it. Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
 that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and
 attaches the package and the minified sheets to a GitHub release. It also publishes to npm while the
 repository variable `PUBLICAR_NPM` is `true`. Build, release and publish are three jobs with the least permissions each: the one that publishes to npm installs nothing, authenticates with Trusted Publishing (OIDC, no stored token) and publishes the very `.tgz` attached to the release, checked by its sha256, with `--ignore-scripts`. `npm run check:acciones` guards that, and that every action is pinned to a commit SHA.
