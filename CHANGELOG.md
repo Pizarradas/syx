@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Publicación en tres trabajos** (F0-05): `construir` (solo lectura, sin secretos) pasa la cadena y empaqueta una vez; `release` sube ese `.tgz` con su sha256; `npm` no hace checkout ni `npm ci`, se autentica con Trusted Publishing (OIDC, sin `NPM_TOKEN`) y publica el `.tgz` de la release con `--ignore-scripts`. Antes un solo trabajo tenía a la vez `contents: write`, `id-token` y el token después de instalar las devDependencies, y `npm publish` volvía a empaquetar.
 - **Actions fijadas por SHA** en los cinco workflows, con su versión en un comentario, y **Dependabot** para `github-actions` (F0-06). La CLI de Claude Code de `evals.yml` va con versión fija.
 - **`check:acciones`** lo vigila, con dos casos de mutación.
+- **Dependabot** agrupa solo las subidas menores y de parche de las actions; cada versión mayor abre su propia PR.
 - **Quién aprueba** (F0-10): `aprobado-humano` solo cuenta si la puso, la última vez, una cuenta de persona con permiso *maintain* o *admin*. Una etiqueta puesta por un bot, una app o una cuenta de solo escritura se ignora y la PR queda sin aprobar. No se exige que sea distinta del autor: SYX tiene un solo mantenedor. `check:acciones` lo vigila.
 
 ## [5.1.0] — 2026-11-06
