@@ -28,9 +28,16 @@
   // cabía y se salía del contenedor.
   //
   // Ahora el suelo baja a un tamaño usable en móvil y el techo se mantiene:
-  // el 4xl va de 40 px a 68,7 px. Los escalones pequeños (xs…xl) no se tocan;
-  // ahí el rango corto sí era correcto, porque el texto de lectura no debe
-  // cambiar tanto de tamaño.
+  // el 4xl va de 40 px a 68,7 px. Los escalones de lectura (xs…lg) no se
+  // tocan; ahí el rango corto sí era correcto, porque el texto de lectura no
+  // debe cambiar tanto de tamaño.
+  //
+  // Los titulares (xl…4xl) usan dos razones: ×1,125 en el suelo (de lg 25 px
+  // a 4xl 40 px en cuatro pasos) y ×1,25 en el techo. Hasta la 5.1 xl
+  // conservaba su suelo de 31,25 px y quedaba por encima de 2xl (30 px): por
+  // debajo de ~540 px el h3 salía más pequeño que el h4. `check:escala-tipo`
+  // vigila que cada paso crezca a cualquier ancho y que el valor preferente
+  // toque el mínimo a 375 px y el máximo a 1440 px.
   // ================================================
   // Step -2 | xs     | 10.24px → 11.52px
   --primitive-font-size-xs: clamp(0.64rem, 0.61rem + 0.14vw, 0.72rem);
@@ -47,17 +54,17 @@
   // Step +2 | lg     | 25px → 28.125px
   --primitive-font-size-lg: clamp(1.563rem, 1.49rem + 0.3vw, 1.758rem);
 
-  // Step +3 | xl     | 31.25px → 35.16px
-  --primitive-font-size-xl: clamp(1.953rem, 1.86rem + 0.37vw, 2.197rem);
+  // Step +3 | xl     | 28.12px → 35.16px
+  --primitive-font-size-xl: clamp(1.758rem, 1.603rem + 0.661vw, 2.197rem);
 
-  // Step +4 | 2xl    | 39.06px → 43.95px
-  --primitive-font-size-2xl: clamp(1.875rem, 1.63rem + 1.05vw, 2.747rem);
+  // Step +4 | 2xl    | 31.62px → 43.95px
+  --primitive-font-size-2xl: clamp(1.976rem, 1.705rem + 1.158vw, 2.747rem);
 
-  // Step +5 | 3xl    | 48.83px → 54.93px
-  --primitive-font-size-3xl: clamp(2.125rem, 1.75rem + 1.6vw, 3.433rem);
+  // Step +5 | 3xl    | 35.57px → 54.93px
+  --primitive-font-size-3xl: clamp(2.223rem, 1.797rem + 1.818vw, 3.433rem);
 
-  // Step +6 | 4xl    | 61.04px → 68.67px
-  --primitive-font-size-4xl: clamp(2.5rem, 1.9rem + 2.57vw, 4.291rem);
+  // Step +6 | 4xl    | 40px → 68.67px
+  --primitive-font-size-4xl: clamp(2.5rem, 1.869rem + 2.692vw, 4.292rem);
 
   // LINE HEIGHTS
   // ================================================
