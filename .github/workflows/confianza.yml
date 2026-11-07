@@ -17,6 +17,10 @@
 # una versión y se fusionaba otra. Ahora, en cada `synchronize` se quita la
 # etiqueta y la PR vuelve a necesitarla si toca `human`.
 #
+# QUIÉN APRUEBA
+# La etiqueta solo cuenta si la puso una persona con permiso maintain o admin
+# (ver el paso «Rutas human y pr del cambio»).
+#
 # Sustituye al job «Confianza» de ci.yml y a la reevaluación al etiquetar:
 # este workflow escucha también `labeled` y `unlabeled`, con un job del mismo
 # nombre, así que la protección de rama sigue viendo «Confianza».
@@ -87,6 +91,15 @@ jobs:
           echo "Se ha quitado \`aprobado-humano\`: la aprobación era de la versión anterior." >> "$GITHUB_STEP_SUMMARY"
 
       # Las etiquetas, leídas DESPUÉS de quitarla: el evento trae las de antes.
+      #
+      # QUIÉN PUSO LA ETIQUETA (auditoría 2026-11, F0-10)
+      # Antes valía la pusiera quien la pusiera: un agente con un token de
+      # escritura podía abrir una PR que toca `human` y aprobársela. Ahora
+      # `aprobado-humano` solo cuenta si la puso, la última vez, una cuenta de
+      # persona (type User, no Bot ni app) con permiso maintain o admin. No se
+      # exige que sea distinta del autor: SYX tiene un solo mantenedor y él
+      # abre las PR. Si no se cumple, la etiqueta se ignora (no se quita) y el
+      # guardián juzga la PR como no aprobada.
       - name: Rutas human y pr del cambio
         env:
           GH_TOKEN: ${{ github.token }}
@@ -94,4 +107,18 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           gh api "repos/$REPO/pulls/$PR" --jq '{pull_request: {labels: .labels}}' > "$RUNNER_TEMP/evento.json"
+          if jq -e '.pull_request.labels | map(.name) | index("aprobado-humano")' "$RUNNER_TEMP/evento.json" > /dev/null; then
+            QUIEN="$(gh api --paginate "repos/$REPO/issues/$PR/events" \
+              --jq '.[] | select(.event == "labeled" and .label.name == "aprobado-humano") | "\(.actor.login) \(.actor.type)"' | tail -n 1)"
+            LOGIN="${QUIEN%% *}"; TIPO="${QUIEN##* }"
+            ROL="$( [ -n "$LOGIN" ] && gh api "repos/$REPO/collaborators/$LOGIN/permission" --jq '.role_name' 2>/dev/null || echo desconocido)"
+            if [ "$TIPO" = "User" ] && { [ "$ROL" = "admin" ] || [ "$ROL" = "maintain" ]; }; then
+              echo "\`aprobado-humano\` la puso $LOGIN ($ROL)." >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning::aprobado-humano no cuenta: la puso ${LOGIN:-nadie} (${TIPO:-?}, rol ${ROL:-?}); hace falta una persona con permiso maintain o admin"
+              echo "\`aprobado-humano\` **no cuenta**: la puso ${LOGIN:-nadie} (${TIPO:-?}, rol ${ROL:-?})." >> "$GITHUB_STEP_SUMMARY"
+              jq '.pull_request.labels |= map(select(.name != "aprobado-humano"))' "$RUNNER_TEMP/evento.json" > "$RUNNER_TEMP/e2.json"
+              mv "$RUNNER_TEMP/e2.json" "$RUNNER_TEMP/evento.json"
+            fi
+          fi
           GITHUB_EVENT_PATH="$RUNNER_TEMP/evento.json" node base/scripts/check-confianza.js --repo pr
