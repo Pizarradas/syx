@@ -91,8 +91,8 @@ Use HTML comments to declare how layout shifts at each breakpoint:
 ```html
 <!-- RESPONSIVE:
   - 320px (base): single column, full-width buttons, stacked form fields
-  - 640px+: two columns for plan grid, inline buttons
-  - 1024px+: three columns for plan grid
+  - 600px+ (sm): two columns for plan grid, inline buttons
+  - 1024px+ (lg): three columns for plan grid
 -->
 ```
 
@@ -106,9 +106,12 @@ Use HTML comments to declare how layout shifts at each breakpoint:
 
 | Name | `min-width` | Typical layout change |
 |---|---|---|
-| `sm` | `640px` | 2-col grids, inline CTAs |
-| `md` | `768px` | Side-by-side form layout |
-| `lg` | `1024px` | 3-col grids, fixed sidebars |
+| `sm` | `37.5em` (600px) | 2-col grids, inline CTAs |
+| `md` | `48em` (768px) | Side-by-side form layout |
+| `lg` | `64em` (1024px) | 3-col grids, fixed sidebars |
+| `xl` | `80em` (1280px) | Wide layouts |
+
+The scale is `scss/abstracts/tokens/primitives/_breakpoints.scss`; never document another width.
 
 Document only the breakpoints that are actually relevant to the component.
 
@@ -162,7 +165,7 @@ Always declare `autocomplete` on personal data fields:
 ### Submit button
 - Must communicate the action, not just "Enviar". Use "Crear cuenta", "Activar suscripción", "Confirmar pedido".
 - One primary action per step. Secondary actions (back, cancel) use ghost/outline style.
-- Show loading state (`is-loading` + `disabled`) immediately on submit to prevent double-submit.
+- Show the loading state immediately on submit to prevent double-submit: `disabled` on the button plus an `atom-spinner` with its label (`atom-btn` has no loading modifier).
 
 ---
 
@@ -200,116 +203,15 @@ Before recommending a component, ask:
 
 ---
 
-## Color Contrast Requirements
+## Color Contrast and Foundations
 
-Poor contrast is the most common WCAG failure. It makes UI inaccessible to low-vision users, users in bright light, and any screen below reference quality. **A component that cannot be read cannot be considered good UX.**
-
-### Minimum ratios (WCAG 2.1 AA)
-
-| Text type | Min ratio | When it applies |
-|---|---|---|
-| Normal text (< 18pt regular / < 14pt bold) | **4.5:1** | Body, labels, hints, captions, placeholders |
-| Large text (≥ 18pt regular / ≥ 14pt bold) | **3:1** | Headings, display text |
-| UI components | **3:1** | Input borders, button borders, focus rings, icons |
-
-### Safe reference values (against white `#ffffff`)
-
-| Value | Ratio | Safe for |
-|---|---|---|
-| `#111827` | 16.8:1 | Headings, primary text — safe at any size |
-| `#374151` | 10.7:1 | Body text |
-| `#6b7280` | 4.6:1 | Muted text, hints — minimum for normal-size text |
-| `#9ca3af` | 2.5:1 | **Fails normal text** — decorative/UI only |
-| `#d1d5db` | 1.3:1 | **Fails everything** — never use for text |
-
-### Required contrast safeguard block (when linking compiled SYX CSS)
-
-Theme CSS applies token values that cannot be assumed to meet WCAG without verification. Every UX POC that references a compiled theme must include this block in the scaffolding `<style>`:
-
-```css
-/*
-  ── Contrast safeguards ──
-  Theme token values cannot be assumed to meet WCAG 1.4.3 without audit.
-  Override here. Final values are the responsibility of [SYX: TOKEN] / [SYX: THEME].
-  Ratio reference (on white #fff): #111827 = 16.8:1 · #6b7280 = 4.6:1
-*/
-
-/* 1. Text elements */
-.your-component [class*="atom-title"] { color: #111827; } /* 16.8:1 — AAA */
-.your-component .atom-txt            { color: #374151; } /* 10.7:1 — AAA */
-.your-component .atom-txt,
-.your-component .mol-form-field__msg { color: #6b7280; } /* 4.6:1 — AA minimum */
-
-/* 2. Colored surfaces (badges, pills, status dots, filled buttons)
-   Never use var(--token, currentColor) as a background fallback —
-   currentColor inherits text color and produces an unverified bg/fg pair.
-   Override with a hardcoded value and document the ratio. */
-.your-component .atom-pill--primary,
-.your-component [class*="__badge"] {
-  background: #111827; /* 16.8:1 against #fff text */
-  color: #ffffff;
-}
-```
-
-**Text rule:** any theme token that produces text below 4.5:1 at normal size, or below 3:1 at large size, is a contract violation.
-
-**Surface rule:** never use `var(--token, currentColor)` as a background fallback for colored surfaces. `currentColor` inherits the computed text color of the parent and produces an unverifiable foreground/background pair. Always provide a hardcoded hex fallback with a documented ratio.
-
-Flag violations and escalate to `[SYX: AUDIT]`.
-
----
-
-## Methodological Foundations
-
-UX decisions in this mode are grounded in established, peer-reviewed frameworks. When in doubt, cite the principle driving the decision.
-
-### Heuristics & Cognitive Principles
-
-| Principle | What it means in practice | Source |
-|---|---|---|
-| **Nielsen's 10 Usability Heuristics** | Visibility of system status, error prevention, recognition over recall, consistency, flexibility — apply all ten | [nngroup.com/articles/ten-usability-heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) |
-| **Fitts's Law** | Interactive targets must be large enough and close enough to be hit reliably — minimum 44×44px, group related actions | [lawsofux.com/fittss-law](https://lawsofux.com/fittss-law/) |
-| **Hick's Law** | Decision time grows logarithmically with the number of options — limit choices, use progressive disclosure | [lawsofux.com/hicks-law](https://lawsofux.com/hicks-law/) |
-| **Miller's Law** | Working memory holds ~7±2 chunks — chunk navigation, limit form fields per step, paginate dense content | [lawsofux.com/millers-law](https://lawsofux.com/millers-law/) |
-| **Jakob's Law** | Users spend most of their time on other sites — design patterns should match widespread conventions unless deviation adds clear value | [lawsofux.com/jakobs-law](https://lawsofux.com/jakobs-law/) |
-| **Tesler's Law** | Every system has irreducible complexity — don't push it onto the user; absorb it in the UI layer | [lawsofux.com/teslers-law](https://lawsofux.com/teslers-law/) |
-| **Doherty Threshold** | Response time under 400ms maintains flow; above it users lose focus — flag loading states in your state inventory | [lawsofux.com/doherty-threshold](https://lawsofux.com/doherty-threshold/) |
-
-### Gestalt Principles (applied to layout decisions)
-
-| Principle | Application |
-|---|---|
-| **Proximity** | Group related controls (label + input + hint + error) — don't scatter them |
-| **Similarity** | Consistent styling for same-function elements (all destructive actions red, all primary actions the same button style) |
-| **Figure/Ground** | Modals, tooltips, and dropdowns must visually separate from the page surface |
-| **Continuity** | Visual flow guides the eye — align form fields, align action buttons to the same edge |
-| **Closure** | Users will complete incomplete shapes — use this for skeleton loaders and progress indicators |
-
-### Accessibility Standards
-
-| Standard | Scope | Source |
-|---|---|---|
-| **WCAG 2.1 AA** | Minimum bar for all SYX components. Perceivable, Operable, Understandable, Robust. | [w3.org/WAI/WCAG21/quickref](https://www.w3.org/WAI/WCAG21/quickref/) |
-| **WCAG 2.2** | Additional criteria: focus appearance, target size (24×24px minimum), redundant entry reduction | [w3.org/TR/WCAG22](https://www.w3.org/TR/WCAG22/) |
-| **ARIA Authoring Practices Guide (APG)** | Reference patterns for widgets: dialogs, comboboxes, tabs, trees, carousels | [w3.org/WAI/ARIA/apg](https://www.w3.org/WAI/ARIA/apg/) |
-| **Inclusive Components** | Real-world ARIA implementations with edge case analysis | [inclusive-components.design](https://inclusive-components.design/) |
-
-### Interaction Design Frameworks
-
-| Framework | When to apply |
-|---|---|
-| **Progressive Disclosure** | Surface only what the user needs at each step. Reveal complexity on demand, not upfront. |
-| **Affordance & Signifiers** (Norman) | Controls must look like they can be interacted with. Flat boxes with no border are not obviously inputs. |
-| **Mental Models** | Match UI behavior to how the user expects the system to work based on prior experience. |
-| **Error Recovery** (POKA-YOKE) | Make errors hard to make; make recovery easy and self-explanatory. Never dead-end the user. |
-
-### Recommended Reading
-
-- **"Don't Make Me Think"** — Steve Krug. Cognitive load and self-evident design.
-- **"The Design of Everyday Things"** — Don Norman. Affordances, feedback loops, and error design.
-- **"Forms that Work"** — Caroline Jarrett & Gerry Gaffney. The definitive guide to form UX.
-- **Nielsen Norman Group Research** — [nngroup.com/articles](https://www.nngroup.com/articles/) — evidence-based UX articles and reports.
-- **Laws of UX** — [lawsofux.com](https://lawsofux.com/) — concise principle-to-practice reference.
+- **Contrast** — the ratios (4.5:1 text, 3:1 large text and UI) and why are in
+  `front/accessibility-wcag.md`, which is loaded. SYX measures every theme against
+  `contracts/contrast.json` (`npm run check:contraste`): never patch a theme's colours with
+  hardcoded values in a POC. A pairing that fails goes to `[SYX: THEME]` or `[SYX: AUDIT]`.
+- **Foundations** — Nielsen's heuristics, the laws of UX (Fitts, Hick, Miller, Jakob, Tesler,
+  Doherty) and Gestalt are in `ux/nielsen-heuristics.md` and `ux/laws-of-ux.md`, both loaded.
+  When a decision rests on one, name it.
 
 ---
 
@@ -394,6 +296,6 @@ Structure your response as:
 
 **Accessibility Notes:**
 - `aria-pressed` on toggle updates to `"true"` when password is visible
-- `aria-label` on toggle updates to "Hide password" when active
+- The toggle keeps its name ("Show password"): a toggle changes its state, not its name (APG), so screen readers announce "Show password, pressed"
 - Error message uses `role="alert"` and is shown/hidden via `hidden` attribute (not CSS display)
 - `autocomplete="current-password"` enables password manager support

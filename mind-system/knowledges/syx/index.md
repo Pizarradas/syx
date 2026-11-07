@@ -20,6 +20,7 @@ Conocimiento específico del sistema SYX: tokens, pipeline SCSS, patrones de com
 | `token-system.md` | Cuatro tiers, contratos de naming, cómo referencia cada tier |
 | `scss-pipeline.md` | Template de mixin, @layer, lista de mixins disponibles |
 | `component-patterns.md` | BEM en SYX, prefijos atom/mol/org, estructura de componente |
+| `visual-principles.md` | Rejilla, roles tipográficos, color, elevación, movimiento, estados, correcciones ópticas y densidad al implementar |
 | `theme-system.md` | Estructura de `_theme.scss`, secciones obligatorias, dark mode |
 | `color-oklch.md` | Por qué OKLCH, construcción de escalas, distribución 60/30/10 |
 
@@ -32,6 +33,7 @@ Conocimiento específico del sistema SYX: tokens, pipeline SCSS, patrones de com
 | `token-system.md` | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `scss-pipeline.md` | — | ✓ | — | ✓ | — | — | ✓ |
 | `component-patterns.md` | — | ✓ | — | ✓ | ✓ | — | ✓ |
+| `visual-principles.md` | — | ✓ | — | — | — | — | — |
 | `theme-system.md` | — | — | ✓ | ✓ | — | ✓ | — |
 | `color-oklch.md` | ✓ | — | ✓ | — | — | ✓ | — |
 

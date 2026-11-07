@@ -24,7 +24,7 @@ Ninguna de las cinco autoriza nada. El conocimiento informa; la regla ejecuta.
 
 | Tramo | Qué suma | Límite |
 |---|---|---|
-| **Entrada** | `CLAUDE.md` + lo que manda leer antes de nada (`AI_GUIDELINES.md`) + el fichero del modo + sus módulos **Always** | ≤ 22 000 tokens |
+| **Entrada** | `CLAUDE.md` + el fichero del modo + sus módulos **Always** (con un modo no se lee `AI_GUIDELINES.md`) | ≤ 18 000 tokens |
 | **Ruta `AGENTS.md`** | Lo mismo con `AGENTS.md` en lugar de `CLAUDE.md`, más `decision-record.md` salvo en SKETCH | ≤ 26 000 tokens |
 | **Peor caso** | Entrada + todo **When relevant** + **With GSAP** + **Self-check** + la mayor carga **On request** | ≤ 60 000 tokens |
 
@@ -49,7 +49,7 @@ Tokens ≈ bytes / 3,5. Las cifras no se copian aquí a mano —se quedaban viej
 | `ui/motion-principles.md` | | | ● | | | ○ | | | ○ | |
 | `ui/practical-ui.md` | | | ○ | | | | | | ○ | |
 | `front/html-semantics.md` | | ● | | | | | | | | |
-| `front/mobile-first.md` | · | ● | | | | ● | ○ | | | |
+| `front/mobile-first.md` | · | ● | | | | ○ | ○ | | | |
 | `front/accessibility-wcag.md` | | ● | | | | | ○ | | | |
 | `front/progressive-enhancement.md` | | ○ | | | | | ○ | | | ○ |
 | `front/javascript-patterns.md` | | ○ | | | | | | | | |
@@ -59,6 +59,7 @@ Tokens ≈ bytes / 3,5. Las cifras no se copian aquí a mano —se quedaban viej
 | `syx/token-system.md` | | | | ● | ● | ● | ● | ● | ● | ● |
 | `syx/scss-pipeline.md` | | | | | | ● | ● | | | ● |
 | `syx/component-patterns.md` | · | | ○ | | | ● | ● | ○ | | ● |
+| `syx/visual-principles.md` | | | | | | ○ | | | | |
 | `syx/theme-system.md` | | | | | ● | | ○ | | ● | |
 | `syx/color-oklch.md` | | | | ○ | ● | | | | ○ | |
 | `branding/perception-of-prestige-foundations.md` | | · | ● | | | | | | ● | |
@@ -128,6 +129,7 @@ La lectura que importa para el mantenimiento. **Un módulo sin ningún modo en s
 | `syx/` | `token-system` | TOKEN · THEME · UI · AUDIT · MIGRATE · BRAND · ROADMAP |
 | | `scss-pipeline` | UI · AUDIT · ROADMAP |
 | | `component-patterns` | SKETCH · CREATIVE · UI · AUDIT · MIGRATE · ROADMAP |
+| | `visual-principles` | UI |
 | | `theme-system` | THEME · AUDIT · BRAND |
 | | `color-oklch` | TOKEN · THEME · BRAND |
 | `branding/` | `perception-of-prestige-foundations` | UX · CREATIVE · BRAND |

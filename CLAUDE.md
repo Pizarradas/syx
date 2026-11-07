@@ -5,10 +5,10 @@ You are working with **SYX**, a token-driven, native SCSS design system (v5.1.0)
 > **Building a website or an app that *uses* SYX, rather than changing SYX?** Read
 > `CONSUMING.md` instead, and run `npx syx-init` in the app.
 
-Before doing anything else, read:
-1. `AI_GUIDELINES.md` — strict rules, contracts, token architecture, mixin cheatsheet. Its rule
-   table (R01–R11) is the readable form of `contracts/rules.json`; ask `validate_snippet`
-   instead of reading the JSON.
+**With a mode prefix**, the mode file is your guide: it carries its own rules, format and knowledge
+— do not load `AI_GUIDELINES.md` on top of it. **Without one**, before writing SCSS read
+`AI_GUIDELINES.md` (strict rules, token architecture, mixin cheatsheet). Its rule table (R01–R11) is
+the readable form of `contracts/rules.json`; ask `validate_snippet` instead of reading the JSON.
 
 **Then ask, don't load.** `tokens.json` (≈ 280 KB) and `component-registry.json` (≈ 45 KB) are the
 sources of truth; reading them whole costs some 80 000 tokens. With the `syx` MCP server, ask:
