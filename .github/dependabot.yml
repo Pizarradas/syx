@@ -1,0 +1,16 @@
+# SYX — Dependabot
+# Las actions van fijadas por SHA (auditoría 2026-11, F0-06): una etiqueta
+# como @v4 se puede mover y ejecutar otro código con los permisos del
+# trabajo. Dependabot propone el SHA nuevo con su versión en el comentario,
+# y la PR pasa por la misma revisión que cualquier otra.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
+    commit-message:
+      prefix: 'chore(actions)'
