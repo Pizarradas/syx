@@ -9,8 +9,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Las subidas menores y de parche van juntas en una PR. Cada versión
+    # mayor llega en la suya: puede cambiar el comportamiento, y release.yml
+    # (solo corre al etiquetar) y pages.yml (solo en main) no se prueban en la
+    # CI de la PR, así que se revisan sus notas una a una.
     groups:
-      actions:
+      actions-menores:
         patterns: ['*']
+        update-types: ['minor', 'patch']
     commit-message:
       prefix: 'chore(actions)'
