@@ -22,6 +22,7 @@
 // ================================================
 
 @use '../../abstracts/index' as *;
+@use 'tintas-respaldo' as *; // npx syx-tintas-respaldo: ver _tintas-respaldo.scss
 
 @mixin theme-template {
   :root {
@@ -143,6 +144,8 @@
   :root[data-theme="light"] {
     color-scheme: light;
   }
+  // Navegadores sin color relativo: las tintas como literal. Va al final.
+  @include tintas-respaldo;
 }
 
 // ================================================

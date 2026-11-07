@@ -107,9 +107,10 @@ function semanticosComunes(root) {
 /**
  * Revisa un tema. `dirTema` es su carpeta en scss/themes/ y `css` su hoja
  * compilada. Devuelve cada declaración sin consumidor con fichero y línea, y
- * cuántas se aceptaron por ser API semántica.
+ * cuántas se aceptaron por ser API semántica. `excluir`: nombres de parciales
+ * del tema que no se revisan (los generados, que no son contrato del tema).
  */
-function revisarTema({ root, dirTema, css, externos, api }) {
+function revisarTema({ root, dirTema, css, externos, api, excluir = [] }) {
   const semanticos = api || semanticosComunes(root);
   const ext = externos || lectoresExternos(root);
   // Los roles exentos también LEEN: lo que lee un --semantic-* de la API (un
@@ -121,7 +122,7 @@ function revisarTema({ root, dirTema, css, externos, api }) {
   const sinConsumidor = [];
   const exentas = new Set();
   const declaradas = new Set();
-  for (const f of scssDe(dirTema)) {
+  for (const f of scssDe(dirTema).filter((x) => !excluir.includes(path.basename(x)))) {
     const rel = path.relative(root, f).split(path.sep).join('/');
     const vistas = new Set();
     for (const d of leerDeclaraciones(fs.readFileSync(f, 'utf8'))) {

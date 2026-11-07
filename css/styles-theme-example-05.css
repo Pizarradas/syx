@@ -1551,6 +1551,98 @@
   }
 }
 
+@supports not (color: oklch(from red l c h)) {
+  :root {
+    --semantic-color-primary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-secondary-text: oklch(0.8 0.074 256.04);
+    --semantic-color-tertiary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-quaternary-text: oklch(0.8 0.138 92.259);
+    --semantic-color-quinary-text: oklch(0.8 0.059 255.26);
+    --semantic-color-state-success-text: oklch(0.8 0.181 145.621);
+    --semantic-color-state-error-text: oklch(0.8 0.205 26.96);
+    --semantic-color-state-warning-text: oklch(0.8 0.14 79.915);
+    --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+    --semantic-color-code-tag: oklch(0.82 0.139 91.059);
+    --semantic-color-code-attr: oklch(0.82 0.074 256.04);
+    --semantic-color-code-val: oklch(0.82 0.139 91.059);
+    --semantic-color-code-fn: oklch(0.82 0.138 92.259);
+    --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme=light]) {
+      --semantic-color-primary-text: oklch(0.8 0.139 91.059);
+      --semantic-color-secondary-text: oklch(0.8 0.074 256.04);
+      --semantic-color-tertiary-text: oklch(0.8 0.139 91.059);
+      --semantic-color-quaternary-text: oklch(0.8 0.138 92.259);
+      --semantic-color-quinary-text: oklch(0.8 0.059 255.26);
+      --semantic-color-state-success-text: oklch(0.8 0.181 145.621);
+      --semantic-color-state-error-text: oklch(0.8 0.205 26.96);
+      --semantic-color-state-warning-text: oklch(0.8 0.14 79.915);
+      --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+      --semantic-color-code-tag: oklch(0.82 0.139 91.059);
+      --semantic-color-code-attr: oklch(0.82 0.074 256.04);
+      --semantic-color-code-val: oklch(0.82 0.139 91.059);
+      --semantic-color-code-fn: oklch(0.82 0.138 92.259);
+      --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+    }
+  }
+  :root[data-theme=light] {
+    --semantic-color-primary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-secondary-text: oklch(0.8 0.074 256.04);
+    --semantic-color-tertiary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-quaternary-text: oklch(0.8 0.138 92.259);
+    --semantic-color-quinary-text: oklch(0.8 0.059 255.26);
+    --semantic-color-state-success-text: oklch(0.8 0.181 145.621);
+    --semantic-color-state-error-text: oklch(0.8 0.205 26.96);
+    --semantic-color-state-warning-text: oklch(0.8 0.14 79.915);
+    --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+    --semantic-color-code-tag: oklch(0.82 0.139 91.059);
+    --semantic-color-code-attr: oklch(0.82 0.074 256.04);
+    --semantic-color-code-val: oklch(0.82 0.139 91.059);
+    --semantic-color-code-fn: oklch(0.82 0.138 92.259);
+    --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+  }
+  :root[data-theme=dark] {
+    --semantic-color-primary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-secondary-text: oklch(0.8 0.074 256.04);
+    --semantic-color-tertiary-text: oklch(0.8 0.139 91.059);
+    --semantic-color-quaternary-text: oklch(0.8 0.138 92.259);
+    --semantic-color-quinary-text: oklch(0.8 0.059 255.26);
+    --semantic-color-state-success-text: oklch(0.8 0.181 145.621);
+    --semantic-color-state-error-text: oklch(0.8 0.205 26.96);
+    --semantic-color-state-warning-text: oklch(0.8 0.14 79.915);
+    --semantic-color-state-info-text: oklch(0.8 0.275 270.486);
+    --semantic-color-code-tag: oklch(0.82 0.139 91.059);
+    --semantic-color-code-attr: oklch(0.82 0.074 256.04);
+    --semantic-color-code-val: oklch(0.82 0.139 91.059);
+    --semantic-color-code-fn: oklch(0.82 0.138 92.259);
+    --semantic-color-code-inline-fg: oklch(0.8 0.205 22.32);
+  }
+}
+@supports not (color: oklch(from red clamp(0, l, 1) c h)) {
+  :root {
+    --semantic-color-primary-strong: oklch(0.68 0.139 91.059);
+    --semantic-color-state-success-strong: oklch(0.68 0.181 145.621);
+    --semantic-color-secondary-strong: oklch(0.68 0.074 256.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme=light]) {
+      --semantic-color-primary-strong: oklch(0.68 0.139 91.059);
+      --semantic-color-state-success-strong: oklch(0.68 0.181 145.621);
+      --semantic-color-secondary-strong: oklch(0.68 0.074 256.04);
+    }
+  }
+  :root[data-theme=light] {
+    --semantic-color-primary-strong: oklch(0.68 0.139 91.059);
+    --semantic-color-state-success-strong: oklch(0.68 0.181 145.621);
+    --semantic-color-secondary-strong: oklch(0.68 0.074 256.04);
+  }
+  :root[data-theme=dark] {
+    --semantic-color-primary-strong: oklch(0.68 0.139 91.059);
+    --semantic-color-state-success-strong: oklch(0.68 0.181 145.621);
+    --semantic-color-secondary-strong: oklch(0.68 0.074 256.04);
+  }
+}
 @font-face {
   font-family: "Bebas Neue";
   src: url("../fonts/google-bebas-neue/BebasNeue-Regular.woff2") format("woff2");

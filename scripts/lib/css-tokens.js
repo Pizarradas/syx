@@ -104,6 +104,9 @@ function appliesTo(block, mode) {
     // La preferencia de movimiento reducido no es el estado por defecto.
     if (a.includes('prefers-reduced-motion:reduce')) return false;
     // @supports: se asume navegador moderno, que es donde este sistema vive.
+    // Por eso el respaldo para navegadores sin color relativo (`@supports not
+    // (… from …)`, scripts/build-tintas-respaldo.js) no cuenta.
+    if (a.startsWith('@supportsnot') && a.includes('from')) return false;
     // Cualquier otra media query (anchura) se ignora: el snapshot describe el
     // estado base, no un breakpoint concreto.
     if (a.startsWith('@media') && !a.includes('prefers-color-scheme')) return false;

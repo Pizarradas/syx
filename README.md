@@ -258,6 +258,7 @@ version it has installed — not against whatever is on `main` today.
 | `syx-design-system/contracts/resolved-tokens.json` | Every token resolved, 7 themes × light/dark |
 | `syx-design-system/tokens.json`, `/component-registry.json` | Registries |
 | `npx syx-mcp` | The MCP server, from the installed package |
+| `npx syx-tintas-respaldo <sheet.css> <partial.scss>` | For a theme of your own: writes its brand inks as literals for browsers without relative colour syntax (see `THEMING-RULES.md`) |
 
 Releases are cut by pushing a `vX.Y.Z` tag: `.github/workflows/release.yml` checks
 that the tag, `package.json` and `CHANGELOG.md` agree, runs the full chain and

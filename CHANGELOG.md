@@ -17,10 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Contraste en navegadores sin color relativo** (F0-08): Chrome y Edge 111–118, Firefox 121–127 y Safari 16.2–16.3, que el browserslist declara soportados, pintaban las tintas de marca y de estado, las variantes fuertes y los colores de código con el relleno de marca: hasta 49 pares por debajo de AA en un tema. Cada tema lleva ahora `_tintas-respaldo.scss`, generado desde su hoja compilada, con esos valores como literal dentro de `@supports not (…)`. El browserslist no cambia.
 - **Theme Builder**: tres interruptores (*Fluid Typography*, *Extended Color Palette* y *Disable Legacy Bridge*) se anunciaban sin nombre: su `aria-labelledby` apuntaba al deslizador vacío del interruptor anterior. Ahora apuntan a su título.
 
 ### Added
 
+- **`syx-tintas-respaldo`**, comando del paquete: genera el parcial de respaldo de un tema propio desde su hoja compilada (`npx syx-tintas-respaldo css/mi-tema.css scss/themes/mi-tema/_tintas-respaldo.scss`). La plantilla trae el parcial vacío y ya lo incluye.
+- **`check:contraste` mide dos ramas**, con y sin color relativo: un token que sin él siga siendo una expresión relativa sale «sin medir» y no aprueba. **`check:tintas-respaldo`** falla si un parcial está desfasado o si aparece un token relativo sin respaldo. `check:plantilla` genera el respaldo de la plantilla con el comando, como haría quien crea un tema, antes de medirla.
 - **`THIRD_PARTY_NOTICES.md`**, que viaja en el paquete: las seis familias tipográficas (OFL 1.1), los iconos de Lucide incrustados en cada hoja (ISC; MIT los derivados de Feather), y GSAP y awesome-design-md, que solo usa el sitio.
 - **Licencias que faltaban**: `fonts/google-space-grotesk/LICENSE`, `fonts/google-syne/LICENSE` e `img/icons/lucide/LICENSE`.
 - **`check:package`** falla si una carpeta de fuentes viaja sin su `LICENSE` o si el aviso de terceros no viaja.

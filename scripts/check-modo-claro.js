@@ -27,66 +27,12 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const postcss = require('postcss');
 
 const ROOT = path.resolve(__dirname, '..');
 const CSS_DIR = path.join(ROOT, 'css');
 const RELEVANTE = /^--(semantic|component|btn)-.*(color|bg|text|border|shadow|surface|link|fill|stroke|focus|tone)/;
 
-/** A qué estados (eleccion × so) se aplica un selector de :root, o null si no es uno de ellos. */
-function predicado(selector) {
-  // Sin comillas: el CSS compilado a veces las quita (`[data-theme=dark]`).
-  const s = selector.replace(/\s+/g, '').replace(/["']/g, '');
-  const tabla = {
-    ':root': () => true,
-    ':root:root': () => true,
-    ':root[data-theme=light]': (e) => e === 'light',
-    ':root[data-theme=dark]': (e) => e === 'dark',
-    ':root:not([data-theme=light])': (e) => e !== 'light',
-    ':root:not([data-theme=dark])': (e) => e !== 'dark',
-  };
-  return tabla[s] || null;
-}
-const especificidad = (sel) => (sel.match(/:root|\[|:not/g) || []).length - (sel.match(/:not/g) || []).length;
-
-function declaraciones(css) {
-  const out = [];
-  let orden = 0;
-  postcss.parse(css).walkRules((rule) => {
-    const pred = predicado(rule.selector);
-    if (!pred) return;
-    let so = null, descartar = false;
-    for (let p = rule.parent; p && p.type !== 'root'; p = p.parent) {
-      if (p.type !== 'atrule' || p.name !== 'media') continue;
-      if (/prefers-color-scheme:\s*dark/.test(p.params)) so = 'dark';
-      else if (/prefers-color-scheme:\s*light/.test(p.params)) so = 'light';
-      else descartar = true; // reduced motion, anchos: no cambian con el modo
-    }
-    if (descartar) return;
-    const spec = especificidad(rule.selector.replace(/\s+/g, ''));
-    rule.walkDecls((d) => {
-      if (d.prop.startsWith('--')) out.push({ prop: d.prop, value: d.value.trim(), pred, so, spec, orden: orden++ });
-    });
-  });
-  return out;
-}
-
-function estado(decls, eleccion, so) {
-  const vars = {};
-  decls
-    .filter((d) => d.pred(eleccion) && (d.so === null || d.so === so))
-    .sort((a, b) => a.spec - b.spec || a.orden - b.orden)
-    .forEach((d) => { vars[d.prop] = d.value; });
-  return vars;
-}
-
-function resolver(vars, valor, prof = 0) {
-  if (prof > 30 || valor === undefined) return valor ?? '';
-  return valor.replace(/var\(\s*(--[\w-]+)\s*(?:,\s*([^()]*(?:\([^()]*\))*[^()]*))?\)/g, (m, nombre, fallback) => {
-    if (vars[nombre] !== undefined) return resolver(vars, vars[nombre], prof + 1);
-    return fallback !== undefined ? resolver(vars, fallback.trim(), prof + 1) : m;
-  }).replace(/\s+/g, ' ').trim();
-}
+const { declaraciones, estado, resolver } = require('./lib/cascada');
 
 /** Luminosidad OKLCH aproximada del fondo principal, para saber si un estado es claro u oscuro. */
 function esClaro(vars) {

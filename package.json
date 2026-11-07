@@ -32,7 +32,8 @@
   "bin": {
     "syx-mcp": "scripts/mcp-server.js",
     "syx-scan": "scripts/scan-drift.js",
-    "syx-init": "scripts/init-app.js"
+    "syx-init": "scripts/init-app.js",
+    "syx-tintas-respaldo": "scripts/build-tintas-respaldo.js"
   },
   "files": [
     "index.js",
@@ -88,7 +89,9 @@
   "scripts": {
     "start": "npm run watch",
     "build": "npm run build:css && npm run build:docs-componentes && npm run build:dist",
-    "build:css": "node scripts/build-css.js && npm run build:tokens && npm run build:tokens-json",
+    "build:css": "node scripts/build-css.js && node scripts/build-tintas-respaldo.js && node scripts/build-css.js && npm run build:tokens && npm run build:tokens-json",
+    "build:tintas-respaldo": "node scripts/build-tintas-respaldo.js",
+    "check:tintas-respaldo": "node scripts/build-tintas-respaldo.js --check",
     "build:dist": "node scripts/build-dist.js",
     "watch": "sass --watch scss:css --style=expanded --no-source-map",
     "postcss": "postcss css/*.css --replace --no-map",
@@ -102,7 +105,7 @@
     "check:compilado": "node scripts/check-compilado.js",
     "export:tokens": "node scripts/export-tokens.js",
     "export:figma": "node scripts/export-figma.js",
-    "check": "npm run lint && npm run check:cadena && npm run check:contratos && npm run validate:report && npm run check:reglas && npm run check:compilado && npm run check:themes && npm run check:plantilla && npm run check:modo-claro && npm run check:contraste && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:consumidores && npm run check:registry && npm run check:usage && npm run check:mcp && npm run check:colores && npm run check:capacidades && npm run check:escaner && npm run check:init-app && npm run check:clases-docs && npm run check:docs-componentes && npm run check:recuentos && npm run check:vitrina && npm run check:why-syx && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run check:soporte && npm run check:prepros && npm run check:pages && npm run build",
+    "check": "npm run lint && npm run check:cadena && npm run check:contratos && npm run validate:report && npm run check:reglas && npm run check:compilado && npm run check:themes && npm run check:plantilla && npm run check:modo-claro && npm run check:contraste && npm run check:tintas-respaldo && npm run check:setups && npm run check:version && npm run check:tokens && npm run check:tokens-json && npm run check:huerfanos && npm run check:consumidores && npm run check:registry && npm run check:usage && npm run check:mcp && npm run check:colores && npm run check:capacidades && npm run check:escaner && npm run check:init-app && npm run check:clases-docs && npm run check:docs-componentes && npm run check:recuentos && npm run check:vitrina && npm run check:why-syx && npm run check:figma && npm run check:mixins && npm run check:clasificacion && npm run check:codeowners && npm run check:modos && npm run check:evals && npm run check:runner && npm run check:conocimiento && npm run check:encoding && npm run check:package && npm run check:soporte && npm run check:prepros && npm run check:pages && npm run build",
     "check:todo": "node scripts/check-todo.js",
     "check:cadena": "node scripts/check-cadena.js",
     "check:themes": "node scripts/check-theme-symmetry.js --strict",
