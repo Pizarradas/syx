@@ -12,6 +12,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **README y CONSUMING**: la instalación pasa a `npm install syx-design-system`, publicado en npm desde la 5.1.0.
+- **Home**: el *Quick start* enseña `npm install syx-design-system` en lugar de clonar y compilar con Sass.
+- **Web pública**: canonical y `og:url` propios en cada página (apuntaban al repositorio de GitHub), `og:image` y `twitter:image` con `assets/og-image.jpg` (era un JPEG con extensión `.png`), tarjeta `summary` porque la imagen es cuadrada, `sitemap.xml` nuevo y `robots.txt` apuntando a él en lugar de a `syntaxys.design`.
+
+### Fixed
+
+- **Theme Builder**: tres interruptores (*Fluid Typography*, *Extended Color Palette* y *Disable Legacy Bridge*) se anunciaban sin nombre: su `aria-labelledby` apuntaba al deslizador vacío del interruptor anterior. Ahora apuntan a su título.
+
+### Added
+
+- **`THIRD_PARTY_NOTICES.md`**, que viaja en el paquete: las seis familias tipográficas (OFL 1.1), los iconos de Lucide incrustados en cada hoja (ISC; MIT los derivados de Feather), y GSAP y awesome-design-md, que solo usa el sitio.
+- **Licencias que faltaban**: `fonts/google-space-grotesk/LICENSE`, `fonts/google-syne/LICENSE` e `img/icons/lucide/LICENSE`.
+- **`check:package`** falla si una carpeta de fuentes viaja sin su `LICENSE` o si el aviso de terceros no viaja.
+
+### Removed
+
+- **`site.webmanifest` y `browserconfig.xml`**: ninguna página los enlazaba y sus iconos no existían.
 
 ## [5.1.0] — 2026-11-06
 

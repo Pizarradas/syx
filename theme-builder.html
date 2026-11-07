@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYX — Theme Builder</title>
+    <link rel="canonical" href="https://pizarradas.github.io/syx/theme-builder.html">
     <link rel="stylesheet" id="syx-theme-link" href="css/setup-builder.css">
     <style>
         /* =========================================
@@ -283,7 +284,7 @@
                     </div>
                     <label class="atom-switch">
                         <input type="checkbox" class="atom-switch__input" id="advanced-mode-toggle" role="switch" aria-labelledby="advanced-mode-label">
-                        <span id="module-fluid-label" class="atom-switch__slider"></span>
+                        <span class="atom-switch__slider" aria-hidden="true"></span>
                     </label>
                 </div>
 
@@ -302,7 +303,7 @@
                     <!-- Fluid Typography & Spacing -->
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
-                            <span class="syx-type-body-small tb-d-block"
+                            <span id="module-fluid-label" class="syx-type-body-small tb-d-block"
                                 style="color: var(--primitive-color-white); font-weight: 600;">Fluid Typography &
                                 Spacing</span>
                             <p class="syx-type-caption tb-mt-1"
@@ -314,14 +315,14 @@
                         </div>
                         <label class="atom-switch tb-mt-1">
                             <input type="checkbox" class="atom-switch__input" id="module-fluid-toggle" role="switch" aria-labelledby="module-fluid-label">
-                            <span id="module-palette-label" class="atom-switch__slider"></span>
+                            <span class="atom-switch__slider" aria-hidden="true"></span>
                         </label>
                     </div>
 
                     <!-- Extended Color Palette -->
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-4">
                         <div style="flex: 1; padding-right: 1rem;">
-                            <span class="syx-type-body-small tb-d-block"
+                            <span id="module-palette-label" class="syx-type-body-small tb-d-block"
                                 style="color: var(--primitive-color-white); font-weight: 600;">Extended Color
                                 Palette</span>
                             <p class="syx-type-caption tb-mt-1"
@@ -370,14 +371,14 @@
                         </div>
                         <label class="atom-switch tb-mt-1">
                             <input type="checkbox" class="atom-switch__input" id="module-tables-toggle" role="switch" aria-labelledby="module-tables-label">
-                            <span id="module-disable-legacy-label" class="atom-switch__slider"></span>
+                            <span class="atom-switch__slider" aria-hidden="true"></span>
                         </label>
                     </div>
 
                     <!-- Disable Legacy Bridge -->
                     <div class="tb-d-flex tb-justify-between tb-align-start tb-mb-2">
                         <div style="flex: 1; padding-right: 1rem;">
-                            <span class="syx-type-body-small tb-d-block"
+                            <span id="module-disable-legacy-label" class="syx-type-body-small tb-d-block"
                                 style="color: var(--primitive-color-warning-500); font-weight: 600;">Disable Legacy
                                 Bridge</span>
                             <p class="syx-type-caption tb-mt-1"
