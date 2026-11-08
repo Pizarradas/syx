@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 732,
-      "omitidas": 366,
+      "variables": 730,
+      "omitidas": 368,
       "fueraDeAlcance": {
         "primitive": 227,
         "icon": 17,
@@ -1594,29 +1594,6 @@
           }
         },
         {
-          "name": "semantic/color/state/focus",
-          "type": "COLOR",
-          "token": "--semantic-color-state-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1175,
-              "g": 0.2275,
-              "b": 0.9999,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5216,
-              "g": 0.6555,
-              "b": 0.9994,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#1e3aff",
-            "dark": "#85a7ff"
-          }
-        },
-        {
           "name": "semantic/color/state/hover/primary",
           "type": "COLOR",
           "token": "--semantic-color-state-hover-primary",
@@ -2294,29 +2271,6 @@
           "valuesByMode": {
             "light": "cubic-bezier(0.2,0,0,1)",
             "dark": "cubic-bezier(0.2,0,0,1)"
-          }
-        },
-        {
-          "name": "semantic/focus/ring/color",
-          "type": "COLOR",
-          "token": "--semantic-focus-ring-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.1175,
-              "g": 0.2275,
-              "b": 0.9999,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5216,
-              "g": 0.6555,
-              "b": 0.9994,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#1e3aff",
-            "dark": "#85a7ff"
           }
         },
         {
@@ -21624,6 +21578,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-color-state-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-state-info-text",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -21697,6 +21655,10 @@
     },
     {
       "token": "--semantic-filter-white",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--semantic-focus-ring-color",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
