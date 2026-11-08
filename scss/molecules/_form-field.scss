@@ -36,6 +36,8 @@
     .atom-label {
       margin-block-end: var(--component-form-field-label-margin-bottom);
       display: block;
+      // Etiqueta y mensaje: una palabra sin cortes ensanchaba el campo.
+      overflow-wrap: anywhere;
       color: var(--component-form-field-color);
       font-weight: var(--semantic-font-weight-bold);
     }
@@ -45,6 +47,7 @@
     &__msg {
       margin-block-start: var(--component-form-field-msg-margin-top);
       display: block;
+      overflow-wrap: anywhere;
       font-size: var(--component-form-field-msg-font-size);
       line-height: var(--component-form-field-msg-line-height);
       color: var(--component-form-field-color); // Default color

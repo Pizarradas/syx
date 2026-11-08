@@ -9,7 +9,10 @@
   @layer syx.atoms {
   .atom-btn {
     @include border(all, var(--component-button-border-width), var(--component-button-border-style), null);
-    overflow-wrap: break-word;
+    // El botón parte línea por los espacios, como cualquier texto, y una
+    // palabra sin cortes se parte donde haga falta. Con `break-word` el ancho
+    // mínimo seguía siendo la palabra entera y desbordaba (174 px a 1280 px).
+    overflow-wrap: anywhere;
     display: inline-flex;
     align-items: center;
     justify-content: center;

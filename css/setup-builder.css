@@ -2653,7 +2653,7 @@
 @layer syx.atoms {
   .atom-btn {
     border: var(--component-button-border-width) var(--component-button-border-style);
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -4176,12 +4176,14 @@
   .mol-form-field .atom-label {
     margin-block-end: var(--component-form-field-label-margin-bottom);
     display: block;
+    overflow-wrap: anywhere;
     color: var(--component-form-field-color);
     font-weight: var(--semantic-font-weight-bold);
   }
   .mol-form-field__msg {
     margin-block-start: var(--component-form-field-msg-margin-top);
     display: block;
+    overflow-wrap: anywhere;
     font-size: var(--component-form-field-msg-font-size);
     line-height: var(--component-form-field-msg-line-height);
     color: var(--component-form-field-color);
