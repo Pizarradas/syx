@@ -88,6 +88,10 @@
 
       &__title {
         margin: 0;
+        // Una palabra sin cortes (URL, nombre propio, alemán) partía la
+        // tarjeta. `anywhere`, y no `break-word`, porque solo `anywhere`
+        // rebaja el ancho mínimo y deja encoger la caja en flex y grid.
+        overflow-wrap: anywhere;
         font-size: var(--component-card-title-font-size);
         font-weight: var(--component-card-title-font-weight);
         line-height: var(--component-card-title-line-height);
@@ -95,6 +99,9 @@
 
       &__body {
         flex-grow: 1;
+        // El cuerpo es celda de rejilla (subgrid): su ancho mínimo es el de
+        // la palabra más larga, y con `break-word` la tarjeta crecía igual.
+        overflow-wrap: anywhere;
         color: var(--component-card-body-color);
 
         > :first-child { margin-block-start: 0; }

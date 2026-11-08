@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Palabras sin cortes** (fase 2 del plan de generación): una URL o una palabra larga desbordaba el título de tarjeta, el título y el cuerpo de alerta, la etiqueta y el mensaje de campo y el botón (este, 174 px a 1280 px, porque `break-word` no rebaja el ancho mínimo). Ahora llevan `overflow-wrap: anywhere`. **Cambia el comportamiento:** un botón en una fila flex sin `wrap` que no cabe parte la palabra en vez de salirse.
 - `ux.md` y `front/mobile-first.md` documentaban breakpoints que no son la escala (640, 800, 1120 px); `ux.md` citaba un `is-loading` que `atom-btn` no tiene y cambiaba el nombre del botón de mostrar contraseña al pulsarlo.
 - **La jerarquía de titulares se invertía en móvil:** por debajo de ~540 px el h3 (`2xl`, 30 px) salía más pequeño que el h4 (`xl`, 31,25 px). Los titulares usan ahora dos razones: ×1,125 en el suelo (h4 28 px, h3 31,6 px, h2 35,6 px, h1 40 px a 375 px) y ×1,25 en el techo, que no cambia. **Cambia el aspecto en móvil:** el h4 baja unos 3 px y el h3 y el h2 suben de 1,5 a 2 px. Además, `2xl`, `3xl` y `4xl` no llegaban a su máximo a 1440 px (el h2 se quedaba en 51 px de 55); ahora sí. Lo vigila `check:escala-tipo`.
 - **Opacidad en Figma:** `contracts/figma/*.figma.json` exportaba la opacidad en tanto por uno (0.5) y Figma la lee en porcentaje: una capa enlazada quedaba al 0,5 %. Ahora va en 0–100, y `check:figma` falla si vuelve.
