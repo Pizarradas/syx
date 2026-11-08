@@ -26,6 +26,9 @@
       border-radius: var(--component-alert-border-radius);
       background-color: var(--component-alert-bg);
       color: var(--component-alert-color);
+      // Título y cuerpo: una palabra sin cortes desbordaba la alerta. Se
+      // hereda a los dos. `anywhere` rebaja el ancho mínimo; `break-word` no.
+      overflow-wrap: anywhere;
 
       &__title {
         margin: 0;
