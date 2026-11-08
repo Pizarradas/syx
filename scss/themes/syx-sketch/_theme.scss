@@ -77,7 +77,9 @@
   --semantic-color-on-secondary: var(--semantic-color-ink-dark);
   --semantic-color-on-state-hover-secondary: var(--semantic-color-ink-dark);
   --semantic-color-on-quinary: var(--semantic-color-ink-light);
-  --semantic-focus-ring-color: var(--semantic-color-primary);
+  // 1.4.11: el anillo sigue a la variante fuerte, no al primario: con una
+  // marca clara (amarillo, aguamarina, lima) el primario no llega a 3:1.
+  --semantic-focus-ring-color: var(--semantic-color-primary-strong);
   // gray-500 se quedaba en 3,5:1 sobre el campo blanco; el placeholder es
   // texto y pide 4,5. El terciario del tema (gray-600) da 5,5.
   --semantic-color-placeholder: var(--semantic-color-text-tertiary);

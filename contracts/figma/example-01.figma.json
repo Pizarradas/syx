@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 608,
-      "omitidas": 490,
+      "variables": 606,
+      "omitidas": 492,
       "fueraDeAlcance": {
         "primitive": 227,
         "icon": 17,
@@ -1020,29 +1020,6 @@
           }
         },
         {
-          "name": "semantic/color/state/focus",
-          "type": "COLOR",
-          "token": "--semantic-color-state-focus",
-          "valuesByMode": {
-            "light": {
-              "r": 0.396,
-              "g": 0.3955,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5114,
-              "g": 0.5455,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#6565ff",
-            "dark": "#828bff"
-          }
-        },
-        {
           "name": "semantic/color/state/hover/primary",
           "type": "COLOR",
           "token": "--semantic-color-state-hover-primary",
@@ -1444,29 +1421,6 @@
           "valuesByMode": {
             "light": "ease",
             "dark": "ease"
-          }
-        },
-        {
-          "name": "semantic/focus/ring/color",
-          "type": "COLOR",
-          "token": "--semantic-focus-ring-color",
-          "valuesByMode": {
-            "light": {
-              "r": 0.396,
-              "g": 0.3955,
-              "b": 1,
-              "a": 1
-            },
-            "dark": {
-              "r": 0.5114,
-              "g": 0.5455,
-              "b": 1,
-              "a": 1
-            }
-          },
-          "hexByMode": {
-            "light": "#6565ff",
-            "dark": "#828bff"
           }
         },
         {
@@ -11772,7 +11726,7 @@
         },
         {
           "token": "--component-check-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-check-size",
@@ -13543,7 +13497,7 @@
         },
         {
           "token": "--component-form-field-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-radio-bg-checked",
@@ -14010,7 +13964,7 @@
         },
         {
           "token": "--component-form-field-shadow-focus",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-switch-bg-on",
@@ -14294,7 +14248,7 @@
         },
         {
           "token": "--component-table-state-hover-shadow",
-          "motivo": "sombra: en Figma es un efecto, no una variable"
+          "motivo": "expresión CSS: solo un navegador la reduce"
         },
         {
           "token": "--component-table-th-font-size",
@@ -17286,7 +17240,7 @@
     },
     {
       "token": "--component-button-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-button-shadow-hover",
@@ -17390,7 +17344,7 @@
     },
     {
       "token": "--component-check-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-check-size",
@@ -17714,7 +17668,7 @@
     },
     {
       "token": "--component-form-field-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-form-field-success-color",
@@ -17930,7 +17884,7 @@
     },
     {
       "token": "--component-link-primary-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-list-icon-filter",
@@ -18070,7 +18024,7 @@
     },
     {
       "token": "--component-pagination-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-pill-danger-bg",
@@ -18310,7 +18264,7 @@
     },
     {
       "token": "--component-table-state-hover-shadow",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--component-table-th-font-size",
@@ -18673,6 +18627,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-color-state-focus",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-color-state-info-text",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -18797,6 +18755,10 @@
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
+      "token": "--semantic-focus-ring-color",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
       "token": "--semantic-font-size-body",
       "motivo": "expresión CSS: solo un navegador la reduce"
     },
@@ -18862,7 +18824,7 @@
     },
     {
       "token": "--semantic-shadow-focus",
-      "motivo": "sombra: en Figma es un efecto, no una variable"
+      "motivo": "expresión CSS: solo un navegador la reduce"
     },
     {
       "token": "--semantic-shadow-hard",

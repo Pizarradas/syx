@@ -130,7 +130,9 @@
     --semantic-color-border-strong: oklch(0.78 0.019 261.325);
 
     // State
-    --semantic-focus-ring-color: var(--semantic-color-primary);
+    // 1.4.11: el anillo sigue a la variante fuerte, no al primario: con una
+    // marca clara (amarillo, aguamarina, lima) el primario no llega a 3:1.
+    --semantic-focus-ring-color: var(--semantic-color-primary-strong);
 
     // Fonts
     --semantic-font-family-primary: var(--primitive-font-family-inter);
