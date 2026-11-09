@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **`syx-embed` y `syx-map` usan `aspect-ratio` nativo** en lugar del truco de `height: 0` + `padding-block-end` en %, como ya hacía el mixin `aspect-ratio()`. Las clases no cambian; el contenedor tiene ahora altura real y `--3by2` es exacto (antes 66,66 %). `syx-map--h100` pasa de `padding-block-end: 100vh` a `block-size: 100dvh` (la barra del navegador móvil ya no lo recorta).
 - **Tabla segura por defecto** (plan de generación, fase 2f): `atom-table__container` hace scroll por sí mismo, con o sin `--resp`, y lleva el anillo de foco cuando recibe `tabindex="0"`. El suelo `min-width: 44rem` solo se aplica dentro de un contenedor con scroll (`__container` o `--resp`). Antes, una tabla suelta o envuelta solo en `__container` ensanchaba la página a 704 px en una ventana de 320 (WCAG 1.4.10); ahora mide 320 y la tabla hace scroll dentro. **Cambia el comportamiento:** una `<table class="atom-table">` sin contenedor ya no tiene suelo de ancho y comprime sus columnas en vez de desbordar.
 - **El anillo de foco de `syx-sketch` y `example-01` sigue a la variante fuerte** (plan de generación, fase 2a): declaraban `--semantic-focus-ring-color: var(--semantic-color-primary)` y se saltaban la derivación `-strong`. Con los azules de hoy pasa, pero con una marca clara (amarillo `#ffe600`, aguamarina `#7fffd4`, lima `#39ff14`) el anillo bajaba de 3:1 (WCAG 1.4.11): 16 fallos de `anillo-de-foco` en `check:contraste` por marca, 0 con `var(--semantic-color-primary-strong)`. Los otros cinco temas ya no lo hacían.
 - **`check:escaner` ya no lleva el primario de `syx-sketch` escrito a mano** (fase 2b): lo pregunta al sistema (`getToken`, lo mismo que `get_token`). Cambiar la marca rompía dos casos por la razón equivocada; con un primario `#ffe600` pasa 43/43 (antes 41/43).
@@ -39,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Utilidades `syx-aspect-*`** (`16by9`, `8by5`, `3by2`, `4by3`, `1by1`): `aspect-ratio` nativo sobre el propio elemento (`<img>`, `<video>`, un bloque), sin contenedor ni hijo absoluto. Sin variantes responsive.
 - **Tres reglas nuevas en `syx-scan`** (F1-06): `cifras-de-estilo-antiguo` (media) en tablas, horas, fechas e importes; `etiqueta-de-estado-pequena` (baja) por debajo de 14 px; `nombre-sin-texto-visible` (WCAG 2.5.3): media si el nombre accesible no contiene el texto visible, baja si lo contiene sin empezar por él.
 - **`check:conocimiento` vigila las clases**, no solo los tokens: toda `atom-`/`mol-`/`org-` citada en el córtex, la gobernanza, ATLAS, las entradas, las guías de `scss/` y los modos tiene que existir en el CSS compilado (había 68 que no existían).
 - **Tokens que faltaban o no se leían:** `--component-list-ordered-counter-bg` y `-color` para el contador de `atom-list--ordered`, que leía el semántico directamente; los bordes `--component-button-{variante}-border` y `-filled-border` existían y nadie los leía: ahora los lee `atom-btn`, con el mismo valor que tenía el borde.

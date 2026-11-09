@@ -8442,9 +8442,23 @@
     max-width: 100%;
     height: auto;
   }
+  .syx-aspect-16by9 {
+    aspect-ratio: 16/9;
+  }
+  .syx-aspect-8by5 {
+    aspect-ratio: 8/5;
+  }
+  .syx-aspect-3by2 {
+    aspect-ratio: 3/2;
+  }
+  .syx-aspect-4by3 {
+    aspect-ratio: 4/3;
+  }
+  .syx-aspect-1by1 {
+    aspect-ratio: 1/1;
+  }
   .syx-embed {
     position: relative;
-    height: 0;
     display: block;
     overflow: hidden;
   }
@@ -8458,23 +8472,22 @@
     border: 0;
   }
   .syx-embed--16by9 {
-    padding-block-end: 56.25%;
+    aspect-ratio: 16/9;
   }
   .syx-embed--8by5 {
-    padding-block-end: 62.5%;
+    aspect-ratio: 8/5;
   }
   .syx-embed--3by2 {
-    padding-block-end: 66.66%;
+    aspect-ratio: 3/2;
   }
   .syx-embed--4by3 {
-    padding-block-end: 75%;
+    aspect-ratio: 4/3;
   }
   .syx-embed--1by1 {
-    padding-block-end: 100%;
+    aspect-ratio: 1/1;
   }
   .syx-map {
     position: relative;
-    height: 0;
     overflow: hidden;
   }
   .syx-map__iframe {
@@ -8486,19 +8499,19 @@
     border: 0;
   }
   .syx-map--16by9 {
-    padding-block-end: 56.25%;
+    aspect-ratio: 16/9;
   }
   .syx-map--8by5 {
-    padding-block-end: 62.5%;
-  }
-  .syx-map--4by3 {
-    padding-block-end: 75%;
+    aspect-ratio: 8/5;
   }
   .syx-map--3by2 {
-    padding-block-end: 66.66%;
+    aspect-ratio: 3/2;
+  }
+  .syx-map--4by3 {
+    aspect-ratio: 4/3;
   }
   .syx-map--h100 {
-    padding-block-end: 100vh;
+    block-size: 100dvh;
   }
   .syx-obj-cover {
     object-fit: cover;

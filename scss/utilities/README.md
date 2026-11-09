@@ -234,6 +234,14 @@ Brand colors: `.syx-text-facebook` · `.syx-text-twitter` · `.syx-text-instagra
 <img class="syx-img-fluid" src="..." alt="..." />
 ```
 
+#### Aspect ratio on the element itself
+
+```html
+<img class="syx-aspect-16by9 syx-obj-cover" src="..." alt="..." width="1600" height="900" />
+```
+
+Variants: `syx-aspect-16by9` · `-8by5` · `-3by2` · `-4by3` · `-1by1` (native `aspect-ratio`, no wrapper). On an `<img>`, keep the `width`/`height` attributes: they already reserve the space and prevent layout shift; the class is for when CSS imposes a different ratio, usually with `syx-obj-cover`.
+
 #### Embed with aspect-ratio
 
 ```html
@@ -252,7 +260,7 @@ Variants: `--16by9` · `--8by5` · `--3by2` · `--4by3` · `--1by1`
 </div>
 ```
 
-Variants: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100`
+Variants: `--16by9` · `--8by5` · `--4by3` · `--3by2` · `--h100` (`100dvh`)
 
 #### Object-fit
 

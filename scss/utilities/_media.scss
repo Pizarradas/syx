@@ -3,6 +3,7 @@
 // @layer syx.utilities ensures these always win over components
 // without !important and regardless of import order.
 
+@use "sass:list";
 @use "../abstracts/index" as *;
 
 @layer syx.utilities {
@@ -18,16 +19,36 @@
 }
 
 // ================================================
+// ASPECT RATIO (elemento directo: img, video, div)
+// ================================================
+// Usage: <img class="syx-aspect-16by9 syx-obj-cover" width="1600" height="900" ...>
+// Con <img>, los atributos width/height ya reservan el hueco (CLS); la
+// utilidad sirve cuando el CSS impone otra proporción. Sin variantes
+// responsive a propósito: no multiplican el CSS por breakpoint.
+$_syx-ratios: (
+  "16by9": (16, 9),
+  "8by5":  (8, 5),
+  "3by2":  (3, 2),
+  "4by3":  (4, 3),
+  "1by1":  (1, 1),
+);
+
+@each $name, $r in $_syx-ratios {
+  .syx-aspect-#{$name} { @include aspect-ratio(list.nth($r, 1), list.nth($r, 2)); }
+}
+
+// ================================================
 // RESPONSIVE EMBED (aspect-ratio wrapper)
 // ================================================
 // Usage:
 //   <div class="syx-embed syx-embed--16by9">
 //     <iframe class="syx-embed__item" ...></iframe>
 //   </div>
+// aspect-ratio nativo: el contenedor tiene altura real (antes, height 0 +
+// padding en %). Las clases no cambian.
 
 .syx-embed {
   @include position(relative);
-  @include size(null, 0);
   display: block;
   overflow: hidden;
 
@@ -37,11 +58,9 @@
     @include border(all, 0, null, null);
   }
 
-  &--16by9  { padding-block-end: 56.25%; }
-  &--8by5   { padding-block-end: 62.5%; }
-  &--3by2   { padding-block-end: 66.66%; }
-  &--4by3   { padding-block-end: 75%; }
-  &--1by1   { padding-block-end: 100%; }
+  @each $name, $r in $_syx-ratios {
+    &--#{$name} { @include aspect-ratio(list.nth($r, 1), list.nth($r, 2)); }
+  }
 }
 
 // ================================================
@@ -49,7 +68,6 @@
 // ================================================
 .syx-map {
   @include position(relative);
-  @include size(null, 0);
   overflow: hidden;
 
   &__iframe {
@@ -58,11 +76,13 @@
     @include border(all, 0, null, null);
   }
 
-  &--16by9 { padding-block-end: 56.25%; }
-  &--8by5  { padding-block-end: 62.5%; }
-  &--4by3  { padding-block-end: 75%; }
-  &--3by2  { padding-block-end: 66.66%; }
-  &--h100  { padding-block-end: 100vh; }
+  @each $name, $r in $_syx-ratios {
+    @if $name != "1by1" {
+      &--#{$name} { @include aspect-ratio(list.nth($r, 1), list.nth($r, 2)); }
+    }
+  }
+  // Alto de la ventana visible (dvh: no lo tapa la barra del navegador móvil).
+  &--h100 { block-size: 100dvh; }
 }
 
 // ================================================
