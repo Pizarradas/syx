@@ -12,7 +12,8 @@
  * el CSS emitido son `position: sticky`, `transition: …`, `!important`…
  *
  * Así que esto compila cada punto de entrada CON MAPA DE FUENTES y aplica
- * R01, R02, R03, R04 y R11 a cada declaración emitida, con los mismos
+ * R01, R02, R03, R04 y R11 a cada declaración emitida (y rechaza la
+ * proporción por padding en %, que sustituye aspect-ratio()), con los mismos
  * comparadores del motor (lib/rules.js, leídos de contracts/rules.json). Los
  * permisos siguen siendo los del contrato y se deciden en el ORIGEN de la
  * declaración, que da el mapa: una `transition` que escribe el mixin
@@ -86,6 +87,14 @@ const selectorDe = (nodo) => {
 const CAPA_COMPONENTE = /(^|\.)syx\.(atoms|molecules|organisms)$/;
 const CAPA_ALTA = /^--(primitive|semantic|theme)-/;
 const RUTAS_PR = /^scss\/(atoms|molecules|organisms|layout|utilities|pages|abstracts\/tokens\/components)\//;
+// Proporción por padding: `height: 0` + un padding vertical en % (que se
+// calcula sobre el ANCHO) es el truco anterior a `aspect-ratio`. SYX lo
+// retiró en la 5.1 (PR #30) y el mixin aspect-ratio() lo sustituye. Sin
+// excepción en línea: todo el soporte mínimo de SYX tiene aspect-ratio (y
+// syx-allow solo admite ids de contracts/rules.json). La capa del sitio queda
+// fuera, como en R11.
+const PADDING_VERTICAL = /^padding(-(top|bottom|block|block-start|block-end))?$/;
+const PORCENTAJE = /(^|[\s(])-?[\d.]+%/;
 
 const fallos = [];
 let declaraciones = 0;
@@ -109,6 +118,11 @@ for (const entrada of entradas) {
     // de un salto: R11 mira qué nombre se lee, no quién lo declara.
     if (origen && CAPA_ALTA.test(decl.prop) && RUTAS_PR.test(origen) && !origen.includes('_deprecated')) {
       fallos.push({ entrada, regla: 'capa', motivo: `${decl.prop} se declara fuera de su capa`, donde: `${capaDe(decl)} ${selectorDe(decl)}`, origen: `${origen}:${o.line}` });
+    }
+
+    if (origen && PADDING_VERTICAL.test(decl.prop) && PORCENTAJE.test(decl.value)
+      && !origen.startsWith('scss/site/')) {
+      fallos.push({ entrada, regla: 'aspecto', motivo: `${decl.prop}: ${decl.value} es una proporción por padding; usa @include aspect-ratio(ancho, alto)`, donde: `${capaDe(decl)} ${selectorDe(decl)}`, origen: `${origen}:${o.line}` });
     }
 
     // El nodo emitido, con lo que el motor necesita ver.

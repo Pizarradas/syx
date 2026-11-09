@@ -124,6 +124,14 @@ module.exports = [
   // aplica las reglas a lo que Sass emite y decide el permiso por el origen
   // de cada declaración (mapa de fuentes).
   {
+    id: 'compilado-aspecto-padding',
+    regresion: 'una utilidad vuelve al truco de height 0 + padding-block-end en % para fijar la proporción',
+    guardian: 'check:compilado (aspecto)',
+    comando: COMPILADO,
+    espera: /aspecto scss\/utilities\/_media\.scss/,
+    mutar: (t) => t.reemplazar('scss/utilities/_media.scss', '  &--h100 { block-size: 100dvh; }', '  &--h100 { block-size: 100dvh; }\n  &--legacy { height: 0; padding-block-end: 56.25%; }'),
+  },
+  {
     id: 'compilado-r01-interpolado',
     regresion: "`var(--#{'primitive'}-…)`: el primitivo se arma con interpolación",
     guardian: 'check:compilado (R01)',
