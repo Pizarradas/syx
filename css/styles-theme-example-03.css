@@ -3996,9 +3996,12 @@
   .atom-radio__label::after {
     content: "";
     position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: calc(var(--component-radio-size) / 4);
-    transform: translateY(-50%) scale(0);
+    inset-block-start: 0;
+    inset-inline-end: calc(100% - var(--component-radio-size));
+    inset-block-end: 0;
+    inset-inline-start: 0;
+    margin: auto;
+    transform: scale(0);
     width: var(--component-radio-checked-size);
     height: var(--component-radio-checked-size);
     border-radius: var(--component-radio-dot-border-radius);
@@ -4019,7 +4022,7 @@
     border-color: var(--component-radio-bg-checked);
   }
   .atom-radio__input:checked + .atom-radio__label::after {
-    transform: translateY(-50%) scale(1);
+    transform: scale(1);
   }
   .atom-radio__input:focus-visible + .atom-radio__label::before {
     outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);

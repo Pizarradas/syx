@@ -54,11 +54,16 @@
         );
       }
 
-      // Inner dot (hidden by default)
+      // Inner dot (hidden by default) — centrado con inset + margin: auto
+      // sobre una caja del tamaño del círculo, como el ✓ de atom-check.
+      // Antes era `left: size / 4`, que solo centra si el punto mide la mitad
+      // del círculo; con 8px sobre 24px quedaba 2px a la izquierda, y al ser
+      // ambos tokens fluidos (clamp) con ritmos distintos, no hay cociente fijo.
       &::after {
         content: "";
-        @include absolute($top: 50%, $left: calc(var(--component-radio-size) / 4));
-        transform: translateY(-50%) scale(0);
+        @include absolute($top: 0, $right: calc(100% - var(--component-radio-size)), $bottom: 0, $left: 0);
+        margin: auto;
+        transform: scale(0);
         width: var(--component-radio-checked-size);
         height: var(--component-radio-checked-size);
         border-radius: var(--component-radio-dot-border-radius);
@@ -84,7 +89,7 @@
       }
 
       &::after {
-        transform: translateY(-50%) scale(1);
+        transform: scale(1);
       }
     }
 
