@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "5.1.0",
-    "generated": "2026-11-08",
+    "generated": "2026-11-09",
     "generator": "scripts/build-component-registry.js",
     "description": "SYX Design System — inventario de componentes legible por máquina, generado desde el código y contrastado contra el CSS compilado.",
     "tokenPrefix": "--component-",
@@ -981,9 +981,9 @@
         "--component-table-th-font-size",
         "--component-table-th-line-height"
       ],
-      "description": "[scope: system-reusable] Tabular data — rows that compare along shared columns. --resp goes on the wrapper <div> (with __container), never on the <table>: overflow has no effect on a table box, so the page itself scrolled sideways. The table keeps a min-width floor so it scrolls instead of collapsing, and --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.",
+      "description": "[scope: system-reusable] Tabular data — rows that compare along shared columns. Wrap it in __container: the wrapper scrolls by itself (--resp only adds spacing and can stand in for it on a plain <div>), and inside it the table keeps a min-width floor so it scrolls instead of collapsing. A bare <table> has no floor, so it compresses instead of widening the page. Never put --resp on the <table>: overflow has no effect on a table box. --is-stick-thead pins the header. Never for layout: if the cells do not share a meaning down the column, it is not a table.",
       "usage": "<div class=\"atom-table__container atom-table--resp\" role=\"region\" aria-label=\"Semantic tokens\" tabindex=\"0\"><table class=\"atom-table atom-table--primary\"><thead><tr><th class=\"atom-table__th\" scope=\"col\">Token</th></tr></thead><tbody><tr><td class=\"atom-table__td\">--semantic-color-text-primary</td></tr></tbody></table></div>",
-      "a11y": "Native <table> with <th scope> headers; name it with <caption> or aria-label. With --resp the scrolling element is the wrapper <div>: give it role=\"region\", an aria-label and tabindex=\"0\" so it can be scrolled from the keyboard (it takes the system focus ring). No JS."
+      "a11y": "Native <table> with <th scope> headers; name it with <caption> or aria-label. The scrolling element is the wrapper <div>: give it role=\"region\", an aria-label and tabindex=\"0\" so it can be scrolled from the keyboard (it takes the system focus ring). No JS."
     },
     {
       "name": "title",

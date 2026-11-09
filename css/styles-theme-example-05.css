@@ -4211,12 +4211,17 @@
 }
 @layer syx.atoms {
   .atom-table {
-    min-width: var(--component-table-min-width);
     word-break: normal;
   }
   .atom-table__container {
     position: relative;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .atom-table__container:focus-visible {
+    outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
+    outline-offset: var(--semantic-focus-ring-offset);
   }
   .atom-table__th {
     padding: var(--component-table-cell-padding-y) var(--component-table-cell-padding-x);
@@ -4259,6 +4264,9 @@
   .atom-table--resp:focus-visible {
     outline: var(--semantic-focus-ring-width) var(--semantic-focus-ring-style) var(--semantic-focus-ring-color, CanvasText);
     outline-offset: var(--semantic-focus-ring-offset);
+  }
+  :where(.atom-table__container, .atom-table--resp) > .atom-table {
+    min-width: var(--component-table-min-width);
   }
   .atom-table--is-stick-thead {
     overflow-y: auto;

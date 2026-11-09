@@ -8,16 +8,23 @@
 @mixin atom-table($theme: null) {
   @layer syx.atoms {
   .atom-table {
-      // Ancho mínimo: sin él, el navegador comprime las columnas hasta
-      // dejarlas en una palabra por línea antes de permitir scroll. Con un
-      // suelo, la tabla mantiene su forma y el contenedor hace scroll.
-      min-width: var(--component-table-min-width);
+    // El ancho mínimo solo se aplica dentro de un contenedor con scroll (más
+    // abajo). Suelta, una tabla con suelo de 44rem ensanchaba la página a
+    // 704 px en una ventana de 320 (WCAG 1.4.10): sin contenedor se comprime.
     word-break: normal;
 
-    // &__container
+    // &__container: hace scroll por sí mismo, con o sin --resp. Antes solo
+    // --resp desbordaba dentro; sin él, la tabla empujaba la página.
     &__container {
       @include position(relative);
       @include size(100%, null);
+      overflow-x: auto;
+      overflow-y: hidden;
+
+      // Con scroll, el contenedor puede recibir foco (tabindex="0"): anillo común.
+      &:focus-visible {
+        @include focus-ring();
+      }
     }
 
     // &__th
@@ -89,6 +96,12 @@
     &:focus-visible {
       @include focus-ring();
     }
+  }
+
+  // Suelo de ancho: sin él, el navegador comprime las columnas hasta dejarlas
+  // en una palabra por línea. Solo donde hay quien haga scroll.
+  :where(.atom-table__container, .atom-table--resp) > .atom-table {
+    min-width: var(--component-table-min-width);
   }
 
   // stylelint-disable-next-line no-duplicate-selectors -- segundo bloque a propósito: los modificadores --is van después de --resp
