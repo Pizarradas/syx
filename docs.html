@@ -2935,7 +2935,7 @@ scss/organisms/_site-header.scss</code></pre>
         <!-- Media -->
         <section class="syx-mb-5" id="util-media">
           <h3 class="atom-title atom-title--h5 syx-mb-3">Media
-            — img-fluid · embed · object-fit</h3>
+            — img-fluid · aspect · embed · object-fit</h3>
           <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-img-fluid</p>
           <div class="layout-grid__nested syx-mb-3">
             <div class="layout-grid__col-xs-12 layout-grid__col-sm-8 layout-grid__col-md-5">
@@ -2953,6 +2953,24 @@ scss/organisms/_site-header.scss</code></pre>
                   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
               </div>
             </div>
+          </div>
+          <p class="syx-type-overline syx-text-gray syx-mb-2">.syx-aspect-* + .syx-obj-cover — the same 4:3 image, ratio set on the element (no wrapper)</p>
+          <div class="layout-grid__nested syx-gap-3 syx-mb-3">
+            <figure class="layout-grid__col-xs-12 layout-grid__col-sm-4">
+              <img src="https://picsum.photos/seed/syx/800/600" alt="" width="800" height="600" loading="lazy"
+                class="syx-aspect-16by9 syx-obj-cover syx-img-fluid">
+              <figcaption class="syx-type-caption syx-text-gray syx-mt-1">.syx-aspect-16by9 · 16:9</figcaption>
+            </figure>
+            <figure class="layout-grid__col-xs-12 layout-grid__col-sm-4">
+              <img src="https://picsum.photos/seed/syx/800/600" alt="" width="800" height="600" loading="lazy"
+                class="syx-aspect-4by3 syx-obj-cover syx-img-fluid">
+              <figcaption class="syx-type-caption syx-text-gray syx-mt-1">.syx-aspect-4by3 · 4:3</figcaption>
+            </figure>
+            <figure class="layout-grid__col-xs-12 layout-grid__col-sm-4">
+              <img src="https://picsum.photos/seed/syx/800/600" alt="" width="800" height="600" loading="lazy"
+                class="syx-aspect-1by1 syx-obj-cover syx-img-fluid">
+              <figcaption class="syx-type-caption syx-text-gray syx-mt-1">.syx-aspect-1by1 · 1:1</figcaption>
+            </figure>
           </div>
           <p class="syx-type-overline syx-text-gray syx-mb-2">Object-fit · Background-size classes</p>
           <div class="mol-label-group">

@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Ejemplo de `syx-aspect-*` en `docs.html`** (sección Media): la misma imagen 4:3 recortada a 16:9, 4:3 y 1:1 con `syx-obj-cover`, sin contenedor.
 - **Utilidades `syx-aspect-*`** (`16by9`, `8by5`, `3by2`, `4by3`, `1by1`): `aspect-ratio` nativo sobre el propio elemento (`<img>`, `<video>`, un bloque), sin contenedor ni hijo absoluto. Sin variantes responsive.
 - **Tres reglas nuevas en `syx-scan`** (F1-06): `cifras-de-estilo-antiguo` (media) en tablas, horas, fechas e importes; `etiqueta-de-estado-pequena` (baja) por debajo de 14 px; `nombre-sin-texto-visible` (WCAG 2.5.3): media si el nombre accesible no contiene el texto visible, baja si lo contiene sin empezar por él.
 - **`check:conocimiento` vigila las clases**, no solo los tokens: toda `atom-`/`mol-`/`org-` citada en el córtex, la gobernanza, ATLAS, las entradas, las guías de `scss/` y los modos tiene que existir en el CSS compilado (había 68 que no existían).
