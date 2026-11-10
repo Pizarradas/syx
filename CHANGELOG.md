@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **El escáner mira los `style="…"` sobre elementos de SYX** (plan de generación, fase 2d): un atributo style que pinta una clase de SYX (`color`, `padding`, `font-size`…) cuenta como repintarla, igual que una regla. Entra como aviso (`baja`): en las páginas propias marca 49 casos que quedan por arreglar. Colocar y sobrescribir tokens en línea siguen permitidos.
 - **Ejemplo de `syx-aspect-*` en `docs.html`** (sección Media): la misma imagen 4:3 recortada a 16:9, 4:3 y 1:1 con `syx-obj-cover`, sin contenedor.
 - **Utilidades `syx-aspect-*`** (`16by9`, `8by5`, `3by2`, `4by3`, `1by1`): `aspect-ratio` nativo sobre el propio elemento (`<img>`, `<video>`, un bloque), sin contenedor ni hijo absoluto. Sin variantes responsive.
 - **Tres reglas nuevas en `syx-scan`** (F1-06): `cifras-de-estilo-antiguo` (media) en tablas, horas, fechas e importes; `etiqueta-de-estado-pequena` (baja) por debajo de 14 px; `nombre-sin-texto-visible` (WCAG 2.5.3): media si el nombre accesible no contiene el texto visible, baja si lo contiene sin empezar por él.
