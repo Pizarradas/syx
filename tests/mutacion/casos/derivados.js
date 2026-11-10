@@ -6,6 +6,8 @@
 
 'use strict';
 
+const path = require('path');
+
 module.exports = [
   {
     id: 'css-editado-a-mano',
@@ -37,6 +39,20 @@ module.exports = [
     comando: ['node', 'scripts/syx-validate.js', '--check'],
     espera: /lint-contract\.json/,
     mutar: (t) => t.json('contracts/lint-contract.json', (c) => { c.stats.legacyRuntime = 0; }),
+  },
+  // Regenerar en Windows cambiaba el orden de token-usage-map.json y
+  // check:contratos fallaba sin que nada hubiera cambiado: el validador leía
+  // los .scss en el orden en que el disco los lista. Aquí el disco lista al
+  // revés; con el orden fijo da igual, sin él el guardián lo ve.
+  {
+    id: 'contratos-segun-el-disco',
+    regresion: 'el validador lee los .scss en el orden del disco (sin ordenar)',
+    guardian: 'check:contratos',
+    comando: ['node', 'scripts/syx-validate.js', '--check'],
+    // Entre comillas: en Windows la copia puede ir en una ruta con espacios.
+    env: (t) => ({ NODE_OPTIONS: `--require ${JSON.stringify(path.join(t.dir, 'tests/mutacion/readdir-al-reves.js'))}` }),
+    espera: /token-usage-map\.json/,
+    mutar: (t) => t.reemplazar('scripts/syx-validate.js', /\n\s*\.sort\(\(a, b\) => \(a\.name < b\.name[^\n]*\);/, ';'),
   },
   {
     id: 'figma-fichero-de-mas',

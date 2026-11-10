@@ -56,7 +56,11 @@ function trozosCss(html) {
     trozos.push({ css: m[1], desde: lineaDe(limpio, m.index + m[0].indexOf(m[1])), origen: 'bloque <style>' });
   }
   for (const m of limpio.matchAll(/\bstyle\s*=\s*"([^"]*)"/gi)) {
-    trozos.push({ css: m[1], desde: lineaDe(limpio, m.index), origen: 'atributo style', unaLinea: true });
+    // Las clases de la etiqueta que lleva el atributo: un `style` sobre un
+    // `.atom-table` lo pinta igual que una regla con ese selector (3c).
+    const etiqueta = limpio.slice(limpio.lastIndexOf('<', m.index), limpio.indexOf('>', m.index) + 1);
+    const clases = (/\bclass\s*=\s*"([^"]*)"/i.exec(etiqueta) || [])[1] || '';
+    trozos.push({ css: m[1], desde: lineaDe(limpio, m.index), origen: 'atributo style', unaLinea: true, clases: clases.split(/\s+/).filter(Boolean) });
   }
   return trozos;
 }
@@ -586,6 +590,24 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
     if (!esHtml || trozos.length) {
       const COLOCAR = /^(margin|margin-[a-z-]+|grid-area|grid-column|grid-row|grid-column-[a-z]+|grid-row-[a-z]+|order|align-self|justify-self|place-self|flex|flex-grow|flex-shrink|flex-basis|inline-size|max-inline-size|min-inline-size|width|max-width|min-width)$/;
       for (const t of trozos) {
+        // Un atributo style no tiene selector: lo que pinta es su elemento. Si
+        // ese elemento lleva una clase de SYX, cuenta igual que una regla con
+        // ella de sujeto. Regla nueva (plan de generación, fase 2d): entra como
+        // aviso, `baja`, hasta que se vea qué marca en las apps reales.
+        if (t.unaLinea) {
+          const syxClase = (t.clases || []).find((c) => /^(atom|mol|org)-[A-Za-z0-9_-]+$/.test(c));
+          const pinta = syxClase ? [...t.css.matchAll(/(?:^|;)\s*([a-zA-Z-]+)\s*:/g)].map((m) => m[1].toLowerCase())
+            .filter((p) => !p.startsWith('--') && !COLOCAR.test(p)) : [];
+          if (pinta.length) {
+            añadir({
+              tipo: 'pinta-clase-syx-style', gravedad: 'baja', file: rel, linea: t.desde,
+              que: `un style="…" pinta .${syxClase} (${[...new Set(pinta)].slice(0, 4).join(', ')})`,
+              detalle: `style="${t.css.trim().slice(0, 70)}" sobre un elemento con .${syxClase}: una clase de SYX solo se coloca (margin, grid-*, order, align/justify-self, flex) desde la app, también en línea.`,
+              sugerencia: 'Usa un modificador o una utilidad que exista, sobrescribe sus tokens en el style (--component-…), o envuélvelo en un elemento propio (app-*) — CONSUMING.md §3–4.',
+            });
+          }
+          continue;
+        }
         const css = t.css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).replace(/\/\/[^\n]*/g, (m) => ' '.repeat(m.length));
         let i = 0;
         while ((i = css.indexOf('{', i)) !== -1) {

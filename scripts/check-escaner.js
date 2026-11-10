@@ -287,6 +287,25 @@ comprobar('app: colocar, :has() y sobrescribir un token NO es pintar', () => {
   if (malos.length) throw new Error(malos.map((h) => h.que).join(' | '));
 });
 
+// Fase 2d del plan de generación: un style="…" sobre un elemento de SYX lo
+// pinta igual que una regla. Antes el escáner se lo saltaba (no hay selector).
+comprobar('style en línea: pinta un elemento de SYX, como aviso; colocar, tokens y app-* no', () => {
+  const f = path.join(tmp, 'en-linea.html');
+  fs.writeFileSync(f, [
+    '<!doctype html><html><body>',
+    '<button class="atom-btn atom-btn--primary" style="color: red; padding: 2px">Pinta</button>',
+    '<button class="atom-btn" style="margin-inline-start: auto; order: 2">Coloca</button>',
+    '<article class="mol-card" style="--component-card-bg: var(--semantic-color-bg-secondary)">Token</article>',
+    '<div class="app-panel" style="color: red">Propio</div>',
+    '</body></html>',
+  ].join('\n'));
+  const r = escanear({ files: [f], syx });
+  const h = r.hallazgos.filter((x) => x.tipo === 'pinta-clase-syx-style');
+  if (h.length !== 1) throw new Error(`esperaba 1, encontró ${h.length}: ${h.map((x) => x.que).join(' | ') || 'nada'}`);
+  if (!/atom-btn/.test(h[0].que) || !/color/.test(h[0].que) || !/padding/.test(h[0].que)) throw new Error(`no nombra elemento y propiedades: ${h[0].que}`);
+  if (h[0].gravedad !== 'baja' || h[0].linea !== 2) throw new Error(`gravedad ${h[0].gravedad}, línea ${h[0].linea}: debe entrar como aviso (baja) en la línea 2`);
+});
+
 comprobar('app: una transition en crudo en SCSS, con el mixin al lado', () => {
   const h = enApp('movimiento-sin-salida', 'transform 1s');
   if (!/@include transition/.test(h.sugerencia)) throw new Error(`sugiere ${h.sugerencia}`);

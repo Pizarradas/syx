@@ -24,4 +24,14 @@ module.exports = [
     espera: /se ve «GitHub» y se llama «Open the repository»/,
     mutar: (t) => t.reemplazar('home.html', 'aria-label="GitHub repository"', 'aria-label="Open the repository"'),
   },
+  // Fase 2d: un style="…" sobre un elemento de SYX lo pinta. Si el escáner
+  // vuelve a saltarse los atributos style, check:escaner tiene que verlo.
+  {
+    id: 'escaner-style-en-linea',
+    regresion: 'el escáner vuelve a saltarse los style="…" sobre elementos de SYX',
+    guardian: 'check:escaner',
+    comando: ['node', 'scripts/check-escaner.js'],
+    espera: /❌ style en línea: pinta un elemento de SYX[\s\S]*esperaba 1, encontró 0/,
+    mutar: (t) => t.reemplazar('scripts/lib/escaner.js', "const syxClase = (t.clases || []).find(", 'const syxClase = [].find('),
+  },
 ];
