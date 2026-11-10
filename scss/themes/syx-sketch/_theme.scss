@@ -441,7 +441,10 @@
 
     // Trazo — tres pesos. `strong` es tinta pura: es el borde
     // "dibujado" y también el color de la sombra dura.
-    --semantic-color-border-focus: var(--semantic-color-primary);
+    // Foco del campo: la variante fuerte, como en los otros seis temas. Con
+    // el relleno de marca, una marca clara (amarillo, aguamarina, lima) dejaba
+    // el borde de foco en 1,27:1 sobre el papel (WCAG 1.4.11 pide 3:1).
+    --semantic-color-border-focus: var(--semantic-color-primary-strong);
 
     // Enlaces — azul-600 (8.65:1) en lugar del azul de marca:
     // el texto corrido necesita más contraste que un botón.

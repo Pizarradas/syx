@@ -63,7 +63,12 @@ function escribir(fichero, contenido) {
 function readAllScss(dir) {
   const results = [];
   if (!fs.existsSync(dir)) return results;
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+  // Ordenado por nombre (unidades de código, no localeCompare): el disco no
+  // lista en un orden fijo (NTFS ordena, ext4 no) y el orden de lectura llega
+  // a token-usage-map.json, lint-contract.json y validation-report.md.
+  const entradas = fs.readdirSync(dir, { withFileTypes: true })
+    .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+  for (const entry of entradas) {
     const fp = path.join(dir, entry.name);
     if (entry.isDirectory()) results.push(...readAllScss(fp));
     else if (entry.name.endsWith('.scss'))
