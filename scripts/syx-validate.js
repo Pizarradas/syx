@@ -122,10 +122,22 @@ function isOfficial(prop) {
 // SCSS y no del formato de css/. Que css/ signifique lo mismo lo vigila
 // check-limpio. Sin el punto de entrada (un consumidor con solo css/), se lee
 // la hoja publicada.
+//
+// Si el SCSS NO COMPILA, también se lee la hoja publicada, con un aviso: un
+// `@include` a un mixin que no existe es justo lo que este validador denuncia
+// como R09 (lo hace sobre el SCSS, más abajo), y si la compilación lo tumbaba
+// antes, el informe se quedaba en «Undefined mixin» sin decir qué regla se
+// rompe. Lo prueba el caso de Mutación r09-mixin-inexistente. Que el SCSS
+// compile ya lo exige check-compilado.
 function cssDeReferencia() {
   const entrada = path.join(SCSS_DIR, path.basename(CSS_REF).replace(/\.css$/, '.scss'));
   if (fs.existsSync(entrada)) {
-    return require('sass').compile(entrada, { style: 'expanded', sourceMap: false }).css + '\n';
+    try {
+      return require('sass').compile(entrada, { style: 'expanded', sourceMap: false }).css + '\n';
+    } catch (e) {
+      const motivo = String(e && e.message || e).split('\n')[0];
+      console.warn(`⚠️  ${path.relative(ROOT, entrada).replace(/\\/g, '/')} no compila (${motivo}): se lee ${path.relative(ROOT, CSS_REF).replace(/\\/g, '/')}.`);
+    }
   }
   return fs.readFileSync(CSS_REF, 'utf8');
 }
