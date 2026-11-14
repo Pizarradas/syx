@@ -111,6 +111,25 @@ function isOfficial(prop) {
 
 // ─── Module 2: Extract Runtime Tokens from CSS ───────────────────────────────
 
+// El CSS de referencia, compilado en expandido desde su punto de entrada, y no
+// leído de css/. Quien mantiene SYX publica css/ minificado con Prepros, y
+// build-css.js lo da por bueno si significa lo mismo (scripts/lib/css-normal.js);
+// pero aquí se copian los VALORES al contrato tal cual vienen escritos, y con la
+// hoja minificada `clamp(1rem, 0.96rem + 0.19vw, 1.125rem)` pasaba a
+// `clamp(1rem,0.96rem + 0.19vw,1.125rem)`: el contrato cambiaba con cada
+// compilación de Prepros sin que cambiara nada, y check:contratos fallaba
+// (PR #37, noviembre de 2026). Compilado en expandido, el contrato depende del
+// SCSS y no del formato de css/. Que css/ signifique lo mismo lo vigila
+// check-limpio. Sin el punto de entrada (un consumidor con solo css/), se lee
+// la hoja publicada.
+function cssDeReferencia() {
+  const entrada = path.join(SCSS_DIR, path.basename(CSS_REF).replace(/\.css$/, '.scss'));
+  if (fs.existsSync(entrada)) {
+    return require('sass').compile(entrada, { style: 'expanded', sourceMap: false }).css + '\n';
+  }
+  return fs.readFileSync(CSS_REF, 'utf8');
+}
+
 function extractRuntimeTokens() {
   if (!fs.existsSync(CSS_REF)) {
     console.warn(`⚠️  Reference CSS not found: ${CSS_REF}`);
@@ -127,7 +146,7 @@ function extractRuntimeTokens() {
     for (let p = nodo.parent; p; p = p.parent) if (p.type === 'rule') return p.selector;
     return ':root';
   };
-  require('postcss').parse(fs.readFileSync(CSS_REF, 'utf8')).walkDecls((d) => {
+  require('postcss').parse(cssDeReferencia()).walkDecls((d) => {
     if (!d.prop.startsWith('--')) return;
     const sel = contexto(d);
     if (!tokens[d.prop]) tokens[d.prop] = { value: d.value.trim(), usedInSelectors: [] };
