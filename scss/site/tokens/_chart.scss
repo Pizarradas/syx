@@ -1,0 +1,75 @@
+// SITE TOKENS: GRÁFICOS DE why-syx.html
+// ================================================
+// La sección «What it costs an agent, in tokens» pinta dos gráficos de
+// barras: el contexto leído, apilado por página (cinco categorías), y el
+// código escrito, con SYX resaltado.
+//
+// POR QUÉ COLORES LITERALES
+// Las cinco categorías (instalación, botón, campo, tarjeta, diálogo) no
+// tienen rol semántico, y las rampas de primitivos cambian de un tema a otro
+// (syx-sketch no tiene naranja): con primitivos, la paleta sería distinta en
+// cada tema y no se podría validar una vez. Es la paleta categórica de
+// referencia, en su orden, validada con validate_palette.js contra el fondo
+// real de los siete temas:
+//   claro  (#ffffff, #ffedec, #f0f8f0)      CVD ΔE 9,1 · visión normal 19,6
+//   oscuro (#1b1b1b, #161b25, #03060d, #0f1b2d) CVD ΔE 8,4 · visión normal 19,3
+// En claro, aqua, amarillo y magenta quedan por debajo de 3:1 contra el
+// fondo: lo compensan el total escrito al final de cada barra, la leyenda y
+// la tabla, que da cada cifra en texto.
+//
+// EL MODO lo decide el fondo, no data-theme: example-05 (Midnight) pinta su
+// modo claro sobre fondo oscuro, así que ahí el claro usa los pasos oscuros.
+//
+// R01 permite literales y primitivos en scss/site/tokens/ (contracts/rules.json).
+// ================================================
+
+@mixin site-chart-oscuro {
+  --component-token-chart-series-1: #3987e5;
+  --component-token-chart-series-2: #d95926;
+  --component-token-chart-series-3: #199e70;
+  --component-token-chart-series-4: #c98500;
+  --component-token-chart-series-5: #d55181;
+  --component-token-chart-muted: #898781;
+}
+
+@mixin site-tokens-chart($theme: null) {
+  :root {
+    @if $theme == example-05 {
+      @include site-chart-oscuro;
+    } @else {
+      --component-token-chart-series-1: #2a78d6;
+      --component-token-chart-series-2: #eb6834;
+      --component-token-chart-series-3: #1baf7a;
+      --component-token-chart-series-4: #eda100;
+      --component-token-chart-series-5: #e87ba4;
+      --component-token-chart-muted: #898781;
+    }
+    // El sistema resaltado: la variante fuerte del primario, que cada tema
+    // garantiza a 3:1 contra su fondo (WCAG 1.4.11) en claro y en oscuro.
+    --component-token-chart-accent: var(--semantic-color-primary-strong);
+    --component-token-chart-bar-size: 0.75rem;
+    --component-token-chart-gap: 2px;
+    --component-token-chart-radius: 4px;
+    --component-token-chart-columns: minmax(9ch, 12ch) 1fr;
+    --component-token-chart-share: 0;
+    // Sitio que la barra más larga deja para su total, y su separación.
+    --component-token-chart-value-room: 8ch;
+    --component-token-chart-value-gap: 0.5rem;
+    --component-token-chart-swatch: var(--component-token-chart-muted);
+    --component-token-chart-swatch-size: 0.75em;
+    --component-token-chart-swatch-radius: 2px;
+    --component-token-chart-key-gap: 0.4em;
+    --component-token-chart-row-padding: 0.375rem;
+    --component-token-chart-tip-padding: 0.375rem 0.5rem;
+  }
+
+  :root[data-theme='dark'] {
+    @include site-chart-oscuro;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+      @include site-chart-oscuro;
+    }
+  }
+}

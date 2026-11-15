@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "descripcion": "Qué lee un agente de cada sistema para construir la UI de referencia (ui/): la página oficial de instalación y la de cada pieza, en la forma que el propio sistema sirve para agentes (Markdown/MDX) cuando la tiene. Una fuente por rol y sistema. Ver LEEME.md.",
+    "roles": ["setup", "button", "field", "card", "dialog"]
+  },
+  "sistemas": {
+    "syx": {
+      "setup": "local:CONSUMING.md",
+      "button": "syx:btn",
+      "field": "syx:form-field",
+      "card": "syx:card",
+      "dialog": "syx:dialog"
+    },
+    "shadcn": {
+      "setup": "https://ui.shadcn.com/docs/installation/vite.md",
+      "button": "https://ui.shadcn.com/docs/components/button.md",
+      "field": "https://ui.shadcn.com/docs/components/field.md",
+      "card": "https://ui.shadcn.com/docs/components/card.md",
+      "dialog": "https://ui.shadcn.com/docs/components/alert-dialog.md"
+    },
+    "tailwind": {
+      "setup": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/app/(docs)/docs/installation/(tabs)/using-vite/page.tsx",
+      "button": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/docs/styling-with-utility-classes.mdx",
+      "field": null,
+      "card": null,
+      "dialog": null
+    },
+    "chakra": {
+      "setup": "https://chakra-ui.com/docs/get-started/installation.mdx",
+      "button": "https://chakra-ui.com/docs/components/button.mdx",
+      "field": "https://chakra-ui.com/docs/components/field.mdx",
+      "card": "https://chakra-ui.com/docs/components/card.mdx",
+      "dialog": "https://chakra-ui.com/docs/components/dialog.mdx"
+    },
+    "bootstrap": {
+      "setup": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/getting-started/introduction.mdx",
+      "button": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/buttons.mdx",
+      "field": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/forms/validation.mdx",
+      "card": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/card.mdx",
+      "dialog": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/modal.mdx"
+    },
+    "mui": {
+      "setup": "https://mui.com/material-ui/getting-started/installation.md",
+      "button": "https://mui.com/material-ui/react-button.md",
+      "field": "https://mui.com/material-ui/react-text-field.md",
+      "card": "https://mui.com/material-ui/react-card.md",
+      "dialog": "https://mui.com/material-ui/react-dialog.md"
+    },
+    "antd": {
+      "setup": "https://ant.design/docs/react/getting-started.md",
+      "button": "https://ant.design/components/button.md",
+      "field": "https://ant.design/components/form.md",
+      "card": "https://ant.design/components/card.md",
+      "dialog": "https://ant.design/components/modal.md"
+    }
+  },
+  "salida": {
+    "syx": "ui/syx.html",
+    "shadcn": "ui/shadcn.tsx",
+    "tailwind": "ui/tailwind.html",
+    "chakra": "ui/chakra.tsx",
+    "bootstrap": "ui/bootstrap.html",
+    "mui": "ui/mui.tsx",
+    "antd": "ui/antd.tsx"
+  }
+}

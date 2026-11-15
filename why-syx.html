@@ -227,12 +227,12 @@
 
                 <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
                     <p class="atom-txt syx-mb-1" style="font-size:0.85rem">
-                        <strong>Re-measured:</strong> October 2026 &nbsp;·&nbsp;
+                        <strong>Re-measured:</strong> November 2026 &nbsp;·&nbsp;
                         <strong>Versions:</strong>
-                        <!-- why-syx:versiones -->SYX v5.1.0 &nbsp;·&nbsp; Shadcn UI (2026 registry) &nbsp;·&nbsp; Tailwind CSS 4.3.3 &nbsp;·&nbsp; Chakra UI 3.37 &nbsp;·&nbsp; Bootstrap 5.3.8 &nbsp;·&nbsp; Material UI 9.4 &nbsp;·&nbsp; Ant Design 6.6<!-- /why-syx:versiones -->
+                        <!-- why-syx:versiones -->SYX v5.1.0 &nbsp;·&nbsp; Shadcn UI (2026 registry) &nbsp;·&nbsp; Tailwind CSS 4.3.5 &nbsp;·&nbsp; Chakra UI 3.38 &nbsp;·&nbsp; Bootstrap 5.3.9 &nbsp;·&nbsp; Material UI 9.5 &nbsp;·&nbsp; Ant Design 6.7<!-- /why-syx:versiones -->
                     </p>
                     <p class="atom-txt syx-mb-0" style="font-size:0.8rem;color:var(--semantic-color-text-secondary)">
-                        April 2026 scored SYX v4.2.0 against Material UI v6 and Ant Design v5 and kept those scores after both shipped a new major; September fixed that and added three criteria. October re-measures SYX at 5.0.0 after three internal audits, and re-checks the other six at their current versions: none shipped a new major, so their scores stand. SYX&rsquo;s own scores and the profile weights now live in <code>contracts/why-syx.json</code>, and the tables below are generated from it, so a score cannot change in one table and not in the others. Scores are a dated snapshot, not a live ranking.
+                        April 2026 scored SYX v4.2.0 against Material UI v6 and Ant Design v5 and kept those scores after both shipped a new major; September fixed that and added three criteria. October re-measured SYX at 5.0.0 after three internal audits. November re-measures it at 5.1.0, re-runs every command on this page and re-checks the other six at their current versions: none shipped a new major, so all fourteen scores stand, for all seven systems. SYX&rsquo;s own scores and the profile weights now live in <code>contracts/why-syx.json</code>, and the tables below are generated from it, so a score cannot change in one table and not in the others. Scores are a dated snapshot, not a live ranking.
                     </p>
                 </div>
             </section>
@@ -257,8 +257,8 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left">Weight of a theme bundle</td>
-                                <td style="text-align:left"><strong>51.3 – 59.0 kB gzipped</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">363–451 kB raw · 40.4–44.8 kB brotli · 7 themes, with the site layer (<code>dist/</code>, without it: 40.6–43.4 kB gzipped, 253–282 kB raw), as published (Prepros, minified). The reference theme is the heaviest because it also carries this site&rsquo;s own layer</span></td>
+                                <td style="text-align:left"><strong>50.1 – 57.5 kB gzipped</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">326–411 kB raw · 40.1–44.1 kB brotli · 7 themes, with the site layer (<code>dist/*.full.min.css</code>, without it: 41.3–44.2 kB gzipped, 259–288 kB raw), as published (Prepros, minified). The reference theme is the heaviest because it also carries this site&rsquo;s own layer</span></td>
                                 <td style="text-align:left"><code>gzip -9</code> and brotli 11 over <code>css/styles-theme-*.css</code></td>
                             </tr>
                             <tr>
@@ -270,7 +270,7 @@
                             <tr>
                                 <td style="text-align:left">Client-side JavaScript</td>
                                 <td style="text-align:left"><strong>0 bytes required · 11.6 kB gz optional</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">five small vanilla modules — tabs, menu (APG), tooltip, toast, character count — 28.9 kB raw, each loaded only where its component is used. Without them every component still renders; with them it behaves. The site&rsquo;s mobile nav (4.9 kB) is the site&rsquo;s, not the system&rsquo;s</span></td>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">five small vanilla modules — tabs, menu (APG), tooltip, toast, character count — 28.9 kB raw, each loaded only where its component is used. Without them every component still renders; with them it behaves. The site&rsquo;s mobile nav (4.9 kB) is the site&rsquo;s, not the system&rsquo;s; <code>syx-colors.js</code> (8.5 kB raw, 3.8 kB gz) is a helper that turns tokens into hex for canvas chart libraries, not behaviour, and is not counted</span></td>
                                 <td style="text-align:left"><code>js/syx-*.js</code>, keyboard-tested in CI by <code>tests/browser/interaccion.mjs</code></td>
                             </tr>
                             <tr>
@@ -281,8 +281,8 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Cascade control</td>
-                                <td style="text-align:left"><strong>7 named layers, 68 <code>@layer</code> blocks</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">reset · base · tokens · atoms · molecules · organisms · utilities</span></td>
+                                <td style="text-align:left"><strong>8 named layers, 68 <code>@layer</code> rules</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)"><code>syx.</code> reset · base · tokens · atoms · molecules · organisms · app · utilities — one order statement and 67 blocks. <code>syx.app</code> is empty on purpose: it is the slot where the consuming application writes, between the components and the utilities. The tokens themselves sit unlayered in <code>:root</code>, by design, so <code>syx.tokens</code> carries no rules</span></td>
                                 <td style="text-align:left"><code>css/styles-theme-syx-sketch.css</code></td>
                             </tr>
                             <tr>
@@ -292,24 +292,24 @@
                             </tr>
                             <tr>
                                 <td style="text-align:left">Tokens in the public contract</td>
-                                <td style="text-align:left"><strong>1,127 — 224 primitive, 226 semantic, 620 component, 57 other</strong></td>
+                                <td style="text-align:left"><strong>1,129 — 224 primitive, 226 semantic, 622 component, 57 other</strong></td>
                                 <td style="text-align:left"><code>tokens.json</code>, generated from the compiled CSS</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left">Source size</td>
-                                <td style="text-align:left"><strong>221 SCSS files · 19,045 lines</strong></td>
+                                <td style="text-align:left"><strong>229 SCSS files · 19,974 lines</strong></td>
                                 <td style="text-align:left"><code>scss/</code></td>
                             </tr>
                             <tr>
                                 <td style="text-align:left">Agentic surface</td>
-                                <td style="text-align:left"><strong>12 MCP tools · 10 modes · 5 workflows · 39 guards</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">plus seven browser suites (axe in 7 themes × 2 modes and RTL, keyboard, focus, reflow, the four pages, <code>hidden</code>, visual regression) and a mutation suite that injects 35 known regressions and fails if any guard lets one through</span></td>
+                                <td style="text-align:left"><strong>12 MCP tools · 10 modes · 5 workflows · 52 guards</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">plus seven browser suites (axe in 7 themes × 2 modes and RTL, keyboard, focus, reflow, the four pages, <code>hidden</code>, visual regression) and a mutation suite that injects 54 known regressions and fails if any guard lets one through</span></td>
                                 <td style="text-align:left"><code>scripts/mcp-server.js</code>, <code>_agents/</code>, <code>package.json</code> scripts</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left">Contrast, all seven themes</td>
-                                <td style="text-align:left"><strong>3,304 / 3,304 measurements pass WCAG AA</strong><br>
-                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">118 text and UI pairs × 7 themes × light, dark and their states, enforced by <code>npm run check:contraste</code>. What it does not measure yet — the outline button&rsquo;s hover and the site pages under the six demo themes — is in <a href="#loses">Where SYX loses</a></span></td>
+                                <td style="text-align:left"><strong>6,608 / 6,608 measurements pass WCAG AA</strong><br>
+                                    <span style="font-size:0.85em;color:var(--semantic-color-text-secondary)">118 text and UI pairs × 7 themes × 4 mode states (OS light, OS dark, light chosen, dark chosen) × 2 branches — with relative colour and with the fallback tints that browsers at the floor without it receive — enforced by <code>npm run check:contraste</code>. What it does not measure yet — the site pages under the six demo themes — is in <a href="#loses">Where SYX loses</a></span></td>
                                 <td style="text-align:left"><code>npm run check:contraste</code></td>
                             </tr>
                             <tr>
@@ -336,7 +336,7 @@
       ══════════════════════════════════════════ -->
             <section id="rubric" aria-labelledby="rubric-heading" class="syx-mb-5">
                 <h2 class="atom-title atom-title--h2 syx-mb-1" id="rubric-heading">The fourteen criteria</h2>
-                <p class="atom-txt syx-text-gray syx-mb-4">Three criteria were added in September: <strong>ecosystem &amp; support</strong>, <strong>interactive behaviour</strong> and <strong>browser floor</strong>. They were added because SYX scored 1, 1 and 3 on them, and a comparison whose author only measured what he wins is not a comparison. In October it scores 1, 3 and 3. Each row says what a 5 and a 1 mean, so the score can be argued
+                <p class="atom-txt syx-text-gray syx-mb-4">Three criteria were added in September: <strong>ecosystem &amp; support</strong>, <strong>interactive behaviour</strong> and <strong>browser floor</strong>. They were added because SYX scored 1, 1 and 3 on them, and a comparison whose author only measured what he wins is not a comparison. In October it scored 1, 3 and 3, and in November still does. Each row says what a 5 and a 1 mean, so the score can be argued
                     with.</p>
 
                 <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-0 syx-overflow-auto" role="region" tabindex="0" aria-label="The fourteen criteria (table)">
@@ -653,7 +653,22 @@
                 </div>
 
                 <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0">
-                    <p class="syx-type-overline syx-text-gray syx-mb-2">What changed in October 2026</p>
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">What changed in November 2026</p>
+                    <p class="atom-txt syx-mb-0">No score moves, for any system, and the reasons are on this page.
+                        SYX 5.1.0 fixed the outline button&rsquo;s hover contrast, gave browsers without relative colour
+                        fallback tints that are measured too (the contrast guard now runs both branches: 6,608
+                        measurements, 0 below AA), set the root font size in % so the user&rsquo;s browser setting
+                        applies, and made tables safe to reflow at 320&nbsp;px. That is real progress on
+                        accessibility and does not reach a 5: forced-colors mode and WCAG 2.4.11 still fail,
+                        re-measured in Chromium. Components (40), behaviour modules (5) and the browser floor
+                        (Chrome 111) are unchanged, so criteria 4, 13 and 14 stay where they were. The guards went
+                        from 39 to 52 and the mutation cases from 35 to 54: that strengthens criterion 11, already a
+                        5, and adds to what a human has to learn, which keeps criterion 10 at 3. The other six were
+                        re-checked on npm: Tailwind 4.3.5, Chakra UI 3.38, Bootstrap 5.3.9, Material UI 9.5, Ant
+                        Design 6.7 and the Shadcn CLI 4.23 are minor releases, and every checkable fact in the table
+                        at the foot of this page still holds. Two majors are in pre-release, Bootstrap
+                        6.0.0-alpha.1 and Material UI 10.0.0-alpha.0: they are scored when they ship, not before.</p>
+                    <p class="syx-type-overline syx-text-gray syx-mb-2" style="margin-top:1.25rem">What changed in October 2026</p>
                     <p class="atom-txt syx-mb-0">SYX moves from 52 to 55, on four criteria, and each move names its evidence.
                         <strong>Ready-made UI, 2 → 3</strong>: 40 components now include tooltip, toast, menu,
                         dialog, tabs, progress, skeleton, avatar, card and an app shell — still no combobox, drawer,
@@ -1105,6 +1120,287 @@
             </section>
 
             <!-- ══════════════════════════════════════════
+           TOKEN COST
+      ══════════════════════════════════════════ -->
+            <section id="tokens" aria-labelledby="tokens-heading" class="syx-mb-5">
+                <h2 class="atom-title atom-title--h2 syx-mb-1" id="tokens-heading">What it costs an agent, in tokens</h2>
+                <p class="atom-txt syx-text-gray syx-mb-4">The same small screen built with each system — a card with an
+                    email field in an error state and a destructive button that opens a confirmation dialog — and two
+                    numbers for each: the tokens of the official documentation an agent reads to build it (the install
+                    page and the page for each of the four parts, whole, as each system serves it to agents), and the
+                    tokens of the code it writes. Counted with Claude&rsquo;s tokenizer. Not scored: it informs
+                    criterion 11 and changes no number above.</p>
+
+                <!-- why-syx:coste-tokens -->
+                <p class="atom-txt syx-mb-3"><strong>SYX is the cheapest of the seven for this task</strong>: 14,074 tokens, read and written. The next is Tailwind CSS at 18,598; the most expensive, Ant Design, costs 6.6× as much.</p>
+                <div class="layout-grid__nested syx-mb-4">
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+                        <div class="atom-stat"><span class="atom-stat__number">13,501</span><span class="atom-stat__label">Tokens SYX hands an agent to read</span></div>
+                    </div>
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+                        <div class="atom-stat"><span class="atom-stat__number">573</span><span class="atom-stat__label">Tokens of SYX code the agent writes</span></div>
+                    </div>
+                    <div class="layout-grid__col-xs-12 layout-grid__col-md-4">
+                        <div class="atom-stat"><span class="atom-stat__number">2.7×</span><span class="atom-stat__label">fewer than the median of the other six</span></div>
+                    </div>
+                </div>
+                <figure class="mol-token-chart syx-mb-4" aria-labelledby="tc-read-title">
+                    <p class="mol-token-chart__title" id="tc-read-title">Tokens read, by page</p>
+                    <p class="mol-token-chart__note">The official page for each part, whole. Fewest first. Hover a segment, or focus a row, for its figures.</p>
+                    <ul class="mol-token-chart__legend">
+                        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--1" aria-hidden="true"></span>Install</li>
+                        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--2" aria-hidden="true"></span>Button</li>
+                        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--3" aria-hidden="true"></span>Field + error</li>
+                        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--4" aria-hidden="true"></span>Card</li>
+                        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--5" aria-hidden="true"></span>Dialog</li>
+                    </ul>
+                    <ol class="mol-token-chart__rows">
+                        <li class="mol-token-chart__row mol-token-chart__row--accent" tabindex="0" aria-label="SYX, 13,501 tokens read: install 7,890, button 2,175, field + error 1,302, card 1,131, dialog 1,003" data-tip="SYX: 13,501 read&#10;Install: 7,890&#10;Button: 2,175&#10;Field + error: 1,302&#10;Card: 1,131&#10;Dialog: 1,003">
+                            <span class="mol-token-chart__name" aria-hidden="true">SYX</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0853" data-tip="Install: 7,890"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.0235" data-tip="Button: 2,175"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.0141" data-tip="Field + error: 1,302"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.0122" data-tip="Card: 1,131"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.0108" data-tip="Dialog: 1,003"></span>
+                                <span class="mol-token-chart__value">13,501</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Tailwind CSS, 17,870 tokens read: install 1,782, button 16,088" data-tip="Tailwind CSS: 17,870 read&#10;Install: 1,782&#10;Button: 16,088">
+                            <span class="mol-token-chart__name" aria-hidden="true">Tailwind CSS</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0193" data-tip="Install: 1,782"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.1739" data-tip="Button: 16,088"></span>
+                                <span class="mol-token-chart__value">17,870</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Chakra UI, 30,498 tokens read: install 1,304, button 5,508, field + error 3,931, card 4,450, dialog 15,305" data-tip="Chakra UI: 30,498 read&#10;Install: 1,304&#10;Button: 5,508&#10;Field + error: 3,931&#10;Card: 4,450&#10;Dialog: 15,305">
+                            <span class="mol-token-chart__name" aria-hidden="true">Chakra UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0141" data-tip="Install: 1,304"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.0595" data-tip="Button: 5,508"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.0425" data-tip="Field + error: 3,931"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.0481" data-tip="Card: 4,450"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.1654" data-tip="Dialog: 15,305"></span>
+                                <span class="mol-token-chart__value">30,498</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Shadcn UI, 35,746 tokens read: install 2,760, button 4,926, field + error 14,640, card 7,320, dialog 6,100" data-tip="Shadcn UI: 35,746 read&#10;Install: 2,760&#10;Button: 4,926&#10;Field + error: 14,640&#10;Card: 7,320&#10;Dialog: 6,100">
+                            <span class="mol-token-chart__name" aria-hidden="true">Shadcn UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0298" data-tip="Install: 2,760"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.0532" data-tip="Button: 4,926"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.1582" data-tip="Field + error: 14,640"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.0791" data-tip="Card: 7,320"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.0659" data-tip="Dialog: 6,100"></span>
+                                <span class="mol-token-chart__value">35,746</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Bootstrap, 40,352 tokens read: install 3,090, button 4,733, field + error 6,408, card 10,562, dialog 15,559" data-tip="Bootstrap: 40,352 read&#10;Install: 3,090&#10;Button: 4,733&#10;Field + error: 6,408&#10;Card: 10,562&#10;Dialog: 15,559">
+                            <span class="mol-token-chart__name" aria-hidden="true">Bootstrap</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0334" data-tip="Install: 3,090"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.0512" data-tip="Button: 4,733"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.0693" data-tip="Field + error: 6,408"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.1142" data-tip="Card: 10,562"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.1682" data-tip="Dialog: 15,559"></span>
+                                <span class="mol-token-chart__value">40,352</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Material UI, 80,104 tokens read: install 2,341, button 12,652, field + error 33,315, card 13,441, dialog 18,355" data-tip="Material UI: 80,104 read&#10;Install: 2,341&#10;Button: 12,652&#10;Field + error: 33,315&#10;Card: 13,441&#10;Dialog: 18,355">
+                            <span class="mol-token-chart__name" aria-hidden="true">Material UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0253" data-tip="Install: 2,341"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.1367" data-tip="Button: 12,652"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.3601" data-tip="Field + error: 33,315"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.1453" data-tip="Card: 13,441"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.1984" data-tip="Dialog: 18,355"></span>
+                                <span class="mol-token-chart__value">80,104</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Ant Design, 92,526 tokens read: install 1,991, button 14,443, field + error 52,954, card 7,144, dialog 15,994" data-tip="Ant Design: 92,526 read&#10;Install: 1,991&#10;Button: 14,443&#10;Field + error: 52,954&#10;Card: 7,144&#10;Dialog: 15,994">
+                            <span class="mol-token-chart__name" aria-hidden="true">Ant Design</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--1" style="--component-token-chart-share:0.0215" data-tip="Install: 1,991"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--2" style="--component-token-chart-share:0.1561" data-tip="Button: 14,443"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--3" style="--component-token-chart-share:0.5723" data-tip="Field + error: 52,954"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--4" style="--component-token-chart-share:0.0772" data-tip="Card: 7,144"></span>
+                                <span class="mol-token-chart__seg mol-token-chart__seg--5" style="--component-token-chart-share:0.1729" data-tip="Dialog: 15,994"></span>
+                                <span class="mol-token-chart__value">92,526</span>
+                            </span>
+                        </li>
+                    </ol>
+                </figure>
+                <figure class="mol-token-chart syx-mb-4" aria-labelledby="tc-written-title">
+                    <p class="mol-token-chart__title" id="tc-written-title">Tokens written, same screen</p>
+                    <p class="mol-token-chart__note">The code for the screen, written the way each system&rsquo;s own examples write it. Fewest first; SYX in the theme&rsquo;s colour.</p>
+                    <ol class="mol-token-chart__rows">
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Ant Design, 386 tokens written" data-tip="Ant Design: 386 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Ant Design</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:0.5223"></span>
+                                <span class="mol-token-chart__value">386</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Bootstrap, 533 tokens written" data-tip="Bootstrap: 533 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Bootstrap</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:0.7212"></span>
+                                <span class="mol-token-chart__value">533</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row mol-token-chart__row--accent" tabindex="0" aria-label="SYX, 573 tokens written" data-tip="SYX: 573 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">SYX</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg mol-token-chart__seg--accent" style="--component-token-chart-share:0.7754"></span>
+                                <span class="mol-token-chart__value">573</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Chakra UI, 666 tokens written" data-tip="Chakra UI: 666 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Chakra UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:0.9012"></span>
+                                <span class="mol-token-chart__value">666</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Tailwind CSS, 728 tokens written" data-tip="Tailwind CSS: 728 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Tailwind CSS</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:0.9851"></span>
+                                <span class="mol-token-chart__value">728</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Shadcn UI, 731 tokens written" data-tip="Shadcn UI: 731 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Shadcn UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:0.9892"></span>
+                                <span class="mol-token-chart__value">731</span>
+                            </span>
+                        </li>
+                        <li class="mol-token-chart__row" tabindex="0" aria-label="Material UI, 739 tokens written" data-tip="Material UI: 739 written">
+                            <span class="mol-token-chart__name" aria-hidden="true">Material UI</span>
+                            <span class="mol-token-chart__track" aria-hidden="true">
+                                <span class="mol-token-chart__seg" style="--component-token-chart-share:1.0000"></span>
+                                <span class="mol-token-chart__value">739</span>
+                            </span>
+                        </li>
+                    </ol>
+                </figure>
+                <p class="mol-token-chart__title" id="tc-table-title">The figures</p>
+                <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-2 syx-overflow-auto" role="region" tabindex="0" aria-labelledby="tc-table-title">
+                    <table class="atom-table" style="min-width:900px;text-align:right">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">System</th>
+                                <th>Install</th>
+                                <th>Button</th>
+                                <th>Field + error</th>
+                                <th>Card</th>
+                                <th>Dialog</th>
+                                <th>Read</th>
+                                <th>Written</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="text-align:left">SYX</th>
+                                <td>7,890</td>
+                                <td>2,175</td>
+                                <td>1,302</td>
+                                <td>1,131</td>
+                                <td>1,003</td>
+                                <td><strong>13,501</strong></td>
+                                <td>573</td>
+                                <td><strong>14,074</strong></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Tailwind CSS</th>
+                                <td>1,782</td>
+                                <td>16,088</td>
+                                <td>&mdash;</td>
+                                <td>&mdash;</td>
+                                <td>&mdash;</td>
+                                <td>17,870</td>
+                                <td>728</td>
+                                <td>18,598</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Chakra UI</th>
+                                <td>1,304</td>
+                                <td>5,508</td>
+                                <td>3,931</td>
+                                <td>4,450</td>
+                                <td>15,305</td>
+                                <td>30,498</td>
+                                <td>666</td>
+                                <td>31,164</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Shadcn UI</th>
+                                <td>2,760</td>
+                                <td>4,926</td>
+                                <td>14,640</td>
+                                <td>7,320</td>
+                                <td>6,100</td>
+                                <td>35,746</td>
+                                <td>731</td>
+                                <td>36,477</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Bootstrap</th>
+                                <td>3,090</td>
+                                <td>4,733</td>
+                                <td>6,408</td>
+                                <td>10,562</td>
+                                <td>15,559</td>
+                                <td>40,352</td>
+                                <td>533</td>
+                                <td>40,885</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Material UI</th>
+                                <td>2,341</td>
+                                <td>12,652</td>
+                                <td>33,315</td>
+                                <td>13,441</td>
+                                <td>18,355</td>
+                                <td>80,104</td>
+                                <td>739</td>
+                                <td>80,843</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="text-align:left">Ant Design</th>
+                                <td>1,991</td>
+                                <td>14,443</td>
+                                <td>52,954</td>
+                                <td>7,144</td>
+                                <td>15,994</td>
+                                <td>92,526</td>
+                                <td><strong>386</strong></td>
+                                <td>92,912</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="atom-txt syx-text-gray syx-mb-0" style="font-size:0.85rem">Tokens, counted with <code>count_tokens</code> and <code>claude-opus-5-5</code> on 2026-11-15. Ordered by total; lowest in each total column in bold. Tailwind&rsquo;s &ldquo;Button&rdquo; column is its core-concepts page: it has no component pages. Method, sources, hashes and the seven implementations: <code>docs/why-syx/coste-tokens/</code>.</p>
+                <!-- /why-syx:coste-tokens -->
+
+                <div class="syx-border syx-p-3 syx-bg-gray-50 syx-mb-0" style="margin-top:1rem">
+                    <p class="syx-type-overline syx-text-gray syx-mb-2">What this number does not say</p>
+                    <p class="atom-txt syx-mb-0">It is the same measurement for all seven, not a prediction of a real
+                        session: an agent may read one example instead of a whole page, or read the component source
+                        too. It does not count what a model already knows. Bootstrap and Material UI are in every
+                        model&rsquo;s training, and an agent may read nothing at all; SYX is in none, so its context is
+                        the one that has to be paid. Shadcn&rsquo;s count leaves out the component files its CLI copies
+                        into the project. Tailwind has no component pages, so its reading is short and its writing is
+                        long. And the author of SYX wrote all seven implementations: they are in
+                        <code>docs/why-syx/coste-tokens/</code>, with the sources, their hashes and the script, so a
+                        shorter and equally correct version can replace any of them.</p>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════════
            WHERE SYX LOSES
       ══════════════════════════════════════════ -->
             <section id="loses" aria-labelledby="loses-heading" class="syx-mb-5">
@@ -1115,7 +1411,7 @@
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Accessibility gaps, measured</span>
-                            <p class="atom-txt syx-mb-3">Contrast is guarded now — but three things fail and no test catches them yet. In <strong>forced-colors mode</strong> (Windows high contrast) the mask icons and the mobile menu button disappear. With a sticky header, <strong>keyboard focus can end up fully hidden</strong> under it (WCAG 2.4.11): seven controls in the docs at 375&nbsp;px. And the outline button&rsquo;s <strong>hover state drops below AA</strong> in all seven themes, as low as 2.42:1, because the contrast guard does not measure that pair.</p>
+                            <p class="atom-txt syx-mb-3">Contrast is guarded now — but two things fail and no test catches them yet. In <strong>forced-colors mode</strong> (Windows high contrast) the mask icons and the mobile menu button disappear. With a sticky header, <strong>keyboard focus can end up fully hidden</strong> under it (WCAG 2.4.11): seven controls in the docs at 375&nbsp;px and seventeen at 1280&nbsp;px, reached with Shift+Tab. Both were re-measured in Chromium in November. (The third gap listed in October, the outline button&rsquo;s hover at 2.42:1, is fixed: the guard measures that pair now, and it passes in all seven themes.)</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">This is why criterion 8 scores 4 and not 5. Shadcn UI and Chakra UI score 5, and they deserve it.</p>
                         </div>
                     </div>
@@ -1129,7 +1425,7 @@
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">One maintainer</span>
-                            <p class="atom-txt syx-mb-3">Ecosystem and support scores <strong>1</strong>. There is one author, no contributor base, no Stack Overflow tag, no pool of developers who already know it, and no answer to &ldquo;what happens if he stops&rdquo; other than the MIT licence and 18,669 readable lines.</p>
+                            <p class="atom-txt syx-mb-3">Ecosystem and support scores <strong>1</strong>. There is one author, no contributor base, no Stack Overflow tag, no pool of developers who already know it, and no answer to &ldquo;what happens if he stops&rdquo; other than the MIT licence and 19,974 readable lines. Being on npm since 5.1.0 makes it easier to install, not less dependent on one person.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">For a system whole products are built on, this is a real risk and not a rhetorical one.</p>
                         </div>
                     </div>
@@ -1150,7 +1446,7 @@
                     <div class="layout-grid__col-xs-12 layout-grid__col-md-6 syx-mb-4">
                         <div class="syx-h-full">
                             <span class="atom-pill atom-pill--dark syx-mb-3" style="display:inline-block">Not a small system to learn</span>
-                            <p class="atom-txt syx-mb-3">19,045 lines of SCSS across 221 files, 1,127 tokens in the public contract, a four-tier token cascade, eleven contract rules, ten agent modes, twelve MCP tools and 39 guards. The pay-off is that an agent can be told no by a machine instead of by a reviewer — but the surface a human has to hold is not small.</p>
+                            <p class="atom-txt syx-mb-3">19,974 lines of SCSS across 229 files, 1,129 tokens in the public contract, a four-tier token cascade, eleven contract rules, ten agent modes, twelve MCP tools and 52 guards. The pay-off is that an agent can be told no by a machine instead of by a reviewer — but the surface a human has to hold is not small.</p>
                             <p class="atom-txt syx-mb-0 syx-text-gray">Bootstrap scores 5 on learning curve. SYX scores 3.</p>
                         </div>
                     </div>
@@ -1174,7 +1470,7 @@
 
                             <div class="mol-compare-card__block mol-compare-card__block--pro">
                                 <span class="syx-type-overline mol-compare-card__label">Strengths</span>
-                                <p class="atom-txt syx-mb-0">Zero browser dependencies and no JavaScript required to render; 49&ndash;56&nbsp;kB gzipped per theme; specificity solved by seven named <code>@layer</code>s, with a single, deliberate <code>!important</code>; drops into any server-rendered HTML; contrast in all seven themes enforced by a guard; the only system here an agent can query, be refused by, and be corrected by — with the rules checked on the compiled CSS, not just the source.</p>
+                                <p class="atom-txt syx-mb-0">Zero browser dependencies and no JavaScript required to render; 50&ndash;57.5&nbsp;kB gzipped per theme; specificity solved by eight named <code>@layer</code>s, with a single, deliberate <code>!important</code>; drops into any server-rendered HTML; contrast in all seven themes enforced by a guard; the only system here an agent can query, be refused by, and be corrected by — with the rules checked on the compiled CSS, not just the source.</p>
                             </div>
 
                             <div class="mol-compare-card__block mol-compare-card__block--con">
@@ -1358,7 +1654,7 @@
       ══════════════════════════════════════════ -->
             <section id="sources" aria-labelledby="sources-heading" class="syx-mb-5">
                 <h2 class="atom-title atom-title--h2 syx-mb-1" id="sources-heading">Sources and versions</h2>
-                <p class="atom-txt syx-text-gray syx-mb-4">Checked October 2026 (versions from the npm registry). Every &ldquo;checkable&rdquo; claim on
+                <p class="atom-txt syx-text-gray syx-mb-4">Checked 15 November 2026 (versions from the npm registry). Every &ldquo;checkable&rdquo; claim on
                     this page resolves to one of these.</p>
 
                 <div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-0 syx-overflow-auto" role="region" tabindex="0" aria-label="Sources and versions (table)">
@@ -1374,43 +1670,43 @@
                         <tbody>
                             <tr>
                                 <td style="text-align:left"><strong>SYX</strong></td>
-                                <td style="text-align:left">5.0.0</td>
+                                <td style="text-align:left">5.1.0</td>
                                 <td style="text-align:left">No — a stylesheet link</td>
                                 <td style="text-align:left">Optional — five vanilla modules, 11.6 kB gz; the CSS works alone</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Shadcn UI</strong></td>
-                                <td style="text-align:left">2026 registry (CLI 4.21), Tailwind v4 + React 19</td>
+                                <td style="text-align:left">2026 registry (CLI 4.23), Tailwind v4 + React 19</td>
                                 <td style="text-align:left">Yes — React</td>
                                 <td style="text-align:left">Yes</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Tailwind CSS</strong></td>
-                                <td style="text-align:left">4.3.3</td>
+                                <td style="text-align:left">4.3.5</td>
                                 <td style="text-align:left">No</td>
                                 <td style="text-align:left">No</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Chakra UI</strong></td>
-                                <td style="text-align:left">3.37</td>
+                                <td style="text-align:left">3.38</td>
                                 <td style="text-align:left">Yes — React</td>
                                 <td style="text-align:left">Yes — v3 kept Emotion, so styling stays partly at runtime</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Bootstrap</strong></td>
-                                <td style="text-align:left">5.3.8</td>
+                                <td style="text-align:left">5.3.9</td>
                                 <td style="text-align:left">No</td>
                                 <td style="text-align:left">Optional — the CSS works alone; the components need its JS</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Material UI</strong></td>
-                                <td style="text-align:left">9.4</td>
+                                <td style="text-align:left">9.5</td>
                                 <td style="text-align:left">Yes — React</td>
                                 <td style="text-align:left">Yes</td>
                             </tr>
                             <tr>
                                 <td style="text-align:left"><strong>Ant Design</strong></td>
-                                <td style="text-align:left">6.6</td>
+                                <td style="text-align:left">6.7</td>
                                 <td style="text-align:left">Yes — React</td>
                                 <td style="text-align:left">Yes</td>
                             </tr>

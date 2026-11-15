@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "totalMappedTokens": 1529
+    "totalMappedTokens": 1550
   },
   "map": {
     "--primitive-fluid-space-xs": {
@@ -122,6 +122,7 @@
         "scss/site/_home-themes.scss",
         "scss/site/_home-tokens.scss",
         "scss/site/_theme-swatch-card.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_defaults.scss",
         "scss/site/tokens/_syx-sketch.scss",
         "scss/themes/syx-sketch/_theme.scss"
@@ -155,6 +156,7 @@
         "scss/site/_home-themes.scss",
         "scss/site/_home-tokens.scss",
         "scss/site/_ranking.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_defaults.scss",
         "scss/site/tokens/_syx-sketch.scss",
         "scss/themes/syx-sketch/_theme.scss",
@@ -300,6 +302,7 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
         "scss/abstracts/tokens/semantic/_shadows.scss",
+        "scss/site/_token-chart.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
     },
@@ -310,7 +313,8 @@
         "scss/molecules/_empty-state.scss",
         "scss/molecules/_menu.scss",
         "scss/molecules/_tabs.scss",
-        "scss/organisms/_app-shell.scss"
+        "scss/organisms/_app-shell.scss",
+        "scss/site/_token-chart.scss"
       ]
     },
     "--semantic-focus-ring-width": {
@@ -321,7 +325,8 @@
         "scss/molecules/_empty-state.scss",
         "scss/molecules/_menu.scss",
         "scss/molecules/_tabs.scss",
-        "scss/organisms/_app-shell.scss"
+        "scss/organisms/_app-shell.scss",
+        "scss/site/_token-chart.scss"
       ]
     },
     "--semantic-focus-ring-style": {
@@ -433,6 +438,7 @@
         "scss/site/_home-footer.scss",
         "scss/site/_ranking.scss",
         "scss/site/_score.scss",
+        "scss/site/_token-chart.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -591,6 +597,7 @@
         "scss/abstracts/tokens/components/_tabs.scss",
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/abstracts/tokens/semantic/_dark-mode.scss",
+        "scss/site/tokens/_chart.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -609,6 +616,7 @@
         "scss/molecules/_toast.scss",
         "scss/site/_evidence.scss",
         "scss/site/_score.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_syx-sketch.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
@@ -649,6 +657,7 @@
         "scss/site/_home-tokens.scss",
         "scss/site/_ranking.scss",
         "scss/site/_theme-swatch-card.scss",
+        "scss/site/_token-chart.scss",
         "scss/utilities/_accessibility.scss",
         "scss/utilities/_text.scss"
       ]
@@ -980,6 +989,7 @@
         "scss/abstracts/tokens/semantic/_colors.scss",
         "scss/atoms/_stat-counter.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_defaults.scss",
         "scss/themes/syx-sketch/_theme.scss",
         "scss/utilities/_text.scss"
@@ -1015,6 +1025,7 @@
         "scss/layout/_stack.scss",
         "scss/site/_compare-card.scss",
         "scss/site/_ranking.scss",
+        "scss/site/_token-chart.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-02/_theme.scss",
         "scss/themes/example-03/_theme.scss",
@@ -1130,6 +1141,7 @@
       "usages": [
         "scss/abstracts/tokens/components/_dialogs.scss",
         "scss/pages/_theme-builder.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_defaults.scss",
         "scss/themes/syx-sketch/_theme.scss"
       ]
@@ -1200,6 +1212,7 @@
         "scss/molecules/_menu.scss",
         "scss/site/_compare-card.scss",
         "scss/site/_ranking.scss",
+        "scss/site/_token-chart.scss",
         "scss/themes/example-01/_theme.scss",
         "scss/themes/example-03/_theme.scss",
         "scss/themes/example-04/_theme.scss",
@@ -1236,6 +1249,7 @@
         "scss/layout/_cluster.scss",
         "scss/site/_compare-card.scss",
         "scss/site/_ranking.scss",
+        "scss/site/_token-chart.scss",
         "scss/utilities/_display.scss",
         "scss/utilities/_spacing.scss"
       ]
@@ -1712,6 +1726,7 @@
         "scss/site/_home-hero.scss",
         "scss/site/_home-layers.scss",
         "scss/site/_home-themes.scss",
+        "scss/site/_token-chart.scss",
         "scss/utilities/_text.scss"
       ]
     },
@@ -2949,6 +2964,7 @@
         "scss/site/_home-layers.scss",
         "scss/site/_ranking.scss",
         "scss/site/_score.scss",
+        "scss/site/_token-chart.scss",
         "scss/site/tokens/_defaults.scss"
       ]
     },
@@ -7196,6 +7212,111 @@
     "--component-theme-card-dot-sketch-b": {
       "usages": [
         "scss/site/_theme-swatch-card.scss"
+      ]
+    },
+    "--component-token-chart-key-gap": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-swatch-size": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-swatch-radius": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-swatch": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-columns": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-row-padding": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-radius": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-gap": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-value-room": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-share": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-bar-size": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-fill": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-series-1": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-series-2": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-series-3": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-series-4": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-series-5": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-accent": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-value-gap": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-tip-padding": {
+      "usages": [
+        "scss/site/_token-chart.scss"
+      ]
+    },
+    "--component-token-chart-muted": {
+      "usages": [
+        "scss/site/tokens/_chart.scss"
       ]
     },
     "--semantic-space-layout-xl": {

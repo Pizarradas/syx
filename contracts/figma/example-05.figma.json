@@ -12,8 +12,8 @@
     "note": "Los primitivos no suben: R01 prohíbe que un componente los lea, y en Figma serían un atajo elegible. Las propiedades de los componentes deben ATARSE a las variables de las colecciones, no copiarse: copiar el valor pierde el modo oscuro.",
     "inferencia": "Clases, modificadores y tokens vienen del registro, contrastado contra el CSS compilado. El reparto por variante y por estado se deduce del nombre del token.",
     "cuentas": {
-      "variables": 610,
-      "omitidas": 488,
+      "variables": 624,
+      "omitidas": 494,
       "fueraDeAlcance": {
         "primitive": 242,
         "icon": 17,
@@ -9854,6 +9854,230 @@
           }
         },
         {
+          "name": "component/token/chart/bar/size",
+          "type": "FLOAT",
+          "token": "--component-token-chart-bar-size",
+          "valuesByMode": {
+            "light": 12,
+            "dark": 12
+          }
+        },
+        {
+          "name": "component/token/chart/gap",
+          "type": "FLOAT",
+          "token": "--component-token-chart-gap",
+          "valuesByMode": {
+            "light": 2,
+            "dark": 2
+          }
+        },
+        {
+          "name": "component/token/chart/muted",
+          "type": "COLOR",
+          "token": "--component-token-chart-muted",
+          "valuesByMode": {
+            "light": {
+              "r": 0.5373,
+              "g": 0.5294,
+              "b": 0.5059,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5373,
+              "g": 0.5294,
+              "b": 0.5059,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#898781",
+            "dark": "#898781"
+          }
+        },
+        {
+          "name": "component/token/chart/radius",
+          "type": "FLOAT",
+          "token": "--component-token-chart-radius",
+          "valuesByMode": {
+            "light": 4,
+            "dark": 4
+          }
+        },
+        {
+          "name": "component/token/chart/row/padding",
+          "type": "FLOAT",
+          "token": "--component-token-chart-row-padding",
+          "valuesByMode": {
+            "light": 6,
+            "dark": 6
+          }
+        },
+        {
+          "name": "component/token/chart/series/1",
+          "type": "COLOR",
+          "token": "--component-token-chart-series-1",
+          "valuesByMode": {
+            "light": {
+              "r": 0.2235,
+              "g": 0.5294,
+              "b": 0.898,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.2235,
+              "g": 0.5294,
+              "b": 0.898,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#3987e5",
+            "dark": "#3987e5"
+          }
+        },
+        {
+          "name": "component/token/chart/series/2",
+          "type": "COLOR",
+          "token": "--component-token-chart-series-2",
+          "valuesByMode": {
+            "light": {
+              "r": 0.851,
+              "g": 0.349,
+              "b": 0.149,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.851,
+              "g": 0.349,
+              "b": 0.149,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d95926",
+            "dark": "#d95926"
+          }
+        },
+        {
+          "name": "component/token/chart/series/3",
+          "type": "COLOR",
+          "token": "--component-token-chart-series-3",
+          "valuesByMode": {
+            "light": {
+              "r": 0.098,
+              "g": 0.6196,
+              "b": 0.4392,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.098,
+              "g": 0.6196,
+              "b": 0.4392,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#199e70",
+            "dark": "#199e70"
+          }
+        },
+        {
+          "name": "component/token/chart/series/4",
+          "type": "COLOR",
+          "token": "--component-token-chart-series-4",
+          "valuesByMode": {
+            "light": {
+              "r": 0.7882,
+              "g": 0.5216,
+              "b": 0,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.7882,
+              "g": 0.5216,
+              "b": 0,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#c98500",
+            "dark": "#c98500"
+          }
+        },
+        {
+          "name": "component/token/chart/series/5",
+          "type": "COLOR",
+          "token": "--component-token-chart-series-5",
+          "valuesByMode": {
+            "light": {
+              "r": 0.8353,
+              "g": 0.3176,
+              "b": 0.5059,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.8353,
+              "g": 0.3176,
+              "b": 0.5059,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#d55181",
+            "dark": "#d55181"
+          }
+        },
+        {
+          "name": "component/token/chart/share",
+          "type": "FLOAT",
+          "token": "--component-token-chart-share",
+          "valuesByMode": {
+            "light": 0,
+            "dark": 0
+          }
+        },
+        {
+          "name": "component/token/chart/swatch",
+          "type": "COLOR",
+          "token": "--component-token-chart-swatch",
+          "valuesByMode": {
+            "light": {
+              "r": 0.5373,
+              "g": 0.5294,
+              "b": 0.5059,
+              "a": 1
+            },
+            "dark": {
+              "r": 0.5373,
+              "g": 0.5294,
+              "b": 0.5059,
+              "a": 1
+            }
+          },
+          "hexByMode": {
+            "light": "#898781",
+            "dark": "#898781"
+          }
+        },
+        {
+          "name": "component/token/chart/swatch/radius",
+          "type": "FLOAT",
+          "token": "--component-token-chart-swatch-radius",
+          "valuesByMode": {
+            "light": 2,
+            "dark": 2
+          }
+        },
+        {
+          "name": "component/token/chart/value/gap",
+          "type": "FLOAT",
+          "token": "--component-token-chart-value-gap",
+          "valuesByMode": {
+            "light": 8,
+            "dark": 8
+          }
+        },
+        {
           "name": "component/token/component/accent",
           "type": "COLOR",
           "token": "--component-token-component-accent",
@@ -18435,6 +18659,30 @@
     {
       "token": "--component-toast-shadow",
       "motivo": "sombra: en Figma es un efecto, no una variable"
+    },
+    {
+      "token": "--component-token-chart-accent",
+      "motivo": "expresión CSS: solo un navegador la reduce"
+    },
+    {
+      "token": "--component-token-chart-columns",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-token-chart-key-gap",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+    },
+    {
+      "token": "--component-token-chart-swatch-size",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
+    },
+    {
+      "token": "--component-token-chart-tip-padding",
+      "motivo": "valor no traducible a una variable de Figma"
+    },
+    {
+      "token": "--component-token-chart-value-room",
+      "motivo": "unidad relativa: Figma no tiene contexto con el que resolverla"
     },
     {
       "token": "--component-token-component-badge-bg",

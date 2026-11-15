@@ -1,0 +1,28 @@
+<div class="card" style="max-width: 28rem;">
+  <div class="card-body">
+    <h2 class="card-title h5">Delete project</h2>
+    <p class="card-text">This removes the project and all its files.</p>
+    <form>
+      <div class="mb-3">
+        <label for="email" class="form-label">Confirm with your email</label>
+        <input type="email" class="form-control is-invalid" id="email" required aria-invalid="true" aria-describedby="email-msg">
+        <div id="email-msg" class="invalid-feedback">Enter a valid email address.</div>
+      </div>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm">Delete project</button>
+    </form>
+  </div>
+</div>
+<div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="confirm-title" aria-describedby="confirm-desc" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="confirm-title">Delete project?</h2>
+      </div>
+      <div class="modal-body" id="confirm-desc">Files and history will be lost.</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

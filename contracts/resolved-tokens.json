@@ -554,7 +554,21 @@
     "--component-theme-card-swatch-sketch-image": "repeating-linear-gradient(to right,oklch(0.498 0.282 266.24/0.16) 0 1px,transparent 1px 12px),repeating-linear-gradient(to bottom,oklch(0.498 0.282 266.24/0.16) 0 1px,transparent 1px 12px)",
     "--component-theme-card-dot-sketch-a": "oklch(0.498 0.282 266.24)",
     "--component-theme-card-dot-sketch-b": "oklch(0.753 0.129 173)",
-    "--component-theme-grid-min": "16rem"
+    "--component-theme-grid-min": "16rem",
+    "--component-token-chart-muted": "#898781",
+    "--component-token-chart-bar-size": "0.75rem",
+    "--component-token-chart-gap": "2px",
+    "--component-token-chart-radius": "4px",
+    "--component-token-chart-columns": "minmax(9ch,12ch) 1fr",
+    "--component-token-chart-share": "0",
+    "--component-token-chart-value-room": "8ch",
+    "--component-token-chart-value-gap": "0.5rem",
+    "--component-token-chart-swatch": "#898781",
+    "--component-token-chart-swatch-size": "0.75em",
+    "--component-token-chart-swatch-radius": "2px",
+    "--component-token-chart-key-gap": "0.4em",
+    "--component-token-chart-row-padding": "0.375rem",
+    "--component-token-chart-tip-padding": "0.375rem 0.5rem"
   },
   "themes": {
     "example-01": {
@@ -1405,7 +1419,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.78 0.019 261.325)",
         "--component-docs-badge-organism-bg": "oklch(0.20 0.059 280.513)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.20 0.059 280.513)"
+        "--component-docs-badge-organism-border": "oklch(0.20 0.059 280.513)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.23 276.966) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary-text": "oklch(from oklch(0.60 0.23 276.966) 0.80 c h)",
@@ -1762,7 +1782,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.51 0 0)",
         "--component-docs-badge-organism-bg": "oklch(1 0 0)",
         "--component-docs-badge-organism-color": "oklch(0.22 0 0)",
-        "--component-docs-badge-organism-border": "oklch(1 0 0)"
+        "--component-docs-badge-organism-border": "oklch(1 0 0)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.23 276.966) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-border-radius",
@@ -2032,6 +2058,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -3087,7 +3114,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.657 0.241 6.902)",
         "--component-docs-badge-organism-bg": "oklch(0.193 0.069 300.442)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.193 0.069 300.442)"
+        "--component-docs-badge-organism-border": "oklch(0.193 0.069 300.442)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.241 6.902) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary-text": "oklch(from oklch(0.60 0.241 6.902) 0.80 c h)",
@@ -3419,7 +3452,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.51 0 0)",
         "--component-docs-badge-organism-bg": "oklch(1 0 0)",
         "--component-docs-badge-organism-color": "oklch(0.22 0 0)",
-        "--component-docs-badge-organism-border": "oklch(1 0 0)"
+        "--component-docs-badge-organism-border": "oklch(1 0 0)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.241 6.902) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-border-radius",
@@ -3689,6 +3728,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -4750,7 +4790,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.687 0.083 29.795)",
         "--component-docs-badge-organism-bg": "oklch(0.20 0.04 40)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.20 0.04 40)"
+        "--component-docs-badge-organism-border": "oklch(0.20 0.04 40)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.181 22.839) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary-text": "oklch(from oklch(0.60 0.181 22.839) 0.80 c h)",
@@ -5111,7 +5157,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.51 0 0)",
         "--component-docs-badge-organism-bg": "oklch(1 0 0)",
         "--component-docs-badge-organism-color": "oklch(0.22 0 0)",
-        "--component-docs-badge-organism-border": "oklch(1 0 0)"
+        "--component-docs-badge-organism-border": "oklch(1 0 0)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.181 22.839) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-border-radius",
@@ -5373,6 +5425,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -6431,7 +6484,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.731 0.085 154.2)",
         "--component-docs-badge-organism-bg": "oklch(0.22 0.018 155.826)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.22 0.018 155.826)"
+        "--component-docs-badge-organism-border": "oklch(0.22 0.018 155.826)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.182 151.711) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary-text": "oklch(from oklch(0.60 0.182 151.711) 0.80 c h)",
@@ -6792,7 +6851,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.51 0 0)",
         "--component-docs-badge-organism-bg": "oklch(1 0 0)",
         "--component-docs-badge-organism-color": "oklch(0.22 0 0)",
-        "--component-docs-badge-organism-border": "oklch(1 0 0)"
+        "--component-docs-badge-organism-border": "oklch(1 0 0)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.182 151.711) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-border-radius",
@@ -7060,6 +7125,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -8124,7 +8190,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.60 0.139 91.059)",
         "--component-docs-badge-organism-bg": "oklch(0.80 0.139 91.059)",
         "--component-docs-badge-organism-color": "oklch(0.22 0.021 264.344)",
-        "--component-docs-badge-organism-border": "oklch(0.80 0.139 91.059)"
+        "--component-docs-badge-organism-border": "oklch(0.80 0.139 91.059)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.60 0.139 91.059) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-bg-primary": "oklch(0.22 0 0)",
@@ -8636,6 +8708,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -9696,7 +9769,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.70 0 0)",
         "--component-docs-badge-organism-bg": "oklch(0.12 0.02 260)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.12 0.02 260)"
+        "--component-docs-badge-organism-border": "oklch(0.12 0.02 260)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.75 0.15 190) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary-text": "oklch(from oklch(0.75 0.15 190) 0.80 c h)",
@@ -10046,7 +10125,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.51 0 0)",
         "--component-docs-badge-organism-bg": "oklch(1 0 0)",
         "--component-docs-badge-organism-color": "oklch(0.22 0 0)",
-        "--component-docs-badge-organism-border": "oklch(1 0 0)"
+        "--component-docs-badge-organism-border": "oklch(1 0 0)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.75 0.15 190) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-border-radius",
@@ -10308,6 +10393,7 @@
         "--component-toast-offset",
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
+        "--component-token-chart-accent",
         "--component-token-component-badge-bg",
         "--component-token-component-badge-border",
         "--component-token-component-badge-color",
@@ -11354,7 +11440,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.740 0.133 267)",
         "--component-docs-badge-organism-bg": "oklch(0.440 0.260 266)",
         "--component-docs-badge-organism-color": "oklch(1 0 0)",
-        "--component-docs-badge-organism-border": "oklch(0.440 0.260 266)"
+        "--component-docs-badge-organism-border": "oklch(0.440 0.260 266)",
+        "--component-token-chart-series-1": "#2a78d6",
+        "--component-token-chart-series-2": "#eb6834",
+        "--component-token-chart-series-3": "#1baf7a",
+        "--component-token-chart-series-4": "#eda100",
+        "--component-token-chart-series-5": "#e87ba4",
+        "--component-token-chart-accent": "oklch(from oklch(0.498 0.282 266.24) clamp(calc(0.45 - 0.12),l,calc(0.45 + 0.12)) c h)"
       },
       "dark": {
         "--semantic-color-primary": "oklch(0.740 0.133 267)",
@@ -11835,7 +11927,13 @@
         "--component-docs-badge-molecule-border": "oklch(0.440 0.260 266)",
         "--component-docs-badge-organism-bg": "oklch(0.740 0.133 267)",
         "--component-docs-badge-organism-color": "oklch(0.221 0.039 258.3)",
-        "--component-docs-badge-organism-border": "oklch(0.740 0.133 267)"
+        "--component-docs-badge-organism-border": "oklch(0.740 0.133 267)",
+        "--component-token-chart-series-1": "#3987e5",
+        "--component-token-chart-series-2": "#d95926",
+        "--component-token-chart-series-3": "#199e70",
+        "--component-token-chart-series-4": "#c98500",
+        "--component-token-chart-series-5": "#d55181",
+        "--component-token-chart-accent": "oklch(from oklch(0.740 0.133 267) clamp(calc(0.80 - 0.12),l,calc(0.80 + 0.12)) c h)"
       },
       "expressions": [
         "--component-alert-error-title-color",
@@ -12040,6 +12138,7 @@
         "--component-toast-padding-block",
         "--component-toast-padding-inline",
         "--component-toast-shadow",
+        "--component-token-chart-accent",
         "--component-tooltip-font-size",
         "--component-tooltip-padding-block",
         "--component-tooltip-padding-inline",

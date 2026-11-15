@@ -1,0 +1,175 @@
+// MOLECULE: TOKEN CHART
+// ===============================================
+// Barras horizontales para la sección de coste en tokens de why-syx.html,
+// apiladas (una categoría por segmento) o simples (una por sistema, con el
+// resaltado en --accent). Lo genera scripts/build-why-syx.js.
+//
+// Reglas de la guía de visualización que sigue:
+//   · barra de 16 px, extremo de dato redondeado 4 px, recta en la base;
+//   · 2 px de fondo entre segmentos, nunca un borde alrededor;
+//   · el texto lleva tintas de texto, nunca el color de la serie;
+//   · el valor al final de la barra; el resto, en el tooltip y en la tabla;
+//   · tooltip al pasar el ratón por un segmento y, con teclado, al enfocar la
+//     fila (una parada de Tab por fila, no una por segmento).
+// ===============================================
+@use "../abstracts/index" as *;
+
+@mixin mol-token-chart($theme: null) {
+  @layer syx.molecules {
+    .mol-token-chart {
+      margin: 0;
+
+      &__title {
+        font-weight: var(--semantic-font-weight-bold);
+        margin: 0 0 var(--semantic-space-stack-xs);
+      }
+
+      &__note {
+        color: var(--semantic-color-text-secondary);
+        font-size: var(--semantic-font-size-body-small);
+        margin: 0 0 var(--semantic-space-stack-sm);
+      }
+
+      // Leyenda: muestra + nombre, en línea.
+      &__legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--semantic-space-stack-xs) var(--semantic-space-inline-md);
+        list-style: none;
+        margin: 0 0 var(--semantic-space-stack-sm);
+        padding: 0;
+        font-size: var(--semantic-font-size-body-small);
+        color: var(--semantic-color-text-secondary);
+      }
+
+      &__key {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--component-token-chart-key-gap);
+      }
+
+      &__swatch {
+        inline-size: var(--component-token-chart-swatch-size);
+        block-size: var(--component-token-chart-swatch-size);
+        border-radius: var(--component-token-chart-swatch-radius);
+        background: var(--component-token-chart-swatch);
+      }
+
+      &__rows {
+        container: token-chart / inline-size;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      // Una fila: nombre · barra · total.
+      &__row {
+        position: relative;
+        display: grid;
+        grid-template-columns: var(--component-token-chart-columns);
+        align-items: center;
+        gap: var(--semantic-space-inline-md);
+        padding: var(--component-token-chart-row-padding) 0;
+        border-radius: var(--component-token-chart-radius);
+
+        // Estrecho: la barra baja bajo el nombre y usa todo el ancho.
+        @container token-chart (max-width: 32rem) {
+          grid-template-columns: 1fr;
+          gap: var(--semantic-space-stack-xs);
+        }
+
+        &:focus-visible {
+          outline: var(--semantic-focus-ring-width) solid var(--semantic-focus-ring-color);
+          outline-offset: var(--semantic-focus-ring-offset);
+        }
+      }
+
+      &__name {
+        white-space: nowrap;
+        color: var(--semantic-color-text-primary);
+      }
+
+      &__row--accent &__name {
+        font-weight: var(--semantic-font-weight-bold);
+      }
+
+      // La pista no se pinta: da la anchura de referencia (el máximo, menos
+      // el sitio del total) y lleva el total justo al final de la barra.
+      &__track {
+        display: flex;
+        align-items: center;
+        gap: var(--component-token-chart-gap);
+        min-inline-size: 0;
+      }
+
+      &__seg {
+        position: relative;
+        flex: 0 0 calc((100% - var(--component-token-chart-value-room)) * var(--component-token-chart-share));
+        min-inline-size: 1px;
+        block-size: var(--component-token-chart-bar-size);
+        background: var(--component-token-chart-fill, var(--component-token-chart-muted));
+
+        // Solo el último segmento (el que va antes del total) lleva el
+        // extremo de dato redondeado.
+        &:has(+ .mol-token-chart__value) {
+          border-start-end-radius: var(--component-token-chart-radius);
+          border-end-end-radius: var(--component-token-chart-radius);
+        }
+
+        &:hover {
+          filter: brightness(1.12);
+        }
+      }
+
+      &__seg--1 { --component-token-chart-fill: var(--component-token-chart-series-1); }
+      &__seg--2 { --component-token-chart-fill: var(--component-token-chart-series-2); }
+      &__seg--3 { --component-token-chart-fill: var(--component-token-chart-series-3); }
+      &__seg--4 { --component-token-chart-fill: var(--component-token-chart-series-4); }
+      &__seg--5 { --component-token-chart-fill: var(--component-token-chart-series-5); }
+      &__seg--accent { --component-token-chart-fill: var(--component-token-chart-accent); }
+
+      &__swatch--1 { --component-token-chart-swatch: var(--component-token-chart-series-1); }
+      &__swatch--2 { --component-token-chart-swatch: var(--component-token-chart-series-2); }
+      &__swatch--3 { --component-token-chart-swatch: var(--component-token-chart-series-3); }
+      &__swatch--4 { --component-token-chart-swatch: var(--component-token-chart-series-4); }
+      &__swatch--5 { --component-token-chart-swatch: var(--component-token-chart-series-5); }
+
+      &__value {
+        font-family: var(--semantic-font-family-mono);
+        font-variant-numeric: tabular-nums;
+        font-size: var(--semantic-font-size-body-small);
+        color: var(--semantic-color-text-secondary);
+        margin-inline-start: var(--component-token-chart-value-gap);
+        white-space: nowrap;
+      }
+
+      // Tooltip: el del segmento al pasar el ratón; el de la fila entera al
+      // enfocarla con el teclado. Sale de data-tip, que escribe el generador.
+      &__seg[data-tip]:hover::after,
+      &__row[data-tip]:focus-visible::after {
+        content: attr(data-tip);
+        @include absolute($bottom: calc(100% + var(--component-token-chart-row-padding)), $left: 0);
+        z-index: 2;
+        padding: var(--component-token-chart-tip-padding);
+        border-radius: var(--semantic-border-radius-sm);
+        background: var(--semantic-color-bg-inverse);
+        color: var(--semantic-color-text-inverse);
+        font-family: var(--semantic-font-family-mono);
+        font-size: var(--semantic-font-size-body-small);
+        line-height: var(--semantic-line-height-body);
+        white-space: pre;
+        pointer-events: none;
+      }
+
+      // Alto contraste: el sistema pinta el fondo como Canvas y las barras
+      // desaparecerían. Se conservan los colores y se dibuja el contorno.
+      @media (forced-colors: active) {
+        &__seg,
+        &__swatch {
+          forced-color-adjust: none;
+          outline: 1px solid CanvasText;
+        }
+      }
+    }
+  }
+}

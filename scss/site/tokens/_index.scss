@@ -7,9 +7,11 @@
 
 @use 'defaults' as *;
 @use 'syx-sketch' as *;
+@use 'chart' as *;
 
 @mixin site-tokens($theme: null) {
   @include site-tokens-defaults;
+  @include site-tokens-chart($theme);
 
   // Un tema que quiera vestir las páginas de SYX a su manera añade aquí
   // su fichero; los demás se quedan con los valores por defecto.
