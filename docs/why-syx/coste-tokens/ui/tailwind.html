@@ -1,0 +1,22 @@
+<div class="max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+  <h2 class="text-lg font-semibold text-gray-900">Delete project</h2>
+  <p class="mt-1 text-sm text-gray-600">This removes the project and all its files.</p>
+  <form class="mt-4 space-y-4">
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-900">Confirm with your email</label>
+      <input id="email" type="email" required aria-invalid="true" aria-describedby="email-msg" class="mt-1 block w-full rounded-md border border-red-500 px-3 py-2 text-sm text-gray-900">
+      <p id="email-msg" class="mt-1 text-sm text-red-600">Enter a valid email address.</p>
+    </div>
+    <button type="button" onclick="document.getElementById('confirm').showModal()" class="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-500">Delete project</button>
+  </form>
+</div>
+<dialog id="confirm" role="alertdialog" aria-labelledby="confirm-title" aria-describedby="confirm-desc" class="m-auto w-full max-w-sm rounded-xl bg-white p-6 shadow-xl backdrop:bg-black/50">
+  <form method="dialog">
+    <h2 id="confirm-title" class="text-lg font-semibold text-gray-900">Delete project?</h2>
+    <p id="confirm-desc" class="mt-2 text-sm text-gray-600">Files and history will be lost.</p>
+    <div class="mt-6 flex justify-end gap-3">
+      <button value="cancel" autofocus class="rounded-md border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50">Cancel</button>
+      <button value="ok" class="rounded-md bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-500">Delete</button>
+    </div>
+  </form>
+</dialog>

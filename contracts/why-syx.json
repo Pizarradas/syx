@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Las puntuaciones y los pesos de why-syx.html. La página no se edita a mano en esas secciones: scripts/build-why-syx.js genera la matriz, el total, la clasificación y los seis perfiles desde aquí, y check:why-syx comprueba que coinciden.",
-    "remedido": "2026-10-01",
+    "remedido": "2026-11-15",
     "criterios": [
       "1. Frontend architecture", "2. Agnosticism & integration", "3. Styling architecture", "4. Ready-made UI",
       "5. Art direction", "6. Technical debt", "7. Performance & SEO", "8. Accessibility", "9. Override friction",
@@ -11,12 +11,12 @@
   },
   "sistemas": [
     { "id": "syx", "nombre": "SYX", "corto": "SYX", "version": "5.1.0", "puntos": [5, 5, 4, 3, 5, 4, 5, 4, 5, 3, 5, 1, 3, 3] },
-    { "id": "shadcn", "nombre": "Shadcn UI", "corto": "Shadcn UI", "version": "2026 registry (CLI 4.21), Tailwind v4 + React 19", "puntos": [4, 2, 4, 4, 5, 4, 4, 5, 4, 3, 4, 4, 5, 3] },
-    { "id": "tailwind", "nombre": "Tailwind CSS", "corto": "Tailwind", "version": "4.3.3", "puntos": [4, 5, 4, 1, 5, 3, 5, 2, 4, 4, 3, 5, 1, 4] },
-    { "id": "chakra", "nombre": "Chakra UI", "corto": "Chakra UI", "version": "3.37", "puntos": [3, 1, 5, 4, 3, 4, 2, 5, 3, 4, 2, 4, 5, 4] },
-    { "id": "bootstrap", "nombre": "Bootstrap", "corto": "Bootstrap", "version": "5.3.8", "puntos": [3, 5, 3, 4, 1, 3, 4, 4, 2, 5, 2, 5, 4, 5] },
-    { "id": "mui", "nombre": "Material UI", "corto": "MUI", "version": "9.4", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 3, 2, 5, 5, 4] },
-    { "id": "antd", "nombre": "Ant Design", "corto": "Ant Design", "version": "6.6", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 2, 2, 4, 5, 4] }
+    { "id": "shadcn", "nombre": "Shadcn UI", "corto": "Shadcn UI", "version": "2026 registry (CLI 4.23), Tailwind v4 + React 19", "puntos": [4, 2, 4, 4, 5, 4, 4, 5, 4, 3, 4, 4, 5, 3] },
+    { "id": "tailwind", "nombre": "Tailwind CSS", "corto": "Tailwind", "version": "4.3.5", "puntos": [4, 5, 4, 1, 5, 3, 5, 2, 4, 4, 3, 5, 1, 4] },
+    { "id": "chakra", "nombre": "Chakra UI", "corto": "Chakra UI", "version": "3.38", "puntos": [3, 1, 5, 4, 3, 4, 2, 5, 3, 4, 2, 4, 5, 4] },
+    { "id": "bootstrap", "nombre": "Bootstrap", "corto": "Bootstrap", "version": "5.3.9", "puntos": [3, 5, 3, 4, 1, 3, 4, 4, 2, 5, 2, 5, 4, 5] },
+    { "id": "mui", "nombre": "Material UI", "corto": "MUI", "version": "9.5", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 3, 2, 5, 5, 4] },
+    { "id": "antd", "nombre": "Ant Design", "corto": "Ant Design", "version": "6.7", "puntos": [2, 1, 3, 5, 1, 3, 2, 4, 1, 2, 2, 4, 5, 4] }
   ],
   "perfiles": [
     { "id": "legacy", "titulo": "Legacy &amp; server-rendered", "sub": "JSP · PHP · .NET · Rails — the browser is modern, the server is not", "pesos": [3, 3, 2, 2, 1, 3, 2, 2, 3, 2, 1, 2, 1, 3] },

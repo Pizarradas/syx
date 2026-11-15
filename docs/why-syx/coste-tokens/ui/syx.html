@@ -1,0 +1,26 @@
+<article class="mol-card">
+  <header class="mol-card__header">
+    <h2 class="mol-card__title">Delete project</h2>
+  </header>
+  <div class="mol-card__body">
+    <p>This removes the project and all its files.</p>
+    <form>
+      <div class="mol-form-field mol-form-field--is-error">
+        <label class="atom-label" for="email">Confirm with your email</label>
+        <input class="atom-input" id="email" type="email" required aria-invalid="true" aria-describedby="email-msg">
+        <span class="mol-form-field__msg" id="email-msg">Enter a valid email address.</span>
+      </div>
+      <button class="atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md" type="button" onclick="document.getElementById('confirm').showModal()">Delete project</button>
+    </form>
+  </div>
+</article>
+<dialog class="mol-dialog" id="confirm" role="alertdialog" aria-labelledby="confirm-title" aria-describedby="confirm-desc">
+  <form method="dialog" class="mol-dialog__inner">
+    <h2 class="mol-dialog__title" id="confirm-title">Delete project?</h2>
+    <p class="mol-dialog__body" id="confirm-desc">Files and history will be lost.</p>
+    <div class="mol-dialog__footer">
+      <button class="atom-btn atom-btn--secondary atom-btn--size-md" value="cancel" autofocus>Cancel</button>
+      <button class="atom-btn atom-btn--danger atom-btn--filled atom-btn--size-md" value="ok">Delete</button>
+    </div>
+  </form>
+</dialog>

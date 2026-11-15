@@ -1,0 +1,8 @@
+{
+  "name": "syx-why-coste-tokens",
+  "private": true,
+  "description": "Mide el coste en tokens de why-syx.html. No viaja en el paquete; necesita credenciales de la API de Anthropic.",
+  "type": "module",
+  "scripts": { "medir": "node medir.mjs" },
+  "dependencies": { "@anthropic-ai/sdk": "^1.8.0" }
+}

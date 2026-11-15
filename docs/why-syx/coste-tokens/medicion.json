@@ -1,0 +1,387 @@
+{
+  "_nota": "Generado por medir.mjs. No se edita a mano.",
+  "medido": "2026-11-15",
+  "modelo": "claude-opus-5-5",
+  "envoltorio": 8,
+  "contexto": {
+    "syx": {
+      "total": 13501,
+      "setup": 7890,
+      "button": 2175,
+      "field": 1302,
+      "card": 1131,
+      "dialog": 1003
+    },
+    "shadcn": {
+      "total": 35746,
+      "setup": 2760,
+      "button": 4926,
+      "field": 14640,
+      "card": 7320,
+      "dialog": 6100
+    },
+    "tailwind": {
+      "total": 17870,
+      "setup": 1782,
+      "button": 16088,
+      "field": null,
+      "card": null,
+      "dialog": null
+    },
+    "chakra": {
+      "total": 30498,
+      "setup": 1304,
+      "button": 5508,
+      "field": 3931,
+      "card": 4450,
+      "dialog": 15305
+    },
+    "bootstrap": {
+      "total": 40352,
+      "setup": 3090,
+      "button": 4733,
+      "field": 6408,
+      "card": 10562,
+      "dialog": 15559
+    },
+    "mui": {
+      "total": 80104,
+      "setup": 2341,
+      "button": 12652,
+      "field": 33315,
+      "card": 13441,
+      "dialog": 18355
+    },
+    "antd": {
+      "total": 92526,
+      "setup": 1991,
+      "button": 14443,
+      "field": 52954,
+      "card": 7144,
+      "dialog": 15994
+    }
+  },
+  "salida": {
+    "syx": 573,
+    "shadcn": 731,
+    "tailwind": 728,
+    "chakra": 666,
+    "bootstrap": 533,
+    "mui": 739,
+    "antd": 386
+  },
+  "fuentes": [
+    {
+      "sistema": "syx",
+      "rol": "setup",
+      "fuente": "local:CONSUMING.md",
+      "bytes": 19396,
+      "sha256": "a46168ab6b95a64214f705036db3856c4c9f07196704ad3592eb1ac04fa9fead",
+      "tokens": 7890
+    },
+    {
+      "sistema": "syx",
+      "rol": "button",
+      "fuente": "syx:btn",
+      "bytes": 5675,
+      "sha256": "f80d3c35603959dbed1a7d8019a92bc69560fac53eb51f9e76858cbd02d89708",
+      "tokens": 2175
+    },
+    {
+      "sistema": "syx",
+      "rol": "field",
+      "fuente": "syx:form-field",
+      "bytes": 3251,
+      "sha256": "f46b75d2c23a29198dd449c7dda1c6b66054e2830cc8f453044244700bd4a63a",
+      "tokens": 1302
+    },
+    {
+      "sistema": "syx",
+      "rol": "card",
+      "fuente": "syx:card",
+      "bytes": 2867,
+      "sha256": "9b3c748e83324e742cccbee92051797910e468e931fde7d8ea52d11939666c56",
+      "tokens": 1131
+    },
+    {
+      "sistema": "syx",
+      "rol": "dialog",
+      "fuente": "syx:dialog",
+      "bytes": 2361,
+      "sha256": "c50f62f098866b1354075738cd82d640b49133ba89b72e4b79e62b42615cf16a",
+      "tokens": 1003
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "setup",
+      "fuente": "https://ui.shadcn.com/docs/installation/vite.md",
+      "bytes": 6960,
+      "sha256": "676f3621728e77cec2585688ecc577fb2514e7c96abc63f51ef5e3c5254c3b6c",
+      "tokens": 2760
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "button",
+      "fuente": "https://ui.shadcn.com/docs/components/button.md",
+      "bytes": 12418,
+      "sha256": "966cf16702128d2b385b62616ee24bb3b1b3b2ed7eebfc13ce411c90421f8910",
+      "tokens": 4926
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "field",
+      "fuente": "https://ui.shadcn.com/docs/components/field.md",
+      "bytes": 38034,
+      "sha256": "1afe174f74b982ec86fad520dab464a16bfe289c2d54fde88241ce3a791112ee",
+      "tokens": 14640
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "card",
+      "fuente": "https://ui.shadcn.com/docs/components/card.md",
+      "bytes": 19164,
+      "sha256": "718dec761e0ad426b53d4673d206ab6dbfbbff5757f9714b883a04126f75db3e",
+      "tokens": 7320
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "dialog",
+      "fuente": "https://ui.shadcn.com/docs/components/alert-dialog.md",
+      "bytes": 14313,
+      "sha256": "ccc9147729b395b1d80ba6c9190ffbd5b556213571f958bb10c111a38b63c2da",
+      "tokens": 6100
+    },
+    {
+      "sistema": "tailwind",
+      "rol": "setup",
+      "fuente": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/app/(docs)/docs/installation/(tabs)/using-vite/page.tsx",
+      "bytes": 4589,
+      "sha256": "d60698bd0c3ab0b763c86bce834471bac1612c2d38e171f09ee66c48bff06bb1",
+      "tokens": 1782
+    },
+    {
+      "sistema": "tailwind",
+      "rol": "button",
+      "fuente": "https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/docs/styling-with-utility-classes.mdx",
+      "bytes": 38673,
+      "sha256": "ce94e054e95a123e660b88fe85fa25076213c16f5744ef9715e8cd6c991637f2",
+      "tokens": 16088
+    },
+    {
+      "sistema": "chakra",
+      "rol": "setup",
+      "fuente": "https://chakra-ui.com/docs/get-started/installation.mdx",
+      "bytes": 3412,
+      "sha256": "26e07f89d789bcd1058cc384e3b535d1dc89bb271fb017c06aa2651e6c39596d",
+      "tokens": 1304
+    },
+    {
+      "sistema": "chakra",
+      "rol": "button",
+      "fuente": "https://chakra-ui.com/docs/components/button.mdx",
+      "bytes": 13327,
+      "sha256": "9ccc225d4a76e5f6b6ed27149b0355b4e576f824b989c962268ed49ccfddc361",
+      "tokens": 5508
+    },
+    {
+      "sistema": "chakra",
+      "rol": "field",
+      "fuente": "https://chakra-ui.com/docs/components/field.mdx",
+      "bytes": 9852,
+      "sha256": "949b596947246a9c80753b5c9f61f65b8b3153d1141e9248d8d4b2571de33ff5",
+      "tokens": 3931
+    },
+    {
+      "sistema": "chakra",
+      "rol": "card",
+      "fuente": "https://chakra-ui.com/docs/components/card.mdx",
+      "bytes": 10641,
+      "sha256": "512fa6cdc9720cf0c9e4ebcf626488ac3d94ced3b5d4514ab512b50aefad448a",
+      "tokens": 4450
+    },
+    {
+      "sistema": "chakra",
+      "rol": "dialog",
+      "fuente": "https://chakra-ui.com/docs/components/dialog.mdx",
+      "bytes": 38208,
+      "sha256": "5f124a7ec5c8419c7966e4e58a30efa2108225fb0ac79cf7d4321e44c14514ee",
+      "tokens": 15305
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "setup",
+      "fuente": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/getting-started/introduction.mdx",
+      "bytes": 8070,
+      "sha256": "a71b2114fa4b2b6b03e83caea7176bde31a63d0fe5630f9b16eba604cad76ad1",
+      "tokens": 3090
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "button",
+      "fuente": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/buttons.mdx",
+      "bytes": 12830,
+      "sha256": "7cc97b7d12374626132afae8e4d378cb8828af5411ee75927cd303824e1d394f",
+      "tokens": 4733
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "field",
+      "fuente": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/forms/validation.mdx",
+      "bytes": 18433,
+      "sha256": "148f94e60d6392dfd934af7b858e1e22bca7a252cc2f8704915faca35a571cae",
+      "tokens": 6408
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "card",
+      "fuente": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/card.mdx",
+      "bytes": 29496,
+      "sha256": "06f588844ca729b604f25196ca3bb2f97005d17bcbd7085c9dde3df2c9e2c8c2",
+      "tokens": 10562
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "dialog",
+      "fuente": "https://raw.githubusercontent.com/twbs/bootstrap/v5.3.9/site/src/content/docs/components/modal.mdx",
+      "bytes": 39300,
+      "sha256": "38dc481a198f6102af05d01f9f3252cc3e0b9c7b3b5f071dac2da400afc39250",
+      "tokens": 15559
+    },
+    {
+      "sistema": "mui",
+      "rol": "setup",
+      "fuente": "https://mui.com/material-ui/getting-started/installation.md",
+      "bytes": 5944,
+      "sha256": "c6b729faebc3e538afc638228e4068a5a5b80f4def1c7597ba2388a0ba2ae1cc",
+      "tokens": 2341
+    },
+    {
+      "sistema": "mui",
+      "rol": "button",
+      "fuente": "https://mui.com/material-ui/react-button.md",
+      "bytes": 32792,
+      "sha256": "8beac5529b04fe61aa2e2438873beb5574c78b8ba6357a5ead5e799fffed43ad",
+      "tokens": 12652
+    },
+    {
+      "sistema": "mui",
+      "rol": "field",
+      "fuente": "https://mui.com/material-ui/react-text-field.md",
+      "bytes": 88476,
+      "sha256": "984ef2371ad3b73a610b043d00a087fd5024d8693551feb69e7633d4c3357237",
+      "tokens": 33315
+    },
+    {
+      "sistema": "mui",
+      "rol": "card",
+      "fuente": "https://mui.com/material-ui/react-card.md",
+      "bytes": 36354,
+      "sha256": "1eac24d309994fd02509c0ed1a50e886c3ed5eb5de10115595eb0d0b4cec20a9",
+      "tokens": 13441
+    },
+    {
+      "sistema": "mui",
+      "rol": "dialog",
+      "fuente": "https://mui.com/material-ui/react-dialog.md",
+      "bytes": 48454,
+      "sha256": "c8cc74e25d4687f49e651ee02a710e31697831240a8f416a4fbc33922e680a7c",
+      "tokens": 18355
+    },
+    {
+      "sistema": "antd",
+      "rol": "setup",
+      "fuente": "https://ant.design/docs/react/getting-started.md",
+      "bytes": 5386,
+      "sha256": "2586fe1b2738b75bdd1d8c8b7c28f3eba13a511349e9ac75ae4deb5ef919f1bd",
+      "tokens": 1991
+    },
+    {
+      "sistema": "antd",
+      "rol": "button",
+      "fuente": "https://ant.design/components/button.md",
+      "bytes": 37635,
+      "sha256": "bcbeca09e8a1ffd47ab66e38970d5da0c7f625b1b20a65fe7dc81a3d95d82b16",
+      "tokens": 14443
+    },
+    {
+      "sistema": "antd",
+      "rol": "field",
+      "fuente": "https://ant.design/components/form.md",
+      "bytes": 137077,
+      "sha256": "a45c87cdfe6f52d0eb8ebcb7d5595db04213dba8d35eeab1e7cacdbb45ea7ac0",
+      "tokens": 52954
+    },
+    {
+      "sistema": "antd",
+      "rol": "card",
+      "fuente": "https://ant.design/components/card.md",
+      "bytes": 17772,
+      "sha256": "00b468923e746d0eb4a278ec97442c2087ad010c0f9bc8358614ababa76bff05",
+      "tokens": 7144
+    },
+    {
+      "sistema": "antd",
+      "rol": "dialog",
+      "fuente": "https://ant.design/components/modal.md",
+      "bytes": 41475,
+      "sha256": "a55b9b9e8ef61c28beabbcf84ce48f4cd3f8ca31e35dbaf29de8dcd9aa1ba05a",
+      "tokens": 15994
+    },
+    {
+      "sistema": "syx",
+      "rol": "salida",
+      "fuente": "ui/syx.html",
+      "bytes": 1418,
+      "sha256": "450f0b5c26fd16f0d29c95fc2bb2f8a57e4d7202770d583c0ea8903c87d0b826",
+      "tokens": 573
+    },
+    {
+      "sistema": "shadcn",
+      "rol": "salida",
+      "fuente": "ui/shadcn.tsx",
+      "bytes": 1856,
+      "sha256": "be2b05cb85aeda5a912553b555c8e36f53c184a9c93e607f602ba3283dda4ba5",
+      "tokens": 731
+    },
+    {
+      "sistema": "tailwind",
+      "rol": "salida",
+      "fuente": "ui/tailwind.html",
+      "bytes": 1660,
+      "sha256": "3a25758ca384d7a3259955993c03e972590be32e5e754c6b125eded4f1321b7e",
+      "tokens": 728
+    },
+    {
+      "sistema": "chakra",
+      "rol": "salida",
+      "fuente": "ui/chakra.tsx",
+      "bytes": 1797,
+      "sha256": "885693dd090b606e14fff68bc649be501d8f26e291b3bcf1c12a451f3115e753",
+      "tokens": 666
+    },
+    {
+      "sistema": "bootstrap",
+      "rol": "salida",
+      "fuente": "ui/bootstrap.html",
+      "bytes": 1358,
+      "sha256": "3c92439c92ab1e7fdff605be4962ade719beff1d8587ae4db4491622237f3a65",
+      "tokens": 533
+    },
+    {
+      "sistema": "mui",
+      "rol": "salida",
+      "fuente": "ui/mui.tsx",
+      "bytes": 2102,
+      "sha256": "dedc80b2e4d46eea0dbe6f9f2049cef43d855a382b1ea29d9b8c562f752df2ad",
+      "tokens": 739
+    },
+    {
+      "sistema": "antd",
+      "rol": "salida",
+      "fuente": "ui/antd.tsx",
+      "bytes": 1061,
+      "sha256": "ed0745d146776be6793fc48d99afa60bb005229a9d61440a1ab63cedab4d4a02",
+      "tokens": 386
+    }
+  ]
+}

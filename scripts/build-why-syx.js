@@ -15,6 +15,8 @@
  *   perfiles    la frase de la sección de perfiles
  *   perfil-<id> cada perfil: su frase, su clasificación y sus pesos
  *   versiones   la línea de versiones evaluadas
+ *   coste-tokens la tabla de coste en tokens, desde
+ *               docs/why-syx/coste-tokens/medicion.json (lo escribe medir.mjs)
  *
  * Media ponderada = Σ(peso × nota) / Σ(peso). Empates: misma posición
  * (1, 2, 2, 4). La barra es la nota sobre la mejor del bloque.
@@ -182,6 +184,154 @@ const rTotal = clasificar(total);
 bloques.versiones = sistemas
   .map((s) => (s.id === 'shadcn' ? 'Shadcn UI (2026 registry)' : `${s.nombre} ${s.id === 'syx' ? 'v' : ''}${s.version}`))
   .join(' &nbsp;·&nbsp; ');
+
+// ─── Coste en tokens ─────────────────────────────────────────────────────────
+// Lo mide docs/why-syx/coste-tokens/medir.mjs (necesita la API de Anthropic,
+// así que no corre en la CI); aquí solo se pinta medicion.json: tres cifras,
+// dos gráficos (leído, apilado por página; escrito, con SYX resaltado) y la
+// tabla, que es la versión en texto de los dos gráficos.
+const MEDICION = path.join(ROOT, 'docs', 'why-syx', 'coste-tokens', 'medicion.json');
+if (!fs.existsSync(MEDICION)) {
+  // Sin medir todavía: un aviso visible en vez de un hueco, y ninguna cifra.
+  bloques['coste-tokens'] = [
+    '                <div class="mol-alert mol-alert--info" role="note">',
+    '                    <p class="mol-alert__title">Not measured yet</p>',
+    '                    <p class="mol-alert__body">The charts and the table appear here once the counts exist. They need the Anthropic API, so they are not run in CI: <code>docs/why-syx/coste-tokens/medir.mjs</code> writes <code>medicion.json</code>, and <code>npm run build:why-syx</code> draws it. No figure is shown until then, on purpose.</p>',
+    '                </div>',
+  ].join('\n');
+} else {
+  const medicion = JSON.parse(fs.readFileSync(MEDICION, 'utf8'));
+  const ROLES = [
+    ['setup', 'Install'],
+    ['button', 'Button'],
+    ['field', 'Field + error'],
+    ['card', 'Card'],
+    ['dialog', 'Dialog'],
+  ];
+  const n = (x) => (x == null ? '&mdash;' : x.toLocaleString('en-US'));
+  const pct = (x, max) => (x / max).toFixed(4);
+  const filas = sistemas.map((s) => {
+    const c = medicion.contexto[s.id];
+    const o = medicion.salida[s.id];
+    if (!c || o == null) throw new Error(`medicion.json no tiene a ${s.id}`);
+    return { s, c, lee: c.total, escribe: o, total: c.total + o };
+  });
+  const min = (k) => Math.min(...filas.map((f) => f[k]));
+  const marca = (f, k) => (f[k] === min(k) ? `<strong>${n(f[k])}</strong>` : n(f[k]));
+  const orden = [...filas].sort((a, b) => a.total - b.total);
+  const posSyx = orden.findIndex((f) => f.s.id === 'syx') + 1;
+  const syx = filas.find((f) => f.s.id === 'syx');
+  const otros = filas.filter((f) => f.s.id !== 'syx').map((f) => f.total).sort((a, b) => a - b);
+  const mediana = (otros[2] + otros[3]) / 2;
+  const veces = (a, b) => (b / a).toFixed(1).replace(/\.0$/, '');
+  const ultimo = orden[orden.length - 1];
+  const frase = posSyx === 1
+    ? `<strong>SYX is the cheapest of the seven for this task</strong>: ${n(syx.total)} tokens, read and written. The next is ${orden[1].s.nombre} at ${n(orden[1].total)}; the most expensive, ${ultimo.s.nombre}, costs ${veces(syx.total, ultimo.total)}× as much.`
+    : `<strong>SYX comes ${ORD[posSyx - 1]} of seven for this task</strong>, at ${n(syx.total)} tokens read and written; ${orden[0].s.nombre} is the cheapest at ${n(orden[0].total)}.`;
+  const S = '                ';
+
+  // Tres cifras. La tercera dice cuánto respecto a la mediana de los otros
+  // seis, en el sentido que toque: «× less» o «× more».
+  const rel = syx.total <= mediana
+    ? [`${veces(syx.total, mediana)}×`, 'fewer than the median of the other six']
+    : [`${veces(mediana, syx.total)}×`, 'more than the median of the other six'];
+  const tiles = [
+    [n(syx.lee), 'Tokens SYX hands an agent to read'],
+    [n(syx.escribe), 'Tokens of SYX code the agent writes'],
+    rel,
+  ];
+  const kpi = [
+    `${S}<div class="layout-grid__nested syx-mb-4">`,
+    ...tiles.map(([v, l]) => [
+      `${S}    <div class="layout-grid__col-xs-12 layout-grid__col-md-4">`,
+      `${S}        <div class="atom-stat"><span class="atom-stat__number">${v}</span><span class="atom-stat__label">${l}</span></div>`,
+      `${S}    </div>`,
+    ].join('\n')),
+    `${S}</div>`,
+  ];
+
+  // Gráfico 1 — leído, apilado por página, de menos a más.
+  const porLeido = [...filas].sort((a, b) => a.lee - b.lee);
+  const maxLee = porLeido[porLeido.length - 1].lee;
+  const g1 = [
+    `${S}<figure class="mol-token-chart syx-mb-4" aria-labelledby="tc-read-title">`,
+    `${S}    <p class="mol-token-chart__title" id="tc-read-title">Tokens read, by page</p>`,
+    `${S}    <p class="mol-token-chart__note">The official page for each part, whole. Fewest first. Hover a segment, or focus a row, for its figures.</p>`,
+    `${S}    <ul class="mol-token-chart__legend">`,
+    ...ROLES.map(([, nombre], i) => `${S}        <li class="mol-token-chart__key"><span class="mol-token-chart__swatch mol-token-chart__swatch--${i + 1}" aria-hidden="true"></span>${nombre}</li>`),
+    `${S}    </ul>`,
+    `${S}    <ol class="mol-token-chart__rows">`,
+    ...porLeido.map((f) => {
+      const partes = ROLES.map(([k, nombre], i) => ({ k, nombre, i, v: f.c[k] })).filter((p) => p.v != null);
+      const tip = [`${f.s.nombre}: ${f.lee.toLocaleString('en-US')} read`, ...partes.map((p) => `${p.nombre}: ${p.v.toLocaleString('en-US')}`)].join('&#10;');
+      const etiqueta = `${f.s.nombre}, ${f.lee.toLocaleString('en-US')} tokens read: ${partes.map((p) => `${p.nombre.toLowerCase()} ${p.v.toLocaleString('en-US')}`).join(', ')}`;
+      return [
+        `${S}        <li class="mol-token-chart__row${f.s.id === 'syx' ? ' mol-token-chart__row--accent' : ''}" tabindex="0" aria-label="${etiqueta}" data-tip="${tip}">`,
+        `${S}            <span class="mol-token-chart__name" aria-hidden="true">${f.s.nombre}</span>`,
+        `${S}            <span class="mol-token-chart__track" aria-hidden="true">`,
+        ...partes.map((p) => `${S}                <span class="mol-token-chart__seg mol-token-chart__seg--${p.i + 1}" style="--component-token-chart-share:${pct(p.v, maxLee)}" data-tip="${p.nombre}: ${p.v.toLocaleString('en-US')}"></span>`),
+        `${S}                <span class="mol-token-chart__value">${n(f.lee)}</span>`,
+        `${S}            </span>`,
+        `${S}        </li>`,
+      ].join('\n');
+    }),
+    `${S}    </ol>`,
+    `${S}</figure>`,
+  ];
+
+  // Gráfico 2 — escrito, de menos a más, SYX en el color del tema y los demás
+  // en gris: la historia es dónde cae uno, no siete series.
+  const porEscrito = [...filas].sort((a, b) => a.escribe - b.escribe);
+  const maxEsc = porEscrito[porEscrito.length - 1].escribe;
+  const g2 = [
+    `${S}<figure class="mol-token-chart syx-mb-4" aria-labelledby="tc-written-title">`,
+    `${S}    <p class="mol-token-chart__title" id="tc-written-title">Tokens written, same screen</p>`,
+    `${S}    <p class="mol-token-chart__note">The code for the screen, written the way each system&rsquo;s own examples write it. Fewest first; SYX in the theme&rsquo;s colour.</p>`,
+    `${S}    <ol class="mol-token-chart__rows">`,
+    ...porEscrito.map((f) => [
+      `${S}        <li class="mol-token-chart__row${f.s.id === 'syx' ? ' mol-token-chart__row--accent' : ''}" tabindex="0" aria-label="${f.s.nombre}, ${f.escribe.toLocaleString('en-US')} tokens written" data-tip="${f.s.nombre}: ${f.escribe.toLocaleString('en-US')} written">`,
+      `${S}            <span class="mol-token-chart__name" aria-hidden="true">${f.s.nombre}</span>`,
+      `${S}            <span class="mol-token-chart__track" aria-hidden="true">`,
+      `${S}                <span class="mol-token-chart__seg${f.s.id === 'syx' ? ' mol-token-chart__seg--accent' : ''}" style="--component-token-chart-share:${pct(f.escribe, maxEsc)}"></span>`,
+      `${S}                <span class="mol-token-chart__value">${n(f.escribe)}</span>`,
+      `${S}            </span>`,
+      `${S}        </li>`,
+    ].join('\n')),
+    `${S}    </ol>`,
+    `${S}</figure>`,
+  ];
+
+  const tabla = [
+    `${S}<p class="mol-token-chart__title" id="tc-table-title">The figures</p>`,
+    `${S}<div class="syx-border syx-bg-gray-50 syx-p-3 syx-mb-2 syx-overflow-auto" role="region" tabindex="0" aria-labelledby="tc-table-title">`,
+    `${S}    <table class="atom-table" style="min-width:900px;text-align:right">`,
+    `${S}        <thead>`,
+    `${S}            <tr>`,
+    `${S}                <th style="text-align:left">System</th>`,
+    ...ROLES.map(([, nombre]) => `${S}                <th>${nombre}</th>`),
+    `${S}                <th>Read</th>`,
+    `${S}                <th>Written</th>`,
+    `${S}                <th>Total</th>`,
+    `${S}            </tr>`,
+    `${S}        </thead>`,
+    `${S}        <tbody>`,
+    ...orden.map((f) => [
+      `${S}            <tr>`,
+      `${S}                <th scope="row" style="text-align:left">${f.s.nombre}</th>`,
+      ...ROLES.map(([k]) => `${S}                <td>${n(f.c[k])}</td>`),
+      `${S}                <td>${marca(f, 'lee')}</td>`,
+      `${S}                <td>${marca(f, 'escribe')}</td>`,
+      `${S}                <td>${marca(f, 'total')}</td>`,
+      `${S}            </tr>`,
+    ].join('\n')),
+    `${S}        </tbody>`,
+    `${S}    </table>`,
+    `${S}</div>`,
+    `${S}<p class="atom-txt syx-text-gray syx-mb-0" style="font-size:0.85rem">Tokens, counted with <code>count_tokens</code> and <code>${medicion.modelo}</code> on ${medicion.medido}. Ordered by total; lowest in each total column in bold. Tailwind&rsquo;s &ldquo;Button&rdquo; column is its core-concepts page: it has no component pages. Method, sources, hashes and the seven implementations: <code>docs/why-syx/coste-tokens/</code>.</p>`,
+  ];
+
+  bloques['coste-tokens'] = [`${S}<p class="atom-txt syx-mb-3">${frase}</p>`, ...kpi, ...g1, ...g2, ...tabla].join('\n');
+}
 
 // ─── Escribir o comprobar ────────────────────────────────────────────────────
 const html = fs.readFileSync(PAGINA, 'utf8');
