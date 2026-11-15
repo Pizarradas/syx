@@ -8,15 +8,19 @@
 
 | Metric | Count |
 |---|---|
-| Total custom properties in runtime CSS | 1444 |
-| Official (SYX-prefixed) | 1382 |
+| Total custom properties in runtime CSS | 1465 |
+| Official (SYX-prefixed) | 1403 |
 | Legacy (no SYX prefix) | 62 |
 
 ## Source vs Runtime Gaps
 
 ### ✅ No phantom tokens
 
-### ✅ All official tokens documented
+### ⚠️ Undocumented Official Tokens (1)
+_Runtime CSS has official-prefix tokens not in tokens.json_
+
+**--component-* (1)**
+- `--component-token-chart-fill`
 
 ## Legacy Vars (R07) — 62 found
 
