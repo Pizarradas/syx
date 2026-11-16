@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **El escáner lee el `style={{…}}` de JSX/TSX** (plan de generación, fase 2d2, 1.ª parte): en un `.jsx`, `.tsx` o un `.js` con JSX, el objeto literal del `style` se juzga como un atributo `style="…"`: fallbacks caducados, valores a pelo, tokens usurpados o inexistentes y `pinta-clase-syx-style` (aviso, `baja`). Antes un React no tenía ningún trozo de CSS que mirar. Lo que es expresión (`style={estilos}`, `...base`, `color: tono`) no se juzga. Caso nuevo en `check:escaner` y mutación `escaner-style-jsx`.
 - **El escáner mira los `style="…"` sobre elementos de SYX** (plan de generación, fase 2d): un atributo style que pinta una clase de SYX (`color`, `padding`, `font-size`…) cuenta como repintarla, igual que una regla. Entra como aviso (`baja`): en las páginas propias marca 49 casos que quedan por arreglar. Colocar y sobrescribir tokens en línea siguen permitidos.
 - **Ejemplo de `syx-aspect-*` en `docs.html`** (sección Media): la misma imagen 4:3 recortada a 16:9, 4:3 y 1:1 con `syx-obj-cover`, sin contenedor.
 - **Utilidades `syx-aspect-*`** (`16by9`, `8by5`, `3by2`, `4by3`, `1by1`): `aspect-ratio` nativo sobre el propio elemento (`<img>`, `<video>`, un bloque), sin contenedor ni hijo absoluto. Sin variantes responsive.
