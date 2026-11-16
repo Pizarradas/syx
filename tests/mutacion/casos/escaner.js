@@ -34,4 +34,14 @@ module.exports = [
     espera: /❌ style en línea: pinta un elemento de SYX[\s\S]*esperaba 1, encontró 0/,
     mutar: (t) => t.reemplazar('scripts/lib/escaner.js', "const syxClase = (t.clases || []).find(", 'const syxClase = [].find('),
   },
+  // Fase 2d2: el style={{…}} de JSX/TSX. Si el escáner vuelve a no leerlo,
+  // check:escaner tiene que verlo.
+  {
+    id: 'escaner-style-jsx',
+    regresion: 'el escáner vuelve a saltarse los style={{…}} de JSX/TSX',
+    guardian: 'check:escaner',
+    comando: ['node', 'scripts/check-escaner.js'],
+    espera: /❌ JSX: style=\{\{…\}\} pinta un elemento de SYX[\s\S]*esperaba 1, encontró 0/,
+    mutar: (t) => t.reemplazar('scripts/lib/escaner.js', 'ES_JSX.test(file) || ES_SCRIPT.test(file) ? trozosJsx(bruto)', 'ES_JSX.test(file) || ES_SCRIPT.test(file) ? []'),
+  },
 ];

@@ -65,6 +65,79 @@ function trozosCss(html) {
   return trozos;
 }
 
+/** Recorre desde `desde` hasta el carácter que cierra al nivel 0, saltando cadenas y llaves. */
+function hastaNivelCero(texto, desde, cierra) {
+  let nivel = 0; let cadena = null;
+  for (let j = desde; j < texto.length; j++) {
+    const ch = texto[j];
+    if (cadena) { if (ch === '\\') j++; else if (ch === cadena) cadena = null; continue; }
+    if (ch === '"' || ch === "'" || ch === '`') cadena = ch;
+    else if (ch === '{' || ch === '(' || ch === '[') nivel++;
+    else if (ch === '}' || ch === ')' || ch === ']') { nivel--; if (nivel === 0 && ch === cierra) return j; }
+    else if (nivel === 0 && ch === cierra) return j;
+  }
+  return texto.length;
+}
+
+/** Parte por comas de nivel 0 (fuera de cadenas, paréntesis y llaves). */
+function partirComas(texto) {
+  const partes = []; let i = 0;
+  while (i <= texto.length) {
+    const j = hastaNivelCero(texto, i, ',');
+    partes.push(texto.slice(i, j));
+    i = j + 1;
+  }
+  return partes;
+}
+
+/**
+ * Trozos de CSS dentro de JSX/TSX (o de un .js con JSX): el `style={{ … }}`.
+ *
+ * POR QUÉ (plan de generación, fase 2d2)
+ * Una app React escribe en línea con un objeto, no con un atributo de texto, y
+ * el escáner no lo veía: `var(--semantic-color-primary, #6d28d9)` o un style
+ * que pinta un `atom-btn` salían en un .html y no en un .jsx.
+ *
+ * QUÉ LEE, Y NADA MÁS
+ * Un objeto literal. Cada clave pasa a CSS (`backgroundColor` →
+ * `background-color`; `'--component-x'` igual) y cada valor que sea una cadena
+ * sin interpolar o un número (tal cual, sin `px`). Lo que es expresión
+ * (`style={estilos}`, `...base`, `color: tono`, `${x}px`) no se juzga: el
+ * error que se acepta es el que calla, no el que acusa.
+ */
+function trozosJsx(fuente) {
+  const limpio = vaciar(fuente)
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/(^|[\s;{}()])\/\/[^\n]*/g, (m, antes) => antes + ' '.repeat(m.length - antes.length));
+  const trozos = [];
+  for (const m of limpio.matchAll(/\bstyle\s*=\s*\{\s*\{/g)) {
+    const abre = m.index + m[0].length - 1;
+    const cierra = hastaNivelCero(limpio, abre, '}');
+    const decls = [];
+    for (const par of partirComas(limpio.slice(abre + 1, cierra))) {
+      const kv = /^\s*(?:(["'])(--[\w-]+|[A-Za-z]+)\1|([A-Za-z][\w$]*))\s*:\s*([\s\S]*?)\s*$/.exec(par);
+      if (!kv) continue;
+      const clave = kv[2] || kv[3];
+      const prop = clave.startsWith('--') ? clave
+        : clave.replace(/^(Webkit|Moz|ms)(?=[A-Z])/, (x) => `-${x.toLowerCase()}`).replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+      const cadena = /^(["'])((?:\\.|(?!\1)[^\\])*)\1$/.exec(kv[4]) || /^`([^`$]*)`$/.exec(kv[4]);
+      const valor = cadena ? cadena[cadena.length - 1] : /^-?\d+(\.\d+)?$/.test(kv[4]) ? kv[4] : null;
+      if (valor !== null) decls.push(`${prop}: ${valor}`);
+    }
+    if (!decls.length) continue;
+    // Las clases de la etiqueta que lleva el objeto, como en trozosCss (3c).
+    let inicio = limpio.lastIndexOf('<', m.index);
+    while (inicio > 0 && !/[A-Za-z]/.test(limpio[inicio + 1])) inicio = limpio.lastIndexOf('<', inicio - 1);
+    const etiqueta = inicio === -1 ? '' : limpio.slice(inicio, hastaNivelCero(limpio, inicio, '>') + 1);
+    const clases = (/\bclass(?:Name)?\s*=\s*(?:\{\s*)?(["'`])([^"'`]*)\1/.exec(etiqueta) || [])[2] || '';
+    trozos.push({
+      css: decls.join('; '), desde: lineaDe(limpio, m.index), origen: 'style={{…}}', unaLinea: true,
+      clases: clases.split(/\s+/).filter((c) => c && !/[${}]/.test(c)),
+    });
+  }
+  return trozos;
+}
+
 /** Valores de los atributos class, fuera de las zonas muertas. */
 function clasesDe(html) {
   const limpio = vaciar(html);
@@ -334,7 +407,8 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
   const ES_JSX = /\.(jsx|tsx)$/i;
   const ES_SCRIPT = /\.(m?js|cjs|m?ts|cts)$/i;
   const trozosDe = (file, bruto) =>
-    ES_JSX.test(file) || ES_SCRIPT.test(file) ? []
+    // JSX (fase 2d2): solo sus `style={{…}}`; un .js sin JSX no tiene ninguno.
+    ES_JSX.test(file) || ES_SCRIPT.test(file) ? trozosJsx(bruto)
       : ES_MARCADO.test(file) ? trozosCss(bruto)
         : [{ css: bruto, desde: 1, origen: path.basename(file) }];
   // Hay modificadores que el propio sistema enseña sin su bloque:
@@ -918,4 +992,4 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
 
 const ESCANEABLE = /^(?!.*\.min\.js$).*\.(html?|css|scss|vue|svelte|astro|jsx|tsx|m?js|cjs|m?ts|cts)$/i;
 
-module.exports = { ESCANEABLE, escanear, trozosCss, clasesDe, clasesDeScript, varsConFallback, vaciar, distancia };
+module.exports = { ESCANEABLE, escanear, trozosCss, trozosJsx, clasesDe, clasesDeScript, varsConFallback, vaciar, distancia };

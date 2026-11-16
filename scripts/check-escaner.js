@@ -306,6 +306,29 @@ comprobar('style en línea: pinta un elemento de SYX, como aviso; colocar, token
   if (h[0].gravedad !== 'baja' || h[0].linea !== 2) throw new Error(`gravedad ${h[0].gravedad}, línea ${h[0].linea}: debe entrar como aviso (baja) en la línea 2`);
 });
 
+// Fase 2d2: en JSX/TSX el style va en un objeto (`style={{…}}`). Mismas
+// reglas que el atributo de texto; lo que es expresión no se juzga.
+comprobar('JSX: style={{…}} pinta un elemento de SYX y su fallback caduca; colocar, tokens, app-* y expresiones no', () => {
+  const f = path.join(tmp, 'EnLinea.tsx');
+  fs.writeFileSync(f, [
+    'export const EnLinea = ({ tono, base }: P) => (<main>',
+    "  <button className=\"atom-btn atom-btn--primary\" onClick={() => ir(1, 2)} style={{ color: 'var(--semantic-color-primary, #6d28d9)', padding: 2 }}>Pinta</button>",
+    "  <button className=\"atom-btn\" style={{ marginInlineStart: 'auto', order: 2 }}>Coloca</button>",
+    "  <article className=\"mol-card\" style={{ '--component-card-bg': 'var(--semantic-color-bg-secondary)' }}>Token</article>",
+    "  <div className=\"app-panel\" style={{ color: 'red' }}>Propio</div>",
+    '  <p className="atom-txt" style={base}>Expresión</p>',
+    '  <p className="atom-txt" style={{ ...base, color: tono }}>Expresión</p>',
+    '</main>);',
+  ].join('\n'));
+  const r = escanear({ files: [f], syx });
+  const h = r.hallazgos.filter((x) => x.tipo === 'pinta-clase-syx-style');
+  if (h.length !== 1) throw new Error(`esperaba 1, encontró ${h.length}: ${h.map((x) => x.que).join(' | ') || 'nada'}`);
+  if (!/atom-btn/.test(h[0].que) || !/color/.test(h[0].que) || !/padding/.test(h[0].que)) throw new Error(`no nombra elemento y propiedades: ${h[0].que}`);
+  if (h[0].gravedad !== 'baja' || h[0].linea !== 2) throw new Error(`gravedad ${h[0].gravedad}, línea ${h[0].linea}: aviso (baja) en la línea 2`);
+  const fb = r.hallazgos.filter((x) => x.tipo === 'fallback-desviado');
+  if (fb.length !== 1 || !/#6d28d9/.test(fb[0].detalle) || fb[0].linea !== 2) throw new Error(`fallback: ${fb.map((x) => `${x.que} L${x.linea}`).join(' | ') || 'nada'}`);
+});
+
 comprobar('app: una transition en crudo en SCSS, con el mixin al lado', () => {
   const h = enApp('movimiento-sin-salida', 'transform 1s');
   if (!/@include transition/.test(h.sugerencia)) throw new Error(`sugiere ${h.sugerencia}`);
