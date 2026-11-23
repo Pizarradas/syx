@@ -44,4 +44,14 @@ module.exports = [
     espera: /❌ JSX: style=\{\{…\}\} pinta un elemento de SYX[\s\S]*esperaba 1, encontró 0/,
     mutar: (t) => t.reemplazar('scripts/lib/escaner.js', 'ES_JSX.test(file) || ES_SCRIPT.test(file) ? trozosJsx(bruto)', 'ES_JSX.test(file) || ES_SCRIPT.test(file) ? []'),
   },
+  // Fase 2d2 (2.ª parte): los colores propios de la app pasan por contraste.
+  // Si el escáner deja de medirlos, check:escaner tiene que verlo.
+  {
+    id: 'escaner-contraste-app',
+    regresion: 'el escáner deja de medir el contraste de los colores propios de la app',
+    guardian: 'check:escaner',
+    comando: ['node', 'scripts/check-escaner.js'],
+    espera: /❌ contraste: los colores propios de la app[\s\S]*encontró nada/,
+    mutar: (t) => t.reemplazar('scripts/lib/escaner.js', 'if (razon >= umbral) return;', 'return;'),
+  },
 ];

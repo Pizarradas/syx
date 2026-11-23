@@ -329,6 +329,35 @@ comprobar('JSX: style={{…}} pinta un elemento de SYX y su fallback caduca; col
   if (fb.length !== 1 || !/#6d28d9/.test(fb[0].detalle) || fb[0].linea !== 2) throw new Error(`fallback: ${fb.map((x) => `${x.que} L${x.linea}`).join(' | ') || 'nada'}`);
 });
 
+// Fase 2d2 (2.ª parte): los colores propios de la app pasan por contraste.
+// Mide el par color/fondo de un mismo bloque cuando uno de los dos es de la
+// app; los pares del sistema son de check:contraste. Aviso, `baja`.
+comprobar('contraste: los colores propios de la app se miden; texto grande, pares del sistema, alfa y degradados no', () => {
+  const css = path.join(tmp, 'colores.css');
+  fs.writeFileSync(css, [
+    '.app-aviso { color: #999; background: #fff; }',
+    '.app-ok { color: #333; background-color: #fff; }',
+    '.app-titulo { color: #888; background: white; font-size: 2rem; }',
+    '.app-sys { color: var(--semantic-color-text-primary); background: var(--semantic-color-bg-primary); }',
+    '.app-marca { --app-fondo: #ffe600; color: #fff; background: var(--app-fondo); }',
+    '.app-deg { color: #eee; background: linear-gradient(#fff, #eee); }',
+    '.app-alfa { color: rgba(0, 0, 0, 0.2); background: #fff; }',
+  ].join('\n'));
+  const jsx = path.join(tmp, 'Colores.jsx');
+  fs.writeFileSync(jsx, [
+    'export const C = () => (<main>',
+    "  <div className=\"app-x\" style={{ color: '#aaa', backgroundColor: '#fff' }}>Flojo</div>",
+    "  <div className=\"app-y\" style={{ color: '#1a1a1a', backgroundColor: '#fff' }}>Bien</div>",
+    '</main>);',
+  ].join('\n'));
+  const r = escanear({ files: [css, jsx], syx });
+  const h = r.hallazgos.filter((x) => x.tipo === 'contraste-insuficiente');
+  const donde = h.map((x) => `${path.basename(x.file)}:${x.linea}`).sort().join(' ');
+  if (donde !== 'Colores.jsx:2 colores.css:1 colores.css:5') throw new Error(`esperaba Colores.jsx:2 colores.css:1 colores.css:5, encontró ${donde || 'nada'}`);
+  if (h.some((x) => x.gravedad !== 'baja')) throw new Error('debe entrar como aviso (baja)');
+  if (!/2\.85:1/.test(h.find((x) => x.linea === 1 && /\.css$/.test(x.file)).que)) throw new Error(`razón mal calculada: ${h.map((x) => x.que).join(' | ')}`);
+});
+
 comprobar('app: una transition en crudo en SCSS, con el mixin al lado', () => {
   const h = enApp('movimiento-sin-salida', 'transform 1s');
   if (!/@include transition/.test(h.sugerencia)) throw new Error(`sugiere ${h.sugerencia}`);
