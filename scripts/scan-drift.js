@@ -179,6 +179,7 @@ const TITULOS = {
   'cifras-de-estilo-antiguo': 'Cifras de estilo antiguo en datos',
   'etiqueta-de-estado-pequena': 'Etiquetas de estado por debajo de 14 px',
   'nombre-sin-texto-visible': 'Nombres accesibles que no dicen lo que se ve (WCAG 2.5.3)',
+  'contraste-insuficiente': 'Colores propios de la app por debajo del contraste mínimo (WCAG 1.4.3)',
 };
 const MARCA = { alta: '🔴', media: '🟠', baja: '·' };
 

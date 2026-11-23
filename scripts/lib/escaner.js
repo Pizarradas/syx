@@ -34,6 +34,7 @@ const fs = require('fs');
 const path = require('path');
 const postcss = require('postcss');
 const postcssScss = require('postcss-scss');
+const { contraste } = require('./contraste');
 
 // ─── Recorte de zonas que no son la aplicación ───────────────────────────────
 
@@ -297,6 +298,26 @@ function varsSinFallback(css) {
 
 const sinEspacios = (v) => String(v).replace(/\s+/g, '').toLowerCase();
 const ES_COLOR = /^(#[0-9a-f]{3,8}|(rgba?|hsla?|oklch|oklab|lab|lch|color)\(|transparent$|currentcolor$)/i;
+
+/**
+ * Un color escrito por la app, en la forma que contraste.js lee (hex de seis
+ * cifras u oklch()). `#abc` se expande y `rgb()` pasa a hex; con alfa menor
+ * que 1, o un nombre de color que no sea white/black, devuelve null: no se
+ * mide lo que no se sabe pintar igual que el navegador.
+ */
+function colorLeible(valor) {
+  const v = String(valor).trim().replace(/\s*!important$/i, '');
+  const corto = /^#([0-9a-f])([0-9a-f])([0-9a-f])$/i.exec(v);
+  if (corto) return `#${corto[1]}${corto[1]}${corto[2]}${corto[2]}${corto[3]}${corto[3]}`;
+  const rgb = /^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)\s*(?:[,/]\s*([\d.]+%?))?\s*\)$/i.exec(v);
+  if (rgb) {
+    const alfa = rgb[4] === undefined ? 1 : rgb[4].endsWith('%') ? parseFloat(rgb[4]) / 100 : +rgb[4];
+    if (alfa < 1) return null;
+    return '#' + rgb.slice(1, 4).map((x) => Math.min(255, Math.round(+x)).toString(16).padStart(2, '0')).join('');
+  }
+  if (/^(#[0-9a-f]{6}|oklch\(.*\)|white|black)$/i.test(v)) return v;
+  return null;
+}
 
 // ─── Distancia para sugerir la clase real ────────────────────────────────────
 
@@ -609,6 +630,74 @@ function escanear({ files, syx, theme = 'syx-sketch', mode = 'light', prefijo = 
           que: `${valor} escrito a mano, existiendo como token`,
           detalle: `es ${(semanticos.length ? semanticos : cerca.exact).slice(0, 3).join(', ')}`,
           sugerencia: `var(${(semanticos[0] || cerca.exact[0])})`,
+        });
+      }
+    }
+
+    // ── 2b. Colores propios de la app, por contraste ─────────────────────────
+    // Plan de generación, fase 2d2 (2.ª parte). El paso 2 calla ante un color
+    // que el sistema no tiene («un color propio de la app no es desviación»), y
+    // con razón: la app puede tener su paleta. Pero esa paleta ya no pasa por
+    // check:contraste, que solo mide los pares del sistema. Aquí se mide el par
+    // que la app escribe en un mismo bloque (una regla, un style="…" o un
+    // style={{…}}): `color` sobre `background(-color)`, cuando al menos uno de
+    // los dos es suyo. El mismo cálculo que check:contraste (lib/contraste.js),
+    // con el umbral de WCAG 1.4.3: 4,5:1, o 3:1 si el bloque fija un texto
+    // grande (≥ 24 px, o ≥ 18,66 px en negrita). Entra como aviso (`baja`).
+    // Lo que no se puede resolver a un color opaco (expresiones, degradados,
+    // alfa, currentColor) no se mide: el error que se acepta es el que calla.
+    if (!esTema) {
+      const valoresApp = new Map();
+      for (const tr of todosLosTrozos) {
+        for (const m of tr.css.matchAll(/(^|[;{\s])(--[a-zA-Z0-9_-]+)\s*:\s*([^;{}]+)/g)) {
+          if (!valoresApp.has(m[2])) valoresApp.set(m[2], m[3].trim());
+        }
+      }
+      // { color, propio } o null. «Propio»: ni un token de SYX ni un literal
+      // que el sistema ya tenga como token (eso lo juzga el paso 2).
+      const resolver = (valor, vuelta = 0) => {
+        const v = String(valor).trim().replace(/\s*!important$/i, '');
+        const ref = /^var\(\s*(--[a-zA-Z0-9_-]+)\s*(?:,\s*([\s\S]+))?\)$/.exec(v);
+        if (ref) {
+          if (vuelta > 4) return null;
+          if (valoresApp.has(ref[1]) && !TOKENS_SYX.test(ref[1])) return resolver(valoresApp.get(ref[1]), vuelta + 1);
+          const real = syx.getToken({ token: ref[1], theme, mode });
+          if (real.found && real.value) {
+            const c = colorLeible(real.value);
+            return c ? { color: c, propio: false } : null;
+          }
+          return ref[2] ? resolver(ref[2], vuelta + 1) : null;
+        }
+        const c = colorLeible(v);
+        if (!c) return null;
+        return { color: c, propio: !syx.findTokenByValue({ value: v, theme, mode }).exact.length };
+      };
+      for (const t of trozos) {
+        let raiz;
+        try { raiz = postcssScss.parse(t.unaLinea ? `x{${t.css}}` : t.css); } catch (e) { continue; }
+        raiz.walkRules((regla) => {
+          const d = {};
+          for (const n of regla.nodes || []) if (n.type === 'decl') d[n.prop.toLowerCase()] = n;
+          const texto = d.color;
+          const fondo = d['background-color'] || d.background;
+          if (!texto || !fondo) return;
+          const a = resolver(texto.value);
+          const b = resolver(fondo.value);
+          if (!a || !b || (!a.propio && !b.propio)) return;
+          const razon = contraste(a.color, b.color);
+          if (razon === null) return;
+          const px = d['font-size'] ? tamañoMinimoPx(d['font-size'].value) : null;
+          const negrita = d['font-weight'] && /^(bold|bolder|[7-9]00)$/.test(d['font-weight'].value.trim());
+          const grande = px !== null && (px >= 24 || (negrita && px >= 18.66));
+          const umbral = grande ? 3 : 4.5;
+          if (razon >= umbral) return;
+          añadir({
+            tipo: 'contraste-insuficiente', gravedad: 'baja', file: rel,
+            linea: t.unaLinea ? t.desde : t.desde + texto.source.start.line - 1,
+            que: `color ${texto.value.trim()} sobre ${fondo.value.trim()}: ${razon.toFixed(2)}:1`,
+            detalle: `Por debajo de ${umbral}:1 (WCAG 1.4.3${grande ? ', texto grande' : ''}). Uno de los dos colores es de la app: check:contraste no lo mide.`,
+            sugerencia: 'Usa un par del sistema (--semantic-color-text-* sobre --semantic-color-bg-*), o ajusta el tuyo hasta el umbral; si es decorativo y no lleva texto, quita el color.',
+          });
         });
       }
     }
